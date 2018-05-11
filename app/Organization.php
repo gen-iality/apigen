@@ -8,5 +8,5 @@ use Moloquent;
 class Organization extends Moloquent
 {
     //
-    protected $fillable = [ 'name', 'country', 'city', 'address', 'nit', 'phone', 'documents', 'description', 'owner'];
+    protected $fillable = [ 'name', 'country', 'city', 'address', 'nit', 'phone', 'documents', 'description', 'author'];
 }

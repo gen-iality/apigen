@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
+use App\EventUser;
 use Storage;
 
 class EventController extends Controller
@@ -13,11 +14,12 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         //return response()->json(Event::all());
-        return Event::all();
+        //return Event::all();
+        return Event::where('author', $request->get('user')->uid)->get();
     }
 
     /**
@@ -38,35 +40,27 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $result = new Event($request->all());
         $disk = Storage::disk('gcs');        
-        $entityBody = file_get_contents('php://input');
-        if (Storage::exists('file.jpg'))
-        {
-            var_dump('EXISTE!!!!');
-        }else{
-            var_dump('CERADO!!!!',$_FILES['picture']['tmp_name']);
-            $disk->put('avatars/file.png', $_FILES['picture']);
+        //$entityBody = file_get_contents('php://input');
+        if(!is_null($request->file('picture'))){        
+            $hola = $disk->put('evius/events', $request->file('picture'));
+            Storage::disk('gcs')->setVisibility($hola, 'public');
+            $result->picture = 'https://storage.googleapis.com/herba-images/'.$hola;
         }
-        var_dump($_POST);
-        var_dump($_FILES);   
-        var_dump($_REQUEST);  
-        var_dump($entityBody);
-        var_dump($_SERVER);
-        var_dump("----------------------------------aacacacac----------------------------------");
-        var_dump($request->all());  
-        var_dump("///////////////////////");
-        /* $disk->put('avatars/1.png', $fileContents);
-        $url = $disk->url('folder/my_file.txt'); */
-        /* var_dump($url); */
-        
-        return "ok";
-
-
-        //        
-        /* $result = new Event($request->all());
         $result->author = $request->get('user')->uid;
-        $result->save(); */
-        //return $request->all();
+        $result->save();
+        
+        $userEvt = [
+            'userid' => $request->get('user')->uid,
+            'event_id' => $result->_id
+        ];
+        var_dump($userEvt);
+        $userToEvt = new EventUser($userEvt);
+        
+        $userToEvt->save();
+
+        return $result;
         //$data= $request->get('user');
         //return $data;
     }
@@ -106,9 +100,17 @@ class EventController extends Controller
     {
         //
         $data = $request->all();
+        $entityBody = file_get_contents('php://input');
+        $disk = Storage::disk('gcs'); 
+        //var_dump($request);
+        if(count($request->file()) != 0){        
+            $hola = $disk->put('evius/events', $request->file('picture'));
+            Storage::disk('gcs')->setVisibility($hola, 'public');
+            $data['picture'] = 'https://storage.googleapis.com/herba-images/'.$hola;
+        }
         $id->fill($data);
         $id->save();
-        return $id;
+        return $data;
     }
 
     /**

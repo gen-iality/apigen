@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Permission;
+use App\AttendeTicket;
+use App\Event;
+use App\Rol;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -12,9 +15,10 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        return $request->get('user')->uid;
     }
 
     /**
@@ -81,5 +85,12 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         //
+    }
+
+    public function getUserPermissionByEvent(Request $request,$id){
+        $rol = AttendeTicket::where('event_id', $id)
+                                    ->where('user_id', $request->get('user')->uid)->firstOrFail();
+        $permissions = Rol::find($rol->rol_id);
+        return $permissions;
     }
 }

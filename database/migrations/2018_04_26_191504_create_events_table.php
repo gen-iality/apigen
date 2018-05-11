@@ -18,15 +18,15 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('venue');
-            $table->string('pulep');
+            $table->string('pulep');//cacas
             $table->string('author');
-            $table->string('organization');
+            $table->string('organization');//aca
             $table->text('description');
             $table->string('hour');
-            $table->date('data_start');	
-            $table->date('end_start');	
+            $table->date('date_start');	
+            $table->date('date_end');	
             $table->string('visibility');	
-            $table->string('image');
+            $table->string('picture');
             //$table->string('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->timestamps();

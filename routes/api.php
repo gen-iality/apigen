@@ -21,16 +21,30 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //Event EndPoint
-Route::get('events', 'EventController@index');
-Route::middleware('auth.firebase')->get('events/{id}', 'EventController@show');
-Route::post('events', 'EventController@store');
-Route::middleware('auth.firebase')->put('events/{id}', 'EventController@update');
+Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
+Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
+Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
+Route::middleware('auth.firebase')->post('user/events/{id}', 'EventController@update');
+
+//Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
 //User Events Endpoint
-//Route::middleware('cors')->get('user/events', 'OrganizationController@index');
-//Route::middleware('cors','auth.firebase')->post('user/events', 'OrganizationController@store');
-//Route::middleware('cors','auth.firebase')->put('user/events/{id}', 'OrganizationController@update');
-//Route::middleware('cors')->get('user/events/{id}', 'OrganizationController@show');
+Route::middleware('auth.firebase')->get('user/organizations', 'OrganizationController@index');
+Route::middleware('auth.firebase')->post('user/organizations', 'OrganizationController@store');
+Route::middleware('auth.firebase')->put('user/organizations/{id}', 'OrganizationController@update');
+Route::middleware('auth.firebase')->get('user/organizations/{id}', 'OrganizationController@show');
+
+Route::middleware('auth.firebase')->get('user/organization_users/{id}', 'OrganizationUserController@index');
+
+Route::middleware('auth.firebase')->get('user/event_users/{id}', 'EventUserController@index');
+
+Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
+Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
+
+
+Route::get("/testroute", "EventUserController@testing");
+
+//Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
 
 
 //Organization EndPoint

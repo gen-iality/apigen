@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Organization;
+use App\OrganizationUser;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -12,10 +13,11 @@ class OrganizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return Organization::all();
+        return Organization::where('author', $request->get('user')->uid)->get();
+        //return Organization::all();
     }
 
     /**
@@ -38,7 +40,16 @@ class OrganizationController extends Controller
     {
         //
         $result = new Organization($request->all());
+        $result->author = $request->get('user')->uid;
         $result->save();
+        $userOrg = [
+            'userid' => $request->get('user')->uid,
+            'organization_id' => $result->_id
+        ];
+        var_dump($userOrg);
+        $userToOrg = new OrganizationUser($userOrg);
+        $userToOrg->save();
+        
         return $result;
     }
 
