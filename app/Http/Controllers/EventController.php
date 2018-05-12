@@ -38,16 +38,10 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, GoogleFiles $gfService)
     {
         $result = new Event($request->all());
-        $disk = Storage::disk('gcs');        
-        //$entityBody = file_get_contents('php://input');
-        if(!is_null($request->file('picture'))){        
-            $hola = $disk->put('evius/events', $request->file('picture'));
-            Storage::disk('gcs')->setVisibility($hola, 'public');
-            $result->picture = 'https://storage.googleapis.com/herba-images/'.$hola;
-        }
+        $result->picture  =  $gfService->storeFile($request->file('picture'));
         $result->author = $request->get('user')->uid;
         $result->save();
         
@@ -88,7 +82,16 @@ class EventController extends Controller
     {
         //
     }
-
+    /**
+     * Simply testing service providers
+     *
+     * @param GoogleFiles $gfService
+     * @return void
+     */
+    public function test(GoogleFiles $gfService)
+    {
+        echo $gfService->doSomethingUseful();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -96,18 +99,13 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $id)
+    public function update(Request $request, Event $id, GoogleFiles $gfService)
     {
-        //
         $data = $request->all();
-        $entityBody = file_get_contents('php://input');
-        $disk = Storage::disk('gcs'); 
-        //var_dump($request);
-        if(count($request->file()) != 0){        
-            $hola = $disk->put('evius/events', $request->file('picture'));
-            Storage::disk('gcs')->setVisibility($hola, 'public');
-            $data['picture'] = 'https://storage.googleapis.com/herba-images/'.$hola;
-        }
+        //@debug post $entityBody = file_get_contents('php://input');
+
+        $data['picture'] =  $gfService->storeFile($request->file('picture'));
+
         $id->fill($data);
         $id->save();
         return $data;
