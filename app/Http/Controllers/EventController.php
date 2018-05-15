@@ -6,6 +6,8 @@ use App\Event;
 use Illuminate\Http\Request;
 use App\EventUser;
 use Storage;
+use App\evaLib\Services\GoogleFiles;
+use App\evaLib\Services\EvaRol;
 
 class EventController extends Controller
 {
@@ -38,22 +40,15 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, GoogleFiles $gfService)
+    public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $result = new Event($request->all());
         $result->picture  =  $gfService->storeFile($request->file('picture'));
         $result->author = $request->get('user')->uid;
         $result->save();
         
-        $userEvt = [
-            'userid' => $request->get('user')->uid,
-            'event_id' => $result->_id
-        ];
-        var_dump($userEvt);
-        $userToEvt = new EventUser($userEvt);
+        $RolService->createAuthorAsEventAdmin($request->get('user')->uid, $result->_id);
         
-        $userToEvt->save();
-
         return $result;
         //$data= $request->get('user');
         //return $data;

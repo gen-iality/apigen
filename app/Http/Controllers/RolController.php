@@ -80,7 +80,7 @@ class RolController extends Controller
         $id->save();
         return $id;
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

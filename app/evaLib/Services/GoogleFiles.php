@@ -3,8 +3,7 @@
  *
  */
 namespace App\evaLib\Services;
-
-use App\evaLib\Services\GoogleFiles;
+use Storage;
 
 class GoogleFiles
 {
@@ -25,7 +24,7 @@ class GoogleFiles
             return '';
         }
         //debug         //$entityBody = file_get_contents('php://input');
-        $disk = Storage::disk('gcs');
+        $disk = Storage::disk('gcs');      
         $hola = $disk->put('evius/events', $filePost);
         Storage::disk('gcs')->setVisibility($hola, 'public');
         return 'https://storage.googleapis.com/herba-images/'.$hola;

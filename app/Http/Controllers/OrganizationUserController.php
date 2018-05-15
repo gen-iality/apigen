@@ -20,16 +20,21 @@ class OrganizationUserController extends Controller
         //
         //return OrganizationUser::all();
         $usersfilter = function($data){
+            $temporal = (object)[];
             $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
             $firebase = (new Factory)
                 ->withServiceAccount($serviceAccount)
                 ->create();
             $auth = $firebase->getAuth();
-            return $auth->getUser($data->userid);
+            $user = $auth->getUser($data->userid);
+            $temporal->user = $user;
+            $temporal->rol = $data->rol;
+            return $temporal;
         };
         $orgUsers = OrganizationUser::where('organization_id', $id)->get();
         $users = array_map($usersfilter, $orgUsers->all());        
         return $users;
+        
     }
 
     /**
@@ -67,8 +72,6 @@ class OrganizationUserController extends Controller
             ->create();
         $auth = $firebase->getAuth();
         try {
-            $class = new \ReflectionClass('Exception');        
-            var_dump($class->getNamespaceName());   
             $userData = $auth->getUserByEmail($request->email);
             
             if($userData->uid){

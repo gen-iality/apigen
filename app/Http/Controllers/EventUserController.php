@@ -18,16 +18,21 @@ class EventUserController extends Controller
     {
         //
         $usersfilter = function($data){
+            $temporal = (object)[];
             $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
             $firebase = (new Factory)
                 ->withServiceAccount($serviceAccount)
                 ->create();
             $auth = $firebase->getAuth();
-            //return $auth->getUser($data->userid);
+            $user = $auth->getUser($data->userid);
+            $temporal->user = $user;
+            $temporal->rol = $data->rol;
+            return $temporal;
         };
         $evtUsers = EventUser::where('event_id', $id)->get();
         $users = array_map($usersfilter, $evtUsers->all());        
         return $users;
+        
     }
 
     /**
@@ -50,7 +55,7 @@ class EventUserController extends Controller
             ->withServiceAccount($serviceAccount)
             ->create();
         $auth = $firebase->getAuth();
-        return $auth->getUserByEmail("apps@mocionsoft.222com");
+        return $auth->getUserByEmail("apps@mocionsoft.com");
         /* $evtUsers = EventUser::where('event_id', $id)->get();
         $users = array_map($usersfilter, $evtUsers->all());        
         return $users; */
@@ -68,8 +73,29 @@ class EventUserController extends Controller
         //
         return $request;
     }
-    
 
+    public function verifyandcreate(Request $request,$id){
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->create();
+        $auth = $firebase->getAuth();
+        try {
+            $userData = $auth->getUserByEmail($request->email);
+            
+            if($userData->uid){
+                $result = new EventUser($request->all());
+                $result->userid = $userData->uid;
+                $result->event_id = $id;
+                $result->save();
+                return $result;
+            }else{
+                return "no";
+            }   
+        } catch (\Exception $e) {
+            echo 'Excepción capturada: '. $e->getMessage();
+        } 
+    }
     /**
      * Display the specified resource.
      *

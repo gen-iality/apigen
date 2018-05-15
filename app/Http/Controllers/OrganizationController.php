@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Organization;
 use App\OrganizationUser;
 use Illuminate\Http\Request;
+use App\evaLib\Services\EvaRol;
 
 class OrganizationController extends Controller
 {
@@ -36,20 +37,13 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, EvaRol $RolService)
     {
         //
         $result = new Organization($request->all());
         $result->author = $request->get('user')->uid;
         $result->save();
-        $userOrg = [
-            'userid' => $request->get('user')->uid,
-            'organization_id' => $result->_id
-        ];
-        var_dump($userOrg);
-        $userToOrg = new OrganizationUser($userOrg);
-        $userToOrg->save();
-        
+        $RolService->createAuthorAsOrganizationAdmin($request->get('user')->uid, $result->_id);
         return $result;
     }
 

@@ -37,10 +37,12 @@ Route::middleware('auth.firebase')->get('user/organizations/{id}', 'Organization
 Route::middleware('auth.firebase')->get('user/organization_users/{id}', 'OrganizationUserController@index');
 
 Route::middleware('auth.firebase')->get('user/event_users/{id}', 'EventUserController@index');
+Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 
-Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
+//Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
 Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
 
+Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 
 Route::get("/testroute", "EventUserController@testing");
 
