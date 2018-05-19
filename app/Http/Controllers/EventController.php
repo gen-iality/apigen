@@ -25,6 +25,17 @@ class EventController extends Controller
     }
 
     /**
+     * Return all public events
+     */
+    public function publicEvents(Request $request)
+    {
+        return Event::all();
+    }
+    public function getOnePublicEvent(Event $id)
+    {
+        return $id;
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

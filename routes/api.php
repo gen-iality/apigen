@@ -75,3 +75,14 @@ Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show'); */
+
+
+
+/**
+ * End-Point 
+ * Publics
+ */
+Route::get('events', 'EventController@publicEvents');
+Route::get('event/{id}', 'EventController@getOnePublicEvent');
+
+
