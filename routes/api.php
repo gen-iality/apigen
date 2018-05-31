@@ -25,6 +25,7 @@ Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
 Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
 Route::middleware('auth.firebase')->post('user/events/{id}', 'EventController@update');
+Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@delete');
 
 //Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
@@ -44,6 +45,8 @@ Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 
 
 Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 
+Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
+//middleware('auth.firebase')->
 Route::get("/testroute", "EventUserController@testing");
 
 //Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');

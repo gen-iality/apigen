@@ -44,6 +44,14 @@ class EventController extends Controller
     {
         //
     }
+    public function delete(Event $id){
+        $res = $id->delete();
+        if($res == true){
+            return 'True';
+        }else{
+            return 'Error';
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

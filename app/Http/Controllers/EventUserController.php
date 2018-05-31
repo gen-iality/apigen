@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\EventUser;
+use App\State;
+use App\Rol;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -24,13 +26,22 @@ class EventUserController extends Controller
                 ->withServiceAccount($serviceAccount)
                 ->create();
             $auth = $firebase->getAuth();
-            $user = $auth->getUser($data->userid);
-            $temporal->user = $user;
-            $temporal->rol = $data->rol;
-            return $temporal;
+            try {
+                $user = $auth->getUser($data->userid);
+            } catch (\Exception $e) {
+                $user = false;
+            }
+            if($user){
+                $temporal = $data;
+                $temporal->user = $user;
+                $temporal->rol_id = $data->rol;
+                $temporal->state_id = $data->state;
+                return $temporal;
+            }
         };
         $evtUsers = EventUser::where('event_id', $id)->get();
-        $users = array_map($usersfilter, $evtUsers->all());        
+        $users = array_map($usersfilter, $evtUsers->all()); 
+       
         return $users;
         
     }
@@ -87,15 +98,90 @@ class EventUserController extends Controller
                 $result = new EventUser($request->all());
                 $result->userid = $userData->uid;
                 $result->event_id = $id;
+                    if(! isset($result->status)){
+                        //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
+                        $result->state_id = State::first();
+                    }
                 $result->save();
                 return $result;
             }else{
                 return "no";
             }   
+
         } catch (\Exception $e) {
             echo 'Excepción capturada: '. $e->getMessage();
         } 
     }
+    /**
+     * Create users imported in the excel
+     */
+    public function createImportedUser(Request $request, $id){
+        
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->create();
+        $auth = $firebase->getAuth();
+        try {
+            var_dump("aca uno");
+            $userData = $auth->getUserByEmail($request->email);
+            var_dump("aca uno");            
+            $rol = Rol::where('level', 0)->first();
+
+            if($userData->uid){
+                $result = new EventUser($request->all());
+                $result->userid = $userData->uid;
+                $result->event_id = $id;
+                $result->rol_id = $rol->_id;
+                if(! isset($result->status)){
+                    //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
+                    $temp = State::first();
+                    $result->state_id = $temp->_id;
+                }
+                $result->save();
+                return "false";
+            } 
+        } catch (\Exception $e) {
+            $url = "http://localhost:3020";
+
+            $data = json_encode($request->all());
+            $httpRequest = array(
+                'http' =>
+                    array(
+                        'method' => 'POST',
+                        'header' => 'Content-type: application/json',
+                        'content' => $data
+                    )
+            );
+
+            $context = stream_context_create($httpRequest);
+
+            $response = json_decode(file_get_contents($url, false, $context));
+
+            $userData = $auth->getUserByEmail($request->email);
+            $rol = Rol::where('level', 0)->first();
+            if($userData->uid){
+                $result = new EventUser($request->all());
+                $result->userid = $userData->uid;
+                $result->event_id = $id;
+                $result->rol_id = $rol->_id;
+                if(! isset($result->status)){
+                    //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
+                    $temp = State::first();
+                    $result->state_id = $temp->_id;
+                }
+    
+                $result->save();
+            }
+            return "true";
+        }
+    }
+
+
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -106,6 +192,10 @@ class EventUserController extends Controller
     {
         //
     }
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.

@@ -7,6 +7,7 @@ use Storage;
 use App\EventUser;
 use App\Rol;
 use App\OrganizationUser;
+use App\State;
 
 
 class EvaRol
@@ -28,10 +29,12 @@ class EvaRol
             return '';
         }
         $rol = Rol::where('level', -1)->first();
+        $state = State::first();
         $userEvt = [
             'userid' => $authorId,
             'event_id' => $eventId,
-            'rol_id' => $rol->_id
+            'rol_id' => $rol->_id,
+            'state_id' => $state->_id            
         ];
         $userToEvt = new EventUser($userEvt);
         $userToEvt->save();
@@ -47,7 +50,7 @@ class EvaRol
         $userOrg = [
             'userid' => $authorId,
             'organization_id' => $organizationId,
-            'rol_id' => $rol->_id
+            'rol_id' => $rol->_id,
         ];
         $userToOrg = new OrganizationUser($userOrg);
         $userToOrg->save();
