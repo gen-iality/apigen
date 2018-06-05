@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Organization;
-use App\OrganizationUser;
+use App\Permission;
+use App\AttendeTicket;
+use App\Event;
+use App\Rol;
 use Illuminate\Http\Request;
-use App\evaLib\Services\EvaRol;
 
-class OrganizationController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,7 @@ class OrganizationController extends Controller
     public function index(Request $request)
     {
         //
-        return Organization::where('author', $request->get('user')->uid)->get();
-        //return Organization::all();
+        return $request->get('user')->uid;
     }
 
     /**
@@ -37,35 +37,29 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, EvaRol $RolService)
+    public function store(Request $request)
     {
         //
-        $result = new Organization($request->all());
-        $result->author = $request->get('user')->uid;
-        $result->save();
-        $RolService->createAuthorAsOrganizationAdmin($request->get('user')->uid, $result->_id);
-        return $result;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Organization  $organization
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function show(Organization $id)
+    public function show(Permission $permission)
     {
         //
-        return $id;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Organization  $organization
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function edit(Organization $organization)
+    public function edit(Permission $permission)
     {
         //
     }
@@ -74,26 +68,29 @@ class OrganizationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Organization  $organization
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organization $id)
+    public function update(Request $request, Permission $permission)
     {
         //
-        $data = $request->all();
-        $id->fill($data);
-        $id->save();
-        return $id;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Organization  $organization
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Organization $organization)
+    public function destroy(Permission $permission)
     {
         //
+    }
+
+    public function getUserPermissionByEvent(Request $request,$id){
+        $rol = AttendeTicket::where('event_id', $id)
+                                    ->where('user_id', $request->get('user')->uid)->firstOrFail();
+        $permissions = Rol::find($rol->rol_id);
+        return $permissions;
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\OrganizationUser;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+
 
 class OrganizationUserController extends Controller
 {
@@ -12,10 +15,26 @@ class OrganizationUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
-        return OrganizationUser::all();
+        //return OrganizationUser::all();
+        $usersfilter = function($data){
+            $temporal = (object)[];
+            $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+            $firebase = (new Factory)
+                ->withServiceAccount($serviceAccount)
+                ->create();
+            $auth = $firebase->getAuth();
+            $user = $auth->getUser($data->userid);
+            $temporal->user = $user;
+            $temporal->rol = $data->rol;
+            return $temporal;
+        };
+        $orgUsers = OrganizationUser::where('organization_id', $id)->get();
+        $users = array_map($usersfilter, $orgUsers->all());        
+        return $users;
+        
     }
 
     /**
@@ -42,6 +61,33 @@ class OrganizationUserController extends Controller
         return $result;
     }
 
+
+    public function verifyandcreate(Request $request, $id)
+    {
+        //
+
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->create();
+        $auth = $firebase->getAuth();
+        try {
+            $userData = $auth->getUserByEmail($request->email);
+            
+            if($userData->uid){
+                $result = new OrganizationUser($request->all());
+                $result->userid = $userData->uid;
+                $result->organization_id = $id;
+                $result->save();
+                return $result;
+            }else{
+                return "no";
+            }   
+        } catch (\Exception $e) {
+            echo 'Excepción capturada: '. $e->getMessage();
+        } 
+        
+    }
     /**
      * Display the specified resource.
      *

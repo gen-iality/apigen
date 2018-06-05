@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Organization;
-use App\OrganizationUser;
+use App\State;
 use Illuminate\Http\Request;
-use App\evaLib\Services\EvaRol;
 
-class OrganizationController extends Controller
+class StateController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //
-        return Organization::where('author', $request->get('user')->uid)->get();
-        //return Organization::all();
+        return State::get();
     }
 
     /**
@@ -37,35 +33,29 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, EvaRol $RolService)
+    public function store(Request $request)
     {
         //
-        $result = new Organization($request->all());
-        $result->author = $request->get('user')->uid;
-        $result->save();
-        $RolService->createAuthorAsOrganizationAdmin($request->get('user')->uid, $result->_id);
-        return $result;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Organization  $organization
+     * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function show(Organization $id)
+    public function show(State $state)
     {
         //
-        return $id;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Organization  $organization
+     * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function edit(Organization $organization)
+    public function edit(State $state)
     {
         //
     }
@@ -74,25 +64,21 @@ class OrganizationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Organization  $organization
+     * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organization $id)
+    public function update(Request $request, State $state)
     {
         //
-        $data = $request->all();
-        $id->fill($data);
-        $id->save();
-        return $id;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Organization  $organization
+     * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Organization $organization)
+    public function destroy(State $state)
     {
         //
     }

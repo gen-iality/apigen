@@ -12,5 +12,9 @@ class OrganizationUser extends Moloquent
     {
         return $this->belongsTo('App\Organization');
     }
-    protected $fillable = [ 'userid', 'organization_id'];
+    public function rol()
+    {
+        return $this->belongsTo('App\Rol');
+    }
+    protected $fillable = [ 'userid', 'organization_id', 'rol_id'];
 }

@@ -6,7 +6,7 @@ use Closure;
 use Firebase\Auth\Token\Verifier;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
-
+use App;
 
 class AuthFirebase
 {
@@ -35,10 +35,10 @@ class AuthFirebase
             //Se obtiene la informacion del usuario
             $user = $auth->getUser($verifiedIdToken->getClaim('sub'));
             $request->attributes->add(['user' => $user]);
-        }catch(Exception $e){
-            abort(403, "asdasdnkasbk.");
+            return $next($request);
+        }catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
+            return response("{ status: 401, content: 'Error' }");      
         }
-        return $next($request);
     }
 }
 //TEner en cuenta para Enviar mensajes de error

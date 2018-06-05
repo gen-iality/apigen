@@ -12,5 +12,5 @@ class Event extends Moloquent
     {
         return $this->belongsTo('App\Organization');
     }
-    protected $fillable = [ 'name', 'location', 'venue', 'pulep', 'description', 'hour', 'data_start', 'end_start', 'visibility', 'image', 'organization_id'];
+    protected $fillable = [ 'name', 'location', 'venue', 'pulep', 'description', 'hour', 'date_start', 'date_end', 'visibility', 'picture', 'organization_id'];
 }

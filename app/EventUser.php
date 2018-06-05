@@ -4,8 +4,7 @@ namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
 use Moloquent;
-
-class AttendeTicket extends Moloquent
+class EventUser extends Moloquent
 {
     //
     public function event()
@@ -16,5 +15,9 @@ class AttendeTicket extends Moloquent
     {
         return $this->belongsTo('App\Rol');
     }
-    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'status'];
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id'];
 }

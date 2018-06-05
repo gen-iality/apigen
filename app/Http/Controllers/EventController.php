@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
+use App\EventUser;
 use Storage;
+use App\evaLib\Services\GoogleFiles;
+use App\evaLib\Services\EvaRol;
 
 class EventController extends Controller
 {
@@ -13,13 +16,25 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         //return response()->json(Event::all());
-        return Event::all();
+        //return Event::all();
+        return Event::where('author', $request->get('user')->uid)->get();
     }
 
+    /**
+     * Return all public events
+     */
+    public function publicEvents(Request $request)
+    {
+        return Event::all();
+    }
+    public function getOnePublicEvent(Event $id)
+    {
+        return $id;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -29,6 +44,14 @@ class EventController extends Controller
     {
         //
     }
+    public function delete(Event $id){
+        $res = $id->delete();
+        if($res == true){
+            return 'True';
+        }else{
+            return 'Error';
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,37 +59,16 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
-        $disk = Storage::disk('gcs');        
-        $entityBody = file_get_contents('php://input');
-        if (Storage::exists('file.jpg'))
-        {
-            var_dump('EXISTE!!!!');
-        }else{
-            var_dump('CERADO!!!!',$_FILES['picture']['tmp_name']);
-            $disk->put('avatars/file.png', $_FILES['picture']);
-        }
-        var_dump($_POST);
-        var_dump($_FILES);   
-        var_dump($_REQUEST);  
-        var_dump($entityBody);
-        var_dump($_SERVER);
-        var_dump("----------------------------------aacacacac----------------------------------");
-        var_dump($request->all());  
-        var_dump("///////////////////////");
-        /* $disk->put('avatars/1.png', $fileContents);
-        $url = $disk->url('folder/my_file.txt'); */
-        /* var_dump($url); */
-        
-        return "ok";
-
-
-        //        
-        /* $result = new Event($request->all());
+        $result = new Event($request->all());
+        $result->picture  =  $gfService->storeFile($request->file('picture'));
         $result->author = $request->get('user')->uid;
-        $result->save(); */
-        //return $request->all();
+        $result->save();
+        
+        $RolService->createAuthorAsEventAdmin($request->get('user')->uid, $result->_id);
+        
+        return $result;
         //$data= $request->get('user');
         //return $data;
     }
@@ -94,7 +96,16 @@ class EventController extends Controller
     {
         //
     }
-
+    /**
+     * Simply testing service providers
+     *
+     * @param GoogleFiles $gfService
+     * @return void
+     */
+    public function test(GoogleFiles $gfService)
+    {
+        echo $gfService->doSomethingUseful();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -102,13 +113,16 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $id)
+    public function update(Request $request, Event $id, GoogleFiles $gfService)
     {
-        //
         $data = $request->all();
+        //@debug post $entityBody = file_get_contents('php://input');
+
+        $data['picture'] =  $gfService->storeFile($request->file('picture'));
+
         $id->fill($data);
         $id->save();
-        return $id;
+        return $data;
     }
 
     /**
