@@ -162,7 +162,8 @@ return [
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         App\Providers\EvaFilesServiceProvider::class,
-        App\Providers\EvaRolServiceProvider::class
+        App\Providers\EvaRolServiceProvider::class,
+        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
     ],
 
     /*
