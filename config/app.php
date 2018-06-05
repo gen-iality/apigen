@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
+        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
     ],
 
     /*
