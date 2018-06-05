@@ -14,7 +14,7 @@ class StateController extends Controller
      */
     public function index()
     {
-        //
+        return State::get();
     }
 
     /**

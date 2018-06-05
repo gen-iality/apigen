@@ -93,39 +93,6 @@ class EventUserController extends Controller
         $auth = $firebase->getAuth();
         try {
             $userData = $auth->getUserByEmail($request->email);
-            
-            if($userData->uid){
-                $result = new EventUser($request->all());
-                $result->userid = $userData->uid;
-                $result->event_id = $id;
-                    if(! isset($result->status)){
-                        //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
-                        $result->state_id = State::first();
-                    }
-                $result->save();
-                return $result;
-            }else{
-                return "no";
-            }   
-
-        } catch (\Exception $e) {
-            echo 'Excepción capturada: '. $e->getMessage();
-        } 
-    }
-    /**
-     * Create users imported in the excel
-     */
-    public function createImportedUser(Request $request, $id){
-        
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        $auth = $firebase->getAuth();
-        try {
-            var_dump("aca uno");
-            $userData = $auth->getUserByEmail($request->email);
-            var_dump("aca uno");            
             $rol = Rol::where('level', 0)->first();
 
             if($userData->uid){
@@ -139,7 +106,69 @@ class EventUserController extends Controller
                     $result->state_id = $temp->_id;
                 }
                 $result->save();
-                return "false";
+                return "true";
+            } 
+        } catch (\Exception $e) {
+            $url = "http://localhost:3020";
+
+            $data = json_encode($request->all());
+            $httpRequest = array(
+                'http' =>
+                    array(
+                        'method' => 'POST',
+                        'header' => 'Content-type: application/json',
+                        'content' => $data
+                    )
+            );
+
+            $context = stream_context_create($httpRequest);
+
+            $response = json_decode(file_get_contents($url, false, $context));
+
+            $userData = $auth->getUserByEmail($request->email);
+            $rol = Rol::where('level', 0)->first();
+            if($userData->uid){
+                $result = new EventUser($request->all());
+                $result->userid = $userData->uid;
+                $result->event_id = $id;
+                $result->rol_id = $rol->_id;
+                if(! isset($result->status)){
+                    //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
+                    $temp = State::first();
+                    $result->state_id = $temp->_id;
+                }
+    
+                $result->save();
+            }
+            return "true";
+        }
+    }
+    /**
+     * Create users imported in the excel
+     */
+    public function createImportedUser(Request $request, $id){
+        
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->create();
+        $auth = $firebase->getAuth();
+        try {
+            $userData = $auth->getUserByEmail($request->email);
+            $rol = Rol::where('level', 0)->first();
+
+            if($userData->uid){
+                $result = new EventUser($request->all());
+                $result->userid = $userData->uid;
+                $result->event_id = $id;
+                $result->rol_id = $rol->_id;
+                if(! isset($result->status)){
+                    //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
+                    $temp = State::first();
+                    $result->state_id = $temp->_id;
+                }
+                $result->save();
+                return "true";
             } 
         } catch (\Exception $e) {
             $url = "http://localhost:3020";

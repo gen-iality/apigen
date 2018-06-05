@@ -44,6 +44,7 @@ Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventU
 Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
 
 Route::middleware('auth.firebase')->get('rols', 'RolController@index');
+Route::get('states', 'StateController@index');
 
 Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 //middleware('auth.firebase')->
