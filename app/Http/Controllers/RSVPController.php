@@ -11,6 +11,11 @@ use Kreait\Firebase\ServiceAccount;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RSVP;
 
+/**
+ * @resource RSVP
+ *
+ *  Handle RSVP(invitations for events)
+ */
 class RSVPController extends Controller
 {
 
@@ -18,8 +23,8 @@ class RSVPController extends Controller
      * Send RSVP to users in an event, taking EventUser status as parameter 
      * to filter which users the RSVP is going to be send to
      *
-     * @param Event $event
-     * @param State $state
+     * @param Event $event  Event to which users are suscribed
+     * @param State $state (optional) EventUser state to filter which users are going to get the RSVP
      * @return int Number of email sent
      */
     public function sendEventRSVP(Event $event, State $state)
