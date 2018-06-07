@@ -47,6 +47,11 @@ Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 Route::get('states', 'StateController@index');
 
 Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
+
+//RSVP
+Route::get('rsvp/sendeventrsvp/{event}/{state?}', 'RSVPController@sendEventRSVP');
+
+
 //middleware('auth.firebase')->
 Route::get("/testroute", "EventUserController@testing");
 

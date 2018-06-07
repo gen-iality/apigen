@@ -15,9 +15,10 @@ class TestingController extends Controller
      */
     public function sendemail()
     {
+        
         Mail::to('juan.lopez@mocionsoft.com')
         ->send(new RSVP());
 
         return "ok";
-    }   //
+    }   
 }
