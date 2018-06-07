@@ -19,5 +19,12 @@ class EventUser extends Moloquent
     {
         return $this->belongsTo('App\State');
     }
+
+
+    public function confirm(){
+        $this->state_id = "5b188b41c4004d12ec13d139";
+        return $this;
+    }
+
     protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id'];
 }

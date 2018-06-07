@@ -7,18 +7,24 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Event;
+use App\EventUser;
+use App\User;
+
 class RSVP extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $event;
+    public $urlconfirmacion;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Event $event)
     {
-        //
+        $this->event = $event;
     }
 
     /**
@@ -28,6 +34,8 @@ class RSVP extends Mailable
      */
     public function build()
     {
-        return $this->view('rsvp.rsvpinvitation');
+        
+        return $this->markdown('rsvp.rsvpinvitation');
+        //return $this->view('vendor.mail.html.message');
     }
 }

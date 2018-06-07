@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('testsendemail', 'TestingController@sendemail');
+
 //Event EndPoint
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
@@ -50,7 +51,7 @@ Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser
 
 //RSVP
 Route::get('rsvp/sendeventrsvp/{event}/{state?}', 'RSVPController@sendEventRSVP');
-
+Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 
 //middleware('auth.firebase')->
 Route::get("/testroute/{user}", "EventUserController@testing");
