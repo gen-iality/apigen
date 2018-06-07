@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\State;
 use App\Event;
 use App\EventUser;
@@ -13,20 +14,24 @@ use App\Mail\RSVP;
 
 /**
  * @resource RSVP
- *
+ *  aasdf s
  *  Handle RSVP(invitations for events)
+ *
+ * asdfsadf sadf sad fsadf
  */
 class RSVPController extends Controller
 {
 
     /**
-     * Send RSVP to users in an event, taking EventUser status as parameter 
+     * Send RSVP to users in an event, taking EventUser status as parameter
      * to filter which users the RSVP is going to be send to
      *
      * @param Event $event  Event to which users are suscribed
      * @param State $state (optional) EventUser state to filter which users are going to get the RSVP
      * @return int Number of email sent
      */
+
+
     public function sendEventRSVP(Event $event, State $state)
     {
         //por cada envio de RSVP se tiene que validar que se enviaron los correos
@@ -39,7 +44,26 @@ class RSVPController extends Controller
 
         return count($users);
     }
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function confirmRSVP(EventUser $eventUser)
+    {
+        if (!$eventUser->confirm()->save()) {
+            App::abort(500, 'Error');
+        }
+        //return redirect()->away('https://bbc.com');
+        return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
+    }
+    /**
+     * Undocumented function
+     *
+     * @param [type] $users
+     * @return void
+     */
     private static function sendRSVPmail($users)
     {
         foreach ($users as &$user) {
@@ -47,7 +71,7 @@ class RSVPController extends Controller
             Mail::to($user->email)
             ->cc('juan.lopez@mocionsoft.com')
             ->send(new RSVP());
-        }       
+        }
     }
 
     private static function getEventUsers($event, $state)
@@ -89,9 +113,5 @@ class RSVPController extends Controller
         $users = array_map($usersfilter, $evtUsers->all());
 
         return $users;
-    }
-
-    public function confirmRSVP(Event $id, EventUser $eventUser)
-    {
     }
 }
