@@ -17,22 +17,17 @@ class OrganizationUserController extends Controller
      */
     public function index($id)
     {
-        //
-        //return OrganizationUser::all();
+        
         $usersfilter = function($data){
-            $temporal = (object)[];
-            $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-            $firebase = (new Factory)
-                ->withServiceAccount($serviceAccount)
-                ->create();
-            $auth = $firebase->getAuth();
-            $user = $auth->getUser($data->userid);
-            $temporal->user = $user;
-            $temporal->rol = $data->rol;
+            $temporal = $data;
+            $temporal->user =  User::where('uid', $data->userid)->first();
+            $temporal->rol_id = $data->rol;
+            $temporal->state_id = $data->state;
             return $temporal;
         };
-        $orgUsers = OrganizationUser::where('organization_id', $id)->get();
-        $users = array_map($usersfilter, $orgUsers->all());        
+        $evtUsers = OrganizationUser::where('organization_id', $id)->get();
+        $users = array_map($usersfilter, $evtUsers->all()); 
+    
         return $users;
         
     }
