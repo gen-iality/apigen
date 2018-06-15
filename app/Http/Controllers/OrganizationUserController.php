@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OrganizationUser;
+use App\User;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;

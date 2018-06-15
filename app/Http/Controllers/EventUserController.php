@@ -137,23 +137,14 @@ class EventUserController extends Controller
                     "uid" => $userData->uid,
                     "email" => $request->email
                  );
-                 self::createUserOnMongo($newUser);
+
+                $userCreateOnMongo = new User($newUser);
+                $userCreateOnMongo->save();
                 
             }
             return "true";
         }
     }
-
-    private static function createUserOnMongo($array){
-        $userCreateOnMongo = new User($newUser);
-        $userCreateOnMongo->save();
-    }
-
-    private static function createEventUser($array){
-        $userCreateOnMongo = new User($newUser);
-        $userCreateOnMongo->save();
-    }
-
 
 
 
