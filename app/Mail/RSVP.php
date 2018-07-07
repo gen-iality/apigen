@@ -16,15 +16,17 @@ class RSVP extends Mailable
     use Queueable, SerializesModels;
 
     public $event;
+    public $eventUser;
     public $urlconfirmacion;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(Event $event, $eventUser)
     {
         $this->event = $event;
+        $this->eventUser = $eventUser;
     }
 
     /**

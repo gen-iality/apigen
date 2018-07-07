@@ -38,7 +38,7 @@ class RSVPController extends Controller
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
         $users = self::getEventUsers($event, $state);
-        self::sendRSVPmail($users);
+        self::sendRSVPmail($users, $event);
 
         return count($users);
     }
@@ -62,13 +62,13 @@ class RSVPController extends Controller
      * @param [type] $users
      * @return void
      */
-    private static function sendRSVPmail($users)
+    private static function sendRSVPmail($users, $event)
     {
         foreach ($users as &$user) {
             var_dump($user->email);
             Mail::to($user->email)
             ->cc('juan.lopez@mocionsoft.com')
-            ->send(new RSVP());
+            ->send(new RSVP($event, $user));
         }
     }
 

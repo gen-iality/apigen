@@ -54,7 +54,7 @@ Route::get('rsvp/sendeventrsvp/{event}/{state?}', 'RSVPController@sendEventRSVP'
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 
 //middleware('auth.firebase')->
-Route::get("/testroute", "EventUserController@testing");
+Route::get("/testroute/{user}", "EventUserController@testing");
 
 //Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
 

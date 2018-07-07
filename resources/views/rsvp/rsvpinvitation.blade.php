@@ -11,7 +11,7 @@ Evento: {{$event->name}}
 <p>{{$event->description}}</p>
 
 
-@component('mail::button', ['url' => '', 'color' => 'green'])
+@component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'green'])
 Confirmar asistencia
 @endcomponent
 
