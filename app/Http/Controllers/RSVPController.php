@@ -14,10 +14,8 @@ use App\Mail\RSVP;
 
 /**
  * @resource RSVP
- *  aasdf s
- *  Handle RSVP(invitations for events)
+ * Handle RSVP(invitations for events)
  *
- * asdfsadf sadf sad fsadf
  */
 class RSVPController extends Controller
 {

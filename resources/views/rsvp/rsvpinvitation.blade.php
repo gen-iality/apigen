@@ -15,7 +15,6 @@ Evento: {{$event->name}}
 Confirmar asistencia
 @endcomponent
 
-
 @component('mail::table')
 | Laravel       | Table         | Example  |
 | ------------- |:-------------:| --------:|
