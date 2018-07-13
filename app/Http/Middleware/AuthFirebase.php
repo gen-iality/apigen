@@ -6,6 +6,7 @@ use Closure;
 use Firebase\Auth\Token\Verifier;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
+use Illuminate\Support\Facades\Log;
 use App;
 
 class AuthFirebase
@@ -29,7 +30,17 @@ class AuthFirebase
             //Se carga el projectID solo necesario para la libreria Auth
             $projectId = 'eviusauth';
             $verifier = new Verifier($projectId);
-            $firebaseToken = $_COOKIE['token']; 
+
+            if (isset($_REQUEST['evius_token'])){
+                $firebaseToken = $_REQUEST['evius_token'];
+            }
+
+            if (isset($_COOKIE['evius_token'])){
+                $firebaseToken = $_COOKIE['evius_token'];
+            }
+            if (!$firebaseToken)
+            return response("{ status: 401, content: 'Error: No token provided' }");
+       
             //Se verifica la valides del token
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             //Se obtiene la informacion del usuario
@@ -37,7 +48,7 @@ class AuthFirebase
             $request->attributes->add(['user' => $user]);
             return $next($request);
         }catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-            return response("{ status: 401, content: 'Error' }");      
+            return response("{ status: 401, content: 'Error: ExpiredToken' }");      
         }
     }
 }
