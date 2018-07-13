@@ -20,6 +20,7 @@ use App\Event;
 }); */
 
 Route::get('testsendemail', 'TestingController@sendemail');
+Route::get('test', 'EventController@test');
 //Event EndPoint
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
