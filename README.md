@@ -25,11 +25,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-PHP 7.1 (works on Laravel) 
-MongoDB (compass gui visual client)
-Composer
-Evius auth server (https://bitbucket.org/modev/eviusauth/)
-el login se maneja con el este servicio de autenticación, tiene que estar corriendo para poder loguearse.
+- PHP 7.1 (works on Laravel) 
+- MongoDB (compass gui visual client)
+- Composer
+- Evius auth server (https://bitbucket.org/modev/eviusauth/)
+- el login se maneja con el este servicio de autenticación, tiene que estar corriendo para poder loguearse.
 
 
 ## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
