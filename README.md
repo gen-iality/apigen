@@ -1,6 +1,4 @@
-# Project Title
-
-EVIUS API (Events)
+# EVIUS API (Events)
 
 
 ### Documentation
