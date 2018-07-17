@@ -21,6 +21,7 @@ use App\Event;
 
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::get('test', 'EventController@test');
+
 //Event EndPoint
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
@@ -48,8 +49,13 @@ Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 Route::get('states', 'StateController@index');
 
 Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
+
+//RSVP
+Route::get('rsvp/sendeventrsvp/{event}/{state?}', 'RSVPController@sendEventRSVP');
+Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+
 //middleware('auth.firebase')->
-Route::get("/testroute", "EventUserController@testing");
+Route::get("/testroute/{user}", "EventUserController@testing");
 
 
 //MISC Controllers
