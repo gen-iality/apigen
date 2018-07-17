@@ -51,7 +51,12 @@ Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser
 //middleware('auth.firebase')->
 Route::get("/testroute", "EventUserController@testing");
 
+
+//MISC Controllers
+Route::post("files/upload/{field_name?}", "FilesController@upload");
+
 //Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
+
 
 
 //Organization EndPoint
