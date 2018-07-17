@@ -164,6 +164,7 @@ return [
         App\Providers\EvaFilesServiceProvider::class,
         App\Providers\EvaRolServiceProvider::class,
         Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class
     ],
 
     /*

@@ -1,16 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;
 use App\evaLib\Services\GoogleFiles;
-
+/**
+ * @resource Files
+ *
+ * Files handing mostly used to upload new files
+ */
 class FilesController extends Controller
 {
 
 
 /**
+ * Uploads files send though HTTP multipart/form-data
+ * 
  * Uploads provided file though HTTPFile  multipart/form-data; and returns full file URL.
  * default field_name(key) for the file is file but it could be changed using 
  * additional parameter field_name to reference file using another field_name
