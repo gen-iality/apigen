@@ -11,7 +11,7 @@ class FilesController extends Controller
 
 
 /**
- * Uploads provided file though HTTPFile and returns full file URL.
+ * Uploads provided file though HTTPFile  multipart/form-data; and returns full file URL.
  * default field_name(key) for the file is file but it could be changed using 
  * additional parameter field_name to reference file using another field_name
  * HTTPFile could be just one file on multiple files, 
