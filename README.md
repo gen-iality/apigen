@@ -2,16 +2,13 @@
 Este proyecto se encuentra el API de EVIUS plataforma de eventos.
 
 EVIUS se compone de los siguientes proyectos
- * EVIUS API  
-   https://bitbucket.org/modev/eviusapilaravel/src
- * EVIUSAUTH 
-   https://bitbucket.org/modev/eviusauth
- * administradorevius (para administrar los eventos)        
-   https://bitbucket.org/modev/administradorevius
- * eviusfirebasemanagement   (para actualizar los usuarios en firebase)
-   https://bitbucket.org/modev/eviusfirebasemanagement 
- * frontvius (el portal que ven los usuarios no administradores)
-   https://bitbucket.org/modev/frontvius
+no es necesario instalarlos todos según el desarrollo que se quiera realizar.
+
+- EVIUS API  https://bitbucket.org/modev/eviusapilaravel/src
+- EVIUSAUTH https://bitbucket.org/modev/eviusauth 
+- administradorevius (para administrar los eventos) https://bitbucket.org/modev/administradorevius
+- eviusfirebasemanagement   (para actualizar los usuarios en firebase) https://bitbucket.org/modev/eviusfirebasemanagement 
+- frontvius (el portal que ven los usuarios no administradores https://bitbucket.org/modev/frontvius
 
 ### Documentation
 API Documentation can be found inside this repository  in public/docs it can be loaded in a brower is pure HTML
