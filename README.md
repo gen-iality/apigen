@@ -14,8 +14,12 @@ no es necesario instalarlos todos según el desarrollo que se quiera realizar.
 API Documentation can be found inside this repository  in public/docs it can be loaded in a brower is pure HTML
 
 for developers:
-documentation can be generated using 
+documentation can be generated using
+
+```
 php artisan api:generate --routePrefix="api/*" 
+```
+
 How this documentation is generated can be found in https://github.com/mpociot/laravel-apidoc-generator
 
 

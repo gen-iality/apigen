@@ -21,7 +21,7 @@ Welcome to the generated API reference.
 
 #Files
 
-Files handing
+Files handing mostly used to upload new files
 <!-- START_2a29088746aee0c7fa1f3a03ed44765b -->
 ## Uploads files send though HTTP multipart/form-data
 
@@ -31,6 +31,13 @@ additional parameter field_name to reference file using another field_name
 HTTPFile could be just one file on multiple files,
 for one file this function returns  a string with the url
 for multiple files It returns an array of URLS.
+
+Request example
+POST /eviusapilaravel/public/api/files/upload/image HTTP/1.1
+Host: localhost
+Cache-Control: no-cache
+Postman-Token: 2f16a68e-f8fd-4b1b-a0d6-635c5ba7e981
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 > Example request:
 
@@ -1039,13 +1046,13 @@ $.ajax(settings).done(function (response) {
 
 <!-- END_2478aef777186232e8bca32fdf09efe3 -->
 
-<!-- START_90a862b801273a9558db888637ce28cd -->
+<!-- START_89db474df50ab4ed5e9793d3f81674f2 -->
 ## Update the specified resource in storage.
 
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/user/events/{id}" \
+curl -X PUT "http://localhost/api/user/events/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -1054,7 +1061,7 @@ var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost/api/user/events/{id}",
-    "method": "POST",
+    "method": "PUT",
     "headers": {
         "accept": "application/json"
     }
@@ -1067,10 +1074,10 @@ $.ajax(settings).done(function (response) {
 
 
 ### HTTP Request
-`POST api/user/events/{id}`
+`PUT api/user/events/{id}`
 
 
-<!-- END_90a862b801273a9558db888637ce28cd -->
+<!-- END_89db474df50ab4ed5e9793d3f81674f2 -->
 
 <!-- START_12c8930e4df622f14d09b59666f41193 -->
 ## api/user/events/{id}
@@ -3526,7 +3533,7 @@ $.ajax(settings).done(function (response) {
     "disabled": false,
     "metadata": {
         "createdAt": "2018-06-07T20:50:25+00:00",
-        "lastLoginAt": "2018-07-17T12:03:02+00:00"
+        "lastLoginAt": "2018-07-17T18:30:54+00:00"
     },
     "providerData": [
         {

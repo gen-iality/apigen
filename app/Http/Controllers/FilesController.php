@@ -22,6 +22,14 @@ class FilesController extends Controller
  * HTTPFile could be just one file on multiple files, 
  * for one file this function returns  a string with the url
  * for multiple files It returns an array of URLS.
+ * 
+ * Request example
+ * POST /eviusapilaravel/public/api/files/upload/image HTTP/1.1
+ * Host: localhost
+ * Cache-Control: no-cache
+ * Postman-Token: 2f16a68e-f8fd-4b1b-a0d6-635c5ba7e981
+ * Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+ * 
  *
  * @param Request $request
  * @param string $field_name 
