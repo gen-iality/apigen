@@ -18,9 +18,12 @@ class TestingController extends Controller
     public function sendemail()
     {
         $event = Event::find("5b1060b20d4ed40e93533af3");
+        $eventuser = $event->eventUsers()->first();
+        $eventuser->email = "juan.lopez@mocionsoft.com";
 
+        
         Mail::to('juan.lopez@mocionsoft.com')
-        ->send(new RSVP($event));
+        ->send(new RSVP($event,$eventuser));
 
         return "ok";
     }
