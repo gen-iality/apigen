@@ -25,7 +25,7 @@ Route::get('test', 'EventController@test');
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
 Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
-Route::middleware('auth.firebase')->post('user/events/{id}', 'EventController@update');
+Route::middleware('auth.firebase')->put('user/events/{id}', 'EventController@update');
 Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@delete');
 
 //Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
