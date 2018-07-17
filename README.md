@@ -1,23 +1,41 @@
 # EVIUS API (Events)
+Este proyecto se encuentra el API de EVIUS plataforma de eventos.
 
+EVIUS se compone de los siguientes proyectos
+ * EVIUS API  
+   https://bitbucket.org/modev/eviusapilaravel/src
+ * EVIUSAUTH 
+   https://bitbucket.org/modev/eviusauth
+ * administradorevius (para administrar los eventos)        
+   https://bitbucket.org/modev/administradorevius
+ * eviusfirebasemanagement   (para actualizar los usuarios en firebase)
+   https://bitbucket.org/modev/eviusfirebasemanagement 
+ * frontvius (el portal que ven los usuarios no administradores)
+   https://bitbucket.org/modev/frontvius
 
 ### Documentation
-Documentation can be found inside this repository  in public/docs it can be loaded in a brower is pure HTML
+API Documentation can be found inside this repository  in public/docs it can be loaded in a brower is pure HTML
 
 for developers:
 documentation can be generated using 
 php artisan api:generate --routePrefix="api/*" 
 How this documentation is generated can be found in https://github.com/mpociot/laravel-apidoc-generator
 
-## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+PHP 7.1 (works on Laravel) 
+MongoDB (compass gui visual client)
+Composer
+Evius auth server (https://bitbucket.org/modev/eviusauth/)
+el login se maneja con el este servicio de autenticación, tiene que estar corriendo para poder loguearse.
 
+
+## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
 ```
 Give examples
 ```
