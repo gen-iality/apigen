@@ -49,18 +49,9 @@ class RSVPController extends Controller
         $users = self::getEventUsers($event, $state);
         // self::sendRSVPmail($users, $message, $image,$event,$subject) ;
         $usersCount = count($users);
-        //@START Save message
-        $messageDB->message =  $message;
-        $messageDB->subject =  $subject;
-        $messageDB->image =  $image;
-        $messageDB->recipients_filter_field =  "0";
-        $messageDB->recipients_filter_value =  "0";
-        $messageDB->sent =  $usersCount;
-        $messageDB->success =  $usersCount;
-        $messageDB->failed =  0;
-        $messageDB->event_id =  $event->id;
-        $messageDB->save();
-        //@END save message
+        $eventId = $event->id;
+
+        $this->saveRSVP($message, $subject, $image, $usersCount, $eventId, $state->name, $messageDB);
 
         return $usersCount;
     }
@@ -71,6 +62,21 @@ class RSVPController extends Controller
      * @param [type] $users
      * @return void
      */
+    public static function saveRSVP($message, $subject, $image, $usersCount, $eventId, $state, $messageDB){
+                //@START Save message
+                var_dump($message, $subject, $image, $usersCount, $eventId, $state);
+                $messageDB->message =  $message;
+                $messageDB->subject =  $subject;
+                $messageDB->image =  $image;
+                $messageDB->recipients_filter_field =  "status";
+                $messageDB->recipients_filter_value =  ($state)? $state: null;
+                $messageDB->sent =  $usersCount;
+                $messageDB->success =  $usersCount;
+                $messageDB->failed =  0;
+                $messageDB->event_id =  $eventId;
+                $messageDB->save();
+                //@END save message
+    }
     private static function sendRSVPmail($users, $message, $image,$event,$subject)
     {
         foreach ($users as &$user) {
