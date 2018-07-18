@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,6 +10,8 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RSVP;
+use Storage;
+use App\evaLib\Services\GoogleFiles;
 
 /**
  * @resource RSVP
@@ -30,18 +31,42 @@ class RSVPController extends Controller
      */
 
 
-    public function sendEventRSVP(Event $event, State $state)
+    public function sendEventRSVP(Request $request, Event $event, State $state, GoogleFiles $gfService)
     {
+        //$request->all();
+        $message = $request->input('message');
+        
+        $image = $gfService->storeFile($request->file('image'));
+        //$id->fill($data);
+        //$id->save();        
+        var_dump($message);
+        var_dump($image);
         //por cada envio de RSVP se tiene que validar que se enviaron los correos
         //actualizando el estado del RSVP
         //
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
-        $users = self::getEventUsers($event, $state);
-        self::sendRSVPmail($users, $event);
-
+        //$users = self::getEventUsers($event, $state);
+        //self::sendRSVPmail($users, $message, $image,$event) ;
+        $users = [];
         return count($users);
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $users
+     * @return void
+     */
+    private static function sendRSVPmail($users, $event,$image)
+    {
+        foreach ($users as &$user) {
+            var_dump($user->email);
+            Mail::to($user->email)
+            ->cc('juan.lopez@mocionsoft.com')
+            ->send(new RSVP($event, $user));
+        }
+    }    
     /**
      * Undocumented function
      *
@@ -56,21 +81,7 @@ class RSVPController extends Controller
         return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
     }
-    /**
-     * Undocumented function
-     *
-     * @param [type] $users
-     * @return void
-     */
-    private static function sendRSVPmail($users, $event)
-    {
-        foreach ($users as &$user) {
-            var_dump($user->email);
-            Mail::to($user->email)
-            ->cc('juan.lopez@mocionsoft.com')
-            ->send(new RSVP($event, $user));
-        }
-    }
+
 
     private static function getEventUsers($event, $state)
     {

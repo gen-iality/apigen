@@ -21,9 +21,10 @@ class TestingController extends Controller
         $eventuser = $event->eventUsers()->first();
         $eventuser->email = "juan.lopez@mocionsoft.com";
 
-        
-        Mail::to('juan.lopez@mocionsoft.com')
-        ->send(new RSVP($event,$eventuser));
+        $mail = new RSVP($event,$eventuser);
+        var_dump($mail->build());
+        //Mail::to('juan.lopez@mocionsoft.com')
+        //->send(new RSVP($event,$eventuser));
 
         return "ok";
     }
