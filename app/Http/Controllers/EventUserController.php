@@ -22,8 +22,9 @@ class EventUserController extends Controller
         $usersfilter = function($data){
                 $temporal = $data;
                 $temporal->user =  User::where('uid', $data->userid)->first();
-                $temporal->rol_id = $data->rol;
                 $temporal->state_id = $data->state;
+                $temporal->rol_id = $data->rol;
+                
                 return $temporal;
         };
         $evtUsers = EventUser::where('event_id', $id)->get();

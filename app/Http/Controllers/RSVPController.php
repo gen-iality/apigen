@@ -89,6 +89,7 @@ class RSVPController extends Controller
                 $eventUser->changeToInvite();
             }
               //->cc('juan.lopez@mocionsoft.com')
+        
           Mail::to($eventUser->email)
             ->send(new RSVP($message, $event, $eventUser, $image,$subject));
         
