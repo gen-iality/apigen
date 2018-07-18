@@ -40,6 +40,7 @@ class RSVPController extends Controller
         $image     = $request->input('image');
         $subject   = $request->input('subject');
         $subject   = ($subject)?$subject:"[Invitación] ".$event->name;
+        $footer    = $request->input('footer');
         //$image = $gfService->storeFile($request->file('image'));
         //$id->fill($data);
         //$id->save();        
@@ -146,7 +147,6 @@ class RSVPController extends Controller
                 $temporal->rol_id = $data->rol;
                 $temporal->state_id = $data->state;
                 $temporal->email = $user->email;
-                $footer  = $request->input('footer');
                 
                 return $temporal;
             }
