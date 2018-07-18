@@ -47,9 +47,9 @@ class RSVPController extends Controller
         //
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
-        $users = self::getEventUsers($event, $state);
-        self::sendRSVPmail($users, $message, $image,$event,$subject) ;
-        $usersCount = count($users);
+        $eventUsers = self::getEventUsers($event, $state);
+        self::sendRSVPmail($eventUsers, $message, $image,$event,$subject) ;
+        $usersCount = count($eventUsers);
         $eventId = $event->id;
 
         $this->saveRSVP($message, $subject, $image, $usersCount, $eventId, $state->name, $messageDB);
@@ -79,21 +79,21 @@ class RSVPController extends Controller
                 //@END save message
     }
 
-    private static function sendRSVPmail($users, $message, $image,$event,$subject)
+    private static function sendRSVPmail($eventUsers, $message, $image,$event,$subject)
     {
         
-        foreach ($users as &$user) {
-            if (!$user)continue;
-            
-            $eventUser = EventUser::where('user_id',$user->id)->where('event_id',$event->id)->first();
-            echo "user_id: ".$user->id;
-            $eventUser->changeToInvite()->save();
-            
+        foreach ($eventUsers as &$eventUser) {
+            if (!$eventUser)continue;
 
-            Mail::to($user->email)
+            if ($eventUser) {
+                echo "lo pudimos cambiar";
+                $eventUser->changeToInvite()->save();
+            }
+
+           /* Mail::to($user->email)
             ->cc('juan.lopez@mocionsoft.com')
             ->send(new RSVP($message, $event, $user, $image,$subject));
-
+*/
             
         }
     }    
