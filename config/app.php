@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL ^ E_DEPRECATED);
 return [
 
     /*
@@ -146,7 +146,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        
         /*
          * Package Service Providers...
          */

@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Storage;
 use App\evaLib\Services\GoogleFiles;
+
 /**
  * @resource Files
  *
@@ -39,13 +41,15 @@ class FilesController extends Controller
     public function upload(Request $request,string $field_name = null, GoogleFiles $gfService)
     {   //@debug post $entityBody = file_get_contents('php://input');
         $imgurls = [];
-       
+        
         //valor por defecto de campo que contiene el archivo
         $field_name = ($field_name)?$field_name:"file";
-
+        
         //No viene ningun archivo
         if (!$request->hasFile($field_name)){
-            return "";
+            $statusCode = "400";
+            $message = "No file found in field '".$field_name."' to be uploded";
+            return response()->json(['error' => $message], $statusCode);
         }
         $files = $request->file($field_name);
 
