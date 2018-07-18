@@ -17,16 +17,20 @@ class RSVP extends Mailable
 
     public $event;
     public $eventUser;
+    public $image;
+    public $message;
     public $urlconfirmacion;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Event $event, $eventUser)
+    public function __construct(string $message, Event $event, $eventUser, string $image)
     {
         $this->event = $event;
         $this->eventUser = $eventUser;
+        $this->image = $image;
+        $this->message = $message;
     }
 
     /**

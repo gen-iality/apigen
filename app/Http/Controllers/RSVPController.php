@@ -35,8 +35,8 @@ class RSVPController extends Controller
     {
         //$request->all();
         $message = $request->input('message');
-        
-        $image = $gfService->storeFile($request->file('image'));
+        $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        //$image = $gfService->storeFile($request->file('image'));
         //$id->fill($data);
         //$id->save();        
         var_dump($message);
@@ -46,9 +46,9 @@ class RSVPController extends Controller
         //
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
-        //$users = self::getEventUsers($event, $state);
-        //self::sendRSVPmail($users, $message, $image,$event) ;
-        $users = [];
+        $users = self::getEventUsers($event, $state);
+        self::sendRSVPmail($users, $message, $image,$event) ;
+
         return count($users);
     }
 
@@ -58,13 +58,16 @@ class RSVPController extends Controller
      * @param [type] $users
      * @return void
      */
-    private static function sendRSVPmail($users, $event,$image)
+    private static function sendRSVPmail($users, $message, $image,$event)
     {
         foreach ($users as &$user) {
-            var_dump($user->email);
+            if (!$user)continue;
+            echo "user_id: ".$user->id;
+            
+            
             Mail::to($user->email)
             ->cc('juan.lopez@mocionsoft.com')
-            ->send(new RSVP($event, $user));
+            ->send(new RSVP($message, $event, $user, $image));
         }
     }    
     /**
@@ -88,7 +91,7 @@ class RSVPController extends Controller
         $condiciones = [['event_id', '=', $event->id]];
         
         //Agregamos la condicion por estado si es que viene
-        if ($state->id) {
+        if ($state && $state->id) {
             $condiciones[] = ['state_id', '=', $state->id];
         }
        
@@ -106,6 +109,7 @@ class RSVPController extends Controller
             try {
                 $user = $auth->getUser($data->userid);
             } catch (\Exception $e) {
+                echo ($e->getMessage());
                 $user = false;
             }
             if ($user) {

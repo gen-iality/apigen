@@ -3,13 +3,12 @@
 {{$event->name}}
 ----------------
 
-![alt text](https://picsum.photos/600/200 "Logo Title Text 1")
+![alt text]({{$image}} "Logo Title Text 1")
 
 
 
 @component('mail::promotion')
-Hola juan, estas invitad@ al 
-Lanzamiento de Mitika
+{{$message}}
 
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'green'])
 Confirmar asistencia

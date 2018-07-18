@@ -20,12 +20,14 @@ class TestingController extends Controller
         $event = Event::find("5b1060b20d4ed40e93533af3");
         $eventuser = $event->eventUsers()->first();
         $eventuser->email = "juan.lopez@mocionsoft.com";
+        $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        $message = "mensaje";
 
-        $mail = new RSVP($event,$eventuser);
-        var_dump($mail->build());
-        //Mail::to('juan.lopez@mocionsoft.com')
-        //->send(new RSVP($event,$eventuser));
-
+   
+       // var_dump($mail->build());
+        Mail::to('juan.lopez@mocionsoft.com')
+        ->send(new RSVP( $message, $event,$eventuser,$image));
+       
         return "ok";
     }
     public function sendemail2(){
