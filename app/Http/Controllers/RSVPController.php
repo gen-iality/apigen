@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\State;
+use App\Message;
 use App\Event;
 use App\EventUser;
 use Kreait\Firebase\Factory;
@@ -31,7 +32,7 @@ class RSVPController extends Controller
      */
 
 
-    public function sendEventRSVP(Request $request, Event $event, State $state, GoogleFiles $gfService)
+    public function sendEventRSVP(Request $request, Event $event, State $state, GoogleFiles $gfService, Message $messageDB)
     {
         //$request->all();
         $message = $request->input('message');
@@ -40,17 +41,28 @@ class RSVPController extends Controller
         //$image = $gfService->storeFile($request->file('image'));
         //$id->fill($data);
         //$id->save();        
-        var_dump($message);
-        var_dump($image);
         //por cada envio de RSVP se tiene que validar que se enviaron los correos
         //actualizando el estado del RSVP
         //
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
         $users = self::getEventUsers($event, $state);
-        self::sendRSVPmail($users, $message, $image,$event,$subject) ;
+        // self::sendRSVPmail($users, $message, $image,$event,$subject) ;
+        $usersCount = count($users);
+        //@START Save message
+        $messageDB->message =  $message;
+        $messageDB->subject =  $subject;
+        $messageDB->image =  $image;
+        $messageDB->recipients_filter_field =  "0";
+        $messageDB->recipients_filter_value =  "0";
+        $messageDB->sent =  $usersCount;
+        $messageDB->success =  $usersCount;
+        $messageDB->failed =  0;
+        $messageDB->event_id =  $event->id;
+        $messageDB->save();
+        //@END save message
 
-        return count($users);
+        return $usersCount;
     }
 
     /**
