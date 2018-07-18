@@ -7,11 +7,13 @@ use Closure;
 class Cors {
     public function handle($request, Closure $next)
     {
-        
-        $urlComponent = parse_url($_SERVER['HTTP_REFERER']);
-        $originURL = $urlComponent["scheme"]."://".$urlComponent["host"];
-        if(isset($urlComponent["port"])) {
-            $originURL .= ":".$urlComponent["port"];
+        $originURL ="http://dev.mocionsoft.com:3000";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $urlComponent = parse_url($_SERVER['HTTP_REFERER']);
+            $originURL = $urlComponent["scheme"]."://".$urlComponent["host"];
+            if (isset($urlComponent["port"])) {
+                $originURL .= ":".$urlComponent["port"];
+            }
         }
 
         return $next($request)
