@@ -36,7 +36,8 @@ class RSVPController extends Controller
     {
         //$request->all();
         $message = $request->input('message');
-        $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        $image   = $request->input('image');
         $subject = "[Invitación]".$event->name;
         //$image = $gfService->storeFile($request->file('image'));
         //$id->fill($data);
