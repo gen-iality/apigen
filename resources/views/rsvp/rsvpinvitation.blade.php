@@ -22,13 +22,12 @@ Confirmar asistencia
 -----------------------
 @endcomponent
 @component('mail::table')
-| Cuando          | Lugar         | 
-| -------------   |:-------------:| 
-| Fecha:          | Dirección:      | 
-| jueves          | Calle 93 #19-55      | 
-| julio 12, 2018  | WeWork de la 93 | 
-| Hora:           | Centered      | 
-| 06:00 p.m.      | Centered      | 
+| Cuando                | Lugar              | 
+| --------------------  |:------------------:| 
+| Fecha:                |                    | 
+| {{$event->date_start}}|  {{$event->venue}} | 
+|  Hora:                | Dirección:         |
+|  {{$event->hour}}     |{{$event->location}}| 
 
 @endcomponent
 
