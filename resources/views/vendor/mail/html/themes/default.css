@@ -242,6 +242,14 @@ img {
     border-left: 18px solid #bf5329;
 }
 
+.button-evius {
+    background-color: #3f51b5;
+    border-top: 10px solid #3f51b5;
+    border-right: 18px solid #3f51b5;
+    border-bottom: 10px solid #3f51b5;
+    border-left: 18px solid #3f51b5;
+}
+
 /* Panels */
 
 .panel {
