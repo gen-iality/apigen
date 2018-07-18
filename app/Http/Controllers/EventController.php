@@ -118,7 +118,7 @@ class EventController extends Controller
         $data = $request->all();
         //@debug post $entityBody = file_get_contents('php://input');
 
-        $data['picture'] =  $gfService->storeFile($request->file('picture'));
+        //$data['picture'] =  $gfService->storeFile($request->file('picture'));
 
         $id->fill($data);
         $id->save();
