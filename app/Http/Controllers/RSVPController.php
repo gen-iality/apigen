@@ -106,7 +106,7 @@ class RSVPController extends Controller
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
         }
-        return redirect()->away('https://dev.mocionsoft.com:3000/events/id_evento');
+        return redirect()->away('http://dev.mocionsoft.com:3000/evento/'.$eventUser->event_id.'');
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
 
