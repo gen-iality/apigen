@@ -46,7 +46,7 @@ class RSVPController extends Controller
         //actualizando el estado del RSVP
         //
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
-
+        
         $eventUsers = self::getEventUsers($event, $state);
         self::sendRSVPmail($eventUsers, $message, $image,$event,$subject) ;
         $usersCount = count($eventUsers);
@@ -86,15 +86,12 @@ class RSVPController extends Controller
             if (!$eventUser)continue;
 
             if ($eventUser) {
-                echo "lo pudimos cambiar";
                 $eventUser->changeToInvite()->save();
             }
 
-           /* Mail::to($user->email)
+           Mail::to($eventUser->email)
             ->cc('juan.lopez@mocionsoft.com')
-            ->send(new RSVP($message, $event, $user, $image,$subject));
-*/
-            
+            ->send(new RSVP($message, $event, $eventUser, $image,$subject));
         }
     }    
     /**
@@ -118,7 +115,7 @@ class RSVPController extends Controller
         $condiciones = [['event_id', '=', $event->id]];
         
         //Agregamos la condicion por estado si es que viene
-        if ($state && $state->id) {
+        if ($state && $state!="null" && $state->id) {
             $condiciones[] = ['state_id', '=', $state->id];
         }
        
