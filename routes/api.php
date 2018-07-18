@@ -48,6 +48,10 @@ Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 
 Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 Route::get('states', 'StateController@index');
 
+Route::get('event/{id}/messages', 'MessageController@message');
+// Route::get('event/messages', 'MessageController@message');
+
+
 Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
