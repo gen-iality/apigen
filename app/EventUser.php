@@ -27,8 +27,14 @@ class EventUser extends Moloquent
     }
 
     public function changeToInvite(){
-        if ($this->state_id == "5b188b41c4004d12ec13d139")
-        $this->state_id = "5b4ebb4c7c9ccd45328a31d6";
+        if ($this->state_id == "5b0efc411d18160bce9bc706" || !$this->state_id )
+        {
+            $this->state_id = "5b4ebb4c7c9ccd45328a31d6";
+            $this->save();
+        
+        }
+        //else
+        //$this->state_id = $this->state_id;
         return $this;
     }
 
