@@ -53,7 +53,7 @@ class RSVPController extends Controller
         $usersCount = count($eventUsers);
         $eventId = $event->id;
 
-        $this->saveRSVP($message, $subject, $image, $usersCount, $eventId, $state->name, $messageDB);
+        $this->saveRSVP($message, $subject, $image, $footer, $usersCount, $eventId, $state->name, $messageDB);
 
         return $usersCount;
     }
@@ -146,6 +146,7 @@ class RSVPController extends Controller
                 $temporal->rol_id = $data->rol;
                 $temporal->state_id = $data->state;
                 $temporal->email = $user->email;
+                $footer  = $request->input('footer');
                 
                 return $temporal;
             }
