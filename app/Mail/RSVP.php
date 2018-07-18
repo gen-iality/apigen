@@ -19,18 +19,20 @@ class RSVP extends Mailable
     public $eventUser;
     public $image;
     public $message;
+    public $subject;
     public $urlconfirmacion;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image)
+    public function __construct(string $message, Event $event, $eventUser, string $image,string $subject = null)
     {
         $this->event = $event;
         $this->eventUser = $eventUser;
         $this->image = $image;
         $this->message = $message;
+        $this->subject = ($subject)?$subject:"[Invitación] ";
     }
 
     /**
@@ -41,7 +43,9 @@ class RSVP extends Mailable
     public function build()
     {
         
-        return $this->markdown('rsvp.rsvpinvitation');
+        return $this
+        ->subject($this->subject)
+        ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
     }
 }

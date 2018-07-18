@@ -36,6 +36,7 @@ class RSVPController extends Controller
         //$request->all();
         $message = $request->input('message');
         $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        $subject = "[Invitación]".$event->name;
         //$image = $gfService->storeFile($request->file('image'));
         //$id->fill($data);
         //$id->save();        
@@ -47,7 +48,7 @@ class RSVPController extends Controller
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
         $users = self::getEventUsers($event, $state);
-        self::sendRSVPmail($users, $message, $image,$event) ;
+        self::sendRSVPmail($users, $message, $image,$event,$subject) ;
 
         return count($users);
     }
@@ -58,16 +59,18 @@ class RSVPController extends Controller
      * @param [type] $users
      * @return void
      */
-    private static function sendRSVPmail($users, $message, $image,$event)
+    private static function sendRSVPmail($users, $message, $image,$event,$subject)
     {
         foreach ($users as &$user) {
             if (!$user)continue;
             echo "user_id: ".$user->id;
             
-            
+
             Mail::to($user->email)
             ->cc('juan.lopez@mocionsoft.com')
-            ->send(new RSVP($message, $event, $user, $image));
+            ->send(new RSVP($message, $event, $user, $image,$subject));
+
+            
         }
     }    
     /**
