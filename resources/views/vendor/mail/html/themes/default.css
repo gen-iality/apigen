@@ -1,6 +1,6 @@
 /* Base */
 
-body, body *:not(html):not(style):not(br):not(tr):not(code) {
+body, body *:not(html):not(style):not(br):not(tr) {
     font-family: Avenir, Helvetica, sans-serif;
     box-sizing: border-box;
 }
@@ -29,6 +29,12 @@ blockquote {
     text-align: left;
 }
 
+pre {
+    font-weight: 900;
+    font-size: 3em;
+    text-align: center;
+}
+
 a {
     color: #3869D4;
 }
@@ -44,7 +50,7 @@ h1 {
     font-size: 19px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    text-align: center;
 }
 
 h2 {
@@ -52,7 +58,7 @@ h2 {
     font-size: 16px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    text-align: center;
 }
 
 h3 {
@@ -60,7 +66,7 @@ h3 {
     font-size: 14px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    text-align: center;
 }
 
 p {
@@ -68,7 +74,7 @@ p {
     font-size: 16px;
     line-height: 1.5em;
     margin-top: 0;
-    text-align: left;
+    text-align: center;
 }
 
 p.sub {
@@ -274,7 +280,6 @@ img {
 
 .promotion {
     background-color: #FFFFFF;
-    border: 2px dashed #9BA2AB;
     margin: 0;
     margin-bottom: 25px;
     margin-top: 25px;
