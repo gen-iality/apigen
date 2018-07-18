@@ -47,7 +47,7 @@ class RSVPController extends Controller
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
 
         $users = self::getEventUsers($event, $state);
-        // self::sendRSVPmail($users, $message, $image,$event,$subject) ;
+        self::sendRSVPmail($users, $message, $image,$event,$subject) ;
         $usersCount = count($users);
         $eventId = $event->id;
 
@@ -77,11 +77,16 @@ class RSVPController extends Controller
                 $messageDB->save();
                 //@END save message
     }
+
     private static function sendRSVPmail($users, $message, $image,$event,$subject)
     {
+        
         foreach ($users as &$user) {
             if (!$user)continue;
+            
+            $eventUser = EventUser::where('user_id',$user->id)->where('event_id',$event->id)->first();
             echo "user_id: ".$user->id;
+            $eventUser->changeToInvite()->save();
             
 
             Mail::to($user->email)

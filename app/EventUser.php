@@ -26,5 +26,10 @@ class EventUser extends Moloquent
         return $this;
     }
 
+    public function changeToInvite(){
+        $this->state_id = "5b4ebb4c7c9ccd45328a31d6";
+        return $this;
+    }
+
     protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id'];
 }
