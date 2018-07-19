@@ -4,8 +4,6 @@
 
 ![Logo]({{$image}})
 
-
-
 @component('mail::promotion')
 {{$message}}
 
@@ -14,7 +12,6 @@ Confirmar asistencia
 @endcomponent
 
 @endcomponent
-
 
 @component('mail::panel')
 {{$event->description}}
@@ -34,6 +31,11 @@ Confirmar asistencia
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'evius'])
 Confirmar asistencia
 @endcomponent
+
+@component('mail::subcopy')
+{{$footer}}
+@endcomponent
+
 
 @endcomponent
 

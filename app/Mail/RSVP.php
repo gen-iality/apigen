@@ -19,6 +19,7 @@ class RSVP extends Mailable
     public $eventUser;
     public $image;
     public $message;
+    public $footer;
     public $subject;
     public $urlconfirmacion;
     /**
@@ -26,13 +27,14 @@ class RSVP extends Mailable
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null,string $subject = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null,string $subject = null, $footer=null)
     {
-        $this->event = $event;
+        $this->event     = $event;
         $this->eventUser = $eventUser;
-        $this->image = ($image)?$image:null;
-        $this->message = $message;
-        $this->subject = ($subject)?$subject:"[Invitación] ";
+        $this->image     = ($image)?$image:null;
+        $this->message   = $message;
+        $this->footer    = $footer;
+        $this->subject   = ($subject)?$subject:"[Invitación] ";
     }
 
     /**

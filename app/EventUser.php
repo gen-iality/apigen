@@ -26,6 +26,21 @@ class EventUser extends Moloquent
         return $this;
     }
 
+    public function checkIn(){
+        try{
+            $this->checked_in = true;
+            $this->checked_in_date = time();
+            return ($this->save())?"true":"false";
+         }
+         catch(\Exception $e){
+            // do task when error
+            return $e->getMessage();  
+         }        
+
+        return true;
+    }
+
+
     public function changeToInvite(){
         if ($this->state_id == "5b0efc411d18160bce9bc706" || !$this->state_id )
         {
@@ -38,5 +53,5 @@ class EventUser extends Moloquent
         return $this;
     }
 
-    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id'];
+    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id',"checked_in","checked_in_date"];
 }

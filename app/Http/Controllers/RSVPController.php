@@ -50,7 +50,7 @@ class RSVPController extends Controller
         //http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/5b1060b20d4ed40e93533af3/5b188b41c4004d12ec13d139
         
         $eventUsers = self::getEventUsers($event, $state);
-        self::sendRSVPmail($eventUsers, $message, $image,$event,$subject) ;
+        self::sendRSVPmail($eventUsers, $message, $image,$footer, $event,$subject) ;
         $usersCount = count($eventUsers);
         $eventId = $event->id;
 
@@ -65,10 +65,11 @@ class RSVPController extends Controller
      * @param [type] $users
      * @return void
      */
-    public static function saveRSVP($message, $subject, $image, $usersCount, $eventId, $state, $messageDB){
+    public static function saveRSVP($message, $subject, $image, $footer, $usersCount, $eventId, $state, $messageDB){
                 //@START Save message
-                var_dump($message, $subject, $image, $usersCount, $eventId, $state);
+
                 $messageDB->message =  $message;
+                $messageDB->footer =  $footer;
                 $messageDB->subject =  $subject;
                 $messageDB->image =  $image;
                 $messageDB->recipients_filter_field =  "status";
@@ -81,7 +82,7 @@ class RSVPController extends Controller
                 //@END save message
     }
 
-    private static function sendRSVPmail($eventUsers, $message, $image,$event,$subject)
+    private static function sendRSVPmail($eventUsers, $message, $image,$footer, $event,$subject)
     {
         
         foreach ($eventUsers as &$eventUser) {
@@ -93,7 +94,7 @@ class RSVPController extends Controller
               //->cc('juan.lopez@mocionsoft.com')
         
           Mail::to($eventUser->email)
-            ->send(new RSVP($message, $event, $eventUser, $image,$subject));
+            ->send(new RSVP($message, $event, $eventUser, $image,$footer, $subject));
         
         }
     }    

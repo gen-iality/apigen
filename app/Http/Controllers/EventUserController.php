@@ -188,8 +188,26 @@ class EventUserController extends Controller
      */
     public function update(Request $request, EventUser $eventUser)
     {
-        //
+        $data = $request->all();
+        $id->fill($data);
+        $id->save();
+        return $data;
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\EventUser  $eventUser
+     * @return \Illuminate\Http\Response
+     */
+    public function checkIn($id)
+    {   
+        $eventUser = EventUser::find($id);
+        return $eventUser->checkIn();
+    
+    }
+
 
     /**
      * Remove the specified resource from storage.
