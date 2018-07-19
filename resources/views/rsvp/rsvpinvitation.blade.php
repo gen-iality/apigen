@@ -23,9 +23,9 @@ Confirmar asistencia
 @component('mail::table')
 |                       |                     | 
 | --------------------  |:-------------------:| 
-| **Fecha:**            | **Lugar**           | 
+| **Fecha:**            | **Lugar:**          | 
 | {{$event->date_start}}| {{$event->venue}}   | 
-|                       |                     |
+|  &npsp;               |  &npsp;             |
 | **Hora:**             | **Dirección:**      |
 | {{$event->hour}}      | {{$event->location}}| 
 
