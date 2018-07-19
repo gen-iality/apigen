@@ -20,11 +20,11 @@ Confirmar asistencia
 {{$event->description}}
 -----------------------
 @endcomponent
-@component('mail::table') 
+@component('mail::table')
 |                       |                     | 
 | --------------------  |:-------------------:| 
 | **Fecha:**            | **Lugar:**          | 
-| {{ date('M j, Y H:i', strtotime($event->date_start)) }}| {{$event->venue}}   | 
+| {{ date('l, F j Y ', strtotime($event->date_start)) }}| {{$event->venue}}   | 
 |<br>                   |<br>                 |
 | **Hora:**             | **Dirección:**      |
 | {{$event->hour}}      | {{$event->location}}| 
