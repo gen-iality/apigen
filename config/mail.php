@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'apps@mocionsoft.com'),
-        'name' => env('MAIL_FROM_NAME', 'contact'),
+        'name' => env('MAIL_FROM_NAME', 'MAXIM'),
     ],
 
     /*
