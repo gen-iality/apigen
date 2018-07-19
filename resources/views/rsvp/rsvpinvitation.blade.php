@@ -25,7 +25,7 @@ Confirmar asistencia
 | --------------------  |:-------------------:| 
 | **Fecha:**            | **Lugar:**          | 
 | {{$event->date_start}}| {{$event->venue}}   | 
-|  &npsp;               |  &npsp;             |
+|:---------------------:|:-------------------:|
 | **Hora:**             | **Dirección:**      |
 | {{$event->hour}}      | {{$event->location}}| 
 
