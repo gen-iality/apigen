@@ -17,9 +17,9 @@ class TestingController extends Controller
      */
     public function sendemail()
     {
-        $event = Event::find("5b1060b20d4ed40e93533af3");
+        $event = Event::find("5b4f491cc065860378680a24");
         $eventuser = $event->eventUsers()->first();
-        $eventuser->email = "juan.lopez@mocioadfadfnsoft.com";
+        $eventuser->email = "juan.lopez@mocionsoft.com";
         $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
         $message = "mensaje";
         $subject = "[Invitación Máxim] kraken en Colombia";
