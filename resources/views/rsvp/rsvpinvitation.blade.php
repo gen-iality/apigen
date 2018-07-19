@@ -21,10 +21,11 @@ Confirmar asistencia
 -----------------------
 @endcomponent
 @component('mail::table')
-| Cuando                | Lugar               | 
+|                       |                     | 
 | --------------------  |:-------------------:| 
-| **Fecha:**            |                     | 
+| **Fecha:**            | **Lugar**           | 
 | {{$event->date_start}}| {{$event->venue}}   | 
+|                       |                     |
 | **Hora:**             | **Dirección:**      |
 | {{$event->hour}}      | {{$event->location}}| 
 
