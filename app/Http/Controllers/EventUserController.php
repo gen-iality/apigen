@@ -39,9 +39,10 @@ class EventUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addUserToEvent(Request $request, $event_id)
     {
-        //
+        $result = self::verifyAndInviteUsers($request, $event_id);
+        return $result;
     }
 
     public function testing(User $user)
