@@ -22,6 +22,7 @@ class AuthFirebase
     {
         //Se carga el sdk de firebase para PHP
         try {
+            $firebaseToken = null;
             $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
             $firebase = (new Factory)
                 ->withServiceAccount($serviceAccount)
@@ -31,10 +32,12 @@ class AuthFirebase
             $projectId = 'eviusauth';
             $verifier = new Verifier($projectId);
 
+            //miramos si el token viene en la Petición
             if (isset($_REQUEST['evius_token'])){
                 $firebaseToken = $_REQUEST['evius_token'];
             }
 
+            //miramos si el token viene en una cookie
             if (isset($_COOKIE['evius_token'])){
                 $firebaseToken = $_COOKIE['evius_token'];
             }
