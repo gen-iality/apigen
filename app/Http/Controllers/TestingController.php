@@ -34,4 +34,8 @@ class TestingController extends Controller
         return "ahi";
     }   
 
+    public function usuario(){
+        return "usuario";
+    }
+
 }
