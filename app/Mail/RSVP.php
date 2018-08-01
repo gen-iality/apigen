@@ -27,7 +27,9 @@ class RSVP extends Mailable
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null,string $subject = null, $footer=null)
+    
+    public function __construct(
+        string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
     {
         $this->event     = $event;
         $this->eventUser = $eventUser;

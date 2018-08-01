@@ -36,13 +36,41 @@ These instructions will get you a copy of the project up and running on your loc
 - el login se maneja con el este servicio de autenticación, tiene que estar corriendo para poder loguearse.
 
 
-## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
-```
-Give examples
-```
-
 ### Installing
 
+1. First install mongodb
+
+2. Then install MongoDB PHP Driver
+https://github.com/mongodb/mongo-php-driver
+
+installing MongoDB PHP Driver is somewhat involved:  
+
+using pecl:
+
+* sudo apt-get install php7.x-dev
+* sudo pecl install mongodb
+* You should add "extension=mongodb.so" to php.ini for web and cli versions
+* restart webServer
+
+3. composer install inside proyect folder
+
+4. generate encryption key
+
+```
+php artisan key:generate
+```
+and store the key in .env file with APP_KEY name
+
+```
+APP_KEY = ZqxYyhRadx1UNwPgdjXsmeG/MvBZO6ZR6PeUuCa6cAs=
+```
+
+5. Make sure storage folder has right permissions for laravel to store stuff there.
+
+
+
+
+## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
 A step by step series of examples that tell you how to get a development env running
 
 Say what the step will be
@@ -50,6 +78,12 @@ Say what the step will be
 ```
 Give the example
 ```
+
+
+```
+Give examples
+```
+
 
 And repeat
 

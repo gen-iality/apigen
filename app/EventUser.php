@@ -20,6 +20,12 @@ class EventUser extends Moloquent
         return $this->belongsTo('App\State');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','userid');
+    }
+
+
 
     public function confirm(){
         $this->state_id = "5b188b41c4004d12ec13d139";

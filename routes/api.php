@@ -21,7 +21,7 @@ use App\Event;
 
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::get('test', 'EventController@test');
-
+Route::get('rsvpdev/event/{id}', 'RSVPController@devthings');
 //event CRUD
 Route::put('event/{id}', 'EventController@update');
 
@@ -64,7 +64,7 @@ Route::get('event/{id}/messages', 'MessageController@message');
 Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
-Route::post('rsvp/sendeventrsvp/{event}/{state?}', 'RSVPController@sendEventRSVP');
+Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@sendEventRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 
 //middleware('auth.firebase')->
