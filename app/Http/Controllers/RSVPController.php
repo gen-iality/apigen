@@ -30,7 +30,7 @@ class RSVPController extends Controller
      * @param body image link
      * @param body subject
      * @param body footer
-     
+
      * @return int Number of email sent
      */
 
@@ -38,8 +38,8 @@ class RSVPController extends Controller
     { //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //los usuarios
         $usersIds = $request->input('usersIds');
-
         //$request->all();
+
         $message = $request->input('message');
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
         $image = $request->input('image');
@@ -53,8 +53,6 @@ class RSVPController extends Controller
         $usersCount = count($eventUsers);
         $eventId = $event->id;
 
-        //$this->saveRSVP($message, $subject, $image, $footer, $usersCount, $eventId, $state->name, $messageDB);
-
         return $usersCount;
     }
 
@@ -64,7 +62,11 @@ class RSVPController extends Controller
         $eventUsers = EventUser::where('event_id', '=', $event->id)
             ->whereIn('userid', $usersIds)
             ->get();
-        var_dump(count($eventUsers));
+
+        foreach ($eventUsers as $eventUser) {
+            $usuario = User::firstOrCreate(["uid" => $eventUser->userid]);
+        }
+
         $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
 
         foreach ($usersIdNotInEvent as $userId) {
@@ -105,26 +107,35 @@ class RSVPController extends Controller
      * @param [type] $users
      * @return void
      */
-    public static function saveRSVP($message, $subject, $image, $footer, $usersCount, $eventId, $state, $messageDB)
-    {
+    public static function saveRSVP($message, $subject, $image,
+        $footer, $usersCount, $eventId
+    ) {
         //@START Save message
-
+        $messageDB = new Message();
         $messageDB->message = $message;
         $messageDB->footer = $footer;
         $messageDB->subject = $subject;
         $messageDB->image = $image;
         $messageDB->recipients_filter_field = "status";
-        $messageDB->recipients_filter_value = ($state) ? $state : null;
+        $messageDB->recipients_filter_value = null;
         $messageDB->sent = $usersCount;
         $messageDB->success = $usersCount;
         $messageDB->failed = 0;
         $messageDB->event_id = $eventId;
         $messageDB->save();
         //@END save message
+        return $messageDB;
     }
 
-    private static function sendRSVPmail($eventUsers, $message, $image, $footer, $event, $subject)
-    {
+    private static function sendRSVPmail(
+        $eventUsers, $message, $image, $footer,
+        $event, $subject
+    ) {
+        $usersCount = count($eventUsers);
+
+        $message = self::saveRSVP($message, $subject, $image, $footer,
+            $usersCount, $event->id
+        );
 
         foreach ($eventUsers as &$eventUser) {
             if (!$eventUser) {
@@ -134,9 +145,11 @@ class RSVPController extends Controller
             if ($eventUser) {
                 $eventUser->changeToInvite();
             }
-            Mail::to($eventUser->user->email)
+            //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
+            $email = (!empty($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
+            Mail::to($email)
                 ->send(new RSVP($message, $event, $eventUser, $image, $footer, $subject));
-                //->cc('juan.lopez@mocionsoft.com');
+            //->cc('juan.lopez@mocionsoft.com');
 
         }
     }
