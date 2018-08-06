@@ -5,6 +5,7 @@ use App\Event;
 use App\EventUser;
 use App\Mail\RSVP;
 use App\Message;
+use App\MessageUser;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class RSVPController extends Controller
 {
 
     /**
-     * Send RSVP to users in an event, taking EventUser status as parameter
+     * Send RSVP to users in an event, taking usersIds[] in request 
      * to filter which users the RSVP is going to be send to
      *
      * @param Event $event  Event to which users are suscribed
@@ -30,17 +31,17 @@ class RSVPController extends Controller
      * @param body image link
      * @param body subject
      * @param body footer
-
+     * @param request Laravel request object
      * @return int Number of email sent
      */
 
     public function sendEventRSVP(Request $request, Event $event, Message $messageDB)
-    { //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
+    { 
+        //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //los usuarios
         $usersIds = $request->input('usersIds');
-        //$request->all();
 
-        $message = $request->input('message');
+        $message  = $request->input('message');
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
         $image = $request->input('image');
         $subject = $request->input('subject');
@@ -49,9 +50,8 @@ class RSVPController extends Controller
 
         $eventUsers = self::getOrCreateEventUserFromUsers($event, $usersIds);
 
-        self::sendRSVPmail($eventUsers, $message, $image, $footer, $event, $subject);
+        self::_sendRSVPmail($eventUsers, $message, $image, $footer, $event, $subject);
         $usersCount = count($eventUsers);
-        $eventId = $event->id;
 
         return $usersCount;
     }
@@ -127,9 +127,8 @@ class RSVPController extends Controller
         return $messageDB;
     }
 
-    private static function sendRSVPmail(
-        $eventUsers, $message, $image, $footer,
-        $event, $subject
+    private static function _sendRSVPmail(
+        $eventUsers, $message, $image, $footer,$event, $subject
     ) {
         $usersCount = count($eventUsers);
 
@@ -142,15 +141,27 @@ class RSVPController extends Controller
                 continue;
             }
 
-            if ($eventUser) {
-                $eventUser->changeToInvite();
-            }
+            $eventUser->changeToInvite();
+
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
             $email = (!empty($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
-            Mail::to($email)
-                ->send(new RSVP($message, $event, $eventUser, $image, $footer, $subject));
-            //->cc('juan.lopez@mocionsoft.com');
+            
+            $messageUser = new MessageUser(
+                [
+                    'email' => $eventUser->user->email,
+                    'user_id' => $eventUser->user->uid,
+                    'event_user_id' => $eventUser->id,
+                ]
+            );
+            $message->messageUsers()->save($messageUser);
 
+            $m = Message::find($message->id);
+           
+            foreach ($m->messageUsers as $mu) {
+                var_dump($mu->email);
+            }
+            // Mail::to($email)->send(new RSVP($message, $event, $eventUser, $image, $footer, $subject));
+            //->cc('juan.lopez@mocionsoft.com');
         }
     }
 
