@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App;
 use Closure;
 use Firebase\Auth\Token\Verifier;
+use Illuminate\Http\Response;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
@@ -41,11 +42,13 @@ class AuthFirebase
                 $firebaseToken = $_COOKIE['evius_token'];
             }
             if (!$firebaseToken) {
-                return response()->toJson(
-                    ['status' => 401,
-                        'content' => 'Error: No token provided',
-                    ], 401
+                return response(
+                    [
+                    'status' => Response::HTTP_NOT_FOUND,
+                    'message' => 'Error: No token provided',
+                ], Response::HTTP_NOT_FOUND
                 );
+
             }
 
             //Se verifica la valides del token
@@ -55,11 +58,13 @@ class AuthFirebase
             $request->attributes->add(['user' => $user]);
             return $next($request);
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-            return response()->toJson(
-                ['status' => 401,
-                    'content' => 'Error: ExpiredToken',
-                ], 401
+            return response(
+                [
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'Error: ExpiredToken',
+            ], Response::HTTP_NOT_FOUND
             );
+
         }
     }
 }
