@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App;
 use Closure;
 use Firebase\Auth\Token\Verifier;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
-use Illuminate\Support\Facades\Log;
-use App;
 
 class AuthFirebase
 {
@@ -33,32 +32,41 @@ class AuthFirebase
             $verifier = new Verifier($projectId);
 
             //miramos si el token viene en la Petición
-            if (isset($_REQUEST['evius_token'])){
+            if (isset($_REQUEST['evius_token'])) {
                 $firebaseToken = $_REQUEST['evius_token'];
             }
 
             //miramos si el token viene en una cookie
-            if (isset($_COOKIE['evius_token'])){
+            if (isset($_COOKIE['evius_token'])) {
                 $firebaseToken = $_COOKIE['evius_token'];
             }
-            if (!$firebaseToken)
-            return response("{ status: 401, content: 'Error: No token provided' }");
-       
+            if (!$firebaseToken) {
+                return response()->toJson(
+                    ['status' => 401,
+                        'content' => 'Error: No token provided',
+                    ], 401
+                );
+            }
+
             //Se verifica la valides del token
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             //Se obtiene la informacion del usuario
             $user = $auth->getUser($verifiedIdToken->getClaim('sub'));
             $request->attributes->add(['user' => $user]);
             return $next($request);
-        }catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-            return response("{ status: 401, content: 'Error: ExpiredToken' }");      
+        } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
+            return response()->toJson(
+                ['status' => 401,
+                    'content' => 'Error: ExpiredToken',
+                ], 401
+            );
         }
     }
 }
 //TEner en cuenta para Enviar mensajes de error
 /* } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-    echo $e->getMessage();
+echo $e->getMessage();
 } catch (\Firebase\Auth\Token\Exception\IssuedInTheFuture $e) {
-    echo $e->getMessage();
+echo $e->getMessage();
 } catch (\Firebase\Auth\Token\Exception\InvalidToken $e) {
-    echo $e->getMessage(); */
+echo $e->getMessage(); */

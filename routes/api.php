@@ -66,6 +66,8 @@ Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser
 //RSVP
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@sendEventRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+Route::get('rsvp/{id}', 'RSVPController@index');
+Route::get('rsvp/{id}/log', 'RSVPController@log');
 
 //middleware('auth.firebase')->
 Route::get("/testroute/{user}", "EventUserController@testing");

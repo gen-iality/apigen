@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Mail;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        //
+        //return response()->json(Event::all());
+        //return Event::all();
+        return RSVP::where('author', $request->get('user')->uid)->get();
+    }
+
+
+
 /**
  * @resource RSVP
  * Handle RSVP(invitations for events)
