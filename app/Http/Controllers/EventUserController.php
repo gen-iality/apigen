@@ -195,13 +195,13 @@ class EventUserController extends Controller
         return $data;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EventUser  $eventUser
-     * @return \Illuminate\Http\Response
-     */
+/**
+ * Undocumented function
+ *
+ * @param int $id
+ * @return boolean success result
+ */
+
     public function checkIn($id)
     {   
         $eventUser = EventUser::find($id);

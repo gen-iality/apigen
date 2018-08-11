@@ -3,12 +3,12 @@
  *
  */
 namespace App\evaLib\Services;
-use Storage;
-use App\EventUser;
-use App\Rol;
-use App\OrganizationUser;
-use App\State;
 
+use App\EventUser;
+use App\OrganizationUser;
+use App\Rol;
+use App\State;
+use Storage;
 
 class EvaRol
 {
@@ -17,12 +17,13 @@ class EvaRol
         return 'Output from DemoOne';
     }
 
-    /**
-     * Stores a file in remote storage service returning url
-     *
-     * @param [type] $filePost
-     * @return void
-     */
+/**
+ * Stores a file in remote storage service returning url
+ *
+ * @param int $authorId
+ * @param int $eventId
+ * @return void
+ */
     public function createAuthorAsEventAdmin($authorId, $eventId)
     {
         if (!$authorId) {
@@ -34,13 +35,13 @@ class EvaRol
             'userid' => $authorId,
             'event_id' => $eventId,
             'rol_id' => $rol->_id,
-            'state_id' => $state->_id            
+            'state_id' => $state->_id,
         ];
         $userToEvt = new EventUser($userEvt);
         $userToEvt->save();
         return true;
     }
-    
+
     public function createAuthorAsOrganizationAdmin($authorId, $organizationId)
     {
         if (!$authorId) {
