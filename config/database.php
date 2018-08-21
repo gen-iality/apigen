@@ -42,11 +42,11 @@ return [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'evius'),
-            'username' => env('DB_USERNAME', ''),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'evius2'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'mocion2040'),
             'options'  => [
-                'database' => env('DB_MONGO_OPT_DATABASE' ,'evius') // sets the authentication database required by mongo 3
+                'database' => env('DB_MONGO_OPT_DATABASE' ,'evius2') // sets the authentication database required by mongo 3
             ]
         ],
         'mysql' => [
