@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package App\EventInvitations
+ */
 namespace App\Http\Controllers;
 
 use App\Event;
@@ -14,8 +17,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
 /**
- * @resource RSVP
- * Handle RSVP(invitations for events)
+ * @resource RSVP Handle RSVP(invitations for events)
  *
  */
 class RSVPController extends Controller
@@ -35,18 +37,37 @@ class RSVPController extends Controller
     }
 
     /**
-     * Send RSVP to users in an event, taking usersIds[] in request
-     * to filter which users the RSVP is going to be send to
+     * Send RSVP to users in an event, taking usersIds[] in
+     * request to filter which users the RSVP is going to be send to
+     *
+     ** @post body usersIds[]
+     *+     @post body message
+     *     + @@post body image link
+     * *   @post body subject
+     * *   @post body footer
+     *     * @body message asdfasdf
+     *      *
+     * ```javascript
+     * var s = "JavaScript syntax highlighting";
+     * alert(s);
+     * ```
+     * ---
+     * ___
+     * ***
+     * <b> funciona </p>
+     *
+     *
+     *     post asdf asdfasd
+     * @get asdf sadf
+     * @url huy huy
+     * @header param asdfa s     *
+     *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
      * @param Message $messageDB auto injected
      * @return int Number of email sent
-     * 
-     * @post body usersIds[]
-     * @post body message
-     * @post body image link
-     * @post body subject
-     * @post body footer
+     *
+
      */
 
     public function sendEventRSVP(Request $request, Event $event, Message $messageDB)
@@ -116,7 +137,7 @@ class RSVPController extends Controller
     }
 
 /**
- * Undocumented function
+ * saveRSVP
  *
  * @param [type] $message
  * @param [type] $subject

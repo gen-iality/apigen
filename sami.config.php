@@ -20,5 +20,5 @@ return new Sami($iterator, [
     'theme' => 'default',
     'title' => 'Evius-EVA',
     'build_dir' => __DIR__ . '/_docs/build',
-    'ache_dir' => __DIR__ . '/_docs/cache'
+    'cache_dir' => __DIR__ . '/_docs/cache'
 ]);

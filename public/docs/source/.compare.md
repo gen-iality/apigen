@@ -19,334 +19,6 @@ Welcome to the generated API reference.
 [Get Postman Collection](http://localhost/docs/collection.json)
 <!-- END_INFO -->
 
-#AuthUser
-This class is in charge of managing auth stuff which is implemented using firebase
-<!-- START_b266549567ce3e7e2ff0e03b2e1db70d -->
-## getCurrentUser
-
-returns current user information using valid token send with the request.
-Token is prosseced by middleware
-
-> Example request:
-
-```bash
-curl -X GET "http://localhost/auth/currentUser" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/auth/currentUser",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
-    "message": "Undefined index: REMOTE_ADDR",
-    "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
-    "line": 20,
-    "trace": [
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
-            "line": 20,
-            "function": "handleError",
-            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "App\\Http\\Middleware\\Cors",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
-            "line": 57,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Fideloper\\Proxy\\TrustProxies",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
-            "line": 27,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
-            "line": 151,
-            "function": "then",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
-            "line": 116,
-            "function": "sendRequestThroughRouter",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
-            "line": 116,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
-            "line": 98,
-            "function": "callRoute",
-            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
-            "line": 58,
-            "function": "getRouteResponse",
-            "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
-            "line": 261,
-            "function": "processRoute",
-            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
-            "line": 83,
-            "function": "processLaravelRoutes",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "->"
-        },
-        {
-            "function": "handle",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 29,
-            "function": "call_user_func_array"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 87,
-            "function": "Illuminate\\Container\\{closure}",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 31,
-            "function": "callBoundMethod",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
-            "line": 564,
-            "function": "call",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
-            "function": "call",
-            "class": "Illuminate\\Container\\Container",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
-            "function": "execute",
-            "class": "Illuminate\\Console\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Command\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
-            "function": "run",
-            "class": "Illuminate\\Console\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
-            "function": "doRunCommand",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
-            "function": "doRun",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
-            "line": 89,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
-            "line": 122,
-            "function": "run",
-            "class": "Illuminate\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
-            "line": 37,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Console\\Kernel",
-            "type": "->"
-        }
-    ]
-}
-```
-
-### HTTP Request
-`GET auth/currentUser`
-
-`HEAD auth/currentUser`
-
-
-<!-- END_b266549567ce3e7e2ff0e03b2e1db70d -->
-
 #Files
 
 Files handing mostly used to upload new files
@@ -370,7 +42,7 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/files/upload/{field_name?}" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/files/upload/{field_name?}" \
 -H "Accept: application/json"
 ```
 
@@ -378,7 +50,7 @@ curl -X POST "http://localhost/api/files/upload/{field_name?}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/files/upload/{field_name?}",
+    "url": "http://localhost/eviusapilaravel/public/api/files/upload/{field_name?}",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -397,16 +69,50 @@ $.ajax(settings).done(function (response) {
 
 <!-- END_2a29088746aee0c7fa1f3a03ed44765b -->
 
-#RSVP
-Handle RSVP(invitations for events)
-<!-- START_ab454c5fa09c79fc1c5a131a9ceb1a38 -->
-## Send RSVP to users in an event, taking EventUser status as parameter
-to filter which users the RSVP is going to be send to
+#RSVP Handle RSVP(invitations for events)
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
++ item1
++ item2
+ + item3
+ + item4
+   + item5
+   + item6
+     + item7
+     * asdsad
+     *** tres astericos
+     solo espacios
+Alternatively, for H1 and H2, an underline-ish style:
+[I&#039;m an inline-style link](https://www.google.com)
+Inline-style:
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png &quot;Logo Title Text 1&quot;)
+<!-- START_6b8165cc7da505120fbe6aa7aba5356e -->
+## Send RSVP to users in an event, taking usersIds[] in
+request to filter which users the RSVP is going to be send to
+
+* @post body usersIds[]
++     @post body message
+    + @@post body image link
+*   @post body subject
+*   @post body footer
+    * @body message asdfasdf
+     *
+```javascript
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+---
+___
+***
+<b> funciona </p>
+
+
+    post asdf asdfasd
 
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/rsvp/sendeventrsvp/{event}/{state?}" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/{event}" \
 -H "Accept: application/json"
 ```
 
@@ -414,7 +120,7 @@ curl -X POST "http://localhost/api/rsvp/sendeventrsvp/{event}/{state?}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/rsvp/sendeventrsvp/{event}/{state?}",
+    "url": "http://localhost/eviusapilaravel/public/api/rsvp/sendeventrsvp/{event}",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -428,10 +134,10 @@ $.ajax(settings).done(function (response) {
 
 
 ### HTTP Request
-`POST api/rsvp/sendeventrsvp/{event}/{state?}`
+`POST api/rsvp/sendeventrsvp/{event}`
 
 
-<!-- END_ab454c5fa09c79fc1c5a131a9ceb1a38 -->
+<!-- END_6b8165cc7da505120fbe6aa7aba5356e -->
 
 <!-- START_ea641ff7880e698679830295d38350bb -->
 ## Undocumented function
@@ -439,7 +145,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/rsvp/confirmrsvp/{eventUser}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/rsvp/confirmrsvp/{eventUser}" \
 -H "Accept: application/json"
 ```
 
@@ -447,7 +153,7 @@ curl -X GET "http://localhost/api/rsvp/confirmrsvp/{eventUser}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/rsvp/confirmrsvp/{eventUser}",
+    "url": "http://localhost/eviusapilaravel/public/api/rsvp/confirmrsvp/{eventUser}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -465,186 +171,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -656,89 +362,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -756,14 +462,13 @@ $.ajax(settings).done(function (response) {
 
 <!-- END_ea641ff7880e698679830295d38350bb -->
 
-#general
-<!-- START_2213be84844ee2a81120463d7f13eeb2 -->
-## Authenticate the request for channel access.
+<!-- START_a31a18b9591e27eb2986ab2cedc224d3 -->
+## Display a listing of the resource.
 
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/broadcasting/auth" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/rsvp/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -771,49 +476,7 @@ curl -X GET "http://localhost/broadcasting/auth" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/broadcasting/auth",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET broadcasting/auth`
-
-`POST broadcasting/auth`
-
-`HEAD broadcasting/auth`
-
-
-<!-- END_2213be84844ee2a81120463d7f13eeb2 -->
-
-<!-- START_7ae0f29552788b7d1501fc7d3cb2c2a5 -->
-## Show the form for creating a new resource.
-
-> Example request:
-
-```bash
-curl -X GET "http://localhost/api/testsendemail" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/testsendemail",
+    "url": "http://localhost/eviusapilaravel/public/api/rsvp/{id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -831,186 +494,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -1022,89 +685,381 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
+            "line": 37,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Console\\Kernel",
+            "type": "->"
+        }
+    ]
+}
+```
+
+### HTTP Request
+`GET api/rsvp/{id}`
+
+`HEAD api/rsvp/{id}`
+
+
+<!-- END_a31a18b9591e27eb2986ab2cedc224d3 -->
+
+#general
+<!-- START_7ae0f29552788b7d1501fc7d3cb2c2a5 -->
+## Show the form for creating a new resource.
+
+> Example request:
+
+```bash
+curl -X GET "http://localhost/eviusapilaravel/public/api/testsendemail" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/eviusapilaravel/public/api/testsendemail",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "message": "Call to a member function eventUsers() on null",
+    "exception": "Symfony\\Component\\Debug\\Exception\\FatalThrowableError",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Controllers\/TestingController.php",
+    "line": 21,
+    "trace": [
+        {
+            "function": "sendemail",
+            "class": "App\\Http\\Controllers\\TestingController",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Controller.php",
+            "line": 54,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/ControllerDispatcher.php",
+            "line": 45,
+            "function": "callAction",
+            "class": "Illuminate\\Routing\\Controller",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php",
+            "line": 212,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\ControllerDispatcher",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php",
+            "line": 169,
+            "function": "runController",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 665,
+            "function": "run",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 667,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 642,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 608,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 597,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "line": 176,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "line": 151,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "line": 116,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "line": 116,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "line": 98,
+            "function": "callRoute",
+            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "line": 58,
+            "function": "getRouteResponse",
+            "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "line": 261,
+            "function": "processRoute",
+            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "line": 83,
+            "function": "processLaravelRoutes",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "function": "handle",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "line": 29,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "line": 87,
+            "function": "Illuminate\\Container\\{closure}",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "line": 31,
+            "function": "callBoundMethod",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "line": 564,
+            "function": "call",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
+            "function": "call",
+            "class": "Illuminate\\Container\\Container",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
+            "function": "execute",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Command\\Command",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
+            "function": "run",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
+            "function": "doRunCommand",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
+            "function": "doRun",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "line": 89,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "line": 122,
+            "function": "run",
+            "class": "Illuminate\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -1128,7 +1083,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/test" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/test" \
 -H "Accept: application/json"
 ```
 
@@ -1136,7 +1091,7 @@ curl -X GET "http://localhost/api/test" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/test",
+    "url": "http://localhost/eviusapilaravel/public/api/test",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -1154,186 +1109,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -1345,89 +1300,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -1451,7 +1406,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/event/{id}" \
+curl -X PUT "http://localhost/eviusapilaravel/public/api/event/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -1459,7 +1414,7 @@ curl -X PUT "http://localhost/api/event/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/event/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/event/{id}",
     "method": "PUT",
     "headers": {
         "accept": "application/json"
@@ -1479,12 +1434,12 @@ $.ajax(settings).done(function (response) {
 <!-- END_76dab3f6b54f1f8d8c104a4c5b374173 -->
 
 <!-- START_0bc9a6b1e8171137692d19f425c62171 -->
-## Update the specified resource in storage.
+## Undocumented function
 
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/eventUser/{id}/checkin" \
+curl -X PUT "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin" \
 -H "Accept: application/json"
 ```
 
@@ -1492,7 +1447,7 @@ curl -X PUT "http://localhost/api/eventUser/{id}/checkin" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/eventUser/{id}/checkin",
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin",
     "method": "PUT",
     "headers": {
         "accept": "application/json"
@@ -1517,7 +1472,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/eventUser/{id}" \
+curl -X PUT "http://localhost/eviusapilaravel/public/api/eventUser/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -1525,7 +1480,7 @@ curl -X PUT "http://localhost/api/eventUser/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/eventUser/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/{id}",
     "method": "PUT",
     "headers": {
         "accept": "application/json"
@@ -1550,7 +1505,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/eventUser/addUserToEvent/{event_id}" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/eventUser/addUserToEvent/{event_id}" \
 -H "Accept: application/json"
 ```
 
@@ -1558,7 +1513,7 @@ curl -X POST "http://localhost/api/eventUser/addUserToEvent/{event_id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/eventUser/addUserToEvent/{event_id}",
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/addUserToEvent/{event_id}",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -1583,7 +1538,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/user/events" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/user/events" \
 -H "Accept: application/json"
 ```
 
@@ -1591,7 +1546,7 @@ curl -X GET "http://localhost/api/user/events" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/events",
+    "url": "http://localhost/eviusapilaravel/public/api/user/events",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -1609,186 +1564,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -1800,89 +1755,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -1906,7 +1861,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/user/events/{id}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/user/events/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -1914,7 +1869,7 @@ curl -X GET "http://localhost/api/user/events/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/events/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/events/{id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -1932,186 +1887,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -2123,89 +2078,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -2229,7 +2184,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/user/events" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/user/events" \
 -H "Accept: application/json"
 ```
 
@@ -2237,7 +2192,7 @@ curl -X POST "http://localhost/api/user/events" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/events",
+    "url": "http://localhost/eviusapilaravel/public/api/user/events",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -2262,7 +2217,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/user/events/{id}" \
+curl -X PUT "http://localhost/eviusapilaravel/public/api/user/events/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -2270,7 +2225,7 @@ curl -X PUT "http://localhost/api/user/events/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/events/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/events/{id}",
     "method": "PUT",
     "headers": {
         "accept": "application/json"
@@ -2295,7 +2250,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X DELETE "http://localhost/api/user/events/{id}" \
+curl -X DELETE "http://localhost/eviusapilaravel/public/api/user/events/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -2303,7 +2258,7 @@ curl -X DELETE "http://localhost/api/user/events/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/events/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/events/{id}",
     "method": "DELETE",
     "headers": {
         "accept": "application/json"
@@ -2328,7 +2283,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/user/organizations" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/user/organizations" \
 -H "Accept: application/json"
 ```
 
@@ -2336,7 +2291,7 @@ curl -X GET "http://localhost/api/user/organizations" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/organizations",
+    "url": "http://localhost/eviusapilaravel/public/api/user/organizations",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -2354,186 +2309,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -2545,89 +2500,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -2651,7 +2606,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/user/organizations" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/user/organizations" \
 -H "Accept: application/json"
 ```
 
@@ -2659,7 +2614,7 @@ curl -X POST "http://localhost/api/user/organizations" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/organizations",
+    "url": "http://localhost/eviusapilaravel/public/api/user/organizations",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -2684,7 +2639,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/user/organizations/{id}" \
+curl -X PUT "http://localhost/eviusapilaravel/public/api/user/organizations/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -2692,7 +2647,7 @@ curl -X PUT "http://localhost/api/user/organizations/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/organizations/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/organizations/{id}",
     "method": "PUT",
     "headers": {
         "accept": "application/json"
@@ -2717,7 +2672,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/user/organizations/{id}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/user/organizations/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -2725,7 +2680,7 @@ curl -X GET "http://localhost/api/user/organizations/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/organizations/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/organizations/{id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -2743,186 +2698,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -2934,89 +2889,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -3040,7 +2995,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/user/organization_users/{id}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/user/organization_users/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -3048,7 +3003,7 @@ curl -X GET "http://localhost/api/user/organization_users/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/organization_users/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/organization_users/{id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -3066,186 +3021,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -3257,89 +3212,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -3363,7 +3318,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/user/event_users/{id}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/user/event_users/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -3371,7 +3326,7 @@ curl -X GET "http://localhost/api/user/event_users/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/event_users/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/event_users/{id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -3389,186 +3344,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -3580,89 +3535,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -3686,7 +3641,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/user/event_users/create/{id}" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/user/event_users/create/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -3694,7 +3649,7 @@ curl -X POST "http://localhost/api/user/event_users/create/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/event_users/create/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/event_users/create/{id}",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -3719,7 +3674,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/user/organization_users/create/{id}" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/user/organization_users/create/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -3727,7 +3682,7 @@ curl -X POST "http://localhost/api/user/organization_users/create/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/user/organization_users/create/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/user/organization_users/create/{id}",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -3752,7 +3707,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/rols" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/rols" \
 -H "Accept: application/json"
 ```
 
@@ -3760,7 +3715,7 @@ curl -X GET "http://localhost/api/rols" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/rols",
+    "url": "http://localhost/eviusapilaravel/public/api/rols",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -3778,186 +3733,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -3969,89 +3924,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -4075,7 +4030,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/states" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/states" \
 -H "Accept: application/json"
 ```
 
@@ -4083,7 +4038,7 @@ curl -X GET "http://localhost/api/states" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/states",
+    "url": "http://localhost/eviusapilaravel/public/api/states",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -4101,186 +4056,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -4292,89 +4247,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -4398,7 +4353,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/event/{id}/messages" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/event/{id}/messages" \
 -H "Accept: application/json"
 ```
 
@@ -4406,7 +4361,7 @@ curl -X GET "http://localhost/api/event/{id}/messages" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/event/{id}/messages",
+    "url": "http://localhost/eviusapilaravel/public/api/event/{id}/messages",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -4424,186 +4379,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -4615,89 +4570,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -4721,7 +4676,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/import/users/events/{id}" \
+curl -X POST "http://localhost/eviusapilaravel/public/api/import/users/events/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -4729,7 +4684,7 @@ curl -X POST "http://localhost/api/import/users/events/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/import/users/events/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/import/users/events/{id}",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -4754,7 +4709,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/testroute/{user}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/testroute/{user}" \
 -H "Accept: application/json"
 ```
 
@@ -4762,7 +4717,7 @@ curl -X GET "http://localhost/api/testroute/{user}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/testroute/{user}",
+    "url": "http://localhost/eviusapilaravel/public/api/testroute/{user}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -4780,186 +4735,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -4971,89 +4926,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -5077,7 +5032,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/events" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/events" \
 -H "Accept: application/json"
 ```
 
@@ -5085,7 +5040,7 @@ curl -X GET "http://localhost/api/events" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/events",
+    "url": "http://localhost/eviusapilaravel/public/api/events",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -5103,186 +5058,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -5294,89 +5249,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -5400,7 +5355,7 @@ $.ajax(settings).done(function (response) {
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/api/event/{id}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/event/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -5408,7 +5363,7 @@ curl -X GET "http://localhost/api/event/{id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/api/event/{id}",
+    "url": "http://localhost/eviusapilaravel/public/api/event/{id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -5426,186 +5381,186 @@ $.ajax(settings).done(function (response) {
 {
     "message": "Undefined index: REMOTE_ADDR",
     "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
     "line": 20,
     "trace": [
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
             "line": 20,
             "function": "handleError",
             "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "App\\Http\\Middleware\\Cors",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
             "line": 57,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
             "line": 27,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
             "line": 53,
             "function": "Illuminate\\Pipeline\\{closure}",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
             "function": "Illuminate\\Routing\\{closure}",
             "class": "Illuminate\\Routing\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 151,
             "function": "then",
             "class": "Illuminate\\Pipeline\\Pipeline",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
             "line": 116,
             "function": "sendRequestThroughRouter",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 116,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Kernel",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
             "line": 98,
             "function": "callRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
             "line": 58,
             "function": "getRouteResponse",
             "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 261,
             "function": "processRoute",
             "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
             "line": 83,
             "function": "processLaravelRoutes",
             "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
@@ -5617,89 +5572,89 @@ $.ajax(settings).done(function (response) {
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 29,
             "function": "call_user_func_array"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 87,
             "function": "Illuminate\\Container\\{closure}",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
             "line": 31,
             "function": "callBoundMethod",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
             "line": 564,
             "function": "call",
             "class": "Illuminate\\Container\\BoundMethod",
             "type": "::"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
             "function": "call",
             "class": "Illuminate\\Container\\Container",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
             "function": "execute",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Command\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
             "function": "run",
             "class": "Illuminate\\Console\\Command",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
             "function": "doRunCommand",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
             "function": "doRun",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
             "line": 89,
             "function": "run",
             "class": "Symfony\\Component\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
             "line": 122,
             "function": "run",
             "class": "Illuminate\\Console\\Application",
             "type": "->"
         },
         {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
             "line": 37,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -5716,650 +5671,4 @@ $.ajax(settings).done(function (response) {
 
 
 <!-- END_2c00ea987e6c2f0f85eef7126e217c41 -->
-
-<!-- START_4a68a42f1adeedc096901e583868ec5a -->
-## Show the form for creating a new resource.
-
-> Example request:
-
-```bash
-curl -X GET "http://localhost/testsendemail" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/testsendemail",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
-    "message": "Undefined index: REMOTE_ADDR",
-    "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
-    "line": 20,
-    "trace": [
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
-            "line": 20,
-            "function": "handleError",
-            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "App\\Http\\Middleware\\Cors",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
-            "line": 57,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Fideloper\\Proxy\\TrustProxies",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
-            "line": 27,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
-            "line": 151,
-            "function": "then",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
-            "line": 116,
-            "function": "sendRequestThroughRouter",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
-            "line": 116,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
-            "line": 98,
-            "function": "callRoute",
-            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
-            "line": 58,
-            "function": "getRouteResponse",
-            "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
-            "line": 261,
-            "function": "processRoute",
-            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
-            "line": 83,
-            "function": "processLaravelRoutes",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "->"
-        },
-        {
-            "function": "handle",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 29,
-            "function": "call_user_func_array"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 87,
-            "function": "Illuminate\\Container\\{closure}",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 31,
-            "function": "callBoundMethod",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
-            "line": 564,
-            "function": "call",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
-            "function": "call",
-            "class": "Illuminate\\Container\\Container",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
-            "function": "execute",
-            "class": "Illuminate\\Console\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Command\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
-            "function": "run",
-            "class": "Illuminate\\Console\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
-            "function": "doRunCommand",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
-            "function": "doRun",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
-            "line": 89,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
-            "line": 122,
-            "function": "run",
-            "class": "Illuminate\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
-            "line": 37,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Console\\Kernel",
-            "type": "->"
-        }
-    ]
-}
-```
-
-### HTTP Request
-`GET testsendemail`
-
-`HEAD testsendemail`
-
-
-<!-- END_4a68a42f1adeedc096901e583868ec5a -->
-
-<!-- START_39852ea172f6971c906de94aebf15bdd -->
-## Simply testing service providers
-
-> Example request:
-
-```bash
-curl -X GET "http://localhost/test" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/test",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
-    "message": "Undefined index: REMOTE_ADDR",
-    "exception": "ErrorException",
-    "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
-    "line": 20,
-    "trace": [
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
-            "line": 20,
-            "function": "handleError",
-            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "App\\Http\\Middleware\\Cors",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
-            "line": 57,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Fideloper\\Proxy\\TrustProxies",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
-            "line": 27,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
-            "line": 46,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 149,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-            "line": 102,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
-            "line": 151,
-            "function": "then",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
-            "line": 116,
-            "function": "sendRequestThroughRouter",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
-            "line": 116,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
-            "line": 98,
-            "function": "callRoute",
-            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
-            "line": 58,
-            "function": "getRouteResponse",
-            "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
-            "line": 261,
-            "function": "processRoute",
-            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
-            "line": 83,
-            "function": "processLaravelRoutes",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "->"
-        },
-        {
-            "function": "handle",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 29,
-            "function": "call_user_func_array"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 87,
-            "function": "Illuminate\\Container\\{closure}",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
-            "line": 31,
-            "function": "callBoundMethod",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
-            "line": 564,
-            "function": "call",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 183,
-            "function": "call",
-            "class": "Illuminate\\Container\\Container",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
-            "line": 252,
-            "function": "execute",
-            "class": "Illuminate\\Console\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
-            "line": 170,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Command\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 865,
-            "function": "run",
-            "class": "Illuminate\\Console\\Command",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 241,
-            "function": "doRunCommand",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
-            "line": 143,
-            "function": "doRun",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
-            "line": 89,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
-            "line": 122,
-            "function": "run",
-            "class": "Illuminate\\Console\\Application",
-            "type": "->"
-        },
-        {
-            "file": "\/var\/www\/html\/eviusapilaravel\/artisan",
-            "line": 37,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Console\\Kernel",
-            "type": "->"
-        }
-    ]
-}
-```
-
-### HTTP Request
-`GET test`
-
-`HEAD test`
-
-
-<!-- END_39852ea172f6971c906de94aebf15bdd -->
 
