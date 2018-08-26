@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\evaLib\Services\UserEventService;
+use App\Event;
 use App\EventUser;
-use App\State;
+use App\Http\Resources\EventUserResource;
 use App\Rol;
+use App\State;
 use App\User;
 use Illuminate\Http\Request;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
+use Illuminate\Http\Response;
 
+/**
+ * Handles behavior realated to user booking into an event
+ *
+ * User relation to an event is on of the fundamental aspects of this platform
+ * most of the user functionality is executed under "EventUser" model and not directly
+ * under User, because is an events platform.
+ */
 class EventUserController extends Controller
 {
     /**
@@ -19,40 +28,45 @@ class EventUserController extends Controller
      */
     public function index($id)
     {
-        $usersfilter = function($data){
-                $temporal = $data;
-                $temporal->user =  User::where('uid', $data->userid)->first();
-                $temporal->state_id = $data->state;
-                $temporal->rol_id = $data->rol;
-                
-                return $temporal;
+        $usersfilter = function ($data) {
+            $temporal = $data;
+            $temporal->user = User::where('uid', $data->userid)->first();
+            $temporal->state_id = $data->state;
+            $temporal->rol_id = $data->rol;
+
+            return $temporal;
         };
         $evtUsers = EventUser::where('event_id', $id)->get();
-        $users = array_map($usersfilter, $evtUsers->all()); 
-       
+        $users = array_map($usersfilter, $evtUsers->all());
+
         return $users;
-        
-    }
 
+    }
     /**
-     * Show the form for creating a new resource.
+     * Tries to create a new user from provided data and then add that user to specified event
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request HTTP request
+     * @param string  $event_id to add the user to.
+     * 
+     * @uses $_POST[email] required field
+     * @uses $_POST[name]  
+     * @uses $_POST[other_params],... any other params send will be saved in user and eventUser
+     * 
+     * @return EventUserResource
      */
-    public function addUserToEvent(Request $request, $event_id)
+    public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
-        $result = self::verifyAndInviteUsers($request, $event_id);
-        return $result;
-    }
+        try {
+            $event = Event::find($event_id);
+            $userData = $request->all();
+            $result = UserEventService::importUserEvent($event, $userData);
 
-    public function testing(User $user)
-    {
-        //
-        return $user;
-        /* $evtUsers = EventUser::where('event_id', $id)->get();
-        $users = array_map($usersfilter, $evtUsers->all());        
-        return $users; */
-
+            $response = new EventUserResource($result->data);
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
+        return $response;
     }
 
     /**
@@ -67,93 +81,6 @@ class EventUserController extends Controller
         return $request;
     }
 
-    public function verifyandcreate(Request $request,$id){
-        $result = self::verifyAndInviteUsers($request, $id);
-        return $result;
-    }
-    /**
-     * Create users imported in the excel
-     */
-    public function createImportedUser(Request $request, $id){
-        $result = self::verifyAndInviteUsers($request, $id);
-        return $result;
-    }
-
-    private static function verifyAndInviteUsers($request, $id){
-
-        //Inicializamos el servicio de firebase
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        $auth = $firebase->getAuth();
-
-        //intentamos buscar el usuario en la autenticacion o lo creamos
-        $userData = null;
-        try {
-            $userData = $auth->getUserByEmail($request->email);
-        }catch (\Exception $e) {
-            $url = "http://localhost:3020";
-            $data = json_encode($request->all());
-            $httpRequest = array(
-                'http' =>
-                    array(
-                        'method' => 'POST',
-                        'header' => 'Content-type: application/json',
-                        'content' => $data
-                    )
-            );
-            $context = stream_context_create($httpRequest);
-            $response = json_decode(file_get_contents($url, false, $context)); 
-            $userData = $auth->getUserByEmail($request->email);       
-        }
-        if (!$userData->uid) {
-         return "false";
-        }
-
-        try {
-
-            //acualizamos la información del usuario
-            $user = User::firstOrNew(['uid' => $userData->uid]);
-            $user->fill($request->all());
-            $user->uid = $userData->uid;
-            $user->save();
-
-            //actualizamos el UserEvent
-            $userEvent = EventUser::firstOrNew(
-                ['userid' => $userData->uid,
-                'event_id'=>$id
-            ]);
-
-            $userEvent->fill($request->all());    
-            $userEvent->userid = $userData->uid;
-            $userEvent->event_id = $id;
-            
-            if (!isset($userEvent->rol_id)) {
-                $rol = Rol::where('level', 0)->first();
-                $userEvent->rol_id = $rol->_id;
-            }
-
-            if (!isset($userEvent->status)) {
-                //Aca jala el primer estado que se encuentra, por que se necesita uno por defecto
-                $temp = State::first();
-                $userEvent->state_id = $temp->_id;
-            }
-
-            $userEvent->save();
-
-            return "true";
-            
-        } catch (\Exception $e) {
-            //var_dump($e->getMessage());
-            return "false";
-        }
-
-        return "true";
-    }
-
-
-
     /**
      * Display the specified resource.
      *
@@ -164,10 +91,6 @@ class EventUserController extends Controller
     {
         //
     }
-
-
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -203,12 +126,11 @@ class EventUserController extends Controller
  */
 
     public function checkIn($id)
-    {   
+    {
         $eventUser = EventUser::find($id);
         return $eventUser->checkIn();
-    
-    }
 
+    }
 
     /**
      * Remove the specified resource from storage.

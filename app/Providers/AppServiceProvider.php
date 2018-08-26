@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'App\evaLib\Services\UserEventService', function ($app) {
+                return new UserEventService();
+            }
+        );
     }
 }

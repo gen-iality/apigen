@@ -30,6 +30,7 @@ Route::put('event/{id}', 'EventController@update');
 Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
 Route::put('eventUser/{id}', 'EventUserController@update');
 Route::post('eventUser/addUserToEvent/{event_id}', 'EventUserController@addUserToEvent');
+Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 
 //Event EndPoint
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');

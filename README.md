@@ -48,6 +48,7 @@ installing MongoDB PHP Driver is somewhat involved:
 using pecl:
 
 * sudo apt-get install php7.x-dev
+* sudo apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev #this line is required if you  have authentication enabled in mongodb
 * sudo pecl install mongodb
 * You should add "extension=mongodb.so" to php.ini for web and cli versions
 * restart webServer

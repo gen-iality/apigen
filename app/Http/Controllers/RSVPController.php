@@ -64,24 +64,39 @@ class RSVPController extends Controller
      *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
-     * @param Message $messageDB auto injected
+     * @param Message $message auto injected
      * @return int Number of email sent
      *
 
      */
 
-    public function sendEventRSVP(Request $request, Event $event, Message $messageDB)
+    public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
-        //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
-        //los usuarios
-        $usersIds = $request->input('usersIds');
-
-        $message = $request->input('message');
-        // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-        $image = $request->input('image');
+        //~~~~~~~~~~~~~~~~~~~~~~
+        //Create RSVP
         $subject = $request->input('subject');
         $subject = ($subject) ? $subject : "[Invitación] " . $event->name;
-        $footer = $request->input('footer') || "";
+        $message->subject = $subject;
+
+        $message->message = $request->input('message');
+        $message->footer  = $request->input('footer') || "";
+        // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        $message->image = $request->input('image') || "";
+        $message->event_id = $eventId;
+        $message->save();
+
+        //~~~~~~~~~~~~~~~~~~~~~~
+        //addUsers - recipients of message
+        //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
+        $usersIds = $request->input('usersIds');
+
+        
+        //Send RSVP
+
+    }
+
+    public function sendEventRSVP(Request $request, Event $event, Message $messageDB)
+    {
 
         $eventUsers = self::getOrCreateEventUserFromUsers($event, $usersIds);
 
@@ -89,51 +104,6 @@ class RSVPController extends Controller
         $usersCount = count($eventUsers);
 
         return $usersCount;
-    }
-
-    private static function getOrCreateEventUserFromUsers($event, $usersIds)
-    {
-        //cargamos varios usuarios por id.
-        $eventUsers = EventUser::where('event_id', '=', $event->id)
-            ->whereIn('userid', $usersIds)
-            ->get();
-
-        foreach ($eventUsers as $eventUser) {
-            $usuario = User::firstOrCreate(["uid" => $eventUser->userid]);
-        }
-
-        $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
-
-        foreach ($usersIdNotInEvent as $userId) {
-            //Crear EventUser
-            $eventUser = new EventUser;
-            $eventUser->event_id = $event->id;
-            $eventUser->userid = $userId;
-            $eventUser->save();
-            $eventUsers[] = $eventUser;
-        }
-
-        return $eventUsers;
-    }
-
-    private static function getusersIdNotInEvent($eventUsers, $usersIds)
-    {
-        $usersIdNotInEvent = array_filter($usersIds, function ($userId) use ($eventUsers) {
-            $userIsInEvent = false;
-
-            if (!$eventUsers || !count($eventUsers)) {
-                return !$userIsInEvent;
-            }
-
-            foreach ($eventUsers as $eventUser) {
-                if (isset($eventUser->userid) && $eventUser->userid == $userId) {
-                    $userIsInEvent = true;
-                }
-            };
-            return !$userIsInEvent;
-        });
-
-        return $usersIdNotInEvent;
     }
 
 /**
@@ -147,23 +117,24 @@ class RSVPController extends Controller
  * @param [type] $eventId
  * @return void
  */
-    public static function saveRSVP($message, $subject, $image,
-        $footer, $usersCount, $eventId
-    ) {
-        //@START Save message
-        $messageDB = new Message();
-        $messageDB->message = $message;
-        $messageDB->footer = $footer;
-        $messageDB->subject = $subject;
-        $messageDB->image = $image;
-        $messageDB->recipients_filter_field = "status";
-        $messageDB->recipients_filter_value = null;
-        $messageDB->sent = $usersCount;
-        $messageDB->success = $usersCount;
-        $messageDB->failed = 0;
-        $messageDB->event_id = $eventId;
-        $messageDB->save();
-        //@END save message
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $messageUser = MessageUser::create($request->all());
+        return new MessageUserResource($book);
+    }
+
+    private static function saveRSVP($message, $subject, $image, $footer, $eventId)
+    {
+
+
+
         return $messageDB;
     }
 

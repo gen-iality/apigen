@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Resources\MessageUserResource;
-use App\Http\Resources\MessageUsersResource;
 use App\MessageUser;
+use Illuminate\Http\Request;
 
-/*
-
-Verb          Path                        Action  Route Name
-GET           /users                      index   users.index
-GET           /users/create               create  users.create
-POST          /users                      store   users.store
-GET           /users/{user}               show    users.show
-GET           /users/{user}/edit          edit    users.edit
-PUT|PATCH     /users/{user}               update  users.update
-DELETE        /users/{user}               destroy users.destroy
-*/
-
+/**
+ * Verb          Path                              Action  Route Name
+ *  GET           /messageUser                      index   users.index
+ *  POST          /messageUser                      store   users.store
+ *  GET           /messageUser/{messageUser}        show    users.show
+ *  PUT|PATCH     /messageUser/{messageUser}        update  users.update
+ *  DELETE        /messageUser/{messageUser}        destroy users.destroy
+ */
 class MessageUserController extends Controller
 {
     /**
@@ -28,18 +23,15 @@ class MessageUserController extends Controller
      */
     public function index()
     {
-        
-        return new MessageUsersResource(MessageUser::paginate());
-    }
+        $ar = ["puerco" => "sucio", "verde" => "color"];
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        MessageUser::unguard();
+        $Topic = new MessageUser($ar);
+
+        $Topic->save();
+        var_dump($Topic->toArray());
+        return ["false" => "false"];
+        return MessageUserResource::collection(MessageUser::paginate(50));
     }
 
     /**
@@ -50,7 +42,8 @@ class MessageUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messageUser = MessageUser::create($request->all());
+        return new MessageUserResource($book);
     }
 
     /**
@@ -61,18 +54,8 @@ class MessageUserController extends Controller
      */
     public function show(MessageUser $messageUser)
     {
+        MessageUserResource::withoutWrapping();
         return new MessageUserResource($messageUser);
-    }
- 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -82,19 +65,21 @@ class MessageUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, MessageUser $messageUser)
     {
-        //
+        $messageUser->update($request->all());
+        return new MessageUserResource($messageUser);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param MessageUser $messageUser
+     * @return json null http 204
      */
-    public function destroy($id)
+    public function destroy(MessageUser $messageUser)
     {
-        //
+        $book->delete();
+        return response()->json(null, 204);
     }
 }

@@ -19,8 +19,6 @@ class CreateMessage extends Migration
             $table->longText('message')->nullable();
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('recipients_filter_field')->nullable();
-            $table->string('recipients_filter_value')->nullable();
             $table->integer('sent');
             $table->integer('success');
             $table->integer('failed');
