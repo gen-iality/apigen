@@ -85,6 +85,8 @@
         
     
 
+            <div class="description">
+            <p>Represents Messages send to each user</p>                                </div>
     
     
             <h2>Constants</h2>
@@ -92,6 +94,27 @@
             <table class="table table-condensed">
                     <tr>
                 <td>STATUS_QUEUED</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>SENT</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>VIEWED</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FAILED</td>
                 <td class="last">
                     <p><em></em></p>
                     <p></p>
@@ -135,24 +158,42 @@
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <abbr title="App\BelogsTo">BelogsTo</abbr>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_user">user</a>()
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>MessageUser belogs to User</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <abbr title="App\BelogsTo">BelogsTo</abbr>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_message">message</a>()
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>MessageUser belogs to Message</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_viewed">viewed</a>()
+        
+                                            <p>Change status to viewed</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_sent">sent</a>()
+        
+                                            <p>Change status to sent</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -163,8 +204,8 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_user">
-        <div class="location">at         line 25</div>
-        <code>                    
+        <div class="location">at         line 39</div>
+        <code>                    <abbr title="App\BelogsTo">BelogsTo</abbr>
     <strong>user</strong>()
         </code>
     </h3>
@@ -172,8 +213,19 @@
             
     
 
+                    <div class="method-description">
+                                    <p>MessageUser belogs to User</p>                                                </div>
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="App\BelogsTo">BelogsTo</abbr></td>
+            <td>relation</td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -182,8 +234,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_message">
-        <div class="location">at         line 30</div>
-        <code>                    
+        <div class="location">at         line 49</div>
+        <code>                    <abbr title="App\BelogsTo">BelogsTo</abbr>
     <strong>message</strong>()
         </code>
     </h3>
@@ -191,8 +243,79 @@
             
     
 
+                    <div class="method-description">
+                                    <p>MessageUser belogs to Message</p>                                                </div>
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="App\BelogsTo">BelogsTo</abbr></td>
+            <td>relation</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_viewed">
+        <div class="location">at         line 59</div>
+        <code>                    void
+    <strong>viewed</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Change status to viewed</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_sent">
+        <div class="location">at         line 69</div>
+        <code>                    void
+    <strong>sent</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Change status to sent</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>

@@ -136,23 +136,12 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Illuminate\Http\Response">Response</abbr>
+                    <a href="../../../App/Http/Resources/EventUserResource.html"><abbr title="App\Http\Resources\EventUserResource">EventUserResource</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addUserToEvent">addUserToEvent</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, $event_id)
+                    <a href="#method_createUserAndAddtoEvent">createUserAndAddtoEvent</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, string $event_id)
         
-                                            <p>Show the form for creating a new resource.</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_testing">testing</a>(<a href="../../../App/User.html"><abbr title="App\User">User</abbr></a> $user)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p><strong>CreateUserAndAddtoEvent</strong> Tries to create a new user from provided data and then add that user to specified event</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -163,27 +152,6 @@
                     <a href="#method_store">store</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request)
         
                                             <p>Store a newly created resource in storage.</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_verifyandcreate">verifyandcreate</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, $id)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_createImportedUser">createImportedUser</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, $id)
-        
-                                            <p>Create users imported in the excel</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -218,12 +186,12 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    boolean
+                    void
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_checkIn">checkIn</a>(int $id)
+                    <a href="#method_checkIn">checkIn</a>(<abbr title="App\Http\Controllers\[type]">[type]</abbr> $id)
         
-                                            <p>Undocumented function</p>                </div>
+                                            <p>checkIn</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -244,7 +212,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_index">
-        <div class="location">at         line 20</div>
+        <div class="location">at         line 30</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>index</strong>($id)
         </code>
@@ -283,10 +251,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_addUserToEvent">
-        <div class="location">at         line 42</div>
-        <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
-    <strong>addUserToEvent</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, $event_id)
+                    <h3 id="method_createUserAndAddtoEvent">
+        <div class="location">at         line 62</div>
+        <code>                    <a href="../../../App/Http/Resources/EventUserResource.html"><abbr title="App\Http\Resources\EventUserResource">EventUserResource</abbr></a>
+    <strong>createUserAndAddtoEvent</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, string $event_id)
         </code>
     </h3>
     <div class="details">
@@ -294,7 +262,25 @@
     
 
                     <div class="method-description">
-                                    <p>Show the form for creating a new resource.</p>                                                </div>
+                                    <p><strong>CreateUserAndAddtoEvent</strong> Tries to create a new user from provided data and then add that user to specified event</p>                    <p><table>
+<thead>
+<tr>
+  <th>Body Params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>@body $_POST[email] required field</td>
+</tr>
+<tr>
+  <td>@body $_POST[name]</td>
+</tr>
+<tr>
+  <td>@body $_POST[other_params],... any other params send will be saved in user and eventUser</td>
+</tr>
+</tbody>
+</table>
+</p>                            </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -302,12 +288,12 @@
                     <tr>
                 <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
                 <td>$request</td>
-                <td></td>
+                <td>HTTP request</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$event_id</td>
-                <td></td>
+                <td>to add the user to.</td>
             </tr>
             </table>
 
@@ -316,7 +302,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="Illuminate\Http\Response">Response</abbr></td>
+            <td><a href="../../../App/Http/Resources/EventUserResource.html"><abbr title="App\Http\Resources\EventUserResource">EventUserResource</abbr></a></td>
             <td></td>
         </tr>
     </table>
@@ -328,37 +314,8 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_testing">
-        <div class="location">at         line 48</div>
-        <code>                    
-    <strong>testing</strong>(<a href="../../../App/User.html"><abbr title="App\User">User</abbr></a> $user)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><a href="../../../App/User.html"><abbr title="App\User">User</abbr></a></td>
-                <td>$user</td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method_store">
-        <div class="location">at         line 64</div>
+        <div class="location">at         line 83</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>store</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request)
         </code>
@@ -397,78 +354,8 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_verifyandcreate">
-        <div class="location">at         line 70</div>
-        <code>                    
-    <strong>verifyandcreate</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, $id)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
-                <td>$request</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$id</td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_createImportedUser">
-        <div class="location">at         line 77</div>
-        <code>                    
-    <strong>createImportedUser</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, $id)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                    <div class="method-description">
-                                    <p>Create users imported in the excel</p>                                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
-                <td>$request</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$id</td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method_show">
-        <div class="location">at         line 163</div>
+        <div class="location">at         line 95</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>show</strong>(<a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a> $eventUser)
         </code>
@@ -508,7 +395,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_edit">
-        <div class="location">at         line 178</div>
+        <div class="location">at         line 106</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>edit</strong>(<a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a> $eventUser)
         </code>
@@ -548,7 +435,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_update">
-        <div class="location">at         line 190</div>
+        <div class="location">at         line 118</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>update</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, <a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a> $eventUser)
         </code>
@@ -593,9 +480,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_checkIn">
-        <div class="location">at         line 205</div>
-        <code>                    boolean
-    <strong>checkIn</strong>(int $id)
+        <div class="location">at         line 132</div>
+        <code>                    void
+    <strong>checkIn</strong>(<abbr title="App\Http\Controllers\[type]">[type]</abbr> $id)
         </code>
     </h3>
     <div class="details">
@@ -603,13 +490,13 @@
     
 
                     <div class="method-description">
-                                    <p>Undocumented function</p>                                                </div>
+                                    <p>checkIn</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td>int</td>
+                <td><abbr title="App\Http\Controllers\[type]">[type]</abbr></td>
                 <td>$id</td>
                 <td></td>
             </tr>
@@ -620,8 +507,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>boolean</td>
-            <td>success result</td>
+            <td>void</td>
+            <td></td>
         </tr>
     </table>
 
@@ -633,7 +520,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_destroy">
-        <div class="location">at         line 219</div>
+        <div class="location">at         line 144</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>destroy</strong>(<a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a> $eventUser)
         </code>

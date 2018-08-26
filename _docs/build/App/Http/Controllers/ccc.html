@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>App\Http\Controllers\RSVPController | Evius-EVA</title>
+    <title>App\Http\Controllers\ccc | Evius-EVA</title>
 
             <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
@@ -19,7 +19,7 @@
     
     </head>
 
-    <body id="class" data-name="class:App_Http_Controllers_RSVPController" data-root-path="../../../">
+    <body id="class" data-name="class:App_Http_Controllers_ccc" data-root-path="../../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -66,20 +66,20 @@
                         <div class="namespace-breadcrumbs">
             <ol class="breadcrumb">
                 <li><span class="label label-default">class</span></li>
-                        <li><a href="../../../App.html">App</a></li><li class="backslash">\</li><li><a href="../../../App/Http.html">Http</a></li><li class="backslash">\</li><li><a href="../../../App/Http/Controllers.html">Controllers</a></li><li class="backslash">\</li><li>RSVPController</li>
+                        <li><a href="../../../App.html">App</a></li><li class="backslash">\</li><li><a href="../../../App/Http.html">Http</a></li><li class="backslash">\</li><li><a href="../../../App/Http/Controllers.html">Controllers</a></li><li class="backslash">\</li><li>ccc</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
         <h1>
-            RSVPController
+            ccc
                 
         </h1>
     </div>
 
     <p>    class
-    <strong>RSVPController</strong>        extends <a href="../../../App/Http/Controllers/Controller.html"><abbr title="App\Http\Controllers\Controller">Controller</abbr></a>
+    <strong>ccc</strong>        extends <a href="../../../App/Http/Controllers/Controller.html"><abbr title="App\Http\Controllers\Controller">Controller</abbr></a>
 </p>
 
         
@@ -129,31 +129,19 @@
                     <abbr title="Illuminate\Http\Response">Response</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_index">index</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request)
+                    <a href="#method_index">index</a>()
         
                                             <p>Display a listing of the resource.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    int
+                    <abbr title="Illuminate\Http\Response">Response</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_createAndSendRSVP">createAndSendRSVP</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, <a href="../../../App/Event.html"><abbr title="App\Event">Event</abbr></a> $event, <a href="../../../App/Message.html"><abbr title="App\Message">Message</abbr></a> $message)
+                    <a href="#method_create">create</a>()
         
-                                            <p>Send RSVP to users in an event, taking usersIds[] in
-request to filter which users the RSVP is going to be send to</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_sendEventRSVP">sendEventRSVP</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, <a href="../../../App/Event.html"><abbr title="App\Event">Event</abbr></a> $event, <a href="../../../App/Message.html"><abbr title="App\Message">Message</abbr></a> $messageDB)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Show the form for creating a new resource.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -168,12 +156,42 @@ request to filter which users the RSVP is going to be send to</p>               
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    void
+                    <abbr title="Illuminate\Http\Response">Response</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_confirmRSVP">confirmRSVP</a>(<a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a> $eventUser)
+                    <a href="#method_show">show</a>(int $id)
         
-                                            <p>Undocumented function</p>                </div>
+                                            <p>Display the specified resource.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Illuminate\Http\Response">Response</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_edit">edit</a>(int $id)
+        
+                                            <p>Show the form for editing the specified resource.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Illuminate\Http\Response">Response</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_update">update</a>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, int $id)
+        
+                                            <p>Update the specified resource in storage.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Illuminate\Http\Response">Response</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_destroy">destroy</a>(int $id)
+        
+                                            <p>Remove the specified resource from storage.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -184,9 +202,9 @@ request to filter which users the RSVP is going to be send to</p>               
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_index">
-        <div class="location">at         line 31</div>
+        <div class="location">at         line 14</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
-    <strong>index</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request)
+    <strong>index</strong>()
         </code>
     </h3>
     <div class="details">
@@ -196,16 +214,6 @@ request to filter which users the RSVP is going to be send to</p>               
                     <div class="method-description">
                                     <p>Display a listing of the resource.</p>                                                </div>
                 <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
-                <td>$request</td>
-                <td></td>
-            </tr>
-            </table>
-
             
                             <h4>Return Value</h4>
 
@@ -223,10 +231,10 @@ request to filter which users the RSVP is going to be send to</p>               
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_createAndSendRSVP">
-        <div class="location">at         line 73</div>
-        <code>                    int
-    <strong>createAndSendRSVP</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, <a href="../../../App/Event.html"><abbr title="App\Event">Event</abbr></a> $event, <a href="../../../App/Message.html"><abbr title="App\Message">Message</abbr></a> $message)
+                    <h3 id="method_create">
+        <div class="location">at         line 24</div>
+        <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
+    <strong>create</strong>()
         </code>
     </h3>
     <div class="details">
@@ -234,66 +242,15 @@ request to filter which users the RSVP is going to be send to</p>               
     
 
                     <div class="method-description">
-                                    <p>Send RSVP to users in an event, taking usersIds[] in
-request to filter which users the RSVP is going to be send to</p>                    <p><ul>
-<li>@post body usersIds[]</li>
-<li>@post body message
-
-<ul>
-<li>@@post body image link</li>
-</ul></li>
-<li>@post body subject</li>
-<li>@post body footer
-
-<ul>
-<li>@body message asdfasdf
-*</li>
-</ul></li>
-</ul>
-
-<pre><code class="javascript">var s = "JavaScript syntax highlighting";
-alert(s);
-</code></pre>
-
-<hr />
-
-<hr />
-
-<hr />
-
-<p><b> funciona </p></p>
-
-<pre><code>post asdf asdfasd
-</code></pre>
-</p>                            </div>
+                                    <p>Show the form for creating a new resource.</p>                                                </div>
                 <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
-                <td>$request</td>
-                <td>Laravel request object</td>
-            </tr>
-                    <tr>
-                <td><a href="../../../App/Event.html"><abbr title="App\Event">Event</abbr></a></td>
-                <td>$event</td>
-                <td>Event to which users are suscribed</td>
-            </tr>
-                    <tr>
-                <td><a href="../../../App/Message.html"><abbr title="App\Message">Message</abbr></a></td>
-                <td>$message</td>
-                <td>auto injected</td>
-            </tr>
-            </table>
-
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>int</td>
-            <td>Number of email sent</td>
+            <td><abbr title="Illuminate\Http\Response">Response</abbr></td>
+            <td></td>
         </tr>
     </table>
 
@@ -304,47 +261,8 @@ alert(s);
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_sendEventRSVP">
-        <div class="location">at         line 98</div>
-        <code>                    
-    <strong>sendEventRSVP</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, <a href="../../../App/Event.html"><abbr title="App\Event">Event</abbr></a> $event, <a href="../../../App/Message.html"><abbr title="App\Message">Message</abbr></a> $messageDB)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
-                <td>$request</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td><a href="../../../App/Event.html"><abbr title="App\Event">Event</abbr></a></td>
-                <td>$event</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td><a href="../../../App/Message.html"><abbr title="App\Message">Message</abbr></a></td>
-                <td>$messageDB</td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method_store">
-        <div class="location">at         line 127</div>
+        <div class="location">at         line 35</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
     <strong>store</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request)
         </code>
@@ -383,10 +301,10 @@ alert(s);
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_confirmRSVP">
-        <div class="location">at         line 184</div>
-        <code>                    void
-    <strong>confirmRSVP</strong>(<a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a> $eventUser)
+                    <h3 id="method_show">
+        <div class="location">at         line 46</div>
+        <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
+    <strong>show</strong>(int $id)
         </code>
     </h3>
     <div class="details">
@@ -394,14 +312,14 @@ alert(s);
     
 
                     <div class="method-description">
-                                    <p>Undocumented function</p>                                                </div>
+                                    <p>Display the specified resource.</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../App/EventUser.html"><abbr title="App\EventUser">EventUser</abbr></a></td>
-                <td>$eventUser</td>
+                <td>int</td>
+                <td>$id</td>
                 <td></td>
             </tr>
             </table>
@@ -411,7 +329,132 @@ alert(s);
 
                     <table class="table table-condensed">
         <tr>
-            <td>void</td>
+            <td><abbr title="Illuminate\Http\Response">Response</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_edit">
+        <div class="location">at         line 57</div>
+        <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
+    <strong>edit</strong>(int $id)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Show the form for editing the specified resource.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$id</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Illuminate\Http\Response">Response</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_update">
+        <div class="location">at         line 69</div>
+        <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
+    <strong>update</strong>(<abbr title="Illuminate\Http\Request">Request</abbr> $request, int $id)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Update the specified resource in storage.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
+                <td>$request</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$id</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Illuminate\Http\Response">Response</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_destroy">
+        <div class="location">at         line 80</div>
+        <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>
+    <strong>destroy</strong>(int $id)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Remove the specified resource from storage.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$id</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Illuminate\Http\Response">Response</abbr></td>
             <td></td>
         </tr>
     </table>

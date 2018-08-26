@@ -46,6 +46,17 @@ class MessageUserController extends Controller
         return new MessageUserResource($book);
     }
 
+    public function create(Request $request)
+    {
+        $messageUser = MessageUser::create($request->all());
+        return new MessageUserResource($book);
+    }
+    public function edit(Request $request)
+    {
+        $messageUser = MessageUser::create($request->all());
+        return new MessageUserResource($book);
+    }
+
     /**
      * Display the specified resource.
      *

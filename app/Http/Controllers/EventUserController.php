@@ -13,8 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Handles behavior realated to user booking into an event
+ * @resource EventUser (Attendee)
  *
+ * Handles behavior realated to user booking into an event
  * User relation to an event is on of the fundamental aspects of this platform
  * most of the user functionality is executed under "EventUser" model and not directly
  * under User, because is an events platform.
@@ -43,15 +44,17 @@ class EventUserController extends Controller
 
     }
     /**
-     * Tries to create a new user from provided data and then add that user to specified event
+     * **CreateUserAndAddtoEvent** Tries to create a new user from provided data and then add that user to specified event
+     *
+     * | Body Params   |
+     * | ------------- |
+     * | @body $_POST[email] required field |   
+     * | @body $_POST[name]     |
+     * | @body $_POST[other_params],... any other params  will be saved in user and eventUser 
      *
      * @param Request $request HTTP request
-     * @param string  $event_id to add the user to.
-     * 
-     * @uses $_POST[email] required field
-     * @uses $_POST[name]  
-     * @uses $_POST[other_params],... any other params send will be saved in user and eventUser
-     * 
+     * @param String  $event_id to add the user to.
+     *
      * @return EventUserResource
      */
     public function createUserAndAddtoEvent(Request $request, string $event_id)
@@ -118,18 +121,16 @@ class EventUserController extends Controller
         return $data;
     }
 
-/**
- * Undocumented function
- *
- * @param int $id
- * @return boolean success result
- */
-
+    /**
+     * checkIn
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function checkIn($id)
     {
         $eventUser = EventUser::find($id);
         return $eventUser->checkIn();
-
     }
 
     /**

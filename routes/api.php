@@ -29,7 +29,7 @@ Route::put('event/{id}', 'EventController@update');
 
 Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
 Route::put('eventUser/{id}', 'EventUserController@update');
-Route::post('eventUser/addUserToEvent/{event_id}', 'EventUserController@addUserToEvent');
+//Route::post('eventUser/addUserToEvent/{event_id}', 'EventUserController@addUserToEvent');
 Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 
 //Event EndPoint
@@ -50,7 +50,7 @@ Route::middleware('auth.firebase')->get('user/organizations/{id}', 'Organization
 Route::middleware('auth.firebase')->get('user/organization_users/{id}', 'OrganizationUserController@index');
 
 Route::middleware('auth.firebase')->get('user/event_users/{id}', 'EventUserController@index');
-Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
+//Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 
 //Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
 Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
@@ -62,7 +62,7 @@ Route::get('event/{id}/messages', 'MessageController@message');
 // Route::get('event/messages', 'MessageController@message');
 
 
-Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
+//Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@sendEventRSVP');
@@ -71,7 +71,7 @@ Route::get('rsvp/{id}', 'RSVPController@index');
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
 //middleware('auth.firebase')->
-Route::get("/testroute/{user}", "EventUserController@testing");
+//Route::get("/testroute/{user}", "EventUserController@testing");
 
 
 //MISC Controllers
