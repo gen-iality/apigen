@@ -5,53 +5,50 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\EventUser;
+use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\Rol;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Requests\EventUserRequest;
 
 /**
  * @resource EventUser (Attendee)
- *
- * Handles behavior realated to user booking into an event
- * User relation to an event is on of the fundamental aspects of this platform
+ * 
+ * Handles the relation bewteeen user and event.  It handles user booking into an event
+ * User relation to an event is one of the fundamental aspects of this platform
  * most of the user functionality is executed under "EventUser" model and not directly
  * under User, because is an events platform.
+ *
+ * <p style="border: 1px solid #DDD">   
+ * EventUser has one user though user_id         
+ * <br> and one event though event_id    
+ * <br> This relation has states that represent the booking status of the user into the event   
+ * </p>
+ *  
  */
 class EventUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+    /** 
+     * __index:__ Display all the EventUsers of an event
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($event_id)
     {
-        $usersfilter = function ($data) {
-            $temporal = $data;
-            $temporal->user = User::where('uid', $data->userid)->first();
-            $temporal->state_id = $data->state;
-            $temporal->rol_id = $data->rol;
-
-            return $temporal;
-        };
-        $evtUsers = EventUser::where('event_id', $id)->get();
-        $users = array_map($usersfilter, $evtUsers->all());
-
-        return $users;
-
+        return EventUserResource::collection(
+            EventUser::where("event_id", $event_id)->paginate(50)
+        );
     }
+
     /**
-     * **CreateUserAndAddtoEvent** Tries to create a new user from provided data and then add that user to specified event
+     * __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
      *
      * | Body Params   |
      * | ------------- |
-     * | @body $_POST[email] required field |   
+     * | @body $_POST[email] required field |
      * | @body $_POST[name]     |
-     * | @body $_POST[other_params],... any other params  will be saved in user and eventUser 
+     * | @body $_POST[other_params],... any other params  will be saved in user and eventUser
      *
      * @param Request $request HTTP request
      * @param String  $event_id to add the user to.
@@ -74,41 +71,42 @@ class EventUserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * __Store:__ Store a newly EventUser  in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
-        return $request;
+        $eventUser = EventUser::create($request->all());
+        return new EventUserResource($eventUser);
     }
 
     /**
-     * Display the specified resource.
+     * __Show:__ Display an EventUser by id
      *
      * @param  \App\EventUser  $eventUser
      * @return \Illuminate\Http\Response
      */
     public function show(EventUser $eventUser)
     {
-        //
+        /*
+        $usersfilter = function ($data) {
+        $temporal = $data;
+        $temporal->user = User::where('uid', $data->userid)->first();
+        $temporal->state_id = $data->state;
+        $temporal->rol_id = $data->rol;
+
+        return $temporal;
+        };
+         */
+        $response = new EventUserResource($eventUser);
+        return $response;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\EventUser  $eventUser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(EventUser $eventUser)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
+     * __Update:__ Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\EventUser  $eventUser
@@ -123,9 +121,9 @@ class EventUserController extends Controller
     }
 
     /**
-     * checkIn
+     * __CheckIn:__ Checks In an existent EventUser to the related event
      *
-     * @param [type] $id
+     * @param  string $id EventUser to checkin into the event
      * @return void
      */
     public function checkIn($id)
@@ -135,13 +133,13 @@ class EventUserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * __delete:__ Remove the specified resource from storage.
      *
      * @param  \App\EventUser  $eventUser
      * @return \Illuminate\Http\Response
      */
     public function destroy(EventUser $eventUser)
     {
-        //
+        return $eventUser->delete(); 
     }
 }

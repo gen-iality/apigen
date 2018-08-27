@@ -19,7 +19,7 @@ class EventUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'other_fields.sometimes' => 'any other params will be saved in user and eventUser'
+            'other_fields.sometimes' => 'any other params will be saved in user and eventUser',
         ];
     }
 

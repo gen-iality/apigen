@@ -4,31 +4,21 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Cors {
+class Cors
+{
     public function handle($request, Closure $next)
     {
-        $originURL ="http://dev.mocionsoft.com:3000";
-
-        $origin;
+        $originURL = "http://dev.mocionsoft.com:3000";
+        //$originURL = "http://localhost";
 
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
-            $origin = $_SERVER['HTTP_ORIGIN'];
-        }
-        else if (array_key_exists('HTTP_REFERER', $_SERVER)) {
-            $origin = $_SERVER['HTTP_REFERER'];
-        } else {
-            $origin = $_SERVER['REMOTE_ADDR'];
-        }
+            $originURL = $_SERVER['HTTP_ORIGIN'];
 
-        /*if (isset(  ['HTTP_REFERER'])) {
-            $urlComponent = parse_url($_SERVER['HTTP_REFERER']);
-            $originURL = $urlComponent["scheme"]."://".$urlComponent["host"];
-            if (isset($urlComponent["port"])) {
-                $originURL .= ":".$urlComponent["port"];
-            }
-        }*/
-        if ($origin){
-            $originURL = $origin;
+        } else if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+            $originURL = $_SERVER['HTTP_REFERER'];
+
+        } else if (array_key_exists('REMOTE_ADDR', $_SERVER)) {
+            $originURL = $_SERVER['REMOTE_ADDR'];
         }
 
         return $next($request)

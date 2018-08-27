@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Event;
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,10 +9,10 @@ use App\Event;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+return $request->user();
 }); */
 Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail', 'TestingController@sendemail');
@@ -25,12 +21,14 @@ Route::get('test', 'EventController@test');
 //event CRUD
 Route::put('event/{id}', 'EventController@update');
 
-//eventUser CRUD
-
+//eventUser
+Route::get('eventUser/{event_id}', 'EventUserController@index');
 Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
-Route::put('eventUser/{id}', 'EventUserController@update');
-//Route::post('eventUser/addUserToEvent/{event_id}', 'EventUserController@addUserToEvent');
+
 Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
+Route::post('eventUser', 'EventUserController@store');
+Route::put('eventUser/{id}', 'EventUserController@update');
+Route::delete('eventUser/{id}', 'EventUserController@destroy');
 
 //Event EndPoint
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
@@ -61,7 +59,6 @@ Route::get('states', 'StateController@index');
 Route::get('event/{id}/messages', 'MessageController@message');
 // Route::get('event/messages', 'MessageController@message');
 
-
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
@@ -73,13 +70,10 @@ Route::get('rsvp/{id}', 'RSVPController@index');
 //middleware('auth.firebase')->
 //Route::get("/testroute/{user}", "EventUserController@testing");
 
-
 //MISC Controllers
 Route::post("files/upload/{field_name?}", "FilesController@upload");
 
 //Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
-
-
 
 //Organization EndPoint
 /* Route::middleware('cors')->get('organizations', 'OrganizationController@index');
@@ -87,13 +81,11 @@ Route::middleware('cors')->post('organizations', 'OrganizationController@store')
 Route::middleware('cors')->put('organizations/{id}', 'OrganizationController@update');
 Route::middleware('cors')->get('organizations/{id}', 'OrganizationController@show');
 
-
 //OrganizationUser EndPoint
 Route::middleware('cors')->get('organization_users', 'OrganizationUserController@index');
 Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
 Route::middleware('cors')->put('organization_users/{id}', 'OrganizationUserController@update');
 Route::middleware('cors')->get('organization_users/{id}', 'OrganizationUserController@show');
-
 
 //Rol EndPoint
 Route::middleware('cors')->get('rols', 'RolController@index');
@@ -101,20 +93,15 @@ Route::middleware('cors')->post('rols', 'RolController@store');
 Route::middleware('cors')->put('rols/{id}', 'RolController@update');
 Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 
-
 //AttendeTicket EndPoint
 Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index');
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show'); */
 
-
-
 /**
- * End-Point 
+ * End-Point
  * Publics
  */
 Route::get('events', 'EventController@publicEvents');
 Route::get('event/{id}', 'EventController@getOnePublicEvent');
-
-
