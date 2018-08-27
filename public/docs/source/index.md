@@ -31,13 +31,16 @@ EventUser has one user though user_id
 &lt;br&gt; and one event though event_id    
 &lt;br&gt; This relation has states that represent the booking status of the user into the event   
 &lt;/p&gt;
-<!-- START_8d35f2e6000965b882b97f117feeed12 -->
+<!-- START_80fa72beaf769771aa5f18ca9692593f -->
 ## __index:__ Display all the EventUsers of an event
+
+response includes user data who this EventUser belongs to
+in the property user.
 
 > Example request:
 
 ```bash
-curl -X GET "http://localhost/eviusapilaravel/public/api/eventUser/{event_id}" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/eventUser/event/{event_id}" \
 -H "Accept: application/json"
 ```
 
@@ -45,7 +48,7 @@ curl -X GET "http://localhost/eviusapilaravel/public/api/eventUser/{event_id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/eviusapilaravel/public/api/eventUser/{event_id}",
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/event/{event_id}",
     "method": "GET",
     "headers": {
         "accept": "application/json"
@@ -63,8 +66,8 @@ $.ajax(settings).done(function (response) {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/eventUser\/1?page=1",
-        "last": "http:\/\/localhost\/api\/eventUser\/1?page=1",
+        "first": "http:\/\/localhost\/api\/eventUser\/event\/1?page=1",
+        "last": "http:\/\/localhost\/api\/eventUser\/event\/1?page=1",
         "prev": null,
         "next": null
     },
@@ -72,7 +75,7 @@ $.ajax(settings).done(function (response) {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/eventUser\/1",
+        "path": "http:\/\/localhost\/api\/eventUser\/event\/1",
         "per_page": 50,
         "to": null,
         "total": 0
@@ -81,20 +84,20 @@ $.ajax(settings).done(function (response) {
 ```
 
 ### HTTP Request
-`GET api/eventUser/{event_id}`
+`GET api/eventUser/event/{event_id}`
 
-`HEAD api/eventUser/{event_id}`
+`HEAD api/eventUser/event/{event_id}`
 
 
-<!-- END_8d35f2e6000965b882b97f117feeed12 -->
+<!-- END_80fa72beaf769771aa5f18ca9692593f -->
 
-<!-- START_0bc9a6b1e8171137692d19f425c62171 -->
-## __CheckIn:__ Checks In an existent EventUser to the related event
+<!-- START_bbdd7d200dc8c3f237abdd06b9fbaf99 -->
+## __Show:__ Display an EventUser by id
 
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin" \
+curl -X GET "http://localhost/eviusapilaravel/public/api/eventUser/{id}" \
 -H "Accept: application/json"
 ```
 
@@ -102,8 +105,8 @@ curl -X PUT "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin"
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin",
-    "method": "PUT",
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/{id}",
+    "method": "GET",
     "headers": {
         "accept": "application/json"
     }
@@ -114,67 +117,449 @@ $.ajax(settings).done(function (response) {
 });
 ```
 
+> Example response:
 
-### HTTP Request
-`PUT api/eventUser/{id}/checkin`
-
-
-<!-- END_0bc9a6b1e8171137692d19f425c62171 -->
-
-<!-- START_3a620655e082dda31e5de71f2d951084 -->
-## __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
-
-| Body Params   |
-| ------------- |
-| @body $_POST[email] required field |
-| @body $_POST[name]     |
-| @body $_POST[other_params],... any other params  will be saved in user and eventUser
-
-> Example request:
-
-```bash
-curl -X POST "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}" \
--H "Accept: application/json" \
-    -d "email"="at" \
-    -d "name"="at" \
-    -d "other_fields"="at" \
-
-```
-
-```javascript
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}",
-    "method": "POST",
-    "data": {
-        "email": "at",
-        "name": "at",
-        "other_fields": "at"
-},
-    "headers": {
-        "accept": "application/json"
-    }
+```json
+{
+    "message": "Call to a member function toArray() on null",
+    "exception": "Symfony\\Component\\Debug\\Exception\\FatalThrowableError",
+    "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Http\/Resources\/Json\/JsonResource.php",
+    "line": 113,
+    "trace": [
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Resources\/EventUserResource.php",
+            "line": 17,
+            "function": "toArray",
+            "class": "Illuminate\\Http\\Resources\\Json\\JsonResource",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Http\/Resources\/Json\/JsonResource.php",
+            "line": 91,
+            "function": "toArray",
+            "class": "App\\Http\\Resources\\EventUserResource",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Http\/Resources\/Json\/ResourceResponse.php",
+            "line": 39,
+            "function": "resolve",
+            "class": "Illuminate\\Http\\Resources\\Json\\JsonResource",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Http\/Resources\/Json\/JsonResource.php",
+            "line": 194,
+            "function": "toResponse",
+            "class": "Illuminate\\Http\\Resources\\Json\\ResourceResponse",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 718,
+            "function": "toResponse",
+            "class": "Illuminate\\Http\\Resources\\Json\\JsonResource",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 705,
+            "function": "toResponse",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 665,
+            "function": "prepareResponse",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Middleware\/SubstituteBindings.php",
+            "line": 41,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Middleware\/ThrottleRequests.php",
+            "line": 57,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 667,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 642,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 608,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php",
+            "line": 597,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "line": 176,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/app\/Http\/Middleware\/Cors.php",
+            "line": 24,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "App\\Http\\Middleware\\Cors",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/fideloper\/proxy\/src\/TrustProxies.php",
+            "line": 57,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Fideloper\\Proxy\\TrustProxies",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/TransformsRequest.php",
+            "line": 31,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/ValidatePostSize.php",
+            "line": 27,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php",
+            "line": 62,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 151,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "line": 151,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php",
+            "line": 116,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "line": 116,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/AbstractGenerator.php",
+            "line": 98,
+            "function": "callRoute",
+            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Generators\/LaravelGenerator.php",
+            "line": 58,
+            "function": "getRouteResponse",
+            "class": "Mpociot\\ApiDoc\\Generators\\AbstractGenerator",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "line": 261,
+            "function": "processRoute",
+            "class": "Mpociot\\ApiDoc\\Generators\\LaravelGenerator",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/mpociot\/laravel-apidoc-generator\/src\/Mpociot\/ApiDoc\/Commands\/GenerateDocumentation.php",
+            "line": 83,
+            "function": "processLaravelRoutes",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "function": "handle",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "line": 29,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "line": 87,
+            "function": "Illuminate\\Container\\{closure}",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/BoundMethod.php",
+            "line": 31,
+            "function": "callBoundMethod",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php",
+            "line": 564,
+            "function": "call",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 184,
+            "function": "call",
+            "class": "Illuminate\\Container\\Container",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Command\/Command.php",
+            "line": 251,
+            "function": "execute",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Command.php",
+            "line": 171,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Command\\Command",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 886,
+            "function": "run",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 262,
+            "function": "doRunCommand",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/symfony\/console\/Application.php",
+            "line": 145,
+            "function": "doRun",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Console\/Application.php",
+            "line": 89,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Console\/Kernel.php",
+            "line": 122,
+            "function": "run",
+            "class": "Illuminate\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "\/var\/www\/html\/evius\/eviusapilaravel\/artisan",
+            "line": 37,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Console\\Kernel",
+            "type": "->"
+        }
+    ]
 }
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
 ```
 
-
 ### HTTP Request
-`POST api/eventUser/createUserAndAddtoEvent/{event_id}`
+`GET api/eventUser/{id}`
 
-#### Parameters
+`HEAD api/eventUser/{id}`
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    email | string |  required  | 
-    name | string |  required  | 
-    other_fields | string |  optional  | 
 
-<!-- END_3a620655e082dda31e5de71f2d951084 -->
+<!-- END_bbdd7d200dc8c3f237abdd06b9fbaf99 -->
 
 <!-- START_5d3346866041315ad0b5f005546b0a46 -->
 ## __Store:__ Store a newly EventUser  in storage.
@@ -275,8 +660,99 @@ $.ajax(settings).done(function (response) {
 
 <!-- END_91af77ad56d2f478df880cd263f19527 -->
 
+<!-- START_0bc9a6b1e8171137692d19f425c62171 -->
+## __CheckIn:__ Checks In an existent EventUser to the related event
+
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/{id}/checkin",
+    "method": "PUT",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`PUT api/eventUser/{id}/checkin`
+
+
+<!-- END_0bc9a6b1e8171137692d19f425c62171 -->
+
+<!-- START_3a620655e082dda31e5de71f2d951084 -->
+## __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
+
+| Body Params   |
+| ------------- |
+| @body $_POST[email] required field |
+| @body $_POST[name]     |
+| @body $_POST[other_params],... any other params  will be saved in user and eventUser
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}" \
+-H "Accept: application/json" \
+    -d "email"="at" \
+    -d "name"="at" \
+    -d "other_fields"="at" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}",
+    "method": "POST",
+    "data": {
+        "email": "at",
+        "name": "at",
+        "other_fields": "at"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST api/eventUser/createUserAndAddtoEvent/{event_id}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    email | string |  required  | 
+    name | string |  required  | 
+    other_fields | string |  optional  | 
+
+<!-- END_3a620655e082dda31e5de71f2d951084 -->
+
 <!-- START_e06f32afc490022ae0689eabbcd14517 -->
 ## __index:__ Display all the EventUsers of an event
+
+response includes user data who this EventUser belongs to
+in the property user.
 
 > Example request:
 

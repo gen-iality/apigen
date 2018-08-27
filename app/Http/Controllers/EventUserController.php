@@ -29,10 +29,16 @@ use Illuminate\Http\Response;
  */
 class EventUserController extends Controller
 {
-    /** 
-     * __index:__ Display all the EventUsers of an event
+    /**
+     * __index:__ Display all the EventUsers of an event   
      *
-     * @return \Illuminate\Http\Response
+     * response includes user data who this EventUser belongs to
+     * in the property user.
+     * 
+     * @param [type] $event_id
+     * 
+     * @return \Illuminate\Http\Response EventUserResource collection
+     * 
      */
     public function index($event_id)
     {
