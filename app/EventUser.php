@@ -6,7 +6,8 @@ namespace App;
 use Moloquent;
 class EventUser extends Moloquent
 {
-    //
+    protected $with = ['user'];
+    
     public function event()
     {
         return $this->belongsTo('App\Event');

@@ -88,7 +88,7 @@ class EventUserController extends Controller
      * @param  \App\EventUser  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function show(EventUser $eventUser)
+    public function show($id)
     {
         /*
         $usersfilter = function ($data) {
@@ -100,6 +100,9 @@ class EventUserController extends Controller
         return $temporal;
         };
          */
+        
+         $eventUser = EventUser::find($id);
+
         $response = new EventUserResource($eventUser);
         return $response;
     }

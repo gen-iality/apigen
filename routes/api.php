@@ -22,13 +22,17 @@ Route::get('test', 'EventController@test');
 Route::put('event/{id}', 'EventController@update');
 
 //eventUser
-Route::get('eventUser/{event_id}', 'EventUserController@index');
-Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
+Route::get('eventUser/event/{event_id}', 'EventUserController@index');
 
-Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
-Route::post('eventUser', 'EventUserController@store');
-Route::put('eventUser/{id}', 'EventUserController@update');
+Route::get('eventUser/{id}',     'EventUserController@show');
+Route::post('eventUser',        'EventUserController@store');
+Route::put('eventUser/{id}',    'EventUserController@update');
 Route::delete('eventUser/{id}', 'EventUserController@destroy');
+
+Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
+Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
+
+
 
 //Event EndPoint
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
