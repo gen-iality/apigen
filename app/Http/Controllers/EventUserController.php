@@ -64,7 +64,8 @@ class EventUserController extends Controller
     {
         try {
             $rules = [
-                'email' => 'required|email',
+                'email'   => 'required|email',
+                'name'    => 'required|alpha_dash'
             ];
             $validator = \Validator::make($request->all(), $rules);
             if ($validator->fails()) {
