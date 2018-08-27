@@ -92,15 +92,23 @@ $.ajax(settings).done(function (response) {
 <!-- END_0b34bd1d85c807f0ba68615300d85d91 -->
 
 <!-- START_3a620655e082dda31e5de71f2d951084 -->
-## CreateUserAndAddtoEvent Tries to create a new user from provided data and then add that user to specified event
+## **CreateUserAndAddtoEvent** Tries to create a new user from provided data and then add that user to specified event
 
-AAAAA
+| Body Params   |
+| ------------- |
+| @body $_POST[email] required field |
+| @body $_POST[name]     |
+| @body $_POST[other_params],... any other params  will be saved in user and eventUser
 
 > Example request:
 
 ```bash
 curl -X POST "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}" \
--H "Accept: application/json"
+-H "Accept: application/json" \
+    -d "email"="at" \
+    -d "name"="at" \
+    -d "other_fields"="at" \
+
 ```
 
 ```javascript
@@ -109,6 +117,11 @@ var settings = {
     "crossDomain": true,
     "url": "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}",
     "method": "POST",
+    "data": {
+        "email": "at",
+        "name": "at",
+        "other_fields": "at"
+},
     "headers": {
         "accept": "application/json"
     }
@@ -123,6 +136,13 @@ $.ajax(settings).done(function (response) {
 ### HTTP Request
 `POST api/eventUser/createUserAndAddtoEvent/{event_id}`
 
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    email | string |  required  | 
+    name | string |  required  | 
+    other_fields | string |  optional  | 
 
 <!-- END_3a620655e082dda31e5de71f2d951084 -->
 

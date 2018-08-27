@@ -100,18 +100,44 @@ $.ajax(settings).done(function (response) {
 <p><code>PUT api/eventUser/{id}</code></p>
 <!-- END_0b34bd1d85c807f0ba68615300d85d91 -->
 <!-- START_3a620655e082dda31e5de71f2d951084 -->
-<h2>CreateUserAndAddtoEvent Tries to create a new user from provided data and then add that user to specified event</h2>
-<p>AAAAA</p>
+<h2><strong>CreateUserAndAddtoEvent</strong> Tries to create a new user from provided data and then add that user to specified event</h2>
+<table>
+<thead>
+<tr>
+<th>Body Params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@body $_POST[email] required field</td>
+</tr>
+<tr>
+<td>@body $_POST[name]</td>
+</tr>
+<tr>
+<td>@body $_POST[other_params],... any other params  will be saved in user and eventUser</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}" \
--H "Accept: application/json"</code></pre>
+-H "Accept: application/json" \
+    -d "email"="at" \
+    -d "name"="at" \
+    -d "other_fields"="at" \
+</code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}",
     "method": "POST",
+    "data": {
+        "email": "at",
+        "name": "at",
+        "other_fields": "at"
+},
     "headers": {
         "accept": "application/json"
     }
@@ -122,6 +148,34 @@ $.ajax(settings).done(function (response) {
 });</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/eventUser/createUserAndAddtoEvent/{event_id}</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td>other_fields</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_3a620655e082dda31e5de71f2d951084 -->
 <!-- START_e06f32afc490022ae0689eabbcd14517 -->
 <h2>Display a listing of the resource.</h2>

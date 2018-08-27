@@ -11,6 +11,7 @@ use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Requests\EventUserRequest;
 
 /**
  * @resource EventUser (Attendee)
@@ -57,7 +58,7 @@ class EventUserController extends Controller
      *
      * @return EventUserResource
      */
-    public function createUserAndAddtoEvent(Request $request, string $event_id)
+    public function createUserAndAddtoEvent(EventUserRequest $request, string $event_id)
     {
         try {
             $event = Event::find($event_id);
