@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\EventUser;
-use App\Http\Resources\EventUserResource;
 use App\Http\Requests\EventUserRequest;
+use App\Http\Resources\EventUserResource;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Validator;
+
 
 /**
  * @resource EventUser (Attendee)
@@ -19,12 +21,16 @@ use Illuminate\Http\Response;
  * User relation to an event is one of the fundamental aspects of this platform
  * most of the user functionality is executed under "EventUser" model and not directly
  * under User, because is an events platform.
+ * @see App\Http\Requests\EventUserRequest for parameters validation
+ *
+ * @see App\Http\Requests\EventUserRequest for parameters validation
  *
  * <p style="border: 1px solid #DDD">
  * EventUser has one user though user_id
  * <br> and one event though event_id
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
+ *
  *
  */
 class EventUserController extends Controller
@@ -61,19 +67,25 @@ class EventUserController extends Controller
      *
      * @return EventUserResource
      */
-    public function createUserAndAddtoEvent(EventUserRequest $request, string $event_id)
+    public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
         try {
-            /*
-            $rules = [
-                'email'   => 'required|email',
-                'name'    => 'required|alpha_dash'
-            ];
-            $validator = \Validator::make($request->all(), $rules);
+
+            $validator = Validator::make(
+                $request->all(), [
+                    'email' => 'required|email',
+                    'name' => 'required',
+                    'other_fields' => 'sometimes',
+                ]
+            );
+
             if ($validator->fails()) {
-                return response()->json($validator->errors(), 422);
+                return response(
+                    $validator->errors(),
+                    422
+                );
             }
-            */
+
             $event = Event::find($event_id);
             $userData = $request->all();
             $result = UserEventService::importUserEvent($event, $userData);
@@ -81,7 +93,7 @@ class EventUserController extends Controller
             $response = new EventUserResource($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
-            
+
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         return $response;

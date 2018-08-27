@@ -26,10 +26,10 @@ User relation to an event is one of the fundamental aspects of this platform
 most of the user functionality is executed under &quot;EventUser&quot; model and not directly
 under User, because is an events platform.
 
-&lt;p style=&quot;border: 1px solid #DDD&quot;&gt;   
-EventUser has one user though user_id         
-&lt;br&gt; and one event though event_id    
-&lt;br&gt; This relation has states that represent the booking status of the user into the event   
+&lt;p style=&quot;border: 1px solid #DDD&quot;&gt;
+EventUser has one user though user_id
+&lt;br&gt; and one event though event_id
+&lt;br&gt; This relation has states that represent the booking status of the user into the event
 &lt;/p&gt;
 <!-- START_80fa72beaf769771aa5f18ca9692593f -->
 ## __index:__ Display all the EventUsers of an event
@@ -707,7 +707,7 @@ $.ajax(settings).done(function (response) {
 ```bash
 curl -X POST "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}" \
 -H "Accept: application/json" \
-    -d "email"="at" \
+    -d "email"="umorar@example.org" \
     -d "name"="at" \
     -d "other_fields"="at" \
 
@@ -720,7 +720,7 @@ var settings = {
     "url": "http://localhost/eviusapilaravel/public/api/eventUser/createUserAndAddtoEvent/{event_id}",
     "method": "POST",
     "data": {
-        "email": "at",
+        "email": "umorar@example.org",
         "name": "at",
         "other_fields": "at"
 },
@@ -742,7 +742,7 @@ $.ajax(settings).done(function (response) {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    email | string |  required  | 
+    email | email |  required  | 
     name | string |  required  | 
     other_fields | string |  optional  | 
 

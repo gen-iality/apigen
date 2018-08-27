@@ -6,6 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EventUserRequest extends FormRequest
 {
+
+    public function ajax()
+    {
+        return true;
+    }
+
+    public function wantsJson()
+    {
+        return true;
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,11 +24,6 @@ class EventUserRequest extends FormRequest
     public function authorize()
     {
         return true;
-    }
-
-    public function response(array $errors)
-    {
-        return Response::create($errors, 422);
     }
 
     public function messages()
