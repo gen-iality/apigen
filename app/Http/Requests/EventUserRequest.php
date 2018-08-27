@@ -16,6 +16,11 @@ class EventUserRequest extends FormRequest
         return true;
     }
 
+    public function response(array $errors)
+    {
+        return Response::create($errors, 422);
+    }
+
     public function messages()
     {
         return [
@@ -31,7 +36,7 @@ class EventUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
+            'email' => 'required|email',
             'name' => 'required',
             'other_fields' => 'sometimes',
         ];

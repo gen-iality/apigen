@@ -6,6 +6,7 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\EventUser;
 use App\Http\Resources\EventUserResource;
+use App\Http\Requests\EventUserRequest;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
@@ -60,9 +61,10 @@ class EventUserController extends Controller
      *
      * @return EventUserResource
      */
-    public function createUserAndAddtoEvent(Request $request, string $event_id)
+    public function createUserAndAddtoEvent(EventUserRequest $request, string $event_id)
     {
         try {
+            /*
             $rules = [
                 'email'   => 'required|email',
                 'name'    => 'required|alpha_dash'
@@ -71,7 +73,7 @@ class EventUserController extends Controller
             if ($validator->fails()) {
                 return response()->json($validator->errors(), 422);
             }
-
+            */
             $event = Event::find($event_id);
             $userData = $request->all();
             $result = UserEventService::importUserEvent($event, $userData);
@@ -80,7 +82,7 @@ class EventUserController extends Controller
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
             
-            $response = response()->json((object) ["message" => "xx" . $e->getMessage()], 500);
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         return $response;
     }
