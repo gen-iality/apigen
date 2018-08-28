@@ -35,7 +35,7 @@ Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController
 
 
 //Event EndPoint
-Route::post('user/events/addUserProperties', 'EventController@addUserProperties');
+Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
 Route::middleware('auth.firebase')->post('user/events', 'EventController@store');

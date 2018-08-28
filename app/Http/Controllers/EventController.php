@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
+use App\Properties;
 use Illuminate\Http\Request;
 use Storage;
-
+/**
+ * @resource Event 
+ *
+ * 
+ */
 class EventController extends Controller
 {
     /**
@@ -137,14 +142,24 @@ class EventController extends Controller
         //
     }
     /**
-     * Undocumented function
-     *
+     * AddUserProperty: Add dynamic user property to the event
+     * 
+     * each dynamic property must be composed of following parameters:
+     * 
+     * * name     text 
+     * * required boolean
+     * * type     text
+     * 
+     * Once created user dynamic event properties could be get directly from $event->userProperties.
+     *    Dynamic properties are returned inside each UserEvent like regular properties
      * @param Event $event
      * @param array $properties
      * @return void
      */
-    public function addUserProperties(Event $event, array $properties = [])
+    public function addUserProperty(Request $request, $event_id)
     {
-        return $event->userProperties()->create(['title' => 'A Game of Thrones']);
+        $event = Event::find($event_id);
+        $property = $event->userProperties()->create($request->all());
+        return $property->toArray();
     }
 }

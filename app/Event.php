@@ -6,8 +6,12 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use Moloquent;
 
+/**
+ * Undocumented class
+ */
 class Event extends Moloquent
 {
+    protected $with = ['userProperties'];
     //protected $collection = 'events';
     public function organization()
     {
@@ -30,7 +34,7 @@ class Event extends Moloquent
      */
     public function userProperties()
     {
-        return $this->embedsMany('App\Properties');
+        return $this->hasMany('App\Properties');
     }
 
 }
