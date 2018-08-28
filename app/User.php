@@ -6,7 +6,7 @@ use Moloquent;
 
 class User extends Moloquent
 {
-    protected $primaryKey = 'uid';
+    //protected $primaryKey = 'uid';
     protected $fillable = ['name', 'email', 'uid'];
 
     /**

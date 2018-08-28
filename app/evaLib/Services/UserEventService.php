@@ -45,11 +45,13 @@ class UserEventService
 
         //Revisamos por el id si el usuario existe
         $user = User::updateOrCreate($matchAttributes, $userData);
-
+       
+        //5b855232cb22e03382263973
+        // event_id 5b7c4159c06586333f616385 userid 5b8551d1cb22e0338127b183
         $matchAttributes = ["event_id" => $event->id, "userid" => $user->id];
         $eventUserFields = $matchAttributes;
         $eventUser = EventUser::updateOrCreate($matchAttributes, $eventUserFields);
-
+       
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
         //User rol assigned by default
@@ -57,15 +59,17 @@ class UserEventService
             $rol = Rol::where('level', 0)->first();
             $eventUser->rol_id = $rol->_id;
         }
+        $eventUser->rol_id = "5afaf644500a7104f77189cd";
 
         //eventUser booking status default value
-        if (!isset($eventUser->status)) {
+        if (!isset($eventUser->state_id)) {
             $temp = State::first();
             $eventUser->state_id = $temp->_id;
         }
+        $eventUser->state_id = "5b0efc411d18160bce9bc706";
 
         $data = $eventUser;
-
+        
         return (object) [
             "status" => $result_status,
             "data" => $data,
