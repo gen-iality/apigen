@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\evaLib\Services\EvaRol;
+use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use Illuminate\Http\Request;
-use App\EventUser;
 use Storage;
-use App\evaLib\Services\GoogleFiles;
-use App\evaLib\Services\EvaRol;
 
 class EventController extends Controller
 {
@@ -31,6 +30,7 @@ class EventController extends Controller
     {
         return Event::all();
     }
+
     public function getOnePublicEvent(Event $id)
     {
         return $id;
@@ -44,11 +44,12 @@ class EventController extends Controller
     {
         //
     }
-    public function delete(Event $id){
+    public function delete(Event $id)
+    {
         $res = $id->delete();
-        if($res == true){
+        if ($res == true) {
             return 'True';
-        }else{
+        } else {
             return 'Error';
         }
     }
@@ -62,12 +63,12 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $result = new Event($request->all());
-        $result->picture  =  $gfService->storeFile($request->file('picture'));
+        $result->picture = $gfService->storeFile($request->file('picture'));
         $result->author = $request->get('user')->uid;
         $result->save();
-        
+
         $RolService->createAuthorAsEventAdmin($request->get('user')->uid, $result->_id);
-        
+
         return $result;
         //$data= $request->get('user');
         //return $data;
@@ -134,5 +135,16 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+    /**
+     * Undocumented function
+     *
+     * @param Event $event
+     * @param array $properties
+     * @return void
+     */
+    public function addUserProperties(Event $event, array $properties = [])
+    {
+        return $event->userProperties()->create(['title' => 'A Game of Thrones']);
     }
 }

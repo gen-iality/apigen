@@ -35,6 +35,12 @@ use Validator;
  */
 class EventUserController extends Controller
 {
+
+    public function test($id){
+       $eventUser =  EventUser::find($id);
+
+       return ["a"=>$eventUser->getAttributes()];
+    }
     /**
      * __index:__ Display all the EventUsers of an event
      *

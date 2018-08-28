@@ -16,7 +16,7 @@ return $request->user();
 }); */
 Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail', 'TestingController@sendemail');
-Route::get('test', 'EventController@test');
+Route::get('test/{id}', 'EventUserController@test');
 
 //event CRUD
 Route::put('event/{id}', 'EventController@update');
@@ -35,6 +35,7 @@ Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController
 
 
 //Event EndPoint
+Route::post('user/events/addUserProperties', 'EventController@addUserProperties');
 Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
 Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
