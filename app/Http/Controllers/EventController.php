@@ -147,11 +147,11 @@ class EventController extends Controller
      * each dynamic property must be composed of following parameters:
      * 
      * * name     text 
-     * * required boolean
-     * * type     text
+     * * required boolean - this field is not yet used  for anything
+     * * type     text    - this field is not yet used for anything
      * 
      * Once created user dynamic event properties could be get directly from $event->userProperties.
-     *    Dynamic properties are returned inside each UserEvent like regular properties
+     * Dynamic properties are returned inside each UserEvent like regular properties
      * @param Event $event
      * @param array $properties
      * @return void

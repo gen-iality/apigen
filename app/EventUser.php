@@ -6,6 +6,8 @@ namespace App;
 use Moloquent;
 class EventUser extends Moloquent
 {
+    static protected  $unguarded = true;
+    
     protected $with = ['user','rol','state'];
     
     public function event()

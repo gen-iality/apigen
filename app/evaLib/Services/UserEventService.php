@@ -50,6 +50,7 @@ class UserEventService
         // event_id 5b7c4159c06586333f616385 userid 5b8551d1cb22e0338127b183
         $matchAttributes = ["event_id" => $event->id, "userid" => $user->id];
         $eventUserFields = $matchAttributes;
+        $eventUserFields["properties"] = $userData;
 
         //User rol assigned by default
         if (!isset($eventUserFields["rol_id"])) {

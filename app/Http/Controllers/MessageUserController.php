@@ -29,7 +29,6 @@ class MessageUserController extends Controller
         $Topic = new MessageUser($ar);
 
         $Topic->save();
-        var_dump($Topic->toArray());
         return ["false" => "false"];
         return MessageUserResource::collection(MessageUser::paginate(50));
     }
