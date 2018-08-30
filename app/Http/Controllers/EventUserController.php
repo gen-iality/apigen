@@ -79,13 +79,13 @@ class EventUserController extends Controller
 
             //las propiedades del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
-            $eventUserData = $request->post();
-            $userData = $request->post();
+            $eventUserData = $request->json()->all();
+            $userData = $request->json()->all();
 
-            if (isset($eventUserData['propeties'])) {
-                $userData = $eventUserData['propeties'];
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
             }
-
+            var_dump($userData);
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
                 $userData, [
