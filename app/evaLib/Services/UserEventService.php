@@ -66,6 +66,10 @@ class UserEventService
         }
         $eventUserFields["state_id"] = "5b0efc411d18160bce9bc706";
 
+        if ($eventUserFields['uid']) {
+            unset($eventUserFields['uid']);
+        }
+
         $eventUser = EventUser::updateOrCreate($matchAttributes, $eventUserFields);
 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
