@@ -35,18 +35,23 @@ class AuthFirebase
             //miramos si el token viene en la Petición
             if (isset($_REQUEST['evius_token'])) {
                 $firebaseToken = $_REQUEST['evius_token'];
+            } else if (isset($_REQUEST['token'])) {
+                $firebaseToken = $_REQUEST['token'];
             }
 
             //miramos si el token viene en una cookie
             if (isset($_COOKIE['evius_token'])) {
                 $firebaseToken = $_COOKIE['evius_token'];
+            } else if (isset($_COOKIE['token'])) {
+                $firebaseToken = $_COOKIE['token'];
             }
+
             if (!$firebaseToken) {
                 return response(
                     [
-                    'status' => Response::HTTP_NOT_FOUND,
-                    'message' => 'Error: No token provided',
-                ], Response::HTTP_NOT_FOUND
+                        'status' => Response::HTTP_NOT_FOUND,
+                        'message' => 'Error: No token provided',
+                    ], Response::HTTP_NOT_FOUND
                 );
 
             }
@@ -60,9 +65,9 @@ class AuthFirebase
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
             return response(
                 [
-                'status' => Response::HTTP_NOT_FOUND,
-                'message' => 'Error: ExpiredToken',
-            ], Response::HTTP_NOT_FOUND
+                    'status' => Response::HTTP_NOT_FOUND,
+                    'message' => 'Error: ExpiredToken',
+                ], Response::HTTP_NOT_FOUND
             );
 
         }
