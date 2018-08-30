@@ -8,10 +8,11 @@ use App\Event;
 use App\Properties;
 use Illuminate\Http\Request;
 use Storage;
+
 /**
- * @resource Event 
+ * @resource Event
  *
- * 
+ *
  */
 class EventController extends Controller
 {
@@ -68,15 +69,17 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $result = new Event($request->all());
-        $result->picture = $gfService->storeFile($request->file('picture'));
+
+        if ($request->file('picture')) {
+            $result->picture = $gfService->storeFile($request->file('picture'));
+        }
+
         $result->author = $request->get('user')->uid;
         $result->save();
 
         $RolService->createAuthorAsEventAdmin($request->get('user')->uid, $result->_id);
 
         return $result;
-        //$data= $request->get('user');
-        //return $data;
     }
 
     /**
@@ -143,13 +146,13 @@ class EventController extends Controller
     }
     /**
      * AddUserProperty: Add dynamic user property to the event
-     * 
+     *
      * each dynamic property must be composed of following parameters:
-     * 
-     * * name     text 
+     *
+     * * name     text
      * * required boolean - this field is not yet used  for anything
      * * type     text    - this field is not yet used for anything
-     * 
+     *
      * Once created user dynamic event properties could be get directly from $event->userProperties.
      * Dynamic properties are returned inside each UserEvent like regular properties
      * @param Event $event
