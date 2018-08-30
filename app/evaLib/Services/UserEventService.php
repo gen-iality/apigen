@@ -50,6 +50,12 @@ class UserEventService
         // event_id 5b7c4159c06586333f616385 userid 5b8551d1cb22e0338127b183
         $matchAttributes = ["event_id" => $event->id, "userid" => $user->id];
         $eventUserFields = $matchAttributes;
+
+       
+        if ($userData['uid']) {
+              unset($userData['uid']);
+        }
+                
         $eventUserFields["properties"] = $userData;
 
         //User rol assigned by default
@@ -66,9 +72,6 @@ class UserEventService
         }
         $eventUserFields["state_id"] = "5b0efc411d18160bce9bc706";
 
-        if ($eventUserFields['uid']) {
-            unset($eventUserFields['uid']);
-        }
 
         $eventUser = EventUser::updateOrCreate($matchAttributes, $eventUserFields);
 
