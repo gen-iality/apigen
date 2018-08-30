@@ -77,8 +77,18 @@ class EventUserController extends Controller
     {
         try {
 
+            //las propiedades del usuario se estan migrando de una propiedad directa
+            //a estar dentro de un hijo llamado properties
+            $eventUserData = $request->post();
+            $userData = $request->post();
+
+            if (isset($eventUserData['propeties'])) {
+                $userData = $eventUserData['propeties'];
+            }
+
+            //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
-                $request->all(), [
+                $userData, [
                     'email' => 'required|email',
                     'name' => 'required',
                     'other_fields' => 'sometimes',
@@ -91,11 +101,8 @@ class EventUserController extends Controller
                     422
                 );
             }
-
             $event = Event::find($event_id);
-            $userData = $request->post();
-
-            $result = UserEventService::importUserEvent($event, $userData);
+            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
             $response = new EventUserResource($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);

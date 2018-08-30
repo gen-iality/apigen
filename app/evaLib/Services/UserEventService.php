@@ -26,7 +26,7 @@ class UserEventService
      * @param [type] $userData
      * @return void
      */
-    public static function importUserEvent(Event $event, $userData)
+    public static function importUserEvent(Event $event, $eventUserFields, $userData)
     {
         $result_status = null;
         $data = null;
@@ -46,16 +46,16 @@ class UserEventService
         //Revisamos por el id si el usuario existe
         $user = User::updateOrCreate($matchAttributes, $userData);
 
-        //5b855232cb22e03382263973
-        // event_id 5b7c4159c06586333f616385 userid 5b8551d1cb22e0338127b183
+        //test 5b855232cb22e03382263973 vent_id 5b7c4159c06586333f616385 userid 5b8551d1cb22e0338127b183
         $matchAttributes = ["event_id" => $event->id, "userid" => $user->id];
-        $eventUserFields = $matchAttributes;
 
-       
+        $eventUserFields += $matchAttributes;
+
+        //avoid saving uid as user properties
         if ($userData['uid']) {
               unset($userData['uid']);
         }
-                
+
         $eventUserFields["properties"] = $userData;
 
         //User rol assigned by default
