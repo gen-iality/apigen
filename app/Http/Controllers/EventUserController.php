@@ -93,7 +93,7 @@ class EventUserController extends Controller
             }
 
             $event = Event::find($event_id);
-            $userData = $request->all();
+            $userData = $request->post();
             $result = UserEventService::importUserEvent($event, $userData);
 
             $response = new EventUserResource($result->data);
