@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Validator;
 
-
 /**
  * @resource EventUser (Attendee)
  *
@@ -36,10 +35,11 @@ use Validator;
 class EventUserController extends Controller
 {
 
-    public function test($id){
-       $eventUser =  EventUser::find($id);
+    public function test($id)
+    {
+        $eventUser = EventUser::find($id);
 
-       return ["a"=>$eventUser->getAttributes()];
+        return ["a" => $eventUser->getAttributes()];
     }
     /**
      * __index:__ Display all the EventUsers of an event
@@ -94,6 +94,9 @@ class EventUserController extends Controller
 
             $event = Event::find($event_id);
             $userData = $request->post();
+            if ($userData['uid']) {
+                unset($userData['uid']);
+            }
             $result = UserEventService::importUserEvent($event, $userData);
 
             $response = new EventUserResource($result->data);
