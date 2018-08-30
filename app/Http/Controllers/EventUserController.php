@@ -85,7 +85,7 @@ class EventUserController extends Controller
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
             }
-            var_dump($userData);
+
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
                 $userData, [
