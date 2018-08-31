@@ -6,6 +6,7 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Properties;
+use App\User;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
@@ -89,11 +90,13 @@ class EventController extends Controller
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-
-        $result->author = $request->get('user')->id;
+        $userFire = $request->get('user');
+        $user = User::where('uid', $userFire->uid)->first();
+        
+        $result->author = $user->id;
         $result->save();
 
-        $RolService->createAuthorAsEventAdmin($request->get('user')->id, $result->_id);
+        $RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
         return $result;
     }
