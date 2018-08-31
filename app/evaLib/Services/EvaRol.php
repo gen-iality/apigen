@@ -6,6 +6,7 @@ namespace App\evaLib\Services;
 
 use App\EventUser;
 use App\OrganizationUser;
+use App\User;
 use App\Rol;
 use App\State;
 use Storage;
@@ -37,6 +38,11 @@ class EvaRol
             'rol_id' => $rol->_id,
             'state_id' => $state->_id,
         ];
+        
+        //cargando los attributos del usuario dentro del EventUser
+        $user = User::find($authorId);
+        $userEvt['properties'] = $user->getAttributes();
+
         $userToEvt = new EventUser($userEvt);
         $userToEvt->save();
         return true;
