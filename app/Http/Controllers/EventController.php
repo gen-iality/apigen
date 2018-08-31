@@ -28,7 +28,8 @@ class EventController extends Controller
         //
         //return response()->json(Event::all());
         //return Event::all();
-        return Event::where('author', $request->get('user')->uid)->get();
+        $user = User::where('uid', $request->get('user')->uid);
+        return Event::where('author', $user->id)->get();
     }
 
     /**
@@ -92,7 +93,7 @@ class EventController extends Controller
         }
         $userFire = $request->get('user');
         $user = User::where('uid', $userFire->uid)->first();
-        
+
         $result->author = $user->id;
         $result->save();
 
