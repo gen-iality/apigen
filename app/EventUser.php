@@ -7,7 +7,7 @@ use Moloquent;
 class EventUser extends Moloquent
 {
     static protected  $unguarded = true;
-    
+    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id',"checked_in","checked_in_date"];
     protected $with = ['user','rol','state'];
     
     public function event()
@@ -61,6 +61,4 @@ class EventUser extends Moloquent
         //$this->state_id = $this->state_id;
         return $this;
     }
-
-    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'state_id',"checked_in","checked_in_date"];
 }

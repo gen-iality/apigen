@@ -103,7 +103,7 @@ class EventUserController extends Controller
             }
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-
+            
             $response = new EventUserResource($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {

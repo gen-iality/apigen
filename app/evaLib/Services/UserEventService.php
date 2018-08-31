@@ -72,10 +72,12 @@ class UserEventService
         }
         $eventUserFields["state_id"] = "5b0efc411d18160bce9bc706";
 
-
         $eventUser = EventUser::updateOrCreate($matchAttributes, $eventUserFields);
 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
+
+        //don't know why updateOrCreate doens't eager load related models
+        $eventUser = EventUser::where($matchAttributes)->first();
 
         $data = $eventUser;
 
