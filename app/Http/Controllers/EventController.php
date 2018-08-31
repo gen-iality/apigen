@@ -96,7 +96,7 @@ class EventController extends Controller
         $result->author = $user->id;
         $result->save();
 
-        $RolService->createAuthorAsEventAdmin($user->id, $result->_id);
+        //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
         return $result;
     }
