@@ -90,10 +90,10 @@ class EventController extends Controller
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
 
-        $result->author = $request->get('user')->uid;
+        $result->author = $request->get('user')->id;
         $result->save();
 
-        $RolService->createAuthorAsEventAdmin($request->get('user')->uid, $result->_id);
+        $RolService->createAuthorAsEventAdmin($request->get('user')->id, $result->_id);
 
         return $result;
     }
