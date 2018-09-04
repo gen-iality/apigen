@@ -4,6 +4,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\EventUser;
 use App\Mail\RSVP;
@@ -47,60 +48,40 @@ class RSVPController extends Controller
      * *   @post body footer
      *     * @body message asdfasdf
      *      *
-     * ```javascript
-     * var s = "JavaScript syntax highlighting";
-     * alert(s);
-     * ```
-     * ---
-     * ___
-     * ***
-     * <b> funciona </p>
-     *
-     *
-     *     post asdf asdfasd
-     * @get asdf sadf
-     * @url huy huy
-     * @header param asdfa s     *
-     *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
      * @param Message $message auto injected
      * @return int Number of email sent
-     *
-
      */
 
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
+        $data = $request->json()->all();
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
-        $subject = $request->input('subject');
+        $subject = $data['subject'];
         $subject = ($subject) ? $subject : "[Invitación] " . $event->name;
         $message->subject = $subject;
 
-        $message->message = $request->input('message');
-        $message->footer  = $request->input('footer') || "";
+        $message->message = $data['message'];
+        $message->footer = isset($data['footer'])?$data['footer']:"";
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-        $message->image = $request->input('image') || "";
-        $message->event_id = $eventId;
+        $message->image = isset($data['image'])?$data['image']:"";
+        $message->event_id = $event->id;
         $message->save();
 
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
-        $usersIds = $request->input('usersIds');
+        $usersIds = $data['usersIds'];
+        $eventUsers = UserEventService::addUsersToAnEvent($event, $usersIds);
 
-        
         //Send RSVP
 
-    }
+        self::_sendRSVPmail(
+            $eventUsers, $message
+        );
 
-    public function sendEventRSVP(Request $request, Event $event, Message $messageDB)
-    {
-
-        $eventUsers = self::getOrCreateEventUserFromUsers($event, $usersIds);
-
-        self::_sendRSVPmail($eventUsers, $message, $image, $footer, $event, $subject);
         $usersCount = count($eventUsers);
 
         return $usersCount;
@@ -130,22 +111,15 @@ class RSVPController extends Controller
         return new MessageUserResource($book);
     }
 
-    private static function saveRSVP($message, $subject, $image, $footer, $eventId)
+/**
+ * Undocumented function
+ *
+ * @param [type] $eventUsers
+ * @param [type] $message
+ * @return void
+ */
+    private static function _sendRSVPmail($eventUsers, $message)
     {
-
-
-
-        return $messageDB;
-    }
-
-    private static function _sendRSVPmail(
-        $eventUsers, $message, $image, $footer, $event, $subject
-    ) {
-        $usersCount = count($eventUsers);
-
-        $message = self::saveRSVP($message, $subject, $image, $footer,
-            $usersCount, $event->id
-        );
 
         foreach ($eventUsers as &$eventUser) {
             if (!$eventUser) {
@@ -160,7 +134,7 @@ class RSVPController extends Controller
             $messageUser = new MessageUser(
                 [
                     'email' => $eventUser->user->email,
-                    'user_id' => $eventUser->user->uid,
+                    'user_id' => $eventUser->user->id,
                     'event_user_id' => $eventUser->id,
                 ]
             );
@@ -168,9 +142,7 @@ class RSVPController extends Controller
 
             $m = Message::find($message->id);
 
-            foreach ($m->messageUsers as $mu) {
-                var_dump($mu->email);
-            }
+
             // Mail::to($email)->send(new RSVP($message, $event, $eventUser, $image, $footer, $subject));
             //->cc('juan.lopez@mocionsoft.com');
         }
@@ -188,11 +160,6 @@ class RSVPController extends Controller
         }
         return redirect()->away('http://dev.mocionsoft.com:3000/evento/' . $eventUser->event_id . '');
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
-
-    }
-
-    private static function getEventUsers($eventUsersId)
-    {
 
     }
 

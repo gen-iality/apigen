@@ -67,7 +67,7 @@ Route::get('event/{id}/messages', 'MessageController@message');
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
-Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@sendEventRSVP');
+Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/{id}', 'RSVPController@index');
 //Route::get('rsvp/{id}/log', 'RSVPController@log');

@@ -7,22 +7,33 @@ namespace App;
 use Moloquent;
 
 /**
- * Undocumented class
+ * Event Model
+ *
  */
 class Event extends Moloquent
 {
+    const VISIBILITY_PUBLIC = 'PUBLIC';
+    const VISIBILITY_ORGANIZATION = "ORGANIZATION";
+
     protected $with = ['userProperties'];
     //protected $collection = 'events';
+
+    /**
+     * Event is owned by an organization
+     * @return void
+     */
     public function organization()
     {
         return $this->belongsTo('App\Organization');
     }
     protected $fillable = [
-        'name', 'description','location', 'venue', 'pulep', 
-        'datetime_start','datetime_end',
-        'date_start', 'date_end', 'time_start','time_end',
-        'visibility', 'picture', 'organization_id'
+        'name', 'description', 'location', 'venue', 'pulep',
+        'datetime_from', 'datetime_to',
+        'date_start', 'date_end', 'time_start', 'time_end',
+        'visibility', 'picture', 'organization_id',
     ];
+
+    protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
 
     /**
      * Get the comments for the blog post.
@@ -33,7 +44,7 @@ class Event extends Moloquent
     }
 
     /**
-     * Dynamic user properties  
+     * Dynamic user properties
      *
      * @return void
      */

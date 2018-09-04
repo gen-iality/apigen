@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
+use Carbon\Carbon;
 
 /**
  * @resource Event
@@ -73,6 +74,7 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $data = $request->json()->all();
+
         //este validador pronto se va a su clase de validacion
         $validator = Validator::make(
             $data, [
@@ -88,7 +90,7 @@ class EventController extends Controller
         };
 
         $result = new Event($data);
-
+        
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
