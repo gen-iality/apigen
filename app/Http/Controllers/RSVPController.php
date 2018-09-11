@@ -64,9 +64,11 @@ class RSVPController extends Controller
         $message->subject = $subject;
 
         $message->message = $data['message'];
-        $message->footer = isset($data['footer'])?$data['footer']:"";
+        $message->footer = isset($data['footer']) ? $data['footer'] : "";
+
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-        $message->image = isset($data['image'])?$data['image']:"";
+
+        $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->save();
 
@@ -122,7 +124,10 @@ class RSVPController extends Controller
     {
 
         foreach ($eventUsers as &$eventUser) {
-            if (!$eventUser) {
+
+            if (!$eventUser && !isset($eventUser->user)) {
+                $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
+                \Log::debug("This eventUser doesn't have any assosiated user". $usuariolog);
                 continue;
             }
 
@@ -141,7 +146,6 @@ class RSVPController extends Controller
             $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
-
 
             // Mail::to($email)->send(new RSVP($message, $event, $eventUser, $image, $footer, $subject));
             //->cc('juan.lopez@mocionsoft.com');

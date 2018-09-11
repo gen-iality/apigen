@@ -61,15 +61,16 @@ Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 
 Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 Route::get('states', 'StateController@index');
 
-Route::get('event/{id}/messages', 'MessageController@message');
+
 // Route::get('event/messages', 'MessageController@message');
 
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
+Route::get( 'rsvp/event/{id}/messages', 'MessageController@message');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
-Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
-Route::get('rsvp/{id}', 'RSVPController@index');
+Route::get( 'rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+Route::get( 'rsvp/{id}', 'RSVPController@index');
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
 //middleware('auth.firebase')->
