@@ -125,7 +125,7 @@ class RSVPController extends Controller
 
         foreach ($eventUsers as &$eventUser) {
 
-            if (!$eventUser && !isset($eventUser->user)) {
+            if (!$eventUser || !isset($eventUser->user)) {
                 $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
                 \Log::debug("This eventUser doesn't have any assosiated user". $usuariolog);
                 continue;
