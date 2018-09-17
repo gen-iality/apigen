@@ -20,6 +20,14 @@ class Message extends Moloquent
     public function messageUsers()
     {
         return $this->hasMany('App\MessageUser');
-    }    
+    }
+
+    /**
+     * Get the event that owns the message.
+     */
+    public function event()
+    {
+        return $this->belongsTo('App\Event');
+    }
 
 }

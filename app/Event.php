@@ -53,4 +53,12 @@ class Event extends Moloquent
         return $this->hasMany('App\Properties');
     }
 
+    /**
+     * Get the comments for the blog post.
+     */
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
 }

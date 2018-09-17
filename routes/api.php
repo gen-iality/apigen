@@ -67,10 +67,13 @@ Route::get('states', 'StateController@index');
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
-Route::get( 'rsvp/event/{id}/messages', 'MessageController@message');
+Route::get( 'rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get( 'rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
-Route::get( 'rsvp/{id}', 'RSVPController@index');
+
+Route::get( 'event/{event_id}/rsvp', 'MessageController@indexEvent');
+
+
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
 //middleware('auth.firebase')->
