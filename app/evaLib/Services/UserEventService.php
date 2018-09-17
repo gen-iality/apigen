@@ -101,6 +101,10 @@ class UserEventService
         $eventUsers = EventUser::where('event_id', '=', $event->id)
             ->whereIn('userid', $usersIds)
             ->get();
+        foreach($eventUsers as $eventUser){
+            var_dump($eventUser->user->email);
+        }
+        
 
         $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
 

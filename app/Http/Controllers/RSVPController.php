@@ -41,13 +41,13 @@ class RSVPController extends Controller
      * Send RSVP to users in an event, taking usersIds[] in
      * request to filter which users the RSVP is going to be send to
      *
-     ** @post body usersIds[]
-     *+     @post body message
-     *     + @@post body image link
-     * *   @post body subject
-     * *   @post body footer
-     *     * @body message asdfasdf
-     *      *
+     *      +@@post body usersIds[]
+     *      +@@post body message
+     *      +@@post body image link
+     *      +@@post body subject
+     *      +@@post body footer
+     *      +@body message asdfasdf
+     *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
      * @param Message $message auto injected
@@ -81,7 +81,7 @@ class RSVPController extends Controller
         //Send RSVP
 
         self::_sendRSVPmail(
-            $eventUsers, $message
+            $eventUsers, $message, $event
         );
 
         $usersCount = count($eventUsers);
@@ -120,14 +120,14 @@ class RSVPController extends Controller
  * @param [type] $message
  * @return void
  */
-    private static function _sendRSVPmail($eventUsers, $message)
+    private static function _sendRSVPmail($eventUsers, $message, $event)
     {
 
         foreach ($eventUsers as &$eventUser) {
 
             if (!$eventUser || !isset($eventUser->user)) {
                 $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
-                \Log::debug("This eventUser doesn't have any assosiated user". $usuariolog);
+                \Log::debug("This eventUser doesn't have any assosiated user" . $usuariolog);
                 continue;
             }
 
@@ -147,8 +147,8 @@ class RSVPController extends Controller
 
             $m = Message::find($message->id);
 
-            // Mail::to($email)->send(new RSVP($message, $event, $eventUser, $image, $footer, $subject));
-            //->cc('juan.lopez@mocionsoft.com');
+            Mail::to($email)->send(new RSVP($message, $event, $eventUser, $message->image, $message->footer, $message->subject))
+                ->cc('juan.lopez@mocionsoft.com');
         }
     }
 
