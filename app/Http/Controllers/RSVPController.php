@@ -134,7 +134,7 @@ class RSVPController extends Controller
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (!empty($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
+            $email = (!isset($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
 
             $messageUser = new MessageUser(
                 [
