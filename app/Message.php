@@ -8,7 +8,7 @@ use Moloquent;
 class Message extends Moloquent
 {
     protected $table = ('messages');
-
+    protected $with  = ['messageUsers'];
     /**
      * The messages that belong to the user.
      */
