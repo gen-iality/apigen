@@ -101,18 +101,27 @@ class UserEventService
         $eventUsers = EventUser::where('event_id', '=', $event->id)
             ->whereIn('userid', $usersIds)
             ->get();
-        foreach($eventUsers as $eventUser){
-            var_dump($eventUser->user->email);
-        }
-        
+            
 
         $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
 
         foreach ($usersIdNotInEvent as $userId) {
+
+            $user = User::findOrFail($userId);
             //Crear EventUser
             $eventUser = new EventUser;
             $eventUser->event_id = $event->id;
             $eventUser->userid = $userId;
+            $eventUser->properties = ["email"=>$user->email,"name"=>$user->name];
+
+
+            $rol = Rol::where('level', 0)->first();
+            $eventUser->rol_id = $rol->_id;        
+            $eventUser->rol_id = "5afaf644500a7104f77189cd";
+
+            $temp = State::first();
+            $eventUser->state_id = $temp->_id;
+
             $eventUser->save();
             $eventUsers[] = $eventUser;
         }

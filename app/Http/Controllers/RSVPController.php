@@ -74,7 +74,6 @@ class RSVPController extends Controller
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($usersIds);
-        $message->save();
 
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
@@ -86,7 +85,8 @@ class RSVPController extends Controller
         self::_sendRSVPmail(
             $eventUsers, $message, $event
         );
-
+        $mesage = $message->fresh();
+        
         return $message;
     }
 
