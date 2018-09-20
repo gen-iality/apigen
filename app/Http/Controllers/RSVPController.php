@@ -75,7 +75,7 @@ class RSVPController extends Controller
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
-
+        $message->save();
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
