@@ -56,10 +56,11 @@ class RSVPController extends Controller
 
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
-        
+
         $data = $request->json()->all();
 
-        $usersIds = $data['usersIds'];
+        //Si esto no existe que?
+        $eventUsersIds = $data['eventUsersIds'];
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
         $subject = $data['subject'];
@@ -73,20 +74,20 @@ class RSVPController extends Controller
 
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
-        $message->number_of_recipients = count($usersIds);
+        $message->number_of_recipients = count($eventUsersIds);
 
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
-        $usersIds = $data['usersIds'];
-        $eventUsers = UserEventService::addUsersToAnEvent($event, $usersIds);
-
+        //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
+        $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
+        //var_dump($eventUsers);
         //Send RSVP
         self::_sendRSVPmail(
             $eventUsers, $message, $event
         );
         $mesage = $message->fresh();
-        
+
         return $message;
     }
 
@@ -126,6 +127,8 @@ class RSVPController extends Controller
 
         foreach ($eventUsers as &$eventUser) {
 
+            
+
             if (!$eventUser || !isset($eventUser->user)) {
                 $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
                 \Log::debug("This eventUser doesn't have any assosiated user" . $usuariolog);
@@ -147,9 +150,9 @@ class RSVPController extends Controller
             $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
-
+            var_dump($email);
             Mail::to($email)->send(new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject));
-        
+
             //->cc('juan.lopez@mocionsoft.com');
         }
     }

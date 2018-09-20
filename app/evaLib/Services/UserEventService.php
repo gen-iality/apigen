@@ -9,6 +9,7 @@ use App\EventUser;
 use App\Rol;
 use App\State;
 use App\User;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Undocumented class
@@ -53,7 +54,7 @@ class UserEventService
 
         //avoid saving uid as user properties
         if ($userData['uid']) {
-              unset($userData['uid']);
+            unset($userData['uid']);
         }
 
         $eventUserFields["properties"] = $userData;
@@ -88,6 +89,39 @@ class UserEventService
         ];
     }
     /**
+     * Undocumented function
+     *
+     * @param Event $event
+     * @param [type] $EventusersIds
+     * @return void
+     */
+    public static function addEventUsersToEvent(Event $event, $eventusersIds)
+    {
+
+        $eventAttendees = [];
+
+        //cargamos varios EventUser por UserId.
+
+        $eventUsers = EventUser::find($eventusersIds);
+
+        foreach ($eventUsers as $eventUser) {
+
+            if ($eventUser->event_id == $event->id) {
+                $eventAttendees[] = $eventUser;
+            } else {
+                $newEventUser = $eventUser->replicate();
+                $newEventUser->event_id = $event->id;
+                $newEventUser->save();
+                $eventAttendees[] = $newEventUser;
+                echo  " NuevoeventUser:>> ".$newEventUser->id." <<";
+            }
+        }
+
+        return  $eventAttendees;
+
+    }
+
+    /**
      * Add Users to an event in draft status
      *
      * @param Event       $event    Where users are going to be added
@@ -101,22 +135,26 @@ class UserEventService
         $eventUsers = EventUser::where('event_id', '=', $event->id)
             ->whereIn('userid', $usersIds)
             ->get();
-            
 
         $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
 
         foreach ($usersIdNotInEvent as $userId) {
 
-            $user = User::findOrFail($userId);
+            $user = User::find($userId);
+            if (!$user) {
+                Log::debug('User not found when trying to create. ' . $userId);
+                continue;
+
+            }
+            Log::debug('User not found when trying to create. ' . $userId);
             //Crear EventUser
             $eventUser = new EventUser;
             $eventUser->event_id = $event->id;
             $eventUser->userid = $userId;
-            $eventUser->properties = ["email"=>$user->email,"name"=>$user->name];
-
+            $eventUser->properties = ["email" => $user->email, "name" => $user->name];
 
             $rol = Rol::where('level', 0)->first();
-            $eventUser->rol_id = $rol->_id;        
+            $eventUser->rol_id = $rol->_id;
             $eventUser->rol_id = "5afaf644500a7104f77189cd";
 
             $temp = State::first();
