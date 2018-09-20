@@ -21,10 +21,10 @@ Confirmar asistencia
 |                       |                     | 
 | --------------------  |:-------------------:| 
 | **Fecha:**            | **Lugar:**          | 
-| {{ date('l, F j Y ', strtotime($event->date_start)) }}| {{$event->venue}}   | 
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }}| {{$event->venue}}   | 
 |<br>                   |<br>                 |
 | **Hora:**             | **Dirección:**      |
-| {{$event->hour}}      | {{$event->location}}| 
+| {{date('H:s', strtotime($event->datetime_from)) }}     | {{$event->location}}| 
 
 @endcomponent
 

@@ -9,6 +9,7 @@ class Message extends Moloquent
 {
     protected $table = ('messages');
     protected $with  = ['messageUsers'];
+    protected $fillable = ['subject','message','footer','image','number_of_recipients'];
     /**
      * The messages that belong to the user.
      */

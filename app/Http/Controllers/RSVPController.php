@@ -56,7 +56,10 @@ class RSVPController extends Controller
 
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
+        
         $data = $request->json()->all();
+
+        $usersIds = $data['usersIds'];
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
         $subject = $data['subject'];
@@ -70,6 +73,7 @@ class RSVPController extends Controller
 
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
+        $message->number_of_recipients = count($usersIds);
         $message->save();
 
         //~~~~~~~~~~~~~~~~~~~~~~
@@ -79,14 +83,11 @@ class RSVPController extends Controller
         $eventUsers = UserEventService::addUsersToAnEvent($event, $usersIds);
 
         //Send RSVP
-
         self::_sendRSVPmail(
             $eventUsers, $message, $event
         );
 
-        $usersCount = count($eventUsers);
-
-        return $usersCount;
+        return $message;
     }
 
 /**
@@ -147,8 +148,9 @@ class RSVPController extends Controller
 
             $m = Message::find($message->id);
 
-            Mail::to($email)->send(new RSVP($message, $event, $eventUser, $message->image, $message->footer, $message->subject))
-                ->cc('juan.lopez@mocionsoft.com');
+            Mail::to($email)->send(new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject));
+        
+            //->cc('juan.lopez@mocionsoft.com');
         }
     }
 
