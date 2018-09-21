@@ -51,9 +51,12 @@ class EventController extends Controller
         $user = User::where('uid', $userFire->email)->first();
         //var_dump($user->id);
         //var_dump($user->events());
-        
+        return EventResource::collection(
+            Event::where('author_id', $user->id)
+                ->paginate(12)
+            //EventUser::where("event_id", $event_id)->paginate(50)
+        );        
 
-        return  Event::where('author_id', $user->id)->get();
     }
 
 
