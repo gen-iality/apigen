@@ -82,7 +82,7 @@ class EventController extends Controller
     {
         $data = $request->json()->all();
 
-        //este validador pronto se va a su clase de validacion
+        //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
                 'name' => 'required',
@@ -102,9 +102,9 @@ class EventController extends Controller
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
         $userFire = $request->get('user');
-        $user = User::where('uid', $userFire->uid)->first();
-
-        $result->author = $user->id;
+        $user     = User::where('uid', $userFire->uid)->first();
+        
+        $result->author()->associate($user);
         $result->save();
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
