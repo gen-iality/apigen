@@ -52,18 +52,7 @@ class EventController extends Controller
         return Event::where('author', $user->id)->get();
     }
 
-    /**
-     * Return all public events
-     */
-    public function publicEvents(Request $request)
-    {
-        return Event::all();
-    }
 
-    public function getOnePublicEvent(Event $id)
-    {
-        return $id;
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -129,11 +118,12 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $id)
+    public function show(String $id)
     {
-        //
-        //return Event::findOrFail($id);
-        return $id;
+        $event = Event::find($id);
+        EventResource::withoutWrapping();
+        $response = new EventResource($event);
+        return $response;
     }
 
     /**

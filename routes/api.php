@@ -18,8 +18,7 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::get('test/{id}', 'EventUserController@test');
 
-//event CRUD
-Route::put('event/{id}', 'EventController@update');
+
 
 //eventUser
 Route::get('eventUser/event/{event_id}', 'EventUserController@index');
@@ -31,8 +30,13 @@ Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 
 
-//Event EndPoint
+//Events
+
+//Public
 Route::get('events', 'EventController@index');
+Route::get('event/{id}', 'EventController@show');
+
+Route::put('event/{id}', 'EventController@update');
 Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
 Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
@@ -60,7 +64,6 @@ Route::get('states', 'StateController@index');
 
 
 // Route::get('event/messages', 'MessageController@message');
-
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
@@ -105,8 +108,4 @@ Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@stor
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show'); */
 
-/**
- * End-Point
- * Publics
- */
-Route::get('event/{id}', 'EventController@getOnePublicEvent');
+
