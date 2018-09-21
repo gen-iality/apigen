@@ -44,12 +44,16 @@ class EventController extends Controller
      */
     public function currentUserindex(Request $request)
     {
-        //
-        //return response()->json(Event::all());
-        //return Event::all();
+
         $userFire = $request->get('user');
-        $user = User::where('uid', $userFire->uid)->first();
-        return Event::where('author', $user->id)->get();
+        var_dump($userFire->email);
+        
+        $user = User::where('uid', $userFire->email)->first();
+        //var_dump($user->id);
+        //var_dump($user->events());
+        
+
+        return  Event::where('author_id', $user->id)->get();
     }
 
 
