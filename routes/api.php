@@ -34,7 +34,7 @@ Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController
 
 //Public
 Route::get('events', 'EventController@index');
-Route::get('event/{id}', 'EventController@show');
+Route::get('events/{id}', 'EventController@show');
 
 Route::put('event/{id}', 'EventController@update');
 Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
