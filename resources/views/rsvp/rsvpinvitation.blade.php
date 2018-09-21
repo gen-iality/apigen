@@ -32,7 +32,7 @@ Confirmar asistencia
 
 @component('mail::panel')
 Ubicación del evento  <br>
-{{$event->location}}  <br>
+
 {{$event->venue}}
 -----------------------
 @endcomponent
