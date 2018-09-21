@@ -23,20 +23,17 @@ Route::put('event/{id}', 'EventController@update');
 
 //eventUser
 Route::get('eventUser/event/{event_id}', 'EventUserController@index');
-
 Route::get('eventUser/{id}',     'EventUserController@show');
 Route::post('eventUser',        'EventUserController@store');
 Route::put('eventUser/{id}',    'EventUserController@update');
 Route::delete('eventUser/{id}', 'EventUserController@destroy');
-
 Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 
 
-
 //Event EndPoint
-Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
-Route::middleware('auth.firebase')->get('user/events', 'EventController@index');
+Route::get('events', 'EventController@index');
+Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
 Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
 Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
 Route::middleware('auth.firebase')->put('user/events/{id}', 'EventController@update');
@@ -45,14 +42,14 @@ Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@
 //Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
 //User Events Endpoint
+Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
 Route::middleware('auth.firebase')->get('user/organizations', 'OrganizationController@index');
 Route::middleware('auth.firebase')->post('user/organizations', 'OrganizationController@store');
 Route::middleware('auth.firebase')->put('user/organizations/{id}', 'OrganizationController@update');
 Route::middleware('auth.firebase')->get('user/organizations/{id}', 'OrganizationController@show');
-
 Route::middleware('auth.firebase')->get('user/organization_users/{id}', 'OrganizationUserController@index');
-
 Route::middleware('auth.firebase')->get('user/event_users/{id}', 'EventUserController@index');
+
 //Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 
 //Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
@@ -112,5 +109,4 @@ Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@
  * End-Point
  * Publics
  */
-Route::get('events', 'EventController@publicEvents');
 Route::get('event/{id}', 'EventController@getOnePublicEvent');

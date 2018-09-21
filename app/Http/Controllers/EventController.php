@@ -6,11 +6,11 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Properties;
+use App\Http\Resources\EventResource;
 use App\User;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
-use Carbon\Carbon;
 
 /**
  * @resource Event
@@ -25,6 +25,24 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
+    {
+
+        return EventResource::collection(
+            Event::where('visibility', '<>', '') //not null
+                ->orWhere('visibility', 'IS NULL', null, 'and') //null
+                ->paginate(12)
+            //EventUser::where("event_id", $event_id)->paginate(50)
+        );
+
+        //$events = Event::where('visibility', $request->input('name'))->get();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function currentUserindex(Request $request)
     {
         //
         //return response()->json(Event::all());
@@ -90,7 +108,7 @@ class EventController extends Controller
         };
 
         $result = new Event($data);
-        
+
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }

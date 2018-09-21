@@ -9,10 +9,25 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('test', 'EventController@test');
+
+Route::get('/rsvptemplate', function () {
+
+    $event = new App\Event();
+    $event->name="event best";
+    $event->venue    ="venue";
+    $event->location ="location";
+    $event->description ="description";
+
+    $eventUser = new App\EventUser();
+    $eventUser->name ="odiseo";
+    $eventUser->email ="odiseo@iliada.com";
+
+    return new App\Mail\RSVP("message", $event, $eventUser, null, "footer", "subject");
+});
