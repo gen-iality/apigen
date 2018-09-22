@@ -151,7 +151,12 @@ class RSVPController extends Controller
 
             $m = Message::find($message->id);
             
-            Mail::to($email)->send(new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject));
+            Mail::to($email)
+            ->from('bookings@evius.com', 'EVIUS')
+            ->send(
+                new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject)
+            
+            );
 
             //->cc('juan.lopez@mocionsoft.com');
         }
