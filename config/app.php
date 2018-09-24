@@ -12,6 +12,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    'front_url' => 'https://eviusco.netlify.com',
 
     'name' => env('APP_NAME', 'Evius'),
 

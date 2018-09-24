@@ -13,6 +13,7 @@ use App\MessageUser;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -24,6 +25,12 @@ use Kreait\Firebase\ServiceAccount;
 class RSVPController extends Controller
 {
 
+    public function test()
+    {
+        echo "hola";
+        echo Config::get('app.front_url', 'aaa');
+        die();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,6 +88,10 @@ class RSVPController extends Controller
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
+
+        $message->number_of_recipients = count($eventUsers);
+        $message->save();
+
         //var_dump($eventUsers);
         //Send RSVP
         self::_sendRSVPmail(
@@ -127,8 +138,6 @@ class RSVPController extends Controller
 
         foreach ($eventUsers as &$eventUser) {
 
-            
-
             if (!$eventUser || !isset($eventUser->user)) {
                 $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
                 \Log::debug("This eventUser doesn't have any assosiated user" . $usuariolog);
@@ -150,12 +159,11 @@ class RSVPController extends Controller
             $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
-            
+
             Mail::to($email)
-            ->send(
-                new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject)
-            
-            );
+                ->send(
+                    new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject)
+                );
 
             //->cc('juan.lopez@mocionsoft.com');
         }
@@ -171,7 +179,8 @@ class RSVPController extends Controller
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
         }
-        return redirect()->away('http://dev.mocionsoft.com:3000/evento/' . $eventUser->event_id . '');
+
+        redirect()->away(Config::get('app.front_url', 'https://evius.co') .'/evento/' . $eventUser->event_id."?attendee=".$eventUser->_id.'&status='.$eventUser->state_id);
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
     }
