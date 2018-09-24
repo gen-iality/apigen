@@ -36,7 +36,7 @@ class EventUser extends Moloquent
     }
 
     public function confirm()
-    {
+    {   
         $this->state_id = self::STATE_BOOKED;
         return $this;
     }
