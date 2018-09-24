@@ -54,6 +54,7 @@ class EventUserController extends Controller
      */
     public function index($event_id)
     {
+
         return EventUserResource::collection(
             EventUser::where("event_id", $event_id)->paginate(50)
         );
@@ -121,6 +122,7 @@ class EventUserController extends Controller
      */
     public function store(Request $request)
     {
+        EventUserResource::withoutWrapping();
         $eventUser = EventUser::create($request->all());
         return new EventUserResource($eventUser);
     }

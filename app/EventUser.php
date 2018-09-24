@@ -16,12 +16,13 @@ class EventUser extends Moloquent
     const ROL_ATTENDEE = "5afaf644500a7104f77189cd";
 
     protected static $unguarded = true;
-    protected $fillable = ['userid', 'event_id', 'rol_id', 'state_id', "checked_in", "checked_in_date"];
+    protected $fillable = ['userid', 'event_id', 'rol_id',  'role_id', 'state_id', "checked_in", "checked_in_date"];
     protected $with = ['user', 'rol', 'state'];
 
     //Default values
     protected $attributes = [
         'state_id'  => self::STATE_DRAFT,
+        'rol_id'   => self::ROL_ATTENDEE,
         'role_id'   => self::ROL_ATTENDEE,
     ];
 
