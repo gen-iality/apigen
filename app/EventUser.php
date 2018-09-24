@@ -13,9 +13,17 @@ class EventUser extends Moloquent
     const STATE_RESERVED = "5ba8d200aac5b12a5a8ce748";//"RESERVED";
     const STATE_BOOKED = "5b859ed02039276ce2b996f0";//"BOOKED";
 
+    const ROL_ATTENDEE = "5afaf644500a7104f77189cd";
+
     protected static $unguarded = true;
     protected $fillable = ['userid', 'event_id', 'rol_id', 'state_id', "checked_in", "checked_in_date"];
     protected $with = ['user', 'rol', 'state'];
+
+    //Default values
+    protected $attributes = [
+        'state_id'  => self::STATE_DRAFT,
+        'role_id'   => self::ROL_ATTENDEE,
+    ];
 
     public function event()
     {
