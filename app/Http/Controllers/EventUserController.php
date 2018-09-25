@@ -52,11 +52,23 @@ class EventUserController extends Controller
      * @return \Illuminate\Http\Response EventUserResource collection
      *
      */
-    public function index($event_id)
+    public function index(Request $request, $event_id)
     {
 
+        $state_id = $request->input('state_id');
+        $rol_id   = $request->input('rol_id');
+
+        $query = EventUser::where("event_id", $event_id);
+        if ($state_id) {
+            $query->where("state_id", $state_id);
+        }
+
+        if ($state_id) {
+            $query->where("rol_id", $state_id);
+        }
+
         return EventUserResource::collection(
-            EventUser::where("event_id", $event_id)->paginate(50)
+            $query->paginate(50)
         );
     }
 
@@ -104,7 +116,7 @@ class EventUserController extends Controller
             }
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            
+
             $response = new EventUserResource($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
