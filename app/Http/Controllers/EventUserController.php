@@ -58,8 +58,11 @@ class EventUserController extends Controller
     {
         $query = EventUser::where("event_id", $event_id);
 
+        //páginacion pordefecto
+        $pageSize = $request->input('filtered');
+        $pageSize = ( $pageSize)? $pageSize:25;
+
         $filteredBy = json_decode($request->input('filtered'));
-    
         $filteredBy = is_array($filteredBy)?$filteredBy:[$filteredBy];
 
         $orderedBy  = json_decode($request->input('orderBy'));
@@ -86,7 +89,7 @@ class EventUserController extends Controller
         }
 
         return EventUserResource::collection(
-            $query->paginate(50)
+            $query->paginate($pageSize)
         );
     }
 
