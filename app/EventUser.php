@@ -49,6 +49,12 @@ class EventUser extends Moloquent
         return $this;
     }
 
+    public function book()
+    {   
+        $this->state_id = self::STATE_BOOKED;
+        return $this;
+    }
+
     public function checkIn()
     {
         try {

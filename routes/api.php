@@ -28,7 +28,7 @@ Route::put('eventUser/{id}',    'EventUserController@update');
 Route::delete('eventUser/{id}', 'EventUserController@destroy');
 Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
-
+Route::post('eventUser/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 //Events
 

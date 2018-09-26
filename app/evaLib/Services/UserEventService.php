@@ -121,6 +121,41 @@ class UserEventService
 
     }
 
+
+    /**
+     * Undocumented function
+     *
+     * @param Event $event
+     * @param [type] $EventusersIds
+     * @return void
+     */
+    public static function bookEventUsersToEvent(Event $event, $eventusersIds)
+    {
+
+        $eventAttendees = [];
+
+        //cargamos varios EventUser por UserId.
+
+        $eventUsers = EventUser::find($eventusersIds);
+
+        foreach ($eventUsers as $eventUser) {
+
+            if ($eventUser->event_id == $event->id) {
+                $newEventUser = $eventUser;
+            } else {
+                $newEventUser = $eventUser->replicate();
+                $newEventUser->event_id = $event->id;
+                echo  " NuevoeventUser:>> ".$newEventUser->id." <<";
+            }
+
+            $newEventUser->book()->save();
+            $eventAttendees[] = $newEventUser;
+        }
+
+        return  $eventAttendees;
+
+    }    
+
     /**
      * Add Users to an event in draft status
      *

@@ -41,30 +41,48 @@ class EventUserController extends Controller
 
         return ["a" => $eventUser->getAttributes()];
     }
+
     /**
      * __index:__ Display all the EventUsers of an event
      *
-     * response includes user data who this EventUser belongs to
-     * in the property user.
-     *
+     * response  EventUser of specific event
+     * it could be filtered by
+     *    +'state_id'
+     *    +'rol_id'
      * @param [type] $event_id
      *
      * @return \Illuminate\Http\Response EventUserResource collection
      *
      */
-    public function index(Request $request, $event_id)
+    public function index(Request $request, String $event_id)
     {
-
-        $state_id = $request->input('state_id');
-        $rol_id   = $request->input('rol_id');
-
         $query = EventUser::where("event_id", $event_id);
-        if ($state_id) {
-            $query->where("state_id", $state_id);
+
+        $filteredBy = json_decode($request->input('filtered'));
+    
+        $filteredBy = is_array($filteredBy)?$filteredBy:[$filteredBy];
+
+        $orderedBy  = json_decode($request->input('orderBy'));
+        $orderedBy = is_array($orderedBy)?$orderedBy:[$orderedBy];
+
+        foreach ((array) $filteredBy as $condition) {
+            if (!isset($condition->id) && !isset($condition->value)) {
+                continue;
+            }
+
+            $query->where($condition->id, $condition->value);
         }
 
-        if ($state_id) {
-            $query->where("rol_id", $state_id);
+        
+
+        foreach ((array) $orderedBy as $order) {
+           
+            if (!isset($order->id)) {
+                continue;
+            } 
+            $direccion =  (isset($order->desc) && $order->desc) ? "desc" : "asc";
+            $query->orderBy($order->id, $direccion);
+
         }
 
         return EventUserResource::collection(
@@ -72,6 +90,20 @@ class EventUserController extends Controller
         );
     }
 
+    public function bookEventUsers(Request $request, Event $event)
+    {
+        try {
+
+            $eventUsersIds = $data['eventUsersIds'];
+            $eventUsers = UserEventService::bookEventUsersToEvent($event, $eventUsersIds);
+            $response = new EventUserResource($eventUsers);
+            //$response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
+
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
+        return $response;
+    }
     /**
      * __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
      *
