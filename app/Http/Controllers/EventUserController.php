@@ -59,31 +59,37 @@ class EventUserController extends Controller
         $query = EventUser::where("event_id", $event_id);
 
         //páginacion pordefecto
-        $pageSize = (int)$request->input('pageSize');
-        $pageSize = ($pageSize)? $pageSize:25;
+        $pageSize = (int) $request->input('pageSize');
+        $pageSize = ($pageSize) ? $pageSize : 25;
 
         $filteredBy = json_decode($request->input('filtered'));
-        $filteredBy = is_array($filteredBy)?$filteredBy:[$filteredBy];
+        $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
 
-        $orderedBy  = json_decode($request->input('orderBy'));
-        $orderedBy = is_array($orderedBy)?$orderedBy:[$orderedBy];
+        $orderedBy = json_decode($request->input('orderBy'));
+        $orderedBy = is_array($orderedBy) ? $orderedBy : [$orderedBy];
 
         foreach ((array) $filteredBy as $condition) {
-            if (!isset($condition->id) && !isset($condition->value)) {
+            if (!$condition || !isset($condition->id) || !isset($condition->value)) {
                 continue;
             }
 
-            $query->where($condition->id, $condition->value);
+            if (strpos($condition->id, 'properties.') === 0) {
+                $condition->comparator = "like";
+            }
+
+            $comparator = (isset($condition->comparator)) ? $condition->comparator : "=";
+            if (strtolower($condition->comparator) == "like") {
+                $condition->value = "%" . $condition->value . "%";
+            }
+            $query->where($condition->id, $condition->comparator, $condition->value);
         }
 
-        
-
         foreach ((array) $orderedBy as $order) {
-           
+
             if (!isset($order->id)) {
                 continue;
-            } 
-            $direccion =  (isset($order->desc) && $order->desc) ? "desc" : "asc";
+            }
+            $direccion = (isset($order->desc) && $order->desc) ? "desc" : "asc";
             $query->orderBy($order->id, $direccion);
 
         }
