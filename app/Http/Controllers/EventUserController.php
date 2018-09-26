@@ -59,7 +59,7 @@ class EventUserController extends Controller
         $query = EventUser::where("event_id", $event_id);
 
         //páginacion pordefecto
-        $pageSize = $request->input('filtered');
+        $pageSize = $request->input('pageSize');
         $pageSize = ( $pageSize)? $pageSize:25;
 
         $filteredBy = json_decode($request->input('filtered'));
