@@ -78,7 +78,7 @@ class EventUserController extends Controller
             }
 
             $comparator = (isset($condition->comparator)) ? $condition->comparator : "=";
-            if (strtolower($condition->comparator) == "like") {
+            if (isset($condition->comparator) && strtolower($condition->comparator) == "like") {
                 $condition->value = "%" . $condition->value . "%";
             }
             $query->where($condition->id, $condition->comparator, $condition->value);
