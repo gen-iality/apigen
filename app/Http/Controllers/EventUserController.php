@@ -79,10 +79,12 @@ class EventUserController extends Controller
                 continue;
             }
 
+            //for any eventUser inner properties enable text like partial search by default is the most common use case
             if (strpos($condition->id, 'properties.') === 0) {
                 $condition->comparator = "like";
             }
 
+            //if like comparator is stated add partial search using %% symbols
             $comparator = (isset($condition->comparator)) ? $condition->comparator : "=";
             if (strtolower($comparator) == "like") {
                 $condition->value = "%" . $condition->value . "%";
@@ -96,21 +98,21 @@ class EventUserController extends Controller
             if (!isset($order->id)) {
                 continue;
             }
-            $direccion = (isset($order->desc) && $order->desc) ? "desc" : "asc";
+
+            $direccion = (isset($order->order) && $order->order) ? $order->order : "desc";
             $query->orderBy($order->id, $direccion);
 
         }
 
+        /* Test to select only few columns
         $users = $query->get();
-
         $subset = $users->map(function ($user) {
             return collect($user->toArray())
                 ->only(['properties'])
                 ->all();
         });
-        
 
-        return $subset;
+        return $subset;*/
 
         return EventUserResource::collection(
             $query->paginate($pageSize)
