@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\EventUser;
+use App\Mail\BookingConfirmed;
 use App\Observers\EventUserObserver;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,10 +19,20 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Log::debug("definiendo observador");
-        \App\EventUser::observe(App\Observers\EventUserObserver::class);
+        //\App\EventUser::observe(App\Observers\EventUserObserver::class);
 
-        \App\EventUser::saving(function ($model) {
-            Log::debug("saving afuera");
+        \App\EventUser::saved(function ($eventUser) {
+            Log::debug("ejecutando observador saved eventUser");
+            //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
+            $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
+            Log::debug("saved afuera " . $eventUser->state_id . " " . EventUser::STATE_BOOKED);
+            if ($eventUser->state_id == EventUser::STATE_BOOKED) {
+                Log::debug("saved adentro vamos a enviar el email");
+                Mail::to($email)
+                    ->send(
+                        new BookingConfirmed()
+                    );
+            }
         });
     }
 

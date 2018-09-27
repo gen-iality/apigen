@@ -120,13 +120,19 @@ class EventUserController extends Controller
     }
 
     public function bookEventUsers(Request $request, Event $event)
-    {
+    {     Log::debug("agregando");
         try {
-
+            $data = $request->json()->all();
+            
+            
             $eventUsersIds = $data['eventUsersIds'];
-            $eventUsers = UserEventService::bookEventUsersToEvent($event, $eventUsersIds);
-            $response = new EventUserResource($eventUsers);
-            //$response->additional(['status' => $result->status, 'message' => $result->message]);
+            
+             $eventUsers = UserEventService::bookEventUsersToEvent($event, $eventUsersIds);
+            
+            //$response = EventUserResource::collection($eventUsers);
+            /* $response->additional(['status' => $result->status, 'message' => $result->message]);
+            */
+          $response = ["msg"=>"users booked ".count($eventUsers)];
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
@@ -234,8 +240,10 @@ class EventUserController extends Controller
      */
     public function update(Request $request, EventUser $eventUser)
     {
-        Log::debug("model created");
-        $data = $request->all();
+        
+        $data = $request->json()->all();
+        Log::debug("model to update".$eventUser->id);
+        Log::debug(json_encode($data));
         $eventUser->fill($data);
         $eventUser->save();
         return $eventUser;

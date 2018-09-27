@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class bookingConfirmed extends Mailable
+class BookingConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 

@@ -131,7 +131,7 @@ class UserEventService
      */
     public static function bookEventUsersToEvent(Event $event, $eventusersIds)
     {
-
+        Log::debug("agregando");
         $eventAttendees = [];
 
         //cargamos varios EventUser por UserId.
@@ -139,7 +139,7 @@ class UserEventService
         $eventUsers = EventUser::find($eventusersIds);
 
         foreach ($eventUsers as $eventUser) {
-
+            Log::debug("eventUser: ".$eventUser->id);
             if ($eventUser->event_id == $event->id) {
                 $newEventUser = $eventUser;
             } else {
