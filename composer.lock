@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13776cd1e454503ba50ec7e4020eb779",
+    "content-hash": "3581c7ce6ccc79a35ae393cc6131e703",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -714,12 +714,12 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/google/google-auth-library-php.git",
+                "url": "https://github.com/googleapis/google-auth-library-php.git",
                 "reference": "436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-auth-library-php/zipball/436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0",
                 "reference": "436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0",
                 "shasum": ""
             },
@@ -761,12 +761,12 @@
             "version": "v1.21.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/GoogleCloudPlatform/google-cloud-php-core.git",
+                "url": "https://github.com/googleapis/google-cloud-php-core.git",
                 "reference": "4dee63d2baf793d3798cc7e420004102a49b0a71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php-core/zipball/4dee63d2baf793d3798cc7e420004102a49b0a71",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/4dee63d2baf793d3798cc7e420004102a49b0a71",
                 "reference": "4dee63d2baf793d3798cc7e420004102a49b0a71",
                 "shasum": ""
             },
@@ -820,12 +820,12 @@
             "version": "v1.3.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/GoogleCloudPlatform/google-cloud-php-storage.git",
+                "url": "https://github.com/googleapis/google-cloud-php-storage.git",
                 "reference": "240de4b1d65fad78983d80ca78bed7b1facd6467"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php-storage/zipball/240de4b1d65fad78983d80ca78bed7b1facd6467",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/240de4b1d65fad78983d80ca78bed7b1facd6467",
                 "reference": "240de4b1d65fad78983d80ca78bed7b1facd6467",
                 "shasum": ""
             },
@@ -2854,6 +2854,62 @@
                 "uri"
             ],
             "time": "2017-06-14T03:57:53+00:00"
+        },
+        {
+            "name": "spatie/laravel-tail",
+            "version": "3.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-tail.git",
+                "reference": "a47d8b2b477bd687e1e1b69bc016231f6fe01c79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-tail/zipball/a47d8b2b477bd687e1e1b69bc016231f6fe01c79",
+                "reference": "a47d8b2b477bd687e1e1b69bc016231f6fe01c79",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
+                "php": "^7.0",
+                "symfony/process": "^3.3|^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Tail\\TailServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Tail\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://murze.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily tail the application log",
+            "homepage": "https://github.com/spatie/laravel-tail",
+            "keywords": [
+                "development",
+                "laravel",
+                "laravel-tail",
+                "log",
+                "tail"
+            ],
+            "time": "2018-08-20T21:21:50+00:00"
         },
         {
             "name": "superbalist/flysystem-google-storage",

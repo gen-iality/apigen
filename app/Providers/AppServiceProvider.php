@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Observers\EventUserObserver;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //use App\Observers\EventUserObserver;
+        Log::debug("definiendo observador");
+        \App\EventUser::observe(App\Observers\EventUserObserver::class);
+
+        \App\EventUser::saving(function ($model) {
+            Log::debug("saving afuera");
+        });
     }
 
     /**

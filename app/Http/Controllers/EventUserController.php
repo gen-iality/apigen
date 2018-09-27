@@ -11,6 +11,7 @@ use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 /**
@@ -53,6 +54,11 @@ class EventUserController extends Controller
      *
      * @return \Illuminate\Http\Response EventUserResource collection
      *
+     * PROBLEMA ORDENAMIENTO CON mayusculas
+     * Se tiene que crear las colecciones con collation por defecto insensitiva a mayusculas
+     * EJemplo: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
+     * https://docs.mongodb.com/manual/core/index-case-insensitive/
+     * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
      */
     public function index(Request $request, String $event_id)
     {
@@ -81,7 +87,7 @@ class EventUserController extends Controller
             if (strtolower($comparator) == "like") {
                 $condition->value = "%" . $condition->value . "%";
             }
-            
+
             $query->where($condition->id, $comparator, $condition->value);
         }
 
@@ -94,6 +100,17 @@ class EventUserController extends Controller
             $query->orderBy($order->id, $direccion);
 
         }
+
+        $users = $query->get();
+
+        $subset = $users->map(function ($user) {
+            return collect($user->toArray())
+                ->only(['properties'])
+                ->all();
+        });
+        
+
+        return $subset;
 
         return EventUserResource::collection(
             $query->paginate($pageSize)
@@ -215,10 +232,11 @@ class EventUserController extends Controller
      */
     public function update(Request $request, EventUser $eventUser)
     {
+        Log::debug("model created");
         $data = $request->all();
-        $id->fill($data);
-        $id->save();
-        return $data;
+        $eventUser->fill($data);
+        $eventUser->save();
+        return $eventUser;
     }
 
     /**
@@ -229,6 +247,7 @@ class EventUserController extends Controller
      */
     public function checkIn($id)
     {
+        Log::debug("model ");
         $eventUser = EventUser::find($id);
         return $eventUser->checkIn();
     }

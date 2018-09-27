@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\EventUser;
+use Illuminate\Support\Facades\Log;
 
 class EventUserObserver
 {
@@ -12,20 +13,24 @@ class EventUserObserver
      * @param  \App\EventUser  $eventUser
      * @return void
      */
-    public function created(EventUser $eventUser)
+    public function created( $eventUser)
     {
-        //
+        Log::debug("model created");
     }
 
+    public function saving($eventUser)
+    {
+        Log::debug("model saving");
+    }
     /**
      * Handle the event user "updated" event.
      *
      * @param  \App\EventUser  $eventUser
      * @return void
      */
-    public function updated(EventUser $eventUser)
+    public function updated( $eventUser)
     {
-        //
+        Log::debug("model updated");
     }
 
     /**
