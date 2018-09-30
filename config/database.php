@@ -40,7 +40,7 @@ return [
         ],
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', 'localhost'),
+            'host'     => env('DB_HOST', 'dev.mocionsoft.com'),
             'port'     => env('DB_PORT', 27017),
             'database' => env('DB_DATABASE', 'evius2'),
             'username' => env('DB_USERNAME', 'root'),

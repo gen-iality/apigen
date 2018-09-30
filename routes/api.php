@@ -30,6 +30,11 @@ Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUser/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
+//Category Public
+Route::get('category', 'CategoryController@index');
+Route::get('category/{id}', 'CategoryController@show');
+
+
 //Events
 
 //Public
