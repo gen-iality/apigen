@@ -38,9 +38,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-1. First install mongodb
-
-2. Then install MongoDB PHP Driver
+1. Then install MongoDB PHP Driver
 https://github.com/mongodb/mongo-php-driver
 
 installing MongoDB PHP Driver is somewhat involved:  
@@ -50,12 +48,19 @@ using pecl:
 * sudo apt-get install php7.x-dev
 * sudo apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev #this line is required if you  have authentication enabled in mongodb
 * sudo pecl install mongodb
+
+```
+please be careful that mongodb version should be superior than:
+version ^1.5.0
+```
+also avoid installing mongodb php driver using apt-get usually It installs the wrong version
+
 * You should add "extension=mongodb.so" to php.ini for web and cli versions
 * restart webServer
 
-3. composer install inside proyect folder
+2. composer install inside proyect folder
 
-4. generate encryption key
+3. generate encryption key
 
 ```
 php artisan key:generate
@@ -66,9 +71,7 @@ and store the key in .env file with APP_KEY name
 APP_KEY = ZqxYyhRadx1UNwPgdjXsmeG/MvBZO6ZR6PeUuCa6cAs=
 ```
 
-5. Make sure storage folder has right permissions for laravel to store stuff there.
-
-
+4. Make sure storage folder has right permissions for laravel to store stuff there.
 
 
 ## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
