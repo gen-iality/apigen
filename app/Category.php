@@ -13,16 +13,17 @@ use Moloquent;
 class Category extends Moloquent
 {
 
-    protected $with = ['event'];
+    //protected $with = ['event'];
 
+    //protected $table = 'category';
     /**
      * Category is owned by an event
      * @return void
      */
-    public function event()
+    /*public function event()
     {
         return $this->HasMany('App\Event');
-    }
+    }*/
 
     protected $fillable = [
         'name',

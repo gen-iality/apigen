@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
 use App\Category;
+use App\Event;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 use Storage;
-use Validator;
 
 /**
  * @resource Event
@@ -16,6 +15,13 @@ use Validator;
  */
 class CategoryController extends Controller
 {
+
+    /* por defecto el modelo es en singular y el nombre de la tabla en prural
+    //protected $table = 'categories';
+    $a = new Category();
+    var_dump($a->getTable());
+     */
+
     /**
      * Display a listing of the resource.
      *
@@ -24,16 +30,12 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
 
-        return Category::all();
-                
-        // CategoryResource::collection(
-        //     Category::paginate(12)
-        //     //EventUser::where("event_id", $event_id)->paginate(50)
-        // );
+        return CategoryResource::collection(
+            Category::paginate(config('app.page_size'))
+        );
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -60,7 +62,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
+
     /**
      * Display the specified resource.
      *

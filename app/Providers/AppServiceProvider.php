@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Log::debug("definiendo observador");
-        //\App\EventUser::observe(App\Observers\EventUserObserver::class);
+        \App\EventUser::observe(App\Observers\EventUserObserver::class);
 
         \App\EventUser::saved(function ($eventUser) {
             Log::debug("ejecutando observador saved eventUser");
