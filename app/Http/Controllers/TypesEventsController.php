@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
 use App\Http\Resources\TypesEventsResource;
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use App\EventType;
 use App\Event;
 use Storage;
@@ -27,7 +25,7 @@ class TypesEventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -49,7 +47,7 @@ class TypesEventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(EventType $id)
     {
         //
     }
@@ -83,8 +81,24 @@ class TypesEventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(EventType $id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(EventType $id)
+    {
+        $res = $id->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
     }
 }
