@@ -8,6 +8,7 @@ use App\Event;
 use App\Properties;
 use App\Http\Resources\EventResource;
 use App\User;
+use App\EventType;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
@@ -202,4 +203,5 @@ class EventController extends Controller
         $property = $event->userProperties()->create($request->all());
         return $property->toArray();
     }
+
 }

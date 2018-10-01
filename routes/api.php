@@ -18,6 +18,12 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::get('test/{id}', 'EventUserController@test');
 
+/**
+ * 
+ * 
+ */
+Route::get('eventType', 'TypesEventsController@index');
+
 
 
 //eventUser
