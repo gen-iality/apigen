@@ -17,7 +17,7 @@ return [
     'name' => env('APP_NAME', 'Evius'),
 
     'front_url' => 'https://eviusco.netlify.com',
-    'page_size' => '25',
+    'page_size' => 25,
     /*
     |--------------------------------------------------------------------------
     | Application Environment
