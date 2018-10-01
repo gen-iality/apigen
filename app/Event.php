@@ -35,6 +35,10 @@ class Event extends Moloquent
 
     protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'category' => 'array',
+    ];
+
     public function author()
     {
         return $this->belongsTo('App\User', 'author_id');
@@ -48,7 +52,7 @@ class Event extends Moloquent
 
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->belongsToMany('App\Category');
     }
 
     /**
