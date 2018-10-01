@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Resources\TypesEventsResource;
 namespace App\Http\Controllers;
+use App\Http\Resources\TypesEventsResource;
 use Illuminate\Http\Request;
 use App\EventType;
 use App\Event;
@@ -17,7 +17,7 @@ class TypesEventsController extends Controller
     public function index()
     {
         return TypesEventsResource::collection(
-            EventType::paginate(12));
+            EventType::paginate(config('app.page_size')));
     }
 
     /**
@@ -38,7 +38,25 @@ class TypesEventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->json()->all();
+        $result = new EventType($data);
+        $result->save();
+        return $result;
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(EventType $id)
+    {
+        $res = $id->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
     }
 
     /**
@@ -47,9 +65,13 @@ class TypesEventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EventType $id)
+    public function show(String $id)
     {
         //
+        $EventType = EventType::find($id);
+        TypesEventsResource::withoutWrapping();
+        $response = new TypesEventsResource($EventType);
+        return $response;
     }
 
     /**
@@ -70,9 +92,13 @@ class TypesEventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $EventType = EventType::find($id);
+        $EventType->fill($data);
+        $EventType->save();
+        return $data;
     }
 
     /**
@@ -84,21 +110,5 @@ class TypesEventsController extends Controller
     public function destroy(EventType $id)
     {
         //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(EventType $id)
-    {
-        $res = $id->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
     }
 }
