@@ -20,10 +20,10 @@ class Category extends Moloquent
      * Category is owned by an event
      * @return void
      */
-    /*public function event()
+    public function event()
     {
-        return $this->HasMany('App\Event');
-    }*/
+        return $this->belongsToMany('App\Event');
+    }
 
     protected $fillable = [
         'name',
