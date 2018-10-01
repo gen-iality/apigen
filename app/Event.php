@@ -15,7 +15,7 @@ class Event extends Moloquent
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
 
-    protected $with = ['userProperties', 'author', 'eventType'];
+    protected $with = ['userProperties', 'author','categories', 'eventType'];
 
     /**
      * Event is owned by an organization
@@ -30,10 +30,14 @@ class Event extends Moloquent
         'author', 'name', 'description', 'location', 'venue', 'pulep',
         'datetime_from', 'datetime_to',
         'date_start', 'date_end', 'time_start', 'time_end',
-        'visibility', 'picture', 'organization_id',
+        'visibility', 'picture', 'organization_id', 'category'
     ];
 
     protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'category' => 'array',
+    ];
 
     public function author()
     {
@@ -44,6 +48,11 @@ class Event extends Moloquent
     public function eventUsers()
     {
         return $this->hasMany('App\EventUser');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
     }
 
     /**
@@ -61,7 +70,7 @@ class Event extends Moloquent
      */
     public function messages()
     {
-        return $this->hasMany('App\Message');
+        return $this->belongsToMany('App\Message');
     }
 
     /**
