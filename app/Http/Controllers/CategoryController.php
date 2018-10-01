@@ -46,6 +46,21 @@ class CategoryController extends Controller
     {
         //
     }
+   /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data = $request->json()->all();
+        $result = new Category($data);
+        $result->save();
+
+        return $result;
+        
+    }
     public function delete(Category $id)
     {
         $res = $id->delete();
@@ -72,6 +87,7 @@ class CategoryController extends Controller
     public function show(String $id)
     {
         $category = Category::find($id);
+        return $category;
         CategoryResource::withoutWrapping();
         $response = new CategoryResource($category);
         return $response;
@@ -83,12 +99,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $id)
+    public function update(Request $request, string $id)
     {
         $data = $request->all();
-
-        $id->fill($data);
-        $id->save();
+        $category = Category::find($id);
+        $category->fill($data);
+        $category->save();
         return $data;
     }
 

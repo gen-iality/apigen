@@ -33,7 +33,11 @@ Route::post('eventUser/bookEventUsers/{event}', 'EventUserController@bookEventUs
 //Category Public
 Route::get('category', 'CategoryController@index');
 Route::get('category/{id}', 'CategoryController@show');
-
+//Middleware autentication
+Route::middleware('auth.firebase')->get('category/events/{id}', 'CategoryController@show');
+Route::middleware('auth.firebase')->post('category/events', 'CategoryController@store');
+Route::middleware('auth.firebase')->put('category/events/{id}', 'CategoryController@update');
+Route::middleware('auth.firebase')->delete('category/events/{id}', 'CategoryController@delete');
 
 //Events
 
