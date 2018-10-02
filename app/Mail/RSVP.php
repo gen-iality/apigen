@@ -11,7 +11,7 @@ use App\Event;
 use App\EventUser;
 use App\User;
 
-class RSVP extends Mailable
+class RSVP extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
