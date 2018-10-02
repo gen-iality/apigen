@@ -74,7 +74,7 @@ class Event extends Moloquent
      */
     public function messages()
     {
-        return $this->belongsToMany('App\Message');
+        return $this->hasMany('App\Message');
     }
 
     /**
