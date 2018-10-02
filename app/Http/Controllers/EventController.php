@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
-use App\Properties;
 use App\Http\Resources\EventResource;
+use App\Properties;
 use App\User;
 use Illuminate\Http\Request;
 use Storage;
@@ -45,29 +45,15 @@ class EventController extends Controller
     public function currentUserindex(Request $request)
     {
 
-        $userFire = $request->get('user');
+        $user = $request->get('user');
 
-        $user = User::where('uid', $userFire->email)->first();
-        //var_dump($user->id);
-        //var_dump($user->events());
         return EventResource::collection(
             Event::where('author_id', $user->id)
-                ->paginate(12)
-            //EventUser::where("event_id", $event_id)->paginate(50)
-        );        
+                ->paginate(config('app.page_size'))
+        );
 
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
     public function delete(Event $id)
     {
         $res = $id->delete();
@@ -86,6 +72,8 @@ class EventController extends Controller
      */
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
+        $user = $request->get('user');
+        
         $data = $request->json()->all();
 
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
@@ -107,9 +95,7 @@ class EventController extends Controller
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-        $userFire = $request->get('user');
-        $user     = User::where('uid', $userFire->uid)->first();
-        
+
         $result->author()->associate($user);
         $result->save();
 

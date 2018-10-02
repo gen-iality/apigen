@@ -46,9 +46,9 @@ class Event extends Moloquent
         return $this->hasMany('App\EventUser');
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Category');
+        return $this->hasMany('App\Category');
     }
 
     /**
