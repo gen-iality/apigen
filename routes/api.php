@@ -16,8 +16,20 @@ return $request->user();
 }); */
 Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail', 'TestingController@sendemail');
-Route::get('test/{id}', 'EventUserController@test');
+Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 
+/**
+ * This is the routes of event types
+ * You can find differents option how get, post, put, deleted
+ * 
+ */
+Route::get('typesEvent', 'TypesEventsController@index');
+Route::get('typesEvent/{id}', 'TypesEventsController@show');
+//Middleware autentication
+Route::middleware('auth.firebase')->get('typesEvent/events/{id}', 'TypesEventsController@show');
+Route::middleware('auth.firebase')->post('typesEvent/events', 'TypesEventsController@store');
+Route::middleware('auth.firebase')->put('typesEvent/events/{id}', 'TypesEventsController@update');
+Route::middleware('auth.firebase')->delete('typesEvent/events/{id}', 'TypesEventsController@delete');
 
 
 //eventUser

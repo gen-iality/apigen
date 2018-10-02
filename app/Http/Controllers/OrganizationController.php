@@ -17,7 +17,7 @@ class OrganizationController extends Controller
     public function index(Request $request)
     {
         //
-        return Organization::where('author', $request->get('user')->uid)->get();
+        return Organization::where('author', $request->get('user')->id)->get();
         //return Organization::all();
     }
 
@@ -41,9 +41,9 @@ class OrganizationController extends Controller
     {
         //
         $result = new Organization($request->all());
-        $result->author = $request->get('user')->uid;
+        $result->author = $request->get('user')->id;
         $result->save();
-        $RolService->createAuthorAsOrganizationAdmin($request->get('user')->uid, $result->_id);
+        $RolService->createAuthorAsOrganizationAdmin($request->get('user')->id, $result->_id);
         return $result;
     }
 

@@ -18,7 +18,7 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         //
-        return $request->get('user')->uid;
+        return $request->get('user')->id;
     }
 
     /**
@@ -89,7 +89,7 @@ class PermissionController extends Controller
 
     public function getUserPermissionByEvent(Request $request,$id){
         $rol = AttendeTicket::where('event_id', $id)
-                                    ->where('user_id', $request->get('user')->uid)->firstOrFail();
+                                    ->where('user_id', $request->get('user')->id)->firstOrFail();
         $permissions = Rol::find($rol->rol_id);
         return $permissions;
     }

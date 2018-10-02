@@ -1,40 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Category;
-use App\Event;
-use App\Http\Resources\CategoryResource;
+use App\Http\Resources\TypesEventsResource;
 use Illuminate\Http\Request;
+use App\EventType;
+use App\Event;
 use Storage;
 
-/**
- * @resource Event
- *
- *
- */
-class CategoryController extends Controller
+class TypesEventsController extends Controller
 {
-
-    /* por defecto el modelo es en singular y el nombre de la tabla en prural
-    //protected $table = 'categories';
-    $a = new Category();
-    var_dump($a->getTable());
-     */
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        return CategoryResource::collection(
-            Category::paginate(config('app.page_size'))
-        );
-
-        //$events = Event::where('visibility', $request->input('name'))->get();
+        return TypesEventsResource::collection(
+            EventType::paginate(config('app.page_size')));
     }
 
     /**
@@ -42,11 +25,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
-   /**
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -55,13 +39,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        $result = new Category($data);
+        $result = new EventType($data);
         $result->save();
-
         return $result;
-        
     }
-    public function delete(Category $id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(EventType $id)
     {
         $res = $id->delete();
         if ($res == true) {
@@ -72,48 +60,54 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
     {
-        $category = Category::find($id);
-        CategoryResource::withoutWrapping();
-        $response = new CategoryResource($category);
+        //
+        $EventType = EventType::find($id);
+        TypesEventsResource::withoutWrapping();
+        $response = new TypesEventsResource($EventType);
         return $response;
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, string $id)
     {
         $data = $request->all();
-        $category = Category::find($id);
-        $category->fill($data);
-        $category->save();
+        $EventType = EventType::find($id);
+        $EventType->fill($data);
+        $EventType->save();
         return $data;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Event  $event
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(EventType $id)
     {
         //
     }

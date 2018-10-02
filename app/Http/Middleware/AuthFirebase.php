@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App;
+use App\User;
 use Closure;
 use Firebase\Auth\Token\Verifier;
 use Illuminate\Http\Response;
@@ -41,9 +42,9 @@ class AuthFirebase
 
             //miramos si el token viene en una cookie
             /*if (isset($_COOKIE['evius_token'])) {
-                $firebaseToken = $_COOKIE['evius_token'];
+            $firebaseToken = $_COOKIE['evius_token'];
             } elseif (isset($_COOKIE['token'])) {
-                $firebaseToken = $_COOKIE['token'];
+            $firebaseToken = $_COOKIE['token'];
             }*/
 
             if (!$firebaseToken) {
@@ -53,14 +54,23 @@ class AuthFirebase
                         'message' => 'Error: No token provided',
                     ], Response::HTTP_NOT_FOUND
                 );
-
             }
 
             //Se verifica la valides del token
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             //Se obtiene la informacion del usuario
-            $user = $auth->getUser($verifiedIdToken->getClaim('sub'));
+            //Claim sub user_id
+            $user_auth = $auth->getUser($verifiedIdToken->getClaim('sub'));
+            $user = User::where('uid', '=', $user_auth->uid)->first();
+
+            if (!$user) {
+                var_dump("vamos a crearlo");
+                $user = User::create(get_object_vars($user_auth));
+                $user->save();
+            }
+
             $request->attributes->add(['user' => $user]);
+
             return $next($request);
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
             return response(

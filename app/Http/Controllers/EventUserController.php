@@ -36,11 +36,12 @@ use Validator;
 class EventUserController extends Controller
 {
 
-    public function test($id)
+    public function test(Request $request)
     {
-        $eventUser = EventUser::find($id);
-
-        return ["a" => $eventUser->getAttributes()];
+        var_dump($request->user);
+        //$eventUser = EventUser::find($id);
+        //$eventUser->getAttributes()
+        return ["a" => "a"];
     }
 
     /**

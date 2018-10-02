@@ -41,7 +41,7 @@ class RSVPController extends Controller
         //
         //return response()->json(Event::all());
         //return Event::all();
-        return RSVP::where('author', $request->get('user')->uid)->get();
+        return RSVP::where('author', $request->get('user')->id)->get();
     }
 
     /**
