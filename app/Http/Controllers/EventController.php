@@ -46,12 +46,7 @@ class EventController extends Controller
     public function currentUserindex(Request $request)
     {
 
-<<<<<<< HEAD
-        $userFire = $request->get('user');
-        // return $userFire;
-=======
         $user = $request->get('user');
->>>>>>> df6264e164002821741b6a69d71a51b12e274081
 
         return EventResource::collection(
             Event::where('author_id', $user->id)
