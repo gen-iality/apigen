@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OrganizationUser;
 use App\User;
+use App\Http\Resources\OrganizationUserResource;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -26,10 +27,13 @@ class OrganizationUserController extends Controller
             $temporal->state_id = $data->state;
             return $temporal;
         };
-        $evtUsers = OrganizationUser::where('organization_id', $id)->get();
-        $users = array_map($usersfilter, $evtUsers->all()); 
+        $evtUsers = OrganizationUserResource::collection(
+            OrganizationUser::where('organization_id', $id)
+            ->paginate(config('app.page_size'))
+        );
+            $users = array_map($usersfilter, $evtUsers->all()); 
     
-        return $users;
+        return $evtUsers;
         
     }
 
