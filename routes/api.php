@@ -18,6 +18,18 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 
+/**
+ * This is the routes of event types
+ * You can find differents option how get, post, put, deleted
+ * 
+ */
+Route::get('typesEvent', 'TypesEventsController@index');
+Route::get('typesEvent/{id}', 'TypesEventsController@show');
+//Middleware autentication
+Route::middleware('auth.firebase')->get('typesEvent/events/{id}', 'TypesEventsController@show');
+Route::middleware('auth.firebase')->post('typesEvent/events', 'TypesEventsController@store');
+Route::middleware('auth.firebase')->put('typesEvent/events/{id}', 'TypesEventsController@update');
+Route::middleware('auth.firebase')->delete('typesEvent/events/{id}', 'TypesEventsController@delete');
 
 
 //eventUser
@@ -33,7 +45,11 @@ Route::post('eventUser/bookEventUsers/{event}', 'EventUserController@bookEventUs
 //Category Public
 Route::get('category', 'CategoryController@index');
 Route::get('category/{id}', 'CategoryController@show');
-
+//Middleware autentication
+Route::middleware('auth.firebase')->get('category/events/{id}', 'CategoryController@show');
+Route::middleware('auth.firebase')->post('category/events', 'CategoryController@store');
+Route::middleware('auth.firebase')->put('category/events/{id}', 'CategoryController@update');
+Route::middleware('auth.firebase')->delete('category/events/{id}', 'CategoryController@delete');
 
 //Events
 

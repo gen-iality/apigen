@@ -8,6 +8,7 @@ use App\Event;
 use App\Http\Resources\EventResource;
 use App\Properties;
 use App\User;
+use App\Category;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
@@ -96,8 +97,18 @@ class EventController extends Controller
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
 
+<<<<<<< HEAD
+=======
+        
+        $userFire = $request->get('user');
+        $user     = User::where('uid', $userFire->uid)->first();
+        
+>>>>>>> 38845eb2cbac1df304e16165200bd5b98d33990f
         $result->author()->associate($user);
         $result->save();
+
+        if ( isset($data['category_ids'])) 
+        $result->categories()->sync($data['category_ids']);
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
@@ -144,17 +155,23 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
+     * 
+     * How was images upload before
+     * 
+     * @debug post $entityBody = file_get_contents('php://input');
+     * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      */
-    public function update(Request $request, Event $id, GoogleFiles $gfService)
+    public function update(Request $request, string $id, GoogleFiles $gfService)
     {
         $data = $request->all();
-        //@debug post $entityBody = file_get_contents('php://input');
+        $event = Event::find($id);
 
-        //$data['picture'] =  $gfService->storeFile($request->file('picture'));
+        if ( isset($data['category_ids'])) 
+        $event->categories()->sync($data['category_ids']);
 
-        $id->fill($data);
-        $id->save();
-        return $data;
+        $event->fill($data);    
+        $event->save();
+        return $event;
     }
 
     /**
