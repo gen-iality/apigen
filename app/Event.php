@@ -52,11 +52,7 @@ class Event extends Moloquent
 
     public function categories()
     {
-<<<<<<< HEAD
-        return $this->hasMany('App\Category');
-=======
         return $this->belongsToMany('App\Category');
->>>>>>> 38845eb2cbac1df304e16165200bd5b98d33990f
     }
 
     /**
