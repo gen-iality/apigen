@@ -97,13 +97,6 @@ class EventController extends Controller
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
 
-<<<<<<< HEAD
-=======
-        
-        $userFire = $request->get('user');
-        $user     = User::where('uid', $userFire->uid)->first();
-        
->>>>>>> 38845eb2cbac1df304e16165200bd5b98d33990f
         $result->author()->associate($user);
         $result->save();
 
