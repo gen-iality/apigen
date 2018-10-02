@@ -47,6 +47,7 @@ class EventController extends Controller
     {
 
         $userFire = $request->get('user');
+        // return $userFire;
 
         $user = User::where('uid', $userFire->email)->first();
         //var_dump($user->id);
