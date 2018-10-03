@@ -203,7 +203,7 @@ class EventUserController extends Controller
     public function store(Request $request)
     {
         EventUserResource::withoutWrapping();
-        $eventUser = EventUser::create($request->all());
+        $eventUser = EventUser::create($request->json()->all());
         return new EventUserResource($eventUser);
     }
 

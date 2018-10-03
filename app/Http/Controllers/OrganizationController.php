@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Organization;
-use App\OrganizationUser;
-use Illuminate\Http\Request;
 use App\evaLib\Services\EvaRol;
+use App\Http\Resources\OrganizationResource;
+use App\Organization;
+use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
@@ -16,19 +16,11 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        return Organization::where('author', $request->get('user')->id)->get();
+        return OrganizationResource::collection(
+            Organization::where('author', $request->get('user')->id)
+                ->paginate(config('app.page_size'))
+        );
         //return Organization::all();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -39,11 +31,16 @@ class OrganizationController extends Controller
      */
     public function store(Request $request, EvaRol $RolService)
     {
-        //
-        $result = new Organization($request->all());
+        $data = $request->json()->all();
+        $result = new Organization($data);
         $result->author = $request->get('user')->id;
         $result->save();
         $RolService->createAuthorAsOrganizationAdmin($request->get('user')->id, $result->_id);
+
+        if (isset($data['category_ids'])) {
+            $result->categories()->sync($data['category_ids']);
+        }
+
         return $result;
     }
 
@@ -60,30 +57,24 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Organization  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Organization $organization)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organization $id)
+    public function update(Request $request, Organization $org)
     {
         //
-        $data = $request->all();
-        $id->fill($data);
-        $id->save();
-        return $id;
+        $data = $request->json()->all();
+        $org->fill($data);
+        $org->save();
+
+        if (isset($data['category_ids'])) {
+            $org->categories()->sync($data['category_ids']);
+        }
+
+        return $org;
     }
 
     /**

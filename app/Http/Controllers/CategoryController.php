@@ -100,7 +100,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->json()->all();
         $category = Category::find($id);
         $category->fill($data);
         $category->save();

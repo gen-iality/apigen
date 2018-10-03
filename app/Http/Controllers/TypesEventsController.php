@@ -94,7 +94,7 @@ class TypesEventsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->json()->all();
         $EventType = EventType::find($id);
         $EventType->fill($data);
         $EventType->save();

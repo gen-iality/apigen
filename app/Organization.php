@@ -8,5 +8,10 @@ use Moloquent;
 class Organization extends Moloquent
 {
     //
-    protected $fillable = [ 'name', 'country', 'city', 'address', 'nit', 'phone', 'documents', 'description', 'author'];
+    protected $fillable = [ 'name', 'country', 'city', 'image','address', 'nit', 'phone', 'documents', 'description', 'author'];
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
+    }  
 }
