@@ -122,7 +122,7 @@ class RSVPController extends Controller
      */
     public function store(Request $request)
     {
-        $messageUser = MessageUser::create($request->all());
+        $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
     }
 

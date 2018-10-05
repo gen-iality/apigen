@@ -56,7 +56,7 @@ class OrganizationUserController extends Controller
     public function store(Request $request)
     {
         //
-        $result = new OrganizationUser($request->all());
+        $result = new OrganizationUser($request->json()->all());
         $result->save();
         return $result;
     }
@@ -75,7 +75,7 @@ class OrganizationUserController extends Controller
             $userData = $auth->getUserByEmail($request->email);
             
             if($userData->uid){
-                $result = new OrganizationUser($request->all());
+                $result = new OrganizationUser($request->json()->all());
                 $result->userid = $userData->uid;
                 $result->organization_id = $id;
                 $result->save();
@@ -121,7 +121,7 @@ class OrganizationUserController extends Controller
     public function update(Request $request, OrganizationUser $id)
     {
         //
-        $data = $request->all();
+        $data = $request->json()->all();
         $id->fill($data);
         $id->save();
         return $id;

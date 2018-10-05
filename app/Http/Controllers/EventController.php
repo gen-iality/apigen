@@ -31,7 +31,7 @@ class EventController extends Controller
         return EventResource::collection(
             Event::where('visibility', '<>', '') //not null
                 ->orWhere('visibility', 'IS NULL', null, 'and') //null
-                ->paginate(12)
+                ->paginate(config('app.page_size'))
             //EventUser::where("event_id", $event_id)->paginate(50)
         );
 
@@ -117,21 +117,9 @@ class EventController extends Controller
     public function show(String $id)
     {
         $event = Event::find($id);
-        EventResource::withoutWrapping();
-        $response = new EventResource($event);
-        return $response;
+        return new EventResource($event);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
     /**
      * Simply testing service providers
      *
@@ -156,7 +144,7 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
-        $data = $request->all();
+        $data = $request->json()->all();
         $event = Event::find($id);
 
         if ( isset($data['category_ids'])) 
@@ -164,7 +152,7 @@ class EventController extends Controller
 
         $event->fill($data);    
         $event->save();
-        return $event;
+        return  new EventResource($event);
     }
 
     /**
@@ -195,7 +183,7 @@ class EventController extends Controller
     public function addUserProperty(Request $request, $event_id)
     {
         $event = Event::find($event_id);
-        $property = $event->userProperties()->create($request->all());
+        $property = $event->userProperties()->create($request->json()->all());
         return $property->toArray();
     }
 }

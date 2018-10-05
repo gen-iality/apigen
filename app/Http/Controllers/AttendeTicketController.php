@@ -26,7 +26,7 @@ class AttendeTicketController extends Controller
     public function create()
     {
         //
-        $result = new AttendeTicket($request->all());
+        $result = new AttendeTicket($request->json()->all());
         $result->save();
         return $result;
     }
@@ -75,7 +75,7 @@ class AttendeTicketController extends Controller
     public function update(Request $request, AttendeTicket $id)
     {
         //
-        $data = $request->all();
+        $data = $request->json()->all();
         $id->fill($data);
         $id->save();
         return $id;

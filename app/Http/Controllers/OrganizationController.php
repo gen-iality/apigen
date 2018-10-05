@@ -2,13 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Organization;
-use App\OrganizationUser;
-use Illuminate\Http\Request;
 use App\evaLib\Services\EvaRol;
+use App\Http\Resources\OrganizationResource;
+use App\Organization;
+use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function meOrganizations(Request $request)
+    {
+        return OrganizationResource::collection(
+            Organization::where('author', $request->get('user')->id)
+                ->paginate(config('app.page_size'))
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,19 +33,9 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        return Organization::where('author', $request->get('user')->id)->get();
-        //return Organization::all();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return OrganizationResource::collection(
+            Organization::paginate(config('app.page_size'))
+        );
     }
 
     /**
@@ -39,13 +46,19 @@ class OrganizationController extends Controller
      */
     public function store(Request $request, EvaRol $RolService)
     {
-        //
-        $result = new Organization($request->all());
+        $data = $request->json()->all();
+        $result = new Organization($data);
         $result->author = $request->get('user')->id;
         $result->save();
         $RolService->createAuthorAsOrganizationAdmin($request->get('user')->id, $result->_id);
-        return $result;
+
+        if (isset($data['category_ids'])) {
+            $result->categories()->sync($data['category_ids']);
+        }
+
+        return new OrganizationResource($result);
     }
+
 
     /**
      * Display the specified resource.
@@ -53,21 +66,10 @@ class OrganizationController extends Controller
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function show(Organization $id)
+    public function show($id)
     {
-        //
-        return $id;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Organization  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Organization $organization)
-    {
-        //
+        $organization = Organization::findOrFail($id);
+        return new OrganizationResource($organization);
     }
 
     /**
@@ -77,13 +79,17 @@ class OrganizationController extends Controller
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organization $id)
+    public function update(Request $request, $organization_id)
     {
-        //
-        $data = $request->all();
-        $id->fill($data);
-        $id->save();
-        return $id;
+        $organization = Organization::findOrFail($organization_id);
+        $data = $request->json()->all();
+        $org->fill($data);
+        $org->save();
+
+        if (isset($data['category_ids'])) {
+            $org->categories()->sync($data['category_ids']);
+        }
+        return new OrganizationResource($org);
     }
 
     /**
@@ -96,4 +102,7 @@ class OrganizationController extends Controller
     {
         //
     }
+
+
+    
 }
