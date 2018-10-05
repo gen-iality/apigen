@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,7 +43,6 @@ Route::group(
         //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
     }
 );
-
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
@@ -125,6 +123,7 @@ Route::get('event/{event_id}/rsvp', 'MessageController@indexEvent');
 Route::post("files/upload/{field_name?}", "FilesController@upload");
 
 //Rol EndPoint
+/*
 Route::middleware('cors')->get('rols', 'RolController@index');
 Route::middleware('cors')->post('rols', 'RolController@store');
 Route::middleware('cors')->put('rols/{id}', 'RolController@update');
@@ -135,3 +134,4 @@ Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show');
+*/
