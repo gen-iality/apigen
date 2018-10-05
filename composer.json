@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "cweagans/composer-patches": "~1.0",
         "fideloper/proxy": "^4.0",
         "jenssegers/mongodb": "^3.4",
         "kreait/firebase-php": "^4.6",
@@ -40,6 +41,12 @@
         }
     },
     "extra": {
+        "enable-patching": true,
+        "patches": {
+            "webup/laravel-sendinblue": {
+                "Add event providerSendEmail into SendinBlueTransport": "patches/add-event-in-sendinblue.patch"  
+            }    
+        },
         "laravel": {
             "dont-discover": [
             ]

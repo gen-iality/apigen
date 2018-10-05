@@ -12,21 +12,25 @@ class TestingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendemail()
+    public function sendemail(string $id)
     {
-        $email = "juan.lopez@mocionsoftxxxx.com.co";
-        Mail::to($email)
-            ->send(
-                new BookingConfirmed("QQQUUU"), ["a", "a"], ["b", "b"]
-            );
-        return "ok";
+        // $data = $request->json()->all();
+        // $event_id = $id;
+        // $event = Event::find($event_id);
+        // $eventuser = $event->eventUsers()->first();
+        // $eventuser->email = "cesar.torres@mocionsoft.com";
+        // $email = "cesar.torres@mocionsoft.com";
+        // $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        // $message = "mensaje";
+        // $subject = "[Invitación Máxim] kraken en Colombia";
+
+        // Mail::to($email)
+        //     ->send(
+        //         new BookingConfirmed($event, $eventUser, $image, $subject)
+        //     );
+        // return "ok";
         /*
-    $event = Event::find("5b4f491cc065860378680a24");
-    $eventuser = $event->eventUsers()->first();
-    $eventuser->email = "juan.lopez@mocionsoft.com";
-    $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-    $message = "mensaje";
-    $subject = "[Invitación Máxim] kraken en Colombia";
+    
 
     // var_dump($mail->build());
     Mail::to('juan.lopez@mocionsoft.com')
