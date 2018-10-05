@@ -117,9 +117,7 @@ class EventController extends Controller
     public function show(String $id)
     {
         $event = Event::find($id);
-        Event
-        $response = new EventResource($event);
-        return $response;
+        return new EventResource($event);
     }
 
     /**
@@ -154,7 +152,7 @@ class EventController extends Controller
 
         $event->fill($data);    
         $event->save();
-        return $event;
+        return  new EventResource($event);
     }
 
     /**

@@ -62,9 +62,9 @@ class MessageUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MessageUser $messageUser)
+    public function show($id)
     {
-        MessageUser
+        $messageUser = MessageUser::findOrFail($id);
         return new MessageUserResource($messageUser);
     }
 

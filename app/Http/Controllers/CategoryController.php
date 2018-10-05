@@ -87,7 +87,6 @@ class CategoryController extends Controller
     public function show(String $id)
     {
         $category = Category::find($id);
-        Category
         $response = new CategoryResource($category);
         return $response;
     }

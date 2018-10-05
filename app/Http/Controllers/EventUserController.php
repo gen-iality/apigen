@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Validator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * @resource EventUser (Attendee)
@@ -32,16 +31,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
  *
-        
-        $usersfilter = function ($data) {
-        $temporal = $data;
-        $temporal->user = User::where('uid', $data->userid)->first();
-        $temporal->state_id = $data->state;
-        $temporal->rol_id = $data->rol;
 
-        return $temporal;
-        };
-        
+$usersfilter = function ($data) {
+$temporal = $data;
+$temporal->user = User::where('uid', $data->userid)->first();
+$temporal->state_id = $data->state;
+$temporal->rol_id = $data->rol;
+
+return $temporal;
+};
+
  */
 class EventUserController extends Controller
 {
@@ -185,13 +184,12 @@ class EventUserController extends Controller
         return $response;
     }
 
-
     public function index(Request $request)
-    {   
+    {
         return EventUserResource::collection(
             EventUser::paginate(config('app.page_size'))
         );
-    }    
+    }
 
     /**
      * __Store:__ Store a newly EventUser  in storage.
@@ -201,7 +199,6 @@ class EventUserController extends Controller
      */
     public function store(Request $request)
     {
-        EventUser
         $eventUser = EventUser::create($request->json()->all());
         return new EventUserResource($eventUser);
     }
@@ -242,7 +239,6 @@ class EventUserController extends Controller
      */
     public function checkIn($id)
     {
-        Log::debug("model ");
         $eventUser = EventUser::find($id);
         return $eventUser->checkIn();
     }
