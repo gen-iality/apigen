@@ -25,52 +25,22 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
  */
 Route::get('typesEvent', 'TypesEventsController@index');
 Route::get('typesEvent/{id}', 'TypesEventsController@show');
-
 //Middleware autentication
 Route::middleware('auth.firebase')->get('typesEvent/events/{id}', 'TypesEventsController@show');
 Route::middleware('auth.firebase')->post('typesEvent/events', 'TypesEventsController@store');
 Route::middleware('auth.firebase')->put('typesEvent/events/{id}', 'TypesEventsController@update');
 Route::middleware('auth.firebase')->delete('typesEvent/events/{id}', 'TypesEventsController@delete');
 
-/* EXAMPLE OF ROUTES PER MODEL
-Verb	    URI	                    Action	Route Name
-GET	        /photos	                index	photos.index
-POST	    /photos	                store	photos.store
-GET	        /photos/{photo}	        show	photos.show
-PUT/PATCH	/photos/{photo}	        update	photos.update
-DELETE	    /photos/{photo}	        destroy	photos.destroy
-*/
 
 //eventUser
-//remover esta ruta
-Route::get('eventUser/event/{event_id}', 'EventUserController@indexByEvent');
-
-Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::apiResource('eventUser', 'EventUserController');
-Route::apiResource('eventUsers', 'EventUserController');
-
-/*
-Route::get('eventUser',         'EventUserController@index');
+Route::get('eventUser/event/{event_id}', 'EventUserController@index');
+Route::get('eventUser/{id}',     'EventUserController@show');
 Route::post('eventUser',        'EventUserController@store');
-Route::get('eventUser/{id}',    'EventUserController@show');
 Route::put('eventUser/{id}',    'EventUserController@update');
 Route::delete('eventUser/{id}', 'EventUserController@destroy');
-*/
-
-
-
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
-Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-
-
-
-Route::apiResources([
-    'photos' => 'PhotoController',
-    'posts' => 'PostController'
-]);
-
-
+Route::put('eventUser/{id}/checkin', 'EventUserController@checkIn');
+Route::post('eventUser/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
+Route::post('eventUser/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 //Category Public
 Route::get('category', 'CategoryController@index');
@@ -98,7 +68,6 @@ Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@
 
 //User Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
-
 Route::middleware('auth.firebase')->get('user/organizations', 'OrganizationController@index');
 Route::middleware('auth.firebase')->post('user/organizations', 'OrganizationController@store');
 Route::middleware('auth.firebase')->put('user/organizations/{id}', 'OrganizationController@update');

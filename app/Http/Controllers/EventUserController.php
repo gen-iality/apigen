@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * @resource EventUser (Attendee)
@@ -31,18 +32,19 @@ use Validator;
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
  *
- *
+        
+        $usersfilter = function ($data) {
+        $temporal = $data;
+        $temporal->user = User::where('uid', $data->userid)->first();
+        $temporal->state_id = $data->state;
+        $temporal->rol_id = $data->rol;
+
+        return $temporal;
+        };
+        
  */
 class EventUserController extends Controller
 {
-
-    public function test(Request $request)
-    {
-        var_dump($request->user);
-        //$eventUser = EventUser::find($id);
-        //$eventUser->getAttributes()
-        return ["a" => "a"];
-    }
 
     /**
      * __index:__ Display all the EventUsers of an event
@@ -61,13 +63,13 @@ class EventUserController extends Controller
      * https://docs.mongodb.com/manual/core/index-case-insensitive/
      * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
      */
-    public function index(Request $request, String $event_id)
+    public function indexByEvent(Request $request, String $event_id)
     {
         $query = EventUser::where("event_id", $event_id);
 
         //páginacion pordefecto
         $pageSize = (int) $request->input('pageSize');
-        $pageSize = ($pageSize) ? $pageSize : 25;
+        $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
 
         $filteredBy = json_decode($request->input('filtered'));
         $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
@@ -105,35 +107,24 @@ class EventUserController extends Controller
 
         }
 
-        /* Test to select only few columns
-        $users = $query->get();
-        $subset = $users->map(function ($user) {
-            return collect($user->toArray())
-                ->only(['properties'])
-                ->all();
-        });
-
-        return $subset;*/
-
         return EventUserResource::collection(
             $query->paginate($pageSize)
         );
     }
 
     public function bookEventUsers(Request $request, Event $event)
-    {     Log::debug("agregando");
+    {
         try {
             $data = $request->json()->all();
-            
-            
+
             $eventUsersIds = $data['eventUsersIds'];
-            
-             $eventUsers = UserEventService::bookEventUsersToEvent($event, $eventUsersIds);
-            
+
+            $eventUsers = UserEventService::bookEventUsersToEvent($event, $eventUsersIds);
+
             //$response = EventUserResource::collection($eventUsers);
             /* $response->additional(['status' => $result->status, 'message' => $result->message]);
-            */
-          $response = ["msg"=>"users booked ".count($eventUsers)];
+             */
+            $response = ["msg" => "users booked " . count($eventUsers)];
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
@@ -194,6 +185,14 @@ class EventUserController extends Controller
         return $response;
     }
 
+
+    public function index(Request $request)
+    {   
+        return EventUserResource::collection(
+            EventUser::paginate(config('app.page_size'))
+        );
+    }    
+
     /**
      * __Store:__ Store a newly EventUser  in storage.
      *
@@ -202,7 +201,7 @@ class EventUserController extends Controller
      */
     public function store(Request $request)
     {
-        EventUserResource::withoutWrapping();
+        EventUser
         $eventUser = EventUser::create($request->json()->all());
         return new EventUserResource($eventUser);
     }
@@ -215,21 +214,8 @@ class EventUserController extends Controller
      */
     public function show($id)
     {
-        /*
-        $usersfilter = function ($data) {
-        $temporal = $data;
-        $temporal->user = User::where('uid', $data->userid)->first();
-        $temporal->state_id = $data->state;
-        $temporal->rol_id = $data->rol;
-
-        return $temporal;
-        };
-         */
-
-        $eventUser = EventUser::find($id);
-
-        $response = new EventUserResource($eventUser);
-        return $response;
+        $eventUser = EventUser::findOrFail($id);
+        return new EventUserResource($eventUser);
     }
 
     /**
@@ -241,10 +227,8 @@ class EventUserController extends Controller
      */
     public function update(Request $request, EventUser $eventUser)
     {
-        
+
         $data = $request->json()->all();
-        Log::debug("model to update".$eventUser->id);
-        Log::debug(json_encode($data));
         $eventUser->fill($data);
         $eventUser->save();
         return $eventUser;

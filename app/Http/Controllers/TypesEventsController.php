@@ -69,7 +69,7 @@ class TypesEventsController extends Controller
     {
         //
         $EventType = EventType::find($id);
-        TypesEventsResource::withoutWrapping();
+        TypesEvents
         $response = new TypesEventsResource($EventType);
         return $response;
     }

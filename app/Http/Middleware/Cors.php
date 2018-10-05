@@ -10,7 +10,6 @@ class Cors
     {
         $originURL = "http://dev.mocionsoft.com:3000";
         //$originURL = "http://localhost";
-
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             $originURL = $_SERVER['HTTP_ORIGIN'];
 
@@ -26,9 +25,8 @@ class Cors
             ->header('Vary', 'origin')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
             ->header('Access-Control-Allow-Credentials', 'true')
-            ->header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN")
-            //to force API validation to always return JSON and not some fucking redirect for webpages
-            ->header("Accept", "application/json");
+            ->header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN");
+        
     }
 
 }

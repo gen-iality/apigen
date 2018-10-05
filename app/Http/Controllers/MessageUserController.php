@@ -64,7 +64,7 @@ class MessageUserController extends Controller
      */
     public function show(MessageUser $messageUser)
     {
-        MessageUserResource::withoutWrapping();
+        MessageUser
         return new MessageUserResource($messageUser);
     }
 

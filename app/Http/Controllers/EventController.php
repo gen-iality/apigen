@@ -117,7 +117,7 @@ class EventController extends Controller
     public function show(String $id)
     {
         $event = Event::find($id);
-        EventResource::withoutWrapping();
+        Event
         $response = new EventResource($event);
         return $response;
     }
