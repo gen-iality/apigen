@@ -74,7 +74,7 @@ Route::middleware('auth.firebase')->put('user/organizations/{id}', 'Organization
 Route::middleware('auth.firebase')->get('user/organizations/{id}', 'OrganizationController@show');
 Route::middleware('auth.firebase')->get('user/organization_users/{id}', 'OrganizationUserController@index');
 
-Route::get('user/event_users/{id}', 'EventUserController@index');
+
 
 //Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 

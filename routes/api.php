@@ -11,6 +11,43 @@
 |
  */
 
+/* EXAMPLE OF ROUTES PER MODEL
+Verb        URI                        Action    Route Name
+GET            /photos                    index    photos.index
+POST           /photos                    store    photos.store
+GET            /photos/{photo}            show    photos.show
+PUT/PATCH      /photos/{photo}            update    photos.update
+DELETE         /photos/{photo}            destroy    photos.destroy
+ */
+
+/****************
+ * eventUses
+ ****************/
+Route::apiResource('eventUsers', 'EventUserController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('eventUsers', 'EventUserController', ['except' => ['index', 'show']]);
+        //Route::get('me/events', 'OrganizationController@meOrganizations');
+        Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
+    }
+);
+
+/****************
+ * organizations
+ ****************/
+Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
+        Route::get('me/organizations', 'OrganizationController@meOrganizations');
+        //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
+        //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
+    }
+);
+
+
+/* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
+
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
 return $request->user();
 }); */
@@ -21,7 +58,7 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 /**
  * This is the routes of event types
  * You can find differents option how get, post, put, deleted
- * 
+ *
  */
 Route::get('typesEvent', 'TypesEventsController@index');
 Route::get('typesEvent/{id}', 'TypesEventsController@show');
@@ -32,45 +69,9 @@ Route::middleware('auth.firebase')->post('typesEvent/events', 'TypesEventsContro
 Route::middleware('auth.firebase')->put('typesEvent/events/{id}', 'TypesEventsController@update');
 Route::middleware('auth.firebase')->delete('typesEvent/events/{id}', 'TypesEventsController@delete');
 
-/* EXAMPLE OF ROUTES PER MODEL
-Verb	    URI	                    Action	Route Name
-GET	        /photos	                index	photos.index
-POST	    /photos	                store	photos.store
-GET	        /photos/{photo}	        show	photos.show
-PUT/PATCH	/photos/{photo}	        update	photos.update
-DELETE	    /photos/{photo}	        destroy	photos.destroy
-*/
-
-//eventUser
-//remover esta ruta
-Route::get('eventUser/event/{event_id}', 'EventUserController@indexByEvent');
-
-Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::apiResource('eventUser', 'EventUserController');
-Route::apiResource('eventUsers', 'EventUserController');
-
-/*
-Route::get('eventUser',         'EventUserController@index');
-Route::post('eventUser',        'EventUserController@store');
-Route::get('eventUser/{id}',    'EventUserController@show');
-Route::put('eventUser/{id}',    'EventUserController@update');
-Route::delete('eventUser/{id}', 'EventUserController@destroy');
-*/
-
-
-
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-
-
-
-Route::apiResources([
-    'photos' => 'PhotoController',
-    'posts' => 'PostController'
-]);
-
-
 
 //Category Public
 Route::get('category', 'CategoryController@index');
@@ -98,35 +99,22 @@ Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@
 
 //User Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
-
-Route::middleware('auth.firebase')->get('user/organizations', 'OrganizationController@index');
-Route::middleware('auth.firebase')->post('user/organizations', 'OrganizationController@store');
-Route::middleware('auth.firebase')->put('user/organizations/{id}', 'OrganizationController@update');
-Route::middleware('auth.firebase')->get('user/organizations/{id}', 'OrganizationController@show');
-Route::middleware('auth.firebase')->get('user/organization_users/{id}', 'OrganizationUserController@index');
-
-Route::get('user/event_users/{id}', 'EventUserController@index');
-
 //Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
-
 //Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
-Route::middleware('auth.firebase')->post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
 
 Route::middleware('auth.firebase')->get('rols', 'RolController@index');
 Route::get('states', 'StateController@index');
-
 
 // Route::get('event/messages', 'MessageController@message');
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
-Route::get( 'rsvp/test', 'RSVPController@test');
-Route::get( 'rsvp/{id}', 'MessageController@show');
+Route::get('rsvp/test', 'RSVPController@test');
+Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
-Route::get( 'rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 
-Route::get( 'event/{event_id}/rsvp', 'MessageController@indexEvent');
-
+Route::get('event/{event_id}/rsvp', 'MessageController@indexEvent');
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
@@ -135,20 +123,6 @@ Route::get( 'event/{event_id}/rsvp', 'MessageController@indexEvent');
 
 //MISC Controllers
 Route::post("files/upload/{field_name?}", "FilesController@upload");
-
-//Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
-
-//Organization EndPoint
-/* Route::middleware('cors')->get('organizations', 'OrganizationController@index');
-Route::middleware('cors')->post('organizations', 'OrganizationController@store');
-Route::middleware('cors')->put('organizations/{id}', 'OrganizationController@update');
-Route::middleware('cors')->get('organizations/{id}', 'OrganizationController@show');
-
-//OrganizationUser EndPoint
-Route::middleware('cors')->get('organization_users', 'OrganizationUserController@index');
-Route::middleware('cors')->post('organization_users', 'OrganizationUserController@store');
-Route::middleware('cors')->put('organization_users/{id}', 'OrganizationUserController@update');
-Route::middleware('cors')->get('organization_users/{id}', 'OrganizationUserController@show');
 
 //Rol EndPoint
 Route::middleware('cors')->get('rols', 'RolController@index');
@@ -160,6 +134,4 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index');
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
-Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show'); */
-
-
+Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show');

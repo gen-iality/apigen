@@ -9,6 +9,23 @@ use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function meOrganizations(Request $request)
+    {
+        return OrganizationResource::collection(
+            Organization::where('author', $request->get('user')->id)
+                ->paginate(config('app.page_size'))
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +34,8 @@ class OrganizationController extends Controller
     public function index(Request $request)
     {
         return OrganizationResource::collection(
-            Organization::where('author', $request->get('user')->id)
-                ->paginate(config('app.page_size'))
+            Organization::paginate(config('app.page_size'))
         );
-        //return Organization::all();
     }
 
     /**
@@ -41,8 +56,9 @@ class OrganizationController extends Controller
             $result->categories()->sync($data['category_ids']);
         }
 
-        return $result;
+        return new OrganizationResource($result);
     }
+
 
     /**
      * Display the specified resource.
@@ -50,10 +66,10 @@ class OrganizationController extends Controller
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function show(Organization $id)
+    public function show($id)
     {
-        //
-        return $id;
+        $organization = Organization::findOrFail($id);
+        return new OrganizationResource($organization);
     }
 
     /**
@@ -63,9 +79,9 @@ class OrganizationController extends Controller
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organization $org)
+    public function update(Request $request, $organization_id)
     {
-        //
+        $organization = Organization::findOrFail($organization_id);
         $data = $request->json()->all();
         $org->fill($data);
         $org->save();
@@ -73,8 +89,7 @@ class OrganizationController extends Controller
         if (isset($data['category_ids'])) {
             $org->categories()->sync($data['category_ids']);
         }
-
-        return $org;
+        return new OrganizationResource($org);
     }
 
     /**
@@ -87,4 +102,7 @@ class OrganizationController extends Controller
     {
         //
     }
+
+
+    
 }
