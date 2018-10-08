@@ -20,7 +20,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
 /****************
- * eventUses
+ * eventUsers
  ****************/
 Route::apiResource('eventUsers', 'EventUserController', ['only' => ['index', 'show']]);
 Route::group(
@@ -41,6 +41,21 @@ Route::group(
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
         //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
+    }
+);
+
+/****************
+ * events
+ ****************/
+Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
+        Route::get('me/events', 'EventController@currentUserindex');
+
+        //this routes should be erased after front migration
+        Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
+        Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
     }
 );
 
@@ -81,17 +96,6 @@ Route::middleware('auth.firebase')->put('category/events/{id}', 'CategoryControl
 Route::middleware('auth.firebase')->delete('category/events/{id}', 'CategoryController@delete');
 
 //Events
-
-//Public
-Route::get('events', 'EventController@index');
-Route::get('events/{id}', 'EventController@show');
-
-Route::put('event/{id}', 'EventController@update');
-Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
-Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
-Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
-Route::middleware('auth.firebase')->put('user/events/{id}', 'EventController@update');
-Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@delete');
 
 //Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
@@ -134,4 +138,4 @@ Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show');
-*/
+ */

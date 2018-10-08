@@ -6,9 +6,9 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Http\Resources\EventResource;
+use App\Organization;
 use App\Properties;
 use App\User;
-use App\Category;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
@@ -66,7 +66,11 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created event resource in storage.
+     *
+     * there is a special event relation called organizer Its polymorphic relationship.
+     * related to user and organization
+     * organizer: It could be "me"(current user) or an organization Id
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -74,13 +78,14 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $user = $request->get('user');
-        
+
         $data = $request->json()->all();
 
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
                 'name' => 'required',
+
             ]
         );
 
@@ -100,8 +105,21 @@ class EventController extends Controller
         $result->author()->associate($user);
         $result->save();
 
-        if ( isset($data['category_ids'])) 
-        $result->categories()->sync($data['category_ids']);
+        /* Organizer: 
+        It could be "me"(current user) or a organization Id
+        the relationship is polymorpic.
+        */
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
+            $organizer = $user;
+        } else {
+            $organizer = Organization::findOrFail($data['organizer_id']);
+        }
+        $result->organizer()->associate($organizer);
+
+        /*categories*/
+        if (isset($data['category_ids'])) {
+            $result->categories()->sync($data['category_ids']);
+        }
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
@@ -136,23 +154,37 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
-     * 
+     *
      * How was images upload before
-     * 
+     *
      * @debug post $entityBody = file_get_contents('php://input');
      * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
         $data = $request->json()->all();
-        $event = Event::find($id);
 
-        if ( isset($data['category_ids'])) 
-        $event->categories()->sync($data['category_ids']);
+        $event = Event::findOrFail($id);
 
-        $event->fill($data);    
+        /* Organizer: 
+        It could be "me"(current user) or an organization Id
+        the relationship is polymorpic.
+        */
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
+            $organizer = $user;
+        } else {
+            $organizer = Organization::findOrFail($data['organizer_id']);
+        }
+        $event->organizer()->associate($organizer);
+
+
+        if (isset($data['category_ids'])) {
+            $event->categories()->sync($data['category_ids']);
+        }
+
+        $event->fill($data);
         $event->save();
-        return  new EventResource($event);
+        return new EventResource($event);
     }
 
     /**

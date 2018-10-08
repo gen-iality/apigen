@@ -20,8 +20,15 @@ class User extends Moloquent
 
     public function events()
     {
+        return $this->morphMany('App\Event', 'organizer');
+    }
+    
+    public function ownedEvents()
+    {
         return $this->hasMany('App\Event');
     }
+
+
     public function organizations()
     {
         return $this->belongsToMany('App\Organization');
