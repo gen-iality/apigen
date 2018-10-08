@@ -61,6 +61,14 @@ Route::group(
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
+ 
+ /*************** 
+ * categories
+ ****************/
+Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
 
@@ -90,15 +98,6 @@ Route::middleware('auth.firebase')->delete('typesEvent/events/{id}', 'TypesEvent
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-
-//Category Public
-Route::get('category', 'CategoryController@index');
-Route::get('category/{id}', 'CategoryController@show');
-//Middleware autentication
-Route::middleware('auth.firebase')->get('category/events/{id}', 'CategoryController@show');
-Route::middleware('auth.firebase')->post('category/events', 'CategoryController@store');
-Route::middleware('auth.firebase')->put('category/events/{id}', 'CategoryController@update');
-Route::middleware('auth.firebase')->delete('category/events/{id}', 'CategoryController@delete');
 
 //Events
 
