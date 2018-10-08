@@ -8,9 +8,14 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+To crate a new API for model please follow this guidelines:
+| - the fist part indicating the model must be plural
+| - use apiResource to create the CRUD
+- use group middleware to restrict access for users and inside again apiResource
+- add other methods separated trying to use API estandar and if It get complex create another controller
  */
 
-/* EXAMPLE OF ROUTES PER MODEL
+/* EXAMPLE OF ROUTES PER MODEL using apiResource
 Verb        URI                        Action    Route Name
 GET            /photos                    index    photos.index
 POST           /photos                    store    photos.store
@@ -20,7 +25,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
 /****************
- * eventUses
+ * eventUsers
  ****************/
 Route::apiResource('eventUsers', 'EventUserController', ['only' => ['index', 'show']]);
 Route::group(
@@ -41,10 +46,26 @@ Route::group(
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
         //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
+        Route::get('/organizations/{id}/events', '[MISSING]@[MISSING]');
     }
 );
 
 /****************
+ * events
+ ****************/
+Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
+        Route::get('me/events', 'EventController@currentUserindex');
+
+        //this routes should be erased after front migration
+        Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
+        Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
+    }
+);
+
+/***************
  * categories
  ****************/
 Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
@@ -84,17 +105,6 @@ Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserControlle
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 //Events
-
-//Public
-Route::get('events', 'EventController@index');
-Route::get('events/{id}', 'EventController@show');
-
-Route::put('event/{id}', 'EventController@update');
-Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
-Route::middleware('auth.firebase')->get('user/events/{id}', 'EventController@show');
-Route::middleware('auth.firebase')->post('user/events', 'EventController@store');
-Route::middleware('auth.firebase')->put('user/events/{id}', 'EventController@update');
-Route::middleware('auth.firebase')->delete('user/events/{id}', 'EventController@delete');
 
 //Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
@@ -137,4 +147,5 @@ Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show');
-*/
+
+ */

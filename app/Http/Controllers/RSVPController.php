@@ -28,8 +28,7 @@ class RSVPController extends Controller
     public function test()
     {
         echo "hola";
-        echo Config::get('app.front_url', 'aaa');
-        die();
+        echo Config::get('app.front_url', 'aaa')
     }
     /**
      * Display a listing of the resource.
