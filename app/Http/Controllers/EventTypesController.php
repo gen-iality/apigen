@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Resources\TypesEventsResource;
+use App\Http\Resources\EventTypesResource;
 use Illuminate\Http\Request;
 use App\EventType;
 use App\Event;
 use Storage;
 
-class TypesEventsController extends Controller
+class EventTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class TypesEventsController extends Controller
      */
     public function index()
     {
-        return TypesEventsResource::collection(
+        return EventTypesResource::collection(
             EventType::paginate(config('app.page_size')));
     }
 
@@ -51,12 +51,7 @@ class TypesEventsController extends Controller
      */
     public function delete(EventType $id)
     {
-        $res = $id->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
+
     }
 
     /**
@@ -69,8 +64,7 @@ class TypesEventsController extends Controller
     {
         //
         $EventType = EventType::find($id);
-        TypesEvents
-        $response = new TypesEventsResource($EventType);
+        $response = new EventTypesResource($EventType);
         return $response;
     }
 
@@ -107,8 +101,14 @@ class TypesEventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EventType $id)
+    public function destroy($id)
     {
-        //
+        $eventType = EventType::find($id);
+        $res = $eventType->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
     }
 }
