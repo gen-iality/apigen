@@ -161,6 +161,8 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
+        $user = $request->get('user');
+        
         $data = $request->json()->all();
 
         $event = Event::findOrFail($id);
