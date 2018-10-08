@@ -8,9 +8,14 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+  To crate a new API for model please follow this guidelines:
+ | - the fist part indicating the model must be plural
+ | - use apiResource to create the CRUD
+   - use group middleware to restrict access for users and inside again apiResource
+   - add other methods separated trying to use API estandar and if It get complex create another controller  
  */
 
-/* EXAMPLE OF ROUTES PER MODEL
+/* EXAMPLE OF ROUTES PER MODEL using apiResource
 Verb        URI                        Action    Route Name
 GET            /photos                    index    photos.index
 POST           /photos                    store    photos.store
