@@ -45,7 +45,6 @@ class EventController extends Controller
      */
     public function currentUserindex(Request $request)
     {
-        echo "die";
         $user = $request->get('user');
 
         return EventResource::collection(
