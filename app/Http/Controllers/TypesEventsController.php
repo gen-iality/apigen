@@ -69,7 +69,7 @@ class TypesEventsController extends Controller
     {
         //
         $EventType = EventType::find($id);
-        TypesEventsResource::withoutWrapping();
+        TypesEvents
         $response = new TypesEventsResource($EventType);
         return $response;
     }
@@ -94,7 +94,7 @@ class TypesEventsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->json()->all();
         $EventType = EventType::find($id);
         $EventType->fill($data);
         $EventType->save();

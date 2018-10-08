@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OrganizationUser;
 use App\User;
+use App\Http\Resources\OrganizationUserResource;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -26,10 +27,13 @@ class OrganizationUserController extends Controller
             $temporal->state_id = $data->state;
             return $temporal;
         };
-        $evtUsers = OrganizationUser::where('organization_id', $id)->get();
-        $users = array_map($usersfilter, $evtUsers->all()); 
+        $evtUsers = OrganizationUserResource::collection(
+            OrganizationUser::where('organization_id', $id)
+            ->paginate(config('app.page_size'))
+        );
+            $users = array_map($usersfilter, $evtUsers->all()); 
     
-        return $users;
+        return $evtUsers;
         
     }
 
@@ -52,7 +56,7 @@ class OrganizationUserController extends Controller
     public function store(Request $request)
     {
         //
-        $result = new OrganizationUser($request->all());
+        $result = new OrganizationUser($request->json()->all());
         $result->save();
         return $result;
     }
@@ -71,7 +75,7 @@ class OrganizationUserController extends Controller
             $userData = $auth->getUserByEmail($request->email);
             
             if($userData->uid){
-                $result = new OrganizationUser($request->all());
+                $result = new OrganizationUser($request->json()->all());
                 $result->userid = $userData->uid;
                 $result->organization_id = $id;
                 $result->save();
@@ -117,7 +121,7 @@ class OrganizationUserController extends Controller
     public function update(Request $request, OrganizationUser $id)
     {
         //
-        $data = $request->all();
+        $data = $request->json()->all();
         $id->fill($data);
         $id->save();
         return $id;

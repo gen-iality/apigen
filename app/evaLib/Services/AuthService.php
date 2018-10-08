@@ -30,7 +30,7 @@ class AuthService
             $userData = $auth->getUserByEmail($request->email);
         } catch (\Exception $e) {
             $url = "http://localhost:3020";
-            $data = json_encode($request->all());
+            $data = json_encode($request->json()->all());
             $httpRequest = array(
                 'http' => array(
                     'method' => 'POST',
@@ -50,7 +50,7 @@ class AuthService
 
             //acualizamos la información del usuario
             $user = User::firstOrNew(['uid' => $userData->uid]);
-            $user->fill($request->all());
+            $user->fill($request->json()->all());
             $user->uid = $userData->uid;
             $user->save();
 
@@ -60,7 +60,7 @@ class AuthService
                     'event_id' => $id,
                 ]);
 
-            $userEvent->fill($request->all());
+            $userEvent->fill($request->json()->all());
             $userEvent->userid = $userData->uid;
             $userEvent->event_id = $id;
 

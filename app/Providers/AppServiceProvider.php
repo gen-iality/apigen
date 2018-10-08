@@ -8,6 +8,8 @@ use App\Observers\EventUserObserver;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\Resource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,19 +20,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Resource::withoutWrapping();
         Log::debug("definiendo observador");
         \App\EventUser::observe(App\Observers\EventUserObserver::class);
 
         \App\EventUser::saved(function ($eventUser) {
             Log::debug("ejecutando observador saved eventUser");
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
+            $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
             Log::debug("saved afuera " . $eventUser->state_id . " " . EventUser::STATE_BOOKED);
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
                 Log::debug("saved adentro vamos a enviar el email");
+                // var_dump($eventUser->event_id);
                 Mail::to($email)
                     ->send(
-                        new BookingConfirmed()
+                        new BookingConfirmed($eventUser)
                     );
             }
         });

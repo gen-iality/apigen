@@ -37,7 +37,7 @@ class RolController extends Controller
     public function store(Request $request)
     {
         //
-        $result = new Rol($request->all());
+        $result = new Rol($request->json()->all());
         $result->save();
         return $result;
     }
@@ -75,7 +75,7 @@ class RolController extends Controller
     public function update(Request $request, Rol $id)
     {
         //
-        $data = $request->all();
+        $data = $request->json()->all();
         $id->fill($data);
         $id->save();
         return $id;

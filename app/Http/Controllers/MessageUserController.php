@@ -41,18 +41,18 @@ class MessageUserController extends Controller
      */
     public function store(Request $request)
     {
-        $messageUser = MessageUser::create($request->all());
+        $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
     }
 
     public function create(Request $request)
     {
-        $messageUser = MessageUser::create($request->all());
+        $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
     }
     public function edit(Request $request)
     {
-        $messageUser = MessageUser::create($request->all());
+        $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
     }
 
@@ -62,9 +62,9 @@ class MessageUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MessageUser $messageUser)
+    public function show($id)
     {
-        MessageUserResource::withoutWrapping();
+        $messageUser = MessageUser::findOrFail($id);
         return new MessageUserResource($messageUser);
     }
 
@@ -77,7 +77,7 @@ class MessageUserController extends Controller
      */
     public function update(Request $request, MessageUser $messageUser)
     {
-        $messageUser->update($request->all());
+        $messageUser->update($request->json()->all());
         return new MessageUserResource($messageUser);
     }
 

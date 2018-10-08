@@ -22,6 +22,10 @@ class User extends Moloquent
     {
         return $this->hasMany('App\Event');
     }
+    public function organizations()
+    {
+        return $this->belongsToMany('App\Organization');
+    }
     //->as('subscription')
     //->withTimestamps();
 

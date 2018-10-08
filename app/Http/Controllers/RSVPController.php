@@ -41,7 +41,7 @@ class RSVPController extends Controller
         //
         //return response()->json(Event::all());
         //return Event::all();
-        return RSVP::where('author', $request->get('user')->uid)->get();
+        return RSVP::where('author', $request->get('user')->id)->get();
     }
 
     /**
@@ -122,7 +122,7 @@ class RSVPController extends Controller
      */
     public function store(Request $request)
     {
-        $messageUser = MessageUser::create($request->all());
+        $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
     }
 
