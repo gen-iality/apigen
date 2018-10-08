@@ -73,6 +73,18 @@ APP_KEY = ZqxYyhRadx1UNwPgdjXsmeG/MvBZO6ZR6PeUuCa6cAs=
 
 4. Make sure storage folder has right permissions for laravel to store stuff there.
 
+## Patches
+
+In this project is used a patch:
+
+add-event-in-sendinblue2
+
+Which is used at the time when the email is sent to the person when it is Booked,
+to take the message-id and be able to save in the BD
+
+To apply this patch the following command must be executed:
+ 
+composer require "cweagans/composer-patches:~1.0"
 
 ## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
 A step by step series of examples that tell you how to get a development env running

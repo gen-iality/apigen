@@ -65,7 +65,7 @@ Route::group(
 return $request->user();
 }); */
 Route::resource('messageUser', 'MessageUserController');
-Route::get('testsendemail', 'TestingController@sendemail');
+Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 
 /**
