@@ -8,11 +8,11 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-  To crate a new API for model please follow this guidelines:
- | - the fist part indicating the model must be plural
- | - use apiResource to create the CRUD
-   - use group middleware to restrict access for users and inside again apiResource
-   - add other methods separated trying to use API estandar and if It get complex create another controller  
+To crate a new API for model please follow this guidelines:
+| - the fist part indicating the model must be plural
+| - use apiResource to create the CRUD
+- use group middleware to restrict access for users and inside again apiResource
+- add other methods separated trying to use API estandar and if It get complex create another controller
  */
 
 /* EXAMPLE OF ROUTES PER MODEL using apiResource
@@ -61,8 +61,10 @@ Route::group(
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
- 
- /*************** 
+    }
+);
+
+/***************
  * categories
  ****************/
 Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
@@ -142,4 +144,5 @@ Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index
 Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
 Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
 Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show');
+
  */
