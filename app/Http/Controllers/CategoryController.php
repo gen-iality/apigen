@@ -114,7 +114,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $id)
     {
-        return "hola mundo";
         $res = $id->delete();
         if ($res == true) {
             return 'True';
