@@ -70,41 +70,7 @@ class EventUserController extends Controller
         $pageSize = (int) $request->input('pageSize');
         $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
 
-        $filteredBy = json_decode($request->input('filtered'));
-        $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
-
-        $orderedBy = json_decode($request->input('orderBy'));
-        $orderedBy = is_array($orderedBy) ? $orderedBy : [$orderedBy];
-
-        foreach ((array) $filteredBy as $condition) {
-            if (!$condition || !isset($condition->id) || !isset($condition->value)) {
-                continue;
-            }
-
-            //for any eventUser inner properties enable text like partial search by default is the most common use case
-            if (strpos($condition->id, 'properties.') === 0) {
-                $condition->comparator = "like";
-            }
-
-            //if like comparator is stated add partial search using %% symbols
-            $comparator = (isset($condition->comparator)) ? $condition->comparator : "=";
-            if (strtolower($comparator) == "like") {
-                $condition->value = "%" . $condition->value . "%";
-            }
-
-            $query->where($condition->id, $comparator, $condition->value);
-        }
-
-        foreach ((array) $orderedBy as $order) {
-
-            if (!isset($order->id)) {
-                continue;
-            }
-
-            $direccion = (isset($order->order) && $order->order) ? $order->order : "desc";
-            $query->orderBy($order->id, $direccion);
-
-        }
+        $query = $filterQuery::FilterQueryService($query, $request);
 
         return EventUserResource::collection(
             $query->paginate($pageSize)

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\GoogleFiles;
+use App\evaLib\Services\FilterQuery;
 use App\Event;
+use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
 use App\Properties;
@@ -13,10 +15,16 @@ use Illuminate\Http\Request;
 use Storage;
 use Validator;
 
+
 /**
  * @resource Event
- *
- *
+ * 
+ */
+
+ /**
+ * Use the services FilterQuery
+ * 
+ * 
  */
 class EventController extends Controller
 {
@@ -25,13 +33,15 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, FilterQuery $filterQuery)
     {
+      
+        $query =  Event::where('visibility', '<>', '') //not null
+        ->orWhere('visibility', 'IS NULL', null, 'and'); //null
+        $query = $filterQuery::FilterQueryService($query, $request);
 
         return EventResource::collection(
-            Event::where('visibility', '<>', '') //not null
-                ->orWhere('visibility', 'IS NULL', null, 'and') //null
-                ->paginate(config('app.page_size'))
+            $query->paginate(config('app.page_size'))
             //EventUser::where("event_id", $event_id)->paginate(50)
         );
 
@@ -113,7 +123,13 @@ class EventController extends Controller
             $organizer = Organization::findOrFail($data['organizer_id']);
         }
         $result->organizer()->associate($organizer);
-        $result->save();
+
+        /*Events Type*/
+        if (isset($data['event_type_id'])) {
+            $event_type = EventType::findOrFail($data['event_type_id']);
+            $result->eventType()->associate($event_type);
+            $result->save();
+        }
 
         /*categories*/
         if (isset($data['category_ids'])) {
@@ -178,7 +194,13 @@ class EventController extends Controller
         }
         $event->organizer()->associate($organizer);
 
+         /*Events Type*/
+         if (isset($data['event_type_id'])) {
+            $event_type = EventType::findOrFail($data['organizer_id']);
+            $result->eventType()->associate($event_type);
+        }
 
+        /*categories*/
         if (isset($data['category_ids'])) {
             $event->categories()->sync($data['category_ids']);
         }
