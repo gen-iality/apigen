@@ -112,8 +112,14 @@ class CategoryController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Category $id)
     {
-        //
+        return "hola mundo";
+        $res = $id->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
     }
 }

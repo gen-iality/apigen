@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\EvaRol;
 use App\Http\Resources\OrganizationResource;
 use App\Organization;
+use App\Event;
+use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -61,6 +63,17 @@ class OrganizationController extends Controller
         }
 
         return new OrganizationResource($model);
+    }
+
+    public function OrganizationsEvents(string $id)
+    {
+        $organizer_id = $id;
+
+        return EventResource::collection(
+            Event::where('organizer_id', $organizer_id)
+                ->paginate(config('app.page_size'))
+        );
+
     }
 
 

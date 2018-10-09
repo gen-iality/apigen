@@ -46,7 +46,7 @@ Route::group(
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
         //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
-        Route::get('/organizations/{id}/events', '[MISSING]@[MISSING]');
+        Route::get('/organizations/{id}/events', 'OrganizationController@OrganizationsEvents');
     }
 );
 

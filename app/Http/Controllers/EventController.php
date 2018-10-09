@@ -102,7 +102,6 @@ class EventController extends Controller
         }
 
         $result->author()->associate($user);
-        $result->save();
 
         /* Organizer: 
         It could be "me"(current user) or a organization Id
@@ -119,6 +118,7 @@ class EventController extends Controller
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
+        $result->save();
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
