@@ -113,12 +113,12 @@ class EventController extends Controller
             $organizer = Organization::findOrFail($data['organizer_id']);
         }
         $result->organizer()->associate($organizer);
+        $result->save();
 
         /*categories*/
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
-        $result->save();
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
