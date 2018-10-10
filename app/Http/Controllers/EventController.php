@@ -24,7 +24,34 @@ use Validator;
  /**
  * Use the services FilterQuery
  * 
+ * Once the FilterQuery service is created, a method is 
+ * created to execute the filters corresponding to the 
+ * event, these filters take the data injected by the 
+ * parameters @ Param request, these go in a Json Array that 
+ * consists of 2 values (Id, Value), once passed 
+ * these values ​​by the parameter they arrive at that service
+ * method and the filter is executed which returns a variable 
+ * ($ query) that takes the value of the sql query, which
+ * once it reaches the function of the index it is returned
+ * with said filters inside the EventResource, to be shown later.
  * 
+ * Json Array has:
+ *  - ID:
+ *  "id":"event_type_id"
+ *  - Value:
+ * "value":"5bb21557af7ea71be746e98b"
+ * 
+ * Exmaple:
+ *  - [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+ * 
+ * Also has:     
+ *  - Comparator:
+ *     +'= equal'
+ *     +'/ difference'
+ * 
+ * And you can give an order:
+ *     +'desc'
+ *     +'asc'
  */
 class EventController extends Controller
 {
