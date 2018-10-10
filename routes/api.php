@@ -64,7 +64,13 @@ Route::group(
 /****************
  * events
  ****************/
-Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+// Este Route::group es un expermimento para detectar a el usuario logueado
+// pero sin producir ningun tipo de errores. 
+// Route::group( 
+//     ['middleware' => 'tokenauth.firebase'], function () {
+        Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+//     }
+// );
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);

@@ -79,18 +79,28 @@ class EventUser extends Moloquent
         return $this;
     }
 
-    protected static function boot()
-    {
-        parent::boot();
+    /**
+     *La siguiente funcion se comento porque no se pudo 
+     *hacer que el request obtuviera el usuario logueado
+     *y asi poder ejecutar sus consultas sql
+     */
 
-        if(Auth::user()){ 
-            static::addGlobalScope('visibility', function (Builder $builder) {
-                $builder->where('visibility', 'IS NULL', null, 'and');
-            });
-        }else{
-            static::addGlobalScope('visibility', function (Builder $builder) {
-                $builder->where('visibility', '<>', Event::VISIBILITY_ORGANIZATION );
-            });
-        }
-    }
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     $request = request();
+    //     var_dump("usuario");
+    //     var_dump($request->get("user"));
+
+    //     if(isset($request->user)){ 
+    //         static::addGlobalScope('visibility', function (Builder $builder) {
+    //             $builder->where('visibility', 'IS NULL', null, 'and');
+    //         });
+    //     }else{
+    //         static::addGlobalScope('visibility', function (Builder $builder) {
+    //             $builder->where('visibility', '<>', Event::VISIBILITY_ORGANIZATION );
+    //         });
+    //     }
+    // }
 }

@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'auth.firebase' => \App\Http\Middleware\AuthFirebase::class,
+        'tokenauth.firebase' => \App\Http\Middleware\TokenAuthFirebase::class,
     ];
 }

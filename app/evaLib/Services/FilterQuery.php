@@ -15,7 +15,7 @@ class FilterQuery
      * this allows to have a dynamic queries using the same url endpoints
      * this is useful when we have a query for all elements and want to filter by category, or type, etc.
      *
-     * query options could injected though URL via this params
+     * query options could injected through URL via this params
      *
      *    *** filtered: parameters to alter the where part of the query that means to filter the query
      *                  is accepts a JSON array of filters in the form:
