@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\evaLib\Services\UserEventService;
 use App\evaLib\Services\FilterQuery;
+use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\EventUser;
 use App\Http\Requests\EventUserRequest;
@@ -12,7 +12,6 @@ use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use Validator;
 
 /**
@@ -31,17 +30,6 @@ use Validator;
  * <br> and one event though event_id
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
- *
-
-$usersfilter = function ($data) {
-$temporal = $data;
-$temporal->user = User::where('uid', $data->userid)->first();
-$temporal->state_id = $data->state;
-$temporal->rol_id = $data->rol;
-
-return $temporal;
-};
-
  */
 class EventUserController extends Controller
 {
@@ -49,19 +37,19 @@ class EventUserController extends Controller
     /**
      * __index:__ Display all the EventUsers of an event
      *
-     * response  EventUser of specific event
-     * it could be filtered by
-     *    +'state_id'
-     *    +'rol_id'
-     * @param [type] $event_id
+     * this methods allows dynamic quering by any property via URL using the services FilterQuery.
+     * Exmaple:
+     *  - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
      *
-     * @return \Illuminate\Http\Response EventUserResource collection
      *
      * PROBLEMA ORDENAMIENTO CON mayusculas
      * Se tiene que crear las colecciones con collation por defecto insensitiva a mayusculas
      * EJemplo: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
      * https://docs.mongodb.com/manual/core/index-case-insensitive/
      * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
+     * 
+     *  @return \Illuminate\Http\Response EventUserResource collection
      */
     public function indexByEvent(Request $request, String $event_id, FilterQuery $filterQuery)
     {
@@ -71,7 +59,7 @@ class EventUserController extends Controller
         $pageSize = (int) $request->input('pageSize');
         $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
 
-        $query = $filterQuery::FilterQueryService($query, $request);
+        $query = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
 
         return EventUserResource::collection(
             $query->paginate($pageSize)
