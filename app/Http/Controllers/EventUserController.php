@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\evaLib\Services\UserEventService;
+use App\evaLib\Services\FilterQuery;
 use App\Event;
 use App\EventUser;
 use App\Http\Requests\EventUserRequest;
@@ -62,7 +63,7 @@ class EventUserController extends Controller
      * https://docs.mongodb.com/manual/core/index-case-insensitive/
      * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
      */
-    public function indexByEvent(Request $request, String $event_id)
+    public function indexByEvent(Request $request, String $event_id, FilterQuery $filterQuery)
     {
         $query = EventUser::where("event_id", $event_id);
 
