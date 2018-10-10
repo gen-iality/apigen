@@ -63,8 +63,8 @@ class EventController extends Controller
     public function index(Request $request, FilterQuery $filterQuery)
     {
       
-        $query =  Event::where('visibility', '<>', '') //not null
-        ->orWhere('visibility', 'IS NULL', null, 'and'); //null
+        $query =  Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+        ->orWhere('visibility', 'IS NULL', null, 'and'); //null; 
         $query = $filterQuery::FilterQueryService($query, $request);
 
         return EventResource::collection(

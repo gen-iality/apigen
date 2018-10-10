@@ -78,4 +78,19 @@ class EventUser extends Moloquent
         }
         return $this;
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        if(Auth::user()){ 
+            static::addGlobalScope('visibility', function (Builder $builder) {
+                $builder->where('visibility', 'IS NULL', null, 'and');
+            });
+        }else{
+            static::addGlobalScope('visibility', function (Builder $builder) {
+                $builder->where('visibility', '<>', Event::VISIBILITY_ORGANIZATION );
+            });
+        }
+    }
 }
