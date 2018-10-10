@@ -193,8 +193,13 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
-            $organizer = $user;
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\User")) {
+            if ($data['organizer_id'] == "me") {
+                $organizer = $user;
+            } else {
+                $organizer = User::findOrFail($data['organizer_id']);
+            }
+
         } else {
             $organizer = Organization::findOrFail($data['organizer_id']);
         }
@@ -202,8 +207,8 @@ class EventController extends Controller
 
         /*Events Type*/
         if (isset($data['event_type_id'])) {
-            $event_type = EventType::findOrFail($data['organizer_id']);
-            $result->eventType()->associate($event_type);
+            $event_type = EventType::findOrFail($data['event_type_id']);
+            $event->eventType()->associate($event_type);
         }
 
         /*categories*/
