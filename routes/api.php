@@ -50,6 +50,17 @@ Route::group(
     }
 );
 
+
+/****************
+ * eventTypes
+ ****************/
+Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
+    }
+);
+
 /****************
  * events
  ****************/
@@ -90,15 +101,6 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
  *
  */
 
-/****************
- * eventTypes
- ****************/
-Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
-Route::group(
-    ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
-    }
-);
 
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');

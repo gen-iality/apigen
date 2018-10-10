@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\evaLib\Services\EvaRol;
-use App\evaLib\Services\GoogleFiles;
 use App\evaLib\Services\FilterQuery;
+use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\EventType;
 use App\Http\Resources\EventResource;
@@ -15,57 +15,36 @@ use Illuminate\Http\Request;
 use Storage;
 use Validator;
 
-
 /**
  * @resource Event
- * 
+ *
  */
 
- /**
- * Use the services FilterQuery
- * 
- * Once the FilterQuery service is created, a method is 
- * created to execute the filters corresponding to the 
- * event, these filters take the data injected by the 
- * parameters @ Param request, these go in a Json Array that 
- * consists of 2 values (Id, Value), once passed 
- * these values ​​by the parameter they arrive at that service
- * method and the filter is executed which returns a variable 
- * ($ query) that takes the value of the sql query, which
- * once it reaches the function of the index it is returned
- * with said filters inside the EventResource, to be shown later.
- * 
- * Json Array has:
- *  - ID:
- *  "id":"event_type_id"
- *  - Value:
- * "value":"5bb21557af7ea71be746e98b"
- * 
- * Exmaple:
- *  - [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
- * 
- * Also has:     
- *  - Comparator:
- *     +'= equal'
- *     +'/ difference'
- * 
- * And you can give an order:
- *     +'desc'
- *     +'asc'
- */
 class EventController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Illuminate\Http\Request $request [injected]
+     * @param App\evaLib\Services\FilterQuery $filterQuery [injected]
+     * all params are injected
+     *
+     *  __index:__ Display all the events
+     *
+     * this methods allows dynamic quering by any property via URL using the services FilterQuery.
+     * Exmaple:
+     *  - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
+     *
+     * @return \Illuminate\Http\Response EventResource collection
      */
+
     public function index(Request $request, FilterQuery $filterQuery)
     {
-      
-        $query =  Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
-        ->orWhere('visibility', 'IS NULL', null, 'and'); //null; 
-        $query = $filterQuery::FilterQueryService($query, $request);
+
+        $query = Event::where('visibility', '<>', '') //not null
+            ->orWhere('visibility', 'IS NULL', null, 'and'); //null
+        $query = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
 
         return EventResource::collection(
             $query->paginate(config('app.page_size'))
@@ -140,10 +119,10 @@ class EventController extends Controller
 
         $result->author()->associate($user);
 
-        /* Organizer: 
+        /* Organizer:
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
-        */
+         */
         if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
             $organizer = $user;
         } else {
@@ -205,15 +184,15 @@ class EventController extends Controller
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
         $user = $request->get('user');
-        
+
         $data = $request->json()->all();
 
         $event = Event::findOrFail($id);
 
-        /* Organizer: 
+        /* Organizer:
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
-        */
+         */
         if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
             $organizer = $user;
         } else {
@@ -221,8 +200,8 @@ class EventController extends Controller
         }
         $event->organizer()->associate($organizer);
 
-         /*Events Type*/
-         if (isset($data['event_type_id'])) {
+        /*Events Type*/
+        if (isset($data['event_type_id'])) {
             $event_type = EventType::findOrFail($data['organizer_id']);
             $result->eventType()->associate($event_type);
         }
