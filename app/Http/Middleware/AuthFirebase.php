@@ -46,7 +46,9 @@ class AuthFirebase
             } elseif (isset($_REQUEST['token'])) {
                 $firebaseToken = $_REQUEST['token'];
             }
-            $refresh_token = $_REQUEST['refresh_token'];
+
+            //Esta linea llega el refresh token
+            // $refresh_token = $_REQUEST['refresh_token'];
             
             //miramos si el token viene en una cookie
             /*if (isset($_COOKIE['evius_token'])) {
@@ -81,18 +83,18 @@ class AuthFirebase
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
 
             //API Url
-            $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
-            //Params sent for refresh_token
-            $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
-            //Send params to method POST
-            $client = new Client();
-            $response = $client->request('POST', $url, ['form_params' => $body]);
+            // $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
+            // //Params sent for refresh_token
+            // $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
+            // //Send params to method POST
+            // $client = new Client();
+            // $response = $client->request('POST', $url, ['form_params' => $body]);
 
             return response(
                 [
                     'status' => Response::HTTP_UNAUTHORIZED,
                     'message' => 'Error: ExpiredToken',
-                    'request' => (string) $response->getBody(),
+                    // 'request' => (string) $response->getBody(),
                 ], Response::HTTP_UNAUTHORIZED
             );
 
