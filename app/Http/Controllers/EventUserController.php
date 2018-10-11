@@ -206,8 +206,7 @@ class EventUserController extends Controller
      */
     public function checkIn($id)
     {
-        $eventUser = EventUser::findOrFail($id);
-        // return $eventUser;        
+        $eventUser = EventUser::findOrFail($id);      
         return $eventUser->checkIn();
     }
 

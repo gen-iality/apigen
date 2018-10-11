@@ -33,9 +33,9 @@ class MessageController extends Controller
        //páginacion pordefecto
        $pageSize = (int) $request->input('pageSize');
        $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
-       
        return MessageResource::collection(
-        $event->messages()->paginate($pageSize)
+        $event->messages()->orderBy('created_at','desc')
+        ->paginate($pageSize)
        );
     }
 
