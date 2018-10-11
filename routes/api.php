@@ -33,8 +33,13 @@ Route::group(
         Route::apiResource('eventUsers', 'EventUserController', ['except' => ['index', 'show']]);
         //Route::get('me/events', 'OrganizationController@meOrganizations');
         Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
+        Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
     }
 );
+
+Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
+Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
+Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 /****************
  * organizations
@@ -50,10 +55,27 @@ Route::group(
     }
 );
 
+
+/****************
+ * eventTypes
+ ****************/
+Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
+    }
+);
+
 /****************
  * events
  ****************/
-Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+// Este Route::group es un expermimento para detectar a el usuario logueado
+// pero sin producir ningun tipo de errores. 
+// Route::group( 
+//     ['middleware' => 'tokenauth.firebase'], function () {
+        Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+//     }
+// );
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
@@ -75,6 +97,14 @@ Route::group(
     }
 );
 
+/** 
+ * *****************
+ *    users
+ * *****************
+ */
+
+ 
+
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -90,19 +120,6 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
  *
  */
 
-/****************
- * eventTypes
- ****************/
-Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
-Route::group(
-    ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
-    }
-);
-
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
-Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 //Events
 
@@ -124,8 +141,8 @@ Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
-Route::get('event/{event_id}/rsvp', 'MessageController@indexEvent');
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 

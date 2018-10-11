@@ -54,9 +54,15 @@ class providerSentEmailEventListener
      */
     public function handle(providerSentEmail $event)
     {
+        
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
-  
         $messageId=($event->res['data']['message-id']);
+        $array_email = array_keys($event->message->getTo());
+        $user_email= reset($array_email);
+        var_dump($user_email);
+
+        // var_dump($user_email);
+        
         $data = array( 
             // "limit" => 10000,
             // "start_date" => "",
@@ -70,15 +76,27 @@ class providerSentEmailEventListener
             "message_id" => $messageId,
             // "template_id" => 0
         );
-        $user_email = (($mailin->get_report($data))["data"][0]["email"]);
-        $user_reason = (($mailin->get_report($data))["data"][0]["reason"]);
-        $user_event = (($mailin->get_report($data))["data"][0]["event"]);
+        //chambonada mientras la presentacion despues esto tiene que ir en un servicio asincrono
+        sleep(1);
+        try{
+        $report = ($mailin->get_report($data)["data"]);
+        $user_reason = ($report["0"]["reason"]);
+        $user_status = ($report["0"]["event"]);
 
-        $user = MessageUser::where('email', $user_email)->first();
+        $message_user = MessageUser::where('email', $user_email)
+        ->where('sender_id', 'exists', false)
+        ->orderBy('created_at','desc')->first();
+   
+        $message_user->sender_id = $messageId;
+        $message_user->status = $user_status;
+        $message_user->history = $report;
+        $message_user->status_message = $user_reason;
 
-        $user->message_id = $messageId;
-        $user->reason = $user_reason;
-        $user->event = $user_event;
-        $user->save();
+        $message_user->save(); 
+
+    }catch(\Exception $e){
+        var_dump($e->message());
+    
     }
+}
 }
