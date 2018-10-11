@@ -177,13 +177,25 @@ class EventUserController extends Controller
      * @param  \App\EventUser  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EventUser $eventUser)
+    public function update(Request $request, $evenUserId)
     {
-
         $data = $request->json()->all();
+        $eventUser = EventUser::findOrFail($evenUserId);
         $eventUser->fill($data);
         $eventUser->save();
         return $eventUser;
+    }
+    public function updateWithStatus(Request $request, $evenUserId)
+    {
+        $data = $request->json()->all();
+        $eventUser = EventUser::findOrFail($evenUserId);
+        $eventUser->fill($data);
+        $eventUser->save();
+
+        $response = new EventUserResource($eventUser);
+        $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
+
+        return $response;
     }
 
     /**
@@ -194,7 +206,8 @@ class EventUserController extends Controller
      */
     public function checkIn($id)
     {
-        $eventUser = EventUser::find($id);
+        $eventUser = EventUser::findOrFail($id);
+        // return $eventUser;        
         return $eventUser->checkIn();
     }
 

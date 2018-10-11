@@ -19,6 +19,7 @@ class UserEventService
 
     const CREATED = 'CREATED';
     const UPDATED = 'UPDATED';
+    const MESSAGE = 'OK';
 
     /**
      * Undocumented function

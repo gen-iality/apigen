@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\MessageResource;
 use \App\Message;
-use \App\Event;
-
+use App\Event;
 /**
  * Undocumented class
  */
@@ -28,8 +28,11 @@ class MessageController extends Controller
      */
     public function indexEvent($event_id)
     {
-       $event = Event::findOrFail($event_id);
-       return $event->messages;
+       $event = Event::findOrfail($event_id);
+       
+       return MessageResource::collection(
+        $event->messages()->paginate(config('app.page_size'))
+       );
     }
 
 

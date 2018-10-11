@@ -33,6 +33,7 @@ Route::group(
         Route::apiResource('eventUsers', 'EventUserController', ['except' => ['index', 'show']]);
         //Route::get('me/events', 'OrganizationController@meOrganizations');
         Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
+        Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
     }
 );
 
@@ -92,6 +93,7 @@ Route::group(
     }
 );
 
+Route::middleware('auth.firebase')->get('events/{id}/invitations', 'MessageController@indexEvent');
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {

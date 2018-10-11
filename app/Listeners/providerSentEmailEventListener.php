@@ -74,10 +74,10 @@ class providerSentEmailEventListener
         $user_reason = (($mailin->get_report($data))["data"][0]["reason"]);
         $user_event = (($mailin->get_report($data))["data"][0]["event"]);
 
-        $user = MessageUser::where('email', $user_email)->first();
-
+        $user = MessageUser::where('email', $user_email)
+        ->orWhere('email', '<>', '')->first();
         $user->message_id = $messageId;
-        $user->reason = $user_reason;
+        $user->status = $user_reason;
         $user->event = $user_event;
         $user->save();
     }

@@ -57,6 +57,7 @@ class EventUser extends Moloquent
 
     public function checkIn()
     {
+        return "hola";
         try {
             $this->checked_in = true;
             $this->checked_in_date = time();
