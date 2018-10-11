@@ -37,6 +37,10 @@ Route::group(
     }
 );
 
+Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
+Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
+Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
+
 /****************
  * organizations
  ****************/
@@ -93,7 +97,14 @@ Route::group(
     }
 );
 
-Route::middleware('auth.firebase')->get('events/{id}/invitations', 'MessageController@indexEvent');
+/** 
+ * *****************
+ *    users
+ * *****************
+ */
+
+ 
+
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -109,10 +120,6 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
  *
  */
 
-
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
-Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 //Events
 
@@ -134,10 +141,6 @@ Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
-
-//esta ruta sigue funcionando mientras se migra todo
-Route::get('event/{event_id}/rsvp', 'MessageController@indexEvent');
-
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
 
