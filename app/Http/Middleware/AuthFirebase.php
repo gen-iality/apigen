@@ -50,9 +50,9 @@ class AuthFirebase
             if (!$firebaseToken) {
                 return response(
                     [
-                        'status' => Response::HTTP_NOT_FOUND,
+                        'status' => Response::HTTP_UNAUTHORIZED,
                         'message' => 'Error: No token provided',
-                    ], Response::HTTP_NOT_FOUND
+                    ], Response::HTTP_UNAUTHORIZED
                 );
             }
 
@@ -75,9 +75,9 @@ class AuthFirebase
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
             return response(
                 [
-                    'status' => Response::HTTP_NOT_FOUND,
+                    'status' => Response::HTTP_UNAUTHORIZED,
                     'message' => 'Error: ExpiredToken',
-                ], Response::HTTP_NOT_FOUND
+                ], Response::HTTP_UNAUTHORIZED
             );
 
         }
