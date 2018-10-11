@@ -95,7 +95,7 @@ class providerSentEmailEventListener
         $message_user->save(); 
 
     }catch(\Exception $e){
-        var_dump($e->message());
+        var_dump($e);
     
     }
 }
