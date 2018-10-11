@@ -180,7 +180,7 @@ class RSVPController extends Controller
             App::abort(500, 'Error');
         }
 
-        return redirect()->away(Config::get('app.front_url', 'https://evius.co') .'/evento/' . $eventUser->event_id."?attendee=".$eventUser->_id.'&status='.$eventUser->state_id);
+        return redirect()->away(Config::get('app.front_url', 'https://evius.co') .'/landing/' . $eventUser->event_id."?attendee=".$eventUser->_id.'&status='.$eventUser->state_id);
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
     }
