@@ -92,7 +92,7 @@ class providerSentEmailEventListener
         $message_user->history = $report;
         $message_user->status_message = $user_reason;
 
-        $message_user->save();
+        $message_user->save(); 
 
     }catch(\Exception $e){
         var_dump($e->message());
