@@ -26,12 +26,16 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexEvent($event_id)
+    public function indexEvent(Request $request, $event_id)
     {
        $event = Event::findOrfail($event_id);
+
+       //páginacion pordefecto
+       $pageSize = (int) $request->input('pageSize');
+       $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
        
        return MessageResource::collection(
-        $event->messages()->paginate(config('app.page_size'))
+        $event->messages()->paginate($pageSize)
        );
     }
 
