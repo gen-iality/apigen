@@ -135,7 +135,11 @@ Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 
-Route::get('events/{event_id}/rsvp', 'MessageController@indexEvent');
+//esta ruta sigue funcionando mientras se migra todo
+Route::get('event/{event_id}/rsvp', 'MessageController@indexEvent');
+
+Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
+
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
