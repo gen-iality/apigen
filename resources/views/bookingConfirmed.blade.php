@@ -1,6 +1,6 @@
 @component('mail::message')
 
- Hola Lucia Gomez, has sido invitad@ a {{$event->name}}
+ Hola {{$eventUser->user->name}}, has sido invitad@ a {{$event->name}}
 
 <div style="text-align: justify">
     <span>
@@ -16,7 +16,7 @@
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
 |:----------------------:|:-------------------------------------------------------------------------------------:| 
-|General | $130.000 |       
+|General | Invitacion |       
 @endcomponent
 @component('mail::table')                                                          
 | **Fecha Inicio:**            | **Hora:**                                                                       | 
@@ -31,7 +31,7 @@
 @component('mail::panel')
 Ubicación del evento  <br>
 
-{{$event->FormattedAddress}}
+{{$event->location->FormattedAddress}}
 -----------------------
 @endcomponent
 
@@ -52,10 +52,7 @@ Confirmar Cuenta
 @component('mail::subcopy')
 @endcomponent
 
-[Eliminar Suscripcion](http://assemble.io)       [Iniciar Sesion](http://assemble.io)
-<br>
-[Politicas de privacidad](http://assemble.io)
-
+[Eliminar Suscripcion](https://eviusauth.netlify.com/)       [Politicas de privacidad](https://eviusauth.netlify.com/)
 
 <div style="text-align: center">
     <span>
