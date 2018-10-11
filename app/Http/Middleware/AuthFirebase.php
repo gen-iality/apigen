@@ -9,6 +9,7 @@ use Firebase\Auth\Token\Verifier;
 use Illuminate\Http\Response;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
+use GuzzleHttp\Client;
 
 class AuthFirebase
 {
@@ -20,26 +21,31 @@ class AuthFirebase
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {
+    {  
         //Se carga el sdk de firebase para PHP
         try {
             $firebaseToken = null;
             $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+            
             $firebase = (new Factory)
-                ->withServiceAccount($serviceAccount)
-                ->create();
+            ->withServiceAccount($serviceAccount)
+            ->create();
+
+            $api_key = "AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
+
             $auth = $firebase->getAuth();
             //Se carga el projectID solo necesario para la libreria Auth
             $projectId = 'eviusauth';
             $verifier = new Verifier($projectId);
-
+            
             //miramos si el token viene en la Petición
             if (isset($_REQUEST['evius_token'])) {
                 $firebaseToken = $_REQUEST['evius_token'];
             } elseif (isset($_REQUEST['token'])) {
                 $firebaseToken = $_REQUEST['token'];
             }
-
+            $refresh_token = $_REQUEST['refresh_token'];
+            
             //miramos si el token viene en una cookie
             /*if (isset($_COOKIE['evius_token'])) {
             $firebaseToken = $_COOKIE['evius_token'];
@@ -55,9 +61,18 @@ class AuthFirebase
                     ], Response::HTTP_NOT_FOUND
                 );
             }
-
             //Se verifica la valides del token
+
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
+
+            /* if(false)
+            {
+                return response("Im here");
+            }else{
+                return response("ok");
+            } */
+
+
             //Se obtiene la informacion del usuario
             //Claim sub user_id
             $user_auth = $auth->getUser($verifiedIdToken->getClaim('sub'));
@@ -73,10 +88,20 @@ class AuthFirebase
 
             return $next($request);
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
+
+            //API Url
+            $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
+            //Params sent for refresh_token
+            $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
+            //Send params to method POST
+            $client = new Client();
+            $response = $client->request('POST', $url, ['form_params' => $body]);
+
             return response(
                 [
                     'status' => Response::HTTP_NOT_FOUND,
                     'message' => 'Error: ExpiredToken',
+                    'request' => (string) $response->getBody(),
                 ], Response::HTTP_NOT_FOUND
             );
 
