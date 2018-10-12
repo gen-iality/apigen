@@ -56,12 +56,14 @@ Route::group(
 );
 
 /****************
- * eventTypes
+ * Users
  ****************/
-Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
+        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
+        Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
     }
 );
 
@@ -79,7 +81,6 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
         Route::get('me/events', 'EventController@currentUserindex');
-        
 
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
@@ -99,15 +100,14 @@ Route::group(
     }
 );
 
-/**
- * *****************
- *    users
- * *****************
- */
+/****************
+ * eventTypes
+ ****************/
+Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
-        //Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
+        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
     }
 );
 
