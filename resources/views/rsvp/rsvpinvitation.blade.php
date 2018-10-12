@@ -1,12 +1,15 @@
 @component('mail::message')
+
+
+
+Hola {{$eventUser->user->name}} haz sido invitado a  
+
 {{$event->name}}
 ----------------
 
-![Logo]({{$image}})
+{{$message}}
 
 @component('mail::promotion')
-Hola, {{$eventUser->user->name}}
-{{$message}}
 
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'evius'])
 Confirmar asistencia
@@ -38,7 +41,7 @@ Ubicación del evento  <br>
 -----------------------
 @endcomponent
 
-
+![Logo]({{$image}})
 
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'evius'])
 Confirmar asistencia
