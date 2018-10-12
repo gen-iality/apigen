@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function storeRefreshToken()
     {
-        return true;
+        return ["status"=>'true'];
     }
 
     /**
