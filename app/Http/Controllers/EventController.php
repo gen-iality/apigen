@@ -70,6 +70,24 @@ class EventController extends Controller
 
     }
 
+    public function EventbyUser(string $id)
+    {
+        return EventResource::collection(
+            Event::where('author_id', $id)
+                ->paginate(config('app.page_size'))
+        );
+
+    }
+
+    public function EventbyOrganization(string $id)
+    {
+        return EventResource::collection(
+            Event::where('author_id', $id)
+                ->paginate(config('app.page_size'))
+        );
+
+    }
+
     public function delete(Event $id)
     {
         $res = $id->delete();

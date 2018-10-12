@@ -79,12 +79,15 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
         Route::get('me/events', 'EventController@currentUserindex');
+        
 
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
     }
 );
+Route::get('users/{id}/events', 'EventController@EventbyUser');
+Route::get('organizations/{id}/events', 'EventController@EventbyOrganization');
 
 /***************
  * categories
