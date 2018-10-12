@@ -86,13 +86,17 @@ class providerSentEmailEventListener
         $message_user = MessageUser::where('email', $user_email)
         ->where('sender_id', 'exists', false)
         ->orderBy('created_at','desc')->first();
-   
-        $message_user->sender_id = $messageId;
-        $message_user->status = $user_status;
-        $message_user->history = $report;
-        $message_user->status_message = $user_reason;
 
-        $message_user->save(); 
+        if($message_user = NULL){
+            return "false";
+        }else{
+            $message_user->sender_id = $messageId;
+            $message_user->status = $user_status;
+            $message_user->history = $report;
+            $message_user->status_message = $user_reason;
+
+            $message_user->save(); 
+        }
 
     }catch(\Exception $e){
         var_dump($e);
