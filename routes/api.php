@@ -104,7 +104,7 @@ Route::group(
  */
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::put("/me/refresh_token","UserController@storeRefreshToken");
+        Route::put("me/refresh_token","UserController@storeRefreshToken");
         //Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
