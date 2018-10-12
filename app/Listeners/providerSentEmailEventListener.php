@@ -87,7 +87,7 @@ class providerSentEmailEventListener
         ->where('sender_id', 'exists', false)
         ->orderBy('created_at','desc')->first();
 
-        if($message_user = NULL){
+        if(is_null($message_user)){
             return "false";
         }else{
             $message_user->sender_id = $messageId;
