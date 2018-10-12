@@ -5,6 +5,7 @@
 ![Logo]({{$image}})
 
 @component('mail::promotion')
+Hola, {{$eventUser->user->name}}
 {{$message}}
 
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'evius'])
