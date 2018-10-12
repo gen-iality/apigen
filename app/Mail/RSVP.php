@@ -22,6 +22,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $footer;
     public $subject;
     public $urlconfirmacion;
+    public $event_location;
     /**
      * Create a new message instance.
      *
@@ -31,7 +32,11 @@ class RSVP extends Mailable implements ShouldQueue
     public function __construct(
         string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
     {
+
+        $event_location = ($event["location"]["FormattedAddress"]);
+
         $this->event     = $event;
+        $this->event_location = $event_location;
         $this->eventUser = $eventUser;
         $this->image     = ($image)?$image:null;
         $this->message   = $message;
