@@ -86,8 +86,8 @@ Route::group(
         Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
     }
 );
-Route::get('users/{id}/events', 'EventController@EventbyUser');
-Route::get('organizations/{id}/events', 'EventController@EventbyOrganization');
+Route::get('users/{id}/events', 'EventController@EventbyUsers');
+Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 
 /***************
  * categories

@@ -70,7 +70,7 @@ class EventController extends Controller
 
     }
 
-    public function EventbyUser(string $id)
+    public function EventbyUsers(string $id)
     {
         return EventResource::collection(
             Event::where('author_id', $id)
@@ -79,7 +79,7 @@ class EventController extends Controller
 
     }
 
-    public function EventbyOrganization(string $id)
+    public function EventbyOrganizations(string $id)
     {
         return EventResource::collection(
             Event::where('author_id', $id)
