@@ -59,7 +59,7 @@ class providerSentEmailEventListener
         $messageId=($event->res['data']['message-id']);
         $array_email = array_keys($event->message->getTo());
         $user_email= reset($array_email);
-        var_dump($user_email);
+        // var_dump($user_email);
 
         // var_dump($user_email);
         
@@ -95,7 +95,7 @@ class providerSentEmailEventListener
         $message_user->save(); 
 
     }catch(\Exception $e){
-        var_dump($e->message());
+        var_dump($e);
     
     }
 }

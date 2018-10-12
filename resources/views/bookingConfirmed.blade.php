@@ -1,6 +1,6 @@
 @component('mail::message')
 
- Hola {{$eventUser->user->name}}, has sido invitad@ a {{$event->name}}
+ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 
 <div style="text-align: justify">
     <span>
@@ -31,7 +31,7 @@
 @component('mail::panel')
 Ubicación del evento  <br>
 
-{{$event->location->FormattedAddress}}
+{{$event_location}}
 -----------------------
 @endcomponent
 

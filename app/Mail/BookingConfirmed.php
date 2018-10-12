@@ -13,7 +13,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     public $event;
-    public $eventUser;
+    public $event_location;
+    public $eventuser_name;
 
     /**
      * Create a new message instance.
@@ -24,9 +25,12 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $eventUser)
     {
         $event = Event::find($eventUser->event_id);
-    
-        $this->event     = $event;
-        $this->eventuser = $eventUser;
+        $event_location = ($event["location"]["FormattedAddress"]);
+        $eventUser_name =($eventUser["properties"]["name"]);
+
+        $this->event = $event;
+        $this->event_location = $event_location;
+        $this->eventuser_name = $eventUser_name;
         $this->subject   = "[Invitación] ";
     }
 
