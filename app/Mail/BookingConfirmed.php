@@ -47,7 +47,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public function build()
     {
         $file = 'qr/'.$this->eventuser_id.'_qr.png';
-        $image = QRCode::url('https://eviusco.netlify.com/')
+        $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->setOutfile($file)
