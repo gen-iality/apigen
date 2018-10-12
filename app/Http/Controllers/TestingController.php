@@ -52,13 +52,13 @@ class TestingController extends Controller
 
     public function qrTesting()
     {
-        $public_path = public_path();
-        $file = 'qr/qr.png';
-        $image = QRCode::url('https://eviusco.netlify.com/')
-                ->setOutfile($file)
-                ->png();
+        // $public_path = public_path();
+        // $file = 'qr/qr.png';
+        // $image = QRCode::url('https://eviusco.netlify.com/')
+        //         ->setOutfile($file)
+        //         ->png();
 
-        return $file;
+        // return $file;
     }
 
 

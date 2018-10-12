@@ -1,7 +1,10 @@
 @component('mail::message')
 
- Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
+{{$event->name}}
 
+ ![Evius]({{$logo}})   
+
+ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <div style="text-align: justify">
     <span>
         Aquí podrás encontrar la información del evento y el
@@ -14,7 +17,7 @@
 
 ![QR]({{$qr}})
 
----
+
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
 |:----------------------:|:-------------------------------------------------------------------------------------:| 
