@@ -102,7 +102,12 @@ Route::group(
  *    users
  * *****************
  */
-
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::put("me/refresh_token","UserController@storeRefreshToken");
+        //Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
+    }
+);
  
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
@@ -159,11 +164,4 @@ Route::middleware('cors')->get('rols', 'RolController@index');
 Route::middleware('cors')->post('rols', 'RolController@store');
 Route::middleware('cors')->put('rols/{id}', 'RolController@update');
 Route::middleware('cors')->get('rols/{id}', 'RolController@show');
-
-//AttendeTicket EndPoint
-Route::middleware('cors')->get('attende_tickets', 'AttendeTicketController@index');
-Route::middleware('cors')->post('attende_tickets', 'AttendeTicketController@store');
-Route::middleware('cors')->put('attende_tickets/{id}', 'AttendeTicketController@update');
-Route::middleware('cors')->get('attende_tickets/{id}', 'AttendeTicketController@show');
-
- */
+*/
