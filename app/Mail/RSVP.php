@@ -42,7 +42,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->image     = ($image)?$image:null;
         $this->message   = $message;
         $this->footer    = $footer;
-        $this->subject   = ($subject)?$subject:"[Invitación] ";
+        $this->subject   = "[Invitación - ".$event->name."]";
     }
 
     /**
