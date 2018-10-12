@@ -55,7 +55,6 @@ Route::group(
     }
 );
 
-
 /****************
  * eventTypes
  ****************/
@@ -70,10 +69,10 @@ Route::group(
  * events
  ****************/
 // Este Route::group es un expermimento para detectar a el usuario logueado
-// pero sin producir ningun tipo de errores. 
-// Route::group( 
+// pero sin producir ningun tipo de errores.
+// Route::group(
 //     ['middleware' => 'tokenauth.firebase'], function () {
-        Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
 //     }
 // );
 Route::group(
@@ -97,18 +96,17 @@ Route::group(
     }
 );
 
-/** 
+/**
  * *****************
  *    users
  * *****************
  */
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::put("me/refresh_token","UserController@storeRefreshToken");
+        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         //Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
- 
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
@@ -124,7 +122,6 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
  * You can find differents option how get, post, put, deleted
  *
  */
-
 
 //Events
 
@@ -148,7 +145,6 @@ Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
-
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
 //middleware('auth.firebase')->
@@ -163,4 +159,4 @@ Route::middleware('cors')->get('rols', 'RolController@index');
 Route::middleware('cors')->post('rols', 'RolController@store');
 Route::middleware('cors')->put('rols/{id}', 'RolController@update');
 Route::middleware('cors')->get('rols/{id}', 'RolController@show');
-*/
+ */
