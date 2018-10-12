@@ -40,6 +40,7 @@ Route::group(
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
+Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 
 /****************
  * organizations
