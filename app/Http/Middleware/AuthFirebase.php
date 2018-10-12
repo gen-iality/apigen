@@ -30,8 +30,10 @@ class AuthFirebase
             $firebase = (new Factory)
             ->withServiceAccount($serviceAccount)
             ->create();
-
-            $api_key = "AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
+      
+            $json = file_get_contents(base_path('firebase_credentials.json'));
+            $data = json_decode($json,true);
+            $api_key = $data['api_key'];
 
             $auth = $firebase->getAuth();
             //Se carga el projectID solo necesario para la libreria Auth
@@ -44,7 +46,9 @@ class AuthFirebase
             } elseif (isset($_REQUEST['token'])) {
                 $firebaseToken = $_REQUEST['token'];
             }
-            $refresh_token = $_REQUEST['refresh_token'];
+
+            //Esta linea llega el refresh token
+            // $refresh_token = $_REQUEST['refresh_token'];
             
             //miramos si el token viene en una cookie
             /*if (isset($_COOKIE['evius_token'])) {
@@ -56,25 +60,14 @@ class AuthFirebase
             if (!$firebaseToken) {
                 return response(
                     [
-                        'status' => Response::HTTP_NOT_FOUND,
+                        'status' => Response::HTTP_UNAUTHORIZED,
                         'message' => 'Error: No token provided',
-                    ], Response::HTTP_NOT_FOUND
+                    ], Response::HTTP_UNAUTHORIZED
                 );
             }
             //Se verifica la valides del token
-
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
 
-            /* if(false)
-            {
-                return response("Im here");
-            }else{
-                return response("ok");
-            } */
-
-
-            //Se obtiene la informacion del usuario
-            //Claim sub user_id
             $user_auth = $auth->getUser($verifiedIdToken->getClaim('sub'));
             $user = User::where('uid', '=', $user_auth->uid)->first();
 
@@ -90,19 +83,19 @@ class AuthFirebase
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
 
             //API Url
-            $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
-            //Params sent for refresh_token
-            $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
-            //Send params to method POST
-            $client = new Client();
-            $response = $client->request('POST', $url, ['form_params' => $body]);
+            // $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
+            // //Params sent for refresh_token
+            // $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
+            // //Send params to method POST
+            // $client = new Client();
+            // $response = $client->request('POST', $url, ['form_params' => $body]);
 
             return response(
                 [
-                    'status' => Response::HTTP_NOT_FOUND,
+                    'status' => Response::HTTP_UNAUTHORIZED,
                     'message' => 'Error: ExpiredToken',
-                    'request' => (string) $response->getBody(),
-                ], Response::HTTP_NOT_FOUND
+                    // 'request' => (string) $response->getBody(),
+                ], Response::HTTP_UNAUTHORIZED
             );
 
         }
