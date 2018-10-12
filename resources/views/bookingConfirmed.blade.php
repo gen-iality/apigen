@@ -12,6 +12,8 @@
     </span>
 </div>
 
+![QR]({{$qr}})
+
 ---
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   

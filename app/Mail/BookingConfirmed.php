@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Event;
 use App\EventUser;
+use QRCode;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
@@ -15,6 +16,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $event;
     public $event_location;
     public $eventuser_name;
+    public $eventuser_id;
+    public $qr;
 
     /**
      * Create a new message instance.
@@ -27,10 +30,12 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
         $eventUser_name =($eventUser["properties"]["name"]);
+        $eventUser_id = $eventUser->id;
 
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
+        $this->eventuser_id = $eventUser_id;
         $this->subject   = "[Invitación] ";
     }
 
@@ -41,6 +46,14 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $file = 'qr/'.$this->eventuser_id.'_qr.png';
+        $image = QRCode::url('https://eviusco.netlify.com/')
+                ->setSize(8)
+                ->setMargin(4)
+                ->setOutfile($file)
+                ->png();
+        $this->qr = url($file);
+
         return $this
         ->subject($this->subject)
         ->markdown('bookingConfirmed');        

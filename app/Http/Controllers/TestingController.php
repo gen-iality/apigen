@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\BookingConfirmed;
 use Illuminate\Support\Facades\Mail;
+use QRCode;
 
 class TestingController extends Controller
 {
@@ -48,5 +49,19 @@ class TestingController extends Controller
     {
         return "usuario";
     }
+
+    public function qrTesting()
+    {
+        $public_path = public_path();
+        $file = 'qr/qr.png';
+        $image = QRCode::url('https://eviusco.netlify.com/')
+                ->setOutfile($file)
+                ->png();
+
+        return $file;
+    }
+
+
+    
 
 }
