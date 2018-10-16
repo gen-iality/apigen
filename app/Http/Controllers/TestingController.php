@@ -70,8 +70,8 @@ class TestingController extends Controller
 
     public function qrTesting()
     {
-        $file = 'qr/prueba_qr.png';
-        $image = QRCode::text("prueba")
+        $file = 'qr/prueba2_qr.png';
+        $image = QRCode::text("prueba2")
                 ->setSize(8)
                 ->setMargin(4)
                 ->setOutfile($file)

@@ -59,9 +59,6 @@ class providerSentEmailEventListener
         $messageId=($event->res['data']['message-id']);
         $array_email = array_keys($event->message->getTo());
         $user_email= reset($array_email);
-        // var_dump($user_email);
-
-        // var_dump($user_email);
         
         $data = array( 
             // "limit" => 10000,
@@ -79,23 +76,29 @@ class providerSentEmailEventListener
         //chambonada mientras la presentacion despues esto tiene que ir en un servicio asincrono
         sleep(1);
         try{
-            $report = ($mailin->get_report($data)["data"]);
-            $user_reason = ($report["0"]["reason"]);
-            $user_status = ($report["0"]["event"]);
 
             $message_user = MessageUser::where('email', $user_email)
             ->where('sender_id', 'exists', false)
             ->orderBy('created_at','desc')->first();
-
+        
             if(is_null($message_user)){
                 return "false";
             }else{
-                $message_user->sender_id = $messageId;
-                $message_user->status = $user_status;
-                $message_user->history = $report;
-                $message_user->status_message = $user_reason;
 
+                $report = ($mailin->get_report($data)["data"]);
+                if (isset($report) && isset($report["0"])){ 
+                    $user_reason = ($report["0"]["reason"]);
+                    $user_status = ($report["0"]["event"]);
+                    $message_user->status_message = $user_reason;
+                    $message_user->status = $user_status;
+                    $message_user->history = $report;
+                }
+
+                $message_user->sender_id = $messageId;
                 $message_user->save(); 
+
+
+
             }
 
     }catch(\Exception $e){
