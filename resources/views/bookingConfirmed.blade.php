@@ -49,10 +49,10 @@ Ubicación del evento  <br>
     </span>
 </div>
 
-Click aqui
+<!-- Click aqui
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])
 Confirmar Cuenta
-@endcomponent
+@endcomponent -->
 
 @component('mail::subcopy')
 @endcomponent
