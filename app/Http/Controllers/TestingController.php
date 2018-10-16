@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App;
 use App\User;
 use Illuminate\Http\Response;
+use QRCode;
 
 class TestingController extends Controller
 {
