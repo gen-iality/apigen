@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
  *
  */
-class RSVPController extends Controller
+class RSVPController extends Controller implements ShouldQueue
 {
 
     public function test()

@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 //use Kreait\Firebase\Auth;
 
 
-class AppServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider implements ShouldQueue
 {
     /**
      * Bootstrap any application services.

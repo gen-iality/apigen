@@ -15,7 +15,7 @@ class AuthFirebase
 
     public function __construct(\Kreait\Firebase\Auth $auth)
     {
-        $this->auth = $auth;
+     	$this->auth = $auth;
     }
 
     /**
@@ -60,7 +60,7 @@ class AuthFirebase
             if (!$firebaseToken) {
                 return response(
                     [
-                        'status' => Response::HTTP_UNAUTHORIZED,
+                     	'status' => Response::HTTP_UNAUTHORIZED,
                         'message' => 'Error: No token provided',
                     ], Response::HTTP_UNAUTHORIZED
                 );
