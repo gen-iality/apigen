@@ -113,11 +113,11 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function activeWebHooks($id)
+    public function activeWebHooks()
     {	
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         
-		$data = array( "url" => "https://eviusco.netlify.com/UpdateStatusMessage",
+		$data = array( "url" => "https://dev.mocionsoft.com/evius/eviusapilaravel/public/api/UpdateStatusMessage",
 			"description" => "Update status of messages",
 			"events" => array( 
                 "delivered", "request" , "hard_bounce", "soft_bounce", 
@@ -126,7 +126,6 @@ class MessageController extends Controller
 			) ,
 			"is_plat" => 0
         );
- 
 		var_dump($mailin->create_webhook($data));
 	}
 
@@ -134,16 +133,16 @@ class MessageController extends Controller
      * Change status in email sent by Sendinblue.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response        
      */
     public function UpdateStatusMessage(Request $request)
-    {
+    {        
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         sleep(1);
         try{
 
             $data = $request->json()->all();
-
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user");
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
             $user_reason = ($data["reason"]);
@@ -152,7 +151,6 @@ class MessageController extends Controller
             //update the new status that is in data
 
             $message_user = MessageUser::where('sender_id', $message_id)
-            ->where('sender_id', 'exists', false)
             ->orderBy('created_at','desc')->first();
 
             $message_user->status = $user_status;
@@ -167,9 +165,9 @@ class MessageController extends Controller
 
             $message_user->save(); 
 
-    }catch(\Exception $e){
-        var_dump($e);
-    
-    }
+        }catch(\Exception $e){
+            var_dump($e);
+        
+        }
     }
 }

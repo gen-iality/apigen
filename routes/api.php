@@ -93,9 +93,6 @@ Route::group(
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 
-//Esta ruta es para el webhooks que actualizara el status del email enviado
-// Route::get('messages/changeStatus', 'MessageController@ChangeStatusMessage');
-
 /***************
  * categories
  ****************/
@@ -126,6 +123,8 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
+Route::post('UpdateStatusMessage', 'MessageController@UpdateStatusMessage');
+Route::get('activeWebhooks', 'MessageController@activeWebHooks');
 
 /**
  * This is the routes of event types

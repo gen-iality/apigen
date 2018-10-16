@@ -73,7 +73,6 @@ class providerSentEmailEventListener
             "message_id" => $messageId,
             // "template_id" => 0
         );
-        //chambonada mientras la presentacion despues esto tiene que ir en un servicio asincrono
         sleep(1);
         try{
 
@@ -84,21 +83,8 @@ class providerSentEmailEventListener
             if(is_null($message_user)){
                 return "false";
             }else{
-
-                $report = ($mailin->get_report($data)["data"]);
-                if (isset($report) && isset($report["0"])){ 
-                    $user_reason = ($report["0"]["reason"]);
-                    $user_status = ($report["0"]["event"]);
-                    $message_user->status_message = $user_reason;
-                    $message_user->status = $user_status;
-                    $message_user->history = $report;
-                }
-
                 $message_user->sender_id = $messageId;
                 $message_user->save(); 
-
-
-
             }
 
     }catch(\Exception $e){
