@@ -29,6 +29,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public function __construct(
         $eventUser)
     {
+        Log::debug("consutryendo");
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
         $eventUser_name =($eventUser["properties"]["name"]);
@@ -39,7 +40,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
         $this->subject   = "[Tu Ticket - ".$event->name."]" ;
-    }
+Log::debug("al final del constructor del correo");    
+}
 
     /**
      * Build the message.
@@ -49,16 +51,16 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public function build()
     {
         $logo_evius = 'images/logo.png';
-        var_dump($logo_evius);
+        Log::debug("BUILIDNG EL COREO ******");
         $file = 'qr/'.$this->eventuser_id.'_qr.png';
         $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
-                ->setOutfile($file)
+//                ->setOutfile($file)
                 ->png();
-
-     
-                Log::debug("useridmail".$this->eventuser_id);
+Log::debug($file."FINFILE");
+        Log::debug($image);
+        Log::debug("useridmail".$this->eventuser_id);
         $this->qr = url($file);
         $this->logo = url($logo_evius);
 
