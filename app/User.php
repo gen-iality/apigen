@@ -30,6 +30,8 @@ class User extends Moloquent
             function ($model) {
                 
                 try{
+
+                    //Si ya existe un usuario con ese correo se jode
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
@@ -44,7 +46,7 @@ class User extends Moloquent
                     $model->uid = $fbuser->uid;
                     //var_dump($fbuser);
                 }catch(\Exception $e){
-                    var_dump($e);
+                    var_dump($e->getMessage());
                 }
             }
         );
