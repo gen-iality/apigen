@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AppServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider implements ShouldQueue
 {
     /**
      * Bootstrap any application services.
