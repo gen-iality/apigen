@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\BookingConfirmed;
-use Illuminate\Support\Facades\Mail;
-use QRCode;
+use App;
+use App\User;
+use Illuminate\Http\Response;
 
 class TestingController extends Controller
 {
@@ -13,6 +13,24 @@ class TestingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function auth(\Kreait\Firebase\Auth $fireauth)
+    {
+        /*$o = new User(
+            [
+                "name" => 'test' . time(),
+                "email" => 'apps' . time() . "@mocionsoft.com",
+            ]
+        );
+        $o->save();
+        return $o;
+        */
+        $u = User::find("5bc51599cb22e0643e006173");
+        $u->save();
+        $r = $u;
+        return $r;
+    }
+
     public function sendemail(string $id)
     {
         // $data = $request->json()->all();
@@ -31,7 +49,6 @@ class TestingController extends Controller
         //     );
         // return "ok";
         /*
-    
 
     // var_dump($mail->build());
     Mail::to('juan.lopez@mocionsoft.com')
@@ -52,16 +69,13 @@ class TestingController extends Controller
 
     public function qrTesting()
     {
-        $public_path = public_path();
-        $file = 'qr/qr.png';
-        $image = QRCode::url('https://eviusco.netlify.com/')
-                ->setOutfile($file)
-                ->png();
+        // $public_path = public_path();
+        // $file = 'qr/qr.png';
+        // $image = QRCode::url('https://eviusco.netlify.com/')
+        //         ->setOutfile($file)
+        //         ->png();
 
-        return $file;
+        // return $file;
     }
-
-
-    
 
 }

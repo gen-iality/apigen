@@ -18,6 +18,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_name;
     public $eventuser_id;
     public $qr;
+    public $logo;
 
     /**
      * Create a new message instance.
@@ -36,7 +37,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
-        $this->subject   = "[Invitación] ";
+        $this->subject   = "[Tu Ticket - ".$event->name."]" ;
     }
 
     /**
@@ -46,13 +47,16 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $logo_evius = 'images/logo.png';
+        var_dump($logo_evius);
         $file = 'qr/'.$this->eventuser_id.'_qr.png';
-        $image = QRCode::url('https://eviusco.netlify.com/')
+        $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->setOutfile($file)
                 ->png();
         $this->qr = url($file);
+        $this->logo = url($logo_evius);
 
         return $this
         ->subject($this->subject)

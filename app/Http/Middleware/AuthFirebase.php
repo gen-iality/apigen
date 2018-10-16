@@ -16,6 +16,14 @@ use Storage;
 
 class AuthFirebase
 {
+
+    protected $auth;
+
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -55,6 +63,9 @@ class AuthFirebase
                 $firebaseToken = $_REQUEST['token'];
             }
 
+            //Esta linea llega el refresh token
+            // $refresh_token = $_REQUEST['refresh_token'];
+
             //miramos si el token viene en una cookie
             if (isset($_COOKIE['evius_token'])) {
                 $firebaseToken = $_COOKIE['evius_token'];
@@ -84,7 +95,7 @@ class AuthFirebase
             //Se verifica la valides del token
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
 
-            $user_auth = $auth->getUser($verifiedIdToken->getClaim('sub'));
+            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
             $user = User::where('uid', '=', $user_auth->uid)->first();
 
             //store refresh_tokeb

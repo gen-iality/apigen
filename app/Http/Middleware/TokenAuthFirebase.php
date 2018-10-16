@@ -12,6 +12,13 @@ use Kreait\Firebase\ServiceAccount;
 
 class TokenAuthFirebase
 {
+
+    protected $auth;
+
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }    
     /**
      * Handle an incoming request.
      *
@@ -24,11 +31,7 @@ class TokenAuthFirebase
         //Se carga el sdk de firebase para PHP
         try {
             $firebaseToken = null;
-            $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-            $firebase = (new Factory)
-                ->withServiceAccount($serviceAccount)
-                ->create();
-            $auth = $firebase->getAuth();
+
             //Se carga el projectID solo necesario para la libreria Auth
             $projectId = 'eviusauth';
             $verifier = new Verifier($projectId);
@@ -55,7 +58,7 @@ class TokenAuthFirebase
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             //Se obtiene la informacion del usuario
             //Claim sub user_id
-            $user_auth = $auth->getUser($verifiedIdToken->getClaim('sub'));
+            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
             $user = User::where('uid', '=', $user_auth->uid)->first();
 
             if (!$user) {

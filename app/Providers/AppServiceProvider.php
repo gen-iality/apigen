@@ -12,6 +12,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+//use Kreait\Firebase\Auth;
+
+
 class AppServiceProvider extends ServiceProvider implements ShouldQueue
 {
     /**
@@ -39,6 +44,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                     );
             }
         });
+
+
+        
     }
 
     /**
@@ -54,7 +62,17 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                 return new FilterQuery();
             }
         );*/
-                
+
+        $this->app->singleton(
+            'Kreait\Firebase\Auth', function ($app) {
+               $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+               $firebase = (new Factory)
+                    ->withServiceAccount($serviceAccount)
+                    ->create();
+                return $firebase->getAuth();
+            }
+        );
+
         $this->app->bind(
             'App\evaLib\Services\UserEventService', function ($app) {
                 return new UserEventService();

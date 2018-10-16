@@ -24,6 +24,8 @@ PUT/PATCH      /photos/{photo}            update    photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
+Route::get('test/auth', 'TestingController@auth');
+
 /****************
  * eventUsers
  ****************/
@@ -40,6 +42,7 @@ Route::group(
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
+Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 
 /****************
  * organizations
@@ -56,12 +59,14 @@ Route::group(
 );
 
 /****************
- * eventTypes
+ * Users
  ****************/
-Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
+        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
+        Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
     }
 );
 
@@ -85,6 +90,8 @@ Route::group(
         Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
     }
 );
+Route::get('users/{id}/events', 'EventController@EventbyUsers');
+Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 
 /***************
  * categories
@@ -96,15 +103,14 @@ Route::group(
     }
 );
 
-/**
- * *****************
- *    users
- * *****************
- */
+/****************
+ * eventTypes
+ ****************/
+Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
-        //Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
+        Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
     }
 );
 

@@ -103,11 +103,11 @@ class EventUserController extends Controller
     {
         try {
 
-            //las propiedades del usuario se estan migrando de una propiedad directa
+            //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
-            $userData = $request->json()->all();
 
+            $userData = $request->json()->all();
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
             }

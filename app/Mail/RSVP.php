@@ -23,6 +23,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $subject;
     public $urlconfirmacion;
     public $event_location;
+    public $logo;
     /**
      * Create a new message instance.
      *
@@ -41,7 +42,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->image     = ($image)?$image:null;
         $this->message   = $message;
         $this->footer    = $footer;
-        $this->subject   = ($subject)?$subject:"[Invitación] ";
+        $this->subject   = "[Invitación - ".$event->name."]";
     }
 
     /**
@@ -51,6 +52,8 @@ class RSVP extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $logo_evius = 'images/logo.png';
+        $this->logo = url($logo_evius);
         
         return $this
         ->subject($this->subject)
