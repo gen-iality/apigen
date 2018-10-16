@@ -50,7 +50,7 @@ class UserEventService
         $eventUserFields += $matchAttributes;
 
         //avoid saving uid as user properties
-        if ($userData['uid']) {
+        if (isset($userData['uid'])) {
             unset($userData['uid']);
         }
 
