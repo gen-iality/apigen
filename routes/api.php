@@ -24,6 +24,8 @@ PUT/PATCH      /photos/{photo}            update    photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
+Route::get('test/auth', 'TestingController@auth');
+
 /****************
  * eventUsers
  ****************/

@@ -37,18 +37,14 @@ class UserEventService
         if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
         }
+
+        /* Buscamos primero el usuario por email y sino existe lo creamos */
         $email = $userData['email'];
-
-        if (!isset($userData['uid'])) {
-            $userData['uid'] = $email;
-        }
-
         $matchAttributes = ['email' => $email];
-
-        //Revisamos por el id si el usuario existe
         $user = User::updateOrCreate($matchAttributes, $userData);
 
-        //test 5b855232cb22e03382263973 vent_id 5b7c4159c06586333f616385 userid 5b8551d1cb22e0338127b183
+
+        /* ya con el usuario actualizamos o creamos el eventUser */
         $matchAttributes = ["event_id" => $event->id, "userid" => $user->id];
 
         $eventUserFields += $matchAttributes;

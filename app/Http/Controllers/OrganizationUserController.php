@@ -62,15 +62,9 @@ class OrganizationUserController extends Controller
     }
 
 
-    public function verifyandcreate(Request $request, $id)
+    public function verifyandcreate(Request $request, \Kreait\Firebase\Auth $auth, $id)
     {
-        //
 
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        $auth = $firebase->getAuth();
         try {
             $userData = $auth->getUserByEmail($request->email);
             

@@ -11,6 +11,11 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\Resource;
 
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+//use Kreait\Firebase\Auth;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -38,6 +43,9 @@ class AppServiceProvider extends ServiceProvider
                     );
             }
         });
+
+
+        
     }
 
     /**
@@ -53,7 +61,17 @@ class AppServiceProvider extends ServiceProvider
                 return new FilterQuery();
             }
         );*/
-                
+
+        $this->app->singleton(
+            'Kreait\Firebase\Auth', function ($app) {
+               $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+               $firebase = (new Factory)
+                    ->withServiceAccount($serviceAccount)
+                    ->create();
+                return $firebase->getAuth();
+            }
+        );
+
         $this->app->bind(
             'App\evaLib\Services\UserEventService', function ($app) {
                 return new UserEventService();

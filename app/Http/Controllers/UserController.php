@@ -100,19 +100,12 @@ class UserController extends Controller
         return $data;
     }
 
-    public function VerifyAccount(Request $request, $uid)
+    public function VerifyAccount(Request $request, \Kreait\Firebase\Auth $auth, $uid)
     {
         $data = $request->json()->all();
         $user = User::where("uid", $uid);
         $password = $data["password"];
 
-        $firebaseToken = null;
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        
-        $firebase = (new Factory)
-        ->withServiceAccount($serviceAccount)
-        ->create();
-        $auth = $firebase->getAuth();
         $user_auth = $auth->updateUser($uid, [  
             "password" => $password,
             "emailVerified" => true

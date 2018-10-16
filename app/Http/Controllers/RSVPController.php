@@ -196,11 +196,7 @@ class RSVPController extends Controller
 
         $evtUsers = EventUser::where($condiciones)->get();
 
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        $auth = $firebase->getAuth();
+        $auth = resolve('Kreait\Firebase\Auth');
 
         $usersfilter = function ($data) use ($auth) {
             $temporal = (object) [];

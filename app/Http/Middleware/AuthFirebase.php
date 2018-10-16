@@ -7,12 +7,17 @@ use App\User;
 use Closure;
 use Firebase\Auth\Token\Verifier;
 use Illuminate\Http\Response;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
-use GuzzleHttp\Client;
 
 class AuthFirebase
 {
+
+    protected $auth;
+
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -21,25 +26,20 @@ class AuthFirebase
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {  
+    {
         //Se carga el sdk de firebase para PHP
         try {
             $firebaseToken = null;
-            $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-            
-            $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-      
+
             $json = file_get_contents(base_path('firebase_credentials.json'));
-            $data = json_decode($json,true);
+            $data = json_decode($json, true);
             $api_key = $data['api_key'];
 
-            $auth = $firebase->getAuth();
+
             //Se carga el projectID solo necesario para la libreria Auth
             $projectId = 'eviusauth';
             $verifier = new Verifier($projectId);
-            
+
             //miramos si el token viene en la Petición
             if (isset($_REQUEST['evius_token'])) {
                 $firebaseToken = $_REQUEST['evius_token'];
@@ -49,7 +49,7 @@ class AuthFirebase
 
             //Esta linea llega el refresh token
             // $refresh_token = $_REQUEST['refresh_token'];
-            
+
             //miramos si el token viene en una cookie
             /*if (isset($_COOKIE['evius_token'])) {
             $firebaseToken = $_COOKIE['evius_token'];
@@ -68,7 +68,7 @@ class AuthFirebase
             //Se verifica la valides del token
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
 
-            $user_auth = $auth->getUser($verifiedIdToken->getClaim('sub'));
+            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
             $user = User::where('uid', '=', $user_auth->uid)->first();
 
             if (!$user) {

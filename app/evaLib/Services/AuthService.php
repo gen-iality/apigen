@@ -17,12 +17,7 @@ class AuthService
     private static function verifyAndInviteUsers($request, $id)
     {
 
-        //Inicializamos el servicio de firebase
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        $auth = $firebase->getAuth();
+        $auth = resolve('Kreait\Firebase\Auth');
 
         //intentamos buscar el usuario en la autenticacion o lo creamos
         $userData = null;
