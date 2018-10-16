@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Event;
 use App\EventUser;
 use QRCode;
+use Illuminate\Support\Facades\Log;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
@@ -55,9 +56,12 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->setMargin(4)
                 ->setOutfile($file)
                 ->png();
+
         $this->qr = url($file);
         $this->logo = url($logo_evius);
-
+        Log::debug($file);
+        Log::debug(url($file));
+        Log::debu($image);
         return $this
         ->subject($this->subject)
         ->markdown('bookingConfirmed');        
