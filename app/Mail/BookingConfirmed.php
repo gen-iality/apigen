@@ -48,7 +48,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public function build()
     {
         $logo_evius = 'images/logo.png';
-        var_dump($logo_evius);
+        var_dump($this->eventuser_id);
         $file = 'qr/'.$this->eventuser_id.'_qr.png';
         $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)

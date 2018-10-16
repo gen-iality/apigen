@@ -93,6 +93,9 @@ Route::group(
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 
+//Esta ruta es para el webhooks que actualizara el status del email enviado
+// Route::get('messages/changeStatus', 'MessageController@ChangeStatusMessage');
+
 /***************
  * categories
  ****************/
