@@ -108,6 +108,7 @@ class UserEventService
             } else {
                 $newEventUser = $eventUser->replicate();
                 $newEventUser->event_id = $event->id;
+                $newEventUser->stated_id = EventUser::DRAFT;
                 $newEventUser->save();
                 $eventAttendees[] = $newEventUser;
                 echo  " NuevoeventUser:>> ".$newEventUser->id." <<";

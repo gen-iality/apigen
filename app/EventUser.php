@@ -55,6 +55,12 @@ class EventUser extends Moloquent
         return $this;
     }
 
+    public function draft()
+    {   
+        $this->state_id = self::STATE_DRAFT;
+        return $this;
+    }
+
     public function checkIn()
     {
         try {
