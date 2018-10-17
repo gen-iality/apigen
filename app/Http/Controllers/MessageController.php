@@ -136,7 +136,81 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response        
      */
-    public function UpdateStatusMessage(Request $request)
+    public function UpdateStatusMessagePOST(Request $request)
+    {        
+        $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
+        sleep(1);
+        try{
+
+            $data = $request->json()->all();
+            var_dump($data);
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user");
+            Log::debug("data es".$data);
+            //search messageUser by message-id
+            $message_id = ($data["message-id"]);
+            $user_reason = ($data["reason"]);
+            $user_status = ($data["event"]);
+            //update the new status that is in data
+
+            $message_user = MessageUser::where('sender_id', $message_id)
+            ->orderBy('created_at','desc')->first();
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user".$message_user);
+
+            $message_user->status = $user_status;
+            // $message_user->history = $report;
+            $message_user->status_message = $user_reason;
+
+            if(is_null($message_user->history)){
+                $message_user->history = [];   
+            }
+            $message_user->history[] = $user_status;
+            
+
+            $message_user->save(); 
+
+        }catch(\Exception $e){
+            var_dump($e);
+        
+        }
+    }
+    public function UpdateStatusMessagePUT(Request $request)
+    {        
+        $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
+        sleep(1);
+        try{
+
+            $data = $request->json()->all();
+            var_dump($data);
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user");
+            Log::debug("data es".$data);
+            //search messageUser by message-id
+            $message_id = ($data["message-id"]);
+            $user_reason = ($data["reason"]);
+            $user_status = ($data["event"]);
+            //update the new status that is in data
+
+            $message_user = MessageUser::where('sender_id', $message_id)
+            ->orderBy('created_at','desc')->first();
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user".$message_user);
+
+            $message_user->status = $user_status;
+            // $message_user->history = $report;
+            $message_user->status_message = $user_reason;
+
+            if(is_null($message_user->history)){
+                $message_user->history = [];   
+            }
+            $message_user->history[] = $user_status;
+            
+
+            $message_user->save(); 
+
+        }catch(\Exception $e){
+            var_dump($e);
+        
+        }
+    }
+    public function UpdateStatusMessageGET(Request $request)
     {        
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         sleep(1);
