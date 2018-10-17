@@ -143,8 +143,9 @@ class MessageController extends Controller
         try{
 
             $data = $request->json()->all();
-            var_dump($data);
-            Log::debug("Se recibio la informacion ahora se esta buscando el message_user");
+            $datos = (json_decode($request->getContent(), true));
+            var_dump(json_decode($request->getContent(), true));
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user".$datos);
             Log::debug("data es".$data);
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
