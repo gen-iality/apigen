@@ -36,12 +36,13 @@ class RSVP extends Mailable implements ShouldQueue
 
         $event_location = ($event["location"]["FormattedAddress"]);
 
-        $this->event     = $event;
+        $this->event          = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
         $this->image     = ($image)?$image:null;
         $this->message   = $message;
         $this->footer    = $footer;
+        
         $this->subject   = "[Invitación - ".$event->name."]";
     }
 
@@ -54,8 +55,10 @@ class RSVP extends Mailable implements ShouldQueue
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        
+        $from = isset($this->event->organizer->name)?$this->event->organizer->name."(Evius)":"(Evius)"; 
+
         return $this
+        ->from($from)
         ->subject($this->subject)
         ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
