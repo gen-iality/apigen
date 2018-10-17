@@ -59,7 +59,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->logo = url($logo_evius);
 
         return $this
-        ->subject($from)
+        ->from("apps@mocionsoft.com", $from)
         ->subject($this->subject)
         ->markdown('bookingConfirmed');        
     }
