@@ -7,6 +7,7 @@ use App\Http\Resources\MessageResource;
 use \App\Message;
 use App\Event;
 use Sendinblue\Mailin;
+use Illuminate\Support\Facades\Log;
 /**
  * Undocumented class
  */
@@ -142,7 +143,7 @@ class MessageController extends Controller
         try{
 
             $data = $request->json()->all();
-            // Log::debug("Se recibio la informacion ahora se esta buscando el message_user");
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user");
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
             $user_reason = ($data["reason"]);
