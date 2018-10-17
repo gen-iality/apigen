@@ -86,6 +86,15 @@ To apply this patch the following command must be executed:
  
 composer require "cweagans/composer-patches:~1.0"
 
+5. Once the application is installed, remember that you must execute the following 
+route so that the webhooks are created in the sendinblue api and so you can update 
+the status of the sent emails.
+
+```
+Route::get('activeWebhooks', 'SendinblueController@activeWebHooks');
+```
+
+
 ## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR
 A step by step series of examples that tell you how to get a development env running
 
