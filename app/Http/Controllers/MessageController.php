@@ -148,11 +148,11 @@ class MessageController extends Controller
             $message_id = ($data["message-id"]);
             $user_reason = ($data["reason"]);
             $user_status = ($data["event"]);
-
             //update the new status that is in data
 
             $message_user = MessageUser::where('sender_id', $message_id)
             ->orderBy('created_at','desc')->first();
+            Log::debug("Se recibio la informacion ahora se esta buscando el message_user".$message_user);
 
             $message_user->status = $user_status;
             // $message_user->history = $report;
