@@ -47,6 +47,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $from = isset($this->event->organizer->name)?$this->event->organizer->name."(Evius)":"(Evius)"; 
         $logo_evius = 'images/logo.png';
         $file = 'qr/'.$this->eventuser_id.'_qr.png';
         $image = QRCode::text($this->eventuser_id)
@@ -58,6 +59,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->logo = url($logo_evius);
 
         return $this
+        ->subject($from)
         ->subject($this->subject)
         ->markdown('bookingConfirmed');        
     }
