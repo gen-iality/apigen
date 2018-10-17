@@ -101,13 +101,12 @@ class UserEventService
 
         $eventUsers = EventUser::find($eventusersIds);
 
+        
         foreach ($eventUsers as $eventUser) {
 
             if ($eventUser->event_id == $event->id) {
                 $eventAttendees[] = $eventUser;
             } else {
-                $state = EventUser::STATE_DRAFT;
-                return $state;
                 $newEventUser = $eventUser->replicate();
                 $newEventUser->event_id = $event->id;
                 $newEventUser->stated_id = EventUser::STATE_DRAFT;
