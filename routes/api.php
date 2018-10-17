@@ -123,7 +123,7 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
-Route::post('UpdateStatusMessagePOST', 'MessageController@UpdateStatusMessagePOST');
+Route::post('UpdateStatusMessage', 'MessageController@UpdateStatusMessagePOST');
 Route::get('activeWebhooks', 'MessageController@activeWebHooks');
 
 /**
