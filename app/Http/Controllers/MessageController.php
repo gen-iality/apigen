@@ -148,9 +148,9 @@ class MessageController extends Controller
             Log::debug("Se recibio la informacion ahora se esta buscando el message_user".$datos);
             Log::debug("data es".$data);
             //search messageUser by message-id
-            $message_id = ($data["message-id"]);
-            $user_reason = ($data["reason"]);
-            $user_status = ($data["event"]);
+            $message_id = ($datos["message-id"]);
+            $user_reason = ($datos["reason"]);
+            $user_status = ($datos["event"]);
             //update the new status that is in data
 
             $message_user = MessageUser::where('sender_id', $message_id)
