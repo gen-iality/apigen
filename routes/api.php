@@ -123,6 +123,8 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
+Route::post('UpdateStatusMessage', 'MessageController@UpdateStatusMessage');
+Route::get('activeWebhooks', 'MessageController@activeWebHooks');
 
 /**
  * This is the routes of event types

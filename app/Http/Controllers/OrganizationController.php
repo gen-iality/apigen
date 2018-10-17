@@ -100,13 +100,14 @@ class OrganizationController extends Controller
     {
         $organization = Organization::findOrFail($organization_id);
         $data = $request->json()->all();
-        $org->fill($data);
-        $org->save();
+       
+        $organization->fill($data);
+        $organization->save();
 
         if (isset($data['category_ids'])) {
-            $org->categories()->sync($data['category_ids']);
+            $organization->categories()->sync($data['category_ids']);
         }
-        return new OrganizationResource($org);
+        return new OrganizationResource($organization);
     }
 
     /**
