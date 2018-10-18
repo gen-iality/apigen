@@ -143,4 +143,62 @@ class SendinBlueController extends Controller
         
         }
     }
+
+    /**
+     * Update manually status in email sent by Sendinblue.
+     *
+     * This methods allows function for update manually status 
+     * in email.
+     * 
+     * Once the method has been executed, search the database 
+     * for those that are in a "queued" state limited by 50.
+     * 
+     * Then it executes the report of the emails sent in order 
+     * to update the status of these.   
+     */
+    public function UpdateManuallyStatusMessage()
+    {        
+        $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
+        try{
+            Log::debug('va hacer a consulta');  
+        $message_users = MessageUser::where('sender_id', 'exists', true)
+            ->where('status', 'queued')
+            ->limit(50)->get();
+            
+       $ids = [];
+        foreach ($message_users as $message_user){
+            $messageId = $message_user->sender_id;
+            Log::debug('se obtuvo el message_id'.$messageId);            
+            $data = array( 
+                // "limit" => 10000,
+                // "start_date" => "",
+                // "end_date" => "",
+                // "offset" =>4,
+                // "date" => "2018-10-03",
+                // "days" => 0,
+                // "email" => "",
+                // "event" => "",
+                // "tags" => "",
+                "message_id" => $messageId,
+                // "template_id" => 0
+            );   
+            Log::debug('se va a pedir el reporte de los datos en sendinblue con el message_id');
+            $data_mailin = $mailin->get_report($data)["data"][0];
+            Log::debug('Data es '.json_encode($data_mailin));
+ 
+            $event  = $data_mailin["event"];
+            $message_user->reason = isset($data_mailin["reason"])?$data_mailin["reason"]:$data_mailin["event"];
+            $message_user->status = $event;
+
+            $message_user->save();
+            $ids[] = $message_user->id; 
+
+         }
+         return ["message"=>json_encode($ids)];
+        
+        }catch(\Exception $e){
+           return ["message"=>$e->getMessage()];
+        
+        }
+    }
 }

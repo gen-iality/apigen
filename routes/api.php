@@ -127,6 +127,7 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 //Routes for create a new webhooks in Sendinblue API and Update status of messages send by sendinblue
 Route::post('UpdateStatusMessage', 'SendinBlueController@UpdateStatusMessagePOST');
 Route::get('activeWebhooks', 'SendinBlueController@activeWebHooks');
+Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallyStatusMessage');
 
 /**
  * This is the routes of event types
