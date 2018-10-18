@@ -118,7 +118,7 @@ class SendinBlueController extends Controller
         try{
         Log::debug('Recibiendo la informacion de los email para actualizar');
             $data = $request->json()->all();
-        Log::debug('Data es '.$data);
+        Log::debug('Data es '.json_encode($data));
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
             $user_reason = ($data["reason"]);
