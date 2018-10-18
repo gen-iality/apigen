@@ -5,13 +5,16 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 use App\Event;
 use App\EventUser;
 use QRCode;
 
-class BookingConfirmed extends Mailable
+class BookingConfirmed extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, Dispatchable, InteractsWithQueue;
     public $event;
     public $event_location;
     public $eventuser_name;
@@ -37,6 +40,8 @@ class BookingConfirmed extends Mailable
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
         $this->subject   = "[Tu Ticket - ".$event->name."]" ;
+        $this->build();
+
 }
 
     /**
