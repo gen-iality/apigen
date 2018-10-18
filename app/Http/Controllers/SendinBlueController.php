@@ -121,7 +121,7 @@ class SendinBlueController extends Controller
         Log::debug('Data es '.json_encode($data));
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
-            $user_reason = ($data["reason"]);
+            $user_reason = (isset($data["reason"]) ? $data["reason"] : $data["event"]);
             $user_status = ($data["event"]);
             //update the new status that is in data
             $message_user = MessageUser::where('sender_id', $message_id)
