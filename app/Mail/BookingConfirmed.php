@@ -5,12 +5,11 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Event;
 use App\EventUser;
 use QRCode;
 
-class BookingConfirmed extends Mailable implements ShouldQueue
+class BookingConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
     public $event;
