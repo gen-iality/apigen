@@ -116,6 +116,7 @@ class SendinBlueController extends Controller
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         sleep(1);
         try{
+        Log::debug('Recibiendo la informacion de los email para actualizar');
             $data = $request->json()->all();
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
