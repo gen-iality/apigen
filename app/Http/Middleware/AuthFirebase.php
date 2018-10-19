@@ -72,7 +72,7 @@ class AuthFirebase
             $user = User::where('uid', '=', $user_auth->uid)->first();
 
             if (!$user) {
-                var_dump("vamos a crearlo");
+                
                 $user = User::create(get_object_vars($user_auth));
                 $user->save();
             }
