@@ -48,15 +48,16 @@ class OrganizationController extends Controller
      */
     public function store(Request $request, EvaRol $RolService)
     {
+        
         $data = $request->json()->all();
         $model = new Organization($data);
         $model->author = $request->get('user')->id;
-        $model->save();
 
         $user = $request->get('user');
 
-    
         $RolService->createAuthorAsOrganizationAdmin($request->get('user')->id, $model->_id);
+        
+        $model->save();
 
         if (isset($data['category_ids'])) {
             $model->categories()->sync($data['category_ids']);
@@ -102,6 +103,8 @@ class OrganizationController extends Controller
         $data = $request->json()->all();
        
         $organization->fill($data);
+
+        
         $organization->save();
 
         if (isset($data['category_ids'])) {
