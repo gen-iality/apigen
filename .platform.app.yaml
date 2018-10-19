@@ -15,7 +15,8 @@ build:
 # The left-hand side is the name of the relationship as it will be exposed
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
-#relationships:
+relationships:
+    database: "mydatabase:mongodb"
 #    database: 'mysqldb:mysql'
 
 # The hooks that will be triggered when the package is deployed.
@@ -55,3 +56,6 @@ web:
             scripts: false
             allow: true
             passthru: '/index.php'
+runtime:
+    extensions:
+        - mongodb
