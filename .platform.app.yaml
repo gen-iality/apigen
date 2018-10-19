@@ -1,61 +1,58 @@
-# .platform.app.yaml
-
-# The name of this application, which must be unique within a project.
-name: 'api'
-
-# The type key specifies the language and version for your application.
-type: 'php:7.2'
-
-# On PHP, there are multiple build flavors available. Pretty much everyone
-# except Drupal 7 users will want the composer flavor.
+# the name of this particular app, remember that we allow you
+# to create a project out of 1 or more apps, so this gives our
+# Laravel app a name...
+name: app
+type: php:7.0 # SSIA
 build:
+  # Same as before, this alerts our system to look for a composer.json
+  # or composer.lock file and install the dependencies defined therein
   flavor: composer
 
-# The relationships of the application with services or other applications.
-# The left-hand side is the name of the relationship as it will be exposed
-# to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
-# side is in the form `<service name>:<endpoint name>`.
 relationships:
-    database: "mydatabase:mongodb"
-#    database: 'mysqldb:mysql'
-
-# The hooks that will be triggered when the package is deployed.
-hooks:
-    # Build hooks can modify the application files on disk but not access any services like databases.
-    build: |
-      #rm web/app_dev.php
-    # Deploy hooks can access services but the file system is now read-only.
-    deploy: |
-      #app/console --env=prod cache:clear
-
-
-# The size of the persistent disk of the application (in MB).
-disk: 2048
-
-# The 'mounts' describe writable, persistent filesystem mounts in the application.
-# The keys are directory paths relative to the application root. The values are a
-# mount definition. In this case, `web-files` is just a unique name for the mount.
-mounts:
-    'web/files':
-        source: local
-        source_path: 'web-files'
-
-# The configuration of the application when it is exposed to the web.
+    database: "mydatabase:mongodb"  
+# basic web configuration for this particular app.  Laravel apps have a
+# "public" folder that serves as the web docroot.
 web:
-    locations:
-        '/':
-            # The public directory of the application relative to its root.
-            root: 'public'
-            # The front-controller script which determines where to send
-            # non-static requests.
-            passthru: '/index.php'
-        # Allow uploaded files to be served, but do not run scripts.
-        # Missing files get mapped to the front controller above.
-        '/files':
-            root: 'public/'
-            scripts: false
-            allow: true
-            passthru: '/index.php'
-runtime:
-    extensions:
-        - mongodb
+  locations:
+    "/":
+      root: "public"
+      index:
+        - index.php
+      allow: true
+      passthru: "/index.php"
+# How much disk space to allot to this app.  
+disk: 2048
+# This is where you define your writable file system paths.  the keys are the
+# paths in your app that need to be writable/uploadable.  The values are always
+# going to be named "shared:files/$WHATEVER_HERE", where "WHATEVER_HERE" can be
+# any arbitrary identifier.
+mounts:
+  # Laravel uses a directory off the root called "storage" for logs and cache.
+  # We don't support specifying nested directories so make these directories
+  # flat beyond "shared:files"
+  "/storage/app/public": "shared:files/app-public"
+  "/storage/framework/views": "shared:files/framework-views"
+  "/storage/framework/sessions": "shared:files/framework-sessions"
+  "/storage/framework/cache": "shared:files/framework-cache"
+  "/storage/logs": "shared:files/logs"
+  # And another cache directory here.
+  "/bootstrap/cache": "shared:files/bootstrap_cache"
+
+
+  # .platform.app.yaml, after all the rest ...
+mounts:
+  # Laravel uses a directory off the root called "storage" for logs and cache.
+  "/storage/app/public": "shared:files/storage/app/public"
+  "/storage/framework/views": "shared:files/storage/framework/views"
+  "/storage/framework/sessions": "shared:files/storage/framework/sessions"
+  "/storage/framework/cache": "shared:files/storage/framework/cache"
+  "/storage/logs": "shared:files/storage/logs"
+  # And another cache directory here.
+  "/bootstrap/cache": "shared:files/bootstrap_cache"
+#hooks:
+#  deploy: |
+#    mkdir -p storage/app/public
+#    mkdir -p storage/framework/views
+#    mkdir -p storage/framework/sessions
+#    mkdir -p storage/framework/cache
+#    mkdir -p storage/logs
