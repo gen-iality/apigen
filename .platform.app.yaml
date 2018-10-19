@@ -45,3 +45,8 @@ mounts:
 #    mkdir -p storage/framework/sessions
 #    mkdir -p storage/framework/cache
 #    mkdir -p storage/logs
+
+# Additional extensions
+runtime:
+    extensions:
+        - mongodb
