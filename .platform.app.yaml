@@ -2,7 +2,7 @@
 # to create a project out of 1 or more apps, so this gives our
 # Laravel app a name...
 name: app
-type: php:7.0 # SSIA
+type: php:7.2 # SSIA
 build:
   # Same as before, this alerts our system to look for a composer.json
   # or composer.lock file and install the dependencies defined therein
