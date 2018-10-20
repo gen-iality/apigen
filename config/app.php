@@ -1,5 +1,13 @@
 <?php
-error_reporting(E_ALL ^ E_DEPRECATED);
+error_reporting(E_ALL ^ E_DEPRECATED);// config/app/php
+$config = new \Platformsh\ConfigReader\Config();
+
+if($config->isAvailable()){
+    foreach($config->variables as $k => $v) {
+        putenv("$k=$v");
+    }
+}
+
 return [
 
     /*
