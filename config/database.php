@@ -13,7 +13,7 @@ if ($config->isAvailable()){
     putenv("DB_PASSWORD={$database['password']}");
 }
 
-var_dump($config);
+var_dump($pltrels['database'][0]);
 
 return [
 
