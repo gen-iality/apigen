@@ -1,13 +1,13 @@
 <?php
 error_reporting(E_ALL ^ E_DEPRECATED);// config/app/php
+// Extract enviorment configuration in platform.sh hosting
 $config = new \Platformsh\ConfigReader\Config();
-
 if($config->isAvailable()){
     foreach($config->variables as $k => $v) {
         putenv("$k=$v");
     }
 }
-
+// End offset extraction
 return [
 
     /*

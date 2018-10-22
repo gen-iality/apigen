@@ -1,7 +1,7 @@
 <?php
 // config/database.php
+// Extract enviorment configuration in platform.sh hosting
 $config = new Platformsh\ConfigReader\Config();
-
 if ($config->isAvailable()){
     $pltrels = $config->relationships;
     $database = $pltrels['database'][0];
@@ -11,7 +11,13 @@ if ($config->isAvailable()){
     putenv("DB_DATABASE={$database['path']}");
     putenv("DB_USERNAME={$database['username']}");
     putenv("DB_PASSWORD={$database['password']}");
+
+    $redis = $pltrels['applicationqueue'][0];
+    // putenv("QUEUE_DRIVER={$redis['scheme']}");
+    putenv("DB_HOST={$redis['REDIS_HOST']}");
+    putenv("DB_PORT={$redis['REDIS_PORT']}");
 }
+// End offset extraction
 
 return [
 
