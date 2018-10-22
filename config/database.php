@@ -12,10 +12,11 @@ if ($config->isAvailable()){
     putenv("DB_USERNAME={$database['username']}");
     putenv("DB_PASSWORD={$database['password']}");
 
+    var_dump($pltrels);
     $redis = $pltrels['applicationqueue'][0];
     // putenv("QUEUE_DRIVER={$redis['scheme']}");
-    putenv("DB_HOST={$redis['REDIS_HOST']}");
-    putenv("DB_PORT={$redis['REDIS_PORT']}");
+    // putenv("DB_HOST={$redis['REDIS_HOST']}");
+    // putenv("DB_PORT={$redis['REDIS_PORT']}");
 }
 // End offset extraction
 
