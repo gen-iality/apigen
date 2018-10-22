@@ -155,6 +155,7 @@ Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');

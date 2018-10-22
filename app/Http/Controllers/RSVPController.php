@@ -186,6 +186,16 @@ class RSVPController extends Controller implements ShouldQueue
 
     }
 
+    public function confirmRSVPTest(EventUser $eventUser)
+    {  
+        if (!$eventUser->confirm()->save()) {
+            App::abort(500, 'Error');
+        }
+        return $eventUser;
+        // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
+
+    }
+
     private static function getEventUsersByState($event, $state)
     {
         $condiciones = [['event_id', '=', $event->id]];

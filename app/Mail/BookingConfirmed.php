@@ -8,9 +8,12 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\evaLib\Services\GoogleFiles;
+
 use App\Event;
 use App\EventUser;
 use QRCode;
+use Storage;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
@@ -51,15 +54,22 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $gfService = new GoogleFiles();
+
         $from = isset($this->event->organizer->name)?$this->event->organizer->name."(Evius)":"(Evius)"; 
         $logo_evius = 'images/logo.png';
-        $file = 'qr/'.$this->eventuser_id.'_qr.png';
+        $file =$this->eventuser_id.'_qr.png';
+        $fullpath = storage_path('app/'.$file);
+
         $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
-                ->setOutfile($file)
+                ->setOutfile($fullpath)
                 ->png();
-        $this->qr = url($file);
+
+        $img = Storage::get($file);
+        $this->qr = $gfService->storeFile($img, $file);
+        $img = Storage::delete($file);
         $this->logo = url($logo_evius);
 
         return $this
