@@ -1,0 +1,52 @@
+# the name of this particular app, remember that we allow you
+# to create a project out of 1 or more apps, so this gives our
+# Laravel app a name...
+name: app
+type: php:7.2 # SSIA
+build:
+  # Same as before, this alerts our system to look for a composer.json
+  # or composer.lock file and install the dependencies defined therein
+  flavor: composer
+
+relationships:
+    database: "mydatabase:mongodb"  
+# basic web configuration for this particular app.  Laravel apps have a
+# "public" folder that serves as the web docroot.
+web:
+  locations:
+    "/":
+      root: "public"
+      index:
+        - index.php
+      allow: true
+      passthru: "/index.php"
+# How much disk space to allot to this app.  
+disk: 2048
+# This is where you define your writable file system paths.  the keys are the
+# paths in your app that need to be writable/uploadable.  The values are always
+# going to be named "shared:files/$WHATEVER_HERE", where "WHATEVER_HERE" can be
+# any arbitrary identifier.
+
+
+  # .platform.app.yaml, after all the rest ...
+mounts:
+  # Laravel uses a directory off the root called "storage" for logs and cache.
+  "/storage/app/public": "shared:files/storage/app/public"
+  "/storage/framework/views": "shared:files/storage/framework/views"
+  "/storage/framework/sessions": "shared:files/storage/framework/sessions"
+  "/storage/framework/cache": "shared:files/storage/framework/cache"
+  "/storage/logs": "shared:files/storage/logs"
+  # And another cache directory here.
+  "/bootstrap/cache": "shared:files/bootstrap_cache"
+#hooks:
+#  deploy: |
+#    mkdir -p storage/app/public
+#    mkdir -p storage/framework/views
+#    mkdir -p storage/framework/sessions
+#    mkdir -p storage/framework/cache
+#    mkdir -p storage/logs
+
+# Additional extensions
+runtime:
+    extensions:
+        - mongodb

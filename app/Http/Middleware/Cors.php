@@ -8,7 +8,7 @@ class Cors
 {
     public function handle($request, Closure $next)
     {
-        $originURL = "http://dev.mocionsoft.com:3000";
+        $originURL = "https://eviusco.netlify.com";
         //$originURL = "http://localhost";
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             $originURL = $_SERVER['HTTP_ORIGIN'];

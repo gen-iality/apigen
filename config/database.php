@@ -1,4 +1,17 @@
 <?php
+// config/database.php
+$config = new Platformsh\ConfigReader\Config();
+
+if ($config->isAvailable()){
+    $pltrels = $config->relationships;
+    $database = $pltrels['database'][0];
+    putenv("DB_CONNECTION={$database['scheme']}");
+    putenv("DB_HOST={$database['host']}");
+    putenv("DB_PORT={$database['port']}");
+    putenv("DB_DATABASE={$database['path']}");
+    putenv("DB_USERNAME={$database['username']}");
+    putenv("DB_PASSWORD={$database['password']}");
+}
 
 return [
 
@@ -40,13 +53,13 @@ return [
         ],
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', 'dev.mocionsoft.com'),
+            'host'     => env('DB_HOST', 'database.internal'),
             'port'     => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'evius2'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'mocion2040'),
+            'database' => env('DB_DATABASE', 'main'),
+            'username' => env('DB_USERNAME', 'main'),
+            'password' => env('DB_PASSWORD', 'main'),
             'options'  => [
-                'database' => env('DB_MONGO_OPT_DATABASE' ,'evius2') // sets the authentication database required by mongo 3
+                'database' => env('DB_DATABASE', 'main') // sets the authentication database required by mongo 3
             ]
         ],
         'mysql' => [

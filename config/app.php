@@ -1,5 +1,13 @@
 <?php
-error_reporting(E_ALL ^ E_DEPRECATED);
+error_reporting(E_ALL ^ E_DEPRECATED);// config/app/php
+$config = new \Platformsh\ConfigReader\Config();
+
+if($config->isAvailable()){
+    foreach($config->variables as $k => $v) {
+        putenv("$k=$v");
+    }
+}
+
 return [
 
     /*
@@ -30,7 +38,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'development'),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +51,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------

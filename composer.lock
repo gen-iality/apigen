@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7795d415241850bdbc84af418bd2106d",
+    "content-hash": "37ef52173fe9198dabf8af5ac000b686",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1670,7 +1670,7 @@
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -2479,6 +2479,48 @@
                 "invoker"
             ],
             "time": "2017-03-20T19:28:22+00:00"
+        },
+        {
+            "name": "platformsh/config-reader",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/platformsh/platformsh-config-reader-php.git",
+                "reference": "f985ff0b4eab1c81651ccae3aed62d76b7506be9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/platformsh/platformsh-config-reader-php/zipball/f985ff0b4eab1c81651ccae3aed62d76b7506be9",
+                "reference": "f985ff0b4eab1c81651ccae3aed62d76b7506be9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Platformsh\\ConfigReader\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Dawkins"
+                },
+                {
+                    "name": "Ori Pekelman",
+                    "email": "ori+github@pekelman.com"
+                }
+            ],
+            "description": "Small helper to access Platform.sh environment variables",
+            "time": "2018-01-12T17:50:23+00:00"
         },
         {
             "name": "predis/predis",
