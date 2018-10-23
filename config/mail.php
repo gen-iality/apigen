@@ -29,9 +29,8 @@ return [
     | the Mailgun mail service which will provide reliable deliveries.
     |
     */
-    
-    'host' => env('PLATFORM_SMTP_HOST', 'smtp.mailtrap.io'),
-    //'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
+
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
 
     /*
     |--------------------------------------------------------------------------
