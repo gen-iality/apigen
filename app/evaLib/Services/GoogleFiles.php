@@ -27,13 +27,25 @@ class GoogleFiles
             return '';
         }
 
+        if (empty($fileName)) {
+            $fileName = time() . ".png";
+        }
+
         $path = 'evius/events/' . $fileName;
+
         //debug         //$entityBody = file_get_contents('php://input');
         $disk = Storage::disk('gcs');
-        $file = $disk->put($path, $fileContent);
-        $url = $disk->url($path);
-        Storage::disk('gcs')->setVisibility($path, 'public');
-        return $url;
+
+        if (!is_object($fileContent)) {
+            $file = $disk->put($path, $fileContent);
+            $url = $disk->url($path);
+            Storage::disk('gcs')->setVisibility($path, 'public');
+            return $url;
+        } else {
+            $hola = $disk->put('evius/events', $fileContent);
+            Storage::disk('gcs')->setVisibility($hola, 'public');
+            return 'https://storage.googleapis.com/herba-images/' . $hola;
+        }
 
     }
 }
