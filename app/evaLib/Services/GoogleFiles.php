@@ -22,29 +22,18 @@ class GoogleFiles
      */
     public function storeFile($fileContent, $fileName = '')
     {
+
         if (!$fileContent) {
             return '';
         }
 
-        if (empty($fileName)) {
-            $fileName = time() . ".png";
-        }
-
         $path = 'evius/events/' . $fileName;
-
         //debug         //$entityBody = file_get_contents('php://input');
         $disk = Storage::disk('gcs');
-
-        if (!is_object($fileContent)) {
-            $file = $disk->put($path, $fileContent);
-            $url = $disk->url($path);
-            Storage::disk('gcs')->setVisibility($path, 'public');
-            return $url;
-        } else {
-            $hola = $disk->put('evius/events', $fileContent);
-            Storage::disk('gcs')->setVisibility($hola, 'public');
-            return 'https://storage.googleapis.com/herba-images/' . $hola;
-        }
+        $file = $disk->put($path, $fileContent);
+        $url = $disk->url($path);
+        Storage::disk('gcs')->setVisibility($path, 'public');
+        return $url;
 
     }
 }
