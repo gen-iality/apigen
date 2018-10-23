@@ -65,16 +65,18 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->setMargin(4)
                 ->setOutfile($fullpath)
                 ->png();
-            $img = Storage::get($file);
-            echo "generado";
+
+            echo "generado";    
+            //$img = Storage::get($file);
+           
 
             var_dump(Storage::get("public/" . $file));
             var_dump(Storage::get("app/public/" . $file));
             var_dump(Storage::get("/app/public/" . $file));
 
-            $gfService->storeFile($img, $file);
+            //$gfService->storeFile($img, $file);
             echo "generado";
-            $this->qr = $img;
+            //$this->qr = $img;
             //$img = Storage::delete($file);
             $this->logo = url($logo_evius);
 
