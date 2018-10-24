@@ -90,7 +90,6 @@ class AuthFirebase
             */
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             $user = self::validator($verifiedIdToken, $refresh_token, $request);
-            return response("ok");
             $request->attributes->add(['user' => $user]);
             return $next($request);
             
