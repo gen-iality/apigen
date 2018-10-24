@@ -10,7 +10,6 @@ use Illuminate\Http\Response;
 
 class AuthFirebase
 {
-
     protected $auth;
 
     public function __construct(\Kreait\Firebase\Auth $auth)
@@ -21,42 +20,61 @@ class AuthFirebase
     /**
      * Handle an incoming request.
      *
+     * El sigue el siguiente proceso para enviar la informacón a partir del token
+     * 1. Carga las credenciales de firebase.
+     * 2. Carga el token del usaurio si no existe token avisa directamente al usuario
+     * 3. Verifica el token 
+     *      3.1 si lo encuentra va a la función del validador el cual gurda el refresh_token 
+     *      y retorna el usuario
+     *      3.2 si no lo encuentra se dirije al catch el cual envia  por metodo POST 
+     *      La url que contiene el api_key y el cuerpo, el cual contiene el refresh token
+     *      del usuario(siempre es el mismo para el usuario) y la palabra refresh_token, para
+     *      indicar que se va a refrescar el token y generar un nuevo token ID.
+     *      3.4 Capturamos el nuevo id, verificamos la información y volvemos a ejecutar 
+     *      la funcion validador.
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
     {
-        //Se carga el sdk de firebase para PHP
         try {
+            /**
+             * Se carga el sdk de firebase para PHP
+             * Cargamos el json el cual contiene las credenciales para conectarse a firebase 
+             */
+            //
             $firebaseToken = null;
-
             $json = file_get_contents(base_path('firebase_credentials.json'));
             $data = json_decode($json, true);
             $api_key = $data['api_key'];
-
-
-            //Se carga el projectID solo necesario para la libreria Auth
-            $projectId = 'eviusauth';
+            /**
+             * Iniciamos el proyecto de firebase
+             * Se carga el projectID solo necesario para la libreria Auth
+             */
+            $projectId = $data['project_id'];
             $verifier = new Verifier($projectId);
+            /**
+             * Miramos si el token viene en la Petición
+             * El token viene en la petición el cual si llega con el nombre evius_token o token
+             * si llega en una cookie o en una REQUEST, 
+             * 
+             * En la Petición por el momento viene el refresh_token
+             */
+            //
+            if (isset($_REQUEST['evius_token'])) { $firebaseToken = $_REQUEST['evius_token']; } 
+            elseif (isset($_REQUEST['token'])) { $firebaseToken = $_REQUEST['token']; }
+            
+            if (isset($_REQUEST['refresh_token'])){ $refresh_token = $_REQUEST['refresh_token']; }
+            if (isset($_COOKIE['evius_token'])) { $firebaseToken = $_COOKIE['evius_token']; } 
+            elseif (isset($_COOKIE['token'])) { $firebaseToken = $_COOKIE['token']; }
 
-            //miramos si el token viene en la Petición
-            if (isset($_REQUEST['evius_token'])) {
-                $firebaseToken = $_REQUEST['evius_token'];
-            } elseif (isset($_REQUEST['token'])) {
-                $firebaseToken = $_REQUEST['token'];
-            }
-
-            //Esta linea llega el refresh token
-            // $refresh_token = $_REQUEST['refresh_token'];
-
-            //miramos si el token viene en una cookie
-            /*if (isset($_COOKIE['evius_token'])) {
-            $firebaseToken = $_COOKIE['evius_token'];
-            } elseif (isset($_COOKIE['token'])) {
-            $firebaseToken = $_COOKIE['token'];
-            }*/
-
+            /**
+             * Si el token no viene en la petición
+             * Bota el error de que el token no fue enviado en la petición, recordar que esta ruta es 
+             * una petición GET.
+             */
             if (!$firebaseToken) {
                 return response(
                     [
@@ -65,46 +83,100 @@ class AuthFirebase
                     ], Response::HTTP_UNAUTHORIZED
                 );
             }
-            //Se verifica la valides del token
+            /* 
+            * Se verifica la valides del token
+            * Si este se encuentra activamos la función validator, el cual nos devuelve el 
+            * usuario y finalmente enviamos el request indicando que se puede continuar, con la página acutal.
+            */
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
-
-            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-            $user = User::where('uid', '=', $user_auth->uid)->first();
-
-            if (!$user) {
-                
-                $user = User::create(get_object_vars($user_auth));
-                $user->save();
-            }
-
+            $user = self::validator($verifiedIdToken, $refresh_token, $request);
+            return response("ok");
             $request->attributes->add(['user' => $user]);
-
             return $next($request);
+            
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
 
-            //API Url
-            // $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
-            // //Params sent for refresh_token
-            // $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
-            // //Send params to method POST
-            // $client = new Client();
-            // $response = $client->request('POST', $url, ['form_params' => $body]);
+            /**
+             * Decodificación del token
+             * Para decodificar utilizamos JWT https://firebase.google.com/docs/auth/admin/verify-id-tokens
+             * o puede consultar lo siguiente https://stackoverflow.com/questions/42098150/how-to-verify-firebase-id-token-with-phpjwt
+             */
+            $token = $e->getToken()->getClaims();
+            $user_id = ((array)$token)['user_id'];
 
-            return response(
-                [
-                    'status' => Response::HTTP_UNAUTHORIZED,
-                    'message' => 'Error: ExpiredToken',
-                    // 'request' => (string) $response->getBody(),
-                ], Response::HTTP_UNAUTHORIZED
-            );
+            /*
+             * Capturamos el refresh token
+             * Capturamos el usuario a partir del correo el cual se encuentra en el token codificado
+             * y recuperamos el refresh_token
+             */
+            $user = User::where('uid',(string)$user_id)->get();
+            // $refresh_token = $user->refresh_token;
+            // return response($user);
+            /**
+             * Generamos la URL a partir del api_key
+             * Esta url sirve para poder generar el nuevo token id, 
+             * pero mas adelante se debe enviar el cuerpo 
+             */
+            $url = "https://securetoken.googleapis.com/v1/token?key=".$api_key;
+            /**
+             * Generamos el cuerpo indicando 
+             * el valor del refresh_token, e indicacndo que  el token se va a refrescar
+             */
+            $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
+            /**
+             * Enviamos los datos a la url
+             * Enviamos por metodo post el cuerpo por medio de la url asignada
+             */
+            $client = new Client();
+            $response = $client->request('POST', $url, ['form_params' => $body]);
+            /**
+             * Capturamos el nuevo id_token
+             * Capturamos el cuerpo, decodificamos la respuesta y capturamos el id_token
+             */
+            $response = (string) $response->getBody();
+            $firebaseToken = json_decode($response)->id_token;
+            /* 
+            * Se verifica la valides del token
+            * Si este se encuentra activamos la función validator, el cual nos devuelve el 
+            * usuario y finalmente enviamos el request por medio de $next.
+            */
+           $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
+           $user = self::validator($verifiedIdToken, $refresh_token, $request);
 
+           $request->attributes->add(['user' => $user, 'new_token'=>$firebaseToken]);
+           
+           return $next($request);
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
         }
     }
+
+    /**
+     * Validator
+     * 
+     * Esta función sigue el siguiente proceso
+     * 
+     * 1. Capturamos el usuario autenticado a partir del id token verificado
+     * 2. Capturamos los datos del usuario dentro de nuestra base de datos
+     * 3. Si no existe el usuario lo crea.
+     * 4. Guardamos un nuevo camo llamado refresh_token
+     * 5. Guardamos el usaurio y lo retornamos.
+     *
+     * @param array $verifiedIdToken
+     * @param string $refresh_token
+     * @param array $request
+     * @return $user
+     */
+    public function validator($verifiedIdToken, $refresh_token, $request){
+
+        $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
+        $user = User::where('uid', '=', $user_auth->uid)->first();
+        if (!$user) {
+            var_dump("vamos a crearlo");
+            $user = User::create(get_object_vars($user_auth));
+        }
+        $user->refresh_token = $refresh_token;
+        $user->save();
+        return $user;
+    }
 }
-//TEner en cuenta para Enviar mensajes de error
-/* } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-echo $e->getMessage();
-} catch (\Firebase\Auth\Token\Exception\IssuedInTheFuture $e) {
-echo $e->getMessage();
-} catch (\Firebase\Auth\Token\Exception\InvalidToken $e) {
-echo $e->getMessage(); */
