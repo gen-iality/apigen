@@ -7,9 +7,11 @@ use App\User;
 use Closure;
 use Firebase\Auth\Token\Verifier;
 use Illuminate\Http\Response;
+use GuzzleHttp\Client;
 
 class AuthFirebase
 {
+
     protected $auth;
 
     public function __construct(\Kreait\Firebase\Auth $auth)
