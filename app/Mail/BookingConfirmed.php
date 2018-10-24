@@ -59,18 +59,22 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $from = isset($this->event->organizer->name)?$this->event->organizer->name."(Evius)":"(Evius)"; 
         $logo_evius = 'images/logo.png';
         $file =$this->eventuser_id.'_qr.png';
-        $fullpath = storage_path('app/'.$file);
+        $fullpath = storage_path('app/public/'.$file);
 
+        try{
         $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->setOutfile($fullpath)
                 ->png();
-
         $img = Storage::get($file);
         $this->qr = $gfService->storeFile($img, $file);
-        $img = Storage::delete($file);
+        //$img = Storage::delete($file);
         $this->logo = url($logo_evius);
+       
+        }catch(\Exception $e){
+
+        }
 
         return $this
         ->from("apps@mocionsoft.com", $from)
