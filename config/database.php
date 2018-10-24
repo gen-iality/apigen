@@ -13,9 +13,9 @@ if ($config->isAvailable()){
     putenv("DB_DATABASE={$database['path']}");
     putenv("DB_USERNAME={$database['username']}");
     putenv("DB_PASSWORD={$database['password']}");
-    var_dump($redis);
     $redis = $pltrels['applicationqueue'][0];
     // putenv("QUEUE_DRIVER={$redis['scheme']}");
+    var_dump($redis);
     putenv("REDIS_HOST={$redis['host']}");
     putenv("REDIS_PORT={$redis['port']}");
 }
