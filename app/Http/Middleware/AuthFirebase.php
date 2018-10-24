@@ -144,9 +144,9 @@ class AuthFirebase
            $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
            $user = self::validator($verifiedIdToken, $refresh_token, $request);
 
-           $request->attributes->add(['user' => $user, 'new_token'=>$firebaseToken]);
+           $request->attributes->add(['user' => $user]);
            
-           return $next($request);
+           return $next($request)->header('new_token', $firebaseToken);
         } catch (\Exception $e) {
             var_dump($e->getMessage());
         }
