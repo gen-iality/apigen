@@ -21,7 +21,7 @@ if ($config->isAvailable()){
 }
 // End offset extraction
 
-return [
+$data = [
 
     /*
     |--------------------------------------------------------------------------
@@ -149,3 +149,6 @@ return [
     ],
 
 ];
+
+var_dump($data);
+return 0;
