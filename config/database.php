@@ -1,4 +1,6 @@
 <?php
+// echo $PLATFORM_RELATIONSHIPS | base64 --decode | json_pp;
+
 // config/database.php
 // Extract enviorment configuration in platform.sh hosting
 $config = new Platformsh\ConfigReader\Config();
@@ -11,7 +13,7 @@ if ($config->isAvailable()){
     putenv("DB_DATABASE={$database['path']}");
     putenv("DB_USERNAME={$database['username']}");
     putenv("DB_PASSWORD={$database['password']}");
-
+    var_dump($redis);
     $redis = $pltrels['applicationqueue'][0];
     // putenv("QUEUE_DRIVER={$redis['scheme']}");
     putenv("REDIS_HOST={$redis['host']}");
