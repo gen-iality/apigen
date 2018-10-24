@@ -15,13 +15,12 @@ if ($config->isAvailable()){
     putenv("DB_PASSWORD={$database['password']}");
     $redis = $pltrels['applicationqueue'][0];
     // putenv("QUEUE_DRIVER={$redis['scheme']}");
-    var_dump($redis);
     putenv("REDIS_HOST={$redis['host']}");
     putenv("REDIS_PORT={$redis['port']}");
 }
 // End offset extraction
 
-$data = [
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -149,6 +148,3 @@ $data = [
     ],
 
 ];
-
-var_dump($data);
-return 0;
