@@ -133,15 +133,16 @@ class AuthFirebase
              */ 
             $client = new Client();
             try{
-            $response = $client->request('POST', $url, ['form_params' => $body]);
+            $response = $client->post($url, ['form_params' => $body]);
             }catch(RequestException $e){
-                return response("ok");
-            }return response($response);
+                return response($e->getResponse());
+            }
             /**
              * Capturamos el nuevo id_token
              * Capturamos el cuerpo, decodificamos la respuesta y capturamos el id_token
              */
             $response = (string) $response->getBody();
+            return response(json_encode($response));
             $firebaseToken = json_decode($response)->id_token;
             /* 
             * Se verifica la valides del token
