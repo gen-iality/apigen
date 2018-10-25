@@ -132,8 +132,8 @@ class AuthFirebase
              * Enviamos por metodo post el cuerpo por medio de la url asignada
              */
             $client = new Client();
-            return response($body);
             $response = $client->request('POST', $url, ['form_params' => $body]);
+            return response($response);
             /**
              * Capturamos el nuevo id_token
              * Capturamos el cuerpo, decodificamos la respuesta y capturamos el id_token
