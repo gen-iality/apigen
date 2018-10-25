@@ -123,11 +123,16 @@ class AuthFirebase
              * el valor del refresh_token, e indicacndo que  el token se va a refrescar
              */
             $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
+
+            // // var_dump($url);
+            // return response($url);
+            // return response("ok");
             /**
              * Enviamos los datos a la url
              * Enviamos por metodo post el cuerpo por medio de la url asignada
              */
             $client = new Client();
+            return response($body);
             $response = $client->request('POST', $url, ['form_params' => $body]);
             /**
              * Capturamos el nuevo id_token
