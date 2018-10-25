@@ -67,7 +67,7 @@ class AuthFirebase
             //
             if (isset($_REQUEST['evius_token'])) { $firebaseToken = $_REQUEST['evius_token']; } 
             elseif (isset($_REQUEST['token'])) { $firebaseToken = $_REQUEST['token']; }
-            
+            $refresh_token= NULL;
             if (isset($_REQUEST['refresh_token'])){ $refresh_token = $_REQUEST['refresh_token']; }
             if (isset($_COOKIE['evius_token'])) { $firebaseToken = $_COOKIE['evius_token']; } 
             elseif (isset($_COOKIE['token'])) { $firebaseToken = $_COOKIE['token']; }
@@ -176,8 +176,10 @@ class AuthFirebase
             var_dump("vamos a crearlo");
             $user = User::create(get_object_vars($user_auth));
         }
-        $user->refresh_token = $refresh_token;
-        $user->save();
+        if($refresh_token){  
+            $user->refresh_token = $refresh_token;
+            $user->save();
+        }
         return $user;
     }
 }
