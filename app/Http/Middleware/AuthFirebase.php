@@ -96,21 +96,24 @@ class AuthFirebase
             return $next($request);
             
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-            return response("hellow world");
             /**
              * Decodificación del token
              * Para decodificar utilizamos JWT https://firebase.google.com/docs/auth/admin/verify-id-tokens
              * o puede consultar lo siguiente https://stackoverflow.com/questions/42098150/how-to-verify-firebase-id-token-with-phpjwt
              */
+            var_dump("numero 1");
             $token = $e->getToken()->getClaims();
             $user_id = ((array)$token)['user_id'];
-            
+            var_dump("numero 2");            
             /*
             * Capturamos el refresh token
             * Capturamos el usuario a partir del correo el cual se encuentra en el token codificado
             * y recuperamos el refresh_token
             */
             $user = User::where('uid',(string)$user_id)->first();
+            var_dump($user);
+            
+            return response("hellow world");
             $refresh_token = $user->refresh_token;
             return response($refresh_token);
             /**
