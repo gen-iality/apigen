@@ -130,10 +130,13 @@ class AuthFirebase
             /**
              * Enviamos los datos a la url
              * Enviamos por metodo post el cuerpo por medio de la url asignada
-             */
+             */ 
             $client = new Client();
+            try{
             $response = $client->request('POST', $url, ['form_params' => $body]);
-            return response($response);
+            }catch(RequestException $e){
+                return response($e->getResponse());
+            }return response($response);
             /**
              * Capturamos el nuevo id_token
              * Capturamos el cuerpo, decodificamos la respuesta y capturamos el id_token
@@ -145,7 +148,7 @@ class AuthFirebase
             * Si este se encuentra activamos la función validator, el cual nos devuelve el 
             * usuario y finalmente enviamos el request por medio de $next.
             */
-           $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
+           $vexrifiedIdToken = $verifier->verifyIdToken($firebaseToken);
            $user = self::validator($verifiedIdToken, $refresh_token, $request);
 
            $request->attributes->add(['user' => $user]);
