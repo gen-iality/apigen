@@ -133,7 +133,7 @@ class AuthFirebase
              */ 
             $client = new Client();
             try{
-            $response = $client->post($url, ['form_params' => $body]);
+            $response = $client->request('POST', $url, ['form_params' => $body]);
             }catch(RequestException $e){
                 return response($e->getResponse());
             }
