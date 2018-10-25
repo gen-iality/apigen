@@ -135,7 +135,7 @@ class AuthFirebase
             try{
             $response = $client->request('POST', $url, ['form_params' => $body]);
             }catch(RequestException $e){
-                return response($e->getResponse());
+                return response("ok");
             }return response($response);
             /**
              * Capturamos el nuevo id_token
