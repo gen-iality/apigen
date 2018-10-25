@@ -96,6 +96,7 @@ class AuthFirebase
             return $next($request);
             
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
+            return response("hellow world");
             /**
              * Decodificación del token
              * Para decodificar utilizamos JWT https://firebase.google.com/docs/auth/admin/verify-id-tokens
