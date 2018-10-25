@@ -109,10 +109,9 @@ class AuthFirebase
             * y recuperamos el refresh_token
             */
             $user = User::where('uid',(string)$user_id)->first();
-            var_dump($user);
-            
+            // var_dump($user);
             $refresh_token = $user->refresh_token;
-            return response($refresh_token);
+            // return response($refresh_token);
             /**
              * Generamos la URL a partir del api_key
              * Esta url sirve para poder generar el nuevo token id, 
