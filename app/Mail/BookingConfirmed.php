@@ -53,7 +53,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     {
         $gfService = new GoogleFiles();
 
-        $from = isset($this->event->organizer->name) ? $this->event->organizer->name : "(Evius)";
+        $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
         $fullpath = storage_path('app/public/' . $file);
