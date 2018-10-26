@@ -67,7 +67,7 @@ class AuthFirebase
             //
             if (isset($_REQUEST['evius_token'])) { $firebaseToken = $_REQUEST['evius_token']; } 
             elseif (isset($_REQUEST['token'])) { $firebaseToken = $_REQUEST['token']; }
-            
+            $refresh_token= NULL;
             if (isset($_REQUEST['refresh_token'])){ $refresh_token = $_REQUEST['refresh_token']; }
             if (isset($_COOKIE['evius_token'])) { $firebaseToken = $_COOKIE['evius_token']; } 
             elseif (isset($_COOKIE['token'])) { $firebaseToken = $_COOKIE['token']; }
@@ -96,23 +96,22 @@ class AuthFirebase
             return $next($request);
             
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-
             /**
              * Decodificación del token
              * Para decodificar utilizamos JWT https://firebase.google.com/docs/auth/admin/verify-id-tokens
              * o puede consultar lo siguiente https://stackoverflow.com/questions/42098150/how-to-verify-firebase-id-token-with-phpjwt
              */
             $token = $e->getToken()->getClaims();
-            $user_id = ((array)$token)['user_id'];
-
+            $user_id = ((array)$token)['user_id'];           
             /*
-             * Capturamos el refresh token
-             * Capturamos el usuario a partir del correo el cual se encuentra en el token codificado
-             * y recuperamos el refresh_token
-             */
-            $user = User::where('uid',(string)$user_id)->get();
-            // $refresh_token = $user->refresh_token;
-            // return response($user);
+            * Capturamos el refresh token
+            * Capturamos el usuario a partir del correo el cual se encuentra en el token codificado
+            * y recuperamos el refresh_token
+            */
+            $user = User::where('uid',(string)$user_id)->first();
+            // var_dump($user);
+            $refresh_token = $user->refresh_token;
+            // return response($refresh_token);
             /**
              * Generamos la URL a partir del api_key
              * Esta url sirve para poder generar el nuevo token id, 
@@ -124,24 +123,33 @@ class AuthFirebase
              * el valor del refresh_token, e indicacndo que  el token se va a refrescar
              */
             $body = [ 'grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
+
+            // // var_dump($url);
+            // return response($url);
+            // return response("ok");
             /**
              * Enviamos los datos a la url
              * Enviamos por metodo post el cuerpo por medio de la url asignada
-             */
+             */ 
             $client = new Client();
+            try{
             $response = $client->request('POST', $url, ['form_params' => $body]);
+            }catch(RequestException $e){
+                return response($e->getResponse());
+            }
             /**
              * Capturamos el nuevo id_token
              * Capturamos el cuerpo, decodificamos la respuesta y capturamos el id_token
              */
             $response = (string) $response->getBody();
+            return response(json_encode($response));
             $firebaseToken = json_decode($response)->id_token;
             /* 
             * Se verifica la valides del token
             * Si este se encuentra activamos la función validator, el cual nos devuelve el 
             * usuario y finalmente enviamos el request por medio de $next.
             */
-           $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
+           $vexrifiedIdToken = $verifier->verifyIdToken($firebaseToken);
            $user = self::validator($verifiedIdToken, $refresh_token, $request);
 
            $request->attributes->add(['user' => $user]);
@@ -176,8 +184,10 @@ class AuthFirebase
             var_dump("vamos a crearlo");
             $user = User::create(get_object_vars($user_auth));
         }
-        $user->refresh_token = $refresh_token;
-        $user->save();
+        if($refresh_token){  
+            $user->refresh_token = $refresh_token;
+            $user->save();
+        }
         return $user;
     }
 }
