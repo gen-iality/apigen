@@ -54,7 +54,7 @@ runtime:
     extensions:
         - mongodb
         - redis
-        - php_curl
+        - curl
 
 variables:
     php:
