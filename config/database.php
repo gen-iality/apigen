@@ -1,6 +1,5 @@
 <?php
 // echo $PLATFORM_RELATIONSHIPS | base64 --decode | json_pp;
-
 // config/database.php
 // Extract enviorment configuration in platform.sh hosting
 $config = new Platformsh\ConfigReader\Config();
