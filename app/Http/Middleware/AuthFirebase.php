@@ -158,7 +158,7 @@ class AuthFirebase
             $verifiedIdToken = $verifier->verifyIdToken($token_response->access_token);
 
             $refresh_token = null;
-            $user = self::validator($verifiedIdToken, $refresh_token);
+            $user = self::validator($verifiedIdToken, $refresh_token = null);
 
             $request->attributes->add(['user' => $user]);
 
@@ -185,7 +185,6 @@ class AuthFirebase
      */
     public function validator($verifiedIdToken, $refresh_token = null)
     {
-
         $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
         $user = User::where('uid', '=', $user_auth->uid)->first();
         if (!$user) {
