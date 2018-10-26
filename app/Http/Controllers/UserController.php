@@ -75,9 +75,7 @@ class UserController extends Controller
              */
             //
             if ($request->has('evius_token')) { $firebaseToken = $request->input('evius_token');}
-            if ($request->has('refresh_token')) { 
-                $refresh_token = json_decode(file_get_contents('php://input'))->refresh_token;
-            }
+            $refresh_token = json_decode(file_get_contents('php://input'))->refresh_token;
     
             /**
              * Si el token no viene en la petición
