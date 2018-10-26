@@ -97,7 +97,6 @@ class UserController extends Controller
              */
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             $user = self::validator($verifiedIdToken, $refresh_token);
-            return response($user);
             $request->attributes->add(['user' => $user]);
             return response($request);
 

@@ -55,7 +55,7 @@ class RSVP extends Mailable implements ShouldQueue
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        $from = isset($this->event->organizer->name)?$this->event->organizer->name."(Evius)":"(Evius)"; 
+        $from = $this->event->organizer->name; 
 
         return $this
         ->from("apps@mocionsoft.com", $from)
