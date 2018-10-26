@@ -11,11 +11,20 @@ use QRCode;
 class TestingController extends Controller
 {
 
+    public function error()
+    {
+        return response(
+            [
+                'status' => 500,
+                'message' => 'Error: Tremendo',
+            ],
+            500);
+    }
     public function request($refresh_token)
     {
         $client = new Client();
         $url = "http://httpbin.org/post";
-        $r =  $client->request('POST', $url, ['form_params' => ['test'=>'test']]);
+        $r = $client->request('POST', $url, ['form_params' => ['test' => 'test']]);
         var_dump(json_decode($r->getBody()));
         $url = "https://securetoken.googleapis.com/v1/token?key=" . "AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
         /**
@@ -27,11 +36,11 @@ class TestingController extends Controller
          * Enviamos los datos a la url
          * Enviamos por metodo post el cuerpo por medio de la url asignada
          */
-        
+
         $response = $client->request('POST', $url, ['form_params' => $body]);
         var_dump(json_decode($response->getBody()));
         //var_dump((string) $response->getContents());
-        
+
         return [true];
     }
 
