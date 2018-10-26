@@ -74,7 +74,7 @@ class UserController extends Controller
              * En la Petición viene el refresh_token
              */
             //
-            return response($request->input('evius_token'));
+            return response($_PUT);
             if ($request->has('evius_token')) { $firebaseToken = $request->input('evius_token');}
             if ($request->has('refresh_token')) { $refresh_token = $request->input('refresh_token'); }
     
