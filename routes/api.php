@@ -25,6 +25,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
 Route::get('test/auth', 'TestingController@auth');
+Route::get('test/request', 'TestingController@request');
 
 /****************
  * eventUsers

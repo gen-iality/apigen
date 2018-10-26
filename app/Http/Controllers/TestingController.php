@@ -4,11 +4,37 @@ namespace App\Http\Controllers;
 
 use App;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Response;
 use QRCode;
 
 class TestingController extends Controller
 {
+
+    public function request()
+    {
+        $client = new Client();
+        $url = "http://httpbin.org/post";
+        $r =  $client->request('POST', $url, ['form_params' => ['test'=>'test']]);
+        var_dump($r->getBody());
+        $url = "https://securetoken.googleapis.com/v1/token?key=" . "aaaaa";
+        /**
+         * Generamos el cuerpo indicando
+         * el valor del refresh_token, e indicacndo que  el token se va a refrescar
+         */
+        $body = ['grant_type' => 'refresh_token', 'refresh_token' => "aaaa"];
+        /**
+         * Enviamos los datos a la url
+         * Enviamos por metodo post el cuerpo por medio de la url asignada
+         */
+        
+        $response = $client->request('POST', $url, ['form_params' => $body]);
+        var_dump($response);
+
+        
+        return [true];
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -18,14 +44,14 @@ class TestingController extends Controller
     public function auth(\Kreait\Firebase\Auth $fireauth)
     {
         /*$o = new User(
-            [
-                "name" => 'test' . time(),
-                "email" => 'apps' . time() . "@mocionsoft.com",
-            ]
+        [
+        "name" => 'test' . time(),
+        "email" => 'apps' . time() . "@mocionsoft.com",
+        ]
         );
         $o->save();
         return $o;
-        */
+         */
         $u = User::find("5bc51599cb22e0643e006173");
         $u->save();
         $r = $u;
@@ -72,10 +98,10 @@ class TestingController extends Controller
     {
         $file = 'qr/prueba2_qr.png';
         $image = QRCode::text("prueba2")
-                ->setSize(8)
-                ->setMargin(4)
-                ->setOutfile($file)
-                ->png();
+            ->setSize(8)
+            ->setMargin(4)
+            ->setOutfile($file)
+            ->png();
         return $file;
     }
 

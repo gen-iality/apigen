@@ -54,3 +54,8 @@ runtime:
     extensions:
         - mongodb
         - redis
+        - php_curl
+
+variables:
+    php:
+        disable_functions: ''
