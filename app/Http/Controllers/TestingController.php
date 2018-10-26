@@ -11,26 +11,26 @@ use QRCode;
 class TestingController extends Controller
 {
 
-    public function request()
+    public function request($refresh_token)
     {
         $client = new Client();
         $url = "http://httpbin.org/post";
         $r =  $client->request('POST', $url, ['form_params' => ['test'=>'test']]);
-        var_dump($r->getBody());
-        $url = "https://securetoken.googleapis.com/v1/token?key=" . "aaaaa";
+        var_dump(json_decode($r->getBody()));
+        $url = "https://securetoken.googleapis.com/v1/token?key=" . "AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
         /**
          * Generamos el cuerpo indicando
          * el valor del refresh_token, e indicacndo que  el token se va a refrescar
          */
-        $body = ['grant_type' => 'refresh_token', 'refresh_token' => "aaaa"];
+        $body = ['grant_type' => 'refresh_token', 'refresh_token' => $refresh_token];
         /**
          * Enviamos los datos a la url
          * Enviamos por metodo post el cuerpo por medio de la url asignada
          */
         
         $response = $client->request('POST', $url, ['form_params' => $body]);
-        var_dump($response);
-
+        var_dump(json_decode($response->getBody()));
+        //var_dump((string) $response->getContents());
         
         return [true];
     }
