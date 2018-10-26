@@ -63,6 +63,7 @@ variables:
 workers:
     queue:
         size: S
+        disk: 256
         commands:
             start: |
               php artisan queue:work redis
