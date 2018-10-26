@@ -109,6 +109,16 @@ class AuthFirebase
             $user = User::where('uid', (string) $user_id)->first();
             // var_dump($user);
             $refresh_token = $user->refresh_token;
+
+            if (!$refresh_token) {
+                return response(
+                    [
+                        'status' => Response::HTTP_UNAUTHORIZED,
+                        'message' => 'Error: Token expired',
+                    ], Response::HTTP_UNAUTHORIZED
+                );
+            }
+
             // return response($refresh_token);
             /**
              * Generamos la URL a partir del api_key
