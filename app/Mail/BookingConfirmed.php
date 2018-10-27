@@ -68,7 +68,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->png();
 
             $img = Storage::get("public/" . $file);
-            g::debug("RUTA2: ".$img);
+            Log::debug("RUTA2: ".$img);
 
             $url = $gfService->storeFile($img, $file);
             $this->qr = $url;
