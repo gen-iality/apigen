@@ -23,9 +23,6 @@
 
 ![QR2]({{$qrdos}})
 
-
-<img src="{{$qrdos}}" />
-
 ```
 algo imagen
 {{$qr}}
@@ -34,6 +31,8 @@ algo imagen
 algo imagen
 {{$imgqr}}
 ```
+
+<p>cc {{$imgqr}} aa</p>
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   

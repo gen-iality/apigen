@@ -22,7 +22,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_name;
     public $eventuser_id;
     public $qr;
-    public $imgqr ="nada";
+    public $imgqr ="xxxx";
     public $qrdos;
     public $logo;
 
@@ -73,8 +73,11 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             $url = $gfService->storeFile($img, $file);
             $this->qr = $url;
             $this->qrdos = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
+            
             Log::debug("RUTA3: " . $url);
-            $this->imgqr = $url;
+            Log::debug("RUTA3TYPE: " . (gettype($url)));
+            
+            $this->imgqr = "ira".$url;
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
 
