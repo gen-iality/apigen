@@ -16,15 +16,15 @@
 </div>
 <br />
 
-
+<img src="{{$qr}}" />
 ![QR2]({{$qrdos}})
 
 ![imagen]({{$qrdos}})
 
 <img src="{{$qrdos}}" />
 
-<img src="{{$qr}}" />
-<p><{{$qr}}/p>
+
+<p>-->{{$qr}}</p>
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
