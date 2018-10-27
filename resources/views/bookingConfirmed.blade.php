@@ -2,6 +2,9 @@
 
 {{$event->name}}
 
+
+{{get_defined_vars()}}
+
  ![Evius]({{$logo}})   
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}

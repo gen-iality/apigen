@@ -77,6 +77,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             Log::debug("url: " . (string)$url);
             Log::debug("url type: " . (gettype($url)));
             $this->imgqr ="hhhh".$gfService->storeFile($img, $file)."iirraa";
+            Log::debug("url2: " . (string)$this->imgqr);
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
             Log::debug("logo: " . (string)$url);
