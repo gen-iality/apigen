@@ -10,9 +10,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use QRCode;
 use Storage;
-use Illuminate\Support\Facades\Log;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
@@ -58,7 +58,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
         $fullpath = storage_path('app/public/' . $file);
-        Log::debug("RUTA: ".$fullpath);
+        Log::debug("RUTA: " . $fullpath);
 
         try {
             $image = QRCode::text($this->eventuser_id)
@@ -68,17 +68,17 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->png();
 
             $img = Storage::get("public/" . $file);
-            Log::debug("RUTA2: ".$img);
+            Log::debug("RUTA2: " . $img);
 
             $url = $gfService->storeFile($img, $file);
             $this->qr = $url;
             $this->qr2 = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
-            Log::debug("RUTA3: ".$url);
+            Log::debug("RUTA3: " . $url);
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
 
         } catch (\Exception $e) {
-            Log::debug("error: ".$e->getMessage());
+            Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
 
