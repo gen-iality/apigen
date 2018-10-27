@@ -17,12 +17,12 @@
 
 ![QR]({{$qr}})
 
-![QR2]({{$qr2}})
 
+![QR2]({{$qrdos}})
 
-![imagen]({{$qr2}})
+![imagen]({{$qrdos}})
 
-<img src="{{$qr2}}" />
+<img src="{{$qrdos}}" />
 
 <img src="{{$qr}}" />
 
