@@ -3,8 +3,6 @@
 {{$event->name}}
 
 
-{{get_defined_vars()}}
-
  ![Evius]({{$logo}})   
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
@@ -22,6 +20,8 @@
 <img src="{{$qr}}" />
 @component('mail::panel')
 -->{{$imgqr}}<--
+{{$cuatro}}
+{{$tres}}
 @endcomponent
 
 ![QR2]({{$qrdos}})

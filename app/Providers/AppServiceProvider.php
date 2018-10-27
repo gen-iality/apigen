@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     public function boot()
     {
         Resource::withoutWrapping();
-        Log::debug("definiendo observador");
+       
         \App\EventUser::observe(App\Observers\EventUserObserver::class);
 
         \App\EventUser::saved(function ($eventUser) {

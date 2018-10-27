@@ -24,6 +24,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $qr;
     public $imgqr ="xxxx";
     public $qrdos;
+    public $tres;
+    public $cuatro;
     public $logo;
 
     /**
@@ -73,7 +75,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             $url = $gfService->storeFile($img, $file);
             $this->qr =  (string)$url;
             $this->qrdos = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
-            
+            $this->tres = str_replace("a", "a", $url);
+            $this->cuatro = htmlentities($url);
             Log::debug("url: " . (string)$url);
             Log::debug("url type: " . (gettype($url)));
             $this->imgqr ="hhhh".$gfService->storeFile($img, $file)."iirraa";
@@ -81,6 +84,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
             Log::debug("logo: " . (string)$url);
+
 
         } catch (\Exception $e) {
             Log::debug("error: " . $e->getMessage());
