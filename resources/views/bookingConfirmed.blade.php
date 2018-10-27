@@ -15,7 +15,7 @@
     </span>
 </div>
 <br />
-
+<p> {{$codigoqr}}</p>
 
 
 <img src="{{$codigoqr}}" />
@@ -24,7 +24,7 @@
 
 <p>Ticket: {{$eventuser_id}}</p>
 <p> {{$codigoqr}}</p>
-<p> {{$qrimage}} </p>
+
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
 |:----------------------:|:-------------------------------------------------------------------------------------:| 
