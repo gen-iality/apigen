@@ -72,6 +72,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
 
             $url = $gfService->storeFile($img, $file);
             $this->qr = $url;
+            $this->qr2 = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
             Log::debug("RUTA3: ".$url);
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);

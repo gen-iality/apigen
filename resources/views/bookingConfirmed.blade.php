@@ -17,6 +17,16 @@
 
 ![QR]({{$qr}})
 
+<div>
+![QR]({{$qr}})
+</div>
+
+
+![imagen]({{$qr2}})
+
+<img src="{{$qr2}}">
+
+<img src="{{$qr}}">
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
