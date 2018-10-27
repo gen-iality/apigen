@@ -15,15 +15,16 @@
     </span>
 </div>
 <br />
-<p> {{$codigoqr}}</p>
+![QR]({{$qr}})
 
 
-<img src="{{$codigoqr}}" />
+![QR2]({{$qrdos}})
 
-![codigoqr]({{$codigoqr}})
+![imagen]({{$qrdos}})
 
-<p>Ticket: {{$eventuser_id}}</p>
-<p> {{$codigoqr}}</p>
+<img src="{{$qrdos}}" />
+
+<img src="{{$qr}}" />
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
