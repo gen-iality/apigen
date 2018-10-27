@@ -12,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use QRCode;
 use Storage;
+use Illuminate\Support\Facades\Log;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
@@ -57,6 +58,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
         $fullpath = storage_path('app/public/' . $file);
+        Log::debug("RUTA: ".$fullpath);
 
         try {
             $image = QRCode::text($this->eventuser_id)
@@ -66,6 +68,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->png();
 
             $img = Storage::get("public/" . $file);
+            g::debug("RUTA2: ".$img);
 
             $url = $gfService->storeFile($img, $file);
             $this->qr = $url;
@@ -73,6 +76,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             $this->logo = url($logo_evius);
 
         } catch (\Exception $e) {
+            Log::debug("error: ".$e->getMessage());
             var_dump($e->getMessage());
         }
 
