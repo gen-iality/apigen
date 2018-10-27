@@ -17,13 +17,22 @@
 <br />
 
 <img src="{{$qr}}" />
+@component('mail::panel')
+{{$imgqr}}
+@endcomponent
 
 ![QR2]({{$qrdos}})
-![imagen]({{$qrdos}})
+
+
 <img src="{{$qrdos}}" />
 
 ```
+algo imagen
 {{$qr}}
+```
+```
+algo imagen
+{{$imgqr}}
 ```
 
 @component('mail::table')
