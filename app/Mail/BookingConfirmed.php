@@ -23,6 +23,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_id;
     public $codigoqr;
     public $logo;
+    public $qrimage;
 
     /**
      * Create a new message instance.
@@ -35,6 +36,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event_location = ($event["location"]["FormattedAddress"]);
         $eventUser_name = ($eventUser["properties"]["name"]);
         $eventUser_id = $eventUser->id;
+
 
         $this->event = $event;
         $this->event_location = $event_location;
@@ -67,7 +69,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->png();
 
             $img = Storage::get("public/" . $file);
-        
+            $this->qrimage = $img;
             $url = $gfService->storeFile($img, $file);
             $this->codigoqr = $url;
 

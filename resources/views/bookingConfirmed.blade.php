@@ -18,12 +18,13 @@
 
 
 
-<img alt="{{$eventuser_id}}" src="{{$codigoqr}}" />
+<img src="{{$codigoqr}}" />
 
 ![codigoqr]({{$codigoqr}})
 
 <p>Ticket: {{$eventuser_id}}</p>
-
+<p> {{$codigoqr}}</p>
+<p> {{$qrimage}} </p>
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
 |:----------------------:|:-------------------------------------------------------------------------------------:| 
