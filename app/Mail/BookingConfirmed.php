@@ -71,14 +71,15 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             $img = Storage::get("public/" . $file);
 
             $url = $gfService->storeFile($img, $file);
-            $this->qr = $url;
+            $this->qr =  (string)$url;
             $this->qrdos = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
             
-            Log::debug("RUTA3: " . (string)$url);
-            Log::debug("RUTA3TYPE: " . (gettype($url)));
-            $this->imgqr =$gfService->storeFile($img, $file);
+            Log::debug("url: " . (string)$url);
+            Log::debug("url type: " . (gettype($url)));
+            $this->imgqr ="hhhh".$gfService->storeFile($img, $file)."iirraa";
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
+            Log::debug("logo: " . (string)$url);
 
         } catch (\Exception $e) {
             Log::debug("error: " . $e->getMessage());
