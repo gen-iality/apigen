@@ -17,14 +17,14 @@
 <br />
 
 <img src="{{$qr}}" />
+
 ![QR2]({{$qrdos}})
-
 ![imagen]({{$qrdos}})
-
 <img src="{{$qrdos}}" />
 
-
-<p>-->{{$qr}}</p>
+```
+{{$qr}}
+```
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
