@@ -18,7 +18,7 @@
 
 <img src="{{$qr}}" />
 @component('mail::panel')
-{{$imgqr}}
+-->{{$imgqr}}<--
 @endcomponent
 
 ![QR2]({{$qrdos}})
@@ -26,6 +26,7 @@
 ```
 algo imagen
 {{$qr}}
+--{{$qrdos}}
 ```
 ```
 algo imagen

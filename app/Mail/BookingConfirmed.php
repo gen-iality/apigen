@@ -74,10 +74,9 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             $this->qr = $url;
             $this->qrdos = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
             
-            Log::debug("RUTA3: " . $url);
+            Log::debug("RUTA3: " . (string)$url);
             Log::debug("RUTA3TYPE: " . (gettype($url)));
-            
-            $this->imgqr = "ira".$url;
+            $this->imgqr = "ira".(string)$url;
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
 
