@@ -18,15 +18,11 @@
 
 
 
-![QR2]({{$qrdos}})
+<img alt="{{$eventuser_id}}" src="{{$codigoqr}}" />
 
-![imagen]({{$qrdos}})
+![codigoqr]({{$codigoqr}})
 
-<img src="{{$qrdos}}" />
-
-<img src="{{$qr}}" />
-
-![QR]({{$qr}})
+<p>Ticket: {{$eventuser_id}}</p>
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
