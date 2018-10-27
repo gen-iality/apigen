@@ -14,8 +14,8 @@
         PDF adjunto.
     </span>
 </div>
+<br />
 
-![QR]({{$qr}})
 
 
 ![QR2]({{$qrdos}})
@@ -25,6 +25,8 @@
 <img src="{{$qrdos}}" />
 
 <img src="{{$qr}}" />
+
+![QR]({{$qr}})
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
