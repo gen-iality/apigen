@@ -15,7 +15,6 @@
     </span>
 </div>
 <br />
-![QR]({{$qr}})
 
 
 ![QR2]({{$qrdos}})
@@ -25,6 +24,7 @@
 <img src="{{$qrdos}}" />
 
 <img src="{{$qr}}" />
+<p><{{$qr}}/p>
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |   
