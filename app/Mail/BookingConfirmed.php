@@ -22,7 +22,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_name;
     public $eventuser_id;
     public $qr;
-    public $imgqr ="xxxx";
+    public $imgqr = "xxxx";
     public $qrdos;
     public $tres;
     public $cuatro;
@@ -33,9 +33,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(
-        $eventUser) {
-            Log::debug("construyendo");
+    public function __construct($eventUser)
+    {
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
         $eventUser_name = ($eventUser["properties"]["name"]);
@@ -46,8 +45,6 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";
-        $this->build();
-
     }
 
     /**
@@ -74,18 +71,17 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             $img = Storage::get("public/" . $file);
 
             $url = $gfService->storeFile($img, $file);
-            $this->qr =  (string)$url;
+            $this->qr = (string) $url;
             $this->qrdos = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
             $this->tres = str_replace("a", "a", $url);
             $this->cuatro = htmlentities($url);
-            Log::debug("url: " . (string)$url);
+            Log::debug("url: " . (string) $url);
             Log::debug("url type: " . (gettype($url)));
-            $this->imgqr ="hhhh".$gfService->storeFile($img, $file)."iirraa";
-            Log::debug("url2: " . (string)$this->imgqr);
+            $this->imgqr = "hhhh" . $gfService->storeFile($img, $file) . "iirraa";
+            Log::debug("url2: " . (string) $this->imgqr);
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
-            Log::debug("logo: " . (string)$url);
-
+            Log::debug("logo: " . (string) $url);
 
         } catch (\Exception $e) {
             Log::debug("error: " . $e->getMessage());
