@@ -1,7 +1,7 @@
 @component('mail::message')
 
 {{$event->name}}
-
+{{$qrs}}
 
  ![Evius]({{$logo}})   
 

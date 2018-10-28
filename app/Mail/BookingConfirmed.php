@@ -87,10 +87,15 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
-
+       
+        $qr = $this->qr;
         return $this
             ->from("apps@mocionsoft.com", $from)
             ->subject($this->subject)
-            ->markdown('bookingConfirmed');
+            ->markdown('bookingConfirmed')->with(
+            [
+                "qrs" => "tt".$qr,
+            ]
+        );
     }
 }
