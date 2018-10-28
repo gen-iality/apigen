@@ -45,6 +45,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";
+        Log::debug("enviando corero __construct");
     }
 
     /**
@@ -55,7 +56,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public function build()
     {
         $gfService = new GoogleFiles();
-
+        Log::debug("Enviando el Correo");
         $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
@@ -88,6 +89,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             var_dump($e->getMessage());
         }
        
+        Log::debug("generando el view: ");
         $qr = $this->qr;
         return $this
             ->from("apps@mocionsoft.com", $from)
