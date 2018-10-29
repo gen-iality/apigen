@@ -66,4 +66,4 @@ workers:
         disk: 256
         commands:
             start: |
-              php artisan queue:work redis
+              php artisan queue:work
