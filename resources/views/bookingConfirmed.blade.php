@@ -15,8 +15,8 @@
     </span>
 </div>
 <br />
-
-![qr]({{$qr}})
+<img src="{{ route('api/generatorQr/12345678') }}">
+<!-- ![qr]({{$qr}}) -->
 
 
 @component('mail::table')
