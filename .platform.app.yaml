@@ -62,7 +62,6 @@ runtime:
 variables:
     php:
         disable_functions: ''
-
 #workers:
 #    queue:
 #        size: S
