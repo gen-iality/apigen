@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use QRCode;
-use App\EventUser;
 use App\User;
 
 class GenerateQr extends Controller
@@ -16,9 +15,8 @@ class GenerateQr extends Controller
      */
     public function index($id)
     {
-        $EventUser = EventUser::find($id);
         ob_start(); 
-        QRCode::text($EventUser)
+        QRCode::text($id)
         ->setSize(8)
         ->setMargin(4)
         ->png();
