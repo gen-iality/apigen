@@ -2,7 +2,7 @@
 
 {{$event->name}}
 
- ![Evius]({{$logo}})
+ <!-- ![Evius]({{$logo}}) -->
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <div style="text-align: justify">
