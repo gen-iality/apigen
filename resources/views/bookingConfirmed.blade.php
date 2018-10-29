@@ -15,7 +15,7 @@
     </span>
 </div>
 <br />
-{{eventUser_id}}
+{{$eventUser_id}}
 <img src="{{ url()->previous().'/api/generatorQr/'.$eventUser_id }}">
 <!-- ![qr]({{$qr}}) -->
 
