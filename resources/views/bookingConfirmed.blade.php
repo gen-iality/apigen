@@ -15,7 +15,7 @@
     </span>
 </div>
 <br />
-<img src="{{ route('api/generatorQr/12345678') }}">
+<img src="{{ url()->previous(); }}">
 <!-- ![qr]({{$qr}}) -->
 
 
