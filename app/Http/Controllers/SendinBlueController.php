@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use \App\MessageUser;
 use Sendinblue\Mailin;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class SendinBlueController extends Controller
 {
@@ -92,9 +93,10 @@ class SendinBlueController extends Controller
      */
     public function activeWebHooks()
     {	
+        $url = URL::previous();
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         
-		$data = array( "url" => "https://dev.mocionsoft.com/evius/eviusapilaravel/public/api/UpdateStatusMessage",
+		$data = array( "url" => $url."/api/UpdateStatusMessage",
 			"description" => "Update status of messages",
 			"events" => array( 
                 "delivered", "request" , "hard_bounce", "soft_bounce", 
@@ -116,9 +118,9 @@ class SendinBlueController extends Controller
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         sleep(1);
         try{
-        Log::debug('Recibiendo la informacion de los email para actualizar');
+        //Log::debug('Recibiendo la informacion de los email para actualizar');
             $data = $request->json()->all();
-        Log::debug('Data es '.json_encode($data));
+        //Log::debug('Data es '.json_encode($data));
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
             $user_reason = (isset($data["reason"]) ? $data["reason"] : $data["event"]);

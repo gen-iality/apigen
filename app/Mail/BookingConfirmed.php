@@ -2,22 +2,21 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use App\evaLib\Services\GoogleFiles;
-
 use App\Event;
-use App\EventUser;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use QRCode;
 use Storage;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels, Dispatchable, InteractsWithQueue;
+    use Queueable, SerializesModels;//, Dispatchable, InteractsWithQueue;
     public $event;
     public $event_location;
     public $eventuser_name;
@@ -30,22 +29,22 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(
-        $eventUser)
+    public function __construct($eventUser)
     {
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
-        $eventUser_name =($eventUser["properties"]["name"]);
+        $eventUser_name = ($eventUser["properties"]["name"]);
         $eventUser_id = $eventUser->id;
 
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
-        $this->subject   = "[Tu Ticket - ".$event->name."]" ;
-        $this->build();
+        $this->subject = "[Tu Ticket - " . $event->name . "]";
+        $gfService = new GoogleFiles();
+        
 
-}
+    }
 
     /**
      * Build the message.
@@ -54,31 +53,39 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        Log::debug("Construyendo el correo de ticket");
         $gfService = new GoogleFiles();
-
-        $from = isset($this->event->organizer->name)?$this->event->organizer->name."(Evius)":"(Evius)"; 
+        
+        $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
-        $file =$this->eventuser_id.'_qr.png';
-        $fullpath = storage_path('app/public/'.$file);
+        $file = $this->eventuser_id . '_qr.png';
+        $fullpath = storage_path('app/public/' . $file);
 
-        try{
-        $image = QRCode::text($this->eventuser_id)
+        try {
+            $image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->setOutfile($fullpath)
                 ->png();
-        $img = Storage::get($file);
-        $this->qr = $gfService->storeFile($img, $file);
-        //$img = Storage::delete($file);
-        $this->logo = url($logo_evius);
-       
-        }catch(\Exception $e){
 
+            $img = Storage::get("public/" . $file);
+
+            $url = $gfService->storeFile($img, $file);
+            $this->qr = (string) $url;
+            Log::debug("QR link: ".$url);
+            //$img = Storage::delete("public/".$file);
+            $this->logo = url($logo_evius);
+
+
+        } catch (\Exception $e) {
+            Log::debug("error: " . $e->getMessage());
+            var_dump($e->getMessage());
         }
-
+       
+    
         return $this
-        ->from("apps@mocionsoft.com", $from)
-        ->subject($this->subject)
-        ->markdown('bookingConfirmed');        
+            ->from("apps@mocionsoft.com", $from)
+            ->subject($this->subject)
+            ->markdown('bookingConfirmed');
     }
 }

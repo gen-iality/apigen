@@ -41,7 +41,10 @@ mounts:
   "/storage/logs": "shared:files/storage/logs"
   # And another cache directory here.
   "/bootstrap/cache": "shared:files/bootstrap_cache"
-#hooks:
+hooks:
+   post_deploy: |
+     php artisan queue:restart
+     php artisan queue:work redis --queue="master" &
 #  deploy: |
 #    mkdir -p storage/app/public
 #    mkdir -p storage/framework/views
@@ -54,3 +57,15 @@ runtime:
     extensions:
         - mongodb
         - redis
+        - curl
+
+variables:
+    php:
+        disable_functions: ''
+#workers:
+#    queue:
+#        size: S
+#        disk: 256
+#        commands:
+#            start: |
+#              php artisan queue:work redis --queue="master"

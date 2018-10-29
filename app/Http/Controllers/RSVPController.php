@@ -12,12 +12,10 @@ use App\Message;
 use App\MessageUser;
 use App\State;
 use App\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
@@ -160,8 +158,13 @@ class RSVPController extends Controller implements ShouldQueue
 
             $m = Message::find($message->id);
 
+            if (!$eventUser->user) {
+                \Log::debug("User doesn't exists for this eventUser: " . $eventUser->id);
+                return null;
+            }
+
             Mail::to($email)
-                ->send(
+                ->queue(
                     new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject)
                 );
 
@@ -175,19 +178,19 @@ class RSVPController extends Controller implements ShouldQueue
      * @return void
      */
     public function confirmRSVP(EventUser $eventUser)
-    {  
+    {
 
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
         }
 
-        return redirect()->away(Config::get('app.front_url', 'https://evius.co') .'/landing/' . $eventUser->event_id."?attendee=".$eventUser->_id.'&status='.$eventUser->state_id);
+        return redirect()->away(Config::get('app.front_url', 'https://evius.co') . '/landing/' . $eventUser->event_id . "?attendee=" . $eventUser->_id . '&status=' . $eventUser->state_id);
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
     }
 
     public function confirmRSVPTest(EventUser $eventUser)
-    {  
+    {
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
         }
