@@ -20,7 +20,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $event;
     public $event_location;
     public $eventuser_name;
-    public $eventuser;
+    public $eventUserData;
     public $eventuser_id;
     public $qr;
     public $logo;
@@ -35,13 +35,13 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
         $eventUser_name = ($eventUser["properties"]["name"]);
-        $eventUser = ($eventUser["properties"]);
+        $eventUserData = ($eventUser["properties"]);
         $eventUser_id = $eventUser->id;
 
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
-        $this->eventUser = $eventUser;
+        $this->eventUserData = $eventUserData;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";
         $gfService = new GoogleFiles();
