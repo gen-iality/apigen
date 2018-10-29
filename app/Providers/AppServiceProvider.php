@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                 Log::debug("saved adentro vamos a enviar el email");
                 // var_dump($eventUser->event_id);
                 Mail::to($email)
-                    ->send(
+                    ->queue(
                         new BookingConfirmed($eventUser)
                     );
             }

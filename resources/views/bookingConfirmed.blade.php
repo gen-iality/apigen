@@ -1,9 +1,8 @@
 @component('mail::message')
 
 {{$event->name}}
-{{$qrs}}
 
- ![Evius]({{$logo}})   
+ ![Evius]({{$logo}})
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <div style="text-align: justify">
@@ -17,39 +16,21 @@
 </div>
 <br />
 
-<img src="{{$qr}}" />
-@component('mail::panel')
--->{{$imgqr}}<--
-{{$cuatro}}
-{{$tres}}
-@endcomponent
+![qr]({{$qr}})
 
-![QR2]({{$qrdos}})
-
-```
-algo imagen
-{{$qr}}
---{{$qrdos}}
-```
-```
-algo imagen
-{{$imgqr}}
-```
-
-<p>cc {{$imgqr}} aa</p>
 
 @component('mail::table')
-| **Tipo de Entrada:**            | **Precio:**                                                                  |   
-|:----------------------:|:-------------------------------------------------------------------------------------:| 
-|General | Invitacion |       
+| **Tipo de Entrada:**            | **Precio:**                                                                  |
+|:----------------------:|:-------------------------------------------------------------------------------------:|
+|General | Invitacion |
 @endcomponent
-@component('mail::table')                                                          
-| **Fecha Inicio:**            | **Hora:**                                                                       | 
-|:---------------------:|:--------------------------------------------------------------------------------------:| 
+@component('mail::table')
+| **Fecha Inicio:**            | **Hora:**                                                                       |
+|:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:s', strtotime($event->datetime_from)) }} |
-|<br>                   |<br>  
-| **Fecha Finalizacion:**            | **Hora:**                                                                 | 
-| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:s', strtotime($event->datetime_to)) }} | 
+|<br>                   |<br>
+| **Fecha Finalizacion:**            | **Hora:**                                                                 |
+| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:s', strtotime($event->datetime_to)) }} |
 
 @endcomponent
 
@@ -88,7 +69,7 @@ Confirmar Cuenta
 </div>
 <div style="text-align: center">
     <span>
-        
+
     </span>
     <span></span>
 </div>

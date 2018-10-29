@@ -16,16 +16,12 @@ use Storage;
 
 class BookingConfirmed extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels, Dispatchable, InteractsWithQueue;
+    use Queueable, SerializesModels;//, Dispatchable, InteractsWithQueue;
     public $event;
     public $event_location;
     public $eventuser_name;
     public $eventuser_id;
     public $qr;
-    public $imgqr = "xxxx";
-    public $qrdos;
-    public $tres;
-    public $cuatro;
     public $logo;
 
     /**
@@ -45,7 +41,9 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";
-        Log::debug("enviando corero __construct");
+        $gfService = new GoogleFiles();
+        
+
     }
 
     /**
@@ -55,8 +53,9 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        Log::debug("Construyendo el correo de ticket");
         $gfService = new GoogleFiles();
-        Log::debug("Enviando el Correo");
+        
         $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
@@ -73,31 +72,19 @@ class BookingConfirmed extends Mailable implements ShouldQueue
 
             $url = $gfService->storeFile($img, $file);
             $this->qr = (string) $url;
-            $this->qrdos = "https://storage.googleapis.com/herba-images/evius/events/5bd375f972b12700e76ed592_qr.png";
-            $this->tres = str_replace("a", "a", $url);
-            $this->cuatro = htmlentities($url);
-            Log::debug("url: " . (string) $url);
-            Log::debug("url type: " . (gettype($url)));
-            $this->imgqr = "hhhh" . $gfService->storeFile($img, $file) . "iirraa";
-            Log::debug("url2: " . (string) $this->imgqr);
             //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
-            Log::debug("logo: " . (string) $url);
+
 
         } catch (\Exception $e) {
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
        
-        Log::debug("generando el view: ");
-        $qr = $this->qr;
+    
         return $this
             ->from("apps@mocionsoft.com", $from)
             ->subject($this->subject)
-            ->markdown('bookingConfirmed')->with(
-            [
-                "qrs" => "tt".$qr,
-            ]
-        );
+            ->markdown('bookingConfirmed');
     }
 }
