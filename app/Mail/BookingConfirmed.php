@@ -23,6 +23,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_id;
     public $qr;
     public $logo;
+    public $attach;
 
     /**
      * Create a new message instance.
@@ -53,6 +54,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $attachPath = url()->previous().'/api/generatorQr/'.$this->eventuser_id;
+        $this->attach = $attachPath;
         Log::debug("Construyendo el correo de ticket");
         $gfService = new GoogleFiles();
         
@@ -91,6 +94,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
        
     
         return $this
+            ->attach($attachPath)
             ->from("apps@mocionsoft.com", $from)
             ->subject($this->subject)
             ->markdown('bookingConfirmed');
