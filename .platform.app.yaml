@@ -44,7 +44,7 @@ mounts:
 hooks:
    post_deploy: |
      php artisan queue:restart
-     php artisan queue:work redis --queue="master" &
+
 #  deploy: |
 #    mkdir -p storage/app/public
 #    mkdir -p storage/framework/views
@@ -62,10 +62,10 @@ runtime:
 variables:
     php:
         disable_functions: ''
-#workers:
-#    queue:
-#        size: S
-#        disk: 256
-#        commands:
-#            start: |
-#              php artisan queue:work redis --queue="master"
+workers:
+    queue:
+        size: S
+        disk: 256
+        commands:
+            start: |
+              php artisan queue:work redis --queue="master"
