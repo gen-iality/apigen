@@ -15,6 +15,8 @@
     </span>
 </div>
 <br />
+
+{{eventuser}}
 <img src="{{ url()->previous().'/api/generatorQr/sadasda' }}">
 <!-- ![qr]({{$qr}}) -->
 
