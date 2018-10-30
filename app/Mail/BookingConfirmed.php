@@ -94,10 +94,6 @@ class BookingConfirmed extends Mailable implements ShouldQueue
        
     
         return $this
-            ->attach($attachPath, [
-                'as' => 'checkin.png',
-                'mime' => 'application/png',
-            ])
             ->attach('pdf_bookingConfirmed', [
                 'as' => 'ticket',
                 'mime' => 'application/pdf',
