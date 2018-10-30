@@ -90,4 +90,20 @@ class synchronizationController extends Controller
         }
         return  response('the proccess was completed');
     }
+
+    public function EventUserRDT($user){
+        $eventUser = EventUser::find($user);
+        $dataUser = json_decode($eventUser,true);
+
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new \Kreait\Firebase\Factory)
+             ->withServiceAccount($serviceAccount)
+             ->create();
+
+        $db = $firebase->getDatabase();
+
+        $db->getReference('users/'.$eventUser->user->_id)->set($dataUser);
+
+        return ($db->getReference('config/website/name')->set('New name'));             
+    }
 }

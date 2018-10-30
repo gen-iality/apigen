@@ -44,6 +44,14 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  */
                 Log::debug($eventUser->event_id);
                 self::saveFirestore($eventUser->event_id.'event_users', $eventUser->_id, $eventUser);
+                /**
+                 * Guardar en firebase Real Data Time
+                 * Debes enviar:
+                 *      1. la COLLECCIÓN que deseas guardar,
+                 *      2. El id del DOCUMENTO
+                 *      3. La información que desear guardar en el documento COLLECCIÓN.
+                 */
+                self::saveFirebase('users', $eventUser->user->_id, $eventUser);
 
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
 
@@ -106,7 +114,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     }
 
     /**
-     * Event User
+     * Save Firestore
      * 
      * Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
      * Realizando una migración por medio del id,
@@ -140,6 +148,42 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $user = $collection->document($document);
             $dataUser = json_decode($data,true);
             $user->set($dataUser);
+        }
+    }
+
+
+        /**
+     * Event User
+     * 
+     * Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
+     * Realizando una migración por medio del id,
+     *
+     * para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
+     * https://github.com/morrislaptop/firestore-php
+     * 
+     * El controlador sigue los siguientes pasos:
+     *      1. Se abre el servicio de firestore
+     *      2. Captura toda la información del event_users
+     *      3. Se diríge a la collección, el cual es el mismo nombre "event_users"
+     *      4. Recorre todos los usuarios encontrados anteriormente pero.
+     *          4.1. Si los datos del usuario existen entonces.
+     *          4.2. Guarda un nuevo documento con el id del event_user.
+     *          4.3. Convertimos los datos del usuario en un array para poder guardarlo. 
+     *          4.4. Dentro del documento guardamos los datos del usuario.
+     *      5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function saveFirebase($collection, $user_id, $data)
+    {
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new \Kreait\Firebase\Factory)
+             ->withServiceAccount($serviceAccount)
+             ->create();
+        $db = $firebase->getDatabase();
+        
+        if($data){
+            $db->getReference($collection.'/'.$user_id)->set($data);
         }
     }
 }
