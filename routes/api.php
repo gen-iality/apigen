@@ -29,6 +29,8 @@ Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
+Route::get('sync/firebase', 'synchronizationController@EventUsers');
+Route::get('sync/firebase/{id}', 'synchronizationController@EventUser');
 /****************
  * eventUsers
  ****************/
