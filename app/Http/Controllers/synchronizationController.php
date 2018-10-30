@@ -78,9 +78,10 @@ class synchronizationController extends Controller
      */
     public function EventUser($user)
     {
-       
+
         $eventUser = EventUser::find($user);
-        
+        $firestore = resolve('Morrislaptop\Firestore');
+
         if($eventUser->user){
             $collection = $firestore->collection($eventUser->event_id.'-event_users');
             $user = $collection->document($eventUser->_id);

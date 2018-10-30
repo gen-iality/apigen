@@ -34,17 +34,18 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             Log::debug("ejecutando observador saved eventUser");
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
             $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
-            
-            if ($eventUser->state_id == EventUser::STATE_BOOKED) {
 
                 /**
                  * Guardar en firestore
                  * Debes enviar:
-                 *      1.la collección que deseas guardar,
-                 *      2. El id del documento
-                 *      3. La información que desear guardar en el documento.
+                 *      1. la COLLECCIÓN que deseas guardar,
+                 *      2. El id del DOCUMENTO
+                 *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                self::saveFirestore('event_users', $eventUser->_id, $eventUser->user);
+                Log::debug($eventUser->event_id);
+                self::saveFirestore($eventUser->event_id.'event_users', $eventUser->_id, $eventUser);
+
+            if ($eventUser->state_id == EventUser::STATE_BOOKED) {
 
                 Log::debug("Vamos a programar email de booking confirmado");
                 
@@ -126,17 +127,19 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      * 
      * @return \Illuminate\Http\Response
      */
-    public function saveFirestore($collection, $id, $data)
+    public function saveFirestore($collection, $document, $data)
     {
         $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firestore = (new \Morrislaptop\Firestore\Factory)->withServiceAccount($serviceAccount)->createFirestore();
+        $firebase = (new \Morrislaptop\Firestore\Factory)
+             ->withServiceAccount($serviceAccount)
+             ->createFirestore();
         
         if($data){
-            $collection = $firestore->collection($collection);
-            $user = $collection->document($id);
+            Log::debug($collection);
+            $collection = $firebase->collection($collection);
+            $user = $collection->document($document);
             $dataUser = json_decode($data,true);
             $user->set($dataUser);
         }
-        return  response('the proccess was completed');
     }
 }
