@@ -23,6 +23,7 @@ class EventUser extends Moloquent
     protected $attributes = [
         'state_id'  => self::STATE_DRAFT,
         'rol_id'   => self::ROL_ATTENDEE,
+        'checked_in' => false
     ];
 
     public function event()
