@@ -58,6 +58,7 @@ runtime:
         - mongodb
         - redis
         - curl
+        - grpc
 
 variables:
     php:
