@@ -36,6 +36,16 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
             
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
+
+                /**
+                 * Guardar en firestore
+                 * Debes enviar:
+                 *      1.la collección que deseas guardar,
+                 *      2. El id del documento
+                 *      3. La información que desear guardar en el documento.
+                 */
+                self::saveFirestore('event_users', $eventUser->_id, $eventUser->user);
+
                 Log::debug("Vamos a programar email de booking confirmado");
                 
                 Mail::to($email)
@@ -80,5 +90,41 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         );
 
 
+    }
+
+    /**
+     * Event User
+     * 
+     * Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
+     * Realizando una migración por medio del id,
+     *
+     * para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
+     * https://github.com/morrislaptop/firestore-php
+     * 
+     * El controlador sigue los siguientes pasos:
+     *      1. Se abre el servicio de firestore
+     *      2. Captura toda la información del event_users
+     *      3. Se diríge a la collección, el cual es el mismo nombre "event_users"
+     *      4. Recorre todos los usuarios encontrados anteriormente pero.
+     *          4.1. Si los datos del usuario existen entonces.
+     *          4.2. Guarda un nuevo documento con el id del event_user.
+     *          4.3. Convertimos los datos del usuario en un array para poder guardarlo. 
+     *          4.4. Dentro del documento guardamos los datos del usuario.
+     *      5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function saveFirestore($collection, $id, $data)
+    {
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firestore = (new \Morrislaptop\Firestore\Factory)->withServiceAccount($serviceAccount)->createFirestore();
+        
+        if($data){
+            $collection = $firestore->collection($collection);
+            $user = $collection->document($id);
+            $dataUser = json_decode($data,true);
+            $user->set($dataUser);
+        }
+        return  response('the proccess was completed');
     }
 }
