@@ -78,14 +78,13 @@ class synchronizationController extends Controller
      */
     public function EventUser($user)
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
+       
         $eventUser = EventUser::find($user);
         
         if($eventUser->user){
-            $collection = $firestore->collection('event_users');
+            $collection = $firestore->collection($eventUser->event_id.'-event_users');
             $user = $collection->document($eventUser->_id);
-            $dataUser = json_decode($eventUser->user,true);
+            $dataUser = json_decode($eventUser,true);
             $user->set($dataUser);
         }
         return  response('the proccess was completed');

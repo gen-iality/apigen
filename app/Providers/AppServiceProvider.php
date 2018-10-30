@@ -76,12 +76,24 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         $this->app->singleton(
             'Kreait\Firebase\Auth', function ($app) {
                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-               $firebase = (new Factory)
+               $firebase = (new \Kreait\Firebase\Factory)
                     ->withServiceAccount($serviceAccount)
                     ->create();
                 return $firebase->getAuth();
             }
         );
+
+        $this->app->singleton(
+            'Morrislaptop\Firestore', function ($app) {
+               $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+               $firebase = (new \Morrislaptop\Firestore\Factory)
+                    ->withServiceAccount($serviceAccount)
+                    ->createFirestore();
+                return $firebase;
+            }
+        );
+         // $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        // $firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
 
         $this->app->bind(
             'App\evaLib\Services\UserEventService', function ($app) {
