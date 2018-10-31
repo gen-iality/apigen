@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37ef52173fe9198dabf8af5ac000b686",
+    "content-hash": "35d39befa5904f6ac02ba2227120e31a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -913,6 +913,47 @@
             "time": "2018-10-01T14:07:51+00:00"
         },
         {
+            "name": "google/protobuf",
+            "version": "v3.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/protobuf.git",
+                "reference": "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/protobuf/zipball/48cb18e5c419ddd23d9badcfe4e9df7bde1979b2",
+                "reference": "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.8.0"
+            },
+            "suggest": {
+                "ext-bcmath": "Need to support JSON deserialization"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Google\\Protobuf\\": "php/src/Google/Protobuf",
+                    "GPBMetadata\\Google\\Protobuf\\": "php/src/GPBMetadata/Google/Protobuf"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "proto library for PHP",
+            "homepage": "https://developers.google.com/protocol-buffers/",
+            "keywords": [
+                "proto"
+            ],
+            "time": "2018-07-27T20:30:28+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.3",
             "source": {
@@ -1670,7 +1711,7 @@
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
-                    "role": "developer"
+                    "role": "Developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -2075,6 +2116,56 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "morrislaptop/firestore-php",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morrislaptop/firestore-php.git",
+                "reference": "2ba355eae9c6e2c05ed636d87a7546ef2f903d92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morrislaptop/firestore-php/zipball/2ba355eae9c6e2c05ed636d87a7546ef2f903d92",
+                "reference": "2ba355eae9c6e2c05ed636d87a7546ef2f903d92",
+                "shasum": ""
+            },
+            "require": {
+                "google/protobuf": "^3.6",
+                "kreait/firebase-php": "^4.15"
+            },
+            "require-dev": {
+                "morrislaptop/var-dumper-with-context": "^0.2.0",
+                "phpunit/phpunit": "^7.1",
+                "symfony/var-dumper": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Morrislaptop\\Firestore\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Craig Morris",
+                    "email": "cr@igmorr.is"
+                }
+            ],
+            "description": "Firestore SDK for PHP without gRPC",
+            "homepage": "https://github.com/morrislaptop/firestore-php",
+            "keywords": [
+                "api",
+                "database",
+                "firestore",
+                "google",
+                "sdk"
+            ],
+            "time": "2018-10-21T11:13:02+00:00"
         },
         {
             "name": "mpociot/documentarian",

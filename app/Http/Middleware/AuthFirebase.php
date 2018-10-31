@@ -100,7 +100,8 @@ class AuthFirebase
              * o puede consultar lo siguiente https://stackoverflow.com/questions/42098150/how-to-verify-firebase-id-token-with-phpjwt
              */
             $token = $e->getToken()->getClaims();
-            $user_id = ((array) $token)['user_id'];
+            $user_id = ((array) $token);
+            $user_id = $user_id['user_id'];
             /*
              * Capturamos el refresh token
              * Capturamos el usuario a partir del correo el cual se encuentra en el token codificado
