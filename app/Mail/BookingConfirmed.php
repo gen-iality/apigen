@@ -11,6 +11,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade as PDF;
 use QRCode;
 use Storage;
 
@@ -63,6 +64,11 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
         $fullpath = storage_path('app/public/' . $file);
+        $event = $this->event;
+        $eventuser = $this->eventuser_name;
+        $tikect_id = $this->eventuser_id;
+
+        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','tikect_id'));
 
         try {
             /*$image = QRCode::text($this->eventuser_id)
@@ -94,10 +100,14 @@ class BookingConfirmed extends Mailable implements ShouldQueue
        
     
         return $this
-            ->attach($attachPath, [
-                'as' => 'checkin.png',
-                'mime' => 'application/png',
-            ])
+            // ->attach('pdf_bookingConfirmed',[
+            //     'as' => 'ticket',
+            //     'mime' => 'application/pdf',
+            // ])
+            ->attachData($pdf->output(), [
+                'as' => 'boleta',
+                'mime' => 'application/pdf',
+                ])
             ->from("apps@mocionsoft.com", $from)
             ->subject($this->subject)
             ->markdown('bookingConfirmed');
