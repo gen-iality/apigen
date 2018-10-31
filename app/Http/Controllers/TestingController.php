@@ -6,6 +6,8 @@ use App;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
+use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use QRCode;
 
 class TestingController extends Controller
@@ -98,9 +100,17 @@ class TestingController extends Controller
         return "ahi";
     }
 
-    public function usuario()
+    public function pdf()
     {
-        return "usuario";
+        $event = 'evento de prueba generar pdf';
+        $eventuser = 'cesar barriosnuevos';
+        $ticket_id = 12345;
+        $attachPath = url()->previous().'/api/generatorQr/5bd9959672b12737b359c722';
+        $date = '31/10/2018';
+
+        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','attachPath','date'));
+        $pdf->setPaper('legal','portrait');
+        return $pdf->download('example.pdf');
     }
 
     public function qrTesting()
