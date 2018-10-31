@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                 // if($eventUser->properties){
                 //     self::saveFirebase('users', $eventUser->user->_id, $eventUser->properties);
                 // }else{
-                    self::saveFirebase('users', $eventUser->user->_id, $eventUser->user);
+                    self::saveFirebase('users', $eventUser->user->_id, $eventUser->properties);
                 // }
 
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
