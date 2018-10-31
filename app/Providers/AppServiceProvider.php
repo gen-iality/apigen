@@ -44,7 +44,6 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                Log::debug($eventUser->event_id);
                 self::saveFirestore($eventUser->event_id.'_event_attendees', $eventUser->_id, $eventUser);
                 /**
                  * Guardar en firebase Real Data Time
@@ -53,11 +52,8 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                // if($eventUser->properties){
-                //     self::saveFirebase('users', $eventUser->user->_id, $eventUser->properties);
-                // }else{
-                    self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
-                // }
+                Log::debug("Entrando a firebase");
+                self::saveFirebase('users', $eventUser->user->_id, $eventUser->user);
 
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
 
