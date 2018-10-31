@@ -14,6 +14,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
+
+use Kreait\Firebase\Database;
 //use Kreait\Firebase\Auth;
 
 
@@ -151,7 +153,11 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $collection = $firebase->collection($collection);
             $user = $collection->document($document);
             $dataUser = json_decode($data,true);
+            $dataUser['updated_at'] =date_create();
+            $dataUser['created_at'] =date_create();
+            // var_dump($dataUser);
             $user->set($dataUser);
+            
         }
     }
 
