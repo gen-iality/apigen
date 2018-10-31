@@ -84,8 +84,6 @@ class RSVPController extends Controller implements ShouldQueue
         //addUsers - recipients of message
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
-        var_dump(json_encode($event->id));
-        return 0;
         $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
         
         $message->number_of_recipients = count($eventUsers);
