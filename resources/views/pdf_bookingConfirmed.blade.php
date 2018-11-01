@@ -16,7 +16,7 @@
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Ticket Nro</h3>
-                            <p style="margin: 0;">{{$tikect_id}}</p>
+                            <p style="margin: 0;">{{$ticket_id}}</p>
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Fecha de Impresion</h3>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div style="width: auto; display: inline-block;">
-                        <img src="{{url()->previous()}}/api/generatorQr/{{$tikect_id}}" />
+                        <img src="{{url()->previous()}}/api/generatorQr/{{$ticket_id}}" />
                     </div>
                 </div>
 
