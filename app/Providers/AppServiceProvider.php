@@ -150,7 +150,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $user = $collection->document($document);
             $dataUser = json_decode($data,true);
             $dataUser['updated_at'] =date_create();
-            $dataUser['created_at'] =date_create();
+            $dataUser['created_at'] =($dataUser['created_at'])? date_create($dataUser['created_at']):date_create();
             // var_dump($dataUser);
             $user->set($dataUser);
             
