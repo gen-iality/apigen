@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
                 Log::debug("Entrando a firebase");
-                self::saveFirebase('users', $eventUser->_id, $eventUser);
+                self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
 
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
 
@@ -189,6 +189,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         $db = $firebase->getDatabase();
         
         if($data){
+            var_dump($data);
+            var_dump($user_id);
+            var_dump($collection);
             $db->getReference($collection.'/'.$user_id)->set($data);
         }
     }
