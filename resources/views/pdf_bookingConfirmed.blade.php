@@ -9,7 +9,7 @@
                 </div>
 
                 <div style="display: block; height: 300px; margin-bottom:1em; border-bottom: 1px solid lightgrey;">
-                    <div style="width:45%; display: inline-block; vertical-align:top; padding: 35px 0;">
+                    <div style="width:40%; display: inline-block; vertical-align:top; padding: 35px 0;">
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Evento</h3>
                             <p style="margin: 0;">{{$event->name}}</p>
