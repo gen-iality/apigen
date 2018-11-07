@@ -14,6 +14,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
+
+use Kreait\Firebase\Database;
 //use Kreait\Firebase\Auth;
 
 
@@ -42,7 +44,6 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                Log::debug($eventUser->event_id);
                 self::saveFirestore($eventUser->event_id.'_event_attendees', $eventUser->_id, $eventUser);
                 /**
                  * Guardar en firebase Real Data Time
@@ -51,7 +52,8 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                self::saveFirebase('users', $eventUser->user->_id, $eventUser);
+                Log::debug("Entrando a firebase");
+                self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
 
             if ($eventUser->state_id == EventUser::STATE_BOOKED) {
 
@@ -147,7 +149,11 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $collection = $firebase->collection($collection);
             $user = $collection->document($document);
             $dataUser = json_decode($data,true);
+            $dataUser['updated_at'] =date_create();
+            $dataUser['created_at'] =($dataUser['created_at'])? date_create($dataUser['created_at']):date_create();
+            // var_dump($dataUser);
             $user->set($dataUser);
+            
         }
     }
 

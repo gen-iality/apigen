@@ -61,9 +61,8 @@ class RSVPController extends Controller implements ShouldQueue
 
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
-
         $data = $request->json()->all();
-
+        
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
         //~~~~~~~~~~~~~~~~~~~~~~
@@ -71,12 +70,12 @@ class RSVPController extends Controller implements ShouldQueue
         $subject = $data['subject'];
         $subject = ($subject) ? $subject : "[Invitación] " . $event->name;
         $message->subject = $subject;
-
+        
         $message->message = $data['message'];
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
-
+        
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-
+        
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
@@ -86,7 +85,7 @@ class RSVPController extends Controller implements ShouldQueue
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
-
+        
         $message->number_of_recipients = count($eventUsers);
         $message->save();
 
@@ -96,10 +95,10 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUsers, $message, $event
         );
         $mesage = $message->fresh();
-
+        
         return $message;
     }
-
+    
 /**
  * saveRSVP
  *
