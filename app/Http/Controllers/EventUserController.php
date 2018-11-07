@@ -55,15 +55,9 @@ class EventUserController extends Controller
     {
         $query = EventUser::where("event_id", $event_id);
 
-        //páginacion pordefecto
-        $pageSize = (int) $request->input('pageSize');
-        $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
 
-        $query = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
-
-        return EventUserResource::collection(
-            $query->paginate($pageSize)
-        );
+        return EventUserResource::collection($results);
     }
 
     public function bookEventUsers(Request $request, Event $event)
