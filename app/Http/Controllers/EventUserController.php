@@ -60,6 +60,18 @@ class EventUserController extends Controller
         return EventUserResource::collection($results);
     }
 
+    public function meEvents(Request $request)
+    {
+       
+        $user = $request->get('user');
+
+        $query   = EventUser::with("event")->where("userid", $user->id);
+        $results = $query->paginate(config('app.page_size'));
+        return EventUserResource::collection($results);
+    }    
+
+
+
     public function bookEventUsers(Request $request, Event $event)
     {
         try {
