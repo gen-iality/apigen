@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use \App\MessageUser;
 use Sendinblue\Mailin;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class SendinBlueController extends Controller
 {
@@ -92,9 +93,10 @@ class SendinBlueController extends Controller
      */
     public function activeWebHooks()
     {	
+        $url = URL::previous();
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         
-		$data = array( "url" => "https://dev.mocionsoft.com/evius/eviusapilaravel/public/api/UpdateStatusMessage",
+		$data = array( "url" => $url."/api/UpdateStatusMessage",
 			"description" => "Update status of messages",
 			"events" => array( 
                 "delivered", "request" , "hard_bounce", "soft_bounce", 
@@ -116,10 +118,12 @@ class SendinBlueController extends Controller
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
         sleep(1);
         try{
+        //Log::debug('Recibiendo la informacion de los email para actualizar');
             $data = $request->json()->all();
+        //Log::debug('Data es '.json_encode($data));
             //search messageUser by message-id
             $message_id = ($data["message-id"]);
-            $user_reason = ($data["reason"]);
+            $user_reason = (isset($data["reason"]) ? $data["reason"] : $data["event"]);
             $user_status = ($data["event"]);
             //update the new status that is in data
             $message_user = MessageUser::where('sender_id', $message_id)
@@ -138,6 +142,64 @@ class SendinBlueController extends Controller
 
         }catch(\Exception $e){
             var_dump($e);
+        
+        }
+    }
+
+    /**
+     * Update manually status in email sent by Sendinblue.
+     *
+     * This methods allows function for update manually status 
+     * in email.
+     * 
+     * Once the method has been executed, search the database 
+     * for those that are in a "queued" state limited by 50.
+     * 
+     * Then it executes the report of the emails sent in order 
+     * to update the status of these.   
+     */
+    public function UpdateManuallyStatusMessage()
+    {        
+        $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
+        try{
+            Log::debug('va hacer a consulta');  
+        $message_users = MessageUser::where('sender_id', 'exists', true)
+            ->where('status', 'queued')
+            ->limit(50)->get();
+            
+       $ids = [];
+        foreach ($message_users as $message_user){
+            $messageId = $message_user->sender_id;
+            Log::debug('se obtuvo el message_id'.$messageId);            
+            $data = array( 
+                // "limit" => 10000,
+                // "start_date" => "",
+                // "end_date" => "",
+                // "offset" =>4,
+                // "date" => "2018-10-03",
+                // "days" => 0,
+                // "email" => "",
+                // "event" => "",
+                // "tags" => "",
+                "message_id" => $messageId,
+                // "template_id" => 0
+            );   
+            Log::debug('se va a pedir el reporte de los datos en sendinblue con el message_id');
+            $data_mailin = $mailin->get_report($data)["data"][0];
+            Log::debug('Data es '.json_encode($data_mailin));
+ 
+            $event  = $data_mailin["event"];
+            $message_user->reason = isset($data_mailin["reason"])?$data_mailin["reason"]:$data_mailin["event"];
+            $message_user->status = $event;
+
+            $message_user->save();
+            $ids[] = $message_user->id; 
+
+         }
+         return ["message"=>json_encode($ids)];
+        
+        }catch(\Exception $e){
+           return ["message"=>$e->getMessage()];
         
         }
     }

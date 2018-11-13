@@ -25,6 +25,13 @@ DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
 Route::get('test/auth', 'TestingController@auth');
+Route::get('test/request/{refresh_token}', 'TestingController@request');
+Route::get('test/error', 'TestingController@error');
+
+Route::get('generatorQr/{id}', 'GenerateQr@index');
+Route::get('sync/firestore', 'synchronizationController@EventUsers');
+Route::get('sync/firestore/{id}', 'synchronizationController@EventUser');
+Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 
 /****************
  * eventUsers
@@ -54,7 +61,7 @@ Route::group(
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
         //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
-        Route::get('organizations/{id}/events', 'OrganizationController@OrganizationsEvents');
+       
     }
 );
 
@@ -67,8 +74,10 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+        Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
+
 
 /****************
  * events
@@ -92,6 +101,7 @@ Route::group(
 );
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
+
 
 /***************
  * categories
@@ -122,11 +132,13 @@ return $request->user();
 Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
+Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 
 //Routes for create a new webhooks in Sendinblue API and Update status of messages send by sendinblue
 Route::post('UpdateStatusMessage', 'SendinBlueController@UpdateStatusMessagePOST');
 Route::get('activeWebhooks', 'SendinBlueController@activeWebHooks');
+Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallyStatusMessage');
 
 /**
  * This is the routes of event types
@@ -154,6 +166,7 @@ Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
+Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');

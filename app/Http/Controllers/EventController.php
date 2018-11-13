@@ -44,12 +44,10 @@ class EventController extends Controller
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
             ->orWhere('visibility', 'IS NULL', null, 'and'); //null
-        $query = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+            
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
 
-        return EventResource::collection(
-            $query->paginate(config('app.page_size'))
-            //EventUser::where("event_id", $event_id)->paginate(50)
-        );
+        return EventResource::collection($results);
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
@@ -73,7 +71,7 @@ class EventController extends Controller
     public function EventbyUsers(string $id)
     {
         return EventResource::collection(
-            Event::where('author_id', $id)
+            Event::where('organizer_id', $id)
                 ->paginate(config('app.page_size'))
         );
 
@@ -82,7 +80,7 @@ class EventController extends Controller
     public function EventbyOrganizations(string $id)
     {
         return EventResource::collection(
-            Event::where('author_id', $id)
+            Event::where('organizer_id', $id)
                 ->paginate(config('app.page_size'))
         );
 

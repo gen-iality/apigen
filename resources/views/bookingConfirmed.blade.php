@@ -2,7 +2,7 @@
 
 {{$event->name}}
 
- ![Evius]({{$logo}})   
+ <!-- ![Evius]({{$logo}}) -->
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <div style="text-align: justify">
@@ -14,22 +14,21 @@
         PDF adjunto.
     </span>
 </div>
-
-![QR]({{$qr}})
-
+<br />
+<img src="{{url()->previous()}}/api/generatorQr/{{$eventuser_id}}">
 
 @component('mail::table')
-| **Tipo de Entrada:**            | **Precio:**                                                                  |   
-|:----------------------:|:-------------------------------------------------------------------------------------:| 
-|General | Invitacion |       
+| **Tipo de Entrada:**            | **Precio:**                                                                  |
+|:----------------------:|:-------------------------------------------------------------------------------------:|
+|General | Invitacion |
 @endcomponent
-@component('mail::table')                                                          
-| **Fecha Inicio:**            | **Hora:**                                                                       | 
-|:---------------------:|:--------------------------------------------------------------------------------------:| 
+@component('mail::table')
+| **Fecha Inicio:**            | **Hora:**                                                                       |
+|:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:s', strtotime($event->datetime_from)) }} |
-|<br>                   |<br>  
-| **Fecha Finalizacion:**            | **Hora:**                                                                 | 
-| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:s', strtotime($event->datetime_to)) }} | 
+|<br>                   |<br>
+| **Fecha Finalizacion:**            | **Hora:**                                                                 |
+| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:s', strtotime($event->datetime_to)) }} |
 
 @endcomponent
 
@@ -45,7 +44,7 @@ Ubicación del evento  <br>
         A través del sitio web de Evius.co puedes acceder
         fácilmente a las entradas de tus eventos. Comienza
         dando clic en el siguiente enlace para confirmar tu
-        cuenta y ver los eventos que esperan por ti
+        cuenta y ver los eventos que esperan por ti 
     </span>
 </div>
 
@@ -57,7 +56,7 @@ Confirmar Cuenta
 @component('mail::subcopy')
 @endcomponent
 
-[Eliminar Suscripcion](https://eviusauth.netlify.com/)       [Politicas de privacidad](https://eviusauth.netlify.com/)
+[Políticas de privacidad](https://eviusauth.netlify.com/)
 
 <div style="text-align: center">
     <span>
@@ -68,7 +67,7 @@ Confirmar Cuenta
 </div>
 <div style="text-align: center">
     <span>
-        
+
     </span>
     <span></span>
 </div>

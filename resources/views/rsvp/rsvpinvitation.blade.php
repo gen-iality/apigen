@@ -1,8 +1,6 @@
 @component('mail::message')
 
-
-
-Hola {{$eventUser->user->name}} haz sido invitado a  
+Hola @if ($eventUser->user) {{$eventUser->user->name}}, @endif has sido invitado a  
 
 {{$event->name}}
 ----------------

@@ -1,13 +1,13 @@
 <?php
 error_reporting(E_ALL ^ E_DEPRECATED);// config/app/php
+// Extract enviorment configuration in platform.sh hosting
 $config = new \Platformsh\ConfigReader\Config();
-
 if($config->isAvailable()){
     foreach($config->variables as $k => $v) {
         putenv("$k=$v");
     }
 }
-
+// End offset extraction
 return [
 
     /*
@@ -176,7 +176,8 @@ return [
         App\Providers\EvaFilesServiceProvider::class,
         App\Providers\EvaRolServiceProvider::class,
         Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
-        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         //Spatie\Tail\TailServiceProvider::class
     ],
 
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

@@ -12,12 +12,10 @@ use App\Message;
 use App\MessageUser;
 use App\State;
 use App\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
@@ -63,9 +61,8 @@ class RSVPController extends Controller implements ShouldQueue
 
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
-
         $data = $request->json()->all();
-
+        
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
         //~~~~~~~~~~~~~~~~~~~~~~
@@ -73,12 +70,12 @@ class RSVPController extends Controller implements ShouldQueue
         $subject = $data['subject'];
         $subject = ($subject) ? $subject : "[Invitación] " . $event->name;
         $message->subject = $subject;
-
+        
         $message->message = $data['message'];
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
-
+        
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-
+        
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
@@ -88,7 +85,7 @@ class RSVPController extends Controller implements ShouldQueue
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
-
+        
         $message->number_of_recipients = count($eventUsers);
         $message->save();
 
@@ -98,10 +95,10 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUsers, $message, $event
         );
         $mesage = $message->fresh();
-
+        
         return $message;
     }
-
+    
 /**
  * saveRSVP
  *
@@ -160,8 +157,13 @@ class RSVPController extends Controller implements ShouldQueue
 
             $m = Message::find($message->id);
 
+            if (!$eventUser->user) {
+                \Log::debug("User doesn't exists for this eventUser: " . $eventUser->id);
+                return null;
+            }
+
             Mail::to($email)
-                ->send(
+                ->queue(
                     new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject)
                 );
 
@@ -175,13 +177,23 @@ class RSVPController extends Controller implements ShouldQueue
      * @return void
      */
     public function confirmRSVP(EventUser $eventUser)
-    {  
+    {
 
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
         }
 
-        return redirect()->away(Config::get('app.front_url', 'https://evius.co') .'/landing/' . $eventUser->event_id."?attendee=".$eventUser->_id.'&status='.$eventUser->state_id);
+        return redirect()->away(Config::get('app.front_url', 'https://evius.co') . '/landing/' . $eventUser->event_id . "?attendee=" . $eventUser->_id . '&status=' . $eventUser->state_id);
+        // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
+
+    }
+
+    public function confirmRSVPTest(EventUser $eventUser)
+    {
+        if (!$eventUser->confirm()->save()) {
+            App::abort(500, 'Error');
+        }
+        return $eventUser;
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
 
     }

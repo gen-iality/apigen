@@ -20,7 +20,11 @@
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Fecha de Impresion</h3>
+<<<<<<< HEAD
                             <p style="margin: 0;">13/11/2018</p>
+=======
+                            <p style="margin: 0;">31/10/2018</p>
+>>>>>>> 7370cb248a328e6759a95a2a82020560ef84fedd
                         </div>
                     </div>
                     <div style="width: auto; display: inline-block;">
