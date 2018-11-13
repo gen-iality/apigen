@@ -44,7 +44,7 @@ Ubicación del evento  <br>
         A través del sitio web de Evius.co puedes acceder
         fácilmente a las entradas de tus eventos. Comienza
         dando clic en el siguiente enlace para confirmar tu
-        cuenta y ver los eventos que esperan por ti
+        cuenta y ver los eventos que esperan por ti 
     </span>
 </div>
 
