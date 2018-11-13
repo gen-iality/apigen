@@ -66,17 +66,6 @@ class OrganizationController extends Controller
         return new OrganizationResource($model);
     }
 
-    public function OrganizationsEvents(string $id)
-    {
-        $organizer_id = $id;
-
-        return EventResource::collection(
-            Event::where('organizer_id', $organizer_id)
-                ->paginate(config('app.page_size'))
-        );
-
-    }
-
 
     /**
      * Display the specified resource.

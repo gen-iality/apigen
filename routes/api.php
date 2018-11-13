@@ -32,6 +32,7 @@ Route::get('generatorQr/{id}', 'GenerateQr@index');
 Route::get('sync/firestore', 'synchronizationController@EventUsers');
 Route::get('sync/firestore/{id}', 'synchronizationController@EventUser');
 Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
+
 /****************
  * eventUsers
  ****************/
@@ -60,7 +61,7 @@ Route::group(
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
         //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
-        Route::get('organizations/{id}/events', 'OrganizationController@OrganizationsEvents');
+       
     }
 );
 
@@ -73,6 +74,7 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+        Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
 
@@ -98,6 +100,7 @@ Route::group(
 );
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
+
 
 /***************
  * categories
