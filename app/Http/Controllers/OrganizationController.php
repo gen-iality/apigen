@@ -57,12 +57,13 @@ class OrganizationController extends Controller
 
         $RolService->createAuthorAsOrganizationAdmin($request->get('user')->id, $model->_id);
         
-        $model->save();
-
+        
         if (isset($data['category_ids'])) {
             $model->categories()->sync($data['category_ids']);
         }
-
+        
+        $model->save();
+        
         return new OrganizationResource($model);
     }
 
