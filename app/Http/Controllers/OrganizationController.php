@@ -48,9 +48,8 @@ class OrganizationController extends Controller
      */
     public function store(Request $request, EvaRol $RolService)
     {
-        // return 'ok';        
+        
         $data = $request->json()->all();
-        var_dump($data);
         $model = new Organization($data);
         $model->author = $request->get('user')->id;
 
