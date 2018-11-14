@@ -50,6 +50,7 @@ class OrganizationController extends Controller
     {
         
         $data = $request->json()->all();
+        return $data;
         $model = new Organization($data);
         $model->author = $request->get('user')->id;
 
