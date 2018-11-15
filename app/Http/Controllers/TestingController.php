@@ -87,7 +87,7 @@ class TestingController extends Controller
 
         Mail::to($email)
             ->send(
-                new BookingConfirmed($event, $eventuser, $image, $subject)
+                new BookingConfirmed($eventuser)
             );
         return "ok";
         /*
