@@ -6,6 +6,7 @@ use App;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use QRCode;
