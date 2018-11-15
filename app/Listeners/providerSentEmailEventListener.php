@@ -56,6 +56,9 @@ class providerSentEmailEventListener
     {
         
         $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
+        if(!isset($event->res['data']['message-id'])){
+            return 0;
+        }
         $messageId=($event->res['data']['message-id']);
         $array_email = array_keys($event->message->getTo());
         $user_email= reset($array_email);
