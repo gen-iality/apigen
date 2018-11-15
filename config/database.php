@@ -1,5 +1,4 @@
 <?php
-var_dump(env());
 // echo $PLATFORM_RELATIONSHIPS | base64 --decode | json_pp;
 // config/database.php
 // Extract enviorment configuration in platform.sh hosting
