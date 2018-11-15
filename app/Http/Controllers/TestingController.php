@@ -69,7 +69,7 @@ class TestingController extends Controller
         return $r;
     }
 
-    public function sendemail(string $id)
+    public function sendemail(Request $request, string $id)
     {
         $data = $request->json()->all();
         $event_id = $id;
