@@ -9,6 +9,8 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use App\Event;
+use Illuminate\Support\Facades\Mail;
 use QRCode;
 
 class TestingController extends Controller
@@ -76,8 +78,8 @@ class TestingController extends Controller
         $event_id = $id;
         $event = Event::find($event_id);
         $eventuser = $event->eventUsers()->first();
-        $eventuser->email = "cesar.torres@mocionsoft.com";
-        $email = "cesar.torres@mocionsoft.com";
+        $eventuser->email = "felipe.martinez@mocionsoft.com";
+        $email = "felipe.martinez@mocionsoft.com";
         $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
         $message = "mensaje";
         $subject = "[Invitación Máxim] kraken en Colombia";
