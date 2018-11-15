@@ -16,6 +16,7 @@ if ($config->isAvailable()){
     // putenv("QUEUE_DRIVER={$redis['scheme']}");
     putenv("REDIS_HOST={$redis['host']}"); 
     putenv("REDIS_PORT={$redis['port']}");
+    var_dump($pltrels);
 }
 // End offset extraction
 
