@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use App\Event;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingConfirmed;
 use QRCode;
 
 class TestingController extends Controller
