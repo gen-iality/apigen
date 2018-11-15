@@ -22,6 +22,6 @@ class FireBaseAuthController extends Controller
      */
     public function getCurrentUser(Request $request)
     {
-        return ($request->get('user'))?$request->get('user'):null;
+        return ($request->get('user')?$request->get('user'):null);
     }
 }

@@ -65,10 +65,15 @@ class AuthFirebase
              * En la Petición por el momento viene el refresh_token
              */
             //
+            if (isset($_COOKIE['evius_token'])) {$firebaseToken = $_COOKIE['evius_token'];} 
+            elseif (isset($_COOKIE['token'])) {$firebaseToken = $_COOKIE['token'];}
+
             if (isset($_REQUEST['evius_token'])) {$firebaseToken = $_REQUEST['evius_token'];} elseif (isset($_REQUEST['token'])) {$firebaseToken = $_REQUEST['token'];}
+            
             $refresh_token = null;
             if (isset($_REQUEST['refresh_token'])) {$refresh_token = $_REQUEST['refresh_token'];}
-            if (isset($_COOKIE['evius_token'])) {$firebaseToken = $_COOKIE['evius_token'];} elseif (isset($_COOKIE['token'])) {$firebaseToken = $_COOKIE['token'];}
+            
+
 
             /**
              * Si el token no viene en la petición
@@ -83,6 +88,7 @@ class AuthFirebase
                     ], Response::HTTP_UNAUTHORIZED
                 );
             }
+         
             /*
              * Se verifica la valides del token
              * Si este se encuentra activamos la función validator, el cual nos devuelve el

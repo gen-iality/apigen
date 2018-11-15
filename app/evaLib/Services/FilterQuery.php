@@ -44,6 +44,8 @@ class FilterQuery
      */
     public static function addDynamicQueryFiltersFromUrl($query, $request)
     {
+
+
         $filteredBy = json_decode($request->input('filtered'));
         $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
 
@@ -84,7 +86,14 @@ class FilterQuery
 
         }
 
-        return $query;
+
+        //páginacion pordefecto
+        $pageSize = (int) $request->input('pageSize');
+        $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
+        $result = $query->paginate($pageSize);
+
+
+        return $result;
     }
 
 }
