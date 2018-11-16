@@ -41,7 +41,7 @@ class AuthFirebase
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {   Log::debug('Init authfirebase'.__LINE__);
+    {   Log::debug('Init authfirebase'.$_SERVER['REQUEST_URI']." ".__LINE__);
         try {
             /**
              * Se carga el sdk de firebase para PHP
@@ -98,10 +98,11 @@ class AuthFirebase
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             $user = self::validator($verifiedIdToken, $refresh_token);
             $request->attributes->add(['user' => $user]);
-            Log::debug("finish auth".__LINE__);
+            Log::debug("finish auth".$_SERVER['REQUEST_URI']." ".__LINE__);
             return $next($request);
 
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
+            Log::debug("token expirado renovando".$_SERVER['REQUEST_URI']." ".__LINE__);
             /**
              * Decodificación del token
              * Para decodificar utilizamos JWT https://firebase.google.com/docs/auth/admin/verify-id-tokens
@@ -173,8 +174,13 @@ class AuthFirebase
             Log::debug("finish refreshtoken".__LINE__);
             return $next($request)->header('new_token', $token_response->access_token);
         } catch (\Exception $e) {
-            Log::debug($e->getMessage().__LINE__);
-            var_dump($e->getMessage());
+            Log::debug("bug".$e->getMessage().__LINE__);
+            return response(
+                [
+                    'status' => Response::HTTP_UNAUTHORIZED,
+                    'message' => $e->getMessage(),
+                ], Response::HTTP_UNAUTHORIZED
+            );
         }
     }
 
@@ -194,7 +200,7 @@ class AuthFirebase
      * @return $user
      */
     public function validator($verifiedIdToken, $refresh_token = null)
-    {
+    {   Log::debug("Creando un nuevo usuario".__LINE__);
         $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
         $user = User::where('uid', '=', $user_auth->uid)->first();
         if (!$user) {
