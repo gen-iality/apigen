@@ -279,7 +279,7 @@ class UserController extends Controller
     {
         // return "ok";
         $data = $request->json()->all();
-        return $data;
+        return $id;
         $User = User::find($id);
         $User->fill($data);
         // $User->save();
