@@ -41,7 +41,8 @@ class AuthFirebase
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {Log::debug('Init authfirebase' . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " " . __LINE__);
+    {
+        Log::debug('Init authfirebase' . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " " . __LINE__);
         try {
             /**
              * Se carga el sdk de firebase para PHP
