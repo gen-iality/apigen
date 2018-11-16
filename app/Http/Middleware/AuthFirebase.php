@@ -8,6 +8,7 @@ use Closure;
 use Firebase\Auth\Token\Verifier;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class AuthFirebase
 {
@@ -40,13 +41,13 @@ class AuthFirebase
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {
+    {   Log::debug('Init authfirebase'.__LINE__);
         try {
             /**
              * Se carga el sdk de firebase para PHP
              * Cargamos el json el cual contiene las credenciales para conectarse a firebase
              */
-            //
+            
             $firebaseToken = null;
             $json = file_get_contents(base_path('firebase_credentials.json'));
             $data = json_decode($json, true);
@@ -97,6 +98,7 @@ class AuthFirebase
             $verifiedIdToken = $verifier->verifyIdToken($firebaseToken);
             $user = self::validator($verifiedIdToken, $refresh_token);
             $request->attributes->add(['user' => $user]);
+            Log::debug("finish auth".__LINE__);
             return $next($request);
 
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
@@ -168,9 +170,10 @@ class AuthFirebase
             $user = self::validator($verifiedIdToken, $refresh_token = null);
 
             $request->attributes->add(['user' => $user]);
-
+            Log::debug("finish refreshtoken".__LINE__);
             return $next($request)->header('new_token', $token_response->access_token);
         } catch (\Exception $e) {
+            Log::debug($e->getMessage().__LINE__);
             var_dump($e->getMessage());
         }
     }
