@@ -5,6 +5,9 @@
  <!-- ![Evius]({{$logo}}) -->
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
+
+ ![Logo]({{$event->picture}})
+
 <div style="text-align: justify">
     <span>
         Aquí podrás encontrar la información del evento y el
