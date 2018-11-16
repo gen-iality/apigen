@@ -86,8 +86,9 @@ class EventController extends Controller
 
     }
 
-    public function delete(Event $id)
+    public function delete(string $id)
     {
+        return $id;
         $res = $id->delete();
         if ($res == true) {
             return 'True';
@@ -245,7 +246,13 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        // return $id;
+        $res = $event->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
     }
     /**
      * AddUserProperty: Add dynamic user property to the event

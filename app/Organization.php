@@ -8,7 +8,7 @@ use Moloquent;
 class Organization extends Moloquent
 {
     //
-    protected $fillable = [ 'name', 'country', 'city', 'image','address', 'nit', 'phone', 'documents', 'description', 'author','email'];
+    protected $fillable = [ 'name', 'country', 'city', 'picture','location', 'nit', 'phone', 'doc', 'description', 'author','email'];
 
     public function events()
     {

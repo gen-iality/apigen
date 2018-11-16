@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'sendinblue'),
+    'driver' => env('MAIL_DRIVER', 'smtp'),
     'SENDINBLUE_KEY' => env('SENDINBLUE_KEY', 'w1Arma30zZfOcPGQ'),
 
     /*

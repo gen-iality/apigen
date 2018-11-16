@@ -6,8 +6,12 @@ use App;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use App\Event;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingConfirmed;
 use QRCode;
 
 class TestingController extends Controller
@@ -69,23 +73,23 @@ class TestingController extends Controller
         return $r;
     }
 
-    public function sendemail(string $id)
+    public function sendemail(Request $request, string $id)
     {
-        // $data = $request->json()->all();
-        // $event_id = $id;
-        // $event = Event::find($event_id);
-        // $eventuser = $event->eventUsers()->first();
-        // $eventuser->email = "cesar.torres@mocionsoft.com";
-        // $email = "cesar.torres@mocionsoft.com";
-        // $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-        // $message = "mensaje";
-        // $subject = "[Invitación Máxim] kraken en Colombia";
+        $data = $request->json()->all();
+        $event_id = $id;
+        $event = Event::find($event_id);
+        $eventuser = $event->eventUsers()->first();
+        $eventuser->email = "felipe.martinez@mocionsoft.com";
+        $email = "felipe.martinez@mocionsoft.com";
+        $image = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
+        $message = "mensaje";
+        $subject = "[Invitación Máxim] kraken en Colombia";
 
-        // Mail::to($email)
-        //     ->send(
-        //         new BookingConfirmed($event, $eventUser, $image, $subject)
-        //     );
-        // return "ok";
+        Mail::to($email)
+            ->send(
+                new BookingConfirmed($eventuser)
+            );
+        return "ok";
         /*
 
     // var_dump($mail->build());

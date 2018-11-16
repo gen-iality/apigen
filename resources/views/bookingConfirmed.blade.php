@@ -56,7 +56,8 @@ Confirmar Cuenta
 @component('mail::subcopy')
 @endcomponent
 
-[Políticas de privacidad](https://eviusauth.netlify.com/)
+[Políticas de privacidad](https://evius.co/privacy) | 
+[Términos y Condiciones](https://evius.co/terms)
 
 <div style="text-align: center">
     <span>

@@ -20,7 +20,7 @@
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Fecha de Impresion</h3>
-                            <p style="margin: 0;">31/10/2018</p>
+                            <p style="margin: 0;">13/11/2018</p>
                         </div>
                     </div>
                     <div style="width: auto; display: inline-block;">
