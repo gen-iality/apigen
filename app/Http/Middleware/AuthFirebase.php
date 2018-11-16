@@ -200,17 +200,30 @@ class AuthFirebase
      */
     public function validator($verifiedIdToken, $refresh_token = null)
     {
-        Log::debug("Creando un nuevo usuario:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . __LINE__);
-        $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-        $user = User::where('uid', '=', $user_auth->uid)->first();
-        if (!$user) {
-            var_dump("vamos a crearlo");
-            $user = User::create(get_object_vars($user_auth));
-        }
-        if ($refresh_token) {
-            $user->refresh_token = $refresh_token;
-            $user->save();
+
+        try {
+            Log::debug("buscando un usuario:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . __LINE__);
+            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
+            $user = User::where('uid', '=', $user_auth->uid)->first();
+            if (!$user) {
+                Log::debug("Creando un nuevo usuario:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . __LINE__);
+                $user = User::create(get_object_vars($user_auth));
+            }
+            if ($refresh_token) {
+                $user->refresh_token = $refresh_token;
+                $user->save();
+            }
+
+        } catch (\Exception $e) {
+            Log::debug("bug: " . $e->getMessage() . __LINE__);
+            return response(
+                [
+                    'status' => Response::HTTP_UNAUTHORIZED,
+                    'message' => $e->getMessage(),
+                ], Response::HTTP_UNAUTHORIZED
+            );
         }
         return $user;
     }
+
 }
