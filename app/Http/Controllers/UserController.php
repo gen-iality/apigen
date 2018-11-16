@@ -277,9 +277,9 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // return "ok";
         $data = $request->json()->all();
-        // return $id;
+        $data['profile_completed'] = (isset($data['phoneNumber']) && isset($data['picture'])) ? true : false;
+    
         $User = User::find($id);
         $User->fill($data);
         $User->save();
