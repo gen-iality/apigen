@@ -282,7 +282,7 @@ class UserController extends Controller
         // return $id;
         $User = User::find($id);
         $User->fill($data);
-        // $User->save();
+        $User->save();
         return $data;
     }
 
