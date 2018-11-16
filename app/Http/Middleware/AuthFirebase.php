@@ -42,7 +42,7 @@ class AuthFirebase
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
     {
-        //Log::debug('Init authfirebase' . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " " . __LINE__);
+        Log::debug('Init authfirebase' . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " " . __LINE__);
         try {
             /**
              * Se carga el sdk de firebase para PHP
@@ -198,30 +198,18 @@ class AuthFirebase
      * @param string $refresh_token
      * @return $user
      */
-    public static function validator($verifiedIdToken, $refresh_token = null)
+    public function validator($verifiedIdToken, $refresh_token = null)
     {
-        try {
-
-            //Log::debug("** Cargando el usuario:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . __LINE__);
-            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-            $user = User::where('uid', '=', $user_auth->uid)->first();
-            if (!$user) {
-                //Log::debug("*** Creando un nuevo usuarioNuevo:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . __LINE__);
-                $user = User::create(get_object_vars($user_auth));
-            }
-            if ($refresh_token) {
-                $user->refresh_token = $refresh_token;
-                $user->save();
-            }
-
-        } catch (\Exception $e) {
-            //Log::debug("bug creacion : " . $e->getMessage() . __LINE__);
-            return response(
-                [
-                    'status' => Response::HTTP_UNAUTHORIZED,
-                    'message' => $e->getMessage(),
-                ], Response::HTTP_UNAUTHORIZED
-            );
+        Log::debug("Creando un nuevo usuario:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . __LINE__);
+        $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
+        $user = User::where('uid', '=', $user_auth->uid)->first();
+        if (!$user) {
+            var_dump("vamos a crearlo");
+            $user = User::create(get_object_vars($user_auth));
+        }
+        if ($refresh_token) {
+            $user->refresh_token = $refresh_token;
+            $user->save();
         }
         return $user;
     }
