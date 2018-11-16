@@ -9,7 +9,7 @@ class Cors
 {
     public function handle($request, Closure $next)
     {
-        Log::debug("init CORS" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " " . __LINE__);
+        Log::debug("*init CORS:  " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " " . __LINE__);
         $originURL = "https://eviusco.netlify.com";
         //$originURL = "http://localhost";
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
