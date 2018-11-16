@@ -278,8 +278,11 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->json()->all();
+        
         if(isset($data['phoneNumber']) && isset($data['picture'])){
             $data['profile_completed'] = ($data['phoneNumber'] != "" && $data['picture'] != "") ? true : false;
+        }else{
+            $data['profile_completed'] = false;
         }
     
         $User = User::find($id);
