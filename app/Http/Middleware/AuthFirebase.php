@@ -14,12 +14,12 @@ class AuthFirebase
 {
 
     protected $auth;
-    protected $identificador;
+    protected $id;
 
     public function __construct(\Kreait\Firebase\Auth $auth)
     {
         $this->auth = $auth;
-        $this->id = time();
+        $this->id = microtime();
     }
 
     /**
