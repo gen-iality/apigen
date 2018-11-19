@@ -22,6 +22,8 @@ web:
         - index.php
       allow: true
       passthru: "/index.php"
+      headers:
+        Access-Control-Allow-Origin: http://localhost, https://localhost, https://evius.co, https://eviusco.netlify.com, https://eviusauth.netlify.com
 # How much disk space to allot to this app.  
 disk: 2048
 # This is where you define your writable file system paths.  the keys are the
