@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UsersResource;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Firebase\Auth\Token\Verifier;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -28,25 +29,59 @@ class UserController extends Controller
         $this->auth = $auth;
     }
     /**
-     * Handle an incoming request.
-     *
-     * El sigue el siguiente proceso para enviar la informacón a partir del token
-     * 1. Carga las credenciales de firebase.
-     * 2. Carga el token del usaurio si no existe token avisa directamente al usuario
-     * 3. Verifica el token
-     *      3.1 si lo encuentra va a la función del validador el cual gurda el refresh_token
-     *      y retorna el usuario
-     *      3.2 si no lo encuentra se dirije al catch el cual envia  por metodo POST
-     *      La url que contiene el api_key y el cuerpo, el cual contiene el refresh token
-     *      del usuario(siempre es el mismo para el usuario) y la palabra refresh_token, para
-     *      indicar que se va a refrescar el token y generar un nuevo token ID.
-     *      3.4 Capturamos el nuevo id, verificamos la información y volvemos a ejecutar
-     *      la funcion validador.
+     * loginorcreatefromtoken
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
      */
+
+
+    public function loginorcreatefromtoken(Request $request){
+
+            /**
+             * Miramos si el token viene en la Petición
+             * El token viene en la petición el cual si llega con el nombre evius_token o token
+             * REQUEST,
+             *
+             * En la Petición viene el refresh_token
+             */
+            //
+            $firebaseToken = null;
+            if ($request->has('evius_token')) { $firebaseToken = $request->input('evius_token');}
+    
+            /**
+             * Si el token no viene en la petición
+             * Bota el error de que el token no fue enviado en la petición, recordar que esta ruta es
+             * una petición GET.
+             */
+            if (!$firebaseToken) {
+                return response(
+                    [
+                        'status' => Response::HTTP_UNAUTHORIZED,
+                        'message' => 'Error: No token provided',
+                    ], Response::HTTP_UNAUTHORIZED
+                );
+            }
+            /*
+             * Se verifica la valides del token
+             * Si este se encuentra activamos la función validator, el cual nos devuelve el
+             * usuario y finalmente enviamos el request indicando que se puede continuar, con la página acutal.
+             */
+
+            $verifiedIdToken = $this->auth->verifyIdToken($firebaseToken);
+            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
+            
+            $user = User::where('uid', '=', $user_auth->uid)->first();
+            
+            if(!$user){
+                $user = User::create(get_object_vars($user_auth));
+            }
+
+            return redirect('https://evius.co/?token='.$firebaseToken);
+    }
+    
+
     public function storeRefreshToken(Request $request)
     {
 
@@ -167,7 +202,7 @@ class UserController extends Controller
 
             $refresh_token = null;
             $user = self::validator($verifiedIdToken, $refresh_token = null);
-
+            
             $request->attributes->add(['user' => $user]);
 
             return response($request);
