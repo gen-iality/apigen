@@ -26,7 +26,7 @@ web:
         Access-Control-Allow-Origin: http://localhost, https://localhost, https://evius.co, https://eviusco.netlify.com, https://eviusauth.netlify.com
 # How much disk space to allot to this app.  
 disk: 2048
-size: S
+size: XL
 # This is where you define your writable file system paths.  the keys are the
 # paths in your app that need to be writable/uploadable.  The values are always
 # going to be named "shared:files/$WHATEVER_HERE", where "WHATEVER_HERE" can be
@@ -69,7 +69,7 @@ variables:
         disable_functions: ''
 workers:
     queue:
-        size: S
+        size: XL
         disk: 256
         commands:
             start: |
