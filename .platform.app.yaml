@@ -56,6 +56,9 @@ mounts:
 
 # Additional extensions
 runtime:
+    sizing_hints:
+        request_memory: 20
+        reserved_memory: 80  
     extensions:
         - mongodb
         - redis
@@ -70,6 +73,4 @@ workers:
         commands:
             start: |
               php artisan queue:work redis --queue="master"
-    sizing_hints:
-        request_memory: 20
-        reserved_memory: 80
+
