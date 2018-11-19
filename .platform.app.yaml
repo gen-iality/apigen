@@ -74,9 +74,3 @@ workers:
         commands:
             start: |
               php artisan queue:work redis --queue="master"
-    queue2:
-        size: S
-        disk: 256
-        commands:
-            start: |
-              php artisan queue:work redis --queue="master"
