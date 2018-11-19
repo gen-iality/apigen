@@ -22,6 +22,8 @@ web:
         - index.php
       allow: true
       passthru: "/index.php"
+      headers:
+        Access-Control-Allow-Origin: http://localhost, https://localhost, https://evius.co, https://eviusco.netlify.com, https://eviusauth.netlify.com
 # How much disk space to allot to this app.  
 disk: 2048
 # This is where you define your writable file system paths.  the keys are the
@@ -32,7 +34,7 @@ disk: 2048
 
   # .platform.app.yaml, after all the rest ...
 mounts:
-  # Laravel uses a directory off the root called "storage" for logs and cache.
+  #  Laravel uses a directory off the root called "storage" for logs and cache.
   "/storage/app": "shared:files/storage/app"
   "/storage/app/public": "shared:files/storage/app/public"
   "/storage/framework/views": "shared:files/storage/framework/views"
@@ -54,6 +56,9 @@ mounts:
 
 # Additional extensions
 runtime:
+    sizing_hints:
+        request_memory: 20
+        reserved_memory: 80  
     extensions:
         - mongodb
         - redis
@@ -68,3 +73,4 @@ workers:
         commands:
             start: |
               php artisan queue:work redis --queue="master"
+
