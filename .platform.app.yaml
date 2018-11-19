@@ -13,7 +13,7 @@ relationships:
     applicationqueue: "redisdata:redis"
 
 # basic web configuration for this particular app.  Laravel apps have a
-# "public" folder that serves as the web docroot.
+# "public" folder that serves as the web docroot. 
 web:
   locations:
     "/":
@@ -22,6 +22,7 @@ web:
         - index.php
       allow: true
       passthru: "/index.php"
+      size: M
       headers:
         Access-Control-Allow-Origin: http://localhost, https://localhost, https://evius.co, https://eviusco.netlify.com, https://eviusauth.netlify.com
 # How much disk space to allot to this app.  
