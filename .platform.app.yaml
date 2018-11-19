@@ -57,9 +57,9 @@ mounts:
 
 # Additional extensions
 runtime:
-    sizing_hints:
-        request_memory: 60
-        reserved_memory: 100  
+#    sizing_hints:
+#        request_memory: 60
+#        reserved_memory: 100  
     extensions:
         - mongodb
         - redis
