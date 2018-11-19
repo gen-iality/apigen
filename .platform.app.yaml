@@ -34,7 +34,7 @@ disk: 2048
 
   # .platform.app.yaml, after all the rest ...
 mounts:
-  # Laravel uses a directory off the root called "storage" for logs and cache.
+  #  Laravel uses a directory off the root called "storage" for logs and cache.
   "/storage/app": "shared:files/storage/app"
   "/storage/app/public": "shared:files/storage/app/public"
   "/storage/framework/views": "shared:files/storage/framework/views"
