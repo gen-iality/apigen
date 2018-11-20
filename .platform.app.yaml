@@ -25,8 +25,8 @@ web:
       headers:
         Access-Control-Allow-Origin: http://localhost, https://localhost, https://evius.co, https://eviusco.netlify.com, https://eviusauth.netlify.com
 # How much disk space to allot to this app.  
-disk: 1024
-size: S
+disk: 2048
+size: M
 # This is where you define your writable file system paths.  the keys are the
 # paths in your app that need to be writable/uploadable.  The values are always
 # going to be named "shared:files/$WHATEVER_HERE", where "WHATEVER_HERE" can be
@@ -62,7 +62,7 @@ runtime:
 #        reserved_memory: 100  
     extensions:
         - mongodb
-#        - redis
+        - redis
         - curl
 variables:
     php:
