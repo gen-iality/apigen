@@ -67,10 +67,10 @@ runtime:
 variables:
     php:
         disable_functions: ''
-#workers:
-#    queue:
-#        size: S
-#        disk: 256
-#        commands:
-#            start: |
-#              php artisan queue:work redis --queue="master"
+workers:
+    queue:
+        size: S
+        disk: 256
+        commands:
+            start: |
+              php artisan queue:work  --queue="default"
