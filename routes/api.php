@@ -68,6 +68,7 @@ Route::group(
 /****************
  * Users
  ****************/
+Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
 Route::group(
