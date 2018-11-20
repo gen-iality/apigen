@@ -62,7 +62,7 @@ runtime:
 #        reserved_memory: 100  
     extensions:
         - mongodb
-        - redis
+#        - redis
         - curl
 variables:
     php:
@@ -73,4 +73,4 @@ workers:
         disk: 256
         commands:
             start: |
-              php artisan queue:work  --queue="default"
+              php artisan queue:work  database --queue="default"
