@@ -46,8 +46,9 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 hooks:
    post_deploy: |
-     chmod a+x app/run_queue.sh
-     app/run_queue.sh
+     chmod a+x /app/run_queue.sh
+     /app/run_queue.sh
+     pwd
 
 #  deploy: |
 #    mkdir -p storage/app/public
@@ -80,5 +81,5 @@ variables:
 crons:
     queue:
         spec: '*/5 * * * *'
-        cmd: 'app/run_queue.sh'
+        cmd: '/app/run_queue.sh'
 
