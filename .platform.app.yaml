@@ -46,7 +46,7 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 hooks:
    post_deploy: |
-    php artisan queue:work redis > /dev/null 2>&1 &
+     run_queue.sh
 
 #  deploy: |
 #    mkdir -p storage/app/public
@@ -79,5 +79,5 @@ variables:
 crons:
     queue:
         spec: '*/5 * * * *'
-        cmd: 'php artisan queue:restart; php artisan queue:work redis &'
+        cmd: 'run_queue.sh'
 
