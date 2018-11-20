@@ -47,8 +47,7 @@ mounts:
 hooks:
    post_deploy: |
      chmod a+x /app/run_queue.sh
-     /app/run_queue.sh
-     pwd
+     #/app/run_queue.sh
 
 #  deploy: |
 #    mkdir -p storage/app/public
