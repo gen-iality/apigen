@@ -10,7 +10,7 @@ build:
 
 relationships:
     database: "mydatabase:mongodb"  
-    #applicationqueue: "redisdata:redis"
+    applicationqueue: "redisdata:redis"
 
 # basic web configuration for this particular app.  Laravel apps have a
 # "public" folder that serves as the web docroot. 
@@ -67,10 +67,18 @@ runtime:
 variables:
     php:
         disable_functions: ''
-workers:
+#workers:
+#    queue:
+#        size: S
+#        disk: 256
+#        commands:
+#            start: |
+#              php artisan queue:work  database --queue="default"
+
+
+crons:
+    # Run Drupal's cron tasks every 20 minutes.
     queue:
-        size: S
-        disk: 256
-        commands:
-            start: |
-              php artisan queue:work  database --queue="default"
+        spec: '*/5 * * * *'
+        cmd: 'php artisan queue:restart ; php artisan queue:worker '
+
