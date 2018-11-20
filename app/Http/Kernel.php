@@ -13,14 +13,15 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+
     protected $middleware = [
+        \App\Http\Middleware\Cors::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        \App\Http\Middleware\Cors::class,
-        \App\Http\Middleware\ForceJsonResponse::class
+        \App\Http\Middleware\ForceJsonResponse::class,
     ];
 
     /**
@@ -41,8 +42,8 @@ class Kernel extends HttpKernel
 
         'api' => [
             //'throttle:6000,1',
-           'bindings',
-        ]
+            'bindings',
+        ],
     ];
 
     /**
