@@ -7,6 +7,9 @@
 if pgrep -f "php artisan queue:work" > /dev/null
 then
     echo "Running"
+    php artisan queue:restart
+    pwd
 else
     php artisan queue:work  &
+    pwd
 fi

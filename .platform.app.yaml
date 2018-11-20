@@ -46,7 +46,7 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 hooks:
    post_deploy: |
-     chmod a+x /app/run_queue.sh
+     chmod 777 /app/run_queue.sh
      #/app/run_queue.sh
 
 #  deploy: |
