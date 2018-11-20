@@ -10,7 +10,7 @@ build:
 
 relationships:
     database: "mydatabase:mongodb"  
-    applicationqueue: "redisdata:redis"
+    #applicationqueue: "redisdata:redis"
 
 # basic web configuration for this particular app.  Laravel apps have a
 # "public" folder that serves as the web docroot. 
