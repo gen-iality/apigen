@@ -48,7 +48,7 @@ hooks:
    post_deploy: |
      cp /app/run_queue.sh /app/storage/app/public/run_queue.sh
      chmod 777 /app/storage/app/public/run_queue.sh
-     #/app/run_queue.sh
+     
 
 #  deploy: |
 #    mkdir -p storage/app/public
@@ -81,5 +81,5 @@ variables:
 crons:
     queue:
         spec: '*/5 * * * *'
-        cmd: '/app/run_queue.sh'
+        cmd: '/app/storage/app/public/run_queue.sh'
 
