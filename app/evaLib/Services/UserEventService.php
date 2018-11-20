@@ -75,7 +75,7 @@ class UserEventService
             //Si encuentra el estado por nombre, es finalmente colocado por id, 
             //Si no lo encuentra borra el valor del estado de la petición
             if($temp){
-                $eventUserFields["state"] = $temp->_id;
+                $eventUserFields["state_id"] = $temp->_id;
             }else{
                 unset($eventUserFields["state"]);
             }
