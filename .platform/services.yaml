@@ -4,4 +4,5 @@ mydatabase:
 
 redisdata:
     type: redis-persistent:3.2
-    disk: 1024
+    disk: 512
+    size: S

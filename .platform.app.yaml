@@ -13,7 +13,7 @@ relationships:
     applicationqueue: "redisdata:redis"
 
 # basic web configuration for this particular app.  Laravel apps have a
-# "public" folder that serves as the web docroot.
+# "public" folder that serves as the web docroot. 
 web:
   locations:
     "/":
@@ -26,10 +26,11 @@ web:
         Access-Control-Allow-Origin: http://localhost, https://localhost, https://evius.co, https://eviusco.netlify.com, https://eviusauth.netlify.com
 # How much disk space to allot to this app.  
 disk: 2048
+size: M
 # This is where you define your writable file system paths.  the keys are the
 # paths in your app that need to be writable/uploadable.  The values are always
 # going to be named "shared:files/$WHATEVER_HERE", where "WHATEVER_HERE" can be
-# any arbitrary identifier.
+# any arbitrary identifier. 
 
 
   # .platform.app.yaml, after all the rest ...
@@ -43,9 +44,11 @@ mounts:
   "/storage/logs": "shared:files/storage/logs"
   # And another cache directory here.
   "/bootstrap/cache": "shared:files/bootstrap_cache"
-#hooks:
-#   post_deploy: |
-#     php artisan queue:restart
+hooks:
+   post_deploy: |
+     cp /app/run_queue.sh /app/storage/app/public/run_queue.sh
+     chmod 777 /app/storage/app/public/run_queue.sh
+     
 
 #  deploy: |
 #    mkdir -p storage/app/public
@@ -57,8 +60,8 @@ mounts:
 # Additional extensions
 runtime:
 #    sizing_hints:
-#        request_memory: 20
-#        reserved_memory: 80  
+#        request_memory: 60
+#        reserved_memory: 100  
     extensions:
         - mongodb
         - redis
@@ -66,11 +69,17 @@ runtime:
 variables:
     php:
         disable_functions: ''
-workers:
+#workers:
+#    queue:
+#        size: S
+#        disk: 256
+#        commands:
+#            start: |
+#              php artisan queue:work  database --queue="default"
+
+
+crons:
     queue:
-        size: S
-        disk: 256
-        commands:
-            start: |
-              php artisan queue:work redis --queue="master"
+        spec: '*/5 * * * *'
+        cmd: '/app/storage/app/public/run_queue.sh'
 
