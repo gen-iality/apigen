@@ -13,6 +13,7 @@ use App\Event;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmed;
 use QRCode;
+use Sendinblue\Mailin;
 
 class TestingController extends Controller
 {
@@ -127,5 +128,14 @@ class TestingController extends Controller
             ->png();
         return $file;
     }
+
+    public function viewWebHooks()
+    {	
+        $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
+        
+		$data = array( "is_plat" => "" );
+ 
+		var_dump($mailin->get_webhooks($data));
+	}
 
 }

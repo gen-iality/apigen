@@ -165,11 +165,13 @@ class SendinBlueController extends Controller
             Log::debug('va hacer a consulta');  
         $message_users = MessageUser::where('sender_id', 'exists', true)
             ->where('status', 'queued')
-            ->limit(50)->get();
-            
+            ->limit(100)->get();
+
+        // var_dump($message_users[50]["sender_id"]);
+
        $ids = [];
-        foreach ($message_users as $message_user){
-            $messageId = $message_user->sender_id;
+        foreach ($message_users as $index => $message_user){
+            $messageId = $message_user[$index]["sender_id"];
             Log::debug('se obtuvo el message_id'.$messageId);            
             $data = array( 
                 // "limit" => 10000,
@@ -185,7 +187,8 @@ class SendinBlueController extends Controller
                 // "template_id" => 0
             );   
             Log::debug('se va a pedir el reporte de los datos en sendinblue con el message_id');
-            $data_mailin = $mailin->get_report($data)["data"][0];
+            // var_dump($mailin->get_report($data)["data"]);
+            $data_mailin = isset($mailin->get_report($data)["data"])?$mailin->get_report($data)["data"][0]:"";
             Log::debug('Data es '.json_encode($data_mailin));
  
             $event  = $data_mailin["event"];
