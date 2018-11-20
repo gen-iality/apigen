@@ -64,11 +64,22 @@ class UserEventService
         $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
 
         //eventUser booking status default value
-        if (!isset($eventUserFields["state_id"])) {
+        // Si el usuario no tiene asignado un estado, poner un estado por defecto
+        if(!isset($user->state_id) || !$user->state_id){
             $temp = State::first();
             $eventUserFields["state_id"] = $temp->_id;
         }
-        $eventUserFields["state_id"] = "5b0efc411d18160bce9bc706";
+        // Si dentro de la petición viene el estado, colocarle el estado que viene en la petición
+        if (isset($eventUserFields["state_id"])) {
+            $temp = State::where('name',strtoupper($eventUserFields["state_id"]))->first();
+            //Si encuentra el estado por nombre, es finalmente colocado por id, 
+            //Si no lo encuentra borra el valor del estado de la petición
+            if($temp){
+                $eventUserFields["state_id"] = $temp->_id;
+            }else{
+                unset($eventUserFields["state_id"]);
+            }
+        }
 
         $eventUser = EventUser::updateOrCreate($matchAttributes, $eventUserFields);
 
