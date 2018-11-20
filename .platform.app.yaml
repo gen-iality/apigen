@@ -46,8 +46,8 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 hooks:
    post_deploy: |
-     nohup php artisan queue:restart  > /dev/null 2>&1 &
-     nohup php artisan queue:work redis > /dev/null 2>&1 &
+     nohup php artisan queue:restart 
+     nohup php artisan queue:work redis 
 
 #  deploy: |
 #    mkdir -p storage/app/public
