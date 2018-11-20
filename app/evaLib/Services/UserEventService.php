@@ -70,14 +70,14 @@ class UserEventService
             $eventUserFields["state_id"] = $temp->_id;
         }
         // Si dentro de la petición viene el estado, colocarle el estado que viene en la petición
-        if (isset($eventUserFields["state_id"])) {
-            $temp = State::where('name',strtoupper($eventUserFields["state_id"]))->first();
+        if (isset($eventUserFields["state"])) {
+            $temp = State::where('name',strtoupper($eventUserFields["state"]))->first();
             //Si encuentra el estado por nombre, es finalmente colocado por id, 
             //Si no lo encuentra borra el valor del estado de la petición
             if($temp){
-                $eventUserFields["state_id"] = $temp->_id;
+                $eventUserFields["state"] = $temp->_id;
             }else{
-                unset($eventUserFields["state_id"]);
+                unset($eventUserFields["state"]);
             }
         }
 
