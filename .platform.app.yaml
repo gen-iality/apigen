@@ -46,7 +46,7 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 hooks:
    post_deploy: |
-     php artisan queue:restart; php artisan queue:work
+     php artisan queue:restart; php artisan queue:work redis &
 
 #  deploy: |
 #    mkdir -p storage/app/public
@@ -80,5 +80,5 @@ crons:
     # Run Drupal's cron tasks every 20 minutes.
     queue:
         spec: '*/5 * * * *'
-        cmd: 'php artisan queue:restart ; php artisan queue:work'
+        cmd: 'php artisan queue:restart ; php artisan queue:work redis &'
 
