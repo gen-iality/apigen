@@ -138,13 +138,6 @@ class SendinBlueController extends Controller
                 array_push($array, $user_status);    
                 $message_user->history = $array;
             }
-
-            $message = Message::findOrfail($message_user->message_id);
-            $add_status = $message->$user_status;
-            $message->$user_status = $add_status + 1;
-            
-            $message->save(); 
-            
             $message_user->save(); 
 
         }catch(\Exception $e){
