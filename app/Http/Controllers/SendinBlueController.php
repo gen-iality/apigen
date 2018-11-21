@@ -138,6 +138,14 @@ class SendinBlueController extends Controller
                 array_push($array, $user_status);    
                 $message_user->history = $array;
             }
+            Log::debug('Se va a cambiar el total de los estados de los emails en la tabla messages');
+            $message = Message::findOrfail($message_user->message_id);
+            // var_dump($message_id);
+            $add_status = $message->$user_status;
+            $message->$user_status = $add_status + 1;
+            
+            $message->save(); 
+            
             $message_user->save(); 
 
         }catch(\Exception $e){
