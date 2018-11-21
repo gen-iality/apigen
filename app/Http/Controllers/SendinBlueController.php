@@ -139,6 +139,10 @@ class SendinBlueController extends Controller
                 $message_user->history = $array;
             }
             $message_user->save(); 
+            
+            $message = $message_user->message()->create([
+                'Click' =>  $user_status,
+            ]);
 
         }catch(\Exception $e){
             var_dump($e);
