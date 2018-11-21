@@ -23,6 +23,7 @@ class GenerateQr extends Controller
         ->png();
         $page = ob_get_contents();
         return response($page, 200)->header('Content-Type', 'image/png');
+        
     }
 
     /**
