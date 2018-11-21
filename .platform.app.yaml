@@ -78,8 +78,8 @@ variables:
 #              php artisan queue:work  database --queue="default"
 
 
-crons:
-    queue:
-        spec: '*/5 * * * *'
-        cmd: '/app/storage/app/public/run_queue.sh'
+#crons:
+#    queue:
+#        spec: '*/5 * * * *'
+#        cmd: '/app/storage/app/public/run_queue.sh'
 
