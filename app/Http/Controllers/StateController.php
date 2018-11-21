@@ -24,7 +24,7 @@ class StateController extends Controller
      */
     public function create()
     {
-        //
+           //
     }
 
     /**
