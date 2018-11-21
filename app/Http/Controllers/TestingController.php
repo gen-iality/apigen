@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App;
 use App\User;
+use App\MessageUser;
+use \App\Message;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -136,6 +138,45 @@ class TestingController extends Controller
 		$data = array( "is_plat" => "" );
  
 		var_dump($mailin->get_webhooks($data));
-	}
+    }
+    
+    public function UpdateStatusMessagePOST()
+    {      
+        $message_id =  "<201811211540.49660781994@smtp-relay.sendinblue.com>";
+        $user_reason = "Opened";
+        $user_status = "Opened"; 
+        // $message_id = '5bf56db9854baf00b34d45e2'; 
+        
+        sleep(1);
+        try{
+            //update the new status that is in data
+            $message_user = MessageUser::where('sender_id', $message_id)
+            ->orderBy('created_at','desc')->first();
+            $message_user->status = $user_status;
+            $message_user->status_message = $user_reason;
+            
+            if(is_null($message_user->history)){
+                $message_user->history = array($user_status);
+            }else{
+                $array = $message_user->history;
+                array_push($array, $user_status);    
+                $message_user->history = $array;
+            }
+            
+            
+            $message = Message::findOrfail($message_user->message_id);
+            // var_dump($message_id);
+            $add_status = $message->$user_status;
+            $message->$user_status = $add_status + 1;
+            
+            $message->save(); 
+            
+            $message_user->save(); 
+            // return response($message);
+        }catch(\Exception $e){
+            var_dump($e);
+        
+        }
+    }
 
 }

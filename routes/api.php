@@ -140,6 +140,7 @@ Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 Route::post('UpdateStatusMessage', 'SendinBlueController@UpdateStatusMessagePOST');
 Route::get('activeWebhooks', 'SendinBlueController@activeWebHooks');
 Route::get('viewWebhooks', 'TestingController@viewWebhooks');
+Route::post('UpdateStatusMessageT', 'TestingController@UpdateStatusMessagePOST');
 Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallyStatusMessage');
 
 /**
