@@ -77,7 +77,7 @@ class UserController extends Controller
             if(!$user){
                 $user = User::create(get_object_vars($user_auth));
             }
-
+ 
             return redirect('https://evius.co/?token='.$firebaseToken);
     }
 
