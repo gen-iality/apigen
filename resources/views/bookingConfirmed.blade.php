@@ -15,7 +15,7 @@
     </span>
 </div>
 <br />
-<img src="{{url()->previous()}}/api/generatorQr/{{$eventuser_id}}">
+<img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}">
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |
