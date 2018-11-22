@@ -19,7 +19,7 @@
         "morrislaptop/firestore-php": "^2.2",
         "mpociot/laravel-apidoc-generator": "^2.0",
         "platformsh/config-reader": "^1.0",
-        "predis/predis": "^1.1",
+        "predis/predis": "^1.0",
         "spatie/laravel-tail": "^3.2",
         "superbalist/laravel-google-cloud-storage": "^2.0",
         "webup/laravel-sendinblue": "^1.1",
@@ -78,4 +78,3 @@
     "minimum-stability": "dev",
     "prefer-stable": true
 }
-
