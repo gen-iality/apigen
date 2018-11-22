@@ -1,23 +1,4 @@
 <?php
-// echo $PLATFORM_RELATIONSHIPS | base64 --decode | json_pp;
-// config/database.php
-// Extract enviorment configuration in platform.sh hosting
-$config = new Platformsh\ConfigReader\Config();
-if ($config->isAvailable()){
-    $pltrels = $config->relationships;
-    $database = $pltrels['database'][0];
-    putenv("DB_CONNECTION={$database['scheme']}");
-    putenv("DB_HOST={$database['host']}");
-    putenv("DB_PORT={$database['port']}");
-    putenv("DB_DATABASE={$database['path']}");
-    putenv("DB_USERNAME={$database['username']}");
-    putenv("DB_PASSWORD={$database['password']}");
-    $redis = $pltrels['applicationqueue'][0];
-    // putenv("QUEUE_DRIVER={$redis['scheme']}");
-    putenv("REDIS_HOST={$redis['host']}"); 
-    putenv("REDIS_PORT={$redis['port']}");
-}
-// End offset extraction
 
 return [
 
@@ -60,7 +41,8 @@ return [
         'mongodb' => [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'database.internal'),
-            'port'     => env('DB_PORT', 27017),
+	    'dsn'      =>     'mongodb+srv://cluster0-gp9gs.mongodb.net',
+	    'port'     => env('DB_PORT', 27017),
             'database' => env('DB_DATABASE', 'main'),
             'username' => env('DB_USERNAME', 'main'),
             'password' => env('DB_PASSWORD', 'main'),
