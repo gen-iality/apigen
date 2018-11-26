@@ -9,11 +9,9 @@ Hola @if ($eventUser->user) {{$eventUser->user->name}}, @endif has sido invitado
 
 @component('mail::promotion')
 
-@component('mail::button', ['url' => 'https://api.evius.co/api/rsvp/confirmrsvp/'.$eventUser->id, 'color' => 'evius'])
-
 ![Logo]({{$image}})
 
-@component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'evius'])
+@component('mail::button', ['url' => 'https://api.evius.co/api/rsvp/confirmrsvp/'.$eventUser->id, 'color' => 'evius'])
 
 Confirmar asistencia
 @endcomponent
@@ -44,12 +42,10 @@ Ubicación del evento  <br>
 -----------------------
 @endcomponent
 
-![Logo]({{$image}})
 
 @component('mail::button', ['url' => 'https://api.evius.co/api/rsvp/confirmrsvp/'.$eventUser->id, 'color' => 'evius'])
-
-@component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/'.$eventUser->id), 'color' => 'evius'])
 Confirmar asistencia
+
 @endcomponent
 
 @component('mail::subcopy')

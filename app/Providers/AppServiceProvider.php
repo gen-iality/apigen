@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
 
         \App\EventUser::saved(
             function ($eventUser) {
-                Log::debug("ejecutando observador saved eventUser");
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
                 $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
 
@@ -49,15 +48,11 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                Log::debug("Entrando a firebase");
                 self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
 
                 $original = $eventUser->getOriginal();
 
                 if ($eventUser->state_id == EventUser::STATE_BOOKED && isset($original['state_id']) && $original['state_id'] != EventUser::STATE_BOOKED) {
-
-                    Log::debug("Vamos a programar email de booking confirmado");
-
                     Mail::to($email)
                         ->queue(
                             new BookingConfirmed($eventUser)

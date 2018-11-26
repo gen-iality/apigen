@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SendinBlue;
 use Illuminate\Http\Request;
 use \App\MessageUser;
+use \App\Message;
 use Sendinblue\Mailin;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
