@@ -73,6 +73,24 @@ APP_KEY = ZqxYyhRadx1UNwPgdjXsmeG/MvBZO6ZR6PeUuCa6cAs=
 
 4. Make sure storage folder has right permissions for laravel to store stuff there.
 
+### Installing in a Docker image 
+
+Install: 
+
+apk add --no-cache libressl-dev openldap-dev
+
+Or failing that depends on the version: 
+
+apk add --no-cache openssl-dev openldap-dev
+
+Then install the mongo php driver
+
+pecl install mongod
+
+Create the mongo extension in php:
+
+docker-php-ext-enable mongodb
+
 ## Patches
 
 In this project is used a patch:
