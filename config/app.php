@@ -17,7 +17,7 @@ return [
     'name' => env('APP_NAME', 'Evius'),
 
     'front_url' => 'https://eviusco.netlify.com',
-    'page_size' => 30,
+    'page_size' => 25,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
     /*
     |--------------------------------------------------------------------------
