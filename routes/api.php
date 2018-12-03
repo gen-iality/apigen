@@ -126,6 +126,17 @@ Route::group(
     }
 );
 
+/****************
+ * Escarapelas
+ ****************/
+Route::apiResource('escarapelas', 'EscarapelaController', ['only' => ['index', 'show']]);
+
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('escarapelas', 'EscarapelaController', ['except' => ['index', 'show']]);
+    }
+);
+
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
