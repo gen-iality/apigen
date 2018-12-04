@@ -57,10 +57,9 @@ class EscarapelaController extends Controller
      * @param  \App\Escarapela  $escarapela
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show(String $event_id)
     {
-        $escarapela = Escarapela::find($id);
-        return $escarapela;
+        $escarapela = Escarapela::where('fields_id', $event_id)->first();
         $response = new EscarapelaResource($escarapela);
         return $response;
     }
@@ -83,25 +82,33 @@ class EscarapelaController extends Controller
      * @param  \App\Escarapela  $escarapela
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $event_id)
+    {   
+        $escarapela = Escarapela::where('fields_id', $event_id);
+        $del = $escarapela->delete();
+
+        if ($del == true) {
         $data = $request->json()->all();
-        $escarapela = Escarapela::find($id);
-        $escarapela->fill($data);
-        $escarapela->save();
-        return $data;
+        $result = new Escarapela($data);
+        $result->save();
+        return $result;
+        } else{
+            return 'Error';
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified escarapela from storage.
      *
-     * @param  \App\Escarapela  $escarapela
+     * @param  \App\String  $event_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Escarapela $id)
+    public function destroy(String $event_id)
     {
-        $res = $id->delete();
-        if ($res == true) {
+        $escarapela = Escarapela::where('fields_id', $event_id);
+        $del = $escarapela->delete();
+
+        if ($del == true) {
             return 'True';
         } else {
             return 'Error';
