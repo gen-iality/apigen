@@ -246,7 +246,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        // return $id;
+        return $event;
         $res = $event->delete();
         if ($res == true) {
             return 'True';
