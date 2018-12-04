@@ -40,15 +40,27 @@ class EscarapelaController extends Controller
      */
     public function store(Request $request)
     {
-        // return '';
         $data = $request->json()->all();
-        $result = new Escarapela($data);
-        
-       
-        $result->save();
-        return $result;
-        
-        
+
+        $fields_id =  $data['fields_id'];
+        $escarapela = Escarapela::where('fields_id', $fields_id);
+
+        if($escarapela){
+
+            $del = $escarapela->delete();
+
+            if ($del == true) {
+            $result = new Escarapela($data);
+            $result->save();
+            return $result;
+            }else{
+                return 'Error';
+            }
+        }else{
+            $result = new Escarapela($data);
+            $result->save();
+            return $result;
+        }
     }
 
     /**
@@ -60,8 +72,12 @@ class EscarapelaController extends Controller
     public function show(String $event_id)
     {
         $escarapela = Escarapela::where('fields_id', $event_id)->first();
-        $response = new EscarapelaResource($escarapela);
-        return $response;
+        if($escarapela){
+            $response = new EscarapelaResource($escarapela);
+            return $response;
+        }else{
+            return array();
+        }
     }
 
     /**
