@@ -15,7 +15,7 @@ class Event extends Moloquent
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
 
-    protected $with = ['userProperties', 'author', 'categories', 'eventType', 'organizer'];
+    protected $with = ['Properties', 'author', 'categories', 'eventType', 'organizer'];
 
     /**
      * Event is owned by an organization
