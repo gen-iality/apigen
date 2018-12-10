@@ -41,7 +41,7 @@ class UserEventService
         // if (!isset($userData['email'])) {
         //     $userData['email'] = 'event_'.$date.'@evius.co';
         // }
-         /* Si no existe el correo le creamos uno, anteriormente se mostraba un error */
+         /* Si no existe el correo le mostramos el error */
          if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
         }
