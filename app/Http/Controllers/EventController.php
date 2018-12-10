@@ -281,7 +281,7 @@ class EventController extends Controller
         $event = Event::find($event_id);
         $event_properties = $event->user_properties;
         $count = count($event_properties);
-        $fields = [ $count => ["name" => $request->name,"type" => "text"]];
+        $fields = [ $count => ["name" => $request->name, "unique" => false, "mandatory" => false,"type" => "text"]];
         $event->user_properties += $fields;
         $event->save();
         return $event->user_properties;
