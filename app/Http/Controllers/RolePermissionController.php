@@ -5,6 +5,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use App\User;
+use App\ModelHasRole;
 use App\EventUser;
 
 class RolePermissionController extends Controller
@@ -113,7 +114,7 @@ class RolePermissionController extends Controller
                             ["model_type" => "App\User"]
                         ];
             $role = $data += $app_user;
-            
+
             $model = ModelHasRole::create($role);
             return $model;
         }
