@@ -170,6 +170,8 @@ return [
         Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
         //Spatie\Tail\TailServiceProvider::class
     ],
 

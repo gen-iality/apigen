@@ -28,6 +28,7 @@ Route::get('test/auth', 'TestingController@auth');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
+Route::post('test/roles/{id}', 'RolePermissionController@update');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
 Route::get('sync/firestore', 'synchronizationController@EventUsers');
@@ -163,7 +164,7 @@ Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallySt
 
 //Events
 
-//Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
+Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
 //User Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');

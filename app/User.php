@@ -2,10 +2,19 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Hash;
+
 use Moloquent;
 
 class User extends Moloquent
 {
+
+    use Notifiable;
+    use HasRoles;
+
+
     protected static $unguarded = true;
     //protected $primaryKey = 'uid';
     protected $fillable = ['name', 'email', 'uid'];
@@ -76,5 +85,9 @@ class User extends Moloquent
     }
     //->as('subscription')
     //->withTimestamps();
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
 
 }
