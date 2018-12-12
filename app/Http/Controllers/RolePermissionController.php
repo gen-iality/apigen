@@ -16,41 +16,8 @@ class RolePermissionController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $request->json()->all();
-        $role_id = $data['role_id'];
-        $user_id = $data['user_id'];
-
-
-        $user = User::findOrFail($user_id);
-        $user->update($request->all());
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->syncRoles($roles);
-
-
-        return 
-
-
-        $role = Role::find($role_id);
-        $user = User::find($user_id);
-        return $user->role();
-        // $user->assignRole('Administrator');
-        
-        return Role::find();
-        return Role::all();
-
-        // return $request;
-        // Role::create(['name' => 'writer']);
-        // Permission::create(['name' => 'edit articles']);
-        $role = Role::find('5c080634f33bd4188832dfa6');
-        $permission = Permission::create(['name' => 'edit articles']);
-        $permissionB = Permission::create(['name' => 'deleted articles']);
-        $permissionC = Permission::create(['name' => 'new articles']);
-
-        $role->givePermissionTo($permission);
-        $role->givePermissionTo($permissionB);
-        $role->givePermissionTo($permissionC);
-
-        return $role;
+        $roles = Role::all();
+        return $roles;
     }
 
     /**
@@ -123,3 +90,31 @@ class RolePermissionController extends Controller
         //
     }
 }
+
+
+/*
+
+
+        $role = Role::find($role_id);
+        $user = User::find($user_id);
+        return $user->role();
+        // $user->assignRole('Administrator');
+        
+        return Role::find();
+        return Role::all();
+
+        // return $request;
+        // Role::create(['name' => 'writer']);
+        // Permission::create(['name' => 'edit articles']);
+        $role = Role::find('5c080634f33bd4188832dfa6');
+        $permission = Permission::create(['name' => 'edit articles']);
+        $permissionB = Permission::create(['name' => 'deleted articles']);
+        $permissionC = Permission::create(['name' => 'new articles']);
+
+        $role->givePermissionTo($permission);
+        $role->givePermissionTo($permissionB);
+        $role->givePermissionTo($permissionC);
+
+        return $role;
+
+*/

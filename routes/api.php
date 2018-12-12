@@ -29,6 +29,7 @@ Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
 Route::post('test/roles/{id}', 'RolePermissionController@update');
+// Route::get('test/roles/', 'RolePermissionController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
 Route::get('sync/firestore', 'synchronizationController@EventUsers');
@@ -135,6 +136,17 @@ Route::apiResource('escarapelas', 'EscarapelaController', ['only' => ['index', '
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('escarapelas', 'EscarapelaController', ['except' => ['index', 'show']]);
+    }
+);
+
+/****************
+ * eventTypes
+ ****************/
+Route::apiResource('roles', 'RolePermissionController', ['only' => ['index', 'show']]);
+
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('roles', 'RolePermissionController', ['except' => ['index', 'show']]);
     }
 );
 
