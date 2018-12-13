@@ -114,11 +114,13 @@ class RolePermissionController extends Controller
         $user = User::updateOrCreate($eventUserData);
         $id_user = $user->id;
         $event_id = $user->event_id;
+        $role_id  = $user->role_id;
         if($user){
 
             $data = $request->json()->all();
             $app_user =     ["event_id" => $event_id,
                             "model_id" => $id_user ,
+                            "role_id" => $role_id,
                             "model_type" => "App\User"];
             $role = $app_user;
             $model = ModelHasRole::create($role);
