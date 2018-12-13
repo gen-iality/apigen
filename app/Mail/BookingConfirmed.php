@@ -33,10 +33,13 @@ class BookingConfirmed extends Mailable implements ShouldQueue
      */
     public function __construct($eventUser)
     {
+        Log::debug("recibiendo event_user");
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
         $eventUser_name = ($eventUser["properties"]["Nombres"]);
         $eventUser_id = $eventUser->id;
+
+        Log::debug("cargando datos event_user al correo");
 
         $this->event = $event;
         $this->event_location = $event_location;
@@ -45,6 +48,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->subject = "[Tu Ticket - " . $event->name . "]";
         $gfService = new GoogleFiles();
         
+        Log::debug("pasando a crear correo");
 
     }
 
