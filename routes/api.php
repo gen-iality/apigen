@@ -140,16 +140,17 @@ Route::group(
 );
 
 /****************
- * eventTypes
+ * RolesPermmisions
  ****************/
-Route::apiResource('roles', 'RolePermissionController', ['only' => ['index', 'show']]);
+Route::apiResource('permissions/roles', 'RolePermissionController', ['only' => ['index', 'show']]);
 
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('roles', 'RolePermissionController', ['except' => ['index', 'show']]);
+        Route::apiResource('permissions/roles', 'RolePermissionController', ['except' => ['index', 'show']]);
+        
     }
 );
-
+Route::get('userpermissions/{id}', 'RolePermissionController@userpermissions');
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
