@@ -43,19 +43,14 @@ class EscarapelaController extends Controller
         $data = $request->json()->all();
 
         $fields_id =  $data['fields_id'];
-        $escarapela = Escarapela::where('fields_id', $fields_id);
+        $escarapela = Escarapela::where('fields_id', $fields_id)->delete();
 
-        if($escarapela){
-
-            $del = $escarapela->delete();
-
-            if ($del == true) {
+        // return $escarapela;
+        if($escarapela == true){
+            
             $result = new Escarapela($data);
             $result->save();
             return $result;
-            }else{
-                return 'Error';
-            }
         }else{
             $result = new Escarapela($data);
             $result->save();

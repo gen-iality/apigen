@@ -9,6 +9,7 @@ use App\EventUser;
 use App\Rol;
 use App\State;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -33,8 +34,15 @@ class UserEventService
         $result_status = null;
         $data = null;
         $message = "OK";
+        $date = Carbon::now();
+        $date = $date->format('his');
 
-        if (!isset($userData['email'])) {
+        /* Si no existe el correo le creamos uno, anteriormente se mostraba un error */
+        // if (!isset($userData['email'])) {
+        //     $userData['email'] = 'event_'.$date.'@evius.co';
+        // }
+         /* Si no existe el correo le mostramos el error */
+         if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
         }
 

@@ -113,18 +113,33 @@ class EventUserController extends Controller
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
 
+            $field = Event::find($event_id);
+            $user_properties = $field->user_properties;
+
+
             $userData = $request->json()->all();
+
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
             }
+            $validations = [
+                'email' => 'required|email',
+                'other_fields' => 'sometimes',
+            ];
+            foreach ($user_properties as $user_property){
+
+                if($user_property['mandatory'] !== true)continue;
+
+                    $field = $user_property['name'];
+
+                    $validations [$field] = 'required';
+                    
+                }
 
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
-                $userData, [
-                    'email' => 'required|email',
-                    'name' => 'required',
-                    'other_fields' => 'sometimes',
-                ]
+                $userData, 
+                $validations
             );
 
             if ($validator->fails()) {

@@ -6,6 +6,7 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
+use App\EventUser;
 use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
@@ -110,14 +111,14 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $user = $request->get('user');
-
+        
         $data = $request->json()->all();
+        // return $data;
 
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
                 'name' => 'required',
-
             ]
         );
 
@@ -127,7 +128,13 @@ class EventController extends Controller
                 422
             );
         };
-
+        if (!isset($data['user_properties'])){
+        $fields = [
+                    ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
+                    ["name" => "nombres", "unique" => false, "mandatory" => true,"type" => "text"]
+                ];
+        $data['user_properties'] = $fields;
+        }
         $result = new Event($data);
 
         if ($request->file('picture')) {
@@ -158,6 +165,10 @@ class EventController extends Controller
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
+        // /*categories*/
+        // if (isset($data['user_properties'])) {
+        //     $result->userProperties()->sync($data['user_properties']);
+        // }
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
 
@@ -246,6 +257,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        // $event_id = $event->id;
+        // EventUser::where('event_id', $event_id)->first();
         $res = $event->delete();
         if ($res == true) {
             return 'True';
@@ -270,8 +283,13 @@ class EventController extends Controller
      */
     public function addUserProperty(Request $request, $event_id)
     {
+        
         $event = Event::find($event_id);
-        $property = $event->userProperties()->create($request->json()->all());
-        return $property->toArray();
+        $event_properties = $event->user_properties;
+        $count = count($event_properties);
+        $fields = [ $count => ["name" => $request->name, "unique" => false, "mandatory" => false,"type" => "text"]];
+        $event->user_properties += $fields;
+        $event->save();
+        return $event->user_properties;
     }
 }
