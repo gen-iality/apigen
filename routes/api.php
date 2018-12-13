@@ -149,6 +149,7 @@ Route::group(
         Route::apiResource('permissions/roles', 'RolePermissionController', ['except' => ['index', 'show']]);
         Route::post('permissions/roles/add', 'RolePermissionController@addRolePermissions');
         Route::post('permissions/roles/usersPermissionsEvent/{id}', 'RolePermissionController@usersPermissionsEvent');
+        Route::post('permissions/roles/CreateAndAdd', 'RolePermissionController@CreateAndAddRolePermissions');
     }
 );
 

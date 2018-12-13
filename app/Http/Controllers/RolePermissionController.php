@@ -102,21 +102,29 @@ class RolePermissionController extends Controller
      */
     public function CreateAndAddRolePermissions(Request $request)
     {
-        $user = User::updateOrCreate($request);
+        $eventUserData = $request->json()->all();
 
+            $userData = $request->json()->all();
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
+            }
+        
+        $email = $userData['email'];
+        $matchAttributes = ['email' => $email];
+        $user = User::updateOrCreate($eventUserData);
+        $id_user = $user->id;
+        $event_id = $user->event_id;
         if($user){
-            $user_data = User::where('email', $request->email);
-            $user_id  = $user_data->id;
 
             $data = $request->json()->all();
-            $app_user = [
-                            ["model_id" => $user_id],
-                            ["model_type" => "App\User"]
-                        ];
-            $role = $data += $app_user;
-
+            $app_user =     ["event_id" => $event_id,
+                            "model_id" => $id_user ,
+                            "model_type" => "App\User"];
+            $role = $app_user;
             $model = ModelHasRole::create($role);
-            return $model;
+            return $role;
+        }else{
+            return 'error';
         }
     }
 
