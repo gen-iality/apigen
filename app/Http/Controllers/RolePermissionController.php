@@ -151,7 +151,7 @@ class RolePermissionController extends Controller
     public function usersPermissionsEvent($id){
         
         $userPermissions = ModelHasRole::where('event_id', $id)->get();
-        return $userPermissions;
+        return  $userPermissions;
 
     }
 }
