@@ -20,4 +20,9 @@ class ModelHasRole extends Moloquent
     {
         return $this->belongsTo('Spatie\Permission\Models\Role', 'role_id');
     }
+
+    public function event()
+    {
+        return $this->belongsTo('App\Event','event_id');
+    }
 }

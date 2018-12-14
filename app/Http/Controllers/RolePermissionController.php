@@ -198,6 +198,32 @@ class RolePermissionController extends Controller
         }
 
     }
+
+
+    /**
+     * Create model_has_role
+     * role_id
+     * model_id (user_id) 
+     * event_id
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function meEventsRoles(){
+
+        $user = ($request->get('user'))->id;
+        $userPermissions = ModelHasRole::where('model_id',$user)->with('event')->get();
+        
+        if(isset($userPermissions))
+        {
+            return  $userPermissions;
+        }else{
+            return [];
+        }
+
+    }
+
+
 }
 
 
