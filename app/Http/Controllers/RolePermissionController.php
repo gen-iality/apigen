@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Resources\ModelHasRoleResource;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -73,11 +74,14 @@ class RolePermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->syncRoles($roles);
+        $data = $request->json()->all();
 
-        return $user;
+        $ModelHasRole = ModelHasRole::findOrFail($id);
+        $ModelHasRole->fill($data);
+        $ModelHasRole->save();
+
+        $response = new ModelHasRoleResource($ModelHasRole);
+        return $response;
     }
 
     /**
@@ -88,7 +92,13 @@ class RolePermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ModelHasRole = ModelHasRole::find($id);
+        $res = $ModelHasRole->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
     }
 
     /**
@@ -145,13 +155,16 @@ class RolePermissionController extends Controller
         $app_user = ["model_type" => "App\User"];
         $role = $data += $app_user;
         $model = ModelHasRole::create($role);
-        return $model;
+        $response = new ModelHasRoleResource($model);
+        return $response;
     }
 
     public function usersPermissionsEvent($id){
         
         $userPermissions = ModelHasRole::where('event_id', $id)->get();
-        return $userPermissions;
+        
+        $response = new ModelHasRoleResource($userPermissions);
+        return $response;
 
     }
 }

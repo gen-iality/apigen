@@ -78,6 +78,7 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+        Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
