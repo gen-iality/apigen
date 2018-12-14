@@ -194,4 +194,18 @@ class UserController extends Controller
             return 'Error';
         }
     }
+
+    /**
+     * Find the specified resource from storage.
+     * by email.
+     *
+     * @param  int  $email
+     * @return \Illuminate\Http\Response
+     */
+    public function findByEmail($email)
+    {
+        $User = User::where('email','=', $email)->get();
+        $response = new UsersResource($User);
+        return $User;
+    }
 }
