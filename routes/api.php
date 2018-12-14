@@ -151,10 +151,11 @@ Route::group(
         Route::post('permissions/roles/add', 'RolePermissionController@addRolePermissions');
         Route::get('permissions/roles/event/{id}', 'RolePermissionController@usersRolesEvent');
         Route::post('permissions/roles/CreateAndAdd', 'RolePermissionController@CreateAndAddRolePermissions');
-        Route::post('permissions/roles/user/{id}', 'RolePermissionController@userPermissionsEvent');
+        Route::get('permissions/roles/event/{event_id}/me', 'RolePermissionController@mePermissionsEvent');
 
     }
 );
+
 
 
 // Route::get('userpermissions/{id}', 'RolePermissionController@userpermissions');

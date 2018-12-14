@@ -161,6 +161,7 @@ class RolePermissionController extends Controller
 
     /**
      * Create usersRolesEvent
+     * Controller show the users with your roles 
      * role_id
      * model_id (user_id) 
      * event_id
@@ -184,14 +185,17 @@ class RolePermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function userPermissionsEvent(Request $request, $id){
+    public function mePermissionsEvent(Request $request, $event_id){
         
-        $data = $request->json()->all();
-        $model_id = $id;
-        $event_id = $data['event_id']; 
-        $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id',$model_id)->first();
-        $role = Role::select('permissions')->where('name',$userPermissions->role->name)->with('permissions')->first();
-        return  $role->permissions;
+        $user = $request->get('user');
+        $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id',$user->id)->first();
+        if(isset($userPermissions))
+        {
+            $role = Role::select('permissions')->where('name',$userPermissions->role->name)->with('permissions')->first();
+            return  $role->permissions;
+        }else{
+            return [];
+        }
 
     }
 }
