@@ -124,7 +124,7 @@ class RolePermissionController extends Controller
                             "model_type" => "App\User"];
             $role = $app_user;
             $model = ModelHasRole::create($role);
-            return $role;
+            return response()->json(['success'=>true]);
         }else{
             return 'error';
         }
