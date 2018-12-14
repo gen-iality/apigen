@@ -148,7 +148,7 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('permissions/roles', 'RolePermissionController', ['except' => ['index', 'show']]);
         Route::post('permissions/roles/add', 'RolePermissionController@addRolePermissions');
-        Route::get('permissions/roles/usersPermissionsEvent/{id}', 'RolePermissionController@usersPermissionsEvent');
+        Route::get('permissions/roles/event/{id}', 'RolePermissionController@usersPermissionsEvent');
         Route::post('permissions/roles/CreateAndAdd', 'RolePermissionController@CreateAndAddRolePermissions');
     }
 );
