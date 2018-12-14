@@ -108,10 +108,10 @@ class RolePermissionController extends Controller
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
             }
-        
+        // return $userData['email'];
         $email = $userData['email'];
         $matchAttributes = ['email' => $email];
-        $user = User::updateOrCreate($eventUserData);
+        $user = User::updateOrCreate($eventUserData, $userData);
         $id_user = $user->id;
         $event_id = $user->event_id;
         $role_id  = $user->role_id;
