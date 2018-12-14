@@ -152,7 +152,7 @@ Route::group(
         Route::get('permissions/roles/event/{id}', 'RolePermissionController@usersRolesEvent');
         Route::post('permissions/roles/CreateAndAdd', 'RolePermissionController@CreateAndAddRolePermissions');
         Route::get('permissions/roles/event/{event_id}/me', 'RolePermissionController@mePermissionsEvent');
-        Route::get('permissions/roles/event/me', 'RolePermissionController@meEventsRoles');
+        Route::get('permissions/roles/me/event', 'RolePermissionController@myEvents');
     }
 );
 
