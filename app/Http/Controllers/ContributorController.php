@@ -69,7 +69,12 @@ class ContributorController extends Controller
 
         //add the user as contributor to the event with the specific rol
         $rol['model_type'] = "App\User";
-        $model = ModelHasRole::updateOrCreate($rol);
+        $matchAttributesRol = [
+         "role_id" => $rol['role_id'],
+         "model_id" => $rol['model_id'],
+         "event_id" => $rol["event_id"] 
+        ];
+        $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);
         return $response;
     }

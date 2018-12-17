@@ -52,6 +52,9 @@
         "patches": {
             "webup/laravel-sendinblue": {
                 "Add event providerSendEmail into SendinBlueTransport": "patches/add-event-in-sendinblue.patch"  
+            },
+            "spatie/laravel-permission":{
+                "Change eloquent to moloquent in spatie":"patches/spatieToMoloquent.patch"
             }    
         },
         "laravel": {
