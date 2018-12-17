@@ -28,8 +28,7 @@ Route::get('test/auth', 'TestingController@auth');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
-Route::post('test/roles/{id}', 'RolePermissionController@update');
-// Route::get('test/roles/', 'RolePermissionController@index');
+// Route::get('test/roles/', 'ContributorController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
 Route::get('sync/firestore', 'synchronizationController@EventUsers');
@@ -141,23 +140,17 @@ Route::group(
 );
 
 /****************
- * RolesPermmisions
+ * Contributors
  ****************/
-Route::apiResource('permissions/roles', 'RolePermissionController', ['only' => ['index', 'show']]);
-
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('permissions/roles', 'RolePermissionController', ['except' => ['index', 'show']]);
-        Route::post('permissions/roles/add', 'RolePermissionController@addRolePermissions');
-        Route::get('permissions/roles/event/{id}', 'RolePermissionController@usersRolesEvent');
-        Route::post('permissions/roles/CreateAndAdd', 'RolePermissionController@CreateAndAddRolePermissions');
-        Route::get('permissions/roles/event/{event_id}/me', 'RolePermissionController@mePermissionsEvent');
-        Route::get('permissions/roles/me/event', 'RolePermissionController@myEvents');
+        Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
+        Route::get('contributors/events/{event_id}', 'ContributorController@index');
+        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
+        Route::get('me/contributors/events', 'ContributorController@myEvents');
+        Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
     }
 );
-
-
-
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 

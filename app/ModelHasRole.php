@@ -9,7 +9,7 @@ class ModelHasRole extends Moloquent
 {
     //
     protected $table = ('model_has_roles');
-    protected $fillable = ['role_id','event_id','model_id'];
+    protected $fillable = ['role_id','event_id','model_id', 'model_type'];
     protected $with = ['user', 'role']; 
     public function user()
     {
