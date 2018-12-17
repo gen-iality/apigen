@@ -19,7 +19,7 @@ class RolePermissionController extends Controller
     public function index(Request $request)
     {
         $roles = Role::with('permissions')->get();
-        return $roles;
+        return ModelHasRoleResource::collection($roles);
     }
 
     /**
@@ -72,7 +72,7 @@ class RolePermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, String $id)
     {
         $data = $request->json()->all();
 
@@ -80,8 +80,7 @@ class RolePermissionController extends Controller
         $ModelHasRole->fill($data);
         $ModelHasRole->save();
 
-        $response = new ModelHasRoleResource($ModelHasRole);
-        return $response;
+        return new ModelHasRoleResource($ModelHasRole);    
     }
 
     /**
@@ -90,15 +89,10 @@ class RolePermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(String $id)
     {
-        $ModelHasRole = ModelHasRole::find($id);
-        $res = $ModelHasRole->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
+        $ModelHasRole = ModelHasRole::findOrFail($id);
+        return (string)$ModelHasRole->delete();
     }
 
     /**
@@ -169,10 +163,10 @@ class RolePermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function usersRolesEvent($id){
+    public function usersRolesEvent(String $id){
         
         $usersRolesEvent = ModelHasRole::where('event_id', $id)->get();
-        return  $usersRolesEvent;
+        return ModelHasRoleResource::collection($usersRolesEvent);
 
     }
 
@@ -185,7 +179,7 @@ class RolePermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function mePermissionsEvent(Request $request, $event_id){
+    public function mePermissionsEvent(Request $request, String $event_id){
         
         $user = $request->get('user');
         $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id',$user->id)->first();
@@ -214,7 +208,7 @@ class RolePermissionController extends Controller
         $user = $request->get('user');
         $userPermissions = ModelHasRole::where('model_id',$user->id)->with('event')->get();
         
-        return  $userPermissions?$userPermissions:[];
+        return  $userPermissions? ModelHasRoleResource::collection($$userPermissions) : [];
     }
 
 
