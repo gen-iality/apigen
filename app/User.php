@@ -17,7 +17,7 @@ class User extends Moloquent
 
     protected static $unguarded = true;
     //protected $primaryKey = 'uid';
-    protected $fillable = ['name', 'email', 'uid'];
+    protected $fillable = ['displayName','name', 'email', 'uid'];
 
     protected static $auth;
 

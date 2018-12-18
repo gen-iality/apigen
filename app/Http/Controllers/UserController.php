@@ -204,7 +204,7 @@ class UserController extends Controller
      */
     public function findByEmail($email)
     {
-        $User = User::where('email','=', $email)->get();
+        $User = User::where('email','=', $email)->get(['id','email','names','name','Nombres','displayName']);
         $response = new UsersResource($User);
         return $User;
     }
