@@ -28,6 +28,7 @@ Route::get('test/auth', 'TestingController@auth');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
+Route::get('test/permissions', 'TestingController@permissions');
 // Route::get('test/roles/', 'ContributorController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');

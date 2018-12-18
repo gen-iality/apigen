@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Permission;
 use App\Event;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmed;
@@ -178,5 +179,11 @@ class TestingController extends Controller
         
         }
     }
+
+    public function permissions(){
+        return Permission::all();
+    }
+
+
 
 }
