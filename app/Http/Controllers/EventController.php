@@ -128,13 +128,12 @@ class EventController extends Controller
                 422
             );
         };
-        if (!isset($data['user_properties'])){
-        $fields = [
+
+        $data['user_properties'] += [
                     ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
                     ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
                 ];
-        $data['user_properties'] = $fields;
-        }
+        
         $result = new Event($data);
 
         if ($request->file('picture')) {

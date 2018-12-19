@@ -37,9 +37,8 @@ class User extends Moloquent
         //Creamos el usuario en firebase
         self::creating(
             function ($model) {
-                
                 try{
-
+                    
                     //Si ya existe un usuario con ese correo se jode
                     $fbuser = self::$auth->createUser(
                         [
@@ -47,7 +46,7 @@ class User extends Moloquent
                             //emailVerified: false,
                             //phoneNumber: "+11234567890",
                             "password" => isset($model->password) ? $model->password : "mocion.2040",
-                            "displayName" => isset($model->name) ? $model->name : $model->email,
+                            "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
                             //photoURL: "http://www.example.com/12345678/photo.png",
                             //disabled: false
                         ]
