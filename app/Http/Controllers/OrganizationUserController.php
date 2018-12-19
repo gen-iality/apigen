@@ -17,93 +17,55 @@ class OrganizationUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        
-        $usersfilter = function($data){
-            $temporal = $data;
-            $temporal->user =  User::where('uid', $data->userid)->first();
-            $temporal->rol_id = $data->rol;
-            $temporal->state_id = $data->state;
-            return $temporal;
-        };
-        $evtUsers = OrganizationUserResource::collection(
-            OrganizationUser::where('organization_id', $id)
-            ->paginate(config('app.page_size'))
+        return OrganizationUserResource::collection(
+            OrganizationUser::paginate(config('app.page_size'))
         );
-            $users = array_map($usersfilter, $evtUsers->all()); 
-    
-        return $evtUsers;
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     * En el request llega el email del usuario
+     * Buscamos la información del usuario por el correo
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
-        $result = new OrganizationUser($request->json()->all());
-        $result->save();
+        $data = $request->json()->all();
+        if($data['names']){
+            $data['displayName'] = $data['names'];
+            unset($data['names']);
+        }
+
+        $user = User::updateOrCreate($data);
+        
+        $UserOrganization = [
+            "userid" => $user->id,
+            "organization_id" => $data['organization_id'],
+        ];
+        $result = OrganizationUser::updateOrCreate($UserOrganization);
         return $result;
     }
 
 
-    public function verifyandcreate(Request $request, \Kreait\Firebase\Auth $auth, $id)
-    {
-
-        try {
-            $userData = $auth->getUserByEmail($request->email);
-            
-            if($userData->uid){
-                $result = new OrganizationUser($request->json()->all());
-                $result->userid = $userData->uid;
-                $result->organization_id = $id;
-                $result->save();
-                return $result;
-            }else{
-                return "no";
-            }   
-        } catch (\Exception $e) {
-            echo 'Excepción capturada: '. $e->getMessage();
-        } 
-        
-    }
     /**
      * Display the specified resource.
      *
      * @param  \App\OrganizationUser  $organizationUser
      * @return \Illuminate\Http\Response
      */
-    public function show(OrganizationUser $id)
+    public function show($id)
     {
-        //
-        return $id;
+        $evtUsers = OrganizationUserResource::collection(
+            OrganizationUser::where('organization_id', $id)
+            ->paginate(config('app.page_size'))
+        );
+        return $evtUsers;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\OrganizationUser  $organizationUser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrganizationUser $organizationUser)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -112,7 +74,7 @@ class OrganizationUserController extends Controller
      * @param  \App\OrganizationUser  $organizationUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrganizationUser $id)
+/*     public function update(Request $request, OrganizationUser $id)
     {
         //
         $data = $request->json()->all();
@@ -120,15 +82,18 @@ class OrganizationUserController extends Controller
         $id->save();
         return $id;
     }
-
+ */
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\OrganizationUser  $organizationUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrganizationUser $organizationUser)
+    public function destroy(Request $request, $id)
     {
-        //
+        $data = $request->json()->all();
+        $userOrganization = OrganizationUser::where('userid', $data['userid'])->where('organization_id',$data['organization_id']);
+        $response = ($userOrganization->delete()) ? 1 : 0;
+        return $response;
     }
 }

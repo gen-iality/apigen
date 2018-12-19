@@ -62,11 +62,21 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
-        //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
-        //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
-       
+        // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
+        // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
     }
 );
+
+/****************
+ * Users Organization
+ ****************/
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('organizations', 'OrganizationUserController');
+    }
+);
+
+
 
 /****************
  * Users
