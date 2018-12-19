@@ -254,4 +254,45 @@ class UserEventService
 
         return $usersIdNotInEvent;
     }
+
+        /**
+     * Store
+     * 
+     * | Body Params   |
+     * | ------------- |
+     * | @body $_POST[role_id] required field       |
+     * | @body $_POST[event_id]  required field     |
+     * | @body $_POST[model_id] required field      |  
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response Contributors Resources
+     */
+    public static function saveRolUser($request)
+    {
+        return $request;
+        $rol = $request;  
+
+        //find or create user
+        if (!isset($rol['model_id'])){
+            if(isset($rol['properties'])){
+                $email = $rol['properties']['email'];
+                $matchAttributes = ['email' => $email];
+                $user = User::updateOrCreate($matchAttributes, $rol['properties']);
+                $rol['model_id'] = $user->id;
+            }else{
+                throw new Exception("model_id and properties are mandatory", 1);                
+            }
+        }
+
+        //add the user as contributor to the event with the specific rol
+        $rol['model_type'] = "App\User";
+        $matchAttributesRol = [
+         "role_id" => $rol['role_id'],
+         "model_id" => $rol['model_id'],
+         "event_id" => $rol["event_id"] 
+        ];
+        $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
+        $response = new ModelHasRoleResource($model);
+        return $response;
+    }
 }

@@ -14,6 +14,7 @@ class Event extends Moloquent
 {
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
+    const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
     protected $with = ['author', 'categories', 'eventType', 'organizer'];
 

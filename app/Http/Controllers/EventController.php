@@ -13,6 +13,7 @@ use App\Organization;
 use App\Properties;
 use App\User;
 use Illuminate\Http\Request;
+use App\ModelHasRole;
 use Storage;
 use Validator;
 
@@ -23,7 +24,6 @@ use Validator;
 
 class EventController extends Controller
 {
-
     /**
      *
      * @param Illuminate\Http\Request $request [injected]
@@ -110,10 +110,8 @@ class EventController extends Controller
      */
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
-        $user = $request->get('user');
-        
+        $user = $request->get('user');        
         $data = $request->json()->all();
-        // return $data;
 
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
@@ -170,6 +168,21 @@ class EventController extends Controller
         // }
 
         //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
+
+        /**
+         * Add role administrator to creator of the event
+         * 
+         * We have the three data by add in the table model_has_role
+         */
+
+        $UserRolAdminister = [
+            "role_id" => Event::ID_ROL_ADMINISTRATOR,
+            "model_id" => $user->id,
+            "event_id" => $result->id,
+            "model_type" => "App\User"
+           ];
+           
+        $response =  ModelHasRole::create($UserRolAdminister);
 
         return $result;
     }
