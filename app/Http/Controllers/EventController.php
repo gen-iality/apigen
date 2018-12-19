@@ -162,29 +162,21 @@ class EventController extends Controller
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
-        // /*categories*/
-        // if (isset($data['user_properties'])) {
-        //     $result->userProperties()->sync($data['user_properties']);
-        // }
 
-        //$RolService->createAuthorAsEventAdmin($user->id, $result->_id);
+        self::addOwnerAsAdminColaborator($user->id, $result->id);
+        return $result;
+    }
 
-        /**
-         * Add role administrator to creator of the event
-         * 
-         * We have the three data by add in the table model_has_role
-         */
+    public function addOwnerAsAdminColaborator($user_id, $event_id){
 
-        $UserRolAdminister = [
+        $DataUserRolAdminister = [
             "role_id" => Event::ID_ROL_ADMINISTRATOR,
-            "model_id" => $user->id,
-            "event_id" => $result->id,
+            "model_id" => $user_id,
+            "event_id" => $event_id,
             "model_type" => "App\User"
            ];
-           
-        $response =  ModelHasRole::create($UserRolAdminister);
-
-        return $result;
+           $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
+           return $DataUserRolAdminister;
     }
 
     /**
