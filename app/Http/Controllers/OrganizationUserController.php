@@ -17,11 +17,13 @@ class OrganizationUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return OrganizationUserResource::collection(
-            OrganizationUser::paginate(config('app.page_size'))
+        $OrganizationUsers = OrganizationUserResource::collection(
+            OrganizationUser::where('organization_id', $id)
+            ->paginate(config('app.page_size'))
         );
+        return $OrganizationUsers;
     }
 
     /**
@@ -54,16 +56,17 @@ class OrganizationUserController extends Controller
     /**
      * Display the specified resource.
      *
+     * /users/organization/{id_event}/show?userid=user_id
      * @param  \App\OrganizationUser  $organizationUser
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $organization_id)
     {
-        $OrganizationUsers = OrganizationUserResource::collection(
-            OrganizationUser::where('organization_id', $id)
+        $OrganizationUser = OrganizationUserResource::collection(
+            OrganizationUser::where('organization_id', $organization_id)->where('userid', $request->userid)
             ->paginate(config('app.page_size'))
         );
-        return $OrganizationUsers;
+        return $OrganizationUser;
     }
 
 
@@ -93,8 +96,7 @@ class OrganizationUserController extends Controller
     {
         $data = $request->json()->all();
         $userOrganization = OrganizationUser::where('userid', $data['userid'])->where('organization_id',$data['organization_id']);
-        $response = ($userOrganization->delete()) ? 1 : 0;
-        return $response;
+        return (string)$userOrganization->delete();
     }
 
     public function userOrganizations($user_id){
