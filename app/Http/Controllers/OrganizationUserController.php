@@ -59,11 +59,11 @@ class OrganizationUserController extends Controller
      */
     public function show($id)
     {
-        $evtUsers = OrganizationUserResource::collection(
+        $OrganizationUsers = OrganizationUserResource::collection(
             OrganizationUser::where('organization_id', $id)
             ->paginate(config('app.page_size'))
         );
-        return $evtUsers;
+        return $OrganizationUsers;
     }
 
 
@@ -95,5 +95,13 @@ class OrganizationUserController extends Controller
         $userOrganization = OrganizationUser::where('userid', $data['userid'])->where('organization_id',$data['organization_id']);
         $response = ($userOrganization->delete()) ? 1 : 0;
         return $response;
+    }
+
+    public function userOrganizations($user_id){
+        $OrganizationsUser = OrganizationUserResource::collection(
+            OrganizationUser::where('userid', $user_id)
+            ->paginate(config('app.page_size'))
+        );
+        return $OrganizationsUser;
     }
 }
