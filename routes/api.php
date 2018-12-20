@@ -72,9 +72,11 @@ Route::group(
  ****************/
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('organizations', 'OrganizationUserController');
     }
 );
+Route::apiResource('users/organization', 'OrganizationUserController');
+// Route::get('users/organization', 'OrganizationUserController@index');
+
 
 
 
