@@ -89,4 +89,24 @@ class Event extends Moloquent
     {
         return $this->belongsTo('App\EventType', 'event_type_id');
     }
+
+     /**
+     * The tickets associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
+    }
+
+    /**
+     * The orders associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }
