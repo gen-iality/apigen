@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Attendize\Http\Controllers;
 
 use App\Events\OrderCompletedEvent;
-use App\Models\Account;
-use App\Models\AccountPaymentGateway;
-use App\Models\Affiliate;
-use App\Models\Attendee;
-use App\Models\Event;
-use App\Models\EventStats;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\PaymentGateway;
-use App\Models\QuestionAnswer;
-use App\Models\ReservedTickets;
-use App\Models\Ticket;
+use App\Account;
+use App\AccountPaymentGateway;
+use App\Affiliate;
+use App\Attendee;
+use App\Event;
+use App\EventStats;
+use App\Order;
+use App\OrderItem;
+use App\PaymentGateway;
+use App\QuestionAnswer;
+use App\ReservedTickets;
+use App\Ticket;
 use App\Services\Order as OrderService;
 use Carbon\Carbon;
 use Cookie;
@@ -62,7 +62,7 @@ class EventCheckoutController extends Controller
         $order_expires_time = Carbon::now()->addMinutes(config('attendize.checkout_timeout_after'));
 
         $event = Event::findOrFail($event_id);
-
+        
         if (!$request->has('tickets')) {
             return response()->json([
                 'status'  => 'error',
@@ -100,13 +100,13 @@ class EventCheckoutController extends Controller
 
             $total_ticket_quantity = $total_ticket_quantity + $current_ticket_quantity;
             $ticket = Ticket::find($ticket_id);
-            $ticket_quantity_remaining = $ticket->quantity_remaining;
+            $ticket_quantity_remaining = $ticket->max_per_person;
             $max_per_person = min($ticket_quantity_remaining, $ticket->max_per_person);
 
             $quantity_available_validation_rules['ticket_' . $ticket_id] = [
                 'numeric',
                 'min:' . $ticket->min_per_person,
-                'max:' . $max_per_person
+                'max:' . $ticket->$max_per_person
             ];
 
             $quantity_available_validation_messages = [
@@ -116,6 +116,7 @@ class EventCheckoutController extends Controller
 
             $validator = Validator::make(['ticket_' . $ticket_id => (int)$request->get('ticket_' . $ticket_id)],
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
+                
 
             if ($validator->fails()) {
                 return response()->json([
@@ -123,7 +124,6 @@ class EventCheckoutController extends Controller
                     'messages' => $validator->messages()->toArray(),
                 ]);
             }
-
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
@@ -171,6 +171,7 @@ class EventCheckoutController extends Controller
                     }
                 }
             }
+
         }
 
         if (empty($tickets)) {

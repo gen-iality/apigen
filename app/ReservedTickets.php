@@ -11,6 +11,7 @@ namespace App;
  *
  * @author Dave
  */
+use Moloquent;
 class ReservedTickets extends Moloquent
 {
     //put your code here

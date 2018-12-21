@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Attendize\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Organiser;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Attendize\Http\Controllers;
 
 use App\Event;
 use App\Ticket;
@@ -46,7 +46,6 @@ class EventTicketsController extends MyBaseController
         $tickets = empty($q) === false
         ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->paginate()
         : $event->tickets()->orderBy($sort_by, 'asc')->paginate();
-        
         // Return view.
         return view('ManageEvent.Tickets', compact('event', 'tickets', 'sort_by', 'q', 'allowed_sorts'));
     }
@@ -210,12 +209,11 @@ class EventTicketsController extends MyBaseController
     public function postEditTicket(Request $request, $event_id, $ticket_id)
     {
         $ticket = Ticket::findOrFail($ticket_id);
-
         /*
          * Add validation message
          */
         $validation_messages['quantity_available.min'] = trans("Controllers.quantity_min_error");
-        $ticket->messages = $validation_messages + $ticket->messages;
+        $ticket->messages = $validation_messages;
 
         if (!$ticket->validate($request->all())) {
             return response()->json([
