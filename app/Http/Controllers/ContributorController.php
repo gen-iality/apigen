@@ -5,7 +5,7 @@ use App\Http\Resources\ModelHasRoleResource;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
-use App\User;
+use App\Account;
 use App\ModelHasRole;
 use App\EventUser;
 
@@ -60,7 +60,7 @@ class ContributorController extends Controller
             if(isset($rol['properties'])){
                 $email = $rol['properties']['email'];
                 $matchAttributes = ['email' => $email];
-                $user = User::updateOrCreate($matchAttributes, $rol['properties']);
+                $user = Account::updateOrCreate($matchAttributes, $rol['properties']);
                 $rol['model_id'] = $user->id;
             }else{
                 throw new Exception("model_id and properties are mandatory", 1);                
@@ -68,7 +68,7 @@ class ContributorController extends Controller
         }
 
         //add the user as contributor to the event with the specific rol
-        $rol['model_type'] = "App\User";
+        $rol['model_type'] = "App\Account";
         $matchAttributesRol = [
          "role_id" => $rol['role_id'],
          "model_id" => $rol['model_id'],

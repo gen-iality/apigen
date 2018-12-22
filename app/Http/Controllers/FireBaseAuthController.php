@@ -18,7 +18,7 @@ class FireBaseAuthController extends Controller
      * Token is prosseced by middleware
      *
      * @param Request $request
-     * @return User user information using valid token send with the request.
+     * @return Account user information using valid token send with the request.
      */
     public function getCurrentUser(Request $request)
     {

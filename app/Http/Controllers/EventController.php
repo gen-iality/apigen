@@ -11,11 +11,12 @@ use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
 use App\Properties;
-use App\User;
+use App\Account;
 use Illuminate\Http\Request;
 use App\ModelHasRole;
 use Storage;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @resource Event
@@ -42,6 +43,11 @@ class EventController extends Controller
 
     public function index(Request $request, FilterQuery $filterQuery)
     {
+
+        /* $events = DB::collection('events')->update(['organizer_type' => 'App\Account']);
+        var_dump($events);
+        return true; */
+
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
             ->orWhere('visibility', 'IS NULL', null, 'and'); //null
@@ -173,7 +179,7 @@ class EventController extends Controller
             "role_id" => Event::ID_ROL_ADMINISTRATOR,
             "model_id" => $user_id,
             "event_id" => $event_id,
-            "model_type" => "App\User"
+            "model_type" => "App\Account"
            ];
            $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
            return $DataUserRolAdminister;
@@ -225,11 +231,11 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\User")) {
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
             if ($data['organizer_id'] == "me") {
                 $organizer = $user;
             } else {
-                $organizer = User::findOrFail($data['organizer_id']);
+                $organizer = Account::findOrFail($data['organizer_id']);
             }
 
         } else {

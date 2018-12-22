@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App;
-use App\User;
+use App\Account;
 use Closure;
 use Firebase\Auth\Token\Verifier;
 use GuzzleHttp\Client;
@@ -114,7 +114,7 @@ class AuthFirebase
              * Capturamos el usuario a partir del correo el cual se encuentra en el token codificado
              * y recuperamos el refresh_token
              */
-            $user = User::where('uid', (string) $user_id)->first();
+            $user = Account::where('uid', (string) $user_id)->first();
             // var_dump($user);
             $refresh_token = $user->refresh_token;
 
@@ -200,7 +200,7 @@ class AuthFirebase
 
         try {
             $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-            $user = User::where('uid', '=', $user_auth->uid)->first();
+            $user = Account::where('uid', '=', $user_auth->uid)->first();
             
             if ($refresh_token) {
                 $user->refresh_token = $refresh_token;

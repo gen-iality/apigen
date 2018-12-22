@@ -150,7 +150,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     }
 
     /**
-     * Event User
+     * Event Account
      *
      * Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
      * Realizando una migración por medio del id,

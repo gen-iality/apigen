@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UsersResource;
-use App\User;
+use App\Account;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Firebase\Auth\Token\Verifier;
@@ -72,10 +72,10 @@ class UserController extends Controller
             $verifiedIdToken = $this->auth->verifyIdToken($firebaseToken);
             $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
             
-            $user = User::where('uid', '=', $user_auth->uid)->first();
+            $user = Account::where('uid', '=', $user_auth->uid)->first();
             
             if(!$user){
-                $user = User::create(get_object_vars($user_auth));
+                $user = Account::create(get_object_vars($user_auth));
             }
  
             return redirect('https://evius.co/?token='.$firebaseToken);
@@ -89,7 +89,7 @@ class UserController extends Controller
     public function index()
     {
         return UsersResource::collection(
-            User::paginate(config('app.page_size'))
+            Account::paginate(config('app.page_size'))
         );
     }
 
@@ -102,7 +102,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        $result = new User($data);
+        $result = new Account($data);
         $result->save();
         return $result;
     }
@@ -112,7 +112,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(User $id)
+    public function delete(Account $id)
     {
 
     }
@@ -126,8 +126,8 @@ class UserController extends Controller
     public function show(String $id)
     {
         //
-        $User = User::find($id);
-        $response = new UsersResource($User);
+        $Account = Account::find($id);
+        $response = new UsersResource($Account);
         return $response;
     }
 
@@ -159,16 +159,16 @@ class UserController extends Controller
             $data['profile_completed'] = false;
         }
     
-        $User = User::find($id);
-        $User->fill($data);
-        $User->save();
+        $Account = Account::find($id);
+        $Account->fill($data);
+        $Account->save();
         return $data;
     }
 
     public function VerifyAccount(Request $request, \Kreait\Firebase\Auth $auth, $uid)
     {
         $data = $request->json()->all();
-        $user = User::where("uid", $uid);
+        $user = Account::where("uid", $uid);
         $password = $data["password"];
 
         $user_auth = $auth->updateUser($uid, [  
@@ -186,8 +186,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $User = User::find($id);
-        $res = $User->delete();
+        $Account = Account::find($id);
+        $res = $Account->delete();
         if ($res == true) {
             return 'True';
         } else {
@@ -204,8 +204,8 @@ class UserController extends Controller
      */
     public function findByEmail($email)
     {
-        $User = User::where('email','=', $email)->get(['id','email','names','name','Nombres','displayName']);
-        $response = new UsersResource($User);
-        return $User;
+        $Account = Account::where('email','=', $email)->get(['id','email','names','name','Nombres','displayName']);
+        $response = new UsersResource($Account);
+        return $Account;
     }
 }

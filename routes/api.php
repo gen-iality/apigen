@@ -72,12 +72,11 @@ Route::group(
  ****************/
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
-        Route::apiResource('users/organization', 'OrganizationUserController',  ['except' => ['index','show']]);
-
     }
 );
-Route::get('users/organization/{user_id}', 'OrganizationUserController@index');
-Route::get('users/organization/{user_id}/show', 'OrganizationUserController@show');
+Route::apiResource('users/organization', 'OrganizationUserController',  ['except' => ['index','show']]);
+Route::get('users/organization/{organization_id}', 'OrganizationUserController@index');
+Route::get('users/organization/{organization_id}/show', 'OrganizationUserController@show');
 /****************
  * Users
  ****************/
@@ -191,7 +190,7 @@ Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallySt
 
 Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
-//User Events Endpoint
+//Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
 //Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 //Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');

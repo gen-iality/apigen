@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App;
-use App\User;
+use App\Account;
 use Closure;
 use Firebase\Auth\Token\Verifier;
 use Illuminate\Http\Response;
@@ -59,11 +59,11 @@ class TokenAuthFirebase
             //Se obtiene la informacion del usuario
             //Claim sub user_id
             $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-            $user = User::where('uid', '=', $user_auth->uid)->first();
+            $user = Account::where('uid', '=', $user_auth->uid)->first();
 
             if (!$user) {
                 var_dump("vamos a crearlo");
-                $user = User::create(get_object_vars($user_auth));
+                $user = Account::create(get_object_vars($user_auth));
                 $user->save();
             }
          

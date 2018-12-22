@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use QRCode;
 use App\EventUser;
-use App\User;
+use App\Account;
 
 class GenerateQr extends Controller
 {

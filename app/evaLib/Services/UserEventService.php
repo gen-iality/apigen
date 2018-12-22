@@ -8,7 +8,7 @@ use App\Event;
 use App\EventUser;
 use App\Rol;
 use App\State;
-use App\User;
+use App\Account;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -55,7 +55,7 @@ class UserEventService
             unset($userData['names']);
         }
 
-        $user = User::updateOrCreate($matchAttributes, $userData);
+        $user = Account::updateOrCreate($matchAttributes, $userData);
 
 
         /* ya con el usuario actualizamos o creamos el eventUser */
@@ -70,7 +70,7 @@ class UserEventService
 
         $eventUserFields["properties"] = $userData;
 
-        //User rol assigned by default
+        //Account rol assigned by default
         if (!isset($eventUserFields["rol_id"])) {
             $rol = Rol::where('level', 0)->first();
             $eventUserFields["rol_id"] = $rol->_id;
@@ -194,7 +194,7 @@ class UserEventService
      * Add Users to an event in draft status
      *
      * @param Event       $event    Where users are going to be added
-     * @param Array[User] $usersIds Users to be added
+     * @param Array[Account] $usersIds Users to be added
      *
      * @return EventUser             eventUsers(attendees) added to the event
      */
@@ -209,13 +209,13 @@ class UserEventService
 
         foreach ($usersIdNotInEvent as $userId) {
 
-            $user = User::find($userId);
+            $user = Account::find($userId);
             if (!$user) {
-                Log::debug('User not found when trying to create. ' . $userId);
+                Log::debug('Account not found when trying to create. ' . $userId);
                 continue;
 
             }
-            Log::debug('User not found when trying to create. ' . $userId);
+            Log::debug('Account not found when trying to create. ' . $userId);
             //Crear EventUser
             $eventUser = new EventUser;
             $eventUser->event_id = $event->id;
@@ -277,7 +277,7 @@ class UserEventService
             if(isset($rol['properties'])){
                 $email = $rol['properties']['email'];
                 $matchAttributes = ['email' => $email];
-                $user = User::updateOrCreate($matchAttributes, $rol['properties']);
+                $user = Account::updateOrCreate($matchAttributes, $rol['properties']);
                 $rol['model_id'] = $user->id;
             }else{
                 throw new Exception("model_id and properties are mandatory", 1);                
@@ -285,7 +285,7 @@ class UserEventService
         }
 
         //add the user as contributor to the event with the specific rol
-        $rol['model_type'] = "App\User";
+        $rol['model_type'] = "App\Account";
         $matchAttributesRol = [
          "role_id" => $rol['role_id'],
          "model_id" => $rol['model_id'],

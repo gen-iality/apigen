@@ -14,3 +14,5 @@ yarn-error.log
 .env
 cache
 /laradock
+public/assets/*
+public/vendor/*

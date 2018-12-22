@@ -12,7 +12,7 @@ class OrganizationUser extends Moloquent
     
     public function user()
     {
-        return $this->belongsTo('App\User', 'userid');
+        return $this->belongsTo('App\Account', 'userid');
     }
     public function organization()
     {

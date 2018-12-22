@@ -1,6 +1,7 @@
 <?php
 namespace App\evaLib\Services;
 
+use App\Models\User;
 /**
  * Alters a query to be executed using dynamic paramers provided via URL
  */

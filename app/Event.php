@@ -42,7 +42,7 @@ class Event extends Moloquent
 
     public function author()
     {
-        return $this->belongsTo('App\User', 'author_id');
+        return $this->belongsTo('App\Account', 'author_id');
     }
 
 /**

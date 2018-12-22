@@ -11,7 +11,7 @@ use App\Mail\RSVP;
 use App\Message;
 use App\MessageUser;
 use App\State;
-use App\User;
+use App\Account;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -158,7 +158,7 @@ class RSVPController extends Controller implements ShouldQueue
             $m = Message::find($message->id);
 
             if (!$eventUser->user) {
-                \Log::debug("User doesn't exists for this eventUser: " . $eventUser->id);
+                \Log::debug("Account doesn't exists for this eventUser: " . $eventUser->id);
                 return null;
             }
 
