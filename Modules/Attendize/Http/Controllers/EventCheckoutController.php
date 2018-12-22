@@ -118,12 +118,13 @@ class EventCheckoutController extends Controller
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
                 
 
-            if ($validator->fails()) {
+            /* if ($validator->fails()) {
                 return response()->json([
                     'status'   => 'error',
                     'messages' => $validator->messages()->toArray(),
                 ]);
-            }
+            } */
+
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
@@ -147,7 +148,6 @@ class EventCheckoutController extends Controller
             $reservedTickets->expires = $order_expires_time;
             $reservedTickets->session_id = session()->getId();
             $reservedTickets->save();
-
             for ($i = 0; $i < $current_ticket_quantity; $i++) {
                 /*
                  * Create our validation rules here
@@ -164,12 +164,18 @@ class EventCheckoutController extends Controller
                 /*
                  * Validation rules for custom questions
                  */
-                foreach ($ticket->questions as $question) {
-                    if ($question->is_required && $question->is_enabled) {
-                        $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
-                        $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = "This question is required";
+
+                if($ticket->questions){
+                    foreach ($ticket->questions as $question) {
+
+                        if ($question->is_required && $question->is_enabled) {
+                            $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
+                            $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = "This question is required";
+                        }
                     }
                 }
+
+
             }
 
         }
@@ -180,13 +186,12 @@ class EventCheckoutController extends Controller
                 'message' => 'No tickets selected.',
             ]);
         }
-
         if (config('attendize.enable_dummy_payment_gateway') == TRUE) {
             $activeAccountPaymentGateway = new AccountPaymentGateway();
             $activeAccountPaymentGateway->fill(['payment_gateway_id' => config('attendize.payment_gateway_dummy')]);
             $paymentGateway= $activeAccountPaymentGateway;
         } else {
-            $activeAccountPaymentGateway = $event->account->active_payment_gateway->count() ? $event->account->active_payment_gateway->firstOrFail() : false;
+            $activeAccountPaymentGateway = ($event->account->active_payment_gateway->count()) ? $event->account->active_payment_gateway->firstOrFail() : false;
             $paymentGateway = $event->account->active_payment_gateway->count() ? $event->account->active_payment_gateway->payment_gateway : false;
         }
 
@@ -212,7 +217,7 @@ class EventCheckoutController extends Controller
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway'         => $paymentGateway
         ]);
-
+            return 'ok';
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.

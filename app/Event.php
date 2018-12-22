@@ -117,4 +117,14 @@ class Event extends Moloquent
         return $this->hasMany('App\Order');
     }
 
+    /**
+     * The account associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo('App\Account');
+    }
+
 }
