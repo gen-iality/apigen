@@ -110,8 +110,7 @@
             @foreach($tickets as $ticket)
                 <div id="ticket_{{$ticket->id}}" class="col-md-4 col-sm-6 col-xs-12">
                     <div class="panel panel-success ticket" data-ticket-id="{{$ticket->id}}">
-                       <!--  Acá va ese codigo que muestra los tiques-->
-                       <div style="cursor: pointer;" data-modal-id='ticket-{{ $ticket->id }}'
+                        <div style="cursor: pointer;" data-modal-id='ticket-{{ $ticket->id }}'
                              data-href="{{ route('showEditTicket', ['event_id' => $event->id, 'ticket_id' => $ticket->id]) }}"
                              class="panel-heading loadModal">
                             <h3 class="panel-title">
@@ -123,12 +122,10 @@
                                 @endif
                                 {{$ticket->title}}
                                 <span class="pull-right">
-                                    {{ ($ticket->is_free) ? trans("Order.free") : $ticket->price }}
-                                </span>
+                        {{ ($ticket->is_free) ? trans("Order.free") : money($ticket->price, $event->currency) }}
+                    </span>
                             </h3>
                         </div>
-
-
                         <div class='panel-body'>
                             <ul class="nav nav-section nav-justified mt5 mb5">
                                 <li>
@@ -150,8 +147,8 @@
                                 <li>
                                     <div class="section">
                                         <h4 class="nm hint--top"
-                                            title="{{$ticket->sales_volume}} + {{$ticket->organiser_fees_volume}} @lang("Order.organiser_booking_fees")">
-                                            {{$ticket->sales_volume + $ticket->organiser_fees_volume}}
+                                            title="{{money($ticket->sales_volume, $event->currency)}} + {{money($ticket->organiser_fees_volume, $event->currency)}} @lang("Order.organiser_booking_fees")">
+                                            {{money($ticket->sales_volume + $ticket->organiser_fees_volume, $event->currency)}}
                                             <sub title="@lang("Ticket.doesnt_account_for_refunds").">*</sub>
                                         </h4>
                                         <p class="nm text-muted">@lang("Ticket.revenue")</p>
@@ -159,8 +156,6 @@
                                 </li>
                             </ul>
                         </div>
-
-
                         <div class="panel-footer" style="height: 56px;">
                             <div class="sortHandle" title="@lang("basic.drag_to_reorder")">
                                 <i class="ico-paragraph-justify"></i>
@@ -168,21 +163,21 @@
                             <ul class="nav nav-section nav-justified">
                                 <li>
                                     <a href="javascript:void(0);">
-                                        @if(true)
+                                        @if($ticket->sale_status === config('attendize.ticket_status_on_sale'))
                                             @if($ticket->is_paused)
                                                 @lang("Ticket.ticket_sales_paused") &nbsp;
                                                 <span class="pauseTicketSales label label-info"
                                                       data-id="{{$ticket->id}}"
                                                       data-route="{{route('postPauseTicket', ['event_id'=>$event->id])}}">
-                                                        <i class="ico-play4"></i> @lang("Ticket.resume")
-                                                </span>
+                                    <i class="ico-play4"></i> @lang("Ticket.resume")
+                                </span>
                                             @else
                                                 @lang("Ticket.on_sale") &nbsp;
                                                 <span class="pauseTicketSales label label-info"
                                                       data-id="{{$ticket->id}}"
                                                       data-route="{{route('postPauseTicket', ['event_id'=>$event->id])}}">
-                                                <i class="ico-pause"></i> @lang("Ticket.pause")
-                                                </span>
+                                    <i class="ico-pause"></i> @lang("Ticket.pause")
+                                </span>
                                             @endif
                                         @else
                                             {{\App\Models\TicketStatus::find($ticket->sale_status)->name}}
@@ -191,8 +186,6 @@
                                 </li>
                             </ul>
                         </div>
-
-                       <!--  Arriba va ese código que muestra los tiques-->
                     </div>
                 </div>
             @endforeach

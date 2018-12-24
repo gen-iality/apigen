@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+require (__DIR__ . '/attendize/attendize.php');
+
+
 Route::get('testsendemail', 'TestingController@sendemail');
 Route::get('/', function () {
     return view('welcome');
@@ -31,4 +35,3 @@ Route::get('/rsvptemplate', function () {
 
     return new App\Mail\RSVP("message", $event, $eventUser, null, "footer", "subject");
 });
-
