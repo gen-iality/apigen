@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Event;
 use App\EventUser;
-use App\User;
+use App\Account;
 
 class RSVP extends Mailable implements ShouldQueue
 {

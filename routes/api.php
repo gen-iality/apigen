@@ -28,6 +28,7 @@ Route::get('test/auth', 'TestingController@auth');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
+Route::get('test/permissions', 'TestingController@permissions');
 // Route::get('test/roles/', 'ContributorController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
@@ -61,12 +62,21 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
-        //Route::get('organizations/{id}/users', 'OrganizationUserController@index');
-        //Route::post('user/organization_users/create/{id}', 'OrganizationUserController@verifyandcreate');
-       
+        // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
+        // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
     }
 );
 
+/****************
+ * Users Organization
+ ****************/
+Route::group(
+    ['middleware' => 'auth.firebase'], function () {
+    }
+);
+Route::apiResource('users/organization', 'OrganizationUserController',  ['except' => ['index','show']]);
+Route::get('users/organization/{organization_id}', 'OrganizationUserController@index');
+Route::get('users/organization/{organization_id}/show', 'OrganizationUserController@show');
 /****************
  * Users
  ****************/
@@ -180,7 +190,7 @@ Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallySt
 
 Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
-//User Events Endpoint
+//Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
 //Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 //Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');

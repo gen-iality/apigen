@@ -9,7 +9,7 @@ use App\EventUser;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\State;
-use App\User;
+use App\Account;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Validator;
@@ -18,9 +18,9 @@ use Validator;
  * @resource EventUser (Attendee)
  *
  * Handles the relation bewteeen user and event.  It handles user booking into an event
- * User relation to an event is one of the fundamental aspects of this platform
+ * Account relation to an event is one of the fundamental aspects of this platform
  * most of the user functionality is executed under "EventUser" model and not directly
- * under User, because is an events platform.
+ * under Account, because is an events platform.
  * @see App\Http\Requests\EventUserRequest for parameters validation
  *
  * @see App\Http\Requests\EventUserRequest for parameters validation

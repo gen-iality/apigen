@@ -25,3 +25,5 @@ installed
 _ide_helper.php
 *.swp
 _docs/build
+public/assets/*
+public/vendor/*

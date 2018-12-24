@@ -4,12 +4,23 @@ namespace App;
 
 use App\Attendize\Utils;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Hash;
 use DB;
 
-class Account extends MyBaseModel
+class Account extends Models\MyBaseModel
 {
     use SoftDeletes;
+    use Notifiable;
+    use HasRoles;
+    
+    protected static $unguarded = true;
+    protected static $auth;
+    protected $table = 'users';
 
+
+    
     /**
      * The validation rules
      *
@@ -28,12 +39,13 @@ class Account extends MyBaseModel
      */
     public $dates = ['deleted_at'];
 
+
     /**
-     * The validation error messages.
+     * The validation error error_messages.
      *
-     * @var array $messages
+     * @var array $error_messages
      */
-    protected $messages = [];
+    protected $error_messages = [];
 
     /**
      * The attributes that are mass assignable.
@@ -41,6 +53,8 @@ class Account extends MyBaseModel
      * @var array $fillable
      */
     protected $fillable = [
+        'displayName',
+        'uid',
         'first_name',
         'last_name',
         'email',
@@ -68,6 +82,74 @@ class Account extends MyBaseModel
         'stripe_data_raw'
     ];
 
+    public function __construct($attributes = array())
+    {
+        parent::__construct($attributes);
+
+    }
+
+    public static function boot()
+    {
+
+        parent::boot();
+
+        self::$auth = resolve('Kreait\Firebase\Auth');
+
+        //Creamos el usuario en firebase
+        self::creating(
+            function ($model) {
+                try{
+                    
+                    //Si ya existe un usuario con ese correo se jode
+                    $fbuser = self::$auth->createUser(
+                        [
+                            "email" => $model->email,
+                            //emailVerified: false,
+                            //phoneNumber: "+11234567890",
+                            "password" => isset($model->password) ? $model->password : "mocion.2040",
+                            "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                            //photoURL: "http://www.example.com/12345678/photo.png",
+                            //disabled: false
+                        ]
+                    );
+                    $model->uid = $fbuser->uid;
+                    //var_dump($fbuser);
+                }catch(\Exception $e){
+                    var_dump($e->getMessage());
+                }
+            }
+        );
+    }
+
+    /**
+     * The messages that belong to the user.
+     */
+    public function messages()
+    {
+        return $this->belongsToMany('App\Message', null, 'user_id', 'message_id');
+    }
+
+    public function events()
+    {
+        return $this->morphMany('App\Event', 'organizer');
+    }
+
+    public function ownedEvents()
+    {
+        return $this->hasMany('App\Event');
+    }
+
+    public function organizations()
+    {
+        return $this->belongsToMany('App\Organization');
+    }
+    //->as('subscription')
+    //->withTimestamps();
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
     /**
      * The users associated with the account.
      *
@@ -75,7 +157,7 @@ class Account extends MyBaseModel
      */
     public function users()
     {
-        return $this->hasMany(\App\User::class);
+        return $this->hasMany(\App\Models\User::class);
     }
 
     /**
@@ -85,7 +167,7 @@ class Account extends MyBaseModel
      */
     public function orders()
     {
-        return $this->hasMany(\App\Order::class);
+        return $this->hasMany(\App\Models\Order::class);
     }
 
     /**
@@ -95,7 +177,7 @@ class Account extends MyBaseModel
      */
     public function currency()
     {
-        return $this->belongsTo(\App\Currency::class);
+        return $this->belongsTo(\App\Models\Currency::class);
     }
 
     /**
@@ -105,7 +187,7 @@ class Account extends MyBaseModel
      */
     public function account_payment_gateways()
     {
-        return $this->hasMany(\App\AccountPaymentGateway::class);
+        return $this->hasMany(\App\Models\AccountPaymentGateway::class);
     }
 
     /**
@@ -124,7 +206,7 @@ class Account extends MyBaseModel
      */
     public function active_payment_gateway()
     {
-        return $this->hasOne(\App\AccountPaymentGateway::class, 'payment_gateway_id', 'payment_gateway_id')->where('account_id', $this->id);
+        return $this->hasOne(\App\Models\AccountPaymentGateway::class, 'payment_gateway_id', 'payment_gateway_id')->where('account_id', $this->id);
     }
 
     /**

@@ -15,7 +15,7 @@ class Message extends Moloquent
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', null, 'message_id', 'user_id');
+        return $this->belongsToMany('App\Account', null, 'message_id', 'user_id');
     }
 
     public function messageUsers()

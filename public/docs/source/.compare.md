@@ -1212,9 +1212,9 @@ $.ajax(settings).done(function (response) {
 #EventUser (Attendee)
 
 Handles the relation bewteeen user and event.  It handles user booking into an event
-User relation to an event is one of the fundamental aspects of this platform
+Account relation to an event is one of the fundamental aspects of this platform
 most of the user functionality is executed under &quot;EventUser&quot; model and not directly
-under User, because is an events platform.
+under Account, because is an events platform.
 <!-- START_47bd3796df2f03bd21abaddcdea6f50f -->
 ## api/test/{id}
 

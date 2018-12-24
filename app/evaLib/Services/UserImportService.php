@@ -6,7 +6,7 @@ namespace App\evaLib\Services;
 
 use App\Event;
 use App\EventUser;
-use App\User;
+use App\Account;
 
 
 
@@ -22,7 +22,7 @@ class UserImportService
      * Add Users to an event in draft status
      *
      * @param Event       $event    Where users are going to be added
-     * @param Array[User] $usersIds Users to be added
+     * @param Array[Account] $usersIds Users to be added
      * 
      * @return EventUser             eventUsers(attendees) added to the event
      */

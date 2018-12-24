@@ -6,7 +6,7 @@ namespace App\evaLib\Services;
 
 use App\Event;
 use App\EventUser;
-use App\User;
+use App\Account;
 
 /**
  * Undocumented class
@@ -44,7 +44,7 @@ class AuthService
         try {
 
             //acualizamos la información del usuario
-            $user = User::firstOrNew(['uid' => $userData->uid]);
+            $user = Account::firstOrNew(['uid' => $userData->uid]);
             $user->fill($request->json()->all());
             $user->uid = $userData->uid;
             $user->save();

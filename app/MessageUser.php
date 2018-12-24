@@ -32,13 +32,13 @@ class MessageUser extends Moloquent
     ];
 
     /**
-     * MessageUser belogs to User
+     * MessageUser belogs to Account
      *
      * @return BelogsTo relation
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Account');
     }
 
     /**

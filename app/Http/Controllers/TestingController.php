@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\User;
+use App\Account;
 use App\MessageUser;
 use \App\Message;
 use GuzzleHttp\Client;
@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Permission;
 use App\Event;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmed;
@@ -61,7 +62,7 @@ class TestingController extends Controller
 
     public function auth(\Kreait\Firebase\Auth $fireauth)
     {
-        /*$o = new User(
+        /*$o = new Account(
         [
         "name" => 'test' . time(),
         "email" => 'apps' . time() . "@mocionsoft.com",
@@ -70,7 +71,7 @@ class TestingController extends Controller
         $o->save();
         return $o;
          */
-        $u = User::find("5bc51599cb22e0643e006173");
+        $u = Account::find("5bc51599cb22e0643e006173");
         $u->save();
         $r = $u;
         return $r;
@@ -178,5 +179,11 @@ class TestingController extends Controller
         
         }
     }
+
+    public function permissions(){
+        return Permission::all();
+    }
+
+
 
 }
