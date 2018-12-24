@@ -10,7 +10,7 @@ use Moloquent;
  * Event Model
  *
  */
-class Event extends Moloquent
+class Event extends Models\Event
 {
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
