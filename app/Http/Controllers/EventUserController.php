@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UserEventService;
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\State;
@@ -15,18 +15,18 @@ use Illuminate\Http\Response;
 use Validator;
 
 /**
- * @resource EventUser (Attendee)
+ * @resource Attendee (Attendee)
  *
  * Handles the relation bewteeen user and event.  It handles user booking into an event
  * Account relation to an event is one of the fundamental aspects of this platform
- * most of the user functionality is executed under "EventUser" model and not directly
+ * most of the user functionality is executed under "Attendee" model and not directly
  * under Account, because is an events platform.
  * @see App\Http\Requests\EventUserRequest for parameters validation
  *
  * @see App\Http\Requests\EventUserRequest for parameters validation
  *
  * <p style="border: 1px solid #DDD">
- * EventUser has one user though user_id
+ * Attendee has one user though user_id
  * <br> and one event though event_id
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
@@ -53,7 +53,7 @@ class EventUserController extends Controller
      */
     public function indexByEvent(Request $request, String $event_id, FilterQuery $filterQuery)
     {
-        $query = EventUser::where("event_id", $event_id);
+        $query = Attendee::where("event_id", $event_id);
 
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
 
@@ -65,7 +65,7 @@ class EventUserController extends Controller
        
         $user = $request->get('user');
 
-        $query   = EventUser::with("event")->where("userid", $user->id);
+        $query   = Attendee::with("event")->where("account_id", $user->id);
         $results = $query->paginate(config('app.page_size'));
         return EventUserResource::collection($results);
     }    
@@ -164,31 +164,31 @@ class EventUserController extends Controller
     public function index(Request $request)
     {
         return EventUserResource::collection(
-            EventUser::paginate(config('app.page_size'))
+            Attendee::paginate(config('app.page_size'))
         );
     }
 
     /**
-     * __Store:__ Store a newly EventUser  in storage.
+     * __Store:__ Store a newly Attendee  in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $eventUser = EventUser::create($request->json()->all());
+        $eventUser = Attendee::create($request->json()->all());
         return new EventUserResource($eventUser);
     }
 
     /**
-     * __Show:__ Display an EventUser by id
+     * __Show:__ Display an Attendee by id
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $eventUser = EventUser::findOrFail($id);
+        $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
     }
 
@@ -196,13 +196,13 @@ class EventUserController extends Controller
      * __Update:__ Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $evenUserId)
     {
         $data = $request->json()->all();
-        $eventUser = EventUser::findOrFail($evenUserId);
+        $eventUser = Attendee::findOrFail($evenUserId);
         $eventUser->fill($data);
         $eventUser->save();
         return $eventUser;
@@ -210,7 +210,7 @@ class EventUserController extends Controller
     public function updateWithStatus(Request $request, $evenUserId)
     {
         $data = $request->json()->all();
-        $eventUser = EventUser::findOrFail($evenUserId);
+        $eventUser = Attendee::findOrFail($evenUserId);
         $eventUser->fill($data);
         $eventUser->save();
 
@@ -221,24 +221,24 @@ class EventUserController extends Controller
     }
 
     /**
-     * __CheckIn:__ Checks In an existent EventUser to the related event
+     * __CheckIn:__ Checks In an existent Attendee to the related event
      *
-     * @param  string $id EventUser to checkin into the event
+     * @param  string $id Attendee to checkin into the event
      * @return void
      */
     public function checkIn($id)
     {
-        $eventUser = EventUser::findOrFail($id);      
+        $eventUser = Attendee::findOrFail($id);      
         return $eventUser->checkIn();
     }
 
     /**
      * __delete:__ Remove the specified resource from storage.
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EventUser $eventUser)
+    public function destroy(Attendee $eventUser)
     {
         return $eventUser->delete();
     }

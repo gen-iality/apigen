@@ -50,7 +50,7 @@ class OrganizationUserController extends Controller
         $user = Account::updateOrCreate($data);
         
         $UserOrganization = [
-            "userid" => $user->id,
+            "account_id" => $user->id,
             "organization_id" => $data['organization_id'],
         ];
         $result = OrganizationUser::updateOrCreate($UserOrganization);
@@ -61,16 +61,16 @@ class OrganizationUserController extends Controller
     /**
      * Display the specified resource.
      *  Muestra los datos de un aorganización respecto a un usuario
-     * http://localhost/eviusapilaravel/public/api/users/organization/5bbfce07c065863da36b821e?userid=5bbfc2f2c065863da36b8207
+     * http://localhost/eviusapilaravel/public/api/users/organization/5bbfce07c065863da36b821e?account_id=5bbfc2f2c065863da36b8207
      * 
-     * /users/organization/{id_event}/show?userid=user_id
+     * /users/organization/{id_event}/show?account_id=user_id
      * @param  \App\OrganizationUser  $organizationUser
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $organization_id)
     {
         $OrganizationUser = OrganizationUserResource::collection(
-            OrganizationUser::where('organization_id', $organization_id)->where('userid', $request->userid)
+            OrganizationUser::where('organization_id', $organization_id)->where('account_id', $request->account_id)
             ->paginate(config('app.page_size'))
         );
         return $OrganizationUser;
@@ -102,13 +102,13 @@ class OrganizationUserController extends Controller
     public function destroy(Request $request, $organization_id)
     {
         $data = $request->json()->all();
-        $userOrganization = OrganizationUser::where('userid', $data['userid'])->where('organization_id',$organization_id);
+        $userOrganization = OrganizationUser::where('account_id', $data['account_id'])->where('organization_id',$organization_id);
         return (string)$userOrganization->delete();
     }
 
     public function userOrganizations($user_id){
         $OrganizationsUser = OrganizationUserResource::collection(
-            OrganizationUser::where('userid', $user_id)
+            OrganizationUser::where('account_id', $user_id)
             ->paginate(config('app.page_size'))
         );
         return $OrganizationsUser;

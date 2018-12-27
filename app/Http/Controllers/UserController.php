@@ -10,7 +10,7 @@ use Firebase\Auth\Token\Verifier;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\State;

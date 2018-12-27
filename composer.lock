@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e4accda2b0f7e1c1eae32965e470ec7",
+    "content-hash": "a6c845ae3dd4e93f61a30289ff74843d",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2740,6 +2740,55 @@
             "time": "2018-10-30T06:33:55+00:00"
         },
         {
+            "name": "milon/barcode",
+            "version": "5.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/milon/barcode.git",
+                "reference": "ca2f3efbf46142ff7f7afe3b0f3660ea4a067576"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/milon/barcode/zipball/ca2f3efbf46142ff7f7afe3b0f3660ea4a067576",
+                "reference": "ca2f3efbf46142ff7f7afe3b0f3660ea4a067576",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Milon\\Barcode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nuruzzaman Milon",
+                    "email": "contact@milon.im"
+                }
+            ],
+            "description": "Barcode generator like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) ",
+            "keywords": [
+                "CODABAR",
+                "CODE 128",
+                "CODE 39",
+                "barcode",
+                "datamatrix",
+                "ean",
+                "laravel",
+                "pdf417",
+                "qr code",
+                "qrcode"
+            ],
+            "time": "2017-07-28T00:33:38+00:00"
+        },
+        {
             "name": "mnapoli/front-yaml",
             "version": "1.6.0",
             "source": {
@@ -3411,52 +3460,32 @@
             "time": "2018-12-26T11:32:39+00:00"
         },
         {
-            "name": "nwidart/laravel-modules",
-            "version": "4.0.0",
+            "name": "nitmedia/wkhtml2pdf",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nWidart/laravel-modules.git",
-                "reference": "d487d9be3bfd6b7365678fd805d9ba5f0dd8295c"
+                "url": "https://github.com/NitMedia/wkhtml2pdf.git",
+                "reference": "586df81dcbeb75b092dc35f9e8b3ef940d66e05a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/d487d9be3bfd6b7365678fd805d9ba5f0dd8295c",
-                "reference": "d487d9be3bfd6b7365678fd805d9ba5f0dd8295c",
+                "url": "https://api.github.com/repos/NitMedia/wkhtml2pdf/zipball/586df81dcbeb75b092dc35f9e8b3ef940d66e05a",
+                "reference": "586df81dcbeb75b092dc35f9e8b3ef940d66e05a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.7",
-                "laravel/framework": "5.7.*",
-                "mockery/mockery": "~1.0",
-                "orchestra/testbench": "^3.7",
-                "phpstan/phpstan": "^0.9.2",
-                "phpunit/phpunit": "~7.3",
-                "spatie/phpunit-snapshot-assertions": "^1.0"
+                "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
-                "laravel": {
-                    "providers": [
-                        "Nwidart\\Modules\\LaravelModulesServiceProvider"
-                    ],
-                    "aliases": {
-                        "Module": "Nwidart\\Modules\\Facades\\Module"
-                    }
-                },
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Nwidart\\Modules\\": "src"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
+                "psr-0": {
+                    "Nitmedia\\Wkhtml2pdf": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3464,21 +3493,19 @@
             ],
             "authors": [
                 {
-                    "name": "Nicolas Widart",
-                    "email": "n.widart@gmail.com",
-                    "homepage": "https://nicolaswidart.com",
-                    "role": "Developer"
+                    "name": "Nithin Meppurathu",
+                    "email": "admin@nitmedia.com"
                 }
             ],
-            "description": "Laravel Module management",
+            "description": "Html 2 Pdf - using wkhtml2pdf, work on 32bit and 64 bit linux + MacOS",
             "keywords": [
+                "illuminate",
                 "laravel",
-                "module",
-                "modules",
-                "nwidart",
-                "rad"
+                "pdf",
+                "wkhtml2pdf",
+                "wkhtmltopdf"
             ],
-            "time": "2018-09-30T10:02:46+00:00"
+            "time": "2017-03-06T14:34:44+00:00"
         },
         {
             "name": "omnipay/common",
@@ -8299,7 +8326,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "nitmedia/wkhtml2pdf": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

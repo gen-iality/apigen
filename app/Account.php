@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Hash;
 use DB;
+use App\Models\User;
 
-class Account extends Models\MyBaseModel
+class Account extends User
 {
     use SoftDeletes;
     use Notifiable;

@@ -66,7 +66,7 @@ class Event extends Models\Event
 
     public function eventUsers()
     {
-        return $this->hasMany('App\EventUser');
+        return $this->hasMany('App\Attendee');
     }
 
     public function categories()
@@ -114,7 +114,7 @@ class Event extends Models\Event
      */
     public function tickets()
     {
-        return $this->hasMany('\App\Ticket', 'event_id');
+        return $this->hasMany('\App\Models\Ticket', 'event_id');
     }
 
     /**

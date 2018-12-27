@@ -145,7 +145,8 @@ class MyBaseModel extends Moloquent
          * browse all events etc. in the system.
          * //return  $query;
          */
-
+        return  $query;
+        
         if (!$accountId) {
             $accountId = Auth::user()->account_id;
         }

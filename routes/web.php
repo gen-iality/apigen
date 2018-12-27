@@ -29,7 +29,7 @@ Route::get('/rsvptemplate', function () {
     $event->location ="location";
     $event->description ="description";
 
-    $eventUser = new App\EventUser();
+    $eventUser = new App\Attendee();
     $eventUser->name ="odiseo";
     $eventUser->email ="odiseo@iliada.com";
 

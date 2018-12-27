@@ -7,12 +7,12 @@ use Moloquent;
 
 class OrganizationUser extends Moloquent
 {
-    protected $fillable = [ 'userid', 'organization_id'];
+    protected $fillable = [ 'account_id', 'organization_id'];
     protected $with = ['user', 'organization'];
     
     public function user()
     {
-        return $this->belongsTo('App\Account', 'userid');
+        return $this->belongsTo('App\Account', 'account_id');
     }
     public function organization()
     {

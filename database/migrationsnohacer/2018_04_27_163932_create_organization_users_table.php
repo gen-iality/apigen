@@ -15,7 +15,7 @@ class CreateOrganizationUsersTable extends Migration
     {
         Schema::create('organization_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('userid');
+            $table->string('account_id');
             $table->string('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->timestamps();

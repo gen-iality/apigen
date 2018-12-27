@@ -42,7 +42,7 @@ class Order extends Moloquent
      */
     public function orderItems()
     {
-        return $this->hasMany('App\OrderItem');
+        return $this->hasMany('App\Models\OrderItem');
     }
 
     /**
@@ -52,7 +52,7 @@ class Order extends Moloquent
      */
     public function attendees()
     {
-        return $this->hasMany('App\EventUser');
+        return $this->hasMany('App\Models\Attendee');
     }
 
     /**
@@ -82,7 +82,7 @@ class Order extends Moloquent
      */
     public function tickets()
     {
-        return $this->hasMany('App\Ticket');
+        return $this->hasMany('App\Models\Ticket');
     }
 
 
@@ -98,7 +98,7 @@ class Order extends Moloquent
      */
     public function orderStatus()
     {
-        return $this->belongsTo('App\OrderStatus');
+        return $this->belongsTo('App\Models\OrderStatus');
     }
 
 

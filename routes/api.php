@@ -33,7 +33,7 @@ Route::get('test/permissions', 'TestingController@permissions');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
 Route::get('sync/firestore', 'synchronizationController@EventUsers');
-Route::get('sync/firestore/{id}', 'synchronizationController@EventUser');
+Route::get('sync/firestore/{id}', 'synchronizationController@Attendee');
 Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 
 /****************

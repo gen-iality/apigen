@@ -1,5 +1,7 @@
 <?php
 
+
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -9,7 +11,10 @@ Route::group(
      * Include our API routes file
      */
     include_once('api_routes.php');
-
+    Route::get('select_organiser', [
+        'as'   => 'showSelectOrganiser',
+        'uses' => 'OrganiserController@showSelectOrganiser',
+    ]);
     /*
      * -------------------------
      * Installer
@@ -41,18 +46,23 @@ Route::group(
         'as'   => 'logout',
     ]);
 
-
+/*
     Route::get('/terms_and_conditions', [
         'as' => 'termsAndConditions',
         function () {
             return 'TODO: add terms and cond';
         }
-    ]);
+    ]);*/
 
 
 
     Route::group(['middleware' => ['installed']], function () {
-
+        Route::get('/testo', [
+            'as' => 'testo',
+            function () {
+                return 'TODO: add terms and cond';
+            }
+        ]);
         /*
          * Login
          */
@@ -178,6 +188,7 @@ Route::group(
     /*
      * Public view order routes
      */
+
     Route::get('order/{order_reference}', [
         'as'   => 'showOrderDetails',
         'uses' => 'EventCheckoutController@showOrderDetails',
@@ -191,7 +202,7 @@ Route::group(
     /*
      * Backend routes
      */
-    Route::group(['middleware' => ['auth', 'first.run']], function () {
+    Route::group(['middleware' => ['auth']], function () {
 
         /*
          * Edit Authentication
@@ -235,12 +246,9 @@ Route::group(
 
         });
 
-        Route::get('select_organiser', [
-            'as'   => 'showSelectOrganiser',
-            'uses' => 'OrganiserController@showSelectOrganiser',
-        ]);
 
-        /*
+
+        /* <- select_organiser
          * Organiser routes
          */
         Route::group(['prefix' => 'organiser'], function () {
@@ -310,7 +318,7 @@ Route::group(
         /*
          * Event management routes
          */
-        // Route::group(['prefix' => 'event'], function () {
+        Route::group(['prefix' => 'event'], function () {
 
             /*
              * Dashboard
@@ -692,7 +700,7 @@ Route::group(
                 'as'   => 'showEventPromote',
                 'uses' => 'EventPromoteController@showPromote',
             ]);
-        // });
+        });
     });
 
     Route::get('/', function () {

@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Account;
 
 class RSVP extends Mailable implements ShouldQueue

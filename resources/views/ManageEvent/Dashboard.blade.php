@@ -156,11 +156,12 @@
             <div class="panel panel-success ticket">
                 <div class="panel-body">
                     <i class="ico ico-clock"></i>
-                    @if($event->happening_now)
+                   {{-- @MOCIFIX @if($event->happening_now)
                         @lang("Dashboard.this_event_is_on_now")
                     @else
                         <span id="countdown"></span>
                     @endif
+                   --}}
                 </div>
             </div>
             <div class="panel panel-success">
@@ -399,7 +400,8 @@
             return curr_date + sup + ' ' + m_names[x.getMonth() + 1];
         }
 
-        var target_date = new Date("{{$event->start_date->format('M d, Y H:i')}} ").getTime();
+        var target_date = now().getTime(); 
+        //@MOCIFIX var target_date = new Date("{{-- $event->start_date->format('M d, Y H:i') --}} ").getTime();
         var now = new Date();
         var countdown = document.getElementById("countdown");
         if (target_date > now) {
@@ -419,6 +421,7 @@
                 minutes = parseInt(seconds_left / 60);
                 // format countdown string + set tag value
                 countdown.innerHTML = (days > 0 ? '<b>' + days + "</b> @lang("basic.days")<b> " : '') + (hours > 0 ? hours + " </b>@lang("basic.hours")<b> " : '') + (minutes > 0 ? minutes + "</b> @lang("basic.minutes")" : '');
+         
             }
         }
 

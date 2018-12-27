@@ -6,7 +6,7 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
@@ -268,7 +268,7 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         // $event_id = $event->id;
-        // EventUser::where('event_id', $event_id)->first();
+        // Attendee::where('event_id', $event_id)->first();
         $res = $event->delete();
         if ($res == true) {
             return 'True';

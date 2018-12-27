@@ -16,5 +16,5 @@ class AttendeTicket extends Moloquent
     {
         return $this->belongsTo('App\Rol');
     }
-    protected $fillable = [ 'userid', 'event_id', 'rol_id', 'status'];
+    protected $fillable = [ 'account_id', 'event_id', 'rol_id', 'status'];
 }
