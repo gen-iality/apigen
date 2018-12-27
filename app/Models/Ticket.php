@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +10,7 @@ class Ticket extends MyBaseModel
 {
     use SoftDeletes;
 
-    protected $dates = ['start_sale_date', 'end_sale_date'];
+    // protected $dates = ['start_sale_date', 'end_sale_date'];
 
     /**
      * The rules to validate the model.
@@ -229,7 +229,7 @@ class Ticket extends MyBaseModel
      *
      * @return int
      */
-    public function getSaleStatusAttribute()
+/*     public function getSaleStatusAttribute()
     {
         if ($this->start_sale_date !== null && $this->start_sale_date->isFuture()) {
             return config('attendize.ticket_status_before_sale_date');
@@ -248,5 +248,5 @@ class Ticket extends MyBaseModel
         }
 
         return config('attendize.ticket_status_on_sale');
-    }
+    } */
 }

@@ -27,22 +27,18 @@
         <div class="col-md-12">
             <h1 property="name">{{$event->name}}</h1>
             <div class="event_venue">
-                <span property="startDate" content="{{ $event->datetime_from->toIso8601String() }}">
-                    {{-- $event->startDateFormatted() --}}
+                <span property="startDate" content="{{ $event->datetime_from }}">
+                    {{ $event->startDateFormatted() }}
                 </span>f
                 -
-                <span property="endDate" content="{{ $event->datetime_to->toIso8601String() }}">
-                    @if($event->datetime_from->diffInDays($event->datetime_to) == 0)
-                        {{ $event->datetime_to->format('H:i') }}
-                     @else
+             <span property="endDate" content="{{ $event->datetime_to }}">
                         {{ $event->endDateFormatted() }}
-                     @endif
                 </span>
                 @lang("Public_ViewEvent.at")
                 <span property="location" typeof="Place">
                     <b property="name">{{$event->venue_name}}</b>
                     <meta property="address" content="{{ urldecode($event->venue_name) }}">
-                </span>
+                </span> 
             </div>
 
             <div class="event_buttons">

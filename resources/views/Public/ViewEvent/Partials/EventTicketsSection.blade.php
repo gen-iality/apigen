@@ -1,11 +1,11 @@
-<section id="tickets" class="container">
+{<section id="tickets" class="container">
     <div class="row">
         <h1 class='section_head'>
             @lang("Public_ViewEvent.tickets")
         </h1>
     </div>
- 
-   @if(false)
+
+    @if(false)
         <div class="alert alert-boring">
             @lang("Public_ViewEvent.event_already", ['started' => trans('Public_ViewEvent.event_already_ended')])
         </div>
@@ -41,10 +41,10 @@
                                                     <?php
                                                     $is_free_event = false;
                                                     ?>
-                                                  {{--  <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span> --}}
-                                                    <span class="tax-amount text-muted text-smaller">{{ ($event->organizer->tax_name && $event->organizer->tax_value) ? '(+'.money(($ticket->total_price*($event->organizer->tax_value)/100), $event->currency).' '.$event->organizer->tax_name.')' : '' }}</span>
+                                                    <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
+                                                  {{--  <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span> --}}
                                                     <meta property="priceCurrency"
-                                                          content="{{-- $event->currency->code --}}">
+                                                          content="{{ $event->currency->code }}">
                                                     <meta property="price"
                                                           content="{{ number_format($ticket->price, 2, '.', '') }}">
                                                 @endif
@@ -133,3 +133,4 @@
     @endif
 
 </section>
+}

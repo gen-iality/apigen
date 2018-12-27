@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Mail;
 use Validator;
 use App\Ticket;
+use DB;
 
 class EventViewController extends Controller
 {
@@ -26,8 +27,8 @@ class EventViewController extends Controller
      */
     public function showEventHome(Request $request, $event_id, $slug = '', $preview = false)
     {
+ 
         $event = Event::findOrFail($event_id);
-
         if (!Utils::userOwns($event) && !$event->is_live) {
 
             return view('Public.ViewEvent.EventNotLivePage');
@@ -38,6 +39,7 @@ class EventViewController extends Controller
             'tickets'     => $event->tickets()->where('is_hidden', 0)->orderBy('sort_order', 'asc')->get(),
             'is_embedded' => 0,
         ];
+
         /*
          * Don't record stats if we're previewing the event page from the backend or if we own the event.
          */
@@ -66,6 +68,7 @@ class EventViewController extends Controller
                 Cookie::queue('affiliate_' . $event_id, $affiliate_ref, 60 * 24 * 60);
             }
         }
+
         return view('Public.ViewEvent.EventPage', $data);
     }
 

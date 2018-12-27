@@ -16,7 +16,7 @@ class Event extends Models\Event
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author', 'categories', 'eventType', 'organizer'];
+    protected $with = ['author', 'categories', 'eventType', 'organizer','currency'];
 
     /**
      * Event is owned by an organization
@@ -41,6 +41,15 @@ class Event extends Models\Event
     ];
 
     public function author()
+    {
+        return $this->belongsTo('App\Account', 'author_id');
+    }
+
+    /**
+     * Override parent method
+     * 
+     */
+    public function account()
     {
         return $this->belongsTo('App\Account', 'author_id');
     }
@@ -105,7 +114,7 @@ class Event extends Models\Event
      */
     public function tickets()
     {
-        return $this->hasMany('App\Ticket', 'event_id');
+        return $this->hasMany('\App\Ticket', 'event_id');
     }
 
     /**
@@ -116,16 +125,6 @@ class Event extends Models\Event
     public function orders()
     {
         return $this->hasMany('App\Order');
-    }
-
-    /**
-     * The account associated with the event.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function account()
-    {
-        return $this->belongsTo('App\Account');
     }
 
 }

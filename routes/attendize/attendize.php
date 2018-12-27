@@ -120,7 +120,7 @@ Route::group(
     /*
      * Public event page routes
      */
-    Route::group(['prefix' => 'e'], function () {
+    // Route::group(['prefix' => 'e'], function () {
 
         /*
          * Embedded events
@@ -173,7 +173,7 @@ Route::group(
             'as'   => 'postCreateOrder',
             'uses' => 'EventCheckoutController@postCreateOrder',
         ]);
-    });
+    // });
 
     /*
      * Public view order routes
@@ -310,7 +310,7 @@ Route::group(
         /*
          * Event management routes
          */
-        Route::group(['prefix' => 'event'], function () {
+        // Route::group(['prefix' => 'event'], function () {
 
             /*
              * Dashboard
@@ -333,7 +333,7 @@ Route::group(
             Route::get('{event_id}/go_live', [
                 'as' => 'MakeEventLive',
                 function ($event_id) {
-                    $event = \App\Models\Event::scope()->findOrFail($event_id);
+                    $event = \App\Event::scope()->findOrFail($event_id);
                     $event->is_live = 1;
                     $event->save();
                     \Session::flash('message',
@@ -692,7 +692,7 @@ Route::group(
                 'as'   => 'showEventPromote',
                 'uses' => 'EventPromoteController@showPromote',
             ]);
-        });
+        // });
     });
 
     Route::get('/', function () {

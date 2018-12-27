@@ -11,10 +11,10 @@ class CurrencySeeder extends Seeder
      */
     public function run()
     {
-
+/* 
         Schema::disableForeignKeyConstraints();
         DB::table('currencies')->delete();
-        Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints(); */
 
 
         $currencies = [

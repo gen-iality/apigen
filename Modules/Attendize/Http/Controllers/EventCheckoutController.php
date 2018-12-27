@@ -124,6 +124,7 @@ class EventCheckoutController extends Controller
                     'messages' => $validator->messages()->toArray(),
                 ]);
             } */
+            
 
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
@@ -179,13 +180,13 @@ class EventCheckoutController extends Controller
             }
 
         }
-
         if (empty($tickets)) {
             return response()->json([
                 'status'  => 'error',
                 'message' => 'No tickets selected.',
             ]);
         }
+
         if (config('attendize.enable_dummy_payment_gateway') == TRUE) {
             $activeAccountPaymentGateway = new AccountPaymentGateway();
             $activeAccountPaymentGateway->fill(['payment_gateway_id' => config('attendize.payment_gateway_dummy')]);
@@ -217,7 +218,6 @@ class EventCheckoutController extends Controller
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway'         => $paymentGateway
         ]);
-            return 'ok';
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
@@ -231,7 +231,6 @@ class EventCheckoutController extends Controller
                     ]) . '#order_form',
             ]);
         }
-
         /*
          * Maybe display something prettier than this?
          */
@@ -249,15 +248,19 @@ class EventCheckoutController extends Controller
     {
         $order_session = session()->get('ticket_order_' . $event_id);
 
+
         if (!$order_session || $order_session['expires'] < Carbon::now()) {
+            
             $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
             return redirect()->route($route_name, ['event_id' => $event_id]);
+            return $order_session;
         }
+
 
         $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
 
         $event = Event::findorFail($order_session['event_id']);
-
+        
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
 
@@ -439,7 +442,6 @@ class EventCheckoutController extends Controller
             Log::error($e);
             $error = 'Sorry, there was an error processing your payment. Please try again.';
         }
-
         if ($error) {
             return response()->json([
                 'status'  => 'error',

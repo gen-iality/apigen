@@ -22,7 +22,6 @@ class EventDashboardController extends MyBaseController
         $event = Event::scope()->findOrFail($event_id);
 
         $num_days = 20;
-
         /*
          * This is a fairly hackish way to get the data for the dashboard charts. I'm sure someone
          * with better SQL skill could do it in one simple query.
@@ -86,7 +85,6 @@ class EventDashboardController extends MyBaseController
             'chartData'  => json_encode($result),
             'ticketData' => json_encode($tickets_data),
         ];
-
         return view('ManageEvent.Dashboard', $data);
     }
 }

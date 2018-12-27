@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-// use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class AccountPaymentGateway extends MyBaseModel
@@ -26,7 +26,7 @@ class AccountPaymentGateway extends MyBaseModel
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function account() {
-        return $this->belongsTo(\App\Account::class);
+        return $this->belongsTo(\App\Models\Account::class);
     }
 
     /**
@@ -36,7 +36,7 @@ class AccountPaymentGateway extends MyBaseModel
      */
     public function payment_gateway()
     {
-        return $this->belongsTo(\App\PaymentGateway::class, 'payment_gateway_id', 'id');
+        return $this->belongsTo(\App\Models\PaymentGateway::class, 'payment_gateway_id', 'id');
     }
 
     /**

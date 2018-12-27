@@ -10,6 +10,6 @@ use Illuminate\Support\Facades\DB; */
 //Importante usar moloquent!!!!!!
 // use Moloquent;
 
-class Ticket extends MyBaseModel
+class Ticket extends Models\Ticket
 {
 }
