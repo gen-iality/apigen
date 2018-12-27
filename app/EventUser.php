@@ -16,8 +16,8 @@ class EventUser extends Moloquent
     const ROL_ATTENDEE = "5afaf644500a7104f77189cd";
     protected $observables = ['saved', 'created','updated'];
     protected static $unguarded = true;
-    protected $fillable = ['userid', 'event_id', 'rol_id',  'state_id', "checked_in", "checked_in_date"];
-    protected $with = ['user', 'rol', 'state'];
+    protected $fillable = ['userid', 'event_id', 'state_id', "checked_in", "checked_in_date", "properties"];
+    protected $with = ['user', 'state'];
 
     //Default values
     protected $attributes = [
@@ -29,10 +29,6 @@ class EventUser extends Moloquent
     public function event()
     {
         return $this->belongsTo('App\Event');
-    }
-    public function rol()
-    {
-        return $this->belongsTo('App\Rol');
     }
     public function state()
     {

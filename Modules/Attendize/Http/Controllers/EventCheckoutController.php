@@ -3,20 +3,20 @@
 namespace Modules\Attendize\Http\Controllers;
 
 use App\Events\OrderCompletedEvent;
-use App\Account;
-use App\AccountPaymentGateway;
-use App\Affiliate;
-use App\Attendee;
-use App\Event;
-use App\EventStats;
-use App\Order;
-use App\OrderItem;
-use App\PaymentGateway;
-use App\QuestionAnswer;
-use App\ReservedTickets;
-use App\Ticket;
+use App\Models\AccountPaymentGateway;
+use App\Models\Affiliate;
+use App\Models\Attendee;
+use App\Models\EventStats;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\PaymentGateway;
+use App\Models\QuestionAnswer;
+use App\Models\ReservedTickets;
+use App\Models\Ticket;
 use App\Services\Order as OrderService;
 use Carbon\Carbon;
+use App\Account;
+use App\Event;
 use Cookie;
 use DB;
 use Illuminate\Http\Request;
@@ -301,19 +301,20 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($event_id);
         $order = new Order();
         $ticket_order = session()->get('ticket_order_' . $event_id);
-
+        return $ticket_order;
         $validation_rules = $ticket_order['validation_rules'];
         $validation_messages = $ticket_order['validation_messages'];
 
         $order->rules = $order->rules + $validation_rules;
         $order->messages = $order->messages + $validation_messages;
 
-        if (!$order->validate($request->all())) {
+
+      /*   if (!$order->validate($request->all())) {
             return response()->json([
                 'status'   => 'error',
                 'messages' => $order->errors(),
             ]);
-        }
+        } */
 
         //Add the request data to a session in case payment is required off-site
         session()->push('ticket_order_' . $event_id . '.request_data', $request->except(['card-number', 'card-cvc']));
@@ -341,6 +342,7 @@ class EventCheckoutController extends Controller
                 $gateway->initialize();
 
             } else {
+                return $ticket_order;
                 $gateway = Omnipay::create($ticket_order['payment_gateway']->name);
                 $gateway->initialize($ticket_order['account_payment_gateway']->config + [
                         'testMode' => config('attendize.enable_test_payments'),
@@ -462,7 +464,6 @@ class EventCheckoutController extends Controller
      */
     public function showEventCheckoutPaymentReturn(Request $request, $event_id)
     {
-
         if ($request->get('is_payment_cancelled') == '1') {
             session()->flash('message', 'You cancelled your payment. You may try again.');
             return response()->redirectToRoute('showEventCheckout', [

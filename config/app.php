@@ -242,8 +242,9 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
-        'Str'          => Illuminate\Support\Str::class,
+        'Str'  => Illuminate\Support\Str::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'Omnipay' => Omnipay\Omnipay::class,
     ],
 
 ];
