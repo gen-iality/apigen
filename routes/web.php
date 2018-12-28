@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', 'EventController@test');
+Route::get('test', 'EventController@index');
 
 Route::get('/rsvptemplate', function () {
 

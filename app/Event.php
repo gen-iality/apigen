@@ -5,7 +5,6 @@ namespace App;
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //Importante usar moloquent!!!!!!
 use Moloquent;
-
 /**
  * Event Model
  *
@@ -16,7 +15,7 @@ class Event extends Models\Event
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author', 'categories', 'eventType', 'organizer','currency'];
+    protected $with = ['author', 'categories', 'eventType', 'organiser','currency'];
 
     /**
      * Event is owned by an organization
@@ -34,7 +33,7 @@ class Event extends Models\Event
         'visibility', 'picture', 'organization_id', 'category','extra_config', 'user_properties'
     ];
 
-    protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+    // protected $dates = parent::$dates+['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
 
     protected $casts = [
         'category' => 'array',
@@ -59,10 +58,11 @@ class Event extends Models\Event
  *
  * @return void
  */
-    public function organizer()
+  /*   public function organiser()
     {
-        return $this->morphTo();
-    }
+        // return $this->morphTo();
+        return $this->hasMany('App\Organization');
+    } */
 
     public function eventUsers()
     {

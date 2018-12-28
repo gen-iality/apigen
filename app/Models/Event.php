@@ -157,7 +157,7 @@ class Event extends MyBaseModel
      */
     public function organiser()
     {
-        return $this->belongsTo(\App\Models\Organiser::class);
+        return $this->belongsTo(\App\Organization::class,'organizer_id');
     }
 
     /**
@@ -367,10 +367,10 @@ class Event extends MyBaseModel
      *
      * @return array $dates
      */
-    public function getDates()
+   /*  public function getDates()
     {
         return ['created_at', 'updated_at', 'start_date', 'end_date'];
-    }
+    } */
 
     public function getIcsForEvent()
     {

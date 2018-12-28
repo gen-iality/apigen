@@ -75,7 +75,7 @@
         <div class="col-sm-4">
             <div class="stat-box">
                 <h3>
-                    {{ money($organiser->events->sum('sales_volume') + $organiser->events->sum('organiser_fees_volume'), $organiser->account->currency) }}
+                    {{--MOCIFIX money($organiser->events->sum('sales_volume') + $organiser->events->sum('organiser_fees_volume'), $organiser->account->currency) --}}
                 </h3>
             <span>
                 @lang("Organiser.sales_volume")
@@ -126,7 +126,7 @@
                             </p>
                             <h6>
                                 {{ $order->created_at->diffForHumans() }} &bull; <span
-                                        style="color: green;">{{ $order->event->currency_symbol }}{{ $order->amount }}</span>
+                                        style="color: green;">{{--MOCIFIX $order->event->currency_symbol --}}{{ $order->amount }}</span>
                             </h6>
                         </li>
                     @endforeach

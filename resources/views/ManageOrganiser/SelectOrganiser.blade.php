@@ -23,15 +23,14 @@
                         {!!HTML::image('assets/images/logo-dark.png')!!}
                     </div>
 
-                  {{--MOCIFIX  <h5>@lang("Organiser.continue_to"):</h5> --}}
+                    <h5>@lang("Organiser.continue_to"):</h5>
                     <div class="list-group">
-                    {{--  {{$organisers}}
-                        @foreach($organisers as $organiser)
+                     @foreach($organisers as $organiser)
                             <a href="{{route('showOrganiserDashboard', ['organiser_id'=>$organiser->id] )}}"
                                class="list-group-item">
                                 {{$organiser->name}}
                             </a>
-                        @endforeach --}}
+                        @endforeach
                     </div>
 
                     <div style="margin-top:-15px; padding: 10px; text-align: center;">

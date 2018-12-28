@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organiser;
+use App\Organization;
 use Illuminate\Http\Request;
 use Image;
+use Auth;
 
 class OrganiserController extends MyBaseController
 {
@@ -15,7 +16,9 @@ class OrganiserController extends MyBaseController
      */
     public function showSelectOrganiser()
     {
-        return view('ManageOrganiser.SelectOrganiser');
+        $userId = Auth::id();
+        $organisers = Organization::where('author',$userId)->get();
+        return view('ManageOrganiser.SelectOrganiser',compact('organisers'));
     }
 
     /**
@@ -38,7 +41,7 @@ class OrganiserController extends MyBaseController
      */
     public function postCreateOrganiser(Request $request)
     {
-        $organiser = Organiser::createNew(false, false, true);
+        $organiser = Organization::createNew(false, false, true);
 
         $chargeTax = $request->get('charge_tax');
         if ($chargeTax == 1) {

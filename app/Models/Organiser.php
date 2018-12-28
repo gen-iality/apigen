@@ -68,7 +68,7 @@ class Organiser extends MyBaseModel implements AuthenticatableContract
      */
     public function events()
     {
-        return $this->hasMany(\App\Models\Event::class);
+        return $this->hasMany('App\Event');
     }
 
     /**

@@ -31,6 +31,8 @@ class TokenToUserProvider implements UserProvider
 
     public function retrieveByToken($identifier, $token)
     {
+        
+        die('retrieveByToken');
         //$token = $this->token->with('user')->where($identifier, $token)->first();
         //return $token && $token->user ? $token->user : null;
 
@@ -63,19 +65,22 @@ class TokenToUserProvider implements UserProvider
     public function retrieveByCredentials(array $credentials)
     {
 
+
         //array(2) { ["email"]=> string(19) "apps@mocionsoft.com" ["password"]=> string(11) "mocion.2040" }
 
         // implementation upto user.
         // how he wants to implement -
         // let's try to assume that the credentials ['username', 'password'] given
         $user = $this->user;
-
+        $query = get_class($user)::query();
         foreach ($credentials as $credentialKey => $credentialValue) {
             if (strpos($credentialKey, 'password') === false) {
-                $user->where($credentialKey, $credentialValue);
+                $query = $query->where($credentialKey, $credentialValue);
+                
             }
         }
-        return $user->first();
+
+        return $query->first();
 
     }
 

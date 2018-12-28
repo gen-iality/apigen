@@ -2,6 +2,7 @@
 
 
 
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -130,7 +131,7 @@ Route::group(
     /*
      * Public event page routes
      */
-    // Route::group(['prefix' => 'e'], function () {
+    Route::group(['prefix' => 'e'], function () {
 
         /*
          * Embedded events
@@ -183,7 +184,7 @@ Route::group(
             'as'   => 'postCreateOrder',
             'uses' => 'EventCheckoutController@postCreateOrder',
         ]);
-    // });
+    });
 
     /*
      * Public view order routes
@@ -199,6 +200,7 @@ Route::group(
         'uses' => 'EventCheckoutController@showOrderTickets',
     ]);
 
+    
     /*
      * Backend routes
      */
@@ -246,12 +248,14 @@ Route::group(
 
         });
 
+        
 
 
         /* <- select_organiser
          * Organiser routes
          */
         Route::group(['prefix' => 'organiser'], function () {
+
 
             Route::get('{organiser_id}/dashboard', [
                 'as'   => 'showOrganiserDashboard',
@@ -275,6 +279,7 @@ Route::group(
                 'as'   => 'showCreateOrganiser',
                 'uses' => 'OrganiserController@showCreateOrganiser',
             ]);
+                
             Route::post('create', [
                 'as'   => 'postCreateOrganiser',
                 'uses' => 'OrganiserController@postCreateOrganiser',

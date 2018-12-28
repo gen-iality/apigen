@@ -188,7 +188,7 @@
                                 </span>
                                             @endif
                                         @else
-                                            {{ \App\TicketStatus::find($ticket->sale_status)->name }}
+                                            {{ ($nameTicket = \App\TicketStatus::find($ticket->sale_status)->name) }}
                                         @endif
                                     </a>
                                 </li>
