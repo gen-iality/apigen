@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class QuestionType extends \Illuminate\Database\Eloquent\Model
+class QuestionType  extends MyBaseModel
 {
     //put your code here
 }

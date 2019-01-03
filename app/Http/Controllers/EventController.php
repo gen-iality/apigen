@@ -45,7 +45,7 @@ class EventController extends Controller
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $events = DB::collection('events')->update(['organizer_type' => 'App\User']);
-        var_dump($events);
+        
         return true;
 
 
@@ -118,7 +118,7 @@ class EventController extends Controller
     {
         $user = $request->get('user');        
         $data = $request->json()->all();
-
+       
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
@@ -376,9 +376,8 @@ class EventController extends Controller
 
         $event->end_date = $request->get('end_date');
 
-        //Davidfelipe return Auth::user()->account;
-        $event->currency_id = Auth::user()->account->currency_id;
-        //$event->timezone_id = Auth::user()->account->timezone_id;
+        $event->currency_id = Auth::user()->currency_id;
+        //$event->timezone_id = Auth::user()->timezone_id;
         /*
          * Set a default background for the event
          */
@@ -426,8 +425,8 @@ class EventController extends Controller
          * Set the event defaults.
          * @todo these could do mass assigned
          */
-        $defaults = $event->organiser->event_defaults;
-        if ($defaults) {
+        //$defaults = $event->organiser->event_defaults;
+        if (isset($defaults))            {
             $event->organiser_fee_fixed = $defaults->organiser_fee_fixed;
             $event->organiser_fee_percentage = $defaults->organiser_fee_percentage;
             $event->pre_order_display_message = $defaults->pre_order_display_message;
@@ -459,6 +458,7 @@ class EventController extends Controller
             ]);
         }
 
+        /*
         if ($request->hasFile('event_image')) {
             $path = public_path() . '/' . config('attendize.event_images_path');
             $filename = 'event_image-' . md5(time() . $event->id) . '.' . strtolower($request->file('event_image')->getClientOriginalExtension());
@@ -476,14 +476,15 @@ class EventController extends Controller
 
             $img->save($file_full_path);
 
-            /* Upload to s3 */
+            // Upload to s3 
             \Storage::put(config('attendize.event_images_path') . '/' . $filename, file_get_contents($file_full_path));
 
             $eventImage = EventImage::createNew();
             $eventImage->image_path = config('attendize.event_images_path') . '/' . $filename;
             $eventImage->event_id = $event->id;
             $eventImage->save();
-        }
+            
+        }*/
 
         return response()->json([
             'status'      => 'success',

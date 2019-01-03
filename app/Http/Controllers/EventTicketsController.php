@@ -43,6 +43,8 @@ class EventTicketsController extends MyBaseController
         if ($event === null) {
             abort(404);
         }
+
+
         
         // Get tickets for event.
         $tickets = empty($q) === false

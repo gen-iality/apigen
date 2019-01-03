@@ -15,9 +15,7 @@ require (__DIR__ . '/attendize/attendize.php');
 
 
 Route::get('testsendemail', 'TestingController@sendemail');
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('test', 'EventController@index');
 

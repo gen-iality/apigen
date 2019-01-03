@@ -15,22 +15,14 @@ class Event extends Models\Event
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author', 'categories', 'eventType', 'organiser','currency'];
+    protected $with = ['author', 'categories', 'eventType', 'organiser','organizer','currency'];
 
-    /**
-     * Event is owned by an organization
-     * @return void
-     */
-    public function organization()
-    {
-        return $this->belongsTo('App\Organization');
-    }
 
     protected $fillable = [
         'author', 'name', 'description', 'location', 'venue', 'pulep',
         'datetime_from', 'datetime_to',
         'date_start', 'date_end', 'time_start', 'time_end',
-        'visibility', 'picture', 'organization_id', 'category','extra_config', 'user_properties'
+        'visibility', 'picture', 'category','extra_config', 'user_properties'
     ];
 
     // protected $dates = parent::$dates+['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
@@ -38,6 +30,17 @@ class Event extends Models\Event
     protected $casts = [
         'category' => 'array',
     ];
+
+    /**
+     * The organizer associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function organizer()
+    {
+        return $this->belongsTo(\App\Organization::class,'organizer_id');
+    }
+
 
     public function author()
     {

@@ -157,7 +157,7 @@ class Event extends MyBaseModel
      */
     public function organiser()
     {
-        return $this->belongsTo(\App\Organization::class,'organizer_id');
+        return $this->belongsTo(\App\Organization::class,'organiser_id');
     }
 
     /**

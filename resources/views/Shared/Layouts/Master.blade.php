@@ -50,7 +50,8 @@
 
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="meta">
-                        <span class="text ">{{isset($organiser->name) ? $organiser->name : $event->organiser->name}}</span>
+                    {{-- $event->organiser->name --}}
+                    <span class="text ">{{isset($organiser->name) ? $organiser->name : "a"}}</span>
                         <span class="arrow"></span>
                     </span>
                 </a>
