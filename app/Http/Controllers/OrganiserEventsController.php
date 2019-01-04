@@ -29,7 +29,7 @@ class OrganiserEventsController extends MyBaseController
         $events = $searchQuery
             ? Event::scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
                 'desc')->where('organiser_id', '=', $organiser_id)->paginate(12)
-            : Event::scope()->where('organizer_id', '=', $organiser_id)->orderBy($sort_by, 'desc')->paginate(12);
+            : Event::scope()->where('organiser_id', '=', $organiser_id)->orderBy($sort_by, 'desc')->paginate(12);
         
         $data = [
             'events'    => $events,

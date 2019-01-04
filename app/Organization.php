@@ -14,7 +14,7 @@ class Organization extends Organiser
    /*  public function events()
     {
         // return $this->morphMany('App\Event', 'organizer');
-        return $this->belongsTo('App\Event', 'organizer_id');
+        return $this->belongsTo('App\Event', 'organiser_id');
     } */
     
     public function categories()

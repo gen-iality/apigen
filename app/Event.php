@@ -5,6 +5,7 @@ namespace App;
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //Importante usar moloquent!!!!!!
 use Moloquent;
+use Carbon\Carbon;
 /**
  * Event Model
  *
@@ -26,6 +27,39 @@ class Event extends Models\Event
     ];
 
     // protected $dates = parent::$dates+['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+   
+    /**
+     * The currency associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency()
+    {
+        return $this->belongsTo(\App\Models\Currency::class,'currency_id')->withDefault([
+            "_id"=>"5c23936fe37db02c715b2a02","id"=>1,"title"=>"U.S. Dollar","symbol_left"=>"$","symbol_right"=>"",
+            "code"=>"USD","decimal_place"=>2,"value"=>1,"decimal_point"=>".","thousand_point"=>",","status"=>1,
+            "created_at"=>"2013-11-29 19=>51=>38","updated_at"=>"2013-11-29 19=>51=>38"      
+            ]);
+    }
+
+     /**
+     * Simulating date fiels to match attendeze platform
+     *
+     * @param string $date DateTime
+     */
+    public function getStartDateAttribute()
+    {
+        $format = config('attendize.default_datetime_format');
+        $this->attributes['start_date'] = Carbon::now();
+        return  Carbon::now();
+    }
+
+    public function getEndDateAttribute()
+    {
+        $format = config('attendize.default_datetime_format');
+        $this->attributes['end_date'] = Carbon::now();
+        return  Carbon::now();
+    }    
 
     protected $casts = [
         'category' => 'array',
@@ -38,7 +72,7 @@ class Event extends Models\Event
      */
     public function organizer()
     {
-        return $this->belongsTo(\App\Organization::class,'organizer_id');
+        return $this->belongsTo(\App\Organization::class,'organiser_id');
     }
 
 

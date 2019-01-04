@@ -143,6 +143,11 @@ class Account extends MyBaseModel
     {
         return $this->belongsToMany('App\Organization');
     }
+
+    public function organizers()
+    {
+        return $this->belongsToMany('App\Organization');
+    }
     //->as('subscription')
     //->withTimestamps();
     public function role()

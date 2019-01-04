@@ -147,7 +147,11 @@ class Event extends MyBaseModel
      */
     public function currency()
     {
-        return $this->belongsTo(\App\Models\Currency::class,'currency_id');
+        return $this->belongsTo(\App\Models\Currency::class,'currency_id')->withDefault([
+            "_id"=>"5c23936fe37db02c715b2a02","id"=>1,"title"=>"U.S. Dollar","symbol_left"=>"$","symbol_right"=>"",
+            "code"=>"USD","decimal_place"=>2,"value"=>1,"decimal_point"=>".","thousand_point"=>",","status"=>1,
+            "created_at"=>"2013-11-29 19=>51=>38","updated_at"=>"2013-11-29 19=>51=>38"      
+            ]);
     }
 
     /**
