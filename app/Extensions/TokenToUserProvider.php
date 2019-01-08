@@ -32,7 +32,6 @@ class TokenToUserProvider implements UserProvider
     public function retrieveByToken($identifier, $token)
     {
         
-        //die('retrieveByToken'.$token);
         //$token = $this->token->with('user')->where($identifier, $token)->first();
         //return $token && $token->user ? $token->user : null;
 
@@ -46,6 +45,7 @@ class TokenToUserProvider implements UserProvider
             $user = $this->findUserByUID($verifiedIdToken);
 
             Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
+            
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
             throw new AuthenticationException($e->getMessage());
             

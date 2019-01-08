@@ -17,6 +17,7 @@ class OrganiserController extends MyBaseController
     public function showSelectOrganiser()
     {
         $userId = Auth::id();
+        
         $organisers = Organization::where('author',$userId)->get();
         return view('ManageOrganiser.SelectOrganiser',compact('organisers'));
     }

@@ -162,6 +162,20 @@ Route::group(
     }
 );
 
+/****************
+ * Contributors
+ ****************/
+//Route::group(
+    //['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('ticket', 'API\EventTicketsAPIController',['except' => ['index']]);
+        Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
+
+   // }
+//);
+
+
+Route::apiResource('photos', 'PhotoController');
+
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
