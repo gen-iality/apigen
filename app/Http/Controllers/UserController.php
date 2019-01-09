@@ -18,8 +18,9 @@ use Illuminate\Http\Response;
 use Validator;
 use Storage;
 use GuzzleHttp\Client;
+use App\Http\Controllers\web\UserController as UserControllerWeb;
 
-class UserController extends Controller
+class UserController extends UserControllerWeb
 {
 
     protected $auth;
