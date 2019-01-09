@@ -62,7 +62,8 @@ class OrganizationUserController extends Controller
         ];
 
         $result = OrganizationUser::updateOrCreate($UserOrganization);
-        return $result;
+        $model = OrganizationUser::find($result->id);
+        return $model;
     }
 
     /**
