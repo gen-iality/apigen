@@ -42,6 +42,12 @@ class OrganizationUserController extends Controller
 
         $data = $request->json()->all();
 
+        //por si envian el names en mayuscula
+        if (isset($data['Names'])) {
+            $data['names'] = $data['Names'];
+            unset($data['Names']);
+        }
+        
         if (isset($data['names'])) {
             $data['displayName'] = $data['names'];
             unset($data['names']);
