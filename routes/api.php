@@ -75,11 +75,9 @@ Route::group(
  ****************/
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
     }
 );
-//5c3524b9fb8a3367af1a1453
-///{organization_id}
-Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
 
 /****************
  * Users
