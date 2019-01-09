@@ -50,7 +50,9 @@ class OrganizationUserController extends Controller
         $user = Account::updateOrCreate($data);
 
         if (isset($data['properties'])) {
-            $data = $data['properties'];
+            $tmp = $data['properties'];
+            if ($data["email"]) $tmp["email"] = $data["email"];
+            if ($data["names"]) $tmp["names"] = $data["names"];
         }       
 
         $UserOrganization = [
