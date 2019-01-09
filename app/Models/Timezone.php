@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Moloquent;
     /*
       Attendize.com   - Event Management & Ticketing
      */
@@ -11,7 +11,7 @@ namespace App\Models;
  *
  * @author Dave
  */
-class Timezone extends \Illuminate\Database\Eloquent\Model
+class Timezone extends Moloquent
 {
     /**
      * Indicates if the model should be timestamped.
