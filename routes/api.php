@@ -58,6 +58,9 @@ Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
  * organizations
  ****************/
 Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+
+Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
+
 Route::group(
     ['middleware' => 'auth.firebase'], function () {
         Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
@@ -76,6 +79,7 @@ Route::group(
 );
 Route::apiResource('users/organization', 'OrganizationUserController',  ['except' => ['index','show']]);
 Route::get('users/organization/{organization_id}', 'OrganizationUserController@index');
+
 Route::get('users/organization/{organization_id}/show', 'OrganizationUserController@show');
 /****************
  * Users
