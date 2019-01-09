@@ -72,10 +72,9 @@ class OrganizationUserController extends Controller
      * @param  \App\OrganizationUser  $organizationUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $organization_id)
+    public function destroy(Request $request, $organization_id, $organization_user_id)
     {
-        $data = $request->json()->all();
-        $userOrganization = OrganizationUser::where('userid', $data['userid'])->where('organization_id', $organization_id);
+        $userOrganization = OrganizationUser::findorfail($organization_user_id);
         return (string) $userOrganization->delete();
     }
 
