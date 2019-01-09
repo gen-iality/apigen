@@ -51,8 +51,8 @@ class OrganizationUserController extends Controller
 
         if (isset($data['properties'])) {
             $tmp = $data['properties'];
-            if ($data["email"]) $tmp["email"] = $data["email"];
-            if ($data["names"]) $tmp["names"] = $data["names"];
+            if (isset($data["email"])) $tmp["email"] = $data["email"];
+            if (isset($data["names"])) $tmp["names"] = $data["names"];
         }       
 
         $UserOrganization = [
