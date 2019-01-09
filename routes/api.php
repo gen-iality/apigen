@@ -74,9 +74,8 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
     }
 );
-Route::apiResource('users/organization', 'OrganizationUserController',  ['except' => ['index','show']]);
-Route::get('users/organization/{organization_id}', 'OrganizationUserController@index');
-Route::get('users/organization/{organization_id}/show', 'OrganizationUserController@show');
+Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
+
 /****************
  * Users
  ****************/
@@ -91,7 +90,6 @@ Route::group(
         Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
-
 
 /****************
  * events
@@ -115,7 +113,6 @@ Route::group(
 );
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
-
 
 /***************
  * categories
