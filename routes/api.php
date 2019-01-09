@@ -16,11 +16,11 @@ To crate a new API for model please follow this guidelines:
  */
 
 /* EXAMPLE OF ROUTES PER MODEL using apiResource
-Verb        URI                        Action    Route Name
-GET            /photos                    index    photos.index
-POST           /photos                    store    photos.store
-GET            /photos/{photo}            show    photos.show
-PUT/PATCH      /photos/{photo}            update    photos.update
+Verb           URI                        Action     Route Name
+GET            /photos                    index      photos.index
+POST           /photos                    store      photos.store
+GET            /photos/{photo}            show       photos.show
+PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
@@ -77,6 +77,8 @@ Route::group(
     ['middleware' => 'auth.firebase'], function () {
     }
 );
+//5c3524b9fb8a3367af1a1453
+///{organization_id}
 Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
 
 /****************

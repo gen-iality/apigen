@@ -14,7 +14,7 @@ class OrganizationUserController extends Controller
      * muestra los usuarios de una organización
      * @return \Illuminate\Http\Response
      */
-    public function index(String $organization_id)
+    public function index(Request $request, String $organization_id)
     {
         $OrganizationUsers = OrganizationUserResource::collection(
             OrganizationUser::where('organization_id', $organization_id)
@@ -23,7 +23,7 @@ class OrganizationUserController extends Controller
         return $OrganizationUsers;
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      * En el request llega el email del usuario
      * Buscamos la información del usuario por el correo
@@ -36,21 +36,29 @@ class OrganizationUserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, String $organization_id)
+     *///, 
+    public function store(Request $request,String $organization_id)
     {
+
         $data = $request->json()->all();
-        if ($data['names']) {
+
+        if (isset($data['names'])) {
             $data['displayName'] = $data['names'];
             unset($data['names']);
         }
 
         $user = Account::updateOrCreate($data);
 
+        if (isset($data['properties'])) {
+            $data = $data['properties'];
+        }       
+
         $UserOrganization = [
             "userid" => $user->id,
-            "organization_id" => $data['organization_id'],
+            "organization_id" => $organization_id,
+            "properties" => $data
         ];
+
         $result = OrganizationUser::updateOrCreate($UserOrganization);
         return $result;
     }
