@@ -115,5 +115,33 @@ class OrganizationController extends Controller
     }
 
 
+        /**
+     * AddUserProperty: Add dynamic user property to the event
+     *
+     * each dynamic property must be composed of following parameters:
+     *
+     * * name     text
+     * * required boolean - this field is not yet used  for anything
+     * * type     text    - this field is not yet used for anything
+     *
+     * Once created user dynamic event properties could be get directly from $event->userProperties.
+     * Dynamic properties are returned inside each UserEvent like regular properties
+     * @param Event $event
+     * @param array $properties
+     * @return void
+     */
+    public function addUserProperty(Request $request, $id)
+    {
+        
+        $event = Organization::find($id);
+        $event_properties = $event->user_properties;
+        $count = count($event_properties);
+        $fields = [ $count => ["name" => $request->name, "unique" => false, "mandatory" => false,"type" => "text"]];
+        $event->user_properties += $fields;
+        $event->save();
+        return $event->user_properties;
+    }
+
+
     
 }

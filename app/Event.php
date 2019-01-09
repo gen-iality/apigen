@@ -31,7 +31,8 @@ class Event extends Moloquent
         'author', 'name', 'description', 'location', 'venue', 'pulep',
         'datetime_from', 'datetime_to',
         'date_start', 'date_end', 'time_start', 'time_end',
-        'visibility', 'picture', 'organization_id', 'category','extra_config', 'user_properties'
+        'visibility', 'picture', 'organization_id', 'category','extra_config', 
+        'user_properties','properties_group'
     ];
 
     protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];

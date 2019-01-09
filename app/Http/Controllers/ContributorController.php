@@ -138,7 +138,8 @@ class ContributorController extends Controller
         
         $user = $request->get('user');
         $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id',$user->id)->latest()->first();
-        if(($userPermissions))
+        
+        if(($userPermissions && $userPermissions->role))
         {
             return $userPermissions->role->permissions;
         }else{
