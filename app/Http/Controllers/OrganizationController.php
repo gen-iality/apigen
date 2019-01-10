@@ -8,7 +8,7 @@ use App\Organization;
 use App\Event;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
-
+use Auth;
 class OrganizationController extends Controller
 {
 
@@ -23,7 +23,7 @@ class OrganizationController extends Controller
     public function meOrganizations(Request $request)
     {
         return OrganizationResource::collection(
-            Organization::where('author', $request->get('user')->id)
+            Organization::where('author', Auth::user()->id)
                 ->paginate(config('app.page_size'))
         );
     }

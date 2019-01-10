@@ -41,7 +41,7 @@ Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
  ****************/
 Route::apiResource('eventUsers', 'EventUserController', ['only' => ['index', 'show']]);
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('eventUsers', 'EventUserController', ['except' => ['index', 'show']]);
         //Route::get('me/events', 'OrganizationController@meOrganizations');
         Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
@@ -62,7 +62,7 @@ Route::apiResource('organizations', 'OrganizationController', ['only' => ['index
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
@@ -74,7 +74,7 @@ Route::group(
  * Users Organization
  ****************/
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
     }
 );
@@ -86,7 +86,7 @@ Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
         Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
@@ -100,18 +100,18 @@ Route::group(
 // Este Route::group es un expermimento para detectar a el usuario logueado
 // pero sin producir ningun tipo de errores.
 // Route::group(
-//     ['middleware' => 'tokenauth.firebase'], function () {
+//     ['middleware' => 'tokenauth:token'], function () {
 Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
 //     }
 // );
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
         Route::get('me/events', 'EventController@currentUserindex');
 
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
-        Route::middleware('auth.firebase')->get('user/events', 'EventController@currentUserindex');
+        Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
     }
 );
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
@@ -122,7 +122,7 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
  ****************/
 Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
@@ -133,7 +133,7 @@ Route::group(
 Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
 
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
     }
 );
@@ -144,7 +144,7 @@ Route::group(
 Route::apiResource('escarapelas', 'EscarapelaController', ['only' => ['index', 'show']]);
 
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('escarapelas', 'EscarapelaController', ['except' => ['index', 'show']]);
     }
 );
@@ -153,7 +153,7 @@ Route::group(
  * Contributors
  ****************/
 Route::group(
-    ['middleware' => 'auth.firebase'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
         Route::get('contributors/events/{event_id}', 'ContributorController@index');
         Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
@@ -166,7 +166,7 @@ Route::group(
  * Contributors
  ****************/
 //Route::group(
-    //['middleware' => 'auth.firebase'], function () {
+    //['middleware' => 'auth:token'], function () {
         Route::apiResource('ticket', 'API\EventTicketsAPIController',['except' => ['index']]);
         Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
 
@@ -185,7 +185,7 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::get('pdftest', 'TestingController@pdf');
-Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
+Route::middleware('auth:token')->get('test', 'EventUserController@test');
 
 //Routes for create a new webhooks in Sendinblue API and Update status of messages send by sendinblue
 Route::post('UpdateStatusMessage', 'SendinBlueController@UpdateStatusMessagePOST');
@@ -202,14 +202,14 @@ Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallySt
 
 //Events
 
-Route::middleware('auth.firebase')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
+Route::middleware('auth:token')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
 
 //Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
-//Route::middleware('auth.firebase')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
-//Route::middleware('auth.firebase')->post('user/event_users/create', 'EventUserController@store');
+//Route::middleware('auth:token')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
+//Route::middleware('auth:token')->post('user/event_users/create', 'EventUserController@store');
 
-Route::middleware('auth.firebase')->get('rols', 'RolController@index');
+Route::middleware('auth:token')->get('rols', 'RolController@index');
 Route::get('states', 'StateController@index');
 
 // Route::get('event/messages', 'MessageController@message');
@@ -225,7 +225,7 @@ Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
-//middleware('auth.firebase')->
+//middleware('auth:token')->
 //Route::get("/testroute/{user}", "EventUserController@testing");
 
 //MISC Controllers
