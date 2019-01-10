@@ -80,7 +80,7 @@
 
     </head>
     <body class="attendize">
-        <div id="event_page_wrap" vocab="http://schema.org/" typeof="Event">
+        <div id="" vocab="http://schema.org/" typeof="Event">
             @yield('content')
 
             {{-- Push for sticky footer--}}
