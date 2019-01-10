@@ -751,10 +751,13 @@ class EventCheckoutController extends Controller
             'event'     => $order->event,
             'tickets'   => $order->event->tickets,
             'attendees' => $order->attendees,
-            'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
+            //'css'       => "file_get_contents(public_path('assets/stylesheet/ticket.css'))",
+            'css' => '',
             //'image'     => base64_encode(file_get_contents(public_path($order->event->organiser->full_logo_path))),
             'images'    => $images,
         ];
+
+
 
         if ($request->get('download') == '1') {
           //  return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, 'Tickets');
