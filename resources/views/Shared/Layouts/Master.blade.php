@@ -34,7 +34,7 @@
 </head>
 <body class="attendize">
 @yield('pre_header')
-<header id="header" class="navbar">
+<header id="header" class="navbar" >
 
     <div class="navbar-header">
         <a class="navbar-brand" href="javascript:void(0);">

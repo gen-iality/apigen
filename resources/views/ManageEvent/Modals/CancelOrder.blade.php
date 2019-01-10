@@ -99,7 +99,7 @@
 
 
                 @if($order->transaction_id)
-                @if($order->payment_gateway->can_refund)
+               @if(!empty($order->payment_gateway->can_refund)) 
 
                 <div class="refund_section">
                     @if(!$order->is_refunded)

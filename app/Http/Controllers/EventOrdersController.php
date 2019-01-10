@@ -177,7 +177,7 @@ class EventOrdersController extends Controller
             ]);
         }
 
-        $order = Order::findOrFailOrFail($order_id);
+        $order = Order::findOrFail($order_id);
 
         $order->first_name = $request->get('first_name');
         $order->last_name = $request->get('last_name');
@@ -220,7 +220,7 @@ class EventOrdersController extends Controller
             ]);
         }
 
-        $order = Order::findOrFailOrFail($order_id);
+        $order = Order::findOrFail($order_id);
 
         $refund_order = ($request->get('refund_order') === 'on') ? true : false;
         $refund_type = $request->get('refund_type');
@@ -338,7 +338,7 @@ class EventOrdersController extends Controller
      */
     public function showExportOrders($event_id, $export_as = 'xls')
     {
-        $event = Event::findOrFailOrFail($event_id);
+        $event = Event::findOrFail($event_id);
 
         Excel::create('orders-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
 
@@ -401,7 +401,7 @@ class EventOrdersController extends Controller
      */
     public function showMessageOrder(Request $request, $order_id)
     {
-        $order = Order::findOrFailOrFail($order_id);
+        $order = Order::findOrFail($order_id);
 
         $data = [
             'order' => $order,
@@ -434,7 +434,7 @@ class EventOrdersController extends Controller
             ]);
         }
 
-        $order = Order::findOrFailOrFail($order_id);
+        $order = Order::findOrFail($order_id);
 
         $data = [
             'order'           => $order,
@@ -476,7 +476,7 @@ class EventOrdersController extends Controller
      */
     public function postMarkPaymentReceived(Request $request, $order_id)
     {
-        $order = Order::findOrFailOrFail($order_id);
+        $order = Order::findOrFail($order_id);
 
         $order->is_payment_received = 1;
         $order->order_status_id = 1;
