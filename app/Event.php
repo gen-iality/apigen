@@ -5,27 +5,19 @@ namespace App;
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //Importante usar moloquent!!!!!!
 use Moloquent;
-
+use Carbon\Carbon;
 /**
  * Event Model
  *
  */
-class Event extends Moloquent
+class Event extends Models\Event
 {
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author', 'categories', 'eventType', 'organizer'];
+    protected $with = ['author', 'categories', 'eventType', 'organiser','organizer','currency', 'tickets'];
 
-    /**
-     * Event is owned by an organization
-     * @return void
-     */
-    public function organization()
-    {
-        return $this->belongsTo('App\Organization');
-    }
 
     protected $fillable = [
         'author', 'name', 'description', 'location', 'venue', 'pulep',
@@ -35,13 +27,66 @@ class Event extends Moloquent
         'user_properties','properties_group'
     ];
 
-    protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+    // protected $dates = parent::$dates+['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+   
+    /**
+     * The currency associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency()
+    {
+        return $this->belongsTo(\App\Models\Currency::class,'currency_id')->withDefault([
+            "_id"=>"5c23936fe37db02c715b2a02","id"=>1,"title"=>"U.S. Dollar","symbol_left"=>"$","symbol_right"=>"",
+            "code"=>"USD","decimal_place"=>2,"value"=>1,"decimal_point"=>".","thousand_point"=>",","status"=>1,
+            "created_at"=>"2013-11-29 19=>51=>38","updated_at"=>"2013-11-29 19=>51=>38"      
+            ]);
+    }
+
+     /**
+     * Simulating date fiels to match attendeze platform
+     *
+     * @param string $date DateTime
+     */
+    public function getStartDateAttribute()
+    {
+        $format = config('attendize.default_datetime_format');
+        $this->attributes['start_date'] = Carbon::now();
+        return  Carbon::now();
+    }
+
+    public function getEndDateAttribute()
+    {
+        $format = config('attendize.default_datetime_format');
+        $this->attributes['end_date'] = Carbon::now();
+        return  Carbon::now();
+    }    
 
     protected $casts = [
         'category' => 'array',
     ];
 
+    /**
+     * The organizer associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function organizer()
+    {
+        return $this->belongsTo(\App\Organization::class,'organiser_id');
+    }
+
+
     public function author()
+    {
+        return $this->belongsTo('App\Account', 'author_id');
+    }
+
+    /**
+     * Override parent method
+     * 
+     */
+    public function account()
     {
         return $this->belongsTo('App\Account', 'author_id');
     }
@@ -51,14 +96,15 @@ class Event extends Moloquent
  *
  * @return void
  */
-    public function organizer()
+  /*   public function organiser()
     {
-        return $this->morphTo();
-    }
+        // return $this->morphTo();
+        return $this->hasMany('App\Organization');
+    } */
 
     public function eventUsers()
     {
-        return $this->hasMany('App\EventUser');
+        return $this->hasMany('App\Attendee');
     }
 
     public function categories()
@@ -84,6 +130,13 @@ class Event extends Moloquent
         return $this->hasMany('App\Message');
     }
 
+
+    /**
+     * The tickets associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
     /**
      * Get the event type.
      */
@@ -91,4 +144,25 @@ class Event extends Moloquent
     {
         return $this->belongsTo('App\EventType', 'event_type_id');
     }
+
+     /**
+     * The tickets associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tickets()
+    {
+        return $this->hasMany('\App\Models\Ticket', 'event_id');
+    }
+
+    /**
+     * The orders associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
 }

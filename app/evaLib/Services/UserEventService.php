@@ -5,7 +5,7 @@
 namespace App\evaLib\Services;
 
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Rol;
 use App\State;
 use App\Account;
@@ -59,7 +59,7 @@ class UserEventService
 
 
         /* ya con el usuario actualizamos o creamos el eventUser */
-        $matchAttributes = ["event_id" => $event->id, "userid" => $user->id];
+        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->id];
 
         $eventUserFields += $matchAttributes;
 
@@ -105,12 +105,12 @@ class UserEventService
             
         }
 
-        $eventUser = EventUser::updateOrCreate($matchAttributes, $eventUserFields);
+        $eventUser = Attendee::updateOrCreate($matchAttributes, $eventUserFields);
 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
         //don't know why updateOrCreate doens't eager load related models
-        $eventUser = EventUser::where($matchAttributes)->first();
+        $eventUser = Attendee::where($matchAttributes)->first();
 
         $data = $eventUser;
 
@@ -132,9 +132,9 @@ class UserEventService
 
         $eventAttendees = [];
 
-        //cargamos varios EventUser por UserId.
+        //cargamos varios Attendee por UserId.
 
-        $eventUsers = EventUser::find($eventusersIds);
+        $eventUsers = Attendee::find($eventusersIds);
 
         
         foreach ($eventUsers as $eventUser) {
@@ -144,7 +144,7 @@ class UserEventService
             } else {
                 $newEventUser = $eventUser->replicate();
                 $newEventUser->event_id = $event->id;
-                $newEventUser->stated_id = EventUser::STATE_DRAFT;
+                $newEventUser->stated_id = Attendee::STATE_DRAFT;
                 $newEventUser->save();
                 $eventAttendees[] = $newEventUser;
                 echo  " NuevoeventUser:>> ".$newEventUser->id." <<";
@@ -168,9 +168,9 @@ class UserEventService
         Log::debug("agregando");
         $eventAttendees = [];
 
-        //cargamos varios EventUser por UserId.
+        //cargamos varios Attendee por UserId.
 
-        $eventUsers = EventUser::find($eventusersIds);
+        $eventUsers = Attendee::find($eventusersIds);
 
         foreach ($eventUsers as $eventUser) {
             Log::debug("eventUser: ".$eventUser->id);
@@ -196,13 +196,13 @@ class UserEventService
      * @param Event       $event    Where users are going to be added
      * @param Array[Account] $usersIds Users to be added
      *
-     * @return EventUser             eventUsers(attendees) added to the event
+     * @return Attendee             eventUsers(attendees) added to the event
      */
     public static function addUsersToAnEvent(Event $event, $usersIds)
     {
-        //cargamos varios EventUser por UserId.
-        $eventUsers = EventUser::where('event_id', '=', $event->id)
-            ->whereIn('userid', $usersIds)
+        //cargamos varios Attendee por UserId.
+        $eventUsers = Attendee::where('event_id', '=', $event->id)
+            ->whereIn('account_id', $usersIds)
             ->get();
 
         $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
@@ -216,10 +216,10 @@ class UserEventService
 
             }
             Log::debug('Account not found when trying to create. ' . $userId);
-            //Crear EventUser
-            $eventUser = new EventUser;
+            //Crear Attendee
+            $eventUser = new Attendee;
             $eventUser->event_id = $event->id;
-            $eventUser->userid = $userId;
+            $eventUser->account_id = $userId;
             $eventUser->properties = ["email" => $user->email, "name" => $user->name];
 
             $rol = Rol::where('level', 0)->first();
@@ -245,7 +245,7 @@ class UserEventService
             }
 
             foreach ($eventUsers as $eventUser) {
-                if (isset($eventUser->userid) && $eventUser->userid == $userId) {
+                if (isset($eventUser->account_id) && $eventUser->account_id == $userId) {
                     $userIsInEvent = true;
                 }
             };

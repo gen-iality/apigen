@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Morrislaptop\Firestore\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Illuminate\Http\Request;
-use App\EventUser;
+use App\Attendee;
 
 class synchronizationController extends Controller
 {
@@ -39,7 +39,7 @@ class synchronizationController extends Controller
         try{
             $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
             $firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
-            $eventUsers = EventUser::all();
+            $eventUsers = Attendee::all();
             $collection = $firestore->collection('event_users');
             foreach($eventUsers as $eventUser){
                 if($eventUser->user){
@@ -76,10 +76,10 @@ class synchronizationController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function EventUser($user)
+    public function Attendee($user)
     {
 
-        $eventUser = EventUser::find($user);
+        $eventUser = Attendee::find($user);
         $firestore = resolve('Morrislaptop\Firestore');
 
         if($eventUser->user){
@@ -92,7 +92,7 @@ class synchronizationController extends Controller
     }
 
     public function EventUserRDT($user){
-        $eventUser = EventUser::find($user);
+        $eventUser = Attendee::find($user);
         $dataUser = json_decode($eventUser,true);
 
         $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));

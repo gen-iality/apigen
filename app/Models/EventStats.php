@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Cookie;
 use DB;
+use Moloquent;
 
-class EventStats extends \Illuminate\Database\Eloquent\Model
+class EventStats extends Moloquent
 {
     /**
      * Indicates if the model should be timestamped.

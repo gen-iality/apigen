@@ -4,7 +4,7 @@
  */
 namespace App\evaLib\Services;
 
-use App\EventUser;
+use App\Attendee;
 use App\OrganizationUser;
 use App\Account;
 use App\Rol;
@@ -33,17 +33,17 @@ class EvaRol
         $rol = Rol::where('level', -1)->first();
         $state = State::first();
         $userEvt = [
-            'userid' => $authorId,
+            'account_id' => $authorId,
             'event_id' => $eventId,
             'rol_id' => $rol->_id,
             'state_id' => $state->_id,
         ];
         
-        //cargando los attributos del usuario dentro del EventUser
+        //cargando los attributos del usuario dentro del Attendee
         $user = Account::find($authorId);
         $userEvt['properties'] = $user->getAttributes();
 
-        $userToEvt = new EventUser($userEvt);
+        $userToEvt = new Attendee($userEvt);
         $userToEvt->save();
         return true;
     }
@@ -55,7 +55,7 @@ class EvaRol
         }
         $rol = Rol::where('level', -1)->first();
         $userOrg = [
-            'userid' => $authorId,
+            'account_id' => $authorId,
             'organization_id' => $organizationId,
             'rol_id' => $rol->_id,
         ];

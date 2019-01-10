@@ -11,7 +11,7 @@ namespace App\Models;
  *
  * @author Dave
  */
-class OrderStatus extends \Illuminate\Database\Eloquent\Model
+class OrderStatus extends MyBaseModel
 {
     public $timestamps = false;
 }

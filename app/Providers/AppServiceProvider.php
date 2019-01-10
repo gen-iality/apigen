@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\EventUser;
+use App\Attendee;
 use App\Mail\BookingConfirmed;
 use App\Observers\EventUserObserver;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     {
         Resource::withoutWrapping();
 
-        \App\EventUser::observe(App\Observers\EventUserObserver::class);
+        \App\Attendee::observe(App\Observers\EventUserObserver::class);
 
-        \App\EventUser::saved(
+        \App\Attendee::saved(
             function ($eventUser) {
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
                 $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
 
                 $original = $eventUser->getOriginal();
 
-                if ($eventUser->state_id == EventUser::STATE_BOOKED && isset($original['state_id']) && $original['state_id'] != EventUser::STATE_BOOKED) {
+                if ($eventUser->state_id == Attendee::STATE_BOOKED && isset($original['state_id']) && $original['state_id'] != Attendee::STATE_BOOKED) {
                     Mail::to($email)
                         ->queue(
                             new BookingConfirmed($eventUser)

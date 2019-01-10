@@ -5,7 +5,7 @@
 namespace App\evaLib\Services;
 
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Account;
 
 /**
@@ -50,13 +50,13 @@ class AuthService
             $user->save();
 
             //actualizamos el UserEvent
-            $userEvent = EventUser::firstOrNew(
-                ['userid' => $userData->uid,
+            $userEvent = Attendee::firstOrNew(
+                ['account_id' => $userData->uid,
                     'event_id' => $id,
                 ]);
 
             $userEvent->fill($request->json()->all());
-            $userEvent->userid = $userData->uid;
+            $userEvent->account_id = $userData->uid;
             $userEvent->event_id = $id;
 
             if (!isset($userEvent->rol_id)) {

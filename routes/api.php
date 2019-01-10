@@ -33,7 +33,7 @@ Route::get('test/permissions', 'TestingController@permissions');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
 Route::get('sync/firestore', 'synchronizationController@EventUsers');
-Route::get('sync/firestore/{id}', 'synchronizationController@EventUser');
+Route::get('sync/firestore/{id}', 'synchronizationController@Attendee');
 Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 
 /****************
@@ -161,6 +161,20 @@ Route::group(
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
     }
 );
+
+/****************
+ * Contributors
+ ****************/
+//Route::group(
+    //['middleware' => 'auth.firebase'], function () {
+        Route::apiResource('ticket', 'API\EventTicketsAPIController',['except' => ['index']]);
+        Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
+
+   // }
+//);
+
+
+Route::apiResource('photos', 'PhotoController');
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\evaLib\Services\UserEventService;
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Mail\RSVP;
 use App\Message;
 use App\MessageUser;
@@ -176,7 +176,7 @@ class RSVPController extends Controller implements ShouldQueue
      *
      * @return void
      */
-    public function confirmRSVP(EventUser $eventUser)
+    public function confirmRSVP(Attendee $eventUser)
     {
 
         if (!$eventUser->confirm()->save()) {
@@ -188,7 +188,7 @@ class RSVPController extends Controller implements ShouldQueue
 
     }
 
-    public function confirmRSVPTest(EventUser $eventUser)
+    public function confirmRSVPTest(Attendee $eventUser)
     {
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
@@ -207,7 +207,7 @@ class RSVPController extends Controller implements ShouldQueue
             $condiciones[] = ['state_id', '=', $state->id];
         }
 
-        $evtUsers = EventUser::where($condiciones)->get();
+        $evtUsers = Attendee::where($condiciones)->get();
 
         $auth = resolve('Kreait\Firebase\Auth');
 
@@ -215,7 +215,7 @@ class RSVPController extends Controller implements ShouldQueue
             $temporal = (object) [];
 
             try {
-                $user = $auth->getUser($data->userid);
+                $user = $auth->getUser($data->account_id);
             } catch (\Exception $e) {
                 echo ($e->getMessage());
                 $user = false;

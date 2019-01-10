@@ -14,5 +14,16 @@ yarn-error.log
 .env
 cache
 /laradock
+/public/assets/images
+/public/vendor
+/.phpstorm.meta.php
+installed
+/.settings/
+/.project
+/.buildpath
+/composer.phar
+_ide_helper.php
+*.swp
+_docs/build
 public/assets/*
 public/vendor/*

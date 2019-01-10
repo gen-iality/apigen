@@ -11,7 +11,7 @@ namespace App\Models;
  *
  * @author Dave
  */
-class Activity extends \Illuminate\Database\Eloquent\Model
+class Activity extends MyBaseModel
 {
     //put your code here.
 }

@@ -5,7 +5,7 @@
 namespace App\evaLib\Services;
 
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Account;
 
 
@@ -24,22 +24,22 @@ class UserImportService
      * @param Event       $event    Where users are going to be added
      * @param Array[Account] $usersIds Users to be added
      * 
-     * @return EventUser             eventUsers(attendees) added to the event
+     * @return Attendee             eventUsers(attendees) added to the event
      */
     public static function addUsersToAnEvent(Event $event, $usersIds)
     {
-        //cargamos varios EventUser por UserId.
-        $eventUsers = EventUser::where('event_id', '=', $event->id)
-            ->whereIn('userid', $usersIds)
+        //cargamos varios Attendee por UserId.
+        $eventUsers = Attendee::where('event_id', '=', $event->id)
+            ->whereIn('account_id', $usersIds)
             ->get();
 
         $usersIdNotInEvent = self::getusersIdNotInEvent($eventUsers, $usersIds);
 
         foreach ($usersIdNotInEvent as $userId) {
-            //Crear EventUser
-            $eventUser = new EventUser;
+            //Crear Attendee
+            $eventUser = new Attendee;
             $eventUser->event_id = $event->id;
-            $eventUser->userid = $userId;
+            $eventUser->account_id = $userId;
             $eventUser->save();
             $eventUsers[] = $eventUser;
         }
@@ -56,7 +56,7 @@ class UserImportService
             }
 
             foreach ($eventUsers as $eventUser) {
-                if (isset($eventUser->userid) && $eventUser->userid == $userId) {
+                if (isset($eventUser->account_id) && $eventUser->account_id == $userId) {
                     $userIsInEvent = true;
                 }
             };

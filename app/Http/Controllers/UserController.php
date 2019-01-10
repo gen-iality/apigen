@@ -10,7 +10,7 @@ use Firebase\Auth\Token\Verifier;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use App\Event;
-use App\EventUser;
+use App\Attendee;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\State;
@@ -18,8 +18,9 @@ use Illuminate\Http\Response;
 use Validator;
 use Storage;
 use GuzzleHttp\Client;
+use App\Http\Controllers\web\UserController as UserControllerWeb;
 
-class UserController extends Controller
+class UserController extends UserControllerWeb
 {
 
     protected $auth;

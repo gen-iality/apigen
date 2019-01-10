@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Hash;
 use DB;
+use App\Models\User;
 
-class Account extends Models\MyBaseModel
+class Account extends User
 {
     use SoftDeletes;
     use Notifiable;
@@ -206,7 +207,7 @@ class Account extends Models\MyBaseModel
      */
     public function active_payment_gateway()
     {
-        return $this->hasOne(\App\Models\AccountPaymentGateway::class, 'payment_gateway_id', 'payment_gateway_id')->where('account_id', $this->id);
+        return $this->hasOne('App\Models\AccountPaymentGateway', 'payment_gateway_id', 'payment_gateway_id')->where('account_id', $this->id);
     }
 
     /**

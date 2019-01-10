@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use App\Account;
 use App\ModelHasRole;
-use App\EventUser;
+use App\Attendee;
 
 class ContributorController extends Controller
 {

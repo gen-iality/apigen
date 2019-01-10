@@ -43,7 +43,8 @@ class AuthFirebase
      * @return mixed
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {
+    {   
+        return $next($request);
         try {
             /**
              * Se carga el sdk de firebase para PHP

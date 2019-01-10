@@ -98,15 +98,7 @@ class Event extends MyBaseModel
         return $this->hasMany(\App\Models\Message::class)->orderBy('created_at', 'DESC');
     }
 
-    /**
-     * The tickets associated with the event.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tickets()
-    {
-        return $this->hasMany(\App\Models\Ticket::class);
-    }
+
 
     /**
      * The stats associated with the event.
@@ -145,7 +137,7 @@ class Event extends MyBaseModel
      */
     public function account()
     {
-        return $this->belongsTo(\App\Models\Account::class);
+        return $this->belongsTo(\App\Account::class, 'author_id');
     }
 
     /**
@@ -155,7 +147,11 @@ class Event extends MyBaseModel
      */
     public function currency()
     {
-        return $this->belongsTo(\App\Models\Currency::class);
+        return $this->belongsTo(\App\Models\Currency::class,'currency_id')->withDefault([
+            "_id"=>"5c23936fe37db02c715b2a02","id"=>1,"title"=>"U.S. Dollar","symbol_left"=>"$","symbol_right"=>"",
+            "code"=>"USD","decimal_place"=>2,"value"=>1,"decimal_point"=>".","thousand_point"=>",","status"=>1,
+            "created_at"=>"2013-11-29 19=>51=>38","updated_at"=>"2013-11-29 19=>51=>38"      
+            ]);
     }
 
     /**
@@ -165,7 +161,7 @@ class Event extends MyBaseModel
      */
     public function organiser()
     {
-        return $this->belongsTo(\App\Models\Organiser::class);
+        return $this->belongsTo(\App\Organization::class,'organiser_id');
     }
 
     /**
@@ -215,7 +211,9 @@ class Event extends MyBaseModel
      */
     public function startDateFormatted()
     {
-        return $this->start_date->format(config('attendize.default_datetime_format'));
+        $fecha = (int)$this->datetime_from->__toString();
+        $format = config('attendize.default_datetime_format');
+        return date($format,$fecha);
     }
 
     /**
@@ -235,7 +233,9 @@ class Event extends MyBaseModel
      */
     public function endDateFormatted()
     {
-        return $this->end_date->format(config('attendize.default_datetime_format'));
+        $fecha = (int)$this->datetime_to->__toString();
+        $format = config('attendize.default_datetime_format');
+        return date($format,$fecha);
     }
 
     /**
@@ -371,10 +371,10 @@ class Event extends MyBaseModel
      *
      * @return array $dates
      */
-    public function getDates()
+   /*  public function getDates()
     {
         return ['created_at', 'updated_at', 'start_date', 'end_date'];
-    }
+    } */
 
     public function getIcsForEvent()
     {

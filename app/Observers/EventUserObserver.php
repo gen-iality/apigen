@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\EventUser;
+use App\Attendee;
 use Illuminate\Support\Facades\Log;
 
 class EventUserObserver
@@ -10,7 +10,7 @@ class EventUserObserver
     /**
      * Handle the event user "created" event.
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return void
      */
     public function created( $eventUser)
@@ -25,7 +25,7 @@ class EventUserObserver
     /**
      * Handle the event user "updated" event.
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return void
      */
     public function updated( $eventUser)
@@ -36,10 +36,10 @@ class EventUserObserver
     /**
      * Handle the event user "deleted" event.
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return void
      */
-    public function deleted(EventUser $eventUser)
+    public function deleted(Attendee $eventUser)
     {
         //
     }
@@ -47,10 +47,10 @@ class EventUserObserver
     /**
      * Handle the event user "restored" event.
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return void
      */
-    public function restored(EventUser $eventUser)
+    public function restored(Attendee $eventUser)
     {
         //
     }
@@ -58,10 +58,10 @@ class EventUserObserver
     /**
      * Handle the event user "force deleted" event.
      *
-     * @param  \App\EventUser  $eventUser
+     * @param  \App\Attendee  $eventUser
      * @return void
      */
-    public function forceDeleted(EventUser $eventUser)
+    public function forceDeleted(Attendee $eventUser)
     {
         //
     }

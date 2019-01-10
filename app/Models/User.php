@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends MyBaseModel implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, SoftDeletes, Notifiable;
 

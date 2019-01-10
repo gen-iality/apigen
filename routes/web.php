@@ -10,12 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::get('testsendemail', 'TestingController@sendemail');
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('test', 'EventController@test');
+require (__DIR__ . '/attendize/attendize.php');
+
+
+Route::get('testsendemail', 'TestingController@sendemail');
+
+
+Route::get('test', 'EventController@index');
 
 Route::get('/rsvptemplate', function () {
 
@@ -25,7 +27,7 @@ Route::get('/rsvptemplate', function () {
     $event->location ="location";
     $event->description ="description";
 
-    $eventUser = new App\EventUser();
+    $eventUser = new App\Attendee();
     $eventUser->name ="odiseo";
     $eventUser->email ="odiseo@iliada.com";
 

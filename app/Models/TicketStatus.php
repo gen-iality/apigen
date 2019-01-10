@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Moloquent;
     /*
       Attendize.com   - Event Management & Ticketing
      */
@@ -11,7 +11,8 @@ namespace App\Models;
  *
  * @author Dave
  */
-class TicketStatus extends \Illuminate\Database\Eloquent\Model
+class TicketStatus extends MyBaseModel
 {
     public $timestamps = false;
+    protected $table = 'ticket_statuses';
 }

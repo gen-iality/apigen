@@ -16,5 +16,5 @@ class Rol extends Moloquent
     {
         return $this->belongsTo('App\Organization');
     }
-    protected $fillable = [ 'userid', 'event_id', 'organization_id', 'name', 'level'];
+    protected $fillable = [ 'account_id', 'event_id', 'organization_id', 'name', 'level'];
 }
