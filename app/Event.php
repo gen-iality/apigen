@@ -27,8 +27,14 @@ class Event extends Models\Event
         'user_properties','properties_group'
     ];
 
-    // protected $dates = parent::$dates+['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
-   
+    protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+    
+
+    public function __construct(){
+        parent::__construct();
+        $this->dates = array_merge($this->dates , $this->times);
+    }
+
     /**
      * The currency associated with the event.
      *
