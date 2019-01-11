@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Extensions\AccessTokenGuard;
 use App\Extensions\TokenToUserProvider;
+use App\Extensions\TokenOrSessionGuard;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +38,13 @@ class AuthServiceProvider extends ServiceProvider
             $userProvider = app(TokenToUserProvider::class);
             $request = app('request');
             return new AccessTokenGuard($userProvider, $request, $config);
+        });
+
+        Auth::extend('token_or_session', function ($app, $name, array $config) {
+            // automatically build the DI, put it as reference
+            $userProvider = app(TokenToUserProvider::class);
+            $request = app('request');
+            return new TokenOrSessionGuard($userProvider, $request, $config);
         });
         //
     }

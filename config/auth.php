@@ -37,7 +37,7 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver' => 'token_or_session',
             'provider' => 'users',
         ],
 
@@ -48,11 +48,6 @@ return [
 
         'token' => [
             'driver' => 'access_token',
-            'provider' => 'users',
-        ],
-
-        'token2' => [
-            'driver' => 'session',
             'provider' => 'users',
         ],
     ],
