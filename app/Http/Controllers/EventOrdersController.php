@@ -65,6 +65,7 @@ class EventOrdersController extends Controller
             'sort_by'    => $sort_by,
             'sort_order' => $sort_order,
             'q'          => $searchQuery ? $searchQuery : '',
+            'is_embedded'  => $request->is_embedded
         ];
 
         return view('ManageEvent.Orders', $data);

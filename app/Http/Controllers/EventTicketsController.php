@@ -45,13 +45,13 @@ class EventTicketsController extends MyBaseController
         }
 
 
-        
+        $is_embedded = $request->is_embedded;
         // Get tickets for event.
         $tickets = empty($q) === false
         ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->paginate()
         : $event->tickets()->orderBy($sort_by, 'asc')->paginate();
         // Return view.
-        return view('ManageEvent.Tickets', compact('event', 'tickets', 'sort_by', 'q', 'allowed_sorts'));
+        return view('ManageEvent.Tickets', compact('event', 'tickets', 'sort_by', 'q', 'allowed_sorts', 'is_embedded'));
     }
 
     /**

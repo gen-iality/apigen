@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Models\EventStats;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DateInterval;
 use DatePeriod;
@@ -17,7 +18,7 @@ class EventDashboardController extends MyBaseController
      * @param bool|false $event_id
      * @return \Illuminate\View\View
      */
-    public function showDashboard($event_id = false)
+    public function showDashboard(Request $request, $event_id = false)
     {  
         $event = Event::scope()->findOrFail($event_id);
 
@@ -84,6 +85,7 @@ class EventDashboardController extends MyBaseController
             'event'      => $event,
             'chartData'  => json_encode($result),
             'ticketData' => json_encode($tickets_data),
+            'is_embedded'  => $request->is_embedded
         ];
         return view('ManageEvent.Dashboard', $data);
     }
