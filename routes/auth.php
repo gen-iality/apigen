@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth.firebase')->get('currentUser', 'FireBaseAuthController@getCurrentUser');
+Route::middleware('auth:token')->get('currentUser', 'FireBaseAuthController@getCurrentUser');
 
 

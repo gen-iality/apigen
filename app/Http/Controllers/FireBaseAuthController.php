@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 /**
  * @resource AuthUser
  * This class is in charge of managing auth stuff which is implemented using firebase
@@ -22,6 +22,6 @@ class FireBaseAuthController extends Controller
      */
     public function getCurrentUser(Request $request)
     {
-        return ($request->get('user')?$request->get('user'):null);
+        return (Auth::user()?Auth::user():null);
     }
 }
