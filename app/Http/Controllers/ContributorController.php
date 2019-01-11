@@ -159,7 +159,7 @@ class ContributorController extends Controller
      */
     public function myEvents(Request $request){
 
-        $user = $request->get('user');
+        $user = Auth::user();
         $userPermissions = ModelHasRole::where('model_id',$user->id)->with('event')->get();   
         return  $userPermissions? ModelHasRoleResource::collection($userPermissions) : [];
     }
