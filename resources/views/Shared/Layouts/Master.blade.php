@@ -32,7 +32,7 @@
 
     @yield('head')
 </head>
-<body class="attendize">
+<body class="attendize" style="background-color: white">
 @yield('pre_header')
 <header id="header" class="navbar" >
 
@@ -128,7 +128,7 @@
 <!--Main Content-->
 <section id="main" role="main">
     <div class="container-fluid">
-        <div class="page-title">
+        <div class="page-title"  style="background-color: white">
             <h1 class="title">@yield('page_title')</h1>
         </div>
         @if(array_key_exists('page_header', View::getSections()))
