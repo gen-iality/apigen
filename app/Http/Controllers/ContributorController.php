@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\ModelHasRole;
 use App\Attendee;
+use Auth;
 
 class ContributorController extends Controller
 {
@@ -135,8 +136,8 @@ class ContributorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function meAsContributor(Request $request, String $event_id){
-        
-        $user = $request->get('user');
+
+        $user = Auth::user();
         $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id',$user->id)->latest()->first();
         
         if(($userPermissions && $userPermissions->role))
