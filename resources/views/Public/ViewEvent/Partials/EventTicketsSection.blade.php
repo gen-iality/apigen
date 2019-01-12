@@ -1,4 +1,4 @@
-{<section id="tickets" class="container">
+<section id="tickets" class="container">
     <div class="row">
         <h1 class='section_head'>
             @lang("Public_ViewEvent.tickets")
