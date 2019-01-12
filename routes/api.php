@@ -185,6 +185,7 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::get('pdftest', 'TestingController@pdf');
+Route::post('print_order/{id}/send', 'TestingController@resendOrder');
 Route::middleware('auth.firebase')->get('test', 'EventUserController@test');
 
 //Routes for create a new webhooks in Sendinblue API and Update status of messages send by sendinblue
