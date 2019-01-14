@@ -39,7 +39,6 @@ class UserController extends UserControllerWeb
 
 
     public function loginorcreatefromtoken(Request $request){
-
             /**
              * Miramos si el token viene en la Petición
              * El token viene en la petición el cual si llega con el nombre evius_token o token
@@ -74,9 +73,17 @@ class UserController extends UserControllerWeb
             $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
             
             $user = Account::where('uid', '=', $user_auth->uid)->first();
+            return $user_auth;
             
             if(!$user){
                 $user = Account::create(get_object_vars($user_auth));
+
+                //We created a organization default, thus the name organitatios is the displayName user
+                $organization = null;
+                $organization->author =  $user->id;
+                $organization->name = $user->displayName;
+                $model = new Organization($organization);
+                $model->save();
             }
  
             return redirect('https://evius.co/?token='.$firebaseToken);
