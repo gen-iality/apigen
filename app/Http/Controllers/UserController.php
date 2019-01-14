@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UsersResource;
 use App\Account;
+use App\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Firebase\Auth\Token\Verifier;
@@ -76,13 +77,11 @@ class UserController extends UserControllerWeb
             
             if(!$user){
                 $user = Account::create(get_object_vars($user_auth));
-
                 //We created a organization default, thus the name organitatios is the displayName user
-                $organization = null;
+		$organization = new Organization();
                 $organization->author =  $user->id;
                 $organization->name = $user->displayName;
-                $model = new Organization($organization);
-                $model->save();
+                $organization->save();
             }
  
             return redirect('https://evius.co/?token='.$firebaseToken);
