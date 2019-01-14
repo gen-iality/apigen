@@ -171,4 +171,9 @@ class Event extends ModelsEvent
         return $this->hasMany('App\Order');
     }
 
+    public function userPermissions()
+    {
+        return $this->hasMany('App\ModelHasRole');
+    }
+
 }

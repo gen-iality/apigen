@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\ModelHasRole;
 use App\Attendee;
+use App\Event;
 use Auth;
 
 class ContributorController extends Controller
@@ -160,7 +161,7 @@ class ContributorController extends Controller
     public function myEvents(Request $request){
 
         $user = Auth::user();
-        $userPermissions = ModelHasRole::where('model_id',$user->id)->with('event')->get();   
-        return  $userPermissions? ModelHasRoleResource::collection($userPermissions) : [];
+        $events = Event::with('userPermissions')->where('author_id', $user->id)->get();
+        return  $events? ModelHasRoleResource::collection($events) : [];
     }
 }
