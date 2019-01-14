@@ -73,7 +73,6 @@ class UserController extends UserControllerWeb
             $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
             
             $user = Account::where('uid', '=', $user_auth->uid)->first();
-            return $user_auth;
             
             if(!$user){
                 $user = Account::create(get_object_vars($user_auth));
