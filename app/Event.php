@@ -31,7 +31,7 @@ class Event extends ModelsEvent
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
     
 
-    public function __construct($data = null){
+    public function __construct($data = array()){
          $this->dates = array_merge($this->dates , $this->times);
          parent::__construct($data);
     }
