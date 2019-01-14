@@ -79,7 +79,7 @@ class Event extends ModelsEvent
      */
     public function organizer()
     {
-        return $this->belongsTo(\App\Organization::class,'organiser_id');
+        return $this->belongsTo(\App\Organization::class,'organizer_id');
     }
 
 

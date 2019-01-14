@@ -29,7 +29,7 @@ class Event extends MyBaseModel
                 'venue_name_full'     => 'required_without:location_venue_name',
                 'start_date'          => 'required|date_format:"'.$format.'"',
                 'end_date'            => 'required|date_format:"'.$format.'"',
-                'organiser_name'      => 'required_without:organiser_id',
+                'organiser_name'      => 'required_without:organizer_id',
                 'event_image'         => 'mimes:jpeg,jpg,png|max:3000',
             ];
     }
@@ -161,7 +161,7 @@ class Event extends MyBaseModel
      */
     public function organiser()
     {
-        return $this->belongsTo(\App\Organization::class,'organiser_id');
+        return $this->belongsTo(\App\Organization::class,'organizer_id');
     }
 
     /**
