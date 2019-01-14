@@ -135,7 +135,6 @@ class EventController extends Controller
                 ];
         
         $result = new Event($data);
-
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }

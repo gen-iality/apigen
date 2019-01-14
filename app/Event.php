@@ -6,11 +6,12 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use Moloquent;
 use Carbon\Carbon;
+use App\Models\Event as ModelsEvent;
 /**
  * Event Model
  *
  */
-class Event extends Models\Event
+class Event extends ModelsEvent
 {
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
@@ -30,11 +31,10 @@ class Event extends Models\Event
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
     
 
-    public function __construct(){
-        parent::__construct();
-        $this->dates = array_merge($this->dates , $this->times);
+    public function __construct($data = null){
+         $this->dates = array_merge($this->dates , $this->times);
+         parent::__construct($data);
     }
-
     /**
      * The currency associated with the event.
      *
