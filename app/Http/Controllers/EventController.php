@@ -62,7 +62,7 @@ class EventController extends Controller
      */
     public function currentUserindex(Request $request)
     {
-        $user = $request->get('user');
+        $user = Auth::user();
 
         return EventResource::collection(
             Event::where('author_id', $user->id)
@@ -112,7 +112,7 @@ class EventController extends Controller
      */
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
-        $user = $request->get('user');        
+        $user = Auth::user();
         $data = $request->json()->all();
        
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
@@ -217,7 +217,7 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
-        $user = $request->get('user');
+        $user = Auth::user();
 
         $data = $request->json()->all();
 

@@ -78,7 +78,7 @@ class UserController extends UserControllerWeb
             if(!$user){
                 $user = Account::create(get_object_vars($user_auth));
                 //We created a organization default, thus the name organitatios is the displayName user
-		$organization = new Organization();
+		        $organization = new Organization();
                 $organization->author =  $user->id;
                 $organization->name = $user->displayName;
                 $organization->save();
