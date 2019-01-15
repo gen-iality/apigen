@@ -44,12 +44,10 @@ class EventController extends Controller
 
     public function index(Request $request, FilterQuery $filterQuery)
     {
-        
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
             ->orWhere('visibility', 'IS NULL', null, 'and'); //null
             
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
-
         return EventResource::collection($results);
 
         //$events = Event::where('visibility', $request->input('name'))->get();
@@ -187,7 +185,7 @@ class EventController extends Controller
      */
     public function show(String $id)
     {
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         return new EventResource($event);
     }
 
@@ -259,16 +257,10 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(String $id)
     {
-        // $event_id = $event->id;
-        // Attendee::where('event_id', $event_id)->first();
-        $res = $event->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
+        $Event = Event::findOrFail($id);
+        return (string)$Event->delete();
     }
     /**
      * AddUserProperty: Add dynamic user property to the event

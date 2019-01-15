@@ -7,12 +7,16 @@ namespace App;
 use Moloquent;
 use Carbon\Carbon;
 use App\Models\Event as ModelsEvent;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+
 /**
  * Event Model
  *
  */
 class Event extends ModelsEvent
 {
+    use SoftDeletes;
+
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
