@@ -29,6 +29,8 @@
         @endif
      {{--   <meta property="og:description" content="{{Str::words(strip_tags(Markdown::parse($event->description))), 20}}" /> --}}
         <meta property="og:site_name" content="Attendize.com" />
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -63,6 +65,7 @@
             }
 
         </style>
+
         {{-- @if ($event->bg_type == 'color' || Input::get('bg_color_preview')) --}}
         @if (false)
             <style>body {background-color: {{(Input::get('bg_color_preview') ? '#'.Input::get('bg_color_preview') : $event->bg_color)}} !important; }</style>
@@ -77,6 +80,7 @@
                 }
             </style>
         @endif
+
 
     </head>
     <body class="attendize">
@@ -100,6 +104,8 @@
         @if(isset($secondsToExpire))
         <script>if($('#countdown')) {setCountdown($('#countdown'), {{$secondsToExpire}});}</script>
         @endif
+        
+
 
         @include('Shared.Partials.GlobalFooterJS')
     </body>
