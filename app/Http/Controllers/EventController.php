@@ -44,8 +44,12 @@ class EventController extends Controller
 
     public function index(Request $request, FilterQuery $filterQuery)
     {
+        $currentDate = new \Carbon\Carbon();
+
+
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
-            ->orWhere('visibility', 'IS NULL', null, 'and'); //null
+                ->orWhere('visibility', 'IS NULL', null, 'and') //null
+                ->Where('datetime_to', '>', $currentDate);
             
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
         return EventResource::collection($results);
