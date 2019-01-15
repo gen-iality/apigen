@@ -260,6 +260,9 @@ class EventCheckoutController extends Controller
 
         $event = Event::findorFail($order_session['event_id']);
         
+        //Find user fields in event.
+        $fields = $event->user_properties;
+                
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
 
@@ -267,7 +270,8 @@ class EventCheckoutController extends Controller
                 'event'           => $event,
                 'secondsToExpire' => $secondsToExpire,
                 'is_embedded'     => $this->is_embedded,
-                'orderService'    => $orderService
+                'orderService'    => $orderService,
+                'fields'          => $fields,
                 ];
 
         if ($this->is_embedded) {

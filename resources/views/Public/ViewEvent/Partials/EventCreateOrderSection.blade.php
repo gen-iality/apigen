@@ -65,29 +65,21 @@
 
                 <h3> @lang("Public_ViewEvent.your_information")</h3>
 
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            {!! Form::label("order_first_name", trans("Public_ViewEvent.first_name")) !!}
-                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                        </div>
+                    <div class="row">
+                    @foreach($fields as $field)
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    @if($field['mandatory'] == 'true')
+                                    {!! Form::label($field['name'], $field['name']) !!}
+                                    {!! Form::text("order_{$field['name']}", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                                    @else
+                                    {!! Form::label($field['name'], $field['name']) !!}
+                                    {!! Form::text("order_{$field['name']}", null, ['class' => 'form-control']) !!}
+                                    @endif
+                                </div>
+                            </div>
+                    @endforeach
                     </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            {!! Form::label("order_last_name", trans("Public_ViewEvent.last_name")) !!}
-                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label("order_email", trans("Public_ViewEvent.email")) !!}
-                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
 
                 <div class="p20 pl0">
                     <a href="javascript:void(0);" class="btn btn-primary btn-xs" id="mirror_buyer_info">
@@ -113,30 +105,21 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", trans("Public_ViewEvent.first_name")) !!}
-                                                    {!! Form::text("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_first_name.$i.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
+                                            @foreach($fields as $field)
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        @if($field['mandatory'] == 'true')
+                                                        {!! Form::label($field['name'], $field['name']) !!}
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                                                        @else
+                                                        {!! Form::label($field['name'], $field['name']) !!}
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", trans("Public_ViewEvent.last_name")) !!}
-                                                    {!! Form::text("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_last_name.$i.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    {!! Form::label("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", trans("Public_ViewEvent.email_address")) !!}
-                                                    {!! Form::text("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_email.$i.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
-                                                </div>
-                                            </div>
+                                            @endforeach
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
-
                                         </div>
-
                                     </div>
 
 
