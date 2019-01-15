@@ -66,9 +66,13 @@ class EventTicketsController extends MyBaseController
      */
     public function showEditTicket($event_id, $ticket_id)
     {
+        $event = Event::findOrFail($event_id);
+        $ticket = Ticket::findOrFail($ticket_id);
+        $stages = $event->event_stages;
         $data = [
-            'event'  => Event::findOrFail($event_id),
-            'ticket' => Ticket::findOrFail($ticket_id),
+            'event'  => $event,
+            'ticket' => $ticket,
+            'stages' => $stages,
         ];
 
         return view('ManageEvent.Modals.EditTicket', $data);
@@ -248,9 +252,8 @@ class EventTicketsController extends MyBaseController
 
         $ticket->title = $request->get('title');
         $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
-        $ticket->price = $request->get('price');
-        $ticket->start_sale_date = $request->get('start_sale_date');
-        $ticket->end_sale_date = $request->get('end_sale_date');
+        $ticket->price = $request->get('price'); 
+        $ticket->stage = strip_tags($request->get('stage'));
         $ticket->description = $request->get('description');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
