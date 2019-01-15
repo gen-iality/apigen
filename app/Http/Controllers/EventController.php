@@ -91,7 +91,6 @@ class EventController extends Controller
 
     public function delete(string $id)
     {
-        return $id;
         $res = $id->delete();
         if ($res == true) {
             return 'True';
