@@ -44,8 +44,12 @@ class EventController extends Controller
 
     public function index(Request $request, FilterQuery $filterQuery)
     {
+        $currentDate = new \Carbon\Carbon();
+
+
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
-            ->orWhere('visibility', 'IS NULL', null, 'and'); //null
+                ->orWhere('visibility', 'IS NULL', null, 'and') //null
+                ->Where('datetime_to', '>', $currentDate);
             
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
         return EventResource::collection($results);
@@ -223,15 +227,15 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organiser_id']) || $data['organiser_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
-            if ($data['organiser_id'] == "me") {
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
+            if ($data['organizer_id'] == "me") {
                 $organizer = $user;
             } else {
-                $organizer = Account::findOrFail($data['organiser_id']);
+                $organizer = Account::findOrFail($data['organizer_id']);
             }
 
         } else {
-            $organizer = Organization::findOrFail($data['organiser_id']);
+            $organizer = Organization::findOrFail($data['organizer_id']);
         }
         $event->organizer()->associate($organizer);
 
