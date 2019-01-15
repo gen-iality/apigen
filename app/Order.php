@@ -3,15 +3,13 @@
 namespace App;
 
 use File;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use PDF;
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //Importante usar moloquent!!!!!!
 use Moloquent;
-
-class Order extends Moloquent
+use App\Models\Order as Orders;
+class Order extends Orders
 {
-    use SoftDeletes;
 
     /**
      * The validation rules of the model.

@@ -130,7 +130,6 @@
     <div class="row sortable">
     @if($tickets->count())
 
-
         @foreach($tickets as $ticket)
         @if($ticket->stage == $stage["title"])
             <div id="ticket_{{$ticket->id}}" class="col-md-4 col-sm-6 col-xs-12">
@@ -224,18 +223,11 @@
             @include('ManageEvent.Partials.TicketsBlankSlate')
         @endif
         @endif
-        
     </div><!--/ end ticket table-->
-    @endforeach
-    
+    @endforeach    
     <div class="row">
         <div class="col-md-12">
             {!! $tickets->appends(['q' => $q, 'sort_by' => $sort_by])->render() !!}
         </div>
     </div>
 @stop
-
-
-
-
-
