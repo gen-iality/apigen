@@ -37,6 +37,20 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {!! Form::label('stage','Stages', array('class'=>' control-label required')) !!}
+                            <select class="form-control" name="stage">
+                                @foreach($stages as $stage)
+                                    <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="form-group more-options">
                     {!! Form::label('description', trans("ManageEvent.ticket_description"), array('class'=>'control-label')) !!}
                     {!!  Form::text('description', null,
@@ -45,7 +59,7 @@
                                 ))  !!}
                 </div>
 
-                <div class="row more-options">
+                <!-- <div class="row more-options">
                     <div class="col-sm-6">
                         <div class="form-group">
                             {!! Form::label('start_sale_date', trans("ManageEvent.start_sale_on"), array('class'=>' control-label')) !!}
@@ -77,7 +91,7 @@
                                 ])  !!}
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row more-options">
                     <div class="col-md-6">

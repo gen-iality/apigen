@@ -80,6 +80,7 @@ class EventOrdersController extends Controller
      */
     public function manageOrder(Request $request, $order_id)
     {
+        return 'ok';
         $order = Order::findOrFail($order_id);
 
         $orderService = new OrderService($order->amount, $order->booking_fee, $order->event);
@@ -144,6 +145,7 @@ class EventOrdersController extends Controller
      */
     public function resendOrder($order_id)
     {
+        return 'ok';
         $order = Order::findOrFail($order_id);
 
         $this->dispatch(new SendOrderTickets($order));
