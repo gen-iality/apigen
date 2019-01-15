@@ -125,7 +125,7 @@ class MyBaseModel extends Moloquent
         if (!$format) {
             $format = config('attendize.default_datetime_format');
         }
-
+	return $field; //MOCIONFIX Fue colocado provisionalmento
         return $this->$field === null ? null : $this->$field->format($format);
     }
 
