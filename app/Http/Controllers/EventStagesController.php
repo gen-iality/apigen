@@ -14,14 +14,14 @@ use Log;
   Attendize.com   - Event Management & Ticketing
  */
 
-class EventTicketsController extends MyBaseController
+class EventStagesController extends MyBaseController
 {
     /**
      * @param Request $request
      * @param $event_id
      * @return mixed
      */
-    public function showTickets(Request $request, $event_id)
+    public function showStages(Request $request, $event_id)
     {
         $allowed_sorts = [
             'created_at'    => trans("Controllers.sort.created_at"),
@@ -43,15 +43,15 @@ class EventTicketsController extends MyBaseController
         if ($event === null) {
             abort(404);
         }
-        // Find event stages
-        $stages = $event->event_stages;
+
+
         
         // Get tickets for event.
         $tickets = empty($q) === false
         ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->paginate()
         : $event->tickets()->orderBy($sort_by, 'asc')->paginate();
         // Return view.
-        return view('ManageEvent.Tickets', compact('event', 'stages', 'tickets', 'sort_by', 'q', 'allowed_sorts'));
+        return view('ManageEvent.Tickets', compact('event', 'tickets', 'sort_by', 'q', 'allowed_sorts'));
     }
 
     /**
@@ -72,71 +72,43 @@ class EventTicketsController extends MyBaseController
     }
 
     /**
-     * Show the create ticket modal
+     * Show the create stage modal
      *
      * @param $event_id
      * @return \Illuminate\Contracts\View\View
      */
-    public function showCreateTicket(String $event_id)
+    public function showCreateStage(String $event_id)
     {
-        $event = Event::findOrFail($event_id);
-        $stages = $event->event_stages;
-        return view('ManageEvent.Modals.CreateTicket', [
-            'event' => $event,
-            'stages' => $stages,
+        return view('ManageEvent.Modals.CreateStage', [
+            'event' => Event::findOrFail($event_id),
         ]);
     }
 
     /**
-     * Creates a ticket
+     * Creates a stage
      *
      * @param $event_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCreateTicket(Request $request, $event_id)
+    public function postCreateStage(Request $request, $event_id)
     {
-        $stage = $request->get('stage');
-        $ticket = Ticket::createNew();
-        $event = Event::findOrFail($event_id);
-
-        // Find event stages
-        $event_stages =  $event->event_stages;
-
-        if (!$ticket->validate($request->all())) {
-            return response()->json([
-                'status'   => 'error',
-                'messages' => $ticket->errors(),
-                ]);
-        }
         
-        // From the stage, the start and end dates are searched
-            
-        foreach($event_stages as $event_stage){ 
-            if($event_stage["title"] == $stage){ 
-                $start_sale_date = $event_stage["start_sale_date"];
-                $end_sale_date = $event_stage["end_sale_date"];
-            }
-        }
+        $event = Event::findOrFail($event_id);
+        $event_stages = $event->event_stages;
+        $count = count($event_stages);
 
-        $ticket->event_id = $event_id;
-        $ticket->title = strip_tags($request->get('title'));
-        $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
-        $ticket->start_sale_date = $start_sale_date;
-        $ticket->end_sale_date = $end_sale_date;
-        $ticket->stage = strip_tags($request->get('stage'));
-        $ticket->price = $request->get('price');
-        $ticket->min_per_person = $request->get('min_per_person');
-        $ticket->max_per_person = $request->get('max_per_person');
-        $ticket->description = strip_tags($request->get('description'));
-        $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+        $stages = [$count => 
+        [   "title" => $request->title, 
+            "start_sale_date" => $request->start_sale_date, 
+            "end_sale_date" => $request->end_sale_date]
+        ];
 
-        $ticket->save();
+        $event->event_stages += $stages;
 
-        session()->flash('message', 'Successfully Created Ticket');
+        $event->save();
 
         return response()->json([
             'status'      => 'success',
-            'id'          => $ticket->id,
             'message'     => trans("Controllers.refreshing"),
             'redirectUrl' => route('showEventTickets', [
                 'event_id' => $event_id,

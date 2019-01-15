@@ -17,9 +17,24 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmed;
 use QRCode;
 use Sendinblue\Mailin;
+use App\Jobs\SendOrderTickets;
+use App\Order;
+use App\evaLib\Services\Order as OrderService;
 
 class TestingController extends Controller
 {
+
+    public function resendOrder($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+
+        return $this->dispatch(new SendOrderTickets($order));
+
+        return response()->json([
+            'status'      => 'success',
+            'redirectUrl' => '',
+        ]);
+    }
 
     public function error()
     {
