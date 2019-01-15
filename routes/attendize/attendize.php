@@ -496,6 +496,24 @@ Route::group(
 
             /*
              * -------
+             * Stages
+             * -------
+             */
+            Route::get('{event_id}/stages/', [
+                'as'   => 'showEventStages',
+                'uses' => 'EventStagesController@showStages',
+            ]);
+            Route::get('{event_id}/stage/create', [
+                'as'   => 'showCreateStage',
+                'uses' => 'EventStagesController@showCreateStage',
+            ]);
+            Route::post('{event_id}/stage/create', [
+                'as'   => 'postCreateStage',
+                'uses' => 'EventStagesController@postCreateStage',
+            ]);
+
+            /*
+             * -------
              * Orders
              * -------
              */
@@ -509,7 +527,7 @@ Route::group(
                 'uses' => 'EventOrdersController@manageOrder',
             ]);
 
-            Route::post('order/{order_id}/resend', [
+            Route::post('order/felipe/{order_id}/resend', [
                 'as' => 'resendOrder',
                 'uses' => 'EventOrdersController@resendOrder',
             ]);
