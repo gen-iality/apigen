@@ -83,7 +83,7 @@ class EventController extends Controller
     public function EventbyOrganizations(string $id)
     {
         return EventResource::collection(
-            Event::where('organiser_id', $id)
+            Event::where('organizer_id', $id)
                 ->paginate(config('app.page_size'))
         );
 
