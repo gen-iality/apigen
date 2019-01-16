@@ -13,6 +13,7 @@ use Kreait\Firebase\ServiceAccount;
 use App\Event;
 use App\Attendee;
 use App\Mail\ConfirmationEmail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\State;
