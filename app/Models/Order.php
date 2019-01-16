@@ -32,6 +32,10 @@ class Order extends MyBaseModel
         'order_email.email'         => 'Please enter a valid email',
     ];
 
+    protected $fillable = [
+        '_token',
+    ];
+
     /**
      * The items associated with the order.
      *

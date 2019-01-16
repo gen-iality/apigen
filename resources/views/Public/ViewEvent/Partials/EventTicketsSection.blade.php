@@ -11,10 +11,27 @@
         </div>
     @else
 
+        @foreach($stages as $key => $stage)
+        <div class="row" style="background-color:#eaeaea;font-family:Montserrat,sans-serif">
+            <div class="col-md-3 col-xs-6">
+                    <div class='order_options'>
+                        <a style="color:#00ffc2; font-family:Montserrat,sans-serif" id="more-{{$key}}" href="#" onclick="$('.tabs-{{$key}}').slideToggle(function(){$('#more-{{$key}}').html($('.tabs-{{$key}}').is(':visible')?'<h3>{{$stage['title']}}</h3>':'<h3>{{$stage['title']}}</h3>');});"><h3 style="color:#00ffc2; font-family:Montserrat,sans-serif">{{$stage["title"]}}</h3></a>
+                    </div>
+            </div>
+            <div class="col-md-2 col-xs-6 col-md-offset-7">
+                <div class='order_options'>
+                        <p class="nm text-muted"> <?php echo date('d F', strtotime($stage["start_sale_date"])); ?> /  <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?></p>
+                </div>
+            </div>
+        </div>
         @if($tickets->count() > 0)
 
             {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
-            <div class="row">
+            @if($key == $stage_act)
+                <div class="row tabs-{{$key}}" style="display:block" id="tabs-{{$key}}">
+            @else
+                <div class="row tabs-{{$key}}" style="display:none" id="tabs-{{$key}}">
+            @endif
                 <div class="col-md-12">
                     <div class="content">
                         <div class="tickets_table_wrap">
@@ -23,6 +40,7 @@
                                 $is_free_event = true;
                                 ?>
                                 @foreach($tickets as $ticket)
+                                @if($ticket->stage == $stage["title"])
                                     <tr class="ticket" property="offers" typeof="Offer">
                                         <td>
                                 <span class="ticket-title semibold" property="name">
@@ -75,30 +93,34 @@
                                                 @else
                                                     {!! Form::hidden('tickets[]', $ticket->id) !!}
                                                     <meta property="availability" content="http://schema.org/InStock">
-                                                    <select name="ticket_{{$ticket->id}}" class="form-control"
-                                                            style="text-align: center">
-                                                        @if ($tickets->count() > 1)
-                                                            <option value="0">0</option>
-                                                        @endif
-                                                        @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
-                                                            <option value="{{$i}}">{{$i}}</option>
-                                                        @endfor
-                                                    </select>
+                                                    @if($key == $stage_act)
+                                                        <select name="ticket_{{$ticket->id}}" class="form-control"
+                                                                style="text-align: center">
+                                                            @if ($tickets->count() > 1)
+                                                                <option value="0">0</option>
+                                                            @endif
+                                                            @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
+                                                                <option value="{{$i}}">{{$i}}</option>
+                                                            @endfor
+                                                        </select>
+                                                    @endif
                                                 @endif
 
                                             @endif
                                         </td>
                                     </tr>
+                                @endif
                                 @endforeach
-
-                                    <tr>
-                                        <td colspan="3" style="text-align: center">
-                                            @lang("Public_ViewEvent.below_tickets")
-                                        </td>
-                                    </tr>
+                                    @if($key == $stage_act)
+                                        <tr>
+                                            <td colspan="3" style="text-align: center">
+                                                @lang("Public_ViewEvent.below_tickets")
+                                            </td>
+                                        </tr>
+                                    @endif
                                 <tr class="checkout">
                                     <td colspan="3">
-                                        @if(!$is_free_event)
+                                        @if(!$is_free_event && $key == $stage_act)
                                             <div class="hidden-xs pull-left">
                                                 <img class=""
                                                      src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/>
@@ -111,7 +133,9 @@
                                             </div>
 
                                         @endif
-                                        {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
+                                        @if($key == $stage_act)
+                                            {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
+                                        @endif
                                     </td>
                                 </tr>
                             </table>
@@ -129,8 +153,14 @@
             </div>
 
         @endif
+        @endforeach
+    </div>
 
     @endif
 
 </section>
-}
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+</script>

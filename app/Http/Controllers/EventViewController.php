@@ -27,8 +27,19 @@ class EventViewController extends Controller
      */
     public function showEventHome(Request $request, $event_id, $slug = '', $preview = false)
     {
+        $date = new \DateTime();
+        $now =  $date->format('Y-m-d H:i');
+        $show = '';
  
         $event = Event::findOrFail($event_id);
+        $stages = $event->event_stages;
+
+        foreach($stages as $key => $stage){ 
+            if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+               $stage_act = $key;
+            }
+        }
+
         if (!Utils::userOwns($event) && !$event->is_live) {
 
             return view('Public.ViewEvent.EventNotLivePage');
@@ -36,8 +47,11 @@ class EventViewController extends Controller
 
         $data = [
             'event'       => $event,
-            'tickets'     => $event->tickets()->where('is_hidden', 0)->orderBy('sort_order', 'asc')->get(),
+            'tickets'     => $event->tickets()->where('is_hidden', 0)->orderBy('stage', 'asc')->get(),
             'is_embedded' => 0,
+            'stages' => $stages,
+            'stage_act' => $stage_act,
+            'show' => $show,
         ];
 
         /*
