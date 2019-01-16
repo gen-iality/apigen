@@ -22,6 +22,9 @@ class Attendee extends MyBaseModel
      *
      * @var array $fillable
      */
+    protected $table = "event_users";
+    protected static $unguarded = true;
+    
     protected $fillable = [
         'first_name',
         'last_name',

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\OrderCompletedEvent;
 use App\Models\AccountPaymentGateway;
 use App\Models\Affiliate;
-use App\Models\Attendee;
+use App\Attendee;
 use App\Models\EventStats;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -508,13 +508,14 @@ class EventCheckoutController extends Controller
         // DB::beginTransaction();
         try {
             
-            $order = new Order();
             $ticket_order = session()->get('ticket_order_' . $event_id);
             $request_data = $ticket_order['request_data'][0];
             $event = Event::findOrFail($ticket_order['event_id']);
+            $fields = $event->user_properties;
             $attendee_increment = 1;
             $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
 
+            $order = new Order($request_data);
 
             /*
              * Create the order
@@ -525,9 +526,9 @@ class EventCheckoutController extends Controller
             if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
                 $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
             }
-            $order->first_name = strip_tags($request_data['order_first_name']);
-            $order->last_name = strip_tags($request_data['order_last_name']);
-            $order->email = $request_data['order_email'];
+            // $order->first_name = strip_tags($request_data['order_first_name']);
+            // $order->last_name = strip_tags($request_data['order_last_name']);
+            // $order->email = $request_data['order_email'];
             $order->order_status_id = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount = $ticket_order['order_total'];
             $order->booking_fee = $ticket_order['booking_fee'];
@@ -610,16 +611,18 @@ class EventCheckoutController extends Controller
                 for ($i = 0; $i < $attendee_details['qty']; $i++) {
 
                     $attendee = new Attendee();
-                    $attendee->first_name = strip_tags($request_data["ticket_holder_first_name"][$i][$attendee_details['ticket']['id']]);
-                    $attendee->last_name = strip_tags($request_data["ticket_holder_last_name"][$i][$attendee_details['ticket']['id']]);
-                    $attendee->email = $request_data["ticket_holder_email"][$i][$attendee_details['ticket']['id']];
+                    $attendee->properties = (object)[];
+
+                    foreach($fields as $field){
+                        if(!$field['name']) continue;
+                        $attendee->properties->{$field['name']} = $request_data["tiket_holder_".str_replace(" ","_",$field['name'])][$i][$attendee_details['ticket']['id']];                    
+                    }
                     $attendee->event_id = $event_id;
                     $attendee->order_id = $order->id;
                     $attendee->ticket_id = $attendee_details['ticket']['id'];
                     $attendee->account_id = $event->account->id;
                     $attendee->reference_index = $attendee_increment;
                     $attendee->save();
-
 
                     /*
                      * Save the attendee's questions
