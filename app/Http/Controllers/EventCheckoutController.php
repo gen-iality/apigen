@@ -148,35 +148,35 @@ class EventCheckoutController extends Controller
             $reservedTickets->expires = $order_expires_time;
             $reservedTickets->session_id = session()->getId();
             $reservedTickets->save();
-            for ($i = 0; $i < $current_ticket_quantity; $i++) {
-                /*
-                 * Create our validation rules here
-                 */
-                $validation_rules['ticket_holder_first_name.' . $i . '.' . $ticket_id] = ['required'];
-                $validation_rules['ticket_holder_last_name.' . $i . '.' . $ticket_id] = ['required'];
-                $validation_rules['ticket_holder_email.' . $i . '.' . $ticket_id] = ['required', 'email'];
+            // for ($i = 0; $i < $current_ticket_quantity; $i++) {
+            //     /*
+            //      * Create our validation rules here
+            //      */
+            //     $validation_rules['ticket_holder_first_name.' . $i . '.' . $ticket_id] = ['required'];
+            //     $validation_rules['ticket_holder_last_name.' . $i . '.' . $ticket_id] = ['required'];
+            //     $validation_rules['ticket_holder_email.' . $i . '.' . $ticket_id] = ['required', 'email'];
 
-                $validation_messages['ticket_holder_first_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s first name is required';
-                $validation_messages['ticket_holder_last_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s last name is required';
-                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s email is required';
-                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.email'] = 'Ticket holder ' . ($i + 1) . '\'s email appears to be invalid';
+            //     $validation_messages['ticket_holder_first_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s first name is required';
+            //     $validation_messages['ticket_holder_last_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s last name is required';
+            //     $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s email is required';
+            //     $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.email'] = 'Ticket holder ' . ($i + 1) . '\'s email appears to be invalid';
 
-                /*
-                 * Validation rules for custom questions
-                 */
+            //     /*
+            //      * Validation rules for custom questions
+            //      */
 
-                if($ticket->questions){
-                    foreach ($ticket->questions as $question) {
+            //     if($ticket->questions){
+            //         foreach ($ticket->questions as $question) {
 
-                        if ($question->is_required && $question->is_enabled) {
-                            $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
-                            $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = "This question is required";
-                        }
-                    }
-                }
+            //             if ($question->is_required && $question->is_enabled) {
+            //                 $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
+            //                 $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = "This question is required";
+            //             }
+            //         }
+            //     }
 
 
-            }
+            // }
 
         }
         if (empty($tickets)) {
