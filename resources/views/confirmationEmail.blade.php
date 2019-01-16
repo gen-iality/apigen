@@ -1,7 +1,7 @@
 @component('mail::message')
 
 
- Hola {{$user_id}}!
+ Hola {{$user_name}}!
  
 <div style="text-align: center">
     <span>

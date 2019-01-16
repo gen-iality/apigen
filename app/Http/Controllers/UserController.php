@@ -232,14 +232,14 @@ class UserController extends UserControllerWeb
     {
         $email = $user->email;
       
-            $messageUser = new MessageUser(
-                [
-                    'email' => $eventUser->user->email,
-                    'user_id' => $eventUser->user->id,
-                    'event_user_id' => $eventUser->id,
-                ]
-            );
-            $message->messageUsers()->save($messageUser);
+            // $messageUser = new MessageUser(
+            //     [
+            //         'email' => $eventUser->user->email,
+            //         'user_id' => $eventUser->user->id,
+            //         'event_user_id' => $eventUser->id,
+            //     ]
+            // );
+            // $message->messageUsers()->save($messageUser);
 
             Mail::to($email)
                 ->queue(
