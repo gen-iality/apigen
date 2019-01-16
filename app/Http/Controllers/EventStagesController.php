@@ -92,19 +92,26 @@ class EventStagesController extends MyBaseController
      */
     public function postCreateStage(Request $request, $event_id)
     {
-        
+        $count = 0;
         $event = Event::findOrFail($event_id);
         $event_stages = $event->event_stages;
-        $count = count($event_stages);
 
-        $stages = [$count => 
-        [   "title" => $request->title, 
-            "start_sale_date" => $request->start_sale_date, 
-            "end_sale_date" => $request->end_sale_date]
-        ];
+        if($event_stages){ 
+            $count = count($event_stages);
+        }
 
-        $event->event_stages += $stages;
-
+            $stages = [$count => 
+            [   "title" => $request->title, 
+                "start_sale_date" => $request->start_sale_date, 
+                "end_sale_date" => $request->end_sale_date]
+            ];
+            
+        if($event_stages){ 
+            $event->event_stages += $stages;
+        }else{
+            $event->event_stages = $stages;
+        }
+        
         $event->save();
 
         return response()->json([
