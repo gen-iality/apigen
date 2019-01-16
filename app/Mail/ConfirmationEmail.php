@@ -27,7 +27,7 @@ class ConfirmationEmail extends Mailable implements ShouldQueue
      */
     
     public function __construct(
-        User $user)
+        Account $user)
     {
         $this->user_name = $user->displayName;
         $this->user_id = $user->id;
