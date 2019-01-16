@@ -53,9 +53,11 @@
                                 <div class="form-group">
                                     {!! Form::label('stage','Stages', array('class'=>' control-label required')) !!}
                                     <select class="form-control" name="stage">
-                                        @foreach($stages as $stage)
-                                            <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
-                                        @endforeach
+                                        @if($stages)
+                                            @foreach($stages as $stage)
+                                                <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
