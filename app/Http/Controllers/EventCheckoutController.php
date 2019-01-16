@@ -191,8 +191,11 @@ class EventCheckoutController extends Controller
             $activeAccountPaymentGateway->fill(['payment_gateway_id' => config('attendize.payment_gateway_dummy')]);
             $paymentGateway= $activeAccountPaymentGateway;
         } else {
-            $activeAccountPaymentGateway = ($event->account->active_payment_gateway->count()) ? $event->account->active_payment_gateway->firstOrFail() : false;
-            $paymentGateway = $event->account->active_payment_gateway->count() ? $event->account->active_payment_gateway->payment_gateway : false;
+            $eventAccount = $event->account;
+            $eventPaymentGateway = $eventAccount->active_payment_gateway;
+            $activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
+            $activeAccountPayment = $activeAccountPaymentGateway;
+            $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
         /*
@@ -290,6 +293,7 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $event_id)
     {
+        
         //If there's no session kill the request and redirect back to the event homepage.
         if (!session()->get('ticket_order_' . $event_id)) {
             return response()->json([
@@ -304,6 +308,7 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($event_id);
         $order = new Order();
         $ticket_order = session()->get('ticket_order_' . $event_id);
+        return $ticket_order;
         $validation_rules = $ticket_order['validation_rules'];
         $validation_messages = $ticket_order['validation_messages'];
 
@@ -311,13 +316,12 @@ class EventCheckoutController extends Controller
         $order->messages = $order->messages + $validation_messages;
 
 
-      /*   if (!$order->validate($request->all())) {
+        if (!$order->validate($request->all())) {
             return response()->json([
                 'status'   => 'error',
                 'messages' => $order->errors(),
             ]);
-        } */
-
+        }
         //Add the request data to a session in case payment is required off-site
         session()->push('ticket_order_' . $event_id . '.request_data', $request->except(['card-number', 'card-cvc']));
 
@@ -391,6 +395,18 @@ class EventCheckoutController extends Controller
                         'receipt_email' => $request->get('order_email'),
                     ];
                     break;
+                //CONFIGURATION PLACETOPAY
+                case config('attendize.payment_gateway_placetopay'):
+                    
+                    // $token = $request->get('stripeToken');
+                    $token = "123456789";
+                    $transaction_data += [
+                        'token'         => $token,
+                        'receipt_email' => $request->get('order_email'),
+                    ];
+
+                    break;
+
                 default:
                     Log::error('No payment gateway configured.');
                     return repsonse()->json([

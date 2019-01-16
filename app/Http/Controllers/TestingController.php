@@ -21,6 +21,9 @@ use App\Jobs\SendOrderTickets;
 use App\Order;
 use App\evaLib\Services\Order as OrderService;
 
+use App\Extensions\payment_placetopay\src\Gateway;
+use Omnipay;
+
 class TestingController extends Controller
 {
 
@@ -197,6 +200,12 @@ class TestingController extends Controller
 
     public function permissions(){
         return Permission::all();
+    }
+
+    public function Gateway(){
+
+        $gateway = Omnipay::create('placetopay');
+        return $gateway->getName();
     }
 
 

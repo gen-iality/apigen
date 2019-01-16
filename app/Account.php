@@ -80,7 +80,8 @@ class Account extends User
         'stripe_refresh_token',
         'stripe_secret_key',
         'stripe_publishable_key',
-        'stripe_data_raw'
+        'stripe_data_raw',
+        'payment_gateway_id'
     ];
 
     public function __construct($attributes = array())
