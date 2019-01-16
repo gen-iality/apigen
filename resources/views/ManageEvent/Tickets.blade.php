@@ -229,7 +229,7 @@
             @endforeach 
         @endif
     @endif   
-    <div class="row">
+    <div class="row">   
         <div class="col-md-12">
             {!! $tickets->appends(['q' => $q, 'sort_by' => $sort_by])->render() !!}
         </div>
