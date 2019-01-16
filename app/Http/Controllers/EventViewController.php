@@ -30,13 +30,16 @@ class EventViewController extends Controller
         $date = new \DateTime();
         $now =  $date->format('Y-m-d H:i');
         $show = '';
+        $stage_act = [];
  
         $event = Event::findOrFail($event_id);
         $stages = $event->event_stages;
-
-        foreach($stages as $key => $stage){ 
-            if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
-               $stage_act = $key;
+        
+        if($stages){ 
+            foreach($stages as $key => $stage){ 
+                if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+                $stage_act = $key;
+                }
             }
         }
 
