@@ -186,6 +186,11 @@ Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
+Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
+Route::post('confirmEmail/{id}', 'UserController@confirmEmail');
+
+
+
 
 //Routes for create a new webhooks in Sendinblue API and Update status of messages send by sendinblue
 Route::post('UpdateStatusMessage', 'SendinBlueController@UpdateStatusMessagePOST');

@@ -12,6 +12,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use App\Event;
 use App\Attendee;
+use App\Mail\ConfirmationEmail;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\State;
@@ -19,6 +20,7 @@ use Illuminate\Http\Response;
 use Validator;
 use Storage;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\web\UserController as UserControllerWeb;
 
 class UserController extends UserControllerWeb
@@ -83,7 +85,11 @@ class UserController extends UserControllerWeb
                 $organization->name = $user->displayName;
                 $organization->save();
             }
- 
+            
+            self::_sendConfirmationEmail(
+                $user
+            );
+
             return redirect('https://evius.co/?token='.$firebaseToken);
     }
 
@@ -214,4 +220,48 @@ class UserController extends UserControllerWeb
         $response = new UsersResource($Account);
         return $Account;
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $eventUsers
+     * @param [type] $message
+     * @return void
+     */
+    private static function _sendConfirmationEmail($user)
+    {
+        $email = $user->email;
+      
+            $messageUser = new MessageUser(
+                [
+                    'email' => $eventUser->user->email,
+                    'user_id' => $eventUser->user->id,
+                    'event_user_id' => $eventUser->id,
+                ]
+            );
+            $message->messageUsers()->save($messageUser);
+
+            Mail::to($email)
+                ->queue(
+                    new ConfirmationEmail($user)
+                );
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function confirmEmail(String $id)
+    {
+        $user = Account::findOrFail($id);
+
+        $user->emailVerified = true;
+        $user->save();
+
+        return redirect()->away(Config::get('app.front_url', 'https://evius.co') . '/profile/' . $user->id);
+        // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
+
+    }
+
 }
