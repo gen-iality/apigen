@@ -188,7 +188,7 @@ Route::get('testqr', 'TestingController@qrTesting');
 Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
-Route::post('confirmEmail/{id}', 'UserController@confirmEmail');
+Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
 
 
 
