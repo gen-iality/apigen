@@ -134,6 +134,8 @@ class EventController extends Controller
                     ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
                     ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
                 ];
+
+        $data['organizer_type'] = "App\user";
         
         $result = new Event($data);
         if ($request->file('picture')) {
