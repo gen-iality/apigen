@@ -192,9 +192,8 @@ class EventCheckoutController extends Controller
             $paymentGateway= $activeAccountPaymentGateway;
         } else {
             $eventAccount = $event->account;
-            $eventPaymentGateway = $eventAccount->active_payment_gateway;
-            $activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
-            $activeAccountPayment = $activeAccountPaymentGateway;
+            $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
+            //$activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
             $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
@@ -293,7 +292,7 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $event_id)
     {
-        
+
         //If there's no session kill the request and redirect back to the event homepage.
         if (!session()->get('ticket_order_' . $event_id)) {
             return response()->json([
@@ -308,7 +307,6 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($event_id);
         $order = new Order();
         $ticket_order = session()->get('ticket_order_' . $event_id);
-        return $ticket_order;
         $validation_rules = $ticket_order['validation_rules'];
         $validation_messages = $ticket_order['validation_messages'];
 
@@ -316,12 +314,12 @@ class EventCheckoutController extends Controller
         $order->messages = $order->messages + $validation_messages;
 
 
-        if (!$order->validate($request->all())) {
+       /* if (!$order->validate($request->all())) {
             return response()->json([
                 'status'   => 'error',
                 'messages' => $order->errors(),
             ]);
-        }
+        }*/
         //Add the request data to a session in case payment is required off-site
         session()->push('ticket_order_' . $event_id . '.request_data', $request->except(['card-number', 'card-cvc']));
 
@@ -348,9 +346,16 @@ class EventCheckoutController extends Controller
 
             } else {
                 $gateway = Omnipay::create($ticket_order['payment_gateway']->name);
-                $gateway->initialize($ticket_order['account_payment_gateway']->config + [
-                        'testMode' => config('attendize.enable_test_payments'),
-                    ]);
+                $config = $ticket_order['account_payment_gateway']->config;
+                if (!$config) $config = [];
+                $config += [
+                    'testMode' => config('attendize.enable_test_payments'),
+                    'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
+                    'tranKey' => '3ZNdDTNP0Uk1A28G',
+                    'url' => 'https://test.placetopay.com/redirection/',
+                ];
+
+                $gateway->initialize($config);
             }
 
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
@@ -359,8 +364,8 @@ class EventCheckoutController extends Controller
             $transaction_data += [
                     'amount'      => $orderService->getGrandTotal(),
                     'currency'    => $event->currency->code,
-                    'description' => 'Order for customer: ' . $request->get('order_email'),
-            ];
+                    'description' => 'Evento: ' .$event->name,
+            ];    
 
             //TODO: class with an interface that builds the transaction data.
             switch ($ticket_order['payment_gateway']->id) {
@@ -388,7 +393,7 @@ class EventCheckoutController extends Controller
                             : $event->organiser->name
                     ];
                     break;
-                case config('attendize.payment_gateway_stripe'):
+                    case config('attendize.payment_gateway_stripe'):
                     $token = $request->get('stripeToken');
                     $transaction_data += [
                         'token'         => $token,
@@ -397,14 +402,18 @@ class EventCheckoutController extends Controller
                     break;
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
-                    
-                    // $token = $request->get('stripeToken');
-                    $token = "123456789";
-                    $transaction_data += [
-                        'token'         => $token,
-                        'receipt_email' => $request->get('order_email'),
-                    ];
+                // var_dump($ticket_order['reserved_tickets_id']);die;
+                    $transaction_data +=[
+                        'username' => $request->get('order_Nombres'),
+                        'email' => $request->get('order_email'),
+                        'returnUrl' =>'https://evius.co/landing/'.$event_id.'?payment_process=true',
+                        'orderid' => $ticket_order['reserved_tickets_id'],
+                        
 
+                        'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
+                        'tranKey' => '3ZNdDTNP0Uk1A28G',
+                        'url' => 'https://test.placetopay.com/redirection/',
+                    ];
                     break;
 
                 default:
@@ -428,6 +437,10 @@ class EventCheckoutController extends Controller
                 return $this->completeOrder($event_id);
 
             } elseif ($response->isRedirect()) {
+
+                session()->push('ticket_order_' . $event_id . '.transaction_id',
+                $response->getTransactionReference());
+                $this->completeOrder($event_id);
 
                 /*
                  * As we're going off-site for payment we need to store some data in a session so it's available
@@ -466,6 +479,14 @@ class EventCheckoutController extends Controller
                 'message' => $error,
             ]);
         }
+
+    }
+
+    public function placetopay(){
+
+
+
+        return $request;
 
     }
 
@@ -790,5 +811,16 @@ class EventCheckoutController extends Controller
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
     }
 
+    public function paymentCompleted(Request $request){
+        $request = $request->json()->all();
+        $status = $request['status']['status'];
+        $order = Order::where('order_reference',$request['reference'])->first();
+        $order->status = $request;
+        $order->order_status_id = 10;
+        // $order->order_status_id = ($status == 'APPROVED')? config('attendize.order_complete'): config('attendize.order_cancelled');
+        $order->save();
+
+        return $order;
+    }
 }
 
