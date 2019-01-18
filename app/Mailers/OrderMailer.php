@@ -28,29 +28,31 @@ class OrderMailer
 
     public function sendOrderTickets(Order $order)
     {
+        $logo_evius = 'images/logo.png';
         $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
         $orderService->calculateFinalCosts();
         Log::info("Sending ticket to: " . $order->email);
         $data = [
             'order' => $order,
-            'orderService' => $orderService
+            'orderService' => $orderService,
+            'logo' => $logo_evius
         ];
-        $file_name = $order->order_reference;
-        $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name . '.pdf';
-        if (!file_exists($file_path)) {
-            var_dump('error');die;
+        // $file_name = $order->order_reference;
+        // $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name . '.pdf';
+        // if (!file_exists($file_path)) {
+        //     var_dump('error');die;
         
-            Log::error("Cannot send actual ticket to : " . $order->email . " as ticket file does not exist on disk");
-            return;
-        }
+        //     Log::error("Cannot send actual ticket to : " . $order->email . " as ticket file does not exist on disk");
+        //     return;
+        // }
 
-        Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $file_path) {
+        Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order) {
             $message->to($order->email);
             $message->subject(trans("Controllers.tickets_for_event", ["event" => $order->event->title]));
-            $message->attach($file_path,[
-                    'as' => 'ticket',
-                    'mime' => 'application/pdf',
-                ]);
+            // $message->attach($file_path,[
+            //         'as' => 'ticket',
+            //         'mime' => 'application/pdf',
+            //     ]);
         });
 
     }

@@ -121,6 +121,8 @@
         <br><br>
     </div>
     <br><br>
-    Gracias
+    Gracias, el equipo de Evius.co
+    <br>
+    <img src="https://api.evius.co/images/logo.png" alt="Evius" height="auto" width="450">
     </body>
 </html>

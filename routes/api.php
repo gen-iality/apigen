@@ -190,8 +190,10 @@ Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
 
-
-
+Route::post('order/{order_id}/resend', [
+    'as' => 'resendOrder',
+    'uses' => 'EventOrdersController@resendOrder',
+]);
 
 //Routes for create a new webhooks in Sendinblue API and Update status of messages send by sendinblue
 Route::post('UpdateStatusMessage', 'SendinBlueController@UpdateStatusMessagePOST');
