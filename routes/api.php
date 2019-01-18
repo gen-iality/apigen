@@ -241,5 +241,6 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
  */
 /**
  * REQUEST OF PLACETOPAY
+ * https://api.evius.co/api/order/paymentCompleted
  */
-Route::post("order/checkout", "EventCheckoutController@completedPayment");
+Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");

@@ -811,7 +811,7 @@ class EventCheckoutController extends Controller
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
     }
 
-    public function completedPayment(Request $request){
+    public function paymentCompleted(Request $request){
         $request = $request->json()->all();
         $status = $request['status']['status'];
         $order = Order::where('order_reference',$request['reference'])->first();
