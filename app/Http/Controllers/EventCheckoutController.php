@@ -402,11 +402,12 @@ class EventCheckoutController extends Controller
                     break;
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
+                // var_dump($ticket_order['reserved_tickets_id']);die;
                     $transaction_data +=[
                         'username' => $request->get('order_Nombres'),
                         'email' => $request->get('order_email'),
                         'returnUrl' =>'https://evius.co/landing/'.$event_id.'?payment_process=true',
-                        'orderid' => '234567',
+                        'orderid' => $ticket_order['reserved_tickets_id'],
                         
 
                         'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
