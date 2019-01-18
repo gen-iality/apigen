@@ -45,11 +45,11 @@ return [
     'ticket_booking_fee_percentage' => 0,
 
     /* Order statuses */
-    'order_complete'                => 1,
-    'order_refunded'                => 2,
-    'order_partially_refunded'      => 3,
-    'order_cancelled'               => 4,
-    'order_awaiting_payment'        => 5,
+    'order_complete'                => '5c423232c9a4c86123236dcd',
+    'order_refunded'                => '5c42325c477041612349941b',
+    'order_partially_refunded'      => '5c423296477041612349941c',
+    'order_cancelled'               => '5c4232ad477041612349941d',
+    'order_awaiting_payment'        => '5c4232c1477041612349941e',
 
     /* Attendee question types */
     'question_textbox_single'       => 1,

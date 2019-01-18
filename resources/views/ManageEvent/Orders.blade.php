@@ -121,9 +121,11 @@
                                 </a>
                             </td>
                             <td>
-                                <span class="label label-{{(!$order->is_payment_received || $order->is_refunded || $order->is_partially_refunded) ? 'warning' : 'success'}}">
-                                    {{-- $order->orderStatus->name --}}
-                                </span>
+                                @if(isset($order->orderStatus->name))
+                                    <span class="label label-{{(!$order->is_payment_received || $order->is_refunded || $order->is_partially_refunded) ? 'warning' : 'success'}}">
+                                        {{ $order->orderStatus->name }}
+                                    </span>
+                                @endif
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0);" data-modal-id="cancel-order-{{ $order->id }}" data-href="{{route('showCancelOrder', ['order_id'=>$order->id])}}" title="@lang("Order.cancel_order")" class="btn btn-xs btn-danger loadModal">
