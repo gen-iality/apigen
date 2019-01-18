@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b248640b2985933ee9eaaadff6d89683",
+    "content-hash": "ba18a8cd50f70231a9cf161832acffc6",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -666,6 +666,48 @@
             ],
             "description": "Provides a way to patch Composer packages.",
             "time": "2018-05-11T18:00:16+00:00"
+        },
+        {
+            "name": "dnetix/redirection",
+            "version": "0.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dnetix/redirection.git",
+                "reference": "3533817d95b0173b4247d6c70df710af40288c7d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dnetix/redirection/zipball/3533817d95b0173b4247d6c70df710af40288c7d",
+                "reference": "3533817d95b0173b4247d6c70df710af40288c7d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-soap": "*",
+                "guzzlehttp/guzzle": ">=5.3",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "illuminate/support": "^5.4",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dnetix\\Redirection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Diego Calle",
+                    "email": "dnetix@gmail.com"
+                }
+            ],
+            "description": "Library to connect with PlacetoPay Redirection service",
+            "time": "2018-05-28T20:35:42+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

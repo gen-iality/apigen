@@ -239,3 +239,7 @@ Route::middleware('cors')->post('rols', 'RolController@store');
 Route::middleware('cors')->put('rols/{id}', 'RolController@update');
 Route::middleware('cors')->get('rols/{id}', 'RolController@show');
  */
+/**
+ * REQUEST OF PLACETOPAY
+ */
+Route::post("order/checkout", "EventCheckoutController@completedPayment");

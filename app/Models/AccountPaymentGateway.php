@@ -36,7 +36,7 @@ class AccountPaymentGateway extends MyBaseModel
      */
     public function payment_gateway()
     {
-        return $this->belongsTo(\App\Models\PaymentGateway::class, 'payment_gateway_id', '_id');
+        return $this->belongsTo(\App\Models\PaymentGateway::class, 'payment_gateway_id', 'id');
     }
 
     /**

@@ -35,9 +35,9 @@ class EventViewController extends Controller
         $stages = $event->event_stages;
 
         foreach($stages as $key => $stage){ 
-            if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+            //if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
                $stage_act = $key;
-            }
+            //}
         }
 
         if (!Utils::userOwns($event) && !$event->is_live) {
