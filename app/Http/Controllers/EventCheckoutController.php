@@ -364,7 +364,7 @@ class EventCheckoutController extends Controller
             $transaction_data += [
                     'amount'      => $orderService->getGrandTotal(),
                     'currency'    => $event->currency->code,
-                    'description' => 'Order for customer: ' . $request->get('order_email'),
+                    'description' => 'Evento: ' .$event->name,
             ];    
 
             //TODO: class with an interface that builds the transaction data.
@@ -816,7 +816,8 @@ class EventCheckoutController extends Controller
         $status = $request['status']['status'];
         $order = Order::where('order_reference',$request['reference'])->first();
         $order->status = $request;
-        $order->order_status_id = ($status == 'APPROVED')? config('attendize.order_complete'): config('attendize.order_cancelled');
+        $order->order_status_id = 10;
+        // $order->order_status_id = ($status == 'APPROVED')? config('attendize.order_complete'): config('attendize.order_cancelled');
         $order->save();
 
         return $order;
