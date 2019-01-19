@@ -402,17 +402,19 @@ class EventCheckoutController extends Controller
                     break;
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
+
                 // var_dump($ticket_order['reserved_tickets_id']);die;
                     $transaction_data +=[
                         'username' => $request->get('order_Nombres'),
                         'email' => $request->get('order_email'),
                         'returnUrl' =>'https://evius.co/landing/'.$event_id.'?payment_process=true',
-                        'orderid' => $ticket_order['reserved_tickets_id'],
-                        
-
+                        'orderid' => $event_id,
                         'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
                         'tranKey' => '3ZNdDTNP0Uk1A28G',
                         'url' => 'https://test.placetopay.com/redirection/',
+
+
+
                     ];
                     break;
 
@@ -431,16 +433,16 @@ class EventCheckoutController extends Controller
             
             if ($response->isSuccessful()) {
                 
-                session()->push('ticket_order_' . $event_id . '.transaction_id',
-                $response->getTransactionReference());
-                
+                session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
                 return $this->completeOrder($event_id);
 
-            } elseif ($response->isRedirect()) {
+            }
+            
+            
 
-                session()->push('ticket_order_' . $event_id . '.transaction_id',
-                $response->getTransactionReference());
-                $this->completeOrder($event_id);
+            
+            
+            elseif ($response->isRedirect()) {
 
                 /*
                  * As we're going off-site for payment we need to store some data in a session so it's available
@@ -462,7 +464,14 @@ class EventCheckoutController extends Controller
 
                 return response()->json($return);
 
-            } else {
+            } 
+            
+            
+            
+            
+            
+            
+            else {
                 // display error to customer
                 return response()->json([
                     'status'  => 'error',
@@ -812,15 +821,12 @@ class EventCheckoutController extends Controller
     }
 
     public function paymentCompleted(Request $request){
+
         $request = $request->json()->all();
         $status = $request['status']['status'];
-        $order = Order::where('order_reference',$request['reference'])->first();
-        $order->status = $request;
-        $order->order_status_id = 10;
-        // $order->order_status_id = ($status == 'APPROVED')? config('attendize.order_complete'): config('attendize.order_cancelled');
-        $order->save();
+        $reference = $request['reference'];
+        return $this->completeOrder($reference);
 
-        return $order;
     }
 }
 
