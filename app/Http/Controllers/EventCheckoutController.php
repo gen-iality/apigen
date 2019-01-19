@@ -824,8 +824,9 @@ class EventCheckoutController extends Controller
 
         $request = $request->json()->all();
         $status = $request['status']['status'];
-        $reference = $request['reference'];
-        return $this->completeOrder($reference);
+        $event_id = $request['reference'];
+        Log::info("Volvimos del más allá");
+        return Log::info('here: '.$this->completeOrder($event_id));
 
     }
 }
