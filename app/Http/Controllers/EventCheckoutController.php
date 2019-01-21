@@ -192,8 +192,8 @@ class EventCheckoutController extends Controller
             $paymentGateway= $activeAccountPaymentGateway;
         } else {
             $eventAccount = $event->account;
-            $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
-            //$activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
+	    $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
+	    //$activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
             $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
@@ -553,19 +553,23 @@ class EventCheckoutController extends Controller
     {
         // DB::beginTransaction();
         try {
-            
+//		session()->put('test','testPut');
+		Log::info(session()->get('test'));
+            Log::info('vamo  hacerlo');
             $ticket_order = session()->get('ticket_order_' . $event_id);
-            $request_data = $ticket_order['request_data'][0];
+            Log::info("creamo la orden: ".json_encode($ticket_order));
+	    $request_data = $ticket_order['request_data'][0];
             $event = Event::findOrFail($ticket_order['event_id']);
             $fields = $event->user_properties;
             $attendee_increment = 1;
             $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-
+		Log::info("Por fiiiiiin continuamos my doggies");
             $order = new Order($request_data);
 
             /*
              * Create the order
              */
+		Log::info('vamo por el cuartillo');
             if (isset($ticket_order['transaction_id'])) {
                 $order->transaction_id = $ticket_order['transaction_id'][0];
             }
@@ -590,7 +594,7 @@ class EventCheckoutController extends Controller
 
             $order->taxamt = $orderService->getTaxAmount();
             $order->save();
-
+		Log::info("Lo guardamos esa vaina de orden");
             /*
              * Update the event sales volume
              */
@@ -616,7 +620,7 @@ class EventCheckoutController extends Controller
                 ]);
 
             $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-
+		Log::info("Que vaina tan larga ome");
             if ($ticket_order['order_requires_payment']) {
                 $event_stats->increment('sales_volume', $order->amount);
                 $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
@@ -654,6 +658,7 @@ class EventCheckoutController extends Controller
                 /*
                  * Create the attendees
                  */
+		Log::info("Donde P!# estoy");
                 for ($i = 0; $i < $attendee_details['qty']; $i++) {
 
                     $attendee = new Attendee();
@@ -673,6 +678,7 @@ class EventCheckoutController extends Controller
                     /*
                      * Save the attendee's questions
                      */
+			Log::info("Me dijeron que es por acá");
                     foreach ($attendee_details['ticket']->questions as $question) {
 
 
@@ -700,7 +706,7 @@ class EventCheckoutController extends Controller
                         }
                     }
 
-
+			Log::info("Por fin llegue hasta el final de esta vuelta");
                     /* Keep track of total number of attendees */
                     $attendee_increment++;
                 }
@@ -820,14 +826,15 @@ class EventCheckoutController extends Controller
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
     }
 
-    public function paymentCompleted(Request $request){
-
+   public function paymentCompleted(Request $request){
+	Log::info("Volvimos del más allá");
         $request = $request->json()->all();
         $status = $request['status']['status'];
         $event_id = $request['reference'];
-        Log::info("Volvimos del más allá");
-        return Log::info('here: '.$this->completeOrder($event_id));
-
+	$this->completeOrder($event_id);
+	Log::info("Generamos una nueva orden");
+	Log::info("info here: ".json_encode($request));
+	return 0;
     }
 }
 
