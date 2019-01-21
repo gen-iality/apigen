@@ -134,7 +134,7 @@
 
                                                 @endif
                                                 @if($key == $stage_act)
-                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right', 'disabled' => 'disabled'])!!}
+                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
                                                 @endif
                                             </td>
                                         </tr>

@@ -744,3 +744,7 @@ Route::group(
 
 });
 
+Route::post('order/paymentCompleted', [
+    'as'   => 'completeOrder',
+    'uses' => 'EventCheckoutController@paymentCompleted',
+]);

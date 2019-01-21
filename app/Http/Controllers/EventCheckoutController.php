@@ -192,7 +192,7 @@ class EventCheckoutController extends Controller
             $paymentGateway= $activeAccountPaymentGateway;
         } else {
             $eventAccount = $event->account;
-	    $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
+        $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
 	    //$activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
             $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
@@ -828,9 +828,9 @@ class EventCheckoutController extends Controller
 
    public function paymentCompleted(Request $request){
 	Log::info("Volvimos del más allá");
-        $request = $request->json()->all();
-        $status = $request['status']['status'];
-        $event_id = $request['reference'];
+    $request = $request->json()->all();
+    $status = $request['status']['status'];
+    $event_id = $request['reference'];
 	$this->completeOrder($event_id);
 	Log::info("Generamos una nueva orden");
 	Log::info("info here: ".json_encode($request));
