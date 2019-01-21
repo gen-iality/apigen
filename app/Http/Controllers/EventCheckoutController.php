@@ -533,6 +533,7 @@ class EventCheckoutController extends Controller
 
             $order = new Order($request_data);
 
+//    -----------------------------------------------------------------------------------------------------------------------------------------------------------         
             /*
              * Create the order
              */
@@ -696,6 +697,7 @@ class EventCheckoutController extends Controller
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
 
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         if ($return_json) {
             return response()->json([

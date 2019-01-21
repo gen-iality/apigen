@@ -174,6 +174,16 @@ Route::group(
    // }
 //);
 
+/****************
+ * Speakers
+ ****************/
+Route::apiResource('speakers', 'speakerController', ['only' => ['index', 'show']]);
+
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+        Route::apiResource('speakers', 'speakerController', ['except' => ['index', 'show']]);
+//     }
+// );
 
 Route::apiResource('photos', 'PhotoController');
 
