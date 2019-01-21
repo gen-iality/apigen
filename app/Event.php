@@ -21,7 +21,7 @@ class Event extends ModelsEvent
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author', 'categories', 'eventType', 'organiser','organizer','currency', 'tickets'];
+    protected $with = ['author', 'categories', 'eventType', 'organiser','organizer','currency', 'tickets','speaker'];
 
 
     protected $fillable = [
@@ -153,6 +153,14 @@ class Event extends ModelsEvent
     public function eventType()
     {
         return $this->belongsTo('App\EventType', 'event_type_id');
+    }
+
+    /**
+     * Get the speaker.
+     */
+    public function speaker()
+    {
+        return $this->belongsToMany('App\Speaker', 'speaker_id');
     }
 
      /**
