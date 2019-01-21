@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -16,6 +13,9 @@ Route::group(
         'as'   => 'showSelectOrganiser',
         'uses' => 'OrganiserController@showSelectOrganiser',
     ]);
+
+
+
     /*
      * -------------------------
      * Installer
@@ -744,3 +744,7 @@ Route::group(
 
 });
 
+Route::post('order/paymentCompleted', [
+    'as'   => 'completeOrder',
+    'uses' => 'EventCheckoutController@paymentCompleted',
+]);

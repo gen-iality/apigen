@@ -4,24 +4,21 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Account;
-use App\MessageUser;
-use \App\Message;
-use GuzzleHttp\Client;
-use Illuminate\Http\Response;
-use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
-use Carbon\Carbon;
-use Spatie\Permission\Models\Permission;
 use App\Event;
-use Illuminate\Support\Facades\Mail;
+use App\Extensions\payment_placetopay\src\Gateway;
+use App\Jobs\SendOrderTickets;
 use App\Mail\BookingConfirmed;
+use App\MessageUser;
+use App\Order;
+use Barryvdh\DomPDF\Facade as PDF;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use QRCode;
 use Sendinblue\Mailin;
-use App\Jobs\SendOrderTickets;
-use App\Order;
-use App\evaLib\Services\Order as OrderService;
-
-use App\Extensions\payment_placetopay\src\Gateway;
+use Spatie\Permission\Models\Permission;
+use \App\Message;
 use Omnipay;
 
 class TestingController extends Controller
@@ -34,7 +31,7 @@ class TestingController extends Controller
         return $this->dispatch(new SendOrderTickets($order));
 
         return response()->json([
-            'status'      => 'success',
+            'status' => 'success',
             'redirectUrl' => '',
         ]);
     }
@@ -131,11 +128,11 @@ class TestingController extends Controller
         $event = 'evento de prueba generar pdf';
         $eventuser = 'cesar barriosnuevos';
         $ticket_id = 12345;
-        $attachPath = url()->previous().'/api/generatorQr/5bd9959672b12737b359c722';
+        $attachPath = url()->previous() . '/api/generatorQr/5bd9959672b12737b359c722';
         $date = '31/10/2018';
 
-        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','attachPath','date'));
-        $pdf->setPaper('legal','portrait');
+        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event', 'eventuser', 'ticket_id', 'attachPath', 'date'));
+        $pdf->setPaper('legal', 'portrait');
         return $pdf->download('example.pdf');
     }
 
@@ -151,63 +148,134 @@ class TestingController extends Controller
     }
 
     public function viewWebHooks()
-    {	
-        $mailin = new Mailin(config('app.sendinblue_page'),config('mail.SENDINBLUE_KEY'));
-        
-		$data = array( "is_plat" => "" );
- 
-		var_dump($mailin->get_webhooks($data));
+    {
+        $mailin = new Mailin(config('app.sendinblue_page'), config('mail.SENDINBLUE_KEY'));
+
+        $data = array("is_plat" => "");
+
+        var_dump($mailin->get_webhooks($data));
     }
-    
+
     public function UpdateStatusMessagePOST()
-    {      
-        $message_id =  "<201811211540.49660781994@smtp-relay.sendinblue.com>";
+    {
+        $message_id = "<201811211540.49660781994@smtp-relay.sendinblue.com>";
         $user_reason = "Opened";
-        $user_status = "Opened"; 
-        // $message_id = '5bf56db9854baf00b34d45e2'; 
-        
+        $user_status = "Opened";
+        // $message_id = '5bf56db9854baf00b34d45e2';
+
         sleep(1);
-        try{
+        try {
             //update the new status that is in data
             $message_user = MessageUser::where('sender_id', $message_id)
-            ->orderBy('created_at','desc')->first();
+                ->orderBy('created_at', 'desc')->first();
             $message_user->status = $user_status;
             $message_user->status_message = $user_reason;
-            
-            if(is_null($message_user->history)){
+
+            if (is_null($message_user->history)) {
                 $message_user->history = array($user_status);
-            }else{
+            } else {
                 $array = $message_user->history;
-                array_push($array, $user_status);    
+                array_push($array, $user_status);
                 $message_user->history = $array;
             }
-            
-            
+
             $message = Message::findOrfail($message_user->message_id);
             // var_dump($message_id);
             $add_status = $message->$user_status;
             $message->$user_status = $add_status + 1;
-            
-            $message->save(); 
-            
-            $message_user->save(); 
+
+            $message->save();
+
+            $message_user->save();
             // return response($message);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             var_dump($e);
-        
+
         }
     }
 
-    public function permissions(){
+    public function permissions()
+    {
         return Permission::all();
+    }
+
+    public function Gateway0()
+    {
+
+        $placetopay = new \Dnetix\Redirection\PlacetoPay([
+            'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
+            'tranKey' => '3ZNdDTNP0Uk1A28G',
+            'url' => 'https://test.placetopay.com/redirection/',
+            'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
+        ]);
+
+        $reference = '123456789';
+        $request = [
+    
+            "payer" => [
+                "name" => "DIANA FULTON",
+                "surname" => "Yost",
+                "email" => "flowe@anderson.com",
+                "documentType" => "CC",
+                "document" => "1848839248",
+                "mobile" => "3006108300",
+                "address" => [
+                    "street" => "703 Dicki Island Apt. 609",
+                    "city" => "North Randallstad",
+                    "state" => "Antioquia",
+                    "postalCode" => "46292",
+                    "country" => "US",
+                    "phone" => "363-547-1441 x383"
+                ]
+            ],
+            "buyer" => [
+                "name" => "DIANA FULTON",
+                "surname" => "Yost",
+                "email" => "flowe@anderson.com",
+                "documentType" => "CC",
+                "document" => "1848839248",
+                "mobile" => "3006108300",
+                "address" => [
+                    "street" => "703 Dicki Island Apt. 609",
+                    "city" => "North Randallstad",
+                    "state" => "Antioquia",
+                    "postalCode" => "46292",
+                    "country" => "US",
+                    "phone" => "363-547-1441 x383"
+                ],
+            ],
+        'payment' => [
+        'reference' => $reference,
+        'description' => 'Testing payment',
+        'amount' => [
+            'currency' => 'COP',
+            'total' => 120000,
+        ],
+        ],
+        'expiration' => date('c', strtotime('+2 days')),
+        'returnUrl' => 'http://evius.co/response?reference=' . $reference,
+        'ipAddress' => '127.0.0.1',
+        'userAgent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+        ];
+
+        $response = $placetopay->request($request);
+        if ($response->isSuccessful()) {
+        // STORE THE $response->requestId() and $response->processUrl() on your DB associated with the payment order
+        // Redirect the client to the processUrl or display it on the JS extension
+        return $response->processUrl();
+        // header('Location: ' . $response->processUrl());
+        } else {
+        // There was some error so check the message and log it
+        var_dump($response->status());die;
+        }
     }
 
     public function Gateway(){
 
         $gateway = Omnipay::create('placetopay');
+        return $gateway->initialize();
         return $gateway->getName();
+
     }
-
-
 
 }
