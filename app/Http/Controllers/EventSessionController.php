@@ -13,10 +13,14 @@ class EventSessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function index(Request $request, String $event_id)
     {
-        return EventSessionResource::collection(
-            EventSession::paginate(config('app.page_size')));
+        $EventSession = EventSessionResource::collection(
+            EventSession::where('event_id', $event_id)
+                ->paginate(config('app.page_size'))
+        );
+        return $EventSession;
     }
 
     /**

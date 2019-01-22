@@ -185,6 +185,20 @@ Route::apiResource('speakers', 'speakerController', ['only' => ['index', 'show']
 //     }
 // );
 
+/****************
+ * Event Sessions
+ ****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
+    }
+);
+
+/****************
+ * Users Organization
+ ****************/
+
+
 Route::apiResource('photos', 'PhotoController');
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
