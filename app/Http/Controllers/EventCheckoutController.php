@@ -116,15 +116,6 @@ class EventCheckoutController extends Controller
 
             $validator = Validator::make(['ticket_' . $ticket_id => (int)$request->get('ticket_' . $ticket_id)],
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
-                
-
-            /* if ($validator->fails()) {
-                return response()->json([
-                    'status'   => 'error',
-                    'messages' => $validator->messages()->toArray(),
-                ]);
-            } */
-            
 
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
@@ -149,35 +140,7 @@ class EventCheckoutController extends Controller
             $reservedTickets->expires = $order_expires_time;
             $reservedTickets->session_id = session()->getId();
             $reservedTickets->save();
-            // for ($i = 0; $i < $current_ticket_quantity; $i++) {
-            //     /*
-            //      * Create our validation rules here
-            //      */
-            //     $validation_rules['ticket_holder_first_name.' . $i . '.' . $ticket_id] = ['required'];
-            //     $validation_rules['ticket_holder_last_name.' . $i . '.' . $ticket_id] = ['required'];
-            //     $validation_rules['ticket_holder_email.' . $i . '.' . $ticket_id] = ['required', 'email'];
 
-            //     $validation_messages['ticket_holder_first_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s first name is required';
-            //     $validation_messages['ticket_holder_last_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s last name is required';
-            //     $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s email is required';
-            //     $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.email'] = 'Ticket holder ' . ($i + 1) . '\'s email appears to be invalid';
-
-            //     /*
-            //      * Validation rules for custom questions
-            //      */
-
-            //     if($ticket->questions){
-            //         foreach ($ticket->questions as $question) {
-
-            //             if ($question->is_required && $question->is_enabled) {
-            //                 $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
-            //                 $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = "This question is required";
-            //             }
-            //         }
-            //     }
-
-
-            // }
 
         }
         if (empty($tickets)) {
@@ -312,24 +275,14 @@ class EventCheckoutController extends Controller
             ]);
         }
 
-        $event = Event::findOrFail($event_id);
-        // $order = new Order();
-        // $ticket_order = session()->get('ticket_order_' . $event_id);
-        // $validation_rules = $ticket_order['validation_rules'];
-        // $validation_messages = $ticket_order['validation_messages'];
-
-        // $order->rules = $order->rules + $validation_rules;
-        // $order->messages = $order->messages + $validation_messages;
-
-
-       /* if (!$order->validate($request->all())) {
+        if (!$request->has('terms')) {
             return response()->json([
-                'status'   => 'error',
-                'messages' => $order->errors(),
+                'status'  => 'error',
+                'message' => 'Por favor aceptar los términos y condiciones',
             ]);
-        }*/
-        //Add the request data to a session in case payment is required off-site
-        //session()->push('ticket_order_' . $event_id . '.request_data', $request->except(['card-number', 'card-cvc']));
+        }
+
+        $event = Event::findOrFail($event_id);
 
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
         Cache::put($temporal_id, $ticket_order, 60);
@@ -413,15 +366,22 @@ class EventCheckoutController extends Controller
                     break;
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
-
-                // var_dump($ticket_order['reserved_tickets_id']);die;
                     $transaction_data +=[
                         'returnUrl' =>'https://api.evius.co/order/'.$temporal_id.'/payment',
                         'orderid' => $temporal_id,
                         'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
                         'tranKey' => '3ZNdDTNP0Uk1A28G',
                         'url' => 'https://test.placetopay.com/redirection/',
+                        'typeDocument' => $request->get('typeDocument'),
+                        'document' => $request->get('document'),
+                        'username' =>  $request->get('order_first_name'),
+                        'lastname' =>  $request->get('order_last_name'),
+                        'payerIsBuyer' => $request->get('payerIsBuyer'),
+                        'mobile' => $request->get('mobile'),
+                        'email' => $request->get('order_email'),
                     ];
+
+
                     break;
 
                 default:
@@ -432,11 +392,9 @@ class EventCheckoutController extends Controller
                     ]);
                     break;
             }
-            
             $transaction = $gateway->purchase($transaction_data);
             
             $response = $transaction->send();
-            
             if ($response->isSuccessful()) {
                 
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
