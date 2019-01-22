@@ -81,10 +81,55 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            {!! Form::label("Document", "Tipo") !!}
+                            {!! 
+                                Form::select('typeDocument', array(
+                                    'CC' => ('CC'),
+                                    'TI' => ('TI'),
+                                    'CE' => ('CE'),
+                                ), null, ['required' => 'required', 'class' => 'form-control']);
+                            !!}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            {!! Form::label("document", 'documento') !!}
+                            {!! Form::text("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            {!! Form::label("mobile", 'Teléfono') !!}
+                            {!! Form::text("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label("order_email", trans("Public_ViewEvent.email")) !!}
                             {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!!  Form::checkbox('payerIsBuyer', 'true') !!}
+                            {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son los datos de la tarjeta") !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!!  Form::checkbox('terms', 'true') !!}
+                            {!! Form::label("terms", "Acepta terminos y condiciones") !!}
                         </div>
                     </div>
                 </div>
@@ -219,8 +264,10 @@
 
             </div>
         </div>
+        <div class="col-md-12"><br>
+            <img class="" src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/>
+        </div>
     </div>
-    <img src="https://cdn.attendize.com/lg.png" />
 </section>
 @if(session()->get('message'))
     <script>showMessage('{{session()->get('message')}}');</script>
