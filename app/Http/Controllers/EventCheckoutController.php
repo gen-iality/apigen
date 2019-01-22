@@ -116,7 +116,7 @@ class EventCheckoutController extends Controller
 
             $validator = Validator::make(['ticket_' . $ticket_id => (int)$request->get('ticket_' . $ticket_id)],
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
-                
+
 
             /* if ($validator->fails()) {
                 return response()->json([
@@ -124,7 +124,7 @@ class EventCheckoutController extends Controller
                     'messages' => $validator->messages()->toArray(),
                 ]);
             } */
-            
+
 
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
@@ -254,7 +254,7 @@ class EventCheckoutController extends Controller
         $order_session = Cache::get($temporal_id);
 
         if (!$order_session || $order_session['expires'] < Carbon::now()) {
-            
+
             $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
             return redirect()->route($route_name, ['event_id' => $order_session['event_id']]);
             return $order_session;
@@ -264,10 +264,10 @@ class EventCheckoutController extends Controller
         $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
 
         $event = Event::findorFail($order_session['event_id']);
-        
+
         //Find user fields in event.
         $fields = $event->user_properties;
-                
+
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
 
@@ -376,7 +376,7 @@ class EventCheckoutController extends Controller
                     'amount'      => $orderService->getGrandTotal(),
                     'currency'    => $event->currency->code,
                     'description' => 'Evento: ' .$event->name,
-            ];    
+            ];
 
             //TODO: class with an interface that builds the transaction data.
             switch ($ticket_order['payment_gateway']->id) {
@@ -432,32 +432,32 @@ class EventCheckoutController extends Controller
                     ]);
                     break;
             }
-            
+
             $transaction = $gateway->purchase($transaction_data);
-            
+
             $response = $transaction->send();
-            
+
             if ($response->isSuccessful()) {
-                
+
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
                 return $this->completeOrder($event_id);
 
             }
-            
-            
 
-            
-            
+
+
+
+
             elseif ($response->isRedirect()) {
 
                 /*
                  * As we're going off-site for payment we need to store some data in a session so it's available
                  * when we return
                  */
-                
+
                 // $response->requestId() and $response->processUrl()
-                $session_id = $response->getTransactionReference(); 
-                
+                $session_id = $response->getTransactionReference();
+
                 $ticket_order['transaction_data'] =  $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 Cache::put($temporal_id, $ticket_order, 60);
@@ -477,13 +477,13 @@ class EventCheckoutController extends Controller
 
                 return response()->json($return);
 
-            } 
-            
-            
-            
-            
-            
-            
+            }
+
+
+
+
+
+
             else {
                 // display error to customer
                 return response()->json([
@@ -566,7 +566,7 @@ class EventCheckoutController extends Controller
     {
         // DB::beginTransaction();
         try {
-		// session()->put('test','testPut25');    
+		// session()->put('test','testPut25');
         //  Log::info(session()->get('test'));
 
             Log::info('vamo  hacerlo');
@@ -615,7 +615,7 @@ class EventCheckoutController extends Controller
              */
             $event->increment('sales_volume',(int)$orderService->getGrandTotal());
             $event->increment('organiser_fees_volume', (int)$order->organiser_booking_fee);
-            
+
             /*
             * Update affiliates stats stats
             */
@@ -625,7 +625,7 @@ class EventCheckoutController extends Controller
                 $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
                 $affiliate->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
             }
-            
+
             /*
             * Update the event stats
             */
@@ -681,7 +681,7 @@ class EventCheckoutController extends Controller
 
                     foreach($fields as $field){
                         if(!$field['name']) continue;
-                        $attendee->properties->{$field['name']} = $request_data["tiket_holder_".str_replace(" ","_",$field['name'])][$i][$attendee_details['ticket']['id']];                    
+                        $attendee->properties->{$field['name']} = $request_data["tiket_holder_".str_replace(" ","_",$field['name'])][$i][$attendee_details['ticket']['id']];
                     }
                     $attendee->event_id = $event_id;
                     $attendee->order_id = $order->id;
@@ -846,7 +846,7 @@ class EventCheckoutController extends Controller
     $request = $request->json()->all();
     $temporal_id = $request['reference'];
 
-    
+
     return $this->completeOrder($temporal_id);
 
     }
@@ -859,16 +859,22 @@ class EventCheckoutController extends Controller
             'url' => 'https://test.placetopay.com/redirection/',
             'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
         ]);
-
         $cache = Cache::get($order_reference);
+        $reference = $order_reference;
+        $date = new \DateTime();
+        $today =  $date->format('d-m-Y');
+        $order_total = $cache['order_total'];
+        $order_name = $cache['request_data']['order_first_name'];
+        $order_lastname = $cache['request_data']['order_last_name'];
+        $order_email = $cache['request_data']['order_email'];
         $session_id = $cache['transaction_data']['session_id'];
         $response = $placetopay->query($session_id);
         $status = $response->status();
         $request = $response->request();
         $payment = $request->payment();
         $amount = $payment->amount();
+        $autorization = $response;
 
-        return view('Public.ViewEvent.EventPageViewOrder',compact('request', 'status','payment','amount') );
+        return view('Public.ViewEvent.EventPageDetailOrder',compact('request', 'status','amount','order_total','order_name','order_lastname','order_email','today','reference','payment') );
     }
 }
-
