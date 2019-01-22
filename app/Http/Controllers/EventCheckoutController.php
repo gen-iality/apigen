@@ -416,7 +416,7 @@ class EventCheckoutController extends Controller
 
                 // var_dump($ticket_order['reserved_tickets_id']);die;
                     $transaction_data +=[
-                        'returnUrl' =>'https://evius.co/landing/'.$event_id.'?payment_process=true',
+                        'returnUrl' =>'https://evius.co/order/'.$temporal_id.'/payment',
                         'orderid' => $temporal_id,
                         'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
                         'tranKey' => '3ZNdDTNP0Uk1A28G',
@@ -844,6 +844,10 @@ class EventCheckoutController extends Controller
     
     return $this->completeOrder($temporal_id);
 
+    }
+
+    public function showOrderPaymentDetails($order_reference){
+        return $order_reference;
     }
 }
 
