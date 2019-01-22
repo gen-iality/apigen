@@ -59,29 +59,58 @@
         </div>
         <div class="col-md-8 col-md-pull-4">
             <div class="event_order_form">
-                {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $event->id]), 'class' => ($order_requires_payment && @$payment_gateway->is_on_site) ? 'ajax payment-form' : 'ajax', 'data-stripe-pub-key' => isset($account_payment_gateway->config['publishableKey']) ? $account_payment_gateway->config['publishableKey'] : '']) !!}
+                {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $temporal_id]), 'class' => ($order_requires_payment && @$payment_gateway->is_on_site) ? 'ajax payment-form' : 'ajax', 'data-stripe-pub-key' => isset($account_payment_gateway->config['publishableKey']) ? $account_payment_gateway->config['publishableKey'] : '']) !!}
 
                 {!! Form::hidden('event_id', $event->id) !!}
-
+                {!! Form::hidden('temporal_id', $temporal_id) !!}
                 <h3> @lang("Public_ViewEvent.your_information")</h3>
 
-                    <div class="row">
-                    @foreach($fields as $field)
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    @if($field['mandatory'] == 'true')
-                                    {!! Form::label($field['name'], $field['name']) !!}
-                                    {!! Form::text("order_{$field['name']}", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                    @else
-                                    {!! Form::label($field['name'], $field['name']) !!}
-                                    {!! Form::text("order_{$field['name']}", null, ['class' => 'form-control']) !!}
-                                    @endif
-                                </div>
-                            </div>
-                    @endforeach
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            {!! Form::label("order_first_name", trans("Public_ViewEvent.first_name")) !!}
+                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
                     </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            {!! Form::label("order_last_name", trans("Public_ViewEvent.last_name")) !!}
+                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
 
-                <div class="p20 pl0">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            {!! Form::label("order_first_name", trans("Public_ViewEvent.first_name")) !!}
+                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            {!! Form::label("order_last_name", trans("Public_ViewEvent.last_name")) !!}
+                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            {!! Form::label("order_last_name", trans("Public_ViewEvent.last_name")) !!}
+                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label("order_email", trans("Public_ViewEvent.email")) !!}
+                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p20 pl0" style="display:none">
                     <a href="javascript:void(0);" class="btn btn-primary btn-xs" id="mirror_buyer_info">
                         @lang("Public_ViewEvent.copy_buyer")
                     </a>
