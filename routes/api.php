@@ -177,11 +177,11 @@ Route::group(
 /****************
  * Speakers
  ****************/
-Route::apiResource('speakers', 'speakerController', ['only' => ['index', 'show']]);
+Route::apiResource('speakers', 'SpeakerController', ['only' => ['index', 'show']]);
 
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('speakers', 'speakerController', ['except' => ['index', 'show']]);
+        Route::apiResource('speakers', 'SpeakerController', ['except' => ['index', 'show']]);
 //     }
 // );
 
