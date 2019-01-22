@@ -163,6 +163,15 @@ class Event extends ModelsEvent
         return $this->belongsToMany('App\Speaker', 'speaker_id');
     }
 
+    /**
+     * Get the session associated with de event.
+     */
+    public function sessions()
+    {
+
+        return $this->hasMany('App\EventSession');
+    }
+
      /**
      * The tickets associated with the event.
      *
