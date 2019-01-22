@@ -454,7 +454,12 @@ class EventCheckoutController extends Controller
                  * As we're going off-site for payment we need to store some data in a session so it's available
                  * when we return
                  */
+                
+                // $response->requestId() and $response->processUrl()
+                $session_id = $response->getTransactionReference(); 
+                
                 $ticket_order['transaction_data'] =  $transaction_data;
+                $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 Cache::put($temporal_id, $ticket_order, 60);
 
                 Log::info("Redirect url: " . $response->getRedirectUrl());
@@ -847,7 +852,23 @@ class EventCheckoutController extends Controller
     }
 
     public function showOrderPaymentDetails($order_reference){
-        return $order_reference;
+
+        $placetopay = new \Dnetix\Redirection\PlacetoPay([
+            'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
+            'tranKey' => '3ZNdDTNP0Uk1A28G',
+            'url' => 'https://test.placetopay.com/redirection/',
+            'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
+        ]);
+
+        $cache = Cache::get($order_reference);
+        $session_id = $cache['transaction_data']['session_id'];
+        $response = $placetopay->query($session_id);
+        $status = $response->status();
+        $request = $response->request();
+        $payment = $request->payment();
+        $amount = $payment->amount();
+
+        return view('Public.ViewEvent.EventPageViewOrder',compact('request', 'status','payment','amount') );
     }
 }
 
