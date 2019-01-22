@@ -151,8 +151,7 @@ class EventOrdersController extends Controller
         return response()->json([
             'status'      => 'success',
             'redirectUrl' => '',
-        ]);
-    }
+        ]);    }
 
     /**
      * Cancels an order

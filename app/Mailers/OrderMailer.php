@@ -3,7 +3,10 @@
 namespace App\Mailers;
 
 use App\Models\Order;
+use App\Event;
+use App\Attendee;
 use App\Services\Order as OrderService;
+use PDF;
 use Log;
 use Mail;
 
@@ -28,31 +31,33 @@ class OrderMailer
 
     public function sendOrderTickets(Order $order)
     {
+        // Se cargan los datos que se van a utilizar en el PDF
+        $date = new \DateTime();
+        $today =  $date->format('d-m-Y');
         $logo_evius = 'images/logo.png';
+        $event = Event::findOrFail($order->event_id);
+        $eventusers = Attendee::where('order_id', $order->id)->get();
+        $location = $event["location"]["FormattedAddress"];
+
         $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
         $orderService->calculateFinalCosts();
+
         Log::info("Sending ticket to: " . $order->email);
         $data = [
             'order' => $order,
             'orderService' => $orderService,
-            'logo' => $logo_evius
+            'logo' => $logo_evius,
         ];
-        // $file_name = $order->order_reference;
-        // $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name . '.pdf';
-        // if (!file_exists($file_path)) {
-        //     var_dump('error');die;
         
-        //     Log::error("Cannot send actual ticket to : " . $order->email . " as ticket file does not exist on disk");
-        //     return;
-        // }
+        // Creación del PDF
+        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
+        $pdf->setPaper('legal','portrait');
 
-        Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order) {
+        // Envío del email
+        Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $pdf) {
             $message->to($order->email);
-            $message->subject(trans("Controllers.tickets_for_event", ["event" => $order->event->title]));
-            // $message->attach($file_path,[
-            //         'as' => 'ticket',
-            //         'mime' => 'application/pdf',
-            //     ]);
+            $message->subject('Tus tickets para el evento '.$order->event->name);
+            $message->attachData($pdf->download(),'Tickets Evento '.$order->event->name);
         });
 
     }

@@ -1,5 +1,6 @@
 <html>
     <body>
+    @foreach($eventusers as $eventuser)
         <div style="width:75%; margin:1em auto; height: auto; border: 1px solid lightgrey;">
             <div style="width:70%; margin:0 auto; padding: 3em 0">
                 <div style="width:100%">
@@ -16,31 +17,31 @@
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Ticket Nro</h3>
-                            <p style="margin: 0;">{{$ticket_id}}</p>
+                            <p style="margin: 0;">{{$order->order_reference}}</p>
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Fecha de Impresion</h3>
-                            <p style="margin: 0;">13/11/2018</p>
+                            <p style="margin: 0;">{{$today}}</p>
                         </div>
                     </div>
                     <div style="width: auto; display: inline-block;">
-                        <img src="{{url()->previous()}}/api/generatorQr/{{$ticket_id}}" />
+                        <img src="{{url()->previous()}}/api/generatorQr/{{$eventuser->id}}" />
                     </div>
                 </div>
 
                 <div style="display: block; border-bottom: 1px solid lightgrey;">
                     <div style="display: inline-block; width:100%; margin-bottom: 1em;">
                         <h3 style="margin: 0;">Nombre</h3>
-                        <p style="margin: 0; text-align:center">{{$eventuser}}</p>
+                        <p style="margin: 0; text-align:center">{{$eventuser->properties["Nombres"]}}</p>
                     </div>
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
                             <h3 style="margin: 0;">Tipo de Entrada</h3>
-                            <p style="margin: 0 0 0 1em;">General</p>
+                            <p style="margin: 0 0 0 1em;">{{$eventuser->ticket->title}}</p>
                         </div>
                         <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
                             <h3 style="margin: 0;">Precio</h3>
-                            <p style="margin:0 0 0 1em;">Invitacion</p>
+                            <p style="margin:0 0 0 1em;">{{$eventuser->ticket->price}}</p>
                         </div>
                     </div>                    
                 </div>
@@ -98,5 +99,6 @@
                 <img src="images/logo.png" width="100%"/>
             </div>
         </div>
+        @endforeach
     </body>
 </html>
