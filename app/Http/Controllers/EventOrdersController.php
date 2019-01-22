@@ -220,7 +220,7 @@ class EventOrdersController extends Controller
                 'messages' => $validator->messages()->toArray(),
             ]);
         }
-
+// -----------------------------------------------------------------------------------------------------------------------------------------------
         $order = Order::findOrFail($order_id);
 
         $refund_order = ($request->get('refund_order') === 'on') ? true : false;
@@ -323,6 +323,9 @@ class EventOrdersController extends Controller
             else if($attendees)
                 $msg = trans("Controllers.successfully_cancelled_attendees");
         }
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
         \Session::flash('message', $msg);
 
         return response()->json([
