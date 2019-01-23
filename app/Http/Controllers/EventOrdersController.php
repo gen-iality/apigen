@@ -82,6 +82,7 @@ class EventOrdersController extends Controller
 
         $data = [
             'orders'     => $orders,
+            'q'          => '',
         ];
 
         return view('ManageEvent.userOrders', $data);
