@@ -753,3 +753,7 @@ Route::post('order/paymentCompleted', [
     'as'   => 'completeOrder',
     'uses' => 'EventCheckoutController@paymentCompleted',
 ]);
+Route::get('paymentCompleted/order/{reference_order}', [
+    'as'   => 'orderCompleted',
+    'uses' => 'EventCheckoutController@completePayment',
+]);

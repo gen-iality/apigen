@@ -800,6 +800,7 @@ class EventCheckoutController extends Controller
     }
 
    public function paymentCompleted(Request $request){
+       return $request;
     Log::info("Volvimos del más allá");
     $request = $request->json()->all();
     $temporal_id = $request['reference'];
@@ -808,6 +809,15 @@ class EventCheckoutController extends Controller
     return $this->completeOrder($temporal_id);
 
     }
+
+    public function completePayment (String $id){
+     Log::info("Volvimos del más allá");
+     $temporal_id = $id;
+ 
+ 
+     return $this->completeOrder($temporal_id);
+ 
+     }
 
     public function showOrderPaymentDetails($order_reference){
 

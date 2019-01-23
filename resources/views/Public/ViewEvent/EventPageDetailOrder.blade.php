@@ -1,3 +1,27 @@
+<style>
+.button {
+  border-radius: 15px;
+  background-color: #00f0be;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: calc(.375em - 1px) .75em;
+  text-align: center;
+  white-space: nowrap;
+  font-family: Montserrat,sans-serif;
+  transition: all .33s ease;
+}
+.button.is-primary {
+    background-color: #00f0be;
+    border-color: transparent;
+    color: #fff;
+}
+.has-text-weight-bold {
+    font-weight: 700!important;
+}
+</style>
 <html>
     <body>
         <div style="width:75%; margin:1em auto; height: auto; border: 1px solid lightgrey;">
@@ -9,7 +33,7 @@
                 </div>
                 @if($status->status() == 'APPROVED')
                     <div style="display:block;">
-                        <H2 style="text-align:center">Su pago ha sido aprovado. ¡Muchas gracas por su compra!</H2>
+                        <H2 style="text-align:center">Su pago ha sido APROBADO. ¡Muchas gracias por su compra!</H2>
                     </div>
                 @endif
                 @if($status->status() == 'REJECTED')
@@ -75,6 +99,9 @@
                     <div style="display:block;">
                         <h3 style="margin: 0;">Descripción:</h3>
                         <p style="text-align:center">{{$payment->description()}}</p>
+                    </div>
+                    <div style="display:block;">
+                        <a  href="{{ route('orderCompleted', ['reference' => $reference] )}}" style="text-align:center;" class="button is-primary has-text-weight-bold ">Ver Detalles de la compra</a>
                     </div>
                 </div>
             </div>
