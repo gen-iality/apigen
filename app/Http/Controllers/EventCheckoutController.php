@@ -524,6 +524,9 @@ class EventCheckoutController extends Controller
      */
     public function completeOrder($temporal_id, $return_json = true)
     {
+	$order = Order::where('temporal_reference',$temporal_id)->first();
+        if(!$order){
+
         // DB::beginTransaction();
         try {
 		// session()->put('test','testPut25');
@@ -531,6 +534,7 @@ class EventCheckoutController extends Controller
 
             Log::info('vamo  hacerlo');
             $ticket_order =  $ticket_order = Cache::get($temporal_id);
+          
             $event_id = $ticket_order['event_id'];
             Log::info("creamo la orden: ".json_encode($ticket_order));
 	        $request_data = $ticket_order['request_data'];
@@ -562,7 +566,7 @@ class EventCheckoutController extends Controller
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-
+	    $order->temporal_reference = $temporal_id;
             // Calculating grand total including tax
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
             $orderService->calculateFinalCosts();
@@ -686,7 +690,7 @@ class EventCheckoutController extends Controller
                     $attendee_increment++;
                 }
             }
-
+	
         } catch (Exception $e) {
 
             Log::error($e);
@@ -698,16 +702,17 @@ class EventCheckoutController extends Controller
             ]);
 
         }
+	}
         //save the order to the database
         // DB::commit();
         //forget the order in the session
-        session()->forget('ticket_order_' . $event->id);
+        //session()->forget('ticket_order_' . $event->id);
 
         // Queue up some tasks - Emails to be sent, PDFs etc.
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
         /* Envío de correo */
-        $this->dispatch(new SendOrderTickets($order));
+        //$this->dispatch(new SendOrderTickets($order));
 
 
         // if ($return_json) {
