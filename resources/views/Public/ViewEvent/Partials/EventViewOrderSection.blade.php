@@ -257,7 +257,7 @@
 
                 </div>
                 
-                <a href="https://api.evius.co/e/{{$event->_id}}" class="btn btn-lg btn-primary pull-right">Volver a generar una nueva compra</a>
+                <a href="https://api.evius.co/e/{{$event->_id}}" class="btn btn-lg btn-primary pull-right">Realizar una nueva compra</a>
             </div>
         </div>
     </div>
