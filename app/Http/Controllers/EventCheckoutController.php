@@ -706,7 +706,7 @@ class EventCheckoutController extends Controller
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
         /* Envío de correo */
-        // $this->dispatch(new SendOrderTickets($order));
+        $this->dispatch(new SendOrderTickets($order));
 
 
         // if ($return_json) {
