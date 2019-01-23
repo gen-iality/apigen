@@ -265,7 +265,7 @@
             </div>
         </div>
         <div class="col-md-12"><br>
-            <img class="" src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/>
+            <a href="https://www.placetopay.com" target="_blank"><img class="" src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/></a>
         </div>
     </div>
 </section>
