@@ -32,7 +32,7 @@
                 <div style="display: block; border-bottom: 1px solid lightgrey;">
                     <div style="display: inline-block; width:100%; margin-bottom: 1em;">
                         <h3 style="margin: 0;">Nombre</h3>
-                        <p style="margin: 0; text-align:center">{{$eventuser->properties["Nombres"]}}</p>
+                        <p style="margin: 0; text-align:center">{{$eventuser->properties["names"]}}</p>
                     </div>
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
