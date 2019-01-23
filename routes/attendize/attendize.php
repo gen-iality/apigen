@@ -200,9 +200,9 @@ Route::group(
         'uses' => 'EventCheckoutController@showOrderDetails',
     ]);
 
-    Route::get('order/{order_reference}/payment', [
-        'as'   => 'showOrderDetails',
-        'uses' => 'EventCheckoutController@showOrderPaymentDetails',
+    Route::get('order/{order_reservation_reference}/payment', [
+        'as'   => 'showOrderPaymentStatusDetails',
+        'uses' => 'EventCheckoutController@showOrderPaymentStatusDetails',
     ]);
 
     Route::get('order/{order_reference}/tickets', [
