@@ -706,15 +706,15 @@ class EventCheckoutController extends Controller
         event(new OrderCompletedEvent($order));
 
 
-        if ($return_json) {
-            return response()->json([
-                'status'      => 'success',
-                'redirectUrl' => route('showOrderDetails', [
-                    'is_embedded'     => $this->is_embedded,
-                    'order_reference' => $order->order_reference,
-                ]),
-            ]);
-        }
+        // if ($return_json) {
+        //     return response()->json([
+        //         'status'      => 'success',
+        //         'redirectUrl' => route('showOrderDetails', [
+        //             'is_embedded'     => $this->is_embedded,
+        //             'order_reference' => $order->order_reference,
+        //         ]),
+        //     ]);
+        // }
 
         return response()->redirectToRoute('showOrderDetails', [
             'is_embedded'     => $this->is_embedded,
