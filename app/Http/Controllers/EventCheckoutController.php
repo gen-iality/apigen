@@ -705,7 +705,7 @@ class EventCheckoutController extends Controller
         // Queue up some tasks - Emails to be sent, PDFs etc.
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
-
+        /* Envío de correo */
         $this->dispatch(new SendOrderTickets($order));
 
 
