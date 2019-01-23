@@ -100,9 +100,11 @@
                         <h3 style="margin: 0;">Descripción:</h3>
                         <p style="text-align:center">{{$payment->description()}}</p>
                     </div>
-                    <div style="display:block;">
-                        <a  href="{{ route('orderCompleted', ['reference' => $reference] )}}" style="text-align:center;" class="button is-primary has-text-weight-bold ">Ver Detalles de la compra</a>
-                    </div>
+                    @if($status->status() == 'APPROVED')
+                        <div style="display:block;">
+                            <a  href="{{ route('orderCompleted', ['reference' => $reference] )}}" style="text-align:center;" class="button is-primary has-text-weight-bold ">Ver Detalles de la compra</a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
