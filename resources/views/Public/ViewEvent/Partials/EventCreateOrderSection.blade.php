@@ -96,13 +96,13 @@
                     <div class="col-xs-4">
                         <div class="form-group">
                             {!! Form::label("document", 'documento') !!}
-                            {!! Form::text("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::number("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("mobile", 'Teléfono') !!}
-                            {!! Form::text("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::number("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>
