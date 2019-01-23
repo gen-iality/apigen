@@ -800,7 +800,6 @@ class EventCheckoutController extends Controller
     }
 
    public function paymentCompleted(Request $request){
-       return $request;
     Log::info("Volvimos del más allá");
     $request = $request->json()->all();
     $temporal_id = $request['reference'];
@@ -819,7 +818,7 @@ class EventCheckoutController extends Controller
  
      }
 
-    public function showOrderPaymentDetails($order_reference){
+    public function showOrderPaymentStatusDetails($order_reference){
 
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
             'login' => 'f7186b9a9bd5f04ab68233cd33c31044',

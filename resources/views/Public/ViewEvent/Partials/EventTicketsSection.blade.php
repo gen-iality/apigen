@@ -132,7 +132,7 @@
                                                     </div>
 
                                                 @endif
-                                                @if($key == $stage_act)
+                                                @if(Auth::user())
                                                     {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
                                                 @endif
                                             </td>
