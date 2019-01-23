@@ -26,10 +26,11 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     {
         Resource::withoutWrapping();
 
-        \App\Attendee::observe(App\Observers\EventUserObserver::class);
+        // \App\Attendee::observe(App\Observers\EventUserObserver::class);
 
         \App\Attendee::saved(
             function ($eventUser) {
+                return true;
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
                 $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
 
