@@ -53,6 +53,8 @@ class UserController extends UserControllerWeb
             //
             $firebaseToken = null;
             if ($request->has('evius_token')) { $firebaseToken = $request->input('evius_token');}
+
+            if ($request->has('destination')) { $destination = $request->input('destination');}
     
             /**
              * Si el token no viene en la petición
@@ -90,8 +92,11 @@ class UserController extends UserControllerWeb
             self::_sendConfirmationEmail(
                 $user
             );
-
-            return redirect('https://evius.co/?token='.$firebaseToken);
+            if($destination){
+                return redirect($destination.'/?token='.$firebaseToken);
+            }else{
+                return redirect('https://evius.co/?token='.$firebaseToken);
+            }
     }
 
     /**
