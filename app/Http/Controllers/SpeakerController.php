@@ -89,9 +89,9 @@ class SpeakerController extends Controller
      * @param  \App\Speaker  $speaker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(String $id)
+    public function destroy(Request $request, $event_id, $speaker_id)
     {
-        $speaker = Speaker::findOrFail($id);
-        return (string)$speaker->delete();
+        $speaker = Speaker::findorfail($speaker_id);
+        return (string) $speaker->delete();
     }
 }
