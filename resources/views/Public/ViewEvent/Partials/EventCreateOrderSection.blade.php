@@ -88,7 +88,6 @@
                                 Form::select('typeDocument', array(
                                     'CC' => ('CC'),
                                     'TI' => ('TI'),
-                                    'CE' => ('CE'),
                                 ), null, ['required' => 'required', 'class' => 'form-control']);
                             !!}
                         </div>
@@ -103,15 +102,6 @@
                         <div class="form-group">
                             {!! Form::label("mobile", 'Teléfono') !!}
                             {!! Form::number("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label("order_email", trans("Public_ViewEvent.email")) !!}
-                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>
