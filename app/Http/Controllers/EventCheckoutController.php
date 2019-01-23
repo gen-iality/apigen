@@ -380,7 +380,7 @@ class EventCheckoutController extends Controller
                         'payerIsBuyer' => $request->get('payerIsBuyer'),
                         'mobile' => $request->get('mobile'),
                         'email' => $request->get('order_email'),
-                        'cancelUrl' => 'https://api.evius.co/landing/'.$event_id
+                        'cancelUrl' => 'https://api.evius.co/e/'.$event_id
                     ];
 
 
