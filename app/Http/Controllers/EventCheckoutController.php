@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\OrderCompletedEvent;
+use App\Jobs\SendOrderTickets;
 use App\Models\AccountPaymentGateway;
 use App\Models\Affiliate;
 use App\Attendee;
@@ -705,6 +706,8 @@ class EventCheckoutController extends Controller
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
 
+        $this->dispatch(new SendOrderTickets($order));
+
 
         if ($return_json) {
             return response()->json([
@@ -811,12 +814,10 @@ class EventCheckoutController extends Controller
     }
 
     public function completePayment (String $id){
-     Log::info("Volvimos del más allá");
-     $temporal_id = $id;
- 
- 
-     return $this->completeOrder($temporal_id);
- 
+        Log::info("Volvimos del más allá");
+        $temporal_id = $id;
+    
+        return $this->completeOrder($temporal_id);
      }
 
     public function showOrderPaymentDetails($order_reference){

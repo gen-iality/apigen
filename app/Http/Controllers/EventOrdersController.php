@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Jobs\SendOrderTickets;
 use App\Attendee;
 use App\Event;
+use App\User;
 use App\Models\EventStats;
 use App\Order;
 use App\evaLib\Services\Order as OrderService;
@@ -69,6 +70,21 @@ class EventOrdersController extends Controller
         ];
 
         return view('ManageEvent.Orders', $data);
+    }
+
+
+    public function showOrdersUsers(String $user_id)
+    {
+        // return 1;
+        $user = User::findOrfail($user_id);
+        $user_email = $user->email;
+        $orders = Order::where('email',$user_email)->paginate();
+
+        $data = [
+            'orders'     => $orders,
+        ];
+
+        return view('ManageEvent.userOrders', $data);
     }
 
     /**

@@ -14,6 +14,11 @@ Route::group(
         'uses' => 'OrganiserController@showSelectOrganiser',
     ]);
 
+    Route::get('viewOrdersUsers/{user_id}', [
+        'as'   => 'showUserOrders',
+        'uses' => 'EventOrdersController@showOrdersUsers',
+    ]);
+
 
 
     /*
