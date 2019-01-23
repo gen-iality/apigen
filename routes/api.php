@@ -177,22 +177,20 @@ Route::group(
 /****************
  * Speakers
  ****************/
-Route::apiResource('speakers', 'SpeakerController', ['only' => ['index', 'show']]);
-
 // Route::group(
-//     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('speakers', 'SpeakerController', ['except' => ['index', 'show']]);
-//     }
+    // ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/speakers', 'SpeakerController');
+    // }
 // );
 
 /****************
  * Event Sessions
  ****************/
-Route::group(
-    ['middleware' => 'auth:token'], function () {
+// Route::group(
+    // ['middleware' => 'auth:token'], function () {
         Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
-    }
-);
+    // }
+// );
 
 /****************
  * Users Organization
