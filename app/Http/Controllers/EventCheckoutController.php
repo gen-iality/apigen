@@ -27,6 +27,7 @@ use Omnipay;
 use PDF;
 use PhpSpec\Exception\Exception;
 use Validator;
+use Auth;
 
 class EventCheckoutController extends Controller
 {
@@ -379,10 +380,9 @@ class EventCheckoutController extends Controller
                         'lastname' =>  $request->get('order_last_name'),
                         'payerIsBuyer' => $request->get('payerIsBuyer'),
                         'mobile' => $request->get('mobile'),
-                        'email' => $request->get('order_email'),
+                        'email' => Auth::user()->email,
                         'cancelUrl' => 'https://api.evius.co/e/'.$event_id
                     ];
-
 
                     break;
 
@@ -524,6 +524,9 @@ class EventCheckoutController extends Controller
      */
     public function completeOrder($temporal_id, $return_json = true)
     {
+	$order = Order::where('temporal_reference',$temporal_id)->first();
+        if(!$order){
+
         // DB::beginTransaction();
         try {
 		// session()->put('test','testPut25');
@@ -531,6 +534,7 @@ class EventCheckoutController extends Controller
 
             Log::info('vamo  hacerlo');
             $ticket_order =  $ticket_order = Cache::get($temporal_id);
+          
             $event_id = $ticket_order['event_id'];
             Log::info("creamo la orden: ".json_encode($ticket_order));
 	        $request_data = $ticket_order['request_data'];
@@ -553,7 +557,7 @@ class EventCheckoutController extends Controller
             }
             $order->first_name = strip_tags($request_data['order_first_name']);
             $order->last_name = strip_tags($request_data['order_last_name']);
-            $order->email = $request_data['order_email'];
+            $order->email = Auth::user()->email;
             $order->order_status_id = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount = $ticket_order['order_total'];
             $order->booking_fee = $ticket_order['booking_fee'];
@@ -562,7 +566,7 @@ class EventCheckoutController extends Controller
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-
+	    $order->temporal_reference = $temporal_id;
             // Calculating grand total including tax
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
             $orderService->calculateFinalCosts();
@@ -686,7 +690,7 @@ class EventCheckoutController extends Controller
                     $attendee_increment++;
                 }
             }
-
+	
         } catch (Exception $e) {
 
             Log::error($e);
@@ -698,27 +702,13 @@ class EventCheckoutController extends Controller
             ]);
 
         }
-        //save the order to the database
-        // DB::commit();
-        //forget the order in the session
-        session()->forget('ticket_order_' . $event->id);
-
         // Queue up some tasks - Emails to be sent, PDFs etc.
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
-        /* Envío de correo */
-        $this->dispatch(new SendOrderTickets($order));
+        /* Envío de correo */        
+	$this->dispatch(new SendOrderTickets($order));
 
-
-        // if ($return_json) {
-        //     return response()->json([
-        //         'status'      => 'success',
-        //         'redirectUrl' => route('showOrderDetails', [
-        //             'is_embedded'     => $this->is_embedded,
-        //             'order_reference' => $order->order_reference,
-        //         ]),
-        //     ]);
-        // }
+	}
 
         return response()->redirectToRoute('showOrderDetails', [
             'is_embedded'     => $this->is_embedded,
@@ -835,7 +825,7 @@ class EventCheckoutController extends Controller
         $order_total = $cache['order_total'];
         $order_name = $cache['request_data']['order_first_name'];
         $order_lastname = $cache['request_data']['order_last_name'];
-        $order_email = $cache['request_data']['order_email'];
+        $order_email = Auth::user()->email;
         $session_id = $cache['transaction_data']['session_id'];
         $response = $placetopay->query($session_id);
         $status = $response->status();
