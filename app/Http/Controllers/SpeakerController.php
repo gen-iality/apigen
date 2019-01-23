@@ -49,9 +49,9 @@ class SpeakerController extends Controller
      * @param  \App\Speaker  $speaker
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show(String $event_id, String $speaker_id)
     {
-        $speaker = Speaker::find($id);
+        $speaker = Speaker::find($speaker_id);
         $response = new SpeakerResource($speaker);
         return $response;
     }
@@ -74,10 +74,10 @@ class SpeakerController extends Controller
      * @param  \App\Speaker  $speaker
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $event_id, String $speaker_id)
     {
         $data = $request->json()->all();
-        $speaker = Speaker::find($id);
+        $speaker = Speaker::find($speaker_id);
         $speaker->fill($data);
         $speaker->save();
         return $data;
