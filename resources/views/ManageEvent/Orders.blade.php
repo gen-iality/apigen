@@ -97,7 +97,7 @@
                         <tr>
                             <td>
                                 <a href='javascript:void(0);' data-modal-id='view-order-{{ $order->id }}' data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="@lang("Order.view_order_num", ["num"=>$order->order_reference])" class="loadModal">
-                                    {{$order->order_reference}}
+                                    {{$order->temporal_reference}}
                                 </a>
                             </td>
                             <td>
