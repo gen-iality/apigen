@@ -57,7 +57,7 @@ class OrderMailer
         Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $pdf) {
             $message->to($order->email);
             $message->subject('Tus tickets para el evento '.$order->event->name);
-            $message->attachData($pdf->download(),'Tickets Evento '.$order->event->name);
+            $message->attachData($pdf->download(),'Tickets Evento '.$order->event->name.'.pdf');
         });
 
     }
