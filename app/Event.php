@@ -160,7 +160,7 @@ class Event extends ModelsEvent
      */
     public function speaker()
     {
-        return $this->belongsToMany('App\Speaker', 'speaker_id');
+        return $this->hasMany('App\Speaker', 'event_id');
     }
 
     /**

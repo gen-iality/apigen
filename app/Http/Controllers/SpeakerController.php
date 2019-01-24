@@ -13,10 +13,11 @@ class SpeakerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(String $event_id)
     {
         return SpeakerResource::collection(
-            Speaker::paginate(config('app.page_size')));
+            Speaker::where('event_id', $event_id)
+            ->paginate(config('app.page_size')));
     }
 
     /**
@@ -35,9 +36,11 @@ class SpeakerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, String $event_id)
     {
         $data = $request->json()->all();
+        $data["event_id"] = $event_id;
+        // return $data;
         $result = new Speaker($data);
         $result->save();
         return $result;

@@ -17,7 +17,7 @@ class Speaker extends Moloquent
 
     public function events()
     {
-        return $this->hasOne('App\Event');
+        return $this->belongsTo('App\Event');
     }
 
 }
