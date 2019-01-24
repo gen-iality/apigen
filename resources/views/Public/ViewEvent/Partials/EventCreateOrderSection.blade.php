@@ -109,8 +109,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!!  Form::checkbox('payerIsBuyer', 'true') !!}
-                            {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son los datos de la tarjeta") !!}
+                            {!!  Form::checkbox('payerIsBuyer', 'true', true) !!}
+                            {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son de la persona encargada del pago") !!}
                         </div>
                     </div>
                 </div>
