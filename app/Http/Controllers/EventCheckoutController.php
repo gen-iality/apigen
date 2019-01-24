@@ -414,8 +414,8 @@ class EventCheckoutController extends Controller
                 $ticket_order['transaction_data'] = $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 Cache::put($temporal_id, $ticket_order, 60);
-                var_Dump($this->completeOrder($temporal_id));die;
 
+		$this->completeOrder($temporal_id);
                 Log::info("Redirect url: " . $response->getRedirectUrl());
 
                 $return = [
@@ -789,14 +789,15 @@ class EventCheckoutController extends Controller
     {
         Log::info("Volvimos del más allá");
         $request = $request->json()->all();
-        $status = $request['status']['status'];
+        Log::info($request);
+	$status = $request['status']['status'];
         $order_reference = $request['reference'];
         return $this->changeStatusOrder($order_reference, $status);
 
     }
 
     public function changeStatusOrder($order_reference, $status){
-        Log::info("Change estatus");
+        Log::info("Change Order: ".$order_reference.' Status: '.$status);
         $order = Order::where('temporal_reference', '=', $order_reference)->first();   
         switch ($status) {
             case 'APPROVED':
