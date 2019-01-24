@@ -261,7 +261,6 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $temporal_id)
     {
-
         $ticket_order = Cache::get($temporal_id);
 
         // var_dump($ticket_order);die;
@@ -395,9 +394,9 @@ class EventCheckoutController extends Controller
                     break;
             }
             $transaction = $gateway->purchase($transaction_data);
-
+	
             $response = $transaction->send();
-            if ($response->isSuccessful()) {
+	    if ($response->isSuccessful()) {
 
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
                 return $this->completeOrder($event_id);
@@ -428,7 +427,7 @@ class EventCheckoutController extends Controller
                     'status'       => 'success',
                     'redirectUrl'  => $response->getRedirectUrl(),
                     'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
-                ];
+		];
 
                 // GET method requests should not have redirectData on the JSON return string
                 if($response->getRedirectMethod() == 'POST') {
@@ -524,6 +523,7 @@ class EventCheckoutController extends Controller
      */
     public function completeOrder($temporal_id, $return_json = true)
     {
+
 	$order = Order::where('temporal_reference',$temporal_id)->first();
         if(!$order){
 
@@ -534,7 +534,8 @@ class EventCheckoutController extends Controller
 
             Log::info('vamo  hacerlo');
             $ticket_order =  $ticket_order = Cache::get($temporal_id);
-          
+	    $transaction_data = $ticket_order['transaction_data'];
+
             $event_id = $ticket_order['event_id'];
             Log::info("creamo la orden: ".json_encode($ticket_order));
 	        $request_data = $ticket_order['request_data'];
@@ -557,7 +558,7 @@ class EventCheckoutController extends Controller
             }
             $order->first_name = strip_tags($request_data['order_first_name']);
             $order->last_name = strip_tags($request_data['order_last_name']);
-            $order->email = Auth::user()->email;
+            $order->email = $transaction_data['email'];
             $order->order_status_id = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount = $ticket_order['order_total'];
             $order->booking_fee = $ticket_order['booking_fee'];
@@ -706,7 +707,7 @@ class EventCheckoutController extends Controller
         Log::info('Firing the event');
         event(new OrderCompletedEvent($order));
         /* Envío de correo */        
-	$this->dispatch(new SendOrderTickets($order));
+	// $this->dispatch(new SendOrderTickets($order));
 
 	}
 
@@ -825,7 +826,7 @@ class EventCheckoutController extends Controller
         $order_total = $cache['order_total'];
         $order_name = $cache['request_data']['order_first_name'];
         $order_lastname = $cache['request_data']['order_last_name'];
-        $order_email = Auth::user()->email;
+        $order_email = $cache['transaction_data']['email'];
         $session_id = $cache['transaction_data']['session_id'];
         $response = $placetopay->query($session_id);
         $status = $response->status();
