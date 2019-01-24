@@ -413,9 +413,10 @@ class EventCheckoutController extends Controller
 
                 $ticket_order['transaction_data'] = $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
+                $ticket_order['transaction_data'] += ['url' => $response->getRedirectUrl()];
                 Cache::put($temporal_id, $ticket_order, 60);
 
-		$this->completeOrder($temporal_id);
+		        $this->completeOrder($temporal_id);
                 Log::info("Redirect url: " . $response->getRedirectUrl());
 
                 $return = [
@@ -559,6 +560,7 @@ class EventCheckoutController extends Controller
                 $orderService->calculateFinalCosts();
 
                 $order->taxamt = $orderService->getTaxAmount();
+                $order->url = $transaction_data['url'];
                 $order->save();
                 Log::info("Lo guardamos esa vaina de orden");
                 /*
