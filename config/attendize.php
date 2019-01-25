@@ -44,6 +44,7 @@ return [
     'ticket_booking_fee_fixed'      => 0,
     'ticket_booking_fee_percentage' => 0,
     'send_email'                    => env('SEND_EMAIL_TICKETS', true),
+    'minutes_cache_tickets'         => 1440,
 
     /* Order statuses */
     'order_complete'                => '5c423232c9a4c86123236dcd',
