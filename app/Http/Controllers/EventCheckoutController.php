@@ -817,7 +817,7 @@ class EventCheckoutController extends Controller
         }
         
         $order->save();
-        $this->dispatch(new SendOrderTickets($order));
+        $this->dispatch(new \App\Jobs\SendOrderTickets($order));
         return $order;
     }
 
