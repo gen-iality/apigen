@@ -164,7 +164,8 @@ class EventCheckoutController extends Controller
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
          */
         $temporal_id = "ticket_order_" . time();
-        //session()->put('temporal_order',$temporal_id);
+        //Generamos un cahce donde contiene la información primordial del pago, antes de introducir datos del usuario
+        //Que va a cancelar
         Cache::put($temporal_id, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
@@ -212,7 +213,6 @@ class EventCheckoutController extends Controller
      */
     public function showEventCheckout(Request $request, $temporal_id)
     {
-        // $order_session = session()->get($temporal_id);
         $order_session = Cache::get($temporal_id);
 
         if (!$order_session || $order_session['expires'] < Carbon::now()) {
@@ -257,21 +257,13 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $temporal_id)
     {
+        //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
         $ticket_order = Cache::get($temporal_id);
-
-        // var_dump($ticket_order);die;
+        //Extraemos el event_id del cache
         $event_id = $ticket_order["event_id"];
+        
         //If there's no session kill the request and redirect back to the event homepage.
-        if (!$ticket_order) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Your session has expired.',
-                'redirectUrl' => route('showEventPage', [
-                    'event_id' => $event_id,
-                ]),
-            ]);
-        }
-
+        //Si no estan los terminos y condiciones , no continua.
         if (!$request->has('terms')) {
             return response()->json([
                 'status' => 'error',
@@ -279,13 +271,16 @@ class EventCheckoutController extends Controller
             ]);
         }
 
+        //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
 
+        //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
         Cache::put($temporal_id, $ticket_order, 60);
 
+        //START No entiendo que hace acá esto
         $orderRequiresPayment = $ticket_order['order_requires_payment'];
-
+        
         if ($orderRequiresPayment && $request->get('pay_offline') && $event->enable_offline_payments) {
             return $this->completeOrder($event_id);
         }
@@ -293,6 +288,7 @@ class EventCheckoutController extends Controller
         if (!$orderRequiresPayment) {
             return $this->completeOrder($event_id);
         }
+        //END No entiendo que hace acá esto
 
         try {
             //more transation data being put in here.
@@ -401,7 +397,7 @@ class EventCheckoutController extends Controller
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
                 return $this->completeOrder($event_id);
 
-            } elseif ($response->isRedirect()) {
+            } elseif ($response->isRedirect() && $response->response->processUrl) {
 
                 /*
                  * As we're going off-site for payment we need to store some data in a session so it's available
@@ -410,13 +406,16 @@ class EventCheckoutController extends Controller
 
                 // $response->requestId() and $response->processUrl()
                 $session_id = $response->getTransactionReference();
+                $url_redirect = $response->response->processUrl;
 
                 $ticket_order['transaction_data'] = $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
-                $ticket_order['transaction_data'] += ['url' => $response->getRedirectUrl()];
+                $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
+                //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
                 Cache::put($temporal_id, $ticket_order, 60);
+                $this->completeOrder($temporal_id);
+                
 
-		        $this->completeOrder($temporal_id);
                 Log::info("Redirect url: " . $response->getRedirectUrl());
 
                 $return = [
@@ -436,7 +435,7 @@ class EventCheckoutController extends Controller
                 // display error to customer
                 return response()->json([
                     'status' => 'error',
-                    'message' => $response->getMessage(),
+                    'message' => 'Verifíca los datos para poder continuar',
                 ]);
             }
         } catch (\Exeption $e) {
@@ -454,9 +453,7 @@ class EventCheckoutController extends Controller
 
     public function placetopay()
     {
-
         return $request;
-
     }
 
     /**
@@ -510,39 +507,39 @@ class EventCheckoutController extends Controller
      */
     public function completeOrder($temporal_id, $return_json = true)
     {
-
-        $order = Order::where('temporal_reference', $temporal_id)->first();
+        //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no 
+        //vamos a crear la orden a partir del cache.
+        //EL CACHE ES INDISPENSABLE EN ESTE CONTROLADOR
+        $order = Order::where('order_reference', $temporal_id)->first();
         if (!$order) {
 
-            // DB::beginTransaction();
             try {
-                // session()->put('test','testPut25');
-                //  Log::info(session()->get('test'));
-
-                Log::info('vamo  hacerlo');
+                Log::info('Generación de la orden');
                 $ticket_order = $ticket_order = Cache::get($temporal_id);
                 $transaction_data = $ticket_order['transaction_data'];
+                Log::info("creamo la orden: " . json_encode($ticket_order));
 
                 $event_id = $ticket_order['event_id'];
-                Log::info("creamo la orden: " . json_encode($ticket_order));
                 $request_data = $ticket_order['request_data'];
+
+                //Buscamos el evento el cual le pertence el ticket
                 $event = Event::findOrFail($ticket_order['event_id']);
                 $fields = $event->user_properties;
                 $attendee_increment = 1;
                 $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-                Log::info("Por fiiiiiin continuamos my doggies");
+                //Creamos la nueva orden
                 $order = new Order($request_data);
 
                 /*
                  * Create the order
                  */
-                Log::info('vamo por el cuartillo');
                 if (isset($ticket_order['transaction_id'])) {
                     $order->transaction_id = $ticket_order['transaction_id'][0];
                 }
                 if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
                     $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
                 }
+                //Guardamos cada uno de los datos de la orden
                 $order->first_name = strip_tags($request_data['order_first_name']);
                 $order->last_name = strip_tags($request_data['order_last_name']);
                 $order->email = $transaction_data['email'];
@@ -554,15 +551,15 @@ class EventCheckoutController extends Controller
                 $order->account_id = $event->account->id;
                 $order->event_id = $ticket_order['event_id'];
                 $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-                $order->temporal_reference = $temporal_id;
+                $order->session_id = $ticket_order['transaction_data']['session_id'];
+                $order->order_reference = $temporal_id;
                 // Calculating grand total including tax
                 $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
                 $orderService->calculateFinalCosts();
 
                 $order->taxamt = $orderService->getTaxAmount();
-                $order->url = $transaction_data['url'];
+                $order->url = $transaction_data['url_redirect'];
                 $order->save();
-                Log::info("Lo guardamos esa vaina de orden");
                 /*
                  * Update the event sales volume
                  */
@@ -588,7 +585,6 @@ class EventCheckoutController extends Controller
                 ]);
 
                 $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-                Log::info("Que vaina tan larga ome");
                 if ($ticket_order['order_requires_payment']) {
                     $event_stats->increment('sales_volume', $order->amount);
                     $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
@@ -625,7 +621,6 @@ class EventCheckoutController extends Controller
                     /*
                      * Create the attendees
                      */
-                    Log::info("Donde P!# estoy");
                     for ($i = 0; $i < $attendee_details['qty']; $i++) {
 
                         $attendee = new Attendee();
@@ -648,7 +643,6 @@ class EventCheckoutController extends Controller
                         /*
                          * Save the attendee's questions
                          */
-                        Log::info("Me dijeron que es por acá");
                         foreach ($attendee_details['ticket']->questions as $question) {
 
                             $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
@@ -675,7 +669,6 @@ class EventCheckoutController extends Controller
                             }
                         }
 
-                        Log::info("Por fin llegue hasta el final de esta vuelta");
                         /* Keep track of total number of attendees */
                         $attendee_increment++;
                     }
@@ -718,7 +711,6 @@ class EventCheckoutController extends Controller
     {
         $order = Order::where('order_reference', '=', $order_reference)->first();
 
-        // var_dump($order->event);
         if (!$order) {
             abort(404);
         }
@@ -789,21 +781,33 @@ class EventCheckoutController extends Controller
      */
     public function paymentCompleted(Request $request)
     {
-        Log::info("Volvimos del más allá");
+        Log::info("Petición retornado por PlaceToPay: ". $request);
         $request = $request->json()->all();
-        Log::info($request);
-	$status = $request['status']['status'];
+	    $status = $request['status']['status'];
         $order_reference = $request['reference'];
         return $this->changeStatusOrder($order_reference, $status);
-
     }
 
+    /**
+     * Change Order Status
+     * (Rejected, Approved, Pending, Cancelled)
+     *
+     * @param Request $request
+     * @return void
+     */
     public function changeStatusOrder($order_reference, $status){
         Log::info("Change Order: ".$order_reference.' Status: '.$status);
-        $order = Order::where('temporal_reference', '=', $order_reference)->first();   
+        $order = Order::where('order_reference', '=', $order_reference)->first();   
         switch ($status) {
             case 'APPROVED':
-                $order->order_status_id= config('attendize.order_complete');
+                //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
+                //Ademas de guardar el nuevo estado
+                if($order->order_status_id != config('attendize.order_complete')){
+                    $order->order_status_id= config('attendize.order_complete');
+                    if(config('attendize.send_email')){
+                        $this->dispatch(new \App\Jobs\SendOrderTickets($order));
+                    }
+                }
                 break;
             case 'REJECTED':
                 $order->order_status_id= config('attendize.order_rejected');
@@ -815,9 +819,7 @@ class EventCheckoutController extends Controller
                 $order->order_status_id= config('attendize.order_cancelled');
                 break;
         }
-        
         $order->save();
-        $this->dispatch(new \App\Jobs\SendOrderTickets($order));
         return $order;
     }
 
@@ -843,23 +845,23 @@ class EventCheckoutController extends Controller
      */
     public function showOrderPaymentStatusDetails($order_reference)
     {
-
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
             'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
             'tranKey' => '3ZNdDTNP0Uk1A28G',
             'url' => 'https://test.placetopay.com/redirection/',
             'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
         ]);
-        $cache = Cache::get($order_reference);
+        $order = Order::where('order_reference', '=', $order_reference)->first();
         $reference = $order_reference;
         $date = new \DateTime();
         $today = $date->format('d-m-Y');
-        $order_total = $cache['order_total'];
-        $order_name = $cache['request_data']['order_first_name'];
-        $order_lastname = $cache['request_data']['order_last_name'];
-        $order_email = $cache['transaction_data']['email'];
-        $session_id = $cache['transaction_data']['session_id'];
-        $response = $placetopay->query($session_id);
+        $order_total = $order->amount;
+        $order_name = $order->first_name;
+        $order_lastname = $order->last_name;
+        $order_email = $order->email;
+
+        //Respuesta de Placetopay del proceso de pago
+        $response = $placetopay->query($order->session_id);
         $status =  $response->payment() ? $response->status()->status(): 'CANCELLED';
         $request = $response->request();
         $payment = $response->payment() ? $request->payment() : '';

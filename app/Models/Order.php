@@ -179,7 +179,7 @@ class Order extends MyBaseModel
         parent::boot();
 
         static::creating(function ($order) {
-            $order->order_reference = strtoupper(str_random(5)) . date('jn');
+            // $order->order_reference = strtoupper(str_random(5)) . date('jn');
         });
     }
 }
