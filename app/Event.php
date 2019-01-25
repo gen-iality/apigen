@@ -156,7 +156,7 @@ class Event extends ModelsEvent
     }
 
     /**
-     * Get the speaker.
+     * Get the speaker associated with de event.
      */
     public function speaker()
     {
@@ -169,7 +169,7 @@ class Event extends ModelsEvent
     public function sessions()
     {
 
-        return $this->hasMany('App\EventSession');
+        return $this->hasMany('App\EventSession','event_id');
     }
 
      /**
