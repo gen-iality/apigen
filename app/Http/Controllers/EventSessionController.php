@@ -14,13 +14,12 @@ class EventSessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index(Request $request, String $event_id)
+    public function index(String $event_id)
     {
-        $EventSession = EventSessionResource::collection(
+        return EventSessionResource::collection(
             EventSession::where('event_id', $event_id)
                 ->paginate(config('app.page_size'))
         );
-        return $EventSession;
     }
 
     /**
@@ -39,9 +38,11 @@ class EventSessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, String $event_id)
     {
         $data = $request->json()->all();
+        $data["event_id"] = $event_id;
+        // return $data;
         $result = new EventSession($data);
         $result->save();
         return $result;
@@ -53,9 +54,9 @@ class EventSessionController extends Controller
      * @param  \App\EventSession  $eventSession
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show(String $event_id, String $session_id)
     {
-        $EventSession = EventSession::findOrFail($id);
+        $EventSession = EventSession::findOrFail($session_id);
         $response = new EventSessionResource($EventSession);
         return $response;
     }
@@ -78,10 +79,10 @@ class EventSessionController extends Controller
      * @param  \App\EventSession  $eventSession
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, String $id)
+    public function update(Request $request, string $event_id, String $session_id)
     {
         $data = $request->json()->all();
-        $EventSession = EventSession::findOrFail($id);
+        $EventSession = EventSession::findOrFail($session_id);
         $EventSession->fill($data);
         $EventSession->save();
         return $data;
@@ -93,9 +94,9 @@ class EventSessionController extends Controller
      * @param  \App\EventSession  $eventSession
      * @return \Illuminate\Http\Response
      */
-    public function destroy(String $id)
+    public function destroy(Request $request, $event_id, $session_id)
     {
-        $EventSession = EventSession::findOrFail($id);
+        $EventSession = EventSession::findOrFail($session_id);
         return (string)$EventSession->delete();
     }
 }
