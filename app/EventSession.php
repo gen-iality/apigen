@@ -7,8 +7,9 @@ use Moloquent;
 
 class EventSession extends Moloquent
 {
-    protected $table = ('event_session');
+    protected $table = ('event_sessions');
 
+    protected static $unguarded = true;
 
     public function event() {
         
