@@ -71,7 +71,10 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="@lang("Order.view_order")" class="btn btn-xs btn-primary loadModal">@lang("Order.details")</a>
+                                <!-- <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="@lang("Order.view_order")" class="btn btn-xs btn-primary loadModal">@lang("Order.details")</a> -->
+                                <a href='{{$order->url}}' target="_blank" class="btn btn-xs btn-primary">
+                                    @lang("Order.details")
+                                </a>
                             </td>
                         </tr>
                         @endforeach

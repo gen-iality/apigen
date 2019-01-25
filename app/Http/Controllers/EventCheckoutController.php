@@ -184,7 +184,7 @@ class EventCheckoutController extends Controller
             'affiliate_referral' => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway' => $paymentGateway,
-        ], 60);
+        ], config('attendize.minutes_cache_tickets'));
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
@@ -413,7 +413,7 @@ class EventCheckoutController extends Controller
                 $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
                 //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
                 Cache::put($temporal_id, $ticket_order, 60);
-                $this->completeOrder($temporal_id);
+                $this->storeOrder($temporal_id);
                 
 
                 Log::info("Redirect url: " . $response->getRedirectUrl());
@@ -510,56 +510,25 @@ class EventCheckoutController extends Controller
         //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no 
         //vamos a crear la orden a partir del cache.
         //EL CACHE ES INDISPENSABLE EN ESTE CONTROLADOR
-        $order = Order::where('order_reference', $temporal_id)->first();
-        if (!$order) {
 
             try {
-                Log::info('Generación de la orden');
-                $ticket_order = $ticket_order = Cache::get($temporal_id);
+
+                $order = Order::where('order_reference', '=', $temporal_id)->first();
+                $ticket_order = Cache::get($temporal_id);
                 $transaction_data = $ticket_order['transaction_data'];
-                Log::info("creamo la orden: " . json_encode($ticket_order));
 
                 $event_id = $ticket_order['event_id'];
                 $request_data = $ticket_order['request_data'];
 
                 //Buscamos el evento el cual le pertence el ticket
                 $event = Event::findOrFail($ticket_order['event_id']);
+                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+                $orderService->calculateFinalCosts();
                 $fields = $event->user_properties;
                 $attendee_increment = 1;
                 $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
                 //Creamos la nueva orden
-                $order = new Order($request_data);
-
-                /*
-                 * Create the order
-                 */
-                if (isset($ticket_order['transaction_id'])) {
-                    $order->transaction_id = $ticket_order['transaction_id'][0];
-                }
-                if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
-                    $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
-                }
-                //Guardamos cada uno de los datos de la orden
-                $order->first_name = strip_tags($request_data['order_first_name']);
-                $order->last_name = strip_tags($request_data['order_last_name']);
-                $order->email = $transaction_data['email'];
-                $order->order_status_id = config('attendize.order_awaiting_payment');
-                $order->amount = $ticket_order['order_total'];
-                $order->booking_fee = $ticket_order['booking_fee'];
-                $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
-                $order->discount = 0.00;
-                $order->account_id = $event->account->id;
-                $order->event_id = $ticket_order['event_id'];
-                $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-                $order->session_id = $ticket_order['transaction_data']['session_id'];
-                $order->order_reference = $temporal_id;
-                // Calculating grand total including tax
-                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
-                $orderService->calculateFinalCosts();
-
-                $order->taxamt = $orderService->getTaxAmount();
-                $order->url = $transaction_data['url_redirect'];
-                $order->save();
+            
                 /*
                  * Update the event sales volume
                  */
@@ -691,7 +660,6 @@ class EventCheckoutController extends Controller
             /* Envío de correo */
             // $this->dispatch(new SendOrderTickets($order));
 
-        }
 
         return response()->redirectToRoute('showOrderDetails', [
             'is_embedded' => $this->is_embedded,
@@ -733,6 +701,54 @@ class EventCheckoutController extends Controller
         return view('Public.ViewEvent.EventPageViewOrder', $data);
     }
 
+    /**
+     * Generate Order
+     *
+     * @param [type] $temporal_id
+     * @return void
+     */
+    public function storeOrder($temporal_id){
+        //Datos necesarios para la generación de la orden
+        Log::info('Generación de la orden');
+        $ticket_order = Cache::get($temporal_id);
+        $transaction_data = $ticket_order['transaction_data'];
+        $request_data = $ticket_order['request_data'];
+        $event_id = $ticket_order['event_id'];
+        $event = Event::findOrFail($ticket_order['event_id']);
+        Log::info("creamo la orden: " . json_encode($ticket_order));
+        //Datos necesarios para la generación de la orde
+        $order = new Order($request_data);
+        /*
+         * Create the order
+         */
+        if (isset($ticket_order['transaction_id'])) {
+            $order->transaction_id = $ticket_order['transaction_id'][0];
+        }
+        if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
+            $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
+        }
+        //Guardamos cada uno de los datos de la orden
+        $order->first_name = strip_tags($request_data['order_first_name']);
+        $order->last_name = strip_tags($request_data['order_last_name']);
+        $order->email = $transaction_data['email'];
+        $order->order_status_id = config('attendize.order_awaiting_payment');
+        $order->amount = $ticket_order['order_total'];
+        $order->booking_fee = $ticket_order['booking_fee'];
+        $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
+        $order->discount = 0.00;
+        $order->account_id = $event->account->id;
+        $order->event_id = $ticket_order['event_id'];
+        $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
+        $order->session_id = $ticket_order['transaction_data']['session_id'];
+        $order->order_reference = $temporal_id;
+        // Calculating grand total including tax
+        $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+        $orderService->calculateFinalCosts();
+        $order->taxamt = $orderService->getTaxAmount();
+        $order->url = $transaction_data['url_redirect'];
+        $order->save();
+        return $order;
+    }
     /**
      * Shows the tickets for an order - either HTML or PDF
      *
@@ -781,7 +797,7 @@ class EventCheckoutController extends Controller
      */
     public function paymentCompleted(Request $request)
     {
-        Log::info("Petición retornado por PlaceToPay: ". $request);
+        Log::info("Petición retornado por PlaceToPay: ");
         $request = $request->json()->all();
 	    $status = $request['status']['status'];
         $order_reference = $request['reference'];
@@ -804,7 +820,10 @@ class EventCheckoutController extends Controller
                 //Ademas de guardar el nuevo estado
                 if($order->order_status_id != config('attendize.order_complete')){
                     $order->order_status_id= config('attendize.order_complete');
+                    Log::info("Completamos la orden");
+                    $this->completeOrder($order_reference);
                     if(config('attendize.send_email')){
+                        Log::info("Enviamos el correo");
                         $this->dispatch(new \App\Jobs\SendOrderTickets($order));
                     }
                 }
@@ -833,7 +852,12 @@ class EventCheckoutController extends Controller
     public function completePayment(String $id)
     {
         $temporal_id = $id;
-        return $this->completeOrder($temporal_id);
+        $order = Order::where('order_reference', $temporal_id)->first();
+        
+        return response()->redirectToRoute('showOrderDetails', [
+            'is_embedded' => $this->is_embedded,
+            'order_reference' => $order->order_reference,
+        ]);
     }
 
     /**
@@ -871,4 +895,15 @@ class EventCheckoutController extends Controller
 
         return view('Public.ViewEvent.EventPageDetailOrder', compact('request', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
     }
+/* 
+    public function borrarOrdenes(){
+        $orders = ReservedTickets::all();
+        foreach($orders as $order){
+            $order->forcedelete();
+        }
+        return 'ok';
+        // use App\Models\OrderItem;
+        // use App\Models\QuestionAnswer;
+        // use App\Models\ReservedTickets;
+    } */
 }
