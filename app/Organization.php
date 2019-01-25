@@ -10,7 +10,7 @@ class Organization extends Organiser
 {
     //
     protected $fillable = [ 'name', 'country', 'city', 'picture','location',
-     'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties'];
+     'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties','properties'];
 
    /*  public function events()
     {

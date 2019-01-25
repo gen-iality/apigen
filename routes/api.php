@@ -193,8 +193,21 @@ Route::group(
 // );
 
 /****************
- * Users Organization
+ * Orders Events
  ****************/
+    // ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/orders/', 'OrdersController');
+    // }
+// );
+
+/****************
+ * Orders Users
+ ****************/
+    // ['middleware' => 'auth:token'], function () {
+        // Route::apiResource('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
+        Route::get('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
+    // }
+// );
 
 
 Route::apiResource('photos', 'PhotoController');

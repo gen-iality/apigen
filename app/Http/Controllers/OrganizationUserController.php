@@ -6,6 +6,7 @@ use App\Account;
 use App\Http\Resources\OrganizationUserResource;
 use App\OrganizationUser;
 use Illuminate\Http\Request;
+use Validator;
 
 class OrganizationUserController extends Controller
 {
@@ -15,7 +16,7 @@ class OrganizationUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, String $organization_id)
-    {
+    { 
         $OrganizationUsers = OrganizationUserResource::collection(
             OrganizationUser::where('organization_id', $organization_id)
                 ->paginate(config('app.page_size'))
@@ -42,6 +43,22 @@ class OrganizationUserController extends Controller
 
         $data = $request->json()->all();
 
+        /* Se valida que venga el name y el email */
+
+        $validator = Validator::make(
+            $data, [
+                'name' => 'required',
+                'email' => 'required',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response(
+                $validator->errors(),
+                422
+            );
+        };
+
         //por si envian el names en mayuscula
         if (isset($data['Names'])) {
             $data['names'] = $data['Names'];
@@ -52,7 +69,7 @@ class OrganizationUserController extends Controller
             $data['displayName'] = $data['names'];
             unset($data['names']);
         }
-
+        // return $data;
         $user = Account::updateOrCreate($data);
 
         if (isset($data['properties'])) {

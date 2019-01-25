@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use App\Http\Resources\OrderResource;
 use App\evaLib\Services\OrdersServices;
 use Illuminate\Http\Request;
@@ -16,12 +17,26 @@ class OrdersController extends Controller
      */
     public function indexByEvent(Request $request, String $event_id)
     {
-        $query = Order::where("event_id", $event_id);
+        $query = Order::where("event_id", $event_id)->get();
 
         // $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
 
         return OrderResource::collection($query);
 
+    }
+    /**
+     * __index:__ Display all the Orders of an user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ordersByUsers(Request $request, String $user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $email = $user->email;
+
+        return OrderResource::collection(
+            Order::where("email", $email)
+                ->paginate(config('app.page_size')));
     }
     /**
      * Display all the Orders.
