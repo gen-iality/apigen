@@ -852,7 +852,12 @@ class EventCheckoutController extends Controller
     public function completePayment(String $id)
     {
         $temporal_id = $id;
-        return $this->completeOrder($temporal_id);
+        $order = Order::where('order_reference', $temporal_id)->first();
+        
+        return response()->redirectToRoute('showOrderDetails', [
+            'is_embedded' => $this->is_embedded,
+            'order_reference' => $order->order_reference,
+        ]);
     }
 
     /**
@@ -890,4 +895,15 @@ class EventCheckoutController extends Controller
 
         return view('Public.ViewEvent.EventPageDetailOrder', compact('request', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
     }
+/* 
+    public function borrarOrdenes(){
+        $orders = ReservedTickets::all();
+        foreach($orders as $order){
+            $order->forcedelete();
+        }
+        return 'ok';
+        // use App\Models\OrderItem;
+        // use App\Models\QuestionAnswer;
+        // use App\Models\ReservedTickets;
+    } */
 }
