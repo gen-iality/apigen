@@ -43,6 +43,7 @@ return [
 
     'ticket_booking_fee_fixed'      => 0,
     'ticket_booking_fee_percentage' => 0,
+    'send_email'                    => env('SEND_EMAIL_TICKETS', true),
 
     /* Order statuses */
     'order_complete'                => '5c423232c9a4c86123236dcd',
@@ -50,6 +51,8 @@ return [
     'order_partially_refunded'      => '5c423296477041612349941c',
     'order_cancelled'               => '5c4232ad477041612349941d',
     'order_awaiting_payment'        => '5c4232c1477041612349941e',
+    'order_rejected'                => '5c4a291e5c93dc0eb1992149',
+    'order_pending'                 => '5c4a299c5c93dc0eb199214a',
 
     /* Attendee question types */
     'question_textbox_single'       => 1,
