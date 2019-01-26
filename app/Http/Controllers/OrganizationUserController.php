@@ -59,14 +59,9 @@ class OrganizationUserController extends Controller
             );
         };
 
-        //por si envian el names en mayuscula
-        if (isset($data['Names'])) {
-            $data['names'] = $data['Names'];
-            unset($data['Names']);
-        }
-        
-        if (isset($data['names'])) {
-            $data['displayName'] = $data['names'];
+        //por si envian el names en mayuscula        
+        if (isset($data['name'])) {
+            $data['displayName'] = $data['name'];
             unset($data['names']);
         }
         // return $data;
