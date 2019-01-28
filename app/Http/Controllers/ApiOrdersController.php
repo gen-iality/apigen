@@ -8,7 +8,7 @@ use App\Http\Resources\OrderResource;
 use App\evaLib\Services\OrdersServices;
 use Illuminate\Http\Request;
 
-class OrdersController extends Controller
+class ApiOrdersController extends Controller
 {
     /**
      * __index:__ Display all the Orders of an event
@@ -36,7 +36,8 @@ class OrdersController extends Controller
 
         return OrderResource::collection(
             Order::where("email", $email)
-                ->paginate(config('app.page_size')));
+                ->paginate(config('app.page_size'))
+            );
     }
     /**
      * Display all the Orders.
@@ -61,7 +62,7 @@ class OrdersController extends Controller
     public function store(Request $request, String $event_id, $return_json = true)
     {
         $ticket_order = $request->get('ticket_order_' . $event_id);
-        $request_data = $ticket_order['request_data'][0];
+        $request_data = $ticket_order['request_data'];
         $event = Event::findOrFail($ticket_order['event_id']);
         $fields = $event->user_properties;
         $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
@@ -80,9 +81,10 @@ class OrdersController extends Controller
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
-    {
-        //
+    public function show(String $event_id, String $orders_id)
+    {    
+        $order = Order::findOrFail($orders_id);
+        return new OrderResource($order);
     }
 
     /**

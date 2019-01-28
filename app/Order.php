@@ -33,6 +33,9 @@ class Order extends Orders
         'order_email.email'         => 'Please enter a valid email',
     ];
 
+
+    protected $with = ['event','tickets'];
+
     /**
      * The items associated with the order.
      *
