@@ -77,6 +77,7 @@ Route::group(
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
+        Route::middleware('auth:token')->get('user/organizationUser', 'OrganizationUserController@currentUserindex');
     }
 );
 
@@ -193,8 +194,22 @@ Route::group(
 // );
 
 /****************
- * Users Organization
+ * Orders Events
  ****************/
+    // ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/orders/', 'ApiOrdersController');
+        Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
+    // }
+// );
+
+/****************
+ * Orders Users
+ ****************/
+    // ['middleware' => 'auth:token'], function () {
+        // Route::apiResource('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
+        Route::get('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
+    // }
+// );
 
 
 Route::apiResource('photos', 'PhotoController');

@@ -6,6 +6,8 @@ use App\Account;
 use App\Http\Resources\OrganizationUserResource;
 use App\OrganizationUser;
 use Illuminate\Http\Request;
+use Validator;
+use Auth;
 
 class OrganizationUserController extends Controller
 {
@@ -15,12 +17,28 @@ class OrganizationUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, String $organization_id)
-    {
+    { 
         $OrganizationUsers = OrganizationUserResource::collection(
             OrganizationUser::where('organization_id', $organization_id)
                 ->paginate(config('app.page_size'))
         );
         return $OrganizationUsers;
+    }
+
+    /**
+     * Display all organization of user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function currentUserindex(Request $request)
+    {
+        $user = Auth::user();
+
+        return OrganizationUserResource::collection(
+            OrganizationUser::where('userid', $user->id)
+                ->paginate(config('app.page_size'))
+        );
+
     }
 
     /** 
@@ -42,17 +60,28 @@ class OrganizationUserController extends Controller
 
         $data = $request->json()->all();
 
-        //por si envian el names en mayuscula
-        if (isset($data['Names'])) {
-            $data['names'] = $data['Names'];
-            unset($data['Names']);
-        }
-        
-        if (isset($data['names'])) {
-            $data['displayName'] = $data['names'];
+        /* Se valida que venga el name y el email */
+
+        $validator = Validator::make(
+            $data, [
+                'name' => 'required',
+                'email' => 'required',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response(
+                $validator->errors(),
+                422
+            );
+        };
+
+        //por si envian el names en mayuscula        
+        if (isset($data['name'])) {
+            $data['displayName'] = $data['name'];
             unset($data['names']);
         }
-
+        // return $data;
         $user = Account::updateOrCreate($data);
 
         if (isset($data['properties'])) {
@@ -92,4 +121,5 @@ class OrganizationUserController extends Controller
         );
         return $OrganizationsUser;
     }
+
 }

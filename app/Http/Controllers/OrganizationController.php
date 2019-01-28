@@ -49,6 +49,21 @@ class OrganizationController extends Controller
     public function store(Request $request, EvaRol $RolService)
     {
         $data = $request->json()->all();
+
+        /* Se le agregan campos obligatorios a la organización */
+
+            if(isset($data['properties'])){ 
+                $data['properties'] += [
+                    ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
+                    ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
+                ];
+            }else{
+                $data['properties'] = [
+                    ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
+                    ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
+                ];
+            }
+
         $model = new Organization($data);
         // return response($model);
         $model->author = Auth::user()->id;

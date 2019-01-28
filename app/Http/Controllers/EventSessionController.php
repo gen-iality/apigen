@@ -42,7 +42,6 @@ class EventSessionController extends Controller
     {
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
-        // return $data;
         $result = new EventSession($data);
         $result->save();
         return $result;
