@@ -550,7 +550,7 @@ class EventCheckoutController extends Controller
                  */
                 $event_stats = EventStats::updateOrCreate([
                     'event_id' => $event_id,
-                    'date' => DB::raw('CURRENT_DATE'),
+                    'date' => Carbon::now(),
                 ]);
 
                 $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
@@ -836,6 +836,9 @@ class EventCheckoutController extends Controller
                 break;
             case 'CANCELLED':
                 $order->order_status_id= config('attendize.order_cancelled');
+                break;
+            case 'FAILED':
+                $order->order_status_id= config('attendize.order_failed');
                 break;
         }
         $order->save();
