@@ -24,6 +24,22 @@ class OrganizationUserController extends Controller
         return $OrganizationUsers;
     }
 
+    /**
+     * Display an organization of user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function currentUserindex(Request $request)
+    {
+        $user = Auth::user();
+
+        return OrganizationUserResource::collection(
+            OrganizationUser::where('userid', $user->id)
+                ->paginate(config('app.page_size'))
+        );
+
+    }
+
     /** 
      * Store a newly created resource in storage.
      * En el request llega el email del usuario
@@ -104,4 +120,5 @@ class OrganizationUserController extends Controller
         );
         return $OrganizationsUser;
     }
+
 }
