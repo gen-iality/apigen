@@ -7,6 +7,7 @@ use App\Http\Resources\OrganizationUserResource;
 use App\OrganizationUser;
 use Illuminate\Http\Request;
 use Validator;
+use Auth;
 
 class OrganizationUserController extends Controller
 {
@@ -25,7 +26,7 @@ class OrganizationUserController extends Controller
     }
 
     /**
-     * Display an organization of user.
+     * Display all organization of user.
      *
      * @return \Illuminate\Http\Response
      */
