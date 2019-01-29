@@ -61,6 +61,8 @@
                                 <H3 style="color:RED; margin: 0 0 0 1em; text-align:center">CANCELADO</H3>
                             @elseif($status == 'PENDING')
                                 <H3 style="color:F1B203; margin: 0 0 0 1em; text-align:center">PENDIENTE</H3>
+                            @elseif($status == 'FAILED')
+                                <H3 style="color:RED; margin: 0 0 0 1em; text-align:center">FALLIDO</H3>
                             @endif
                         </div>
                     </div>

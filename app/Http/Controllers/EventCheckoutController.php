@@ -276,7 +276,7 @@ class EventCheckoutController extends Controller
 
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
-        Cache::put($temporal_id, $ticket_order, 60);
+        Cache::put($temporal_id, $ticket_order, config('attendize.minutes_cache_tickets'));
 
         //START No entiendo que hace acá esto
         $orderRequiresPayment = $ticket_order['order_requires_payment'];
@@ -412,7 +412,7 @@ class EventCheckoutController extends Controller
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
                 //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
-                Cache::put($temporal_id, $ticket_order, 60);
+                Cache::put($temporal_id, $ticket_order, config('attendize.minutes_cache_tickets'));
                 $this->storeOrder($temporal_id);
                 
 
@@ -550,7 +550,7 @@ class EventCheckoutController extends Controller
                  */
                 $event_stats = EventStats::updateOrCreate([
                     'event_id' => $event_id,
-                    'date' => DB::raw('CURRENT_DATE'),
+                    'date' => Carbon::now(),
                 ]);
 
                 $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
@@ -837,6 +837,9 @@ class EventCheckoutController extends Controller
             case 'CANCELLED':
                 $order->order_status_id= config('attendize.order_cancelled');
                 break;
+            case 'FAILED':
+                $order->order_status_id= config('attendize.order_failed');
+                break;
         }
         $order->save();
         return $order;
@@ -886,8 +889,9 @@ class EventCheckoutController extends Controller
 
         //Respuesta de Placetopay del proceso de pago
         $response = $placetopay->query($order->session_id);
-        $status =  $response->payment() ? $response->status()->status(): 'CANCELLED';
-        $request = $response->request();
+        
+	$status =  $response->payment() ? $response->payment()[0]->status()->status(): 'CANCELLED';
+	$request = $response->request();
         $payment = $response->payment() ? $request->payment() : '';
         $amount = $payment ? $payment->amount(): '0';
         $autorization = $response;

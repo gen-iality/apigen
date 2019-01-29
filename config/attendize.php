@@ -54,6 +54,7 @@ return [
     'order_awaiting_payment'        => '5c4232c1477041612349941e',
     'order_rejected'                => '5c4a291e5c93dc0eb1992149',
     'order_pending'                 => '5c4a299c5c93dc0eb199214a',
+    'order_failed'                  => '5c4f37a17aa633237e241643',
 
     /* Attendee question types */
     'question_textbox_single'       => 1,
