@@ -21,7 +21,7 @@ class OrganizationUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, String $organization_id)
-    { 
+    {   
         $OrganizationUsers = OrganizationUserResource::collection(
             OrganizationUser::where('organization_id', $organization_id)
                 ->paginate(config('app.page_size'))
@@ -30,19 +30,18 @@ class OrganizationUserController extends Controller
     }
 
     /**
-     * Display all organization of user.
+     * Display only organization of user.
      *
      * @return \Illuminate\Http\Response
      */
-    public function currentUserindex(Request $request)
+    public function currentUserindex(Request $request, String $organization_id)
     {
         $user = Auth::user();
 
         return OrganizationUserResource::collection(
-            OrganizationUser::where('userid', $user->id)
+            OrganizationUser::where('userid', $user->id)->where('organization_id',$organization_id)
                 ->paginate(config('app.page_size'))
         );
-
     }
 
     /** 
@@ -118,6 +117,13 @@ class OrganizationUserController extends Controller
         return (string) $userOrganization->delete();
     }
 
+    /**
+     * Get user organizations
+     *This controller get the organizations of user.
+
+     * @param [type] $user_id
+     * @return OrganizationsUser
+     */
     public function userOrganizations($user_id)
     {
         $OrganizationsUser = OrganizationUserResource::collection(

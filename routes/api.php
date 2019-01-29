@@ -77,7 +77,7 @@ Route::group(
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController');
-        Route::middleware('auth:token')->get('user/organizationUser', 'OrganizationUserController@currentUserindex');
+        Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
     }
 );
 
