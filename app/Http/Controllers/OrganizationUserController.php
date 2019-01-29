@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Validator;
 use Auth;
 
+/** 
+ * Undocumented class
+*/
+
 class OrganizationUserController extends Controller
 {
     /**
@@ -53,6 +57,7 @@ class OrganizationUserController extends Controller
      * }
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param String $organization_id
      * @return \Illuminate\Http\Response
      *///, 
     public function store(Request $request,String $organization_id)

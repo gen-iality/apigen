@@ -161,13 +161,7 @@ class ApiOrdersController extends Controller
 
         $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
         $orderService->calculateFinalCosts();
-
-        $data = [
-            'order'        => $order,
-            'orderService' => $orderService,
-            'event'        => $order->event,
-            'tickets'      => $order->event->tickets,
-        ];
-        return OrderResource::collection($data);
+        
+        return OrderResource::collection($order);
     }
 }

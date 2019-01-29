@@ -193,7 +193,6 @@ class OrdersServices
             $order->taxamt = $orderService->getTaxAmount();
             $order->url = $transaction_data['url_redirect'];
             $order->save();
-            return $order;
 
             /*
              * Update the event sales volume
@@ -204,7 +203,7 @@ class OrdersServices
             /*
             * Update affiliates stats stats
             */
-            if ($ticket_order['affiliate_referral']) {
+            if ($ticket_order['affiliate_referral']) {  
                 $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
                 ->where('event_id', '=', $event_id)->first();
                 $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
