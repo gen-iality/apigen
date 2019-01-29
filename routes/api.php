@@ -196,10 +196,11 @@ Route::group(
 /****************
  * Orders Events
  ****************/
-    // ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events/{event_id}/orders/', 'ApiOrdersController');
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
         Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
-    // }
+//     }
 // );
 
 /****************
