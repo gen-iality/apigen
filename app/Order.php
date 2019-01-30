@@ -194,8 +194,6 @@ class Order extends Orders
         foreach ($this->$attendees as $attendee) {
                 $total = $total + $attendee->price;
         }
-        
-        return $total;
-    
+        $this->amount = $total;
     }
 }

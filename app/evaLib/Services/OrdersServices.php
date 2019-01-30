@@ -393,6 +393,7 @@ class OrdersServices
     public static function addAttendee($attendee_details, $order_id, $event_id, $request_data)
     {
         $event = Event::findOrFail($event_id);
+        $order = Order::findOrFail($order_id);
         $fields = $event->user_properties;
         $attendee_increment = 1;
 
@@ -474,7 +475,8 @@ class OrdersServices
             /* Keep track of total number of attendees */
             $attendee_increment++;
         }
-        return $attendee;
+        $order->calculateTotalAttendeePrice();
+        $order->save();
         return (object) [
             "status" => 'succes',
             "message" => 'ok',
