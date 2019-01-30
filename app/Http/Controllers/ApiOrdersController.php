@@ -115,9 +115,7 @@ class ApiOrdersController extends Controller
 
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
 
-        $response = (['status' => $result->status, 'message' => $result->message]);
-
-        return $response;
+        return $result;
 
     }
 
