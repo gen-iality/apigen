@@ -182,4 +182,14 @@ class Order extends Orders
             $order->order_reference = strtoupper(str_random(5)) . date('jn');
         });
     }
+
+     /**
+     * Calculate total price of each attendee.
+     *
+     * @return int
+     */
+    public function calculateTotalAttendeePrice()
+    {
+
+    }
 }
