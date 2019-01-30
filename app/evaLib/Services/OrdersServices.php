@@ -397,6 +397,7 @@ class OrdersServices
     public static function addAttendee($attendee_details, $order_id, $event_id, $request_data)
     {
         $event = Event::findOrFail($event_id);
+        $order = Order::findOrFail($order_id);
         $fields = $event->user_properties;
         $attendee_increment = 1;
 
@@ -410,8 +411,7 @@ class OrdersServices
             */
         $ticket->increment('quantity_sold', $attendee_details['qty']);
         $ticket->increment('sales_volume', ($ticket['price'] * $attendee_details['qty']));
-        $ticket->increment('organiser_fees_volume', 
-            ($ticket['organiser_booking_fee'] * $attendee_details['qty']));
+        $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $attendee_details['qty']));
 
         /*
             * Insert order items (for use in generating invoices)
@@ -478,7 +478,8 @@ class OrdersServices
             /* Keep track of total number of attendees */
             $attendee_increment++;
         }
-        return $attendee;
+        $order->save();
+
         return (object) [
             "status" => 'succes',
             "message" => 'ok',

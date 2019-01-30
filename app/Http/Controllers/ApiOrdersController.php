@@ -243,6 +243,6 @@ class ApiOrdersController extends Controller
         $result = OrdersServices::addAttendee($attendee_details, $order_id, $event_id, $request_data);
         
         $response = (['status' => $result->status, 'message' => $result->message]);
-        return $result;
+        return $response;
     }
 }
