@@ -202,6 +202,7 @@ Route::group(
         Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
         Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
         Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@storeAttendee');
+        Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
 //     }
 // );
 

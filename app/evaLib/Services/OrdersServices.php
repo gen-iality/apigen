@@ -492,18 +492,21 @@ class OrdersServices
      * @param [type] $ticket_id
      * @return void
      */
-    public static function deleteAttendee($ticket_id, $order_id)
+    public static function deleteAttendee($order_id, $attendee_id)
     {
+        $order = Order::findOrFail($order_id);
+        $attendee = Attendee::findOrFail($attendee_id);
+        $ticket_id = $attendee->ticket_id;
         $ticket = Ticket::find($ticket_id);
         /*
          * Decreases the amount of tickets
          */
-       // $ticket->increment('quantity_sold', -1);
-       // $ticket->increment('sales_volume', -$ticket->price);
+        
+        $ticket->increment('quantity_sold', -1);
+        $ticket->increment('sales_volume', -$ticket->price);
         /**
          * Find Attendee
          */
-        $attendee = Attendee::where('ticket_id',$ticket_id)->where('order_id', $order_id);
         /**
          * Decreases value in stats
          */
@@ -516,7 +519,11 @@ class OrdersServices
         /**
          * Delete attendize ticket
          */
-       
-        return $attendee->delete();
+        $attendee->delete();
+        $order->save();
+        return (object) [
+            "status" => 'succes',
+            "message" => 'ok',
+        ];
     }
 }

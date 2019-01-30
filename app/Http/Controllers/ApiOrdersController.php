@@ -199,10 +199,18 @@ class ApiOrdersController extends Controller
         
         return OrderResource::collection($order);
     }
-
-    public function deleteAttendee($ticket_id, $order_id){
-        return OrdersServices::deleteAttendee($ticket_id, $order_id);
+    /**
+     * Delete Attendee
+     *
+     * @param [type] $ticket_id
+     * @param [type] $order_id
+     * @return void
+     */
+    public function deleteAttendee($order_id, $attendee_id){
+        $result = OrdersServices::deleteAttendee($order_id, $attendee_id);
+        return $result;
     }
+
     /**
      * 
      *  
