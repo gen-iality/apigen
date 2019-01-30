@@ -12,6 +12,7 @@ use App\Order;
 use App\Models\EventStats;
 use App\Models\Affiliate;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
 use App\Services\Order as OrderService;
@@ -472,5 +473,39 @@ class OrdersServices
             // $attendee_increment++;
         }
 
+    }
+
+    /**
+     * Decrease a ticket created
+     *
+     * @param [type] $ticket_id
+     * @return void
+     */
+    public static function deleteAttendee($ticket_id, $order_id)
+    {
+        $ticket = Ticket::find($ticket_id);
+        /*
+         * Decreases the amount of tickets
+         */
+       // $ticket->increment('quantity_sold', -1);
+       // $ticket->increment('sales_volume', -$ticket->price);
+        /**
+         * Find Attendee
+         */
+        $attendee = Attendee::where('ticket_id',$ticket_id)->where('order_id', $order_id);
+        /**
+         * Decreases value in stats
+         */
+        $event_stats = EventStats::updateOrCreate([
+            'event_id' => $ticket->event_id,
+            'date' => (Carbon::now())->toDateString(),
+        ]);
+        $event_stats->increment('tickets_cancel', 1);
+
+        /**
+         * Delete attendize ticket
+         */
+       
+        return $attendee->delete();
     }
 }

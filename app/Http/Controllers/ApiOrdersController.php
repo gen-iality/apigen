@@ -198,4 +198,8 @@ class ApiOrdersController extends Controller
         
         return OrderResource::collection($order);
     }
+
+    public function deleteAttendee($ticket_id, $order_id){
+        return OrdersServices::deleteAttendee($ticket_id, $order_id);
+    }
 }
