@@ -208,7 +208,8 @@ class ApiOrdersController extends Controller
      */
     public function deleteAttendee($order_id, $attendee_id){
         $result = OrdersServices::deleteAttendee($order_id, $attendee_id);
-        return $result;
+        $response = (['status' => $result->status, 'message' => $result->message]);
+        return $response;
     }
 
     /**
