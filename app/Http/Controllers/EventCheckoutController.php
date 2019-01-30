@@ -550,7 +550,7 @@ class EventCheckoutController extends Controller
                  */
                 $event_stats = EventStats::updateOrCreate([
                     'event_id' => $event_id,
-                    'date' => Carbon::now(),
+                    'date' => (Carbon::now())->toDateString(),
                 ]);
 
                 $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);

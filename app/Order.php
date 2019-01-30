@@ -8,6 +8,7 @@ use PDF;
 //Importante usar moloquent!!!!!!
 use Moloquent;
 use App\Models\Order as Orders;
+
 class Order extends Orders
 {
 
@@ -18,8 +19,8 @@ class Order extends Orders
      */
     public $rules = [
         'order_first_name' => ['required'],
-        'order_last_name'  => ['required'],
-        'order_email'      => ['required', 'email'],
+        'order_last_name' => ['required'],
+        'order_email' => ['required', 'email'],
     ];
 
     /**
@@ -29,12 +30,12 @@ class Order extends Orders
      */
     public $messages = [
         'order_first_name.required' => 'Please enter a valid first name',
-        'order_last_name.required'  => 'Please enter a valid last name',
-        'order_email.email'         => 'Please enter a valid email',
+        'order_last_name.required' => 'Please enter a valid last name',
+        'order_email.email' => 'Please enter a valid email',
     ];
 
 
-    protected $with = ['event','tickets'];
+    protected $with = ['event', 'tickets'];
 
     /**
      * The items associated with the order.
@@ -143,12 +144,12 @@ class Order extends Orders
     public function generatePdfTickets()
     {
         $data = [
-            'order'     => $this,
-            'event'     => $this->event,
-            'tickets'   => $this->event->tickets,
+            'order' => $this,
+            'event' => $this->event,
+            'tickets' => $this->event->tickets,
             'attendees' => $this->attendees,
-            'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
-            'image'     => base64_encode(file_get_contents(public_path($this->event->organiser->full_logo_path))),
+            'css' => file_get_contents(public_path('assets/stylesheet/ticket.css')),
+            'image' => base64_encode(file_get_contents(public_path($this->event->organiser->full_logo_path))),
         ];
 
         $pdf_file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $this->order_reference;
@@ -178,8 +179,31 @@ class Order extends Orders
     {
         parent::boot();
 
-        static::creating(function ($order) {
-            $order->order_reference = strtoupper(str_random(5)) . date('jn');
-        });
+        static::creating(
+            function ($order) {
+                $order->order_reference = strtoupper(str_random(5)) . date('jn');
+            }
+        );
+
+        static::saving(
+            function ($order) {
+                $order->calculateTotalAttendeePrice();
+            }
+        );
+    }
+
+    /**
+     * Calculate total price of each attendee.
+     *
+     * @return int
+     */
+    public function calculateTotalAttendeePrice()
+    {
+        $total = 0;
+        if (!$this->attendees) return;
+        foreach ($this->attendees as $attendee) {
+            if ($attendee->ticket->price) $total += $attendee->ticket->price;
+        }
+        $this->amount = $total;
     }
 }

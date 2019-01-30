@@ -36,6 +36,8 @@ class Order extends MyBaseModel
         '_token',
     ];
 
+    protected $dates = ['datetime_to', 'datetime_from'];
+
     /**
      * The items associated with the order.
      *

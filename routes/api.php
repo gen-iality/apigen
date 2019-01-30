@@ -30,6 +30,7 @@ Route::get('test/request/{refresh_token}', 'TestingController@request');
 Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
 Route::get('test/permissions', 'TestingController@permissions');
+Route::get('test/ticket/{ticket_id}/order/{order_id}', 'ApiOrdersController@deleteAttendee');
 // Route::get('test/roles/', 'ContributorController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
@@ -196,10 +197,13 @@ Route::group(
 /****************
  * Orders Events
  ****************/
-    // ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events/{event_id}/orders/', 'ApiOrdersController');
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
         Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
-    // }
+        Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@storeAttendee');
+        Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
+//     }
 // );
 
 /****************
