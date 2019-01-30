@@ -226,93 +226,7 @@ class OrdersServices
                 $event_stats->increment('sales_volume', $order->amount);
                 $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
             }
-            /*
-             * Add the attendees
-             */
-            foreach ($ticket_order['tickets'] as $attendee_details) {
 
-                /*
-                 * Update ticket's quantity sold
-                 */
-                $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
-
-                /*
-                 * Update some ticket info
-                 */
-                $ticket->increment('quantity_sold', $attendee_details['qty']);
-                $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
-                $ticket->increment('organiser_fees_volume',
-                    ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
-
-
-                /*
-                 * Insert order items (for use in generating invoices)
-                 */
-                $orderItem = new OrderItem();
-                $orderItem->title = $attendee_details['ticket']['title'];
-                $orderItem->quantity = $attendee_details['qty'];
-                $orderItem->order_id = $order->id;
-                $orderItem->unit_price = $attendee_details['ticket']['price'];
-                $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
-                $orderItem->save();
-
-                /*
-                 * Create the attendees
-                 */
-                for ($i = 0; $i < $attendee_details['qty']; $i++) {
-
-                    $attendee = new Attendee();
-                    $attendee->properties = (object)[];
-
-                    foreach($fields as $field){
-                        if(!$field['name']) continue;
-                        $attendee->properties->{$field['name']} = $request_data["tiket_holder_".str_replace(" ","_",$field['name'])][$i][$attendee_details['ticket']['id']];                    
-                    }
-                    $attendee->event_id = $event_id;
-                    $attendee->order_id = $order->id;
-                    $attendee->ticket_id = $attendee_details['ticket']['id'];
-                    $attendee->account_id = $event->account->id;
-                    $attendee->reference_index = $attendee_increment;
-                    $attendee->save();
-
-                    /** 
-                    * THIS FUNCTION IS COMMENTED SINCE WE STILL DO NOT WORK WITH QUESTIONS
-
-
-                     * Save the attendee's questions 
-                     */
-                    // foreach ($attendee_details['ticket']->questions as $question) {
-
-
-                    //     $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-
-                    //     if (is_null($ticket_answer)) {
-                    //         continue;
-                    //     }
-
-                    //     /*
-                    //      * If there are multiple answers to a question then join them with a comma
-                    //      * and treat them as a single answer.
-                    //      */
-                    //     $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-
-                    //     if (!empty($ticket_answer)) {
-                    //         QuestionAnswer::create([
-                    //             'answer_text' => $ticket_answer,
-                    //             'attendee_id' => $attendee->id,
-                    //             'event_id'    => $event->id,
-                    //             'account_id'  => $event->account->id,
-                    //             'question_id' => $question->id
-                    //         ]);
-
-                    //     }
-                    // }
-
-
-                    /* Keep track of total number of attendees */
-                    $attendee_increment++;
-                }
-            }
 
         } catch (Exception $e) {
 
@@ -332,12 +246,10 @@ class OrdersServices
 
         // Queue up some tasks - Emails to be sent, PDFs etc.
         Log::info('Firing the event');
+
         event(new OrderCompletedEvent($order));
 
-        return (object) [
-            "status" => 'succes',
-            "message" => 'ok',
-        ];
+        return $order;
     }
 
     /**  
