@@ -10,6 +10,7 @@ use App\evaLib\Services\OrdersServices;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Ticket;
+use Auth;
 
 class ApiOrdersController extends Controller
 {
@@ -35,6 +36,22 @@ class ApiOrdersController extends Controller
     public function ordersByUsers(Request $request, String $user_id)
     {
         $user = User::findOrFail($user_id);
+        $email = $user->email;
+
+        return OrderResource::collection(
+            Order::where("email", $email)
+                ->paginate(config('app.page_size'))
+            );
+    }
+
+       /**
+     * __index:__ Display all the Orders of an user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function meOrders(Request $request)
+    {
+        $user = Auth::user();
         $email = $user->email;
 
         return OrderResource::collection(

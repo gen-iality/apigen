@@ -211,7 +211,8 @@ Route::group(
  ****************/
     // ['middleware' => 'auth:token'], function () {
         // Route::apiResource('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
-        Route::get('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
+        Route::get('users/{user_id}/orders/', 'ApiOrdersController@ordersByUsers');
+        Route::get('me/orders/', 'ApiOrdersController@meOrders');
     // }
 // );
 
