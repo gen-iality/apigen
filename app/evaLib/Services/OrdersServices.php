@@ -178,7 +178,9 @@ class OrdersServices
             $order->email = $request_data['order_email'];
             $order->order_status_id = config('attendize.order_awaiting_payment');
             $order->amount = $ticket_order['order_total'];
-            $order->booking_fee = $ticket_order['booking_fee'];
+            $order->datetime_to = $request_data['datetime_to'];
+            $order->datetime_from = $request_data['datetime_from'];
+            $order->properties = $request_data['properties'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
             $order->discount = 0.00;
             $order->account_id = $event->account->id;
@@ -190,6 +192,7 @@ class OrdersServices
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
             $orderService->calculateFinalCosts();
             $order->taxamt = $orderService->getTaxAmount();
+            
             // $order->url = $transaction_data['url_redirect'];
             $order->save();
 
