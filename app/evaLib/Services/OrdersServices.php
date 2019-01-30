@@ -176,9 +176,9 @@ class OrdersServices
             $order->last_name = strip_tags($request_data['order_last_name']);
             $order->email = $request_data['order_email'];
             $order->order_status_id = config('attendize.order_awaiting_payment');
-            // $order->amount = $ticket_order['order_total'];
-            // $order->booking_fee = $ticket_order['booking_fee'];
-            // $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
+            $order->amount = $ticket_order['order_total'];
+            $order->booking_fee = $ticket_order['booking_fee'];
+            $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
             $order->discount = 0.00;
             $order->account_id = $event->account->id;
             // $order->event_id = $ticket_order['event_id'];
@@ -390,31 +390,34 @@ class OrdersServices
      * 
      *  
      */ 
-    public static function addAttendee()
+    public static function addAttendee($attendee_details, $order_id, $event_id, $request_data)
     {
+        $event = Event::findOrFail($event_id);
+        $fields = $event->user_properties;
+        $attendee_increment = 1;
 
-        /*
+        /*  
             * Update ticket's quantity sold
             */
-        $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
-
+        $ticket = Ticket::findOrFail($attendee_details['ticket_id']);
+        // $ticket = (Array)$ticket;
         /*
             * Update some ticket info
             */
         $ticket->increment('quantity_sold', $attendee_details['qty']);
-        $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
+        $ticket->increment('sales_volume', ($ticket['price'] * $attendee_details['qty']));
         $ticket->increment('organiser_fees_volume', 
-            ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
+            ($ticket['organiser_booking_fee'] * $attendee_details['qty']));
 
         /*
             * Insert order items (for use in generating invoices)
             */
         $orderItem = new OrderItem();
-        $orderItem->title = $attendee_details['ticket']['title'];
+        $orderItem->title = $ticket['title'];
         $orderItem->quantity = $attendee_details['qty'];
-        $orderItem->order_id = $order->id;
-        $orderItem->unit_price = $attendee_details['ticket']['price'];
-        $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
+        $orderItem->order_id = $order_id;
+        $orderItem->unit_price = $ticket['price'];
+        $orderItem->unit_booking_fee = $ticket['booking_fee'] + $ticket['organiser_booking_fee'];
         $orderItem->save();
 
         /*
@@ -430,11 +433,11 @@ class OrdersServices
                     continue;
                 }
 
-                $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
+                $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$ticket['id']];
             }
             $attendee->event_id = $event_id;
-            $attendee->order_id = $order->id;
-            $attendee->ticket_id = $attendee_details['ticket']['id'];
+            $attendee->order_id = $order_id;
+            $attendee->ticket_id = $ticket['id'];
             $attendee->account_id = $event->account->id;
             $attendee->reference_index = $attendee_increment;
             $attendee->save();
@@ -469,8 +472,13 @@ class OrdersServices
             // }
 
             /* Keep track of total number of attendees */
-            // $attendee_increment++;
+            $attendee_increment++;
         }
+        return $attendee;
+        return (object) [
+            "status" => 'succes',
+            "message" => 'ok',
+        ];
 
     }
 }

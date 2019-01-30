@@ -9,6 +9,7 @@ use App\Http\Resources\OrderResource;
 use App\evaLib\Services\OrdersServices;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Ticket;
 
 class ApiOrdersController extends Controller
 {
@@ -71,7 +72,7 @@ class ApiOrdersController extends Controller
         $activeAccountPaymentGateway = 3;
         $paymentGateway = 3;
         $order_expires_time = Carbon::now()->addMinutes(1000000);
-        $order_total = 0;
+        $order_total = 300000;
         $tickets = [];
         $total_ticket_quantity = 0;
 
@@ -197,5 +198,40 @@ class ApiOrdersController extends Controller
         $orderService->calculateFinalCosts();
         
         return OrderResource::collection($order);
+    }
+
+    /**
+     * 
+     *  
+     */
+    public function storeAttendee(Request $request, String $event_id, String $order_id)
+    { 
+        // $attendee_details = [
+        //     'ticket_id' => $ticket,
+        //     'qty' => $current_ticket_quantity
+        // ];
+
+        // $request_data = 
+        // "tiket_holder_Cédula": [
+        //     {
+        //         "5c4a4773342254198e226262": "1014180319"
+        //     }
+        // ],
+        // "tiket_holder_names": [
+        //     {
+        //         "5c4a4773342254198e226262": "kimberly mateus"
+        //     }
+        // ];
+
+        $data = $request->json()->all();
+
+        $attendee_details = $data['attendee_details'];
+
+        $request_data = $data['request_data'];
+
+        $result = OrdersServices::addAttendee($attendee_details, $order_id, $event_id, $request_data);
+        
+        $response = (['status' => $result->status, 'message' => $result->message]);
+        return $result;
     }
 }
