@@ -190,6 +190,12 @@ class Order extends Orders
      */
     public function calculateTotalAttendeePrice()
     {
-
+               
+        foreach ($this->$attendees as $attendee) {
+                $total = $total + $attendee->price;
+        }
+        
+        return $total;
+    
     }
 }
