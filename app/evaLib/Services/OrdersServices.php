@@ -407,8 +407,7 @@ class OrdersServices
             */
         $ticket->increment('quantity_sold', $attendee_details['qty']);
         $ticket->increment('sales_volume', ($ticket['price'] * $attendee_details['qty']));
-        $ticket->increment('organiser_fees_volume', 
-            ($ticket['organiser_booking_fee'] * $attendee_details['qty']));
+        $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $attendee_details['qty']));
 
         /*
             * Insert order items (for use in generating invoices)
@@ -475,8 +474,8 @@ class OrdersServices
             /* Keep track of total number of attendees */
             $attendee_increment++;
         }
-        $order->calculateTotalAttendeePrice();
         $order->save();
+
         return (object) [
             "status" => 'succes',
             "message" => 'ok',
