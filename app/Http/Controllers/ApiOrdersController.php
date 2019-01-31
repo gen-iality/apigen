@@ -7,10 +7,12 @@ use App\User;
 use App\Event;
 use App\Http\Resources\OrderResource;
 use App\evaLib\Services\OrdersServices;
+use App\evaLib\Services\UserEventService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Ticket;
 use Auth;
+use Validator;
 
 class ApiOrdersController extends Controller
 {
@@ -52,6 +54,7 @@ class ApiOrdersController extends Controller
     public function meOrders(Request $request)
     {
         $user = Auth::user();
+        // return $user;
         $email = $user->email;
 
         return OrderResource::collection(
@@ -150,10 +153,12 @@ class ApiOrdersController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return response()->json([
+            return response()->json( 
+                [
                 'status'   => 'error',
                 'messages' => $validator->messages()->toArray(),
-            ]);
+                ]
+            );
         }
 
         try {
@@ -259,6 +264,78 @@ class ApiOrdersController extends Controller
         $result = OrdersServices::addAttendee($attendee_details, $order_id, $event_id, $request_data);
         
         $response = (['status' => $result->status, 'message' => $result->message]);
+        return $response;
+    }
+
+    /**
+     * 
+     *  
+     */
+    public function createUserAndAddtoEvent(Request $request, string $event_id, String $order_id)
+    {
+        // return $request;
+
+        
+        try {
+
+            //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
+            //a estar dentro de un hijo llamado properties
+            $eventUserData = $request->json()->all();
+
+            $event = Event::find($event_id);
+            $user_properties = $event->user_properties;
+
+            // $validations = [
+            //     'email' => 'required|email',
+            //     'other_fields' => 'sometimes',
+            // ];
+            
+            // foreach($user_properties as $user_property){
+
+            //     if($user_property['mandatory'] !== true)continue;
+
+            //         $event = $user_property['name'];
+
+            //         $validations [$event] = 'required';
+                    
+            //     }
+
+            // //este validador pronto se va a su clase de validacion
+            // $validator = Validator::make(
+            //     $userData, 
+            //     $validations
+            // );
+
+            // if ($validator->fails()) {
+            //     return response(
+            //         $validator->errors(),
+            //         422
+            //     );
+            // }
+
+            $userData = $request->json()->all();
+
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
+            }
+
+            /* Se le agrega el id de la orden en la variable eventUserData
+            si esta viene si no, no se agrega nada. */
+
+            if (isset($order_id)) {
+                $eventUserData['order_id'] = $order_id;
+            }
+
+            // return $eventUserData['ticket_id'];
+
+            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+            // return $result;
+            $response = new OrderResource($result->data);
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
+
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
         return $response;
     }
 }

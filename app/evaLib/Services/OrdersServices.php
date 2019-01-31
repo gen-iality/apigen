@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\Order as OrderService;
 use Omnipay;
 use Log;
+use Auth;
 
 /**
  * This class contains methods of the Orders model
@@ -160,7 +161,7 @@ class OrdersServices
      */
     public static function createAnOrder($ticket_order, $request_data, $event, $fields)
     {
-
+        $user = Auth::user();
         $attendee_increment = 1;
         
         try {
@@ -183,7 +184,7 @@ class OrdersServices
             $order->properties = $request_data['properties'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
             $order->discount = 0.00;
-            $order->account_id = $event->account->id;
+            $order->account_id = isset($user->id) ? $user->id : null;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
             // $order->session_id = $ticket_order['transaction_data']['session_id'];
