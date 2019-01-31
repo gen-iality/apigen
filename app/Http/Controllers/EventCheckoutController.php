@@ -311,9 +311,9 @@ class EventCheckoutController extends Controller
 
                 $config += [
                     'testMode' => config('attendize.enable_test_payments'),
-                    'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
-                    'tranKey' => '3ZNdDTNP0Uk1A28G',
-                    'url' => 'https://test.placetopay.com/redirection/',
+                    'login' => 'ff684c45a63f769d824994dcc1369fb9',
+                    'tranKey' => 'X1GIXSF2Dxtq0bfg',
+                    'url' => 'https://secure.placetopay.com/redirection/api/session/',
                 ];
 
                 $gateway->initialize($config);
@@ -879,9 +879,9 @@ class EventCheckoutController extends Controller
     public function showOrderPaymentStatusDetails($order_reference)
     {
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
-            'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
-            'tranKey' => '3ZNdDTNP0Uk1A28G',
-            'url' => 'https://test.placetopay.com/redirection/',
+            'login' => 'ff684c45a63f769d824994dcc1369fb9',
+            'tranKey' => 'X1GIXSF2Dxtq0bfg',
+            'url' => 'https://secure.placetopay.com/redirection/api/session/',
             'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
         ]);
         $order = Order::where('order_reference', '=', $order_reference)->first();
