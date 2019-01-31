@@ -61,7 +61,6 @@ class OrganizationUserController extends Controller
      *///, 
     public function store(Request $request,String $organization_id)
     {
-
         $data = $request->json()->all();
 
         /* Se valida que venga el name y el email */
@@ -103,6 +102,21 @@ class OrganizationUserController extends Controller
         $result = OrganizationUser::updateOrCreate($UserOrganization);
         $model = OrganizationUser::find($result->id);
         return $model;
+    }
+  
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\OrganizationUser  $organizationUser
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $organization_id, $organization_user_id){
+        
+        $data = $request->json()->all();
+        $userOrganization = OrganizationUser::where('organization_id',$organization_id)->where('userid',$organization_user_id)->first();
+        $userOrganization->properties = $data;
+        $userOrganization->save();
+        return $userOrganization;
     }
 
     /**
