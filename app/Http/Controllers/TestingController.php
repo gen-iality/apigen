@@ -278,4 +278,44 @@ class TestingController extends Controller
 
     }
 
+    public function orderSave($order_id){
+        $order = Order::find($order_id);
+/*         $event = Event::find($order->event_id);
+        $event_properties = $event->user_properties;
+        $attendees_order = $order->attendees;
+        $amount = 0;
+
+        //Vamos a recorrer los asistentes que contiene una orden
+        foreach($attendees_order as $attendee){
+            //Capturarmos los campos con su valor de los asistentes que contienen una orden
+            $properties = $attendee->properties;
+            //Recorremos las propiedades del asistente 
+            foreach($properties as $key_attendize=>$attendize){
+                //Recorremos los campos definidos en el evento para encontrar cual tiene monto
+                foreach($event_properties as $key_event_property => $event_property){
+                    //Si el valor del campo es igual al que se configuro en el evento entramos
+                    if($event_property['name'] == $key_attendize){
+                        //Si dentro de campo existe las opciones significa que es un dropdown y entramos
+                        if(isset($event_property['options'])){
+                            //Recorremos las opciones del dropdown
+                            foreach($event_property['options'] as $key_property=>$property){
+                                //Si el input tiene definido un monto entramos
+                                if(isset($property['amount'])){
+                                    //Si el valor del attendize es igual al campo de la propiedad entra
+                                    if($key_property == $attendize){
+                                        $amount += $property['amount'];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        $order->amount = $amount+$order->amount;
+        return $order->amount; */
+        $order->save();
+    }
+
 }
