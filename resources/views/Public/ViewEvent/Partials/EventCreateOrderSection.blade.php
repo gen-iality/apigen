@@ -26,7 +26,7 @@
                                 @if((int)ceil($ticket['full_price']) === 0)
                                     @lang("Public_ViewEvent.free")
                                 @else
-                                {{ money($ticket['full_price'], $event->currency) }}
+                                    {{ money($ticket['full_price'], $event->currency) }}
                                 @endif
                             </td>
                         </tr>

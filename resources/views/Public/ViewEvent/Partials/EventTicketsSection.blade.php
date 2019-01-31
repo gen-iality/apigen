@@ -86,6 +86,7 @@ body {font-family: Arial;}
                                                     @lang("Public_ViewEvent.free")
                                                     <meta property="price" content="0">
                                                 @else
+                                                    
                                                     <?php
                                                     $is_free_event = false;
                                                     ?>
@@ -93,8 +94,9 @@ body {font-family: Arial;}
                                                     {{--  <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span> --}}
                                                     <meta property="priceCurrency"
                                                         content="{{ $event->currency->code }}">
-                                                    <meta property="price"
+                                                    <meta property="price"  
                                                         content="{{ number_format($ticket->price, 2, '.', '') }}">
+                                                    {{$ticket->currency}}
                                                 @endif
                                             </div>
                                         </td>
