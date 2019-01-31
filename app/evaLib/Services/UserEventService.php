@@ -7,9 +7,12 @@ namespace App\evaLib\Services;
 use App\Event;
 use App\Attendee;
 use App\Rol;
+use App\Order;
 use App\State;
 use App\Account;
 use Carbon\Carbon;
+use App\Models\OrderItem;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -31,11 +34,46 @@ class UserEventService
      */
     public static function importUserEvent(Event $event, $eventUserFields, $userData)
     {
+        // return 0;
         $result_status = null;
         $data = null;
         $message = "OK";
         $date = Carbon::now();
         $date = $date->format('his');
+        
+        /* Buscamos el ticket */
+        $ticket = Ticket::findOrFail($eventUserFields['ticket_id']);
+        $ticket_details['qty'] = 1;
+
+        // return $ticket;
+
+        /*
+        * Update some ticket info
+        */
+        $ticket->increment('quantity_sold', $ticket_details['qty']);
+        $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
+        $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
+    
+
+         /* Si viene el id de la orden en la variable eventUserFields
+        buscamos la orden  */
+        if (isset($eventUserFields["order_id"])) {
+
+            $order = Order::findOrFail($eventUserFields["order_id"]);
+
+           
+            //Insert order items (for use in generating invoices)
+
+           $orderItem = new OrderItem();
+           $orderItem->title = $ticket['title'];
+           $orderItem->quantity = 1;
+           $orderItem->order_id = $order->id;
+           $orderItem->unit_price = $ticket['price'];
+           $orderItem->unit_booking_fee = $ticket['booking_fee'] + $ticket['organiser_booking_fee'];
+           $orderItem->save();
+        }
+
+
 
         /* Si no existe el correo le creamos uno, anteriormente se mostraba un error */
         // if (!isset($userData['email'])) {
@@ -50,7 +88,7 @@ class UserEventService
         $email = $userData['email'];
         $matchAttributes = ['email' => $email];
         
-        if($userData['names']){
+        if ($userData['names']) {
             $userData['displayName'] = $userData['names'];
             unset($userData['names']);
         }
@@ -78,34 +116,41 @@ class UserEventService
         $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
 
         //esto por que se nos fue un error en el excel al princiopo
-        if (isset($eventUserFields["state_id"])){
+        if (isset($eventUserFields["state_id"])) {
             unset($eventUserFields["state_id"]);
         }       
                 
         //eventUser booking status default value
         // Si el usuario no tiene asignado un estado, poner un estado por defecto
-        if(!isset($user->state_id) || !$user->state_id){
+        if (!isset($user->state_id) || !$user->state_id) {
             $temp = State::first();
             $eventUserFields["state_id"] = $temp->_id;
         }
  
         // Si dentro de la petición viene el estado, colocarle el estado que viene en la petición
         if (isset($eventUserFields["state"])) {
-            $temp = State::where('name',strtoupper($eventUserFields["state"]))->first();
+            $temp = State::where('name', strtoupper($eventUserFields["state"]))->first();
             //Si encuentra el estado por nombre, es finalmente colocado por id, 
             //Si no lo encuentra borra el valor del estado de la petición
-            if($temp && isset($temp->_id)){
+            if ($temp && isset($temp->_id)) {
                 $eventUserFields["state_id"] = $temp->_id;
             }
-            if (isset($eventUserFields["state"])){
+            if (isset($eventUserFields["state"])) {
                 unset($eventUserFields["state"]);
             }
             
-
-            
         }
 
+
+
+        /* guardamos el Attendee o eventUser */
         $eventUser = Attendee::updateOrCreate($matchAttributes, $eventUserFields);
+
+        /* Si viene el id de la orden en la variable eventUserFields
+        buscamos la orden  */
+        if (isset($eventUserFields["order_id"])) {
+            $order->save();
+        } 
 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
