@@ -360,14 +360,18 @@ class EventCheckoutController extends Controller
                         'receipt_email' => $request->get('order_email'),
                     ];
                     break;
+                    /* Rutas y accesos de prueba */
+                    // 'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
+                    // 'tranKey' => '3ZNdDTNP0Uk1A28G',
+                    // 'url' => 'https://test.placetopay.com/redirection/',
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
                     $transaction_data += [
                         'returnUrl' => 'https://api.evius.co/order/' . $temporal_id . '/payment',
                         'orderid' => $temporal_id,
-                        'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
-                        'tranKey' => '3ZNdDTNP0Uk1A28G',
-                        'url' => 'https://test.placetopay.com/redirection/',
+                        'login' => 'ff684c45a63f769d824994dcc1369fb9',
+                        'tranKey' => 'X1GIXSF2Dxtq0bfg',
+                        'url' => 'https://secure.placetopay.com/redirection/api/session/',
                         'typeDocument' => $request->get('typeDocument'),
                         'document' => $request->get('document'),
                         'username' => $request->get('order_first_name'),
