@@ -184,6 +184,7 @@ class EventCheckoutController extends Controller
             'affiliate_referral' => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway' => $paymentGateway,
+            'currency' => $ticket->currency,
         ], config('attendize.minutes_cache_tickets'));
         /*
          * If we're this far assume everything is OK and redirect them
@@ -323,7 +324,7 @@ class EventCheckoutController extends Controller
 
             $transaction_data += [
                 'amount' => $orderService->getGrandTotal(),
-                'currency' => $event->currency->code,
+                'currency' => $ticket_order["currency"],
                 'description' => 'Evento: ' . $event->name,
             ];
 
