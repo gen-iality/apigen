@@ -182,7 +182,7 @@ class Order extends Orders
 
         static::creating(
             function ($order) {
-                $order->order_reference = strtoupper(str_random(5)) . date('jn');
+                // $order->order_reference = strtoupper(str_random(5)) . date('jn');
             }
         );
 
@@ -213,7 +213,7 @@ class Order extends Orders
         foreach ($attendees_order as $attendee) {
             if ($attendee->ticket->price) $total += $attendee->ticket->price;
         }
-        
+
         //Vamos a recorrer los asistentes que contiene una orden
         foreach($attendees_order as $attendee){
             //Capturarmos los campos con su valor de los asistentes que contienen una orden
