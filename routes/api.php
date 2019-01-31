@@ -80,7 +80,7 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController',['except' => ['update']]);
         Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
-        Route::post('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
+        Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
     }
 );
 

@@ -324,10 +324,9 @@ class ApiOrdersController extends Controller
                 $eventUserData['order_id'] = $order_id;
             }
 
-            // return $eventUserData['ticket_id'];
+            // return $userData;
 
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            // return $result;
             $response = new OrderResource($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
