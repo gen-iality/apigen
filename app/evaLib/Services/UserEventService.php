@@ -87,10 +87,14 @@ class UserEventService
         /* Buscamos primero el usuario por email y sino existe lo creamos */
         $email = $userData['email'];
         $matchAttributes = ['email' => $email];
-        
-        if ($userData['names']) {
+    
+        if (!isset($userData['names'])) {
+            $userData['names'] = isset($userData['firstName']) ? $userData['firstName'] : $userData['email'];
+        }
+
+        if (isset($userData['names'])) {
             $userData['displayName'] = $userData['names'];
-            unset($userData['names']);
+            // unset($userData['names']);
         }
 
         $user = Account::updateOrCreate($matchAttributes, $userData);
