@@ -9,7 +9,7 @@ use App\Events\OrderCompletedEvent;
 use App\Models\AccountPaymentGateway;
 use App\Models\Affiliate;
 use App\Models\EventStats;
-use App\Models\Order;
+use App\Order;
 use App\Models\OrderItem;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
@@ -747,6 +747,7 @@ class EventCheckoutController extends Controller
         $order->taxamt = $orderService->getTaxAmount();
         $order->url = $transaction_data['url_redirect'];
         $order->save();
+
         return $order;
     }
     /**

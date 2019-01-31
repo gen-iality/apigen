@@ -181,7 +181,7 @@ class Order extends MyBaseModel
         parent::boot();
 
         static::creating(function ($order) {
-            $order->order_reference = "ticket_order_" . time();
+            // $order->order_reference = "ticket_order_" . time();
         });
     }
 }
