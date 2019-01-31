@@ -43,7 +43,7 @@ class ApiOrdersController extends Controller
         return OrderResource::collection(
             Order::where("email", $email)
                 ->paginate(config('app.page_size'))
-            );
+        );
     }
 
        /**
@@ -54,13 +54,11 @@ class ApiOrdersController extends Controller
     public function meOrders(Request $request)
     {
         $user = Auth::user();
-        // return $user;
-        $email = $user->email;
 
         return OrderResource::collection(
-            Order::where("email", $email)
+            Order::where("account_id", $user->id)
                 ->paginate(config('app.page_size'))
-            );
+        );
     }
     /**
      * Display all the Orders.
