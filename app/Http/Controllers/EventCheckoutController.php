@@ -421,7 +421,7 @@ class EventCheckoutController extends Controller
                 $this->storeOrder($temporal_id);
                 
 
-                var_dump("Redirect url: " . $response->getRedirectUrl());die;
+                Log::info("Redirect url: " . $response->getRedirectUrl());
 
                 $return = [
                     'status' => 'success',
