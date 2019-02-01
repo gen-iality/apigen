@@ -313,7 +313,7 @@ class EventCheckoutController extends Controller
                     'testMode' => config('attendize.enable_test_payments'),
                     'login' => 'ff684c45a63f769d824994dcc1369fb9',
                     'tranKey' => 'X1GIXSF2Dxtq0bfg',
-                    'url' => 'https://secure.placetopay.com/redirection/api/session/',
+                    'url' => 'https://secure.placetopay.com/redirection/',
                 ];
 
                 $gateway->initialize($config);
@@ -372,7 +372,7 @@ class EventCheckoutController extends Controller
                         'orderid' => $temporal_id,
                         'login' => 'ff684c45a63f769d824994dcc1369fb9',
                         'tranKey' => 'X1GIXSF2Dxtq0bfg',
-                        'url' => 'https://secure.placetopay.com/redirection/api/session/',
+                        'url' => 'https://secure.placetopay.com/redirection/',
                         'typeDocument' => $request->get('typeDocument'),
                         'document' => $request->get('document'),
                         'username' => $request->get('order_first_name'),
@@ -421,7 +421,7 @@ class EventCheckoutController extends Controller
                 $this->storeOrder($temporal_id);
                 
 
-                Log::info("Redirect url: " . $response->getRedirectUrl());
+                var_dump("Redirect url: " . $response->getRedirectUrl());die;
 
                 $return = [
                     'status' => 'success',
@@ -881,7 +881,7 @@ class EventCheckoutController extends Controller
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
             'login' => 'ff684c45a63f769d824994dcc1369fb9',
             'tranKey' => 'X1GIXSF2Dxtq0bfg',
-            'url' => 'https://secure.placetopay.com/redirection/api/session/',
+            'url' => 'https://secure.placetopay.com/redirection/',
             'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
         ]);
         $order = Order::where('order_reference', '=', $order_reference)->first();
