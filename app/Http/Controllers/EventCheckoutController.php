@@ -765,7 +765,7 @@ class EventCheckoutController extends Controller
     public function showOrderTickets(Request $request, $order_reference)
     {
         $order = Order::where('order_reference', '=', $order_reference)->first();
-
+        
         if (!$order) {
             abort(404);
         }
@@ -775,23 +775,35 @@ class EventCheckoutController extends Controller
             $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
         }
 
+         /* Se cargan los datos que se van a utilizar en el PDF */
+        $date = new \DateTime();
+        $today =  $date->format('d-m-Y');
+        $logo_evius = 'images/logo.png';
+        $event = Event::findOrFail($order->event_id);
+        $eventusers = Attendee::where('order_id', $order->id)->get();
+        $location = $event["location"]["FormattedAddress"];
+        
         $data = [
             'order' => $order,
             'event' => $order->event,
-            'tickets' => $order->event->tickets,
-            'attendees' => $order->attendees,
-            //'css'       => "file_get_contents(public_path('assets/stylesheet/ticket.css'))",
-            'css' => '',
-            //'image'     => base64_encode(file_get_contents(public_path($order->event->organiser->full_logo_path))),
-            'images' => $images,
+            'eventusers' => $eventusers,
+            'location' =>  $event["location"]["FormattedAddress"],
+            'today' => $date->format('d-m-Y'),
+            'logo_evius' => 'images/logo.png',
         ];
-
+        
         if ($request->get('download') == '1') {
-            //  return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, 'Tickets');
-            $pdf = PDF::loadView('Public.ViewEvent.Partials.PDFTicket', $data);
-            return $pdf->download('Tickets-pdf');
+            $pdf = PDF::loadview(
+                'pdf_bookingConfirmed', $data
+            );
+            $pdf->setPaper(
+                'legal',  'portrait'
+            );
+            return $pdf->download('Tickets.pdf');
         }
-        return view('Public.ViewEvent.Partials.PDFTicket', $data);
+        return view(
+            'pdf_bookingConfirmed', $data
+        );
     }
 
     /**

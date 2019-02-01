@@ -165,10 +165,10 @@ body {font-family: Arial;}
                                                     @endif
                                                 </div>
 
-                                                @if(Auth::user())
+                                                @endif
+                                                @if(Auth::user() && $key == $stage_act)
                                                     {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
                                                 @endif
-                                            @endif
                                             
                                         </td>
                                     </tr>
