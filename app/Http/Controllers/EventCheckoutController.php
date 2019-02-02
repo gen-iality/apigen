@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Attendee;
 use App\Event;
+use App\Jobs\SendOrderTickets;
 use App\Events\OrderCompletedEvent;
 use App\Models\AccountPaymentGateway;
 use App\Models\Affiliate;
@@ -672,7 +673,7 @@ class EventCheckoutController extends Controller
             Log::info('Firing the event');
             event(new OrderCompletedEvent($order));
             /* Envío de correo */
-            // $this->dispatch(new SendOrderTickets($order));
+            $this->dispatch(new SendOrderTickets($order));
 
 
         return response()->redirectToRoute('showOrderDetails', [
@@ -744,7 +745,7 @@ class EventCheckoutController extends Controller
         //Guardamos cada uno de los datos de la orden
         $order->first_name = strip_tags($request_data['order_first_name']);
         $order->last_name = strip_tags($request_data['order_last_name']);
-        $order->email = $transaction_data['email'];
+        $order->email = isset($transaction_data['email']) ? $transaction_data['email'] : Auth::user()->email;
         $order->order_status_id = config('attendize.order_awaiting_payment');
         $order->amount = $ticket_order['order_total'];
         $order->booking_fee = $ticket_order['booking_fee'];
@@ -761,7 +762,6 @@ class EventCheckoutController extends Controller
         $order->taxamt = $orderService->getTaxAmount();
         $order->url = $transaction_data['url_redirect'];
         $order->save();
-
         return $order;
     }
     /**
@@ -778,13 +778,7 @@ class EventCheckoutController extends Controller
         if (!$order) {
             abort(404);
         }
-        $images = [];
-        $imgs = $order->event->images;
-        foreach ($imgs as $img) {
-            $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
-        }
-
-         /* Se cargan los datos que se van a utilizar en el PDF */
+        /* Se cargan los datos que se van a utilizar en el PDF */
         $date = new \DateTime();
         $today =  $date->format('d-m-Y');
         $logo_evius = 'images/logo.png';
