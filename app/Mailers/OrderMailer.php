@@ -50,7 +50,7 @@ class OrderMailer
         ];
         
         // Creación del PDF
-        /$pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
+         $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
          $pdf->setPaper('legal','portrait');
 
         // Envío del email
