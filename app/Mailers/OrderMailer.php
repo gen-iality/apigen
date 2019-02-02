@@ -50,8 +50,8 @@ class OrderMailer
         ];
         
         // Creación del PDF
-        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
-        $pdf->setPaper('legal','portrait');
+         $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
+         $pdf->setPaper('legal','portrait');
 
         // Envío del email
         Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $pdf) {
