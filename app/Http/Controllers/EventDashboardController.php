@@ -52,13 +52,13 @@ class EventDashboardController extends MyBaseController
             $unique_views = 0;
             $tickets_sold = 0;
             $organiser_fees_volume = 0;
-
+            // return $chartData;
             foreach ($chartData as $item) {
                 if ($item['date'] == $date->format('Y-m-d')) {
-                    $views = $item['views'];
+                    // $views = $item['views'];
                     $sales_volume = $item['sales_volume'];
                     $organiser_fees_volume = $item['organiser_fees_volume'];
-                    $unique_views = $item['unique_views'];
+                    // $unique_views = $item['unique_views'];
                     $tickets_sold = $item['tickets_sold'];
 
                     break;

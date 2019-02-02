@@ -774,7 +774,7 @@ class EventCheckoutController extends Controller
     public function showOrderTickets(Request $request, $order_reference)
     {
         $order = Order::where('order_reference', '=', $order_reference)->first();
-
+        
         if (!$order) {
             abort(404);
         }
@@ -791,7 +791,7 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($order->event_id);
         $eventusers = Attendee::where('order_id', $order->id)->get();
         $location = $event["location"]["FormattedAddress"];
-
+        
         $data = [
             'order' => $order,
             'event' => $order->event,
@@ -800,7 +800,7 @@ class EventCheckoutController extends Controller
             'today' => $date->format('d-m-Y'),
             'logo_evius' => 'images/logo.png',
         ];
-
+        
         if ($request->get('download') == '1') {
             $pdf = PDF::loadview(
                 'pdf_bookingConfirmed', $data
