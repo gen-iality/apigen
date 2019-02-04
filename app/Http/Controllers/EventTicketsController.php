@@ -90,9 +90,11 @@ class EventTicketsController extends MyBaseController
     {
         $event = Event::findOrFail($event_id);
         $stages = $event->event_stages;
+        $currencies = Currency::all();
         return view('ManageEvent.Modals.CreateTicket', [
             'event' => $event,
             'stages' => $stages,
+            'currencies' => $currencies,
         ]);
     }
 
@@ -132,6 +134,8 @@ class EventTicketsController extends MyBaseController
         $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $ticket->start_sale_date = $start_sale_date;
         $ticket->end_sale_date = $end_sale_date;
+        $ticket->stage = strip_tags($request->get('stage'));
+        $ticket->currency = $request->get('currency');
         $ticket->stage = strip_tags($request->get('stage'));
         $ticket->price = $request->get('price');
         $ticket->min_per_person = $request->get('min_per_person');

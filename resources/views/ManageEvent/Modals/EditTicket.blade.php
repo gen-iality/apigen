@@ -41,7 +41,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {!! Form::label('stage','Stages', array('class'=>' control-label required')) !!}
+                            {!! Form::label('stage','Etapa', array('class'=>' control-label required')) !!}
                             <select class="form-control" name="stage">
                                 @foreach($stages as $stage)
                                     @if($stage['title'] == $ticket->stage)   
@@ -56,7 +56,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {!! Form::label('currency','Currency', array('class'=>' control-label required')) !!}
+                            {!! Form::label('currency','Moneda', array('class'=>' control-label required')) !!}
                             <select class="form-control" name="currency" >
                                 @foreach($currencies as $currency)
                                     @if($currency['code'] == $ticket->currency)    
