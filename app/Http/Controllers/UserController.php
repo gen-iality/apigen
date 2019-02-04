@@ -87,11 +87,12 @@ class UserController extends UserControllerWeb
                 $organization->author =  $user->id;
                 $organization->name = $user->displayName;
                 $organization->save();
+                
+                self::_sendConfirmationEmail(
+                    $user
+                );
             }
             
-            self::_sendConfirmationEmail(
-                $user
-            );
             if ($request->has('destination')) {
                 $destination = $request->input('destination');
                 return redirect($destination . '/?token=' . $firebaseToken);
