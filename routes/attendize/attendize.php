@@ -169,10 +169,12 @@ Route::group(
             'uses' => 'EventViewController@showEventHomePreview',
         ]);
 
-        Route::post('{event_id}/checkout/', [
-            'as'   => 'postValidateTickets',
-            'uses' => 'EventCheckoutController@postValidateTickets',
-        ]);
+        /* Se comento para que no de error al intemntar comprar tickets
+        más adelan te se debe volver a usar esta ruta */
+        // Route::post('{event_id}/checkout/', [
+        //     'as'   => 'postValidateTickets',
+        //     'uses' => 'EventCheckoutController@postValidateTickets',
+        // ]);
 
         Route::get('{event_id}/checkout/create', [
             'as'   => 'showEventCheckout',
@@ -760,5 +762,12 @@ Route::post('order/paymentCompleted', [
 ]);
 Route::get('paymentCompleted/order/{reference_order}', [
     'as'   => 'orderCompleted',
-    'uses' => 'EventCheckoutController@completePayment',
+    'uses' => 'EventCheckoutController@completePayment',                                                                                                                                                                            
 ]);
+
+/* Esta ruta es suplementaria para comprar tickets sin problemas de autenticación
+es temporal más adelante se debe eliminar */
+Route::post('validateTickets/{event_id}/checkout/', [
+    'as'   => 'postValidateTickets2',
+    'uses' => 'EventCheckoutController@postValidateTickets',
+]);                                                                                                                                                                                     
