@@ -38,12 +38,32 @@
                 </div>
 
                 <div class="row">
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             {!! Form::label('stage','Stages', array('class'=>' control-label required')) !!}
                             <select class="form-control" name="stage">
                                 @foreach($stages as $stage)
-                                    <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
+                                    @if($stage['title'] == $ticket->stage)   
+                                        <option value="{{ $stage['title'] }}" selected="selected">{{ $stage['title'] }}</option>
+                                    @else
+                                        <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {!! Form::label('currency','Currency', array('class'=>' control-label required')) !!}
+                            <select class="form-control" name="currency" >
+                                @foreach($currencies as $currency)
+                                    @if($currency['code'] == $ticket->currency)    
+                                        <option value="{{ $currency['code'] }}" selected="selected">{{ $currency['title'] }}</option>
+                                    @else
+                                        <option value="{{ $currency['code'] }}">{{ $currency['title'] }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

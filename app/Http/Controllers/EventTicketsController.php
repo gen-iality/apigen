@@ -69,10 +69,12 @@ class EventTicketsController extends MyBaseController
         $event = Event::findOrFail($event_id);
         $ticket = Ticket::findOrFail($ticket_id);
         $stages = $event->event_stages;
+        $currencies = Currency::all();
         $data = [
             'event'  => $event,
             'ticket' => $ticket,
             'stages' => $stages,
+            'currencies' => $currencies,
         ];
 
         return view('ManageEvent.Modals.EditTicket', $data);
@@ -236,6 +238,7 @@ class EventTicketsController extends MyBaseController
      */
     public function postEditTicket(Request $request, $event_id, $ticket_id)
     {
+
         $ticket = Ticket::findOrFail($ticket_id);
         /*
          * Add validation message
@@ -254,11 +257,11 @@ class EventTicketsController extends MyBaseController
         $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $ticket->price = $request->get('price'); 
         $ticket->stage = strip_tags($request->get('stage'));
+        $ticket->currency = $request->get('currency');
         $ticket->description = $request->get('description');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
-
         $ticket->save();
 
         return response()->json([
