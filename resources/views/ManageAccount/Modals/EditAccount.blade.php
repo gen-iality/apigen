@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="form-group" style="display:none">
                                             {!! Form::label('currency_id', trans("ManageAccount.default_currency"), array('class'=>'control-label required')) !!}
                                             {!! Form::select('currency_id', $currencies, $account->currency_id, ['class' => 'form-control']) !!}
                                         </div>

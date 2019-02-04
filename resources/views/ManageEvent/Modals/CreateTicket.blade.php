@@ -51,13 +51,24 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    {!! Form::label('stage','Stages', array('class'=>' control-label required')) !!}
+                                    {!! Form::label('stage','Etapa', array('class'=>' control-label required')) !!}
                                     <select class="form-control" name="stage">
                                         @if($stages)
                                             @foreach($stages as $stage)
                                                 <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
                                             @endforeach
                                         @endif
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {!! Form::label('currency','Moneda', array('class'=>' control-label required')) !!}
+                                    <select class="form-control" name="currency" >
+                                        @foreach($currencies as $currency)
+                                            <option value="{{ $currency['code'] }}">{{ $currency['title'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
