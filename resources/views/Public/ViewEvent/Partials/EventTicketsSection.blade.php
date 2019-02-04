@@ -60,7 +60,7 @@ body {font-family: Arial;}
 
     @if($tickets->count() > 0)
 
-        {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
+        {!! Form::open(['url' => route('postValidateTickets2', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
 
             <div class="col-md-12">
                     <div class="content">
