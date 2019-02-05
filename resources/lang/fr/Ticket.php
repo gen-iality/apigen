@@ -8,6 +8,7 @@ return array (
   'attendee_ref' => 'Réf. participant',
   'coupon_codes' => 'Codes Coupon',
   'create_ticket' => 'Créer un billet',
+  'create_stage'  => 'Créer étape',
   'demo_attendee_ref' => '#YLY9U73-1',
   'demo_end_date_time' => 'Mar 18th 5:08PM',
   'demo_event' => 'Événement de démo',

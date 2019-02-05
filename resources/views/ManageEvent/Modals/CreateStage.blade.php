@@ -57,7 +57,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
                {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit(trans("ManageEvent.create_ticket"), ['class'=>"btn btn-success"]) !!}
+               {!! Form::submit(trans("ManageEvent.create_stage"), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}
