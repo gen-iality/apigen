@@ -288,7 +288,7 @@ class EventCheckoutController extends Controller
         }
 
         if (!$orderRequiresPayment) {
-            $this->storeOrder($temporal_id);
+            $this->storeOrder($temporal_id, true);
             $this->completeOrder($temporal_id);
             $return = [
                 'status' => 'success',
@@ -673,7 +673,7 @@ class EventCheckoutController extends Controller
             Log::info('Firing the event');
             event(new OrderCompletedEvent($order));
             /* Envío de correo */
-            $this->dispatch(new SendOrderTickets($order));
+            // $this->dispatch(new SendOrderTickets($order));
 
 
         return response()->redirectToRoute('showOrderDetails', [
@@ -722,7 +722,8 @@ class EventCheckoutController extends Controller
      * @param [type] $temporal_id
      * @return void
      */
-    public function storeOrder($temporal_id){
+    public function storeOrder($temporal_id, $payment_free = false){
+
         //Datos necesarios para la generación de la orden
         Log::info('Generación de la orden');
         $ticket_order = Cache::get($temporal_id);
@@ -746,7 +747,7 @@ class EventCheckoutController extends Controller
         $order->first_name = strip_tags($request_data['order_first_name']);
         $order->last_name = strip_tags($request_data['order_last_name']);
         $order->email = isset($transaction_data['email']) ? $transaction_data['email'] : Auth::user()->email;
-        $order->order_status_id = config('attendize.order_awaiting_payment');
+        $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
         $order->amount = $ticket_order['order_total'];
         $order->booking_fee = $ticket_order['booking_fee'];
         $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
