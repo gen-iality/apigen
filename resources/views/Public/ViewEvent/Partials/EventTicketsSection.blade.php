@@ -41,6 +41,7 @@ body {font-family: Arial;}
 
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
+@if(isset($stages))
 <div class="tab" style="background-color:#eaeaea;font-family:Montserrat,sans-serif">
     @foreach($stages as $key => $stage) 
         <!-- aca verificamos si el stage esta activo dentro de las fechas -->
@@ -196,7 +197,11 @@ body {font-family: Arial;}
 
     </div>
 @endforeach
-
+@else
+    <span class="text-danger">
+        @lang("Public_ViewEvent.sales_have_not_started")
+    </span>
+@endif 
 <script>
 function openCity(evt, cityName) {
   var i, tabcontent, tablinks;
