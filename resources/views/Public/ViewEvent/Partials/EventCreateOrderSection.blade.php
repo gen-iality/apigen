@@ -106,14 +106,19 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!!  Form::checkbox('payerIsBuyer', 'true', true) !!}
-                            {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son de la persona encargada del pago") !!}
+                @foreach($tickets as $ticket)
+                    @if((int)ceil($ticket['full_price']) > 0)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!!  Form::checkbox('payerIsBuyer', 'true', true) !!}
+                                {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son de la persona encargada del pago") !!}
+                                @break
+                            </div>
                         </div>
                     </div>
-                </div>
+                    @endif
+                @endforeach    
 
                 <div class="row">
                     <div class="col-md-12">
