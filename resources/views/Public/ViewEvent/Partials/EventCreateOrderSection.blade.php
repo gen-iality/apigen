@@ -69,13 +69,13 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_first_name", trans("Public_ViewEvent.first_name")) !!}
-                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control', 'pattern' => '[A-Za-z]{1,}']) !!}
+                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control', 'pattern' => '^[A-Za-z -]+$']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_last_name", trans("Public_ViewEvent.last_name")) !!}
-                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control', 'pattern' => '[A-Za-z]{1,}']) !!}
+                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control', 'pattern' => '^[A-Za-z -]+$']) !!}
                         </div>
                     </div>
                 </div>
