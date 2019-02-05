@@ -4,6 +4,7 @@ return array(
     'attendee_ref'               => 'Ref. de asistente',
     'coupon_codes'               => 'Códigos de cupón',
     'create_ticket'              => 'Crear entrada',
+    'create_stage'               => 'Crear Etapa',
     'demo_attendee_ref'          => '#YLY9U73-1',
     'demo_end_date_time'         => '18 de Mar 5:08PM',
     'demo_event'                 => 'Evento Demo',

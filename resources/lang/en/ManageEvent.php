@@ -23,6 +23,7 @@ return array (
   'confirm_order_cancel' => 'Confirm Order Cancel',
   'create_attendees' => 'Create Attendees',
   'create_ticket' => 'Create Ticket',
+  'create_stage' => 'Create Stage',
   'download_pdf_ticket' => 'Download PDF Ticket',
   'edit_attendee' => 'Edit Attendee',
   'edit_attendee_title' => 'Edit :attendee',
@@ -90,6 +91,8 @@ return array (
   'ticket_price' => 'Ticket Price',
   'ticket_title' => 'Ticket Title',
   'ticket_title_placeholder' => 'E.g: General Admission',
+  'stage_title'              => 'Stage title',
+  'stage_title_placeholder'  => 'E.g: General Admission',
   'update_order' => 'Update Order',
   'widgets' => 'Widgets',
   'LLH:obsolete' => 

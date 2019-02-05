@@ -23,7 +23,7 @@ return array(
     'confirm_order_cancel'                    => 'Confirmar la cancelación del pedido',
     'create_attendees'                        => 'Crear Asistentes',
     'create_ticket'                           => 'Crear entrada',
-    'create_stage'                            => 'Crear etapa',
+    'create_stage'                            => 'Crear Etapa',
     'download_pdf_ticket'                     => 'Descargar entrada en PDF',
     'edit_attendee'                           => 'Editar asistente',
     'edit_attendee_title'                     => 'Editar :attendee',
@@ -91,11 +91,11 @@ return array(
     'ticket_price'                            => 'Precio de la entrada',
     'ticket_title'                            => 'Título de la entrada',
     'ticket_title_placeholder'                => 'P. ej: Admisión General',
+    'stage_title'                             => 'Título de la etapa',
+    'stage_title_placeholder'                 => 'P. ej: Admisión General',
     'update_order'                            => 'Actualizar pedido',
     'widgets'                                 => 'Widgets',
     'stage'                                   => 'Etapa',
-    'stage_title'                             => 'Título de la entrada',
-    'ticket_stage_placeholder'                => 'P. ej: Primera Etapa',
     'LLH:obsolete'                            =>
         array(
             'create_question' => 'Crear pregunta',

@@ -27,6 +27,7 @@ return array (
   'confirm_order_cancel' => 'Confirmer l\'annulation de la commande',
   'create_attendees' => 'Créer les participants',
   'create_ticket' => 'Créer le billet',
+  'create_stage'  => 'Créer étape',
   'download_pdf_ticket' => 'Télécharger le billet PDF',
   'edit_attendee' => 'Éditer le participant',
   'edit_attendee_title' => 'Éditer <b>:attendee<b>',
@@ -93,6 +94,8 @@ return array (
   'ticket_price' => 'Prix du bilet',
   'ticket_title' => 'Titre du billet',
   'ticket_title_placeholder' => 'Par ex. : admission générale',
+  'stage_title'              => 'Titre du étape',
+  'stage_title_placeholder'  => 'Par ex. : admission générale',
   'update_order' => 'Mettre à jour la commande',
   'widgets' => 'Widgets',
   //================================== Obsolete strings ==================================//

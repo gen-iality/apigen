@@ -23,6 +23,7 @@ return array (
   'confirm_order_cancel' => 'Potwierdź Anulowanie Zamówienia',
   'create_attendees' => 'Dodaj Uczestników',
   'create_ticket' => 'Utwórz Bilet',
+  'create_stage'  => 'Stwórz scenę',
   'download_pdf_ticket' => 'Pobierz Bilet (PDF)',
   'edit_attendee' => 'Edytuj Uczestnika',
   'edit_attendee_title' => 'Edytuj :attendee',
@@ -90,6 +91,8 @@ return array (
   'ticket_price' => 'Cena Biletu',
   'ticket_title' => 'Nazwa Biletu',
   'ticket_title_placeholder' => 'Np.: Bilet Normalny',
+  'stage_title'              => 'Nazwa Etapu',
+  'stage_title_placeholder'  => 'Np.: Etapu Normalny',
   'update_order' => 'Aktualizuj Zamówienie',
   'widgets' => 'Widgety',
 );
