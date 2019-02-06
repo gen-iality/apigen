@@ -218,6 +218,7 @@ class EventCheckoutController extends Controller
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         if(!Auth::user()){
             echo "Por favor recargar la página";
+            die;
         }
         //Temporal
         $order_session = Cache::get($temporal_id);
