@@ -22,6 +22,7 @@ class GenerateQr extends Controller
         ->setMargin(4)
         ->png();
         $page = ob_get_contents();
+        ob_end_clean();
         return response($page, 200)->header('Content-Type', 'image/png');
         
     }
