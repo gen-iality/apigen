@@ -852,7 +852,7 @@ class EventCheckoutController extends Controller
                     $this->completeOrder($order_reference);
                     if(config('attendize.send_email')){
                         Log::info("Enviamos el correo");
-                        $this->dispatch(new \App\Jobs\SendOrderTickets($order));
+                        $this->dispatch(new SendOrderTickets($order));
                     }
                 }
                 break;
