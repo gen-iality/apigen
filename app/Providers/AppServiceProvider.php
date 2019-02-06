@@ -30,9 +30,8 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
 
         \App\Attendee::saved(
             function ($eventUser) {
-                return true;
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-                $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "cesar.torres@mocionsoft.com";
+                $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "apps@mocionsoft.com";
 
                 /**
                  * Guardar en firestore

@@ -34,17 +34,19 @@ class synchronizationController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function EventUsers()
+    public function EventUsers($event_id)
     {
         try{
             $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
             $firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
-            $eventUsers = Attendee::all();
-            $collection = $firestore->collection('event_users');
+            
+            $eventUsers = Attendee::where('event_id',$event_id)->get();
+            $collection = $firestore->collection($event_id.'_event_attendees');
             foreach($eventUsers as $eventUser){
+                
                 if($eventUser->user){
                     $user = $collection->document($eventUser->_id);
-                    $dataUser = json_decode($eventUser->user,true);
+                    $dataUser = json_decode($eventUser,true);
                     $user->set($dataUser);
                 }
             }

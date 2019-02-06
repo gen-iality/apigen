@@ -35,7 +35,7 @@ Route::get('test/ticket/{ticket_id}/order/{order_id}', 'ApiOrdersController@dele
 // Route::get('test/roles/', 'ContributorController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
-Route::get('sync/firestore', 'synchronizationController@EventUsers');
+Route::get('sync/firestore/{event_id}', 'synchronizationController@EventUsers');
 Route::get('sync/firestore/{id}', 'synchronizationController@Attendee');
 Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 
