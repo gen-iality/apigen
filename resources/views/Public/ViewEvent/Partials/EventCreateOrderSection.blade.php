@@ -31,6 +31,14 @@
                             </td>
                         </tr>
                         @endforeach
+                        @foreach($tickets as $ticket)
+                            @if((int)ceil($ticket['full_price']) === 0)
+                                <?php $is_free = true;  ?>
+                            @else
+                                <?php $is_free = false; ?>
+                                 @break
+                            @endif
+                        @endforeach
                     </table>
                 </div>
                 @if($order_total > 0)
@@ -65,6 +73,7 @@
                 {!! Form::hidden('temporal_id', $temporal_id) !!}
                 <h3> @lang("Public_ViewEvent.your_information")</h3>
 
+                @if(!$is_free)
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
@@ -106,19 +115,35 @@
                     </div>
                 </div>
 
-                @foreach($tickets as $ticket)
-                    @if((int)ceil($ticket['full_price']) > 0)
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {!!  Form::checkbox('payerIsBuyer', 'true', true) !!}
-                                {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son de la persona encargada del pago") !!}
-                                @break
-                            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!!  Form::checkbox('payerIsBuyer', 'true', true) !!}
+                            {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son de la persona encargada del pago") !!}
                         </div>
                     </div>
-                    @endif
-                @endforeach    
+                </div>
+                @else
+
+                <div class="row">
+                    <div class="col-xs-2">
+                        <b>@lang("Public_ViewEvent.first_name") </b>
+                    </div>
+                    <div class="col-xs-10">
+                        {{Auth::user()->displayName}}
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class="col-xs-2">
+                        <b> @lang("Public_ViewEvent.email") </b>
+                    </div>
+                    <div class="col-xs-10">
+                        {{Auth::user()->email}}
+                    </div>
+                </div>
+                <br>
+                @endif
 
                 <div class="row">
                     <div class="col-md-12">
@@ -259,9 +284,11 @@
 
             </div>
         </div>
+        @if(!$is_free)
         <div class="col-md-12"><br>
             <a href="https://www.placetopay.com" target="_blank"><img class="" src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/></a>
         </div>
+        @endif
     </div>
 </section>
 @if(session()->get('message'))

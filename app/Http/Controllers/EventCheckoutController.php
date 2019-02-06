@@ -744,9 +744,9 @@ class EventCheckoutController extends Controller
             $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
         }
         //Guardamos cada uno de los datos de la orden
-        $order->first_name = strip_tags($request_data['order_first_name']);
-        $order->last_name = strip_tags($request_data['order_last_name']);
-        $order->email = isset($transaction_data['email']) ? $transaction_data['email'] : Auth::user()->email;
+        $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
+        $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
+        $order->email = $payment_free  ? Auth::user()->email : $transaction_data['email'] ;
         $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
         $order->amount = $ticket_order['order_total'];
         $order->booking_fee = $ticket_order['booking_fee'];
@@ -911,7 +911,7 @@ class EventCheckoutController extends Controller
 
         //Respuesta de Placetopay del proceso de pago
         $response = $placetopay->query($order->session_id);
-	    $status =  $response->payment() ? $response->status()->status(): 'PENDING';
+	    $status =  $response->payment() ? $response->status()->status(): 'CANCELLED';
 	    $request = $response->request();
         $payment = $response->payment() ? $request->payment() : '';
         $amount = $payment ? $payment->amount(): '0';
