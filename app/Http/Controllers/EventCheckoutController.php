@@ -216,7 +216,7 @@ class EventCheckoutController extends Controller
     public function showEventCheckout(Request $request, $temporal_id)
     {
         //This code was must TEMPORALThis reload even when there is a user authenticaded
-        if(Auth::user()){
+        if(!Auth::user()){
             echo "Por favor recargar la página";
         }
         //Temporal
