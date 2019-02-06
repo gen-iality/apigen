@@ -171,10 +171,10 @@ Route::group(
 
         /* Se comento para que no de error al intemntar comprar tickets
         más adelan te se debe volver a usar esta ruta */
-        // Route::post('{event_id}/checkout/', [
-        //     'as'   => 'postValidateTickets',
-        //     'uses' => 'EventCheckoutController@postValidateTickets',
-        // ]);
+        Route::post('{event_id}/checkout/', [
+            'as'   => 'postValidateTickets',
+            'uses' => 'EventCheckoutController@postValidateTickets',
+        ]);
 
         Route::get('{event_id}/checkout/create', [
             'as'   => 'showEventCheckout',
