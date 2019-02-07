@@ -178,7 +178,6 @@ class RSVPController extends Controller implements ShouldQueue
      */
     public function confirmRSVP(Attendee $eventUser)
     {
-
         if (!$eventUser->confirm()->save()) {
             App::abort(500, 'Error');
         }
