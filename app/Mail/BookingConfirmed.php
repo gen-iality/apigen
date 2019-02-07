@@ -34,9 +34,10 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public function __construct($eventUser)
     {
         Log::debug("recibiendo event_user");
+
         $event = Event::find($eventUser->event_id);
         $event_location = ($event["location"]["FormattedAddress"]);
-        $eventUser_name = ($eventUser["properties"]["Nombres"]);
+        $eventUser_name = isset($eventUser["properties"]["Nombres"]) ? $eventUser["properties"]["Nombres"] : $eventUser["properties"]["names"];
         $eventUser_id = $eventUser->id;
 
         Log::debug("cargando datos event_user al correo");
