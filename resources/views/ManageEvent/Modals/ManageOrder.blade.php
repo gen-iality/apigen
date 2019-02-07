@@ -60,6 +60,9 @@
                         <div class="col-sm-6 col-xs-6">
                             <b>@lang("Order.email")</b><br> {{$order->email}}
                         </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <b>Evento</b><br> {{$order->event->name}}
+                        </div>
 
                         @if($order->transaction_id)
                         <div class="col-sm-6 col-xs-6">
@@ -219,11 +222,7 @@
             </div> <!-- /end modal body-->
 
             <div class="modal-footer">
-                <a href="javascript:void(0);" data-modal-id="edit-order-{{ $order->id }}" data-href="{{route('showEditOrder', ['order_id'=>$order->id])}}" title="Edit Order" class="btn btn-info loadModal">
-                    @lang("Order.edit")
-                </a>
                 <a class="btn btn-primary" target="_blank" href="{{route('showOrderTickets', ['order_reference' => $order->order_reference])}}?download=1">@lang("ManageEvent.print_tickets")</a>
-                <span class="pauseTicketSales btn btn-success" data-id="{{$order->id}}" data-route="{{route('resendOrder', ['order_id'=>$order->id])}}">@lang("ManageEvent.resend_tickets")</span>
                {!! Form::button(trans("ManageEvent.close"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
             </div>
         </div><!-- /end modal content-->
