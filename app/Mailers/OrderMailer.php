@@ -9,6 +9,7 @@ use App\Services\Order as OrderService;
 use PDF;
 use Log;
 use Mail;
+use QRCode;
 
 class OrderMailer
 {
@@ -48,8 +49,20 @@ class OrderMailer
             'orderService' => $orderService,
             'logo' => $logo_evius,
         ];
-        
-        // Creación del PDF
+
+        foreach ($eventusers as $eventuser) { 
+
+            /* Se genera el QR Code */
+            $qr = QrCode::text($eventuser->id)->setSize(8)->png();
+            $qr = base64_encode($qr);
+            $page = ob_get_contents();
+            ob_end_clean();
+            $type = "png";
+            $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+            $eventuser->qr = $qr;
+        }    
+
+        /* Creación del PDF */
          $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
          $pdf->setPaper('legal','portrait');
 

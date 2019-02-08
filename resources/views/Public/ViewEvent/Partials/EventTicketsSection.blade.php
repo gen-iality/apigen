@@ -4,51 +4,138 @@ body {font-family: Arial;}
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: white;
+  margin-left: 0.8%;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
-  background-color: inherit;
+  background-color: #EEEEEF;
   float: left;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
+  /* transition: 0.3s; */
+  font-size: 1.2em;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+  border-bottom: solid 3px #00f0be;
+  border-left: solid 1px black;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: white;
+  color: #00f0be;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: #00f0be;
+  color:white;
+  font-size: 1.3em;
+  margin-top: 6px;
+  border-radius: 10px 10px 0px 0px;
+  border-left: 0;
 }
+
+.tab button.active p small {
+  color: black;
+}
+
 
 /* Style the tab content */
 .tabcontent {
   display: none;
-  padding: 6px 12px;
+  padding: 6px 0px;
   /* border: 1px solid #ccc; */
   border-top: none;
 }
+.sub-titulo{
+    color: #a2a2a2;
+}
+
+td{
+    border-color:transparent !important;
+}
+.td{
+    border-top: none !important;
+}
+.ticket{
+    height: 80px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 10px 10px;
+}
+.espacio{
+    height: 0px;
+    padding: 5px !important;
+    background-color: transparent !important;
+}
+.content{
+    padding: 0 !important;
+}
+.precio{
+    width:200px; 
+    text-align: right;
+}
+.cantidad{
+    width: 85px;
+}
+
+
+
+@media screen and (max-width: 600px) {
+       table {
+           width:100%;
+       }
+       thead {
+           display: none;
+       }
+       tr td:first-child {
+           background-color: white;
+       }
+       tbody td {
+           display: block;
+           text-align:center;
+       }
+        .precio{
+            width:100%; 
+            text-align:center;
+        }
+        .cantidad{
+            width: 100%;
+        }
+        .tab button {
+            width: 94%;
+            margin-left: 3%;
+            cursor: pointer;
+            padding: 14px 16px;
+            margin-top: 5px;
+            border-left: none;
+            border-radius: 5px 5px 5px 5px;
+        }
+        .tab button.active {
+            border-radius: 5px 5px 5px 5px;
+        }
+        .tab {
+            margin-left: 0;
+        }
+}
+
 </style>
 
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
-<div class="tab" style="background-color:#eaeaea;font-family:Montserrat,sans-serif">
+<div class="tab" style="font-family:Montserrat,sans-serif">
     @foreach($stages as $key => $stage) 
         <!-- aca verificamos si el stage esta activo dentro de las fechas -->
         @php $class_tab_active = ($key == $stage_act) ? 'active': ''; @endphp
-        <button class="tablinks {{$class_tab_active}}" onclick="openCity(event, '{{$key}}')" style="color:#00ffc2; font-family:Montserrat,sans-serif">   
+        <button class="tablinks {{$class_tab_active}}" onclick="openCity(event, '{{$key}}')" style="font-family:Montserrat,sans-serif">   
             {{$stage['title']}} <br>
-            <p class="nm text-muted"><small> <?php echo date('d F', strtotime($stage["start_sale_date"])); ?> /  <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?></small></p>
+            <p class="nm "><small class="sub-titulo "> <?php echo date('d F', strtotime($stage["start_sale_date"])); ?> /  <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?></small></p>
         </button>
     @endforeach
 </div>
@@ -72,8 +159,8 @@ body {font-family: Arial;}
                                 ?>
                                 @foreach($tickets as $ticket)
                                     @if($ticket->stage == $stage["title"])
-                                    <tr class="ticket" property="offers" typeof="Offer">
-                                        <td>
+                                    <tr class="ticket" property="offers" typeof="Offer" >
+                                        <td class="td" >
                                             <span class="ticket-title semibold" property="name">
                                                 {{$ticket->title}}
                                             </span>
@@ -81,8 +168,8 @@ body {font-family: Arial;}
                                                 {{$ticket->description}}
                                             </p>
                                         </td>
-                                        <td style="width:200px; text-align: right;">
-                                            <div class="ticket-pricing" style="margin-right: 20px;">
+                                        <td class="td precio">
+                                            <div class="ticket-pricing">
                                                 @if($ticket->is_free)
                                                     @lang("Public_ViewEvent.free")
                                                     <meta property="price" content="0">
@@ -101,7 +188,7 @@ body {font-family: Arial;}
                                                 @endif
                                             </div>
                                         </td>
-                                        <td style="width:85px;">
+                                        <td class="td cantidad">
                                             @if($ticket->is_paused)
 
                                                 <span class="text-danger">
@@ -128,7 +215,7 @@ body {font-family: Arial;}
                                                     <meta property="availability" content="http://schema.org/InStock">
                                                     @if($key == $stage_act)
                                                         <select name="ticket_{{$ticket->id}}" class="form-control"
-                                                                style="text-align: center">
+                                                                style="text-align: center; border-bottom: solid 3px #00f0be;">
                                                             @if ($tickets->count() > 1)
                                                                 <option value="0">0</option>
                                                             @endif
@@ -141,6 +228,10 @@ body {font-family: Arial;}
 
                                             @endif
                                         </td>
+                                    </tr>
+                                    <!-- este tr es para dar espacio entre las celtas -->
+                                    <tr class="espacio">
+                                        <td class="espacio"></td>
                                     </tr>
                                     @endif
                                 @endforeach
@@ -156,7 +247,7 @@ body {font-family: Arial;}
                                     <tr class="checkout">
                                         <td colspan="3">
                                             @if(!$is_free_event && $key == $stage_act)
-                                                <div class="hidden-xs pull-left">
+                                                <div class="">
                                                 
                                                     @if($event->enable_offline_payments)
                                                         
@@ -168,7 +259,7 @@ body {font-family: Arial;}
 
                                                 @endif
                                                 @if(Auth::user() && $key == $stage_act)
-                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary pull-right button-purchase'])!!}
+                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg button-purchase'])!!}
                                                 @endif
                                             
                                         </td>
