@@ -41,6 +41,10 @@ body {font-family: Arial;}
   border-left: 0;
 }
 
+.tab button.active p small {
+  color: black;
+}
+
 
 /* Style the tab content */
 .tabcontent {
