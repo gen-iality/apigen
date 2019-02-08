@@ -59,8 +59,13 @@ also avoid installing mongodb php driver using apt-get usually It installs the w
 * restart webServer
 
 2. composer install inside proyect folder
+3. npm i inside proyect folder
+4. copy the .env.example 
 
-3. generate encryption key
+```
+cp .env.example .env
+```
+5. generate encryption key
 
 ```
 php artisan key:generate
@@ -71,7 +76,18 @@ and store the key in .env file with APP_KEY name
 APP_KEY = ZqxYyhRadx1UNwPgdjXsmeG/MvBZO6ZR6PeUuCa6cAs=
 ```
 
-4. Make sure storage folder has right permissions for laravel to store stuff there.
+6. copy the code of the database in the .env
+
+```
+DB_CONNECTION=mongodb
+DB_HOST="cluster0-gp9gs.mongodb.net"
+DB_PORT=27017
+DB_DATABASE=evius
+DB_USERNAME=root
+DB_PASSWORD=amazonas.2040
+```
+
+7. Make sure storage folder has right permissions for laravel to store stuff there.
 
 ### Installing in a Docker image 
 
