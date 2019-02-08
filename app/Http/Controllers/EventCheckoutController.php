@@ -297,6 +297,12 @@ class EventCheckoutController extends Controller
         if (!$orderRequiresPayment) {
             $this->storeOrder($temporal_id, true);
             $this->completeOrder($temporal_id);
+            
+            /* Fiond order */
+            $order = Order::where('order_reference', '=', $temporal_id)->first();
+            /* Envío de correo */
+            $this->dispatch(new SendOrderTickets($order));
+
             $return = [
                 'status' => 'success',
                 'redirectUrl' => url('/').'/order/'.$temporal_id,
