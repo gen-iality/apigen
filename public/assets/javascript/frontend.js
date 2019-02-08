@@ -4606,13 +4606,12 @@ function log() {
                         }
                         switch (data.status) {
                             case 'success':
-                            console.log("Hi my doggies")
+
                                 if (data.redirectUrl) {
                                     if(data.redirectData)  {
                                         $.redirectPost(data.redirectUrl, data.redirectData);
                                     } else {
-                                        console.log('redirect');
-                                        window.open(data.redirectUrl, '_blank');
+                                        document.location.href = data.redirectUrl;
                                     }
                                 }
                                 break;
