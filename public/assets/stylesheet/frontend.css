@@ -99,15 +99,20 @@ html,body{height:100%}body{font-family:'Open Sans',sans-serif}table{margin:0}lab
   position: fixed;
   z-index: 998;
   bottom: 0px;
-  display: block;
-  width: 90%;
+  left:1%;
+  width: 98%;
   height: 40px;
   line-height: 20px;
   text-align: center;
-  background-color: #3273dc;
+  background-color: #00f0be;
   border-color: transparent;
   color: #fff;
   font-size: 2.5rem;
   border-radius: 15px;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+
 }
 
