@@ -83,6 +83,28 @@ td{
 .cantidad{
     width: 85px;
 }
+.button-purchase {
+  position: fixed;
+  z-index: 998;
+  bottom: 0px;
+  left:1%;
+  width: 98%;
+  height: 40px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #00f0be;
+  border-color: transparent;
+  color: white !important;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  font-weight: bold;
+  border-radius: 10px 10px 10px 10px;
+  text-transform: uppercase;
+}
+.button-purchase:hover{
+    transition: 0.7s;
+    background-color: #13cea8 !important;
+}
 
 
 
@@ -259,7 +281,7 @@ td{
 
                                                 @endif
                                                 @if(Auth::user() && $key == $stage_act)
-                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg button-purchase'])!!}
+                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                                 @endif
                                             
                                         </td>
