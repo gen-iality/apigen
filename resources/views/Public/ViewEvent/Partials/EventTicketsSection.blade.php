@@ -85,6 +85,7 @@ td{
 }
 
 
+
 @media screen and (max-width: 600px) {
        table {
            width:100%;
@@ -121,7 +122,6 @@ td{
         .tab {
             margin-left: 0;
         }
-
 }
 
 </style>
@@ -259,7 +259,7 @@ td{
 
                                                 @endif
                                                 @if(Auth::user() && $key == $stage_act)
-                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg btn-primary  button-purchase'])!!}
+                                                    {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'btn btn-lg button-purchase'])!!}
                                                 @endif
                                             
                                         </td>
