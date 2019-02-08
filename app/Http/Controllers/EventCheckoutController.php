@@ -936,7 +936,7 @@ class EventCheckoutController extends Controller
 
         //Respuesta de Placetopay del proceso de pago
         $response = $placetopay->query($order->session_id);
-	    $status =  $response->payment() ? $response->status()->status(): 'PENDING';
+	    $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
 	    $request = $response->request();
         $payment = $response->payment() ? $request->payment() : '';
         $amount = $payment ? $payment->amount(): '0';
