@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div style="width: auto; display: inline-block;">
-                        <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser->id}}" /> -->
+                        <img src="{{$eventuser->qr}}" />
                     </div>
                 </div>
 
