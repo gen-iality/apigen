@@ -803,6 +803,7 @@ class EventCheckoutController extends Controller
         foreach ($eventusers as $eventuser) { 
 
             /* Se genera el QR Code */
+            ob_start(); 
             $qr = QrCode::text($eventuser->id)->setSize(8)->png();
             $qr = base64_encode($qr);
             $page = ob_get_contents();

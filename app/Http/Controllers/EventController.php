@@ -130,10 +130,25 @@ class EventController extends Controller
             );
         };
 
-        $data['user_properties'] += [
-                    ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
-                    ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
-                ];
+
+        if (!isset($data['user_properties'])) {
+
+            $data['user_properties'] = [
+                        ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
+                        ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
+                    ];
+
+        }
+
+        if (isset($data['user_properties'])) {
+
+            $data['user_properties'] += [
+                        ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
+                        ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
+                    ];
+    
+        }
+
 
         $data['organizer_type'] = "App\user";
         

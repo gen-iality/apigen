@@ -75,14 +75,21 @@ class EventOrdersController extends Controller
 
     public function showOrdersUsers(String $user_id)
     {
-        // return 1;
+        
+        $sort_by = 'created_at';
+        $sort_order =  'desc';
+
         $user = User::findOrfail($user_id);
         $user_email = $user->email;
-        $orders = Order::where('email',$user_email)->paginate();
+        $order = Order::where('email',$user_email);
+
+        $orders = $order->orderBy($sort_by, $sort_order)->paginate();
 
         $data = [
             'orders'     => $orders,
             'q'          => '',
+            'sort_by'    => $sort_by,
+            'sort_order' => $sort_order,
         ];
 
         return view('ManageEvent.userOrders', $data);
