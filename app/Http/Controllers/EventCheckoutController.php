@@ -27,6 +27,7 @@ use Omnipay;
 use PDF;
 use PhpSpec\Exception\Exception;
 use Validator;
+use QRCode;
 
 class EventCheckoutController extends Controller
 {
@@ -296,6 +297,12 @@ class EventCheckoutController extends Controller
         if (!$orderRequiresPayment) {
             $this->storeOrder($temporal_id, true);
             $this->completeOrder($temporal_id);
+            
+            /* Fiond order */
+            $order = Order::where('order_reference', '=', $temporal_id)->first();
+            /* Envío de correo */
+            $this->dispatch(new SendOrderTickets($order));
+
             $return = [
                 'status' => 'success',
                 'redirectUrl' => url('/').'/order/'.$temporal_id,
@@ -792,7 +799,19 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($order->event_id);
         $eventusers = Attendee::where('order_id', $order->id)->get();
         $location = $event["location"]["FormattedAddress"];
-        
+
+        foreach ($eventusers as $eventuser) { 
+
+            /* Se genera el QR Code */
+            $qr = QrCode::text($eventuser->id)->setSize(8)->png();
+            $qr = base64_encode($qr);
+            $page = ob_get_contents();
+            ob_end_clean();
+            $type = "png";
+            $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+            $eventuser->qr = $qr;
+        }
+
         $data = [
             'order' => $order,
             'event' => $order->event,
