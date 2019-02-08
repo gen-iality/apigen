@@ -1,8 +1,5 @@
 @extends('Shared.Layouts.Master')
 
-@section('page_header')
-@stop
-
 
 @section('content')
 <!--Start Attendees table-->
@@ -44,9 +41,14 @@
                         @foreach($orders as $order)
                         <tr>
                             <td>
-                                <a href='{{$order->url}}' target="_blank">
+                                @if($order->url)
+                                    <a href='{{$order->url}}' target="_blank">{{$order->order_reference}}</a>
+                                @else
+                                <a href='javascript:void(0);' data-modal-id='view-order-{{ $order->id }}' data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="@lang("Order.view_order_num", ["num"=>$order->order_reference])" class="loadModal">
                                     {{$order->order_reference}}
                                 </a>
+                                @endif
+                                
                             </td>
                             <td>
                                 {{ $order->created_at->toDayDateTimeString() }}
@@ -96,3 +98,9 @@
     @endif
 </div>    <!--/End attendees table-->
 @stop
+
+<style>
+#header{
+    display: none;
+}
+</style>

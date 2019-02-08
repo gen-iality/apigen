@@ -1,5 +1,6 @@
 <html>
     <body>
+    @if(isset($eventusers))
     @foreach($eventusers as $eventuser)
         <div style="width:75%; margin:1em auto; height: auto; border: 1px solid lightgrey;">
             <div style="width:70%; margin:0 auto; padding: 3em 0">
@@ -99,6 +100,7 @@
                 <img src="images/logo.png" width="100%"/>
             </div>
         </div>
-        @endforeach
+    @endforeach
+    @endif
     </body>
 </html>

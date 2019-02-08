@@ -98,11 +98,16 @@ html,body{height:100%}body{font-family:'Open Sans',sans-serif}table{margin:0}lab
 .button-purchase {
   position: fixed;
   z-index: 998;
-  bottom: 10px;
+  bottom: 0px;
   display: block;
-  width: 50%;
+  width: 90%;
   height: 40px;
   line-height: 20px;
   text-align: center;
+  background-color: #3273dc;
+  border-color: transparent;
+  color: #fff;
+  font-size: 2.5rem;
+  border-radius: 15px;
 }
 

@@ -42,18 +42,19 @@ class UserEventService
         $date = $date->format('his');
         
         /* Buscamos el ticket */
-        $ticket = Ticket::findOrFail($eventUserFields['ticket_id']);
-        $ticket_details['qty'] = 1;
+        if(isset($eventUserFields['ticket_id'])){
+            $ticket = Ticket::findOrFail($eventUserFields['ticket_id']);
+            $ticket_details['qty'] = 1;
 
-        // return $ticket;
+            // return $ticket;
 
-        /*
-        * Update some ticket info
-        */
-        $ticket->increment('quantity_sold', $ticket_details['qty']);
-        $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
-        $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
-    
+            /*
+            * Update some ticket info
+            */
+            $ticket->increment('quantity_sold', $ticket_details['qty']);
+            $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
+            $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
+        }
 
          /* Si viene el id de la orden en la variable eventUserFields
         buscamos la orden  */
