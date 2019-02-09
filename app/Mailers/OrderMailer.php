@@ -78,9 +78,9 @@ class OrderMailer
             Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $pdf) {
                 $message->to('felipe.martinez@mocionsoft.com');
                 if($order->amount == 0){
-                    $message->subject('Tiquete Gratuito'.$order->event->name);
+                    $message->subject('Tiquete Gratuito '.$order->event->name);
                 }else{
-                    $message->subject('Tiquete Comprado'.$order->event->name);
+                    $message->subject('Tiquete Comprado '.$order->event->name);
                 }
                 $message->attachData(
                     $pdf->download(), 'Tickets Evento '. $order->event->name.'.pdf'
