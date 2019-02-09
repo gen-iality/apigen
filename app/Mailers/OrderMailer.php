@@ -56,7 +56,7 @@ class OrderMailer
             $qr = QrCode::text($eventuser->id)->setSize(8)->png();
             $qr = base64_encode($qr);
             $page = ob_get_contents();
-            ob_end_clean();
+            if ($page) ob_end_clean();
             $type = "png";
             $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
             $eventuser->qr = $qr;
