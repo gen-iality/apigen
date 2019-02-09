@@ -242,6 +242,6 @@ class Order extends Orders
             }
             
         }
-        $this->amount = $amount+$total;
+        $this->amount;
     }
 }
