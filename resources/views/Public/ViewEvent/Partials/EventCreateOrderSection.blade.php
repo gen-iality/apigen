@@ -95,7 +95,7 @@
                             {!! Form::label("Document", "Tipo") !!}
                             {!! 
                                 Form::select('typeDocument', array(
-                                    'CC' => ('Documento de Identidad'),
+                                    'cc' => ('Documento de Identidad'),
                                     'CC' => ('CC'),
                                     'TI' => ('TI'),
                                 ), null, ['required' => 'required', 'class' => 'form-control']);
