@@ -3,6 +3,7 @@
 return array(
     'about'                                        => 'Acerca de',
     'account'                                      => 'Cuenta',
+    'Tickets_information'                          => 'Información de los tiquetes',
     'account_id'                                   => 'ID de la cuenta',
     'account_payment'                              => 'Cuenta / Pago',
     'accout_owner'                                 => 'Titular de la cuenta',
@@ -15,6 +16,8 @@ return array(
     'branding_name_help'                           => 'Este es el nombre que los compradores verán al realizar el pago. Deja este espacio en blanco si deseas que se utilice el nombre del organizador del evento.',
     'coinbase_settings'                            => 'Configuración de Coinbase',
     'default_currency'                             => 'Moneda por defecto',
+    'percentage_discount'                          => 'Porcentaje de descuento',
+    'tickets_discount'                             => 'Cantidad minima para el descuento',
     'default_payment_gateway'                      => 'Pasarela de pagos por defecto',
     'email'                                        => 'Correo electrónico',
     'email_address_placeholder'                    => 'Dirección de correo electrónico',

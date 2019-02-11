@@ -170,14 +170,18 @@ class EventCheckoutController extends Controller
         //Que va a cancelar
 
         //Descuento de los tikets del porcentaje a agregar a una cantidad de ticketes.
-        if($event->id == '5c3fb4ddfb8a3371ef79bd62'){
-            $tickets_discount = 5;
-            $percentage_discount = 10;
-            if($total_ticket_quantity >= $tickets_discount){
+
+
+            $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
+            $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
+            
+            //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
+            //Se realiza el descuento
+            
+            if($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0){
                 $discount = $percentage_discount*$order_total/100;
                 $order_total = $order_total - $discount;
             }
-        }
             
         Cache::put($temporal_id, [
             'validation_rules' => $validation_rules,
