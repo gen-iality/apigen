@@ -228,12 +228,13 @@ class EventCheckoutController extends Controller
     public function showEventCheckout(Request $request, $temporal_id)
     {
         //This code was must TEMPORALThis reload even when there is a user authenticaded
+        $order_session = Cache::get($temporal_id);
+
         if(!Auth::user()){
             header('Location: '.'https://evius.co/landing/'.$order_session['event_id']);
             die;
         }
         //Temporal
-        $order_session = Cache::get($temporal_id);
 
         if (!$order_session || $order_session['expires'] < Carbon::now()) {
 
