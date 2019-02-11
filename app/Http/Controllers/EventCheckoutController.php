@@ -544,12 +544,12 @@ class EventCheckoutController extends Controller
                 $ticket_order = Cache::get($temporal_id);
                 $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
 
-                $event_id = $ticket_order['event_id'];
-                $request_data = $ticket_order['request_data'];
+                $event_id = isset($ticket_order['event_id']) ? $ticket_order['event_id'] : $order->event_id;
+                $request_data = isset($ticket_order['request_data']) ? $ticket_order['request_data'] : [];
 
                 //Buscamos el evento el cual le pertence el ticket
                 // return $ticket_order;die;
-                $event = Event::findOrFail($ticket_order['event_id']);
+                $event = Event::findOrFail($event_id);
                 $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
                 $orderService->calculateFinalCosts();
                 $fields = $event->user_properties;
@@ -566,7 +566,7 @@ class EventCheckoutController extends Controller
                 /*
                  * Update affiliates stats stats
                  */
-                if ($ticket_order['affiliate_referral']) {
+                if (isset($ticket_order['affiliate_referral'])) {
                     $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
                         ->where('event_id', '=', $event_id)->first();
                     $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
@@ -582,7 +582,7 @@ class EventCheckoutController extends Controller
                 ]);
 
                 $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-                if ($ticket_order['order_requires_payment']) {
+                if (isset($ticket_order['order_requires_payment'])) {
                     $event_stats->increment('sales_volume', $order->amount);
                     $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
                 }
@@ -851,7 +851,7 @@ class EventCheckoutController extends Controller
         $order_reference = $request['reference'];
         return $this->changeStatusOrder($order_reference, $status);
     }
-
+    
     /**
      * Change Order Status
      * (Rejected, Approved, Pending, Cancelled)
@@ -864,12 +864,12 @@ class EventCheckoutController extends Controller
         $order = Order::where('order_reference', '=', $order_reference)->first();
         switch ($status) {
             case 'APPROVED':
-                //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
-                //Ademas de guardar el nuevo estado
-                if($order->order_status_id != config('attendize.order_complete')){
-                    $order->order_status_id= config('attendize.order_complete');
-                    Log::info("Completamos la orden");
-                    $this->completeOrder($order_reference);
+            //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
+            //Ademas de guardar el nuevo estado
+            if($order->order_status_id != config('attendize.order_complete')){
+                $order->order_status_id= config('attendize.order_complete');
+                Log::info("Completamos la orden");
+                $this->completeOrder($order_reference); 
                     if(config('attendize.send_email')){
                         Log::info("Enviamos el correo");
                         $this->dispatch(new SendOrderTickets($order));
@@ -937,7 +937,7 @@ class EventCheckoutController extends Controller
 
         //Respuesta de Placetopay del proceso de pago
         $response = $placetopay->query($order->session_id);
-	    $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
+        $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
 	    $request = $response->request();
         $payment = $response->payment() ? $request->payment() : '';
         $amount = $payment ? $payment->amount(): '0';

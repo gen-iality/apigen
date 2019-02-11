@@ -53,14 +53,15 @@ class OrderMailer
         foreach ($eventusers as $eventuser) { 
 
             /* Se genera el QR Code */
-           /*  $qr = QrCode::text($eventuser->id)->setSize(8)->png();
+            ob_start(); 
+            $qr = QrCode::text($eventuser->id)->setSize(8)->png();
             $qr = base64_encode($qr);
             $page = ob_get_contents();
-            if ($page) ob_end_clean();
+            ob_end_clean();
             $type = "png";
-            $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);  */
-            // $eventuser->qr = $qr;
-            $eventuser->qr = 'qr';
+            $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);
+            $eventuser->qr = $qr;
+            // $eventuser->qr = 'qr';
         }    
 
         /* Creación del PDF */
