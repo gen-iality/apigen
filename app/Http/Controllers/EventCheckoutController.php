@@ -231,7 +231,7 @@ class EventCheckoutController extends Controller
         $order_session = Cache::get($temporal_id);
 
         if(!Auth::user()){
-            header('Location: '.'https://evius.co/landing/'.$order_session['event_id']);
+            header('Location: '.'https://evius.co');
             die;
         }
         //Temporal
