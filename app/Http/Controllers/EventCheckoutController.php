@@ -229,7 +229,7 @@ class EventCheckoutController extends Controller
     {
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         if(!Auth::user()){
-            echo "Por favor recargar la página";
+            header('Location: '.'https://evius.co');
             die;
         }
         //Temporal
