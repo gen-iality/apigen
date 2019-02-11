@@ -265,6 +265,13 @@ td{
                                         @endif
                                         </td>
                                     </tr>
+                                    <tr>
+                                        @if(Auth::user() && $event->id == "5c3fb4ddfb8a3371ef79bd62")
+                                        <td  colspan="3" style="text-align: center; colo:red">
+                                           Recibe el 10% de descuenta en el total, al momento de seleccionar 5 tiquetes para el evento
+                                        </td>
+                                        @endif
+                                    </tr>
                                     @endif
                                     <tr class="checkout">
                                         <td colspan="3">

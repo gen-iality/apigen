@@ -168,6 +168,17 @@ class EventCheckoutController extends Controller
         $temporal_id = "ticket_order_" . time();
         //Generamos un cahce donde contiene la información primordial del pago, antes de introducir datos del usuario
         //Que va a cancelar
+
+        //Descuento de los tikets del porcentaje a agregar a una cantidad de ticketes.
+        if($event->id == '5c3fb4ddfb8a3371ef79bd62'){
+            $tickets_discount = 5;
+            $percentage_discount = 10;
+            if($total_ticket_quantity >= $tickets_discount){
+                $discount = $percentage_discount*$order_total/100;
+                $order_total = $order_total - $discount;
+            }
+        }
+            
         Cache::put($temporal_id, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
@@ -217,12 +228,13 @@ class EventCheckoutController extends Controller
     public function showEventCheckout(Request $request, $temporal_id)
     {
         //This code was must TEMPORALThis reload even when there is a user authenticaded
+        $order_session = Cache::get($temporal_id);
+
         if(!Auth::user()){
-            echo "Por favor recargar la página";
+            header('Location: '.'https://evius.co');
             die;
         }
         //Temporal
-        $order_session = Cache::get($temporal_id);
 
         if (!$order_session || $order_session['expires'] < Carbon::now()) {
 
@@ -240,7 +252,7 @@ class EventCheckoutController extends Controller
 
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
-
+        
         $data = $order_session + [
             'event' => $event,
             'secondsToExpire' => $secondsToExpire,
