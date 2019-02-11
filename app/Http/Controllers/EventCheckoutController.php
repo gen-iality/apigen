@@ -172,7 +172,7 @@ class EventCheckoutController extends Controller
         //Descuento de los tikets del porcentaje a agregar a una cantidad de ticketes.
         if($event->id == '5c3fb4ddfb8a3371ef79bd62'){
             $tickets_discount = 5;
-            $percentage_discount = 20;
+            $percentage_discount = 10;
             if($total_ticket_quantity >= $tickets_discount){
                 $discount = $percentage_discount*$order_total/100;
                 $order_total = $order_total - $discount;
