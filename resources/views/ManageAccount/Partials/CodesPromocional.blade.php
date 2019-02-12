@@ -1,7 +1,32 @@
-Códigos
 <div class="row">
     <div class="col-md-12">
-        <div id="codes_discount"></div>
+        <div id="codes_discount">
+        <table class="table codes_discount">
+            <thead>
+                <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Porcentaje</th>
+                <th scope="col">Disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($codes_discount as $code)
+                <tr class="3z3m5p3y">
+                    <td>{{$code['id']}}</td>
+                    <td>{{$code['percentage']}}</td>
+                    
+                    <td>
+                        @if($code['available'])
+                            true
+                        @else
+                            false
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        </div>
     </div>
 </div>
 

@@ -9491,7 +9491,7 @@ $.cf = {
                     }
                     if ($form.hasClass('showCodes')) {
                       $('#codes_discount').empty();
-                      $('#codes_discount').append('<table class="table codes_discount"></table>')
+                      $('#codes_discount').append('<table class="table codes_discount"><thead><tr><th scope="col">Código</th><th scope="col">Porcentaje</th><th scope="col">Disponible</th></tr></thead></table>')
                       data.data.forEach(data => {
 
                         $('table.codes_discount').append('<tr class='+data.id+'></tr>')

@@ -28,6 +28,7 @@ class ManageAccountController extends MyBaseController
      */
     public function showEditTickets(Request $request)
     {
+        $codes_discount = isset(Event::find($request->event_id)->codes_discount) ? Event::find($request->event_id)->codes_discount : [];
         $data = [
             'account'                  => Auth::user(),
             'timezones'                => Timezone::pluck('location', 'id'),
@@ -35,7 +36,8 @@ class ManageAccountController extends MyBaseController
             'payment_gateways'         => PaymentGateway::pluck('provider_name', 'id'),
             'account_payment_gateways' => AccountPaymentGateway::scope()->get(),
             'version_info'             => $this->getVersionInfo(),
-            'event_id'                 => $request->event_id
+            'event_id'                 => $request->event_id,
+            'codes_discount'           => $codes_discount
         ];
         
         return view('ManageAccount.Modals.EditAccount', $data);
