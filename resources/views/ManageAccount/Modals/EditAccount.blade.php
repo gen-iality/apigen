@@ -23,18 +23,27 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-cogs"></i>
-                    @lang("ManageAccount.Tickets_information")</h3>
+                    Información de los tiquetes</h3>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <!-- tab -->
                         <ul class="nav nav-tabs">
-                            <li class="active" style="display:none"><a href="#payment_account" data-toggle="tab">@lang("ManageAccount.payment")</a></li>
+                            <li class="active"><a href="#payment_account" data-toggle="tab">@lang("ManageAccount.payment")</a></li>
+                            <li><a href="#tickets_promocional" data-toggle="tab">Tiquetes promocionales</a></li>
+                            <li><a href="#codes_promocional" data-toggle="tab">códigos promocionales</a></li>
                         </ul>
                         <div class="tab-content panel">
-                            <div class="tab-pane active" id="payment_account">
+                            <div class="tab-pane " id="payment_account">
                                 @include('ManageAccount.Partials.PaymentGatewayOptions')
+                            </div>
+                            <div class="tab-pane" id="tickets_promocional">
+                                @include('ManageAccount.Partials.TicketsPromocional')
+                            </div>
+
+                            <div class="tab-pane active" id="codes_promocional">
+                                @include('ManageAccount.Partials.CodesPromocional')
                             </div>
                         </div>
                     </div>
@@ -43,3 +52,9 @@
         </div>
     </div>
 </div>
+
+<script>
+
+
+
+</script>

@@ -9489,7 +9489,25 @@ $.cf = {
                     if ($form.hasClass('reset')) {
                         $form.resetForm();
                     }
+                    if ($form.hasClass('showCodes')) {
+                      $('#codes_discount').empty();
+                      $('#codes_discount').append('<table class="table codes_discount"></table>')
+                      data.data.forEach(data => {
 
+                        $('table.codes_discount').append('<tr class='+data.id+'></tr>')
+                        
+                        $('tr.'+data.id+'').append('<td id='+data.id+'>');
+                        $('tr.'+data.id+'').append('<td id='+data.percentage+data.id+'>');
+                        $('tr.'+data.id+'').append('<td id='+data.available+'>');
+                        
+                        $('td#'+data.id+'').text(data.id);
+                        $('td#'+data.percentage+data.id+'').text(data.percentage);
+                        $('td#'+data.available+'').text(data.available);
+
+                      });
+                      
+                    }
+                    
                     if ($form.hasClass('closeModalAfter')) {
                         $('.modal, .modal-backdrop').fadeOut().remove();
                     }
