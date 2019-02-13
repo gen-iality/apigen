@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->everyMinute();
-        $schedule->command('Petition:PlaceToPay')->everyMinute();
+        $schedule->command('Petition:PlaceToPay')->hourly();
 
     }
 
