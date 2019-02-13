@@ -9,6 +9,7 @@ return array (
   'coupon_codes' => 'Kupony',
   'create_ticket' => 'Utwórz Bilet',
   'create_stage'  => 'Stwórz scenę',
+  'edit_stage'  => 'Edytuj scenę',
   'demo_attendee_ref' => '#YLY9U73-1',
   'demo_end_date_time' => '18 Mar 17:08',
   'demo_event' => 'Demonstracyjne Wyd.',

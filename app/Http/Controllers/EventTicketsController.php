@@ -106,7 +106,7 @@ class EventTicketsController extends MyBaseController
      */
     public function postCreateTicket(Request $request, $event_id)
     {
-        $stage = $request->get('stage');
+        $stage = $request->get('stage_id');
         $ticket = Ticket::createNew();
         $event = Event::findOrFail($event_id);
 
@@ -123,7 +123,7 @@ class EventTicketsController extends MyBaseController
         // From the stage, the start and end dates are searched
             
         foreach($event_stages as $event_stage){ 
-            if($event_stage["title"] == $stage){ 
+            if($event_stage["stage_id"] == $stage){ 
                 $start_sale_date = $event_stage["start_sale_date"];
                 $end_sale_date = $event_stage["end_sale_date"];
             }
@@ -136,7 +136,7 @@ class EventTicketsController extends MyBaseController
         $ticket->end_sale_date = $end_sale_date;
         $ticket->stage = strip_tags($request->get('stage'));
         $ticket->currency = $request->get('currency');
-        $ticket->stage = strip_tags($request->get('stage'));
+        $ticket->stage_id = strip_tags($request->get('stage_id'));
         $ticket->price = $request->get('price');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');

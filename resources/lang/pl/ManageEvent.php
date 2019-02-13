@@ -24,6 +24,7 @@ return array (
   'create_attendees' => 'Dodaj Uczestników',
   'create_ticket' => 'Utwórz Bilet',
   'create_stage'  => 'Stwórz scenę',
+  'edit_stage'  => 'Edytuj scenę',
   'download_pdf_ticket' => 'Pobierz Bilet (PDF)',
   'edit_attendee' => 'Edytuj Uczestnika',
   'edit_attendee_title' => 'Edytuj :attendee',

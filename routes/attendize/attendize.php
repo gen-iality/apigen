@@ -533,6 +533,14 @@ Route::group(
                 'as'   => 'postCreateStage',
                 'uses' => 'EventStagesController@postCreateStage',
             ]);
+            Route::get('{event_id}/stage/{stage_id}/update', [
+                'as'   => 'showUpdateStage',
+                'uses' => 'EventStagesController@showUpdateStage',
+            ]);
+            Route::post('{event_id}/stage/{stage_id}/update', [
+                'as'   => 'postUpdateStage',
+                'uses' => 'EventStagesController@postUpdateStage',
+            ]);
 
             /*
              * -------

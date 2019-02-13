@@ -24,6 +24,7 @@ return array(
     'create_attendees'                        => 'Crear Asistentes',
     'create_ticket'                           => 'Crear entrada',
     'create_stage'                            => 'Crear Etapa',
+    'edit_stage'                              => 'Editar Etapa',
     'download_pdf_ticket'                     => 'Descargar entrada en PDF',
     'edit_attendee'                           => 'Editar asistente',
     'edit_attendee_title'                     => 'Editar :attendee',

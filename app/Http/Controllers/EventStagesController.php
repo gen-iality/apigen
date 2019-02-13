@@ -93,34 +93,92 @@ class EventStagesController extends MyBaseController
     public function postCreateStage(Request $request, $event_id)
     {
         $count = 0;
+        $id = time();
         $event = Event::findOrFail($event_id);
         $event_stages = $event->event_stages;
 
-        if($event_stages){ 
+        if ($event_stages) { 
             $count = count($event_stages);
         }
 
             $stages = [$count => 
             [   "title" => $request->title, 
                 "start_sale_date" => $request->start_sale_date, 
-                "end_sale_date" => $request->end_sale_date]
+                "end_sale_date" => $request->end_sale_date,
+                "stage_id" => $id]
             ];
             
-        if($event_stages){ 
-            $event->event_stages += $stages;
-        }else{
-            $event->event_stages = $stages;
-        }
+            if ($event_stages) { 
+                $event->event_stages += $stages;
+            } else {
+                $event->event_stages = $stages;
+            }
         
+            $event->save();
+
+            return response()->json([
+                'status'      => 'success',
+                'message'     => trans("Controllers.refreshing"),
+                'redirectUrl' => route('showEventTickets', [
+                    'event_id' => $event_id,
+                ]),
+            ]);
+    }
+
+    /**
+     * Show the update stage modal
+     *
+     * @param $event_id
+     * @param $event_id
+     * @return mixed
+     */
+    public function showUpdateStage(String $event_id, String $stage_id)
+    {
+        $event = Event::findOrFail($event_id);
+        $event_stages = $event->event_stages;
+        
+        foreach ($event_stages as $key => $event_stage) {
+            
+            if ($event_stage['stage_id'] !== $stage_id) continue;
+            $stage = $event_stage;
+        }
+
+        $data = [
+            'event'  => $event,
+            'stage' => (Object)$stage,
+        ];
+
+        return view('ManageEvent.Modals.EditStage', $data);
+    }
+
+    /**
+     * Update a stage
+     *
+     * @param $event_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postUpdateStage(Request $request, $event_id, $stage_id)
+    {
+        $event = Event::findOrFail($event_id);
+        $event_stages = $event->event_stages;
+        
+        foreach ($event_stages as $key => $event_stage) {
+            
+            if ($event_stage['stage_id'] !== $stage_id) continue;
+            $event_stages[$key]['title'] = $request->title;
+            $event_stages[$key]['start_sale_date'] = $request->start_sale_date;
+            $event_stages[$key]['end_sale_date'] = $request->end_sale_date;
+        }
+        $event->event_stages = $event_stages;
         $event->save();
 
-        return response()->json([
-            'status'      => 'success',
-            'message'     => trans("Controllers.refreshing"),
-            'redirectUrl' => route('showEventTickets', [
-                'event_id' => $event_id,
-            ]),
-        ]);
+            return response()->json([
+                'status'      => 'success',
+                'message'     => trans("Controllers.refreshing"),
+                'redirectUrl' => route('showEventTickets', [
+                    'event_id' => $event_id,
+                ]),
+            ]);
     }
 
     /**
