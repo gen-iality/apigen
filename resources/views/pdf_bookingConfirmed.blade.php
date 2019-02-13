@@ -14,7 +14,7 @@
                     <div style="width:40%; display: inline-block; vertical-align:top; padding: 35px 0;">
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Evento</h3>
-                            <p style="margin: 0;">{{$event->name}}</p>
+                            <p style="margin: 0;font-size:14px">{{$event->name}}</p>
                         </div>
                         <div style="margin-bottom: 1em;">
                             <h3 style="margin: 0;">Ticket Nro</h3>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div style="display:block;">
-                    <p style="text-align:center">Imprime esta entrada y tráela el día del evento, recuerda
+                    <p style="text-align:center;font-size:14px">Imprime esta entrada y tráela el día del evento, recuerda
                     que tambien puedes presentarla desde tu smartphone.</p>
                 </div>
             </div>
