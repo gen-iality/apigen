@@ -116,7 +116,18 @@
                                 </div>
                             </div>
                         </div> -->
-
+                        <div class="row more-options">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('dates', 'Fechas del Tickect', array('class'=>' control-label')) !!}
+                                    {!!  Form::text('dates', '',
+                                        array(
+                                        'class'=>'form-control',
+                                        'placeholder'=>'Escriba en un texto las fechas del ticket'
+                                        ))  !!}
+                                </div>
+                            </div>
+                        </div>
                         <div class="row more-options">
                             <div class="col-md-6">
                                 <div class="form-group">

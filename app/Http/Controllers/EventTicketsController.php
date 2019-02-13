@@ -136,6 +136,7 @@ class EventTicketsController extends MyBaseController
         $ticket->end_sale_date = $end_sale_date;
         $ticket->stage = strip_tags($request->get('stage'));
         $ticket->currency = $request->get('currency');
+        $ticket->dates = $request->get('dates');
         $ticket->stage_id = strip_tags($request->get('stage_id'));
         $ticket->price = $request->get('price');
         $ticket->min_per_person = $request->get('min_per_person');
@@ -260,7 +261,8 @@ class EventTicketsController extends MyBaseController
         $ticket->title = $request->get('title');
         $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $ticket->price = $request->get('price'); 
-        $ticket->stage = strip_tags($request->get('stage'));
+        $ticket->stage_id = strip_tags($request->get('stage_id'));
+        $ticket->dates = $request->get('dates');
         $ticket->currency = $request->get('currency');
         $ticket->description = $request->get('description');
         $ticket->min_per_person = $request->get('min_per_person');

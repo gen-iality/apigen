@@ -46,42 +46,51 @@
                         </div>
                     </div>                    
                 </div>
-
-                <div style="display:block;">
-                    <div style="display: inline-block; width:100%; margin-bottom:1em;">
-                        <div style="display: inline-block; margin-bottom: 1em; margin-top: 2em; width: 100%;">
-                            <div style="display:inline-block; width:45%; border-right: 1px solid lightgrey;">
-                                <h3 style="margin: 0;">Fecha de Inicio</h3>
-                                <p style="margin:0 0 0 1em;">{{ date('l, F j Y ', strtotime($event->datetime_from)) }}</p>
-                            </div>
-                            <div style="display:inline-block; width:45%; float: right;">
-                                <h3 style="margin: 0;">Hora</h3>
-                                <p style="margin:0 0 0 1em;">{{date('H:s', strtotime($event->datetime_from)) }}</p>
+                @if(!is_null($eventuser->ticket->dates))
+                    <div style="display: block; border-bottom: 1px dashed lightgrey;">
+                        <div style="display:inline-block; width:100%; margin-bottom:1em;">
+                            <div style="display:inline-block; width:100%">
+                                <h3>Fechas del Evento</h3>
+                                <p style="text-align:center"><b>{{$eventuser->ticket->dates}}</b></p>
+                            </div>    
+                        </div>
+                    </div>
+                @else
+                    <div style="display:block;">
+                        <div style="display: inline-block; width:100%; margin-bottom:1em;">
+                            <div style="display: inline-block; margin-bottom: 1em; margin-top: 2em; width: 100%;">
+                                <div style="display:inline-block; width:45%; border-right: 1px solid lightgrey;">
+                                    <h3 style="margin: 0;">Fecha de Inicio</h3>
+                                    <p style="margin:0 0 0 1em;">{{ date('l, F j Y ', strtotime($event->datetime_from)) }}</p>
+                                </div>
+                                <div style="display:inline-block; width:45%; float: right;">
+                                    <h3 style="margin: 0;">Hora</h3>
+                                    <p style="margin:0 0 0 1em;">{{date('H:s', strtotime($event->datetime_from)) }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div style="display:block;">
-                    <div style="display:inline-block; width:100%; margin-bottom: 1em;">
-                        <div style="display:inline-block; margin-bottom: 1em; width: 100%;">
-                            <div style="display:inline-block; width:45%; border-right: 1px solid lightgrey;">
-                                <h3 style="margin: 0;">Fecha Finalización</h3>
-                                <p style="margin:0 0 0 1em;">{{ date('l, F j Y ', strtotime($event->datetime_to)) }}</p>
+                    <div style="display:block;">
+                        <div style="display:inline-block; width:100%; margin-bottom: 1em;">
+                            <div style="display:inline-block; margin-bottom: 1em; width: 100%;">
+                                <div style="display:inline-block; width:45%; border-right: 1px solid lightgrey;">
+                                    <h3 style="margin: 0;">Fecha Finalización</h3>
+                                    <p style="margin:0 0 0 1em;">{{ date('l, F j Y ', strtotime($event->datetime_to)) }}</p>
+                                </div>
+                                <div style="display:inline-block; width:45%; float:right;">
+                                    <h3 style="margin: 0;">Hora</h3>
+                                    <p style="margin:0 0 0 1em;">{{date('H:s', strtotime($event->datetime_to)) }}</p>
+                                </div>
                             </div>
-                            <div style="display:inline-block; width:45%; float:right;">
-                                <h3 style="margin: 0;">Hora</h3>
-                                <p style="margin:0 0 0 1em;">{{date('H:s', strtotime($event->datetime_to)) }}</p>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                
+                        </div> 
+                    </div>
+                @endif
                 <div style="display: block; border-bottom: 1px dashed lightgrey;">
                     <div style="display:inline-block; width:100%; margin-bottom:1em;">
                         <div style="display:inline-block; width:100%">
                             <h3>Ubicacion del Evento</h3>
-                            <p>{{$location}}</p>
+                            <p style="text-align:center"><b>{{$location}}</b></p>
                         </div>    
                     </div>
                 </div>
@@ -96,6 +105,12 @@
             <div style="display:block;">
                 <p style="text-align:center">La manera más facíl de publicar y organizar tus eventos.</p>
             </div>
+            @if($event->id == '5c3fb4ddfb8a3371ef79bd62')
+                <div style="display:block;">
+                    <p style="text-align:center;font-size:12px">Responsable <b>Asociación Colombiana de Integración Sensorial</b> (ACIS)</p>
+                    <p style="text-align:center;font-size:12px"><b>Mocion NIT. 900324992</b> es un intermediario para la venta de boletería</p>
+                </div>
+            @endif
             <div style="display:block; width:40%; margin: 0 auto">
                 <img src="images/logo.png" width="100%"/>
             </div>

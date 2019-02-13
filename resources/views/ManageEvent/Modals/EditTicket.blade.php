@@ -42,12 +42,12 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             {!! Form::label('stage','Etapa', array('class'=>' control-label required')) !!}
-                            <select class="form-control" name="stage">
+                            <select class="form-control" name="stage_id">
                                 @foreach($stages as $stage)
-                                    @if($stage['title'] == $ticket->stage)   
-                                        <option value="{{ $stage['title'] }}" selected="selected">{{ $stage['title'] }}</option>
+                                    @if($stage['stage_id'] == $ticket->stage_id)   
+                                        <option value="{{ $stage['stage_id'] }}" selected="selected">{{ $stage['title'] }}</option>
                                     @else
-                                        <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
+                                        <option value="{{ $stage['stage_id'] }}">{{ $stage['title'] }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -112,7 +112,18 @@
                         </div>
                     </div>
                 </div> -->
-
+                <div class="row more-options">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('dates', 'Fechas del Tickect', array('class'=>' control-label')) !!}
+                            {!!  Form::text('dates', '',
+                                array(
+                                'class'=>'form-control',
+                                'placeholder'=>'Escriba en un texto las fechas del ticket'
+                                ))  !!}
+                        </div>
+                    </div>
+                </div>
                 <div class="row more-options">
                     <div class="col-md-6">
                         <div class="form-group">
