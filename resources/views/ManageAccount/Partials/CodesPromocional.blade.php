@@ -43,7 +43,7 @@
     </div>
     <div class="col-md-7">
         <div class="form-group">
-            {!! Form::label('codes_discount', trans("ManageAccount.tickets_discount"), array('class'=>'control-label required')) !!}
+            {!! Form::label('codes_discount', trans("ManageAccount.codes_discount"), array('class'=>'control-label required')) !!}
             {!! Form::selectRange('codes_discount', 0, 20, null, array('class'=>'form-control control-label required')) !!}
         </div>
     </div>

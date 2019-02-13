@@ -28,7 +28,11 @@ class ManageAccountController extends MyBaseController
      */
     public function showEditTickets(Request $request)
     {
-        $codes_discount = isset(Event::find($request->event_id)->codes_discount) ? Event::find($request->event_id)->codes_discount : [];
+        $event = Event::find($request->event_id);
+        $codes_discount = isset($event->codes_discount) ? $event->codes_discount : [];
+        $ticket_discount = isset($event->tickets_discount) ? $event->tickets_discount : '';
+        $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount : '';
+
         $data = [
             'account'                  => Auth::user(),
             'timezones'                => Timezone::pluck('location', 'id'),
@@ -37,7 +41,10 @@ class ManageAccountController extends MyBaseController
             'account_payment_gateways' => AccountPaymentGateway::scope()->get(),
             'version_info'             => $this->getVersionInfo(),
             'event_id'                 => $request->event_id,
-            'codes_discount'           => $codes_discount
+            'codes_discount'           => $codes_discount,
+            'ticket_discount'          => $ticket_discount,
+            'percentage_discount'      => $percentage_discount
+
         ];
         
         return view('ManageAccount.Modals.EditAccount', $data);

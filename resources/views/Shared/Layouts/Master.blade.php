@@ -110,9 +110,11 @@
             @yield('top_nav')
             </div>
             <div style="float: left">    
-            <a data-href="{{route('showEditTickets',['event_id'=> $event->_id])}}" data-modal-id="EditAccount" class="loadModal"
-                        href="javascript:void(0);"><br><span class="icon ico-cog"></span>@lang("Top.account_settings")
-            </a>
+            @if(isset($event))
+                <a data-href="{{route('showEditTickets',['event_id'=> $event->_id])}}" data-modal-id="EditAccount" class="loadModal"
+                            href="javascript:void(0);"><br><span class="icon ico-cog"></span>@lang("Top.account_settings")
+                </a>
+            @endif
             </div>
         </div>
     @endif

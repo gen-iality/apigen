@@ -18,7 +18,7 @@ return array(
     'default_currency'                             => 'Moneda por defecto',
     'percentage_discount'                          => 'Porcentaje de descuento',
     'tickets_discount'                             => 'Compra minima de tiquetes (descuento)',
-    'tickets_discount'                             => 'Códigos para el descuento',
+    'codes_discount'                             => 'Códigos para el descuento',
     'default_payment_gateway'                      => 'Pasarela de pagos por defecto',
     'email'                                        => 'Correo electrónico',
     'email_address_placeholder'                    => 'Dirección de correo electrónico',

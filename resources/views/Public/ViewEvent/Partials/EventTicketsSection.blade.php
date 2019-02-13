@@ -271,7 +271,7 @@ td{
                                     <tr>
                                         @if(isset($event->tickets_discount) && $event->tickets_discount != 0)
                                         <td  colspan="3" style="text-align: center; color:red">
-                                           Recibe el <b>{{$event->percentage_discount}}% </b> de descuenta en el total de tu compra, al momento de seleccionar más de <b>{{$event->tickets_discount}}</b> tiquetes para el evento
+                                           Recibe el <b>{{$event->percentage_discount}}% </b> de descuento en el total de tu compra, al momento de seleccionar más de <b>{{$event->tickets_discount}}</b> tiquetes para el evento
                                         </td>
                                         @endif
                                     </tr>
