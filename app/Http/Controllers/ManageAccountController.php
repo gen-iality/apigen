@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\PaymentGateway;
 use App\Models\Timezone;
 use App\Models\User;
+use App\Event;
 use Auth;
 use Hash;
 use HttpClient;
@@ -25,8 +26,13 @@ class ManageAccountController extends MyBaseController
      * @param Request $request
      * @return mixed
      */
-    public function showEditAccount(Request $request)
+    public function showEditTickets(Request $request)
     {
+        $event = Event::find($request->event_id);
+        $codes_discount = isset($event->codes_discount) ? $event->codes_discount : [];
+        $ticket_discount = isset($event->tickets_discount) ? $event->tickets_discount : '';
+        $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount : '';
+
         $data = [
             'account'                  => Auth::user(),
             'timezones'                => Timezone::pluck('location', 'id'),
@@ -34,6 +40,11 @@ class ManageAccountController extends MyBaseController
             'payment_gateways'         => PaymentGateway::pluck('provider_name', 'id'),
             'account_payment_gateways' => AccountPaymentGateway::scope()->get(),
             'version_info'             => $this->getVersionInfo(),
+            'event_id'                 => $request->event_id,
+            'codes_discount'           => $codes_discount,
+            'ticket_discount'          => $ticket_discount,
+            'percentage_discount'      => $percentage_discount
+
         ];
         
         return view('ManageAccount.Modals.EditAccount', $data);
@@ -241,5 +252,67 @@ class ManageAccountController extends MyBaseController
         }
 
         return false;
+    }
+
+
+    /**
+     * Edit an account
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postEditCodesPromocional()
+    {
+        $percentage_discount = Input::get('percentage_discount');
+        $codes_discount = Input::get('codes_discount');
+        $event_id = Input::get('event_id');
+
+        $event = Event::find($event_id);
+
+        //Generador de códigos
+        $codes = isset($event->codes_discount) ? $event->codes_discount : [];
+        for ($j=0; $j < $codes_discount; $j++) { 
+            $key = '';
+            $longitud = 8;
+            $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
+            $max = strlen($pattern)-1;
+            for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
+            $code = [
+                'id' => $key,
+                'percentage' => $percentage_discount,
+                'available' => true,
+            ];
+            array_push($codes, $code);
+        }
+        $event->codes_discount = $codes;
+        $event->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'data'    => $event->codes_discount,
+            'message' => trans("Controllers.account_successfully_updated"),
+        ]);
+    }
+
+       /**
+     * Edit an account
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postEditTicketsPromocional()
+    {
+
+        $percentage_discount = Input::get('percentage_discount');
+        $tickets_discount = Input::get('tickets_discount');
+        $event_id = Input::get('event_id');
+        $event = Event::find($event_id);
+        $event->tickets_discount = $tickets_discount;
+        $event->percentage_discount = $percentage_discount;
+        $event->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'id'      => $event->id,
+            'message' => trans("Controllers.account_successfully_updated"),
+        ]);
     }
 }

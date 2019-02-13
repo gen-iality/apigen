@@ -81,7 +81,7 @@
                                 class="loadModal editUserModal" href="javascript:void(0);"><span class="icon ico-user"></span>@lang("Top.my_profile")</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a data-href="{{route('showEditAccount')}}" data-modal-id="EditAccount" class="loadModal"
+                            <li><a data-href="{{route('showEditTickets')}}" data-modal-id="EditAccount" class="loadModal"
                                 href="javascript:void(0);"><span class="icon ico-cog"></span>@lang("Top.account_settings")</a></li>
 
                             <li class="divider"></li>
@@ -98,7 +98,7 @@
             @yield('top_nav')
             </div>
             <div style="float: left">    
-            <a data-href="{{route('showEditAccount')}}" data-modal-id="EditAccount" class="loadModal"
+            <a data-href="{{route('showEditTickets')}}" data-modal-id="EditAccount" class="loadModal"
                         href="javascript:void(0);"><br><span class="icon ico-cog"></span>@lang("Top.account_settings")
             </a>
             </div>
@@ -110,9 +110,11 @@
             @yield('top_nav')
             </div>
             <div style="float: left">    
-            <a data-href="{{route('showEditAccount')}}" data-modal-id="EditAccount" class="loadModal"
-                        href="javascript:void(0);"><br><span class="icon ico-cog"></span>@lang("Top.account_settings")
-            </a>
+            @if(isset($event))
+                <a data-href="{{route('showEditTickets',['event_id'=> $event->_id])}}" data-modal-id="EditAccount" class="loadModal"
+                            href="javascript:void(0);"><br><span class="icon ico-cog"></span>@lang("Top.account_settings")
+                </a>
+            @endif
             </div>
         </div>
     @endif

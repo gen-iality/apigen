@@ -237,11 +237,11 @@ Route::group(
         /*
          * Manage account
          */
-        Route::group(['prefix' => 'account'], function () {
+        Route::group(['prefix' => 'tickets'], function () {
 
             Route::get('/', [
-                'as'   => 'showEditAccount',
-                'uses' => 'ManageAccountController@showEditAccount',
+                'as'   => 'showEditTickets',
+                'uses' => 'ManageAccountController@showEditTickets',
             ]);
 
             Route::post('/', [
@@ -257,6 +257,16 @@ Route::group(
                 'as'   => 'postInviteUser',
                 'uses' => 'ManageAccountController@postInviteUser',
             ]);
+            Route::post('/codes_promocional', [
+                'as'   => 'postEditCodesPromocional',
+                'uses' => 'ManageAccountController@postEditCodesPromocional',
+            ]);
+
+            Route::post('/tickets_promocional', [
+                'as'   => 'postEditTicketsPromocional',
+                'uses' => 'ManageAccountController@postEditTicketsPromocional',
+            ]);
+            
 
         });
 
