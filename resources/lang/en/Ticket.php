@@ -9,6 +9,7 @@ return array (
   'coupon_codes' => 'Coupon Codes',
   'create_ticket' => 'Create Ticket',
   'create_stage' => 'Create Stage',
+  'edit_stage' => 'Edit Stage',
   'demo_attendee_ref' => '#YLY9U73-1',
   'demo_end_date_time' => 'Mar 18th 5:08PM',
   'demo_event' => 'Demo Event',

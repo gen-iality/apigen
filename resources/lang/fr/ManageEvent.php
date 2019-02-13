@@ -28,6 +28,7 @@ return array (
   'create_attendees' => 'Créer les participants',
   'create_ticket' => 'Créer le billet',
   'create_stage'  => 'Créer étape',
+  'edit_stage'  => 'Éditer étape',
   'download_pdf_ticket' => 'Télécharger le billet PDF',
   'edit_attendee' => 'Éditer le participant',
   'edit_attendee_title' => 'Éditer <b>:attendee<b>',

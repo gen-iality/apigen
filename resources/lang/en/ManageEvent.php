@@ -24,6 +24,7 @@ return array (
   'create_attendees' => 'Create Attendees',
   'create_ticket' => 'Create Ticket',
   'create_stage' => 'Create Stage',
+  'edit_stage' => 'Edit Stage',
   'download_pdf_ticket' => 'Download PDF Ticket',
   'edit_attendee' => 'Edit Attendee',
   'edit_attendee_title' => 'Edit :attendee',

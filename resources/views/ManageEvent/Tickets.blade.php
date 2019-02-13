@@ -118,7 +118,11 @@
                 <div class="row">
                     <div class="col-md-3 col-xs-6">
                             <div class='order_options'>
+                                <div style="cursor: pointer;" data-modal-id='stage-{{ $stage["stage_id"] }}'
+                                    data-href="{{ route('showUpdateStage', ['event_id' => $event->id, 'stage_id' => $stage['stage_id']]) }}"
+                                    class="panel-heading loadModal">
                                 <h3>{{$stage["title"]}}</h3>
+                                </div>
                             </div>
                     </div>
                     <div class="col-md-2 col-xs-6 col-md-offset-7">
@@ -133,7 +137,7 @@
                 @if($tickets->count())
 
                     @foreach($tickets as $ticket)
-                    @if($ticket->stage == $stage["title"])
+                    @if($ticket->stage_id == $stage["stage_id"])
                         <div id="ticket_{{$ticket->id}}" class="col-md-4 col-sm-6 col-xs-12">
                             <div class="panel panel-success ticket" data-ticket-id="{{$ticket->id}}">
                                 <div style="cursor: pointer;" data-modal-id='ticket-{{ $ticket->id }}'
@@ -141,7 +145,7 @@
                                     class="panel-heading loadModal">
                                     <h3 class="panel-title">
                                         @if($ticket->is_hidden)
-                                            <i title="@lang("Ticket.this_ticket_is_hidden")"
+                                            <i title="@lang('Ticket.this_ticket_is_hidden')"
                                             class="ico-eye-blocked ticket_icon mr5 ellipsis"></i>
                                         @else
                                             <i class="ico-ticket ticket_icon mr5 ellipsis"></i>

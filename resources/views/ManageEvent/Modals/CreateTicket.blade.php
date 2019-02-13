@@ -52,10 +52,10 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {!! Form::label('stage','Etapa', array('class'=>' control-label required')) !!}
-                                    <select class="form-control" name="stage">
+                                    <select class="form-control" name="stage_id">
                                         @if($stages)
                                             @foreach($stages as $stage)
-                                                <option value="{{ $stage['title'] }}">{{ $stage['title'] }}</option>
+                                                <option value="{{ $stage['stage_id'] }}">{{ $stage['title'] }}</option>
                                             @endforeach
                                         @endif
                                     </select>

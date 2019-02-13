@@ -5,6 +5,7 @@ return array(
     'coupon_codes'               => 'Códigos de cupón',
     'create_ticket'              => 'Crear entrada',
     'create_stage'               => 'Crear Etapa',
+    'edit_stage'                 => 'Editar Etapa',
     'demo_attendee_ref'          => '#YLY9U73-1',
     'demo_end_date_time'         => '18 de Mar 5:08PM',
     'demo_event'                 => 'Evento Demo',
