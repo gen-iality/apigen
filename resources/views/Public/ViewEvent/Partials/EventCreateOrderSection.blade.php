@@ -26,10 +26,11 @@
                                 @if((int)ceil($ticket['full_price']) === 0)
                                     @lang("Public_ViewEvent.free")
                                 @else
-                                    {{ money($ticket['full_price'], $event->currency) }}
+                                    {{ money($ticket['full_price'], $event->currency) }}  
                                 @endif
                             </td>
                         </tr>
+  
                         @endforeach
                         @foreach($tickets as $ticket)
                             @if((int)ceil($ticket['full_price']) === 0)
@@ -43,20 +44,40 @@
                 </div>
                 @if($order_total > 0)
                 <div class="panel-footer">
+                    @if(isset($discount))
+                            <h5 style="text-align: center;">Descuento  del <b>{{$percentage_discount}}%</b> por 
+                                @if($code_discount)
+                                    el código <b>{{$code_discount}}</b>
+                                @else
+                                    <b>{{$total_ticket_quantity}}</b> tickets
+                                @endif
+                            </h5>
+                        <h5>
+                            Precio: <span style="float: right;">${{ number_format($order_total + $discount, 2, '.', '') }} </span>
+                        </h5>
+                        <h5>
+                            Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
+                        </h5>
+                        <hr/>
+
+                    @endif
                     <h5>
                         @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
                     </h5>
-                {{--    @if($event->organiser->charge_tax)
-                    <h5>
-                        {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
-                        <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
-                    </h5>
-                    <h5>
-                        <strong>Grand Total:</strong>
-                        <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
-                    </h5>
-                    @endif
-                --}}
+                    <!-- Esta Parte se encuentra cancelada -->
+                    {{--    @if($event->organiser->charge_tax)
+                        <h5>
+                            {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
+                            <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
+                        </h5>
+                        <h5>
+                            <strong>Grand Total:</strong>
+                            <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
+                        </h5>
+                        @endif
+                    --}}
+                    <!-- Esta Parte se encuentra cancelada -->
+
                 </div>
                 @endif
 

@@ -217,26 +217,25 @@ td{
                                                     @lang("Public_ViewEvent.currently_not_on_sale")
                                                 </span>
 
-                                                            @else
+                                                    @else
 
-                                                                @if($ticket->sale_status === config('attendize.ticket_status_sold_out'))
-                                                                    <span class="text-danger" property="availability"
-                                                                        content="http://schema.org/SoldOut">
+                                                    @if($ticket->sale_status === config('attendize.ticket_status_sold_out'))
+                                                        <span class="text-danger" property="availability" content="http://schema.org/SoldOut">
                                                     @lang("Public_ViewEvent.sold_out")
                                                 </span>
-                                                                @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
+                                                    @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
                                                                     <span class="text-danger">
                                                     @lang("Public_ViewEvent.sales_have_not_started")
                                                 </span>
-                                                                @elseif($ticket->sale_status === config('attendize.ticket_status_after_sale_date'))
-                                                                    <span class="text-danger">
+                                                    @elseif($ticket->sale_status === config('attendize.ticket_status_after_sale_date'))
+                                                        <span class="text-danger">
                                                     @lang("Public_ViewEvent.sales_have_ended")
                                                 </span>
                                                 @else
                                                     {!! Form::hidden('tickets[]', $ticket->id) !!}
                                                     <meta property="availability" content="http://schema.org/InStock">
                                                     @if($key == $stage_act)
-                                                        <select name="ticket_{{$ticket->id}}" class="form-control"
+                                                        <select name="ticket_{{$ticket->id}}" class="form-control tickets"
                                                                 style="text-align: center; border-bottom: solid 3px #00f0be;">
                                                             @if ($tickets->count() > 1)
                                                                 <option value="0">0</option>
@@ -258,6 +257,10 @@ td{
                                     @endif
                                 @endforeach
                                 @if($key == $stage_act)
+                                    @if(isset($event->codes_discount))
+                                    <tr id="codes_discount">                                        
+                                    </tr>
+                                    @endif
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
@@ -322,6 +325,8 @@ td{
         @lang("Public_ViewEvent.sales_have_not_started")
     </span>
 @endif 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
 <script>
 function openCity(evt, cityName) {
   var i, tabcontent, tablinks;
@@ -336,4 +341,34 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
+
+$(document).ready(function(){
+
+$("select.tickets").change(function(){
+    var total = 0;
+    var total_select = 0;
+    $("select.tickets").each(function(){
+        var total_select = parseInt($(this).val());
+        total += total_select
+    });
+    if(total == 1){
+        $("tr#codes_discount").append(' <td  colspan="1" class="td">Ingresa tu código promocional para recibir tu descuento  </td> <td  colspan="2" class="td">  <input type="text" name="code_discount" class="form-control"></td>')
+    }else{
+        $("tr#codes_discount").empty()
+    }
+});
+
+
+/* 	$("select.tickets").change(function(){
+
+        var total = $('select.tickets').val();
+        console.log(total);
+        if(total == 1){
+            console.log("M here");
+        }
+        
+        // $('input[name=valor1]').val($(this).val());
+    }); */
+});
 </script>

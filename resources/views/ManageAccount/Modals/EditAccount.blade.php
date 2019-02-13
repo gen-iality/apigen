@@ -35,14 +35,14 @@
                             <li><a href="#codes_promocional" data-toggle="tab">códigos promocionales</a></li>
                         </ul>
                         <div class="tab-content panel">
-                            <div class="tab-pane " id="payment_account">
+                            <div class="tab-pane active" id="payment_account">
                                 @include('ManageAccount.Partials.PaymentGatewayOptions')
                             </div>
                             <div class="tab-pane" id="tickets_promocional">
                                 @include('ManageAccount.Partials.TicketsPromocional')
                             </div>
 
-                            <div class="tab-pane active" id="codes_promocional">
+                            <div class="tab-pane" id="codes_promocional">
                                 @include('ManageAccount.Partials.CodesPromocional')
                             </div>
                         </div>

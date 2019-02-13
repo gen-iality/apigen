@@ -178,11 +178,23 @@ class EventCheckoutController extends Controller
             //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
             //Se realiza el descuento
             
-            if($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0){
-                $discount = $percentage_discount*$order_total/100;
-                $order_total = $order_total - $discount;
+        if($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0){
+            $discount = $percentage_discount*$order_total/100;
+            $order_total = $order_total - $discount;
+        }
+
+        $code_discount = $request->get('code_discount');
+        if($code_discount){
+            foreach($event->codes_discount as $code){
+                if($code['id'] == $code_discount && $code['available'] == true){
+                    $percentage_discount = $code['percentage'];
+                    $discount = $percentage_discount*$order_total/100;
+                    $order_total = $order_total - $discount;
+                    break;
+                }
             }
-            
+        }
+
         Cache::put($temporal_id, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
@@ -202,6 +214,9 @@ class EventCheckoutController extends Controller
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway' => $paymentGateway,
             'currency' => $ticket->currency,
+            'code_discount' => $code_discount,
+            'percentage_discount' => $percentage_discount,
+            'discount' => isset($discount) ? $discount : null,
         ], config('attendize.minutes_cache_tickets'));
         /*
          * If we're this far assume everything is OK and redirect them
@@ -780,18 +795,37 @@ class EventCheckoutController extends Controller
         $order->amount = $ticket_order['order_total'];
         $order->booking_fee = $ticket_order['booking_fee'];
         $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
-        $order->discount = 0.00;
         $order->account_id = $event->account->id;
         $order->event_id = $ticket_order['event_id'];
         $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
         $order->session_id = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data']['session_id'] : time();
         $order->order_reference = $temporal_id;
+        $order->discount = isset($ticket_order['discount'])? $ticket_order['discount'] : 0.00;
+        if(isset($ticket_order['code_discount']) || isset($ticket_order['total_ticket_quantity'])){
+            $order->discount_description =  isset($ticket_order['code_discount'])? 
+                'Descuento  del '.$ticket_order['percentage_discount'].'% por el código '.$ticket_order['code_discount'] :
+                'Descuento  del '.$ticket_order['percentage_discount'].'% por '.$ticket_order['total_ticket_quantity'].' tickets comprados';
+        }
         // Calculating grand total including tax
         $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
         $order->taxamt = $orderService->getTaxAmount();
         $order->url = $transaction_data['url_redirect'];
-        $order->save();
+        // $order->save();
+
+        //Cancelación de código promocional
+        if(isset($ticket_order['code_discount']) ){
+            $codes = $event->codes_discount;
+            foreach($codes as $key => $code){
+                if($code['id'] == $ticket_order['code_discount']){
+                    $codes[$key]['available'] = false;
+                    $event->codes_discount = $codes;
+                    $event->save();
+                    break;
+                }
+            }
+        }
+        
         return $order;
     }
     /**
