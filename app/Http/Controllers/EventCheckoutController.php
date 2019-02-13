@@ -968,7 +968,7 @@ class EventCheckoutController extends Controller
      * @param Request $request
      * @return void
      */
-    public function showOrderPaymentStatusDetails($order_reference)
+    public function showOrderPaymentStatusDetails($order_reference, $cron = false)
     {
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
             'login' => 'ff684c45a63f769d824994dcc1369fb9',
@@ -993,8 +993,11 @@ class EventCheckoutController extends Controller
         $amount = $payment ? $payment->amount(): '0';
         $autorization = $response;
         $this->changeStatusOrder($order_reference, $status);
-
-        return view('Public.ViewEvent.EventPageDetailOrder', compact('request', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
+        if(!$cron){
+            return view('Public.ViewEvent.EventPageDetailOrder', compact('request', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
+        }else{
+            return $status;
+        }   
     }
 /*
     public function borrarOrdenes(){
