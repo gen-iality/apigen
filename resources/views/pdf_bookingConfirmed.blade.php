@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div style="display:block; width:75%; margin:1em auto;">
+        <div style="display:block; width:50%; margin:1em auto;">
             <div style="display:block;">
                 <p style="text-align:center">La manera más facíl de publicar y organizar tus eventos.</p>
             </div>
