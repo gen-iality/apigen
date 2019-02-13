@@ -60,7 +60,7 @@ return [
     'sub_total'                         => 'Sub total',
     'thank_you_for_your_order'          => '¡Gracias por tu pedido!',
     'ticket'                            => 'Entrada',
-    'ticket_holder_information'         => 'Información del titular de la entrada',
+    'ticket_holder_information'         => 'Información del asistente N° ',
     'ticket_holder_n'                   => 'Titular de la entrada :n Detalles',
     'ticket_price'                      => 'Precio de la entrada',
     'tickets'                           => 'Entrada(s)',
@@ -73,6 +73,7 @@ return [
     'your'                              => 'Tu(s)',
     'your_email_address'                => 'Tu dirección de correo electrónico',
     'your_information'                  => 'Tu información',
+    'your_information_purshase'         => 'Información de la persona que realiza el pago',
     'your_message'                      => 'Tu mensaje',
     'your_name'                         => 'Tu nombre',
 ];

@@ -92,9 +92,10 @@
 
                 {!! Form::hidden('event_id', $event->id) !!}
                 {!! Form::hidden('temporal_id', $temporal_id) !!}
-                <h3> @lang("Public_ViewEvent.your_information")</h3>
+               
 
                 @if(!$is_free)
+                <h3> @lang("Public_ViewEvent.your_information_purshase")</h3>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
@@ -111,25 +112,26 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-4">
                         <div class="form-group">
-                            {!! Form::label("Document", "Tipo") !!}
+                            {!! Form::label("Document", "Tipo de documento") !!}
                             {!! 
                                 Form::select('typeDocument', array(
-                                    'CC' => ('Documento de Identidad'),
+                                    'cc' => ('Documento de Identidad'),
                                     'CC' => ('CC'),
                                     'TI' => ('TI'),
+                                    'PPN'=> ('Pasaporte'),
                                 ), null, ['required' => 'required', 'class' => 'form-control']);
                             !!}
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="form-group">
-                            {!! Form::label("document", 'documento') !!}
+                            {!! Form::label("document", 'Número del documento') !!}
                             {!! Form::number("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                         <div class="form-group">
                             {!! Form::label("mobile", 'Teléfono') !!}
                             {!! Form::number("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
@@ -137,16 +139,16 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="display:none">
                     <div class="col-md-12">
                         <div class="form-group">
                             {!!  Form::checkbox('payerIsBuyer', 'true', true) !!}
                             {!! Form::label("payerIsBuyer", "Los datos ingresados anteriormente son de la persona encargada del pago") !!}
-                        </div>
+                        </div>  
                     </div>
                 </div>
                 @else
-
+                <h3> @lang("Public_ViewEvent.your_information")</h3>
                 <div class="row">
                     <div class="col-xs-2">
                         <b>@lang("Public_ViewEvent.first_name") </b>
@@ -185,12 +187,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="ticket_holders_details" >
-                            <h3>@lang("Public_ViewEvent.ticket_holder_information")</h3>
+                            
                             <?php
                                 $total_attendee_increment = 0;
                             ?>
                             @foreach($tickets as $ticket)
                                 @for($i=0; $i<=$ticket['qty']-1; $i++)
+                                <h3>@lang("Public_ViewEvent.ticket_holder_information") {{$i+1}}</h3>
+
                                 <div class="panel panel-primary">
 
                                     <div class="panel-heading">
@@ -233,8 +237,7 @@
 
                 @if($order_requires_payment)
 
-                <h3>@lang("Public_ViewEvent.payment_information")</h3>
-                    @lang("Public_ViewEvent.below_payment_information_header")
+        
                 @if($event->enable_offline_payments)
                     <div class="offline_payment_toggle">
                         <div class="custom-checkbox">

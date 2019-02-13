@@ -332,8 +332,9 @@ class EventCheckoutController extends Controller
             /* Fiond order */
             $order = Order::where('order_reference', '=', $temporal_id)->first();
             /* Envío de correo */
-            $this->dispatch(new SendOrderTickets($order));
-
+            if(config('attendize.send_email')){
+                $this->dispatch(new SendOrderTickets($order));
+            }
             $return = [
                 'status' => 'success',
                 'redirectUrl' => url('/').'/order/'.$temporal_id,
@@ -811,7 +812,7 @@ class EventCheckoutController extends Controller
         $orderService->calculateFinalCosts();
         $order->taxamt = $orderService->getTaxAmount();
         $order->url = $transaction_data['url_redirect'];
-        // $order->save();
+        $order->save();
 
         //Cancelación de código promocional
         if(isset($ticket_order['code_discount']) ){
@@ -968,7 +969,7 @@ class EventCheckoutController extends Controller
      * @param Request $request
      * @return void
      */
-    public function showOrderPaymentStatusDetails($order_reference)
+    public function showOrderPaymentStatusDetails($order_reference, $cron = false)
     {
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
             'login' => 'ff684c45a63f769d824994dcc1369fb9',
@@ -993,8 +994,11 @@ class EventCheckoutController extends Controller
         $amount = $payment ? $payment->amount(): '0';
         $autorization = $response;
         $this->changeStatusOrder($order_reference, $status);
-
-        return view('Public.ViewEvent.EventPageDetailOrder', compact('request', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
+        if(!$cron){
+            return view('Public.ViewEvent.EventPageDetailOrder', compact('request', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
+        }else{
+            return $status;
+        }   
     }
 /*
     public function borrarOrdenes(){
