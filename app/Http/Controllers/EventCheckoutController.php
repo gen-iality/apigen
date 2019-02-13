@@ -811,7 +811,7 @@ class EventCheckoutController extends Controller
         $orderService->calculateFinalCosts();
         $order->taxamt = $orderService->getTaxAmount();
         $order->url = $transaction_data['url_redirect'];
-        // $order->save();
+        $order->save();
 
         //Cancelación de código promocional
         if(isset($ticket_order['code_discount']) ){
