@@ -1,0 +1,89 @@
+[1mdiff --git a/app/Extensions/TokenOrSessionGuard.php b/app/Extensions/TokenOrSessionGuard.php[m
+[1mindex 7a6df99..6fd446a 100644[m
+[1m--- a/app/Extensions/TokenOrSessionGuard.php[m
+[1m+++ b/app/Extensions/TokenOrSessionGuard.php[m
+[36m@@ -10,6 +10,7 @@[m [muse Illuminate\Contracts\Auth\UserProvider;[m
+ use Illuminate\Http\Request;[m
+ use Illuminate\Auth\SessionGuard;[m
+ use \Illuminate\Contracts\Session\Session;[m
+[32m+[m[32muse Illuminate\Support\Facades\Log;[m
+ [m
+ class TokenOrSessionGuard extends SessionGuard[m
+ {[m
+[36m@@ -47,6 +48,8 @@[m [mclass TokenOrSessionGuard extends SessionGuard[m
+             return $this->user;[m
+         }[m
+         $id = $this->session->get($this->getName());[m
+[32m+[m[32m        Log::info('************>>USERID '.$id);[m
+[32m+[m[41m        [m
+         // First we will try to load the user using the identifier in the session if[m
+         // one exists. Otherwise we will check for a "remember me" cookie in this[m
+         // request, and if one exists, attempt to retrieve the user using that.[m
+[36m@@ -59,12 +62,23 @@[m [mclass TokenOrSessionGuard extends SessionGuard[m
+ [m
+         //try to load user from token[m
+         if (is_null($user)){[m
+[32m+[m
+[32m+[m
+[32m+[m
+             $token = $this->_getTokenForRequest();[m
+[32m+[m[32m            if (empty($token)) {[m
+[32m+[m[32m                $token =  $this->session->get('evius_token');[m
+[32m+[m[32m            }[m
+[32m+[m[41m            [m
+             if (!empty($token)) {[m
+[32m+[m[32m                $this->session->put('evius_token', $token);[m
+[32m+[m[32m                $this->session->save();[m[41m [m
+[32m+[m[32m                Log::info('LOGOGOGOGOGOGOG');[m
+                 // the token was found, how you want to pass?[m
+                 $user = $this->provider->retrieveByToken($this->storageKey, $token);[m
+                 $this->updateSession($user->getAuthIdentifier());[m
+[31m-                $this->fireAuthenticatedEvent($user);            [m
+[32m+[m[32m                $this->fireAuthenticatedEvent($user);[m[41m  [m
+[32m+[m[41m                          [m
+             }[m
+         }[m
+ [m
+[1mdiff --git a/app/Http/Middleware/TokenAuthFirebase.php b/app/Http/Middleware/TokenAuthFirebase.php[m
+[1mindex 3d250c2..e1499cc 100644[m
+[1m--- a/app/Http/Middleware/TokenAuthFirebase.php[m
+[1m+++ b/app/Http/Middleware/TokenAuthFirebase.php[m
+[36m@@ -9,6 +9,7 @@[m [muse Firebase\Auth\Token\Verifier;[m
+ use Illuminate\Http\Response;[m
+ use Kreait\Firebase\Factory;[m
+ use Kreait\Firebase\ServiceAccount;[m
+[32m+[m[32muse Illuminate\Support\Facades\Log;[m
+ [m
+ class TokenAuthFirebase[m
+ {[m
+[1mdiff --git a/app/Listeners/providerSentEmailEventListener.php b/app/Listeners/providerSentEmailEventListener.php[m
+[1mindex 8d694ee..38eb83a 100644[m
+[1m--- a/app/Listeners/providerSentEmailEventListener.php[m
+[1m+++ b/app/Listeners/providerSentEmailEventListener.php[m
+[36m@@ -5,6 +5,8 @@[m [mnamespace App\Listeners;[m
+ use App\Events\providerSentEmail;[m
+ use Illuminate\Support\Facades\Log;[m
+ [m
+[32m+[m
+[32m+[m
+ use Sendinblue\Mailin;[m
+ use App\MessageUser;[m
+ [m
+[1mdiff --git a/resources/views/Public/ViewEvent/EventPageViewOrder.blade.php b/resources/views/Public/ViewEvent/EventPageViewOrder.blade.php[m
+[1mindex 83a1fc3..7c4a013 100644[m
+[1m--- a/resources/views/Public/ViewEvent/EventPageViewOrder.blade.php[m
+[1m+++ b/resources/views/Public/ViewEvent/EventPageViewOrder.blade.php[m
+[36m@@ -1,10 +1 @@[m
+[31m-@extends('Public.ViewEvent.Layouts.EventPage')[m
+[31m-[m
+[31m-@section('content')[m
+[31m-    @include('Public.ViewEvent.Partials.EventViewOrderSection')[m
+[31m-[m
+[31m-    {{-- @include('Public.ViewEvent.Partials.EventHeaderSection')[m
+[31m-    @include('Public.ViewEvent.Partials.EventShareSection')[m
+[31m-    @include('Public.ViewEvent.Partials.EventFooterSection') --}}[m
+[31m-    [m
+[31m-@stop[m
+[32m+[m[32maaa[m
+\ No newline at end of file[m
+[1mdiff --git a/resou
