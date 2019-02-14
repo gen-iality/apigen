@@ -207,10 +207,18 @@
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
                                                         @if($field['mandatory'] == 'true')
-                                                        {!! Form::label($field['name'], $field['label']) !!}
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                                                            @if(isset( $field['label']))
+                                                                {!! Form::label($field['name'], $field['label']) !!}
+                                                            @else
+                                                                {!! Form::label($field['name'], $field['name']) !!}
+                                                            @endif
+                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
                                                         @else
-                                                        {!! Form::label($field['name'], $field['label']) !!}
+                                                        @if(isset( $field['label']))
+                                                            {!! Form::label($field['name'], $field['label']) !!}
+                                                        @else
+                                                            {!! Form::label($field['name'], $field['name']) !!}
+                                                        @endif
                                                         {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
                                                         @endif
                                                     </div>
