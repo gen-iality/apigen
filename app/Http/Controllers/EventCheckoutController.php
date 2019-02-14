@@ -598,6 +598,7 @@ class EventCheckoutController extends Controller
                 /*
                  * Update affiliates stats stats
                  */
+
                 if (isset($ticket_order['affiliate_referral'])) {
                     $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
                         ->where('event_id', '=', $event_id)->first();
@@ -662,13 +663,17 @@ class EventCheckoutController extends Controller
 
                             $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
                         }
+
                         $attendee->event_id = $event_id;
                         $attendee->order_id = $order->id;
                         $attendee->ticket_id = $attendee_details['ticket']['id'];
                         $attendee->account_id = $event->account->id;
-                        $attendee->reference_index = $attendee_increment;
-                        $attendee->save();
 
+                        $attendee->reference_index = $attendee_increment;
+
+
+                        $attendee->save();
+                        
                         /*
                          * Save the attendee's questions
                          */
@@ -701,6 +706,7 @@ class EventCheckoutController extends Controller
                         /* Keep track of total number of attendees */
                         $attendee_increment++;
                     }
+
                 }
 
             } catch (Exception $e) {
