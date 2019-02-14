@@ -1000,6 +1000,22 @@ class EventCheckoutController extends Controller
             return $status;
         }   
     }
+
+    public function showOrderPaymentStatusDetailsStatus($order_reference, $cron = false)
+    {
+        $placetopay = new \Dnetix\Redirection\PlacetoPay([
+            'login' => 'ff684c45a63f769d824994dcc1369fb9',
+            'tranKey' => 'X1GIXSF2Dxtq0bfg',
+            'url' => 'https://secure.placetopay.com/redirection/',
+            'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
+        ]);
+        $order = Order::where('order_reference', '=', $order_reference)->first();
+
+        //Respuesta de Placetopay del proceso de pago
+        $response = $placetopay->query($order->session_id);
+        $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
+        return $status;
+    }
 /*
     public function borrarOrdenes(){
         $orders = ReservedTickets::all();
