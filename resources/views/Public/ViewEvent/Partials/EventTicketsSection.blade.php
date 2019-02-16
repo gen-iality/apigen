@@ -375,7 +375,7 @@ $("select.tickets").change(function(){
 @else
 <div class="jumbotron">
 
-<img  src="{{ asset('images/kvacis.jpg')}}" />
+<img style="max-width:100%"  src="{{ asset('images/kvacis.jpg')}}" />
 <!-- 
   <hr class="my-4">
     <h1>Primera Etapa Exito en ventas.</h1>
@@ -396,7 +396,7 @@ $("select.tickets").change(function(){
     -->
 
     <br/>
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <h3 
     background-color: beige;
     padding: 22px;
