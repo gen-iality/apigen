@@ -147,7 +147,7 @@ td{
 }
 
 </style>
-
+@if($event->id != '5c3fb4ddfb8a3371ef79bd62')
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
@@ -176,7 +176,7 @@ td{
                     <div class="content">
                         <div class="tickets_table_wrap">
                             <table class="table">
-                                <!-- <?php
+                                <?php
                                 $is_free_event = true;
                                 ?>
                                 @foreach($tickets as $ticket)
@@ -250,7 +250,7 @@ td{
                                             @endif
                                         </td>
                                     </tr>
-                                     este tr es para dar espacio entre las celtas 
+                                    <!-- este tr es para dar espacio entre las celtas -->
                                     <tr class="espacio">
                                         <td class="espacio"></td>
                                     </tr>
@@ -294,18 +294,6 @@ td{
                                                     {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                                 @endif
                                             
-                                        </td>
-                                    </tr> -->
-                                    <tr>
-                                        <td  colspan="3" style="text-align: center;">
-                                        <p style="text-align:center;font-size:16px">Primera Etapa Exito en ventas.
-                                        Aprovecha los descuentos.</p>
-
-                                         <p style="text-align:center;font-size:12px">Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa
-                                        Del 18 al 22 de Febrero Nos encontramos preparandos para ti. <b>Plataforma en mantenimiento.</b></p>
-
-                                         <p style="text-align:center;font-size:12px"><b>¡Contamos con tu asistencia !
-                                        CLIS - ACIS</b></p>    
                                         </td>
                                     </tr>
                             </table>
@@ -384,3 +372,22 @@ $("select.tickets").change(function(){
     }); */
 });
 </script>
+@else
+<div class="jumbotron">
+  <p class="lead"><small>
+    Primera Etapa Exito en ventas.
+    Aprovecha los descuentos.
+  </small></p> 
+  <hr class="my-4">
+  <p><small>
+    Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa
+    Del 18 al 22 de Febrero Nos encontramos preparandos para ti.</p>
+    </small><p>
+    <b>Plataforma en mantenimiento.</b>
+    Gracias por su comprensión, Regresaremos pronto.
+    </p>
+
+    <p><small><b>¡Contamos con tu asistencia !
+    CLIS - ACIS</b></small></p>
+</div>
+@endif
