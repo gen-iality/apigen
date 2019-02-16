@@ -28,7 +28,7 @@ class EventViewController extends Controller
     public function showEventHome(Request $request, $event_id, $slug = '', $preview = false)
     {
         $date = new \DateTime();
-        $now =  $date->format('Y-m-d H:i');
+        $now =  $date->format('Y-m-d H:i:s');
         $show = '';
         $stage_act = [];
  

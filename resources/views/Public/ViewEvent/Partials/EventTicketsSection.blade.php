@@ -180,7 +180,7 @@ td{
                                 $is_free_event = true;
                                 ?>
                                 @foreach($tickets as $ticket)
-                                    @if($ticket->stage == $stage["title"])
+                                    @if($ticket->stage_id == $stage["stage_id"])
                                     <tr class="ticket" property="offers" typeof="Offer" >
                                         <td class="td" >
                                             <span class="ticket-title semibold" property="name">
