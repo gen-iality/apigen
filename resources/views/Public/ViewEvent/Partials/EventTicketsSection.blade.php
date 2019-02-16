@@ -377,7 +377,7 @@ $("select.tickets").change(function(){
   <h1 class="display-4">Hola,</h1>
   <p class="lead"><small>
   Nos encontramos en <b>mantenimiento</b>, volvemos el lunes 18 de febrero de 2019. <br>
-  Por la venta tan alta de las inscripciones internacionales en  los primeros días. Las ventas estan siendo revisadas por las autoridades del comercio.
+  Por la venta tan alta de las inscripciones internacionales en  los primeros días. Las ventas están siendo revisadas por las autoridades del comercio.
   </small></p> 
   <hr class="my-4">
   <p><small>
