@@ -374,8 +374,11 @@ $("select.tickets").change(function(){
 </script>
 @else
 <div class="jumbotron">
-    <h2>
-    Primera Etapa Exito en ventas.</h2>
+
+<img  src="{{ asset('images/kvacis.jpg')}}" />
+<!-- 
+  <hr class="my-4">
+    <h1>Primera Etapa Exito en ventas.</h1>
     <hr class="my-4">
       <p class="lead"><small>
         <b>Aprovecha los descuentos.</b>
@@ -390,5 +393,10 @@ $("select.tickets").change(function(){
 
     <p><small><b>¡Contamos con tu asistencia !
     CLIS - ACIS</b></small></p>
+    -->
+
+    <br/>
+    
+    <h4>Trabajamos para ti. Plataforma en mantenimiento.</b></h4>
 </div>
 @endif
