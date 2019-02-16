@@ -180,7 +180,7 @@ td{
                                 $is_free_event = true;
                                 ?>
                                 @foreach($tickets as $ticket)
-                                    @if($ticket->stage == $stage["title"])
+                                    @if($ticket->stage_id == $stage["stage_id"])
                                     <tr class="ticket" property="offers" typeof="Offer" >
                                         <td class="td" >
                                             <span class="ticket-title semibold" property="name">
@@ -374,11 +374,18 @@ $("select.tickets").change(function(){
 </script>
 @else
 <div class="jumbotron">
+<<<<<<< HEAD
   <p class="lead"><small>
     Primera Etapa Exito en ventas.
     Aprovecha los descuentos.
   </small></p> 
   <hr class="my-4">
+    <h1>
+    Primera Etapa Exito en ventas.</h1>
+    <hr class="my-4">
+      <p class="lead"><small>
+        Aprovecha los descuentos.
+      </small></p> 
   <p><small>
     Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa
     Del 18 al 22 de Febrero Nos encontramos preparandos para ti.</p>
