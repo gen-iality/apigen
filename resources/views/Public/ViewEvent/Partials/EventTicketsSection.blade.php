@@ -147,7 +147,7 @@ td{
 }
 
 </style>
-@if(false)
+@if($event->id != '5c3fb4ddfb8a3371ef79bd62')
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
