@@ -147,7 +147,7 @@ td{
 }
 
 </style>
-
+@if(false)
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
@@ -372,3 +372,16 @@ $("select.tickets").change(function(){
     }); */
 });
 </script>
+@else
+<div class="jumbotron">
+  <h1 class="display-4">Hola,</h1>
+  <p class="lead">Nos encontramos en <b>mantenimiento</b>, volvemos el lunes 18 de febrero de 2019</p>
+  <hr class="my-4">
+  <p>El V° Congreso Latinoamericano de Integración Sensorial y 1° Primer Congreso Colombiano de Integración Sensorial 
+  extiende su <b>primera etapa</b> hasta el <b>22 de febrero de 2019</b>, recuerda que por el mínimo de <b>5 personas</b>  
+    recibe el <b>10% de descuento</b>  en el total de la compra y <b>si eres asociado</b> recibe un ticket con el <b>20% de descuento.</b></p>
+    <p>
+    Gracias por su comprensión, los esperamos pronto.
+    </p>
+</div>
+@endif
