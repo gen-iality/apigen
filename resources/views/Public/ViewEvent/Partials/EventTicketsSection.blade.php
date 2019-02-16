@@ -375,13 +375,16 @@ $("select.tickets").change(function(){
 @else
 <div class="jumbotron">
   <h1 class="display-4">Hola,</h1>
-  <p class="lead">Nos encontramos en <b>mantenimiento</b>, volvemos el lunes 18 de febrero de 2019</p>
+  <p class="lead"><small>
+  Nos encontramos en <b>mantenimiento</b>, volvemos el lunes 18 de febrero de 2019. <br>
+  Por la venta tan alta de las inscripciones internacionales en  los primeros días. Las ventas estan siendo revisadas por las autoridades del comercio.
+  </small></p> 
   <hr class="my-4">
-  <p>El V° Congreso Latinoamericano de Integración Sensorial y 1° Primer Congreso Colombiano de Integración Sensorial 
-  extiende su <b>primera etapa</b> hasta el <b>22 de febrero de 2019</b>, recuerda que por el mínimo de <b>5 personas</b>  
+  <p><small>
+    Se extiende la <b>primera etapa</b> hasta el <b>22 de febrero de 2019</b>, recuerda que por el mínimo de <b>5 personas</b>  
     recibe el <b>10% de descuento</b>  en el total de la compra y <b>si eres asociado</b> recibe un ticket con el <b>20% de descuento.</b></p>
-    <p>
-    Gracias por su comprensión, los esperamos pronto.
+    </small><p>
+    Gracias por su comprensión, Regresaremos pronto.
     </p>
 </div>
 @endif
