@@ -397,11 +397,11 @@ $("select.tickets").change(function(){
 
     <br/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <h3 
+    <h3 style="
     background-color: beige;
-    padding: 22px;
+    padding: 22px;"
 > <i class="fas fa-briefcase-medical fa-3x"></i> 
-<b>Trabajamos para ti. Plataforma en mantenimiento.</b>
+<b>Trabajamos para ti. Plataforma pagos en mantenimiento.</b>
 </h3>
 </div>
 @endif
