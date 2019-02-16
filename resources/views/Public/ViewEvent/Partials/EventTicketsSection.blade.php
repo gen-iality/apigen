@@ -176,7 +176,7 @@ td{
                     <div class="content">
                         <div class="tickets_table_wrap">
                             <table class="table">
-                                <?php
+                                <!-- <?php
                                 $is_free_event = true;
                                 ?>
                                 @foreach($tickets as $ticket)
@@ -250,7 +250,7 @@ td{
                                             @endif
                                         </td>
                                     </tr>
-                                    <!-- este tr es para dar espacio entre las celtas -->
+                                     este tr es para dar espacio entre las celtas 
                                     <tr class="espacio">
                                         <td class="espacio"></td>
                                     </tr>
@@ -294,6 +294,18 @@ td{
                                                     {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                                 @endif
                                             
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td  colspan="3" style="text-align: center;">
+                                        <p style="text-align:center;font-size:16px">Primera Etapa Exito en ventas.
+                                        Aprovecha los descuentos.</p>
+
+                                         <p style="text-align:center;font-size:12px">Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa
+                                        Del 18 al 22 de Febrero Nos encontramos preparandos para ti. <b>Plataforma en mantenimiento.</b></p>
+
+                                         <p style="text-align:center;font-size:12px"><b>¡Contamos con tu asistencia !
+                                        CLIS - ACIS</b></p>    
                                         </td>
                                     </tr>
                             </table>
