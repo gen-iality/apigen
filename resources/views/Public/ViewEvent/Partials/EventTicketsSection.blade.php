@@ -374,17 +374,20 @@ $("select.tickets").change(function(){
 </script>
 @else
 <div class="jumbotron">
-  <h1 class="display-4">Hola,</h1>
   <p class="lead"><small>
-  Nos encontramos en <b>mantenimiento</b>, volvemos el lunes 18 de febrero de 2019. <br>
-  Por la venta tan alta de las inscripciones internacionales en  los primeros días. Las ventas están siendo revisadas por las autoridades del comercio.
+    Primera Etapa Exito en ventas.
+    Aprovecha los descuentos.
   </small></p> 
   <hr class="my-4">
   <p><small>
-    Se extiende la <b>primera etapa</b> hasta el <b>22 de febrero de 2019</b>, recuerda que por el mínimo de <b>5 personas</b>  
-    recibe el <b>10% de descuento</b>  en el total de la compra y <b>si eres asociado</b> recibe un ticket con el <b>20% de descuento.</b></p>
+    Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa
+    Del 18 al 22 de Febrero Nos encontramos preparandos para ti.</p>
     </small><p>
+    <b>Plataforma en mantenimiento.</b>
     Gracias por su comprensión, Regresaremos pronto.
     </p>
+
+    <p><small><b>¡Contamos con tu asistencia !
+    CLIS - ACIS</b></small></p>
 </div>
 @endif
