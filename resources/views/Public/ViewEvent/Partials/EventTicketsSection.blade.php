@@ -374,17 +374,11 @@ $("select.tickets").change(function(){
 </script>
 @else
 <div class="jumbotron">
-<<<<<<< HEAD
-  <p class="lead"><small>
-    Primera Etapa Exito en ventas.
-    Aprovecha los descuentos.
-  </small></p> 
-  <hr class="my-4">
-    <h1>
-    Primera Etapa Exito en ventas.</h1>
+    <h2>
+    Primera Etapa Exito en ventas.</h2>
     <hr class="my-4">
       <p class="lead"><small>
-        Aprovecha los descuentos.
+        <b>Aprovecha los descuentos.</b>
       </small></p> 
   <p><small>
     Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa
