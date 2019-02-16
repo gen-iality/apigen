@@ -401,6 +401,11 @@ $("select.tickets").change(function(){
 
     <br/>
     
-    <h4>Trabajamos para ti. Plataforma en mantenimiento.</b></h4>
+    <h3 
+    background-color: beige;
+    padding: 22px;
+> <i class="fas fa-briefcase-medical fa-3x"></i> 
+<b>Trabajamos para ti. Plataforma en mantenimiento.</b>
+</h3>
 </div>
 @endif
