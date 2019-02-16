@@ -382,8 +382,8 @@ $("select.tickets").change(function(){
       </small></p> 
   <p><small>Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa</p>
     <h3>Del 18 al 22 de Febrero</h3>
-    </small><p><b>Nos encontramos trabajando para ti.
-    Plataforma en mantenimiento.</b></p>
+    </small><p><b>Nos encontramos trabajando para ti</b></p>
+    <p><b>Plataforma en mantenimiento.</b></p>
     <p>
     Gracias por su comprensión, Regresaremos pronto.
     </p>
