@@ -33,6 +33,7 @@
         "mews/purifier": "~2.0",
         "milon/barcode": "^5.3",
         "modev/placetopay": "^1.0",
+        "modev/omnipay-payu": "dev-master",
         "morrislaptop/firestore-php": "^2.2",
         "mpociot/laravel-apidoc-generator": "^2.0",
         "nitmedia/wkhtml2pdf": "dev-master",
@@ -120,6 +121,10 @@
         {
             "type": "git",
             "url":  "https://davidfelipemartinez@bitbucket.org/modev/placetopay.git"
+        },
+        {
+            "type": "git",
+            "url":  "https://cesarbarrios@bitbucket.org/modev/omnipay-payu.git"
         }
     ],
     "minimum-stability": "dev",

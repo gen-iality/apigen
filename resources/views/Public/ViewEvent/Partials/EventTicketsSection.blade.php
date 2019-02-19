@@ -147,7 +147,6 @@ td{
 }
 
 </style>
-@if($event->id != '5c3fb4ddfb8a3371ef79bd62')
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
@@ -372,36 +371,3 @@ $("select.tickets").change(function(){
     }); */
 });
 </script>
-@else
-<div class="jumbotron">
-
-<img style="max-width:100%"  src="{{ asset('images/kvacis.jpg')}}" />
-<!-- 
-  <hr class="my-4">
-    <h1>Primera Etapa Exito en ventas.</h1>
-    <hr class="my-4">
-      <p class="lead"><small>
-        <b>Aprovecha los descuentos.</b>
-      </small></p> 
-  <p><small>Aún tienes la posibilidad de inscribirte con los mismos precios de la primera etapa</p>
-    <h2><b>Del 18 al 22 de Febrero</b></h2>
-    </small><p><b>Nos encontramos trabajando para ti</b></p>
-    <p><b>Plataforma en mantenimiento.</b></p>
-    <p>
-    Gracias por su comprensión, Regresaremos pronto.
-    </p>
-
-    <p><small><b>¡Contamos con tu asistencia !
-    CLIS - ACIS</b></small></p>
-    -->
-
-    <br/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <h3 style="
-    background-color: beige;
-    padding: 22px;"
-> <i class="fas fa-briefcase-medical fa-3x"></i> 
-<b>Trabajamos para ti. Plataforma pagos en mantenimiento.</b>
-</h3>
-</div>
-@endif
