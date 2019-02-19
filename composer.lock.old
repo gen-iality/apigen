@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c5465837ed6f18cdd7dc2ccc67ac4c9",
+    "content-hash": "841a18c87e8adfcdb47e4d6f27068a95",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3844,47 +3844,6 @@
             "time": "2018-12-26T21:17:30+00:00"
         },
         {
-            "name": "modev/omnipay-payu",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://cesarbarrios@bitbucket.org/modev/omnipay-payu.git",
-                "reference": "9413c87e3acd440e8b252361636591fc8e0ada78"
-            },
-            "require": {
-                "omnipay/common": "~3.0",
-                "php-http/guzzle6-adapter": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\PayU\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Mukhamadeev",
-                    "email": "mukhamadeevroman@ya.ru"
-                }
-            ],
-            "description": "PayU Russia driver for the Omnipay payment processing library",
-            "homepage": "https://github.com/RomM1/omnipay-payu",
-            "keywords": [
-                "gateway",
-                "merchant",
-                "omnipay",
-                "pay",
-                "payment",
-                "payu",
-                "payu-russia",
-                "purchase"
-            ],
-            "time": "2019-02-19T08:03:04+00:00"
-        },
-        {
             "name": "modev/placetopay",
             "version": "1.0",
             "source": {
@@ -6075,7 +6034,7 @@
                     "email": "mukhamadeevroman@ya.ru"
                 }
             ],
-            "description": "PayU Russia driver for the Omnipay payment processing library",
+            "description": "payu Russia driver for the Omnipay payment processing library",
             "homepage": "https://github.com/RomM1/omnipay-payu",
             "keywords": [
                 "gateway",
@@ -9945,7 +9904,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "maxhoffmann/parsedown-laravel": 20,
-        "modev/omnipay-payu": 20,
         "nitmedia/wkhtml2pdf": 20
     },
     "prefer-stable": true,

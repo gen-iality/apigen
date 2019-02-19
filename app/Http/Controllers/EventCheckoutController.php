@@ -447,7 +447,7 @@ class EventCheckoutController extends Controller
                         'orderDate' => date('Y-m-d H:i:s'),
                         'merchantId' => '508029',
                         'items' => [
-                            new \Omnipay\payu\Item([
+                            new \Omnipay\PayU\Item([
                                 'name' => 'Item',
                                 'code' => 'ItemCode',
                                 'description' => 'Evento: ' . $event->name,

@@ -33,6 +33,7 @@
         "mews/purifier": "~2.0",
         "milon/barcode": "^5.3",
         "modev/placetopay": "^1.0",
+        "modev/omnipay-payu": "dev-master",
         "morrislaptop/firestore-php": "^2.2",
         "mpociot/laravel-apidoc-generator": "^2.0",
         "nitmedia/wkhtml2pdf": "dev-master",
@@ -44,7 +45,7 @@
         "php-http/message": "^1.6",
         "platformsh/config-reader": "^1.0",
         "predis/predis": "^1.0",
-        "romm1/omnipaypayu": "^3.0",
+        "romm1/omnipay-payu": "^3.0",
         "spatie/laravel-permission": "^2.28",
         "spatie/laravel-tail": "^3.2",
         "superbalist/laravel-google-cloud-storage": "^2.0",
@@ -120,6 +121,10 @@
         {
             "type": "git",
             "url":  "https://davidfelipemartinez@bitbucket.org/modev/placetopay.git"
+        },
+        {
+            "type": "git",
+            "url":  "https://cesarbarrios@bitbucket.org/modev/omnipay-payu.git"
         }
     ],
     "minimum-stability": "dev",
