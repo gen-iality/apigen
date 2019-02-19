@@ -446,6 +446,7 @@ class EventCheckoutController extends Controller
                         'transactionId' => $temporal_id,
                         'orderDate' => date('Y-m-d H:i:s'),
                         'merchantId' => '508029',
+                        'email' => Auth::user()->email,
                         'items' => [
                             new \Omnipay\PayU\Item([
                                 'name' => 'Item',
@@ -1076,6 +1077,7 @@ class EventCheckoutController extends Controller
         $currency = $_REQUEST['currency'];
         $description = $_REQUEST['description'];
 
+        $this->changeStatusOrder($order_reference, $status);
         return view('Public.ViewEvent.EventPageDetailOrder', compact('currency', 'description', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
       
     }
