@@ -32,7 +32,7 @@
 
                 <div style="width:100%">
                     <div style=" width:40%; margin: 0 auto">
-                        <img src="../../../images/logo.png" width="100%"/>
+                        <img src="{{ asset('images/logo.png') }}" width="100%"/>
                     </div>
                 </div>
                 @if($status == 'APPROVED')
