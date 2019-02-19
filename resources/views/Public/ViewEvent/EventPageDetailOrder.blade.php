@@ -92,7 +92,7 @@
                             <p style="margin:0 0 0 1em;">{{$reference}}</p>
                         </div>
                     </div>  
-                    @if($payment)
+                    @if(isset($payment))
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
                             <h3 style="margin: 0;">Total</h3>
@@ -106,6 +106,21 @@
                     <div style="display:block;">
                         <h3 style="margin: 0;">Descripción:</h3>
                         <p style="text-align:center">{{$payment->description()}}</p>
+                    </div>
+                    @else
+                    <div style="display:block; width:100%; margin-bottom: 1em;  ">
+                        <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
+                            <h3 style="margin: 0;">Total</h3>
+                            <p style="margin: 0 0 0 1em;">{{$order_total}}.{{$currency}}</p>
+                        </div>
+                        <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
+                            <h3 style="margin: 0;">Fecha</h3>
+                            <p style="margin:0 0 0 1em;">{{$today}}</p>
+                        </div>
+                    </div>
+                    <div style="display:block;">
+                        <h3 style="margin: 0;">Descripción:</h3>
+                        <p style="text-align:center">{{$description}}</p>
                     </div>
                     @endif
                     @if($status == 'APPROVED')

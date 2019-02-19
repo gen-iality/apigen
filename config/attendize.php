@@ -12,6 +12,7 @@ return [
     'payment_gateway_stripe'   => 1,
     'payment_gateway_paypal'   => 2,
     'payment_gateway_placetopay'   => 3,
+    'payment_gateway_payu'     => 4,
     'fake_card_data' => [
         'number' => '4242424242424242',
         'expiryMonth' => '6',

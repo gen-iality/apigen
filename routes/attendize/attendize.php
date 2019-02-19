@@ -217,6 +217,12 @@ Route::group(
         'uses' => 'EventCheckoutController@showOrderTickets',
     ]);
 
+    /* RESPONSE PAYU */
+
+    Route::get('order/{order_reservation_reference}/payment/PayU', [
+        'as'   => 'showOrderPaymentStatusDetailsPayU',
+        'uses' => 'EventCheckoutController@showOrderPaymentStatusDetailsPayU',
+    ]);
     
     /*
      * Backend routes

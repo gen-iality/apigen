@@ -357,7 +357,7 @@ class EventCheckoutController extends Controller
                 $gateway->initialize();
 
             } else {
-                $gateway = Omnipay::create($ticket_order['payment_gateway']->name);
+                $gateway = Omnipay::create('payu');
                 $config = $ticket_order['account_payment_gateway']->config;
                 if (!$config) {
                     $config = [];
@@ -438,6 +438,30 @@ class EventCheckoutController extends Controller
                     ];
 
                     break;
+                    /* CONFIGURATION PAYU */
+                    case config('attendize.payment_gateway_payu'):
+                    
+                    $transaction_data += [
+                        'responseUrl' => 'https://api.evius.co/order/' . $temporal_id . '/payment/PayU',
+                        'transactionId' => $temporal_id,
+                        'orderDate' => date('Y-m-d H:i:s'),
+                        'merchantId' => '508029',
+                        'items' => [
+                            new \Omnipay\payu\Item([
+                                'name' => 'Item',
+                                'code' => 'ItemCode',
+                                'description' => 'Evento: ' . $event->name,
+                                'price' =>  $orderService->getGrandTotal(),
+                                'priceType' => 'NET',
+                                'quantity' => 1,
+                                'vat' => 0,
+                                'url' => 'https://api.evius.co/order/' . $temporal_id . '/payment/PayU',
+                                ] 
+                            ),
+                        ],
+                    ];
+
+                    break;
 
                 default:
                     Log::error('No payment gateway configured.');
@@ -449,34 +473,38 @@ class EventCheckoutController extends Controller
             }
 
             $transaction = $gateway->purchase($transaction_data);
-            $response = $transaction->send();
-
+            $response = $transaction->send();   
             if ($response->isSuccessful()) {
-
+                
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
                 return $this->completeOrder($event_id);
-
-            } elseif ($response->isRedirect() && $response->response->processUrl) {
-
+            } elseif ($response->isRedirect() && $response->getRedirectUrl()) {
+                
                 /*
-                 * As we're going off-site for payment we need to store some data in a session so it's available
-                 * when we return
-                 */
-
+                * As we're going off-site for payment we need to store some data in a session so it's available
+                * when we return
+                */
+                
                 // $response->requestId() and $response->processUrl()
                 $session_id = $response->getTransactionReference();
-                $url_redirect = $response->response->processUrl;
 
-                $ticket_order['transaction_data'] = $transaction_data;
+                $ticket_order['transaction_data'] = [];
+                if (isset($response->response) && isset($response->response->processUrl)) {
+
+                    $url_redirect = $response->response->processUrl;
+                   
+                    $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
+                }
+                
+                $ticket_order['transaction_data'] += $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
-                $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
                 //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
                 Cache::put($temporal_id, $ticket_order, config('attendize.minutes_cache_tickets'));
                 $this->storeOrder($temporal_id);
-
-
+                
+                
                 Log::info("Redirect url: " . $response->getRedirectUrl());
-
+                // var_dump($response);die;
                 $return = [
                     'status' => 'success',
                     'redirectUrl' => $response->getRedirectUrl(),
@@ -487,7 +515,7 @@ class EventCheckoutController extends Controller
                 if ($response->getRedirectMethod() == 'POST') {
                     $return['redirectData'] = $response->getRedirectData();
                 }
-
+                // var_dump($return);die;
                 return response()->json($return);
 
             } else {
@@ -797,7 +825,7 @@ class EventCheckoutController extends Controller
         //Guardamos cada uno de los datos de la orden
         $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
         $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
-        $order->email = $payment_free  ? Auth::user()->email : $transaction_data['email'] ;
+        $order->email = 'cesar.torres@mocionsoft.com';
         $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
         $order->amount = $ticket_order['order_total'];
         $order->booking_fee = $ticket_order['booking_fee'];
@@ -817,7 +845,7 @@ class EventCheckoutController extends Controller
         $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
         $order->taxamt = $orderService->getTaxAmount();
-        $order->url = $transaction_data['url_redirect'];
+        $order->url = isset($transaction_data['url_redirect']) ? $transaction_data['url_redirect'] : '';
         $order->save();
 
         //Cancelación de código promocional
@@ -1005,6 +1033,51 @@ class EventCheckoutController extends Controller
         }else{
             return $status;
         }   
+    }
+
+        /**
+     * Show information about the order
+     * (Rejected, accepted purshase or pending)
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function showOrderPaymentStatusDetailsPayU(Request $request, String $order_reference)
+    {
+        $order = Order::where('order_reference', '=', $order_reference)->first();
+        $reference = $order_reference;
+        $date = new \DateTime();
+        $today = $date->format('d-m-Y');
+        $order_total = $order->amount;
+        $order_name = $order->first_name;
+        $order_lastname = $order->last_name;
+        $order_email = $order->email;
+
+        if ($_REQUEST['transactionState'] == 4 ) {
+            $status = "APPROVED";
+        }
+        
+        elseif ($_REQUEST['transactionState'] == 6 ) {
+            $status = "REJECTED";
+        }
+        
+        elseif ($_REQUEST['transactionState'] == 104 ) {
+            $status = "Error";
+        }
+        
+        elseif ($_REQUEST['transactionState'] == 7 ) {
+            $status = "PENDING";
+        }
+        
+        else {
+            $status=$_REQUEST['mensaje'];
+        }
+        $order_total = $_REQUEST['TX_VALUE'];
+        $currency = $_REQUEST['currency'];
+        $description = $_REQUEST['description'];
+
+        return view('Public.ViewEvent.EventPageDetailOrder', compact('currency', 'description', 'status', 'amount', 'order_total', 'order_name', 'order_lastname', 'order_email', 'today', 'reference', 'payment'));
+      
     }
 
     public function showOrderPaymentStatusDetailsStatus($order_reference, $cron = false)
