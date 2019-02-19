@@ -357,7 +357,7 @@ class EventCheckoutController extends Controller
                 $gateway->initialize();
 
             } else {
-                $gateway = Omnipay::create('payu');
+                $gateway = Omnipay::create($ticket_order['payment_gateway']->name);
                 $config = $ticket_order['account_payment_gateway']->config;
                 if (!$config) {
                     $config = [];
