@@ -28,6 +28,7 @@ use PDF;
 use PhpSpec\Exception\Exception;
 use Validator;
 use QRCode;
+use GuzzleHttp\Client;
 
 class EventCheckoutController extends Controller
 {
@@ -826,7 +827,7 @@ class EventCheckoutController extends Controller
         //Guardamos cada uno de los datos de la orden
         $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
         $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
-        $order->email = 'cesar.torres@mocionsoft.com';
+        $order->email = Auth::user()->email;
         $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
         $order->amount = $ticket_order['order_total'];
         $order->booking_fee = $ticket_order['booking_fee'];
@@ -932,6 +933,46 @@ class EventCheckoutController extends Controller
     public function paymentCompleted(Request $request)
     {
         Log::info("Petición retornado por PlaceToPay: ");
+        $request = $request->json()->all();
+	    $status = $request['status']['status'];
+        $order_reference = $request['reference'];
+        return $this->changeStatusOrder($order_reference, $status);
+    }
+
+    /**
+     * Process purshase status from PayU via POST
+     * (Rejected, accepted purshase)
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function paymentCompletedPayU(Request $request)
+    {
+        Log::info("Petición retornado por PlaceToPay: ");
+
+
+        $client = new Client();
+        $URL = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+        $data = [ "body" => json_encode([
+                    "test"=> false,
+                    "language" => "en",
+                    "command" => "ORDER_DETAIL_BY_REFERENCE_CODE",
+                    "merchant" => [
+                    "apiLogin" => "mqDxv0NbTNaAUmb",
+                    "apiKey" => "omF0uvbN3365dC2X4dtcjywbS7"
+                    ],
+                    "details" => [
+                        "referenceCode" => "ticket_order_1550593324"
+                    ]
+                ])
+        ];
+
+        $response = $client->post($URL  , $data);
+        var_dump($response->getBody());die;
+        return 'ok';
+
+
+        echo "DONE!";
         $request = $request->json()->all();
 	    $status = $request['status']['status'];
         $order_reference = $request['reference'];

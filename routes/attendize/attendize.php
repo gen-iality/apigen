@@ -208,7 +208,7 @@ Route::group(
     ]);
         //Verificar orden a placetopay
     Route::get('order/{order_reservation_reference}/payment/status', [
-        'as'   => 'showOrderPaymentStatusDetails',
+        'as'   => 'showOrderPaymentStatusDetailsStatus',
         'uses' => 'EventCheckoutController@showOrderPaymentStatusDetailsStatus',
     ]);
 
@@ -789,6 +789,17 @@ Route::post('order/paymentCompleted', [
     'as'   => 'completeOrder',
     'uses' => 'EventCheckoutController@paymentCompleted',
 ]);
+
+Route::post('order/paymentCompleted', [
+    'as'   => 'completeOrder',
+    'uses' => 'EventCheckoutController@paymentCompleted',
+]);
+
+Route::post('order/paymentCompleted/PayU', [
+    'as'   => 'completeOrderPayU',
+    'uses' => 'EventCheckoutController@paymentCompletedPayU',
+]);
+
 Route::get('paymentCompleted/order/{reference_order}', [
     'as'   => 'orderCompleted',
     'uses' => 'EventCheckoutController@completePayment',                                                                                                                                                                            
