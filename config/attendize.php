@@ -8,6 +8,7 @@ return [
     'ticket_status_after_sale_date' => 2,//
     'enable_test_payments'          => env('ENABLE_TEST_PAYMENTS', false),
     'enable_dummy_payment_gateway'  => false,
+    'payment_test' => env('PAYMENT_TEST', true),
     'payment_gateway_dummy'    => 0,
     'payment_gateway_stripe'   => 1,
     'payment_gateway_paypal'   => 2,
@@ -45,7 +46,7 @@ return [
     'ticket_booking_fee_fixed'      => 0,
     'ticket_booking_fee_percentage' => 0,
     'send_email'                    => env('SEND_EMAIL_TICKETS', true),
-    'minutes_cache_tickets'         => 1440,
+    'minutes_cache_tickets'         => 10080,
 
     /* Order statuses */
     'order_complete'                => '5c423232c9a4c86123236dcd',

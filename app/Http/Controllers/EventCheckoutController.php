@@ -196,7 +196,7 @@ class EventCheckoutController extends Controller
             }
         }
 
-        Cache::put($temporal_id, [
+        Cache::forever($temporal_id, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
             'event_id' => $event->id,
@@ -218,7 +218,7 @@ class EventCheckoutController extends Controller
             'code_discount' => $code_discount,
             'percentage_discount' => $percentage_discount,
             'discount' => isset($discount) ? $discount : null,
-        ], config('attendize.minutes_cache_tickets'));
+        ]);
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
@@ -241,6 +241,7 @@ class EventCheckoutController extends Controller
     /**
      * Show the checkout page
      *
+     * This controller show the user information, when you put the user information
      * @param Request $request
      * @param $event_id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
@@ -290,6 +291,7 @@ class EventCheckoutController extends Controller
     }
 
     /**
+     * postCreateOrder
      * Create the order, handle payment, update stats, fire off email jobs then redirect user
      *
      * @param Request $request
@@ -298,6 +300,7 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $temporal_id)
     {
+
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
         $ticket_order = Cache::get($temporal_id);
         //Extraemos el event_id del cache
@@ -317,15 +320,16 @@ class EventCheckoutController extends Controller
 
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
-        Cache::put($temporal_id, $ticket_order, config('attendize.minutes_cache_tickets'));
+        Cache::forever($temporal_id, $ticket_order);
 
-        //START No entiendo que hace acá esto
         $orderRequiresPayment = $ticket_order['order_requires_payment'];
 
+        //this if dont work in this moment 
         if ($orderRequiresPayment && $request->get('pay_offline') && $event->enable_offline_payments) {
             return $this->completeOrder($event_id);
         }
 
+        //When the purshase is free 
         if (!$orderRequiresPayment) {
             $this->storeOrder($temporal_id, true);
             $this->completeOrder($temporal_id);
@@ -344,7 +348,6 @@ class EventCheckoutController extends Controller
             return response()->json($return);
             
         }
-        //END No entiendo que hace acá esto
 
         try {
             //more transation data being put in here.
@@ -384,6 +387,11 @@ class EventCheckoutController extends Controller
             ];
 
             //TODO: class with an interface that builds the transaction data.
+            // if the server is localhost the base is https://dev.evius.co. this add in the urlResponse on the pasarela.
+            // when return depend in the server is currently, except localhost
+
+            $baseUrl = ($_SERVER["SERVER_NAME"] == 'localhost') ? "https://dev.evius.co" : url('/');
+
             switch ($ticket_order['payment_gateway']->id) {
                 case config('attendize.payment_gateway_dummy'):
                     $token = uniqid();
@@ -416,14 +424,10 @@ class EventCheckoutController extends Controller
                         'receipt_email' => $request->get('order_email'),
                     ];
                     break;
-                    /* Rutas y accesos de prueba */
-                    // 'login' => 'f7186b9a9bd5f04ab68233cd33c31044',
-                    // 'tranKey' => '3ZNdDTNP0Uk1A28G',
-                    // 'url' => 'https://test.placetopay.com/redirection/',
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
                     $transaction_data += [
-                        'returnUrl' => 'https://api.evius.co/order/' . $temporal_id . '/payment',
+                        'returnUrl' => $baseUrl.'/order/' . $temporal_id . '/payment',
                         'orderid' => $temporal_id,
                         'login' => 'ff684c45a63f769d824994dcc1369fb9',
                         'tranKey' => 'X1GIXSF2Dxtq0bfg',
@@ -435,15 +439,15 @@ class EventCheckoutController extends Controller
                         'payerIsBuyer' => $request->get('payerIsBuyer'),
                         'mobile' => $request->get('mobile'),
                         'email' => Auth::user()->email,
-                        'cancelUrl' => 'https://api.evius.co/order/' . $temporal_id . '/payment',
+                        'cancelUrl' => $baseUrl.'/order/' . $temporal_id . '/payment',
                     ];
 
                     break;
-                    /* CONFIGURATION PAYU */
-                    case config('attendize.payment_gateway_payu'):
+                /* CONFIGURATION PAYU */
+                case config('attendize.payment_gateway_payu'):
                     
                     $transaction_data += [
-                        'responseUrl' => 'https://api.evius.co/order/' . $temporal_id . '/payment/PayU',
+                        'responseUrl' => $baseUrl.'/order/' . $temporal_id . '/payment/PayU',
                         'transactionId' => $temporal_id,
                         'orderDate' => date('Y-m-d H:i:s'),
                         'merchantId' => '508029',
@@ -457,12 +461,13 @@ class EventCheckoutController extends Controller
                                 'priceType' => 'NET',
                                 'quantity' => 1,
                                 'vat' => 0,
-                                'url' => 'https://api.evius.co/order/' . $temporal_id . '/payment/PayU',
+                                'url' => $baseUrl.'/order/' . $temporal_id . '/payment/PayU',
+                                'confirmationUrl' => $baseUrl.'/order/paymentCompleted/PayU'
+
                                 ] 
                             ),
                         ],
                     ];
-
                     break;
 
                 default:
@@ -501,12 +506,11 @@ class EventCheckoutController extends Controller
                 $ticket_order['transaction_data'] += $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
-                Cache::put($temporal_id, $ticket_order, config('attendize.minutes_cache_tickets'));
+                Cache::forever($temporal_id, $ticket_order);
                 $this->storeOrder($temporal_id);
                 
                 
                 Log::info("Redirect url: " . $response->getRedirectUrl());
-                // var_dump($response);die;
                 $return = [
                     'status' => 'success',
                     'redirectUrl' => $response->getRedirectUrl(),
@@ -517,7 +521,6 @@ class EventCheckoutController extends Controller
                 if ($response->getRedirectMethod() == 'POST') {
                     $return['redirectData'] = $response->getRedirectData();
                 }
-                // var_dump($return);die;
                 return response()->json($return);
 
             } else {
@@ -594,7 +597,7 @@ class EventCheckoutController extends Controller
      * @param bool|true $return_json
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function completeOrder($temporal_id, $return_json = true)
+     public function completeOrder($temporal_id, $return_json = true)
     {
         //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no
         //vamos a crear la orden a partir del cache.
@@ -948,35 +951,9 @@ class EventCheckoutController extends Controller
      */
     public function paymentCompletedPayU(Request $request)
     {
+        return 'ok';
         Log::info("Petición retornado por PlaceToPay: ");
 
-
-        $client = new Client();
-        $URL = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
-        $data = [ "body" => json_encode([
-                    "test"=> false,
-                    "language" => "en",
-                    "command" => "ORDER_DETAIL_BY_REFERENCE_CODE",
-                    "merchant" => [
-                    "apiLogin" => "mqDxv0NbTNaAUmb",
-                    "apiKey" => "omF0uvbN3365dC2X4dtcjywbS7"
-                    ],
-                    "details" => [
-                        "referenceCode" => "ticket_order_1550593324"
-                    ]
-                ])
-        ];
-
-        $response = $client->post($URL  , $data);
-        var_dump($response->getBody());die;
-        return 'ok';
-
-
-        echo "DONE!";
-        $request = $request->json()->all();
-	    $status = $request['status']['status'];
-        $order_reference = $request['reference'];
-        return $this->changeStatusOrder($order_reference, $status);
     }
     
     /**
@@ -997,6 +974,7 @@ class EventCheckoutController extends Controller
                 $order->order_status_id= config('attendize.order_complete');
                 Log::info("Completamos la orden");
                 $this->completeOrder($order_reference); 
+                Cache::forget($order_reference);
                     if(config('attendize.send_email')){
                         Log::info("Enviamos el correo");
                         $this->dispatch(new SendOrderTickets($order));
@@ -1123,6 +1101,14 @@ class EventCheckoutController extends Controller
       
     }
 
+    /**
+     * showOrderPaymentStatusDetailsStatus
+     *
+     *  This controller get the information of the placetopay
+     * @param [type] $order_reference
+     * @param boolean $cron
+     * @return void
+     */
     public function showOrderPaymentStatusDetailsStatus($order_reference, $cron = false)
     {
         $placetopay = new \Dnetix\Redirection\PlacetoPay([
