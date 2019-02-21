@@ -985,7 +985,7 @@ class EventCheckoutController extends Controller
                 $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
                 if(!is_null($status)){
                         Log::info('order: '.$order->order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
-                        // $this->changeStatusOrder($order_reference, $status);
+                        $this->changeStatusOrder($order_reference, $status);
                 }
             }
 
