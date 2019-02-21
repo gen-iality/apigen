@@ -795,6 +795,11 @@ Route::get('order/paymentCompleted/PayU', [
     'uses' => 'EventCheckoutController@paymentCompletedPayU',
 ]);
 
+Route::post('order/paymentCompleted/PayU', [
+    'as'   => 'completeOrderPayUPost',
+    'uses' => 'EventCheckoutController@paymentCompletedPayU',
+]);
+
 Route::get('paymentCompleted/order/{reference_order}', [
     'as'   => 'orderCompleted',
     'uses' => 'EventCheckoutController@completePayment',                                                                                                                                                                            
