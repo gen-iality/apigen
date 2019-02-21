@@ -809,6 +809,8 @@ class EventCheckoutController extends Controller
     public function storeOrder($temporal_id, $payment_free = false){
 
         //Datos necesarios para la generación de la orden
+        
+        if()
         Log::info('Generación de la orden');
         $ticket_order = Cache::get($temporal_id);
         $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
@@ -817,7 +819,8 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($ticket_order['event_id']);
         Log::info("creamo la orden: " . json_encode($ticket_order));
         //Datos necesarios para la generación de la orde
-        $order = new Order($request_data);
+        //Si existe la orden generamos el proceso frente a la orden existente, si no existe la creamos
+        $order = isset(Order::where('order_reference', '=', $order_reference)->first()) ? Order::where('order_reference', '=', $order_reference)->first() : new Order($request_data);
         /*
          * Create the order
          */
@@ -982,7 +985,7 @@ class EventCheckoutController extends Controller
                 $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
                 if(!is_null($status)){
                         Log::info('order: '.$order->order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
-                        $this->changeStatusOrder($order_reference, $status);
+                        // $this->changeStatusOrder($order_reference, $status);
                 }
             }
 
