@@ -206,10 +206,10 @@ Route::group(
         'as'   => 'showOrderPaymentStatusDetails',
         'uses' => 'EventCheckoutController@showOrderPaymentStatusDetails',
     ]);
-        //Verificar orden a placetopay
-    Route::get('order/{order_reservation_reference}/payment/status', [
-        'as'   => 'showOrderPaymentStatusDetailsStatus',
-        'uses' => 'EventCheckoutController@showOrderPaymentStatusDetailsStatus',
+    //Verify orden from placetopay or payu
+    Route::get('order/{order_reservation_reference}/payment/status/{payment_gateway}', [
+        'as'   => 'showOrderPaymentStatusPaymentGateway',
+        'uses' => 'EventCheckoutController@showOrderPaymentStatusPaymentGateway',
     ]);
 
     Route::get('order/{order_reference}/tickets', [

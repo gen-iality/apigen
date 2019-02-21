@@ -542,12 +542,6 @@ class EventCheckoutController extends Controller
         }
 
     }
-
-    public function placetopay()
-    {
-        return $request;
-    }
-
     /**
      * Attempt to complete a user's payment when they return from
      * an off-site gateway
@@ -803,19 +797,24 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * Generate Order
-     *
-     * @param [type] $temporal_id
-     * @return void
+     * storeOrder
+     * Save the order that is in cache, 
+     * If the order don't exist load the cache data with the order_reference,
+     * But, if the order exist return this order
+     * This action is executed when the form is filled and we are going to pay
+     * If the purshase is free is in the moment when youacquire my tickets
+     * 
+     * @param string $temporal_id, $payment_free
+     * @return array $order
      */
-    public function storeOrder($temporal_id, $payment_free = false){
+    public function storeOrder($order_reference, $payment_free = false){
 
         //Datos necesarios para la generación de la orden
         
         Log::info('Generación de la orden');
-        $order = Order::where('order_reference', $temporal_id)->first();
+        $order = Order::where('order_reference', $order_reference)->first();
         if(!isset($order)){
-            $ticket_order = Cache::get($temporal_id);
+            $ticket_order = Cache::get($order_reference);
             $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
             $request_data = $ticket_order['request_data'];
             $event_id = $ticket_order['event_id'];
@@ -845,7 +844,7 @@ class EventCheckoutController extends Controller
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
             $order->session_id = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data']['session_id'] : time();
-            $order->order_reference = $temporal_id;
+            $order->order_reference = $order_reference;
             $order->discount = isset($ticket_order['discount'])? $ticket_order['discount'] : 0.00;
             if(isset($ticket_order['code_discount']) || isset($ticket_order['total_ticket_quantity'])){
                 $order->discount_description =  isset($ticket_order['code_discount'])? 
@@ -989,7 +988,15 @@ class EventCheckoutController extends Controller
                     $xml = simplexml_load_string($response);
                     $json = json_encode($xml);
                     $array = json_decode($json,TRUE);
-                    $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
+
+                    if(isset($array['result']['payload']['order'])){
+                        $status = isset($array['result']['payload']['order']['transactions']) 
+                                ?  $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']
+                                :  end($array['result']['payload']['order'])['transactions']['transaction']['transactionResponse']['state'];
+                    } else{
+                        $status = null;
+                    }
+
                     if(!is_null($status)){
                             Log::info('order: '.$order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
                             $response = $this->changeStatusOrder($order_reference, $status);
@@ -1044,6 +1051,10 @@ class EventCheckoutController extends Controller
             case 'DECLINED':
                 $order->order_status_id= config('attendize.order_rejected');
                 break;
+            case 'EXPIRED':
+                $order->order_status_id= config('attendize.order_rejected');
+                break;
+                
         }
         if($status != 'PENDING'){
             Cache::forget($order_reference);
@@ -1157,37 +1168,72 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * showOrderPaymentStatusDetailsStatus
+     * showOrderPaymentStatusPaymentGateway
      *
-     *  This controller get the information of the placetopay
-     * @param [type] $order_reference
-     * @param boolean $cron
-     * @return void
+     *  This controller get information of order by means of the order_reference, directly from payment gateway
+     * 
+     * @param string $order_reference
+     * @param string $payment_gateway
+     * @return void $status
      */
-    public function showOrderPaymentStatusDetailsStatus($order_reference, $cron = false)
+    public function showOrderPaymentStatusPaymentGateway(string $order_reference, string $payment_gateway)
     {
-        $placetopay = new \Dnetix\Redirection\PlacetoPay([
-            'login' => 'ff684c45a63f769d824994dcc1369fb9',
-            'tranKey' => 'X1GIXSF2Dxtq0bfg',
-            'url' => 'https://secure.placetopay.com/redirection/',
-            'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
-        ]);
-        $order = Order::where('order_reference', '=', $order_reference)->first();
+        switch ($payment_gateway) {
+            case 'placetopay':
+                $placetopay = new \Dnetix\Redirection\PlacetoPay([
+                    'login' => 'ff684c45a63f769d824994dcc1369fb9',
+                    'tranKey' => 'X1GIXSF2Dxtq0bfg',
+                    'url' => 'https://secure.placetopay.com/redirection/',
+                    'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
+                ]);
+                $order = Order::where('order_reference', '=', $order_reference)->first();
+        
+                //Rquest from placetopay of the payment process
+                $response = $placetopay->query($order->session_id);
+                $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
+                break;
+            case 'payu':
+                $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
+                $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
+                $url = config('attendize.payment_test') ? 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi' : 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+                
+                $data =  [
+                        'test' => config('attendize.payment_test'),
+                        "language"=> "en",
+                        "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
+                        "merchant"=> [
+                            "apiLogin"=> $apiLogin,
+                            "apiKey"=> $apiKey,
+                        ]
+                    ];
+                $data["details"] = ["referenceCode" => $order_reference];
 
-        //Respuesta de Placetopay del proceso de pago
-        $response = $placetopay->query($order->session_id);
-        $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
-        return $status;
-    }
-/*
-    public function borrarOrdenes(){
-        $orders = ReservedTickets::all();
-        foreach($orders as $order){
-            $order->forcedelete();
+                $client = new Client();
+                $response = $client->request('POST', $url, [
+                    'body' => json_encode($data),
+                    'headers' => [ 'Content-Type' => 'application/json' ]
+                ]);
+                $response = $response->getBody()->getContents();
+                $xml = simplexml_load_string($response);
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
+
+                if(isset($array['result']['payload']['order'])){
+                    $status = isset($array['result']['payload']['order']['transactions']) 
+                            ?  $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']
+                            :  end($array['result']['payload']['order'])['transactions']['transaction']['transactionResponse']['state'];
+                } else{
+                    $status = "NOT FOUND";
+                }
+                break;
+            default:
+               $status = "payment gateway NOT FOUND";
         }
-        return 'ok';
-        // use App\Models\OrderItem;
-        // use App\Models\QuestionAnswer;
-        // use App\Models\ReservedTickets;
-    } */
+    
+
+        return $status;
+
+    }
+
+
 }
