@@ -957,18 +957,20 @@ class EventCheckoutController extends Controller
     { 
         //Petition to PayU
         $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')->get(); //Estado pendiente o en proceso de pago
-        // var_dump($orders);die;
+
         foreach($orders as $order){
             $order_reference =  $order->order_reference;
+            $apiLogin = config('attendize.order_complete') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
+            $apiKey = config('attendize.order_complete') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
             if($order_reference){
                 $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
                 $data =  [
-                    'test' => false,
+                    'test' => config('attendize.order_complete'),
                     "language"=> "en",
                     "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
                     "merchant"=> [
-                    "apiLogin"=> "mqDxv0NbTNaAUmb",
-                    "apiKey"=> "omF0uvbN3365dC2X4dtcjywbS7",
+                    "apiLogin"=> $apiLogin,
+                    "apiKey"=> $apiKey,
                     ],
                     "details" => [
                         "referenceCode" => $order_reference
@@ -989,7 +991,6 @@ class EventCheckoutController extends Controller
                         $this->changeStatusOrder($order_reference, $status);
                 }
             }
-
         }
         return;
     }
