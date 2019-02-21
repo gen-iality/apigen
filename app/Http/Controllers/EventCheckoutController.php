@@ -810,7 +810,6 @@ class EventCheckoutController extends Controller
 
         //Datos necesarios para la generación de la orden
         
-        if()
         Log::info('Generación de la orden');
         $ticket_order = Cache::get($temporal_id);
         $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
@@ -820,7 +819,8 @@ class EventCheckoutController extends Controller
         Log::info("creamo la orden: " . json_encode($ticket_order));
         //Datos necesarios para la generación de la orde
         //Si existe la orden generamos el proceso frente a la orden existente, si no existe la creamos
-        $order = isset(Order::where('order_reference', '=', $order_reference)->first()) ? Order::where('order_reference', '=', $order_reference)->first() : new Order($request_data);
+        $order = Order::where('order_reference', $order_reference)->first() ? 
+            Order::where('order_reference', $order_reference)->first() : new Order($request_data);
         /*
          * Create the order
          */
