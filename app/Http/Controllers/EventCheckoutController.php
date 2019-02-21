@@ -811,63 +811,65 @@ class EventCheckoutController extends Controller
         //Datos necesarios para la generación de la orden
         
         Log::info('Generación de la orden');
-        $ticket_order = Cache::get($temporal_id);
-        $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
-        $request_data = $ticket_order['request_data'];
-        $event_id = $ticket_order['event_id'];
-        $event = Event::findOrFail($ticket_order['event_id']);
-        Log::info("creamo la orden: " . json_encode($ticket_order));
-        //Datos necesarios para la generación de la orde
-        //Si existe la orden generamos el proceso frente a la orden existente, si no existe la creamos
-        $order =  new Order($request_data);
-        /*
-         * Create the order
-         */
-        if (isset($ticket_order['transaction_id'])) {
-            $order->transaction_id = $ticket_order['transaction_id'][0];
-        }
-        if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
-            $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
-        }
-        //Guardamos cada uno de los datos de la orden
-        $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
-        $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
-        $order->email = Auth::user()->email;
-        $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
-        $order->amount = $ticket_order['order_total'];
-        $order->booking_fee = $ticket_order['booking_fee'];
-        $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
-        $order->account_id = $event->account->id;
-        $order->event_id = $ticket_order['event_id'];
-        $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-        $order->session_id = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data']['session_id'] : time();
-        $order->order_reference = $temporal_id;
-        $order->discount = isset($ticket_order['discount'])? $ticket_order['discount'] : 0.00;
-        if(isset($ticket_order['code_discount']) || isset($ticket_order['total_ticket_quantity'])){
-            $order->discount_description =  isset($ticket_order['code_discount'])? 
-                'Descuento  del '.$ticket_order['percentage_discount'].'% por el código '.$ticket_order['code_discount'] :
-                'Descuento  del '.$ticket_order['percentage_discount'].'% por '.$ticket_order['total_ticket_quantity'].' tickets comprados';
-        }
-        // Calculating grand total including tax
-        $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
-        $orderService->calculateFinalCosts();
-        $order->taxamt = $orderService->getTaxAmount();
-        $order->url = isset($transaction_data['url_redirect']) ? $transaction_data['url_redirect'] : '';
-        $order->save();
+        $order = Order::where('order_reference', $order_reference)->first();
+        if(!isset($order)){
+            $ticket_order = Cache::get($temporal_id);
+            $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
+            $request_data = $ticket_order['request_data'];
+            $event_id = $ticket_order['event_id'];
+            $event = Event::findOrFail($ticket_order['event_id']);
+            Log::info("creamo la orden: " . json_encode($ticket_order));
+            //Datos necesarios para la generación de la orde
+            //Si existe la orden generamos el proceso frente a la orden existente, si no existe la creamos
+            $order =  new Order($request_data);
+            /*
+            * Create the order
+            */
+            if (isset($ticket_order['transaction_id'])) {
+                $order->transaction_id = $ticket_order['transaction_id'][0];
+            }
+            if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
+                $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
+            }
+            //Guardamos cada uno de los datos de la orden
+            $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
+            $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
+            $order->email = Auth::user()->email;
+            $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
+            $order->amount = $ticket_order['order_total'];
+            $order->booking_fee = $ticket_order['booking_fee'];
+            $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
+            $order->account_id = $event->account->id;
+            $order->event_id = $ticket_order['event_id'];
+            $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
+            $order->session_id = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data']['session_id'] : time();
+            $order->order_reference = $temporal_id;
+            $order->discount = isset($ticket_order['discount'])? $ticket_order['discount'] : 0.00;
+            if(isset($ticket_order['code_discount']) || isset($ticket_order['total_ticket_quantity'])){
+                $order->discount_description =  isset($ticket_order['code_discount'])? 
+                    'Descuento  del '.$ticket_order['percentage_discount'].'% por el código '.$ticket_order['code_discount'] :
+                    'Descuento  del '.$ticket_order['percentage_discount'].'% por '.$ticket_order['total_ticket_quantity'].' tickets comprados';
+            }
+            // Calculating grand total including tax
+            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+            $orderService->calculateFinalCosts();
+            $order->taxamt = $orderService->getTaxAmount();
+            $order->url = isset($transaction_data['url_redirect']) ? $transaction_data['url_redirect'] : '';
+            $order->save();
 
-        //Cancelación de código promocional
-        if(isset($ticket_order['code_discount']) ){
-            $codes = $event->codes_discount;
-            foreach($codes as $key => $code){
-                if($code['id'] == $ticket_order['code_discount']){
-                    $codes[$key]['available'] = false;
-                    $event->codes_discount = $codes;
-                    $event->save();
-                    break;
+            //Cancelación de código promocional
+            if(isset($ticket_order['code_discount']) ){
+                $codes = $event->codes_discount;
+                foreach($codes as $key => $code){
+                    if($code['id'] == $ticket_order['code_discount']){
+                        $codes[$key]['available'] = false;
+                        $event->codes_discount = $codes;
+                        $event->save();
+                        break;
+                    }
                 }
             }
         }
-        
         return $order;
     }
     /**
