@@ -819,8 +819,8 @@ class EventCheckoutController extends Controller
         Log::info("creamo la orden: " . json_encode($ticket_order));
         //Datos necesarios para la generación de la orde
         //Si existe la orden generamos el proceso frente a la orden existente, si no existe la creamos
-        $order = Order::where('order_reference', $order_reference)->first() ? 
-            Order::where('order_reference', $order_reference)->first() : new Order($request_data);
+        $order = Order::where('order_reference', $temporal_id)->first() ? 
+            Order::where('order_reference', $temporal_id)->first() : new Order($request_data);
         /*
          * Create the order
          */
