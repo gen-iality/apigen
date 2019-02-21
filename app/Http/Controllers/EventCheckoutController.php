@@ -1019,11 +1019,10 @@ class EventCheckoutController extends Controller
             case 'APPROVED':
             //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
             //Ademas de guardar el nuevo estado
-            if($order->order_status_id != config('attendize.order_complete')){
-                $order->order_status_id= config('attendize.order_complete');
-                Log::info("Completamos la orden");
-                $this->completeOrder($order_reference); 
-                Cache::forget($order_reference);
+                if($order->order_status_id != config('attendize.order_complete')){
+                    $order->order_status_id= config('attendize.order_complete');
+                    Log::info("Completamos la orden");
+                    $this->completeOrder($order_reference); 
                     if(config('attendize.send_email')){
                         Log::info("Enviamos el correo");
                         $this->dispatch(new SendOrderTickets($order));
@@ -1032,23 +1031,22 @@ class EventCheckoutController extends Controller
                 break;
             case 'REJECTED':
                 $order->order_status_id= config('attendize.order_rejected');
-                Cache::forget($order_reference);
                 break;
             case 'PENDING':
                 $order->order_status_id= config('attendize.order_pending');
                 break;
             case 'CANCELLED':
                 $order->order_status_id= config('attendize.order_cancelled');
-                Cache::forget($order_reference);
                 break;
             case 'FAILED':
                 $order->order_status_id= config('attendize.order_failed');
-                Cache::forget($order_reference);
                 break;
             case 'DECLINED':
                 $order->order_status_id= config('attendize.order_rejected');
-                Cache::forget($order_reference);
                 break;
+        }
+        if($status != 'PENDING'){
+            Cache::forget($order_reference);
         }
         $order->save();
         Log::info('Estado guardado: '.$order->orderStatus['name']);
