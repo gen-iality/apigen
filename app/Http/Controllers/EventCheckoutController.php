@@ -937,7 +937,7 @@ class EventCheckoutController extends Controller
     {
         Log::info("Petición retornado por PlaceToPay: ");
         $request = $request->json()->all();
-	    $status = $request['status']['status'];
+        $status = $request['status']['status'];
         $order_reference = $request['reference'];
         return $this->changeStatusOrder($order_reference, $status);
     }
@@ -950,10 +950,44 @@ class EventCheckoutController extends Controller
      * @return void
      */
     public function paymentCompletedPayU(Request $request)
-    {
-        return 'ok';
-        Log::info("Petición retornado por PlaceToPay: ");
+    { 
+        //Petition to PayU
+        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')->get(); //Estado pendiente o en proceso de pago
+        // var_dump($orders);die;
+        foreach($orders as $order){
+            $order_reference =  $order->order_reference;
+            if($order_reference){
+                $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+                $data =  [
+                    'test' => false,
+                    "language"=> "en",
+                    "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
+                    "merchant"=> [
+                    "apiLogin"=> "mqDxv0NbTNaAUmb",
+                    "apiKey"=> "omF0uvbN3365dC2X4dtcjywbS7",
+                    ],
+                    "details" => [
+                        "referenceCode" => $order_reference
+                    ]
+                ];
+                $client = new Client();
+                $response = $client->request('POST', $url, [
+                    'body' => json_encode($data),
+                    'headers' => [ 'Content-Type' => 'application/json' ]
+                ]);
+                $response = $response->getBody()->getContents();
+                $xml = simplexml_load_string($response);
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
+                $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
+                if(!is_null($status)){
+                        Log::info('order: '.$order->order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
+                        $this->changeStatusOrder($order_reference, $status);
+                }
+            }
 
+        }
+        return;
     }
     
     /**
@@ -983,18 +1017,26 @@ class EventCheckoutController extends Controller
                 break;
             case 'REJECTED':
                 $order->order_status_id= config('attendize.order_rejected');
+                Cache::forget($order_reference);
                 break;
             case 'PENDING':
                 $order->order_status_id= config('attendize.order_pending');
                 break;
             case 'CANCELLED':
                 $order->order_status_id= config('attendize.order_cancelled');
+                Cache::forget($order_reference);
                 break;
             case 'FAILED':
                 $order->order_status_id= config('attendize.order_failed');
+                Cache::forget($order_reference);
+                break;
+            case 'DECLINED':
+                $order->order_status_id= config('attendize.order_rejected');
+                Cache::forget($order_reference);
                 break;
         }
         $order->save();
+        Log::info('Estado guardado: '.$order->orderStatus['name']);
         return $order;
     }
 
