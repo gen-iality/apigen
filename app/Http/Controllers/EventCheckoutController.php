@@ -607,139 +607,141 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $temporal_id)->first();
                 $ticket_order = Cache::get($temporal_id);
-                $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
+                if(isset($ticket_order)){
+                    $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
 
-                $event_id = isset($ticket_order['event_id']) ? $ticket_order['event_id'] : $order->event_id;
-                $request_data = isset($ticket_order['request_data']) ? $ticket_order['request_data'] : [];
-
-                //Buscamos el evento el cual le pertence el ticket
-                // return $ticket_order;die;
-                $event = Event::findOrFail($event_id);
-                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
-                $orderService->calculateFinalCosts();
-                $fields = $event->user_properties;
-                $attendee_increment = 1;
-                $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-                //Creamos la nueva orden
-
-                /*
-                 * Update the event sales volume
-                 */
-                $event->increment('sales_volume', (int) $orderService->getGrandTotal());
-                $event->increment('organiser_fees_volume', (int) $order->organiser_booking_fee);
-
-                /*
-                 * Update affiliates stats stats
-                 */
-
-                if (isset($ticket_order['affiliate_referral'])) {
-                    $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
-                        ->where('event_id', '=', $event_id)->first();
-                    $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
-                    $affiliate->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-                }
-
-                /*
-                 * Update the event stats
-                 */
-                $event_stats = EventStats::updateOrCreate([
-                    'event_id' => $event_id,
-                    'date' => (Carbon::now())->toDateString(),
-                ]);
-
-                $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-                if (isset($ticket_order['order_requires_payment'])) {
-                    $event_stats->increment('sales_volume', $order->amount);
-                    $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
-                }
-                /*
-                 * Add the attendees
-                 */
-                foreach ($ticket_order['tickets'] as $attendee_details) {
-
+                    $event_id = isset($ticket_order['event_id']) ? $ticket_order['event_id'] : $order->event_id;
+                    $request_data = isset($ticket_order['request_data']) ? $ticket_order['request_data'] : [];
+    
+                    //Buscamos el evento el cual le pertence el ticket
+                    // return $ticket_order;die;
+                    $event = Event::findOrFail($event_id);
+                    $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+                    $orderService->calculateFinalCosts();
+                    $fields = $event->user_properties;
+                    $attendee_increment = 1;
+                    $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
+                    //Creamos la nueva orden
+    
                     /*
-                     * Update ticket's quantity sold
+                     * Update the event sales volume
                      */
-                    $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
-
+                    $event->increment('sales_volume', (int) $orderService->getGrandTotal());
+                    $event->increment('organiser_fees_volume', (int) $order->organiser_booking_fee);
+    
                     /*
-                     * Update some ticket info
+                     * Update affiliates stats stats
                      */
-                    $ticket->increment('quantity_sold', $attendee_details['qty']);
-                    $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
-                    $ticket->increment('organiser_fees_volume',
-                        ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
-
-                    /*
-                     * Insert order items (for use in generating invoices)
-                     */
-                    $orderItem = new OrderItem();
-                    $orderItem->title = $attendee_details['ticket']['title'];
-                    $orderItem->quantity = $attendee_details['qty'];
-                    $orderItem->order_id = $order->id;
-                    $orderItem->unit_price = $attendee_details['ticket']['price'];
-                    $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
-                    $orderItem->save();
-
-                    /*
-                     * Create the attendees
-                     */
-                    for ($i = 0; $i < $attendee_details['qty']; $i++) {
-
-                        $attendee = new Attendee();
-                        $attendee->properties = (object) [];
-
-                        foreach ($fields as $field) {
-                            if (!$field['name']) {
-                                continue;
-                            }
-
-                            $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
-                        }
-
-                        $attendee->event_id = $event_id;
-                        $attendee->order_id = $order->id;
-                        $attendee->ticket_id = $attendee_details['ticket']['id'];
-                        $attendee->account_id = $event->account->id;
-
-                        $attendee->reference_index = $attendee_increment;
-
-
-                        $attendee->save();
-                        
-                        /*
-                         * Save the attendee's questions
-                         */
-                        foreach ($attendee_details['ticket']->questions as $question) {
-
-                            $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-
-                            if (is_null($ticket_answer)) {
-                                continue;
-                            }
-
-                            /*
-                             * If there are multiple answers to a question then join them with a comma
-                             * and treat them as a single answer.
-                             */
-                            $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-
-                            if (!empty($ticket_answer)) {
-                                QuestionAnswer::create([
-                                    'answer_text' => $ticket_answer,
-                                    'attendee_id' => $attendee->id,
-                                    'event_id' => $event->id,
-                                    'account_id' => $event->account->id,
-                                    'question_id' => $question->id,
-                                ]);
-
-                            }
-                        }
-
-                        /* Keep track of total number of attendees */
-                        $attendee_increment++;
+    
+                    if (isset($ticket_order['affiliate_referral'])) {
+                        $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
+                            ->where('event_id', '=', $event_id)->first();
+                        $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
+                        $affiliate->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
                     }
-
+    
+                    /*
+                     * Update the event stats
+                     */
+                    $event_stats = EventStats::updateOrCreate([
+                        'event_id' => $event_id,
+                        'date' => (Carbon::now())->toDateString(),
+                    ]);
+    
+                    $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
+                    if (isset($ticket_order['order_requires_payment'])) {
+                        $event_stats->increment('sales_volume', $order->amount);
+                        $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
+                    }
+                    /*
+                     * Add the attendees
+                     */
+                    foreach ($ticket_order['tickets'] as $attendee_details) {
+    
+                        /*
+                         * Update ticket's quantity sold
+                         */
+                        $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
+    
+                        /*
+                         * Update some ticket info
+                         */
+                        $ticket->increment('quantity_sold', $attendee_details['qty']);
+                        $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
+                        $ticket->increment('organiser_fees_volume',
+                            ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
+    
+                        /*
+                         * Insert order items (for use in generating invoices)
+                         */
+                        $orderItem = new OrderItem();
+                        $orderItem->title = $attendee_details['ticket']['title'];
+                        $orderItem->quantity = $attendee_details['qty'];
+                        $orderItem->order_id = $order->id;
+                        $orderItem->unit_price = $attendee_details['ticket']['price'];
+                        $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
+                        $orderItem->save();
+    
+                        /*
+                         * Create the attendees
+                         */
+                        for ($i = 0; $i < $attendee_details['qty']; $i++) {
+    
+                            $attendee = new Attendee();
+                            $attendee->properties = (object) [];
+    
+                            foreach ($fields as $field) {
+                                if (!$field['name']) {
+                                    continue;
+                                }
+    
+                                $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
+                            }
+    
+                            $attendee->event_id = $event_id;
+                            $attendee->order_id = $order->id;
+                            $attendee->ticket_id = $attendee_details['ticket']['id'];
+                            $attendee->account_id = $event->account->id;
+    
+                            $attendee->reference_index = $attendee_increment;
+    
+    
+                            $attendee->save();
+                            
+                            /*
+                             * Save the attendee's questions
+                             */
+                            foreach ($attendee_details['ticket']->questions as $question) {
+    
+                                $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
+    
+                                if (is_null($ticket_answer)) {
+                                    continue;
+                                }
+    
+                                /*
+                                 * If there are multiple answers to a question then join them with a comma
+                                 * and treat them as a single answer.
+                                 */
+                                $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
+    
+                                if (!empty($ticket_answer)) {
+                                    QuestionAnswer::create([
+                                        'answer_text' => $ticket_answer,
+                                        'attendee_id' => $attendee->id,
+                                        'event_id' => $event->id,
+                                        'account_id' => $event->account->id,
+                                        'question_id' => $question->id,
+                                    ]);
+    
+                                }
+                            }
+    
+                            /* Keep track of total number of attendees */
+                            $attendee_increment++;
+                        }
+    
+                    }
                 }
 
             } catch (Exception $e) {
