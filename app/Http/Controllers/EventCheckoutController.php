@@ -991,7 +991,7 @@ class EventCheckoutController extends Controller
             }
 
         }
-        return TRUE;
+        return ['status' => true];
     }
     
     /**
