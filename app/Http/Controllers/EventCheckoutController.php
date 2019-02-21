@@ -542,12 +542,6 @@ class EventCheckoutController extends Controller
         }
 
     }
-
-    public function placetopay()
-    {
-        return $request;
-    }
-
     /**
      * Attempt to complete a user's payment when they return from
      * an off-site gateway
@@ -607,139 +601,141 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $temporal_id)->first();
                 $ticket_order = Cache::get($temporal_id);
-                $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
+                if(isset($ticket_order)){
+                    $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
 
-                $event_id = isset($ticket_order['event_id']) ? $ticket_order['event_id'] : $order->event_id;
-                $request_data = isset($ticket_order['request_data']) ? $ticket_order['request_data'] : [];
-
-                //Buscamos el evento el cual le pertence el ticket
-                // return $ticket_order;die;
-                $event = Event::findOrFail($event_id);
-                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
-                $orderService->calculateFinalCosts();
-                $fields = $event->user_properties;
-                $attendee_increment = 1;
-                $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-                //Creamos la nueva orden
-
-                /*
-                 * Update the event sales volume
-                 */
-                $event->increment('sales_volume', (int) $orderService->getGrandTotal());
-                $event->increment('organiser_fees_volume', (int) $order->organiser_booking_fee);
-
-                /*
-                 * Update affiliates stats stats
-                 */
-
-                if (isset($ticket_order['affiliate_referral'])) {
-                    $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
-                        ->where('event_id', '=', $event_id)->first();
-                    $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
-                    $affiliate->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-                }
-
-                /*
-                 * Update the event stats
-                 */
-                $event_stats = EventStats::updateOrCreate([
-                    'event_id' => $event_id,
-                    'date' => (Carbon::now())->toDateString(),
-                ]);
-
-                $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
-                if (isset($ticket_order['order_requires_payment'])) {
-                    $event_stats->increment('sales_volume', $order->amount);
-                    $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
-                }
-                /*
-                 * Add the attendees
-                 */
-                foreach ($ticket_order['tickets'] as $attendee_details) {
-
+                    $event_id = isset($ticket_order['event_id']) ? $ticket_order['event_id'] : $order->event_id;
+                    $request_data = isset($ticket_order['request_data']) ? $ticket_order['request_data'] : [];
+    
+                    //Buscamos el evento el cual le pertence el ticket
+                    // return $ticket_order;die;
+                    $event = Event::findOrFail($event_id);
+                    $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+                    $orderService->calculateFinalCosts();
+                    $fields = $event->user_properties;
+                    $attendee_increment = 1;
+                    $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
+                    //Creamos la nueva orden
+    
                     /*
-                     * Update ticket's quantity sold
+                     * Update the event sales volume
                      */
-                    $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
-
+                    $event->increment('sales_volume', (int) $orderService->getGrandTotal());
+                    $event->increment('organiser_fees_volume', (int) $order->organiser_booking_fee);
+    
                     /*
-                     * Update some ticket info
+                     * Update affiliates stats stats
                      */
-                    $ticket->increment('quantity_sold', $attendee_details['qty']);
-                    $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
-                    $ticket->increment('organiser_fees_volume',
-                        ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
-
-                    /*
-                     * Insert order items (for use in generating invoices)
-                     */
-                    $orderItem = new OrderItem();
-                    $orderItem->title = $attendee_details['ticket']['title'];
-                    $orderItem->quantity = $attendee_details['qty'];
-                    $orderItem->order_id = $order->id;
-                    $orderItem->unit_price = $attendee_details['ticket']['price'];
-                    $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
-                    $orderItem->save();
-
-                    /*
-                     * Create the attendees
-                     */
-                    for ($i = 0; $i < $attendee_details['qty']; $i++) {
-
-                        $attendee = new Attendee();
-                        $attendee->properties = (object) [];
-
-                        foreach ($fields as $field) {
-                            if (!$field['name']) {
-                                continue;
-                            }
-
-                            $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
-                        }
-
-                        $attendee->event_id = $event_id;
-                        $attendee->order_id = $order->id;
-                        $attendee->ticket_id = $attendee_details['ticket']['id'];
-                        $attendee->account_id = $event->account->id;
-
-                        $attendee->reference_index = $attendee_increment;
-
-
-                        $attendee->save();
-                        
-                        /*
-                         * Save the attendee's questions
-                         */
-                        foreach ($attendee_details['ticket']->questions as $question) {
-
-                            $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-
-                            if (is_null($ticket_answer)) {
-                                continue;
-                            }
-
-                            /*
-                             * If there are multiple answers to a question then join them with a comma
-                             * and treat them as a single answer.
-                             */
-                            $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-
-                            if (!empty($ticket_answer)) {
-                                QuestionAnswer::create([
-                                    'answer_text' => $ticket_answer,
-                                    'attendee_id' => $attendee->id,
-                                    'event_id' => $event->id,
-                                    'account_id' => $event->account->id,
-                                    'question_id' => $question->id,
-                                ]);
-
-                            }
-                        }
-
-                        /* Keep track of total number of attendees */
-                        $attendee_increment++;
+    
+                    if (isset($ticket_order['affiliate_referral'])) {
+                        $affiliate = Affiliate::where('name', '=', $ticket_order['affiliate_referral'])
+                            ->where('event_id', '=', $event_id)->first();
+                        $affiliate->increment('sales_volume', $order->amount + $order->organiser_booking_fee);
+                        $affiliate->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
                     }
-
+    
+                    /*
+                     * Update the event stats
+                     */
+                    $event_stats = EventStats::updateOrCreate([
+                        'event_id' => $event_id,
+                        'date' => (Carbon::now())->toDateString(),
+                    ]);
+    
+                    $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
+                    if (isset($ticket_order['order_requires_payment'])) {
+                        $event_stats->increment('sales_volume', $order->amount);
+                        $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
+                    }
+                    /*
+                     * Add the attendees
+                     */
+                    foreach ($ticket_order['tickets'] as $attendee_details) {
+    
+                        /*
+                         * Update ticket's quantity sold
+                         */
+                        $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
+    
+                        /*
+                         * Update some ticket info
+                         */
+                        $ticket->increment('quantity_sold', $attendee_details['qty']);
+                        $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
+                        $ticket->increment('organiser_fees_volume',
+                            ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
+    
+                        /*
+                         * Insert order items (for use in generating invoices)
+                         */
+                        $orderItem = new OrderItem();
+                        $orderItem->title = $attendee_details['ticket']['title'];
+                        $orderItem->quantity = $attendee_details['qty'];
+                        $orderItem->order_id = $order->id;
+                        $orderItem->unit_price = $attendee_details['ticket']['price'];
+                        $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
+                        $orderItem->save();
+    
+                        /*
+                         * Create the attendees
+                         */
+                        for ($i = 0; $i < $attendee_details['qty']; $i++) {
+    
+                            $attendee = new Attendee();
+                            $attendee->properties = (object) [];
+    
+                            foreach ($fields as $field) {
+                                if (!$field['name']) {
+                                    continue;
+                                }
+    
+                                $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
+                            }
+    
+                            $attendee->event_id = $event_id;
+                            $attendee->order_id = $order->id;
+                            $attendee->ticket_id = $attendee_details['ticket']['id'];
+                            $attendee->account_id = $event->account->id;
+    
+                            $attendee->reference_index = $attendee_increment;
+    
+    
+                            $attendee->save();
+                            
+                            /*
+                             * Save the attendee's questions
+                             */
+                            foreach ($attendee_details['ticket']->questions as $question) {
+    
+                                $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
+    
+                                if (is_null($ticket_answer)) {
+                                    continue;
+                                }
+    
+                                /*
+                                 * If there are multiple answers to a question then join them with a comma
+                                 * and treat them as a single answer.
+                                 */
+                                $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
+    
+                                if (!empty($ticket_answer)) {
+                                    QuestionAnswer::create([
+                                        'answer_text' => $ticket_answer,
+                                        'attendee_id' => $attendee->id,
+                                        'event_id' => $event->id,
+                                        'account_id' => $event->account->id,
+                                        'question_id' => $question->id,
+                                    ]);
+    
+                                }
+                            }
+    
+                            /* Keep track of total number of attendees */
+                            $attendee_increment++;
+                        }
+    
+                    }
                 }
 
             } catch (Exception $e) {
@@ -801,19 +797,24 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * Generate Order
-     *
-     * @param [type] $temporal_id
-     * @return void
+     * storeOrder
+     * Save the order that is in cache, 
+     * If the order don't exist load the cache data with the order_reference,
+     * But, if the order exist return this order
+     * This action is executed when the form is filled and we are going to pay
+     * If the purshase is free is in the moment when youacquire my tickets
+     * 
+     * @param string $temporal_id, $payment_free
+     * @return array $order
      */
-    public function storeOrder($temporal_id, $payment_free = false){
+    public function storeOrder($order_reference, $payment_free = false){
 
         //Datos necesarios para la generación de la orden
         
         Log::info('Generación de la orden');
-        $order = Order::where('order_reference', $temporal_id)->first();
+        $order = Order::where('order_reference', $order_reference)->first();
         if(!isset($order)){
-            $ticket_order = Cache::get($temporal_id);
+            $ticket_order = Cache::get($order_reference);
             $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
             $request_data = $ticket_order['request_data'];
             $event_id = $ticket_order['event_id'];
@@ -843,7 +844,7 @@ class EventCheckoutController extends Controller
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
             $order->session_id = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data']['session_id'] : time();
-            $order->order_reference = $temporal_id;
+            $order->order_reference = $order_reference;
             $order->discount = isset($ticket_order['discount'])? $ticket_order['discount'] : 0.00;
             if(isset($ticket_order['code_discount']) || isset($ticket_order['total_ticket_quantity'])){
                 $order->discount_description =  isset($ticket_order['code_discount'])? 
@@ -957,41 +958,58 @@ class EventCheckoutController extends Controller
     { 
         //Petition to PayU
         $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')->get(); //Estado pendiente o en proceso de pago
-        // var_dump($orders);die;
-        foreach($orders as $order){
-            $order_reference =  $order->order_reference;
-            if($order_reference){
-                $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
-                $data =  [
-                    'test' => false,
-                    "language"=> "en",
-                    "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
-                    "merchant"=> [
-                    "apiLogin"=> "mqDxv0NbTNaAUmb",
-                    "apiKey"=> "omF0uvbN3365dC2X4dtcjywbS7",
-                    ],
-                    "details" => [
-                        "referenceCode" => $order_reference
-                    ]
-                ];
-                $client = new Client();
-                $response = $client->request('POST', $url, [
-                    'body' => json_encode($data),
-                    'headers' => [ 'Content-Type' => 'application/json' ]
-                ]);
-                $response = $response->getBody()->getContents();
-                $xml = simplexml_load_string($response);
-                $json = json_encode($xml);
-                $array = json_decode($json,TRUE);
-                $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
-                if(!is_null($status)){
-                        Log::info('order: '.$order->order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
-                        $this->changeStatusOrder($order_reference, $status);
+        
+        if(count($orders)){
+            $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
+            $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
+            $url = config('attendize.payment_test') ? 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi' : 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+            $data =  [
+                        'test' => config('attendize.payment_test'),
+                        "language"=> "en",
+                        "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
+                        "merchant"=> [
+                            "apiLogin"=> $apiLogin,
+                            "apiKey"=> $apiKey,
+                        ]
+                    ];
+            $changes = [];
+            foreach($orders as $order){
+                $order_reference =  $order->order_reference;
+
+                if($order_reference){
+                
+                    $data["details"] = ["referenceCode" => $order_reference];
+                    $client = new Client();
+                    $response = $client->request('POST', $url, [
+                        'body' => json_encode($data),
+                        'headers' => [ 'Content-Type' => 'application/json' ]
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $xml = simplexml_load_string($response);
+                    $json = json_encode($xml);
+                    $array = json_decode($json,TRUE);
+
+                    if(isset($array['result']['payload']['order'])){
+                        $status = isset($array['result']['payload']['order']['transactions']) 
+                                ?  $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']
+                                :  end($array['result']['payload']['order'])['transactions']['transaction']['transactionResponse']['state'];
+                    } else{
+                        $status = null;
+                    }
+
+                    if(!is_null($status)){
+                            Log::info('order: '.$order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
+                            $response = $this->changeStatusOrder($order_reference, $status);
+                            array_push($changes, [  'order' => $order_reference,
+                                                    'estatus_before' => $order->orderStatus['name'],
+                                                    'status_PayU' => $status,
+                                                    'new_status' => $response->orderStatus['name']
+                                                ]);
+                    }
                 }
             }
-
         }
-        return ['status' => true];
+        return $changes;
     }
     
     /**
@@ -1008,11 +1026,10 @@ class EventCheckoutController extends Controller
             case 'APPROVED':
             //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
             //Ademas de guardar el nuevo estado
-            if($order->order_status_id != config('attendize.order_complete')){
-                $order->order_status_id= config('attendize.order_complete');
-                Log::info("Completamos la orden");
-                $this->completeOrder($order_reference); 
-                Cache::forget($order_reference);
+                if($order->order_status_id != config('attendize.order_complete')){
+                    $order->order_status_id= config('attendize.order_complete');
+                    Log::info("Completamos la orden");
+                    $this->completeOrder($order_reference); 
                     if(config('attendize.send_email')){
                         Log::info("Enviamos el correo");
                         $this->dispatch(new SendOrderTickets($order));
@@ -1021,23 +1038,26 @@ class EventCheckoutController extends Controller
                 break;
             case 'REJECTED':
                 $order->order_status_id= config('attendize.order_rejected');
-                Cache::forget($order_reference);
                 break;
             case 'PENDING':
                 $order->order_status_id= config('attendize.order_pending');
                 break;
             case 'CANCELLED':
                 $order->order_status_id= config('attendize.order_cancelled');
-                Cache::forget($order_reference);
                 break;
             case 'FAILED':
                 $order->order_status_id= config('attendize.order_failed');
-                Cache::forget($order_reference);
                 break;
             case 'DECLINED':
                 $order->order_status_id= config('attendize.order_rejected');
-                Cache::forget($order_reference);
                 break;
+            case 'EXPIRED':
+                $order->order_status_id= config('attendize.order_rejected');
+                break;
+                
+        }
+        if($status != 'PENDING'){
+            Cache::forget($order_reference);
         }
         $order->save();
         Log::info('Estado guardado: '.$order->orderStatus['name']);
@@ -1148,37 +1168,72 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * showOrderPaymentStatusDetailsStatus
+     * showOrderPaymentStatusPaymentGateway
      *
-     *  This controller get the information of the placetopay
-     * @param [type] $order_reference
-     * @param boolean $cron
-     * @return void
+     *  This controller get information of order by means of the order_reference, directly from payment gateway
+     * 
+     * @param string $order_reference
+     * @param string $payment_gateway
+     * @return void $status
      */
-    public function showOrderPaymentStatusDetailsStatus($order_reference, $cron = false)
+    public function showOrderPaymentStatusPaymentGateway(string $order_reference, string $payment_gateway)
     {
-        $placetopay = new \Dnetix\Redirection\PlacetoPay([
-            'login' => 'ff684c45a63f769d824994dcc1369fb9',
-            'tranKey' => 'X1GIXSF2Dxtq0bfg',
-            'url' => 'https://secure.placetopay.com/redirection/',
-            'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
-        ]);
-        $order = Order::where('order_reference', '=', $order_reference)->first();
+        switch ($payment_gateway) {
+            case 'placetopay':
+                $placetopay = new \Dnetix\Redirection\PlacetoPay([
+                    'login' => 'ff684c45a63f769d824994dcc1369fb9',
+                    'tranKey' => 'X1GIXSF2Dxtq0bfg',
+                    'url' => 'https://secure.placetopay.com/redirection/',
+                    'type' => \Dnetix\Redirection\PlacetoPay::TP_REST,
+                ]);
+                $order = Order::where('order_reference', '=', $order_reference)->first();
+        
+                //Rquest from placetopay of the payment process
+                $response = $placetopay->query($order->session_id);
+                $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
+                break;
+            case 'payu':
+                $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
+                $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
+                $url = config('attendize.payment_test') ? 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi' : 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+                
+                $data =  [
+                        'test' => config('attendize.payment_test'),
+                        "language"=> "en",
+                        "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
+                        "merchant"=> [
+                            "apiLogin"=> $apiLogin,
+                            "apiKey"=> $apiKey,
+                        ]
+                    ];
+                $data["details"] = ["referenceCode" => $order_reference];
 
-        //Respuesta de Placetopay del proceso de pago
-        $response = $placetopay->query($order->session_id);
-        $status =  $response->payment() ? $response->payment()[0]->status()->status() : $response->status()->status();
-        return $status;
-    }
-/*
-    public function borrarOrdenes(){
-        $orders = ReservedTickets::all();
-        foreach($orders as $order){
-            $order->forcedelete();
+                $client = new Client();
+                $response = $client->request('POST', $url, [
+                    'body' => json_encode($data),
+                    'headers' => [ 'Content-Type' => 'application/json' ]
+                ]);
+                $response = $response->getBody()->getContents();
+                $xml = simplexml_load_string($response);
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
+
+                if(isset($array['result']['payload']['order'])){
+                    $status = isset($array['result']['payload']['order']['transactions']) 
+                            ?  $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']
+                            :  end($array['result']['payload']['order'])['transactions']['transaction']['transactionResponse']['state'];
+                } else{
+                    $status = "NOT FOUND";
+                }
+                break;
+            default:
+               $status = "payment gateway NOT FOUND";
         }
-        return 'ok';
-        // use App\Models\OrderItem;
-        // use App\Models\QuestionAnswer;
-        // use App\Models\ReservedTickets;
-    } */
+    
+
+        return $status;
+
+    }
+
+
 }
