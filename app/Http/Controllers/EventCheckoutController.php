@@ -811,7 +811,7 @@ class EventCheckoutController extends Controller
         //Datos necesarios para la generación de la orden
         
         Log::info('Generación de la orden');
-        $order = Order::where('order_reference', $order_reference)->first();
+        $order = Order::where('order_reference', $temporal_id)->first();
         if(!isset($order)){
             $ticket_order = Cache::get($temporal_id);
             $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
