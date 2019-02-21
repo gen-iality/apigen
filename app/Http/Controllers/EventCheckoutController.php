@@ -960,12 +960,12 @@ class EventCheckoutController extends Controller
 
         foreach($orders as $order){
             $order_reference =  $order->order_reference;
-            $apiLogin = config('attendize.order_complete') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
-            $apiKey = config('attendize.order_complete') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
+            $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
+            $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
             if($order_reference){
                 $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
                 $data =  [
-                    'test' => config('attendize.order_complete'),
+                    'test' => config('attendize.payment_test'),
                     "language"=> "en",
                     "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
                     "merchant"=> [
