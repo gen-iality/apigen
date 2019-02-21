@@ -957,42 +957,49 @@ class EventCheckoutController extends Controller
     { 
         //Petition to PayU
         $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')->get(); //Estado pendiente o en proceso de pago
-
-        foreach($orders as $order){
-            $order_reference =  $order->order_reference;
+        
+        if(count($orders)){
             $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
             $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
-            if($order_reference){
-                $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
-                $data =  [
-                    'test' => config('attendize.payment_test'),
-                    "language"=> "en",
-                    "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
-                    "merchant"=> [
-                    "apiLogin"=> $apiLogin,
-                    "apiKey"=> $apiKey,
-                    ],
-                    "details" => [
-                        "referenceCode" => $order_reference
-                    ]
-                ];
-                $client = new Client();
-                $response = $client->request('POST', $url, [
-                    'body' => json_encode($data),
-                    'headers' => [ 'Content-Type' => 'application/json' ]
-                ]);
-                $response = $response->getBody()->getContents();
-                $xml = simplexml_load_string($response);
-                $json = json_encode($xml);
-                $array = json_decode($json,TRUE);
-                $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
-                if(!is_null($status)){
-                        Log::info('order: '.$order->order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
-                        $this->changeStatusOrder($order_reference, $status);
+            $url = config('attendize.payment_test') ? 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi' : 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+            $data =  [
+                        'test' => config('attendize.payment_test'),
+                        "language"=> "en",
+                        "command"=> "ORDER_DETAIL_BY_REFERENCE_CODE",
+                        "merchant"=> [
+                            "apiLogin"=> $apiLogin,
+                            "apiKey"=> $apiKey,
+                        ]
+                    ];
+            $changes = [];
+            foreach($orders as $order){
+                $order_reference =  $order->order_reference;
+
+                if($order_reference){
+                
+                    $data["details"] = ["referenceCode" => $order_reference];
+                    $client = new Client();
+                    $response = $client->request('POST', $url, [
+                        'body' => json_encode($data),
+                        'headers' => [ 'Content-Type' => 'application/json' ]
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $xml = simplexml_load_string($response);
+                    $json = json_encode($xml);
+                    $array = json_decode($json,TRUE);
+                    $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
+                    if(!is_null($status)){
+                            Log::info('order: '.$order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
+                            $this->changeStatusOrder($order_reference, $status);
+                            $changes += [   'order' => $order_reference,
+                                            'estatus_before' => $order->orderStatus['name'],
+                                            'status_PayU' => $status,
+                                        ];
+                    }
                 }
             }
         }
-        return;
+        return $changes;
     }
     
     /**
