@@ -990,11 +990,12 @@ class EventCheckoutController extends Controller
                     $status = isset($array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']) ? $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state'] : null;
                     if(!is_null($status)){
                             Log::info('order: '.$order_reference.' STATUSCURRENT: '.$order->orderStatus['name'].' STATUSPAYU: '.$status);
-                            $this->changeStatusOrder($order_reference, $status);
-                            $changes += [   'order' => $order_reference,
-                                            'estatus_before' => $order->orderStatus['name'],
-                                            'status_PayU' => $status,
-                                        ];
+                            $response = $this->changeStatusOrder($order_reference, $status);
+                            array_push($changes, [  'order' => $order_reference,
+                                                    'estatus_before' => $order->orderStatus['name'],
+                                                    'status_PayU' => $status,
+                                                    'new_status' => $response->orderStatus['name']
+                                                ]);
                     }
                 }
             }
