@@ -991,7 +991,7 @@ class EventCheckoutController extends Controller
             }
 
         }
-        return;
+        return TRUE;
     }
     
     /**
