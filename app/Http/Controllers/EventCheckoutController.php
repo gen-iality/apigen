@@ -1063,7 +1063,7 @@ class EventCheckoutController extends Controller
             // Cache::forget($order_reference);
         }
         $order->save();
-        Log::info('Estado guardado: '.$order->orderStatus['name']);
+        Log::info('Estado guardado: '.$order_reference." order_reference: ".$order->orderStatus['name']);
         return $order;
     }
 
