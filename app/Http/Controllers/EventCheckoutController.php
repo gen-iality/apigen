@@ -1057,7 +1057,7 @@ class EventCheckoutController extends Controller
                 
         }
         if($status != 'PENDING'){
-            Cache::forget($order_reference);
+            // Cache::forget($order_reference);
         }
         $order->save();
         Log::info('Estado guardado: '.$order->orderStatus['name']);

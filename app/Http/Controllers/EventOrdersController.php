@@ -366,7 +366,6 @@ class EventOrdersController extends Controller
     public function showExportOrders($event_id, $export_as = 'xls')
     {
         $event = Event::findOrFail($event_id);
-
         Excel::create('orders-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
 
             $excel->setTitle('Orders For Event: ' . $event->title);
@@ -375,13 +374,8 @@ class EventOrdersController extends Controller
             $excel->setCreator(config('attendize.app_name'))
                 ->setCompany(config('attendize.app_name'));
 
-            $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
 
-                \DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
-                $yes = strtoupper(trans("basic.yes"));
-                $no = strtoupper(trans("basic.no"));
-                $data = DB::table('orders')
-                    ->where('orders.event_id', '=', $event->id)
+                $data = Order::where('orders.event_id', '=', $event->id)
                     ->where('orders.event_id', '=', $event->id)
                     ->select([
                         'orders.first_name',
@@ -389,8 +383,30 @@ class EventOrdersController extends Controller
                         'orders.email',
                         'orders.order_reference',
                         'orders.amount',
-                        \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
-                        \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
+                        // \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
+                        // \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
+                        'orders.amount_refunded',
+                        'orders.created_at',
+                    ])->get();
+
+                return $data;
+
+
+            $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
+
+                // \DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
+                $yes = strtoupper(trans("basic.yes"));
+                $no = strtoupper(trans("basic.no"));
+                $data = Order::where('orders.event_id', '=', $event->id)
+                    ->where('orders.event_id', '=', $event->id)
+                    ->select([
+                        'orders.first_name',
+                        'orders.last_name',
+                        'orders.email',
+                        'orders.order_reference',
+                        'orders.amount',
+                        // \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
+                        // \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
                         'orders.amount_refunded',
                         'orders.created_at',
                     ])->get();
