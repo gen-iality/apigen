@@ -166,7 +166,7 @@ class EventCheckoutController extends Controller
         /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
          */
-        $temporal_id = "ticket_order_" . time();
+        $order_reference = "ticket_order_" . time();
         //Generamos un cahce donde contiene la información primordial del pago, antes de introducir datos del usuario
         //Que va a cancelar
 
@@ -196,7 +196,7 @@ class EventCheckoutController extends Controller
             }
         }
 
-        Cache::forever($temporal_id, [
+        Cache::forever($order_reference, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
             'event_id' => $event->id,
@@ -227,7 +227,7 @@ class EventCheckoutController extends Controller
             return response()->json([
                 'status' => 'success',
                 'redirectUrl' => route('showEventCheckout', [
-                    'event_id' => $temporal_id,
+                    'event_id' => $order_reference,
                     'is_embedded' => $this->is_embedded,
                 ]) . '#order_form',
             ]);
@@ -246,10 +246,10 @@ class EventCheckoutController extends Controller
      * @param $event_id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function showEventCheckout(Request $request, $temporal_id)
+    public function showEventCheckout(Request $request, $order_reference)
     {
         //This code was must TEMPORALThis reload even when there is a user authenticaded
-        $order_session = Cache::get($temporal_id);
+        $order_session = Cache::get($order_reference);
 
         if(!Auth::user()){
             header('Location: '.'https://evius.co');
@@ -280,7 +280,7 @@ class EventCheckoutController extends Controller
             'is_embedded' => $this->is_embedded,
             'orderService' => $orderService,
             'fields' => $fields,
-            'temporal_id' => $temporal_id,
+            'temporal_id' => $order_reference,
         ];
 
         if ($this->is_embedded) {
@@ -298,11 +298,11 @@ class EventCheckoutController extends Controller
      * @param $event_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCreateOrder(Request $request, $temporal_id)
+    public function postCreateOrder(Request $request, $order_reference)
     {
 
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
-        $ticket_order = Cache::get($temporal_id);
+        $ticket_order = Cache::get($order_reference);
         //Extraemos el event_id del cache
         $event_id = $ticket_order["event_id"];
 
@@ -320,7 +320,7 @@ class EventCheckoutController extends Controller
 
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
-        Cache::forever($temporal_id, $ticket_order);
+        Cache::forever($order_reference, $ticket_order);
 
         $orderRequiresPayment = $ticket_order['order_requires_payment'];
 
@@ -331,18 +331,18 @@ class EventCheckoutController extends Controller
 
         //When the purshase is free 
         if (!$orderRequiresPayment) {
-            $this->storeOrder($temporal_id, true);
-            $this->completeOrder($temporal_id);
+            $this->storeOrder($order_reference, true);
+            $this->completeOrder($order_reference);
             
             /* Fiond order */
-            $order = Order::where('order_reference', '=', $temporal_id)->first();
+            $order = Order::where('order_reference', '=', $order_reference)->first();
             /* Envío de correo */
             if(config('attendize.send_email')){
                 $this->dispatch(new SendOrderTickets($order));
             }
             $return = [
                 'status' => 'success',
-                'redirectUrl' => url('/').'/order/'.$temporal_id,
+                'redirectUrl' => url('/').'/order/'.$order_reference,
                 'message' => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name,
             ];
             return response()->json($return);
@@ -427,8 +427,8 @@ class EventCheckoutController extends Controller
                 //CONFIGURATION PLACETOPAY
                 case config('attendize.payment_gateway_placetopay'):
                     $transaction_data += [
-                        'returnUrl' => $baseUrl.'/order/' . $temporal_id . '/payment',
-                        'orderid' => $temporal_id,
+                        'returnUrl' => $baseUrl.'/order/' . $order_reference . '/payment',
+                        'orderid' => $order_reference,
                         'login' => 'ff684c45a63f769d824994dcc1369fb9',
                         'tranKey' => 'X1GIXSF2Dxtq0bfg',
                         'url' => 'https://secure.placetopay.com/redirection/',
@@ -439,7 +439,7 @@ class EventCheckoutController extends Controller
                         'payerIsBuyer' => $request->get('payerIsBuyer'),
                         'mobile' => $request->get('mobile'),
                         'email' => Auth::user()->email,
-                        'cancelUrl' => $baseUrl.'/order/' . $temporal_id . '/payment',
+                        'cancelUrl' => $baseUrl.'/order/' . $order_reference . '/payment',
                     ];
 
                     break;
@@ -447,8 +447,8 @@ class EventCheckoutController extends Controller
                 case config('attendize.payment_gateway_payu'):
                     
                     $transaction_data += [
-                        'responseUrl' => $baseUrl.'/order/' . $temporal_id . '/payment/PayU',
-                        'transactionId' => $temporal_id,
+                        'responseUrl' => $baseUrl.'/order/' . $order_reference . '/payment/PayU',
+                        'transactionId' => $order_reference,
                         'orderDate' => date('Y-m-d H:i:s'),
                         'merchantId' => '508029',
                         'email' => Auth::user()->email,
@@ -461,7 +461,7 @@ class EventCheckoutController extends Controller
                                 'priceType' => 'NET',
                                 'quantity' => 1,
                                 'vat' => 0,
-                                'url' => $baseUrl.'/order/' . $temporal_id . '/payment/PayU',
+                                'url' => $baseUrl.'/order/' . $order_reference . '/payment/PayU',
                                 'confirmationUrl' => $baseUrl.'/order/paymentCompleted/PayU'
 
                                 ] 
@@ -506,8 +506,8 @@ class EventCheckoutController extends Controller
                 $ticket_order['transaction_data'] += $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
-                Cache::forever($temporal_id, $ticket_order);
-                $this->storeOrder($temporal_id);
+                Cache::forever($order_reference, $ticket_order);
+                $this->storeOrder($order_reference);
                 
                 
                 Log::info("Redirect url: " . $response->getRedirectUrl());
@@ -591,7 +591,7 @@ class EventCheckoutController extends Controller
      * @param bool|true $return_json
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-     public function completeOrder($temporal_id, $return_json = true)
+     public function completeOrder($order_reference, $return_json = true)
     {
         //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no
         //vamos a crear la orden a partir del cache.
@@ -599,9 +599,10 @@ class EventCheckoutController extends Controller
 
             try {
 
-                $order = Order::where('order_reference', '=', $temporal_id)->first();
-                $ticket_order = Cache::get($temporal_id);
+                $order = Order::where('order_reference', '=', $order_reference)->first();
+                $ticket_order = Cache::get($order_reference);
                 if(isset($ticket_order)){
+                    Log::info('completamos la orden: '.$order_reference);
                     $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
 
                     $event_id = isset($ticket_order['event_id']) ? $ticket_order['event_id'] : $order->event_id;
@@ -736,6 +737,8 @@ class EventCheckoutController extends Controller
                         }
     
                     }
+                    Log::info('Borramos el cache de la orden: '.$order_reference);
+                    Cache::forget($order_reference);
                 }
 
             } catch (Exception $e) {
@@ -804,7 +807,7 @@ class EventCheckoutController extends Controller
      * This action is executed when the form is filled and we are going to pay
      * If the purshase is free is in the moment when youacquire my tickets
      * 
-     * @param string $temporal_id, $payment_free
+     * @param string $order_reference, $payment_free
      * @return array $order
      */
     public function storeOrder($order_reference, $payment_free = false){
@@ -1073,8 +1076,8 @@ class EventCheckoutController extends Controller
      */
     public function completePayment(String $id)
     {
-        $temporal_id = $id;
-        $order = Order::where('order_reference', $temporal_id)->first();
+        $order_reference = $id;
+        $order = Order::where('order_reference', $order_reference)->first();
 
         return response()->redirectToRoute('showOrderDetails', [
             'is_embedded' => $this->is_embedded,
