@@ -496,12 +496,10 @@ class EventCheckoutController extends Controller
                 $session_id = $response->getTransactionReference();
 
                 $ticket_order['transaction_data'] = [];
-                if (isset($response->response) && isset($response->response->processUrl)) {
 
-                    $url_redirect = $response->response->processUrl;
+                $url_redirect = $response->getRedirectUrl();
                    
-                    $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
-                }
+                $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
                 
                 $ticket_order['transaction_data'] += $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
@@ -510,7 +508,7 @@ class EventCheckoutController extends Controller
                 $this->storeOrder($order_reference);
                 
                 
-                Log::info("Redirect url: " . $response->getRedirectUrl());
+                Log::info("Redirect url: " . $url_redirect);
                 $return = [
                     'status' => 'success',
                     'redirectUrl' => $response->getRedirectUrl(),
@@ -960,7 +958,8 @@ class EventCheckoutController extends Controller
     public function paymentCompletedPayU(Request $request)
     { 
         //Petition to PayU
-        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')->get(); //Estado pendiente o en proceso de pago
+        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')
+                ->orWhere('payment_gateway_id','4')->get(); //Estado pendiente o en proceso de pago
         
         if(count($orders)){
             $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
