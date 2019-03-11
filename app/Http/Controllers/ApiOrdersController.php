@@ -94,7 +94,7 @@ class ApiOrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+        var_dump("Hello World");die;
     }
 
     /**
