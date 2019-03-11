@@ -17,50 +17,6 @@ use Validator;
 class ApiOrdersController extends Controller
 {
     /**
-     * __index:__ Display all the Orders of an event
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexByEvent(Request $request, String $event_id)
-    {
-        $query = Order::where("event_id", $event_id)->get();
-
-        // $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
-
-        return OrderResource::collection($query);
-
-    }
-    /**
-     * __index:__ Display all the Orders of an user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function ordersByUsers(Request $request, String $user_id)
-    {
-        $user = User::findOrFail($user_id);
-        $email = $user->email;
-
-        return OrderResource::collection(
-            Order::where("email", $email)
-                ->paginate(config('app.page_size'))
-        );
-    }
-
-       /**
-     * __index:__ Display all the Orders of an user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function meOrders(Request $request)
-    {
-        $user = Auth::user();
-
-        return OrderResource::collection(
-            Order::where("account_id", $user->id)
-                ->paginate(config('app.page_size'))
-        );
-    }
-    /**
      * Display all the Orders.
      *
      * @return \Illuminate\Http\Response
@@ -121,6 +77,38 @@ class ApiOrdersController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Orders  $orders
@@ -130,6 +118,51 @@ class ApiOrdersController extends Controller
     {    
         $order = Order::findOrFail($orders_id);
         return new OrderResource($order);
+    }
+
+        /**
+     * __index:__ Display all the Orders of an event
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByEvent(Request $request, String $event_id)
+    {
+        $query = Order::where("event_id", $event_id)->get();
+
+        // $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+
+        return OrderResource::collection($query);
+
+    }
+    /**
+     * __index:__ Display all the Orders of an user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ordersByUsers(Request $request, String $user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $email = $user->email;
+
+        return OrderResource::collection(
+            Order::where("email", $email)
+                ->paginate(config('app.page_size'))
+        );
+    }
+
+       /**
+     * __index:__ Display all the Orders of an user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function meOrders(Request $request)
+    {
+        $user = Auth::user();
+
+        return OrderResource::collection(
+            Order::where("account_id", $user->id)
+                ->paginate(config('app.page_size'))
+        );
     }
 
     /**
@@ -190,16 +223,6 @@ class ApiOrdersController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Orders $orders)
-    {
-        //
-    }
 
     /**
      * Show the order details page
@@ -236,31 +259,10 @@ class ApiOrdersController extends Controller
      */
     public function storeAttendee(Request $request, String $event_id, String $order_id)
     { 
-        // $attendee_details = [
-        //     'ticket_id' => $ticket,
-        //     'qty' => $current_ticket_quantity
-        // ];
-
-        // $request_data = 
-        // "tiket_holder_Cédula": [
-        //     {
-        //         "5c4a4773342254198e226262": "1014180319"
-        //     }
-        // ],
-        // "tiket_holder_names": [
-        //     {
-        //         "5c4a4773342254198e226262": "kimberly mateus"
-        //     }
-        // ];
-
         $data = $request->json()->all();
-
         $attendee_details = $data['attendee_details'];
-
         $request_data = $data['request_data'];
-
         $result = OrdersServices::addAttendee($attendee_details, $order_id, $event_id, $request_data);
-        
         $response = (['status' => $result->status, 'message' => $result->message]);
         return $response;
     }
@@ -282,35 +284,6 @@ class ApiOrdersController extends Controller
 
             $event = Event::find($event_id);
             $user_properties = $event->user_properties;
-
-            // $validations = [
-            //     'email' => 'required|email',
-            //     'other_fields' => 'sometimes',
-            // ];
-            
-            // foreach($user_properties as $user_property){
-
-            //     if($user_property['mandatory'] !== true)continue;
-
-            //         $event = $user_property['name'];
-
-            //         $validations [$event] = 'required';
-                    
-            //     }
-
-            // //este validador pronto se va a su clase de validacion
-            // $validator = Validator::make(
-            //     $userData, 
-            //     $validations
-            // );
-
-            // if ($validator->fails()) {
-            //     return response(
-            //         $validator->errors(),
-            //         422
-            //     );
-            // }
-
             $userData = $request->json()->all();
 
             if (isset($eventUserData['properties'])) {
@@ -323,8 +296,6 @@ class ApiOrdersController extends Controller
             if (isset($order_id)) {
                 $eventUserData['order_id'] = $order_id;
             }
-
-            // return $userData;
 
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
             $response = new OrderResource($result->data);
