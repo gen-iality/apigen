@@ -8,6 +8,7 @@ use App\Attendee;
 use App\Event;
 use App\User;
 use App\Models\EventStats;
+use App\Models\OrderStatus;
 use App\Order;
 use App\evaLib\Services\Order as OrderService;
 use DB;
@@ -127,12 +128,16 @@ class EventOrdersController extends Controller
     public function showEditOrder(Request $request, $order_id)
     {
         $order = Order::findOrFail($order_id);
+        $orderStatus = OrderStatus::all();
+        $tickets = Attendee::where('order_id',$order->id)->get();
 
         $data = [
             'order'     => $order,
+            'tickets'   => $tickets,
             'event'     => $order->event(),
             'attendees' => $order->attendees()->withoutCancelled()->get(),
             'modal_id'  => $request->get('modal_id'),
+            'orderStatus' => $orderStatus,
         ];
 
         return view('ManageEvent.Modals.EditOrder', $data);
@@ -201,14 +206,40 @@ class EventOrdersController extends Controller
             ]);
         }
 
+        //UPDATE ORDERS
+
         $order = Order::findOrFail($order_id);
 
         $order->first_name = $request->get('first_name');
         $order->last_name = $request->get('last_name');
         $order->email = $request->get('email');
+        $order->order_status_id = $request->get('order_status_id');
 
         $order->update();
 
+        //UPDATE TICKETS
+        //Cargamos los datos de los asistentes de la orden
+        $attendees = Attendee::where('order_id',$order_id)->get();
+        //Necesitamos el evento para cargar las propiedades de los usuarios
+        $event = Event::findOrFail($order->event_id);
+        //Recorremos cada uno de los attendizes
+        foreach($attendees as $index => $attende){
+            $attende_properties = $attende->properties;
+            //Generamos un array con los nuevos campos, guardamos los nuevos datos ahí
+            $user_properties_array = [];
+            foreach($event->user_properties as $user_properties){
+                //Guardamos valor uno por uno
+                $property_name = $user_properties['name'];
+                //Capturamos el valor del campo del Request, recuerde que este llega con un valor creciende (1,2,3, ...)
+                $name_field = $property_name.'_'.$index;
+                //Nuevo Valor que se debe reeemplazar
+                $property_new_value = $request->get($name_field);
+                $user_properties_array += [$property_name => $property_new_value];
+            }
+            //Guardamos el array y actualizamos
+            $attende->properties = $user_properties_array;
+            $attende->update();
+        }
 
         \Session::flash('message', trans("Controllers.the_order_has_been_updated"));
 
@@ -228,6 +259,7 @@ class EventOrdersController extends Controller
      */
     public function postCancelOrder(Request $request, $order_id)
     {
+        var_dump(trans("Controllers.refund_only_numbers_error"));die;
         $rules = [
             'refund_amount' => ['numeric'],
         ];
