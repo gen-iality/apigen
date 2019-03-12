@@ -40,13 +40,13 @@ class PetitionPlaceToPay extends Command
      */
     public function handle()
     {
-        Log::info('new cron');
-        $pending_code = "5c4a299c5c93dc0eb199214a";
-        $orders = Order::select('order_reference')->where('order_status_id',$pending_code)->get();
-        foreach($orders as $order){
-            $EventCheckoutController = app()->make('App\Http\Controllers\EventCheckoutController');
-            $response = app()->call([$EventCheckoutController, 'showOrderPaymentStatusDetails'], ['order_reference' => $order->order_reference, 'cron' => true]);
-            Log::info($response);
-        }
+        // Log::info('new cron');
+        // $pending_code = "5c4a299c5c93dc0eb199214a";
+        // $orders = Order::select('order_reference')->where('order_status_id',$pending_code)->get();
+        // foreach($orders as $order){
+        //     $EventCheckoutController = app()->make('App\Http\Controllers\EventCheckoutController');
+        //     $response = app()->call([$EventCheckoutController, 'showOrderPaymentStatusDetails'], ['order_reference' => $order->order_reference, 'cron' => true]);
+        //     Log::info($response);
+        // }
     }
 }

@@ -4606,7 +4606,7 @@ function log() {
                         }
                         switch (data.status) {
                             case 'success':
-
+                            //console.log("data",data);return;
                                 if (data.redirectUrl) {
                                     if(data.redirectData)  {
                                         $.redirectPost(data.redirectUrl, data.redirectData);
@@ -4880,7 +4880,8 @@ $.extend(
         {
             var form = '';
             $.each( args, function( key, value ) {
-                value = value.split('"').join('\"')
+                console.log("key",key,value);
+                value = (String (value)).split('"').join('\"')
                 form += '<input type="hidden" name="'+key+'" value="'+value+'">';
             });
             $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo($(document.body)).submit();

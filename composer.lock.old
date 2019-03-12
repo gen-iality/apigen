@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c5465837ed6f18cdd7dc2ccc67ac4c9",
+    "content-hash": "841a18c87e8adfcdb47e4d6f27068a95",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.87.14",
+            "version": "3.87.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1d442bd93d3648e403ab895b5e1f464b4aa1b376"
+                "reference": "a9b67cbcf53eaebdc0de5b7f0c78818ae9848a15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1d442bd93d3648e403ab895b5e1f464b4aa1b376",
-                "reference": "1d442bd93d3648e403ab895b5e1f464b4aa1b376",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a9b67cbcf53eaebdc0de5b7f0c78818ae9848a15",
+                "reference": "a9b67cbcf53eaebdc0de5b7f0c78818ae9848a15",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-02-19T19:08:06+00:00"
+            "time": "2019-02-18T19:17:32+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -3844,47 +3844,6 @@
             "time": "2018-12-26T21:17:30+00:00"
         },
         {
-            "name": "modev/omnipay-payu",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://cesarbarrios@bitbucket.org/modev/omnipay-payu.git",
-                "reference": "6c4df2dddd135d973c2ba6de0b65ae8350f79f31"
-            },
-            "require": {
-                "omnipay/common": "~3.0",
-                "php-http/guzzle6-adapter": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\PayU\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Mukhamadeev",
-                    "email": "mukhamadeevroman@ya.ru"
-                }
-            ],
-            "description": "PayU Russia driver for the Omnipay payment processing library",
-            "homepage": "https://github.com/RomM1/omnipay-payu",
-            "keywords": [
-                "gateway",
-                "merchant",
-                "omnipay",
-                "pay",
-                "payment",
-                "payu",
-                "payu-russia",
-                "purchase"
-            ],
-            "time": "2019-02-19T08:59:37+00:00"
-        },
-        {
             "name": "modev/placetopay",
             "version": "1.0",
             "source": {
@@ -6075,7 +6034,7 @@
                     "email": "mukhamadeevroman@ya.ru"
                 }
             ],
-            "description": "PayU Russia driver for the Omnipay payment processing library",
+            "description": "payu Russia driver for the Omnipay payment processing library",
             "homepage": "https://github.com/RomM1/omnipay-payu",
             "keywords": [
                 "gateway",
@@ -6228,27 +6187,27 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "2.33.0",
+            "version": "2.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "9da0a1618b0c85f71ef7e11b942d5f6f92d2c063"
+                "reference": "a6ddad06f2d8899178a909f72cddfea497e1e9cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/9da0a1618b0c85f71ef7e11b942d5f6f92d2c063",
-                "reference": "9da0a1618b0c85f71ef7e11b942d5f6f92d2c063",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/a6ddad06f2d8899178a909f72cddfea497e1e9cf",
+                "reference": "a6ddad06f2d8899178a909f72cddfea497e1e9cf",
                 "shasum": ""
             },
             "require": {
-                "illuminate/auth": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
-                "illuminate/container": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
-                "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
-                "illuminate/database": "~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/auth": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/container": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/database": "~5.4.0|~5.5.0|~5.6.0|~5.7.0",
                 "php": ">=7.0"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.4.2|~3.5.0|~3.6.0|~3.7.0|~3.8.0",
+                "orchestra/testbench": "~3.4.2|~3.5.0|~3.6.0|~3.7.0",
                 "phpunit/phpunit": "^5.7|6.2|^7.0",
                 "predis/predis": "^1.1"
             },
@@ -6292,7 +6251,7 @@
                 "security",
                 "spatie"
             ],
-            "time": "2019-02-20T15:56:22+00:00"
+            "time": "2019-02-13T16:05:27+00:00"
         },
         {
             "name": "spatie/laravel-tail",
@@ -9046,16 +9005,16 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "2.1.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "8b389aebe1b8b0578430bda0c7c95a829608e059"
+                "reference": "8b8454ea6958c3dee38453d3bd571e023108c91f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/8b389aebe1b8b0578430bda0c7c95a829608e059",
-                "reference": "8b389aebe1b8b0578430bda0c7c95a829608e059",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/8b8454ea6958c3dee38453d3bd571e023108c91f",
+                "reference": "8b8454ea6958c3dee38453d3bd571e023108c91f",
                 "shasum": ""
             },
             "require": {
@@ -9067,7 +9026,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -9091,7 +9050,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2019-02-20T10:12:59+00:00"
+            "time": "2018-02-01T13:07:23+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -9945,7 +9904,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "maxhoffmann/parsedown-laravel": 20,
-        "modev/omnipay-payu": 20,
         "nitmedia/wkhtml2pdf": 20
     },
     "prefer-stable": true,

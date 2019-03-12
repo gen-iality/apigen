@@ -32,7 +32,7 @@
 
                 <div style="width:100%">
                     <div style=" width:40%; margin: 0 auto">
-                        <img src="../../../images/logo.png" width="100%"/>
+                        <img src="{{ asset('images/logo.png') }}" width="100%"/>
                     </div>
                 </div>
                 @if($status == 'APPROVED')
@@ -92,7 +92,7 @@
                             <p style="margin:0 0 0 1em;">{{$reference}}</p>
                         </div>
                     </div>  
-                    @if($payment)
+                    @if(isset($payment))
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
                             <h3 style="margin: 0;">Total</h3>
@@ -106,6 +106,21 @@
                     <div style="display:block;">
                         <h3 style="margin: 0;">Descripción:</h3>
                         <p style="text-align:center">{{$payment->description()}}</p>
+                    </div>
+                    @else
+                    <div style="display:block; width:100%; margin-bottom: 1em;  ">
+                        <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
+                            <h3 style="margin: 0;">Total</h3>
+                            <p style="margin: 0 0 0 1em;">{{$order_total}}.{{$currency}}</p>
+                        </div>
+                        <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
+                            <h3 style="margin: 0;">Fecha</h3>
+                            <p style="margin:0 0 0 1em;">{{$today}}</p>
+                        </div>
+                    </div>
+                    <div style="display:block;">
+                        <h3 style="margin: 0;">Descripción:</h3>
+                        <p style="text-align:center">{{$description}}</p>
                     </div>
                     @endif
                     @if($status == 'APPROVED')

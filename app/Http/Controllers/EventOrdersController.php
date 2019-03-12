@@ -366,8 +366,13 @@ class EventOrdersController extends Controller
      */
     public function showExportOrders($event_id, $export_as)
     {
+<<<<<<< HEAD
         $start = microtime(true);
         $event = Event::with('orders')->findOrFail($event_id);
+=======
+        $event = Event::findOrFail($event_id);
+        Excel::create('orders-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
+>>>>>>> 6fcaf954c9dcb5bd8cb0d3b4ea1097050616d635
 
         Excel::create('orders-' .$event->title. '-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
             
@@ -375,6 +380,7 @@ class EventOrdersController extends Controller
             
             // Chain the setters
             $excel->setCreator(config('attendize.app_name'))
+<<<<<<< HEAD
             ->setCompany(config('attendize.app_name'));
             
             $excel->sheet('orders_1', function ($sheet) use ($event) {
@@ -414,6 +420,49 @@ class EventOrdersController extends Controller
                             $order['created_at']
                             ]);	
                 }
+=======
+                ->setCompany(config('attendize.app_name'));
+
+
+                $data = Order::where('orders.event_id', '=', $event->id)
+                    ->where('orders.event_id', '=', $event->id)
+                    ->select([
+                        'orders.first_name',
+                        'orders.last_name',
+                        'orders.email',
+                        'orders.order_reference',
+                        'orders.amount',
+                        // \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
+                        // \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
+                        'orders.amount_refunded',
+                        'orders.created_at',
+                    ])->get();
+
+                return $data;
+
+
+            $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
+
+                // \DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
+                $yes = strtoupper(trans("basic.yes"));
+                $no = strtoupper(trans("basic.no"));
+                $data = Order::where('orders.event_id', '=', $event->id)
+                    ->where('orders.event_id', '=', $event->id)
+                    ->select([
+                        'orders.first_name',
+                        'orders.last_name',
+                        'orders.email',
+                        'orders.order_reference',
+                        'orders.amount',
+                        // \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
+                        // \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
+                        'orders.amount_refunded',
+                        'orders.created_at',
+                    ])->get();
+                //DB::raw("(CASE WHEN UNIX_TIMESTAMP(`attendees.arrival_time`) = 0 THEN '---' ELSE 'd' END) AS `attendees.arrival_time`"))
+
+                $sheet->fromArray($data);
+>>>>>>> 6fcaf954c9dcb5bd8cb0d3b4ea1097050616d635
 
                 // Add headings to first row
                 $sheet->row(1, [

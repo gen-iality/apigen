@@ -38,7 +38,7 @@ $(function() {
                         }
                         switch (data.status) {
                             case 'success':
-
+                            alert("huy");return;
                                 if (data.redirectUrl) {
                                     if(data.redirectData)  {
                                         $.redirectPost(data.redirectUrl, data.redirectData);

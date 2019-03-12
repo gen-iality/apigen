@@ -206,10 +206,10 @@ Route::group(
         'as'   => 'showOrderPaymentStatusDetails',
         'uses' => 'EventCheckoutController@showOrderPaymentStatusDetails',
     ]);
-        //Verificar orden a placetopay
-    Route::get('order/{order_reservation_reference}/payment/status', [
-        'as'   => 'showOrderPaymentStatusDetails',
-        'uses' => 'EventCheckoutController@showOrderPaymentStatusDetailsStatus',
+    //Verify orden from placetopay or payu
+    Route::get('order/{order_reservation_reference}/payment/status/{payment_gateway}', [
+        'as'   => 'showOrderPaymentStatusPaymentGateway',
+        'uses' => 'EventCheckoutController@showOrderPaymentStatusPaymentGateway',
     ]);
 
     Route::get('order/{order_reference}/tickets', [
@@ -217,6 +217,12 @@ Route::group(
         'uses' => 'EventCheckoutController@showOrderTickets',
     ]);
 
+    /* RESPONSE PAYU */
+
+    Route::get('order/{order_reservation_reference}/payment/PayU', [
+        'as'   => 'showOrderPaymentStatusDetailsPayU',
+        'uses' => 'EventCheckoutController@showOrderPaymentStatusDetailsPayU',
+    ]);
     
     /*
      * Backend routes
@@ -783,6 +789,17 @@ Route::post('order/paymentCompleted', [
     'as'   => 'completeOrder',
     'uses' => 'EventCheckoutController@paymentCompleted',
 ]);
+
+Route::get('order/paymentCompleted/PayU', [
+    'as'   => 'completeOrderPayU',
+    'uses' => 'EventCheckoutController@paymentCompletedPayU',
+]);
+
+Route::post('order/paymentCompleted/PayU', [
+    'as'   => 'completeOrderPayUPost',
+    'uses' => 'EventCheckoutController@paymentCompletedPayU',
+]);
+
 Route::get('paymentCompleted/order/{reference_order}', [
     'as'   => 'orderCompleted',
     'uses' => 'EventCheckoutController@completePayment',                                                                                                                                                                            
