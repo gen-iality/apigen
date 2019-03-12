@@ -17,6 +17,7 @@ use Log;
 use Mail;
 use Omnipay;
 use Validator;
+use Carbon\Carbon;
 
 class EventOrdersController extends Controller
 {
@@ -363,60 +364,85 @@ class EventOrdersController extends Controller
      * @param $event_id
      * @param string $export_as Accepted: xls, xlsx, csv, pdf, html
      */
-    public function showExportOrders($event_id, $export_as = 'xls')
+    public function showExportOrders($event_id, $export_as)
     {
-        $event = Event::findOrFail($event_id);
+        $start = microtime(true);
+        $event = Event::with('orders')->findOrFail($event_id);
 
-        Excel::create('orders-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
-
+        Excel::create('orders-' .$event->title. '-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
+            
             $excel->setTitle('Orders For Event: ' . $event->title);
-
+            
             // Chain the setters
             $excel->setCreator(config('attendize.app_name'))
-                ->setCompany(config('attendize.app_name'));
+            ->setCompany(config('attendize.app_name'));
+            
+            $excel->sheet('orders_1', function ($sheet) use ($event) {
+                $orders = Order::with(['attendees','attendees.ticket'])
+                                ->where('event_id',$event->id)
+                                ->where('order_status_id', config('attendize.order_complete'))
+                                ->orderBy('DESC')->get();
 
-            $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
+                $indice = 0;
+                foreach($orders as $index => $order) {
+                    $attendees = $order->attendees;
+                    $description = "";
+                    $currency = [];
+                    $stage = [];
+                    $tickets = [];
+                    foreach($attendees as $attendee) {
+                        if(!isset($tickets[$attendee->ticket->description])) {
+                            $tickets[$attendee->ticket->description] = 0;
+                        }
+                        $tickets[$attendee->ticket->description] ++;
+                        $currency[] = $attendee->ticket->currency;
+                        $stage[] = $attendee->ticket->stage;
+                    }
+                    $description = urldecode(str_replace('=', ':', http_build_query($tickets, null, ',')));
+                    $currency = array_unique($currency);
+                    $stage = array_unique($stage);
 
-                \DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
-                $yes = strtoupper(trans("basic.yes"));
-                $no = strtoupper(trans("basic.no"));
-                $data = DB::table('orders')
-                    ->where('orders.event_id', '=', $event->id)
-                    ->where('orders.event_id', '=', $event->id)
-                    ->select([
-                        'orders.first_name',
-                        'orders.last_name',
-                        'orders.email',
-                        'orders.order_reference',
-                        'orders.amount',
-                        \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
-                        \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
-                        'orders.amount_refunded',
-                        'orders.created_at',
-                    ])->get();
-                //DB::raw("(CASE WHEN UNIX_TIMESTAMP(`attendees.arrival_time`) = 0 THEN '---' ELSE 'd' END) AS `attendees.arrival_time`"))
-
-                $sheet->fromArray($data);
+                        $sheet->row(($indice++)+2, [
+                            $order['order_reference'],
+                            $order['first_name'],
+                            $order['last_name'],
+                            $order['email'],
+                            $order['amount'],
+                            implode(",", $currency),
+                            $description,
+                            implode(",", $stage),
+                            $order['created_at']
+                            ]);	
+                }
 
                 // Add headings to first row
                 $sheet->row(1, [
+                    trans("Order.order_ref"),
                     trans("Attendee.first_name"),
                     trans("Attendee.last_name"),
                     trans("Attendee.email"),
-                    trans("Order.order_ref"),
                     trans("Order.amount"),
-                    trans("Order.fully_refunded"),
-                    trans("Order.partially_refunded"),
-                    trans("Order.amount_refunded"),
+                    'Moneda',
+                    'Descripción de la compra',
+                    'Etapa de Venta',
                     trans("Order.order_date"),
                 ]);
 
-                // Set gray background on first row
-                $sheet->row(1, function ($row) {
-                    $row->setBackground('#f5f5f5');
-                });
+                $sheet->cell(
+                    'A1:I1', function ($cell) {
+                        $cell->setBackground('#CFBEE5 f5f5f5');
+                        $cell->setAlignment('center');
+                        $cell->setFontsize('16');
+                    }
+                );
             });
         })->export($export_as);
+        
+        $end = microtime(true) - $start;
+        $sec = intval($end);
+        $micro = $end - $sec;
+        $final = strftime('%T', mktime(0, 0, $sec)) . str_replace('0.', '.', sprintf('%.3f', $micro));
+        var_dump($final);die;
     }
 
     /**

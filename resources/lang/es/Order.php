@@ -3,7 +3,7 @@
 return array(
     'after_order'                  => 'Mensaje para mostrar a los participantes después de que hayan completado su pedido.',
     'after_order_help'             => 'Este mensaje se mostrará a los asistentes una vez que hayan completado con éxito el proceso de pago.',
-    'amount'                       => 'Importe',
+    'amount'                       => 'Monto',
     'amount_refunded'              => 'importe del reembolso',
     'arrived'                      => 'Ha llegado',
     'attendee_cancelled'           => 'Cancelado',
