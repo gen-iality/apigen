@@ -211,16 +211,20 @@ class EventOrdersController extends Controller
         }
 
         //UPDATE ORDERS
-
+        //Validamos si alguno de los campos tiene un cambio, si es asi actualizamos
         $order = Order::findOrFail($order_id);
-
-        $order->first_name = $request->get('first_name');
-        $order->last_name = $request->get('last_name');
-        $order->email = $request->get('email');
-        $order->order_status_id = $request->get('order_status_id');
-
-        $order->update();
-
+        if(
+            $order->first_name != $request->get('first_name') ||
+            $order->last_name != $request->get('last_name') ||
+            $order->email != $request->get('email') ||
+            $order->order_status_id != $request->get('order_status_id')
+        ){
+            $order->first_name = $request->get('first_name');
+            $order->last_name = $request->get('last_name');
+            $order->email = $request->get('email');
+            $order->order_status_id = $request->get('order_status_id');
+            $order->update();
+        }
         //UPDATE TICKETS
         //Cargamos los datos de los asistentes de la orden
         $attendees = Attendee::where('order_id',$order_id)->get();
@@ -243,6 +247,7 @@ class EventOrdersController extends Controller
             $attende_properties = $attende->properties;
             //Generamos un array con los nuevos campos, guardamos los nuevos datos ahí
             $user_properties_array = [];
+            $flag = true;
             foreach($event->user_properties as $user_properties){
                 //Guardamos valor uno por uno
                 $property_name = $user_properties['name'];
@@ -253,12 +258,25 @@ class EventOrdersController extends Controller
                 $user_properties_array += [$property_name => $property_new_value];
             }
             //Guardamos el array y actualizamos
-            $attende->properties = $user_properties_array;
-            $attende->update();
+            if($attende->properties != $user_properties_array){
+                $attende->properties = $user_properties_array;
+                $attende->update();
+            }
         }
 
         //CREATE TICKETS
-        $this->completeTicket($order_id, $request);
+        //Generamos un array con los nuevos campos, guardamos los nuevos datos ahí
+        $user_properties_array = [];
+        $flag = true;
+        foreach($event->user_properties as $user_properties){
+            //Guardamos valor uno por uno
+            $property_name = $user_properties['name'];
+            //Capturamos el valor del campo del Request, recuerde que este llega con un valor creciende (1,2,3, ...)
+            if($request->get($property_name.'_new') && $flag){
+                $this->completeTicket($order_id, $request);
+                $flag = false;
+            }
+        }
 
         \Session::flash('message', trans("Controllers.the_order_has_been_updated"));
 
@@ -291,8 +309,8 @@ class EventOrdersController extends Controller
                 //Buscamos el evento el cual le pertence el ticket
                 $event = Event::findOrFail($event_id);
                 $fields = $event->user_properties;
-                $attendee_increment = 1;
-    
+                $attendee_increment = Attendee::where('order_id',$order_id)->count() + 1;
+                
                 /*
                  * Update the event sales volume
                  */
