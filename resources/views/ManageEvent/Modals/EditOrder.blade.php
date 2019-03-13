@@ -62,58 +62,43 @@
                             ?>
                             @foreach($tickets as $index => $ticket)
                                 <h4>@lang("Public_ViewEvent.ticket_holder_information") {{$index+1}}</h4>
-                                <div class="row">
+                                <div class="row" id="ticket">
                                 @foreach($ticket->properties as $idx=>$property)
                                     <div class="col-xs-6">
                                         <label for="{{$idx}}" class="form-control-label">{{$idx}}</label>
                                         <input type="text" name="{{$idx}}_{{$index}}" class="form-control" value="{{$property}}">
                                     </div>                                    
                                 @endforeach
+                                    <div class="col-xs-6">
+                                        <input type="checkbox" name="delete_{{$index}}" value="true">
+                                        <label for="delete_{{$index}}" class="form-control-label"> Eliminar</label>
+                                    </div> 
                                 </div>
-                            @if(false)
-                                @for($i=0; $i<=2; $i++)
-                                
-
-                                <div class="panel panel-primary">
-
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">
-                                            <b>{{$ticket['ticket']['title']}}</b>: @lang("Public_ViewEvent.ticket_holder_n", ["n"=>$i+1])
-                                        </h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            @foreach($fields as $field)
-                                                <div class="col-xs-6">
-                                                    <div class="form-group">
-                                                        @if($field['mandatory'] == 'true')
-                                                            @if(isset( $field['label']))
-                                                                {!! Form::label($field['name'], $field['label']) !!}
-                                                            @else
-                                                                {!! Form::label($field['name'], $field['name']) !!}
-                                                            @endif
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                                        @else
-                                                        @if(isset( $field['label']))
-                                                            {!! Form::label($field['name'], $field['label']) !!}
-                                                        @else
-                                                            {!! Form::label($field['name'], $field['name']) !!}
-                                                        @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                @endfor
-                                @endif
                             @endforeach
                         </div>
+                        <div class="ticket_holders_details" >
+                            <small>
+                                <h4 align="center">Asistente nuevo</h4>
+                                <small>Este campo solo se debe llenar cuando se agrega un nuevo asistente</small>
+                                <div class="row">
+                                    @foreach($event->first()->user_properties as $property)
+                                        <div class="col-xs-4">
+                                            <label for="{{ $property['name'] }}" class="form-control-label">{{ $property['name'] }}</label>
+                                            <input type="text" name="{{ $property['name'] }}_new" class="form-control" placeholder="ingresa  el dato {{ $property['name'] }} aquí ">
+                                        </div>  
+                                    @endforeach
+                                    <div class="col-xs-4">
+                                        <label for="name_tiquet" class="form-control-label">Nombre del tiquete</label>
+                                            <select class="form-control" name="ticket_id">
+                                            @foreach($tickets_name as $ticket)
+                                                    <option value="{{$ticket->_id}}">{{$ticket->title}}</option>
+                                            @endforeach
+                                            </select>
+                                    </div>  
+                                </div>
+                            </small>
+                        </div>
+
                     </div>
                 </div>
 
@@ -129,3 +114,22 @@
         </div><!-- /end modal content-->
     </div>
 </div>
+
+<script>
+    /*
+     * -------------------------------------------------------------
+     * Simple way for any type of object to be deleted.
+     * -------------------------------------------------------------
+     *
+     * E.g markup:
+     * <a data-route='/route/to/delete' data-id='123' data-type='objectType'>
+     *  Delete This Object
+     * </a>
+     *
+     */
+    $('button.new-tickets-button').on('click', function (e) {
+        var valor = $("#ticket")[0];
+        $("#new-ticket").append($(valor));     
+        console.log("Im here")  
+    })
+</script>
