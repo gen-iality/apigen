@@ -581,6 +581,11 @@ Route::group(
                 'uses' => 'EventOrdersController@showEditOrder',
             ]);
 
+            Route::get('order/{order_id}/transfer/tickets', [
+                'as' => 'orderTransferTickets',
+                'uses' => 'EventOrdersController@showTransferTickets',
+            ]);
+
             Route::post('order/{order_id}/edit', [
                 'as' => 'postOrderEdit',
                 'uses' => 'EventOrdersController@postEditOrder',

@@ -147,6 +147,31 @@ class EventOrdersController extends Controller
         return view('ManageEvent.Modals.EditOrder', $data);
     }
 
+        /**
+     * Shows 'transfer Ticket' modal
+     *
+     * @param Request $request
+     * @param $order_id
+     * @return mixed
+     */
+    public function showTransferTickets(Request $request, $order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        $orderStatus = OrderStatus::all();
+        $tickets = Attendee::where('order_id',$order_id)->get();
+        $tickets_name = Ticket::select('title','_id')->where('event_id',$order->event_id)->get();
+        $data = [
+            'order'     => $order,
+            'tickets'   => $tickets,
+            'tickets_name' => $tickets_name,
+            'event'     => $order->event(),
+            'attendees' => $tickets,
+            'modal_id'  => $request->get('modal_id'),
+            'orderStatus' => $orderStatus,
+        ];
+        return view('ManageEvent.Modals.TransferTickets', $data);
+    }
+
     /**
      * Shows 'Cancel Order' modal
      *
