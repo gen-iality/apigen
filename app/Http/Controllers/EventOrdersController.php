@@ -239,8 +239,14 @@ class EventOrdersController extends Controller
                 $attende->forceDelete();
                 //Disminuimos 1 en la cantidad de boletas compradas
                 $order_items = OrderItem::where('order_id',$order_id)->first();
-                $order_items->quantity = (int)($order_items->quantity) - 1;
-                $order_items->update();
+                if($order_items){
+                    if((int)($order_items->quantity) - 1 != 0){
+                        $order_items->quantity = (int)($order_items->quantity) - 1;
+                        $order_items->update();
+                    }else{
+                        $order_items->forceDelete();
+                    }
+                }
                 continue;
             }
 
@@ -385,13 +391,6 @@ class EventOrdersController extends Controller
             }
 
     }
-
-
-
-
-
-
-
 
     /**
      * Cancels an order
