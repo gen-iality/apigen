@@ -385,6 +385,13 @@ class EventOrdersController extends Controller
 
                 $indice = 0;
                 foreach($orders as $index => $order) {
+                    $date = $order['created_at'];
+                    $date = $date->format('Y-m-d');
+                    $trm_dolar = DB::table('trm')
+                                    ->select('valor')
+                                    ->where('fecha',$date)
+                                    ->get();
+                    $trm_dolar = $trm_dolar[0]['valor'];
                     $attendees = $order->attendees;
                     $description = "";
                     $currency = [];
@@ -402,17 +409,50 @@ class EventOrdersController extends Controller
                     $currency = array_unique($currency);
                     $stage = array_unique($stage);
 
-                        $sheet->row(($indice++)+2, [
-                            $order['order_reference'],
-                            $order['first_name'],
-                            $order['last_name'],
-                            $order['email'],
-                            $order['amount'],
-                            implode(",", $currency),
-                            $description,
-                            implode(",", $stage),
-                            $order['created_at']
-                            ]);	
+                    /* CALCULE OF TAX, COMISION */
+                    $trm = 0;
+                    $amount_dolar = 0;
+                    $amount = $order['amount'];
+                    $comision = $amount *  config('attendize.comision');
+                    $comision = number_format($comision, 2, '.', '');
+                    $tax_comision = $comision * config('attendize.iva_comision');
+                    $tax_comision = number_format($tax_comision, 2, '.', '');
+                    $tax_mocion_11 = $comision * config('attendize.impuesto_mocion_11');
+                    $tax_mocion_9 = $comision * config('attendize.impuesto_mocion_9');
+                    $tax_mocion_all = $tax_mocion_11 + $tax_mocion_9;
+                    $tax_mocion_all = number_format($tax_mocion_all, 2, '.', '');
+                    if (implode(",", $currency) == config('attendize.currency_usd')) { 
+                        /* CALCULE OF TAX, COMISION USD */
+                        $trm = $trm_dolar;
+                        $amount_dolar = $amount * $trm;
+                        $comision = $amount_dolar *  config('attendize.comision');
+                        $comision = number_format($comision, 2, '.', '');
+                        $tax_comision = $comision * config('attendize.iva_comision');
+                        $tax_comision = number_format($tax_comision, 2, '.', '');
+                        $tax_mocion_11 = $comision * config('attendize.impuesto_mocion_11');
+                        $tax_mocion_9 = $comision * config('attendize.impuesto_mocion_9');
+                        $tax_mocion_all = $tax_mocion_11 + $tax_mocion_9;
+                        $tax_mocion_all = number_format($tax_mocion_all, 2, '.', '');
+                        
+                        }   	
+                            $sheet->row(
+                                ($indice++)+2, [
+                                $order['order_reference'],
+                                $order['first_name'],
+                                $order['last_name'],
+                                $order['email'],
+                                implode(",", $currency),
+                                $order['amount'],
+                                $trm,
+                                $amount_dolar,
+                                $comision,
+                                $tax_comision,
+                                $tax_mocion_all,
+                                $description,
+                                implode(",", $stage),
+                                $order['created_at']
+                                ]
+                            );
                 }
 
                 // Add headings to first row
@@ -421,15 +461,20 @@ class EventOrdersController extends Controller
                     trans("Attendee.first_name"),
                     trans("Attendee.last_name"),
                     trans("Attendee.email"),
-                    trans("Order.amount"),
                     'Moneda',
+                    trans("Order.amount"),
+                    'TRM',
+                    'Conversión',
+                    'Comision mocion',
+                    'Iva comision',
+                    'Impuesto Mocion',
                     'Descripción de la compra',
                     'Etapa de Venta',
                     trans("Order.order_date"),
                 ]);
 
                 $sheet->cell(
-                    'A1:I1', function ($cell) {
+                    'A1:L1', function ($cell) {
                         $cell->setBackground('#CFBEE5 f5f5f5');
                         $cell->setAlignment('center');
                         $cell->setFontsize('16');

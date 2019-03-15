@@ -864,7 +864,14 @@ class EventCheckoutController extends Controller
                 $codes = $event->codes_discount;
                 foreach($codes as $key => $code){
                     if($code['id'] == $ticket_order['code_discount']){
-                        $codes[$key]['available'] = false;
+                        if (isset($codes[$key]['quantity']) ) {
+                            $codes[$key]['quantity'] = $codes[$key]['quantity'] - 1;
+                            if (($codes[$key]['quantity']) == 0 ) {
+                                $codes[$key]['available'] = false;
+                            }
+                        } else {
+                            $codes[$key]['available'] = false;
+                        }
                         $event->codes_discount = $codes;
                         $event->save();
                         break;

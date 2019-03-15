@@ -266,34 +266,50 @@ class ManageAccountController extends MyBaseController
     public function postEditCodesPromocional()
     {
         $percentage_discount = Input::get('percentage_discount');
-        $codes_discount = Input::get('codes_discount');
+        $tickets_availability = Input::get('tickets_availability');
+        $codes_title = Input::get('codes_title');
         $event_id = Input::get('event_id');
 
         $event = Event::find($event_id);
 
-        //Generador de códigos
-        $codes = isset($event->codes_discount) ? $event->codes_discount : [];
-        for ($j=0; $j < $codes_discount; $j++) { 
-            $key = '';
-            $longitud = 8;
-            $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
-            $max = strlen($pattern)-1;
-            for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
+        foreach ($event->codes_discount as $code) {
+            if ($code['id'] == $codes_title) {
+                $message_error = 'Ticket name has already been used';
+                return response()->json(
+                    [
+                    'status'  => 'error',
+                    'message' => $message_error,
+                    ]   
+                );
+                break;
+
+            } 
+        }
+            //Generador de códigos
+            $codes = isset($event->codes_discount) ? $event->codes_discount : [];
+            /* Funcion Generar códigos Aleatorios */
+            // for ($j=0; $j < $codes_discount; $j++) { 
+            //     $key = '';
+            //     $longitud = 8;
+            //     $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
+            //     $max = strlen($pattern)-1;
+            //     for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
+            // }
             $code = [
-                'id' => $key,
+                'id' => $codes_title,
                 'percentage' => $percentage_discount,
                 'available' => true,
+                'quantity'  => $tickets_availability,
             ];
             array_push($codes, $code);
-        }
-        $event->codes_discount = $codes;
-        $event->save();
+            $event->codes_discount = $codes;
+            $event->save();
 
-        return response()->json([
-            'status'  => 'success',
-            'data'    => $event->codes_discount,
-            'message' => trans("Controllers.account_successfully_updated"),
-        ]);
+            return response()->json([
+                'status'  => 'success',
+                'data'    => $event->codes_discount,
+                'message' => trans("Controllers.account_successfully_updated"),
+            ]);
     }
 
        /**
