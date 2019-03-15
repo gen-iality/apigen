@@ -29,7 +29,7 @@ class OrganiserDashboardController extends MyBaseController
                 'url'   => route('showEventDashboard', [
                     'event_id' => $event->id
                 ]),
-                'color' => '#4E558F'
+                'color' => '#eaeaea'
             ];
         }
 

@@ -15,8 +15,9 @@
 @stop
 
 @section('page_title')
+<br><br>
 <i class='ico-cart mr5'></i>
-@lang("Event.event_orders")
+    @lang("Event.event_orders")
 <span class="page_title_sub_title hide">
 </span>
 @stop
@@ -121,16 +122,19 @@
                             </td>
                             <td>
                                 @if(isset($order->orderStatus->name))
-                                    <span class="label label-{{(!$order->is_payment_received || $order->is_refunded || $order->is_partially_refunded) ? 'warning' : 'success'}}">
+                                    <span class="label label-{{ ($order->orderStatus->name != 'Completado') ? 'warning' : 'success' }}">
                                         {{ $order->orderStatus->name }}
                                     </span>
                                 @endif
                             </td>
                             <td class="text-center">
+
+                                <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="@lang("Order.view_order")" class="btn btn-xs btn-primary loadModal"><i class="ico-eye"></i></i></a>
+                                <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showEditOrder', ['order_id'=>$order->id])}}" title="Editar Orden" class="btn btn-xs btn-primary loadModal"><i class="ico-edit"></i></a>
+                              {{--  <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('orderTransferTickets', ['order_id'=>$order->id])}}" title="Transferir Tiquetes" class="btn btn-xs btn-primary loadModal"><i class="ico-arrow-right12"></i></a> --}}
                                 <a href="javascript:void(0);" data-modal-id="cancel-order-{{ $order->id }}" data-href="{{route('showCancelOrder', ['order_id'=>$order->id])}}" title="@lang("Order.cancel_order")" class="btn btn-xs btn-danger loadModal">
-                                                @lang("Order.refund/cancel")
-                                            </a>
-                                <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="@lang("Order.view_order")" class="btn btn-xs btn-primary loadModal">@lang("Order.details")</a>
+                                     X
+                                </a>
                             </td>
                         </tr>
                         @endforeach

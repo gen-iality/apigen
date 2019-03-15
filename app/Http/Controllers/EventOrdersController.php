@@ -8,7 +8,10 @@ use App\Attendee;
 use App\Event;
 use App\User;
 use App\Models\EventStats;
+use App\Models\OrderStatus;
 use App\Order;
+use App\Models\Ticket;
+use App\Models\OrderItem;
 use App\evaLib\Services\Order as OrderService;
 use DB;
 use Excel;
@@ -17,7 +20,7 @@ use Log;
 use Mail;
 use Omnipay;
 use Validator;
-use Carbon\Carbon;
+use Carbon;
 
 class EventOrdersController extends Controller
 {
@@ -128,15 +131,45 @@ class EventOrdersController extends Controller
     public function showEditOrder(Request $request, $order_id)
     {
         $order = Order::findOrFail($order_id);
-
+        $orderStatus = OrderStatus::all();
+        $tickets = Attendee::where('order_id',$order_id)->get();
+        $tickets_name = Ticket::select('title','_id')->where('event_id',$order->event_id)->get();
         $data = [
             'order'     => $order,
+            'tickets'   => $tickets,
+            'tickets_name' => $tickets_name,
             'event'     => $order->event(),
             'attendees' => $order->attendees()->withoutCancelled()->get(),
             'modal_id'  => $request->get('modal_id'),
+            'orderStatus' => $orderStatus,
         ];
 
         return view('ManageEvent.Modals.EditOrder', $data);
+    }
+
+        /**
+     * Shows 'transfer Ticket' modal
+     *
+     * @param Request $request
+     * @param $order_id
+     * @return mixed
+     */
+    public function showTransferTickets(Request $request, $order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        $orderStatus = OrderStatus::all();
+        $tickets = Attendee::where('order_id',$order_id)->get();
+        $tickets_name = Ticket::select('title','_id')->where('event_id',$order->event_id)->get();
+        $data = [
+            'order'     => $order,
+            'tickets'   => $tickets,
+            'tickets_name' => $tickets_name,
+            'event'     => $order->event(),
+            'attendees' => $tickets,
+            'modal_id'  => $request->get('modal_id'),
+            'orderStatus' => $orderStatus,
+        ];
+        return view('ManageEvent.Modals.TransferTickets', $data);
     }
 
     /**
@@ -202,14 +235,79 @@ class EventOrdersController extends Controller
             ]);
         }
 
+        //UPDATE ORDERS
+        //Validamos si alguno de los campos tiene un cambio, si es asi actualizamos
         $order = Order::findOrFail($order_id);
+        if(
+            $order->first_name != $request->get('first_name') ||
+            $order->last_name != $request->get('last_name') ||
+            $order->email != $request->get('email') ||
+            $order->order_status_id != $request->get('order_status_id')
+        ){
+            $order->first_name = $request->get('first_name');
+            $order->last_name = $request->get('last_name');
+            $order->email = $request->get('email');
+            $order->order_status_id = $request->get('order_status_id');
+            $order->update();
+        }
+        //UPDATE TICKETS
+        //Cargamos los datos de los asistentes de la orden
+        $attendees = Attendee::where('order_id',$order_id)->get();
+        //Necesitamos el evento para cargar las propiedades de los usuarios
+        $event = Event::findOrFail($order->event_id);
+        //Recorremos cada uno de los attendizes
+        foreach($attendees as $index => $attende){
+            //Miramos si el usuario lo quiere eliminar, para eliminarlo y no continuar con la actualización de datos
+            $field_delete = $name_field = 'delete_'.$index;
+            if($request->get($field_delete)){
+                //Eliminamos attendice
+                $attende->forceDelete();
+                //Disminuimos 1 en la cantidad de boletas compradas
+                $order_items = OrderItem::where('order_id',$order_id)->first();
+                if($order_items){
+                    if((int)($order_items->quantity) - 1 != 0){
+                        $order_items->quantity = (int)($order_items->quantity) - 1;
+                        $order_items->update();
+                    }else{
+                        $order_items->forceDelete();
+                    }
+                }
+                continue;
+            }
 
-        $order->first_name = $request->get('first_name');
-        $order->last_name = $request->get('last_name');
-        $order->email = $request->get('email');
+            $attende_properties = $attende->properties;
+            //Generamos un array con los nuevos campos, guardamos los nuevos datos ahí
+            $user_properties_array = [];
+            $flag = true;
+            foreach($event->user_properties as $user_properties){
+                //Guardamos valor uno por uno
+                $property_name = $user_properties['name'];
+                //Capturamos el valor del campo del Request, recuerde que este llega con un valor creciende (1,2,3, ...)
+                $name_field = $property_name.'_'.$index;
+                //Nuevo Valor que se debe reeemplazar
+                $property_new_value = $request->get($name_field);
+                $user_properties_array += [$property_name => $property_new_value];
+            }
+            //Guardamos el array y actualizamos
+            if($attende->properties != $user_properties_array){
+                $attende->properties = $user_properties_array;
+                $attende->update();
+            }
+        }
 
-        $order->update();
-
+        //CREATE TICKETS
+        //Generamos un array con los nuevos campos, guardamos los nuevos datos ahí
+        $user_properties_array = [];
+        $flag = true;
+        foreach($event->user_properties as $user_properties){
+            //Guardamos valor uno por uno
+            $property_name = $user_properties['name'];
+            //Capturamos el valor del campo del Request, recuerde que este llega con un valor creciende (1,2,3, ...)
+            if($request->get($property_name.'_new') && $flag){
+                $this->completeTicket($order_id, $request);
+                $flag = false;
+            }
+        }
 
         \Session::flash('message', trans("Controllers.the_order_has_been_updated"));
 
@@ -219,6 +317,105 @@ class EventOrdersController extends Controller
         ]);
     }
 
+
+
+    /**
+     * Complete an Ticket
+     *
+     * @param $event_id
+     * @param bool|true $return_json
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function completeTicket($order_id, $request)
+    {
+        //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no
+        //vamos a crear la orden a partir del cache.
+        //EL CACHE ES INDISPENSABLE EN ESTE CONTROLADOR
+
+            try {
+
+                $order = Order::findOrfail($order_id);
+                $event_id = $order->event_id;
+    
+                //Buscamos el evento el cual le pertence el ticket
+                $event = Event::findOrFail($event_id);
+                $fields = $event->user_properties;
+                $attendee_increment = Attendee::where('order_id',$order_id)->count() + 1;
+                
+                /*
+                 * Update the event sales volume
+                 */
+                $event->increment('sales_volume', 1);
+                $event->increment('organiser_fees_volume', 1);
+    
+    
+                /*
+                 * Update the event stats
+                 */
+                $event_stats = EventStats::updateOrCreate([
+                    'event_id' => $event_id,
+                    'date' => (Carbon::now())->toDateString(),
+                ]);
+    
+                $event_stats->increment('tickets_sold', 1);
+    
+                /*
+                    * Insert order items (for use in generating invoices)
+                */
+                //Buscamos el nombre del tiquet y lo buscamos en los order item por el nombre
+                $ticket = Ticket::findOrFail($request->get('ticket_id'));
+                $OrderItem = OrderItem::where('order_id',$order_id)->where('title',$ticket->title)->first();
+                if(isset($OrderItem)){
+                    $OrderItem->quantity = (int)($OrderItem->quantity) + 1;
+                    $OrderItem->update();
+                }else{
+                    $orderItem = new OrderItem();
+                    $orderItem->title = $ticket->title;
+                    $orderItem->quantity = 1;
+                    $orderItem->order_id = $order_id;
+                    $orderItem->unit_price = $ticket->price;
+                    $orderItem->unit_booking_fee = 0;
+                    $orderItem->save();
+                }
+                /*
+                 * Create the attendees
+                 */
+                $attendee = new Attendee();
+
+                //Generamos un array con los nuevos campos, guardamos los nuevos datos ahí
+                $attendee->properties = [];
+                $user_properties_array = [];
+                foreach($event->user_properties as $user_properties){
+                    //Guardamos valor uno por uno
+                    $property_name = $user_properties['name'];
+                    //Capturamos el valor del campo del Request, recuerde que este llega con un valor creciende (1,2,3, ...)
+                    $name_field = $property_name.'_new';
+                    //Nuevo Valor que se debe reeemplazar
+                    $property_new_value = $request->get($name_field);
+                    $user_properties_array += [$property_name => $property_new_value];
+                }
+                //Guardamos el array y actualizamos
+                $attendee->properties = $user_properties_array;
+                $attendee->event_id = $event_id;
+                $attendee->order_id = $order->id;
+                $attendee->ticket_id = $request->get('ticket_id');
+                $attendee->account_id = $event->account->id;
+                $attendee->reference_index = $attendee_increment;
+                $attendee->save();
+
+            } catch (Exception $e) {
+
+                Log::error($e);
+                // DB::rollBack();
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Whoops! There was a problem processing your order. Please try again.',
+                ]);
+
+            }
+
+    }
 
     /**
      * Cancels an order
