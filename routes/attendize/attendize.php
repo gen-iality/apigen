@@ -815,4 +815,10 @@ es temporal más adelante se debe eliminar */
 Route::post('validateTickets/{event_id}/checkout/', [
     'as'   => 'postValidateTickets2',
     'uses' => 'EventCheckoutController@postValidateTickets',
-]);                                                                                                                                                                                     
+]);            
+
+
+Route::get('events/reports/', [
+    'as'   => 'showEventsReports',
+    'uses' => 'EventOrdersController@showAllEventsOrders',
+]);

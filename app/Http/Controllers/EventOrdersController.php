@@ -76,10 +76,31 @@ class EventOrdersController extends Controller
         return view('ManageEvent.Orders', $data);
     }
 
+    /**
+     * Show event orders page
+     *
+     * @param Request $request
+     * @param string $event_id
+     * @return mixed
+     */
+    public function showAllEventsOrders()
+    {
+        $date = '2019-01-16 00:00:00';
+        $id = '5c3fb4ddfb8a3371ef79bd62';
+        $events = Event::all();
+
+        $data = [
+            'events' => $events,
+            'date' => $date,
+        ];
+
+        return view('ManageEvent.globalReport', $data);
+    }
+
 
     public function showOrdersUsers(String $user_id)
     {
-        
+
         $sort_by = 'created_at';
         $sort_order =  'desc';
 
@@ -336,19 +357,19 @@ class EventOrdersController extends Controller
 
                 $order = Order::findOrfail($order_id);
                 $event_id = $order->event_id;
-    
+
                 //Buscamos el evento el cual le pertence el ticket
                 $event = Event::findOrFail($event_id);
                 $fields = $event->user_properties;
                 $attendee_increment = Attendee::where('order_id',$order_id)->count() + 1;
-                
+
                 /*
                  * Update the event sales volume
                  */
                 $event->increment('sales_volume', 1);
                 $event->increment('organiser_fees_volume', 1);
-    
-    
+
+
                 /*
                  * Update the event stats
                  */
@@ -356,9 +377,9 @@ class EventOrdersController extends Controller
                     'event_id' => $event_id,
                     'date' => (Carbon::now())->toDateString(),
                 ]);
-    
+
                 $event_stats->increment('tickets_sold', 1);
-    
+
                 /*
                     * Insert order items (for use in generating invoices)
                 */
@@ -588,7 +609,11 @@ class EventOrdersController extends Controller
                                     ->select('valor')
                                     ->where('fecha',$date)
                                     ->get();
-                    $trm_dolar = $trm_dolar[0]['valor'];
+                    if(isset($trm_dolar[0])) {
+                        $trm_dolar = $trm_dolar[0]['valor'];   
+                    } else {
+                        $trm_dolar = '3150.00';
+                    }
                     $attendees = $order->attendees;
                     $description = "";
                     $currency = [];
@@ -686,6 +711,7 @@ class EventOrdersController extends Controller
         $final = strftime('%T', mktime(0, 0, $sec)) . str_replace('0.', '.', sprintf('%.3f', $micro));
         var_dump($final);die;
     }
+
 
     /**
      * shows 'Message Order Creator' modal
