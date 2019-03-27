@@ -822,3 +822,7 @@ Route::get('events/reports/', [
     'as'   => 'showEventsReports',
     'uses' => 'EventOrdersController@showAllEventsOrders',
 ]);
+Route::get('{event_id}/exportExcel/{export_as?}', [
+    'as'   => 'showEventsReportsExport',
+    'uses' => 'EventOrdersController@showExportOrders',
+]);

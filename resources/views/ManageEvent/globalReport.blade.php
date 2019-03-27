@@ -60,7 +60,7 @@
                                                     {{$event->name}}
                                                 </td>
                                                 <td>
-                                                <a class="button" href="{{route('showExportOrders', ['event_id'=>$event->id,'export_as'=>'xlsx'])}}">@lang("File_format.Excel_xlsx")</a>
+                                                <a class="button" href="{{route('showEventsReportsExport', ['event_id'=>$event->id,'export_as'=>'xlsx'])}}">@lang("File_format.Excel_xlsx")</a>
                                                 </td>
                                         @endif
                                     </tr>
