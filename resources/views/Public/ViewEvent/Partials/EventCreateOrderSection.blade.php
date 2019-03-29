@@ -313,6 +313,7 @@
 
                 <!-- aca verificamos si el stage esta activo dentro de las fechas -->
 
+                @if(($event->seats_configuration)['status'])
                 <div id="chart"></div>
                 <script>
                     var chart = new seatsio.SeatingChart({
@@ -322,9 +323,8 @@
                             language :              "{!! $data_seats['language'] !!}",
                             availableCategories :   {!! json_encode($data_seats['availableCategories']) !!},
                             maxSelectedObjects:     {!! json_encode($data_seats['maxSelectedObjects']) !!},
+                            selectedObjects:        {!! json_encode($data_seats['selectedObjects']) !!},
                             showMinimap: true,
-                            selectedObjects: [
-                            ],
                             onObjectSelected: function(object){
                                 var url = '/checkout/seats';
                                 var data = { data: object, order_reference: '{!! $temporal_id !!}' };
@@ -357,7 +357,7 @@
                         }).render();
 
                 </script>
-
+                @endif
 
 
                {!! Form::hidden('is_embedded', $is_embedded) !!}

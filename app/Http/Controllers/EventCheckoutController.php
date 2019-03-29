@@ -272,50 +272,7 @@ class EventCheckoutController extends Controller
         $fields = $event->user_properties;
 
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
-        $orderService->calculateFinalCosts();
-
-        /**
-         * DATA SEATS JAVASCRIPT
-         * 
-         * event
-         * publicKey
-         * language
-         * availableCategories
-         * maxSelectedObjects
-         * 
-         */
-
-        //variables
-        $date = new \DateTime();
-        $now =  $date->format('Y-m-d H:i:s');
-        $stages = $event->event_stages;
-        $maxSelectedObjects = [];
-        $availableCategories = [];
-        $data_seats = [];
-
-        //maxSelectedObjects 
-        foreach($order_session['tickets'] as $ticket){
-            $title_ticket = $ticket['ticket']->title;
-            array_push($maxSelectedObjects, ['category' =>$title_ticket, 'quantity' => $ticket['qty']]);
-            array_push($availableCategories, $title_ticket );
-        }
-
-             
-        //event: was replace by event_id
-        foreach($stages as $key => $stage){ 
-            if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
-                $event_id =  $event->id.'-'.$stage['stage_id'];
-                break;
-            }
-        }
-
-        $data_seats = [ 
-            'event' => $event_id,
-            'publicKey' => env('SEATS_PUBLICKEY'),
-            'language' => 'es',
-            'availableCategories' => $availableCategories,
-            'maxSelectedObjects'=> $maxSelectedObjects
-        ];      
+        $orderService->calculateFinalCosts();  
         
         $data = $order_session + [
             'event' => $event,
@@ -324,8 +281,66 @@ class EventCheckoutController extends Controller
             'orderService' => $orderService,
             'fields' => $fields,
             'temporal_id' => $order_reference,
-            'data_seats' => $data_seats
         ];
+            
+        /**
+         * DATA SEATS JAVASCRIPT
+         * 
+         * event
+         * publicKey
+         * language
+         * availableCategories
+         * maxSelectedObjects
+         * selectedObjects (save in cache)
+         * 
+         */
+        //if exist the variable
+        if(($event->seats_configuration)['status']){
+
+            //variables
+            $date = new \DateTime();
+            $now =  $date->format('Y-m-d H:i:s');
+            $stages = $event->event_stages;
+            $maxSelectedObjects = [];
+            $availableCategories = [];
+            $data_seats = [];
+
+            //maxSelectedObjects 
+            foreach($order_session['tickets'] as $ticket){
+                $title_ticket = $ticket['ticket']->title;
+                array_push($maxSelectedObjects, ['category' =>$title_ticket, 'quantity' => $ticket['qty']]);
+                array_push($availableCategories, $title_ticket );
+            }
+
+                
+            //event: was replace by event_id
+            foreach($stages as $key => $stage){ 
+                if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+                    $event_id =  $stage['seating_chart'];
+                    break;
+                }
+            }
+
+            //selectedObjects
+            $selectedObjects = [];
+
+            if(isset($order_session['seats_data'])){
+                foreach($order_session['seats_data'] as $key => $seat){ array_push($selectedObjects, $key); }
+            }
+
+            // var_dump($selectedObjects);die;
+
+            $data_seats = [ 
+                'event' => $event_id,
+                'publicKey' => ($event->seats_configuration)['keys']['public'],
+                'language' => 'es',
+                'availableCategories' => $availableCategories,
+                'maxSelectedObjects' => $maxSelectedObjects,
+                'selectedObjects' => $selectedObjects
+            ];  
+
+            $data['data_seats']  =  $data_seats;
+        }
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
@@ -362,7 +377,7 @@ class EventCheckoutController extends Controller
             unset($order_session['seats_data'][$seat_id]);
         }
         Cache::forever($order_reference, $order_session);
-        return ['status' => 'true'];
+        return ['status' => 'true', 'seats' => $order_session['seats_data']];
     }
 
 
@@ -391,20 +406,26 @@ class EventCheckoutController extends Controller
             ]);
         }
 
-        //If don't have select all seats, is show a message.
-        $seats_selected = isset($ticket_order['seats_data']) ? count($ticket_order['seats_data']): 0;
-        $total_ticket_quantity = $ticket_order['total_ticket_quantity'];
 
-        if($seats_selected != $total_ticket_quantity){
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Falta por seleccionar '.($total_ticket_quantity-$seats_selected).' asientos en el mapa',
-            ]);
-        }
 
         //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
 
+        //If don't have select all seats, is show a message. else save position seats
+        if(($event->seats_configuration)['status']){
+            $seats_selected = isset($ticket_order['seats_data']) ? count($ticket_order['seats_data']): 0;
+            $total_ticket_quantity = $ticket_order['total_ticket_quantity'];
+
+            if($seats_selected != $total_ticket_quantity){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Falta por seleccionar '.($total_ticket_quantity-$seats_selected).' asientos en el mapa',
+                ]);
+            }else{
+                $seats = [];
+                foreach($ticket_order['seats_data'] as $key => $seat){  array_push($seats, $key); }
+            }
+        }
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
         Cache::forever($order_reference, $ticket_order);
@@ -415,9 +436,16 @@ class EventCheckoutController extends Controller
         if ($orderRequiresPayment && $request->get('pay_offline') && $event->enable_offline_payments) {
             return $this->completeOrder($event_id);
         }
-
         //When the purshase is free 
         if (!$orderRequiresPayment) {
+
+            /**
+            * Seats Confirmation 
+            */
+
+            $seatsio = new \Seatsio\SeatsioClient('2c69f4e5-6bc5-46c0-b173-dfd28bf39e3c');      // key secret 
+            $seatsio->events->book('5c59ebee34225402ea3cd4d6-1234567', $seats); // key event
+
             $this->storeOrder($order_reference, true);
             $this->completeOrder($order_reference);
             
@@ -430,7 +458,7 @@ class EventCheckoutController extends Controller
             $return = [
                 'status' => 'success',
                 'redirectUrl' => url('/').'/order/'.$order_reference,
-                'message' => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name,
+                'message' => 'Redirigido a la orden',
             ];
             return response()->json($return);
             
@@ -567,7 +595,20 @@ class EventCheckoutController extends Controller
             }
 
             $transaction = $gateway->purchase($transaction_data);
-            $response = $transaction->send();   
+            $response = $transaction->send(); 
+
+            /**
+            * Seats Confirmation 
+            */
+            if(($event->seats_configuration)['status']){
+                $seats = [];
+                foreach($ticket_order['seats_data'] as $key => $seat){  array_push($seats, $key); }
+                $seatsio = new \Seatsio\SeatsioClient('2c69f4e5-6bc5-46c0-b173-dfd28bf39e3c');      // key secret 
+                $seatsio->events->book('5c59ebee34225402ea3cd4d6-1234567', $seats); // key event
+            }
+            /**
+             * Redirection to payment Gatway, it'free redirect to completeOrder Controller
+             */
             if ($response->isSuccessful()) {
                 
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
@@ -606,6 +647,7 @@ class EventCheckoutController extends Controller
                 if ($response->getRedirectMethod() == 'POST') {
                     $return['redirectData'] = $response->getRedirectData();
                 }
+
                 return response()->json($return);
 
             } else {
