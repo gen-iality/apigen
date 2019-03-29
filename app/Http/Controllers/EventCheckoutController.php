@@ -337,14 +337,32 @@ class EventCheckoutController extends Controller
     /**
      * Undocumented function
      *
+     * This controller run every time we select a seat
+     * Get the cache for the order_reference, then, get if this seat was selected and finally
+     * get the id of seat. 
+     * 
+     * Now, we verify if seat was selected, if was selected add inthe variable seats_data.
+     * if not, this position is deleted
+     * 
+     * Save of new in the cache.
+     * 
      * @param Request $request
      * @param [type] $order_reference
      * @return void
      */
 
     public function postCreateSeats(Request $request){
+        $order_reference = $request->order_reference;
+        $seat_id = ($request->data)['id'];
+        $seat_selected = ($request->data)['selected'];
         $order_session = Cache::get($request->order_reference);
-        return $order_session;
+        if($seat_selected){
+            $order_session['seats_data'][$seat_id] = $request->data;
+        }else{
+            unset($order_session['seats_data'][$seat_id]);
+        }
+        Cache::forever($order_reference, $order_session);
+        return ['status' => 'true'];
     }
 
 
@@ -365,11 +383,22 @@ class EventCheckoutController extends Controller
         $event_id = $ticket_order["event_id"];
 
         //If there's no session kill the request and redirect back to the event homepage.
-        //Si no estan los terminos y condiciones , no continua.
+        //If don't have the terms and conditions, not continue
         if (!$request->has('terms')) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Por favor aceptar los términos y condiciones',
+            ]);
+        }
+
+        //If don't have select all seats, is show a message.
+        $seats_selected = isset($ticket_order['seats_data']) ? count($ticket_order['seats_data']): 0;
+        $total_ticket_quantity = $ticket_order['total_ticket_quantity'];
+
+        if($seats_selected != $total_ticket_quantity){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Falta por seleccionar '.($total_ticket_quantity-$seats_selected).' asientos en el mapa',
             ]);
         }
 
@@ -657,6 +686,8 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $order_reference)->first();
                 $ticket_order = Cache::get($order_reference);
+                
+
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
                     $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
@@ -753,10 +784,28 @@ class EventCheckoutController extends Controller
                             $attendee->order_id = $order->id;
                             $attendee->ticket_id = $attendee_details['ticket']['id'];
                             $attendee->account_id = $event->account->id;
-    
                             $attendee->reference_index = $attendee_increment;
-    
-    
+
+                            /**
+                             * Attendeize seats, assignment
+                             */
+
+                            if($ticket_order['seats_data']){
+                                //Get the seats
+                                $seats = $ticket_order['seats_data'];
+                                foreach($seats as $key => $seat){
+                                    $seat_category = $seat['category']['label'];
+                                    $ticket_name = Ticket::find($attendee->ticket_id)->title;
+                                    // we compare the seat_category and ticket_name if this is true save the seat and delete of array of ticket_order, and break the foreach
+                                    if($seat_category == $ticket_name){
+                                        $attendee->seat = $seat['labels'];
+                                        unset($ticket_order['seats_data'][$key]);
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            
                             $attendee->save();
                             
                             /*
