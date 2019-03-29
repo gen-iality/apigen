@@ -273,6 +273,49 @@ class EventCheckoutController extends Controller
 
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();
+
+        /**
+         * DATA SEATS JAVASCRIPT
+         * 
+         * event
+         * publicKey
+         * language
+         * availableCategories
+         * maxSelectedObjects
+         * 
+         */
+
+        //variables
+        $date = new \DateTime();
+        $now =  $date->format('Y-m-d H:i:s');
+        $stages = $event->event_stages;
+        $maxSelectedObjects = [];
+        $availableCategories = [];
+        $data_seats = [];
+
+        //maxSelectedObjects 
+        foreach($order_session['tickets'] as $ticket){
+            $title_ticket = $ticket['ticket']->title;
+            array_push($maxSelectedObjects, ['category' =>$title_ticket, 'quantity' => $ticket['qty']]);
+            array_push($availableCategories, $title_ticket );
+        }
+
+             
+        //event: was replace by event_id
+        foreach($stages as $key => $stage){ 
+            if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+                $event_id =  $event->id.'-'.$stage['stage_id'];
+                break;
+            }
+        }
+
+        $data_seats = [ 
+            'event' => $event_id,
+            'publicKey' => env('SEATS_PUBLICKEY'),
+            'language' => 'es',
+            'availableCategories' => $availableCategories,
+            'maxSelectedObjects'=> $maxSelectedObjects
+        ];      
         
         $data = $order_session + [
             'event' => $event,
@@ -281,6 +324,7 @@ class EventCheckoutController extends Controller
             'orderService' => $orderService,
             'fields' => $fields,
             'temporal_id' => $order_reference,
+            'data_seats' => $data_seats
         ];
 
         if ($this->is_embedded) {
@@ -289,6 +333,20 @@ class EventCheckoutController extends Controller
 
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $order_reference
+     * @return void
+     */
+
+    public function postCreateSeats(Request $request){
+        $order_session = Cache::get($request->order_reference);
+        return $order_session;
+    }
+
 
     /**
      * postCreateOrder

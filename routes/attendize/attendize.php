@@ -826,3 +826,11 @@ Route::get('{event_id}/exportExcel/{export_as?}', [
     'as'   => 'showEventsReportsExport',
     'uses' => 'EventOrdersController@showExportOrders',
 ]);
+
+/**
+ * Checout Seats
+ */
+Route::post('checkout/seats', [
+    'as'   => 'postCreateSeats',
+    'uses' => 'EventCheckoutController@postCreateSeats',
+]);

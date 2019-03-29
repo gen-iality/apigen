@@ -311,6 +311,55 @@
                 </div>
                 @endif
 
+                <!-- aca verificamos si el stage esta activo dentro de las fechas -->
+
+                <div id="chart"></div>
+                <script>
+                    var chart = new seatsio.SeatingChart({
+                            divId: 'chart',
+                            event :                 "{!! $data_seats['event'] !!}",  
+                            publicKey :             "{!! $data_seats['publicKey'] !!}",
+                            language :              "{!! $data_seats['language'] !!}",
+                            availableCategories :   {!! json_encode($data_seats['availableCategories']) !!},
+                            maxSelectedObjects:     {!! json_encode($data_seats['maxSelectedObjects']) !!},
+                            showMinimap: true,
+                            selectedObjects: [
+                            ],
+                            onObjectSelected: function(object){
+                                var url = '/checkout/seats';
+                                var data = { data: object, order_reference: '{!! $temporal_id !!}' };
+
+                                fetch(  url, {
+                                        method: 'POST', // or 'PUT'
+                                        body: JSON.stringify(data), // data can be `string` or {object}!
+                                        headers:{
+                                            'Content-Type': 'application/json'
+                                        }
+                                }).then(res => res.json())
+                                .catch(error => console.error('Error:', error))
+                                .then(response => console.log('Success:', response));
+                                
+                            },
+                            onObjectDeselected: function(object){
+                                var url = '/checkout/seats';
+                                var data = { data: object, order_reference: '{!! $temporal_id !!}' };
+
+                                fetch(  url, {
+                                        method: 'POST', // or 'PUT'
+                                        body: JSON.stringify(data), // data can be `string` or {object}!
+                                        headers:{
+                                            'Content-Type': 'application/json'
+                                        }
+                                }).then(res => res.json())
+                                .catch(error => console.error('Error:', error))
+                                .then(response => console.log('Success:', response));
+                            }
+                        }).render();
+
+                </script>
+
+
+
                {!! Form::hidden('is_embedded', $is_embedded) !!}
                {!! Form::submit(trans("Public_ViewEvent.checkout_submit"), ['class' => 'btn btn-lg btn-success card-submit', 'style' => 'width:100%;']) !!}
 

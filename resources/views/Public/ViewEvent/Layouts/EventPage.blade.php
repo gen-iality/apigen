@@ -10,7 +10,7 @@
          /_/    \_\__|\__\___|_| |_|\__,_|_/___\___(_)___\___/|_| |_| |_|
 
         -->
-        <title>{{{$event->name}}} - Attendize.com</title>
+        <title>{{{$event->name}}}</title>
 
 
         <meta charset="utf-8" />
@@ -31,6 +31,7 @@
         <meta property="og:site_name" content="Attendize.com" />
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdn.seatsio.net/chart.js"></script>
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
