@@ -281,7 +281,10 @@ class EventCheckoutController extends Controller
             'orderService' => $orderService,
             'fields' => $fields,
             'temporal_id' => $order_reference,
+            'cant'   => 1,
         ];
+
+        // return $data;
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);

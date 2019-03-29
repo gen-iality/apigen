@@ -138,6 +138,7 @@ class EventTicketsController extends MyBaseController
         $ticket->dates = $request->get('dates');
         $ticket->stage_id = strip_tags($request->get('stage'));
         $ticket->price = $request->get('price');
+        $ticket->number_person_per_ticket = $request->get('number_person_per_ticket');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->description = strip_tags($request->get('description'));
@@ -264,6 +265,7 @@ class EventTicketsController extends MyBaseController
         $ticket->dates = $request->get('dates');
         $ticket->currency = $request->get('currency');
         $ticket->description = $request->get('description');
+        $ticket->number_person_per_ticket = $request->get('number_person_per_ticket');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
