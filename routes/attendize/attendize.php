@@ -581,6 +581,11 @@ Route::group(
                 'uses' => 'EventOrdersController@showEditOrder',
             ]);
 
+            Route::get('order/{order_id}/transfer/tickets', [
+                'as' => 'orderTransferTickets',
+                'uses' => 'EventOrdersController@showTransferTickets',
+            ]);
+
             Route::post('order/{order_id}/edit', [
                 'as' => 'postOrderEdit',
                 'uses' => 'EventOrdersController@postEditOrder',
@@ -810,4 +815,14 @@ es temporal más adelante se debe eliminar */
 Route::post('validateTickets/{event_id}/checkout/', [
     'as'   => 'postValidateTickets2',
     'uses' => 'EventCheckoutController@postValidateTickets',
-]);                                                                                                                                                                                     
+]);            
+
+
+Route::get('events/reports/', [
+    'as'   => 'showEventsReports',
+    'uses' => 'EventOrdersController@showAllEventsOrders',
+]);
+Route::get('{event_id}/exportExcel/{export_as?}', [
+    'as'   => 'showEventsReportsExport',
+    'uses' => 'EventOrdersController@showExportOrders',
+]);

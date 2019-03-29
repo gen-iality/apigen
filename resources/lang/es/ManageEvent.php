@@ -59,6 +59,7 @@ return array(
     'no_orders_yet_text'                      => 'Los nuevos pedidos aparecerán aquí a medida que se vayan creando.',
     'order_contact_will_receive_instructions' => 'La persona de contacto del pedido será informada para enviar cualquier respuesta a :email',
     'order_details'                           => 'Detalles del pedido',
+    'tickets_details'                           => 'Detalles de tiquetes',
     'order_overview'                          => 'Resumen de pedidos',
     'order_ref'                               => 'Pedido: Nº:order_ref',
     'order_refunded'                          => ':money de este pedido han sido reembolsados.',

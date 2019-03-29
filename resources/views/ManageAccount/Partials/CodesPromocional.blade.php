@@ -6,6 +6,7 @@
                 <tr>
                 <th scope="col">Código</th>
                 <th scope="col">Porcentaje</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Disponible</th>
                 </tr>
             </thead>
@@ -14,6 +15,11 @@
                 <tr class="3z3m5p3y">
                     <td>{{$code['id']}}</td>
                     <td>{{$code['percentage']}}</td>
+                    @if(isset($code['quantity']))
+                        <td>{{$code['quantity']}}</td>
+                    @else
+                        <td>Undefined</td>
+                    @endif
                     
                     <td>
                         @if($code['available'])
@@ -35,16 +41,26 @@
 {{ Form::hidden('event_id', $event_id) }}
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('percentage_discount', trans("ManageAccount.percentage_discount"), array('class'=>'control-label required')) !!}
-            {!! Form::selectRange('percentage_discount', 0, 100, null, array('class'=>'form-control control-label required')) !!}
+            {!! Form::label('codes_title', trans("ManageAccount.codes_title"), array('class'=>'control-label required')) !!}
+            {!! Form::text('codes_title', null, array('class'=>'form-control control-label required')) !!}
         </div>
     </div>
-    <div class="col-md-7">
+
+    <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('codes_discount', trans("ManageAccount.codes_discount"), array('class'=>'control-label required')) !!}
-            {!! Form::selectRange('codes_discount', 0, 20, null, array('class'=>'form-control control-label required')) !!}
+            {!! Form::label('tickets_availability', trans("ManageAccount.codes_availability"), array('class'=>'control-label required')) !!}
+            {!! Form::selectRange('tickets_availability', 0, 100, $ticket_discount , array('class'=>'form-control control-label required')) !!}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('percentage_discount', trans("ManageAccount.percentage_discount"), array('class'=>'control-label required')) !!}
+            {!! Form::selectRange('percentage_discount', 0, 100, null,  array('class'=>'form-control control-label required', 'placeholder' => '%')) !!}
         </div>
     </div>
 </div>

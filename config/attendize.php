@@ -77,5 +77,14 @@ return [
     'default_payment_gateway'    => 1, #Stripe=1 Paypal=2 BitPay=3 MIGS=4
 
     'cdn_url_user_assets'   => '',
-    'cdn_url_static_assets' => env('CDN_URL_STATIC_ASSETS')
+    'cdn_url_static_assets' => env('CDN_URL_STATIC_ASSETS'),
+
+    /* CONSTANTS COMISSION % */
+    'comision'              => 0.09,
+    'iva_comision'          => 0.19,
+    'impuesto_mocion_11'    => 0.11,
+    'impuesto_mocion_9'     => 0.00966,
+    'currency_cop'          => 'COP',
+    'currency_usd'          => 'USD',
+    'trm'                   => 3124.09,
 ];

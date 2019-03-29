@@ -496,12 +496,10 @@ class EventCheckoutController extends Controller
                 $session_id = $response->getTransactionReference();
 
                 $ticket_order['transaction_data'] = [];
-                if (isset($response->response) && isset($response->response->processUrl)) {
 
-                    $url_redirect = $response->response->processUrl;
+                $url_redirect = $response->getRedirectUrl();
                    
-                    $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
-                }
+                $ticket_order['transaction_data'] += ['url_redirect' => $url_redirect];
                 
                 $ticket_order['transaction_data'] += $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
@@ -510,7 +508,7 @@ class EventCheckoutController extends Controller
                 $this->storeOrder($order_reference);
                 
                 
-                Log::info("Redirect url: " . $response->getRedirectUrl());
+                Log::info("Redirect url: " . $url_redirect);
                 $return = [
                     'status' => 'success',
                     'redirectUrl' => $response->getRedirectUrl(),
@@ -866,7 +864,14 @@ class EventCheckoutController extends Controller
                 $codes = $event->codes_discount;
                 foreach($codes as $key => $code){
                     if($code['id'] == $ticket_order['code_discount']){
-                        $codes[$key]['available'] = false;
+                        if (isset($codes[$key]['quantity']) ) {
+                            $codes[$key]['quantity'] = $codes[$key]['quantity'] - 1;
+                            if (($codes[$key]['quantity']) == 0 ) {
+                                $codes[$key]['available'] = false;
+                            }
+                        } else {
+                            $codes[$key]['available'] = false;
+                        }
                         $event->codes_discount = $codes;
                         $event->save();
                         break;
@@ -960,7 +965,8 @@ class EventCheckoutController extends Controller
     public function paymentCompletedPayU(Request $request)
     { 
         //Petition to PayU
-        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')->get(); //Estado pendiente o en proceso de pago
+        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')
+                ->where('payment_gateway_id','4')->get(); //Estado pendiente o en proceso de pago
         
         if(count($orders)){
             $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
@@ -978,9 +984,7 @@ class EventCheckoutController extends Controller
             $changes = [];
             foreach($orders as $order){
                 $order_reference =  $order->order_reference;
-
                 if($order_reference){
-                
                     $data["details"] = ["referenceCode" => $order_reference];
                     $client = new Client();
                     $response = $client->request('POST', $url, [
@@ -1059,8 +1063,10 @@ class EventCheckoutController extends Controller
                 break;
                 
         }
+        Log::info('Borramos el cache de la orden: '.$status);
         if($status != 'PENDING'){
-            // Cache::forget($order_reference);
+         //    Log::info('Borramos el cache de la orden: '.$order_reference);
+	   //  Cache::forget($order_reference);
         }
         $order->save();
         Log::info('Estado guardado: '.$order_reference." order_reference: ".$order->orderStatus['name']);
