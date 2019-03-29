@@ -31,6 +31,10 @@
     <!--/Style-->
 
     @yield('head')
+
+    <script>
+        document.domain = "evius.co"
+    </script>
 </head>
 <body class="attendize" style="background-color: white">
 @yield('pre_header')
