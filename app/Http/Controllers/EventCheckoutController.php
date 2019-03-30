@@ -370,13 +370,17 @@ class EventCheckoutController extends Controller
         $order_reference = $request->order_reference;
         $seat_id = ($request->data)['id'];
         $seat_selected = ($request->data)['selected'];
+        $seat_status = ($request->data)['status'];
         $order_session = Cache::get($request->order_reference);
-        if($seat_selected){
-            $order_session['seats_data'][$seat_id] = $request->data;
-        }else{
-            unset($order_session['seats_data'][$seat_id]);
+
+        if($seat_status ==  "free"){
+            if($seat_selected){
+                $order_session['seats_data'][$seat_id] = $request->data;
+            }else{
+                unset($order_session['seats_data'][$seat_id]);
+            }
+            Cache::forever($order_reference, $order_session);
         }
-        Cache::forever($order_reference, $order_session);
         return ['status' => 'true', 'seats' => $order_session['seats_data']];
     }
 
@@ -442,9 +446,26 @@ class EventCheckoutController extends Controller
             /**
             * Seats Confirmation 
             */
-
-            $seatsio = new \Seatsio\SeatsioClient('2c69f4e5-6bc5-46c0-b173-dfd28bf39e3c');      // key secret 
-            $seatsio->events->book('5c59ebee34225402ea3cd4d6-1234567', $seats); // key event
+            if(($event->seats_configuration)['status']){
+                $date = new \DateTime();
+                $now =  $date->format('Y-m-d H:i:s');
+                $seats = [];
+                foreach($ticket_order['seats_data'] as $key => $seat){  
+                    array_push($seats, $key); 
+                }
+                
+                //event: was replace by event_id
+                $stages = $event->event_stages;
+                foreach($stages as $key => $stage){ 
+                    if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+                        $event_id =  $stage['seating_chart']; // key event
+                        break;
+                    }
+                }
+                $key_secret = ($event->seats_configuration)['keys']['secret'];
+                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                $seatsio->events->book($event_id, $seats); // key event
+            }
 
             $this->storeOrder($order_reference, true);
             $this->completeOrder($order_reference);
@@ -601,10 +622,24 @@ class EventCheckoutController extends Controller
             * Seats Confirmation 
             */
             if(($event->seats_configuration)['status']){
+                $date = new \DateTime();
+                $now =  $date->format('Y-m-d H:i:s');
                 $seats = [];
-                foreach($ticket_order['seats_data'] as $key => $seat){  array_push($seats, $key); }
-                $seatsio = new \Seatsio\SeatsioClient('2c69f4e5-6bc5-46c0-b173-dfd28bf39e3c');      // key secret 
-                $seatsio->events->book('5c59ebee34225402ea3cd4d6-1234567', $seats); // key event
+                foreach($ticket_order['seats_data'] as $key => $seat){  
+                    array_push($seats, $key); 
+                }
+                
+                //event: was replace by event_id
+                $stages = $event->event_stages;
+                foreach($stages as $key => $stage){ 
+                    if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+                        $event_id =  $stage['seating_chart']; // key event
+                        break;
+                    }
+                }
+                $key_secret = ($event->seats_configuration)['keys']['public'];
+                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                $seatsio->events->book($event_id, $seats); // key event
             }
             /**
              * Redirection to payment Gatway, it'free redirect to completeOrder Controller
@@ -728,7 +763,7 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $order_reference)->first();
                 $ticket_order = Cache::get($order_reference);
-                
+                // var_dump($ticket_order);die;
 
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
