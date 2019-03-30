@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <!--
                   _   _                 _ _
              /\  | | | |               | (_)
@@ -16,6 +17,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <link rel="canonical" href="{{$event->event_url}}" />
 
 
@@ -32,6 +35,11 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdn.seatsio.net/chart.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
+        <script src="{{ elixir('js/app.js') }}"></script>
+
+
+
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -71,7 +79,11 @@
     </head>
     <body class="attendize">
     
-    <div id="app" class="container"> </div>
+        <div id="app" class="container"> 
+            <h5> I'm here </h5>
+            <app><app>
+        </div>
+
         <div id="" vocab="http://schema.org/" typeof="Event">
             @yield('content')
 
@@ -96,5 +108,6 @@
 
 
         @include('Shared.Partials.GlobalFooterJS')
+
     </body>
 </html>
