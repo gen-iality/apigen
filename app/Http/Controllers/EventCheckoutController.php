@@ -367,6 +367,7 @@ class EventCheckoutController extends Controller
      */
 
     public function postCreateSeats(Request $request){
+
         $order_reference = $request->order_reference;
         $seat_id = ($request->data)['id'];
         $seat_selected = ($request->data)['selected'];

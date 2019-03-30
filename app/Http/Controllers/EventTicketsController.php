@@ -54,6 +54,7 @@ class EventTicketsController extends MyBaseController
         ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->paginate()
         : $event->tickets()->orderBy($sort_by, 'asc')->paginate();
         // Return view.
+
         return view('ManageEvent.Tickets', compact('event', 'stages', 'tickets', 'sort_by', 'q', 'allowed_sorts', 'is_embedded'));
     }
 
@@ -76,7 +77,6 @@ class EventTicketsController extends MyBaseController
             'stages' => $stages,
             'currencies' => $currencies,
         ];
-
         return view('ManageEvent.Modals.EditTicket', $data);
     }
 

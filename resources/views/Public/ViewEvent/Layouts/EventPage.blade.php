@@ -78,11 +78,18 @@
 
     </head>
     <body class="attendize">
-    
-        <div id="app" class="container"> 
-            <h5> I'm here </h5>
-            <app><app>
+
+
+        <div id="ticket-section"> 
+            <ticket-selection 
+                :event="{{$event}}" 
+                :tickets="{{$tickets}}" 
+                :stage_act="{{$stage_act}}" 
+            >
+            <ticket-selection>
         </div>
+
+
 
         <div id="" vocab="http://schema.org/" typeof="Event">
             @yield('content')

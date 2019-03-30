@@ -16,12 +16,11 @@ Vue.use(require('vue-resource'));
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.component('app', require('./components/gatewaypayment/seats/chart.vue'));
+Vue.component('ticket-selection', require('./components/ticket-section.vue'));
 
-// Vue.component('app', require('./components/ExampleComponent.vue'));
 
 window.onload = function () {
     new Vue({
-        el: '#app'
+        el: '#ticket-section'
     });
 }
