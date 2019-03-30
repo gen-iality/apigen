@@ -1,3 +1,6 @@
+<script>
+        document.domain = "evius.co"
+</script>
 <style>
 body {font-family: Arial;}
 
