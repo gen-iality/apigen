@@ -145,7 +145,7 @@
                         }).then(res => res.json())
                         .catch(error => console.error('Error:', error))
                         .then(response => 
-                            window.location.href = response.redirectUrl
+                            window.top.location.href = response.redirectUrl
                         );
                     }else{
                         humane.log('Te quedan '+ (this.selectQuantity - selectedObject.length) + ' puestos por seleccionar', {

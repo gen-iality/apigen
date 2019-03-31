@@ -51121,7 +51121,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                         }).catch(function (error) {
                                             return console.error('Error:', error);
                                         }).then(function (response) {
-                                            return window.location.href = response.redirectUrl;
+                                            return window.top.location.href = response.redirectUrl;
                                         });
                                     } else {
                                         humane.log('Te quedan ' + (_this.selectQuantity - selectedObject.length) + ' puestos por seleccionar', {
