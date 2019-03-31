@@ -38,7 +38,12 @@
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
                             <h3 style="margin: 0;">Tipo de Entrada</h3>
-                            <p style="margin: 0 0 0 1em;">{{$eventuser->ticket->title}}</p>
+                            @if(!is_null($eventuser->seat))
+                                <p style="margin: 0 0 0 1em;">{{$eventuser->ticket->title}}</p>
+                                <p style="margin: 0 0 0 1em;">{{$eventuser->seat["displayedLabel"]}}</p>
+                            @else
+                                <p style="margin: 0 0 0 1em;">{{$eventuser->ticket->title}}</p>
+                            @endif
                         </div>
                         <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
                             <h3 style="margin: 0;">Precio</h3>
