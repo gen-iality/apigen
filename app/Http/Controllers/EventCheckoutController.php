@@ -293,22 +293,23 @@ class EventCheckoutController extends Controller
             'fields' => $fields,
             'temporal_id' => $order_reference,
         ];
-            
-        //Booked seats seats.io
-        $seats = [];
-        //get seats and booke
-        $seats_data = $order_session['seats_data'];
-        foreach($seats_data as $seat)
-        {
-            array_push($seats,$seat['id']);
+        
+        if($order_session['seats_data']){
+            //Booked seats seats.io
+            $seats = [];
+            //get seats and booke
+            $seats_data = $order_session['seats_data'];
+            foreach($seats_data as $seat)
+            {
+                array_push($seats,$seat['id']);
+            }
+            $event_chart = $seats_data[0]['chart']['config']['event'];
+
+            $event_chart = $seat['chart']['config']['event'];
+            $key_secret = ($event->seats_configuration)['keys']['secret'];
+            $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+            $seatsio->events->book($event_chart, $seats); // key event
         }
-        $event_chart = $seats_data[0]['chart']['config']['event'];
-
-        $event_chart = $seat['chart']['config']['event'];
-        $key_secret = ($event->seats_configuration)['keys']['secret'];
-        $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-        $seatsio->events->book($event_chart, $seats); // key event
-
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);

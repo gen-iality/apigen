@@ -60,7 +60,12 @@
                                 </span>
                         </h5>
                         <hr>
-                        <a class="btn btn-primary btn-lg" href="#" role="button" v-on:click="submit()" v-if="auth">Comprar</a>
+                        <div v-if="auth && !next">
+                            <a class="btn btn-lg btn-success card-submit" href="#" role="button" v-on:click="submit()">Comprar</a>
+                        </div>
+                        <div class="progress" v-else>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,6 +88,7 @@
                 selectQuantity: 1,
                 chart: [],
                 selectedObject: [],
+                next: false,
             }
         },
         mounted() {
@@ -115,6 +121,7 @@
             },
 
             async submit(){
+                this.next = true;
                 this.chart.listSelectedObjects(selectedObject =>{
 
                     var ticketTitle = 'ticket_'+this.tickets[this.selectTicket]['_id']
@@ -142,6 +149,7 @@
                             timeoutAfterMove: 3000,
                             waitForMove: true
                         });
+                        this.next = false;
                     }
                 });
 
@@ -150,3 +158,9 @@
         }
     }
 </script>
+
+<style>
+ a.btn-success{
+     width: 100%;
+ }
+</style> 
