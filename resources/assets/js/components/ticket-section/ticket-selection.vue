@@ -4,20 +4,29 @@
       <div class="col-md-12">
 
         <div class="jumbotron">
-        <!-- <h1 class="display-4">{{event['event_stages'][this.stage_act]['title']}}</h1> -->
         <div class="row">
-            <div class="col-md-6">
-                <label for="title-ticket">Tiquete</label>
-                <select id="title-ticket" class="form-control form-control-lg"  v-model="selectTicket" @change="chartConfiguration">
-                    <option v-for="(ticket, idx) in tickets" :key="idx" v-bind:value="idx">{{ ticket['title']}}</option>
-                </select>
-                <label for="quantity-ticket">Cantidad</label>
-                <select id="quantity-ticket" class="form-control form-control-lg" v-model="selectQuantity" @change="chartConfiguration">
-                    <option v-for="idx in 9" :key="idx">{{idx}}</option>
-                </select>
+            <div class="col-xs-8">
+                <div id="chart"></div>
             </div>
-            <div class="col-md-6">
+            <div class="col-xs-4">
                 <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="ico-cursor mr5"></i>
+                            Selecciona el tiquete.    
+                        </h3>
+                    </div>
+                    <div class="panel-body pt0">
+                        <label for="title-ticket">Tiquete</label>
+                        <select id="title-ticket" class="form-control form-control-lg"  v-model="selectTicket" @change="chartConfiguration">
+                            <option v-for="(ticket, idx) in tickets" :key="idx" v-bind:value="idx">{{ ticket['title']}}</option>
+                        </select>
+                        <label for="quantity-ticket">Cantidad</label>
+                        <select id="quantity-ticket" class="form-control form-control-lg" v-model="selectQuantity" @change="chartConfiguration">
+                            <option v-for="idx in 9" :key="idx">{{idx}}</option>
+                        </select>
+                    </div>
+
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <i class="ico-cart mr5"></i>
@@ -42,24 +51,22 @@
                             </tbody>
                         </table>
                     </div>
-                        <div class="panel-footer">
-                            <h5>
-                                Total: 
-                                    <span style="float: right;">
-                                        <b v-if="tickets[selectTicket]['price'] * selectQuantity > 0">{{tickets[selectTicket]['currency'] }} $ {{ tickets[selectTicket]['price'] * selectQuantity }}  </b>
-                                        <b v-else>Gratis</b>    
-                                    </span>
-                            </h5>
-                            <hr>
-                            <a class="btn btn-primary btn-lg" href="#" role="button" v-on:click="submit()">Comprar</a>
-
-                        </div>
+                    <div class="panel-footer">
+                        <h5>
+                            Total: 
+                                <span style="float: right;">
+                                    <b v-if="tickets[selectTicket]['price'] * selectQuantity > 0">{{tickets[selectTicket]['currency'] }} $ {{ tickets[selectTicket]['price'] * selectQuantity }}  </b>
+                                    <b v-else>Gratis</b>    
+                                </span>
+                        </h5>
+                        <hr>
+                        <a class="btn btn-primary btn-lg" href="#" role="button" v-on:click="submit()" v-if="auth">Comprar</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <hr class="my-12">
-            <div id="chart"></div>
         </div>
 
       </div>
@@ -69,16 +76,17 @@
 
 <script>
     export default {
-        props: ['event','stage_act', 'tickets'],
+        props: ['event','stage_act', 'tickets', 'auth'],
         data() {
             return {
                 selectTicket: 0,
                 selectQuantity: 1,
                 chart: [],
-                selectedObject: []
+                selectedObject: [],
             }
         },
         mounted() {
+
                 this.chart = new seatsio.SeatingChart({
                     divId: 'chart',
                     publicKey :             this.event['seats_configuration']["keys"]["public"],
@@ -95,6 +103,8 @@
         },
         methods: {
             chartConfiguration(){
+
+
                 this.chart.setAvailableCategories([[this.tickets[this.selectTicket]['title']]]);
                 this.chart.changeConfig({
                     maxSelectedObjects: this.selectQuantity
@@ -105,9 +115,6 @@
             },
 
             async submit(){
-
-
-
                 this.chart.listSelectedObjects(selectedObject =>{
 
                     var ticketTitle = 'ticket_'+this.tickets[this.selectTicket]['_id']
@@ -131,10 +138,11 @@
                             window.location.href = response.redirectUrl
                         );
                     }else{
-                        console.log('NOT');
+                        humane.log('Te quedan '+ (this.selectQuantity - selectedObject.length) + ' puestos por seleccionar', {
+                            timeoutAfterMove: 3000,
+                            waitForMove: true
+                        });
                     }
-                    
-
                 });
 
             }

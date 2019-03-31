@@ -262,7 +262,6 @@ class EventCheckoutController extends Controller
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         $order_session = Cache::get($order_reference);
 
-
         if(!Auth::user()){
             header('Location: '.'https://evius.co');
             die;
@@ -296,9 +295,19 @@ class EventCheckoutController extends Controller
         ];
             
         //Booked seats seats.io
-        // $key_secret = ($event->seats_configuration)['keys']['secret'];
-        // $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-        // $seatsio->events->book($event_id, $seats); // key event
+        $seats = [];
+        //get seats and booke
+        $seats_data = $order_session['seats_data'];
+        foreach($seats_data as $seat)
+        {
+            array_push($seats,$seat['id']);
+        }
+        $event_chart = $seats_data[0]['chart']['config']['event'];
+
+        $event_chart = $seat['chart']['config']['event'];
+        $key_secret = ($event->seats_configuration)['keys']['secret'];
+        $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+        $seatsio->events->book($event_chart, $seats); // key event
 
 
         if ($this->is_embedded) {
