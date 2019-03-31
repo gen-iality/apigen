@@ -79,18 +79,6 @@
     </head>
     <body class="attendize">
 
-
-        <div id="ticket-section"> 
-            <ticket-selection 
-                :event="{{$event}}" 
-                :tickets="{{$tickets}}" 
-                :stage_act="{{$stage_act}}" 
-            >
-            <ticket-selection>
-        </div>
-
-
-
         <div id="" vocab="http://schema.org/" typeof="Event">
             @yield('content')
 

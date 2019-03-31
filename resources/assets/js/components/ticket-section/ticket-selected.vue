@@ -127,7 +127,9 @@
                                 }
                         }).then(res => res.json())
                         .catch(error => console.error('Error:', error))
-                        .then(response => console.log('Success:', response));
+                        .then(response => 
+                            window.location.href = response.redirectUrl
+                        );
                     }else{
                         console.log('NOT');
                     }

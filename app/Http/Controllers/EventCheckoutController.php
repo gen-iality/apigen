@@ -218,11 +218,22 @@ class EventCheckoutController extends Controller
             'code_discount' => $code_discount,
             'percentage_discount' => $percentage_discount,
             'discount' => isset($discount) ? $discount : null,
+            'seats_data' => $request->seats
+
         ]);
+
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
          */
+        return response()->json([
+            'status' => 'success',
+            'redirectUrl' => route('showEventCheckout', [
+                'event_id' => $order_reference,
+                'is_embedded' => $this->is_embedded,
+            ]) . '#order_form',
+        ]);
+
         if ($request->ajax()) {
             return response()->json([
                 'status' => 'success',
@@ -250,6 +261,7 @@ class EventCheckoutController extends Controller
     {
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         $order_session = Cache::get($order_reference);
+
 
         if(!Auth::user()){
             header('Location: '.'https://evius.co');
@@ -283,64 +295,11 @@ class EventCheckoutController extends Controller
             'temporal_id' => $order_reference,
         ];
             
-        /**
-         * DATA SEATS JAVASCRIPT
-         * 
-         * event
-         * publicKey
-         * language
-         * availableCategories
-         * maxSelectedObjects
-         * selectedObjects (save in cache)
-         * 
-         */
-        //if exist the variable
-        if(($event->seats_configuration)['status']){
+        //Booked seats seats.io
+        // $key_secret = ($event->seats_configuration)['keys']['secret'];
+        // $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+        // $seatsio->events->book($event_id, $seats); // key event
 
-            //variables
-            $date = new \DateTime();
-            $now =  $date->format('Y-m-d H:i:s');
-            $stages = $event->event_stages;
-            $maxSelectedObjects = [];
-            $availableCategories = [];
-            $data_seats = [];
-
-            //maxSelectedObjects 
-            foreach($order_session['tickets'] as $ticket){
-                $title_ticket = $ticket['ticket']->title;
-                array_push($maxSelectedObjects, ['category' =>$title_ticket, 'quantity' => $ticket['qty']]);
-                array_push($availableCategories, $title_ticket );
-            }
-
-                
-            //event: was replace by event_id
-            foreach($stages as $key => $stage){ 
-                if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
-                    $event_id =  $stage['seating_chart'];
-                    break;
-                }
-            }
-
-            //selectedObjects
-            $selectedObjects = [];
-
-            if(isset($order_session['seats_data'])){
-                foreach($order_session['seats_data'] as $key => $seat){ array_push($selectedObjects, $key); }
-            }
-
-            // var_dump($selectedObjects);die;
-
-            $data_seats = [ 
-                'event' => $event_id,
-                'publicKey' => ($event->seats_configuration)['keys']['public'],
-                'language' => 'es',
-                'availableCategories' => $availableCategories,
-                'maxSelectedObjects' => $maxSelectedObjects,
-                'selectedObjects' => $selectedObjects
-            ];  
-
-            $data['data_seats']  =  $data_seats;
-        }
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
@@ -348,43 +307,6 @@ class EventCheckoutController extends Controller
 
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
-
-    /**
-     * Undocumented function
-     *
-     * This controller run every time we select a seat
-     * Get the cache for the order_reference, then, get if this seat was selected and finally
-     * get the id of seat. 
-     * 
-     * Now, we verify if seat was selected, if was selected add inthe variable seats_data.
-     * if not, this position is deleted
-     * 
-     * Save of new in the cache.
-     * 
-     * @param Request $request
-     * @param [type] $order_reference
-     * @return void
-     */
-
-    public function postCreateSeats(Request $request){
-
-        $order_reference = $request->order_reference;
-        $seat_id = ($request->data)['id'];
-        $seat_selected = ($request->data)['selected'];
-        $seat_status = ($request->data)['status'];
-        $order_session = Cache::get($request->order_reference);
-
-        if($seat_status ==  "free"){
-            if($seat_selected){
-                $order_session['seats_data'][$seat_id] = $request->data;
-            }else{
-                unset($order_session['seats_data'][$seat_id]);
-            }
-            Cache::forever($order_reference, $order_session);
-        }
-        return ['status' => 'true', 'seats' => $order_session['seats_data']];
-    }
-
 
     /**
      * postCreateOrder
@@ -463,9 +385,6 @@ class EventCheckoutController extends Controller
                         break;
                     }
                 }
-                $key_secret = ($event->seats_configuration)['keys']['secret'];
-                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-                $seatsio->events->book($event_id, $seats); // key event
             }
 
             $this->storeOrder($order_reference, true);

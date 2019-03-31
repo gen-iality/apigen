@@ -50230,7 +50230,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                         }).catch(function (error) {
                                             return console.error('Error:', error);
                                         }).then(function (response) {
-                                            return console.log('Success:', response);
+                                            return window.location.href = response.redirectUrl;
                                         });
                                     } else {
                                         console.log('NOT');
