@@ -60,12 +60,15 @@
                                 </span>
                         </h5>
                         <hr>
-                        <div v-if="auth && !next">
-                            <a class="btn btn-lg btn-success card-submit" href="#" role="button" v-on:click="submit()">Comprar</a>
+                        <div v-if="auth">
+                            <div v-if="!next">
+                                <a class="btn btn-lg btn-success card-submit" href="#" role="button" v-on:click="submit()">Comprar</a>
+                            </div>
+                            <div class="progress" v-else>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                            </div>
                         </div>
-                        <div class="progress" v-else>
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                        </div>
+
                     </div>
                 </div>
             </div>

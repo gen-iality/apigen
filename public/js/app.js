@@ -51051,6 +51051,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['event', 'stage_act', 'tickets', 'auth'],
@@ -51340,35 +51343,40 @@ var render = function() {
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _vm.auth && !_vm.next
+                  _vm.auth
                     ? _c("div", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-lg btn-success card-submit",
-                            attrs: { href: "#", role: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.submit()
-                              }
-                            }
-                          },
-                          [_vm._v("Comprar")]
-                        )
+                        !_vm.next
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-lg btn-success card-submit",
+                                  attrs: { href: "#", role: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.submit()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Comprar")]
+                              )
+                            ])
+                          : _c("div", { staticClass: "progress" }, [
+                              _c("div", {
+                                staticClass:
+                                  "progress-bar progress-bar-striped progress-bar-animated bg-info",
+                                staticStyle: { width: "100%" },
+                                attrs: {
+                                  role: "progressbar",
+                                  "aria-valuenow": "100",
+                                  "aria-valuemin": "0",
+                                  "aria-valuemax": "100"
+                                }
+                              })
+                            ])
                       ])
-                    : _c("div", { staticClass: "progress" }, [
-                        _c("div", {
-                          staticClass:
-                            "progress-bar progress-bar-striped progress-bar-animated bg-info",
-                          staticStyle: { width: "100%" },
-                          attrs: {
-                            role: "progressbar",
-                            "aria-valuenow": "100",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        })
-                      ])
+                    : _vm._e()
                 ])
               ])
             ])
