@@ -570,10 +570,10 @@ Route::group(
 // -----------------------------------------------------------------------------------------------------------------
                 // Se comento esta ruta ya que no funcionaba y se habilitó en api.php (las rutas del api)
 
-            // Route::post('order/{order_id}/resend', [
-            //     'as' => 'resendOrder',
-            //     'uses' => 'EventOrdersController@resendOrder',
-            // ]);
+            Route::post('order/{order_id}/resend', [
+                'as' => 'resendOrder',
+                'uses' => 'EventOrdersController@resendOrder',
+            ]);
 // -----------------------------------------------------------------------------------------------------------------
 
             Route::get('order/{order_id}/show/edit', [
@@ -825,12 +825,4 @@ Route::get('events/reports/', [
 Route::get('{event_id}/exportExcel/{export_as?}', [
     'as'   => 'showEventsReportsExport',
     'uses' => 'EventOrdersController@showExportOrders',
-]);
-
-/**
- * Checout Seats
- */
-Route::post('checkout/seats', [
-    'as'   => 'postCreateSeats',
-    'uses' => 'EventCheckoutController@postCreateSeats',
 ]);

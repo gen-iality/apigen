@@ -223,7 +223,8 @@
 
             <div class="modal-footer">
                 <a class="btn btn-primary" target="_blank" href="{{route('showOrderTickets', ['order_reference' => $order->order_reference])}}?download=1">@lang("ManageEvent.print_tickets")</a>
-               {!! Form::button(trans("ManageEvent.close"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+                <span class="pauseTicketSales btn btn-success" data-id="{{$order->id}}" data-route="{{route('resendOrder', ['order_id'=>$order->id])}}">@lang("ManageEvent.resend_tickets")</span>
+		{!! Form::button(trans("ManageEvent.close"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
             </div>
         </div><!-- /end modal content-->
     </div>
