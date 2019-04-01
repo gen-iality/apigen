@@ -195,7 +195,7 @@ class EventCheckoutController extends Controller
                 }
             }
         }
-
+        
         Cache::forever($order_reference, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
@@ -293,28 +293,31 @@ class EventCheckoutController extends Controller
             'fields' => $fields,
             'temporal_id' => $order_reference,
         ];
-        
         if($order_session['seats_data']){
-            //Booked seats seats.io
-            $seats = [];
-            //get seats and booke
-            $seats_data = $order_session['seats_data'];
-            foreach($seats_data as $seat)
-            {
-                array_push($seats,$seat['id']);
-            }
-            $event_chart = $seats_data[0]['chart']['config']['event'];
+            if(!isset($order_session['seats_data']['cache'])){
+                //Booked seats seats.io
+                $seats = [];
+                //get seats and booke
+                $seats_data = $order_session['seats_data'];
+                foreach($seats_data as $seat)
+                {
+                    array_push($seats,$seat['id']);
+                }
+                $event_chart = $seats_data[0]['chart']['config']['event'];
 
-            $event_chart = $seat['chart']['config']['event'];
-            $key_secret = ($event->seats_configuration)['keys']['secret'];
-            $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-            $seatsio->events->book($event_chart, $seats); // key event
+                $event_chart = $seat['chart']['config']['event'];
+                $key_secret = ($event->seats_configuration)['keys']['secret'];
+                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                $seatsio->events->book($event_chart, $seats); // key event
+
+                $order_session['seats_data']['cache'] = true;
+                cache::forever($order_reference,$order_session);
+            }
         }
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
         }
-
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
@@ -567,9 +570,9 @@ class EventCheckoutController extends Controller
                         break;
                     }
                 }
-                $key_secret = ($event->seats_configuration)['keys']['public'];
-                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-                $seatsio->events->book($event_id, $seats); // key event
+                // $key_secret = ($event->seats_configuration)['keys']['public'];
+                // $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                // $seatsio->events->book($event_id, $seats); // key event
             }
             /**
              * Redirection to payment Gatway, it'free redirect to completeOrder Controller
