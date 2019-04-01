@@ -65,7 +65,7 @@ class OrderMailer
         }    
 
         /* Creación del PDF */
-	if(isset($eventuser->properties["names"])){
+//	if(isset($eventuser->properties["names"])){
          $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
          $pdf->setPaper('legal','portrait');
 
@@ -77,10 +77,11 @@ class OrderMailer
                 $pdf->download(), 'Tickets Evento '. $order->event->name.'.pdf'
             );
         });
-        
+
 	    // Envío del email 
             Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $pdf) {
-                $message->to('felipe.martinez@mocionsoft.com');
+                $message->to('felipe.martinez@mocionsoft.com','juan.lopez@mocionsoft.com','cesar.torres@mocionsoft.com');
+		//$message->to('felipe.martinez@mocionsoft.com');
                 if($order->amount == 0){
                     $message->subject('Tiquete Gratuito '.$order->event->name);
                 }else{
@@ -91,6 +92,6 @@ class OrderMailer
                 );
             });
 	}
-    }
+//    }
 
 }
