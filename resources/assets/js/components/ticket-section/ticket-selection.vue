@@ -74,7 +74,6 @@
             </div>
         </div>
 
-        <hr class="my-12">
         </div>
 
       </div>
