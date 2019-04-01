@@ -50523,7 +50523,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             publicKey: this.event['seats_configuration']["keys"]["public"],
             language: this.event['seats_configuration']["language"],
             maxSelectedObjects: this.selectQuantity,
-            event: this.event['event_stages'][this.stage_act]['seating_chart'],
+            event: this.event['seats_configuration']["keys"]["event"],
+            // event :                 this.tickets[this.selectTicket]['chart'],  
             availableCategories: [this.tickets[this.selectTicket]['title']],
             showMinimap: this.event['seats_configuration']["minimap"],
             onObjectSelected: function onObjectSelected(object) {},
@@ -50534,6 +50535,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     methods: {
         chartConfiguration: function chartConfiguration() {
 
+            console.log(this.tickets[this.selectTicket]['chart']);
             this.chart.setAvailableCategories([[this.tickets[this.selectTicket]['title']]]);
             this.chart.changeConfig({
                 maxSelectedObjects: this.selectQuantity

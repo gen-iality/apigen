@@ -350,6 +350,7 @@ class ManageAccountController extends MyBaseController
         $seats_configuration['keys']['secret'] = Input::get('key_secret');
         $seats_configuration['keys']['public'] = Input::get('key_public');
         $seats_configuration['keys']['designer'] = Input::get('key_designer');
+        $seats_configuration['keys']['designer'] = Input::get('key_event');
         $seats_configuration['language'] = Input::get('language') ? 'es':'en';
         $seats_configuration['status'] = Input::get('status')? true : false;
         $seats_configuration['minimap'] = Input::get('minimap')? true : false;

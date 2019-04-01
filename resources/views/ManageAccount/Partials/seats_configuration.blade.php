@@ -6,19 +6,41 @@
     <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('key_secret', "Llave secreta", array('class'=>'control-label required')) !!}
-            {!! Form::text('key_secret', $seats_configuration['keys']['secret'], array('class'=>'form-control control-label required')) !!}
+            @if($seats_configuration)
+                {!! Form::text('key_secret', $seats_configuration['keys']['secret'], array('class'=>'form-control control-label required')) !!}
+            @else
+                {!! Form::text('key_secret', '', array('class'=>'form-control control-label required')) !!}
+            @endif
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('key_public', "Llave publica", array('class'=>'control-label required')) !!}
-            {!! Form::text('key_public', $seats_configuration['keys']['public'], array('class'=>'form-control control-label required')) !!}
+            @if($seats_configuration)
+                {!! Form::text('key_public', $seats_configuration['keys']['public'], array('class'=>'form-control control-label required')) !!}
+            @else
+                {!! Form::text('key_public', '', array('class'=>'form-control control-label required')) !!}
+            @endif    
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('key_designer', "Llave de diseño", array('class'=>'control-label required')) !!}
-            {!! Form::text('key_designer', $seats_configuration['keys']['designer'], array('class'=>'form-control control-label required')) !!}
+            @if($seats_configuration)
+                {!! Form::text('key_designer', $seats_configuration['keys']['designer'], array('class'=>'form-control control-label required')) !!}
+            @else
+                {!! Form::text('key_designer', '', array('class'=>'form-control control-label required')) !!}
+            @endif
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            {!! Form::label('key_event', "Id del evento", array('class'=>'control-label required')) !!}
+            @if($seats_configuration)
+                {!! Form::text('key_event', $seats_configuration['keys']['event'], array('class'=>'form-control control-label required')) !!}
+            @else
+                {!! Form::text('key_event', '', array('class'=>'form-control control-label required')) !!}
+            @endif
         </div>
     </div>
     <div class="col-md-4">

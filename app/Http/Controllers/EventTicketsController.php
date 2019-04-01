@@ -267,6 +267,8 @@ class EventTicketsController extends MyBaseController
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+        $ticket->chart = $request->get('id_chart');
+        
         $ticket->save();
 
         return response()->json([

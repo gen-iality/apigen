@@ -570,9 +570,6 @@ class EventCheckoutController extends Controller
                         break;
                     }
                 }
-                // $key_secret = ($event->seats_configuration)['keys']['public'];
-                // $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-                // $seatsio->events->book($event_id, $seats); // key event
             }
             /**
              * Redirection to payment Gatway, it'free redirect to completeOrder Controller
