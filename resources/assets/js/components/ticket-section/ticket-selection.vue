@@ -163,6 +163,8 @@
 
 <style>
  a.btn-success{
-     width: 100%;
+    width: 100%;
+    color: #75f1c6 !important;
+    border-color: #75f1c6;
  }
 </style> 
