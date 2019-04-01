@@ -277,6 +277,10 @@ Route::group(
                 'as'   => 'postEditTicketsPromocional',
                 'uses' => 'ManageAccountController@postEditTicketsPromocional',
             ]);
+            Route::post('/edit_seats', [
+                'as'   => 'postEditSeats',
+                'uses' => 'ManageAccountController@postEditSeats',
+            ]);
             
 
         });

@@ -32,7 +32,7 @@ class ManageAccountController extends MyBaseController
         $codes_discount = isset($event->codes_discount) ? $event->codes_discount : [];
         $ticket_discount = isset($event->tickets_discount) ? $event->tickets_discount : '';
         $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount : '';
-
+        $seats_configuration = isset($event->seats_configuration) ? $event->seats_configuration: '';
         $data = [
             'account'                  => Auth::user(),
             'timezones'                => Timezone::pluck('location', 'id'),
@@ -43,7 +43,8 @@ class ManageAccountController extends MyBaseController
             'event_id'                 => $request->event_id,
             'codes_discount'           => $codes_discount,
             'ticket_discount'          => $ticket_discount,
-            'percentage_discount'      => $percentage_discount
+            'percentage_discount'      => $percentage_discount,
+            'seats_configuration'      => $seats_configuration
 
         ];
         
@@ -334,4 +335,46 @@ class ManageAccountController extends MyBaseController
             'message' => trans("Controllers.account_successfully_updated"),
         ]);
     }
+
+    /**
+     * Edit seats configuration
+     *
+     * @return void
+     */
+    public function postEditSeats()
+    {
+
+        $event_id = Input::get('event_id');
+        $event = Event::find($event_id);
+        $seats_configuration = [];
+        $seats_configuration['keys']['secret'] = Input::get('key_secret');
+        $seats_configuration['keys']['public'] = Input::get('key_public');
+        $seats_configuration['keys']['designer'] = Input::get('key_designer');
+        $seats_configuration['language'] = Input::get('language') ? 'es':'en';
+        $seats_configuration['status'] = Input::get('status')? true : false;
+        $seats_configuration['minimap'] = Input::get('minimap')? true : false;
+
+        $event->seats_configuration = $seats_configuration;
+        $event->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans("Controllers.account_successfully_updated"),
+        ]);
+
+        $percentage_discount = Input::get('percentage_discount');
+        $tickets_discount = Input::get('tickets_discount');
+        $event_id = Input::get('event_id');
+        $event = Event::find($event_id);
+        $event->tickets_discount = $tickets_discount;
+        $event->percentage_discount = $percentage_discount;
+        $event->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'id'      => $event->id,
+            'message' => trans("Controllers.account_successfully_updated"),
+        ]);
+    }
+    
 }

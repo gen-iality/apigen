@@ -33,6 +33,7 @@
                             <li class="active"><a href="#payment_account" data-toggle="tab">@lang("ManageAccount.payment")</a></li>
                             <li><a href="#tickets_promocional" data-toggle="tab">Tiquetes promocionales</a></li>
                             <li><a href="#codes_promocional" data-toggle="tab">códigos promocionales</a></li>
+                            <li><a href="#seats_configuration" data-toggle="tab">Configuración de asientos</a></li>
                         </ul>
                         <div class="tab-content panel">
                             <div class="tab-pane active" id="payment_account">
@@ -44,6 +45,9 @@
 
                             <div class="tab-pane" id="codes_promocional">
                                 @include('ManageAccount.Partials.CodesPromocional')
+                            </div>
+                            <div class="tab-pane" id="seats_configuration">
+                                @include('ManageAccount.Partials.seats_configuration')
                             </div>
                         </div>
                     </div>
