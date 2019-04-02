@@ -351,21 +351,6 @@ class EventCheckoutController extends Controller
         //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
 
-        //If don't have select all seats, is show a message. else save position seats
-        if(($event->seats_configuration)['status']){
-            $seats_selected = isset($ticket_order['seats_data']) ? count($ticket_order['seats_data']): 0;
-            $total_ticket_quantity = $ticket_order['total_ticket_quantity'];
-
-            if($seats_selected != $total_ticket_quantity){
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Falta por seleccionar '.($total_ticket_quantity-$seats_selected).' asientos en el mapa',
-                ]);
-            }else{
-                $seats = [];
-                foreach($ticket_order['seats_data'] as $key => $seat){  array_push($seats, $key); }
-            }
-        }
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
         Cache::forever($order_reference, $ticket_order);
