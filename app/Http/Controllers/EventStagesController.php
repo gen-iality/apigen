@@ -163,7 +163,7 @@ class EventStagesController extends MyBaseController
         
         foreach ($event_stages as $key => $event_stage) {
             
-            if ($event_stage['stage_id'] !== $stage_id) continue;
+            if ($event_stage['stage_id'] != $stage_id) continue;
             $event_stages[$key]['title'] = $request->title;
             $event_stages[$key]['start_sale_date'] = $request->start_sale_date;
             $event_stages[$key]['end_sale_date'] = $request->end_sale_date;
