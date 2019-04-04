@@ -547,14 +547,8 @@ class EventCheckoutController extends Controller
                     array_push($seats, $key); 
                 }
                 
-                //event: was replace by event_id
-                $stages = $event->event_stages;
-                foreach($stages as $key => $stage){ 
-                    if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
-                        $event_id =  $stage['seating_chart']; // key event
-                        break;
-                    }
-                }
+                //event: was replace by event_idv
+                $event_id = ($event->seats_configuration)['keys']['event'];
             }
             /**
              * Redirection to payment Gatway, it'free redirect to completeOrder Controller
