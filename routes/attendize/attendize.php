@@ -277,6 +277,10 @@ Route::group(
                 'as'   => 'postEditTicketsPromocional',
                 'uses' => 'ManageAccountController@postEditTicketsPromocional',
             ]);
+            Route::post('/edit_seats', [
+                'as'   => 'postEditSeats',
+                'uses' => 'ManageAccountController@postEditSeats',
+            ]);
             
 
         });
@@ -570,10 +574,10 @@ Route::group(
 // -----------------------------------------------------------------------------------------------------------------
                 // Se comento esta ruta ya que no funcionaba y se habilitó en api.php (las rutas del api)
 
-            // Route::post('order/{order_id}/resend', [
-            //     'as' => 'resendOrder',
-            //     'uses' => 'EventOrdersController@resendOrder',
-            // ]);
+            Route::post('order/{order_id}/resend', [
+                'as' => 'resendOrder',
+                'uses' => 'EventOrdersController@resendOrder',
+            ]);
 // -----------------------------------------------------------------------------------------------------------------
 
             Route::get('order/{order_id}/show/edit', [

@@ -55,6 +55,7 @@ class EventViewController extends Controller
             'stages' => $stages,
             'stage_act' => $stage_act,
             'show' => $show,
+            'auth' => Auth::check() ? "true" : "false"
         ];
 
         /*

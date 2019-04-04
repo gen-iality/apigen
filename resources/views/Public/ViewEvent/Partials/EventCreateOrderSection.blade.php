@@ -247,12 +247,32 @@
                                 @for($i=0; $i<=$tot-1; $i++)
                                 <h3>@lang("Public_ViewEvent.ticket_holder_information") {{$i+1}}</h3>
 
-                                <div class="panel panel-primary" id="ticket_details{{$i+1}}">
-
+                                <div class="panel panel-primary">
+                                    
                                     <div class="panel-heading">
+                                    @if (!isset($seats_data))
                                         <h3 class="panel-title">
                                             <b>{{$ticket['ticket']['title']}}</b>: @lang("Public_ViewEvent.ticket_holder_n", ["n"=>$i+1])
                                         </h3>
+                                    @else
+                                    <!-- We compare the seat_category and ticket_name if this is true 
+                                    take the seat labe, and break the foreach -->
+                                    <?php 
+                                        $seats = $seats_data;
+                                        foreach($seats as $key => $seat){
+                                            $seat_category = $seat['category']['label'];
+                                            $ticket_name = $ticket['ticket']['title'];
+                                            if($seat_category == $ticket_name){
+                                                $seat_position = $seat['labels']['displayedLabel'];
+                                                unset($seats_data[$key]);
+                                                break;
+                                            } 
+                                        }
+                                                ?>
+                                        <h3 class="panel-title">
+                                            <b>TICKET: {{$seat_position}}</b>
+                                        </h3>
+                                       @endif
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">

@@ -195,7 +195,7 @@ class EventCheckoutController extends Controller
                 }
             }
         }
-
+        
         Cache::forever($order_reference, [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
@@ -218,11 +218,22 @@ class EventCheckoutController extends Controller
             'code_discount' => $code_discount,
             'percentage_discount' => $percentage_discount,
             'discount' => isset($discount) ? $discount : null,
+            'seats_data' => $request->seats
+
         ]);
+
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
          */
+        return response()->json([
+            'status' => 'success',
+            'redirectUrl' => route('showEventCheckout', [
+                'event_id' => $order_reference,
+                'is_embedded' => $this->is_embedded,
+            ]) . '#order_form',
+        ]);
+
         if ($request->ajax()) {
             return response()->json([
                 'status' => 'success',
@@ -272,7 +283,7 @@ class EventCheckoutController extends Controller
         $fields = $event->user_properties;
 
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
-        $orderService->calculateFinalCosts();
+        $orderService->calculateFinalCosts();  
         
         $data = $order_session + [
             'event' => $event,
@@ -283,13 +294,33 @@ class EventCheckoutController extends Controller
             'temporal_id' => $order_reference,
             'cant'   => 1,
         ];
+        if($order_session['seats_data']){
+            if(!isset($order_session['seats_data']['cache'])){
+                //Booked seats seats.io
+                $seats = [];
+                //get seats and booke
+                $seats_data = $order_session['seats_data'];
+                foreach($seats_data as $seat)
+                {
+                    array_push($seats,$seat['id']);
+                }
+                $event_chart = $seats_data[0]['chart']['config']['event'];
+
+                $event_chart = $seat['chart']['config']['event'];
+                $key_secret = ($event->seats_configuration)['keys']['secret'];
+                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                $seatsio->events->book($event_chart, $seats); // key event
+
+                $order_session['seats_data']['cache'] = true;
+                cache::forever($order_reference,$order_session);
+            }
+        }
 
         // return $data;
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
         }
-
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
@@ -310,13 +341,15 @@ class EventCheckoutController extends Controller
         $event_id = $ticket_order["event_id"];
 
         //If there's no session kill the request and redirect back to the event homepage.
-        //Si no estan los terminos y condiciones , no continua.
+        //If don't have the terms and conditions, not continue
         if (!$request->has('terms')) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Por favor aceptar los términos y condiciones',
             ]);
         }
+
+
 
         //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
@@ -331,9 +364,30 @@ class EventCheckoutController extends Controller
         if ($orderRequiresPayment && $request->get('pay_offline') && $event->enable_offline_payments) {
             return $this->completeOrder($event_id);
         }
-
         //When the purshase is free 
         if (!$orderRequiresPayment) {
+
+            /**
+            * Seats Confirmation 
+            */
+            if(($event->seats_configuration)['status']){
+                $date = new \DateTime();
+                $now =  $date->format('Y-m-d H:i:s');
+                $seats = [];
+                foreach($ticket_order['seats_data'] as $key => $seat){  
+                    array_push($seats, $key); 
+                }
+                
+                //event: was replace by event_id
+                $stages = $event->event_stages;
+                foreach($stages as $key => $stage){ 
+                    if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+                        $event_id =  $stage['seating_chart']; // key event
+                        break;
+                    }
+                }
+            }
+
             $this->storeOrder($order_reference, true);
             $this->completeOrder($order_reference);
             
@@ -346,7 +400,7 @@ class EventCheckoutController extends Controller
             $return = [
                 'status' => 'success',
                 'redirectUrl' => url('/').'/order/'.$order_reference,
-                'message' => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name,
+                'message' => 'Redirigido a la orden',
             ];
             return response()->json($return);
             
@@ -483,7 +537,25 @@ class EventCheckoutController extends Controller
             }
 
             $transaction = $gateway->purchase($transaction_data);
-            $response = $transaction->send();   
+            $response = $transaction->send(); 
+
+            /**
+            * Seats Confirmation 
+            */
+            if(($event->seats_configuration)['status']){
+                $date = new \DateTime();
+                $now =  $date->format('Y-m-d H:i:s');
+                $seats = [];
+                foreach($ticket_order['seats_data'] as $key => $seat){  
+                    array_push($seats, $key); 
+                }
+                
+                //event: was replace by event_idv
+                $event_id = ($event->seats_configuration)['keys']['event'];
+            }
+            /**
+             * Redirection to payment Gatway, it'free redirect to completeOrder Controller
+             */
             if ($response->isSuccessful()) {
                 
                 session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
@@ -522,6 +594,7 @@ class EventCheckoutController extends Controller
                 if ($response->getRedirectMethod() == 'POST') {
                     $return['redirectData'] = $response->getRedirectData();
                 }
+
                 return response()->json($return);
 
             } else {
@@ -602,6 +675,8 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $order_reference)->first();
                 $ticket_order = Cache::get($order_reference);
+                // var_dump($ticket_order);die;
+
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
                     $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
@@ -698,10 +773,28 @@ class EventCheckoutController extends Controller
                             $attendee->order_id = $order->id;
                             $attendee->ticket_id = $attendee_details['ticket']['id'];
                             $attendee->account_id = $event->account->id;
-    
                             $attendee->reference_index = $attendee_increment;
-    
-    
+
+                            /**
+                             * Attendeize seats, assignment
+                             */
+
+                            if($ticket_order['seats_data']){
+                                //Get the seats
+                                $seats = $ticket_order['seats_data'];
+                                foreach($seats as $key => $seat){
+                                    $seat_category = $seat['category']['label'];
+                                    $ticket_name = Ticket::find($attendee->ticket_id)->title;
+                                    // we compare the seat_category and ticket_name if this is true save the seat and delete of array of ticket_order, and break the foreach
+                                    if($seat_category == $ticket_name){
+                                        $attendee->seat = $seat['labels'];
+                                        unset($ticket_order['seats_data'][$key]);
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            
                             $attendee->save();
                             
                             /*
@@ -969,7 +1062,7 @@ class EventCheckoutController extends Controller
     { 
         //Petition to PayU
         $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')
-                ->orWhere('payment_gateway_id','4')->get(); //Estado pendiente o en proceso de pago
+                ->where('payment_gateway_id','4')->get(); //Estado pendiente o en proceso de pago
         
         if(count($orders)){
             $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
@@ -987,9 +1080,7 @@ class EventCheckoutController extends Controller
             $changes = [];
             foreach($orders as $order){
                 $order_reference =  $order->order_reference;
-
                 if($order_reference){
-                
                     $data["details"] = ["referenceCode" => $order_reference];
                     $client = new Client();
                     $response = $client->request('POST', $url, [
@@ -1068,8 +1159,10 @@ class EventCheckoutController extends Controller
                 break;
                 
         }
+        Log::info('Borramos el cache de la orden: '.$status);
         if($status != 'PENDING'){
-            // Cache::forget($order_reference);
+         //    Log::info('Borramos el cache de la orden: '.$order_reference);
+	   //  Cache::forget($order_reference);
         }
         $order->save();
         Log::info('Estado guardado: '.$order_reference." order_reference: ".$order->orderStatus['name']);

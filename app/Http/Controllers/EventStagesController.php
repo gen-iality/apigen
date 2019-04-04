@@ -139,10 +139,9 @@ class EventStagesController extends MyBaseController
         
         foreach ($event_stages as $key => $event_stage) {
             
-            if ($event_stage['stage_id'] !== $stage_id) continue;
+            if ($event_stage['stage_id'] != $stage_id) continue;
             $stage = $event_stage;
         }
-
         $data = [
             'event'  => $event,
             'stage' => (Object)$stage,
@@ -164,7 +163,7 @@ class EventStagesController extends MyBaseController
         
         foreach ($event_stages as $key => $event_stage) {
             
-            if ($event_stage['stage_id'] !== $stage_id) continue;
+            if ($event_stage['stage_id'] != $stage_id) continue;
             $event_stages[$key]['title'] = $request->title;
             $event_stages[$key]['start_sale_date'] = $request->start_sale_date;
             $event_stages[$key]['end_sale_date'] = $request->end_sale_date;
@@ -289,6 +288,7 @@ class EventStagesController extends MyBaseController
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+
 
         $ticket->save();
 

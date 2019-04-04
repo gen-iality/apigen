@@ -54,6 +54,7 @@ class EventTicketsController extends MyBaseController
         ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->paginate()
         : $event->tickets()->orderBy($sort_by, 'asc')->paginate();
         // Return view.
+
         return view('ManageEvent.Tickets', compact('event', 'stages', 'tickets', 'sort_by', 'q', 'allowed_sorts', 'is_embedded'));
     }
 
@@ -76,7 +77,6 @@ class EventTicketsController extends MyBaseController
             'stages' => $stages,
             'currencies' => $currencies,
         ];
-
         return view('ManageEvent.Modals.EditTicket', $data);
     }
 
@@ -106,13 +106,13 @@ class EventTicketsController extends MyBaseController
      */
     public function postCreateTicket(Request $request, $event_id)
     {
-        $stage = $request->get('stage');
+        $stage = $request->get('stage_id');
         $ticket = Ticket::createNew();
         $event = Event::findOrFail($event_id);
 
         // Find event stages
         $event_stages =  $event->event_stages;
-
+        
         if (!$ticket->validate($request->all())) {
             return response()->json([
                 'status'   => 'error',
@@ -136,13 +136,14 @@ class EventTicketsController extends MyBaseController
         $ticket->end_sale_date = $end_sale_date;
         $ticket->currency = $request->get('currency');
         $ticket->dates = $request->get('dates');
-        $ticket->stage_id = strip_tags($request->get('stage'));
+        $ticket->stage_id = strip_tags($request->get('stage_id'));
         $ticket->price = $request->get('price');
         $ticket->number_person_per_ticket = $request->get('number_person_per_ticket');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->description = strip_tags($request->get('description'));
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+        $ticket->chart = $request->get('id_chart');
 
         $ticket->save();
 
@@ -269,6 +270,8 @@ class EventTicketsController extends MyBaseController
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+        $ticket->chart = $request->get('id_chart');
+        
         $ticket->save();
 
         return response()->json([

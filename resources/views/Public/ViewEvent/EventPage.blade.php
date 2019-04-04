@@ -1,11 +1,18 @@
 @extends('Public.ViewEvent.Layouts.EventPage')
 
-     @include('Public.ViewEvent.Partials.EventTicketsSection')
-{{--    @include('Public.ViewEvent.Partials.EventHeaderSection')
-    @include('Public.ViewEvent.Partials.EventDescriptionSection')
-    @include('Public.ViewEvent.Partials.EventShareSection')
-    @include('Public.ViewEvent.Partials.EventMapSection')
-    @include('Public.ViewEvent.Partials.EventOrganiserSection')
-    @include('Public.ViewEvent.Partials.EventFooterSection') --}}
+        @if($event['seats_configuration']['status'] && !isset($temporal_id))
+        <div id="ticket-section"> 
+
+            <ticket-selection 
+            :event="{{$event}}" 
+            :tickets="{{$tickets}}" 
+            :stage_act="{{$stage_act}}" 
+            :auth="{{$auth}}" 
+            >
+            <ticket-selection>
+        </div>
+        @else
+            @include('Public.ViewEvent.Partials.EventTicketsSection')
+        @endif
 
 

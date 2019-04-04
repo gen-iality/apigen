@@ -24,7 +24,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {!! Form::label('price', trans("ManageEvent.ticket_price"), array('class'=>'control-label required')) !!}
-                                    {!!  Form::text('price', 'price',
+                                    {!!  Form::text('price', 0,
                                                 array(
                                                 'class'=>'form-control',
                                                 'placeholder'=>trans("ManageEvent.price_placeholder")
@@ -37,7 +37,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {!! Form::label('quantity_available', trans("ManageEvent.quantity_available"), array('class'=>' control-label')) !!}
-                                    {!!  Form::text('quantity_available', 'quantity_available',
+                                    {!!  Form::text('quantity_available', 10,
                                                 array(
                                                 'class'=>'form-control',
                                                 'placeholder'=>trans("ManageEvent.quantity_available_placeholder")
@@ -52,7 +52,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {!! Form::label('stage','Etapa', array('class'=>' control-label required')) !!}
-                                    <select class="form-control" name="stage">
+                                    <select class="form-control" name="stage_id">
                                         @if($stages)
                                             @foreach($stages as $stage)
                                                 <option value="{{ $stage['stage_id'] }}">{{ $stage['title'] }}</option>
@@ -164,7 +164,22 @@
                                 </div>
                             </div>
                         </div>
+
+                         <div class="row more-options">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('id_chart', trans("ManageEvent.id_chart_ticket"), array('class'=>' control-label')) !!}
+                                    {!!  Form::text('id_chart', '',
+                                        array(
+                                        'class'=>'form-control',
+                                        'placeholder'=>'Id del chart'
+                                        ))  !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                   
 
 
                     <div class="col-md-12">

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <!--
                   _   _                 _ _
              /\  | | | |               | (_)
@@ -10,12 +11,14 @@
          /_/    \_\__|\__\___|_| |_|\__,_|_/___\___(_)___\___/|_| |_| |_|
 
         -->
-        <title>{{{$event->name}}} - Attendize.com</title>
+        <title>{{{$event->name}}}</title>
 
 
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <link rel="canonical" href="{{$event->event_url}}" />
 
 
@@ -31,6 +34,12 @@
         <meta property="og:site_name" content="Attendize.com" />
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdn.seatsio.net/chart.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
+        <script src="{{ elixir('js/app.js') }}"></script>
+
+
+
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -66,24 +75,10 @@
 
         </style>
 
-        {{-- @if ($event->bg_type == 'color' || Input::get('bg_color_preview')) --}}
-        @if (false)
-            <style>body {background-color: {{(Input::get('bg_color_preview') ? '#'.Input::get('bg_color_preview') : $event->bg_color)}} !important; }</style>
-        @endif
-
-        {{-- @if (($event->bg_type == 'image' || $event->bg_type == 'custom_image' || Input::get('bg_img_preview')) && !Input::get('bg_color_preview')) --}}
-        @if (false)
-            <style>
-                body {
-                    background: url({{(Input::get('bg_img_preview') ? URL::to(Input::get('bg_img_preview')) :  asset(config('attendize.cdn_url_static_assets').'/'.$event->bg_image_path))}}) no-repeat center center fixed;
-                    background-size: cover;
-                }
-            </style>
-        @endif
-
 
     </head>
     <body class="attendize">
+
         <div id="" vocab="http://schema.org/" typeof="Event">
             @yield('content')
 
@@ -108,5 +103,6 @@
 
 
         @include('Shared.Partials.GlobalFooterJS')
+
     </body>
 </html>
