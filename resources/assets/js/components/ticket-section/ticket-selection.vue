@@ -2,14 +2,31 @@
   <div>
     <div class="row justify-content-center">
       <div class="col-md-12">
-
         <div class="jumbotron">
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-7">
                 <div id="chart"></div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-5">
                 <div class="panel">
+                    <ul class="nav">
+                        <li class="nav-item" v-for="(stage, idx) in event['event_stages']" :key="idx">
+                            <a class="p-3 mb-2 bg-primary text-white"  href="#" v-if="event['event_stages'][stage_act]['title'] == stage['title']">
+                                <p>{{stage['title']}} 
+                                    <small style="float: right;">Hasta: {{stage['end_sale_date']}}</small>
+                                </p>
+                            </a> 
+                            <a class="nav-link"  href="#" v-else>
+                               <small> 
+                                    <p>{{stage['title']}} 
+                                        <small style="float: right; font-size: 1rem;">Desde: {{stage['start_sale_date']}}</small><br>
+                                        <small style="float: right; font-size: 1rem;">Hasta: {{stage['end_sale_date']}}</small>
+                                    </p>
+                                </small>
+                            </a> 
+
+                        </li>
+                    </ul>
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <i class="ico-cursor mr5"></i>
@@ -19,7 +36,7 @@
                     <div class="panel-body pt0">
                         <label for="title-ticket">Tiquete</label>
                         <select id="title-ticket" class="form-control form-control-lg"  v-model="selectTicket" @change="chartConfiguration">
-                            <option v-for="(ticket, idx) in tickets" :key="idx" v-bind:value="idx">{{ ticket['title']}}</option>
+                            <option v-for="(ticket, idx) in currentTickets" :key="idx" v-bind:value="ticket['position']">{{ ticket['title']}}</option>
                         </select>
                         <label for="quantity-ticket">Cantidad</label>
                         <select id="quantity-ticket" class="form-control form-control-lg" v-model="selectQuantity" @change="chartConfiguration">
@@ -90,7 +107,11 @@
                 selectQuantity: 1,
                 chart: [],
                 selectedObject: [],
+                activators : [
+
+                ],
                 next: false,
+                currentTickets : []
             }
         },
         mounted() {
@@ -109,11 +130,27 @@
                     onObjectDeselected: function(object){
                     }
                 }).render();
+                    console.log("Im here")
+                // realizar ticket seleccionados por estado en la parte de aca
+                var state_active = this.event['event_stages'][this.stage_act]['stage_id'];
+                var flag = true;
+                this.tickets.forEach((ticket,key) => {
+                    if(ticket['stage_id'] == state_active){
+                        ticket['position'] = key;
+                        this.currentTickets.push(ticket)
+                        if(flag){
+                            this.selectTicket = key;
+                            flag = false;
+                        }
+                    }
+                });
         },
         methods: {
             chartConfiguration(){
 
                 console.log(this.tickets[this.selectTicket]['chart']);
+
+                //Cambio de chart
                 this.chart.setAvailableCategories([[this.tickets[this.selectTicket]['title']]]);
                 this.chart.changeConfig({
                     maxSelectedObjects: this.selectQuantity
