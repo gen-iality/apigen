@@ -299,17 +299,24 @@ class EventCheckoutController extends Controller
                 $seats = [];
                 //get seats and booke
                 $seats_data = $order_session['seats_data'];
+                $flag = true;
                 foreach($seats_data as $seat)
-                {
+                {   
+                    //if this dont have chart break the save in seats.io
+                    if($seat['id'] == $seat['labels']['own']){
+                        $flag = false;
+                        break;
+                    };
                     array_push($seats,$seat['id']);
                 }
                 $event_chart = $seats_data[0]['chart']['config']['event'];
 
-                $event_chart = $seat['chart']['config']['event'];
-                $key_secret = ($event->seats_configuration)['keys']['secret'];
-                $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-                $seatsio->events->book($event_chart, $seats); // key event
 
+                if($flag){
+                    $key_secret = ($event->seats_configuration)['keys']['secret'];
+                    $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                    $seatsio->events->book($event_chart, $seats); // key event
+                }
                 $order_session['seats_data']['cache'] = true;
                 cache::forever($order_reference,$order_session);
             }

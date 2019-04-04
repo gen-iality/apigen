@@ -153,19 +153,6 @@
                                 </div>
                             </div>
                         </div>
-
-                         <div class="row more-options">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {!! Form::label('id_chart', trans("ManageEvent.id_chart_ticket"), array('class'=>' control-label')) !!}
-                                    {!!  Form::text('id_chart', '',
-                                        array(
-                                        'class'=>'form-control',
-                                        'placeholder'=>'Id del chart'
-                                        ))  !!}
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                    
