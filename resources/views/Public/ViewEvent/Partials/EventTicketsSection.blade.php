@@ -158,7 +158,7 @@ td{
 @if(isset($stages))
 <div class="tab" style="font-family:Montserrat,sans-serif">
 <ul class="nav">
-    <div class="row">
+    <div class="row" style="background-color: #8080800a">
 
     
     @foreach($stages as $key => $stage) 
@@ -293,8 +293,10 @@ td{
                                     </tr>
                                     <tr>
                                         @if(isset($event->tickets_discount) && $event->tickets_discount != 0)
-                                        <td  colspan="3" style="text-align: center; color:red">
-                                           Recibe el <b>{{$event->percentage_discount}}% </b> de descuento en el total de tu compra, al momento de seleccionar más de <b>{{$event->tickets_discount}}</b> tiquetes para el evento
+                                        <td  colspan="3" style="text-align: center;">
+                                        <div class="alert alert-success" role="alert" style="background-color: #3273dc !important; color: white !important">
+                                            Recibe el <b>{{$event->percentage_discount}}% </b> de descuento en el total de tu compra, al momento de seleccionar más de <b>{{$event->tickets_discount}}</b> tiquetes para el evento
+                                        </div>
                                         </td>
                                         @endif
                                     </tr>
