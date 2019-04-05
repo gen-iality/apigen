@@ -207,43 +207,6 @@
                                 $cant = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
                                 $tot = $ticket['qty'] * $cant;
                             ?>
-
-                                <div class="panel panel-primary" id="ticket_details{{$i+1}}">
-
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">
-                                        <b>{{$ticket['ticket']['title']}}</b>: @lang("Public_ViewEvent.ticket_holder_n", ["n"=>$i+1])
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        @foreach($fields as $field)
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    @if($field['mandatory'] == 'true')
-                                                        @if(isset( $field['label']))
-                                                            {!! Form::label($field['name'], $field['label']) !!}
-                                                        @else
-                                                            {!! Form::label($field['name'], $field['name']) !!}
-                                                        @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                                    @else
-                                                    @if(isset( $field['label']))
-                                                        {!! Form::label($field['name'], $field['label']) !!}
-                                                    @else
-                                                        {!! Form::label($field['name'], $field['name']) !!}
-                                                    @endif
-                                                    {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
-                                    </div>
-                                </div>
-
-
-                                </div>
                                 @for($i=0; $i<=$tot-1; $i++)
                                 <h3>@lang("Public_ViewEvent.ticket_holder_information") {{$i+1}}</h3>
 
@@ -270,7 +233,7 @@
                                         }
                                                 ?>
                                         <h3 class="panel-title">
-                                            <b>TICKET: {{$seat_position}}</b>
+                                            <b>TICKET: {{$seat_position}}-{{$i+1}}</b>
                                         </h3>
                                        @endif
                                     </div>
