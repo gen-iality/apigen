@@ -197,7 +197,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="ticket_holders_details" >
+                        <div class="ticket_holders_details" id="ticket_details" >
                             
                             <?php
                                 $total_attendee_increment = 0;
@@ -208,6 +208,7 @@
                                 $tot = $ticket['qty'] * $cant;
                             ?>
                                 @for($i=0; $i<=$tot-1; $i++)
+                                <div class="attendize-information">
                                 <h3>@lang("Public_ViewEvent.ticket_holder_information") {{$i+1}}</h3>
 
                                 <div class="panel panel-primary">
@@ -242,21 +243,12 @@
                                             @foreach($fields as $field)
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
-                                                        @if($field['mandatory'] == 'true')
-                                                            @if(isset( $field['label']))
-                                                                {!! Form::label($field['name'], $field['label']) !!}
-                                                            @else
-                                                                {!! Form::label($field['name'], $field['name']) !!}
-                                                            @endif
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                                        @else
                                                         @if(isset( $field['label']))
                                                             {!! Form::label($field['name'], $field['label']) !!}
                                                         @else
                                                             {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
                                                         {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
-                                                        @endif
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -265,6 +257,7 @@
                                     </div>
 
 
+                                </div>
                                 </div>
                                 @endfor
                             @endforeach

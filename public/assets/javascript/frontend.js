@@ -4958,14 +4958,13 @@ $.extend(
 $('input[name="holder_info"]').on('click', function(e) {
   var status_radio_button = $('input[name="holder_info"]:checked').val();
 
-  if(status_radio_button == "true"){  
-      $("div#ticket_details1").show();
-      $("div#ticket_details2").show();
-  }else{ 
-    var i;
-    for (i = 2; i < 1000; i++) {
-      $("div#ticket_details"+i).hide();      
-    }      
+  if (status_radio_button == "false") {  
+      $(".attendize-information").hide();    
+      $(".attendize-information:first").show();    
+
+  } else { 
+      $(".attendize-information").show();    
+      
   }
 
 });

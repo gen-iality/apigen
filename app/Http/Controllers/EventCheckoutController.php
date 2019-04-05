@@ -341,6 +341,7 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $order_reference)
     {
+        return $request;
 
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
         $ticket_order = Cache::get($order_reference);
