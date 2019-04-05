@@ -29,22 +29,24 @@ body {font-family: Arial;}
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: white;
+a:hover {
+  background-color: #bfbfbf;
   color: #00f0be;
+  cursor: pointer;
+}
+
+p.active{
+  background-color: #428bca;
+  font-family: Montserrat,sans-serif;
+  padding: 5%;
+  color: white;
+  font-size: 16px;
+  text-align: center;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
-  background-color: #00f0be;
-  color:white;
-  font-size: 1.3em;
-  margin-top: 6px;
-  border-radius: 10px 10px 0px 0px;
-  border-left: 0;
-}
 
-.tab button.active p small {
+button.active p small {
   color: black;
 }
 
@@ -150,18 +152,37 @@ td{
 }
 
 </style>
+
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
 <div class="tab" style="font-family:Montserrat,sans-serif">
+<ul class="nav">
+    <div class="row">
+
+    
     @foreach($stages as $key => $stage) 
+    <div class="col-sm-3">
         <!-- aca verificamos si el stage esta activo dentro de las fechas -->
         @php $class_tab_active = ($key == $stage_act) ? 'active': ''; @endphp
-        <button class="tablinks {{$class_tab_active}}" onclick="openCity(event, '{{$key}}')" style="font-family:Montserrat,sans-serif">   
-            {{$stage['title']}} <br>
-            <p class="nm "><small class="sub-titulo "> <?php echo date('d F', strtotime($stage["start_sale_date"])); ?> /  <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?></small></p>
-        </button>
+        <li class="nav-item">
+        <a class="nav-link" onclick="openCity(event, '{{$key}}')" style="font-family:Montserrat,sans-serif">   
+            <p class="{{$class_tab_active}} tab-{{$key}}">
+                {{$stage['title']}} <br>
+                <small style="font-size: 1rem;">
+                    Desde: <?php echo date('d F', strtotime($stage["start_sale_date"])); ?>
+                </small> <br>
+                 <small style="font-size: 1rem;">
+                    Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
+                </small>
+            </p>
+            
+        </a>
+        </li>
+    </div>
     @endforeach
+    </div>
+</ul>
 </div>
 
 <!-- EN ESTE LUGAR SE CARGA LA INFORMACIÓN DE CADA UNO DE LOS TABS-->
@@ -312,14 +333,6 @@ td{
 
     @endif
 
-
-
-
-
-
-
-
-
     </div>
 @endforeach
 @else
@@ -330,19 +343,24 @@ td{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script>
-function openCity(evt, cityName) {
+function openCity(evt, key) {
+    console.log(evt, key)
+ evt.currentTarget.className += " active";
+
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  tablinks = document.getElementsByClassName("tablinks");
+  tablinks = document.getElementsByClassName("p");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    // tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+  document.getElementById(key).style.display = "block";
+  $('p.active').removeClass("active")
+  $('p.tab-'+key).addClass("active")
 }
+
 
 
 $(document).ready(function(){
@@ -360,17 +378,5 @@ $("select.tickets").change(function(){
         $("tr#codes_discount").empty()
     }
 });
-
-
-/* 	$("select.tickets").change(function(){
-
-        var total = $('select.tickets').val();
-        console.log(total);
-        if(total == 1){
-            console.log("M here");
-        }
-        
-        // $('input[name=valor1]').val($(this).val());
-    }); */
 });
 </script>
