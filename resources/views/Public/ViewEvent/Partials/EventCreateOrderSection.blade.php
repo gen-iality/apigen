@@ -232,14 +232,14 @@
                                                             @else
                                                                 {!! Form::label($field['name'], $field['name']) !!}
                                                             @endif
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
                                                         @else
                                                         @if(isset( $field['label']))
                                                             {!! Form::label($field['name'], $field['label']) !!}
                                                         @else
                                                             {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                         @endif
                                                     </div>
                                                 </div>

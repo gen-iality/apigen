@@ -225,8 +225,8 @@ class EventCheckoutController extends Controller
         //save information in pending with json_encode, value how string
         $pending = new Pending();
         $pending->reference = $order_reference;
-        $pending->save(json_encode($data_pending));
-
+        $pending->value = json_encode($data_pending);
+        $pending->save();
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
@@ -264,23 +264,28 @@ class EventCheckoutController extends Controller
      */
     public function showEventCheckout(Request $request, $order_reference)
     {
+        
         //This code was must TEMPORALThis reload even when there is a user authenticaded
-        $order_session = Cache::get($order_reference);
+        $pending = Pending::where('reference',$order_reference)->first();
 
+        if (!isset($order_session) || $order_session['expires'] < Carbon::now()) {
+            header('Location: '.'https://evius.co'); die;
+        }
+
+        $order_session = json_decode($pending->value, true);
         if(!Auth::user()){
+            header('Location: '.'https://evius.co'); die;
+        }
+
+        //If ticekt was expired show the message, this is commented
+
+        if (!isset($order_session) || $order_session['expires'] < Carbon::now()) {
             header('Location: '.'https://evius.co');
-            die;
+        //     var_dump(!$order_session);die;
+        //     $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
+        //     return redirect()->route($route_name, ['event_id' => $order_session['event_id']]);
         }
-        //Temporal
-
-        if (!$order_session || $order_session['expires'] < Carbon::now()) {
-
-            $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
-            return redirect()->route($route_name, ['event_id' => $order_session['event_id']]);
-            return $order_session;
-        }
-
-        $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
+        // $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
 
         $event = Event::findorFail($order_session['event_id']);
 
@@ -289,16 +294,10 @@ class EventCheckoutController extends Controller
 
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
         $orderService->calculateFinalCosts();  
-        
-        $data = $order_session + [
-            'event' => $event,
-            'secondsToExpire' => $secondsToExpire,
-            'is_embedded' => $this->is_embedded,
-            'orderService' => $orderService,
-            'fields' => $fields,
-            'temporal_id' => $order_reference,
-        ];
+    
+
         if($order_session['seats_data']){
+
             if(!isset($order_session['seats_data']['cache'])){
                 //Booked seats seats.io
                 $seats = [];
@@ -306,7 +305,7 @@ class EventCheckoutController extends Controller
                 $seats_data = $order_session['seats_data'];
                 $flag = true;
                 foreach($seats_data as $seat)
-                {   
+                {
                     //if this dont have chart break the save in seats.io
                     if($seat['id'] == $seat['labels']['own']){
                         $flag = false;
@@ -323,9 +322,19 @@ class EventCheckoutController extends Controller
                     $seatsio->events->book($event_chart, $seats); // key event
                 }
                 $order_session['seats_data']['cache'] = true;
-                cache::forever($order_reference,$order_session);
+                $pending->value = json_encode($order_session);
+                $pending->save();
             }
         }
+
+        $data = $order_session + [
+            'event' => $event,
+            'is_embedded' => $this->is_embedded,
+            'orderService' => $orderService,
+            'fields' => $fields,
+            'temporal_id' => $order_reference,
+        ];
+
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
@@ -343,9 +352,9 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $order_reference)
     {
-
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
-        $ticket_order = Cache::get($order_reference);
+        $pending = Pending::where('reference',$order_reference)->first();
+        $ticket_order = json_decode($pending->value, true);
         //Extraemos el event_id del cache
         $event_id = $ticket_order["event_id"];
 
@@ -362,12 +371,12 @@ class EventCheckoutController extends Controller
 
         //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
-
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
-        Cache::forever($order_reference, $ticket_order);
-
         $orderRequiresPayment = $ticket_order['order_requires_payment'];
+
+        $pending->value = json_encode($ticket_order);
+        $pending->save();
 
         //this if dont work in this moment 
         if ($orderRequiresPayment && $request->get('pay_offline') && $event->enable_offline_payments) {
@@ -383,17 +392,8 @@ class EventCheckoutController extends Controller
                 $date = new \DateTime();
                 $now =  $date->format('Y-m-d H:i:s');
                 $seats = [];
-                foreach($ticket_order['seats_data'] as $key => $seat){  
+                foreach($ticket_order['seats_data'] as $key => $seat){ 
                     array_push($seats, $key); 
-                }
-                
-                //event: was replace by event_id
-                $stages = $event->event_stages;
-                foreach($stages as $key => $stage){ 
-                    if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
-                        $event_id =  $stage['seating_chart']; // key event
-                        break;
-                    }
                 }
             }
 
@@ -427,8 +427,9 @@ class EventCheckoutController extends Controller
                 $gateway->initialize();
 
             } else {
-                $gateway = Omnipay::create($ticket_order['payment_gateway']->name);
-                $config = $ticket_order['account_payment_gateway']->config;
+
+                $gateway = Omnipay::create($ticket_order['payment_gateway']['name']);
+                $config = $ticket_order['account_payment_gateway']['config'];
                 if (!$config) {
                     $config = [];
                 }
@@ -458,7 +459,7 @@ class EventCheckoutController extends Controller
 
             $baseUrl = ($_SERVER["SERVER_NAME"] == 'localhost') ? "https://dev.evius.co" : url('/');
 
-            switch ($ticket_order['payment_gateway']->id) {
+            switch ($ticket_order['payment_gateway']['id']) {
                 case config('attendize.payment_gateway_dummy'):
                     $token = uniqid();
                     $transaction_data += [
@@ -548,6 +549,7 @@ class EventCheckoutController extends Controller
             $transaction = $gateway->purchase($transaction_data);
             $response = $transaction->send(); 
 
+
             /**
             * Seats Confirmation 
             */
@@ -588,15 +590,17 @@ class EventCheckoutController extends Controller
                 $ticket_order['transaction_data'] += $transaction_data;
                 $ticket_order['transaction_data'] += ['session_id' => $session_id];
                 //Guardamos la informacion del tickete en el cache y vamos a complete order para generar la orden.
-                Cache::forever($order_reference, $ticket_order);
+
+                $pending->value = json_encode($ticket_order);
+                $pending->save();
+
                 $this->storeOrder($order_reference);
-                
                 
                 Log::info("Redirect url: " . $url_redirect);
                 $return = [
                     'status' => 'success',
                     'redirectUrl' => $response->getRedirectUrl(),
-                    'message' => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name,
+                    'message' => 'Redirecting to ' . $ticket_order['payment_gateway']['provider_name'],
                 ];
 
                 // GET method requests should not have redirectData on the JSON return string
@@ -683,8 +687,8 @@ class EventCheckoutController extends Controller
             try {
 
                 $order = Order::where('order_reference', '=', $order_reference)->first();
-                $ticket_order = Cache::get($order_reference);
-                // var_dump($ticket_order);die;
+                $pending = Pending::where('reference',$order_reference)->first();
+                $ticket_order = json_decode($pending->value, true);
 
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
@@ -736,12 +740,13 @@ class EventCheckoutController extends Controller
                     /*
                      * Add the attendees
                      */
+
                     foreach ($ticket_order['tickets'] as $attendee_details) {
     
                         /*
                          * Update ticket's quantity sold
                          */
-                        $ticket = Ticket::findOrFail($attendee_details['ticket']['id']);
+                        $ticket = Ticket::findOrFail($attendee_details['ticket']['_id']);
     
                         /*
                          * Update some ticket info
@@ -749,7 +754,7 @@ class EventCheckoutController extends Controller
                         $ticket->increment('quantity_sold', $attendee_details['qty']);
                         $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
                         $ticket->increment('organiser_fees_volume',
-                            ($attendee_details['ticket']['organiser_booking_fee'] * $attendee_details['qty']));
+                            ($attendee_details['organiser_booking_fee'] * $attendee_details['qty']));
     
                         /*
                          * Insert order items (for use in generating invoices)
@@ -759,7 +764,7 @@ class EventCheckoutController extends Controller
                         $orderItem->quantity = $attendee_details['qty'];
                         $orderItem->order_id = $order->id;
                         $orderItem->unit_price = $attendee_details['ticket']['price'];
-                        $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
+                        $orderItem->unit_booking_fee = $attendee_details['booking_fee'] + $attendee_details['organiser_booking_fee'];
                         $orderItem->save();
     
                         /*
@@ -775,12 +780,12 @@ class EventCheckoutController extends Controller
                                     continue;
                                 }
     
-                                $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['id']];
+                                $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['_id']];
                             }
     
                             $attendee->event_id = $event_id;
                             $attendee->order_id = $order->id;
-                            $attendee->ticket_id = $attendee_details['ticket']['id'];
+                            $attendee->ticket_id = $attendee_details['ticket']['_id'];
                             $attendee->account_id = $event->account->id;
                             $attendee->reference_index = $attendee_increment;
 
@@ -805,35 +810,6 @@ class EventCheckoutController extends Controller
                             
                             
                             $attendee->save();
-                            
-                            /*
-                             * Save the attendee's questions
-                             */
-                            foreach ($attendee_details['ticket']->questions as $question) {
-    
-                                $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-    
-                                if (is_null($ticket_answer)) {
-                                    continue;
-                                }
-    
-                                /*
-                                 * If there are multiple answers to a question then join them with a comma
-                                 * and treat them as a single answer.
-                                 */
-                                $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-    
-                                if (!empty($ticket_answer)) {
-                                    QuestionAnswer::create([
-                                        'answer_text' => $ticket_answer,
-                                        'attendee_id' => $attendee->id,
-                                        'event_id' => $event->id,
-                                        'account_id' => $event->account->id,
-                                        'question_id' => $question->id,
-                                    ]);
-    
-                                }
-                            }
     
                             /* Keep track of total number of attendees */
                             $attendee_increment++;
@@ -841,7 +817,7 @@ class EventCheckoutController extends Controller
     
                     }
                     Log::info('Borramos el cache de la orden: '.$order_reference);
-                    Cache::forget($order_reference);
+                    $pending->forceDelete();
                 }
 
             } catch (Exception $e) {
@@ -920,7 +896,10 @@ class EventCheckoutController extends Controller
         Log::info('Generación de la orden');
         $order = Order::where('order_reference', $order_reference)->first();
         if(!isset($order)){
-            $ticket_order = Cache::get($order_reference);
+
+            $pending = Pending::where('reference',$order_reference)->first();
+            $ticket_order = json_decode($pending->value, true);
+
             $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
             $request_data = $ticket_order['request_data'];
             $event_id = $ticket_order['event_id'];
@@ -936,7 +915,7 @@ class EventCheckoutController extends Controller
                 $order->transaction_id = $ticket_order['transaction_id'][0];
             }
             if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
-                $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
+                $order->payment_gateway_id = $ticket_order['payment_gateway']['id'];
             }
             //Guardamos cada uno de los datos de la orden
             $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
@@ -1171,7 +1150,6 @@ class EventCheckoutController extends Controller
         Log::info('Borramos el cache de la orden: '.$status);
         if($status != 'PENDING'){
          //    Log::info('Borramos el cache de la orden: '.$order_reference);
-	   //  Cache::forget($order_reference);
         }
         $order->save();
         Log::info('Estado guardado: '.$order_reference." order_reference: ".$order->orderStatus['name']);
