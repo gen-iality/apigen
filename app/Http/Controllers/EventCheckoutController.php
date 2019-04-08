@@ -1312,8 +1312,7 @@ class EventCheckoutController extends Controller
             default:
                $status = "payment gateway NOT FOUND";
         }
-    
-
+        
         return $status;
 
     }
@@ -1350,7 +1349,6 @@ class EventCheckoutController extends Controller
                     $seats = $order_session->seats_data->seats;
                     $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
                     $seatsio->events->release($event_chart, $seats);
-
                 }
             }
             $pending->delete();
