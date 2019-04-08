@@ -182,16 +182,40 @@
                         @lang("Public_ViewEvent.copy_buyer")
                     </a>
                 </div>
+                @foreach($tickets as $ticket)
+                <?php
+                    $multiple = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
+                ?>
+                    @if ($multiple > 0)
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!!  Form::radio('holder_info', 'true') !!}
+                                    {!! Form::label("holder_info_attendees", "Deseo copiar los datos de cada acompañante") !!}
+                                </div>
+                                <div class="form-group">
+                                    {!!  Form::radio('holder_info', 'false') !!}
+                                    {!! Form::label("holder_info_buyer", "Copiar los datos de los acompañantes luego") !!}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="ticket_holders_details" >
+                        <div class="ticket_holders_details" id="ticket_details" >
                             
                             <?php
                                 $total_attendee_increment = 0;
                             ?>
                             @foreach($tickets as $ticket)
-                                @for($i=0; $i<=$ticket['qty']-1; $i++)
+                            <?php
+                                $cant = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
+                                $tot = $ticket['qty'] * $cant;
+                            ?>
+                                @for($i=0; $i<=$tot-1; $i++)
+                                <div class="attendize-information">
                                 <h3>@lang("Public_ViewEvent.ticket_holder_information") {{$i+1}}</h3>
 
                                 <div class="panel panel-primary">
@@ -217,7 +241,7 @@
                                         }
                                                 ?>
                                         <h3 class="panel-title">
-                                            <b>TICKET: {{$seat_position}}</b>
+                                            <b>TICKET: {{$seat_position}}-{{$i+1}}</b>
                                         </h3>
                                        @endif
                                     </div>
@@ -226,22 +250,14 @@
                                             @foreach($fields as $field)
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
-                                                        @if($field['mandatory'] == 'true')
-                                                            @if(isset( $field['label']))
-                                                                {!! Form::label($field['name'], $field['label']) !!}
-                                                            @else
-                                                                {!! Form::label($field['name'], $field['name']) !!}
-                                                            @endif
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                                        @else
                                                         @if(isset( $field['label']))
                                                             {!! Form::label($field['name'], $field['label']) !!}
                                                         @else
                                                             {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
-                                                        @endif
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
                                                     </div>
+                                                    {{ Form::hidden('ticket_id', $ticket['ticket']['id']) }}
                                                 </div>
                                             @endforeach
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
@@ -249,6 +265,7 @@
                                     </div>
 
 
+                                </div>
                                 </div>
                                 @endfor
                             @endforeach

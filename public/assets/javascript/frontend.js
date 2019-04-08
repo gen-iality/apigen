@@ -4947,3 +4947,24 @@ $.extend(
         return t.replace(/^\//, "").replace(/(?:index|default).[a-zA-Z]{3,4}$/, "").replace(/\/$/, "")
     }, t.fn.smoothScroll.defaults = s
 })(jQuery);
+
+
+/**
+ * Hiden division tickets details
+ * 
+ * @param {*} $submitButton 
+ */
+
+$('input[name="holder_info"]').on('click', function(e) {
+  var status_radio_button = $('input[name="holder_info"]:checked').val();
+
+  if (status_radio_button == "false") {  
+      $(".attendize-information").hide();    
+      $(".attendize-information:first").show();    
+
+  } else { 
+      $(".attendize-information").show();    
+      
+  }
+
+});

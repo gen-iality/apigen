@@ -75,13 +75,24 @@
 
                         </div>
 
-                        <div class="form-group more-options">
-                            {!! Form::label('description', trans("ManageEvent.ticket_description"), array('class'=>'control-label')) !!}
-                            {!!  Form::text('description', 'description',
-                                        array(
-                                        'class'=>'form-control'
-                                        ))  !!}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('number_person_per_ticket', 'Número de personas por ticket', array('class'=>' control-label')) !!}
+                                    {!! Form::selectRange('number_person_per_ticket', 1, 20, 1, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                {!! Form::label('description', trans("ManageEvent.ticket_description"), array('class'=>'control-label')) !!}
+                                {!!  Form::text('description', '',
+                                            array(
+                                            'class'=>'form-control',
+                                            'placeholder'=>'Description'
+                                            ))  !!}
+                            </div>
                         </div>
+
 
                         <!-- <div class="row more-options">
                             <div class="col-sm-6">
