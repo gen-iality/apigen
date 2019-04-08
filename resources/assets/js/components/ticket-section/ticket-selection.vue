@@ -279,8 +279,10 @@ export default {
                     }
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => 
+            .then(response => {
+                console.log(response.redirectUrl);
                 window.top.location.href = response.redirectUrl
+            }
             ); 
     }
   }
