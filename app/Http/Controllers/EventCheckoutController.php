@@ -268,25 +268,11 @@ class EventCheckoutController extends Controller
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         $pending = Pending::where('reference',$order_reference)->first();
 
-        if (!isset($order_session) || $order_session['expires'] < Carbon::now()) {
+        if (!isset($pending) || !Auth::user()) {
             header('Location: '.'https://evius.co'); die;
         }
-
+        
         $order_session = json_decode($pending->value, true);
-        if(!Auth::user()){
-            header('Location: '.'https://evius.co'); die;
-        }
-
-        //If ticekt was expired show the message, this is commented
-
-        if (!isset($order_session) || $order_session['expires'] < Carbon::now()) {
-            header('Location: '.'https://evius.co');
-        //     var_dump(!$order_session);die;
-        //     $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
-        //     return redirect()->route($route_name, ['event_id' => $order_session['event_id']]);
-        }
-        // $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
-
         $event = Event::findorFail($order_session['event_id']);
 
         //Find user fields in event.
@@ -313,19 +299,24 @@ class EventCheckoutController extends Controller
                     };
                     array_push($seats,$seat['id']);
                 }
-                $event_chart = $seats_data[0]['chart']['config']['event'];
-
-
+                
                 if($flag){
+                    $event_chart = $seats_data[0]['chart']['config']['event'];
                     $key_secret = ($event->seats_configuration)['keys']['secret'];
                     $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
                     $seatsio->events->book($event_chart, $seats); // key event
+                    
+                    $order_session['seats_data']['cache'] = true;
+                    $order_session['seats_data']['seats'] = $seats;
+                    $order_session['seats_data']['key_secret'] = $key_secret;
+                    $order_session['seats_data']['event_chart'] = $event_chart;
                 }
-                $order_session['seats_data']['cache'] = true;
-                $pending->value = json_encode($order_session);
-                $pending->save();
+
             }
         }
+
+        $pending->value = json_encode($order_session);
+        $pending->save();
 
         $data = $order_session + [
             'event' => $event,
@@ -1327,39 +1318,47 @@ class EventCheckoutController extends Controller
 
     }
 
-    public function deleteOrdersPending(){
+    /**
+     * deleteOrdersPending
+     *
+     * @return void
+     */
 
-    //    $pendientes = Pending::all();
-    //    return $pendientes;
+    public function deleteOrdersPending(){
         //si el estado esta en estado de comprando y fue la orden hace 25 horas elimino el cache
         $yesterdayTime = Carbon::now()->subHours(25);
-        $orders = Order::where("order_status_id","5c4232c1477041612349941e")->where("created_at","<",$yesterdayTime)->get();
-
-        //We changed the state orders
-        $orders->order_status_id = "5c4232ad477041612349941d";
-        $orders->order_status_message = "Canceled for not having been purchased during the 24 hours";
+        $orders = Order::where("order_status_id", config('attendize.order_awaiting_payment'))->where("created_at","<",$yesterdayTime)->get();
+        $pendings = Pending::where("created_at","<",$yesterdayTime)->get();
 
         //order was passed to gateway payment
 
         foreach($orders as $order){
-            if(isset($order->order_reference)){
-                $pendientes = Pending::all();
-                if($cache){
-                    // save in pending how cache string;
-                    $pending = new Pending();
-                    $pending->value = json_encode($cache);
-                    $pending->save();
+            //We changed the state orders
+            $order->order_status_id =  config('attendize.order_cancelled');
+            $order->order_status_message = "Canceled for not having been purchased during 24 hours";
+            $order->save();
+        }
+        
+        foreach($pendings as $pending){
+            $order_session = json_decode($pending->value);
+            // var_dump($order_session->seats_data);die;
+
+            if($order_session->seats_data ){
+                foreach($order_session->seats_data as $seats_data){
+                    $event_chart = $order_session->seats_data->event_chart;
+                    $key_secret = $order_session->seats_data->key_secret;
+                    $seats = $order_session->seats_data->seats;
+                    $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+                    $seatsio->events->release($event_chart, $seats);
+
                 }
             }
-
-
-            //         //free seats
-            // $key_secret = ($event->seats_configuration)['keys']['secret'];
-            // $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-            // $seatsio->events->book($event_chart, $seats); // key event
-
+            $pending->delete();
         }
-        return 'ok';
+
+
+
+        return ['status' => true];
 
 
     }
