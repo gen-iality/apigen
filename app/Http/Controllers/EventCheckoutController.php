@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Attendee;
 use App\Event;
+use App\Pending;
 use App\Jobs\SendOrderTickets;
 use App\Events\OrderCompletedEvent;
 use App\Models\AccountPaymentGateway;
@@ -195,8 +196,8 @@ class EventCheckoutController extends Controller
                 }
             }
         }
-        
-        Cache::forever($order_reference, [
+
+        $data_pending = [
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
             'event_id' => $event->id,
@@ -220,7 +221,11 @@ class EventCheckoutController extends Controller
             'discount' => isset($discount) ? $discount : null,
             'seats_data' => $request->seats
 
-        ]);
+        ];
+        //save information in pending with json_encode, value how string
+        $pending = new Pending();
+        $pending->reference = $order_reference;
+        $pending->save(json_encode($data_pending));
 
         /*
          * If we're this far assume everything is OK and redirect them
@@ -1341,6 +1346,43 @@ class EventCheckoutController extends Controller
     
 
         return $status;
+
+    }
+
+    public function deleteOrdersPending(){
+
+    //    $pendientes = Pending::all();
+    //    return $pendientes;
+        //si el estado esta en estado de comprando y fue la orden hace 25 horas elimino el cache
+        $yesterdayTime = Carbon::now()->subHours(25);
+        $orders = Order::where("order_status_id","5c4232c1477041612349941e")->where("created_at","<",$yesterdayTime)->get();
+
+        //We changed the state orders
+        $orders->order_status_id = "5c4232ad477041612349941d";
+        $orders->order_status_message = "Canceled for not having been purchased during the 24 hours";
+
+        //order was passed to gateway payment
+
+        foreach($orders as $order){
+            if(isset($order->order_reference)){
+                $pendientes = Pending::all();
+                if($cache){
+                    // save in pending how cache string;
+                    $pending = new Pending();
+                    $pending->value = json_encode($cache);
+                    $pending->save();
+                }
+            }
+
+
+            //         //free seats
+            // $key_secret = ($event->seats_configuration)['keys']['secret'];
+            // $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
+            // $seatsio->events->book($event_chart, $seats); // key event
+
+        }
+        return 'ok';
+
 
     }
 

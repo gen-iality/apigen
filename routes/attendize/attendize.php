@@ -804,6 +804,11 @@ Route::get('order/paymentCompleted/PayU', [
     'uses' => 'EventCheckoutController@paymentCompletedPayU',
 ]);
 
+Route::get('order/delete/orders/pending', [
+    'as'   => 'deleteOrdersPending',
+    'uses' => 'EventCheckoutController@deleteOrdersPending',
+]);
+
 Route::post('order/paymentCompleted/PayU', [
     'as'   => 'completeOrderPayUPost',
     'uses' => 'EventCheckoutController@paymentCompletedPayU',
