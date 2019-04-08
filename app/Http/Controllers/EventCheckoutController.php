@@ -341,7 +341,6 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $order_reference)
     {
-        return $request;
 
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
         $ticket_order = Cache::get($order_reference);
@@ -361,9 +360,16 @@ class EventCheckoutController extends Controller
 
         //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
-
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
+
+
+        /* Si no desea asignar aún los tickets */
+
+        if ($request->holder_info == "false") {
+            self::assignTicketsToPurchaser($request, $event, $ticket_order['request_data']);
+            
+        }
         Cache::forever($order_reference, $ticket_order);
 
         $orderRequiresPayment = $ticket_order['order_requires_payment'];
@@ -1345,6 +1351,34 @@ class EventCheckoutController extends Controller
     
 
         return $status;
+
+    }
+
+    /**
+     * assignTicketsToPurchaser
+     *
+     * Assign all tickets to purchase.
+     * @param string $order_reference
+     * @param string $payment_gateway
+     * @return void $status
+     */
+    public function assignTicketsToPurchaser(Request $request, Event $event, &$data)
+    {
+        $inputs = $request->all();
+        $fields = $event->user_properties;
+        $ticket_id = $request['ticket_id'];
+        $ticket = Ticket::findOrFail($ticket_id);
+        $cant = $ticket['number_person_per_ticket'];
+        foreach ($fields as $field) { 
+            $field_name = 'tiket_holder_'.$field['name'];
+            $seed_value = $inputs[$field_name][0][$ticket_id];
+            for ($i=1; $i<=$cant; $i++) {
+                /* cambiamos el valor nulo al nuevo valor*/
+                $data[$field_name][$i][$ticket_id] = $seed_value;
+            }
+        }
+
+        return $data;
 
     }
 

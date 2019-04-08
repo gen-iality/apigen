@@ -182,18 +182,25 @@
                         @lang("Public_ViewEvent.copy_buyer")
                     </a>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!!  Form::radio('holder_info', 'true') !!}
-                            {!! Form::label("holder_info_attendees", "Copiar los datos de cada acompañante") !!}
+                @foreach($tickets as $ticket)
+                <?php
+                    $multiple = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
+                ?>
+                    @if ($multiple > 0)
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!!  Form::radio('holder_info', 'true') !!}
+                                    {!! Form::label("holder_info_attendees", "Deseo copiar los datos de cada acompañante") !!}
+                                </div>
+                                <div class="form-group">
+                                    {!!  Form::radio('holder_info', 'false') !!}
+                                    {!! Form::label("holder_info_buyer", "Copiar los datos de los acompañantes luego") !!}
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            {!!  Form::radio('holder_info', 'false') !!}
-                            {!! Form::label("holder_info_buyer", "Copiar los datos del comprador como titular de todas las entradas.") !!}
-                        </div>
-                    </div>
-                </div>
+                    @endif
+                @endforeach
 
                 <div class="row">
                     <div class="col-md-12">
@@ -250,6 +257,7 @@
                                                         @endif
                                                         {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
                                                     </div>
+                                                    {{ Form::hidden('ticket_id', $ticket['ticket']['id']) }}
                                                 </div>
                                             @endforeach
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
