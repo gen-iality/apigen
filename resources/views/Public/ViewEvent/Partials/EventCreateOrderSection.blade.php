@@ -184,7 +184,7 @@
                 </div>
                 @foreach($tickets as $ticket)
                 <?php
-                    $multiple = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
+                    $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
                 ?>
                     @if ($multiple > 0)
                         <div class="row">
@@ -211,7 +211,7 @@
                             ?>
                             @foreach($tickets as $ticket)
                             <?php
-                                $cant = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
+                                $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
                                 $tot = $ticket['qty'] * $cant;
                             ?>
                                 @for($i=0; $i<=$tot-1; $i++)
@@ -230,16 +230,19 @@
                                     take the seat labe, and break the foreach -->
                                     <?php 
                                         $seats = $seats_data;
-                                        foreach($seats as $key => $seat){
-                                            $seat_category = $seat['category']['label'];
-                                            $ticket_name = $ticket['ticket']['title'];
-                                            if($seat_category == $ticket_name){
-                                                $seat_position = $seat['labels']['displayedLabel'];
-                                                unset($seats_data[$key]);
-                                                break;
-                                            } 
+                                        foreach ($seats as $key => $seat) {
+                                            if (isset($seat['category'])) {
+                                                $seat_category = $seat['category']['label'];
+                                                $ticket_name = $ticket['ticket']['title'];
+                                                if ($seat_category == $ticket_name) {
+                                                    $seat_position = $seat['labels']['displayedLabel'];
+                                                    unset($seats_data[$key]);
+                                                    break;
+                                                }
+                                            }
+                                        
                                         }
-                                                ?>
+                                    ?>
                                         <h3 class="panel-title">
                                             <b>TICKET: {{$seat_position}}-{{$i+1}}</b>
                                         </h3>
@@ -255,9 +258,10 @@
                                                         @else
                                                             {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                     </div>
-                                                    {{ Form::hidden('ticket_id', $ticket['ticket']['id']) }}
+
+                                                    {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
                                                 </div>
                                             @endforeach
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
