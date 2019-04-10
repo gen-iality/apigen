@@ -217,15 +217,12 @@
                                     if (isset($seat['category'])) {
                                         $seat_title = $seat['category']['label'];
                                     }
-        
+                                
                                 }
                             ?>
-                            <div class="attendize-information">
-                                @if (isset($seats_data))
-                                    <h3>{{$seat_title}}</h3>
-                                @endif
-                            </div>
-
+                            @if (isset($seats_data))
+                                <H3>{{$seat_title}}</H3>
+                            @endif
                             @foreach($tickets as $ticket)
                             <?php
                                 $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
@@ -249,6 +246,8 @@
                                     }
                                 ?>
                                 @for($i=0; $i<=$tot-1; $i++)
+                                <div class="attendize-information">
+
                                 <div class="panel panel-primary">
                                     
                                     <div class="panel-heading">
@@ -284,6 +283,7 @@
                                     </div>
 
 
+                                </div>
                                 </div>
                                 @endfor
                             @endforeach
