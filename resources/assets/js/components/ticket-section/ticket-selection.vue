@@ -66,7 +66,7 @@
                     v-model="selectQuantity"
                     @change="chartConfiguration"
                   >
-                    <option v-for="idx in 2" :key="idx">{{idx}}</option>
+                    <option v-for="idx in 1" :key="idx">{{idx}}</option>
                   </select>
                 </div>
 
