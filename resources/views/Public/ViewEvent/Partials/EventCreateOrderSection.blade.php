@@ -279,7 +279,9 @@
                                                     </div>
 
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
-                                                    {{ Form::hidden('person_per_ticket', $ticket['ticket']['number_person_per_ticket']) }}
+                                                    @if(isset($ticket['ticket']['number_person_per_ticket']))
+                                                        {{ Form::hidden('person_per_ticket', $ticket['ticket']['number_person_per_ticket']) }}
+                                                    @endif
                                                 </div>
                                             @endforeach
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
