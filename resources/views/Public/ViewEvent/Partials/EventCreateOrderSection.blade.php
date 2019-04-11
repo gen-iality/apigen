@@ -232,6 +232,7 @@
                             
                               // We compare the seat_category and ticket_name if this is true 
                             //take the seat labe, and break the foreach 
+                                if (isset($seats_data)) { 
                                     $seats = $seats_data;
                                     foreach ($seats as $key => $seat) {
                                         if (isset($seat['category'])) {
@@ -246,6 +247,7 @@
                                         }
                                     
                                     }
+                                }
                                 ?>
                                 @for($i=0; $i<=$tot-1; $i++)
                                 <div class="attendize-information">
