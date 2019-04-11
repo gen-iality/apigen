@@ -212,12 +212,14 @@
                             
                             <?php
                                 $total_attendee_increment = 0;
-                                $seats = $seats_data;
-                                foreach ($seats as $key => $seat) {
-                                    if (isset($seat['category'])) {
-                                        $seat_title = $seat['category']['label'];
+                                if (isset($seats_data)) { 
+                                    $seats = $seats_data;
+                                    foreach ($seats as $key => $seat) {
+                                        if (isset($seat['category'])) {
+                                            $seat_title = $seat['category']['label'];
+                                        }
+                                    
                                     }
-                                
                                 }
                             ?>
                             @if (isset($seats_data))
