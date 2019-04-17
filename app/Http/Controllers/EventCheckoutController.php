@@ -366,9 +366,7 @@ class EventCheckoutController extends Controller
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
 
-
         /* Si no desea asignar aún los tickets */
-
         if ($request->holder_info == "false") {
             self::assignTicketsToPurchaser($request, $event, $ticket_order['request_data']);
         }
@@ -689,7 +687,6 @@ class EventCheckoutController extends Controller
                 $order = Order::where('order_reference', '=', $order_reference)->first();
                 $pending = Pending::where('reference',$order_reference)->first();
                 $ticket_order = json_decode($pending->value, true);
-
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
                     $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
@@ -770,7 +767,12 @@ class EventCheckoutController extends Controller
                         /*
                          * Create the attendees
                          */
-                        for ($i = 0; $i < $attendee_details['qty']; $i++) {
+                        if (isset($request_data['person_per_ticket'])) {
+                            $cont = $request_data['person_per_ticket'];
+                        } else {
+                            $cont = $attendee_details['qty'];
+                        }
+                        for ($i = 0; $i < $cont; $i++) {
     
                             $attendee = new Attendee();
                             $attendee->properties = (object) [];
@@ -797,13 +799,15 @@ class EventCheckoutController extends Controller
                                 //Get the seats
                                 $seats = $ticket_order['seats_data'];
                                 foreach($seats as $key => $seat){
+                                    if (isset($seat['category'])) {
                                     $seat_category = $seat['category']['label'];
                                     $ticket_name = Ticket::find($attendee->ticket_id)->title;
                                     // we compare the seat_category and ticket_name if this is true save the seat and delete of array of ticket_order, and break the foreach
-                                    if($seat_category == $ticket_name){
-                                        $attendee->seat = $seat['labels'];
-                                        unset($ticket_order['seats_data'][$key]);
-                                        break;
+                                        if($seat_category == $ticket_name){
+                                            $attendee->seat = $seat['labels'];
+                                            unset($ticket_order['seats_data'][$key]);
+                                            break;
+                                        }
                                     }
                                 }
                             }
