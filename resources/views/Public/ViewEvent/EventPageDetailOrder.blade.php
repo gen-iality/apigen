@@ -96,17 +96,25 @@
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
                             <h3 style="margin: 0;">Total</h3>
-                            <p style="margin: 0 0 0 1em;">{{$order_total}}.{{$amount->currency()}}</p>
+                            <p style="margin: 0 0 0 1em;">{{$order_total}}.
+                            @if($amount != 0)
+                                {{$amount->currency()}}
+                            @endif
+                           </p>
                         </div>
                         <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
                             <h3 style="margin: 0;">Fecha</h3>
                             <p style="margin:0 0 0 1em;">{{$today}}</p>
                         </div>
                     </div>
+                    @if($payment != '')
                     <div style="display:block;">
                         <h3 style="margin: 0;">Descripción:</h3>
-                        <p style="text-align:center">{{$payment->description()}}</p>
+                        
+                            <p style="text-align:center">{{$payment->description()}}</p>
+                        
                     </div>
+                    @endif
                     @else
                     <div style="display:block; width:100%; margin-bottom: 1em;  ">
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
