@@ -782,7 +782,7 @@ class EventCheckoutController extends Controller
                         /*
                          * Create the attendees
                          */
-                        if (isset($request_data['person_per_ticket'])) {
+                        if (isset($request_data['person_per_ticket']) && isset($request_data['holder_info'])) {
                             $cont = $request_data['person_per_ticket'];
                         } else {
                             $cont = $attendee_details['qty'];
