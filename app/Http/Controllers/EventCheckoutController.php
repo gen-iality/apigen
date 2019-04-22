@@ -83,9 +83,11 @@ class EventCheckoutController extends Controller
 
             // if user buyer more tickets that there are, show a message of disponibility
             if($ticket->quantity_remaining < $quantity_tickets_user){
+                $message = $ticket->quantity_remaining == 0 ? $ticket->title.": Tiquetes agotados" :
+                           $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tiquetes';
                 return response()->json([
                     'status' => 'error',
-                    'message' => $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tickets',
+                    'message' => $message,
                 ]);
             }
         }
