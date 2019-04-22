@@ -227,7 +227,7 @@
                             @endif
                             @foreach($tickets as $ticket)
                             <?php
-                                $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
+                                $cant = !is_null($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
                                 $tot = $ticket['qty'] * $cant;
                             
                               // We compare the seat_category and ticket_name if this is true 
@@ -275,7 +275,7 @@
                                                         @else
                                                             {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
                                                     </div>
 
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}

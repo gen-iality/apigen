@@ -198,6 +198,10 @@ td{
             <div class="col-md-12">
                     <div class="content">
                         <div class="tickets_table_wrap">
+                        @if(isset($event->codes_discount))
+                            <div id="codes_discount">                          
+                            </div>
+                        @endif
                             <table class="table">
                                 <?php
                                 $is_free_event = true;
@@ -280,10 +284,7 @@ td{
                                     @endif
                                 @endforeach
                                 @if($key == $stage_act)
-                                    @if(isset($event->codes_discount))
-                                    <tr id="codes_discount">                                        
-                                    </tr>
-                                    @endif
+                                   
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
@@ -300,7 +301,7 @@ td{
                                         </td>
                                         @endif
                                     </tr>
-                                    @endif
+                                @endif
                                     <tr class="checkout">
                                         <td colspan="3">
                                             @if(!$is_free_event && $key == $stage_act)
@@ -375,9 +376,24 @@ $("select.tickets").change(function(){
         total += total_select
     });
     if(total == 1){
-        $("tr#codes_discount").append(' <td  colspan="1" class="td">Ingresa tu código promocional para recibir tu descuento.  </td> <td  colspan="2" class="td">  <input type="text" name="code_discount" class="form-control"></td>')
+        $("div#codes_discount").append(`
+        
+        
+        <div class="card" style="border-color: #72f0bf; border-style: dotted;">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                <input type="text" name="code_discount" class="form-control" placeholder="Si tiene un código promocional, puede ingresarlo en este campo" style="border-color: #72f0bf;">
+                <center><footer class="blockquote-footer">Código promocional</footer></center>
+                </blockquote>
+            </div>
+        </div>
+
+        
+        `)
     }else{
-        $("tr#codes_discount").empty()
+        $("div#codes_discount").empty()
     }
 });
 });
