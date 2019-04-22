@@ -44,7 +44,7 @@ class EventViewController extends Controller
             }
         } elseif ($stages && $event->stage_continue !==  null) { /* Si no tiene  limite de compra entre etapas */
             foreach ($stages as $key => $stage) { 
-                if ($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now && $stage_act == null) { /* Se condiciona para que entre 1 sola vez para tener la etapa minima de venta */
+                if ($stage["start_sale_date"] > $now && $stage_act == null) { /* Se condiciona para que entre 1 sola vez para tener la etapa minima de venta */
                 $stage_act = $key;
                 }
             }
