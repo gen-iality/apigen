@@ -76,7 +76,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('number_person_per_ticket', 'Número de personas por ticket', array('class'=>' control-label')) !!}
-                            {!! Form::selectRange('number_person_per_ticket', 1, 20, 1, ['class' => 'form-control']) !!}
+                            {!! Form::selectRange('number_person_per_ticket', 1, 20, null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
 

@@ -50061,7 +50061,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\na.btn-success{\n   width: 100%;\n   color: #75f1c6 !important;\n   border-color: #75f1c6;\n}\n", ""]);
+exports.push([module.i, "\na.btn-success {\n    background-color: #87e5c1;\n    width: 100%;\n    font-size: 100%;\n    border-color: #87e5c1;\n    font-family: Montserrat,sans-serif;\n}\nli > a.active {\n        margin-left: -10px;\n        margin-right: -10px;\n}\n", ""]);
 
 // exports
 
@@ -50504,101 +50504,226 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['event', 'stage_act', 'tickets', 'auth'],
-    data: function data() {
-        return {
-            selectTicket: 0,
-            selectQuantity: 1,
-            chart: [],
-            selectedObject: [],
-            next: false
-        };
+  props: ["event", "stage_act", "tickets", "auth"],
+  data: function data() {
+    return {
+      selectTicket: 0,
+      selectTicketName: "",
+      selectQuantity: 1,
+      chart: [],
+      selectedObject: [],
+      activators: [],
+      next: false,
+      currentTickets: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // realizar ticket seleccionados por estado en la parte de aca
+    var state_active = this.event["event_stages"][this.stage_act]["stage_id"];
+    var flag = true;
+    this.tickets.forEach(function (ticket, key) {
+      if (ticket["stage_id"] == state_active) {
+        ticket["position"] = key;
+        _this.currentTickets.push(ticket);
+        if (flag) {
+          _this.selectTicket = key;
+          _this.selectTicketName = _this.tickets[_this.selectTicket]["title"];
+          flag = false;
+        }
+      }
+    });
+
+    //paint char
+    this.chart = new seatsio.SeatingChart({
+      divId: "chart",
+      publicKey: this.event["seats_configuration"]["keys"]["public"],
+      language: this.event["seats_configuration"]["language"],
+      maxSelectedObjects: this.selectQuantity,
+      event: this.event["seats_configuration"]["keys"]["event"],
+      availableCategories: [this.tickets[this.selectTicket]["title"]],
+      showMinimap: this.event["seats_configuration"]["minimap"],
+      onObjectSelected: function onObjectSelected(object) {},
+      onObjectDeselected: function onObjectDeselected(object) {}
+    }).render();
+  },
+
+  methods: {
+    chartConfiguration: function chartConfiguration() {
+      this.selectTicketName = this.tickets[this.selectTicket]["title"];
+
+      //Cambio de chart
+      this.chart.setAvailableCategories([[this.tickets[this.selectTicket]["title"]]]);
+      this.chart.changeConfig({
+        maxSelectedObjects: this.selectQuantity
+      });
+      this.chart.clearSelection();
     },
-    mounted: function mounted() {
 
-        this.chart = new seatsio.SeatingChart({
-            divId: 'chart',
-            publicKey: this.event['seats_configuration']["keys"]["public"],
-            language: this.event['seats_configuration']["language"],
-            maxSelectedObjects: this.selectQuantity,
-            event: this.event['seats_configuration']["keys"]["event"],
-            // event :                 this.tickets[this.selectTicket]['chart'],  
-            availableCategories: [this.tickets[this.selectTicket]['title']],
-            showMinimap: this.event['seats_configuration']["minimap"],
-            onObjectSelected: function onObjectSelected(object) {},
-            onObjectDeselected: function onObjectDeselected(object) {}
-        }).render();
-    },
+    /**
+     *
+     *
+     */
 
-    methods: {
-        chartConfiguration: function chartConfiguration() {
+    submit: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _this2 = this;
 
-            console.log(this.tickets[this.selectTicket]['chart']);
-            this.chart.setAvailableCategories([[this.tickets[this.selectTicket]['title']]]);
-            this.chart.changeConfig({
-                maxSelectedObjects: this.selectQuantity
-            });
-            this.chart.clearSelection();
-        },
-        submit: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var _this = this;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // this.next = true;
+                this.chart.listSelectedObjects(function (selectedObject) {
+                  if (_this2.selectQuantity == selectedObject.length) {
+                    _this2.petition(selectedObject);
+                  } else {
+                    _this2.chart.listCategories(function (categories) {
+                      var result = categories.filter(function (category) {
+                        return category.label == _this2.selectTicketName;
+                      });
+                      if (!result.length) {
+                        _this2.petition(null);
+                      } else {
+                        humane.log("Te quedan " + (_this2.selectQuantity - selectedObject.length) + " puestos por seleccionar", {
+                          timeoutAfterMove: 3000,
+                          waitForMove: true
+                        });
+                        _this2.next = false;
+                      }
+                    });
+                  }
+                });
 
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                this.next = true;
-                                this.chart.listSelectedObjects(function (selectedObject) {
-
-                                    var ticketTitle = 'ticket_' + _this.tickets[_this.selectTicket]['_id'];
-                                    var data = {};
-                                    data[ticketTitle] = _this.selectQuantity;
-                                    data['seats'] = selectedObject;
-                                    data['tickets'] = [_this.tickets[_this.selectTicket]['_id']];
-
-                                    if (_this.selectQuantity == selectedObject.length) {
-                                        console.log('YES');
-                                        var url = '/es/e/' + _this.event['_id'] + '/checkout';
-                                        fetch(url, {
-                                            method: 'POST', // or 'PUT'
-                                            body: JSON.stringify(data),
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            }
-                                        }).then(function (res) {
-                                            return res.json();
-                                        }).catch(function (error) {
-                                            return console.error('Error:', error);
-                                        }).then(function (response) {
-                                            return window.top.location.href = response.redirectUrl;
-                                        });
-                                    } else {
-                                        humane.log('Te quedan ' + (_this.selectQuantity - selectedObject.length) + ' puestos por seleccionar', {
-                                            timeoutAfterMove: 3000,
-                                            waitForMove: true
-                                        });
-                                        _this.next = false;
-                                    }
-                                });
-
-                            case 2:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function submit() {
-                return _ref.apply(this, arguments);
+              case 1:
+              case "end":
+                return _context.stop();
             }
+          }
+        }, _callee, this);
+      }));
 
-            return submit;
-        }()
+      function submit() {
+        return _ref.apply(this, arguments);
+      }
+
+      return submit;
+    }(),
+
+    /**
+     * Petition
+     * 
+     * Send petition to create  ticket
+     */
+    petition: function petition(selectedObject) {
+      var ticketTitle = "ticket_" + this.tickets[this.selectTicket]["_id"];
+      var data = {};
+      data[ticketTitle] = this.selectQuantity;
+      data["tickets"] = [this.tickets[this.selectTicket]["_id"]];
+      if (!selectedObject) {
+        var seat = {
+          labels: {
+            displayedLabel: this.selectTicketName,
+            own: this.selectTicketName,
+            parent: this.selectTicketName,
+            section: this.selectTicketName
+          },
+          id: this.selectTicketName,
+          chart: {
+            config: {
+              event: this.event["seats_configuration"]["keys"]["event"]
+            }
+          },
+          label: this.selectTicketName,
+          category: {
+            label: this.selectTicketName
+          }
+
+        };
+        selectedObject = [];
+        for (var i = 0; i < this.selectQuantity; i++) {
+          selectedObject.push(seat);
+        }
+      }
+      data["seats"] = selectedObject;
+      // console.log(data);
+      var url = '/es/e/' + this.event['_id'] + '/checkout';
+      fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        return res.json();
+      }).catch(function (error) {
+        return console.error('Error:', error);
+      }).then(function (response) {
+        return window.top.location.href = response.redirectUrl;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -51397,8 +51522,94 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "col-xs-4" }, [
+            _c("div", { staticClass: "col-xs-5" }, [
               _c("div", { staticClass: "panel" }, [
+                _c(
+                  "ul",
+                  { staticClass: "nav" },
+                  _vm._l(_vm.event["event_stages"], function(stage, idx) {
+                    return _c("li", { key: idx, staticClass: "nav-item" }, [
+                      _vm.event["event_stages"][_vm.stage_act]["title"] ==
+                      stage["title"]
+                        ? _c(
+                            "a",
+                            {
+                              staticClass:
+                                "p-3 mb-2 bg-primary text-white active",
+                              attrs: { href: "#" }
+                            },
+                            [
+                              _c("p", [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(stage["title"]) +
+                                    "\n                      "
+                                ),
+                                _c(
+                                  "small",
+                                  { staticStyle: { float: "right" } },
+                                  [
+                                    _vm._v(
+                                      "Hasta: " + _vm._s(stage["end_sale_date"])
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        : _c(
+                            "a",
+                            { staticClass: "nav-link", attrs: { href: "#" } },
+                            [
+                              _c("small", [
+                                _c("p", [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(stage["title"]) +
+                                      "\n                        "
+                                  ),
+                                  _c(
+                                    "small",
+                                    {
+                                      staticStyle: {
+                                        float: "right",
+                                        "font-size": "1rem"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Desde: " +
+                                          _vm._s(stage["start_sale_date"])
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "small",
+                                    {
+                                      staticStyle: {
+                                        float: "right",
+                                        "font-size": "1rem"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Hasta: " +
+                                          _vm._s(stage["end_sale_date"])
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "panel-body pt0" }, [
@@ -51438,10 +51649,10 @@ var render = function() {
                         ]
                       }
                     },
-                    _vm._l(_vm.tickets, function(ticket, idx) {
+                    _vm._l(_vm.currentTickets, function(ticket, idx) {
                       return _c(
                         "option",
-                        { key: idx, domProps: { value: idx } },
+                        { key: idx, domProps: { value: ticket["position"] } },
                         [_vm._v(_vm._s(ticket["title"]))]
                       )
                     }),
@@ -51499,9 +51710,9 @@ var render = function() {
                       _c("tr", [
                         _c("td", { staticClass: "pl0" }, [
                           _vm._v(
-                            "\n                                      " +
+                            "\n                        " +
                               _vm._s(_vm.tickets[_vm.selectTicket]["title"]) +
-                              " \n                                      "
+                              "\n                        "
                           ),
                           _vm.tickets[_vm.selectTicket]["price"] *
                             _vm.selectQuantity >
@@ -51516,12 +51727,11 @@ var render = function() {
                                     " $ " +
                                     _vm._s(
                                       _vm.tickets[_vm.selectTicket]["price"]
-                                    ) +
-                                    " "
+                                    )
                                 )
                               ])
                             : _c("b", [
-                                _vm._v(" X " + _vm._s(_vm.selectQuantity))
+                                _vm._v("X " + _vm._s(_vm.selectQuantity))
                               ])
                         ]),
                         _vm._v(" "),
@@ -51550,9 +51760,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "panel-footer" }, [
                   _c("h5", [
-                    _vm._v(
-                      "\n                          Total: \n                              "
-                    ),
+                    _vm._v("\n                  Total:\n                  "),
                     _c("span", { staticStyle: { float: "right" } }, [
                       _vm.tickets[_vm.selectTicket]["price"] *
                         _vm.selectQuantity >
@@ -51566,8 +51774,7 @@ var render = function() {
                                 _vm._s(
                                   _vm.tickets[_vm.selectTicket]["price"] *
                                     _vm.selectQuantity
-                                ) +
-                                "  "
+                                )
                             )
                           ])
                         : _c("b", [_vm._v("Gratis")])
@@ -51624,7 +51831,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xs-8" }, [
+    return _c("div", { staticClass: "col-xs-7" }, [
       _c("div", { attrs: { id: "chart" } })
     ])
   },
@@ -51635,9 +51842,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "panel-heading" }, [
       _c("h3", { staticClass: "panel-title" }, [
         _c("i", { staticClass: "ico-cursor mr5" }),
-        _vm._v(
-          "\n                          Selecciona el tiquete.    \n                      "
-        )
+        _vm._v("\n                  Selecciona el tiquete.\n                ")
       ])
     ])
   },
@@ -51648,9 +51853,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "panel-heading" }, [
       _c("h3", { staticClass: "panel-title" }, [
         _c("i", { staticClass: "ico-cart mr5" }),
-        _vm._v(
-          "\n                          Resumen del pedido                    \n                      "
-        )
+        _vm._v("\n                  Resumen del pedido\n                ")
       ])
     ])
   }
