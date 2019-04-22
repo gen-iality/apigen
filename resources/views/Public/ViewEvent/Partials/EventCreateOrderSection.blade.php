@@ -34,7 +34,7 @@
                             </td>
                         </tr>
                         <tr>
-                            @if ($multiple > 0)
+                            @if ($multiple > 1)
                             <td class="pl0">Personas por ticket X <b>{{$ticket['ticket']['number_person_per_ticket']}}</b></td>
                             @endif
                         </tr>
@@ -190,7 +190,7 @@
                     </a>
                 </div>
                 @foreach($tickets as $ticket)
-                    @if ($multiple > 0)
+                    @if ($multiple > 1)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
