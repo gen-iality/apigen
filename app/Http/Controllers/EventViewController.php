@@ -30,14 +30,21 @@ class EventViewController extends Controller
         $date = new \DateTime();
         $now =  $date->format('Y-m-d H:i:s');
         $show = '';
-        $stage_act = [];
+        $stage_act = null;
  
         $event = Event::findOrFail($event_id);
         $stages = $event->event_stages;
-        
-        if($stages){ 
-            foreach($stages as $key => $stage){ 
-                if($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now){
+
+
+        if ($stages && $event->stage_continue ==  null) { /*  Si el evento tiene limite de compra entre etapas */
+            foreach ($stages as $key => $stage) { 
+                if ($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now) {
+                $stage_act = $key;
+                }
+            }
+        } elseif ($stages && $event->stage_continue !==  null) { /* Si no tiene  limite de compra entre etapas */
+            foreach ($stages as $key => $stage) { 
+                if ($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now && $stage_act == null) { /* Se condiciona para que entre 1 sola vez para tener la etapa minima de venta */
                 $stage_act = $key;
                 }
             }
@@ -57,7 +64,7 @@ class EventViewController extends Controller
             'show' => $show,
             'auth' => Auth::check() ? "true" : "false"
         ];
-
+        
         /*
          * Don't record stats if we're previewing the event page from the backend or if we own the event.
          */
