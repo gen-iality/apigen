@@ -76,6 +76,21 @@ class EventCheckoutController extends Controller
 
         $ticket_ids = $request->get('tickets');
 
+        foreach ($ticket_ids as $ticket_id) {
+            $ticket = Ticket::find($ticket_id);
+            $quantity_remaining = (int)$ticket->quantity_remaining;
+            $quantity_tickets_user = (int)$request->get('ticket_' . $ticket_id);
+
+            // if user buyer more tickets that there are, show a message of disponibility
+            if($ticket->quantity_remaining < $quantity_tickets_user){
+                $message = $ticket->quantity_remaining == 0 ? $ticket->title.": Tiquetes agotados" :
+                           $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tiquetes';
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $message,
+                ]);
+            }
+        }
         /*
          * Remove any tickets the user has reserved
          */

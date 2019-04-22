@@ -179,7 +179,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!!  Form::checkbox('terms', 'true') !!}
-                            {!! Form::label("terms", "Acepta terminos y condiciones") !!}
+                            <a href="https://evius.co/terms" target="_blank">Acepta terminos y condiciones</a>
                         </div>
                     </div>
                 </div>
