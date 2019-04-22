@@ -227,7 +227,7 @@
                             @endif
                             @foreach($tickets as $ticket)
                             <?php
-                                $cant = is_isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
+                                $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
                                 $tot = $ticket['qty'] * $cant;
                             
                               // We compare the seat_category and ticket_name if this is true 
