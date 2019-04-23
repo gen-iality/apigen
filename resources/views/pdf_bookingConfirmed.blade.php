@@ -59,7 +59,7 @@
                             </div>    
                         </div>
                     </div>
-                @else
+                @elseif(!isset($event->stage_continue))
                     <div style="display:block;">
                         <div style="display: inline-block; width:100%; margin-bottom:1em;">
                             <div style="display: inline-block; margin-bottom: 1em; margin-top: 2em; width: 100%;">
@@ -74,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div style="display:block;">
                         <div style="display:inline-block; width:100%; margin-bottom: 1em;">
                             <div style="display:inline-block; margin-bottom: 1em; width: 100%;">

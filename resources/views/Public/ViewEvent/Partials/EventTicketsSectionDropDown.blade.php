@@ -2,8 +2,7 @@
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
 
-<div id="ticket-selection">
-
+<div id="ticket-selection" style="height: 100%;">
 <div class="tab-navigation ">
 <h3 style="text-align:center"> Fecha </h3>
     <p class= "help-text"> Elija el día de su reserva </p>
