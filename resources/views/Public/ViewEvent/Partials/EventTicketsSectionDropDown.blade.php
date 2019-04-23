@@ -14,17 +14,13 @@
     @endforeach
     </select>
   </div>
-
 <!-- EN ESTE LUGAR SE CARGA LA INFORMACIÃ“N DE CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca los estilos para visualizar el tab-->
 @foreach($stages as $key => $stage)
-
     @php $styles_tab_active = ($key == $stage_act) ? 'display: block': 'display: none';  @endphp
     <div id="{{$key}}" class="tabcontent" style="{{$styles_tab_active}}" >
     @if($tickets->count() > 0)
-
         {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
-
             <div class="">
                     <div class="content">
                         <div class="tickets_table_wrap">
@@ -51,24 +47,21 @@
                                     <h3 class="title">Cantidad</h3>
                                     <p class= "help-text"> Elija el número de personas que van a asistir</p>
                                     @foreach($tickets as $ticket)
-                                    @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-                                    
+                                        @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
                                         <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
                                         <div >
-                                        {!! Form::hidden('tickets[]', $ticket->id) !!}
-                                        <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets" 
-                                                >
-                                            @if ($tickets->count() > 1)
-                                                <option value="0">0</option>
-                                            @endif
-                                            @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
-                                                <option value="{{$i}}">{{$i}}</option>
-                                            @endfor
-                                        </select>
+                                            {!! Form::hidden('tickets[]', $ticket->id) !!}
+                                            <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets" 
+                                                    >
+                                                @if ($tickets->count() > 1)
+                                                    <option value="0">0</option>
+                                                @endif
+                                                @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
+                                                    <option value="{{$i}}">{{$i}}</option>
+                                                @endfor
+                                            </select>
                                         </div>
                                     @endforeach
-
-
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
@@ -89,9 +82,7 @@
                                         <td colspan="3">
                                             @if(!$is_free_event)
                                                 <div class="">
-
                                                     @if($event->enable_offline_payments)
-
                                                         <div class="help-block" style="font-size: 11px;">
                                                             @lang("Public_ViewEvent.offline_payment_methods_available")
                                                         </div>
@@ -127,5 +118,4 @@
         @lang("Public_ViewEvent.sales_have_not_started")
     </span>
 @endif
-
 </div>
