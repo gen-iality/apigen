@@ -74,7 +74,6 @@ td{
     border-top: none !important;
 }
 .ticket{
-    height: 80px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px 10px 10px 10px;
     text-align: center; 
@@ -119,7 +118,7 @@ td{
     background-color: #13cea8 !important;
 }
 
-.etapa {
+.dropdown-tickets {
     background: white;
     text-align:center;
     width:95%;
@@ -139,8 +138,9 @@ td{
     width:100%;
 }
 
+
 @media screen and (min-width: 900px) {
-    .etapa{
+    .dropdown-tickets{
             width: 98%;
             margin: 8px;
         }
@@ -185,7 +185,7 @@ td{
         .tab {
             margin-left: 0;
         }
-        .etapa{
+        .dropdown-tickets{
             width: 98%;
             margin: 5px;
         }
@@ -201,7 +201,7 @@ td{
 
 <div class="tab-navigation ">
 <h3 style="text-align:center"> Fecha </h3>
-    <select id="select-box" class="etapa">
+    <select id="select-box" class="etapa dropdown-tickets">
     @foreach($stages as $key => $stage)
       <option value="{{$key}}" {{$key==0?"selected":""}}>
         <p class="tab-{{$key}}">{{$stage['title']}}</p>
@@ -345,7 +345,7 @@ $is_free_event = true;
 
         {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
 
-            <div class="col-md-12">
+            <div class="column-dropdown">
                     <div class="content">
                         <div class="tickets_table_wrap">
                         @if(isset($event->codes_discount))
@@ -354,44 +354,35 @@ $is_free_event = true;
                         @endif
                              <table class="table">
                                 <?php
-$is_free_event = true;
-?>                              
+                                    $is_free_event = true;
+                                ?>                              
 
-<h3 class="title">Hora</h3>
+                                    <!-- Dropdown hora -->
+                                    <h3 class="title">Hora</h3> 
+                                    <select id="ticket-type-selection" class="ticket-type dropdown-tickets" >  
+                                        <option value="" selected> Seleccione ...</option>                          
+                                            @foreach($tickets as $ticket)
 
-
-
-
-
-
-<select  id="ticket-type-selection" class="form-control ticket-type" >  
-<option value="" selected> Seleccione ...</option>                          
-@foreach($tickets as $ticket)
-
-@if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-    <option value="{{ $ticket->id }}"> {{ $ticket->title }} </option>
-@endforeach
-</select>
-
-<h3 class="title">Cantidad</h3>
-@foreach($tickets as $ticket)
-@if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-   
-    <!-- Como validamos la cantidad y enviamos la información por hora-->
-    <div >
-    <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket" 
-            >
-        @if ($tickets->count() > 1)
-            <option value="0">0</option>
-        @endif
-        @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
-            <option value="{{$i}}">{{$i}}</option>
-        @endfor
-    </select>
-    </div>
-@endforeach
-
-
+                                            @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
+                                        <option value="{{ $ticket->id }}"> {{ $ticket->title }} </option>
+                                            @endforeach
+                                    </select>
+                                    <!-- Dropdown cantidad -->
+                                    <h3 class="title">Cantidad</h3>
+                                    @foreach($tickets as $ticket)
+                                        @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
+                                        <!-- Como validamos la cantidad y enviamos la información por hora-->
+                                        <div>
+                                            <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class= "ticket dropdown-tickets">
+                                                @if ($tickets->count() > 1)
+                                                    <option value="0">0</option>
+                                                @endif
+                                                @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
+                                                    <option value="{{$i}}">{{$i}}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    @endforeach
                                 @foreach($tickets as $ticket)
                                     @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
 
@@ -415,8 +406,8 @@ $is_free_event = true;
                                                 @else
 
                                                     <?php
-$is_free_event = false;
-?>
+                                                        $is_free_event = false;
+                                                    ?>
                                                     <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
                                                     {{--  <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span> --}}
                                                     <meta property="priceCurrency"
