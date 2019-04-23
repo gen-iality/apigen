@@ -325,6 +325,7 @@ Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
                                                 </span>
                                                 @else
                                                     {!! Form::hidden('tickets[]', $ticket->id) !!}
+                                                    <input name="tickets[]" type="hidden" value="{{$ticket->id}}">
                                                     <meta property="availability" content="http://schema.org/InStock">
                                                     @if($key == $stage_act)
                                                         <select name="ticket_{{$ticket->id}}" class="form-control tickets"
@@ -442,6 +443,7 @@ $is_free_event = true;
    
     <!-- Como validamos la cantidad y enviamos la información por hora-->
     <div >
+    <input name="tickets[]" type="hidden" value="{{ $ticket->id }}">
     <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket" 
             >
         @if ($tickets->count() > 1)
