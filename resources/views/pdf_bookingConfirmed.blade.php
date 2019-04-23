@@ -55,6 +55,7 @@
                         <div style="display:inline-block; width:100%; margin-bottom:1em;">
                             <div style="display:inline-block; width:100%">
                                 <h3>Fechas del Evento</h3>
+                                <p style="text-align:center"><b>{{$stage}}</b></p>
                                 <p style="text-align:center"><b>{{$eventuser->ticket->dates}}</b></p>
                             </div>    
                         </div>
@@ -118,6 +119,7 @@
                 <img src="images/logo.png" width="100%"/>
             </div>
         </div>
+        <div style="page-break-after:always;"></div>
     @endforeach
     @endif
     </body>

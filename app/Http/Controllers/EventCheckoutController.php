@@ -1003,11 +1003,12 @@ class EventCheckoutController extends Controller
         $today =  $date->format('d-m-Y');
         $logo_evius = 'images/logo.png';
         $event = Event::findOrFail($order->event_id);
+        $stages = $event->event_stages;
         $eventusers = Attendee::where('order_id', $order->id)->get();
         $location = $event["location"]["FormattedAddress"];
-
+        
         foreach ($eventusers as $eventuser) { 
-
+            
             /* Se genera el QR Code */
             ob_start(); 
             $qr = QrCode::text($eventuser->id)->setSize(8)->png();
@@ -1017,6 +1018,20 @@ class EventCheckoutController extends Controller
             $type = "png";
             $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
             $eventuser->qr = $qr;
+
+            /* Si es un evento con etapas continuas */
+            if (isset($event->stage_continue)) { 
+                $stage_id = isset($eventuser->ticket->stage_id) ? $eventuser->ticket->stage_id : null;
+            }
+        }
+        /* Si es un evento con etapas continuas */
+        if (isset($event->stage_continue)) { 
+            foreach ($stages as $stage) { 
+                if ($stage["stage_id"] == $stage_id) {
+                    $stage_name = $stage["title"];
+                    break;
+                }
+            }
         }
 
         $data = [
@@ -1026,6 +1041,8 @@ class EventCheckoutController extends Controller
             'location' =>  $event["location"]["FormattedAddress"],
             'today' => $date->format('d-m-Y'),
             'logo_evius' => 'images/logo.png',
+            /* Si es un evento con etapas continuas */
+            'stage' => isset($stage_name) ? $stage_name : null,
         ];
         
         if ($request->get('download') == '1') {
