@@ -74,7 +74,6 @@ td{
     border-top: none !important;
 }
 .ticket{
-    height: 80px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px 10px 10px 10px;
     text-align: center; 
@@ -119,7 +118,7 @@ td{
     background-color: #13cea8 !important;
 }
 
-.etapa {
+.dropdown-tickets {
     background: white;
     text-align:center;
     width:95%;
@@ -139,8 +138,9 @@ td{
     width:100%;
 }
 
+
 @media screen and (min-width: 900px) {
-    .etapa{
+    .dropdown-tickets{
             width: 98%;
             margin: 8px;
         }
@@ -185,7 +185,7 @@ td{
         .tab {
             margin-left: 0;
         }
-        .etapa{
+        .dropdown-tickets{
             width: 98%;
             margin: 5px;
         }
