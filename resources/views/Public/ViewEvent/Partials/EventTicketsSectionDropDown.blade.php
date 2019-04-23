@@ -35,39 +35,39 @@
                         @endif
                              <table class="table">
                                 <?php
-$is_free_event = true;
-?>                              
+                                    $is_free_event = true;
+                                    ?>                              
 
-<h3 class="title">Hora</h3>
-<p class= "help-text"> Elija la hora que desee </p>
-<select  id="ticket-type-selection" class="ticket-type dropdown-tickets" >  
-<option value="" selected> Seleccione ...</option>                          
-@foreach($tickets as $ticket)
+                                    <h3 class="title">Hora</h3>
+                                    <p class= "help-text"> Elija la hora que desee </p>
+                                    <select  id="ticket-type-selection" class="ticket-type dropdown-tickets" >  
+                                            <option value="" selected> Seleccione ...</option>                          
+                                    @foreach($tickets as $ticket)
 
-@if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-    <option value="{{ $ticket->id }}"> {{ $ticket->title }} </option>
-@endforeach
-</select>
+                                        @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
+                                            <option value="{{ $ticket->id }}"> {{ $ticket->title }} </option>
+                                    @endforeach
+                                    </select>
 
-<h3 class="title">Cantidad</h3>
-<p class= "help-text"> Elija el número de personas que van a asistir</p>
-@foreach($tickets as $ticket)
-@if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-   
-    <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
-    <div >
-    {!! Form::hidden('tickets[]', $ticket->id) !!}
-    <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets" 
-            >
-        @if ($tickets->count() > 1)
-            <option value="0">0</option>
-        @endif
-        @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
-            <option value="{{$i}}">{{$i}}</option>
-        @endfor
-    </select>
-    </div>
-@endforeach
+                                    <h3 class="title">Cantidad</h3>
+                                    <p class= "help-text"> Elija el número de personas que van a asistir</p>
+                                    @foreach($tickets as $ticket)
+                                    @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
+                                    
+                                        <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
+                                        <div >
+                                        {!! Form::hidden('tickets[]', $ticket->id) !!}
+                                        <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets" 
+                                                >
+                                            @if ($tickets->count() > 1)
+                                                <option value="0">0</option>
+                                            @endif
+                                            @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                        </div>
+                                    @endforeach
 
 
                                     <tr>
@@ -104,7 +104,6 @@ $is_free_event = true;
                                                 {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                             @endif
                                         </div>
-                                    @endif
                                     @if(Auth::user())
                                         {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                     @endif
