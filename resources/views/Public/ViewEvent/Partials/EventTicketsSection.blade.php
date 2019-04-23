@@ -120,9 +120,14 @@ td{
 }
 
 .etapa {
+    background: white;
     text-align:center;
-    width:100%;
+    width:95%;
     padding:10px;
+    margin: 10px 8px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 5px rgba(0, 5, 9, 0.1);
+    border-color: #EAECEE;
 }
 
 .title {
@@ -134,9 +139,17 @@ td{
     width:100%;
 }
 
+@media screen and (min-width: 900px) {
+    .etapa{
+            width: 98%;
+            margin: 8px;
+        }
+}
 
 
-@media screen and (max-width: 600px) {
+
+
+@media screen and (min-width: 600px) {
        table {
            width:100%;
        }
@@ -172,6 +185,10 @@ td{
         .tab {
             margin-left: 0;
         }
+        .etapa{
+            width: 98%;
+            margin: 5px;
+        }
 }
 
 </style>
@@ -192,6 +209,7 @@ td{
     @endforeach
     </select>
   </div>
+
 
 <?php /*
 Esto esta comentado de emergencia mientras se arregla el evento de la feria del libro caracol 
