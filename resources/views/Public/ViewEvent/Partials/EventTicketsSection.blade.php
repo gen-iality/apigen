@@ -38,10 +38,15 @@ a:hover {
 p.active{
   background-color: #428bca;
   font-family: Montserrat,sans-serif;
-  padding: 5%;
+  padding: 4%;
   color: white;
   font-size: 16px;
   text-align: center;
+}
+p.calender{
+ font-family: Montserrat,sans-serif;
+  padding: 6%;
+  font-size: 16px;
 }
 
 /* Create an active/current tablink class */
@@ -167,15 +172,21 @@ td{
         @php $class_tab_active = ($key == $stage_act) ? 'active': ''; @endphp
         <li class="nav-item">
         <a class="nav-link" onclick="openCity(event, '{{$key}}')" style="font-family:Montserrat,sans-serif">   
+            @if(is_null($event->stage_continue))
             <p class="{{$class_tab_active}} tab-{{$key}}">
                 {{$stage['title']}} <br>
                 <small style="font-size: 1rem;">
-                    Desde: <?php echo date('d F', strtotime($stage["start_sale_date"])); ?>
+                    Desde: {{$event->stage_continue}} <?php echo date('d F', strtotime($stage["start_sale_date"])); ?>
                 </small> <br>
                  <small style="font-size: 1rem;">
                     Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
                 </small>
             </p>
+            @else
+            <p class="{{$class_tab_active}} tab-{{$key}} calender">
+                {{$stage['title']}} <br>
+            </p>
+            @endif
             
         </a>
         </li>
