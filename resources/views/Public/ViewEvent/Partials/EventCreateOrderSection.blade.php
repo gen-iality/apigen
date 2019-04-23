@@ -23,6 +23,14 @@
                             <?php
                                 $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
                             ?>
+                        @if(isset($event->stage_continue))
+                        @foreach($event->event_stages as $stage)
+                            @if($stage["stage_id"] == $ticket['ticket']['stage_id'])
+                             <b>   Dia: {{$stage["title"]}} </b>
+                                @break
+                            @endif
+                        @endforeach
+                        @endif
                         <tr>
                             <td class="pl0">{{{$ticket['ticket']['title']}}} X <b>{{$ticket['qty']}}</b></td>
                             <td style="text-align: right;">
@@ -245,7 +253,6 @@
                                                 break;
                                             }
                                         }
-                                    
                                     }
                                 }
                                 ?>
@@ -257,7 +264,7 @@
                                     <div class="panel-heading">
                                     @if (!isset($seats_data))
                                         <h3 class="panel-title">
-                                            <b>{{$ticket['ticket']['title']}}</b>: @lang("Public_ViewEvent.ticket_holder_n", ["n"=>$i+1])
+                                            <b>{{$ticket['ticket']['title']}}</b>: @lang("Public_ViewEvent.ticket_holder_n", ["n"=>$i+1])  
                                         </h3>
                                     @else
                                         <h3 class="panel-title">
