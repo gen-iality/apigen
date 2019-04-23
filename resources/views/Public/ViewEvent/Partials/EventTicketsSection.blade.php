@@ -208,8 +208,6 @@ td{
     @include('Public.ViewEvent.Partials.EventTicketsSectionDropDown')
 @endif
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
 /*Que es esto pregunta juan para documentarlo */
@@ -233,9 +231,6 @@ function openCity(evt, key) {
 
 
 $(document).ready(function(){
-
-
-
 
     function ticket_selection_change(){
         //hide all tabs first
