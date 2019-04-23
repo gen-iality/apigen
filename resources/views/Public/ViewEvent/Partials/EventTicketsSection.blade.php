@@ -76,8 +76,8 @@ td{
 .ticket{
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px 10px 10px 10px;
-    text-align: center; 
-    border-bottom: solid 3px #00f0be; 
+    text-align: center;
+    border-bottom: solid 3px #00f0be;
     width:100%
 }
 .espacio{
@@ -131,7 +131,7 @@ td{
 
 .title {
     text-align:center;
-    width:100%;   
+    width:100%;
 }
 .etapa ul {
     text-align:center;
@@ -195,9 +195,9 @@ td{
 
 
 @if(is_null($event->stage_continue)) <!-- Si el evento tiene limite de compra entre etapas -->
-    @include('Public.ViewEvent.Partials.EventTicketsSectionList')  
+    @include('Public.ViewEvent.Partials.EventTicketsSectionList')
 @else
-    @include('Public.ViewEvent.Partials.EventTicketsSectionDropDown')   
+    @include('Public.ViewEvent.Partials.EventTicketsSectionDropDown')
 @endif
 
 
@@ -206,7 +206,6 @@ td{
 <script>
 /*Que es esto pregunta juan para documentarlo */
 function openCity(evt, key) {
-    console.log(evt, key)
  evt.currentTarget.className += " active";
 
   var i, tabcontent, tablinks;
@@ -228,7 +227,7 @@ function openCity(evt, key) {
 $(document).ready(function(){
 
 
-    
+
 
     function ticket_selection_change(){
         //hide all tabs first
@@ -237,27 +236,24 @@ $(document).ready(function(){
         //$('#1').show();
 
         $('#ticket-selection').on("change",".ticket-type",function () {
-           var select_id =  $( this ).val()
-            console.log("valor",select_id);
-        
+        var select_id =  $( this ).val()
         //first hide all tabs again when a new option is selected
-        $('.ticket_dropdown').hide();
+        $('.ticket_dropdown').val("0").hide();
         //then show the tab content of whatever option value was selected
-      
+
         $('#' + "ticket_" + select_id).show();
 
         });
     }
     ticket_selection_change ();
 
-function tickets_tab_selection(){
+    function tickets_tab_selection(){
         //hide all tabs first
         $('.tabcontent').hide();
         //show the first tab content
         $('#1').show();
 
         $('#select-box').change(function () {
-            console.log("cambio")
         dropdown = $('#select-box').val();
         //first hide all tabs again when a new option is selected
         $('.tabcontent').hide();
@@ -267,33 +263,33 @@ function tickets_tab_selection(){
     }
     tickets_tab_selection();
 
-$("select.tickets").change(function(){
-    var total = 0;
-    var total_select = 0;
-    $("select.tickets").each(function(){
-        var total_select = parseInt($(this).val());
-        total += total_select
+    $("select.tickets").change(function(){
+        var total = 0;
+        var total_select = 0;
+        $("select.tickets").each(function(){
+            var total_select = parseInt($(this).val());
+            total += total_select
+        });
+        if(total == 1){
+            $("div#codes_discount").append(`
+
+
+            <div class="card" style="border-color: #72f0bf; border-style: dotted;">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                    <input type="text" name="code_discount" class="form-control" placeholder="Si tiene un código promocional, puede ingresarlo en este campo" style="border-color: #72f0bf;">
+                    <center><footer class="blockquote-footer">Código promocional</footer></center>
+                    </blockquote>
+                </div>
+            </div>
+
+
+            `)
+        }else{
+            $("div#codes_discount").empty()
+        }
     });
-    if(total == 1){
-        $("div#codes_discount").append(`
-
-
-        <div class="card" style="border-color: #72f0bf; border-style: dotted;">
-            <div class="card-header">
-            </div>
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                <input type="text" name="code_discount" class="form-control" placeholder="Si tiene un código promocional, puede ingresarlo en este campo" style="border-color: #72f0bf;">
-                <center><footer class="blockquote-footer">Código promocional</footer></center>
-                </blockquote>
-            </div>
-        </div>
-
-
-        `)
-    }else{
-        $("div#codes_discount").empty()
-    }
-});
 });
 </script>
