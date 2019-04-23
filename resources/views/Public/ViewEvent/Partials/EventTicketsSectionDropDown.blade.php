@@ -30,8 +30,8 @@
                     <div class="content">
                         <div class="tickets_table_wrap">
                         @if(isset($event->codes_discount))
-                            <div id="codes_discount">
-                            </div>
+                        <div id="codes_discount">
+                        </div>
                         @endif
                              <table class="table">
                                 <?php
@@ -103,16 +103,19 @@ $is_free_event = true;
                                             @if(Auth::user())
                                                 {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                             @endif
-
-                                        </td>
-                                    </tr>
-                            </table>
-                        </div>
+                                        </div>
+                                    @endif
+                                    @if(Auth::user())
+                                        {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             {!! Form::hidden('is_embedded', $is_embedded) !!}
             {!! Form::close() !!}
-
     </div>
     @else
         <div class="alert alert-boring">
