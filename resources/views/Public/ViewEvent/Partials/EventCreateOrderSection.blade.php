@@ -277,12 +277,21 @@
                                             @foreach($fields as $field)
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
+                                                    @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
                                                         @if(isset( $field['label']))
                                                             {!! Form::label($field['name'], $field['label']) !!}
                                                         @else
                                                             {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                                                    @else
+                                                        @if(isset( $field['label']))
+                                                            {!! Form::label($field['name'], $field['label']) !!}
+                                                        @else
+                                                            {!! Form::label($field['name'], $field['name']) !!}
+                                                        @endif
+                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['id']}]", null, ['class' => 'form-control']) !!}
+                                                    @endif
                                                     </div>
 
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
