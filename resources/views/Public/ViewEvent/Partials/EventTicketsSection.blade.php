@@ -11,6 +11,10 @@ body {font-family: Arial;}
      margin-left: 0.8%;
 }
 
+.body-style{
+    overflow: hidden;
+}
+
 /* Style the buttons inside the tab */
 .tab button {
   background-color: #EEEEEF;

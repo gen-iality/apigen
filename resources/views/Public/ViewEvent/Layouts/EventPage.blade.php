@@ -77,7 +77,7 @@
 
 
     </head>
-    <body class="attendize">
+    <body class="attendize body-style" >
 
         <div id="" vocab="http://schema.org/" typeof="Event">
             @yield('content')
