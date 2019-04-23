@@ -87,7 +87,7 @@ td{
     padding: 0 !important;
 }
 .precio{
-    width:200px; 
+    width:200px;
     text-align: right;
 }
 .cantidad{
@@ -116,6 +116,17 @@ td{
     background-color: #13cea8 !important;
 }
 
+.etapa {
+    text-align:center;
+    width:100%;
+    padding:10px;
+}
+
+.etapa ul {
+    text-align:center;
+    width:100%;
+}
+
 
 
 @media screen and (max-width: 600px) {
@@ -133,7 +144,7 @@ td{
            text-align:center;
        }
         .precio{
-            width:100%; 
+            width:100%;
             text-align:center;
         }
         .cantidad{
@@ -161,44 +172,59 @@ td{
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
+
+
+<div class="tab-navigation ">    
+<h3 style="text-align:center"> Fecha </h3>
+    <select id="select-box" class="etapa">
+    @foreach($stages as $key => $stage) 
+      <option value="{{$key}}" {{$key==0?"selected":""}}>                        
+        <p class="tab-{{$key}}">{{$stage['title']}}</p>
+      </option>
+    @endforeach
+    </select>
+  </div>
+
+<?php /*
+?>
 <div class="tab" style="font-family:Montserrat,sans-serif">
 <ul class="nav">
-    <div class="row" style="background-color: #8080800a">
+<div class="row" style="background-color: #8080800a">
 
-    
-    @foreach($stages as $key => $stage) 
-    <div class="col-sm-3">
-        <!-- aca verificamos si el stage esta activo dentro de las fechas -->
-        @php $class_tab_active = ($key == $stage_act) ? 'active': ''; @endphp
-        <li class="nav-item">
-        <a class="nav-link" onclick="openCity(event, '{{$key}}')" style="font-family:Montserrat,sans-serif">   
-            @if(is_null($event->stage_continue))
-            <p class="{{$class_tab_active}} tab-{{$key}}">
-                {{$stage['title']}} <br>
-                <small style="font-size: 1rem;">
-                    Desde: {{$event->stage_continue}} <?php echo date('d F', strtotime($stage["start_sale_date"])); ?>
-                </small> <br>
-                 <small style="font-size: 1rem;">
-                    Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
-                </small>
-            </p>
-            @else
-            <p class="{{$class_tab_active}} tab-{{$key}} calender">
-                {{$stage['title']}} <br>
-            </p>
-            @endif
-            
-        </a>
-        </li>
-    </div>
-    @endforeach
-    </div>
+@foreach($stages as $key => $stage)
+<div class="col-sm-3">
+<!-- aca verificamos si el stage esta activo dentro de las fechas -->
+@php $class_tab_active = ($key == $stage_act) ? 'active': ''; @endphp
+<li class="nav-item">
+<a class="nav-link" onclick="openCity(event, '{{$key}}')" style="font-family:Montserrat,sans-serif">
+@if(is_null($event->stage_continue))
+<p class="{{$class_tab_active}} tab-{{$key}}">
+{{$stage['title']}} <br>
+<small style="font-size: 1rem;">
+Desde: {{$event->stage_continue}} <?php echo date('d F', strtotime($stage["start_sale_date"])); ?>
+</small> <br>
+<small style="font-size: 1rem;">
+Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
+</small>
+</p>
+@else
+<p class="{{$class_tab_active}} tab-{{$key}} calender">
+{{$stage['title']}} <br>
+</p>
+@endif
+
+</a>
+</li>
+</div>
+@endforeach
+</div>
 </ul>
 </div>
+<?php */?>
 
 <!-- EN ESTE LUGAR SE CARGA LA INFORMACIÓN DE CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca los estilos para visualizar el tab-->
-@foreach($stages as $key => $stage) 
+@foreach($stages as $key => $stage)
 
 @if(is_null($event->stage_continue)) <!-- Si el evento tiene limite de compra entre etapas -->
     @php $styles_tab_active = ($key == $stage_act) ? 'display: block': 'display: none';  @endphp
@@ -211,13 +237,13 @@ td{
                     <div class="content">
                         <div class="tickets_table_wrap">
                         @if(isset($event->codes_discount))
-                            <div id="codes_discount">                          
+                            <div id="codes_discount">
                             </div>
                         @endif
                             <table class="table">
                                 <?php
-                                $is_free_event = true;
-                                ?>
+$is_free_event = true;
+?>
                                 @foreach($tickets as $ticket)
                                     @if($ticket->stage_id == $stage["stage_id"])
                                     <tr class="ticket" property="offers" typeof="Offer" >
@@ -235,15 +261,15 @@ td{
                                                     @lang("Public_ViewEvent.free")
                                                     <meta property="price" content="0">
                                                 @else
-                                                    
+
                                                     <?php
-                                                    $is_free_event = false;
-                                                    ?>
+$is_free_event = false;
+?>
                                                     <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
                                                     {{--  <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span> --}}
                                                     <meta property="priceCurrency"
                                                         content="{{ $event->currency->code }}">
-                                                    <meta property="price"  
+                                                    <meta property="price"
                                                         content="{{ number_format($ticket->price, 2, '.', '') }}">
                                                     {{$ticket->currency}}
                                                 @endif
@@ -296,7 +322,7 @@ td{
                                     @endif
                                 @endforeach
                                 @if($key == $stage_act)
-                                   
+
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
@@ -318,9 +344,9 @@ td{
                                         <td colspan="3">
                                             @if(!$is_free_event && $key == $stage_act)
                                                 <div class="">
-                                                
+
                                                     @if($event->enable_offline_payments)
-                                                        
+
                                                         <div class="help-block" style="font-size: 11px;">
                                                             @lang("Public_ViewEvent.offline_payment_methods_available")
                                                         </div>
@@ -331,7 +357,7 @@ td{
                                             @if(Auth::user() && $key == $stage_act)
                                                 {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                             @endif
-                                            
+
                                         </td>
                                     </tr>
                             </table>
@@ -360,13 +386,13 @@ td{
                     <div class="content">
                         <div class="tickets_table_wrap">
                         @if(isset($event->codes_discount))
-                            <div id="codes_discount">                          
+                            <div id="codes_discount">
                             </div>
                         @endif
                             <table class="table">
                                 <?php
-                                $is_free_event = true;
-                                ?>
+$is_free_event = true;
+?>
                                 @foreach($tickets as $ticket)
                                     @if($ticket->stage_id == $stage["stage_id"])
                                     <tr class="ticket" property="offers" typeof="Offer" >
@@ -374,25 +400,28 @@ td{
                                             <span class="ticket-title semibold" property="name">
                                                 {{$ticket->title}}
                                             </span>
+                                            <!--
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
                                             </p>
+                                            -->
                                         </td>
                                         <td class="td precio">
                                             <div class="ticket-pricing">
                                                 @if($ticket->is_free)
-                                                    @lang("Public_ViewEvent.free")
+                                                   <!-- @lang("Public_ViewEvent.free")-->
+                                                   
                                                     <meta property="price" content="0">
                                                 @else
-                                                    
+
                                                     <?php
-                                                    $is_free_event = false;
-                                                    ?>
+$is_free_event = false;
+?>
                                                     <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
                                                     {{--  <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span> --}}
                                                     <meta property="priceCurrency"
                                                         content="{{ $event->currency->code }}">
-                                                    <meta property="price"  
+                                                    <meta property="price"
                                                         content="{{ number_format($ticket->price, 2, '.', '') }}">
                                                     {{$ticket->currency}}
                                                 @endif
@@ -444,7 +473,7 @@ td{
                                     </tr>
                                     @endif
                                 @endforeach
-                                
+
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
@@ -465,9 +494,9 @@ td{
                                         <td colspan="3">
                                             @if(!$is_free_event)
                                                 <div class="">
-                                                
+
                                                     @if($event->enable_offline_payments)
-                                                        
+
                                                         <div class="help-block" style="font-size: 11px;">
                                                             @lang("Public_ViewEvent.offline_payment_methods_available")
                                                         </div>
@@ -478,7 +507,7 @@ td{
                                             @if(Auth::user())
                                                 {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                             @endif
-                                            
+
                                         </td>
                                     </tr>
                             </table>
@@ -487,22 +516,24 @@ td{
             </div>
             {!! Form::hidden('is_embedded', $is_embedded) !!}
             {!! Form::close() !!}
-           
-    </div> 
+
+    </div>
     @else
         <div class="alert alert-boring">
             @lang("Public_ViewEvent.tickets_are_currently_unavailable")
         </div>
     @endif
-            
-@endif            
+
+@endif
 @endforeach
 @else
     <span class="text-danger">
         @lang("Public_ViewEvent.sales_have_not_started")
     </span>
-@endif 
+@endif
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+
 
 <script>
 function openCity(evt, key) {
@@ -527,6 +558,22 @@ function openCity(evt, key) {
 
 $(document).ready(function(){
 
+
+    //hide all tabs first
+$('.tabcontent').hide();
+//show the first tab content
+$('#1').show();
+
+$('#select-box').change(function () {
+   dropdown = $('#select-box').val();
+  //first hide all tabs again when a new option is selected
+  $('.tabcontent').hide();
+  //then show the tab content of whatever option value was selected
+  $('#' + "" + dropdown).show();                                    
+});
+ 
+
+
 $("select.tickets").change(function(){
     var total = 0;
     var total_select = 0;
@@ -536,8 +583,8 @@ $("select.tickets").change(function(){
     });
     if(total == 1){
         $("div#codes_discount").append(`
-        
-        
+
+
         <div class="card" style="border-color: #72f0bf; border-style: dotted;">
             <div class="card-header">
             </div>
@@ -549,7 +596,7 @@ $("select.tickets").change(function(){
             </div>
         </div>
 
-        
+
         `)
     }else{
         $("div#codes_discount").empty()
