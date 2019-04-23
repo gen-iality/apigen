@@ -6,7 +6,8 @@
 
 <div class="tab-navigation ">
 <h3 style="text-align:center"> Fecha </h3>
-    <select id="select-box" class="etapa">
+    <p class= "help-text"> Elija el día de su reserva </p>
+    <select id="select-box" class="etapa dropdown-tickets">
     @foreach($stages as $key => $stage)
       <option value="{{$key}}" {{$key==0?"selected":""}}>
         <p class="tab-{{$key}}">{{$stage['title']}}</p>
@@ -25,7 +26,7 @@
 
         {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
 
-            <div class="col-md-12">
+            <div class="">
                     <div class="content">
                         <div class="tickets_table_wrap">
                         @if(isset($event->codes_discount))
@@ -38,13 +39,8 @@ $is_free_event = true;
 ?>                              
 
 <h3 class="title">Hora</h3>
-
-
-
-
-
-
-<select  id="ticket-type-selection" class="form-control ticket-type" >  
+<p class= "help-text"> Elija la hora que desee </p>
+<select  id="ticket-type-selection" class="ticket-type dropdown-tickets" >  
 <option value="" selected> Seleccione ...</option>                          
 @foreach($tickets as $ticket)
 
@@ -54,13 +50,14 @@ $is_free_event = true;
 </select>
 
 <h3 class="title">Cantidad</h3>
+<p class= "help-text"> Elija el número de personas que van a asistir</p>
 @foreach($tickets as $ticket)
 @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
    
     <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
     <div >
     {!! Form::hidden('tickets[]', $ticket->id) !!}
-    <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown" 
+    <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets" 
             >
         @if ($tickets->count() > 1)
             <option value="0">0</option>

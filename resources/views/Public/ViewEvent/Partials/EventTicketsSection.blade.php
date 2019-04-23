@@ -138,6 +138,10 @@ td{
     width:100%;
 }
 
+.help-text{
+    text-align: center;
+    color:grey;
+}
 
 @media screen and (min-width: 900px) {
     .dropdown-tickets{
