@@ -253,7 +253,7 @@ Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
 <!-- Si el stage esta en las fechas correspondientes se coloca los estilos para visualizar el tab-->
 @foreach($stages as $key => $stage)
 
-@if(is_null($event->stage_continue)) <!-- Si el evento tiene limite de compra entre etapas --><
+@if(is_null($event->stage_continue)) <!-- Si el evento tiene limite de compra entre etapas -->
     @php $styles_tab_active = ($key == $stage_act) ? 'display: block': 'display: none';  @endphp
     <div id="{{$key}}" class="tabcontent" style="{{$styles_tab_active}}" >
     @if($tickets->count() > 0)
@@ -264,27 +264,92 @@ Hasta: <?php echo date('d F Y', strtotime($stage["end_sale_date"])); ?>
                     <div class="content">
                         <div class="tickets_table_wrap">
                         @if(isset($event->codes_discount))
-                            <div id="codes_discount">
+                            <div id="codes_discount">                          
                             </div>
                         @endif
                             <table class="table">
                                 <?php
-$is_free_event = true;
-?>
+                                $is_free_event = true;
+                                ?>
                                 @foreach($tickets as $ticket)
-                                    @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-                                    <tr><td>asdf</td></tr>
+                                    @if($ticket->stage_id == $stage["stage_id"])
+                                    <tr class="ticket" property="offers" typeof="Offer" >
+                                        <td class="td" >
+                                            <span class="ticket-title semibold" property="name">
+                                                {{$ticket->title}}
+                                            </span>
+                                            <p class="ticket-descripton mb0 text-muted" property="description">
+                                                {{$ticket->description}}
+                                            </p>
+                                        </td>
+                                        <td class="td precio">
+                                            <div class="ticket-pricing">
+                                                @if($ticket->is_free)
+                                                    @lang("Public_ViewEvent.free")
+                                                    <meta property="price" content="0">
+                                                @else
+                                                    
+                                                    <?php
+                                                    $is_free_event = false;
+                                                    ?>
+                                                    <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
+                                                    {{--  <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span> --}}
+                                                    <meta property="priceCurrency"
+                                                        content="{{ $event->currency->code }}">
+                                                    <meta property="price"  
+                                                        content="{{ number_format($ticket->price, 2, '.', '') }}">
+                                                    {{$ticket->currency}}
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td class="td cantidad">
+                                            @if($ticket->is_paused)
 
+                                                <span class="text-danger">
+                                                    @lang("Public_ViewEvent.currently_not_on_sale")
+                                                </span>
+
+                                                    @else
+
+                                                    @if($ticket->sale_status === config('attendize.ticket_status_sold_out'))
+                                                        <span class="text-danger" property="availability" content="http://schema.org/SoldOut">
+                                                    @lang("Public_ViewEvent.sold_out")
+                                                </span>
+                                                    @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
+                                                                    <span class="text-danger">
+                                                    @lang("Public_ViewEvent.sales_have_not_started")
+                                                </span>
+                                                    @elseif($ticket->sale_status === config('attendize.ticket_status_after_sale_date'))
+                                                        <span class="text-danger">
+                                                    @lang("Public_ViewEvent.sales_have_ended")
+                                                </span>
+                                                @else
+                                                    {!! Form::hidden('tickets[]', $ticket->id) !!}
+                                                    <meta property="availability" content="http://schema.org/InStock">
+                                                    @if($key == $stage_act)
+                                                        <select name="ticket_{{$ticket->id}}" class="form-control tickets"
+                                                                style="text-align: center; border-bottom: solid 3px #00f0be;">
+                                                            @if ($tickets->count() > 1)
+                                                                <option value="0">0</option>
+                                                            @endif
+                                                            @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
+                                                                <option value="{{$i}}">{{$i}}</option>
+                                                            @endfor
+                                                        </select>
+                                                    @endif
+                                                @endif
+
+                                            @endif
+                                        </td>
+                                    </tr>
                                     <!-- este tr es para dar espacio entre las celtas -->
                                     <tr class="espacio">
                                         <td class="espacio"></td>
                                     </tr>
-                                    
-                                @endforeach <!-- tickets -->
-
-
+                                    @endif
+                                @endforeach
                                 @if($key == $stage_act)
-
+                                   
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
@@ -302,14 +367,13 @@ $is_free_event = true;
                                         @endif
                                     </tr>
                                 @endif
-
                                     <tr class="checkout">
                                         <td colspan="3">
                                             @if(!$is_free_event && $key == $stage_act)
                                                 <div class="">
-
+                                                
                                                     @if($event->enable_offline_payments)
-
+                                                        
                                                         <div class="help-block" style="font-size: 11px;">
                                                             @lang("Public_ViewEvent.offline_payment_methods_available")
                                                         </div>
@@ -320,7 +384,7 @@ $is_free_event = true;
                                             @if(Auth::user() && $key == $stage_act)
                                                 {!!Form::submit(trans("Public_ViewEvent.register"), ['class' => 'button-purchase'])!!}
                                             @endif
-
+                                            
                                         </td>
                                     </tr>
                             </table>
@@ -336,7 +400,6 @@ $is_free_event = true;
             @lang("Public_ViewEvent.tickets_are_currently_unavailable")
         </div>
     @endif
-
 
 @else <!-- Si no tiene  limite de compra entre etapas-->
     @php $styles_tab_active = ($key == $stage_act) ? 'display: block': 'display: none';  @endphp
