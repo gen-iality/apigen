@@ -197,7 +197,7 @@ td{
 @if(is_null($event->stage_continue)) <!-- Si el evento tiene limite de compra entre etapas -->
     @include('Public.ViewEvent.Partials.EventTicketsSectionList')  
 @else
-    @include('Public.ViewEvent.Partials.EventTicketsSectionDropDown') 
+    @include('Public.ViewEvent.Partials.EventTicketsSectionDropDown')   
 @endif
 
 
@@ -232,7 +232,7 @@ $(document).ready(function(){
 
     function ticket_selection_change(){
         //hide all tabs first
-        $('.ticket').hide();
+        $('.ticket_dropdown').hide();
         //show the first tab content
         //$('#1').show();
 
@@ -241,7 +241,7 @@ $(document).ready(function(){
             console.log("valor",select_id);
         
         //first hide all tabs again when a new option is selected
-        $('.ticket').hide();
+        $('.ticket_dropdown').hide();
         //then show the tab content of whatever option value was selected
       
         $('#' + "ticket_" + select_id).show();

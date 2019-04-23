@@ -59,7 +59,8 @@ $is_free_event = true;
    
     <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
     <div >
-    <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket" 
+    {!! Form::hidden('tickets[]', $ticket->id) !!}
+    <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown" 
             >
         @if ($tickets->count() > 1)
             <option value="0">0</option>
