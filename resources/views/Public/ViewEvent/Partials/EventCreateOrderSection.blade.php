@@ -275,7 +275,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             @foreach($fields as $field)
-                                                <div class="col-xs-6">
+                                                <div class="col-xs-12 col-sm-6">
                                                     <div class="form-group">
                                                         @if(isset( $field['label']))
                                                             {!! Form::label($field['name'], $field['label']) !!}
