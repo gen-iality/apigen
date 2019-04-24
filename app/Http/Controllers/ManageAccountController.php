@@ -377,5 +377,24 @@ class ManageAccountController extends MyBaseController
             'message' => trans("Controllers.account_successfully_updated"),
         ]);
     }
+
+    /**
+     * Edit Advanced Configuration
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postEditAdvancedConfiguration()
+    {
+        $event_id = Input::get('event_id');
+        $event = Event::find($event_id);
+        $event->allow_company = Input::get('allow_company')? true : false;
+        $event->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'id'      => $event->id,
+            'message' => trans("Controllers.account_successfully_updated"),
+        ]);
+    }
     
 }

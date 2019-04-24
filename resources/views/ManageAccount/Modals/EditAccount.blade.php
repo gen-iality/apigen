@@ -34,6 +34,7 @@
                             <li><a href="#tickets_promocional" data-toggle="tab">Tiquetes promocionales</a></li>
                             <li><a href="#codes_promocional" data-toggle="tab">códigos promocionales</a></li>
                             <li><a href="#seats_configuration" data-toggle="tab">Configuración de asientos</a></li>
+                            <li><a href="#advanced_configuration" data-toggle="tab">Configuración avanzada</a></li>
                         </ul>
                         <div class="tab-content panel">
                             <div class="tab-pane active" id="payment_account">
@@ -48,6 +49,9 @@
                             </div>
                             <div class="tab-pane" id="seats_configuration">
                                 @include('ManageAccount.Partials.seats_configuration')
+                            </div>
+                            <div class="tab-pane" id="advanced_configuration">
+                                @include('ManageAccount.Partials.AdvancedConfiguration')
                             </div>
                         </div>
                     </div>

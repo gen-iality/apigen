@@ -281,7 +281,10 @@ Route::group(
                 'as'   => 'postEditSeats',
                 'uses' => 'ManageAccountController@postEditSeats',
             ]);
-            
+            Route::post('/advanced_configuration', [
+                'as'   => 'postEditAdvancedConfiguration',
+                'uses' => 'ManageAccountController@postEditAdvancedConfiguration',
+            ]);
 
         });
 
