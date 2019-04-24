@@ -1042,7 +1042,7 @@ class EventCheckoutController extends Controller
             'today' => $date->format('d-m-Y'),
             'logo_evius' => 'images/logo.png',
             /* Si es un evento con etapas continuas */
-            'stage' => isset($stage_name) ? $stage_name : null,
+            'stage' => isset($stage_name) ? $stage_name : "",
         ];
         
         if ($request->get('download') == '1') {

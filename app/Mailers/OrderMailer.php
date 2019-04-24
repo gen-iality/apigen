@@ -37,6 +37,7 @@ class OrderMailer
         $today =  $date->format('d-m-Y');
         $logo_evius = 'images/logo.png';
         $event = Event::findOrFail($order->event_id);
+        $stages = $event->event_stages;
         $eventusers = Attendee::where('order_id', $order->id)->get();
         $location = $event["location"]["FormattedAddress"];
 
@@ -62,11 +63,28 @@ class OrderMailer
             $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);
             $eventuser->qr = $qr;
             // $eventuser->qr = 'qr';
+
+
+            /* Si es un evento con etapas continuas */
+            if (isset($event->stage_continue)) { 
+                $stage_id = isset($eventuser->ticket->stage_id) ? $eventuser->ticket->stage_id : null;
+            }
+        }
+        /* Si es un evento con etapas continuas */
+        if (isset($event->stage_continue)) { 
+            foreach ($stages as $stage) { 
+                if ($stage["stage_id"] == $stage_id) {
+                    $stage_name = $stage["title"];
+                    break;
+                }
+            }
         }    
+        /* Si es un evento con etapas continuas */
+        $stage = isset($stage_name) ? $stage_name : "";
 
         /* Creación del PDF */
-//	if(isset($eventuser->properties["names"])){
-         $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today'));
+        //	if(isset($eventuser->properties["names"])){
+         $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventusers','order','location','today','stage'));
          $pdf->setPaper('legal','portrait');
 
         // Envío del email
