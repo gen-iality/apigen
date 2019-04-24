@@ -12,7 +12,7 @@ body {font-family: Arial;}
 }
 
 .body-style{
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* Style the buttons inside the tab */
