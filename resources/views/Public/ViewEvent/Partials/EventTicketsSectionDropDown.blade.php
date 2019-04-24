@@ -44,9 +44,6 @@
                                             <option value="{{ $ticket->id }}"> {{ $ticket->title }} </option>
                                     @endforeach
                                     </select>
-
-                                    <h3 class="title">Cantidad</h3>
-                                    <p class= "help-text"> Elija el número de personas que van a asistir</p>
                                     <div  style="display: none">
                                     @foreach($tickets as $ticket)
                                         @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
@@ -63,7 +60,7 @@
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())
-                                            @lang("Public_ViewEvent.below_tickets")
+                                            Selecciona la fecha y la hora para la reserva
                                         @endif
                                         </td>
                                     </tr>
