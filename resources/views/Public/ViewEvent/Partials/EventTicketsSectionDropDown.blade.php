@@ -47,22 +47,19 @@
 
                                     <h3 class="title">Cantidad</h3>
                                     <p class= "help-text"> Elija el número de personas que van a asistir</p>
+                                    <div  style="display: none">
                                     @foreach($tickets as $ticket)
                                         @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
                                         <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
-                                        <div >
+                                        <div>
                                             {!! Form::hidden('tickets[]', $ticket->id) !!}
-                                            <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets" 
-                                                    >
-                                                @if ($tickets->count() > 1)
+                                            <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets">
                                                     <option value="0">0</option>
-                                                @endif
-                                                @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
-                                                    <option value="{{$i}}">{{$i}}</option>
-                                                @endfor
+                                                    <option value="1">1</option>
                                             </select>
                                         </div>
                                     @endforeach
+                                    </div>
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                         @if(Auth::user())

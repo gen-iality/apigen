@@ -245,6 +245,7 @@ $(document).ready(function(){
         //then show the tab content of whatever option value was selected
 
         $('#' + "ticket_" + select_id).show();
+        $('#' + "ticket_" + select_id).val("1");
 
         });
     }
