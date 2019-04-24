@@ -7,6 +7,7 @@
 <h3 style="text-align:center"> Fecha </h3>
     <p class= "help-text"> Elija el día de su reserva </p>
     <select id="select-box" class="etapa dropdown-tickets">
+    <option value="" selected> Seleccione ...</option>   
     @foreach($stages as $key => $stage)
       <option value="{{$key}}" {{$key==0?"selected":""}}>
         <p class="tab-{{$key}}">{{$stage['title']}}</p>
