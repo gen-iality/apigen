@@ -292,7 +292,7 @@
                                                         @endif
                                                         <!-- Select Dropdown -->
                                                     @if($field['type'] == 'list'&& $event->id == '5cbe5231d74d5c0d251fa1e2')
-                                                        {!! Form::select('tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]',  [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], null, ['class' => 'form-control']) !!}
+                                                        {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], null, ['class' => 'form-control']) !!}
                                                     @else
                                                         {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                     @endif
