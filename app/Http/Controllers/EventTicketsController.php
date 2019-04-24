@@ -51,8 +51,8 @@ class EventTicketsController extends MyBaseController
         
         // Get tickets for event.
         $tickets = empty($q) === false
-        ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->paginate()
-        : $event->tickets()->orderBy($sort_by, 'asc')->paginate();
+        ? $event->tickets()->where('title', 'like', '%' . $q . '%')->orderBy($sort_by, 'asc')->get()
+        : $event->tickets()->orderBy($sort_by, 'asc')->get();
         // Return view.
 
         return view('ManageEvent.Tickets', compact('event', 'stages', 'tickets', 'sort_by', 'q', 'allowed_sorts', 'is_embedded'));

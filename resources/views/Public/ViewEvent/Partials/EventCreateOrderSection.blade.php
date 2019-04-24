@@ -275,7 +275,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             @foreach($fields as $field)
-                                                <div class="col-xs-6">
+                                                <div class="col-xs-12 col-sm-6">
                                                     <div class="form-group">
                                                     @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
                                                         @if(isset( $field['label']))
