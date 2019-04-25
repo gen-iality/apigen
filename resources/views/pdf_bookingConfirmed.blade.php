@@ -53,9 +53,15 @@
                 @if(!is_null($eventuser->ticket->dates))
                     <div style="display: block; border-bottom: 1px dashed lightgrey;">
                         <div style="display:inline-block; width:100%; margin-bottom:1em;">
-                            <div style="display:inline-block; width:100%">
+                            <div style="display:inline-block; width:45%">
                                 <h3>Fechas del Evento</h3>
-                                <p style="text-align:center"><b>{{$stage}}</b></p>
+                                <p>{{$stage}}</p>
+                            </div>    
+                            <div style="display:inline-block; width:45%">
+                                <h3>Acompañantes</h3>
+                                <p>{{$eventuser->properties['acompanates']}}</p>
+                            </div>    
+                            <div style="display:inline-block; width:100%">
                                 <p style="text-align:center"><b>{{$eventuser->ticket->dates}}</b></p>
                             </div>    
                         </div>

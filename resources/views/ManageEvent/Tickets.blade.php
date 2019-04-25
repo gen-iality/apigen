@@ -188,18 +188,30 @@
                                         @if($ticket->quantity_sold)
                                                 {{ $ticket->quantity_sold }}
                                         @else
-                                            <p style="color: #e0e0e0;">
+                                            <p style="color: #c3b3b3;">
                                                 0
                                             </p>
                                         @endif
                                     </td>
                                     @if(isset($event->allow_company))
                                     <td>
-                                        {{ ($ticket->total_people_quantity=== null) ? '∞' : $ticket->total_people_quantity}}
+                                        @if($ticket->total_people_quantity=== null)
+                                            <p style="color: #c3b3b3;">
+                                                0
+                                            </p>
+                                        @else
+                                            {{ $ticket->total_people_quantity }}
+                                        @endif
                                     </td>
                                     @endif
                                     <td>
-                                        {{ ($ticket->quantity_available === null) ? '∞' : $ticket->quantity_remaining }}
+                                        @if( $ticket->quantity_remaining=== null)
+                                            <p style="color: #c3b3b3;">
+                                                0
+                                            </p>
+                                        @else
+                                            {{  $ticket->quantity_remaining }}
+                                        @endif
                                     </td>
                                     <td>
                                         {{money($ticket->sales_volume + $ticket->organiser_fees_volume, $event->currency)}}
