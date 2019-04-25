@@ -6,7 +6,7 @@
             <div style="width:70%; margin:0 auto; padding: 3em 0">
                 <div style="width:100%">
                     <div style=" width:40%; margin: 0 auto">
-                        <img src="/images/logo.png" width="100%"/>
+                        <img src="images/logo.png" width="100%"/>
                     </div>
                 </div>
 
@@ -122,10 +122,9 @@
                 </div>
             @endif
             <div style="display:block; width:40%; margin: 0 auto">
-                <img src="/images/logo.png" width="100%"/>
+                <img src="images/logo.png" width="100%"/>
             </div>
         </div>
-        <div style="page-break-after:always;"></div>
     @endforeach
     @endif
     </body>
