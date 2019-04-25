@@ -58,6 +58,15 @@
                 <span>@lang("Dashboard.tickets_sold")</span>
             </div>
         </div>
+        <!-- Contador Toal de personas en el evento -->
+        @if(isset($event->allow_company))
+        <div class="col-sm-3">
+            <div class="stat-box">
+                <h3>{{ $event->tickets->sum('total_people_quantity') }}</h3>
+                <span>Total de Personas</span>
+            </div>
+        </div>
+        @endif
         <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->stats->sum('views') }}</h3>
