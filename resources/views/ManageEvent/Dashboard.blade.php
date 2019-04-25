@@ -41,7 +41,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-6">
-            <a  href="https://evius.co/event/5cbe5231d74d5c0d251fa1e2/ticket" class="btn btn-success" type="button"><i class="ico-ticket"></i>Reporte de venta detallado</a>
+            <a  href="{{ route('showEventTickets',array($event->id)) }}" class="btn btn-success" type="button"><i class="ico-ticket"></i>Reporte de venta detallado</a>
         </div>
     </div>
     <br>
