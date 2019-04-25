@@ -40,6 +40,12 @@
 
 @section('content')
     <div class="row">
+        <div class="col-sm-6">
+            <a  href="https://evius.co/event/5cbe5231d74d5c0d251fa1e2/ticket" class="btn btn-success" type="button"><i class="ico-ticket"></i>Reporte de tiquetes</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
         <div class="col-sm-2">
             <div class="stat-box">
                 <h3>{{ money($event->sales_volume + $event->organiser_fees_volume, $event->currency) }}</h3>
