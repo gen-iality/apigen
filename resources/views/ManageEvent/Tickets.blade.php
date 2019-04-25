@@ -193,14 +193,14 @@
                                             </p>
                                         @endif
                                     </td>
-                                    <td>
-                                        {{ ($ticket->quantity_available === null) ? '∞' : $ticket->quantity_remaining }}
-                                    </td>
                                     @if(isset($event->allow_company))
                                     <td>
                                         {{ ($ticket->total_people_quantity=== null) ? '∞' : $ticket->total_people_quantity}}
                                     </td>
                                     @endif
+                                    <td>
+                                        {{ ($ticket->quantity_available === null) ? '∞' : $ticket->quantity_remaining }}
+                                    </td>
                                     <td>
                                         {{money($ticket->sales_volume + $ticket->organiser_fees_volume, $event->currency)}}
                                     </td>
