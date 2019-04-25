@@ -768,7 +768,6 @@ class EventCheckoutController extends Controller
                         $ticket->increment('organiser_fees_volume',
                             ($attendee_details['organiser_booking_fee'] * $attendee_details['qty']));
 
-    
                         /*
                          * Insert order items (for use in generating invoices)
                          */
@@ -799,15 +798,15 @@ class EventCheckoutController extends Controller
                                 }
                                 
                                 $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['_id']];
-
                             }
     
-                            /* Si eleventopermite acompañante aumentar el total_quantity */
+                            /* Si elevento permite acompañante aumentar el total_quantity */
                             if (isset($event->allow_company)) {
                                 $val = (int)$request_data["tiket_holder_acompanates"][$i][$attendee_details['ticket']['_id']];
                                 $people_total= $val + $attendee_details['qty'];
                                 $ticket->increment('total_people_quantity', $people_total);
                             }
+
                             $attendee->event_id = $event_id;
                             $attendee->order_id = $order->id;
                             $attendee->ticket_id = $attendee_details['ticket']['_id'];

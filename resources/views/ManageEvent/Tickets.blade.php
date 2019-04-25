@@ -150,6 +150,11 @@
                                     <th style="color: #008d96">
                                         Vendidos
                                     </th>
+                                    @if(isset($event->allow_company))
+                                    <th style="color: #008d96">
+                                        Total Personas
+                                    </th>
+                                    @endif
                                     <th style="color: #008d96">
                                         Restantes
                                     </th>
@@ -191,6 +196,11 @@
                                     <td>
                                         {{ ($ticket->quantity_available === null) ? '∞' : $ticket->quantity_remaining }}
                                     </td>
+                                    @if(isset($event->allow_company))
+                                    <td>
+                                        {{ ($ticket->total_people_quantity=== null) ? '∞' : $ticket->total_people_quantity}}
+                                    </td>
+                                    @endif
                                     <td>
                                         {{money($ticket->sales_volume + $ticket->organiser_fees_volume, $event->currency)}}
                                     </td>
