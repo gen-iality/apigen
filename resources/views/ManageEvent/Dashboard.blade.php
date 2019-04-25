@@ -40,19 +40,19 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="stat-box">
                 <h3>{{ money($event->sales_volume + $event->organiser_fees_volume, $event->currency) }}</h3>
                 <span>@lang("Dashboard.sales_volume")</span>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="stat-box">
                 <h3>{{ $event->orders->count() }}</h3>
                 <span>@lang("Dashboard.orders")</span>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="stat-box">
                 <h3>{{ $event->tickets->sum('quantity_sold') }}</h3>
                 <span>@lang("Dashboard.tickets_sold")</span>
@@ -60,14 +60,14 @@
         </div>
         <!-- Contador Toal de personas en el evento -->
         @if(isset($event->allow_company))
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="stat-box">
                 <h3>{{ $event->tickets->sum('total_people_quantity') }}</h3>
                 <span>Total de Personas</span>
             </div>
         </div>
         @endif
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="stat-box">
                 <h3>{{ $event->stats->sum('views') }}</h3>
                 <span>@lang("Dashboard.event_views")</span>
