@@ -415,15 +415,15 @@ class EventCheckoutController extends Controller
             
             /* Fiond order */
             $order = Order::where('order_reference', '=', $order_reference)->first();
-            /* Envío de correo */
-            if(config('attendize.send_email')){
-                $this->dispatch(new SendOrderTickets($order));
-            }
             $return = [
                 'status' => 'success',
                 'redirectUrl' => url('/').'/order/'.$order_reference,
                 'message' => 'Redirigido a la orden',
             ];
+            /* Envío de correo */
+            if(config('attendize.send_email')){
+                $this->dispatch(new SendOrderTickets($order));
+            }
             return response()->json($return);
             
         }
