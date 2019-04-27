@@ -1,7 +1,6 @@
 <!-- EN ESTE LUGAR SE CARGA EL TITULO CADA UNO DE LOS TABS-->
 <!-- Si el stage esta en las fechas correspondientes se coloca la clase active-->
 @if(isset($stages))
-
 <div id="ticket-selection" style="height: 100%;">
 <div class="tab-navigation ">
 <h3 style="text-align:center"> Fecha </h3>
@@ -9,9 +8,11 @@
     <select id="select-box" class="etapa dropdown-tickets">
     <option value="" selected> Seleccione ...</option>   
     @foreach($stages as $key => $stage)
+    @if ($stage['stage_id'] != 1555977540)
       <option value="{{$key}}" {{$key==0?"selected":""}}>
         <p class="tab-{{$key}}">{{$stage['title']}}</p>
       </option>
+    @endif
     @endforeach
     </select>
   </div>
