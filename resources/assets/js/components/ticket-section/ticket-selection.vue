@@ -4,10 +4,10 @@
       <div class="col-md-12">
         <div class="jumbotron">
           <div class="row">
-            <div class="col-xs-7">
+            <div class="col-md-7">
               <div id="chart"></div>
             </div>
-            <div class="col-xs-5">
+            <div class="col-md-5">
               <div class="panel">
                 <ul class="nav">
                   <li class="nav-item" v-for="(stage, idx) in event['event_stages']" :key="idx">
@@ -155,8 +155,6 @@ export default {
     };
   },
   mounted() {
-
-
     // realizar ticket seleccionados por estado en la parte de aca
     var state_active = this.event["event_stages"][this.stage_act]["stage_id"];
     var flag = true;
