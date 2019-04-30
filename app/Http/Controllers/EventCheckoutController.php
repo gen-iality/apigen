@@ -82,13 +82,26 @@ class EventCheckoutController extends Controller
             $quantity_tickets_user = (int)$request->get('ticket_' . $ticket_id);
 
             // if user buyer more tickets that there are, show a message of disponibility
-            if($ticket->quantity_remaining < $quantity_tickets_user){
-                $message = $ticket->quantity_remaining == 0 ? $ticket->title.": Tiquetes agotados" :
-                           $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tiquetes';
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $message,
-                ]);
+            if (isset($event->allow_company)) { 
+                if($ticket->quantity_remaining < $quantity_tickets_user){
+                    $tot_tickets = $ticket->quantity_available - $ticket->total_people_quantity;
+                    $message = $tot_tickets == 0 ? $ticket->title.": Tiquetes agotados" :
+                            $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tiquetes';
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $message,
+                    ]);
+                }
+            }
+            else {     
+                if($ticket->quantity_remaining < $quantity_tickets_user){
+                    $message = $ticket->quantity_remaining == 0 ? $ticket->title.": Tiquetes agotados" :
+                            $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tiquetes';
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $message,
+                    ]);
+                }
             }
         }
         /*
@@ -374,12 +387,44 @@ class EventCheckoutController extends Controller
             ]);
         }
 
-
-
         //Buscamos el evento por medio del event_id
         $event = Event::findOrFail($event_id);
+
         //Capturamos los datos ingresados por el usuario y la guardamos en el cache como request_data
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
+
+        /* Function to validate the ticket availability */
+        if (isset($event->allow_company)) { 
+            foreach ($ticket_order['tickets'] as $ticket_count) {
+
+                /* Obtain companies quantity */
+                if (isset($request['person_per_ticket']) && isset($request['holder_info'])) {
+                    $cont = $request['person_per_ticket'];
+                } else {
+                    $cont = $ticket_count['qty'];
+                }
+                for ($i = 0; $i < $cont; $i++) {
+
+                /* Find the ticket */
+                $ticket_id = $ticket_count['ticket']['_id'];
+                $ticket = Ticket::find($ticket_id);
+
+                /* Quantity ticket selected */
+                $quantity_companies_user = (int)$request["tiket_holder_acompanates"][$i][$ticket_id];
+
+                /* Validate the ticket availability */
+                    if($ticket->quantity_remaining < $quantity_companies_user){
+                        $tot_tickets = $ticket->quantity_available - $ticket->total_people_quantity;
+                        $message = $tot_tickets == 0 ? $ticket->title.": Tiquetes agotados" :
+                                $ticket->title.' tiene una disponibilidad de '.$ticket->quantity_remaining.' tiquetes';
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => $message,
+                        ]);
+                    }
+                }
+            }
+        }
 
         /* Si no desea asignar aún los tickets */
         if ($request->holder_info == "false") {
