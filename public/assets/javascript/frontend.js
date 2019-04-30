@@ -4954,6 +4954,8 @@ $.extend(
  * 
  * @param {*} $submitButton 
  */
+$(".attendize-information").hide();    
+$(".attendize-information:first").show();    
 
 $('input[name="holder_info"]').on('click', function(e) {
   var status_radio_button = $('input[name="holder_info"]:checked').val();
