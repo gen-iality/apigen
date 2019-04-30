@@ -4,10 +4,10 @@
       <div class="col-md-12">
         <div class="jumbotron">
           <div class="row">
-            <div class="col-xs-7">
+            <div class="col-md-7">
               <div id="chart"></div>
             </div>
-            <div class="col-xs-5">
+            <div class="col-md-5">
               <div class="panel">
                 <ul class="nav">
                   <li class="nav-item" v-for="(stage, idx) in event['event_stages']" :key="idx">
@@ -59,6 +59,9 @@
                       v-bind:value="ticket['position']"
                     >{{ ticket['title']}}</option>
                   </select>
+                  <div>
+                    <small>{{descriptionTicket}}</small>
+                  </div>
                   <label for="quantity-ticket">Cantidad</label>
                   <select
                     id="quantity-ticket"
@@ -151,22 +154,23 @@ export default {
       selectedObject: [],
       activators: [],
       next: false,
-      currentTickets: []
+      currentTickets: [],
+      state_active: '',
+      descriptionTicket: ''
     };
   },
   mounted() {
-
-
     // realizar ticket seleccionados por estado en la parte de aca
-    var state_active = this.event["event_stages"][this.stage_act]["stage_id"];
+    this.state_active = this.event["event_stages"][this.stage_act]["stage_id"];
     var flag = true;
     this.tickets.forEach((ticket, key) => {
-      if (ticket["stage_id"] == state_active) {
+      if (ticket["stage_id"] == this.state_active) {
         ticket["position"] = key;
         this.currentTickets.push(ticket);
         if (flag) {
             this.selectTicket = key;
             this.selectTicketName = this.tickets[this.selectTicket]["title"];
+            this.descriptionTicket = this.tickets[this.selectTicket]["description"];
             flag = false;
         }
       }
@@ -198,6 +202,13 @@ export default {
         maxSelectedObjects: this.selectQuantity
       });
       this.chart.clearSelection();
+
+      //show description 
+      this.tickets.forEach(element => {
+        if(element.title == this.selectTicketName && element.stage_id == this.state_active){
+          this.descriptionTicket = element.description 
+        }
+      });
     },
     /**
      *
