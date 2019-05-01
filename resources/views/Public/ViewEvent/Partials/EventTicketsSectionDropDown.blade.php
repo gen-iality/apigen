@@ -8,7 +8,7 @@
     <select id="select-box" class="etapa dropdown-tickets">
     <option value="" selected> Seleccione ...</option>   
     @foreach($stages as $key => $stage)
-    @if ($stage['stage_id'] != 1555977540)
+    @if ($stage['stage_id'] != 1555977610)
       <option value="{{$key}}" {{$key==0?"selected":""}}>
         <p class="tab-{{$key}}">{{$stage['title']}}</p>
       </option>
