@@ -4954,17 +4954,19 @@ $.extend(
  * 
  * @param {*} $submitButton 
  */
+$(".attendize-information:nth-child(3)").hide();    
+$(".attendize-information:first input").prop('required',true);
 
 $('input[name="holder_info"]').on('click', function(e) {
   var status_radio_button = $('input[name="holder_info"]:checked').val();
 
   if (status_radio_button == "false") {  
-      $(".attendize-information").hide();    
-      $(".attendize-information:first").show();    
+      $(".attendize-information:nth-child(3)").hide();    
+      $(".attendize-information:nth-child(3) input").prop('required',false);
 
   } else { 
-      $(".attendize-information").show();    
-      
+      $(".attendize-information:nth-child(3)").show();    
+      $(".attendize-information:nth-child(3) input").prop('required',true);
   }
 
 });
