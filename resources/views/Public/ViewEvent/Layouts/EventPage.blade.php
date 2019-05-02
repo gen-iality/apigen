@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <script>
-            document.domain = "evius.co"
-    </script>
         <!--
                   _   _                 _ _
              /\  | | | |               | (_)
