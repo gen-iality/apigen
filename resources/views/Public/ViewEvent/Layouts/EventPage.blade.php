@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
+    <script>
+            document.domain = "evius.co"
+    </script>
         <!--
                   _   _                 _ _
              /\  | | | |               | (_)
@@ -37,9 +39,7 @@
         <script src="https://cdn.seatsio.net/chart.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
         <script src="{{ elixir('js/app.js') }}"></script>
-        <script>
-            document.domain = "evius.co"
-        </script>
+
 
 
         <!--[if lt IE 9]>
