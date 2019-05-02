@@ -121,6 +121,13 @@
                     <p style="text-align:center;font-size:12px"><b>Mocion NIT. 900324992</b> es un intermediario para la venta de boletería</p>
                 </div>
             @endif
+            @if($event->id == '5ca5265c3422542c5a146552')
+                <div style="display:block;">
+                    <p style="text-align:center;font-size:12px">Responsable <b>KALACA PRODUCCIONES SAS NIT 901263157-4</b></p>
+                    <p style="text-align:center;font-size:12px"><b>Mocion NIT. 900324992</b> es un intermediario para la venta de boletería</p>
+                    <p style="text-align:center;font-size:12px">El costo del servicio y el IVA del servicio estan incluidos en el precio de venta</p>
+                </div>
+            @endif
             <div style="display:block; width:40%; margin: 0 auto">
                 <img src="images/logo.png" width="100%"/>
             </div>
