@@ -808,7 +808,11 @@ class EventCheckoutController extends Controller
                         /*
                          * Update some ticket info
                          */
-                        $ticket->increment('quantity_sold', $attendee_details['qty']);
+
+                        /* Si el evento no permite compañia aumentar los tickets normalmente */
+                        if (!isset($event->allow_company)) { 
+                            $ticket->increment('quantity_sold', $attendee_details['qty']);
+                        }
                         $ticket->increment('sales_volume', ($attendee_details['ticket']['price'] * $attendee_details['qty']));
                         $ticket->increment('organiser_fees_volume',
                             ($attendee_details['organiser_booking_fee'] * $attendee_details['qty']));
@@ -845,12 +849,13 @@ class EventCheckoutController extends Controller
                                 $attendee->properties->{$field['name']} = $request_data["tiket_holder_" . str_replace(" ", "_", $field['name'])][$i][$attendee_details['ticket']['_id']];
                             }
     
-                            /* Si elevento permite acompañante aumentar el total_quantity */
+                            /* Si el evento permite acompañante aumentar el total_quantity y los tickets vendidos */
                             if (isset($event->allow_company)) {
                                 $val = (int)$request_data["tiket_holder_acompanates"][$i][$attendee_details['ticket']['_id']];
                                 $people_total= $val + $attendee_details['qty'];
                                 $ticket->increment('total_people_quantity', $people_total);
-                            }
+                                $ticket->increment('quantity_sold', $people_total);
+                            } 
 
                             $attendee->event_id = $event_id;
                             $attendee->order_id = $order->id;
