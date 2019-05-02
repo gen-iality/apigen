@@ -126,19 +126,19 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>
+                                <th style="color:#000000">
                                     @lang("Public_ViewEvent.ticket")
                                 </th>
-                                <th>
+                                <th style="color:#000000">
                                     @lang("Public_ViewEvent.quantity_full")
                                 </th>
-                                <th>
+                                <th style="color:#000000">
                                     @lang("Public_ViewEvent.price")
                                 </th>
-                                <th>
+                                <th style="color:#000000">
                                     @lang("Public_ViewEvent.booking_fee")
                                 </th>
-                                <th>
+                                <th style="color:#000000">
                                     @lang("Public_ViewEvent.total")
                                 </th>
                             </tr>
