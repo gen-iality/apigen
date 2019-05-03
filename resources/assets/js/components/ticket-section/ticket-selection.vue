@@ -42,7 +42,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     <i class="ico-cursor mr5"></i>
-                    Selecciona el tiquete.
+                    Selecciona el tipo de tiquete y luego tu ubicación en el mapa.
                   </h3>
                 </div>
                 <div class="panel-body pt0">
@@ -89,13 +89,13 @@
                         <td class="pl0">
                           <div v-if="event.comission_on_base_price && event.fees">
                             
-                            <p>
+                            <p class="prices">
                               Precio Base
                             </p>
-                            <p>
+                            <p class="prices">
                               Comision
                             </p>
-                            <p>
+                            <p class="prices">
                               IVA
                             </p>
 
@@ -113,13 +113,13 @@
 
                           <div v-if="event.comission_on_base_price && event.fees">
                             
-                            <p class="pl0">
+                            <p class="pl0 prices">
                                {{ tickets[selectTicket]['price']  | currency('$', 0, { thousandsSeparator: '.' }) }}
                             </p>
-                              <p class="pl0">
+                              <p class="pl0 prices">
                                {{ tickets[selectTicket]['price'] * event.fees | currency('$', 0, { thousandsSeparator: '.' }) }}
                             </p>
-                            <p class="pl0">
+                            <p class="pl0 prices">
                                {{ tickets[selectTicket]['price'] * event.fees * event.tax | currency('$', 0, { thousandsSeparator: '.' }) }}
                             </p>
 
@@ -182,8 +182,8 @@
           </div>
         </div>
         <div v-else>
-        <div class="jumbotron jumbotron-fluid">
-          <div class="container">
+        <div class="jumbotron jumbotron-fluid container-back">
+          <div class="">
               <div class="panel-heading">
                 <h3 class="panel-title">
                   <i class="ico-cursor mr5"></i>
@@ -400,4 +400,17 @@ li > a.active {
         margin-left: -10px;
         margin-right: -10px;
 }
+.jumbotron {
+  background-color: white !important;
+}
+
+.selection-tick{
+  margin-left: -59px !important;
+}
+
+p.prices {
+    font-size:14px !important;
+    font-weight:bold !important;
+}
+
 </style> 
