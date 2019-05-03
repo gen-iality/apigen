@@ -2,7 +2,7 @@
   <div>
     <div class="row justify-content-center">
       <div class="col-md-12">
-        <div class="jumbotron">
+        <div class="jumbotron" v-if="showChart">
           <div class="row">
             <div class="col-md-7">
               <div id="chart"></div>
@@ -62,15 +62,17 @@
                   <div>
                     <small>{{descriptionTicket}}</small>
                   </div>
-                  <label for="quantity-ticket">Cantidad</label>
-                  <select
-                    id="quantity-ticket"
-                    class="form-control form-control-lg"
-                    v-model="selectQuantity"
-                    @change="chartConfiguration"
-                  >
-                    <option v-for="idx in 1" :key="idx">{{idx}}</option>
-                  </select>
+                  <div v-if="this.quantityTickets != 1">
+                    <label for="quantity-ticket">Cantidad</label>
+                    <select
+                      id="quantity-ticket"
+                      class="form-control form-control-lg"
+                      v-model="selectQuantity"
+                      @change="chartConfiguration"
+                    >
+                      <option v-for="idx in quantityTickets" :key="idx">{{idx}}</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div class="panel-heading">
@@ -137,6 +139,36 @@
             </div>
           </div>
         </div>
+        <div v-else>
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <i class="ico-cursor mr5"></i>
+                    Selecciona el tiquete.
+                </h3>
+              </div>
+          </div>
+            <div class="panel-body pt0">
+              <label for="title-ticket">Tiquete</label>
+              <select
+                id="title-ticket"
+                class="form-control form-control-lg"
+                v-model="selectTicketinitial"
+                @change="chartConfiguration"
+              >
+              <option value="-1">Selecciona una categoría</option>
+                <option
+                  v-for="(ticket, idx) in currentTickets"
+                  :key="idx"
+                  v-bind:value="ticket['position']"
+                >{{ ticket['title']}}</option>
+              </select>
+              <div>
+              </div>
+            </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -148,6 +180,7 @@ export default {
   data() {
     return {
       selectTicket: 0,
+      selectTicketinitial: -1,
       selectTicketName: "",
       selectQuantity: 1,
       chart: [],
@@ -156,7 +189,9 @@ export default {
       next: false,
       currentTickets: [],
       state_active: '',
-      descriptionTicket: ''
+      descriptionTicket: '',
+      showChart: false,
+      quantityTickets: 1
     };
   },
   mounted() {
@@ -176,23 +211,28 @@ export default {
       }
     });
 
-    //paint char
-    this.chart = new seatsio.SeatingChart({
-      divId: "chart",
-      publicKey: this.event["seats_configuration"]["keys"]["public"],
-      language: this.event["seats_configuration"]["language"],
-      maxSelectedObjects: this.selectQuantity,
-      event: this.event["seats_configuration"]["keys"]["event"],
-      availableCategories: [this.tickets[this.selectTicket]["title"]],
-      showMinimap: this.event["seats_configuration"]["minimap"],
-      onObjectSelected: function(object) {},
-      onObjectDeselected: function(object) {}
-    }).render();
-
   },
   methods: {
     chartConfiguration() {
+      if(!this.showChart){
+        this.selectTicket = this.selectTicketinitial
+
+                //paint char
+        this.chart = new seatsio.SeatingChart({
+          divId: "chart",
+          publicKey: this.event["seats_configuration"]["keys"]["public"],
+          language: this.event["seats_configuration"]["language"],
+          maxSelectedObjects: this.selectQuantity,
+          event: this.event["seats_configuration"]["keys"]["event"],
+          availableCategories: [this.tickets[this.selectTicket]["title"]],
+          showMinimap: this.event["seats_configuration"]["minimap"],
+          onObjectSelected: function(object) {},
+          onObjectDeselected: function(object) {}
+        }).render();
+      }
+      this.showChart = true;
       this.selectTicketName = this.tickets[this.selectTicket]["title"];
+      this.quantityTickets = parseInt(this.tickets[this.selectTicket]["max_per_person"])
 
       //Cambio de chart
       this.chart.setAvailableCategories([

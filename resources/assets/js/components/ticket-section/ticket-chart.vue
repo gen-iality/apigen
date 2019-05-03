@@ -23,7 +23,7 @@
                     language :              this.event['seats_configuration']["language"],
                     maxSelectedObjects:     1,
                     event :                 this.event['event_stages'][this.stage_act]['seating_chart'],  
-                    // availableCategories :   [this.tickets[this.selectTicket]['title']],
+                    // availableCategories   :   [this.tickets[this.selectTicket]['title']],
                     showMinimap:            this.event['seats_configuration']["minimap"],
                     onObjectSelected: function(object){
                         var url = '/checkout/seats';
