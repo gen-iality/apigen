@@ -13,7 +13,6 @@
 </template>
 
 <script>
-    document.domain = "evius.co"
     import ticketselected from './ticket-section/ticket-selection.vue';
     export default {
         components:{ticketselected},
