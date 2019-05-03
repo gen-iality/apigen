@@ -1,3 +1,12 @@
+<style>
+    h4.title {
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+}
+    td.text {
+    text-size-adjust: 12px;
+    }
+</style>
 <html>
     <body>
     @if(isset($eventusers))
@@ -45,8 +54,52 @@
                             @endif
                         </div>
                         <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
+                            @if (isset($event->fees) && $event->comission_on_base_price == true)
+                            <?php 
+                            $price = $eventuser->ticket->price;
+                            $price = number_format($price, 0, '.', '');
+                            $fee = $price * $event->fees;
+                            $fee = number_format($fee, 0, '.', '');
+                            $tax = $fee * $event->tax;
+                            $tax = number_format($tax, 0, '.', '');
+                            $total = $price + $fee + $tax;
+                            $total = number_format($total, 0, '.', '');
+
+                            ?>
+                            <table style="margin-left: -23px;">
+                                <tr>
+                                    <td>
+                                        <h4 class="title">Precio base</h4>
+                                    </td>
+                                    <td>
+                                        <h4 class="title" style ="border-left:1px solid lightgrey; margin: 0 0 0 2px;">Comision</h4>
+                                    </td>
+                                    <td>
+                                        <h4 class="title" style ="border-left:1px solid lightgrey; margin: 0 0 0 2px;">IVA</h4>
+                                    </td>
+                                    <td>
+                                        <h4 class="title" style ="margin: 0 0 0 2px;">Total</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text">
+                                        {{$price}}
+                                    </td>
+                                    <td class="text">
+                                        {{$fee}}
+                                    </td>
+                                    <td class="text">
+                                        {{$tax}}
+                                    </td>
+                                    <td class="text">
+                                        {{$total}}
+                                    </td>
+                                </tr>
+                            </table>
+                            @else
                             <h3 style="margin: 0;">Precio</h3>
                             <p style="margin:0 0 0 1em;">{{$eventuser->ticket->price}}</p>
+                            @endif
                         </div>
                     </div>                    
                 </div>
