@@ -427,7 +427,7 @@ class EventCheckoutController extends Controller
         }
 
         /* Si no desea asignar aún los tickets */
-        if ($request->holder_info == "false") {
+        if ($request->holder_info == 1) {
             self::assignTicketsToPurchaser($request, $event, $ticket_order['request_data']);
         }
 

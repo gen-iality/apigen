@@ -4954,15 +4954,15 @@ $.extend(
  * 
  * @param {*} $submitButton 
  */
-$(".attendize-information").hide();    
-$(".attendize-information:first").show();    
+$(".attendize-information:first").hide();    
+$(".attendize-information").show();    
 
 $(".attendize-information:first input").prop('required',true);
 
 $('input[name="holder_info"]').on('click', function(e) {
   var status_radio_button = $('input[name="holder_info"]:checked').val();
   console.log(status_radio_button)
-  if (status_radio_button == "false") {
+  if (status_radio_button == 1 ) {
       $(".attendize-information").hide();    
       $(".attendize-information:first").show();    
       $(".attendize-information:nth-child(3) input").prop('required',false);
