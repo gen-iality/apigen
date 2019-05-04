@@ -42,7 +42,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     <i class="ico-cursor mr5"></i>
-                    Selecciona el tiquete.
+                    Selecciona el tipo de tiquete y luego tu ubicación en el mapa.
                   </h3>
                 </div>
                 <div class="panel-body pt0">
@@ -78,7 +78,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     <i class="ico-cart mr5"></i>
-                    Resumen del pedido
+                    Resumen del pedido - {{ tickets[selectTicket]['title']}}
                   </h3>
                 </div>
 
@@ -87,17 +87,55 @@
                     <tbody>
                       <tr>
                         <td class="pl0">
-                          {{ tickets[selectTicket]['title']}}
-                          <b
-                            v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
-                          >{{selectQuantity}} X {{tickets[selectTicket]['currency'] }} $ {{tickets[selectTicket]['price']}}</b>
-                          <b v-else>X {{selectQuantity}}</b>
+                          <div v-if="event.comission_on_base_price && event.fees">
+                            
+                            <p class="prices">
+                              Precio Base
+                            </p>
+                            <p class="prices">
+                              Comision
+                            </p>
+                            <p class="prices">
+                              IVA
+                            </p>
+
+                          </div>
+                          <div v-else>
+                            <b
+                              v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
+                            >{{selectQuantity}} X {{tickets[selectTicket]['currency'] }} $ {{tickets[selectTicket]['price']}}</b>
+                            <b v-else>X {{ selectQuantity }}</b>
+                          </div>
+
                         </td>
                         <td style="text-align: right;">
-                          <b
-                            v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
-                          >{{tickets[selectTicket]['currency'] }} $ {{ tickets[selectTicket]['price'] * selectQuantity }}</b>
-                          <b v-else>Gratis</b>
+
+
+                          <div v-if="event.comission_on_base_price && event.fees">
+                            
+                            <p class="pl0 prices">
+                               {{ tickets[selectTicket]['price']  | currency('$', 0, { thousandsSeparator: '.' }) }}
+                            </p>
+                              <p class="pl0 prices">
+                               {{ tickets[selectTicket]['price'] * event.fees | currency('$', 0, { thousandsSeparator: '.' }) }}
+                            </p>
+                            <p class="pl0 prices">
+                               {{ tickets[selectTicket]['price'] * event.fees * event.tax | currency('$', 0, { thousandsSeparator: '.' }) }}
+                            </p>
+
+                          </div>
+                          <div v-else>
+                            <b
+                              v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
+                            >{{selectQuantity}} X {{tickets[selectTicket]['currency'] }} $ {{tickets[selectTicket]['price']}}</b>
+                            <b v-else>X {{ selectQuantity }}</b>
+                          </div>                          
+
+
+
+
+
+
                         </td>
                       </tr>
                     </tbody>
@@ -105,11 +143,15 @@
                 </div>
                 <div class="panel-footer">
                   <h5>
+                  <!--De aca para abajo viene el total-->
                     Total:
                     <span style="float: right;">
                       <b
                         v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
-                      >{{tickets[selectTicket]['currency'] }} $ {{ tickets[selectTicket]['price'] * selectQuantity }}</b>
+                      >
+                      
+                      {{tickets[selectTicket]['currency'] }} {{ tickets[selectTicket]['price'] * selectQuantity +  tickets[selectTicket]['price'] * event.fees + tickets[selectTicket]['price'] * event.fees * event.tax | currency('$', 0, { thousandsSeparator: '.' }) }}
+                      </b>
                       <b v-else>Gratis</b>
                     </span>
                   </h5>
@@ -140,8 +182,8 @@
           </div>
         </div>
         <div v-else>
-        <div class="jumbotron jumbotron-fluid">
-          <div class="container">
+        <div class="jumbotron jumbotron-fluid container-back">
+          <div class="">
               <div class="panel-heading">
                 <h3 class="panel-title">
                   <i class="ico-cursor mr5"></i>
@@ -175,8 +217,13 @@
 </template>
 
 <script>
+
+import Vue2Filters from 'vue2-filters'
+
 export default {
   props: ["event", "stage_act", "tickets", "auth"],
+  components:['Vue2Filters'],
+  mixins: [Vue2Filters.mixin],
   data() {
     return {
       selectTicket: 0,
@@ -353,4 +400,17 @@ li > a.active {
         margin-left: -10px;
         margin-right: -10px;
 }
+.jumbotron {
+  background-color: white !important;
+}
+
+.selection-tick{
+  margin-left: -59px !important;
+}
+
+p.prices {
+    font-size:14px !important;
+    font-weight:bold !important;
+}
+
 </style> 

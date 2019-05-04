@@ -202,11 +202,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    {!!  Form::radio('holder_info', 'true') !!}
+                                    {!!  Form::radio('holder_info', 'false', 'true') !!}
                                     {!! Form::label("holder_info_attendees", "Asignar las boletas a cada uno de los asistentes") !!}
                                 </div>
                                 <div class="form-group">
-                                    {!!  Form::radio('holder_info', 'false', true) !!}
+                                    {!!  Form::radio('holder_info', true) !!}
                                     {!! Form::label("holder_info_buyer", "Asignarme las boletas a mi") !!}
                                 </div>
                             </div>
