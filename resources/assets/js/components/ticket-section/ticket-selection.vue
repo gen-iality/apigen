@@ -42,7 +42,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     <i class="ico-cursor mr5"></i>
-                    Selecciona el tipo de tiquete y luego tu ubicación en el mapa.
+                    Selecciona tu ubicación en el mapa.
                   </h3>
                 </div>
                 <div class="panel-body pt0">
