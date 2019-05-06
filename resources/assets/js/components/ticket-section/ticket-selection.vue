@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-md-12">
+      <div class="col-md-12 no-pad">
         <div class="jumbotron" v-if="showChart">
           <div class="row">
             <div class="col-md-7">
@@ -182,7 +182,7 @@
           </div>
         </div>
         <div v-else>
-        <div class="jumbotron jumbotron-fluid container-back">
+        <div class="jumbotron jumbotron-fluid container-back no-pad">
           <div class="">
               <div class="panel-heading">
                 <h3 class="panel-title">
@@ -413,4 +413,7 @@ p.prices {
     font-weight:bold !important;
 }
 
+.no-pad{
+  padding: 10px 0 !important;
+}
 </style> 
