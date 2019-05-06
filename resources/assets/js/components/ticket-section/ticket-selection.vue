@@ -219,7 +219,7 @@
 <script>
 
 import Vue2Filters from 'vue2-filters'
-const { SeatsioClient } = require('seatsio')
+// const { SeatsioClient } = require('seatsio')
 
 export default {
   props: ["event", "stage_act", "tickets", "auth"],
