@@ -16,7 +16,8 @@
     "dependencies": {
         "less": "~1.7.0",
         "vue-resource": "^1.5.1",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.10",
+        "vue2-filters": "^0.6.0"
     },
     "devDependencies": {
         "axios": "^0.18",

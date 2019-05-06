@@ -109,11 +109,13 @@
                             <div style="display:inline-block; width:45%">
                                 <h3>Fechas del Evento</h3>
                                 <p>{{$stage}}</p>
-                            </div>    
+                            </div>
+                            @if(isset($eventuser->properties['acompanates']))
                             <div style="display:inline-block; width:45%">
                                 <h3>Acompañantes</h3>
                                 <p>{{$eventuser->properties['acompanates']}}</p>
                             </div><br>
+                            @endif
                             <div style="display:inline-block; width:100%">
                                 <p style="text-align:center"><b>{{$eventuser->ticket->dates}}</b></p>
                             </div>    
