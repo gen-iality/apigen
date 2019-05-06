@@ -114,8 +114,9 @@
                             <div style="display:inline-block; width:45%">
                                 <h3>Acompañantes</h3>
                                 <p>{{$eventuser->properties['acompanates']}}</p>
-                            </div><br>
+                            </div>
                             @endif
+                            <br>
                             <div style="display:inline-block; width:100%">
                                 <p style="text-align:center"><b>{{$eventuser->ticket->dates}}</b></p>
                             </div>    
