@@ -5,7 +5,7 @@
         <div class="jumbotron" v-if="showChart">
           <div class="row">
             <div class="col-md-7">
-              <div id="chart"></div>
+              <div id="chart" v-bind:class="{ 'opacity-chart': opacityChart }"></div>
             </div>
             <div class="col-md-5">
               <div class="panel">
@@ -219,6 +219,7 @@
 <script>
 
 import Vue2Filters from 'vue2-filters'
+const { SeatsioClient } = require('seatsio')
 
 export default {
   props: ["event", "stage_act", "tickets", "auth"],
@@ -238,7 +239,9 @@ export default {
       state_active: '',
       descriptionTicket: '',
       showChart: false,
-      quantityTickets: 1
+      quantityTickets: 1,
+      opacityChart: true
+
     };
   },
   mounted() {
@@ -260,7 +263,7 @@ export default {
 
   },
   methods: {
-    chartConfiguration() {
+   chartConfiguration() {
       if(!this.showChart){
         this.selectTicket = this.selectTicketinitial
 
@@ -277,6 +280,12 @@ export default {
           onObjectDeselected: function(object) {}
         }).render();
       }
+
+this.opacityChart = (this.tickets[this.selectTicket]["title"] == "General") ? true :false;
+
+    // console.log(this.tickets[this.selectTicket]["title"]);
+// console.log(await client.events.retrieve(this.event["seats_configuration"]["keys"]["event"]));
+
       this.showChart = true;
       this.selectTicketName = this.tickets[this.selectTicket]["title"];
       this.quantityTickets = parseInt(this.tickets[this.selectTicket]["max_per_person"])
@@ -285,6 +294,9 @@ export default {
       this.chart.setAvailableCategories([
         [this.tickets[this.selectTicket]["title"]]
       ]);
+
+        console.log(this.event["seats_configuration"]["keys"]["event"]);
+
       this.chart.changeConfig({
         maxSelectedObjects: this.selectQuantity
       });
@@ -413,4 +425,7 @@ p.prices {
     font-weight:bold !important;
 }
 
+.opacity-chart{
+  opacity: 0.3
+}
 </style> 
