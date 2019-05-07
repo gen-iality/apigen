@@ -55,7 +55,7 @@
                                 <tbody>
                                     @foreach($events as $event)
                                     <tr>
-                                        @if($event->created_at > $date && $event->sales_volume > 10000000)
+                                        @if(!$event->is_test && $event->sales_volume > 0)
                                                 <td>
                                                     {{$event->name}}
                                                 </td>

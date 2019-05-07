@@ -192,10 +192,18 @@ class EventCheckoutController extends Controller
             $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
+        /* Funcion para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
+
+        $event_name = explode(" ", $event->name); 
+        $acronym = ""; 
+        foreach ($event_name as $w) { 
+            $acronym .= $w[0]; 
+        } 
+        
         /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
          */
-        $order_reference = "ticket_order_" . time();
+        $order_reference = "ticket_order_" .$acronym. "_". time();
         //Generamos un cahce donde contiene la información primordial del pago, antes de introducir datos del usuario
         //Que va a cancelar
 
