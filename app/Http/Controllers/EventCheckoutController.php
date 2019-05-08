@@ -1426,39 +1426,98 @@ class EventCheckoutController extends Controller
      */
 
     public function deleteOrdersPending(){
-        //si el estado esta en estado de comprando y fue la orden hace 25 horas elimino el cache
+
+
         $yesterdayTime = Carbon::now()->subHours(25);
-        $orders = Order::where("order_status_id", config('attendize.order_awaiting_payment'))->where("created_at","<",$yesterdayTime)->get();
-        $pendings = Pending::where("created_at","<",$yesterdayTime)->get();
+        // $orders = Order::where("order_status_id", config('attendize.order_awaiting_payment'))->where("created_at","<",$yesterdayTime)->first();
+        $pendings = Pending::take(20)->get();
 
-        //order was passed to gateway payment
 
-        foreach($orders as $order){
-            //We changed the state orders
-            $order->order_status_id =  config('attendize.order_cancelled');
-            $order->order_status_message = "Canceled for not having been purchased during 24 hours";
-            $order->save();
-        }
-        
+        // FIRST DELETED THE PENDINGS THAT NOT HAVE ORDERS, THIS WAS ORDERS THAT NEVER PASSED TO THE GATEWAY ARE PENDING
         foreach($pendings as $pending){
-            $order_session = json_decode($pending->value);
-            // var_dump($order_session->seats_data);die;
-
-            if($order_session->seats_data ){
-                foreach($order_session->seats_data as $seats_data){
-                    $event_chart = $order_session->seats_data->event_chart;
-                    $key_secret = $order_session->seats_data->key_secret;
-                    $seats = $order_session->seats_data->seats;
-                    $seatsio = new \Seatsio\SeatsioClient($key_secret);      // key secret 
-                    $seatsio->events->release($event_chart, $seats);
+            $pending_session = json_decode($pending->value);
+            if(isset($pending->reference)){
+                $orderFinded =  Order::where("order_reference", $pending->reference)->first();
+                // si se encontro una orden "esperando pago", significa que fue a la pasarela de pago y esperamos 24 horas
+                // Si no fue encontrada liberamos la silla y borramos el pendiente de una vez
+                if($orderFinded){
+                    // Si la orden lleva mas de 24 horas
+                    if(($orderFinded->created_at) <= $yesterdayTime){
+                        //si tiene sillas
+                        if($pending_session->seats_data ){
+                            foreach($pending_session->seats_data as $seats_data){
+                                //We changed the state orders
+                                //GET KEY SECRET OF EVENT FOR DELETED SEATS IN API SEATS.IO
+                                $seats_configuration = Event::select('seats_configuration')->where('_id',$pending_session->event_id)->first();
+                                $event_key_secret = ($seats_configuration->seats_configuration)["keys"]['secret'];
+                                if(isset($seats_data->chart->selectedSeats)){
+                                    $seats = $seats_data->chart->selectedSeats;
+                                    $event_chart = $seats_data->chart->config->event;
+                                    $freeseats = $this->freeseats($event_key_secret, $event_chart, $seats);
+                                    if($freeseats["status"]){
+                                        $orderFinded->order_status_id =  config('attendize.order_cancelled');
+                                        $orderFinded->order_status_message = config('attendize.message_cancelled_order_time');
+                                        $orderFinded->save();
+                                        $pending->forceDelete();
+                                    }
+                                }
+                            }
+                        }else{
+                            $orderFinded->order_status_id =  config('attendize.order_cancelled');
+                            $orderFinded->order_status_message = config('attendize.message_cancelled_order_time');
+                            $orderFinded->save();
+                            $pending->forceDelete();
+                        }
+                    }
+      
+                }else{
+                    //si tiene sillas
+                    if($pending_session->seats_data ){
+                        foreach($pending_session->seats_data as $seats_data){
+                            //GET KEY SECRET OF EVENT FOR forceDeleteD SEATS IN API SEATS.IO
+                            $seats_configuration = Event::select('seats_configuration')->where('_id',$pending_session->event_id)->first();
+                            $event_key_secret = ($seats_configuration->seats_configuration)["keys"]['secret'];
+                            if(isset($seats_data->chart->selectedSeats)){
+                                $seats = $seats_data->chart->selectedSeats;
+                                $event_chart = $seats_data->chart->config->event;
+                                $freeseats = $this->freeseats($event_key_secret, $event_chart, $seats);
+                                if($freeseats["status"]){
+                                    $pending->forceDelete();
+                                }
+                                
+                            }else{
+                                //enviamos mensaje de error
+                            }
+                        }
+                        // $pending->forceDelete();
+                    }else{
+                        $pending->forceDelete();
+                    }
                 }
+                
             }
-            $pending->delete();
+            else{
+                // aca me envia un mensaje de error;
+                $pending->forceDelete();
+            }
         }
 
+        return ['status' => true,
+                'quantity' => Pending::count()
+        ];
+    }
 
+    public function freeseats($event_key_secret, $event_chart, $seats){
+        //we free seats 
+        try {
+            $seatsio = new \Seatsio\SeatsioClient($event_key_secret);      // key secret 
+            $seatsio = $seatsio->events->release($event_chart, $seats);
 
-        return ['status' => true];
+            return ["status" => ($seatsio->objects) ? true : false ];
+
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->messages(), "\n";
+        }
     }
     /*
      * assignTicketsToPurchaser
