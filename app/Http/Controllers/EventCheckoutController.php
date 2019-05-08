@@ -154,12 +154,15 @@ class EventCheckoutController extends Controller
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
 
             /* Si el evento es pago con cobro de comisión y de IVA */
-            if (isset($event->fees) && $event->comission_on_base_price == true) { 
-                $price_fees = ($current_ticket_quantity * $ticket->price) * ($current_ticket_quantity * $event->fees); /* Se saca la comision multiplicando el nro de tickets con su porcentaje */
-                $tax = $price_fees * ($current_ticket_quantity * $event->tax); /* Se calcula el IVA sobre la comision por el numero de ticktes */
-                $price_last = $price_fees + $tax + ($current_ticket_quantity * $ticket->price); /* Se suma para el precio del ticket total */
+            if (isset($event->fees) && $event->comission_on_base_price == true) {
+                $cant_ticket =  $current_ticket_quantity;
+                $ticket_total_price = $cant_ticket * $ticket->price;
+                $fees = $event->fees;
+                $fees_total = $ticket_total_price * $fees;
+                $tax = $event->tax;
+                $tax_total = $fees_total * $tax;
+                $price_last = $fees_total + $tax_total + $ticket_total_price; /* Se suma para el precio del ticket total */
                 $order_total = $order_total +  $price_last;
-
             } else { /* Si no tiene ningun cobro de comision ni de IVA */
 
                 $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
