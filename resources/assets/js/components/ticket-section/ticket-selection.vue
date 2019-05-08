@@ -39,7 +39,7 @@
                     </a>
                   </li>
                 </ul>
-                <div class="panel-heading">
+                <div class="panel-heading" v-if="!opacityChart">
                   <h3 class="panel-title">
                     <i class="ico-cursor mr5"></i>
                     Selecciona tu ubicación en el mapa.
@@ -103,7 +103,7 @@
                           <div v-else>
                             <b
                               v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
-                            >{{selectQuantity}} X {{tickets[selectTicket]['currency'] }} $ {{tickets[selectTicket]['price']}}</b>
+                            >{{ selectQuantity }} X {{tickets[selectTicket]['currency'] }} $ {{tickets[selectTicket]['price']}}</b>
                             <b v-else>X {{ selectQuantity }}</b>
                           </div>
 
@@ -114,13 +114,13 @@
                           <div v-if="event.comission_on_base_price && event.fees">
                             
                             <p class="pl0 prices">
-                               {{ tickets[selectTicket]['price']  | currency('$', 0, { thousandsSeparator: '.' }) }}
+                               {{ tickets[selectTicket]['price'] * selectQuantity | currency('$', 0, { thousandsSeparator: '.' }) }} 
                             </p>
                               <p class="pl0 prices">
-                               {{ tickets[selectTicket]['price'] * event.fees | currency('$', 0, { thousandsSeparator: '.' }) }}
+                               {{ tickets[selectTicket]['price'] * event.fees * selectQuantity | currency('$', 0, { thousandsSeparator: '.' }) }}
                             </p>
                             <p class="pl0 prices">
-                               {{ tickets[selectTicket]['price'] * event.fees * event.tax | currency('$', 0, { thousandsSeparator: '.' }) }}
+                               {{ tickets[selectTicket]['price'] * event.fees * event.tax * selectQuantity| currency('$', 0, { thousandsSeparator: '.' }) }}
                             </p>
 
                           </div>
@@ -150,7 +150,7 @@
                         v-if="tickets[selectTicket]['price'] * selectQuantity > 0"
                       >
                       
-                      {{tickets[selectTicket]['currency'] }} {{ tickets[selectTicket]['price'] * selectQuantity +  tickets[selectTicket]['price'] * event.fees + tickets[selectTicket]['price'] * event.fees * event.tax | currency('$', 0, { thousandsSeparator: '.' }) }}
+                      {{tickets[selectTicket]['currency'] }} {{ tickets[selectTicket]['price'] * selectQuantity +  tickets[selectTicket]['price'] * event.fees * selectQuantity + tickets[selectTicket]['price'] * event.fees * event.tax * selectQuantity | currency('$', 0, { thousandsSeparator: '.' }) }}
                       </b>
                       <b v-else>Gratis</b>
                     </span>
