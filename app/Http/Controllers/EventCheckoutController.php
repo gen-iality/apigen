@@ -122,6 +122,9 @@ class EventCheckoutController extends Controller
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $quantity_available_validation_rules = [];
+        $price_fees = 0;
+        $tax = 0;
+        $price_last = 0;
 
         foreach ($ticket_ids as $ticket_id) {
             $current_ticket_quantity = (int) $request->get('ticket_' . $ticket_id);
@@ -149,7 +152,18 @@ class EventCheckoutController extends Controller
             $validator = Validator::make(['ticket_' . $ticket_id => (int) $request->get('ticket_' . $ticket_id)],
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
 
-            $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
+            /* Si el evento es pago con cobro de comisión y de IVA */
+            if (isset($event->fees) && $event->comission_on_base_price == true) { 
+                $price_fees = ($current_ticket_quantity * $ticket->price) * ($current_ticket_quantity * $event->fees); /* Se saca la comision multiplicando el nro de tickets con su porcentaje */
+                $tax = $price_fees * ($current_ticket_quantity * $event->tax); /* Se calcula el IVA sobre la comision por el numero de ticktes */
+                $price_last = $price_fees + $tax + ($current_ticket_quantity * $ticket->price); /* Se suma para el precio del ticket total */
+                $order_total = $order_total +  $price_last;
+
+            } else { /* Si no tiene ningun cobro de comision ni de IVA */
+
+                $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
+            }
+
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
 
