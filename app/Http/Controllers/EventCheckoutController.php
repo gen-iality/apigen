@@ -60,7 +60,8 @@ class EventCheckoutController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function postValidateTickets(Request $request, $event_id)
-    {
+    { 
+        $email_user = Auth::user()->email;
         /*
          * Order expires after X min
          */
@@ -122,6 +123,9 @@ class EventCheckoutController extends Controller
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $quantity_available_validation_rules = [];
+        $price_fees = 0;
+        $tax = 0;
+        $price_last = 0;
 
         foreach ($ticket_ids as $ticket_id) {
             $current_ticket_quantity = (int) $request->get('ticket_' . $ticket_id);
@@ -149,7 +153,18 @@ class EventCheckoutController extends Controller
             $validator = Validator::make(['ticket_' . $ticket_id => (int) $request->get('ticket_' . $ticket_id)],
                 $quantity_available_validation_rules, $quantity_available_validation_messages);
 
-            $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
+            /* Si el evento es pago con cobro de comisión y de IVA */
+            if (isset($event->fees) && $event->comission_on_base_price == true) { 
+                $price_fees = ($current_ticket_quantity * $ticket->price) * ($current_ticket_quantity * $event->fees); /* Se saca la comision multiplicando el nro de tickets con su porcentaje */
+                $tax = $price_fees * ($current_ticket_quantity * $event->tax); /* Se calcula el IVA sobre la comision por el numero de ticktes */
+                $price_last = $price_fees + $tax + ($current_ticket_quantity * $ticket->price); /* Se suma para el precio del ticket total */
+                $order_total = $order_total +  $price_last;
+
+            } else { /* Si no tiene ningun cobro de comision ni de IVA */
+
+                $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
+            }
+
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
 
@@ -192,10 +207,18 @@ class EventCheckoutController extends Controller
             $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
+        /* Funcion para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
+
+        $event_name = explode(" ", $event->name); 
+        $acronym = ""; 
+        foreach ($event_name as $w) { 
+            $acronym .= $w[0]; 
+        } 
+        
         /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
          */
-        $order_reference = "ticket_order_" . time();
+        $order_reference = "ticket_order_" .$acronym. "_". time();
         //Generamos un cahce donde contiene la información primordial del pago, antes de introducir datos del usuario
         //Que va a cancelar
 
@@ -229,6 +252,7 @@ class EventCheckoutController extends Controller
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
             'event_id' => $event->id,
+            'email_user' => $email_user,
             'tickets' => $tickets,
             'total_ticket_quantity' => $total_ticket_quantity,
             'order_started' => time(),
@@ -354,7 +378,6 @@ class EventCheckoutController extends Controller
             'temporal_id' => $order_reference,
             'cant'   => 1,
         ];
-
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
@@ -563,7 +586,7 @@ class EventCheckoutController extends Controller
                         'lastname' => $request->get('order_last_name'),
                         'payerIsBuyer' => $request->get('payerIsBuyer'),
                         'mobile' => $request->get('mobile'),
-                        'email' => Auth::user()->email,
+                        'email' => $request->get('order_email'),
                         'cancelUrl' => $baseUrl.'/order/' . $order_reference . '/payment',
                     ];
 
@@ -576,7 +599,7 @@ class EventCheckoutController extends Controller
                         'transactionId' => $order_reference,
                         'orderDate' => date('Y-m-d H:i:s'),
                         'merchantId' => '508029',
-                        'email' => Auth::user()->email,
+                        'email' => $request->get('order_email'),
                         'items' => [
                             new \Omnipay\PayU\Item([
                                 'name' => 'Item',

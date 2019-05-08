@@ -97,6 +97,11 @@
                 @endif
 
             </div>
+            @if (isset($event->fees) && $event->comission_on_base_price == true)
+                <div class="help-block">
+                    <strong>El costo del servicio y el IVA del servicio estan incluidos en el precio total</strong>
+                </div>
+            @endif
             <div class="help-block">
                 {!! @trans("Public_ViewEvent.time", ["time"=>"<span id='countdown'></span>"]) !!}
             </div>
@@ -149,6 +154,7 @@
                         <div class="form-group">
                             {!! Form::label("mobile", 'Teléfono') !!}
                             {!! Form::number("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {{ Form::hidden('order_email', $email_user) }}
                         </div>
                     </div>
                 </div>
