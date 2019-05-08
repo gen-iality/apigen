@@ -154,6 +154,7 @@
                         <div class="form-group">
                             {!! Form::label("mobile", 'Teléfono') !!}
                             {!! Form::number("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {{ Form::hidden('order_email', $email_user) }}
                         </div>
                     </div>
                 </div>

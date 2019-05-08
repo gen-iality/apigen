@@ -60,7 +60,8 @@ class EventCheckoutController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function postValidateTickets(Request $request, $event_id)
-    {
+    { 
+        $email_user = Auth::user()->email;
         /*
          * Order expires after X min
          */
@@ -251,6 +252,7 @@ class EventCheckoutController extends Controller
             'validation_rules' => $validation_rules,
             'validation_messages' => $validation_messages,
             'event_id' => $event->id,
+            'email_user' => $email_user,
             'tickets' => $tickets,
             'total_ticket_quantity' => $total_ticket_quantity,
             'order_started' => time(),
@@ -376,7 +378,6 @@ class EventCheckoutController extends Controller
             'temporal_id' => $order_reference,
             'cant'   => 1,
         ];
-
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
@@ -585,7 +586,7 @@ class EventCheckoutController extends Controller
                         'lastname' => $request->get('order_last_name'),
                         'payerIsBuyer' => $request->get('payerIsBuyer'),
                         'mobile' => $request->get('mobile'),
-                        'email' => Auth::user()->email,
+                        'email' => $request->get('order_email'),
                         'cancelUrl' => $baseUrl.'/order/' . $order_reference . '/payment',
                     ];
 
@@ -598,7 +599,7 @@ class EventCheckoutController extends Controller
                         'transactionId' => $order_reference,
                         'orderDate' => date('Y-m-d H:i:s'),
                         'merchantId' => '508029',
-                        'email' => Auth::user()->email,
+                        'email' => $request->get('order_email'),
                         'items' => [
                             new \Omnipay\PayU\Item([
                                 'name' => 'Item',
