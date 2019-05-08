@@ -58,6 +58,10 @@ return [
     'order_pending'                 => '5c4a299c5c93dc0eb199214a',
     'order_failed'                  => '5c4f37a17aa633237e241643',
 
+    /*Message */
+
+    'message_cancelled_order_time' => '5c4232ad477041612349941d',
+
     /* Attendee question types */
     'question_textbox_single'       => 1,
     'question_textbox_multi'        => 2,
