@@ -214,8 +214,11 @@ class EventCheckoutController extends Controller
 
         $event_name = explode(" ", $event->name); 
         $acronym = ""; 
+        $tot_acronym = 0;
         foreach ($event_name as $w) { 
+            if ($tot_acronym > 3) continue;
             $acronym .= $w[0]; 
+            $tot_acronym ++; 
         } 
         
         /*
@@ -632,8 +635,6 @@ class EventCheckoutController extends Controller
 
             $transaction = $gateway->purchase($transaction_data);
             $response = $transaction->send(); 
-
-
             /**
             * Seats Confirmation 
             */
