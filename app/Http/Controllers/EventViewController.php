@@ -29,30 +29,15 @@ class EventViewController extends Controller
     {
         $date = new \DateTime();
         $now =  $date->format('Y-m-d H:i:s');
-        $show = '';
-        $stage_act = null;
+        $stage_act = 0;
  
         $event = Event::findOrFail($event_id);
         $stages = $event->event_stages;
+        $codes_discounts = $event->codes_discount; 
 
-
-        if ($stages && $event->stage_continue ==  null) { /*  Si el evento tiene limite de compra entre etapas */
-            foreach ($stages as $key => $stage) { 
-                if ($stage["start_sale_date"] < $now && $stage["end_sale_date"] > $now) {
-                $stage_act = $key;
-                }
-            }
-        } elseif ($stages && $event->stage_continue !==  null) { /* Si no tiene  limite de compra entre etapas */
-            foreach ($stages as $key => $stage) { 
-                if ($stage["start_sale_date"] > $now && $stage_act == null) { /* Se condiciona para que entre 1 sola vez para tener la etapa minima de venta */
-                $stage_act = $key;
-                }
-            }
-        }
-
-        if (!Utils::userOwns($event) && !$event->is_live) {
-
-            return view('Public.ViewEvent.EventNotLivePage');
+        foreach ($stages as $key => $stage) { 
+            $status = ($stage["start_sale_date"] > $now) ?  true : false;
+            $stages[$key] += ['status' => $status];
         }
 
         $data = [
@@ -60,9 +45,6 @@ class EventViewController extends Controller
             'tickets'     => $event->tickets()->where('is_hidden', 0)->orderBy('stage', 'asc')->get(),
             'is_embedded' => 0,
             'stages' => $stages,
-            'stage_act' => $stage_act,
-            'show' => $show,
-            'auth' => Auth::check() ? "true" : "false"
         ];
         
         /*
@@ -94,7 +76,7 @@ class EventViewController extends Controller
             }
         }
 
-        return view('Public.ViewEvent.EventPage', $data);
+        return $data;
     }
 
     /**
