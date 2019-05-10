@@ -209,6 +209,11 @@ class EventController extends Controller
     public function show(String $id)
     {
         $event = Event::findOrFail($id);
+
+        $stages = $this->stagesStatusActive($id);
+
+        $event->event_stages = $stages;
+
         return new EventResource($event);
     }
 
@@ -505,5 +510,31 @@ class EventController extends Controller
         ]);
     }    
 
+
+    // FUNCTIONS SPECIFICS
+
+    /**
+     * Put status of stage depend day
+     * @param $id  event Id
+     * @return  $stages
+     * 
+     */
+    public function stagesStatusActive($id){
+
+
+        $date = new \DateTime();
+        $event = Event::findOrFail($id);
+        $now =  $date->format('Y-m-d H:i:s');
+        $stages = $event->event_stages;
+        $codes_discounts = $event->codes_discount; 
+
+        foreach ($stages as $key => $stage) { 
+            $status = ($stage["start_sale_date"] > $now) ?  true : false;
+            $stages[$key] += ['status' => $status];
+        }
+        return $stages;
+
+
+    }
     
 }
