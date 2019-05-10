@@ -18,18 +18,12 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="canonical" href="{{$event->event_url}}" />
 
 
         <!-- Open Graph data -->
-        <meta property="og:title" content="{{{$event->name}}}" />
+        <meta property="og:title" content="{{$event->name}}" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="{{$event->event_url}}?utm_source=fb" />
-        {{-- @if($event->images->count()) --}}
-        @if(false)
-        <meta property="og:image" content="{{config('attendize.cdn_url_user_assets').'/'.$event->images->first()['image_path']}}" />
-        @endif
-     {{--   <meta property="og:description" content="{{Str::words(strip_tags(Markdown::parse($event->description))), 20}}" /> --}}
+
         <meta property="og:site_name" content="Attendize.com" />
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

@@ -379,9 +379,7 @@ class EventCheckoutController extends Controller
             'cant'   => 1,
         ];
 
-        if ($this->is_embedded) {
-            return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
-        }
+
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
