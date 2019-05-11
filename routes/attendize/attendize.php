@@ -151,8 +151,8 @@ Route::group(
             'uses' => 'EventViewController@showCalendarIcs',
         ]);
 
-        Route::get('/{event_id}/{event_slug?}', [
-            'as'   => 'showEventPage',
+        Route::get('/{event_id}/showTicketsTypes', [
+            'as'   => 'showTicketsTypes',
             'uses' => 'EventViewController@showEventHome',
         ]);
 

@@ -382,9 +382,7 @@ class EventCheckoutController extends Controller
             'cant'   => 1,
         ];
 
-        if ($this->is_embedded) {
-            return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
-        }
+
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
@@ -641,10 +639,11 @@ class EventCheckoutController extends Controller
                 $date = new \DateTime();
                 $now =  $date->format('Y-m-d H:i:s');
                 $seats = [];
-                foreach($ticket_order['seats_data'] as $key => $seat){  
-                    array_push($seats, $key); 
+                if(isset($ticket_order['seats_data'])){
+                    foreach($ticket_order['seats_data'] as $key => $seat){  
+                        array_push($seats, $key); 
+                    }
                 }
-                
                 //event: was replace by event_idv
                 $event_id = ($event->seats_configuration)['keys']['event'];
             }
