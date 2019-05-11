@@ -521,7 +521,10 @@ class EventController extends Controller
      */
     public function stagesStatusActive($id){
 
-
+        //"start_sale_date": "2019-02-24 18:00",
+        //"end_sale_date": "2019-05-16 05:59",
+        
+        //2019-04-11
         $date = new \DateTime();
         $event = Event::findOrFail($id);
         $now =  $date->format('Y-m-d H:i:s');
@@ -529,7 +532,14 @@ class EventController extends Controller
         $codes_discounts = $event->codes_discount; 
 
         foreach ($stages as $key => $stage) { 
-            $status = ($stage["start_sale_date"] > $now) ?  true : false;
+            if ($stage["end_sale_date"] < $now){
+                $status = "ended";
+            }else if($stage["start_sale_date"] > $now){
+                $status = "notstarted";
+            }else{
+                $status = "active";
+            }
+
             $stages[$key] += ['status' => $status];
         }
         return $stages;
