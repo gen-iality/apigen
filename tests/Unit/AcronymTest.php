@@ -33,7 +33,7 @@ class AcronymTest extends TestCase
         $var2 = strlen($var);
         $var3 = ctype_alnum($var);
         $this->assertTrue($var3, "No es alfanumérico 3");
-        $this->assertEquals(4, $var2 , "No se recibio la cantidad de Carácteres 3");
+        $this->assertEquals(4, $var2, "No se recibio la cantidad de Carácteres 3");
         
     }
 }

@@ -2,34 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Cookie;
+use Log;
+use Omnipay;
+use PDF;
+use Validator;
+use QRCode;
 use App\Account;
 use App\Attendee;
 use App\Event;
+use App\Order;
 use App\Pending;
-use App\Jobs\SendOrderTickets;
 use App\Events\OrderCompletedEvent;
+use App\Jobs\SendOrderTickets;
 use App\Models\AccountPaymentGateway;
 use App\Models\Affiliate;
 use App\Models\EventStats;
-use App\Order;
 use App\Models\OrderItem;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
 use App\Services\Order as OrderService;
-use Auth;
+use App\Services\StringHelpers;
 use Carbon\Carbon;
-use Cookie;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Log;
-use Omnipay;
-use PDF;
 use PhpSpec\Exception\Exception;
-use Validator;
-use QRCode;
-use GuzzleHttp\Client;
 
 class EventCheckoutController extends Controller
 {
@@ -210,16 +211,9 @@ class EventCheckoutController extends Controller
             $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
-        /* Funcion para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
+        /* Método para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
 
-        $event_name = explode(" ", $event->name); 
-        $acronym = ""; 
-        $tot_acronym = 0;
-        foreach ($event_name as $w) { 
-            if ($tot_acronym > 3) continue;
-            $acronym .= $w[0]; 
-            $tot_acronym ++; 
-        } 
+        $acronym = StringHelpers::acronym($event->name);
         
         /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
