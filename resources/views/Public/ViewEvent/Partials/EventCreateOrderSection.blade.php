@@ -236,9 +236,11 @@
                                     }
                                 }
                             ?>
-                            @if (isset($seats_data))
+                            
+                            @if (isset($seat_title))
                                 <H3>{{$seat_title}}</H3>
                             @endif
+
                             @foreach($tickets as $ticket)
                             <?php
                                 $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
