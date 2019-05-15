@@ -326,7 +326,7 @@ class EventCheckoutController extends Controller
         
         $order_session = json_decode($pending->value, true);
         $event = Event::findorFail($order_session['event_id']);
-
+        
         //Find user fields in event.
         $fields = $event->user_properties;
 
@@ -673,11 +673,14 @@ class EventCheckoutController extends Controller
                 $pending->save();
 
                 $this->storeOrder($order_reference);
-                
+                // var_dump($request->get('box_payment'));die;
+                if($request->get('box_payment')){
+                    $url_redirect = "paymentEvius";
+                }
                 Log::info("Redirect url: " . $url_redirect);
                 $return = [
                     'status' => 'success',
-                    'redirectUrl' => $response->getRedirectUrl(),
+                    'redirectUrl' => $url_redirect,
                     'message' => 'Redirecting to ' . $ticket_order['payment_gateway']['provider_name'],
                 ];
 
@@ -986,7 +989,7 @@ class EventCheckoutController extends Controller
      * @return array $order
      */
     public function storeOrder($order_reference, $payment_free = false){
-
+      
         //Datos necesarios para la generación de la orden
         
         Log::info('Generación de la orden');
@@ -995,7 +998,7 @@ class EventCheckoutController extends Controller
 
             $pending = Pending::where('reference',$order_reference)->first();
             $ticket_order = json_decode($pending->value, true);
-
+    
             $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
             $request_data = $ticket_order['request_data'];
             $event_id = $ticket_order['event_id'];
@@ -1016,7 +1019,7 @@ class EventCheckoutController extends Controller
             //Guardamos cada uno de los datos de la orden
             $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
             $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
-            $order->email = Auth::user()->email;
+            $order->email = isset($ticket_order['transaction_data']["email"]) ? $ticket_order['transaction_data']["email"] : Auth::user()->email;
             $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
             $order->amount = $ticket_order['order_total'];
             $order->booking_fee = $ticket_order['booking_fee'];
@@ -1565,5 +1568,32 @@ class EventCheckoutController extends Controller
 
         return $data;
 
+    }
+
+
+        /**
+     * postCreateOrder
+     * Create the order, handle payment, update stats, fire off email jobs then redirect user
+     *
+     * @param Request $request
+     * @param $event_id Request $request, $order_reference
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function paymentEvius(Request $request, $order_reference)
+    {
+
+        $pending = Pending::where('reference',$order_reference)->first();
+        if(isset($pending)){
+            $ticket_order = json_decode($pending->value, true);
+            $event = Event::findOrFail($ticket_order["event_id"]);
+        }else{
+            return "Orden No encontrada";
+        }
+        
+
+        $ticket_order = $ticket_order["transaction_data"];
+        return view('Public.ViewEvent.EventPagePaymentEvius', ['ticket_order' => $ticket_order, 'event' => $event ] );
+    
+    
     }
 }

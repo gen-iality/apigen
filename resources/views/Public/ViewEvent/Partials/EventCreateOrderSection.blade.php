@@ -110,6 +110,15 @@
             <div class="event_order_form">
                 {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $temporal_id]), 'class' => ($order_requires_payment && @$payment_gateway->is_on_site) ? 'ajax payment-form' : 'ajax', 'data-stripe-pub-key' => isset($account_payment_gateway->config['publishableKey']) ? $account_payment_gateway->config['publishableKey'] : '']) !!}
 
+                <div class="row" style="display:none">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input name="box_payment" id="box-payment" type="checkbox" value="true" checked>
+                            <span>Habilitar Caja</span>
+                        </div>
+                    </div>
+                </div>
+
                 {!! Form::hidden('event_id', $event->id) !!}
                 {!! Form::hidden('temporal_id', $temporal_id) !!}
                
@@ -155,6 +164,16 @@
                             {!! Form::label("mobile", 'Teléfono') !!}
                             {!! Form::number("mobile", null, ['required' => 'required', 'class' => 'form-control']) !!}
                             {{ Form::hidden('order_email', $email_user) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="box-payment-div">
+
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            {!! Form::label("order_email", 'Correo del comprador') !!}
+                            {!! Form::text("order_email", $email_user, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>
@@ -414,4 +433,3 @@
 @if(session()->get('message'))
     <script>showMessage('{{session()->get('message')}}');</script>
 @endif
-

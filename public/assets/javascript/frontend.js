@@ -4973,3 +4973,39 @@ $('input[name="holder_info"]').on('click', function(e) {
   }
 
 });
+
+$(document).ready(function(){
+  console.log("Enterrrrr")
+
+    $(".button-submit-payment").click(function(){
+        var id = $(this).attr('id');
+        var ref = $(this).attr('ref');
+        var url = "/order/paymentCompleted";
+        var data = {status: {status: id}, reference: ref};
+        $("#buttons-payment-evius").hide()
+        $("#progress-payment-evius").show()
+        fetch(url, {
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(data), // data can be `string` or {object}!
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+          var urlReturn = "/order/"+ref;
+          if(id == "APPROVED"){
+            window.location.href = urlReturn
+          }else{
+            $("#progress-payment-evius").hide()
+            $("#cancel-payment-evius").show()
+          }
+
+        });
+
+    });
+
+
+
+});
+
