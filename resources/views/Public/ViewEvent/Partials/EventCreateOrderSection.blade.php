@@ -68,7 +68,7 @@
                                 @endif
                             </h5>
                         <h5>
-                            Precio: <span style="float: right;">${{ number_format($order_total + $discount, 2, '.', '') }} </span>
+                            Precio: <span style="float: right;"> ${{ number_format($order_total + $discount, 2, '.', '') }} </span>
                         </h5>
                         <h5>
                             Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
@@ -79,10 +79,10 @@
                     @if (isset($event->fees) && $event->comission_on_base_price == true)
                         <div class="help-block">
                         <h5>
-                            Comision: <span style="float: right;">${{ number_format($fees_total, 2, '.', '') }} </span>
+                            Comision: <span style="float: right;"> money($fees_total, $event->currency)</span>
                         </h5>
                         <h5>
-                            IVA: <span style="float: right;"> - ${{ number_format($tax_total, 2, '.', '') }} </span>
+                            IVA: <span style="float: right;"> money($tax_total, $event->currency)</span>
                         </h5>
                         </div>
                     @endif
