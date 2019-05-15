@@ -59,7 +59,7 @@
                             @endif
                         </tr>
                         <tr>
-                            @if (isset($seats_data)
+                            @if (isset($seats_data))
                             <td class="pl0">{{ $seat_title }}</b></td>
                             @endif
                         </tr>
