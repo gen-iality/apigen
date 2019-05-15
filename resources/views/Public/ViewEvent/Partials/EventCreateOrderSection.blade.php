@@ -24,14 +24,19 @@
                                 $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
                             ?>
                              <?php
-                                $total_attendee_increment = 0;
                                 if (isset($seats_data)) { 
                                     $seats = $seats_data;
                                     foreach ($seats as $key => $seat) {
                                         if (isset($seat['category'])) {
-                                            $seat_title = $seat['category']['label'];
+                                            $seat_category = $seat['category']['label'];
+                                            $ticket_name = $ticket['ticket']['title'];
+                                            if ($seat_category == $ticket_name) {
+                                                $seat_position = $seat['labels']['displayedLabel'];
+                                                $seat_title = $seat['labels']['section'];
+                                                unset($seats_data[$key]);
+                                                break;
+                                            }
                                         }
-                                    
                                     }
                                 }
                             ?>
@@ -60,7 +65,7 @@
                         </tr>
                         <tr>
                             @if (isset($seats_data))
-                            <td class="pl0">{{ $seat_title }}</b></td>
+                            <td class="pl0">{{ $seat_position }}</b></td>
                             @endif
                         </tr>
                         @endforeach
