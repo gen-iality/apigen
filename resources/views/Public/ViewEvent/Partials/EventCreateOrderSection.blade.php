@@ -23,6 +23,18 @@
                             <?php
                                 $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
                             ?>
+                             <?php
+                                $total_attendee_increment = 0;
+                                if (isset($seats_data)) { 
+                                    $seats = $seats_data;
+                                    foreach ($seats as $key => $seat) {
+                                        if (isset($seat['category'])) {
+                                            $seat_title = $seat['category']['label'];
+                                        }
+                                    
+                                    }
+                                }
+                            ?>
                         @if(isset($event->stage_continue))
                         @foreach($event->event_stages as $stage)
                             @if($stage["stage_id"] == $ticket['ticket']['stage_id'])
@@ -44,6 +56,11 @@
                         <tr>
                             @if ($multiple > 1)
                             <td class="pl0">Personas por ticket X <b>{{$ticket['ticket']['number_person_per_ticket']}}</b></td>
+                            @endif
+                        </tr>
+                        <tr>
+                            @if (isset($seats_data)
+                            <td class="pl0">{{ $seat_title }}</b></td>
                             @endif
                         </tr>
                         @endforeach
