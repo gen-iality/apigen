@@ -124,7 +124,8 @@ class EventCheckoutController extends Controller
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $quantity_available_validation_rules = [];
-        $price_fees = 0;
+        $fees_total = 0;
+        $tax_total = 0;
         $tax = 0;
         $price_last = 0;
 
@@ -258,6 +259,8 @@ class EventCheckoutController extends Controller
             'order_started' => time(),
             'expires' => $order_expires_time,
             'reserved_tickets_id' => $reservedTickets->id,
+            'fees_total' => $fees_total,
+            'tax_total' => $tax_total,
             'order_total' => $order_total,
             'booking_fee' => $booking_fee,
             'organiser_booking_fee' => $organiser_booking_fee,

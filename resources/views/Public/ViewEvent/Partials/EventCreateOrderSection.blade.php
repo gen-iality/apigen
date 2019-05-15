@@ -76,6 +76,16 @@
                         <hr/>
 
                     @endif
+                    @if (isset($event->fees) && $event->comission_on_base_price == true)
+                        <div class="help-block">
+                        <h5>
+                            Comision: <span style="float: right;">${{ number_format($fees_total, 2, '.', '') }} </span>
+                        </h5>
+                        <h5>
+                            IVA: <span style="float: right;"> - ${{ number_format($tax_total, 2, '.', '') }} </span>
+                        </h5>
+                        </div>
+                    @endif
                     <h5>
                         @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
                     </h5>
