@@ -141,7 +141,6 @@
         <div class="col-md-8 col-md-pull-4">
             <div class="event_order_form">
                 {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $temporal_id]), 'class' => ($order_requires_payment && @$payment_gateway->is_on_site) ? 'ajax payment-form' : 'ajax', 'data-stripe-pub-key' => isset($account_payment_gateway->config['publishableKey']) ? $account_payment_gateway->config['publishableKey'] : '']) !!}
-
                 {!! Form::hidden('event_id', $event->id) !!}
                 {!! Form::hidden('temporal_id', $temporal_id) !!}
                
@@ -190,6 +189,27 @@
                         </div>
                     </div>
                 </div>
+                <!--  Si tiene el rol de caja o administrador, puede generar las ordenes -->
+                @if($role == "5c1a59b2f33bd40bb67f2322" || $role == "5cdd8e4f1c9d440000924c98")
+                <div class="row" id="box-payment-div">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            {!! Form::label("order_email", 'Correo del comprador') !!}
+                            {!! Form::text("order_email", $email_user, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="display:none">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input name="box_payment" id="box-payment" type="checkbox" value="true" checked>
+                            <span>Habilitar Caja</span>
+                        </div>
+                    </div>
+                </div>
+
+                @endif
 
                 <div class="row" style="display:none">
                     <div class="col-md-12">
@@ -448,4 +468,3 @@
 @if(session()->get('message'))
     <script>showMessage('{{session()->get('message')}}');</script>
 @endif
-
