@@ -6,6 +6,7 @@ use App\Models\Account;
 use App\Models\AccountPaymentGateway;
 use App\Models\Currency;
 use App\Models\PaymentGateway;
+use App\Models\Ticket;
 use App\Models\Timezone;
 use App\Models\User;
 use App\Event;
@@ -29,10 +30,13 @@ class ManageAccountController extends MyBaseController
     public function showEditTickets(Request $request)
     {
         $event = Event::find($request->event_id);
+        $tickets = Ticket::where('event_id', $request->event_id)->where('is_hidden', 0)->get();
         $codes_discount = isset($event->codes_discount) ? $event->codes_discount : [];
+        $stage_event = $event->event_stages ? $event->event_stages : [];
         $ticket_discount = isset($event->tickets_discount) ? $event->tickets_discount : '';
         $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount : '';
         $seats_configuration = isset($event->seats_configuration) ? $event->seats_configuration: '';
+
         $data = [
             'account'                  => Auth::user(),
             'timezones'                => Timezone::pluck('location', 'id'),
@@ -44,10 +48,12 @@ class ManageAccountController extends MyBaseController
             'codes_discount'           => $codes_discount,
             'ticket_discount'          => $ticket_discount,
             'percentage_discount'      => $percentage_discount,
-            'seats_configuration'      => $seats_configuration
-
+            'seats_configuration'      => $seats_configuration,
+            'tickets'                  => $tickets,
+            'stages'                   => $stage_event 
+            
         ];
-        
+
         return view('ManageAccount.Modals.EditAccount', $data);
     }
 
@@ -270,21 +276,23 @@ class ManageAccountController extends MyBaseController
         $tickets_availability = Input::get('tickets_availability');
         $codes_title = Input::get('codes_title');
         $event_id = Input::get('event_id');
+        $ticket_to_discount = Input::get('ticket_to_discount');
 
         $event = Event::find($event_id);
+        if (isset($event->codes_discount)) { 
+            foreach ($event->codes_discount as $code) {
+                if ($code['id'] == $codes_title) {
+                    $message_error = 'Ticket name has already been used';
+                    return response()->json(
+                        [
+                        'status'  => 'error',
+                        'message' => $message_error,
+                        ]   
+                    );
+                    break;
 
-        foreach ($event->codes_discount as $code) {
-            if ($code['id'] == $codes_title) {
-                $message_error = 'Ticket name has already been used';
-                return response()->json(
-                    [
-                    'status'  => 'error',
-                    'message' => $message_error,
-                    ]   
-                );
-                break;
-
-            } 
+                } 
+            }
         }
             //Generador de códigos
             $codes = isset($event->codes_discount) ? $event->codes_discount : [];
@@ -301,6 +309,7 @@ class ManageAccountController extends MyBaseController
                 'percentage' => $percentage_discount,
                 'available' => true,
                 'quantity'  => $tickets_availability,
+                'ticket_assigned'  => $ticket_to_discount,
             ];
             array_push($codes, $code);
             $event->codes_discount = $codes;

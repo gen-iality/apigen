@@ -23,6 +23,23 @@
                             <?php
                                 $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
                             ?>
+                             <?php
+                                if (isset($seats_data)) { 
+                                    $seats = $seats_data;
+                                    foreach ($seats as $key => $seat) {
+                                        if (isset($seat['category'])) {
+                                            $seat_category = $seat['category']['label'];
+                                            $ticket_name = $ticket['ticket']['title'];
+                                            if ($seat_category == $ticket_name) {
+                                                $seat_position = $seat['labels']['displayedLabel'];
+                                                $seat_title = $seat['labels']['section'];
+                                                unset($seats_data[$key]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            ?>
                         @if(isset($event->stage_continue))
                         @foreach($event->event_stages as $stage)
                             @if($stage["stage_id"] == $ticket['ticket']['stage_id'])
@@ -44,6 +61,11 @@
                         <tr>
                             @if ($multiple > 1)
                             <td class="pl0">Personas por ticket X <b>{{$ticket['ticket']['number_person_per_ticket']}}</b></td>
+                            @endif
+                        </tr>
+                        <tr>
+                            @if (isset($seats_data))
+                            <td class="pl0">{{ $seat_position }}</b></td>
                             @endif
                         </tr>
                         @endforeach
@@ -68,13 +90,23 @@
                                 @endif
                             </h5>
                         <h5>
-                            Precio: <span style="float: right;">${{ number_format($order_total + $discount, 2, '.', '') }} </span>
+                            Precio: <span style="float: right;"> ${{ number_format($order_total + $discount, 2, '.', '') }} </span>
                         </h5>
                         <h5>
                             Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
                         </h5>
                         <hr/>
 
+                    @endif
+                    @if (isset($event->fees) && $event->comission_on_base_price == true)
+                        <div class="help-block">
+                        <h5>
+                            Servicio: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>
+                        </h5>
+                        <h5>
+                            IVA servicio: <span style="float: right;">{{ money($tax_total, $event->currency) }}</span>
+                        </h5>
+                        </div>
                     @endif
                     <h5>
                         @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
@@ -256,9 +288,11 @@
                                     }
                                 }
                             ?>
-                            @if (isset($seats_data))
+                            
+                            @if (isset($seat_title))
                                 <H3>{{$seat_title}}</H3>
                             @endif
+
                             @foreach($tickets as $ticket)
                             <?php
                                 $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
