@@ -254,8 +254,8 @@ class EventCheckoutController extends Controller
                         } else {
                             return response()->json(
                                 [
-                                    'status' => 'error',
-                                    'message' => 'Code not allowed for the selected ticket',
+                                'status' => 'error',
+                                'message' => 'Code not allowed for the selected ticket',
                                 ]
                             );
                         }
