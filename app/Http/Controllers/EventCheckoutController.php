@@ -241,12 +241,12 @@ class EventCheckoutController extends Controller
         }
         $code_discount = $request->get('code_discount');
         if ($code_discount) {
-            $ticket = $request->get('tickets');
-            $ticket_id = $ticket[0]; 
+            $ticket_get = $request->get('tickets');
+            $ticket__get_id = $ticket[0]; 
             foreach ($event->codes_discount as $code) {
                 if ($code['id'] == $code_discount && $code['available'] == true) {
                     if (isset($code['ticket_assigned'])) { 
-                        if ($code['ticket_assigned'] == $ticket_id) { 
+                        if ($code['ticket_assigned'] == $ticket__get_id) { 
                             $percentage_discount = $code['percentage'];
                             $discount = $percentage_discount*$order_total/100;
                             $order_total = $order_total - $discount;
