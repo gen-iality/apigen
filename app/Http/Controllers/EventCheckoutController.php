@@ -226,25 +226,42 @@ class EventCheckoutController extends Controller
         //Descuento de los tikets del porcentaje a agregar a una cantidad de ticketes.
 
 
-            $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
-            $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
+        $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
+        $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
+        
+        //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
+        //Se realiza el descuento
             
-            //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
-            //Se realiza el descuento
-            
-        if($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0){
+        if ($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0) {
             $discount = $percentage_discount*$order_total/100;
             $order_total = $order_total - $discount;
         }
 
         $code_discount = $request->get('code_discount');
-        if($code_discount){
-            foreach($event->codes_discount as $code){
-                if($code['id'] == $code_discount && $code['available'] == true){
-                    $percentage_discount = $code['percentage'];
-                    $discount = $percentage_discount*$order_total/100;
-                    $order_total = $order_total - $discount;
-                    break;
+        if ($code_discount) {
+            foreach ($event->codes_discount as $code) {
+                if ($code['id'] == $code_discount && $code['available'] == true) {
+                    if (!isset($code['ticket_assigned'])) { 
+                        if ($code['ticket_assigned'] == $ticket['ticket']['_id']) { 
+                            $percentage_discount = $code['percentage'];
+                            $discount = $percentage_discount*$order_total/100;
+                            $order_total = $order_total - $discount;
+                            break;
+                        } else {
+                            return response()->json(
+                                [
+                                    'status' => 'error',
+                                    'message' => 'Code not allowed for the selected ticket',
+                                ]
+                            );
+                        }
+                    } else {
+                        $percentage_discount = $code['percentage'];
+                        $discount = $percentage_discount*$order_total/100;
+                        $order_total = $order_total - $discount;
+                        break;
+
+                    }
                 }
             }
         }

@@ -82,7 +82,7 @@
 
                     <div class="col-md-6">
                         {!! Form::label('description', trans("ManageEvent.ticket_description"), array('class'=>'control-label')) !!}
-                        {!!  Form::text('description', '',
+                        {!!  Form::text('description', null,
                                     array(
                                     'class'=>'form-control',
                                     'placeholder'=>'Description'
@@ -127,7 +127,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('dates', 'Fechas del Tickect', array('class'=>' control-label')) !!}
-                            {!!  Form::text('dates', '',
+                            {!!  Form::text('dates', null,
                                 array(
                                 'class'=>'form-control',
                                 'placeholder'=>'Escriba en un texto las fechas del ticket'
