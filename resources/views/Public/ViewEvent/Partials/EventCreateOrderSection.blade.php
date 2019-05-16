@@ -96,6 +96,9 @@
                             Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
                         </h5>
                         <hr/>
+                    <h5>
+                        @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $order_total }}</b></span>
+                    </h5>
                     
                     @endif
                 </div>
