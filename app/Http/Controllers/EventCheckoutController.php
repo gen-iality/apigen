@@ -13,6 +13,8 @@ use App\Account;
 use App\Attendee;
 use App\Event;
 use App\Order;
+use App\AttendeTicket;
+use App\ModelHasRole;
 use App\Pending;
 use App\Events\OrderCompletedEvent;
 use App\Jobs\SendOrderTickets;
@@ -30,6 +32,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\UsersResource;
 use PhpSpec\Exception\Exception;
 
 class EventCheckoutController extends Controller
@@ -319,7 +322,7 @@ class EventCheckoutController extends Controller
         
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         $pending = Pending::where('reference',$order_reference)->first();
-
+        
         if (!isset($pending) || !Auth::user()) {
             header('Location: '.'https://evius.co'); die;
         }
@@ -370,6 +373,8 @@ class EventCheckoutController extends Controller
         $pending->value = json_encode($order_session);
         $pending->save();
 
+        $permissions = ModelHasRole::where('model_id',Auth::user()->id)->where('event_id',$order_session["event_id"])->first();
+
         $data = $order_session + [
             'event' => $event,
             'is_embedded' => $this->is_embedded,
@@ -377,9 +382,8 @@ class EventCheckoutController extends Controller
             'fields' => $fields,
             'temporal_id' => $order_reference,
             'cant'   => 1,
+            'role' => isset($permissions->role_id) ? $permissions->role_id : null
         ];
-
-
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
