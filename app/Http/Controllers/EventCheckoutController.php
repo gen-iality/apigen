@@ -252,32 +252,32 @@ class EventCheckoutController extends Controller
                         } else {
                             return response()->json(
                                 [
-                                'status' => 'error',
-                                'message' => 'Code not allowed for the selected ticket',
-                                ]
-                            );
+                                    'status' => 'error',
+                                    'message' => 'Code not allowed for the selected ticket',
+                                    ]
+                                );
+                            }
+                        } else {
+                            $percentage_discount = $code['percentage'];
+                            $discount = $percentage_discount*$order_total/100;
+                            $order_total = $order_total - $discount;
+                            break;
+                            
                         }
-                    } else {
-                        $percentage_discount = $code['percentage'];
-                        $discount = $percentage_discount*$order_total/100;
-                        $order_total = $order_total - $discount;
-                        break;
-
                     }
                 }
             }
-        }
-
-        $data_pending = [
-            'validation_rules' => $validation_rules,
-            'validation_messages' => $validation_messages,
-            'event_id' => $event->id,
-            'email_user' => $email_user,
-            'tickets' => $tickets,
-            'total_ticket_quantity' => $total_ticket_quantity,
-            'order_started' => time(),
-            'expires' => $order_expires_time,
-            'reserved_tickets_id' => $reservedTickets->id,
+            
+            $data_pending = [
+                'validation_rules' => $validation_rules,
+                'validation_messages' => $validation_messages,
+                'event_id' => $event->id,
+                'email_user' => $email_user,
+                'tickets' => $tickets,
+                'total_ticket_quantity' => $total_ticket_quantity,
+                'order_started' => time(),
+                'expires' => $order_expires_time,
+                'reserved_tickets_id' => $reservedTickets->id,
             'fees_total' => $fees_total,
             'tax_total' => $tax_total,
             'order_total' => $order_total,
@@ -294,7 +294,7 @@ class EventCheckoutController extends Controller
             'percentage_discount' => $percentage_discount,
             'discount' => isset($discount) ? $discount : null,
             'seats_data' => $request->seats
-
+            
         ];
         //save information in pending with json_encode, value how string
         $pending = new Pending();
@@ -302,15 +302,16 @@ class EventCheckoutController extends Controller
         $pending->value = json_encode($data_pending);
         $pending->save();
         /*
-         * If we're this far assume everything is OK and redirect them
-         * to the the checkout page.
-         */
+        * If we're this far assume everything is OK and redirect them
+        * to the the checkout page.
+        */
+        return $data_pending;
         return response()->json([
             'status' => 'success',
             'redirectUrl' => route('showEventCheckout', [
                 'event_id' => $order_reference,
                 'is_embedded' => $this->is_embedded,
-            ]) . '#order_form',
+                ]) . '#order_form',
         ]);
 
         if ($request->ajax()) {

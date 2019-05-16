@@ -79,6 +79,27 @@
                         @endforeach
                     </table>
                 </div>
+                @if($order_total = 0)
+                <div class="panel-footer">
+                    @if(isset($discount))
+                            <h5 style="text-align: center;">Descuento  del <b>{{$percentage_discount}}%</b> por 
+                                @if($code_discount)
+                                    el código <b>{{$code_discount}}</b>
+                                @else
+                                    <b>{{$total_ticket_quantity}}</b> tickets
+                                @endif
+                            </h5>
+                        <h5>
+                            Precio: <span style="float: right;"> ${{ number_format($order_total + $discount, 2, '.', '') }} </span>
+                        </h5>
+                        <h5>
+                            Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
+                        </h5>
+                        <hr/>
+                    
+                    @endif
+                </div>
+                @endif
                 @if($order_total > 0)
                 <div class="panel-footer">
                     @if(isset($discount))
