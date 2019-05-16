@@ -67,6 +67,7 @@
                 <a href="#" ref="{{ $ticket_order['orderid'] }}" id="APPROVED" class="button-submit-payment btn btn-outline-danger" style="background-color: #17a2b8;">Confirmar Compra</a>
                 <a href="{{ $ticket_order['url_redirect'] }}"   class="btn btn-outline-success" style="background-color: gray;">Pasarela de Pago</a>
                 <a href="#"  ref="{{ $ticket_order['orderid'] }}"  id="CANCELLED" class="button-submit-payment btn btn-outline-danger" style="background-color: gray;">Cancelar Orden</a>
+                <a href="{{ env('URL_FRONT', 'evius.co') }}/landing/{{ $event->id }}"  class="btn btn-outline-danger" style="background-color: gray;">Evento</a>
             </div>
 
             <div id="cancel-payment-evius" style="display: none;">
