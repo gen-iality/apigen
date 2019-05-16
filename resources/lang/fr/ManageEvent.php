@@ -42,6 +42,7 @@ return array (
   'export' => 'Export',
   'go_to_attendee_name' => 'Aller au participant :name',
   'hide_this_ticket' => 'Cacher ce billet',
+  'seats_this_ticket' => 'Ce billet a des places',
   'import_file' => 'Importer le fichier',
   'invite_attendee' => 'Inviter le participant',
   'invite_attendees' => 'Inviter les participants',

@@ -38,6 +38,7 @@ return array (
   'export' => 'Export',
   'go_to_attendee_name' => 'Go to attendee :name',
   'hide_this_ticket' => 'Hide This Ticket',
+  'seats_this_ticket' => 'This ticket has seats',
   'import_file' => 'Import File',
   'invite_attendee' => 'Invite Attendee',
   'invite_attendees' => 'Invite Attendees',

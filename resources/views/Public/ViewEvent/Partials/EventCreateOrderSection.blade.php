@@ -101,10 +101,10 @@
                     @if (isset($event->fees) && $event->comission_on_base_price == true)
                         <div class="help-block">
                         <h5>
-                            Comision: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>
+                            Servicio: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>
                         </h5>
                         <h5>
-                            IVA: <span style="float: right;">{{ money($tax_total, $event->currency) }}</span>
+                            IVA servicio: <span style="float: right;">{{ money($tax_total, $event->currency) }}</span>
                         </h5>
                         </div>
                     @endif

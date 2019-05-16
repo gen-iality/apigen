@@ -73,15 +73,6 @@
                 <span>@lang("Dashboard.event_views")</span>
             </div>
         </div>
-
-        <!-- May be implemented soon.
-        <div class="col-sm-3 hide">
-            <div class="stat-box">
-                <h3 id="facebook-count">0</h3>
-                <span>Facebook Shares</span>
-            </div>
-        </div>
-        -->
     </div>
 
     <div class="row">
