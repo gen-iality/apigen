@@ -79,7 +79,7 @@
                         @endforeach
                     </table>
                 </div>
-                @if($order_total = 0)
+                @if($order_total == 0)
                 <div class="panel-footer">
                     @if(isset($discount))
                             <h5 style="text-align: center;">Descuento  del <b>{{$percentage_discount}}%</b> por 
