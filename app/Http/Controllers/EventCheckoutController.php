@@ -305,7 +305,6 @@ class EventCheckoutController extends Controller
         * If we're this far assume everything is OK and redirect them
         * to the the checkout page.
         */
-        return $data_pending;
         return response()->json([
             'status' => 'success',
             'redirectUrl' => route('showEventCheckout', [
