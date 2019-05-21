@@ -48,7 +48,7 @@ class EventController extends Controller
 
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
-                ->orWhere('visibility', 'IS NULL', null, 'and') //null
+                ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '>', $currentDate)
                 ->orderBy('datetime_from', 'ASC');
             
