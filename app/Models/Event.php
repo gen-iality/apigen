@@ -352,7 +352,7 @@ class Event extends MyBaseModel
      */
     public function getEventUrlAttribute()
     {
-        return route("showEventPage", ["event_id"=>$this->id, "event_slug"=>Str::slug($this->title)]);
+        // return route("showEventPage", ["event_id"=>$this->id, "event_slug"=>Str::slug($this->title)]);
         //return URL::to('/') . '/e/' . $this->id . '/' . Str::slug($this->title);
     }
 
