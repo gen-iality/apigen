@@ -191,6 +191,12 @@ Route::group(
             'as'   => 'postCreateOrder',
             'uses' => 'EventCheckoutController@postCreateOrder',
         ]);
+
+        Route::get('{event_id}/checkout/paymentEvius', [
+            'as'   => 'paymentEvius',
+            'uses' => 'EventCheckoutController@paymentEvius',
+        ]);
+
     });
 
     /*

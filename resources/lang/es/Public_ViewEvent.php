@@ -76,4 +76,5 @@ return [
     'your_information_purshase'         => 'Información de la persona que realiza el pago',
     'your_message'                      => 'Tu mensaje',
     'your_name'                         => 'Tu nombre',
+    'tickets_paymentEvius'              => 'Tus tiquetes se encuentran en un estado pendiente, por favor dar en confirmar compra, para envíar los tiquetes y completar la orden'
 ];
