@@ -249,24 +249,29 @@ class EventCheckoutController extends Controller
                             $discount = $percentage_discount*$order_total/100;
                             $order_total = $order_total - $discount;
                             break;
+                        } elseif ($code['ticket_assigned'] == 1000) {
+                            $percentage_discount = $code['percentage'];
+                            $discount = $percentage_discount*$order_total/100;
+                            $order_total = $order_total - $discount;
+                            break;
                         } else {
                             return response()->json(
                                 [
                                     'status' => 'error',
                                     'message' => 'Code not allowed for the selected ticket',
-                                    ]
-                                );
-                            }
-                        } else {
+                                ]
+                            );
+                        }
+                    } else {
                             $percentage_discount = $code['percentage'];
                             $discount = $percentage_discount*$order_total/100;
                             $order_total = $order_total - $discount;
                             break;
                             
-                        }
                     }
                 }
             }
+        }
             
             $data_pending = [
                 'validation_rules' => $validation_rules,
