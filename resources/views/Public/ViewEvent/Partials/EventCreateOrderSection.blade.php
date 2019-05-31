@@ -289,8 +289,10 @@
                         @lang("Public_ViewEvent.copy_buyer")
                     </a>
                 </div>
+                <?php $number_tickets = 0 ?>
                 @foreach($tickets as $ticket)
-                    @if ($multiple > 1  || $multiple2 > 1 || $multiple3 > 1)
+                <?php $number_tickets = $number_tickets + 1 ?>
+                    @if ($number_tickets = 1 && $multiple > 1  || $multiple2 > 1 || $multiple3 > 1)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
