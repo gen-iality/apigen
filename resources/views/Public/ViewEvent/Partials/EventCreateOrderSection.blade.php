@@ -22,6 +22,16 @@
                         @foreach($tickets as $ticket)
                             <?php
                                 $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
+
+                                if ($ticket['qty'] > 1) {
+                                    $multiple2 = 2;
+                                } else {
+                                    $multiple2 = 1;
+                                }
+                                $multiple3 = 0;
+                                foreach ($tickets as $ticket) {
+                                    $multiple3 = $multiple3 + 1;
+                                }
                             ?>
                              <?php
                                 if (isset($seats_data)) { 
@@ -280,7 +290,7 @@
                     </a>
                 </div>
                 @foreach($tickets as $ticket)
-                    @if ($multiple > 1)
+                    @if ($multiple > 1  || $multiple2 > 1 || $multiple3 > 1)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
