@@ -132,7 +132,13 @@
                         <hr/>
 
                     @endif
-                    @if (isset($event->fees) && $event->comission_on_base_price == true)
+                    @if (isset($event->fees) && !isset($event->comission_on_base_price))
+                        <div class="help-block">
+                        <h5>
+                            Servicio: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>
+                        </h5>
+                        </div>
+                    @elseif (isset($event->fees) && $event->comission_on_base_price == true)
                         <div class="help-block">
                         <h5>
                             Servicio: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>

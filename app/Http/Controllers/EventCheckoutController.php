@@ -168,7 +168,15 @@ class EventCheckoutController extends Controller
                 $tax_total = $fees_total * $tax;
                 $price_last = $fees_total + $tax_total + $ticket_total_price; /* Se suma para el precio del ticket total */
                 $order_total = $order_total +  $price_last;
-            } else { /* Si no tiene ningun cobro de comision ni de IVA */
+            } elseif (isset($event->fees) && !isset($event->comission_on_base_price)) { /* Si no tiene ningun cobro de comision ni de IVA */
+                $cant_ticket =  $current_ticket_quantity;
+                $ticket_total_price = $cant_ticket * $ticket->price;
+                $fees = $event->fees;
+                $fees_total = $ticket_total_price * $fees;
+                $price_last = $fees_total + $ticket_total_price; /* Se suma para el precio del ticket total */
+                $order_total = $order_total +  $price_last;
+
+            } else { 
 
                 $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             }
