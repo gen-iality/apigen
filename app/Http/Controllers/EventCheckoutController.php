@@ -87,7 +87,7 @@ class EventCheckoutController extends Controller
             $quantity_tickets_user = (int)$request->get('ticket_' . $ticket_id);
 
             // if user buyer more tickets that there are, show a message of disponibility
-            if (isset($event->allow_company)) { 
+            if (isset($event->allow_company) && $event->allow_company) { 
                 if($ticket->quantity_remaining < $quantity_tickets_user){
                     $tot_tickets = $ticket->quantity_available - $ticket->total_people_quantity;
                     $message = $tot_tickets == 0 ? $ticket->title.": Tiquetes agotados" :
@@ -443,7 +443,7 @@ class EventCheckoutController extends Controller
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
 
         /* Function to validate the ticket availability */
-        if (isset($event->allow_company)) { 
+        if (isset($event->allow_company) && $event->allow_company) { 
             foreach ($ticket_order['tickets'] as $ticket_count) {
 
                 /* Obtain companies quantity */
@@ -903,7 +903,7 @@ class EventCheckoutController extends Controller
                             }
     
                             /* Si el evento permite acompañante aumentar el total_quantity y los tickets vendidos */
-                            if (isset($event->allow_company)) {
+                            if (isset($event->allow_company) && $event->allow_company) {
                                 $val = (int)$request_data["tiket_holder_acompanates"][$i][$attendee_details['ticket']['_id']];
                                 $people_total= $val + $attendee_details['qty'];
                                 $ticket->increment('total_people_quantity', $people_total);
@@ -1047,7 +1047,8 @@ class EventCheckoutController extends Controller
                 $order->payment_gateway_id = $ticket_order['payment_gateway']['id'];
             }
             //Guardamos cada uno de los datos de la orden
-            $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
+           //var_dump(Auth::id());die;
+	    $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
             $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
             $order->email = isset($ticket_order['transaction_data']["email"]) ? $ticket_order['transaction_data']["email"] : Auth::user()->email;
             $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
@@ -1627,3 +1628,4 @@ class EventCheckoutController extends Controller
     
     }
 }
+
