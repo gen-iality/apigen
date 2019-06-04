@@ -143,6 +143,18 @@ Route::group(
     }
 );
 
+
+/****************
+ * evnetContents
+ ****************/
+Route::apiResource('eventContents', 'EventContentsController');
+
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+//         Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
+//     }
+// );
+
 /****************
  * Escarapelas
  ****************/

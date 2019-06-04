@@ -197,4 +197,10 @@ class Event extends ModelsEvent
         return $this->hasMany('App\ModelHasRole');
     }
 
+    public function eventContent()
+    {
+        return $this->hasMany('App\ContentTypes');
+    }
+
+
 }
