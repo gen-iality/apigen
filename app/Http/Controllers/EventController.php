@@ -530,17 +530,18 @@ class EventController extends Controller
         $now =  $date->format('Y-m-d H:i:s');
         $stages = $event->event_stages;
         $codes_discounts = $event->codes_discount; 
+        if(isset($stages)) { 
+            foreach ($stages as $key => $stage) { 
+                if ($stage["end_sale_date"] < $now){
+                    $status = "ended";
+                }else if($stage["start_sale_date"] > $now){
+                    $status = "notstarted";
+                }else{
+                    $status = "active";
+                }
 
-        foreach ($stages as $key => $stage) { 
-            if ($stage["end_sale_date"] < $now){
-                $status = "ended";
-            }else if($stage["start_sale_date"] > $now){
-                $status = "notstarted";
-            }else{
-                $status = "active";
+                $stages[$key] += ['status' => $status];
             }
-
-            $stages[$key] += ['status' => $status];
         }
         return $stages;
 
