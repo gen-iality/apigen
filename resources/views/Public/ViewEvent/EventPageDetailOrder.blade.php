@@ -97,7 +97,7 @@
                         <div style="display:inline-block; margin-bottom:1em; border-right:1px solid lightgrey; width:45%;">
                             <h3 style="margin: 0;">Total</h3>
                             <p style="margin: 0 0 0 1em;">{{$order_total}}.
-                            {{$currency}}
+                                {{$amount->currency()}}
                            </p>
                         </div>
                         <div style="display: inline-block; margin-bottom:1em; width:45%; float: right;">
