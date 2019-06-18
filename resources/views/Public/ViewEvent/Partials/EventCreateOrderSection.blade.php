@@ -218,7 +218,7 @@
                     <div class="col-xs-4">
                         <div class="form-group">
                             {!! Form::label("document", 'Número del documento') !!}
-                            {!! Form::number("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-4">
