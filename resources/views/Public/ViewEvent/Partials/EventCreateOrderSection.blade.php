@@ -394,8 +394,8 @@
                                                                 {!! Form::label($field['name'], $field['name']) !!}
                                                             @endif
                                                             <!-- Select Dropdown -->
-                                                            @if($field['type'] == 'list'&& $event->id == '5cbe5231d74d5c0d251fa1e2')
-                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [0,1,2,3,4,5,6,7,8], null, ['class' => 'form-control']) !!}
+                                                            @if($field['type'] == 'list'&& $event->id == '5c3fb4ddfb8a3371ef79bd62')
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [Si,No], null, ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
