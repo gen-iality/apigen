@@ -395,7 +395,7 @@
                                                             @endif
                                                             <!-- Select Dropdown -->
                                                             @if($field['type'] == 'list'&& $event->id == '5c3fb4ddfb8a3371ef79bd62')
-                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [Si,No], null, ['class' => 'form-control']) !!}
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
