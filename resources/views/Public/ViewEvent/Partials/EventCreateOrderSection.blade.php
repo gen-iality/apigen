@@ -298,7 +298,7 @@
                 <?php $number_tickets = 0 ?>
                 @foreach($tickets as $ticket)
                 <?php $number_tickets = $number_tickets + 1 ?>
-                    @if ($number_tickets = 1 && $multiple > 1  || $multiple2 > 1 || $multiple3 > 1)
+                    @if ($number_tickets != 2 && $multiple > 1  || $multiple2 > 1 || $multiple3 > 1)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -379,26 +379,27 @@
                                             @foreach($fields as $field)
                                                 <div class="col-xs-12 col-sm-6">
                                                     <div class="form-group">
-                                                    @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
-                                                        @if(isset( $field['label']))
-                                                            {!! Form::label($field['name'], $field['label']) !!}
+                                                    @if(!isset($field['visible']))
+                                                        @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
+                                                            @if(isset( $field['label']))
+                                                                {!! Form::label($field['name'], $field['label']) !!}
+                                                            @else
+                                                                {!! Form::label($field['name'], $field['name']) !!}
+                                                            @endif
+                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
                                                         @else
-                                                            {!! Form::label($field['name'], $field['name']) !!}
+                                                            @if(isset( $field['label']))
+                                                                {!! Form::label($field['name'], $field['label']) !!}
+                                                            @else
+                                                                {!! Form::label($field['name'], $field['name']) !!}
+                                                            @endif
+                                                            <!-- Select Dropdown -->
+                                                            @if($field['type'] == 'list'&& $event->id == '5cbe5231d74d5c0d251fa1e2')
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [0,1,2,3,4,5,6,7,8], null, ['class' => 'form-control']) !!}
+                                                            @else
+                                                                {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                            @endif
                                                         @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                                    @else
-                                                        @if(isset( $field['label']))
-                                                            {!! Form::label($field['name'], $field['label']) !!}
-                                                        @else
-                                                            {!! Form::label($field['name'], $field['name']) !!}
-                                                        @endif
-                                                        <!-- Select Dropdown -->
-                                                        @if($field['type'] == 'list'&& $event->id == '5cbe5231d74d5c0d251fa1e2')
-                                                            {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [0,1,2,3,4,5,6,7,8], null, ['class' => 'form-control']) !!}
-                                                        @else
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
-                                                        @endif
-                                                    @endif
                                                     </div>
 
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
