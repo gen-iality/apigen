@@ -400,6 +400,7 @@
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
                                                         @endif
+                                                    @endif
                                                     </div>
 
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
