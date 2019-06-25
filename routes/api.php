@@ -295,4 +295,5 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
  * https://api.evius.co/api/order/paymentCompleted
  */
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
+Route::post("order/paymentCompletedPayU", "EventCheckoutController@paymentCompletedPayU");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
