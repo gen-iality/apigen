@@ -152,7 +152,7 @@
                         @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
                     </h5>
                     <!-- Esta Parte se encuentra cancelada -->
-                    {{--    @if($event->organiser->charge_tax)
+                    <!-- {{--    @if($event->organiser->charge_tax)
                         <h5>
                             {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                             <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
@@ -162,7 +162,7 @@
                             <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
                         </h5>
                         @endif
-                    --}}
+                    --}} -->
                     <!-- Esta Parte se encuentra cancelada -->
 
                 </div>
@@ -392,6 +392,9 @@
                                                             <!-- Select Dropdown -->
                                                             @if($field['type'] == 'list'&& $event->id == '5c3fb4ddfb8a3371ef79bd62')
                                                                 {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
+                                                            <!-- Canal de inscripcion ACIS -->
+                                                            @elseif($field['name'] == 'canalDeInscripcion' && $event->id == '5c3fb4ddfb8a3371ef79bd62')
+                                                                {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
