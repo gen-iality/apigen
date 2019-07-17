@@ -395,6 +395,8 @@
                                                             <!-- Canal de inscripcion ACIS -->
                                                             @elseif($field['name'] == 'canalDeInscripcion' && $event->id == '5c3fb4ddfb8a3371ef79bd62')
                                                                 {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
+                                                            @elseif($field['type'] == 'boolean' && $event->id == '5d2de182d74d5c28047d1f85')
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
