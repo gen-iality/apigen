@@ -397,10 +397,6 @@
                                                                 {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
                                                             @elseif($field['type'] == 'boolean' && $event->id == '5d2de182d74d5c28047d1f85')
                                                                 {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
-                                                            <!-- @elseif($field['type'] == 'list' && $event->id == '5d2de182d74d5c28047d1f85')
-                                                                @foreach($field['options'] as $options)
-                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  $options['value'], null, ['class' => 'form-control']) !!}
-                                                                @endforeach -->
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
