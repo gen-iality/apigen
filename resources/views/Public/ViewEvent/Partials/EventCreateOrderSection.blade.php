@@ -397,6 +397,8 @@
                                                                 {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
                                                             @elseif($field['type'] == 'boolean' && $event->id == '5d2de182d74d5c28047d1f85')
                                                                 {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
+                                                             @elseif($field['type'] == 'list' && $event->id == '5d2de182d74d5c28047d1f85')
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", [Alimentos,Recreación y/o Deporte,Salud y/o Medicina,Construcción y/o Infraestructura,Suministros Construcción y/o Infraestructura,Inmobiliaria,Banca y/o Finanzas,Gobierno,Defensa,Industria Militar,Organización sin ánimo de Lucro,Industria Automotríz,Industria Farmaceutica,Tecnología,Telecomunicaciones,Otro], null, ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
