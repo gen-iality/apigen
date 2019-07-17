@@ -375,6 +375,9 @@
                                             @foreach($fields as $field)
                                                 <div class="col-xs-12 col-sm-6">
                                                     <div class="form-group">
+                                                        <?php
+                                                        $optionns = ["Alimentos","Recreacion o Deporte","Salud o Medicina","Construccion o Infraestructura","Suministros Construccion o Infraestructura","Inmobiliaria","Banca o Finanzas","Gobierno","Defensa","Industria Militar","Organizacion sin ánimo de Lucro","Industria Automotriz","Industria Farmaceutica","Tecnologia","Telecomunicaciones","Otro"]; 
+                                                        ?>
                                                     @if(!isset($field['visible']))
                                                         @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
                                                             @if(isset( $field['label']))
@@ -398,7 +401,7 @@
                                                             @elseif($field['type'] == 'boolean' && $event->id == '5d2de182d74d5c28047d1f85')
                                                                 {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
                                                              @elseif($field['type'] == 'list' && $event->id == '5d2de182d74d5c28047d1f85')
-                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", [Alimentos,Recreacion o Deporte,Salud o Medicina,Construccion o Infraestructura,Suministros Construccion o Infraestructura,Inmobiliaria,Banca o Finanzas,Gobierno,Defensa,Industria Militar,Organizacion sin ánimo de Lucro,Industria Automotriz,Industria Farmaceutica,Tecnologia,Telecomunicaciones,Otro], null, ['class' => 'form-control']) !!}
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", $optionns, null, ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
                                                             @endif
