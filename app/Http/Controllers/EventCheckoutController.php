@@ -249,7 +249,7 @@ class EventCheckoutController extends Controller
 
         $code_discount = $request->get('code_discount');
 
-        if ($code_discount) {
+        if ($code_discount && is_array(codes_discount)) {
             foreach ($event->codes_discount as $code) {
 
                 if ($code['id'] == $code_discount && $code['available'] == true) {
@@ -264,6 +264,7 @@ class EventCheckoutController extends Controller
                             ]
                         );                        
                     }
+
 
 
                     if (isset($code['ticket_assigned'])) {
