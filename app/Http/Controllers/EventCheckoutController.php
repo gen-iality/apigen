@@ -429,11 +429,19 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $order_reference)
     {
+        $user_id = Auth::user()->id;
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
         $pending = Pending::where('reference',$order_reference)->first();
         $ticket_order = json_decode($pending->value, true);
         //Extraemos el event_id del cache
         $event_id = $ticket_order["event_id"];
+        $event = Event::findOrFail($event_id);
+        if ($event->author_id == $user_id){
+            return response()->json([
+                'status' => 'error',
+                'message' => '¡Usted no puede realizar compras ya que es el administrador del evento por favor ingrese con otra cuenta para completar la compra!',
+            ]);
+        }
 
         //If there's no session kill the request and redirect back to the event homepage.
         //If don't have the terms and conditions, not continue
@@ -1204,10 +1212,12 @@ class EventCheckoutController extends Controller
     public function paymentCompletedPayU(Request $request)
     { 
         //Petition to PayU
-        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')
-                ->where('payment_gateway_id','4')->get(); //Estado pendiente o en proceso de pago
+        $orders = Order::where ('order_status_id', '5c4232c1477041612349941e')
+        ->orWhere ('order_status_id', '5c4a299c5c93dc0eb199214a')
+        ->where ('payment_gateway_id', '4')
+        ->where('event_id', '5c3fb4ddfb8a3371ef79bd62')->get(); //Estado pendiente o en proceso de pago
         
-        if(count($orders)){
+        if (count($orders)) {
             $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
             $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
             $url = config('attendize.payment_test') ? 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi' : 'https://api.payulatam.com/reports-api/4.0/service.cgi';
@@ -1229,12 +1239,12 @@ class EventCheckoutController extends Controller
                     $response = $client->request('POST', $url, [
                         'body' => json_encode($data),
                         'headers' => [ 'Content-Type' => 'application/json' ]
-                    ]);
+                        ]);
                     $response = $response->getBody()->getContents();
                     $xml = simplexml_load_string($response);
                     $json = json_encode($xml);
                     $array = json_decode($json,TRUE);
-
+                    // var_dump($order->order_reference);die;
                     if(isset($array['result']['payload']['order'])){
                         $status = isset($array['result']['payload']['order']['transactions']) 
                                 ?  $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']
