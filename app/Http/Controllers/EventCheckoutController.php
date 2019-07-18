@@ -224,7 +224,6 @@ class EventCheckoutController extends Controller
         }
 
         /* Método para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
-
         $acronym = StringHelpers::acronym($event->name);
         
         /*
@@ -247,11 +246,28 @@ class EventCheckoutController extends Controller
             $discount = $percentage_discount*$order_total/100;
             $order_total = $order_total - $discount;
         }
+
         $code_discount = $request->get('code_discount');
+
         if ($code_discount) {
             foreach ($event->codes_discount as $code) {
+
                 if ($code['id'] == $code_discount && $code['available'] == true) {
-                    if (isset($code['ticket_assigned'])) { 
+
+
+                    //ticket amount limit by code
+                    if(isset($code['limit_ticket_quantity']) && $total_ticket_quantity>$code['limit_ticket_quantity']){
+                        return response()->json(
+                            [
+                                'status' => 'error',
+                                'message' => 'To many tickets for this code'    
+                            ]
+                        );                        
+                    }
+
+
+                    if (isset($code['ticket_assigned'])) {
+
                         if ($code['ticket_assigned'] == $ticket_id) { 
                             $percentage_discount = $code['percentage'];
                             $discount = $percentage_discount*$order_total/100;
