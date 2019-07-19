@@ -283,14 +283,14 @@ class EventCheckoutController extends Controller
                 if ( $code['available'] == false || $code['mandatory'] == false) continue;
 
                 if ( !isset($code['ticket_assigned'])) { continue; }
-                
+
                 $validator_code = true;
 
                 foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
                     
                     if ($ticket_assigned_id != $ticket_id) continue; 
                     
-                    $validator_ticket = true
+                    $validator_ticket = true;
                 } 
             }
 
