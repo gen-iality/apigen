@@ -82,6 +82,18 @@
     </div>
 </div>
 
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('tickets_amount', trans("ManageAccount.tickets_amount"), array('class'=>'control-label required')) !!}
+            {!! Form::selectRange('tickets_amount', 0, 100, $ticket_amount , array('class'=>'form-control control-label required')) !!}
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel-footer">

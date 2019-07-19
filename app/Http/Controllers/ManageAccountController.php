@@ -36,6 +36,7 @@ class ManageAccountController extends MyBaseController
         $ticket_discount = isset($event->tickets_discount) ? $event->tickets_discount : '';
         $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount : '';
         $seats_configuration = isset($event->seats_configuration) ? $event->seats_configuration: '';
+        $tickets_amount = isset($event->tickets_amount) ? $event->tickets_amount : '';
 
         $data = [
             'account'                  => Auth::user(),
@@ -47,6 +48,7 @@ class ManageAccountController extends MyBaseController
             'event_id'                 => $request->event_id,
             'codes_discount'           => $codes_discount,
             'ticket_discount'          => $ticket_discount,
+            'tickets_amount'           => $tickets_amount, 
             'percentage_discount'      => $percentage_discount,
             'seats_configuration'      => $seats_configuration,
             'tickets'                  => $tickets,
@@ -277,6 +279,7 @@ class ManageAccountController extends MyBaseController
         $codes_title = Input::get('codes_title');
         $event_id = Input::get('event_id');
         $ticket_to_discount = Input::get('ticket_to_discount');
+        $tickets_amount = Input::get('tickets_amount');
 
         $event = Event::find($event_id);
         if (isset($event->codes_discount)) { 
@@ -310,6 +313,7 @@ class ManageAccountController extends MyBaseController
                 'available' => true,
                 'quantity'  => $tickets_availability,
                 'ticket_assigned'  => $ticket_to_discount,
+                'tickets_amount'=>$tickets_amount
             ];
             array_push($codes, $code);
             $event->codes_discount = $codes;
