@@ -271,7 +271,7 @@ class EventCheckoutController extends Controller
         /* Validar si los tickets se deben comprar con un member id */
             foreach ($event->codes_discount as $code) {
 
-                if (!($code['id'] == $code_discount && $code['available'] == true)) continue;
+                if (!($code['id'] == $code_discount && $code['available'] == true && $code['mandatory'] == false)) continue;
 
                 if ( !isset($code['ticket_assigned'])) { continue; }
 
