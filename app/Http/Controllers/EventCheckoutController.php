@@ -112,6 +112,13 @@ class EventCheckoutController extends Controller
         }
 
         /* Validar cantidad de ticketspor codigo promocional para el evento PMI */
+        if ($event_id = '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
+            return response()->json(
+                [
+                    'Debe seleccionar solo 1 tiquete por compra'    
+                ]
+            );      
+        }
         $code_discount = $request->get('code_discount');
         if ($code_discount && is_array($event->codes_discount)) {
             foreach ($event->codes_discount as $code) {
