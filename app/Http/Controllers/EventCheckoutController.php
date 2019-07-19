@@ -298,7 +298,7 @@ class EventCheckoutController extends Controller
                 }
             }
         }
-            if ($validator_code == false && $var2 == false ) { 
+            if ($validator_code == false && $validator_ticket == false ) { 
                 return response()->json(
                     [
                         'Para la compra de este ticket debes ser Miembro del evento',
