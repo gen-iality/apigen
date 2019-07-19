@@ -272,39 +272,38 @@ class EventCheckoutController extends Controller
         }
 
         $code_discount = $request->get('code_discount');
-        $validator_code = true;   
-        $validator_ticket = true;     
+
 
         /* Validar si los tickets se deben comprar con un member id */
+        $code_discount = $request->get('code_discount');
+        $ticke_1 = "5d2de9e3d74d5c28047d1f8a";
+        $ticke_2 = "5d2dea29d74d5c280d004c59";
+        $ticke_3 = "5d2dea67d74d5c280d004c5a";  
+        $event_id = "5d2de182d74d5c28047d1f85"; 
+        $ticket_id = "5d2dea67d74d5c280d004c5a";
+        $discount = "";
         foreach ($event->codes_discount as $code) {
 
-            if ($code['id'] == $code_discount) continue;
-            
-            if ($code['available'] == false || $code['mandatory'] == false) continue;
-
-            if (!isset($code['ticket_assigned']))  continue; 
-            
-            $validator_code = false;
-
-            foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
-                
-                if ($ticket_assigned_id == $ticket_id) {
-
-                    continue;
-
-                } else {
-
-                    $validator_ticket = false;
-                }
+            if ($code['id'] == $code_discount) {
+                $discount = $code['id'];break;
             }
         }
-            if ($validator_code == false && $validator_ticket == false ) { 
+        if (empty($code)) {
+            return response()->json (
+                [
+                    'Para la compra de este ticket debes ser Miembro del evento',
+                ]
+            );
+        } 
+        if (empty($discount)) {
+            if ($ticket_id = $ticke_1 ||$ticket_id = $ticke_2 || $ticket_id = $ticke_3) {
                 return response()->json(
                     [
                         'Para la compra de este ticket debes ser Miembro del evento',
                     ]
                 );
-            }
+            }   
+        }
 
         if ($code_discount && is_array($event->codes_discount)) {
             foreach ($event->codes_discount as $code) {
