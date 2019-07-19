@@ -256,7 +256,7 @@ class EventCheckoutController extends Controller
 
 
                     //ticket amount limit by tickets_amount
-                    if(isset($code['tickets_amount']) && $total_ticket_quantity > 2 ){
+                    if(isset($code['tickets_amount']) && $total_ticket_quantity > $code['tickets_amount']){
                         return response()->json(
                             [
                                 'status' => 'error',
