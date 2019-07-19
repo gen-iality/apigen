@@ -277,7 +277,7 @@ class EventCheckoutController extends Controller
 
                     if ( !isset($code['ticket_assigned'])) { continue; }
 
-                    foreach ($code->ticket_assigned as $ticket_assigned_id) {
+                    foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
         
                         if ($ticket_assigned_id != $ticket_id) continue; 
 
