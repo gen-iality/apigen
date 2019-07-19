@@ -330,7 +330,6 @@ class EventCheckoutController extends Controller
                             
                     }
                 }
-            }
         }
             
             $data_pending = [
