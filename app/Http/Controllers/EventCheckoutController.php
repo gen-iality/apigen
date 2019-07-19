@@ -80,8 +80,9 @@ class EventCheckoutController extends Controller
         }
 
         $ticket_ids = $request->get('tickets');
-
+        $number_ticket = 0;
         foreach ($ticket_ids as $ticket_id) {
+            $number_ticket = $number_ticket + 1;
             $ticket = Ticket::find($ticket_id);
             $quantity_remaining = (int)$ticket->quantity_remaining;
             $quantity_tickets_user = (int)$request->get('ticket_' . $ticket_id);
@@ -106,6 +107,23 @@ class EventCheckoutController extends Controller
                         'status' => 'error',
                         'message' => $message,
                     ]);
+                }
+            }
+        }
+
+        /* Validar cantidad de ticketspor codigo promocional para el evento PMI */
+        $code_discount = $request->get('code_discount');
+        if ($code_discount && is_array($event->codes_discount)) {
+            foreach ($event->codes_discount as $code) {
+                if ($code['id'] == $code_discount && $code['available'] == true) {
+                    if ($event_id = '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
+                        return response()->json(
+                            [
+                                'status' => 'error',
+                                'message' => 'To many tickets for this code'    
+                            ]
+                        );      
+                    }
                 }
             }
         }
@@ -254,20 +272,7 @@ class EventCheckoutController extends Controller
 
                 if ($code['id'] == $code_discount && $code['available'] == true) {
 
-
-                    //ticket amount limit by tickets_amount
-                    if(isset($code['tickets_amount']) && $total_ticket_quantity > $code['tickets_amount']){
-                        return response()->json(
-                            [
-                                'status' => 'error',
-                                'message' => 'To many tickets for this code'    
-                            ]
-                        );                        
-                    }
-
-
-
-                    if (isset($code['ticket_assigned'])) {
+                        if (isset($code['ticket_assigned'])) {
 
                         if ($code['ticket_assigned'] == $ticket_id) { 
                             $percentage_discount = $code['percentage'];
