@@ -267,6 +267,39 @@ class EventCheckoutController extends Controller
 
         $code_discount = $request->get('code_discount');
 
+
+        /* Validar si los tickets se deben comprar con un member id */
+            foreach ($event->codes_discount as $code) {
+
+                if (isset($code['ticket_assigned'])) {
+
+                    if ($code['ticket_assigned'] == $ticket_id) {
+                        if ($code['id'] == $code_discount && $code['available'] == true && $code['mandatory'] == true) {
+                        continue;
+                        } elseif ($code['id'] == $code_discount && $code['available'] == false) {
+                            return response()->json(
+                                [
+                                    'El código de miembro ingresado ya ha sido utilizado por favor contacte al administrador',
+                                ]
+                            );
+                        } elseif ($code['id'] != $code_discount && $code['mandatory'] == true) {
+                            return response()->json(
+                                [
+                                    'Para la compra de este ticket debes ser Miembro del evento',
+                                ]
+                            );
+                        }
+
+                    } elseif ($code['ticket_assigned'] == 1000) {
+                        continue;
+                    } else {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+            }
+
         if ($code_discount && is_array($event->codes_discount)) {
             foreach ($event->codes_discount as $code) {
 
