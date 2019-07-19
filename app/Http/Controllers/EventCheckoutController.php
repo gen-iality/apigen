@@ -126,8 +126,7 @@ class EventCheckoutController extends Controller
                     if ($event_id = '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
                         return response()->json(
                             [
-                                'status' => 'error',
-                                'message' => 'To many tickets for this code'    
+                                'To many tickets for this code'    
                             ]
                         );      
                     }
@@ -301,25 +300,27 @@ class EventCheckoutController extends Controller
 
                 if ($code['id'] == $code_discount && $code['available'] == true) {
 
-                        if (isset($code['ticket_assigned'])) {
+                    if ( !isset($code['ticket_assigned'])) { continue; }
+                    
+                    foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
 
-                        if ($code['ticket_assigned'] == $ticket_id) { 
-                            $percentage_discount = $code['percentage'];
-                            $discount = $percentage_discount*$order_total/100;
-                            $order_total = $order_total - $discount;
-                            break;
-                        } elseif ($code['ticket_assigned'] == 1000) {
-                            $percentage_discount = $code['percentage'];
-                            $discount = $percentage_discount*$order_total/100;
-                            $order_total = $order_total - $discount;
-                            break;
-                        } else {
-                            return response()->json(
-                                [
-                                    'status' => 'error',
-                                    'message' => 'Code not allowed for the selected ticket',
-                                ]
-                            );
+                            if ($ticket_assigned_id == $ticket_id) { 
+                                $percentage_discount = $code['percentage'];
+                                $discount = $percentage_discount*$order_total/100;
+                                $order_total = $order_total - $discount;
+                                break;
+                            } elseif ($ticket_assigned_id == 1000) {
+                                $percentage_discount = $code['percentage'];
+                                $discount = $percentage_discount*$order_total/100;
+                                $order_total = $order_total - $discount;
+                                break;
+                            } else {
+                                return response()->json(
+                                    [
+                                        'message' => 'Code not allowed for the selected ticket',
+                                    ]
+                                );
+                            }
                         }
                     } else {
                             $percentage_discount = $code['percentage'];
