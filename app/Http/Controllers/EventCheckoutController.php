@@ -288,9 +288,15 @@ class EventCheckoutController extends Controller
 
                 foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
                     
-                    if ($ticket_assigned_id != $ticket_id) continue; 
+                    if ($ticket_assigned_id != $ticket_id) {
+
+                        break;
+
+                    } else {
+
+                        $validator_ticket = true;
+                    }
                     
-                    $validator_ticket = true;
                 } 
             }
 
