@@ -279,13 +279,13 @@ class EventCheckoutController extends Controller
         $ticke_3 = "5d2dea67d74d5c280d004c5a";  
         $event_id = "5d2de182d74d5c28047d1f85"; 
         $ticket_id = "5d2dea67d74d5c280d004c5a";
-        $discount = "";
+        $discount_co = "";
 
         if ($event->id == '5d2de182d74d5c28047d1f85') {
             foreach ($event->codes_discount as $code) {
 
                 if ($code['id'] == $code_discount) {
-                    $discount = $code['id'];break;
+                    $discount_co = $code['id'];break;
                 }
             }
             if (empty($code)) {
@@ -295,7 +295,7 @@ class EventCheckoutController extends Controller
                     ]
                 );
             } 
-            if (empty($discount)) {
+            if (empty($discount_co)) {
                 if ($ticket_id = $ticke_1 ||$ticket_id = $ticke_2 || $ticket_id = $ticke_3) {
                     return response()->json(
                         [
