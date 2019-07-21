@@ -282,27 +282,30 @@ class EventCheckoutController extends Controller
         $event_id = "5d2de182d74d5c28047d1f85"; 
         $ticket_id = "5d2dea67d74d5c280d004c5a";
         $discount = "";
-        foreach ($event->codes_discount as $code) {
 
-            if ($code['id'] == $code_discount) {
-                $discount = $code['id'];break;
+        if ($event->id == '5d2de182d74d5c28047d1f85') {
+            foreach ($event->codes_discount as $code) {
+
+                if ($code['id'] == $code_discount) {
+                    $discount = $code['id'];break;
+                }
             }
-        }
-        if (empty($code)) {
-            return response()->json (
-                [
-                    'Para la compra de este ticket debes ser Miembro del evento',
-                ]
-            );
-        } 
-        if (empty($discount)) {
-            if ($ticket_id = $ticke_1 ||$ticket_id = $ticke_2 || $ticket_id = $ticke_3) {
-                return response()->json(
+            if (empty($code)) {
+                return response()->json (
                     [
                         'Para la compra de este ticket debes ser Miembro del evento',
                     ]
                 );
-            }   
+            } 
+            if (empty($discount)) {
+                if ($ticket_id = $ticke_1 ||$ticket_id = $ticke_2 || $ticket_id = $ticke_3) {
+                    return response()->json(
+                        [
+                            'Para la compra de este ticket debes ser Miembro del evento',
+                        ]
+                    );
+                }   
+            }
         }
 
         if ($code_discount && is_array($event->codes_discount)) {
