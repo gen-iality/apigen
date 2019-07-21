@@ -275,7 +275,6 @@ class EventCheckoutController extends Controller
 
 
         /* Validar si los tickets se deben comprar con un member id */
-        $code_discount = $request->get('code_discount');
         $ticke_1 = "5d2de9e3d74d5c28047d1f8a";
         $ticke_2 = "5d2dea29d74d5c280d004c59";
         $ticke_3 = "5d2dea67d74d5c280d004c5a";  
