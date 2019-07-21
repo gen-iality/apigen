@@ -273,8 +273,7 @@ class EventCheckoutController extends Controller
 
         $code_discount = $request->get('code_discount');
 
-
-        /* Validar si los tickets se deben comprar con un member id */
+        /* Validar si los tickets se deben comprar con un member id */  
         $ticke_1 = "5d2de9e3d74d5c28047d1f8a";
         $ticke_2 = "5d2dea29d74d5c280d004c59";
         $ticke_3 = "5d2dea67d74d5c280d004c5a";  
@@ -307,41 +306,43 @@ class EventCheckoutController extends Controller
             }
         }
 
-        if ($code_discount && is_array($event->codes_discount)) {
-            foreach ($event->codes_discount as $code) {
+        if (isset($code_discount)) {
+            if ($code_discount && is_array($event->codes_discount)) {
+                foreach ($event->codes_discount as $code) {
 
-                if ($code['id'] == $code_discount && $code['available'] == true) {
+                    if ($code['id'] == $code_discount && $code['available'] == true) {
 
-                    if ( !isset($code['ticket_assigned'])) { continue; }
-                    
-                    foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
+                        if ( !isset($code['ticket_assigned'])) { continue; }
+                        
+                        foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
 
-                            if ($ticket_assigned_id == $ticket_id) { 
-                                $percentage_discount = $code['percentage'];
-                                $discount = $percentage_discount*$order_total/100;
-                                $order_total = $order_total - $discount;
-                                break;
-                            } elseif ($ticket_assigned_id == 1000) {
-                                $percentage_discount = $code['percentage'];
-                                $discount = $percentage_discount*$order_total/100;
-                                $order_total = $order_total - $discount;
-                                break;
-                            } else {
-                                return response()->json(
-                                    [
-                                        'message' => 'Code not allowed for the selected ticket',
-                                    ]
-                                );
+                                if ($ticket_assigned_id == $ticket_id) { 
+                                    $percentage_discount = $code['percentage'];
+                                    $discount = $percentage_discount*$order_total/100;
+                                    $order_total = $order_total - $discount;
+                                    break;
+                                } elseif ($ticket_assigned_id == 1000) {
+                                    $percentage_discount = $code['percentage'];
+                                    $discount = $percentage_discount*$order_total/100;
+                                    $order_total = $order_total - $discount;
+                                    break;
+                                } else {
+                                    return response()->json(
+                                        [
+                                            'message' => 'Code not allowed for the selected ticket',
+                                        ]
+                                    );
+                                }
                             }
+                        } else {
+                                $percentage_discount = $code['percentage'];
+                                $discount = $percentage_discount*$order_total/100;
+                                $order_total = $order_total - $discount;
+                                break;
+                                
                         }
-                    } else {
-                            $percentage_discount = $code['percentage'];
-                            $discount = $percentage_discount*$order_total/100;
-                            $order_total = $order_total - $discount;
-                            break;
-                            
                     }
-                }
+            }
         }
             
             $data_pending = [
