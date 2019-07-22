@@ -278,7 +278,6 @@ class EventCheckoutController extends Controller
         $ticke_2 = "5d2dea29d74d5c280d004c59";
         $ticke_3 = "5d2dea67d74d5c280d004c5a";  
         $event_id = "5d2de182d74d5c28047d1f85"; 
-        $ticket_id = "5d2dea67d74d5c280d004c5a";
         $discount_co = "";
 
         if ($event->id == '5d2de182d74d5c28047d1f85') {
