@@ -123,7 +123,7 @@ class EventCheckoutController extends Controller
         if ($code_discount && is_array($event->codes_discount)) {
             foreach ($event->codes_discount as $code) {
                 if ($code['id'] == $code_discount && $code['available'] == true) {
-                    if ($event_id = '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
+                    if ($event_id == '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
                         return response()->json(
                             [
                                 'To many tickets for this code'    
@@ -296,7 +296,7 @@ class EventCheckoutController extends Controller
                 );
             } 
             if (empty($discount_co)) {
-                if ($ticket_id = $ticke_1 ||$ticket_id = $ticke_2 || $ticket_id = $ticke_3) {
+                if ($ticket_id == $ticke_1 ||$ticket_id == $ticke_2 || $ticket_id == $ticke_3) {
                     return response()->json(
                         [
                             'Para la compra de este ticket debes ser Miembro del evento',
