@@ -397,7 +397,7 @@
                                                                 @if($field['type'] == 'list')
                                                                     {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
                                                                 <!-- Canal de inscripcion ACIS -->
-                                                                @elseif($field['name'] == 'canalDeInscripcion')
+                                                                @elseif($field['name'] === 'canalDeInscripcion')
                                                                     {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
                                                                 @else
                                                                     {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
