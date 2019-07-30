@@ -415,7 +415,9 @@
                                                         @endif
                                                     @endif
                                                     </div>
-
+                                                    if($field['name'] === 'canalDeInscripcion')
+                                                        {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
+                                                    @endif
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
                                                     @if(isset($ticket['ticket']['number_person_per_ticket']))
                                                         {{ Form::hidden('person_per_ticket', $ticket['ticket']['number_person_per_ticket']) }}
