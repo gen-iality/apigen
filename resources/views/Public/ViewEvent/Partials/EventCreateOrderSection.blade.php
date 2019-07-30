@@ -383,7 +383,7 @@
                                                             @if(isset( $field['label']))
                                                                 {!! Form::label($field['name'], $field['label']) !!}
                                                             @elseif($field['name'] == 'canalDeInscripcion')
-                                                                {!! Form::hx    idden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
+                                                                {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
                                                             @else
                                                                 {!! Form::label($field['name'], $field['name']) !!}
                                                             @endif
