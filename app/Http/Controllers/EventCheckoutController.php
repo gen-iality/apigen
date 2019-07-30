@@ -1672,7 +1672,7 @@ class EventCheckoutController extends Controller
         foreach ($fields as $field) { 
             $field_name = 'tiket_holder_'.$field['name'];
             if ($field['visible'] == false) {
-                continue
+                continue;
             } else {
                 $seed_value = $inputs[$field_name][0][$ticket_id];
                 for ($i=1; $i<=$cant; $i++) {
