@@ -295,7 +295,7 @@
                         @lang("Public_ViewEvent.copy_buyer")
                     </a>
                 </div>
-                    @if ($multiple > 1  || $multiple2 > 1 || $multiple3 > 1 && $event->id != 5c3fb4ddfb8a3371ef79bd62)
+                    @if ($multiple > 1  || $multiple2 > 1 || $multiple3 > 1 && $event->id != '5c3fb4ddfb8a3371ef79bd62')
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
