@@ -273,45 +273,27 @@ class EventCheckoutController extends Controller
 
         $code_discount = $request->get('code_discount');
 
-        /* Validar si los tickets se deben comprar con un member id */  
-        $ticke_1 = "5d2de9e3d74d5c28047d1f8a";
-        $ticke_2 = "5d2dea29d74d5c280d004c59";
-        $ticke_3 = "5d2dea67d74d5c280d004c5a";  
-        $event_id = "5d2de182d74d5c28047d1f85"; 
-        $discount_co = "";
-
-        if ($event->id == '5d2de182d74d5c28047d1f85') {
-            foreach ($event->codes_discount as $code) {
-
-                if ($code['id'] == $code_discount) {
-                    $discount_co = $code['id'];break;
-                }
-            }
-            if (empty($code)) {
-                return response()->json (
-                    [
-                        'Para la compra de este ticket debes ser Miembro del evento',
-                    ]
-                );
-            } 
-            if (empty($discount_co)) {
-                if ($ticket_id == $ticke_1 ||$ticket_id == $ticke_2 || $ticket_id == $ticke_3) {
-                    return response()->json(
-                        [
-                            'Para la compra de este ticket debes ser Miembro del evento',
-                        ]
-                    );
-                }   
-            }
-        }
 
         if (isset($code_discount)) {
+
+            $percentage_discount = 0;
+
             if ($code_discount && is_array($event->codes_discount)) {
+
                 foreach ($event->codes_discount as $code) {
 
                     if ($code['id'] == $code_discount && $code['available'] == true) {
 
-                        if ( !isset($code['ticket_assigned'])) { continue; }
+                        $percentage_discount = $code['percentage'];
+                        $discount = $percentage_discount*$order_total/100;
+                        $order_total = $order_total - $discount;
+                        break;
+                        
+
+                        if ( !isset($code['ticket_assigned'])) { 
+
+
+                         }
                         
                         foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
 
@@ -332,16 +314,25 @@ class EventCheckoutController extends Controller
                                         ]
                                     );
                                 }
-                            }
-                        } else {
+                        }
+                    } /* else {
                                 $percentage_discount = $code['percentage'];
                                 $discount = $percentage_discount*$order_total/100;
                                 $order_total = $order_total - $discount;
                                 break;
                                 
-                        }
+                        }*/
                     }
             }
+
+            if ($percentage_discount == 0){
+                return response()->json(
+                    [
+                        'message' => 'Código no valido para este evento',
+                    ]
+                );       
+            }
+
         }
             
             $data_pending = [
