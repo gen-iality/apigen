@@ -110,7 +110,7 @@
                                 <h3>Fechas del Evento</h3>
                                 <p>{{$stage}}</p>
                             </div>
-                            @if(isset($event->allow_company))
+                            @if(isset($event->allow_company) && $event->allow_company)
                             <div style="display:inline-block; width:45%">
                                 <h3>Acompañantes</h3>
                                 <p>{{$eventuser->properties['acompanates']}}</p>

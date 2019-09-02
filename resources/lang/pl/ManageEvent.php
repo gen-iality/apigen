@@ -38,6 +38,7 @@ return array (
   'export' => 'Eksport',
   'go_to_attendee_name' => 'Przejdź do uczetnika :name',
   'hide_this_ticket' => 'Ukryj ten bilet',
+  'seats_this_ticket' => 'Ten bilet ma miejsca',
   'import_file' => 'Importuj plik',
   'invite_attendee' => 'Zaproś uczestnika',
   'invite_attendees' => 'Zaproś uczestników',

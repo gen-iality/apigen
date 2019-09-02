@@ -13,6 +13,8 @@ use App\Account;
 use App\Attendee;
 use App\Event;
 use App\Order;
+use App\AttendeTicket;
+use App\ModelHasRole;
 use App\Pending;
 use App\Events\OrderCompletedEvent;
 use App\Jobs\SendOrderTickets;
@@ -30,6 +32,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\UsersResource;
 use PhpSpec\Exception\Exception;
 
 class EventCheckoutController extends Controller
@@ -77,14 +80,15 @@ class EventCheckoutController extends Controller
         }
 
         $ticket_ids = $request->get('tickets');
-
+        $number_ticket = 0;
         foreach ($ticket_ids as $ticket_id) {
+            $number_ticket = $number_ticket + 1;
             $ticket = Ticket::find($ticket_id);
             $quantity_remaining = (int)$ticket->quantity_remaining;
             $quantity_tickets_user = (int)$request->get('ticket_' . $ticket_id);
 
             // if user buyer more tickets that there are, show a message of disponibility
-            if (isset($event->allow_company)) { 
+            if (isset($event->allow_company) && $event->allow_company) { 
                 if($ticket->quantity_remaining < $quantity_tickets_user){
                     $tot_tickets = $ticket->quantity_available - $ticket->total_people_quantity;
                     $message = $tot_tickets == 0 ? $ticket->title.": Tiquetes agotados" :
@@ -106,6 +110,29 @@ class EventCheckoutController extends Controller
                 }
             }
         }
+
+        /* Validar cantidad de ticketspor codigo promocional para el evento PMI */
+        if ($event_id == '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
+            return response()->json(
+                [
+                    'Debe seleccionar solo 1 tiquete por compra'    
+                ]
+            );      
+        }
+        $code_discount = $request->get('code_discount');
+        if ($code_discount && is_array($event->codes_discount)) {
+            foreach ($event->codes_discount as $code) {
+                if ($code['id'] == $code_discount && $code['available'] == true) {
+                    if ($event_id == '5d2de182d74d5c28047d1f85' && $number_ticket > 1) {
+                        return response()->json(
+                            [
+                                'To many tickets for this code'    
+                            ]
+                        );      
+                    }
+                }
+            }
+        }
         /*
          * Remove any tickets the user has reserved
          */
@@ -124,7 +151,8 @@ class EventCheckoutController extends Controller
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $quantity_available_validation_rules = [];
-        $price_fees = 0;
+        $fees_total = 0;
+        $tax_total = 0;
         $tax = 0;
         $price_last = 0;
 
@@ -164,7 +192,15 @@ class EventCheckoutController extends Controller
                 $tax_total = $fees_total * $tax;
                 $price_last = $fees_total + $tax_total + $ticket_total_price; /* Se suma para el precio del ticket total */
                 $order_total = $order_total +  $price_last;
-            } else { /* Si no tiene ningun cobro de comision ni de IVA */
+            } elseif (isset($event->fees) && !isset($event->comission_on_base_price)) { /* Si no tiene ningun cobro de comision ni de IVA */
+                $cant_ticket =  $current_ticket_quantity;
+                $ticket_total_price = $cant_ticket * $ticket->price;
+                $fees = $event->fees;
+                $fees_total = $ticket_total_price * $fees;
+                $price_last = $fees_total + $ticket_total_price; /* Se suma para el precio del ticket total */
+                $order_total = $order_total +  $price_last;
+
+            } else { 
 
                 $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             }
@@ -212,7 +248,6 @@ class EventCheckoutController extends Controller
         }
 
         /* Método para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
-
         $acronym = StringHelpers::acronym($event->name);
         
         /*
@@ -225,39 +260,93 @@ class EventCheckoutController extends Controller
         //Descuento de los tikets del porcentaje a agregar a una cantidad de ticketes.
 
 
-            $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
-            $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
+        $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
+        $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
+        
+        //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
+        //Se realiza el descuento
             
-            //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
-            //Se realiza el descuento
-            
-        if($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0){
+        if ($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0) {
             $discount = $percentage_discount*$order_total/100;
             $order_total = $order_total - $discount;
         }
 
         $code_discount = $request->get('code_discount');
-        if($code_discount){
-            foreach($event->codes_discount as $code){
-                if($code['id'] == $code_discount && $code['available'] == true){
-                    $percentage_discount = $code['percentage'];
-                    $discount = $percentage_discount*$order_total/100;
-                    $order_total = $order_total - $discount;
-                    break;
-                }
-            }
-        }
 
-        $data_pending = [
-            'validation_rules' => $validation_rules,
-            'validation_messages' => $validation_messages,
-            'event_id' => $event->id,
-            'email_user' => $email_user,
-            'tickets' => $tickets,
-            'total_ticket_quantity' => $total_ticket_quantity,
-            'order_started' => time(),
-            'expires' => $order_expires_time,
-            'reserved_tickets_id' => $reservedTickets->id,
+
+        if (isset($code_discount)) {
+
+            $percentage_discount = 0;
+
+            if ($code_discount && is_array($event->codes_discount)) {
+
+                foreach ($event->codes_discount as $code) {
+
+                    if ($code['id'] == $code_discount && $code['available'] == true) {
+
+                        $percentage_discount = $code['percentage'];
+                        $discount = $percentage_discount*$order_total/100;
+                        $order_total = $order_total - $discount;
+                        break;
+                        
+
+                        if ( !isset($code['ticket_assigned'])) { 
+
+
+                         }
+                        
+                        foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
+
+                                if ($ticket_assigned_id == $ticket_id) { 
+                                    $percentage_discount = $code['percentage'];
+                                    $discount = $percentage_discount*$order_total/100;
+                                    $order_total = $order_total - $discount;
+                                    break;
+                                } elseif ($ticket_assigned_id == 1000) {
+                                    $percentage_discount = $code['percentage'];
+                                    $discount = $percentage_discount*$order_total/100;
+                                    $order_total = $order_total - $discount;
+                                    break;
+                                } else {
+                                    return response()->json(
+                                        [
+                                            'message' => 'Code not allowed for the selected ticket',
+                                        ]
+                                    );
+                                }
+                        }
+                    } /* else {
+                                $percentage_discount = $code['percentage'];
+                                $discount = $percentage_discount*$order_total/100;
+                                $order_total = $order_total - $discount;
+                                break;
+                                
+                        }*/
+                    }
+            }
+
+            if ($percentage_discount == 0){
+                return response()->json(
+                    [
+                        'message' => 'Código no valido para este evento',
+                    ]
+                );       
+            }
+
+        }
+            
+            $data_pending = [
+                'validation_rules' => $validation_rules,
+                'validation_messages' => $validation_messages,
+                'event_id' => $event->id,
+                'email_user' => $email_user,
+                'tickets' => $tickets,
+                'total_ticket_quantity' => $total_ticket_quantity,
+                'order_started' => time(),
+                'expires' => $order_expires_time,
+                'reserved_tickets_id' => $reservedTickets->id,
+            'fees_total' => $fees_total,
+            'tax_total' => $tax_total,
             'order_total' => $order_total,
             'booking_fee' => $booking_fee,
             'organiser_booking_fee' => $organiser_booking_fee,
@@ -272,7 +361,7 @@ class EventCheckoutController extends Controller
             'percentage_discount' => $percentage_discount,
             'discount' => isset($discount) ? $discount : null,
             'seats_data' => $request->seats
-
+            
         ];
         //save information in pending with json_encode, value how string
         $pending = new Pending();
@@ -280,15 +369,15 @@ class EventCheckoutController extends Controller
         $pending->value = json_encode($data_pending);
         $pending->save();
         /*
-         * If we're this far assume everything is OK and redirect them
-         * to the the checkout page.
-         */
+        * If we're this far assume everything is OK and redirect them
+        * to the the checkout page.
+        */
         return response()->json([
             'status' => 'success',
             'redirectUrl' => route('showEventCheckout', [
                 'event_id' => $order_reference,
                 'is_embedded' => $this->is_embedded,
-            ]) . '#order_form',
+                ]) . '#order_form',
         ]);
 
         if ($request->ajax()) {
@@ -319,14 +408,14 @@ class EventCheckoutController extends Controller
         
         //This code was must TEMPORALThis reload even when there is a user authenticaded
         $pending = Pending::where('reference',$order_reference)->first();
-
+        
         if (!isset($pending) || !Auth::user()) {
             header('Location: '.'https://evius.co'); die;
         }
         
         $order_session = json_decode($pending->value, true);
         $event = Event::findorFail($order_session['event_id']);
-
+        
         //Find user fields in event.
         $fields = $event->user_properties;
 
@@ -370,6 +459,8 @@ class EventCheckoutController extends Controller
         $pending->value = json_encode($order_session);
         $pending->save();
 
+        $permissions = ModelHasRole::where('model_id',Auth::user()->id)->where('event_id',$order_session["event_id"])->first();
+
         $data = $order_session + [
             'event' => $event,
             'is_embedded' => $this->is_embedded,
@@ -377,9 +468,8 @@ class EventCheckoutController extends Controller
             'fields' => $fields,
             'temporal_id' => $order_reference,
             'cant'   => 1,
+            'role' => isset($permissions->role_id) ? $permissions->role_id : null
         ];
-
-
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
@@ -393,11 +483,19 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $order_reference)
     {
+        $user_id = Auth::user()->id;
         //Capturamos el ticket del cache en ticket_order, recuerda que eesto es solo cache
         $pending = Pending::where('reference',$order_reference)->first();
         $ticket_order = json_decode($pending->value, true);
         //Extraemos el event_id del cache
         $event_id = $ticket_order["event_id"];
+        $event = Event::findOrFail($event_id);
+        if ($event->author_id == $user_id){
+            return response()->json([
+                'status' => 'error',
+                'message' => '¡Usted no puede realizar compras ya que es el administrador del evento por favor ingrese con otra cuenta para completar la compra!',
+            ]);
+        }
 
         //If there's no session kill the request and redirect back to the event homepage.
         //If don't have the terms and conditions, not continue
@@ -415,7 +513,7 @@ class EventCheckoutController extends Controller
         $ticket_order['request_data'] = $request->except(['card-number', 'card-cvc']);
 
         /* Function to validate the ticket availability */
-        if (isset($event->allow_company)) { 
+        if (isset($event->allow_company) && $event->allow_company) { 
             foreach ($ticket_order['tickets'] as $ticket_count) {
 
                 /* Obtain companies quantity */
@@ -471,8 +569,10 @@ class EventCheckoutController extends Controller
                 $date = new \DateTime();
                 $now =  $date->format('Y-m-d H:i:s');
                 $seats = [];
-                foreach($ticket_order['seats_data'] as $key => $seat){ 
-                    array_push($seats, $key); 
+                if(isset($ticket_order['seats_data'])) { 
+                    foreach($ticket_order['seats_data'] as $key => $seat){ 
+                        array_push($seats, $key); 
+                    }
                 }
             }
 
@@ -673,11 +773,14 @@ class EventCheckoutController extends Controller
                 $pending->save();
 
                 $this->storeOrder($order_reference);
-                
+                // var_dump($request->get('box_payment'));die;
+                if($request->get('box_payment')){
+                    $url_redirect = "paymentEvius";
+                }
                 Log::info("Redirect url: " . $url_redirect);
                 $return = [
                     'status' => 'success',
-                    'redirectUrl' => $response->getRedirectUrl(),
+                    'redirectUrl' => $url_redirect,
                     'message' => 'Redirecting to ' . $ticket_order['payment_gateway']['provider_name'],
                 ];
 
@@ -888,7 +991,7 @@ class EventCheckoutController extends Controller
                             }
     
                             /* Si el evento permite acompañante aumentar el total_quantity y los tickets vendidos */
-                            if (isset($event->allow_company)) {
+                            if (isset($event->allow_company) && $event->allow_company) {
                                 $val = (int)$request_data["tiket_holder_acompanates"][$i][$attendee_details['ticket']['_id']];
                                 $people_total= $val + $attendee_details['qty'];
                                 $ticket->increment('total_people_quantity', $people_total);
@@ -1004,7 +1107,7 @@ class EventCheckoutController extends Controller
      * @return array $order
      */
     public function storeOrder($order_reference, $payment_free = false){
-
+      
         //Datos necesarios para la generación de la orden
         
         Log::info('Generación de la orden');
@@ -1013,7 +1116,7 @@ class EventCheckoutController extends Controller
 
             $pending = Pending::where('reference',$order_reference)->first();
             $ticket_order = json_decode($pending->value, true);
-
+    
             $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
             $request_data = $ticket_order['request_data'];
             $event_id = $ticket_order['event_id'];
@@ -1032,9 +1135,10 @@ class EventCheckoutController extends Controller
                 $order->payment_gateway_id = $ticket_order['payment_gateway']['id'];
             }
             //Guardamos cada uno de los datos de la orden
-            $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
+           //var_dump(Auth::id());die;
+	    $order->first_name = $payment_free ? Auth::user()->displayName : strip_tags($request_data['order_first_name']);
             $order->last_name =  $payment_free ? null : strip_tags($request_data['order_last_name']);
-            $order->email = Auth::user()->email;
+            $order->email = isset($ticket_order['transaction_data']["email"]) ? $ticket_order['transaction_data']["email"] : Auth::user()->email;
             $order->order_status_id = $payment_free ?  config('attendize.order_complete') : config('attendize.order_awaiting_payment');
             $order->amount = $ticket_order['order_total'];
             $order->booking_fee = $ticket_order['booking_fee'];
@@ -1180,10 +1284,12 @@ class EventCheckoutController extends Controller
     public function paymentCompletedPayU(Request $request)
     { 
         //Petition to PayU
-        $orders = Order::where('order_status_id','5c4232c1477041612349941e')->orWhere('order_status_id','5c4a299c5c93dc0eb199214a')
-                ->where('payment_gateway_id','4')->get(); //Estado pendiente o en proceso de pago
+        $orders = Order::where ('order_status_id', '5c4232c1477041612349941e')
+        ->orWhere ('order_status_id', '5c4a299c5c93dc0eb199214a')
+        ->where ('payment_gateway_id', '4')
+        ->where('event_id', '5c3fb4ddfb8a3371ef79bd62')->get(); //Estado pendiente o en proceso de pago
         
-        if(count($orders)){
+        if (count($orders)) {
             $apiLogin = config('attendize.payment_test') ? 'pRRXKOl8ikMmt9u' : 'mqDxv0NbTNaAUmb';
             $apiKey = config('attendize.payment_test') ? '4Vj8eK4rloUd272L48hsrarnUA' : 'omF0uvbN3365dC2X4dtcjywbS7';
             $url = config('attendize.payment_test') ? 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi' : 'https://api.payulatam.com/reports-api/4.0/service.cgi';
@@ -1205,12 +1311,12 @@ class EventCheckoutController extends Controller
                     $response = $client->request('POST', $url, [
                         'body' => json_encode($data),
                         'headers' => [ 'Content-Type' => 'application/json' ]
-                    ]);
+                        ]);
                     $response = $response->getBody()->getContents();
                     $xml = simplexml_load_string($response);
                     $json = json_encode($xml);
                     $array = json_decode($json,TRUE);
-
+                    // var_dump($order->order_reference);die;
                     if(isset($array['result']['payload']['order'])){
                         $status = isset($array['result']['payload']['order']['transactions']) 
                                 ?  $array['result']['payload']['order']['transactions']['transaction']['transactionResponse']['state']
@@ -1574,14 +1680,42 @@ class EventCheckoutController extends Controller
         $cant = $ticket['number_person_per_ticket'];
         foreach ($fields as $field) { 
             $field_name = 'tiket_holder_'.$field['name'];
-            $seed_value = $inputs[$field_name][0][$ticket_id];
-            for ($i=1; $i<=$cant; $i++) {
-                /* cambiamos el valor nulo al nuevo valor*/
-                $data[$field_name][$i][$ticket_id] = $seed_value;
-            }
+                $seed_value = $inputs[$field_name][0][$ticket_id];
+                for ($i=1; $i<=$cant; $i++) {
+                    /* cambiamos el valor nulo al nuevo valor*/
+                    $data[$field_name][$i][$ticket_id] = $seed_value;
+                }
         }
 
         return $data;
 
     }
+
+
+        /**
+     * postCreateOrder
+     * Create the order, handle payment, update stats, fire off email jobs then redirect user
+     *
+     * @param Request $request
+     * @param $event_id Request $request, $order_reference
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function paymentEvius(Request $request, $order_reference)
+    {
+
+        $pending = Pending::where('reference',$order_reference)->first();
+        if(isset($pending)){
+            $ticket_order = json_decode($pending->value, true);
+            $event = Event::findOrFail($ticket_order["event_id"]);
+        }else{
+            return "Orden No encontrada";
+        }
+        
+
+        $ticket_order = $ticket_order["transaction_data"];
+        return view('Public.ViewEvent.EventPagePaymentEvius', ['ticket_order' => $ticket_order, 'event' => $event ] );
+    
+    
+    }
 }
+

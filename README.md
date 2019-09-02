@@ -213,3 +213,17 @@ If you want run the tests unit you must run the next line:
 vendor/bin/phpunit
 ```
 
+## Resolve permissions denied or the directory of logs does not exist
+
+Enter the following commands:
+
+```
+php artisan route:clear
+
+php artisan config:clear
+
+php artisan cache:clear
+
+php artisan config:cache
+
+```

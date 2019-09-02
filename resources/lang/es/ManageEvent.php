@@ -38,6 +38,7 @@ return array(
     'export'                                  => 'Exportar',
     'go_to_attendee_name'                     => 'Ir a asistente :name',
     'hide_this_ticket'                        => 'Ocultar este entrada',
+    'seats_this_ticket'                        => 'Este ticket tiene asientos',
     'import_file'                             => 'Importar archivo',
     'invite_attendee'                         => 'Invitar al asistente',
     'invite_attendees'                        => 'Invitar a los asistentes',
