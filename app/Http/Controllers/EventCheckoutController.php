@@ -749,6 +749,17 @@ class EventCheckoutController extends Controller
 
     }
 
+
+    
+    public function generateTickets($order_reference, $return_json = true){
+        $order = Order::where('_id', '=', $order_reference)->first();
+       // echo "<pre>";
+      
+        foreach ($order->orderItems as $oi) {
+
+            var_dump($oi->_idu);
+        }
+    }
     /**
      * Complete an order
      *
@@ -766,7 +777,14 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $order_reference)->first();
                 $pending = Pending::where('reference',$order_reference)->first();
+                if (!$pending )
+                return \Response::json([
+                    'not pending order' => "this"
+                ], 201); 
+
                 $ticket_order = json_decode($pending->value, true);
+
+
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
                     $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();

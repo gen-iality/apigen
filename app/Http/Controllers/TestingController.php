@@ -20,9 +20,70 @@ use Sendinblue\Mailin;
 use Spatie\Permission\Models\Permission;
 use \App\Message;
 use Omnipay;
+use Log;
 
 class TestingController extends Controller
 {
+
+    public function pendingOrders(){
+
+/*
+        $orders = Order::select('order_reference')->where('event_id',"5c3fb4ddfb8a3371ef79bd62")->get();
+        echo "cuantas: ". $orders->count();
+
+        foreach($orders as $order){
+
+            $this->dispatch(new SendOrderTickets($order));
+            echo "<p>";
+            echo $order->order_reference;
+            echo "</p>";
+            @ob_end_flush(); // to get php's internal buffers out into the operating system
+            flush();           
+        }
+        
+
+        die;
+
+*/
+
+
+        $pending_code = "5c4a299c5c93dc0eb199214a";
+        $waiting_payment = "5c4232c1477041612349941e";
+        $orders = Order::select('order_reference')->where('order_status_id',$waiting_payment)->get();
+        echo "Cuantos en estado pendiente: ".($orders->count())."<br/><br/>";
+        
+         $count = 0;
+         foreach($orders as $order){
+             $EventCheckoutController = app()->make('App\Http\Controllers\EventCheckoutController');
+
+             //No tenemos un registro para saber por que pasarela fue hecho el pago
+             //nos toca probar con las dos pasarelas que usamos
+             $response = app()->call([$EventCheckoutController, 'showOrderPaymentStatusPaymentGateway'], 
+             ['order_reference' => $order->order_reference, 'payment_gateway' => 'payu']);
+             $respuesta1 = $response;
+
+             if ($response == "NOT FOUND")
+             $response = app()->call([$EventCheckoutController, 'showOrderPaymentStatusPaymentGateway'], 
+             ['order_reference' => $order->order_reference, 'payment_gateway' => 'placetopay']);      
+             $respuesta2 = $response;
+
+             echo "<p>";
+             echo $order->order_reference."  payu ".$respuesta1." ptp ".$respuesta2 ;
+
+/*              $order = app()->call([$EventCheckoutController, 'changeStatusOrder'], 
+             ['order_reference' => $order->order_reference, 'status' => $response]);   */          
+              
+             echo " status ".$order->order_status_id;
+
+             echo "</p>";
+             @ob_end_flush(); // to get php's internal buffers out into the operating system
+             flush(); // to tell the operating system to flush it's buffers to the user.
+             if ($count++>6)die;
+         }
+
+    }
+
+
 
     public function resendOrder($order_id)
     {

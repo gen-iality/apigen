@@ -1899,12 +1899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "66dc42d891a4fc8e9190c524fd67961688a37bbe"
+                "reference": "c39346815303f63ad295d6499e11d914c40040e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/66dc42d891a4fc8e9190c524fd67961688a37bbe",
-                "reference": "66dc42d891a4fc8e9190c524fd67961688a37bbe",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/c39346815303f63ad295d6499e11d914c40040e6",
+                "reference": "c39346815303f63ad295d6499e11d914c40040e6",
                 "shasum": ""
             },
             "require": {
