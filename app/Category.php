@@ -26,7 +26,6 @@ class Category extends Moloquent
     }
 
     protected $fillable = [
-        'name',
+        'name','event_ids','created_at'
     ];
-
 }

@@ -229,7 +229,7 @@ class EventCheckoutController extends Controller
 
 
             $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
-            $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
+            $percentage_discount = is_empty($event->percentage_discount) ? $event->percentage_discount: 0;
             
             //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
             //Se realiza el descuento
@@ -240,6 +240,7 @@ class EventCheckoutController extends Controller
         }
 
         $code_discount = $request->get('code_discount');
+
         if($code_discount){
             foreach($event->codes_discount as $code){
                 if($code['id'] == $code_discount && $code['available'] == true){
