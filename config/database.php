@@ -40,12 +40,12 @@ return [
         ],
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', 'database.internal'),
-	    'dsn'      =>     'mongodb+srv://cluster0-gp9gs.mongodb.net',
-	    'port'     => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'main'),
-            'username' => env('DB_USERNAME', 'main'),
-            'password' => env('DB_PASSWORD', 'main'),
+            'host'     => env('DB_HOST', 'cluster0-gp9gs.mongodb.net'),
+	        'dsn'      =>     'mongodb+srv://cluster0-gp9gs.mongodb.net',
+	        'port'     => env('DB_PORT', 27017),
+            'database' => env('DB_DATABASE', 'evius'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'amazonas.2040'),
             'options'  => [
                 'database' => env('DB_DATABASE', 'main') // sets the authentication database required by mongo 3
             ]

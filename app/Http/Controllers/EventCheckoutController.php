@@ -273,45 +273,27 @@ class EventCheckoutController extends Controller
 
         $code_discount = $request->get('code_discount');
 
-        /* Validar si los tickets se deben comprar con un member id */  
-        $ticke_1 = "5d2de9e3d74d5c28047d1f8a";
-        $ticke_2 = "5d2dea29d74d5c280d004c59";
-        $ticke_3 = "5d2dea67d74d5c280d004c5a";  
-        $event_id = "5d2de182d74d5c28047d1f85"; 
-        $discount_co = "";
-
-        if ($event->id == '5d2de182d74d5c28047d1f85') {
-            foreach ($event->codes_discount as $code) {
-
-                if ($code['id'] == $code_discount) {
-                    $discount_co = $code['id'];break;
-                }
-            }
-            if (empty($code)) {
-                return response()->json (
-                    [
-                        'Para la compra de este ticket debes ser Miembro del evento',
-                    ]
-                );
-            } 
-            if (empty($discount_co)) {
-                if ($ticket_id == $ticke_1 ||$ticket_id == $ticke_2 || $ticket_id == $ticke_3) {
-                    return response()->json(
-                        [
-                            'Para la compra de este ticket debes ser Miembro del evento',
-                        ]
-                    );
-                }   
-            }
-        }
 
         if (isset($code_discount)) {
+
+            $percentage_discount = 0;
+
             if ($code_discount && is_array($event->codes_discount)) {
+
                 foreach ($event->codes_discount as $code) {
 
                     if ($code['id'] == $code_discount && $code['available'] == true) {
 
-                        if ( !isset($code['ticket_assigned'])) { continue; }
+                        $percentage_discount = $code['percentage'];
+                        $discount = $percentage_discount*$order_total/100;
+                        $order_total = $order_total - $discount;
+                        break;
+                        
+
+                        if ( !isset($code['ticket_assigned'])) { 
+
+
+                         }
                         
                         foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
 
@@ -332,16 +314,25 @@ class EventCheckoutController extends Controller
                                         ]
                                     );
                                 }
-                            }
-                        } else {
+                        }
+                    } /* else {
                                 $percentage_discount = $code['percentage'];
                                 $discount = $percentage_discount*$order_total/100;
                                 $order_total = $order_total - $discount;
                                 break;
                                 
-                        }
+                        }*/
                     }
             }
+
+            if ($percentage_discount == 0){
+                return response()->json(
+                    [
+                        'message' => 'Código no valido para este evento',
+                    ]
+                );       
+            }
+
         }
             
             $data_pending = [
@@ -861,6 +852,17 @@ class EventCheckoutController extends Controller
 
     }
 
+
+    
+    public function generateTickets($order_reference, $return_json = true){
+        $order = Order::where('_id', '=', $order_reference)->first();
+       // echo "<pre>";
+      
+        foreach ($order->orderItems as $oi) {
+
+            var_dump($oi->_idu);
+        }
+    }
     /**
      * Complete an order
      *
@@ -878,7 +880,14 @@ class EventCheckoutController extends Controller
 
                 $order = Order::where('order_reference', '=', $order_reference)->first();
                 $pending = Pending::where('reference',$order_reference)->first();
+                if (!$pending )
+                return \Response::json([
+                    'not pending order' => "this"
+                ], 201); 
+
                 $ticket_order = json_decode($pending->value, true);
+
+
                 if(isset($ticket_order)){
                     Log::info('completamos la orden: '.$order_reference);
                     $transaction_data = isset($ticket_order['transaction_data']) ? $ticket_order['transaction_data'] : time();
