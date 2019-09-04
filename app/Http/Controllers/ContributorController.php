@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Resources\ModelHasRoleResource;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -23,7 +24,8 @@ class ContributorController extends Controller
      * @param  String $event_id
      * @return \Illuminate\Http\Response Contributors Resources Collections
      */
-    public function index(String $event_id){
+    public function index(String $event_id)
+    {
         $usersRolesEvent = ModelHasRole::where('event_id', $event_id)->get();
         return ModelHasRoleResource::collection($usersRolesEvent);
     }
@@ -55,26 +57,28 @@ class ContributorController extends Controller
      */
     public function store(Request $request)
     {
-        $rol = $request->json()->all();        
+        $rol = $request->json()->all();
 
         //find or create user
-        if (!isset($rol['model_id'])){
-            if(isset($rol['properties'])){
+        if (!isset($rol['model_id'])) {
+            if (isset($rol['properties'])) {
                 $email = $rol['properties']['email'];
-                $matchAttributes = ['email' => $email];
+                $names = $rol['properties']['Nombres'];
+                $Nombres = $rol['properties']['Nombres'];
+                $matchAttributes = ['email' => $email, 'names' => $names, 'Nombres' => $Nombres];
                 $user = Account::updateOrCreate($matchAttributes, $rol['properties']);
                 $rol['model_id'] = $user->id;
-            }else{
-                throw new Exception("model_id and properties are mandatory", 1);                
+            } else {
+                throw new Exception("model_id and properties are mandatory", 1);
             }
         }
 
         //add the user as contributor to the event with the specific rol
         $rol['model_type'] = "App\Account";
         $matchAttributesRol = [
-         "role_id" => $rol['role_id'],
-         "model_id" => $rol['model_id'],
-         "event_id" => $rol["event_id"] 
+            "role_id" => $rol['role_id'],
+            "model_id" => $rol['model_id'],
+            "event_id" => $rol["event_id"]
         ];
         $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);
@@ -112,7 +116,7 @@ class ContributorController extends Controller
         $ModelHasRole = ModelHasRole::findOrFail($id);
         $ModelHasRole->fill($data);
         $ModelHasRole->save();
-        return new ModelHasRoleResource($ModelHasRole);    
+        return new ModelHasRoleResource($ModelHasRole);
     }
 
     /**
@@ -124,7 +128,7 @@ class ContributorController extends Controller
     public function destroy(String $id)
     {
         $ModelHasRole = ModelHasRole::findOrFail($id);
-        return (string)$ModelHasRole->delete();
+        return (string) $ModelHasRole->delete();
     }
 
     /**
@@ -136,15 +140,15 @@ class ContributorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function meAsContributor(Request $request, String $event_id){
+    public function meAsContributor(Request $request, String $event_id)
+    {
 
         $user = Auth::user();
-        $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id',$user->id)->latest()->first();
-        
-        if(($userPermissions && $userPermissions->role))
-        {
+        $userPermissions = ModelHasRole::where('event_id', $event_id)->where('model_id', $user->id)->latest()->first();
+
+        if (($userPermissions && $userPermissions->role)) {
             return $userPermissions->role->permissions;
-        }else{
+        } else {
             return [];
         }
     }
@@ -158,15 +162,16 @@ class ContributorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function myEvents(Request $request){
+    public function myEvents(Request $request)
+    {
 
         $user = Auth::user();
-        $eventsOne = Event::with('userPermissions')->whereHas('userPermissions', function($q) use($user){
+        $eventsOne = Event::with('userPermissions')->whereHas('userPermissions', function ($q) use ($user) {
             $q->where('model_id', $user->id);
-         })->get();
+        })->get();
 
-         $eventsTwo = Event::with('userPermissions')->where('author_id', $user->id)->get();
-         $events = $eventsOne->merge($eventsTwo); 
-        return  $events? ModelHasRoleResource::collection($events) : [];
+        $eventsTwo = Event::with('userPermissions')->where('author_id', $user->id)->get();
+        $events = $eventsOne->merge($eventsTwo);
+        return  $events ? ModelHasRoleResource::collection($events) : [];
     }
 }
