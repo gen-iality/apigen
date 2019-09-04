@@ -132,6 +132,16 @@ Route::group(
     }
 );
 
+/***************
+ * Certificate
+ ****************/
+ //Route::apiResource('certificate', 'CertificateController', ['only' => ['index', 'show']]);
+Route::apiResource('certificate', 'CertificateController');
+//Route::group(
+ //   ['middleware' => 'auth:token'], function () {
+  //      Route::apiResource('certificate', 'CertificateController', ['except' => ['index', 'show']]);
+   // }
+//);
 /****************
  * eventTypes
  ****************/
@@ -142,6 +152,18 @@ Route::group(
         Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
     }
 );
+
+
+/****************
+ * evnetContents
+ ****************/
+Route::apiResource('eventContents', 'EventContentsController');
+
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+//         Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
+//     }
+// );
 
 /****************
  * Escarapelas
@@ -230,9 +252,6 @@ Route::resource('messageUser', 'MessageUserController');
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::get('pdftest', 'TestingController@pdf');
-Route::get('testorders', 'TestingController@pendingOrders');
-Route::get('generateTickets/{order_id}', 'EventCheckoutController@generateTickets');
-
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
@@ -298,5 +317,4 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
  * https://api.evius.co/api/order/paymentCompleted
  */
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
-Route::post("order/paymentCompletedPayU", "EventCheckoutController@paymentCompletedPayU");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");

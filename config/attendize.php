@@ -86,7 +86,7 @@ return [
     /* CONSTANTS COMISSION % */
     'comision'              => 0.09,
     'iva_comision'          => 0.19,
-    'impuesto_mocion_11'    => 0.11,
+    'impuesto_mocion_11'    => 0.04,
     'impuesto_mocion_9'     => 0.00966,
     'currency_cop'          => 'COP',
     'currency_usd'          => 'USD',
