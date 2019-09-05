@@ -135,13 +135,14 @@ Route::group(
 /***************
  * Certificate
  ****************/
- //Route::apiResource('certificate', 'CertificateController', ['only' => ['index', 'show']]);
-Route::apiResource('certificate', 'CertificateController');
-//Route::group(
- //   ['middleware' => 'auth:token'], function () {
-  //      Route::apiResource('certificate', 'CertificateController', ['except' => ['index', 'show']]);
-   // }
-//);
+Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
+Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
+
+Route::group(
+   ['middleware' => 'auth:token'], function () {
+        Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
+    }
+);
 /****************
  * eventTypes
  ****************/

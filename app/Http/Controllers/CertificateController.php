@@ -122,4 +122,13 @@ class CertificateController extends Controller
             return 'Error';
         }
     }
+
+
+    public function indexByEvent(Request $request, String $event_id)
+    {
+        $query = Attendee::where("event_id", $event_id);
+        $results = $query->get();
+        return JsonResource::collection($results);
+    }
+
 }
