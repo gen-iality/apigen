@@ -86,7 +86,7 @@ class CertificateController extends Controller
      */
     public function show(String $id)
     {
-        $Certificate = Certificate::find($id);
+        $Certificate = Certificate::findOrFail($id);
         $response = new JsonResource($Certificate);
         return $response;
     }
