@@ -142,6 +142,14 @@ Route::apiResource('certificate', 'CertificateController');
   //      Route::apiResource('certificate', 'CertificateController', ['except' => ['index', 'show']]);
    // }
 //);
+
+
+/***************
+ * RolesAttendees
+ ****************/
+Route::apiResource('RolesAttendees', 'RoleAttendeeController');
+Route::get('event/{event_id}/RolesAttendees', 'RoleAttendeeController@indexByEvent');
+ 
 /****************
  * eventTypes
  ****************/
