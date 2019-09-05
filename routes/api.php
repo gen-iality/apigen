@@ -133,23 +133,29 @@ Route::group(
 );
 
 /***************
- * Certificate
+ * Certificates
  ****************/
- //Route::apiResource('certificate', 'CertificateController', ['only' => ['index', 'show']]);
-Route::apiResource('certificate', 'CertificateController');
-//Route::group(
- //   ['middleware' => 'auth:token'], function () {
-  //      Route::apiResource('certificate', 'CertificateController', ['except' => ['index', 'show']]);
-   // }
-//);
+Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
+Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
 
+Route::group(
+   ['middleware' => 'auth:token'], function () {
+        Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
+    }
+);
 
 /***************
  * RolesAttendees
  ****************/
-Route::apiResource('RolesAttendees', 'RoleAttendeeController');
-Route::get('event/{event_id}/RolesAttendees', 'RoleAttendeeController@indexByEvent');
- 
+Route::apiResource('rolesattendees', 'RolesAttendeesController', ['only' => ['index', 'show']]);
+Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
+
+Route::group(
+   ['middleware' => 'auth:token'], function () {
+        Route::apiResource('rolesattendees', 'RoleAttendeeController', ['except' => ['index', 'show']]);
+    }
+);
+
 /****************
  * eventTypes
  ****************/

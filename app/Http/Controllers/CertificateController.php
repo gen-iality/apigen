@@ -86,7 +86,7 @@ class CertificateController extends Controller
      */
     public function show(String $id)
     {
-        $Certificate = Certificate::find($id);
+        $Certificate = Certificate::findOrFail($id);
         $response = new JsonResource($Certificate);
         return $response;
     }
@@ -122,4 +122,13 @@ class CertificateController extends Controller
             return 'Error';
         }
     }
+
+
+    public function indexByEvent(Request $request, String $event_id)
+    {
+        $query = Certificate::where("event_id", $event_id);
+        $results = $query->get();
+        return JsonResource::collection($results);
+    }
+
 }
