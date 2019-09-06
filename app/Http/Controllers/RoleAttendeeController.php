@@ -71,6 +71,7 @@ class RoleAttendeeController extends Controller
     }
     public function delete($id)
     {
+
         $res = $id->delete();
         if ($res == true) {
             return 'True';
@@ -121,12 +122,8 @@ class RoleAttendeeController extends Controller
      */
     public function destroy(Request $request,string $id)
     {  
-        $model = Role::find($id); 
-        $res = $model->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
+        $RoleAttendee = RoleAttendee::findOrFail($id);
+        return (string)$RoleAttendee->delete();
         }
     }
 }
