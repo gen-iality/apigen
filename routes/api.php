@@ -144,10 +144,11 @@ Route::group(
     }
 );
 
+
 /***************
  * RolesAttendees
  ****************/
-Route::apiResource('rolesattendees', 'RolesAttendeesController', ['only' => ['index', 'show']]);
+Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
 Route::group(

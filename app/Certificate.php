@@ -24,8 +24,13 @@ class Certificate extends Moloquent
     {
         return $this->belongsTo('App\Event');
     }
+    public function rol()
+    {
+        return $this->belongsTo('App\RoleAttendee');
+
+    }
 
     protected $fillable = [
-        'name' , 'content' , 'background' , 'event_id'  
+        'name' , 'content' , 'background' , 'event_id' , 'rol_id'
     ];
 }

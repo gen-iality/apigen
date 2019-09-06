@@ -29,7 +29,7 @@ class CertificateController extends Controller
      */
     public function index(Request $request)
     {
-
+  
         return JsonResource::collection(
             Certificate::paginate(config('app.page_size'))
         );
@@ -44,7 +44,7 @@ class CertificateController extends Controller
      */
     public function create()
     {
-        //
+        echo "index";die;
     }
    /**
      * Store a newly created resource in storage.
@@ -54,6 +54,7 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
+       
         $data = $request->json()->all();
         $result = new Certificate($data);
         $result->save();
@@ -63,6 +64,8 @@ class CertificateController extends Controller
     }
     public function delete($id)
     {
+        echo var_dump($id);
+        wait(10000);
         $res = $id->delete();
         if ($res == true) {
             return 'True';
@@ -114,7 +117,8 @@ class CertificateController extends Controller
      */
     public function destroy(Request $request,string $id)
     {  
-        $model = Certificate::find($id); 
+        
+        $model = Certificate::findOrFail($id); 
         $res = $model->delete();
         if ($res == true) {
             return 'True';
