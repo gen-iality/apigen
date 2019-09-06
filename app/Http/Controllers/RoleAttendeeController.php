@@ -124,6 +124,5 @@ class RoleAttendeeController extends Controller
     {  
         $RoleAttendee = RoleAttendee::findOrFail($id);
         return (string)$RoleAttendee->delete();
-        }
     }
 }
