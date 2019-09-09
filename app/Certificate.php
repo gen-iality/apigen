@@ -9,7 +9,7 @@ use Moloquent;
 /**
  * Category Model
  *
- */
+ */ 
 class Certificate extends Moloquent
 {
 
@@ -24,9 +24,9 @@ class Certificate extends Moloquent
     {
         return $this->belongsTo('App\Event');
     }
-    public function rol()
+    public function rol($rol_id)
     {
-        return $this->belongsTo('App\RoleAttendee');
+        return $this->belongsTo('App\RoleAttendee','foreign_key');
 
     }
 

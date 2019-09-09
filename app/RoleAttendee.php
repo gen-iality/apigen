@@ -23,11 +23,8 @@ class RoleAttendee extends Moloquent
     public function event()
     {
         return $this->belongsTo('App\Event');
-
     }
-   
-
     protected $fillable = [ 
-        'name','event_id','id'
+        'name','event_id','rol_id'
     ];
 }

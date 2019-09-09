@@ -20,7 +20,7 @@ Verb           URI                        Action     Route Name
 GET            /photos                    index      photos.index
 POST           /photos                    store      photos.store
 GET            /photos/{photo}            show       photos.show
-PUT/PATCH      /photos/{photo}            update     photos.update
+PUT/PATCH      /photos/{photo}               update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
@@ -135,8 +135,12 @@ Route::group(
 /***************
  * Certificates
  ****************/
+
+Route::get('certificates/{role_id}', 'RoleAttendeeController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
+Route::post('createcer/{id}','CertificateController@store');
+
 
 Route::group(
    ['middleware' => 'auth:token'], function () {
@@ -147,13 +151,17 @@ Route::group(
 
 /***************
  * RolesAttendees
+ * 
  ****************/
+
+ Route::get('rolesattendees/{role_id}', 'RoleAttendeeController@destroy');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
-Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
+//Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
 Route::group(
    ['middleware' => 'auth:token'], function () {
         Route::apiResource('rolesattendees', 'RoleAttendeeController', ['except' => ['index', 'show']]);
+        Route::delete('rolesattendees/{id}', 'RoleAttendeeController@destroy');
     }
 );
 

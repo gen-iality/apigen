@@ -29,11 +29,9 @@ class CertificateController extends Controller
      */
     public function index(Request $request)
     {
-  
         return JsonResource::collection(
             Certificate::paginate(config('app.page_size'))
         );
-
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
@@ -52,13 +50,12 @@ class CertificateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
        
         $data = $request->json()->all();
-        $result = new Certificate($data);
+        $result = new Certificate($data,$RoleAttendee);
         $result->save();
-
         return $result;
         
     }
