@@ -50,18 +50,16 @@ class CertificateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-       
         $data = $request->json()->all();
-        $result = new Certificate($data,$RoleAttendee);
+        $result = new Certificate($data);
         $result->save();
         return $result;
         
     }
     public function delete($id)
     {
-        
         $res = $id->delete();
         if ($res == true) {
             return 'True';
@@ -125,5 +123,4 @@ class CertificateController extends Controller
         $results = $query->get();
         return JsonResource::collection($results);
     }
-
 }
