@@ -154,7 +154,7 @@ Route::group(
  * 
  ****************/
 
- Route::get('rolesattendees/{role_id}', 'RoleAttendeeController@destroy');
+Route::get('rolesattendees/{id}', 'RoleAttendeeController@destroy');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
 //Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
