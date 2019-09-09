@@ -66,7 +66,6 @@ class RoleAttendeeController extends Controller
         $data = $request->json()->all();
         $result = new RoleAttendee($data);
         $result->save();
-
         return $result;   
     }
     public function delete($id)
@@ -124,9 +123,6 @@ class RoleAttendeeController extends Controller
     {  
         $RoleAttendee = RoleAttendee::findOrFail($id);
         return (string)$RoleAttendee->delete();
-<<<<<<< HEAD
-        
-=======
->>>>>>> c67816ad342751ecd73c35e7883f28b86c4287ff
+
     }
 }
