@@ -136,15 +136,16 @@ Route::group(
  * Certificates
  ****************/
 
-Route::get('certificates/{role_id}', 'RoleAttendeeController@destroy');
+Route::get('certificates/{id}', 'RoleAttendeeController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
-Route::post('createcer/{id}','CertificateController@store');
+//Route::post('createcer/{id}','CertificateController@store');
 
 
 Route::group(
    ['middleware' => 'auth:token'], function () {
         Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
+        Route::delete('certificates/{id}', 'RoleAttendeeController@destroy');
     }
 );
 
