@@ -157,7 +157,7 @@ Route::group(
 
 Route::get('rolesattendees/{id}', 'RoleAttendeeController@destroy');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
-//Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
+Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
 Route::group(
    ['middleware' => 'auth:token'], function () {
