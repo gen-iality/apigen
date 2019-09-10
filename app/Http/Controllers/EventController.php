@@ -134,10 +134,10 @@ class EventController extends Controller
 
         if (!isset($data['user_properties'])) {
 
-            $data['user_properties'] = [
-                ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
-                ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
-            ];
+           $data['user_properties'] = [
+                ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
+              ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+          ];
             
         }
         
@@ -145,8 +145,8 @@ class EventController extends Controller
             
             $count = count($data['user_properties']);
             $data['user_properties'] += [  $count => 
-                        ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
-                        ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
+                        ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
+                        ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
                     ];
     
         }
