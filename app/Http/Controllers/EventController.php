@@ -132,7 +132,7 @@ class EventController extends Controller
         };
 
 
-      /*  if (!isset($data['user_properties'])) {
+        if (!isset($data['user_properties'])) {
 
            $data['user_properties'] = [
                 ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
@@ -149,7 +149,7 @@ class EventController extends Controller
                         ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
                     ];
     
-        }*/
+        }
 
 
         $data['organizer_type'] = "App\user";
