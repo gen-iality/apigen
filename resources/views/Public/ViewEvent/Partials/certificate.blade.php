@@ -28,8 +28,7 @@ body{
 
 .imagen{
     width:100%;
-    min-height:612px;
-    height:612px;
+    height:1024px;
     position:fixed;
     top:0px;
     bottom:0px; 
