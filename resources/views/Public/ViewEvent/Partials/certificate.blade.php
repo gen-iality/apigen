@@ -49,6 +49,7 @@ body{
     vertical-align: middle;
     width:60%;
     font-size:1em;
+    padding-left:9%;
 }
 .content {
     width: 60%;
