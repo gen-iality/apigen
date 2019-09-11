@@ -142,7 +142,7 @@ class CertificateController extends Controller
             'content'   => $content,
             'image'     => $image,
         ];
-
+        
         if ($request->get('download') == '1') {
 
             
@@ -151,6 +151,7 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'legal',  'landscape'
             );
+            
             return $pdf->download('Tickets.pdf');
         }
         return view(

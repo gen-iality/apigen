@@ -11,21 +11,31 @@
 </style>
         <style>
 body{
-    background:url(" {{ $image }}");
+
     background-size:cover;
     height:100%;
     width:100%;
     margin:0;
     padding:0;
     /*font-family: "Verdana", "Geneva","Sans serif","Open Sans", "Titillium","Oswald";*/
-   font-family:Arial, Helvetica, sans-serif;
+   /*font-family:Arial, Helvetica, sans-serif;*/
     }
 
+.imagen{
+    width:100%;
+    height:700px;
+    position:absolute;
+    top:0px;
+    bottom:0px; 
 
+
+}
+
+/*
 .containing-table {
     display: table;
     width: 100%;
-    height: 100%; /* for demo only */
+    height: 100%; 
     border: 1px dotted blue;
 }
 .centre-align {
@@ -42,10 +52,11 @@ body{
     height: 70%;
     background-color: blue;
     display: inline-block;
-    vertical-align: middle; /* Removes the extra white space below the baseline */
-}
+    vertical-align: middle;
+}*/
 
         </style>
+
 
  
 
@@ -53,12 +64,11 @@ body{
     <body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
         
        
-      
+    <img class="imagen" src="{{$image}}" />        
 
 <div class="containing-table">
 
     <div class="centre-align">{{ $content }}
-<p>134534f24f2gv23u4iyb3of4u5hfo2b3uron2b 4rno2h3gy4uro2u34brpij</p><p>134534f24f2gv23u4iyb3of4u5hfo2b3uron2b 4rno2h3gy4uro2u34brpij</p> <p></p>       
     </div>
 </div>
     </body>
