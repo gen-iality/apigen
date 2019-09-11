@@ -48,7 +48,7 @@ body{
     text-align: center;
     vertical-align: middle;
     width:60%;
-    font-size:1.2em;
+    font-size:1em;
     padding-left:7%;
 }
 .content {
