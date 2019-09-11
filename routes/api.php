@@ -137,6 +137,7 @@ Route::group(
  ****************/
 
 Route::get('pdfcertificate',"CertificateController@certificatePdf");
+Route::post('generatecertificate',"CertificateController@generateCertificate");
 
 Route::get('certificates/{id}', 'CertificateController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);

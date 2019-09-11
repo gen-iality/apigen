@@ -159,4 +159,41 @@ class CertificateController extends Controller
         );
        }
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
+    
+
+
+    public function generateCertificate(Request $request)
+    {
+
+        $data = $request->json()->all();
+        
+        
+        //$contentqry = Certificate::where("content", $id);
+        //$backgroundqry = Certificate::where("background", $id);
+
+        //$attendee = Attendee::scope()->backgrounddOrFid($attendee_id);
+        
+        /*$data = [
+            'content'   => $content,
+            'image'     => $image,
+        ];*/
+        
+        if ($request->get('download') == '1') {
+
+            
+            $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+    
+            $pdf->setPaper(
+                'legal',  'landscape'
+            );
+            
+            return $pdf->download('Tickets.pdf');
+        }
+        return view(
+            'Public.ViewEvent.Partials.certificate', $data
+        );
+       }
+        //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
     }
+
+}
