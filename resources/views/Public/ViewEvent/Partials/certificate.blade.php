@@ -39,7 +39,7 @@ body{
 .containing-table {
     display: table;
     width: 97%;
-    height: 88%;
+    height: 76%;
 }
 .centre-align {
     display: table-cell;
