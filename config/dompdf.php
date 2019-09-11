@@ -184,7 +184,7 @@
              *
              * @var int
              */
-            "dpi" => 192,
+            "dpi" => 300,
 
             /**
              * Enable inline PHP
