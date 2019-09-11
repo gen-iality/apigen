@@ -71,9 +71,8 @@ body{
 
 <div class="containing-table">
 
-    <div class="centre-align">{{ $content }}
+    <div class="centre-align">{{!! $content !!}}
     </div>
 </div>
     </body>
 </html>
-
