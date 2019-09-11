@@ -9,7 +9,12 @@
 <style>
 
 </style>
+
         <style>
+@page{
+ margin:0px 0px 0px 0px !important;
+ padding:0px 0px 0px 0px !important;
+}
 body{
 
     background-size:cover;
@@ -57,6 +62,8 @@ body{
 
 
     </head>
+    
+    
     <body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
         
        
