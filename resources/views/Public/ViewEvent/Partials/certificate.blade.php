@@ -39,16 +39,14 @@ body{
 .containing-table {
     display: table;
     width: 97%;
-    height: 90%; 
-
+    height: 88%;
 }
 .centre-align {
-
     display: table-cell;
     text-align: center;
     vertical-align: middle;
     width:60%;
-    font-size:1.2em;
+    font-size:1em;
     padding-left:7%;
 }
 .content {
@@ -60,14 +58,8 @@ body{
 }
 
         </style>
-
-
     </head>
-    
-    
     <body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
-        
-       
     <img class="imagen" src="{{$image}}" />        
 
 <div class="containing-table">
