@@ -28,7 +28,7 @@ body{
 
 .imagen{
     width:100%;
-    height:700px;
+    min-height:800px;
     position:fixed;
     top:0px;
     bottom:0px; 
@@ -71,7 +71,7 @@ body{
 
 <div class="containing-table">
 
-    <div class="centre-align">{{!! $content !!}}
+    <div class="centre-align">{{$content }}{{!! $content !!}}
     </div>
 </div>
     </body>
