@@ -7,6 +7,7 @@ use App\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
+use PDF;
 
 /**
  * @resource Event
@@ -123,4 +124,41 @@ class CertificateController extends Controller
         $results = $query->get();
         return JsonResource::collection($results);
     }
-}
+
+    public function certificatePdf(Request $request, $content)
+    {
+
+        
+        //$content = Certificate::where("content"); 
+        $image=$request->input("image");
+        
+        //$contentqry = Certificate::where("content", $id);
+        //$backgroundqry = Certificate::where("background", $id);
+
+        //$attendee = Attendee::scope()->backgrounddOrFid($attendee_id);
+        
+        $data = [
+            'content'   => $content,
+            'image'     => $image,
+        ];
+
+        if ($request->get('download') == '1') {
+
+            
+            $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+    
+            $pdf->setPaper(
+                'legal',  'landscape'
+            );
+            return $pdf->download('Tickets.pdf');
+        }
+        return view(
+            'Public.ViewEvent.Partials.certificate', $data
+        );
+       }
+        //return view('Public.ViewEvent.Partials.PDFTicket', $data);
+
+          
+    }
+
+

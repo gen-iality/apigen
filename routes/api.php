@@ -136,6 +136,8 @@ Route::group(
  * Certificates
  ****************/
 
+Route::get('pdfcertificate/{content}/',"CertificateController@certificatePdf");
+
 Route::get('certificates/{id}', 'CertificateController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
