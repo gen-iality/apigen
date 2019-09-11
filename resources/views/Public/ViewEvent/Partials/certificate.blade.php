@@ -28,7 +28,7 @@ body{
 
 .imagen{
     width:100%;
-    height:1700px;
+    height:2550px;
     position:fixed;
     top:0px;
     bottom:0px; 
