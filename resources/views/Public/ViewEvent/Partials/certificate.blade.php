@@ -48,7 +48,7 @@ body{
     text-align: center;
     vertical-align: middle;
     width:60%;
-    font-size:4em;
+    font-size:1em;
 }
 .content {
     width: 60%;
