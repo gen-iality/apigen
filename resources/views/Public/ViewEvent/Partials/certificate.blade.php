@@ -27,11 +27,10 @@ body{
     position:absolute;
     top:0px;
     bottom:0px; 
-
-
+    z-index:-100;       
 }
 
-/*
+
 .containing-table {
     display: table;
     width: 100%;
@@ -53,12 +52,10 @@ body{
     background-color: blue;
     display: inline-block;
     vertical-align: middle;
-}*/
+}
 
         </style>
 
-
- 
 
     </head>
     <body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
