@@ -125,12 +125,13 @@ class CertificateController extends Controller
         return JsonResource::collection($results);
     }
 
-    public function certificatePdf(Request $request, $content)
+    public function certificatePdf(Request $request)
     {
 
         
         //$content = Certificate::where("content"); 
         $image=$request->input("image");
+        $content=$request->input("content");
         
         //$contentqry = Certificate::where("content", $id);
         //$backgroundqry = Certificate::where("background", $id);
@@ -156,9 +157,5 @@ class CertificateController extends Controller
             'Public.ViewEvent.Partials.certificate', $data
         );
        }
-        //return view('Public.ViewEvent.Partials.PDFTicket', $data);
-
-          
+        //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
     }
-
-
