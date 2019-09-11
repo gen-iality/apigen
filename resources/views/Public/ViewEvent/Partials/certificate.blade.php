@@ -24,7 +24,7 @@ body{
 .imagen{
     width:100%;
     height:700px;
-    position:absolute;
+    position:fixed;
     top:0px;
     bottom:0px; 
     z-index:-100;       
@@ -33,13 +33,12 @@ body{
 
 .containing-table {
     display: table;
-    width: 100%;
-    height: 100%; 
-    border: 1px dotted blue;
+    width: 97%;
+    height: 97%; 
+
 }
 .centre-align {
-    padding: 10px;
-    border: 1px dashed black;
+
     display: table-cell;
     text-align: center;
     vertical-align: middle;
