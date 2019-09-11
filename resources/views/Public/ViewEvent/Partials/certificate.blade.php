@@ -39,7 +39,7 @@ body{
 .containing-table {
     display: table;
     width: 97%;
-    height: 92%; 
+    height: 90%; 
 
 }
 .centre-align {
@@ -48,8 +48,8 @@ body{
     text-align: center;
     vertical-align: middle;
     width:60%;
-    font-size:1em;
-    padding-left:9%;
+    font-size:1.2em;
+    padding-left:7%;
 }
 .content {
     width: 60%;
