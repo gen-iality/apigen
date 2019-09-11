@@ -192,8 +192,6 @@ class CertificateController extends Controller
         return view(
             'Public.ViewEvent.Partials.certificate', $data
         );
-       }
-        //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
     }
-
+        //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 }
