@@ -45,7 +45,7 @@ class EventController extends Controller
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
-
+        $currentDate = $currentDate->subWeek(2); 
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
                 ->whereNotNull('visibility') //not null
