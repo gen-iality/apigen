@@ -149,7 +149,7 @@ class CertificateController extends Controller
             $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
     
             $pdf->setPaper(
-                'letter',  'landscape'
+                'Letter',  'landscape'
             );
             
             return $pdf->download('Tickets.pdf');
