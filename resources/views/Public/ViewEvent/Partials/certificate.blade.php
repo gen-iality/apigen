@@ -27,7 +27,7 @@ body{
     }
 
 .imagen{
-    width:100%;
+    width:3300px;
     height:2550px;
     position:fixed;
     top:0px;
@@ -39,7 +39,7 @@ body{
 .containing-table {
     display: table;
     width: 97%;
-    height: 76%;
+    height: 70%;
 }
 .centre-align {
     display: table-cell;
