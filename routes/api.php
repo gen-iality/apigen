@@ -15,7 +15,7 @@ To crate a new API for model please follow this guidelines:
 - add other methods separated trying to use API estandar and if It get complex create another controller
  */
 
-/* EXAMPLE OF ROUTES PER MODEL using apiResource
+/* EXAMPLE OF ROUTES PER MODEL using apiResourcelogin   
 Verb           URI                        Action     Route Name
 GET            /photos                    index      photos.index
 POST           /photos                    store      photos.store
@@ -110,11 +110,12 @@ Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
 //Route::get("eventsearch",'EventController');
 //     }
 // );
+
+Route::get('events/beforetoday',"EventController@indexBeforeToday");
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
         Route::get('me/events', 'EventController@currentUserindex');
-        Route::get('indexbeforetoday',"EventController@indexBeforeToday");
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
@@ -128,7 +129,7 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
  ****************/
 Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
 Route::group(
-    ['middleware' => 'auth:token'], function () {
+    ['middleware' => 'auth:token'], function () {  
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
