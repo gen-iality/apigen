@@ -57,7 +57,7 @@ class EventController extends Controller
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
-    public function indexBeforeToday(Request $request, FilterQuery $filterQuery)
+    public function beforeToday(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon(); 
 

@@ -111,7 +111,7 @@ Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
 //     }
 // );
 
-Route::get('events/beforetoday',"EventController@indexBeforeToday");
+Route::get('events/beforetoday','EventController@beforeToday');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
