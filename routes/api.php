@@ -111,7 +111,7 @@ Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
 //     }
 // );
 
-Route::get('events/beforetoday','EventController@beforeToday');
+
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
@@ -121,6 +121,7 @@ Route::group(
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
     }
 );
+Route::get('eventsbeforetoday','EventController@beforeToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 
