@@ -57,7 +57,20 @@ class EventController extends Controller
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
+    public function indexBeforeToday(Request $request, FilterQuery $filterQuery)
+    {
+        $currentDate = new \Carbon\Carbon(); 
 
+        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+                ->whereNotNull('visibility') //not null
+                ->Where('datetime_to', '<', $currentDate)
+                ->orderBy('datetime_from', 'ASC');
+            
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+        return EventResource::collection($results);
+
+        //$events = Event::where('visibility', $request->input('name'))->get();
+    }
     /**
      * Display a listing of the resource.
      *

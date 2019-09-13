@@ -107,13 +107,14 @@ Route::group(
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
 Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+//Route::get("eventsearch",'EventController');
 //     }
 // );
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
         Route::get('me/events', 'EventController@currentUserindex');
-
+        Route::get('indexbeforetoday',"EventController@indexBeforeToday");
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
