@@ -149,8 +149,7 @@ class CertificateController extends Controller
         $cedula = strstr($cedula,'</span>',true) ;
         $cedula = (int) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
         if($cedula = o){echo "cedula no encontrada";} 
-        echo $cedula;
-
+        echo '<script>console.log("entry now")</script>';
         if ($request->get('download') == '1') {
 
             
@@ -200,6 +199,7 @@ class CertificateController extends Controller
             echo "entry on 2";
             $cedula = strstr($data,'</span>',true) ;
             echo $cedula."entry on 3";
+            echo '<script>console.log("entry now")</script>';
             $cedula = (int) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
             if($cedula = 0){ echo "cedula no encontrada"; } 
             echo $cedula;    
