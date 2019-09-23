@@ -45,7 +45,7 @@ class EventController extends Controller
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
-        $currentDate = $currentDate->subWeek(2); 
+        //$currentDate = $currentDate->subWeek(2); 
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
                 ->whereNotNull('visibility') //not null
@@ -63,7 +63,7 @@ class EventController extends Controller
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
                 ->whereNotNull('visibility') //not null
-                ->Where('datetime_to', '<', $currentDate)
+                ->Where('datetime_to', '>', $currentDate)
                 ->orderBy('datetime_from', 'ASC');
             
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
