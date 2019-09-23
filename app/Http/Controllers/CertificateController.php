@@ -195,8 +195,11 @@ class CertificateController extends Controller
             'image'     => $image,
         ];*/
         try {
+            echo "entry on";
             $cedula = strstr($data,'"iden">');
+            echo "entry on 2";
             $cedula = strstr($data,'</span>',true) ;
+            echo $cedula."entry on 3";
             $cedula = (int) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
             if($cedula = 0){ echo "cedula no encontrada"; } 
             echo $cedula;    
