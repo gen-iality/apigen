@@ -63,8 +63,8 @@ class EventController extends Controller
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
                 ->whereNotNull('visibility') //not null
-                ->Where('datetime_to', '>', $currentDate)
-                ->orderBy('datetime_from', 'ASC');
+                ->Where('datetime_to', '<', $currentDate)
+                ->orderBy('datetime_from', 'DESC');
             
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
         return EventResource::collection($results);
