@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendee;
 use App\Certificate;
 use App\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
 use PDF;
+use Mail;
 
 /**
  * @resource Event
@@ -132,7 +134,7 @@ class CertificateController extends Controller
         //$content = Certificate::where("content"); 
         $image=$request->input("image");
         $content=$request->input("content");
-        
+       
         //$contentqry = Certificate::where("content", $id);
         //$backgroundqry = Certificate::where("background", $id);
 
@@ -142,7 +144,13 @@ class CertificateController extends Controller
             'content'   => $content,
             'image'     => $image,
         ];
-        
+                
+        $cedula = strstr($datos,'"iden">');
+        $cedula = strstr($cedula,'</span>',true) ;
+        $cedula = (int) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
+        if($cedula = o){echo "cedula no encontrada";} 
+        echo $cedula;
+
         if ($request->get('download') == '1') {
 
             
@@ -151,6 +159,15 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
+            /*
+            FUNCION DE ENVIAR CORREO
+            Mail::send('Public.ViewEvent.Partials.certificate', $data, function ($message) use ($data,$pdf){
+                $message->to("PARAMETRO DE CORREO",'PARAMETRO DE NOMBRE')
+                ->subject("Tus certificados para el evento","PARAMETRO DE NOMBRE EVENTO")
+                ->attachData($pdf->download(),'Tickets.pdf');
+                });
+            };*/
+
             
             return $pdf->download('Tickets.pdf');
         }
@@ -177,6 +194,15 @@ class CertificateController extends Controller
             'content'   => $content,
             'image'     => $image,
         ];*/
+        try {
+            $cedula = strstr($data,'"iden">');
+            $cedula = strstr($data,'</span>',true) ;
+            $cedula = (int) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
+            if($cedula = 0){ echo "cedula no encontrada"; } 
+            echo $cedula;    
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
         
         if ($request->get('download') == '1') {
 
@@ -186,7 +212,15 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            
+            /*
+            FUNCION DE ENVIAR CORREO
+            Mail::send('Public.ViewEvent.Partials.certificate', $data, function ($message) use ($data,$pdf){
+                $message->to("PARAMETRO DE CORREO",'PARAMETRO DE NOMBRE')
+                ->subject("Tus certificados para el evento","PARAMETRO DE NOMBRE EVENTO")
+                ->attachData($pdf->download(),'Tickets.pdf');
+                });
+            };*/
+
             return $pdf->download('Tickets.pdf');
         }
         return view(
