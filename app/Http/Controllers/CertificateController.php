@@ -194,31 +194,27 @@ class CertificateController extends Controller
 
     public function generateCertificate(Request $request)
     {
-        $data = $request->json()->all();        
-        
+        $data = $request->json()->all();
+        //$content = Certificate::where("content"); 
+        //$image=$request->input("image");
+       // $content=$request->input("content");
+       
         //$contentqry = Certificate::where("content", $id);
         //$backgroundqry = Certificate::where("background", $id);
 
         //$attendee = Attendee::scope()->backgrounddOrFid($attendee_id);
-        $content = '<p><br></p> <p> <h3>CERTIFICADO DE ASISTENCIA</h3> </p> </br> <p style="margin-top:-3%;" ><span style="font-weight: 400; font-size: 14pt;"> <br></span></p> <p style="color:#5E605E">Certificamos que&nbsp;<span style="font-style: normal; font-weight: bold;" class="name">Pablo </span> , identificada con el No. de cédula<br> <span style="font-style: normal; font-weight: bold;" class="iden">[1033801141user.identificación]</span> participó con éxito en calidad de asistente&nbsp;<span style="font-style: normal; font-weight: bold;"><br class="eventName">[event.name]</span></p><br><p style="color:#5E605E">BOGOTÁ, COLOMBIA</p> <div style="position:absolute;bottom: 420px;left:-1440px"><span style="font-style: normal; font-weight: bold;">DOMINICA MARTÍNEZ</span><p>presidente Congreso Internacional de<br>Gerencia de Proyectos</p></div> <div style=" position:absolute;bottom:490px;right:-1540px;"><span style="font-style:normal;font-weight: bold">CLAUDIA TRUJILLO</span><p>presidente PMI - 2019</p></div>';
-        $data = [
-            'content'   => $content,
-            'image'     => "ASDASD"
-        ];
         
-            echo "entry on";
-            $cedula = $data["content"];
-            $cedula = strstr($content,'"name">');
-            $cedula = strstr($content,'</span>',true) ;
-            $cedula = (int) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
-            if($cedula = 0){ echo "cedula no encontrada"; } 
-            echo $cedula;    
-            
-
-            $nombreEvento = $data["content"];
-            $nombreEvento = strstr($content,'"eventName">');
-            $nombreEvento = strstr($content,'</span>',true) ;
-            echo $nombreEvento;
+        //$content = '<p><br></p> <p> <h3>CERTIFICADO DE ASISTENCIA</h3> </p> </br> <p style="margin-top:-3%;" ><span style="font-weight: 400; font-size: 14pt;"> <br></span></p> <p style="color:#5E605E">Certificamos que&nbsp;<span style="font-style: normal; font-weight: bold;" class="name">Pablo </span> , identificada con el No. de cédula<br> <span style="font-style: normal; font-weight: bold;" class="iden">[1033801141user.identificación]</span> participó con éxito en calidad de asistente&nbsp;<span style="font-style: normal; font-weight: bold;"><br class="eventName">[event.name]</span></p><br><p style="color:#5E605E">BOGOTÁ, COLOMBIA</p> <div style="position:absolute;bottom: 420px;left:-1440px"><span style="font-style: normal; font-weight: bold;">DOMINICA MARTÍNEZ</span><p>presidente Congreso Internacional de<br>Gerencia de Proyectos</p></div> <div style=" position:absolute;bottom:490px;right:-1540px;"><span style="font-style:normal;font-weight: bold">CLAUDIA TRUJILLO</span><p>presidente PMI - 2019</p></div>';
+      
+        //$data = [
+        //    'content'   => $content,
+        //    'image'     => "ASDASD"
+        //];
+    
+        //if(($cedula)){echo "cedula no encontrada";} 
+        //echo $contentqry;
+        //echo gettype($contentqry);
+        
         if ($request->get('download') == '1') {
 
             
@@ -227,20 +223,34 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            /*
-            FUNCION DE ENVIAR CORREO
-            Mail::send('Public.ViewEvent.Partials.certificate', $data, function ($message) use ($data,$pdf){
-                $message->to("PARAMETRO DE CORREO",'PARAMETRO DE NOMBRE')
-                ->subject("Tus certificados para el evento","PARAMETRO DE NOMBRE EVENTO")
+            $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            echo $actual_link;
+            if($actual_link == "https://evius.co/landing/5d2de182d74d5c28047d1f85"){
+            $cedula = $data["content"];
+            $cedula = strstr($cedula,'"iden">');
+            $cedula = strstr($cedula,'</span>',true) ;
+            $cedula = (string) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
+            $contentqry = Attendee::where('identificacion', $cedula)->where("event_id" , "5d2de182d74d5c28047d1f85")->get();
+            $cedula = json_decode(json_encode($contentqry));
+            $cedula = $cedula[0]->email;
+            echo $cedula;
+            $nombreEvento = $data["content"];
+            $nombreEvento = strstr($nombreEvento,'"eventName">');
+            $nombreEvento = strstr($nombreEvento,'>');
+            $nombreEvento = substr($nombreEvento,1);
+            $nombreEvento = strstr($nombreEvento,'</span>',true) ;
+     
+            //FUNCION DE ENVIAR CORREO
+            
+            Mail::send('Public.ViewEvent.Partials.certificate', $data, function ($message) use ($data,$pdf,$cedula,$nombreEvento){
+                $message->to($cedula,"Evento PMI")
+                ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });
-            };*/
-
+            }
             return $pdf->download('Tickets.pdf');
         }
-        return view(
-            'Public.ViewEvent.Partials.certificate', $data
-        );
+        return view('Public.ViewEvent.Partials.certificate', $data);
     }
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 }
