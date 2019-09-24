@@ -210,9 +210,9 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            $validar = $request->json()->all();
-           $evento = $validar["content"];
-           if(strpos($evento, 'class="iden"') ){
+            //$validar = $request->json()->all();
+            $evento = $data["image"];
+            if(strpos($evento, ',iVBORw0KGgo') ){
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
