@@ -158,9 +158,9 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            echo $actual_link;
-            if($actual_link == "https://evius.co/landing/5d2de182d74d5c28047d1f85"){
+            $cedula = $data["content"];
+            $nombreEvento = $data["content"];
+            if(strpos($cedula, 'class="iden"')){
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
@@ -168,8 +168,6 @@ class CertificateController extends Controller
             $contentqry = Attendee::where('identificacion', $cedula)->where("event_id" , "5d2de182d74d5c28047d1f85")->get();
             $cedula = json_decode(json_encode($contentqry));
             $cedula = $cedula[0]->email;
-            echo $cedula;
-            $nombreEvento = $data["content"];
             $nombreEvento = strstr($nombreEvento,'"eventName">');
             $nombreEvento = strstr($nombreEvento,'>');
             $nombreEvento = substr($nombreEvento,1);
