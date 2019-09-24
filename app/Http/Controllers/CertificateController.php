@@ -226,7 +226,7 @@ class CertificateController extends Controller
             );
             
            $evento = $data["content"];
-           if(strpos($evento, '"class="iden"') ){
+           if(strpos($evento, 'class="iden"') ){
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
