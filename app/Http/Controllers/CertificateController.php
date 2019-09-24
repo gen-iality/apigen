@@ -224,10 +224,8 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            return $pdf->download('Tickets.pdf');
-        return view('Public.ViewEvent.Partials.certificate', $data);
-            $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            echo $actual_link;
+           
+           
            
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
@@ -251,7 +249,8 @@ class CertificateController extends Controller
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });  
         
-         
+          return $pdf->download('Tickets.pdf');
+        return view('Public.ViewEvent.Partials.certificate', $data);
     }
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 
