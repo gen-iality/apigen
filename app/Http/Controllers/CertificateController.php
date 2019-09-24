@@ -211,15 +211,15 @@ class CertificateController extends Controller
                 'letter',  'landscape'
             );
             //$validar = $request->json()->all();
-            
-            $cedula = $request["content"];
+            /*
+            $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
             $cedula = (string) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
             $contentqry = Attendee::where('identificacion', $cedula)->orWhere('identificación', $cedula)->where("event_id" , "5d2de182d74d5c28047d1f85")->get();
             $cedula = json_decode(json_encode($contentqry));
             $cedula = $cedula[0]->email;
-            $nombreEvento = $request["content"];
+            $nombreEvento = $data["content"];
             $nombreEvento = strstr($nombreEvento,'"eventName">');
             $nombreEvento = strstr($nombreEvento,'>');
             $nombreEvento = substr($nombreEvento,1);
@@ -231,12 +231,11 @@ class CertificateController extends Controller
                 $message->to($cedula,"Evento PMI")
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
-                });  
+                });  */
         
         return $pdf->download('Tickets.pdf');
-        return view('Public.ViewEvent.Partials.certificate', $data);
-          
     }
+    return view('Public.ViewEvent.Partials.certificate', $data);
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 
     }    
