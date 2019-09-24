@@ -210,7 +210,7 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-             $cedula = $data["content"];
+             $evento = $data["content"];
             //$validar = $request->json()->all();
             
             if(strpos($evento, 'class="iden"') ){
