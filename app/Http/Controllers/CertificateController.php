@@ -228,7 +228,7 @@ class CertificateController extends Controller
         return view('Public.ViewEvent.Partials.certificate', $data);
             $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             echo $actual_link;
-            if($actual_link == "https://evius.co/landing/5d2de182d74d5c28047d1f85"){
+           
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
@@ -250,7 +250,7 @@ class CertificateController extends Controller
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });  
-        }
+        
          
     }
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
