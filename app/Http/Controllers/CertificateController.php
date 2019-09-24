@@ -224,7 +224,6 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            /*
             $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             echo $actual_link;
             if($actual_link == "https://evius.co/landing/5d2de182d74d5c28047d1f85"){
@@ -248,10 +247,8 @@ class CertificateController extends Controller
                 $message->to($cedula,"Evento PMI")
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
-                });
-            
-           
-        }*/
+                });  
+        }
          return $pdf->download('Tickets.pdf');
         return view('Public.ViewEvent.Partials.certificate', $data);
     }
