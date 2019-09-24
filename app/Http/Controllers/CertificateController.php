@@ -240,7 +240,7 @@ class CertificateController extends Controller
      
             //FUNCION DE ENVIAR CORREO
             
-            Mail::send('Public.ViewEvent.Partials.certificate', $data, function ($message) use ($data,$pdf,$cedula,$nombreEvento){
+            Mail::send('Public.ViewEvent.Partials.certificate', "Tus certificados del evento".$nombreEvento , function ($message) use ($data,$pdf,$cedula,$nombreEvento){
                 $message->to($cedula,"Evento PMI")
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
