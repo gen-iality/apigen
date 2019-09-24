@@ -224,8 +224,8 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-           
-           
+           $evento = $data["event_id"];
+           if($evento == "5d2de182d74d5c28047d1f85"){
            
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
@@ -248,7 +248,7 @@ class CertificateController extends Controller
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });  
-        
+        }
           return $pdf->download('Tickets.pdf');
         return view('Public.ViewEvent.Partials.certificate', $data);
     }
