@@ -211,8 +211,7 @@ class CertificateController extends Controller
                 'letter',  'landscape'
             );
             //$validar = $request->json()->all();
-            $evento = $data["image"];
-            if(strpos($evento, ',iVBORw0KGgo') ){
+            
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
@@ -233,7 +232,7 @@ class CertificateController extends Controller
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });  
-        }
+        
         return $pdf->download('Tickets.pdf');
         return view('Public.ViewEvent.Partials.certificate', $data);
           
