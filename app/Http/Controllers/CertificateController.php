@@ -224,6 +224,8 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
+            return $pdf->download('Tickets.pdf');
+            return view('Public.ViewEvent.Partials.certificate', $data);
            $evento = $data["event_id"];
            if($evento == "5d2de182d74d5c28047d1f85"){
            
@@ -249,8 +251,7 @@ class CertificateController extends Controller
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });  
         }
-          return $pdf->download('Tickets.pdf');
-        return view('Public.ViewEvent.Partials.certificate', $data);
+          
     }
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 
