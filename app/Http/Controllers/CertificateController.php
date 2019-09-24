@@ -212,7 +212,8 @@ class CertificateController extends Controller
             );
              $cedula = $data["content"];
             //$validar = $request->json()->all();
-            /*
+            
+            if(strpos($evento, 'class="iden"') ){
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
@@ -232,8 +233,8 @@ class CertificateController extends Controller
                 $message->to($cedula,"Evento PMI")
                 ->subject("Tus certificados para el evento",$nombreEvento)
                 ->attachData($pdf->download(),'Tickets.pdf');
-                });  */
-        
+                });  
+        }
         return $pdf->download('Tickets.pdf');
     }
     return view('Public.ViewEvent.Partials.certificate', $data);
