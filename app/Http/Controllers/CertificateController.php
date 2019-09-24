@@ -229,7 +229,7 @@ class CertificateController extends Controller
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
             $cedula = (string) filter_var($cedula, FILTER_SANITIZE_NUMBER_INT);
-            $contentqry = Attendee::where('identificacion', $cedula)->where("event_id" , "5d2de182d74d5c28047d1f85")->get();
+            $contentqry = Attendee::where('identificación', $cedula)->where("event_id" , "5d2de182d74d5c28047d1f85")->get();
             $cedula = json_decode(json_encode($contentqry));
             $cedula = $cedula[0]->email;
             $nombreEvento = $data["content"];
