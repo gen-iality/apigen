@@ -224,11 +224,9 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-            return $pdf->download('Tickets.pdf');
-            return view('Public.ViewEvent.Partials.certificate', $data);
-           $evento = $data["event_id"];
-           if($evento == "5d2de182d74d5c28047d1f85"){
-           
+            
+           $evento = $data["content"];
+           if(strpos($evento, '"class="iden"') ){
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
@@ -236,7 +234,6 @@ class CertificateController extends Controller
             $contentqry = Attendee::where('identificacion', $cedula)->where("event_id" , "5d2de182d74d5c28047d1f85")->get();
             $cedula = json_decode(json_encode($contentqry));
             $cedula = $cedula[0]->email;
-            echo $cedula;
             $nombreEvento = $data["content"];
             $nombreEvento = strstr($nombreEvento,'"eventName">');
             $nombreEvento = strstr($nombreEvento,'>');
@@ -251,6 +248,8 @@ class CertificateController extends Controller
                 ->attachData($pdf->download(),'Tickets.pdf');
                 });  
         }
+        return $pdf->download('Tickets.pdf');
+        return view('Public.ViewEvent.Partials.certificate', $data);
           
     }
         //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
