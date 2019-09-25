@@ -53,14 +53,14 @@ class SpaceController extends Controller
         $result->save();
         return $result;
     }
-    public function delete($id)
+    public function delete($id,$event_id)
     {
-        $res = $id->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
+        $Space = Space::findOrFail($id); 
+        if($Space["event_id"] = $event_id){
+        return (string)$Space->delete();
+        }else{
+            echo "este space no pertenece al id del evento asignado";
+        }   
     }
 
     /**
