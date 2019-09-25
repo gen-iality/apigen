@@ -80,7 +80,11 @@ class SpaceController extends Controller
     {
         $Space = Space::findOrFail($id);
         $response = new JsonResource($Space);
+        if($Space["event_id"]= $event_id){
         return $response;
+        }else{
+            echo "este space no pertenece al id del evento asignado";
+        }
     }
     /**
      * Update the specified resource in storage.
@@ -97,7 +101,9 @@ class SpaceController extends Controller
             $Space->fill($data);
             $Space->save();
             return $data;
-        };   
+        }else{
+            echo "este space no pertenece al id del evento asignado";
+        }   
     }
 
     /**
@@ -112,6 +118,8 @@ class SpaceController extends Controller
         $Space = Space::findOrFail($id); 
         if($Space["event_id"] = $event_id){
         return (string)$Space->delete();
+        }else{
+            echo "este space no pertenece al id del evento asignado";
         }   
     }
 
