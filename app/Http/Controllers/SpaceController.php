@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use App\Space;
 /**
  * @resource Event
@@ -24,9 +25,10 @@ class SpaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $event_id)
     {
-        return Space::all();
+        $Space = Space::where("event_id",$event_id)->get();
+        return $Space;
     }
 
     /**
@@ -47,9 +49,8 @@ class SpaceController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        $result = new Space($data);
+        $result = new Space($data); 
         $result->save();
-
         return $result;
     }
     public function delete($id)
@@ -75,7 +76,7 @@ class SpaceController extends Controller
      * @param  \App\Space  $Space
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show(String $id,$event_id)
     {
         $Space = Space::findOrFail($id);
         $response = new JsonResource($Space);
@@ -88,13 +89,15 @@ class SpaceController extends Controller
      * @param  \App\Space  $Space
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id,$event_id)
     {
         $data = $request->json()->all();
-        $Space = Space::find($id);
-        $Space->fill($data);
-        $Space->save();
-        return $data;
+        $Space = Space::findOrFail($id);
+        if($Space["event_id"]= $event_id){
+            $Space->fill($data);
+            $Space->save();
+            return $data;
+        };   
     }
 
     /**
@@ -103,11 +106,13 @@ class SpaceController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,string $id)
+    public function destroy(Request $request,string $id, $event_id)
     {  
+        
         $Space = Space::findOrFail($id); 
+        if($Space["event_id"] = $event_id){
         return (string)$Space->delete();
-            
+        }   
     }
 
 

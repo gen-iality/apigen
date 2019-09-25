@@ -160,8 +160,16 @@ Route::group(
  ****************/
 //Route::post('createspace/{id}','CertificateController@store');
 //Route::get('spaces/{id}', 'SpaceController@destroy');
-Route::apiResource('spaces', 'SpaceController');
-Route::get('events/{event_id}/spaces', 'SpaceController@indexByEvent');
+
+Route::get('events/{event_id}/spaces', 'SpaceController@index');
+Route::post('events/spaces/store', 'SpaceController@store');
+Route::get('events/{id}/spaces/show', 'SpaceController@show');
+Route::post('events/spaces/{id}/update/{event_id}', 'SpaceController@update');
+Route::post('events/spaces/{id}/delete/{event_id}', 'SpaceController@destroy');
+Route::get('events/{event_id}/spacesbyevent', 'SpaceController@indexByEvent');
+//Route::post('createspace/{id}','CertificateController@store');
+
+
 /*
 Route::group(
    ['middleware' => 'auth:token'], function () {
