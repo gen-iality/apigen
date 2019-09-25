@@ -163,7 +163,7 @@ Route::group(
 
 Route::get('events/{event_id}/spaces', 'SpaceController@index');
 Route::post('events/spaces/store', 'SpaceController@store');
-Route::get('events/{id}/spaces/show', 'SpaceController@show');
+Route::get('events/{id}/spaces/{event_id}/show', 'SpaceController@show');
 Route::post('events/spaces/{id}/update/{event_id}', 'SpaceController@update');
 Route::post('events/spaces/{id}/delete/{event_id}', 'SpaceController@destroy');
 Route::get('events/{event_id}/spacesbyevent', 'SpaceController@indexByEvent');
