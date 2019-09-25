@@ -160,15 +160,15 @@ Route::group(
  ****************/
 //Route::post('createspace/{id}','CertificateController@store');
 //Route::get('spaces/{id}', 'SpaceController@destroy');
-Route::apiResource('spaces', 'SpaceController', ['only' => ['index', 'show']]);
+Route::apiResource('spaces', 'SpaceController');
 Route::get('events/{event_id}/spaces', 'SpaceController@indexByEvent');
-
+/*
 Route::group(
    ['middleware' => 'auth:token'], function () {
         Route::apiResource('space', 'SpaceController', ['except' => ['index', 'show']]);
         Route::delete('spaces/{id}', 'SpaceController@destroy');
     }
-);
+);*/
 
 /***************
  * RolesAttendees
@@ -221,7 +221,7 @@ Route::group(
 );
 
 /****************
- * Contributors
+ * Contributors = STAFF 
  ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
