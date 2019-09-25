@@ -21,6 +21,6 @@ class Space extends Moloquent
     }
 
     protected $fillable = [
-        'space' , 'event_id'  
+        'name' , 'event_id'  
     ];
 }
