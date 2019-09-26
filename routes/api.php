@@ -20,7 +20,7 @@ Verb           URI                        Action     Route Name
 GET            /photos                    index      photos.index
 POST           /photos                    store      photos.store
 GET            /photos/{photo}            show       photos.show
-PUT/PATCH      /photos/{photo}               update     photos.update
+PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
@@ -145,7 +145,7 @@ Route::post('generatecertificate',"CertificateController@generateCertificate");
 Route::get('certificates/{id}', 'CertificateController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
-//Route::post('createcer/{id}','CertificateController@store');
+
 
 
 Route::group(
@@ -158,29 +158,15 @@ Route::group(
 /***************
  * SPACES
  ****************/
-//Route::post('createspace/{id}','CertificateController@store');
-//Route::get('spaces/{id}', 'SpaceController@destroy');
+Route::get   ('events/{event_id}/spaces', 'SpaceController@index');
+Route::post  ('events/{event_id}/spaces', 'SpaceController@store');
+Route::get   ('events/{event_id}/spaces/{id}', 'SpaceController@show');
+Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
+Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
-Route::get('events/{event_id}/spaces', 'SpaceController@index');
-Route::post('events/spaces/store', 'SpaceController@store');
-Route::get('events/{id}/spaces/{event_id}/show', 'SpaceController@show');
-Route::post('events/spaces/{id}/update/{event_id}', 'SpaceController@update');
-Route::delete('events/spaces/{id}/delete/{event_id}', 'SpaceController@delete');
-Route::get('events/{event_id}/spacesbyevent', 'SpaceController@indexByEvent');
-//Route::post('createspace/{id}','CertificateController@store');
-
-
-/*
-Route::group(
-   ['middleware' => 'auth:token'], function () {
-        Route::apiResource('space', 'SpaceController', ['except' => ['index', 'show']]);
-        Route::delete('spaces/{id}', 'SpaceController@destroy');
-    }
-);*/
 
 /***************
  * RolesAttendees
- * 
  ****************/
 
 Route::get('rolesattendees/{id}', 'RoleAttendeeController@destroy');
@@ -231,15 +217,15 @@ Route::group(
 /****************
  * Contributors = STAFF 
  ****************/
-Route::group(
-    ['middleware' => 'auth:token'], function () {
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
         Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
         Route::get('contributors/events/{event_id}', 'ContributorController@index');
         Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
         Route::get('me/contributors/events', 'ContributorController@myEvents');
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
-    }
-);
+//     }
+// );
 
 /****************
  * Contributors

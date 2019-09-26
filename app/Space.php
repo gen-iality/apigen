@@ -13,12 +13,17 @@ use Moloquent;
 class Space extends Moloquent
 {
 
-    //protected $with = ['event'];
+    //protected $with = ['staff'];
 
     public function event()
     {
         return $this->belongsTo('App\Event');
     }
+
+    public function staff()
+    {
+        return $this->hasMany('App\ModelHasRole');
+    }    
 
     protected $fillable = [
         'name' , 'event_id'  

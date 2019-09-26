@@ -100,7 +100,7 @@ class CertificateController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->json()->all();
-        $Certificate = Certificate::find($id);
+        $Certificate = Certificate::findOrFail($id);
         $Certificate->fill($data);
         $Certificate->save();
         return $data;
