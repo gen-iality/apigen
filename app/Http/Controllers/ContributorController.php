@@ -152,7 +152,7 @@ class ContributorController extends Controller
        
 
         if (($userPermissions && $userPermissions->role)) {
-            $userPermissions->permissions = $userPermissions->role->permissions;
+            //$userPermissions->permissions = $userPermissions->role->permissions;
             return $userPermissions;
         } else {
             return [];
