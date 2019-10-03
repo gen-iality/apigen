@@ -25,7 +25,7 @@ class Event extends ModelsEvent
 
 
     protected $fillable = [
-        'author', 'name', 'description', 'location', 'venue', 'pulep',
+        'author', 'name', 'description', 'location', 'venue', 'address','pulep',
         'datetime_from', 'datetime_to',
         'date_start', 'date_end', 'time_start', 'time_end',
         'visibility', 'picture', 'organization_id', 'category','extra_config', 
