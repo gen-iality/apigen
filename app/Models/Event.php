@@ -26,7 +26,6 @@ class Event extends MyBaseModel
                 'title'               => 'required',
                 'description'         => 'required',
                 'location_venue_name' => 'required_without:venue_name_full',
-                'place'               => 'required|string',
                 'address'             => 'required|string',
                 'venue_name_full'     => 'required_without:location_venue_name',
                 'start_date'          => 'required|date_format:"'.$format.'"',
@@ -47,7 +46,6 @@ class Event extends MyBaseModel
         'event_image.mimes'                    => 'Please ensure you are uploading an image (JPG, PNG, JPEG)',
         'event_image.max'                      => 'Please ensure the image is not larger then 3MB',
         'address.required'                     => 'Please enter an address for your event',
-        'place.required'                       => 'Please enter the place where the event will be',
         'location_venue_name.required_without' => 'Please enter a venue for your event',
         'venue_name_full.required_without'     => 'Please enter a venue for your event',
     ];
