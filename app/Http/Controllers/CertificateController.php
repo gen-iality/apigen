@@ -222,9 +222,9 @@ class CertificateController extends Controller
                         ->attachData($pdf->download(),'Tickets.pdf');
                         });  
                     }
-                return $pdf->download('Tickets.pdf');
+                //return $pdf->download('Tickets.pdf');
                 }
-            return view('Public.ViewEvent.Partials.certificate', $data);
+            //return view('Public.ViewEvent.Partials.certificate', $data);
         }
     }    
 }
