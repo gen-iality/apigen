@@ -129,7 +129,11 @@ class CertificateController extends Controller
 
     public function certificatePdf(Request $request)
     {
-
+        echo "hola";
+        $contentqry = Attendee::findOrFail("event_id" , "5d2de182d74d5c28047d1f85")->get();
+            echo var_dump($contentqry);
+            die;
+        $data = $request->json()->all();
         $data = $request->json()->all();
         //$content = Certificate::where("content"); 
         //$image=$request->input("image");
@@ -191,29 +195,41 @@ class CertificateController extends Controller
     
 
 
-    public function generateCertificate(Request $request)
-    {
-        $data = $request->json()->all();
-        //$content = '<p><br></p> <p> <h3>CERTIFICADO DE ASISTENCIA</h3> </p> </br> <p style="margin-top:-3%;" ><span style="font-weight: 400; font-size: 14pt;"> <br></span></p> <p style="color:#5E605E">Certificamos que&nbsp;<span style="font-style: normal; font-weight: bold;" class="name">Pablo </span> , identificada con el No. de cédula<br> <span style="font-style: normal; font-weight: bold;" class="iden">[1033801141user.identificación]</span> participó con éxito en calidad de asistente&nbsp;<span style="font-style: normal; font-weight: bold;"><br class="eventName">[event.name]</span></p><br><p style="color:#5E605E">BOGOTÁ, COLOMBIA</p> <div style="position:absolute;bottom: 420px;left:-1440px"><span style="font-style: normal; font-weight: bold;">DOMINICA MARTÍNEZ</span><p>presidente Congreso Internacional de<br>Gerencia de Proyectos</p></div> <div style=" position:absolute;bottom:490px;right:-1540px;"><span style="font-style:normal;font-weight: bold">CLAUDIA TRUJILLO</span><p>presidente PMI - 2019</p></div>';
-      
-        //$data = [
-        //    'content'   => $content,
-        //    'image'     => "ASDASD"
-        //];
-    
-        
-        if ($request->get('download') == '1') {
+    public function generateCertificate(Request $request){
 
+        $data = $request->json()->all();
+        $contentqry = Attendee::where("event_id","5d2de182d74d5c28047d1f85")->get();
+
+        foreach($contentqry as $datos){
             
-            $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
-    
-            $pdf->setPaper(
-                'letter',  'landscape'
-            );
-             $evento = $data["content"];
-            //$validar = $request->json()->all();
+            $cedula = json_decode(json_encode($datos,true));
+
+            if ($request->get('download') == '1') {
+               
+                $data['content'] = '<p><br></p> <p> </p><h3 style="font-size:1.8em;">CERTIFICADO DE ASISTENCIA</h3><p></p> <br> <p style="margin-top:-3%;"><span style="font-weight: 400; font-size: 14pt;"><br></span></p> <p style="color:#5E605E;font-size:1.3em">Certificamos que&nbsp;<span style="font-style: normal; font-weight: bold;">'.$cedula->{"names"}.'</span> , identificada con el No. de cédula<br> <span style="font-style: normal; font-weight: bold;" class="iden">'.$cedula->{"identificacion"}.'</span> participó con éxito en calidad de asistente&nbsp;<span style="font-style: normal; font-weight: bold;"><br class="eventName">VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019</span></p><br><p style="color:#5E605E">BOGOTÁ, COLOMBIA</p> <div style="position:absolute;bottom: 620px;left:-1440px"><span style="font-style: normal; font-weight: bold;font-size:1.3em">DOMINICA MARTÍNEZ</span><p>presidente Congreso Internacional de<br>Gerencia de Proyectos</p></div> <div style=" position:absolute;bottom:680px;right:-1540px;"><span style="font-style:normal;font-weight: bold;font-size:1.3em">CLAUDIA TRUJILLO</span><p>presidente PMI - 2019</p></div>';
+                $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+        
+                $pdf->setPaper(
+                    'letter',  'landscape'
+                );
+                
+                $evento = $data["content"];
             
-            if(strpos($evento, 'class="iden"') ){
+                if(strpos($evento, 'class="iden"') ){
+                    Mail::raw("Tus certificados para el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019 se encuentran adjuntos, recuerda descargarlos y notificar si encuentras errores en tus datos." , function ($message) use ($data,$pdf,$cedula){
+                        $message->to($cedula->{'email'},"Evento PMI")
+                        ->subject("Tus certificados para ","el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019")
+                        ->attachData($pdf->download(),'Tickets.pdf');
+                        });  
+                    }
+                return $pdf->download('Tickets.pdf');
+                }
+            return view('Public.ViewEvent.Partials.certificate', $data);
+        }
+    }    
+}
+          
+/*
             $cedula = $data["content"];
             $cedula = strstr($cedula,'"iden">');
             $cedula = strstr($cedula,'</span>',true) ;
@@ -227,7 +243,7 @@ class CertificateController extends Controller
             $nombreEvento = substr($nombreEvento,1);
             $nombreEvento = strstr($nombreEvento,'</span>',true) ;
      
-            //FUNCION DE ENVIAR CORREO
+            FUNCION DE ENVIAR CORREO
             
             Mail::raw("Tus certificados para el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019 se encuentran adjuntos, recuerda descargarlos y notificar si encuentras errores en tus datos." , function ($message) use ($data,$pdf,$cedula,$nombreEvento){
                 $message->to($cedula,"Evento PMI")
@@ -238,7 +254,7 @@ class CertificateController extends Controller
         return $pdf->download('Tickets.pdf');
     }
     return view('Public.ViewEvent.Partials.certificate', $data);
-        //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
+        return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 
     }    
-}
+} */
