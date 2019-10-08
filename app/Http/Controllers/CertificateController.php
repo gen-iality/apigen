@@ -653,11 +653,11 @@ return view('Public.ViewEvent.Partials.certificate', $data);
 
     }    
 } */
-return view('Public.ViewEvent.Partials.certificate', $data);
+//return view('Public.ViewEvent.Partials.certificate', $data);
     //return view('Public.ViewEvent.Partials.PDFTicket', $data);    
 
-}    
-}
+//}    
+//}
 /*
     public function generateCertificate(Request $request){
 
