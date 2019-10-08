@@ -224,6 +224,15 @@ Route::group(
         Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
         Route::get('me/contributors/events', 'ContributorController@myEvents');
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
+
+        // estas son ->
+        Route::get   ('events/{event_id}/contributors', 'ContributorController@index');
+        Route::post  ('events/{event_id}/contributors', 'ContributorController@store');
+        Route::get   ('events/{event_id}/contributors/{id}', 'ContributorController@show');
+        Route::put   ('events/{event_id}/contributors/{id}', 'ContributorController@update');
+        Route::delete('events/{event_id}/contributors/{id}', 'ContributorController@destroy');
+        // <- aca 
+        
 //     }
 // );
 

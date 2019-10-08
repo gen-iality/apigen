@@ -55,7 +55,7 @@ class ContributorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response Contributors Resources
      */
-    public function store(Request $request)
+    public function store(Request $request,String $event_id)
     {
         $rol = $request->json()->all();
 
@@ -78,7 +78,7 @@ class ContributorController extends Controller
         $matchAttributesRol = [
             "role_id" => $rol['role_id'],
             "model_id" => $rol['model_id'],
-            "event_id" => $rol["event_id"]
+            "event_id" => $event_id
         ];
         $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);
@@ -91,7 +91,7 @@ class ContributorController extends Controller
      * @param  String  $id
      * @return \Illuminate\Http\Response Contribuitors resources 
      */
-    public function show(String $id)
+    public function show(String $event_id ,String $id)
     {
         $ModelHasRole = ModelHasRole::findOrFail($id);
         return new ModelHasRoleResource($ModelHasRole);
@@ -110,7 +110,7 @@ class ContributorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response Contributors Resource
      */
-    public function update(Request $request, String $id)
+    public function update(Request $request, String $event_id ,String $id)
     {
         $data = $request->json()->all();
         $ModelHasRole = ModelHasRole::findOrFail($id);
@@ -125,7 +125,7 @@ class ContributorController extends Controller
      * @param  String  $id
      * @return \Illuminate\Http\Response true
      */
-    public function destroy(String $id)
+    public function destroy(String $event_id ,String $id)
     {
         $ModelHasRole = ModelHasRole::findOrFail($id);
         return (string) $ModelHasRole->delete();
