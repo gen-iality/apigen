@@ -505,7 +505,7 @@ class CertificateController extends Controller
             $pdf->setPaper(
                 'letter',  'landscape'
             );
-             $evento = $data["content"];
+             //$evento = $data["content"];
             //$validar = $request->json()->all();
             
             /*if(strpos($evento, 'class="iden"') ){
