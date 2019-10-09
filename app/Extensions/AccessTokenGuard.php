@@ -8,6 +8,7 @@ use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class AccessTokenGuard implements Guard
 {
@@ -107,8 +108,9 @@ class AccessTokenGuard implements Guard
      * @param //Authenticatable $user
      * @return void
      */
-    public function setUser($user)
+    function setUser(Authenticatable $user)
     {
+        var_dump($user);
         die("GUARDANDO");
     }
 }

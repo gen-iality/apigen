@@ -217,8 +217,12 @@ Route::group(
 /****************
  * Contributors = STAFF 
  ****************/
-// Route::group(
-//     ['middleware' => 'auth:token'], function () {
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
+        Route::get('/me', 'ContributorController@meAsContributor');
+    }
+);
         Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
         Route::get('contributors/events/{event_id}', 'ContributorController@index');
         Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
@@ -233,8 +237,7 @@ Route::group(
         Route::delete('events/{event_id}/contributors/{id}', 'ContributorController@destroy');
         // <- aca 
         
-//     }
-// );
+
 
 /****************
  * Contributors
