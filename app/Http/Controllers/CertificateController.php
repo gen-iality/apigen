@@ -236,7 +236,7 @@ class CertificateController extends Controller
                             ->attachData($pdf->download(),'Tickets.pdf');
                         });  
                         return $pdf->download('Tickets.pdf');
-                        break;   
+                           
                     }
                 }else if(strpos($evento, 'class="desing"') ){
 
@@ -252,14 +252,14 @@ class CertificateController extends Controller
                             ->attachData($pdf->download(),'Tickets.pdf');
                         });  
                         return $pdf->download('Tickets.pdf');
-                        break;  
+                          
                     }   
                 }else if(strpos($evento, 'class="coach"') ){
 
                     $contentqry = Attendee::where("event_id","5d9de5e3d74d5c0594053262")->get();
                     foreach($contentqry as $datos){
-                            $data_single = json_decode(json_encode($datos,true));
-                            $data['content'] = '<br><br><br><br><br><br><br><br><br><p><br></p> <p> </p> <h3 style="font-size:2.5em;font-style: italic;">El PMI Bogotá Colombia Chapter</h3> <span style="font-style: italic;font-size:1.6em">Certifica que</span> <br> <span style="font-style: italic; font-weight: bold;font-size:2em;color:black;">'.$data_single->{"nombres"}.'</span><br><div style="position:fixed;display:none" class="coach">'.$data_single->{"identificacion"}.'</div><br> <span style="font-style: italic;font-size:1.6em">participó en calidad de</span> <br> <span style="font-style: italic;font-weight: bold;font-size:1.9em;color:black">Asistente</span> <br><br> <span style="font-style: italic;font-size:1.2em" class="eventName">en la jornada de taller <strong>El Gerente Coach en acción</strong><br>y en el VIII Congreso Internacional de Gerencia de Proyectos que se realizaron<br>los días 26, 27 y 28 de septiembre de 2019 en la ciudad de Bogotá, Colombia</span></p> <div style="position:absolute;bottom:20%;right:200px;color:#5E605E;font-style: italic;">Se certifica asistencia de<br> 4 horas de Taller<br> 12 horas de Congreso</div>';
+                        $data_single = json_decode(json_encode($datos,true));
+                        $data['content'] = '<br><br><br><br><br><br><br><br><br><p><br></p> <p> </p> <h3 style="font-size:2.5em;font-style: italic;">El PMI Bogotá Colombia Chapter</h3> <span style="font-style: italic;font-size:1.6em">Certifica que</span> <br> <span style="font-style: italic; font-weight: bold;font-size:2em;color:black;">'.$data_single->{"nombres"}.'</span><br><div style="position:fixed;display:none" class="coach">'.$data_single->{"identificacion"}.'</div><br> <span style="font-style: italic;font-size:1.6em">participó en calidad de</span> <br> <span style="font-style: italic;font-weight: bold;font-size:1.9em;color:black">Asistente</span> <br><br> <span style="font-style: italic;font-size:1.2em" class="eventName">en la jornada de taller <strong>El Gerente Coach en acción</strong><br>y en el VIII Congreso Internacional de Gerencia de Proyectos que se realizaron<br>los días 26, 27 y 28 de septiembre de 2019 en la ciudad de Bogotá, Colombia</span></p> <div style="position:absolute;bottom:20%;right:200px;color:#5E605E;font-style: italic;">Se certifica asistencia de<br> 4 horas de Taller<br> 12 horas de Congreso</div>';
                         $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
                         $pdf->setPaper( 'letter',  'landscape' );
                         Mail::raw("Mediante este link puedes encontrar las presentaciones compartidas por los conferencistas, https://drive.google.com/drive/folders/1ffG6-3DXaVa8br7Lxw2KeP9sJAFdFA_x." , function ($message) use ($data,$pdf,$data_single){
@@ -268,7 +268,7 @@ class CertificateController extends Controller
                             ->attachData($pdf->download(),'Tickets.pdf');
                             });  
                         return $pdf->download('Tickets.pdf');
-                        break;  
+                         
                     }
                 
                 }    
