@@ -223,11 +223,11 @@ class CertificateController extends Controller
                             $message->to($data_single->{'email'},"Evento PMI")
                             ->subject("Tus certificados para ","el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019")
                             ->attachData($pdf->download(),'Tickets.pdf');
-                            }); 
+                        }); 
                        
                     }    
                 }else if(strpos($evento, 'class="mental"') ){
-                    $contentqry = Attendee::where("event_id","5d9de5e3d74d5c0594053262")->get();
+                    $contentqry = Attendee::where("event_id","5d8d1776d74d5c61bf588612")->get();
                     foreach($contentqry as $datos){
                         
                         $data_single = json_decode(json_encode($datos,true));
@@ -244,7 +244,7 @@ class CertificateController extends Controller
                     }
                 }else if(strpos($evento, 'class="desing"') ){
 
-                    $contentqry = Attendee::where("event_id","5d9de5e3d74d5c0594053262")->get();
+                    $contentqry = Attendee::where("event_id","5d8d171cd74d5c61c24b5152")->get();
                     foreach($contentqry as $datos){
                         
                         $data_single = json_decode(json_encode($datos,true));
@@ -261,7 +261,7 @@ class CertificateController extends Controller
                     }   
                 }else if(strpos($evento, 'class="coach"') ){
 
-                    $contentqry = Attendee::where("event_id","5d9de5e3d74d5c0594053262")->get();
+                    $contentqry = Attendee::where("event_id","5d8d1d27d74d5c61f571c9c2")->get();
                     foreach($contentqry as $datos){
                         
                         $data_single = json_decode(json_encode($datos,true));
@@ -272,7 +272,7 @@ class CertificateController extends Controller
                             $message->to($data_single->{'email'},"Evento PMI")
                             ->subject("Tus certificados para ","el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019")
                             ->attachData($pdf->download(),'Tickets.pdf');
-                            });  
+                        });  
                     }
                 }    
                 $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
