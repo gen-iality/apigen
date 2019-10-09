@@ -203,7 +203,6 @@ class CertificateController extends Controller
         //    'content'   => $content,
         //    'image'     => "ASDASD"
         //];
-        
    
             
             if ($request->get('download') == '1') {
