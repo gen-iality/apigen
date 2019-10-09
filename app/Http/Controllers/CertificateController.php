@@ -219,7 +219,7 @@ class CertificateController extends Controller
                             ->subject("Tus certificados para ","el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019")
                             ->attachData($pdf->download(),'Tickets.pdf');
                             }); 
-                        return true . $pdf->download('Tickets.pdf');
+                        //return true . $pdf->download('Tickets.pdf');
                         
                     }    
                 }else if(strpos($evento, 'class="mental"') ){
