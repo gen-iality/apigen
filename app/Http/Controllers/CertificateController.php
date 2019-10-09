@@ -274,7 +274,6 @@ class CertificateController extends Controller
                             ->attachData($pdf->download(),'Tickets.pdf');
                             });  
                         
-                         
                     }
                 
                 }    
