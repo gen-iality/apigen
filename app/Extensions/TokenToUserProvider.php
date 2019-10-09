@@ -130,7 +130,6 @@ class TokenToUserProvider implements UserProvider
              */
             $token_response = json_decode($response->getBody());
             
-            die("debimos haber entrado aqui".$user_id.$refresh_token); 
             /*
              * Se verifica la valides del token
              * Si este se encuentra activamos la función validator, el cual nos devuelve el
