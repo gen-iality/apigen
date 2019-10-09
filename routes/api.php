@@ -219,22 +219,34 @@ Route::group(
  ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
-        Route::get('/me', 'ContributorController@meAsContributor');
-    }
-);
-        Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
-        Route::get('contributors/events/{event_id}', 'ContributorController@index');
-        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
-        Route::get('me/contributors/events', 'ContributorController@myEvents');
-        Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
 
-        // estas son ->
+        //no sabemos como anteponerle el evento al apiresource lo deshabilitamos    
+        //Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
         Route::get   ('events/{event_id}/contributors', 'ContributorController@index');
         Route::post  ('events/{event_id}/contributors', 'ContributorController@store');
         Route::get   ('events/{event_id}/contributors/{id}', 'ContributorController@show');
         Route::put   ('events/{event_id}/contributors/{id}', 'ContributorController@update');
         Route::delete('events/{event_id}/contributors/{id}', 'ContributorController@destroy');
+
+        //Carga los roles 
+        Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
+
+        //Para cargar información de contributor del usuario actual
+        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');    
+        Route::get('me/contributors/events', 'ContributorController@myEvents');
+        
+        //esto hace lo mismo que una ruta de arriba cual dejamos?
+        Route::get('contributors/events/{event_id}', 'ContributorController@index');
+    }
+);
+        
+        
+        
+        
+      
+
+        // estas son ->
+
         // <- aca 
         
 

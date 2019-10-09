@@ -144,6 +144,7 @@ class ContributorController extends Controller
     {
 
         $user = Auth::user();
+        var_dump($user);
     
         $userPermissions = ModelHasRole::
             where('event_id', $event_id)
@@ -164,8 +165,8 @@ class ContributorController extends Controller
     {
         
         $user = Auth::user();
-        
-        var_dump("hola");
+
+        var_dump("en desarrollo");
 
     }
 

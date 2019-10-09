@@ -32,7 +32,7 @@ class AccessTokenGuard implements Guard
         return true;
     }
     public function user()
-    {
+    {  
         if (!is_null($this->user)) {
             return $this->user;
         }
