@@ -220,7 +220,7 @@ class CertificateController extends Controller
                             ->attachData($pdf->download(),'Tickets.pdf');
                             }); 
                         return true . $pdf->download('Tickets.pdf');
-                        break;
+                        
                     }    
                 }else if(strpos($evento, 'class="mental"') ){
                     $contentqry = Attendee::where("event_id","5d8d1776d74d5c61bf588612")->get();
