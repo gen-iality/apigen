@@ -160,6 +160,16 @@ class ContributorController extends Controller
         }
     }
 
+    public function meTest(Request $request, String $event_id)
+    {
+        
+        $user = Auth::user();
+        
+        var_dump("hola");
+
+    }
+
+
     /**
      * Create model_has_role
      * role_id
