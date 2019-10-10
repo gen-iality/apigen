@@ -219,9 +219,12 @@ class UserController extends UserControllerWeb
             $response = new UsersResource($Account);
 
             return $Account;
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+            return [];
+        } catch(\Exception $e){
+            return ["error"=>$e->getMessage()];
         }
+         
 
     }
 

@@ -69,7 +69,7 @@ class ContributorController extends Controller
                 $user = Account::updateOrCreate($matchAttributes, $rol['properties']);
                 $rol['model_id'] = $user->id;
             } else {
-                throw new Exception("model_id and properties are mandatory", 1);
+                throw new Exception("Properties names and email are mandatory", 1);
             }
         }
 
@@ -78,8 +78,10 @@ class ContributorController extends Controller
         $matchAttributesRol = [
             "role_id" => $rol['role_id'],
             "model_id" => $rol['model_id'],
-            "event_id" => $event_id
+            "event_id" => $event_id,
         ];
+
+
         $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);
         return $response;

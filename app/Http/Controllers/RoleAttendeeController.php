@@ -68,6 +68,7 @@ class RoleAttendeeController extends Controller
         $result->save();
         return $result;   
     }
+    
     public function delete($id)
     {
 
