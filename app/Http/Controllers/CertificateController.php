@@ -227,24 +227,7 @@ class CertificateController extends Controller
                             ->subject("Memorias PMI 2019","VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019");
                         });       
                     }    
-                }else if(strpos($evento, 'class="mental"') ){
-                    $contentqry = Attendee::where("event_id","5d9e131dd74d5c06d5406502")->get();
-                    foreach($contentqry as $datos){
-                       
-
-                        $data_single = json_decode(json_encode($datos,true));
-                        $data['content'] = '<br><br><br><br><br><br><br><br><br><p><br></p> <p> </p> <h3 style="font-size:2.5em;font-style: italic;">El PMI Bogotá Colombia Chapter</h3> <span style="font-style: italic;font-size:1.6em">Certifica que</span> <br> <span style="font-style: italic; font-weight: bold;font-size:2em;color:black;">'.$data_single->{"nombre"}.'</span> <br> <div style="position:fixed;display:none" class="mental">'.$data_single->{"identificacion"}.'</div><br> <span style="font-style: italic;font-size:1.6em">participó en calidad de</span> <br> <span style="font-style: italic;font-weight: bold;font-size:1.9em;color:black">Asistente</span> <br><br> <span style="font-style: italic;font-size:1.2em" class="eventName">en la jornada de taller <strong>La mentalidad ágil como una fortaleza de resultado y generación de valor</strong><br>y en el VIII Congreso Internacional de Gerencia de Proyectos que se realizaron<br>los días 26, 27 y 28 de septiembre de 2019 en la ciudad de Bogotá, Colombia</span></p> <div style="position:absolute;bottom:20%;right:200px;color:#5E605E;font-style: italic;">Se certifica asistencia de<br> 4 horas de Taller<br>12 horas de congreso</div>';
-                        $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
-                        $pdf->setPaper( 'letter',  'landscape' );
-                        Mail::raw("Mediante este link puedes encontrar las presentaciones de los conferencistas que desearon compartir sus slides, aquí: bit.ly/memoriaspmi2019 ." , function ($message) use ($data,$pdf,$data_single){
-                            $message->to($data_single->{'email'},"Evento PMI")
-                            ->subject("Tus certificados para ","el VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019")
-                            ->attachData($pdf->download(),'Tickets.pdf');
-                        });  
-                     
-                           
-                    }
-                } 
+                }
                 $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
                 $pdf->setPaper( 'letter',  'landscape' );
                 return $pdf->download('Tickets.pdf');
@@ -252,9 +235,5 @@ class CertificateController extends Controller
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
     
     }
-<<<<<<< HEAD
-    
 
-=======
->>>>>>> 8535b0286a02c941294f44247e0b3642d0f8b71a
 }
