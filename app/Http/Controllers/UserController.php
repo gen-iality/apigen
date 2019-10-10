@@ -2,27 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UsersResource;
 use App\Account;
+use App\Event;
+use App\Http\Controllers\web\UserController as UserControllerWeb;
+use App\Http\Resources\UsersResource;
+use App\Mail\ConfirmationEmail;
 use App\Organization;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Firebase\Auth\Token\Verifier;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
-use App\Event;
-use App\Attendee;
-use App\Mail\ConfirmationEmail;
-use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\EventUserRequest;
-use App\Http\Resources\EventUserResource;
-use App\State;
 use Illuminate\Http\Response;
-use Validator;
-use Storage;
-use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Config;
-use App\Http\Controllers\web\UserController as UserControllerWeb;
+use Illuminate\Support\Facades\Mail;
+use Storage;
 
 class UserController extends UserControllerWeb
 {
@@ -41,64 +31,62 @@ class UserController extends UserControllerWeb
      * @return mixed
      */
 
+    public function loginorcreatefromtoken(Request $request)
+    {
+        /**
+         * Miramos si el token viene en la Petición
+         * El token viene en la petición el cual si llega con el nombre evius_token o token
+         * REQUEST,
+         *
+         * En la Petición viene el refresh_token
+         */
+        //
+        $firebaseToken = null;
+        if ($request->has('evius_token')) {$firebaseToken = $request->input('evius_token');}
 
-    public function loginorcreatefromtoken(Request $request){
-            /**
-             * Miramos si el token viene en la Petición
-             * El token viene en la petición el cual si llega con el nombre evius_token o token
-             * REQUEST,
-             *
-             * En la Petición viene el refresh_token
-             */
-            //
-            $firebaseToken = null;
-            if ($request->has('evius_token')) { $firebaseToken = $request->input('evius_token');}
+        /**
+         * Si el token no viene en la petición
+         * Bota el error de que el token no fue enviado en la petición, recordar que esta ruta es
+         * una petición GET.
+         */
+        if (!$firebaseToken) {
+            return response(
+                [
+                    'status' => Response::HTTP_UNAUTHORIZED,
+                    'message' => 'Error: No token provided',
+                ], Response::HTTP_UNAUTHORIZED
+            );
+        }
+        /*
+         * Se verifica la valides del token
+         * Si este se encuentra activamos la función validator, el cual nos devuelve el
+         * usuario y finalmente enviamos el request indicando que se puede continuar, con la página acutal.
+         */
 
+        $verifiedIdToken = $this->auth->verifyIdToken($firebaseToken);
+        $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
 
-    
-            /**
-             * Si el token no viene en la petición
-             * Bota el error de que el token no fue enviado en la petición, recordar que esta ruta es
-             * una petición GET.
-             */
-            if (!$firebaseToken) {
-                return response(
-                    [
-                        'status' => Response::HTTP_UNAUTHORIZED,
-                        'message' => 'Error: No token provided',
-                    ], Response::HTTP_UNAUTHORIZED
-                );
-            }
-            /*
-             * Se verifica la valides del token
-             * Si este se encuentra activamos la función validator, el cual nos devuelve el
-             * usuario y finalmente enviamos el request indicando que se puede continuar, con la página acutal.
-             */
+        $user = Account::where('uid', '=', $user_auth->uid)->first();
 
-            $verifiedIdToken = $this->auth->verifyIdToken($firebaseToken);
-            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-            
-            $user = Account::where('uid', '=', $user_auth->uid)->first();
-            
-            if(!$user){
-                $user = Account::create(get_object_vars($user_auth));
-                //We created a organization default, thus the name organitatios is the displayName user
-		        $organization = new Organization();
-                $organization->author =  $user->id;
-                $organization->name = $user->displayName;
-                $organization->save();
-                
-                self::_sendConfirmationEmail(
-                    $user
-                );
-            }
-            
-            if ($request->has('destination')) {
-                $destination = $request->input('destination');
-                return redirect($destination . '/?token=' . $firebaseToken);
-            } else {
-                return redirect('https://evius.co/?token=' . $firebaseToken);
-            }
+        if (!$user) {
+            $user = Account::create(get_object_vars($user_auth));
+            //We created a organization default, thus the name organitatios is the displayName user
+            $organization = new Organization();
+            $organization->author = $user->id;
+            $organization->name = $user->displayName;
+            $organization->save();
+
+            self::_sendConfirmationEmail(
+                $user
+            );
+        }
+
+        if ($request->has('destination')) {
+            $destination = $request->input('destination');
+            return redirect($destination . '/?token=' . $firebaseToken);
+        } else {
+            return redirect('https://evius.co/?token=' . $firebaseToken);
+        }
     }
 
     /**
@@ -167,18 +155,18 @@ class UserController extends UserControllerWeb
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, string $id)
     {
         $data = $request->json()->all();
-        
-        if(isset($data['phoneNumber']) && isset($data['picture'])){
+
+        if (isset($data['phoneNumber']) && isset($data['picture'])) {
             $data['profile_completed'] = ($data['phoneNumber'] != "" && $data['picture'] != "") ? true : false;
-        }else{
+        } else {
             $data['profile_completed'] = false;
         }
-    
+
         $Account = Account::find($id);
         $Account->fill($data);
         $Account->save();
@@ -191,12 +179,11 @@ class UserController extends UserControllerWeb
         $user = Account::where("uid", $uid);
         $password = $data["password"];
 
-        $user_auth = $auth->updateUser($uid, [  
+        $user_auth = $auth->updateUser($uid, [
             "password" => $password,
-            "emailVerified" => true
+            "emailVerified" => true,
         ]);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -222,11 +209,20 @@ class UserController extends UserControllerWeb
      * @param  int  $email
      * @return \Illuminate\Http\Response
      */
-    public function findByEmail($email)
+    public function findByEmail(\Kreait\Firebase\Auth $auth, $email)
     {
-        $Account = Account::where('email','=', $email)->get(['id','email','names','name','Nombres','displayName']);
-        $response = new UsersResource($Account);
-        return $Account;
+        try {
+            $user = $auth->getUserByEmail($email);
+
+            $Account = Account::where('uid', '=', $user->uid)
+                ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
+            $response = new UsersResource($Account);
+
+            return $Account;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
     }
 
     /**
@@ -239,20 +235,20 @@ class UserController extends UserControllerWeb
     private static function _sendConfirmationEmail($user)
     {
         $email = $user->email;
-      
-            // $messageUser = new MessageUser(
-            //     [
-            //         'email' => $eventUser->user->email,
-            //         'user_id' => $eventUser->user->id,
-            //         'event_user_id' => $eventUser->id,
-            //     ]
-            // );
-            // $message->messageUsers()->save($messageUser);
 
-            Mail::to($email)
-                ->queue(
-                    new ConfirmationEmail($user)
-                );
+        // $messageUser = new MessageUser(
+        //     [
+        //         'email' => $eventUser->user->email,
+        //         'user_id' => $eventUser->user->id,
+        //         'event_user_id' => $eventUser->id,
+        //     ]
+        // );
+        // $message->messageUsers()->save($messageUser);
+
+        Mail::to($email)
+            ->queue(
+                new ConfirmationEmail($user)
+            );
     }
 
     /**
