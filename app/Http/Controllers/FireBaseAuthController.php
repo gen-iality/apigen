@@ -21,7 +21,7 @@ class FireBaseAuthController extends Controller
      * @return Account user information using valid token send with the request.
      */
     public function getCurrentUser(Request $request)
-    {
-        return (Auth::user()?Auth::user():null);
+    { 
+              return (Auth::user()?Auth::user():null);
     }
 }
