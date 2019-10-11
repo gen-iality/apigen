@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Auth\AuthenticationException;
 use App\Http\Resources\ModelHasRoleResource;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -145,9 +145,11 @@ class ContributorController extends Controller
     public function meAsContributor(Request $request, String $event_id)
     {
 
-        
+//Illuminate\Http\Response
         $user = Auth::user();
-
+        if ("Illuminate\Http\Response" == get_class($user)){
+            throw new AuthenticationException("la sesion se vencio");
+        }
         $userPermissions = ModelHasRole::
             where('event_id', $event_id)
             ->where('model_id', $user->id)->latest()->first();
