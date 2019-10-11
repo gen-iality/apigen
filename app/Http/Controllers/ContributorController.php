@@ -145,7 +145,9 @@ class ContributorController extends Controller
     public function meAsContributor(Request $request, String $event_id)
     {
 
-        $user = Auth::user();    
+        
+        $user = Auth::user();
+
         $userPermissions = ModelHasRole::
             where('event_id', $event_id)
             ->where('model_id', $user->id)->latest()->first();
