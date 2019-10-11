@@ -60,7 +60,7 @@ Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 /****************
  * organizations
  ****************/
-Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
 
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 
@@ -140,7 +140,8 @@ Route::group(
  ****************/
 
 Route::get('pdfcertificate',"CertificateController@certificatePdf");
-Route::post('generatecertificate',"CertificateController@generateCertificate");
+Route::post('events/{event_id}/generatecertificate',"CertificateController@generateCertificate");
+Route::get('events/{event_id}/generatecertificate',"CertificateController@generateCertificate");
 
 Route::get('certificates/{id}', 'CertificateController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
@@ -163,6 +164,18 @@ Route::post  ('events/{event_id}/spaces', 'SpaceController@store');
 Route::get   ('events/{event_id}/spaces/{id}', 'SpaceController@show');
 Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
+
+/***************
+ * SENDCONTENT 
+ ****************/
+
+Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
+Route::post('events/{event_id}/sendEmail' , "SendContentController@SendContentGenerated");
+Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
+Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
+Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
+Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
+
 
 
 /***************
