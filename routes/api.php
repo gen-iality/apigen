@@ -140,12 +140,13 @@ Route::group(
  ****************/
 
 Route::get('pdfcertificate',"CertificateController@certificatePdf");
-Route::post('events/{event_id}/generatecertificate',"CertificateController@generateCertificate");
-Route::get('events/{event_id}/generatecertificate',"CertificateController@generateCertificate");
+Route::post('generatecertificate',"CertificateController@generateCertificate");
 
 Route::get('certificates/{id}', 'CertificateController@destroy');
 Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
+
+
 
 
 
@@ -244,7 +245,7 @@ Route::group(
         //Carga los roles 
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
 
-        //Para cargar informaciÃ³n de contributor del usuario actual
+        //Para cargar información de contributor del usuario actual
         Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');    
         Route::get('me/contributors/events', 'ContributorController@myEvents');
         
