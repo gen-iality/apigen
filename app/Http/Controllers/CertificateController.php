@@ -209,8 +209,8 @@ class CertificateController extends Controller
             
             if ($request->get('download') == '1') {
             
-                $evento = $data["content"];
-               
+              //  $evento = $data["content"];
+               /*
                 if(strpos($evento, 'class="iden"') ){
                     $contentqry = Attendee::where("event_id","5d9e131dd74d5c06d5406502")->get();
                     //$contentqry = Attendee::where("event_id","5d2de182d74d5c28047d1f85")->get();
@@ -227,7 +227,7 @@ class CertificateController extends Controller
                             ->subject("Memorias PMI 2019","VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019");
                         });       
                     }    
-                }
+                }*/
                 $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
                 $pdf->setPaper( 'letter',  'landscape' );
                 return $pdf->download('Tickets.pdf');
