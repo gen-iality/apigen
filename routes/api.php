@@ -171,12 +171,23 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
  ****************/
 
 Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
-Route::post('events/{event_id}/sendEmail' , "SendContentController@SendContentGenerated");
+Route::post('events/{event_id}/sendEmail' , "SendContentController@SendInvitation");
 Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
 Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
 Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
 Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
 
+
+/***************
+ * INVITATION 
+ ****************/
+
+Route::get('events/{event_id}/Invitation' , 'InvitationController@index');
+Route::post('events/{event_id}/sendInvitation' , "InvitationController@SendInvitation");
+Route::post('events/{event_id}/Invitation' , 'InvitationController@store');
+Route::get('events/{event_id}/Invitation/{id}' , 'InvitationController@show');
+Route::put('events/{event_id}/Invitation/{id}' , 'InvitationController@update');
+Route::delete('events/{event_id}/Invitation/{id}', 'InvitationController@destroy');
 
 
 /***************
@@ -245,7 +256,7 @@ Route::group(
         //Carga los roles 
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
 
-        //Para cargar información de contributor del usuario actual
+        //Para cargar informaciï¿½n de contributor del usuario actual
         Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');    
         Route::get('me/contributors/events', 'ContributorController@myEvents');
         
@@ -255,15 +266,6 @@ Route::group(
 );
         
         
-        
-        
-      
-
-        // estas son ->
-
-        // <- aca 
-        
-
 
 /****************
  * Contributors
