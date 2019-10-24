@@ -167,6 +167,16 @@ Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
 /***************
+ * USER PROPIERTIES
+ ****************/
+Route::get   ('events/{event_id}/userproperties', 'UserPropertiesController@index');
+Route::post  ('events/{event_id}/userproperties', 'UserPropertiesController@store');
+Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
+Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
+Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
+
+
+/***************
  * SENDCONTENT 
  ****************/
 
@@ -358,6 +368,8 @@ Route::middleware('auth:token')->get('permissions/{id}', 'PermissionController@g
 
 //Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
+Route::post('user/events/{id}/addUserProperty', 'UserPropertiesController@store');
+
 //Route::middleware('auth:token')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 //Route::middleware('auth:token')->post('user/event_users/create', 'EventUserController@store');
 
