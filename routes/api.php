@@ -181,7 +181,7 @@ Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController
  ****************/
 
 Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
-Route::post('events/{event_id}/sendEmail' , "SendContentController@SendInvitation");
+Route::post('events/{event_id}/sendEmail' , "SendContentController@SendContentGenerated");
 Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
 Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
 Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
