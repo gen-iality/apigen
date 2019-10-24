@@ -29,8 +29,7 @@ class UserPropertiesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            UserProperties::where("event_id", $event_id)->paginate(config('app.page_size'))
-        );
+           Event::find($event_id)->user_properties()->get());
     }
 
     /**
@@ -41,11 +40,13 @@ class UserPropertiesController extends Controller
      */
     public function store(Request $request, $event_id)
     {
+        
         $data = $request->json()->all();
-        $data["event_id"] = $event_id;
-        $result = new UserProperties($data);
-        $result->save();
-        return $result;
+        $event = Event::find($event_id);
+        $event->userProperties;
+        $model = new UserProperties($data);
+        $event->user_properties()->save($model);
+        return $model; 
     }
 
     /**
@@ -56,12 +57,16 @@ class UserPropertiesController extends Controller
      */
     public function show($event_id,$id)
     {
-        $UserProperties = UserProperties::findOrFail($id);
+
+        $UserProperties = Event::find($event_id)->user_properties()->find($id);
+        
         $response = new JsonResource($UserProperties);
         //if ($UserProperties["event_id"] = $event_id) {
         return $response;
 
     }
+
+    
     /**
      * Update the specified resource in storage.
      *
@@ -71,13 +76,17 @@ class UserPropertiesController extends Controller
      */
     public function update(Request $request, $event_id, $id)
     {
+        
         $data = $request->json()->all();
-        $UserProperties = UserProperties::findOrFail($id);
+        
+        $UserProperties = Event::find($event_id)->user_properties()->find($id);
         //if($UserProperties["event_id"]= $event_id){
         $UserProperties->fill($data);
+        
         $UserProperties->save();
+        
         return $data;
-
+        
     }
 
     /**
@@ -88,7 +97,7 @@ class UserPropertiesController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {
-        $UserProperties = UserProperties::findOrFail($id);
+        $UserProperties = Event::find($event_id)->user_properties()->find($id);
         return (string) $UserProperties->delete();
     }
 }

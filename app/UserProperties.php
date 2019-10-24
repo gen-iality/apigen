@@ -2,14 +2,18 @@
 
 namespace App;
 use Moloquent;
+
 use Illuminate\Database\Eloquent\Model;
 
 
 class UserProperties extends Moloquent
 {
-    public function event()
+    
+    public function userProperties()
     {
+        
         return $this->belongsTo('App\Event');
     }
+    protected $table = 'user_properties';
     protected $guarded = [];
 }

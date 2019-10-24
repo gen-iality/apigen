@@ -8,6 +8,7 @@ use Moloquent;
 use Carbon\Carbon;
 use App\Models\Event as ModelsEvent;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 /**
  * Event Model
@@ -75,6 +76,19 @@ class Event extends ModelsEvent
     protected $casts = [
         'category' => 'array',
     ];
+
+
+    /***
+     * 
+  _____  ______ _            _______ _____ ____  _   _  _____ 
+ |  __ \|  ____| |        /\|__   __|_   _/ __ \| \ | |/ ____|
+ | |__) | |__  | |       /  \  | |    | || |  | |  \| | (___  
+ |  _  /|  __| | |      / /\ \ | |    | || |  | | . ` |\___ \ 
+ | | \ \| |____| |____ / ____ \| |   _| || |__| | |\  |____) |
+ |_|  \_\______|______/_/    \_\_|  |_____\____/|_| \_|_____/ 
+     * 
+     * 
+     */
 
     /**
      * The organizer associated with the event.
@@ -181,7 +195,6 @@ class Event extends ModelsEvent
     {
         return $this->hasMany('\App\Models\Ticket', 'event_id');
     }
-
     /**
      * The orders associated with the event.
      *
@@ -191,10 +204,13 @@ class Event extends ModelsEvent
     {
         return $this->hasMany('App\Order');
     }
-
     public function userPermissions()
     {
         return $this->hasMany('App\ModelHasRole');
     }
-
+    
+    public function user_properties()
+    {
+        return $this->embedsMany('App\UserProperties');
+    }
 }
