@@ -18,42 +18,26 @@ use Storage;
  */
 class InvitationController extends Controller
 {
-
-    /* por defecto el modelo es en singular y el nombre de la tabla en prural
-    //protected $table = 'categories';
-    $a = new Invitation();
-    var_dump($a->getTable());
-     */
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,$event_id)
     {
         return JsonResource::collection(
             Invitation::paginate(config('app.page_size'))
         );
-        //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
 
-    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$event_id)
     {
         $data = $request->json()->all();
         $result = new Invitation($data);
@@ -61,25 +45,6 @@ class InvitationController extends Controller
         return $result;
 
     }
-    public function delete($id)
-    {
-        $res = $id->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        } $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
-        $pdf->setPaper( 'letter',  'landscape' );
-        return $pdf->download('Tickets.pdf');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
     /**
      * Display the specified resource.
      *
@@ -120,13 +85,6 @@ class InvitationController extends Controller
         $Invitation = Invitation::findOrFail($id);
         return (string) $Invitation->delete();
 
-    }
-
-    public function indexByEvent(Request $request, String $event_id)
-    {
-        $query = Invitation::where("event_id", $event_id);
-        $results = $query->get();
-        return JsonResource::collection($results);
     }
 
     public function SendInvitation(Request $request)

@@ -129,8 +129,9 @@ class SendContentController extends Controller
         return JsonResource::collection($results);
     }
 
-    public function SendContentGenerated(Request $request)
+    public function sendContentGenerated(Request $request)
     {
+        echo "hi";die;
         $data = $request->json()->all();
 
         $pdf = PDF::loadview('Public.ViewEvent.Partials.ContentMail', $data);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use App\Space;
+use App\Host;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,15 +12,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *
  *
  */
-class SpaceController extends Controller
+class HostController extends Controller
 {
-
-    /* por defecto el modelo es en singular y el nombre de la tabla en prural
-    //protected $table = 'categories';
-    $a = new Space();
-    var_dump($a->getTable());
-     */
-
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +22,7 @@ class SpaceController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Space::where("event_id", $event_id)->paginate(config('app.page_size'))
+            Host::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
@@ -43,7 +36,7 @@ class SpaceController extends Controller
     {
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
-        $result = new Space($data);
+        $result = new Host($data);
         $result->save();
         return $result;
     }
@@ -51,14 +44,13 @@ class SpaceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Space  $Space
+     * @param  \App\Host  $Host
      * @return \Illuminate\Http\Response
      */
-    public function show($event_id,$id)
+    public function show($event_id,$id )
     {
-        $Space = Space::findOrFail($id);
-        $response = new JsonResource($Space);
-        //if ($Space["event_id"] = $event_id) {
+        $Host = Host::findOrFail($id);
+        $response = new JsonResource($Host);
         return $response;
 
     }
@@ -66,16 +58,15 @@ class SpaceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Space  $Space
+     * @param  \App\Host  $Host
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
-        $space = Space::findOrFail($id);
-        //if($Space["event_id"]= $event_id){
-        $space->fill($data);
-        $space->save();
+        $Host = Host::findOrFail($id);
+        $Host->fill($data);
+        $Host->save();
         return $data;
 
     }
@@ -88,7 +79,7 @@ class SpaceController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {
-        $Space = Space::findOrFail($id);
-        return (string) $Space->delete();
+        $Host = Host::findOrFail($id);
+        return (string) $Host->delete();
     }
 }

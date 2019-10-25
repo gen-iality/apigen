@@ -157,7 +157,7 @@ Route::group(
     }
 );
 
-/***************
+/****************
  * SPACES
  ****************/
 Route::get   ('events/{event_id}/spaces', 'SpaceController@index');
@@ -165,6 +165,19 @@ Route::post  ('events/{event_id}/spaces', 'SpaceController@store');
 Route::get   ('events/{event_id}/spaces/{id}', 'SpaceController@show');
 Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
+
+/***************
+ * HOST
+ * 
+ * rutas para guardar la agenda de los eventos
+ ****************/
+
+Route::get   ('events/{event_id}/host',      'HostController@index');
+Route::post  ('events/{event_id}/host',      'HostController@store');
+Route::get   ('events/{event_id}/host/{id}', 'HostController@show');
+Route::put   ('events/{event_id}/host/{id}', 'HostController@update');
+Route::delete('events/{event_id}/host/{id}', 'HostController@destroy');
+
 
 /***************
  * USER PROPERTIES
@@ -180,7 +193,7 @@ Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController
  ****************/
 
 Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
-Route::post('events/{event_id}/sendEmail' , "SendContentController@SendContentGenerated");
+Route::post('events/{event_id}/sendemail' , "SendContentController@sendContentGenerated");
 Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
 Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
 Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
@@ -191,12 +204,12 @@ Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destr
  * INVITATION 
  ****************/
 
-Route::get('events/{event_id}/Invitation' , 'InvitationController@index');
-Route::post('events/{event_id}/sendInvitation' , "InvitationController@SendInvitation");
-Route::post('events/{event_id}/Invitation' , 'InvitationController@store');
-Route::get('events/{event_id}/Invitation/{id}' , 'InvitationController@show');
-Route::put('events/{event_id}/Invitation/{id}' , 'InvitationController@update');
-Route::delete('events/{event_id}/Invitation/{id}', 'InvitationController@destroy');
+Route::get('events/{event_id}/invitation' , 'InvitationController@index');
+Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
+Route::post('events/{event_id}/invitation' , 'InvitationController@store');
+Route::get('events/{event_id}/invitation/{id}' , 'InvitationController@show');
+Route::put('events/{event_id}/invitation/{id}' , 'InvitationController@update');
+Route::delete('events/{event_id}/invitation/{id}', 'InvitationController@destroy');
 
 
 /***************
