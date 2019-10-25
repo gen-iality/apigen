@@ -79,14 +79,13 @@ class UserPropertiesController extends Controller
         
         $data = $request->json()->all();
         
-        $UserProperties = Event::find($event_id)->user_properties()->find($id);
-        //if($UserProperties["event_id"]= $event_id){
-        $UserProperties->fill($data);
-        
-        $UserProperties->save();
-        
-        return $data;
-        
+        $userProperty = Event::findOrFail($event_id)->user_properties()->find($id);
+        if (!$userProperty){
+            return abort(404);
+        }
+        $userProperty->fill($data);
+        $userProperty->save();
+        return new JsonResource($userProperty);
     }
 
     /**
@@ -96,8 +95,13 @@ class UserPropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $event_id, $id)
-    {
-        $UserProperties = Event::find($event_id)->user_properties()->find($id);
-        return (string) $UserProperties->delete();
+    {   
+        $event = Event::findOrFail($event_id);
+       
+        $userProperty = $event->user_properties()->find($id);
+        if (!$userProperty){
+            return abort(404);
+        }
+        return (string) $userProperty->delete();
     }
 }
