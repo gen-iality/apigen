@@ -23,7 +23,7 @@ class Activities extends Moloquent
 
     public function space()
     {
-        return $this->belongsToMany('App\Space');
+        return $this->belongsTo('App\Space');
     }
 
     public function categories()
@@ -37,7 +37,7 @@ class Activities extends Moloquent
     }
     public function type()
     {
-        return $this->belongsToMany('App\Type');
+        return $this->belongsTo('App\Type');
     }
     protected $dateformat = 'Y-m-d H:i';
     protected $fillable = [
@@ -46,7 +46,7 @@ class Activities extends Moloquent
         "datetime_end" , 
         "space_id" ,
         "category_ids" , 
-        "hosts_id" , 
+        "host_ids" , 
         "type_id" , 
         "description" ,
         "image" 

@@ -37,7 +37,7 @@ class ActivitiesController extends Controller
     {
         $data = $request->json()->all();
         $category_ids = $data["category_ids"];
-        $host_ids = $data["hosts_id"];
+        $host_ids = $data["host_ids"];
         $space_id = $data["space_id"];  
         $type_id = $data["type_id"];
         
@@ -45,7 +45,9 @@ class ActivitiesController extends Controller
         $activity->save();       
         $activity->categories()->attach($category_ids);
         $activity->hosts()->attach($host_ids);
-                
+        $activity->type()->push($type_id);
+        $activity->space()->push($space_id);
+                   
         //Cargamos de nuevo para traer la info de las categorias
         $activity = Activities::find($activity->id);        
         return $activity;
