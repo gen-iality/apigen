@@ -188,6 +188,27 @@ Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController
 Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
 Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
 
+
+/***************
+ * ACTIVITIES
+ ****************/
+Route::get   ('events/{event_id}/activities',      'ActivitiesController@index');
+Route::post  ('events/{event_id}/activities',      'ActivitiesController@store');
+Route::get   ('events/{event_id}/activities/{id}', 'ActivitiesController@show');
+Route::put   ('events/{event_id}/activities/{id}', 'ActivitiesController@update');
+Route::delete('events/{event_id}/activities/{id}', 'ActivitiesController@destroy');
+
+
+/***************
+ * TYPE
+ ****************/
+Route::get   ('events/{event_id}/type',      'TypeController@index');
+Route::post  ('events/{event_id}/type',      'TypeController@store');
+Route::get   ('events/{event_id}/type/{id}', 'TypeController@show');
+Route::put   ('events/{event_id}/type/{id}', 'TypeController@update');
+Route::delete('events/{event_id}/type/{id}', 'TypeController@destroy');
+
+
 /***************
  * SENDCONTENT 
  ****************/
@@ -198,6 +219,7 @@ Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
 Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
 Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
 Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
+
 
 
 /***************

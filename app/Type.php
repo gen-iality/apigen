@@ -10,9 +10,8 @@ use Moloquent;
  * Category Model
  *
  */ 
-class Host extends Moloquent
+class Type extends Moloquent
 {
-
     public function event()
     {
         return $this->belongsTo('App\Event');
