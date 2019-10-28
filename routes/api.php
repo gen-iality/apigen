@@ -78,6 +78,29 @@ Route::group(
     }
 );
 
+/***************
+ * SENDCONTENT 
+ ****************/
+
+Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
+Route::post('events/{event_id}/sendemail' , "SendContentController@sendContentGenerated");
+Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
+Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
+Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
+Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
+
+/***************
+ * INVITATION 
+ ****************/
+
+Route::get('events/{event_id}/invitation' , 'InvitationController@index');
+Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
+Route::post('events/{event_id}/invitation' , 'InvitationController@store');
+Route::get('events/{event_id}/invitation/{id}' , 'InvitationController@show');
+Route::put('events/{event_id}/invitation/{id}' , 'InvitationController@update');
+Route::delete('events/{event_id}/invitation/{id}', 'InvitationController@destroy');
+
+
 /****************
  * Users Organization
  ****************/

@@ -29,21 +29,20 @@ class ActivitiesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        $category_ids = $data["category_ids"];
+        $activity_category_ids = $data["activity_categories_ids"];
         $host_ids = $data["host_ids"];
         $space_id = $data["space_id"];  
-        $type_id = $data["type_id"];
+        $type_id = $data["type_id"];    
         
         $activity = new Activities($data);      
         $activity->save();       
-        $activity->categories()->attach($category_ids);
+        $activity->activity_categories()->attach($activity_category_ids);
         $activity->hosts()->attach($host_ids);
         $activity->type()->push($type_id);
         $activity->space()->push($space_id);

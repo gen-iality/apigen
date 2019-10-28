@@ -1,21 +1,6 @@
 <?php
 
 
-
-/***************
- * Certificates
- ****************/
-
-Route::get('pdfcertificate',"CertificateController@certificatePdf");
-Route::post('generatecertificate',"CertificateController@generateCertificate");
-
-Route::get('certificates/{id}', 'CertificateController@destroy');
-Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
-Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
-
-
-
-
 /****************
  * SPACES
  ****************/
@@ -58,7 +43,6 @@ Route::put   ('events/{event_id}/activities/{id}', 'ActivitiesController@update'
 Route::delete('events/{event_id}/activities/{id}', 'ActivitiesController@destroy');
 
 
-
 /***************
  * TYPE
  ****************/
@@ -68,40 +52,19 @@ Route::get   ('events/{event_id}/type/{id}', 'TypeController@show');
 Route::put   ('events/{event_id}/type/{id}', 'TypeController@update');
 Route::delete('events/{event_id}/type/{id}', 'TypeController@destroy');
 
-/***************
- * CATEGORYACTIVITIES (las categorias para las actividades de la agenda)
- ****************/
-Route::get   ('events/{event_id}/categoryactivities',      'CategoryActivitiesController@index');
-Route::post  ('events/{event_id}/categoryactivities',      'CategoryActivitiesController@store');
-Route::get   ('events/{event_id}/categoryactivities/{id}', 'CategoryActivitiesController@show');
-Route::put   ('events/{event_id}/categoryactivities/{id}', 'CategoryActivitiesController@update');
-Route::delete('events/{event_id}/categoryactivities/{id}', 'CategoryActivitiesController@destroy');
-
-
 
 /***************
- * SENDCONTENT 
+ * ACTIVITYCATEGORIES (las categorias para las actividades de la agenda)
  ****************/
 
-Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
-Route::post('events/{event_id}/sendemail' , "SendContentController@sendContentGenerated");
-Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
-Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
-Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
-Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
+Route::get   ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@index');
+Route::post  ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@store');
+Route::get   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@show');
+Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@update');
+Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
 
 
 
-/***************
- * INVITATION 
- ****************/
-
-Route::get('events/{event_id}/invitation' , 'InvitationController@index');
-Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
-Route::post('events/{event_id}/invitation' , 'InvitationController@store');
-Route::get('events/{event_id}/invitation/{id}' , 'InvitationController@show');
-Route::put('events/{event_id}/invitation/{id}' , 'InvitationController@update');
-Route::delete('events/{event_id}/invitation/{id}', 'InvitationController@destroy');
 
 
 

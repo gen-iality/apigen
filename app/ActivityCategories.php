@@ -10,11 +10,11 @@ use Moloquent;
  * Category Model
  *
  */ 
-class CategoryActivities extends Moloquent
+class ActivityCategories extends Moloquent
 {
     public function event()
     {
         return $this->belongsTo('App\Event');
     }
-    protected $fillable = ['name'];
+    protected $fillable = ['name','event_id'];
 }

@@ -13,7 +13,7 @@ use Carbon\Carbon;
  */ 
 class Activities extends Moloquent
 {
-    protected $with = ['categories','space','hosts','type'];
+    protected $with = ['activity_categories','space','hosts','type'];
 
 
     public function event()
@@ -26,15 +26,16 @@ class Activities extends Moloquent
         return $this->belongsTo('App\Space');
     }
 
-    public function categories()
+    public function activity_categories()
     {
-        return $this->belongsToMany('App\CategoryActivities' );
+        return $this->belongsToMany('App\ActivityCategories' );
     }
 
     public function hosts()
     {
         return $this->belongsToMany('App\Host');
     }
+    
     public function type()
     {
         return $this->belongsTo('App\Type');
@@ -45,7 +46,7 @@ class Activities extends Moloquent
         'datetime_start' , 
         "datetime_end" , 
         "space_id" ,
-        "category_ids" , 
+        "activity_categories_ids" , 
         "host_ids" , 
         "type_id" , 
         "description" ,

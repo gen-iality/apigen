@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use App\CategoryActivities;
+use App\ActivityCategories;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,7 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *
  *
  */
-class CategoryActivitiesController extends Controller
+class ActivityCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class CategoryActivitiesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            CategoryActivities::paginate(config('app.page_size'))
+            ActivityCategories::paginate(config('app.page_size'))
         );
     }
 
@@ -35,7 +35,7 @@ class CategoryActivitiesController extends Controller
     {
         $data = $request->json()->all();
         //$data["event_id"] = $event_id;
-        $result = new CategoryActivities($data);
+        $result = new ActivityCategories($data);
         $result->save();
         return $result;
     }
@@ -43,13 +43,13 @@ class CategoryActivitiesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CategoryActivities  $CategoryActivities
+     * @param  \App\ActivityCategories  $ActivityCategories
      * @return \Illuminate\Http\Response
      */
     public function show($event_id,$id )
     {
-        $CategoryActivities = CategoryActivities::findOrFail($id);
-        $response = new JsonResource($CategoryActivities);
+        $ActivityCategories = ActivityCategories::findOrFail($id);
+        $response = new JsonResource($ActivityCategories);
         return $response;
 
     }
@@ -57,15 +57,15 @@ class CategoryActivitiesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CategoryActivities  $CategoryActivities
+     * @param  \App\ActivityCategories  $ActivityCategories
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
-        $CategoryActivities = CategoryActivities::findOrFail($id);
-        $CategoryActivities->fill($data);
-        $CategoryActivities->save();
+        $ActivityCategories = ActivityCategories::findOrFail($id);
+        $ActivityCategories->fill($data);
+        $ActivityCategories->save();
         return $data;
 
     }
@@ -78,7 +78,7 @@ class CategoryActivitiesController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {
-        $CategoryActivities = CategoryActivities::findOrFail($id);
-        return (string) $CategoryActivities->delete();
+        $ActivityCategories = ActivityCategories::findOrFail($id);
+        return (string) $ActivityCategories->delete();
     }
 }
