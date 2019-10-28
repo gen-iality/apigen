@@ -28,7 +28,7 @@ class Activities extends Moloquent
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category' );
+        return $this->belongsToMany('App\CategoryActivities' );
     }
 
     public function hosts()
