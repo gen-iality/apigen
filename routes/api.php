@@ -44,7 +44,7 @@ Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 /****************
  * eventUsers
  ****************/
-Route::apiResource('eventUsers', 'EventUserController', ['only' => ['index', 'show']]);
+Route::apiResource('eventUsers', 'EventUserController');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('eventUsers', 'EventUserController', ['except' => ['index', 'show']]);
@@ -58,6 +58,9 @@ Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
+Route::get   ('events/{event_id}/eventusers',      'EventUserController@indexar');
+Route::get   ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
+Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
 /****************
  * organizations
@@ -96,7 +99,7 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
-        Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
+        Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
@@ -136,19 +139,6 @@ Route::group(
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
-
-/***************
- * Certificates
- ****************/
-
-Route::get('pdfcertificate',"CertificateController@certificatePdf");
-Route::post('generatecertificate',"CertificateController@generateCertificate");
-
-Route::get('certificates/{id}', 'CertificateController@destroy');
-Route::apiResource('certificates', 'CertificateController', ['only' => ['index', 'show']]);
-Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
-
-
 
 
 
