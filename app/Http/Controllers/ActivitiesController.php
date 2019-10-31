@@ -52,6 +52,27 @@ class ActivitiesController extends Controller
         return $activity;
     }
 
+    
+
+    public function activitieAssistant(Request $request, $event_id,$activity_id)
+    {
+        $data = $request->json()->all();
+        $activity_category_ids = $data["activity_categories_ids"];
+        $host_ids = $data["host_ids"];
+        $space_id = $data["space_id"];  
+        $type_id = $data["type_id"];    
+        
+        $activity = new Activities($data);      
+        $activity->save();       
+        $activity->activity_categories()->attach($activity_category_ids);
+        $activity->hosts()->attach($host_ids);
+        $activity->type()->push($type_id);
+        $activity->space()->push($space_id);
+                   
+        //Cargamos de nuevo para traer la info de las categorias
+        $activity = Activities::find($activity->id);        
+        return $activity;
+    }
     /**
      * Display the specified resource.
      *

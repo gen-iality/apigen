@@ -18,8 +18,8 @@ class Attendee extends Models\Attendee
     protected $table = "event_users";
     protected $observables = ['saved', 'created','updated'];
     protected static $unguarded = true;
-    protected $fillable = ['account_id', 'event_id', 'state_id', "checked_in", "checked_in_date", "properties"];
-    protected $with = ['user', 'state'];
+    protected $fillable = ['account_id', 'event_id', 'state_id', "checked_in", "checked_in_date", "properties", "activities"];
+    protected $with = ['user', 'state' , 'activities' ];
 
     //Default values
     protected $attributes = [
@@ -27,7 +27,10 @@ class Attendee extends Models\Attendee
         'rol_id'   => self::ROL_ATTENDEE,
         'checked_in' => false
     ];
-
+     public function activities()
+    {
+        return $this->belongsToMany('App\Activities');
+    }
     public function event()
     {
         return $this->belongsTo('App\Event');
@@ -83,7 +86,7 @@ class Attendee extends Models\Attendee
         }
         return $this;
     }
-
+   
     /**
      *La siguiente funcion se comento porque no se pudo 
      *hacer que el request obtuviera el usuario logueado

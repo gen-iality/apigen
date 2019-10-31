@@ -6,6 +6,7 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use Moloquent;
 use Carbon\Carbon;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 /**
  * Category Model
@@ -40,6 +41,14 @@ class Activities extends Moloquent
     {
         return $this->belongsTo('App\Type');
     }
+    public function quantity()
+    {
+        return $this->embedsMany('App\Quantity');   
+    }
+    public function users()
+    {
+        return $this->embedsMany('App\ActivityUsers');
+    }
     protected $dateformat = 'Y-m-d H:i';
     protected $fillable = [
         'name' , 
@@ -50,6 +59,12 @@ class Activities extends Moloquent
         "host_ids" , 
         "type_id" , 
         "description" ,
-        "image" 
+        "image" ,
+        "quantity",
+        "user" , 
+        "event_id",
+        "acitivity_users",
+        "capacity",
+        "remaining_capacity"
     ];
 }

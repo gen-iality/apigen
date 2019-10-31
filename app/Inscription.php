@@ -10,11 +10,15 @@ use Moloquent;
  * Category Model
  *
  */ 
-class ActivityCategories extends Moloquent
+class Inscription extends Moloquent
 {
     public function event()
     {
         return $this->belongsTo('App\Event');
     }
-    protected $fillable = ['name','event_id', 'color'];
+    public function eventusers()
+    {
+        return $this->hasMany('App\Attendee');
+    }
+    protected $guarded = [];
 }
