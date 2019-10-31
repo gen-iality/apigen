@@ -171,7 +171,7 @@ class EventUserController extends Controller
     public function indexar(Request $request,$event_id)
     {
         return EventUserResource::collection(
-            Attendee::where('event_id',$event_id)->paginate(config('app.page_size'))
+            Attendee::where('event_id',$event_id)->paginate(100)
         );
     }
 
