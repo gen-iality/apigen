@@ -38,14 +38,10 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
-        'mongodb' => [
-            'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', 'cluster0-gp9gs.mongodb.net'),
-	        'dsn'      =>     'mongodb+srv://cluster0-gp9gs.mongodb.net',
-	        'port'     => env('DB_PORT', 27017),
+        'mongodb' => [    
+            'driver'   => 'mongodb',   
+            'dsn'=> 'mongodb+srv://root:amazonas.2040@cluster0-gp9gs.mongodb.net/test?retryWrites=true&w=majority',
             'database' => env('DB_DATABASE', 'evius'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'amazonas.2040'),
             'options'  => [
                 'database' => env('DB_DATABASE', 'main') // sets the authentication database required by mongo 3
             ]
