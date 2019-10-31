@@ -16,5 +16,5 @@ class ActivityCategories extends Moloquent
     {
         return $this->belongsTo('App\Event');
     }
-    protected $fillable = ['name','event_id', 'color'];
+    protected $fillable = ['name','event_id' , 'color'];
 }
