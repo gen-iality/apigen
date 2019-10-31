@@ -99,10 +99,37 @@ class ActivitiesController extends Controller
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
+        
+
         $Activities = Activities::findOrFail($id);
         $Activities->fill($data);
-        $Activities->save();
-        return $data;
+        $Activities->save();     
+        $activity_categories_ids = isset($data["activity_categories_ids"]);
+        if($activity_categories_ids){
+            $activity_categories_ids = $data["activity_categories_ids"];
+            $Activities->activity_categories()->detach();
+            $Activities->activity_categories()->attach($activity_categories_ids);
+        }
+        $host_ids = isset($data["host_ids"]);
+        if($host_ids){
+            $host_ids = $data["host_ids"];
+            $Activities->hosts()->detach();
+            $Activities->hosts()->attach($host_ids);
+        }
+        $type_id = isset($data["type_id"]);
+        if($type_id){
+            $type_id = isset($data["type_id"]);
+            $Activities->type()->pull($data["type_id"]);
+            $Activities->type()->push($type_id); 
+        }        
+        $space_id = isset($data["space_id"]);
+        if($space_id){
+            $space_id = $data["space_id"];
+            $Activities->space()->pull($data["space_id"]);
+            $Activities->space()->push($space_id);            
+        }
+        $activity = Activities::find($Activities->id);
+        return $activity;
 
     }
 
