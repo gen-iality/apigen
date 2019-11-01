@@ -22,7 +22,7 @@ class TypeController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Type::paginate(config('app.page_size'))
+            Type::paginate(1000)
         );
     }
 

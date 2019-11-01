@@ -14,13 +14,11 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
 
 /****************
- * ACITIVITY Id
+ * ACITIVITY 
  ****************/
 Route::post  ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@activitieAssistant');
 Route::delete('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@deleteAssistant');
 Route::put   ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@updateUserActivities');
-
-Route::post   ('events/{event_id}/activity/{acitivy_id}/capacity', 'InscriptionController@capacity');
 
 
 
