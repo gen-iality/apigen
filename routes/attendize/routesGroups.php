@@ -21,10 +21,7 @@ Route::delete('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'Insc
 Route::put   ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@updateUserActivities');
 
 Route::post   ('events/{event_id}/activity/{acitivy_id}/capacity', 'InscriptionController@capacity');
-Route::post  ('events/{event_id}/activity/', 'SpaceController@store');
-Route::get   ('events/{event_id}/activity//{id}', 'SpaceController@show');
-Route::put   ('events/{event_id}/activity//{id}', 'SpaceController@update');
-Route::delete('events/{event_id}/activity//{id}', 'SpaceController@destroy');
+
 
 
 /****************
