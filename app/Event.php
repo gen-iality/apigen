@@ -8,6 +8,7 @@ use Moloquent;
 use Carbon\Carbon;
 use App\Models\Event as ModelsEvent;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 /**
  * Event Model
@@ -21,11 +22,10 @@ class Event extends ModelsEvent
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author', 'categories', 'eventType', 'organiser','organizer','currency', 'tickets','speaker'];
-
+    protected $with = ['author','categories','eventType', 'organiser','organizer','currency'];
 
     protected $fillable = [
-        'author', 'name', 'description', 'location', 'venue', 'pulep',
+        'author', 'name', 'description', 'location', 'venue', 'address','pulep',
         'datetime_from', 'datetime_to',
         'date_start', 'date_end', 'time_start', 'time_end',
         'visibility', 'picture', 'organization_id', 'category','extra_config', 
@@ -75,6 +75,19 @@ class Event extends ModelsEvent
     protected $casts = [
         'category' => 'array',
     ];
+
+
+    /***
+     * 
+     *  _____  ______ _            _______ _____ ____  _   _  _____ 
+     *  |  __ \|  ____| |        /\|__   __|_   _/ __ \| \ | |/ ____|
+     *  | |__) | |__  | |       /  \  | |    | || |  | |  \| | (___  
+     *  |  _  /|  __| | |      / /\ \ | |    | || |  | | . ` |\___ \ 
+     *  | | \ \| |____| |____ / ____ \| |   _| || |__| | |\  |____) |
+     *  |_|  \_\______|______/_/    \_\_|  |_____\____/|_| \_|_____/ 
+     * 
+     * 
+     */
 
     /**
      * The organizer associated with the event.
@@ -181,7 +194,6 @@ class Event extends ModelsEvent
     {
         return $this->hasMany('\App\Models\Ticket', 'event_id');
     }
-
     /**
      * The orders associated with the event.
      *
@@ -191,16 +203,13 @@ class Event extends ModelsEvent
     {
         return $this->hasMany('App\Order');
     }
-
     public function userPermissions()
     {
         return $this->hasMany('App\ModelHasRole');
     }
-
-    public function eventContent()
+    
+    public function user_properties()
     {
-        return $this->hasMany('App\ContentTypes');
+        return $this->embedsMany('App\UserProperties');
     }
-
-
 }

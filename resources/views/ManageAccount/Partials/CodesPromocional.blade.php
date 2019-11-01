@@ -63,7 +63,36 @@
             {!! Form::selectRange('percentage_discount', 0, 100, null,  array('class'=>'form-control control-label required', 'placeholder' => '%')) !!}
         </div>
     </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+        {!! Form::label('ticket_to_discount', 'Ticket al que se le habillitará el código', array('class'=>'control-label required')) !!}
+            <select class="form-control" name="ticket_to_discount">
+                @if($tickets)
+                    <option value="1000" selected> Todos</option>   
+                        @foreach($tickets as $ticket)
+                            @foreach($stages as $stage)
+                                @if($stage['stage_id'] == $ticket['stage_id'])
+                                    <option value="{{ $ticket['id'] }}">{{ $ticket['title'] }} - {{ $stage['title'] }}</option>
+                                @endif
+                            @endforeach
+                        @endforeach
+                @endif
+            </select>
+        </div>
+    </div>
 </div>
+
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('tickets_amount', trans("ManageAccount.tickets_amount"), array('class'=>'control-label required')) !!}
+            {!! Form::selectRange('tickets_amount', 0, 100, $tickets_amount , array('class'=>'form-control control-label required')) !!}
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col-md-12">

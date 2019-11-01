@@ -49,7 +49,8 @@ class TokenToUserProvider implements UserProvider
             Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
             
         } catch (\Firebase\Auth\Token\Exception\ExpiredToken $e) {
-
+            
+            
             /**
              * Se carga el sdk de firebase para PHP
              * Cargamos el json el cual contiene las credenciales para conectarse a firebase
@@ -59,6 +60,7 @@ class TokenToUserProvider implements UserProvider
             $json = file_get_contents(base_path('firebase_credentials.json'));
             $data = json_decode($json, true);
             $api_key = $data['api_key'];
+         
 
             /**
              * Decodificación del token
@@ -68,6 +70,7 @@ class TokenToUserProvider implements UserProvider
             $token = $e->getToken()->getClaims();
             $user_id = ((array) $token);
             $user_id = $user_id['user_id'];
+            
             /**
              * Iniciamos el proyecto de firebase
              * Se carga el projectID solo necesario para la libreria Auth
@@ -83,7 +86,7 @@ class TokenToUserProvider implements UserProvider
             // var_dump($user);
             $refresh_token = $user->refresh_token;
 
-
+               
             if (!$refresh_token) {
                 return response(
                     [
@@ -92,7 +95,7 @@ class TokenToUserProvider implements UserProvider
                     ], Response::HTTP_UNAUTHORIZED
                 );
             }
-
+            
             /**
              * Generamos la URL a partir del api_key
              * Esta url sirve para poder generar el nuevo token id,
@@ -111,19 +114,22 @@ class TokenToUserProvider implements UserProvider
              */
 
             $client = new Client();
+            
+            
 
             try {
-                $response = $client->request('POST', $url, ['form_params' => $body]);
-
-            } catch (RequestException $e) {
-                return response($e->getResponse());
+                $response = $client->request('POST', $url, ['form_params' => $body]);  
+            } catch (\Exception $e) {
+                $r = json_decode($e->getResponse()->getBody()->getContents());
+                throw new AuthenticationException($r->error->message);
             }
+           
             /**
              * Capturamos el nuevo id_token
              * Capturamos el cuerpo, decodificamos la respuesta y capturamos el id_token
              */
             $token_response = json_decode($response->getBody());
-
+            
             /*
              * Se verifica la valides del token
              * Si este se encuentra activamos la función validator, el cual nos devuelve el

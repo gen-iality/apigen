@@ -18,8 +18,8 @@ class TokenOrSessionGuard extends SessionGuard
     private $storageKey = '';
     protected $request;
 
-    public function __construct(UserProvider $provider, Request $request, $configuration)
-    {
+    public function __construct($name, UserProvider $provider, Session $session, Request $request, $configuration)
+    {   //die("TokenOrSessionGuard");
         $name = 'session';
         parent::__construct($name, $provider, $request->session(), $request, $configuration);
         $this->provider = $provider;
@@ -28,6 +28,7 @@ class TokenOrSessionGuard extends SessionGuard
         $this->inputKey = isset($configuration['input_key']) ? $configuration['input_key'] : 'token';
         // key to check in database
         $this->storageKey = isset($configuration['storage_key']) ? $configuration['storage_key'] : 'token';
+        
     }
 
     /**

@@ -22,6 +22,33 @@
                         @foreach($tickets as $ticket)
                             <?php
                                 $multiple = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : 0;
+
+                                if ($ticket['qty'] > 1) {
+                                    $multiple2 = 2;
+                                } else {
+                                    $multiple2 = 1;
+                                }
+                                $multiple3 = 0;
+                                foreach ($tickets as $ticket) {
+                                    $multiple3 = $multiple3 + 1;
+                                }
+                            ?>
+                             <?php
+                                if (isset($seats_data)) { 
+                                    $seats = $seats_data;
+                                    foreach ($seats as $key => $seat) {
+                                        if (isset($seat['category'])) {
+                                            $seat_category = $seat['category']['label'];
+                                            $ticket_name = $ticket['ticket']['title'];
+                                            if ($seat_category == $ticket_name) {
+                                                $seat_position = $seat['labels']['displayedLabel'];
+                                                $seat_title = $seat['labels']['section'];
+                                                unset($seats_data[$key]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
                             ?>
                         @if(isset($event->stage_continue))
                         @foreach($event->event_stages as $stage)
@@ -46,6 +73,11 @@
                             <td class="pl0">Personas por ticket X <b>{{$ticket['ticket']['number_person_per_ticket']}}</b></td>
                             @endif
                         </tr>
+                        <tr>
+                            @if (isset($seats_data))
+                            <td class="pl0">{{ $seat_position }}</b></td>
+                            @endif
+                        </tr>
                         @endforeach
                         @foreach($tickets as $ticket)
                             @if((int)ceil($ticket['full_price']) === 0)
@@ -57,6 +89,30 @@
                         @endforeach
                     </table>
                 </div>
+                @if($order_total == 0)
+                <div class="panel-footer">
+                    @if(isset($discount))
+                            <h5 style="text-align: center;">Descuento  del <b>{{$percentage_discount}}%</b> por 
+                                @if($code_discount)
+                                    el código <b>{{$code_discount}}</b>
+                                @else
+                                    <b>{{$total_ticket_quantity}}</b> tickets
+                                @endif
+                            </h5>
+                        <h5>
+                            Precio: <span style="float: right;"> ${{ number_format($order_total + $discount, 2, '.', '') }} </span>
+                        </h5>
+                        <h5>
+                            Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
+                        </h5>
+                        <hr/>
+                    <h5>
+                        @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $order_total }}</b></span>
+                    </h5>
+                    
+                    @endif
+                </div>
+                @endif
                 @if($order_total > 0)
                 <div class="panel-footer">
                     @if(isset($discount))
@@ -68,7 +124,7 @@
                                 @endif
                             </h5>
                         <h5>
-                            Precio: <span style="float: right;">${{ number_format($order_total + $discount, 2, '.', '') }} </span>
+                            Precio: <span style="float: right;"> ${{ number_format($order_total + $discount, 2, '.', '') }} </span>
                         </h5>
                         <h5>
                             Descuento: <span style="float: right;"> - ${{ number_format($discount, 2, '.', '') }} </span>
@@ -76,11 +132,27 @@
                         <hr/>
 
                     @endif
+                    @if (isset($event->fees) && !isset($event->comission_on_base_price))
+                        <div class="help-block">
+                        <h5>
+                            Servicio: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>
+                        </h5>
+                        </div>
+                    @elseif (isset($event->fees) && $event->comission_on_base_price == true)
+                        <div class="help-block">
+                        <h5>
+                            Servicio: <span style="float: right;">{{ money($fees_total, $event->currency) }}</span>
+                        </h5>
+                        <h5>
+                            IVA servicio: <span style="float: right;">{{ money($tax_total, $event->currency) }}</span>
+                        </h5>
+                        </div>
+                    @endif
                     <h5>
                         @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
                     </h5>
                     <!-- Esta Parte se encuentra cancelada -->
-                    {{--    @if($event->organiser->charge_tax)
+                    <!-- {{--    @if($event->organiser->charge_tax)
                         <h5>
                             {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                             <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
@@ -90,7 +162,7 @@
                             <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
                         </h5>
                         @endif
-                    --}}
+                    --}} -->
                     <!-- Esta Parte se encuentra cancelada -->
 
                 </div>
@@ -146,7 +218,7 @@
                     <div class="col-xs-4">
                         <div class="form-group">
                             {!! Form::label("document", 'Número del documento') !!}
-                            {!! Form::number("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("document", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -223,8 +295,7 @@
                         @lang("Public_ViewEvent.copy_buyer")
                     </a>
                 </div>
-                @foreach($tickets as $ticket)
-                    @if ($multiple > 1)
+                    @if ($multiple > 1  || $multiple2 > 1 || $multiple3 > 1 && $event->id != '5c3fb4ddfb8a3371ef79bd62')
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -238,7 +309,6 @@
                             </div>
                         </div>
                     @endif
-                @endforeach
 
                 <div class="row">
                     <div class="col-md-12">
@@ -256,9 +326,11 @@
                                     }
                                 }
                             ?>
-                            @if (isset($seats_data))
+                            
+                            @if (isset($seat_title))
                                 <H3>{{$seat_title}}</H3>
                             @endif
+
                             @foreach($tickets as $ticket)
                             <?php
                                 $cant = isset($ticket['ticket']['number_person_per_ticket']) ? $ticket['ticket']['number_person_per_ticket'] : $cant;
@@ -303,28 +375,49 @@
                                             @foreach($fields as $field)
                                                 <div class="col-xs-12 col-sm-6">
                                                     <div class="form-group">
-                                                    @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
-                                                        @if(isset( $field['label']))
-                                                            {!! Form::label($field['name'], $field['label']) !!}
+                                                        <?php
+                                                        $optionns = ["Alimentos","Recreacion o Deporte","Salud o Medicina","Construccion o Infraestructura","Suministros Construccion o Infraestructura","Inmobiliaria","Banca o Finanzas","Gobierno","Defensa","Industria Militar","Organizacion sin ánimo de Lucro","Industria Automotriz","Industria Farmaceutica","Tecnologia","Telecomunicaciones","Otro"]; 
+                                                        ?>
+                                                    @if(!isset($field['visible']))
+                                                        @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
+                                                            @if(isset( $field['label']))
+                                                                {!! Form::label($field['name'], $field['label']) !!}
+                                                            @else
+                                                                {!! Form::label($field['name'], $field['name']) !!}
+                                                            @endif
+                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
                                                         @else
-                                                            {!! Form::label($field['name'], $field['name']) !!}
-                                                        @endif
-                                                        {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
-                                                    @else
-                                                        @if(isset( $field['label']))
-                                                            {!! Form::label($field['name'], $field['label']) !!}
-                                                        @else
-                                                            {!! Form::label($field['name'], $field['name']) !!}
-                                                        @endif
-                                                        <!-- Select Dropdown -->
-                                                        @if($field['type'] == 'list'&& $event->id == '5cbe5231d74d5c0d251fa1e2')
-                                                            {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  [0,1,2,3,4,5,6,7,8], null, ['class' => 'form-control']) !!}
-                                                        @else
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                            @if(isset( $field['label']))
+                                                                {!! Form::label($field['name'], $field['label']) !!}
+                                                            @else
+                                                                {!! Form::label($field['name'], $field['name']) !!}
+                                                            @endif
+                                                            @if($event->id == '5c3fb4ddfb8a3371ef79bd62')
+                                                            <!-- Select Dropdown -->
+                                                                @if($field['type'] == 'list')
+                                                                    {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
+                                                                <!-- Canal de inscripcion ACIS -->
+                                                                @elseif($field['name'] === 'canalDeInscripcion')
+                                                                    {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
+                                                                @else
+                                                                    {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                                @endif
+                                                            @endif
+                                                            @if($event->id == '5d2de182d74d5c28047d1f85')
+                                                                @if($field['type'] == 'boolean')
+                                                                    {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
+                                                                @elseif($field['type'] == 'list')
+                                                                    {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", $optionns, null, ['class' => 'form-control']) !!}
+                                                                @else
+                                                                    {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                                @endif
+                                                            @endif
                                                         @endif
                                                     @endif
                                                     </div>
-
+                                                    @if($field['name'] === 'canalDeInscripcion')
+                                                        {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
+                                                    @endif
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
                                                     @if(isset($ticket['ticket']['number_person_per_ticket']))
                                                         {{ Form::hidden('person_per_ticket', $ticket['ticket']['number_person_per_ticket']) }}

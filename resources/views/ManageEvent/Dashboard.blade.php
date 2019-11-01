@@ -23,13 +23,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" integrity="sha256-szHusaozbQctTn4FX+3l5E0A5zoxz7+ne4fr8NgWJlw=" crossorigin="anonymous" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js" integrity="sha256-Gk+dzc4kV2rqAZMkyy3gcfW6Xd66BhGYjVWa/FjPu+s=" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js" integrity="sha256-0rg2VtfJo3VUij/UY9X0HJP7NET6tgAY98aMOfwP0P8=" crossorigin="anonymous"></script>
-    <script>
-        $(function () {
-            $.getJSON('http://graph.facebook.com/?id=' + '{{route('showEventPage',['event_id' => $event->id, 'event_slug' => Str::slug($event->title)])}}', function (fbdata) {
-                $('#facebook-count').html(fbdata.shares);
-            });
-        });
-    </script>
+
 
     <style>
         svg {
@@ -79,15 +73,6 @@
                 <span>@lang("Dashboard.event_views")</span>
             </div>
         </div>
-
-        <!-- May be implemented soon.
-        <div class="col-sm-3 hide">
-            <div class="stat-box">
-                <h3 id="facebook-count">0</h3>
-                <span>Facebook Shares</span>
-            </div>
-        </div>
-        -->
     </div>
 
     <div class="row">

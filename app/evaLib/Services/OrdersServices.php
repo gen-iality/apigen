@@ -265,7 +265,6 @@ class OrdersServices
      */
     public static function updateAnOrder($order_reference, $status)
     {
-        return 'hola';
         switch ($status) {
             case 'APPROVED':
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.

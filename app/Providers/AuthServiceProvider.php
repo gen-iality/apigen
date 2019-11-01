@@ -44,7 +44,9 @@ class AuthServiceProvider extends ServiceProvider
             // automatically build the DI, put it as reference
             $userProvider = app(TokenToUserProvider::class);
             $request = app('request');
-            return new TokenOrSessionGuard($userProvider, $request, $config);
+            $name = "session";
+            $session =  $app->make('session.store');
+            return new TokenOrSessionGuard($name, $userProvider, $session, $request, $config);
         });
         //
     }

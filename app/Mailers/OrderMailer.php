@@ -98,7 +98,7 @@ class OrderMailer
 
 	    // Envío del email 
             Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order, $pdf) {
-                $message->to('felipe.martinez@mocionsoft.com','juan.lopez@mocionsoft.com','cesar.torres@mocionsoft.com');
+                $message->to('juan.lopez@mocionsoft.com');
 		//$message->to('felipe.martinez@mocionsoft.com');
                 if($order->amount == 0){
                     $message->subject('Tiquete Gratuito '.$order->event->name);

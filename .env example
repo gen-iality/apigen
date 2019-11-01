@@ -1,17 +1,16 @@
 APP_NAME=Laravel
 APP_ENV=local
-APP_KEY=base64:rNh0PbxLYH50NfUqfnMTmOsdM+bpyg6IXyjAzVUZ3Lo=
+APP_KEY= ZqxYyhRadx1UNwPgdjXsmeG/MvBZO6ZR6PeUuCa6cAs=
 APP_DEBUG=true
 APP_URL=http://localhost
-
 LOG_CHANNEL=stack
 
 DB_CONNECTION=mongodb
-DB_HOST=dev.mocionsoft.com
+DB_HOST="cluster0-gp9gs.mongodb.net"
 DB_PORT=27017
-DB_DATABASE=evius2
+DB_DATABASE=evius
 DB_USERNAME=root
-DB_PASSWORD=mocion2040
+DB_PASSWORD=amazonas.2040	
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file

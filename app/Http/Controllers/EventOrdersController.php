@@ -612,7 +612,7 @@ class EventOrdersController extends Controller
                     if(isset($trm_dolar[0])) {
                         $trm_dolar = $trm_dolar[0]['valor'];   
                     } else {
-                        $trm_dolar = '3150.00';
+                        $trm_dolar = '3206.62';
                     }
                     $attendees = $order->attendees;
                     $description = "";

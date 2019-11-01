@@ -12,9 +12,7 @@ use Moloquent;
  */
 class Category extends Moloquent
 {
-
     //protected $with = ['event'];
-
     //protected $table = 'category';
     /**
      * Category is owned by an event

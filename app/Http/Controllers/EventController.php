@@ -45,10 +45,10 @@ class EventController extends Controller
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
-
+        //$currentDate = $currentDate->subWeek(2); 
 
         $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
-                ->orWhere('visibility', 'IS NULL', null, 'and') //null
+                ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '>', $currentDate)
                 ->orderBy('datetime_from', 'ASC');
             
@@ -57,7 +57,20 @@ class EventController extends Controller
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
+    public function beforeToday(Request $request, FilterQuery $filterQuery)
+    {
+        $currentDate = new \Carbon\Carbon(); 
 
+        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+                ->whereNotNull('visibility') //not null
+                ->Where('datetime_to', '<', $currentDate)
+                ->orderBy('datetime_from', 'DESC');
+            
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+        return EventResource::collection($results);
+
+        //$events = Event::where('visibility', $request->input('name'))->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -134,10 +147,10 @@ class EventController extends Controller
 
         if (!isset($data['user_properties'])) {
 
-            $data['user_properties'] = [
-                ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
-                ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
-            ];
+           $data['user_properties'] = [
+                ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
+                ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+          ];
             
         }
         
@@ -145,15 +158,17 @@ class EventController extends Controller
             
             $count = count($data['user_properties']);
             $data['user_properties'] += [  $count => 
-                        ["name" => "email", "unique" => true, "mandatory" => true,"type" => "email"],
-                        ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
+                        ["name" => "email", "unique" => false, "mandatory" => false,"type" => "text"],
+                        ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
                     ];
     
         }
 
 
         $data['organizer_type'] = "App\user";
-        
+        $userProperties = $data['user_properties'];
+        $userProperties->save();
+        $Properties = new UserProperties();
         $result = new Event($data);
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
@@ -207,13 +222,17 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
-    {
+    {   
+        //Esto es para medir el tiempo de ejecución se pone al inicio y el final
+        //$i = round(microtime(true) * 1000); 
+        //$i = round(microtime(true) * 1000); $f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         $event = Event::findOrFail($id);
-
-        $stages = $this->stagesStatusActive($id);
-
-        $event->event_stages = $stages;
-
+        /* @TODO porque los stages se cargan aqui en el evento 
+        //$stages = $this->stagesStatusActive($id);
+        //$event->event_stages = $stages;
+        */
+        $event->event_stages = [];
+        //$f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         return new EventResource($event);
     }
 
@@ -530,17 +549,25 @@ class EventController extends Controller
         $now =  $date->format('Y-m-d H:i:s');
         $stages = $event->event_stages;
         $codes_discounts = $event->codes_discount; 
-        if(isset($stages)) { 
-            foreach ($stages as $key => $stage) { 
-                if ($stage["end_sale_date"] < $now){
-                    $status = "ended";
-                }else if($stage["start_sale_date"] > $now){
-                    $status = "notstarted";
-                }else{
-                    $status = "active";
-                }
 
-                $stages[$key] += ['status' => $status];
+        if (isset($stages)) {
+            if(!isset($event->is_experience)) { 
+                foreach ($stages as $key => $stage) { 
+                    if ($stage["end_sale_date"] < $now){
+                        $status = "ended";
+                    }else if($stage["start_sale_date"] > $now){
+                        $status = "notstarted";
+                    }else{
+                        $status = "active";
+                    }
+
+                    $stages[$key] += ['status' => $status];
+                }
+            } else {
+                foreach ($stages as $key => $stage) { 
+                    $status = "active";
+                    $stages[$key] += ['status' => $status];
+                }
             }
         }
         return $stages;

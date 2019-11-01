@@ -168,6 +168,13 @@ class EventUserController extends Controller
         );
     }
 
+    public function indexar(Request $request,$event_id)
+    {
+        return EventUserResource::collection(
+            Attendee::where('event_id',$event_id)->paginate(100)
+        );
+    }
+
     /**
      * __Store:__ Store a newly Attendee  in storage.
      *
@@ -191,7 +198,11 @@ class EventUserController extends Controller
         $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
     }
-
+    public function mostrar($event_id, $id)
+    {
+        $eventUser = Attendee::findOrFail($id);
+        return new EventUserResource($eventUser);
+    }
     /**
      * __Update:__ Update the specified resource in storage.
      *
