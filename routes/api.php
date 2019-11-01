@@ -177,11 +177,11 @@ Route::group(
  ****************/
 
 
-Route::get      ('rolesattendees' , 'RoleAttendeeController@index');
-Route::post     ('rolesattendees' , 'RoleAttendeeController@store');
-Route::get      ('rolesattendees/{id}' , 'RoleAttendeeController@show');
-Route::put      ('rolesattendees/{id}' , 'RoleAttendeeController@update');
-Route::delete   ('rolesattendees/{id}', 'RoleAttendeeController@destroy');
+Route::get      ('events/{event_id}/rolesattendees' , 'RoleAttendeeController@indexByEvent');
+Route::post     ('events/{event_id}/rolesattendees' , 'RoleAttendeeController@store');
+Route::get      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@show');
+Route::put      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@update');
+Route::delete   ('events/{event_id}/rolesattendees/{id}', 'RoleAttendeeController@destroy');
 
 
 //Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
