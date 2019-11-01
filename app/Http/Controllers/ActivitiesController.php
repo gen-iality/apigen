@@ -25,7 +25,7 @@ class ActivitiesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Activities::paginate(config('app.page_size'))
+            Activities::paginate(100000000)
         );
     }
 

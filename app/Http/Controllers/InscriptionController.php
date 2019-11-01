@@ -46,10 +46,6 @@ class InscriptionController extends Controller
     }
     public function activitieAssistant(Request $request, $event_id, $activity_id)
     {
-        $save = Attendee::find("5bbf74693dafc21c04524d46");
-        
-     
-        echo var_dump($save->properties["email"]);die;
         $data = $request->json()->all();
         $data["activity_id"] = $activity_id;
         $result = new ActivityAssistants($data);
