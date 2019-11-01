@@ -19,7 +19,7 @@ class Activities extends Moloquent
 /*
  * magic property to return type of restrictions activities 
 */
-    public function getAccessRestrictionTypesAttribute(){
+    public function getAccessRestrictionTypesAvailableAttribute(){
 
         return config('app.activity_access_restriction_types');
     }
