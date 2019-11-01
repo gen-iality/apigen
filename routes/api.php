@@ -176,7 +176,14 @@ Route::group(
  * RolesAttendees
  ****************/
 
-Route::get('rolesattendees/{id}', 'RoleAttendeeController@destroy');
+
+Route::get      ('rolesattendees' , 'RoleAttendeeController@index');
+Route::post     ('rolesattendees' , 'RoleAttendeeController@store');
+Route::get      ('rolesattendees/{id}' , 'RoleAttendeeController@show');
+Route::put      ('rolesattendees/{id}' , 'RoleAttendeeController@update');
+Route::delete   ('rolesattendees/{id}', 'RoleAttendeeController@destroy');
+
+Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
 Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 

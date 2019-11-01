@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Activities;
 use App\Category;
 use App\Event;
+use App\RoleAttendee;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -127,6 +129,12 @@ class ActivitiesController extends Controller
             $space_id = $data["space_id"];
             $Activities->space()->pull($data["space_id"]);
             $Activities->space()->push($space_id);            
+        }
+        if(isset($data["access_restriction_rol_ids"])){
+            $ids = $data["access_restriction_rol_ids"];
+            $Activities->access_restriction_roles()->detach();
+            $Activities->access_restriction_roles()->attach($ids);        
+         
         }
         $activity = Activities::find($Activities->id);
         return $activity;

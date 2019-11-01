@@ -14,10 +14,13 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  */ 
 class Activities extends Moloquent
 {
-    protected $with = ['activity_categories','space','hosts','type'];
+    protected $with = ['activity_categories','space','hosts','type','access_restriction_roles'];
     protected $appends = ['access_restriction_types']; 
-
+/*
+ * magic property to return type of restrictions activities 
+*/
     public function getAccessRestrictionTypesAttribute(){
+
         return config('app.activity_access_restriction_types');
     }
 
@@ -45,10 +48,12 @@ class Activities extends Moloquent
     {
         return $this->belongsTo('App\Type');
     }
-    public function quantity()
+    
+    public function access_restriction_roles()
     {
-        return $this->embedsMany('App\Quantity');   
+        return $this->belongsToMany ('App\RoleAttendee');
     }
+
     public function users()
     {
         return $this->embedsMany('App\ActivityUsers');
@@ -64,13 +69,12 @@ class Activities extends Moloquent
         "type_id" , 
         "description" ,
         "image" ,
-        "quantity",
         "user" , 
         "event_id",
         "acitivity_users",
         "capacity",
         "remaining_capacity",
         "access_restriction_type",
-        "access_restriction_rol"
+        "access_restriction_rol_ids"
     ];
 }
