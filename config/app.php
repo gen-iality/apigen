@@ -1,5 +1,9 @@
 <?php
 
+
+define ("SUGGESTED","SUGGESTED");
+define ("EXCLUSIVE","EXCLUSIVE");
+
 return [
 
     /*
@@ -19,6 +23,7 @@ return [
     'front_url' => 'https://eviusco.netlify.com',
     'page_size' => 25,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
+    'activity_access_restriction_types' => [SUGGESTED, EXCLUSIVE],
     /*
     |--------------------------------------------------------------------------
     | Application Environment

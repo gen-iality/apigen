@@ -15,7 +15,11 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 class Activities extends Moloquent
 {
     protected $with = ['activity_categories','space','hosts','type'];
+    protected $appends = ['access_restriction_types']; 
 
+    public function getAccessRestrictionTypesAttribute(){
+        return config('app.activity_access_restriction_types');
+    }
 
     public function event()
     {
@@ -65,6 +69,8 @@ class Activities extends Moloquent
         "event_id",
         "acitivity_users",
         "capacity",
-        "remaining_capacity"
+        "remaining_capacity",
+        "access_restriction_type",
+        "access_restriction_rol"
     ];
 }
