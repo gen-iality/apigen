@@ -15,7 +15,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 class Activities extends Moloquent
 {
     protected $with = ['activity_categories','space','hosts','type','access_restriction_roles'];
-    protected $appends = ['access_restriction_types']; 
+    protected $appends = ['access_restriction_types_available']; 
 /*
  * magic property to return type of restrictions activities 
 */
@@ -48,7 +48,7 @@ class Activities extends Moloquent
     {
         return $this->belongsTo('App\Type');
     }
-    
+
     public function access_restriction_roles()
     {
         return $this->belongsToMany ('App\RoleAttendee');
@@ -61,6 +61,7 @@ class Activities extends Moloquent
     protected $dateformat = 'Y-m-d H:i';
     protected $fillable = [
         'name' , 
+        'subtitle',
         'datetime_start' , 
         "datetime_end" , 
         "space_id" ,

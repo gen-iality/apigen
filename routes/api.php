@@ -183,9 +183,10 @@ Route::get      ('rolesattendees/{id}' , 'RoleAttendeeController@show');
 Route::put      ('rolesattendees/{id}' , 'RoleAttendeeController@update');
 Route::delete   ('rolesattendees/{id}', 'RoleAttendeeController@destroy');
 
-Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
+
+//Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
-Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
+//Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
 Route::group(
    ['middleware' => 'auth:token'], function () {

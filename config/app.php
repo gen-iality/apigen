@@ -23,7 +23,7 @@ return [
     'front_url' => 'https://eviusco.netlify.com',
     'page_size' => 25,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
-    'activity_access_restriction_types' => [SUGGESTED, EXCLUSIVE],
+    'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE],
     /*
     |--------------------------------------------------------------------------
     | Application Environment
