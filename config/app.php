@@ -1,8 +1,8 @@
 <?php
 
 
-define ("SUGGESTED","SUGGESTED");
-define ("EXCLUSIVE","EXCLUSIVE");
+define ("SUGGESTED","SUGGESTED","OPEN");
+define ("EXCLUSIVE","EXCLUSIVE","OPEN");
 
 return [
 
