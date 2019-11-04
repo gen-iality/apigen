@@ -35,15 +35,7 @@ class InscriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $event_id)
-    {
-       
-        $data = $request->json()->all();
-        $data["event_id"] = $event_id;
-        $result = new Inscription($data);
-        $result->save();
-        return $result;
-    }
+
     public function activitieAssistant(Request $request, $event_id, $activity_id)
     {
         $data = $request->json()->all();
@@ -77,7 +69,7 @@ class InscriptionController extends Controller
     public function updateUserActivities(Request $request, $event_id, $activity_id)
     {
         //ACTUALIZAR ACTIVIDADES DE LOS USUARIOS
-       $activityUsers = ActivityAssistants::paginate();
+        $activityUsers = ActivityAssistants::paginate();
        
          for($i=0;$i < sizeof($activityUsers);$i++){
             for($s=0;$s < sizeof($activityUsers[$i]["user"]);$s++){
@@ -85,13 +77,14 @@ class InscriptionController extends Controller
                 $activity = Activities::find($activity_id);
                 
                 if(!is_null($activity)){
-                    $noid = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
-                    $noid = json_decode(json_encode($noid),TRUE);
+                    $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
+                    $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
                     $user_id = ($activityUsers[$i]["user"][$s]);
+                    echo $user_id;
                     $save = Attendee::find($user_id);
                     if (!is_null($save)){
-                        $save->push("activities",$noid );
-                        return "users activities saved";
+                        $save->destroy("activities");
+                        //$save->push("activities",$dataRecolected);
                     }
                 }
             }

@@ -158,6 +158,16 @@ class EventUserController extends Controller
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
+        
+        /*Crear propierdades names y email*/
+        $findevent = Event::find($event_id);
+        $name = array("name" => "names", "unique" => false, "mandatory" => false,"type" => "text");
+        $model2 = new UserProperties($name);
+        $findevent->user_properties()->save($model2);
+        $email = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "email");        
+        $model1 = new UserProperties($email);
+        $findevent->user_properties()->save($model1);
+
         return $response;
     }
 
@@ -171,7 +181,7 @@ class EventUserController extends Controller
     public function indexar(Request $request,$event_id)
     {
         return EventUserResource::collection(
-            Attendee::where('event_id',$event_id)->paginate(100)
+            Attendee::where('event_id',$event_id)->paginate(config("app.page_size"))
         );
     }
 

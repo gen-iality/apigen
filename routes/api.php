@@ -1,6 +1,6 @@
 <?php
 
-include ("attendize/routesGroups.php");
+include ("attendize/schedule.php");
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -61,6 +61,17 @@ Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::get   ('events/{event_id}/eventusers',      'EventUserController@indexar');
 Route::get   ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
 Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+
+
+/***************
+ * USER PROPERTIES
+ ****************/
+Route::get   ('events/{event_id}/userproperties',      'UserPropertiesController@index');
+Route::post  ('events/{event_id}/userproperties',      'UserPropertiesController@store');
+Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
+Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
+Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
+
 
 /****************
  * organizations

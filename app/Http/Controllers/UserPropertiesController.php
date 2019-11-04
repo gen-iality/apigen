@@ -29,7 +29,7 @@ class UserPropertiesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-           Event::find($event_id)->user_properties()->get());
+           Event::find($event_id)->user_properties());
     }
 
     /**
@@ -39,13 +39,9 @@ class UserPropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $event_id)
-    {
-        
-        $data = $request->json()->all();
-        $event = Event::find($event_id);
-        $event->userProperties;
+    {        
+        $event = Event::find($event_id)->user_properties();
         $model = new UserProperties($data);
-        $event->user_properties()->save($model);
         return $model; 
     }
 
