@@ -166,9 +166,6 @@ class EventController extends Controller
 
 
         $data['organizer_type'] = "App\user";
-        $userProperties = $data['user_properties'];
-        $userProperties->save();
-        $Properties = new UserProperties();
         $result = new Event($data);
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
