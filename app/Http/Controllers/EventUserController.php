@@ -7,7 +7,6 @@ use App\Event;
 use App\State;
 use App\Account;
 use App\Attendee;
-use App\UserProperties;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
@@ -162,14 +161,6 @@ class EventUserController extends Controller
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         
-        /*Crear propierdades names y email*/
-        $findevent = Event::find($event_id);
-        $name = array("name" => "names", "unique" => false, "mandatory" => false,"type" => "text");
-        $model2 = new UserProperties($name);
-        $findevent->user_properties()->save($model2);
-        $email = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "email");        
-        $model1 = new UserProperties($email)->;
-        $findevent->user_properties()->save($model1);
 
         return $response;
     }
