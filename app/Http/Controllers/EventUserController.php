@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\evaLib\Services\FilterQuery;
-use App\evaLib\Services\UserEventService;
+use Validator;
 use App\Event;
-use App\Attendee;
-use App\Http\Requests\EventUserRequest;
-use App\Http\Resources\EventUserResource;
 use App\State;
 use App\Account;
+use App\Attendee;
+use App\UserProperties;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Validator;
+use App\evaLib\Services\FilterQuery;
+use App\Http\Requests\EventUserRequest;
+use App\Http\Resources\EventUserResource;
+use App\evaLib\Services\UserEventService;
+
+
 
 /**
  * @resource Attendee (Attendee)
@@ -165,7 +168,7 @@ class EventUserController extends Controller
         $model2 = new UserProperties($name);
         $findevent->user_properties()->save($model2);
         $email = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "email");        
-        $model1 = new UserProperties($email);
+        $model1 = new UserProperties($email)->;
         $findevent->user_properties()->save($model1);
 
         return $response;
