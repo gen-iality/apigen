@@ -42,23 +42,23 @@ class ActivitiesController extends Controller
 
         if(isset($data["activity_categories_ids"])){
             $activity_categories_ids = $data["activity_categories_ids"];
-            $Activities->activity_categories()->attach($activity_categories_ids);
+            $activity->activity_categories()->attach($activity_categories_ids);
         }
         if(isset($data["host_ids"])){
             $host_ids = $data["host_ids"];
-            $Activities->hosts()->attach($host_ids);
+            $activity->hosts()->attach($host_ids);
         }
         if(isset($data["type_id"])){
             $type_id = isset($data["type_id"]);
-            $Activities->type()->push($type_id); 
+            $activity->type()->push($type_id); 
         }
         if(isset($data["space_id"])){
             $space_id = $data["space_id"];
-            $Activities->space()->push($space_id);            
+            $activity->space()->push($space_id);            
         }
         if(isset($data["access_restriction_rol_ids"])){
             $ids = $data["access_restriction_rol_ids"];
-            $Activities->access_restriction_roles()->attach($ids);        
+            $activity->access_restriction_roles()->attach($ids);        
         }
         //Cargamos de nuevo para traer la info de las categorias
         $activity = Activities::find($activity->id);        
