@@ -62,7 +62,20 @@ class InscriptionController extends Controller
             $remainingCapacity->remaining_capacity = $remaining;
             $remainingCapacity->save(); //guarda el resultado
             echo "- usuarios actuales = ".$actualUsers ."- capacidad total = ". $totalCapacity . "- cupos restantes = " . $remaining;
-
+            
+            $activity = Activities::find($activity_id);
+                
+            if(!is_null($activity)){
+                $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
+                $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
+                $user_id = ($data["user"][0]);
+                echo $user_id;
+                $save = Attendee::find($user_id);
+                if (!is_null($save)){
+                    //$save->destroy("activities");
+                    $save->push("activities",$dataRecolected);
+                }
+            }
             return $data;
         }
     }
