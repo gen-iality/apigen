@@ -3,7 +3,7 @@
 Route::get   ('events/{event_id}/eventusers',      'EventUserController@indexar');
 Route::get   ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
 
-/****************$request->get('per_page', 25)
+/****************
  * SPACES
  ****************/
 Route::get   ('events/{event_id}/spaces', 'SpaceController@index');
@@ -16,9 +16,15 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 /****************
  * ACITIVITY 
  ****************/
-Route::post  ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@activitieAssistant');
-Route::delete('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@deleteAssistant');
-Route::put   ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@updateUserActivities');
+
+Route::post  ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
+Route::delete('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'ActivityAssistantsController@deleteAssistant');
+
+Route::get   ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@index');
+Route::post  ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@store');
+Route::get   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@show');
+Route::put   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@update');
+Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@destroy');
 
 
 /****************
@@ -72,10 +78,5 @@ Route::post  ('events/{event_id}/categoryactivities',      'ActivityCategoriesCo
 Route::get   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@show');
 Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@update');
 Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
-
-
-
-
-
 
 ?>

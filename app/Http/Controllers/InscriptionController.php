@@ -35,9 +35,21 @@ class InscriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
+    public function store(Request $request, $event_id)
+    {
+       
+        $data = $request->json()->all();
+        $data["event_id"] = $event_id;
+        $result = new Inscription($data);
+        $result->save();
+        return $result;
+    }
     public function activitieAssistant(Request $request, $event_id, $activity_id)
     {
+        $save = Attendee::find("5bbf74693dafc21c04524d46");
+        
+     
+        echo var_dump($save->properties["email"]);die;
         $data = $request->json()->all();
         $data["activity_id"] = $activity_id;
         $result = new ActivityAssistants($data);
@@ -62,27 +74,14 @@ class InscriptionController extends Controller
             $remainingCapacity->remaining_capacity = $remaining;
             $remainingCapacity->save(); //guarda el resultado
             echo "- usuarios actuales = ".$actualUsers ."- capacidad total = ". $totalCapacity . "- cupos restantes = " . $remaining;
-            
-            $activity = Activities::find($activity_id);
-                
-            if(!is_null($activity)){
-                $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
-                $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
-                $user_id = ($data["user"][0]);
-                echo $user_id;
-                $save = Attendee::find($user_id);
-                if (!is_null($save)){
-                    //$save->destroy("activities");
-                    $save->push("activities",$dataRecolected);
-                }
-            }
+
             return $data;
         }
     }
     public function updateUserActivities(Request $request, $event_id, $activity_id)
     {
         //ACTUALIZAR ACTIVIDADES DE LOS USUARIOS
-        $activityUsers = ActivityAssistants::paginate();
+       $activityUsers = ActivityAssistants::paginate();
        
          for($i=0;$i < sizeof($activityUsers);$i++){
             for($s=0;$s < sizeof($activityUsers[$i]["user"]);$s++){
@@ -90,14 +89,13 @@ class InscriptionController extends Controller
                 $activity = Activities::find($activity_id);
                 
                 if(!is_null($activity)){
-                    $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
-                    $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
+                    $noid = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
+                    $noid = json_decode(json_encode($noid),TRUE);
                     $user_id = ($activityUsers[$i]["user"][$s]);
-                    echo $user_id;
                     $save = Attendee::find($user_id);
                     if (!is_null($save)){
-                        $save->destroy("activities");
-                        //$save->push("activities",$dataRecolected);
+                        $save->push("activities",$noid );
+                        return "users activities saved";
                     }
                 }
             }
