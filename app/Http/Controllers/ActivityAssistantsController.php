@@ -64,7 +64,7 @@ class ActivityAssistantsController extends Controller
 
             $activity = Activities::find($activity_id);    
             if(!is_null($activity)){
-                $dataRecolected = $activity->makeHidden(["user_ids","space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
+                $dataRecolected = $activity->makeHidden(["access_restriction_types_available","access_restriction_type","access_restriction_rol_ids","access_restriction_roles","user_ids","space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","users",]);
                 $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
                 $user_id = ($data["user_id"]);
                 $save = Attendee::find($user_id);
