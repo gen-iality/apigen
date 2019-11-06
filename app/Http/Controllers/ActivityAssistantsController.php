@@ -59,13 +59,13 @@ class ActivityAssistantsController extends Controller
             $remaining = $totalCapacity - $actualUsers;  //calculos
             $remainingCapacity = Activities::find($activity_id); 
             $remainingCapacity->remaining_capacity = $remaining;
-            $remainingCapacity->save(); //guarda el resu    ltado            
+            $remainingCapacity->save(); //guarda el resultado            
 
             $activity = Activities::find($activity_id);    
             if(!is_null($activity)){
-                $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
+                $dataRecolected = $activity->makeHidden(["user_ids","space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
                 $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
-                $user_id = ($data["user_ids"][0]);
+                $user_id = ($data["user_ids"]);
                 $save = Attendee::find($user_id);
                 if (!is_null($save)){
                     //$save->destroy("activities");
@@ -80,10 +80,10 @@ class ActivityAssistantsController extends Controller
     {
         $data = $request->json()->all();
        // $data["activity_id"] = $activity_id;
-        $user = $data["user_id"];
+        $user = $data["user_ids"];
         $model = ActivityAssistants::where("activity_id",$activity_id)->get();
         $modelreplace = ActivityAssistants::find($model[0]["_id"]);
-        $model = ActivityAssistants::find($model[0]["_id"])->user;
+        $model = ActivityAssistants::find($model[0]["_id"])->user_ids;
         $x = 0;
         $arrayUsers = $model;
         //mapea el array para detectar el usuario que se le parezca
@@ -93,8 +93,21 @@ class ActivityAssistantsController extends Controller
             }
             $x++;
         }
-        $modelreplace->user = $arrayUsers;
+        $modelreplace->user_ids = $arrayUsers;
         $modelreplace->push();
+         /*
+            * calcular cupos restantes
+            */
+         
+            $actualUsers = $modelreplace["user_ids"]; //extrae los usuarios
+            $actualUsers = sizeof($actualUsers); //mide el array de usuarios 
+            $totalCapacity = Activities::find($activity_id)->capacity; // capacidad actual de la actividad 
+            $remaining = $totalCapacity - $actualUsers;  //calculos
+            
+            $remainingCapacity = Activities::find($activity_id); 
+            $remainingCapacity->remaining_capacity = $remaining;
+            $remainingCapacity->save(); //guarda el resultado   
+
         return $modelreplace;
      }
 
