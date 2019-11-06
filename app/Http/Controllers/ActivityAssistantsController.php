@@ -49,29 +49,27 @@ class ActivityAssistantsController extends Controller
         }else{
             $model = ActivityAssistants::where("activity_id",$activity_id)->get();
             $model = ActivityAssistants::find($model[0]["_id"]);
-            $model->push("user_id",$data["user"]);
+            $model->push("user_ids",$data["user_ids"]);
             /*
             * calcular cupos restantes
             */
-            $actualUsers = $model["user"]; //extrae los usuarios
+            $actualUsers = $model["user_ids"]; //extrae los usuarios
             $actualUsers = sizeof($actualUsers); //mide el array de usuarios 
             $totalCapacity = Activities::find($activity_id)->capacity; // capacidad actual de la actividad 
             $remaining = $totalCapacity - $actualUsers;  //calculos
             $remainingCapacity = Activities::find($activity_id); 
             $remainingCapacity->remaining_capacity = $remaining;
-            $remainingCapacity->save(); //guarda el resu    ltado
-            echo "- usuarios actuales = ".$actualUsers ."- capacidad total = ". $totalCapacity . "- cupos restantes = " . $remaining;
-            
+            $remainingCapacity->save(); //guarda el resu    ltado            
 
             $activity = Activities::find($activity_id);    
             if(!is_null($activity)){
                 $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
                 $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
-                $user_id = ($data["user"][0]);
+                $user_id = ($data["user_ids"][0]);
                 $save = Attendee::find($user_id);
                 if (!is_null($save)){
                     //$save->destroy("activities");
-                    $save->push("activity_ids",$dataRecolected);
+                    $save->push("activity_id",$dataRecolected);
                 }
             }
             return $model;
