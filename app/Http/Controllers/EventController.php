@@ -148,8 +148,8 @@ class EventController extends Controller
         if (!isset($data['user_properties'])) {
 
             $data['user_properties'] = [
-                 ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
-                 ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+                 ["name" => "email", "unique" => false, "mandatory" => true,"type" => "email"],
+                 ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
            ];
              
          }
@@ -158,8 +158,8 @@ class EventController extends Controller
              
              $count = count($data['user_properties']);
              $data['user_properties'] += [  $count => 
-                         ["name" => "email", "unique" => false, "mandatory" => false,"type" => "text"],
-                         ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+                         ["name" => "email", "unique" => false, "mandatory" => true,"type" => "text"],
+                         ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
                      ];
      
          }
@@ -201,7 +201,7 @@ class EventController extends Controller
         }
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
-        self::createDefaultUserProperties($result->id);
+        //self::createDefaultUserProperties($result->id);
       
         return $result;
     }

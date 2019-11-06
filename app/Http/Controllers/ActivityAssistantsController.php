@@ -38,7 +38,7 @@ class ActivityAssistantsController extends Controller
     public function activitieAssistant(Request $request, $event_id, $activity_id)
     {
         $data = $request->json()->all();
-        $data["activity_id"] = $activity_id;
+
         $data["event_id"] = $event_id;
         $result = new ActivityAssistants($data);
         $model = ActivityAssistants::where("activity_id",$activity_id)->get();
@@ -102,8 +102,7 @@ class ActivityAssistantsController extends Controller
             $actualUsers = $modelreplace["user_ids"]; //extrae los usuarios
             $actualUsers = sizeof($actualUsers); //mide el array de usuarios 
             $totalCapacity = Activities::find($activity_id)->capacity; // capacidad actual de la actividad 
-            $remaining = $totalCapacity - $actualUsers;  //calculos
-                
+            $remaining = $totalCapacity - $actualUsers;  //calculos                
             $remainingCapacity = Activities::find($activity_id); 
             $remainingCapacity->remaining_capacity = $remaining;
             $remainingCapacity->save(); //guarda el resultado   
