@@ -40,8 +40,8 @@ return [
         ],
         'mongodb' => [    
             'driver'   => 'mongodb',   
-            'dsn'=> 'mongodb+srv://root:amazonas.2040@cluster0-gp9gs.mongodb.net/test?retryWrites=true&w=majority',
-            'database' => env('DB_DATABASE', 'eviusdev'),
+            'dsn'=> env('DB_DSN', 'mongodb+srv://root:amazonas.2040@cluster0-gp9gs.mongodb.net/test?retryWrites=true&w=majority'),
+            'database' => env('DB_DATABASE', 'evius'),
             'options'  => [
                 'database' => env('DB_DATABASE', 'main') // sets the authentication database required by mongo 3
             ]
