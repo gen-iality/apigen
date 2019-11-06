@@ -35,21 +35,22 @@ class ActivityAssistantsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function activitieAssistant(Request $request, $event_id, $activity_id)
+    public function activitieAssistant(Request $request, $event_id)
     {
         $data = $request->json()->all();
-
+        $activity_id =$data["activity_id"];
         $data["event_id"] = $event_id;
         $result = new ActivityAssistants($data);
         $model = ActivityAssistants::where("activity_id",$activity_id)->get();
         $arr = json_decode(json_encode($model), TRUE);
         if(empty($arr)){
+            $result->push("user_ids",$data["user_id"]);
             $result->save();
             return $result;
         }else{
             $model = ActivityAssistants::where("activity_id",$activity_id)->get();
             $model = ActivityAssistants::find($model[0]["_id"]);
-            $model->push("user_ids",$data["user_ids"]);
+            $model->push("user_ids",$data["user_id"]);
             /*
             * calcular cupos restantes
             */
@@ -65,7 +66,7 @@ class ActivityAssistantsController extends Controller
             if(!is_null($activity)){
                 $dataRecolected = $activity->makeHidden(["user_ids","space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
                 $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
-                $user_id = ($data["user_ids"]);
+                $user_id = ($data["user_id"]);
                 $save = Attendee::find($user_id);
                 if (!is_null($save)){
                     //$save->destroy("activities");
@@ -76,11 +77,11 @@ class ActivityAssistantsController extends Controller
         }
     }
     
-    public function deleteAssistant(Request $request, $event_id, $activity_id)
+    public function deleteAssistant(Request $request, $event_id)
     {
         $data = $request->json()->all();
-       // $data["activity_id"] = $activity_id;
-        $user = $data["user_ids"];
+        $activity_id =$data["activity_id"];
+        $user = $data["user_id"];
         $model = ActivityAssistants::where("activity_id",$activity_id)->get();
         $modelreplace = ActivityAssistants::find($model[0]["_id"]);
         $model = ActivityAssistants::find($model[0]["_id"])->user_ids;
