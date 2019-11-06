@@ -145,7 +145,25 @@ class EventController extends Controller
             );
         };
 
+        if (!isset($data['user_properties'])) {
 
+            $data['user_properties'] = [
+                 ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
+                 ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+           ];
+             
+         }
+         
+         if (isset($data['user_properties'])) {
+             
+             $count = count($data['user_properties']);
+             $data['user_properties'] += [  $count => 
+                         ["name" => "email", "unique" => false, "mandatory" => false,"type" => "text"],
+                         ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+                     ];
+     
+         }
+ 
         
 
         $data['organizer_type'] = "App\user";
@@ -162,7 +180,8 @@ class EventController extends Controller
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
+        if (!isset($data['organizer_id']) || $data['organizer_id'] 
+        == "me") {
             $organizer = $user;
         } else {
             $organizer = Organization::findOrFail($data['organizer_id']);
@@ -190,10 +209,10 @@ class EventController extends Controller
     public function createDefaultUserProperties($event_id){
         /*Crear propierdades names y email*/
         $model = Event::find($event_id);
-        $name = array("name" => "names", "unique" => false, "mandatory" => false,"type" => "text");
+        $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
         $user_properties = new UserProperties($name);
         $model->user_properties()->save($user_properties);
-        $email = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "email");        
+        $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
         $user_properties = new UserProperties($user_properties);
         $model->user_properties()->save($user_properties);
 
