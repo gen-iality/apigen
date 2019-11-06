@@ -212,4 +212,11 @@ class Event extends ModelsEvent
     {
         return $this->embedsMany('App\UserProperties');
     }
+
+    public function eventContent()
+    {
+        return $this->hasMany('App\ContentTypes');
+    }
+
+
 }
