@@ -6,6 +6,7 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
+use App\UserProperties;
 use App\Attendee;
 use App\EventType;
 use App\Http\Resources\EventResource;

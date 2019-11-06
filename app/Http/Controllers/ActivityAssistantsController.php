@@ -103,7 +103,7 @@ class ActivityAssistantsController extends Controller
             $actualUsers = sizeof($actualUsers); //mide el array de usuarios 
             $totalCapacity = Activities::find($activity_id)->capacity; // capacidad actual de la actividad 
             $remaining = $totalCapacity - $actualUsers;  //calculos
-            
+                
             $remainingCapacity = Activities::find($activity_id); 
             $remainingCapacity->remaining_capacity = $remaining;
             $remainingCapacity->save(); //guarda el resultado   

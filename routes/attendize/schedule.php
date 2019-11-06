@@ -27,15 +27,6 @@ Route::put   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsCon
 Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@destroy');
 
 
-/****************
- * ACTIVITY USERS
- ****************/
-Route::get   ('events/{event_id}/activityusers',      'ActivityUsersController@index');
-Route::post  ('events/{event_id}/activityusers',      'ActivityUsersController@store');
-Route::get   ('events/{event_id}/activityusers/{id}', 'ActivityUsersController@show');
-Route::put   ('events/{event_id}/activityusers/{id}', 'ActivityUsersController@update');
-Route::delete('events/{event_id}/activityusers/{id}', 'ActivityUsersController@destroy');
-
 /***************
  * HOST
  * 
