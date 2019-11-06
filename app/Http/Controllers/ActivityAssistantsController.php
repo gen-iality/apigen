@@ -70,7 +70,7 @@ class ActivityAssistantsController extends Controller
                 $save = Attendee::find($user_id);
                 if (!is_null($save)){
                     //$save->destroy("activities");
-                    $save->push("activity_id",$dataRecolected);
+                    $save->push("activities",$dataRecolected);
                 }
             }
             return $model;
