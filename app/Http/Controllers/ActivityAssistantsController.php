@@ -62,54 +62,16 @@ class ActivityAssistantsController extends Controller
             $remainingCapacity->save(); //guarda el resu    ltado
             echo "- usuarios actuales = ".$actualUsers ."- capacidad total = ". $totalCapacity . "- cupos restantes = " . $remaining;
             
-<<<<<<< HEAD:app/Http/Controllers/ActivityAssistantsController.php
 
             $activity = Activities::find($activity_id);    
-=======
-            $activity = Activities::find($activity_id);
-                
->>>>>>> 8428791... adding inscription to an activitie:app/Http/Controllers/InscriptionController.php
             if(!is_null($activity)){
                 $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
                 $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
                 $user_id = ($data["user"][0]);
-<<<<<<< HEAD:app/Http/Controllers/ActivityAssistantsController.php
                 $save = Attendee::find($user_id);
                 if (!is_null($save)){
                     //$save->destroy("activities");
                     $save->push("activity_ids",$dataRecolected);
-=======
-                echo $user_id;
-                $save = Attendee::find($user_id);
-                if (!is_null($save)){
-                    //$save->destroy("activities");
-                    $save->push("activities",$dataRecolected);
-                }
-            }
-            return $data;
-        }
-    }
-    public function updateUserActivities(Request $request, $event_id, $activity_id)
-    {
-        //ACTUALIZAR ACTIVIDADES DE LOS USUARIOS
-        $activityUsers = ActivityAssistants::paginate();
-       
-         for($i=0;$i < sizeof($activityUsers);$i++){
-            for($s=0;$s < sizeof($activityUsers[$i]["user"]);$s++){
-                $activity_id = $activityUsers[$i]["activity_id"];
-                $activity = Activities::find($activity_id);
-                
-                if(!is_null($activity)){
-                    $dataRecolected = $activity->makeHidden(["space_id","remaining_capacity","capacity","activity_categories_ids","activity_categories_ids","activity_categories_ids","host_ids","quantity","image","activity_categories","space","users","hosts","type"]);
-                    $dataRecolected = json_decode(json_encode($dataRecolected),TRUE);
-                    $user_id = ($activityUsers[$i]["user"][$s]);
-                    echo $user_id;
-                    $save = Attendee::find($user_id);
-                    if (!is_null($save)){
-                        $save->destroy("activities");
-                        //$save->push("activities",$dataRecolected);
-                    }
->>>>>>> 8428791... adding inscription to an activitie:app/Http/Controllers/InscriptionController.php
                 }
             }
             return $model;

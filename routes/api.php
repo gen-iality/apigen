@@ -72,6 +72,15 @@ Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController
 Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
 Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
 
+/***************
+ * CERTIFICATES
+ ****************/
+Route::get   ('events/{event_id}/certificates',      'CertificateController@index');
+Route::post  ('events/{event_id}/certificates',      'CertificateController@store');
+Route::get   ('events/{event_id}/certificates/{id}', 'CertificateController@show');
+Route::put   ('events/{event_id}/certificates/{id}', 'CertificateController@update');
+Route::delete('events/{event_id}/certificates/{id}', 'CertificateController@destroy');
+
 
 /****************
  * organizations
