@@ -80,9 +80,16 @@ class UserPropertiesController extends Controller
         if (!$userProperty){
             return abort(404);
         }
+        
         $userProperty->fill($data);
+     
         $userProperty->save();
-        return new JsonResource($userProperty);
+         /* echo "hiee";
+        
+        }catch(Exception $e){
+            
+       
+        }*/
     }
 
     /**
