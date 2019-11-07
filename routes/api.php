@@ -1,7 +1,6 @@
 <?php
 
 include ("attendize/schedule.php");
-include ("attendize/innovation.php");
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -196,6 +195,8 @@ Route::post     ('events/{event_id}/rolesattendees' , 'RoleAttendeeController@st
 Route::get      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@show');
 Route::put      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@update');
 Route::delete   ('events/{event_id}/rolesattendees/{id}', 'RoleAttendeeController@destroy');
+
+
 
 
 //Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
