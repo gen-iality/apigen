@@ -40,6 +40,7 @@ class UserPropertiesController extends Controller
      */
     public function store(Request $request, $event_id)
     {        
+        $data = $request->json()->all();
         $event = Event::find($event_id)->user_properties();
         $model = new UserProperties($data);
         return $model; 
@@ -53,7 +54,7 @@ class UserPropertiesController extends Controller
      */
     public function show($event_id,$id)
     {
-
+        
         $UserProperties = Event::find($event_id)->user_properties()->find($id);
         
         $response = new JsonResource($UserProperties);
