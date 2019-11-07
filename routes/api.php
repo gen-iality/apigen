@@ -1,6 +1,7 @@
 <?php
 
 include ("attendize/schedule.php");
+include ("attendize/innovation.php");
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -72,15 +73,6 @@ Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController
 Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
 Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
 
-/***************
- * CERTIFICATES
- ****************/
-Route::get   ('events/{event_id}/certificates',      'CertificateController@index');
-Route::post  ('events/{event_id}/certificates',      'CertificateController@store');
-Route::get   ('events/{event_id}/certificates/{id}', 'CertificateController@show');
-Route::put   ('events/{event_id}/certificates/{id}', 'CertificateController@update');
-Route::delete('events/{event_id}/certificates/{id}', 'CertificateController@destroy');
-
 
 /****************
  * organizations
@@ -132,9 +124,11 @@ Route::group(
     }
 );
 
+
 /****************
  * Users
  ****************/
+
 Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
@@ -159,7 +153,6 @@ Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
 //     }
 // );
 
-
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
@@ -169,6 +162,7 @@ Route::group(
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
     }
 );
+
 Route::get('eventsbeforetoday','EventController@beforeToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
