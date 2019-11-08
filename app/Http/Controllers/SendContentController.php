@@ -131,20 +131,18 @@ class SendContentController extends Controller
 
     public function sendContentGenerated(Request $request)
     {
-        echo "hi";die;
+        
         $data = $request->json()->all();
-
-        $pdf = PDF::loadview('Public.ViewEvent.Partials.ContentMail', $data);
-        $pdf->setPaper( 'letter',  'landscape' );
-        return $pdf->download('content.pdf');
-        return view('Public.ViewEvent.Partials.ContentMail', $data);
+        
+        
         $data_single = "tfrdrummer@gmail.com";
-        Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$pdf,$data_single){
-            $message->to($data_single,"Evento PMI")
-            ->subject("HI¡","VIII Congreso Internacional de Gerencia de Proyectos Bogotá 2019");
+        Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
+
+            $message->to($data_single,"Asistente")
+            ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
         });
         
-       
+        return view('Public.ViewEvent.Partials.ContentMail', $data);
    
         
 
