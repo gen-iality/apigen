@@ -92,12 +92,11 @@ Route::group(
 /***************
  * SENDCONTENT 
  ****************/
-
-Route::get('events/{event_id}/sendcontent' , 'SendContentController@index');
-Route::post('events/{event_id}/sendemail' , "SendContentController@sendContentGenerated");
-Route::post('events/{event_id}/sendcontent' , 'SendContentController@store');
-Route::get('events/{event_id}/sendcontent/{id}' , 'SendContentController@show');
-Route::put('events/{event_id}/sendcontent/{id}' , 'SendContentController@update');
+Route::post('events/{event_id}/sendcontent/{id}' ,  'SendContentController@sendContentGenerated');
+Route::get('events/{event_id}/sendcontent' ,        'SendContentController@index');
+Route::post('events/{event_id}/sendcontent' ,       'SendContentController@store');
+Route::get('events/{event_id}/sendcontent/{id}' ,   'SendContentController@show');
+Route::put('events/{event_id}/sendcontent/{id}' ,   'SendContentController@update');
 Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
 
 /***************
@@ -196,6 +195,16 @@ Route::get      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeControll
 Route::put      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@update');
 Route::delete   ('events/{event_id}/rolesattendees/{id}', 'RoleAttendeeController@destroy');
 
+/***************
+ * CERTIFICATES
+ ****************/
+
+Route::post('generatecertificate',"CertificateController@generateCertificate");
+Route::get      ('events/{event_id}/certificates' ,      'CertificateController@indexByEvent');
+Route::post     ('events/{event_id}/certificates' ,      'CertificateController@store');
+Route::get      ('events/{event_id}/certificates/{id}' , 'CertificateController@show');
+Route::put      ('events/{event_id}/certificates/{id}' , 'CertificateController@update');
+Route::delete   ('events/{event_id}/certificates/{id}',  'CertificateController@destroy');
 
 
 
