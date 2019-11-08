@@ -135,7 +135,7 @@ class SendContentController extends Controller
         $data = $request->json()->all();
         
         
-        $data_single = "tfrdrummer@gmail.com";
+        $data_single = $data["email"];
         Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
 
             $message->to($data_single,"Asistente")

@@ -66,7 +66,7 @@ body{
 
 <div class="containing-table">
     <div class="centre-align">
-    <img style="max-width='100%'" src="https://api.evius.co/images/logo.png">  
+    <img style="max-width='100%'" src="https://api.evius.co/images/logoMEC.png">  
     <h1>¡Bienvenido al Movimiento de Empresarios Creativos!</h1>
 <p>
 
@@ -77,22 +77,17 @@ medida de tus necesidades, para ayudarte a crecer.
 Te compartimos el link para que armes tu agenda y vivas la experiencia PowerCamp.
 </p>
 
-
-
-<p>Visita el siguiente link  <a href="htps://www.meccc.com.co">www.meccc.com.co</a>
+<p>Visita el siguiente link  <a href="https://meccc.com.co/">www.meccc.com.co</a>
 Ingresa con tu usuario y contrasena y podras inscribirte en tus actividades sugeridas
 </p>
-
-
-
 <p>Tu usuario y contraseña son los siguientes</p> 
-
+<br>
 
 
 <p>{{ $email}}</p>
-<br/>
-<p>{{ $id }}</p>
 
+<p>{{ $id }}</p>
+<br>
 <p>¡La zona de registro será en Casa Merced!</p>
 
 <p>Recuerda que también puedes disfrutar el 14 y 15 de noviembre del MECx en el Bulevar del río,
