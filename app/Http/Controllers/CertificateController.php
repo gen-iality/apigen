@@ -30,7 +30,7 @@ class CertificateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,string $event_id)
     {
         return JsonResource::collection(
             Certificate::paginate(config('app.page_size'))
@@ -38,37 +38,20 @@ class CertificateController extends Controller
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
 
-    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,string $event_id)
     {
         $data = $request->json()->all();
         $result = new Certificate($data);
         $result->save();
         return $result;
 
-    }
-    public function delete($id)
-    {
-        $res = $id->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
     }
 
     /**
@@ -84,9 +67,9 @@ class CertificateController extends Controller
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show(string $event_id,string $id)
     {
-        $Certificate = Certificate::findOrFail($id);
+        $Certificate = Certificate::find($id);
         $response = new JsonResource($Certificate);
         return $response;
     }
@@ -97,10 +80,10 @@ class CertificateController extends Controller
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,string $event_id,string $id)
     {
         $data = $request->json()->all();
-        $Certificate = Certificate::findOrFail($id);
+        $Certificate = Certificate::find($id);
         $Certificate->fill($data);
         $Certificate->save();
         return $data;
@@ -112,18 +95,18 @@ class CertificateController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, string $id)
+    public function destroy(Request $request,string $event_id,string $id)
     {
-        $Certificate = Certificate::findOrFail($id);
+        $Certificate = Certificate::find($id);
         return (string) $Certificate->delete();
 
     }
 
     public function indexByEvent(Request $request, String $event_id)
     {
-        $query = Certificate::where("event_id", $event_id);
-        $results = $query->get();
-        return JsonResource::collection($results);
+        return JsonResource::collection(
+            Certificate::where("event_id", $event_id)->paginate(config('app.page_size'))
+        );
     }
 
     public function certificatePdf(Request $request)
