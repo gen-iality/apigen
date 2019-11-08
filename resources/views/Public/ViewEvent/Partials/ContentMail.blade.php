@@ -66,7 +66,7 @@ body{
 
 <div class="containing-table">
     <div class="centre-align">
-    <img style="width:200px;height:auto" src="https://api.evius.co/images/logoMEC.png">  
+    <img style="width:90%;heigh:auto" src="https://api.evius.co/images/logoMecLong.png">  
     <h1>¡Bienvenido al Movimiento de Empresarios Creativos!</h1>
 <p>
 
