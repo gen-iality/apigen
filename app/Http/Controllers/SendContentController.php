@@ -150,5 +150,27 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentMail', $data);
     
     }
+    public function sendContentMec(Request $request)
+    {
+        
+        $data = $request->json()->all();
+        
+        
+        $data_single = $data["email"];
+        Mail::send("Public.ViewEvent.Partials.ContentMailMec",$data , function ($message) use ($data,$data_single){
+
+            $message->to($data_single,"Asistente")
+            ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
+        });
+        
+        return view('Public.ViewEvent.Partials.ContentMailMec', $data);
+   
+        
+
+        
+        return view('Public.ViewEvent.Partials.ContentMail', $data);
+    
+    }
+
 
 }
