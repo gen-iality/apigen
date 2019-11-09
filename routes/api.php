@@ -94,6 +94,8 @@ Route::group(
  ****************/
 Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
 Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
+Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentToAll');
+
 Route::get('events/{event_id}/sendcontent' ,        'SendContentController@index');
 Route::post('events/{event_id}/sendcontent' ,       'SendContentController@store');
 Route::get('events/{event_id}/sendcontent/{id}' ,   'SendContentController@show');

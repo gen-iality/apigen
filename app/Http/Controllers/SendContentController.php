@@ -133,6 +133,20 @@ class SendContentController extends Controller
     {
         
         $data = $request->json()->all();
+        $data_single = $data["email"];
+ 
+            Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
+    
+                $message->to($data_single,"Asistente")
+                ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!","");
+            });
+        return view('Public.ViewEvent.Partials.ContentMail', $data);
+   
+    }
+    public function sendContentToAll(Request $request)
+    {
+        
+        $data = $request->json()->all();
         
         $Attendees = Attendee::where("event_id","5d6eb0cbd74d5c163179d002")->get();
         $attendees_size = $Attendees->count();
@@ -178,7 +192,6 @@ class SendContentController extends Controller
         
         $data_single = $data["email"];
         Mail::send("Public.ViewEvent.Partials.ContentMailMec",$data , function ($message) use ($data,$data_single){
-
             $message->to($data_single,"Asistente")
             ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
         });
@@ -186,9 +199,6 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentMailMec', $data);
    
         
-
-        
-        return view('Public.ViewEvent.Partials.ContentMail', $data);
     
     }
 
