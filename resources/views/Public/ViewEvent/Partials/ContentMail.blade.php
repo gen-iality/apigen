@@ -36,11 +36,7 @@ body{
 }
 
 
-.containing-table {
-    display: table;
-    width: 97%;
-    height: 70%;
-}
+
 .centre-align {
     display: table-cell;
     text-align: center;
