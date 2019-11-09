@@ -134,20 +134,40 @@ class SendContentController extends Controller
         
         $data = $request->json()->all();
         
+        $Attendees = Attendee::where("event_id","5d6eb0cbd74d5c163179d002")->get();
+        $attendees_size = $Attendees->count();
+      
+        for ($i=0;$i<$attendees_size;$i++){
+            $datos["email"] = $Attendees[$i]->email;
+           
+            $datos["id"] = $Attendees[$i]->identification;
+            if($Attendees[$i]->rol_assistant==NULL){
+                $datos["etapa"] = "asistente";
+                
+            }else{
+                $datos["etapa"] = $Attendees[$i]->rol_assistant;
+               
+            }
+            $data_single = $datos["email"];
+            $etapa = $datos["etapa"];
+            $email = $datos["email"];
+            $id = $datos["id"];
         
-        $data_single = $data["email"];
-        Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
-
-            $message->to($data_single,"Asistente")
-            ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
-        });
-        
-        return view('Public.ViewEvent.Partials.ContentMail', $data);
+            
+            Mail::send("Public.ViewEvent.Partials.ContentMail",$datos , function ($message) use ($datos,$data_single){
+    
+                $message->to($data_single,"Asistente")
+                ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
+            });
+            
+        }
+       
+        return view('Public.ViewEvent.Partials.ContentMail', $datos);
    
         
 
         
-        return view('Public.ViewEvent.Partials.ContentMail', $data);
+        
     
     }
     public function sendContentMec(Request $request)
