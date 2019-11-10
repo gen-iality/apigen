@@ -65,9 +65,13 @@ body{
     <img style="width:90%;heigh:auto" src="https://api.evius.co/images/logoMecLong.png">  
     <h1>¡Bienvenido al Movimiento de Empresarios Creativos!</h1>
 <p>
+@if (strstr($etapa,"Etapa"))
+
+Tu empresa está en {{ $etapa }}, por ello te invitamos a participar en los espacios diseñados a la
+@else
 
 Tu empresa está en etapa de {{ $etapa }}, por ello te invitamos a participar en los espacios diseñados a la
-
+@endif
 medida de tus necesidades, para ayudarte a crecer.
 
 Te compartimos el link para que armes tu agenda y vivas la experiencia PowerCamp.

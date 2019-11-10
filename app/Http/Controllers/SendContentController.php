@@ -136,6 +136,7 @@ class SendContentController extends Controller
         $data = $request->json()->all();
         
         $data_single = $data["email"];
+       
  
             Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
     
@@ -158,8 +159,10 @@ class SendContentController extends Controller
             $datos["email"] = $Attendees[$i]->email;
             $verification = $Attendees[$i]->email;
             if($i > 1009){   
-                echo "correo enviado # ".$i." a " .$verification."<br>";
-
+                echo "correo enviado # ".$i." a " .$verification ." rol = ".$Attendees[$i]->rol_assistant." id = ".$Attendees[$i]->identification."\n" ;
+                
+                
+                /*
                 if($Attendees[$i]->identification!=NULL ){
                 
                     $datos["id"] = $Attendees[$i]->identification;
@@ -186,9 +189,7 @@ class SendContentController extends Controller
                 Mail::send("Public.ViewEvent.Partials.ContentMail",$datos , function ($message) use ($datos,$data_single){
                     $message->to($data_single,"Asistente")
                     ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
-                });
-
-
+                });*/
             } 
             
             
