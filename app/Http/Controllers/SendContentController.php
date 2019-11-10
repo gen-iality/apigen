@@ -158,11 +158,9 @@ class SendContentController extends Controller
         for ($i=0;$i<$attendees_size;$i++){
             $datos["email"] = $Attendees[$i]->email;
             $verification = $Attendees[$i]->email;
-            if($i > 1009){   
+            if($i > 1014 && $i < 1025){   
                 echo "correo enviado # ".$i." a " .$verification ." rol = ".$Attendees[$i]->rol_assistant." id = ".$Attendees[$i]->identification."\n" ;
                 
-                
-                /*
                 if($Attendees[$i]->identification!=NULL ){
                 
                     $datos["id"] = $Attendees[$i]->identification;
@@ -189,7 +187,7 @@ class SendContentController extends Controller
                 Mail::send("Public.ViewEvent.Partials.ContentMail",$datos , function ($message) use ($datos,$data_single){
                     $message->to($data_single,"Asistente")
                     ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
-                });*/
+                });
             } 
             
             
