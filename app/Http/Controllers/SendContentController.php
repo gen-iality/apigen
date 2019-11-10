@@ -131,8 +131,10 @@ class SendContentController extends Controller
 
     public function sendContentGenerated(Request $request)
     {
+     
         
         $data = $request->json()->all();
+        
         $data_single = $data["email"];
  
             Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
@@ -148,31 +150,47 @@ class SendContentController extends Controller
         
         $data = $request->json()->all();
         
-        $Attendees = Attendee::where("event_id","5d6eb0cbd74d5c163179d002")->get();
+        $Attendees = Attendee::where("event_id","5db215419567225895c8d296")->get();
         $attendees_size = $Attendees->count();
-      
+   
+     
         for ($i=0;$i<$attendees_size;$i++){
             $datos["email"] = $Attendees[$i]->email;
-           
-            $datos["id"] = $Attendees[$i]->identification;
-            if($Attendees[$i]->rol_assistant==NULL){
-                $datos["etapa"] = "asistente";
+            $verification = $Attendees[$i]->email;
+            if($i > 1009){   
+                echo "correo enviado # ".$i." a " .$verification."<br>";
+
+                if($Attendees[$i]->identification!=NULL ){
                 
-            }else{
-                $datos["etapa"] = $Attendees[$i]->rol_assistant;
-               
-            }
-            $data_single = $datos["email"];
-            $etapa = $datos["etapa"];
-            $email = $datos["email"];
-            $id = $datos["id"];
-        
-            
-            Mail::send("Public.ViewEvent.Partials.ContentMail",$datos , function ($message) use ($datos,$data_single){
+                    $datos["id"] = $Attendees[$i]->identification;
     
-                $message->to($data_single,"Asistente")
-                ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
-            });
+                }else{
+                    $datos["id"] = "mec.2040";
+                    $Attendees[$i]->identification = "mec.2040"; 
+                    $Attendees[$i]->save();  
+                }
+    
+                if($Attendees[$i]->rol_assistant==NULL){
+                    $datos["etapa"] = "asistente";
+                    
+                }else{
+                    $datos["etapa"] = $Attendees[$i]->rol_assistant;
+                   
+                }
+                $data_single = $datos["email"];
+                $etapa = $datos["etapa"];
+                $email = $datos["email"];
+                $id = $datos["id"];
+            
+                
+                Mail::send("Public.ViewEvent.Partials.ContentMail",$datos , function ($message) use ($datos,$data_single){
+                    $message->to($data_single,"Asistente")
+                    ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
+                });
+
+
+            } 
+            
             
         }
        

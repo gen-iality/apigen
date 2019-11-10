@@ -76,7 +76,7 @@ Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController
 /****************
  * organizations
  ****************/
-Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
 
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 
