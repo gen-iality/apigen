@@ -136,8 +136,7 @@ class SendContentController extends Controller
         $data = $request->json()->all();
         
         $data_single = $data["email"];
-        $email = Attendee::where("event_id","5db215419567225895c8d296")->where("email",$data_single)->get();
-        echo ($email);die;
+       
                 
             Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
                 $message->to($data_single,"Asistente")
@@ -146,6 +145,7 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentMail', $data);
    
     }
+    
     public function sendContentToAll(Request $request)
     {
      
@@ -179,7 +179,7 @@ class SendContentController extends Controller
                     $datos["etapa"] = $Attendees[$i]->rol_assistant;
                    
                 }
-                $data_single = "tfrdrummer@gmail.com";//$datos["email"];
+                $data_single = $datos["email"];
                 $etapa = $datos["etapa"];
                 $email = $datos["email"];
                 $id = $datos["id"];
@@ -200,8 +200,7 @@ class SendContentController extends Controller
         
         
         $data_single = $data["email"];
-        $email = Attendee::where("event_id","5db215419567225895c8d296")->where("email",$data_single);
-        echo $email->id;die;
+        
         Mail::send("Public.ViewEvent.Partials.ContentMailMec",$data , function ($message) use ($data,$data_single){
             $message->to($data_single,"Asistente")
             ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
@@ -211,6 +210,23 @@ class SendContentController extends Controller
    
         
     
+    }
+    public function sendNotificationEmail(Request $request)
+    {
+     
+        
+        $data = $request->json()->all();
+        
+        $data_single = $data["email"];
+        //subject, content, title,email,name, reciever
+       
+                
+            Mail::send("Public.ViewEvent.Partials.ContentNotification",$data , function ($message) use ($data,$data_single){
+                $message->to($data_single,"Asistente")
+                ->subject($data["subject"],"");
+            });
+        return view('Public.ViewEvent.Partials.ContentNotification', $data);
+   
     }
 
 
