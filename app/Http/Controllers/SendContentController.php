@@ -156,6 +156,7 @@ class SendContentController extends Controller
      
         for ($i=0;$i<$attendees_size;$i++){
            $tiempo = $data["time"];
+           $limit =$data["limit"];
             $datos["email"] = $Attendees[$i]->email;
             $verification = $Attendees[$i]->email;
              if( $i > 506 && $i < $tiempo ){  
