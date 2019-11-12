@@ -136,10 +136,10 @@ class SendContentController extends Controller
         $data = $request->json()->all();
         
         $data_single = $data["email"];
-       
- 
+        $email = Attendee::where("event_id","5db215419567225895c8d296")->where("email",$data_single)->get();
+        echo $email;die;
+                
             Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
-    
                 $message->to($data_single,"Asistente")
                 ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!","");
             });
@@ -148,7 +148,7 @@ class SendContentController extends Controller
     }
     public function sendContentToAll(Request $request)
     {
-        
+        set_time_limit(2000);
         $data = $request->json()->all();
         
         $Attendees = Attendee::where("event_id","5db215419567225895c8d296")->get();
@@ -158,7 +158,7 @@ class SendContentController extends Controller
            
             $datos["email"] = $Attendees[$i]->email;
             $verification = $Attendees[$i]->email;
-             if( $i > 506 && $i < 550){  
+             if( $i > 506 && $i < 540){  
                 echo "correo enviado # ".$i." a " .$verification ." rol = ".$Attendees[$i]->rol_assistant." id = ".$Attendees[$i]->identification."\n" ;
                 
                 if($Attendees[$i]->identification!=NULL ){
@@ -199,6 +199,8 @@ class SendContentController extends Controller
         
         
         $data_single = $data["email"];
+        $email = Attendee::where("event_id","5db215419567225895c8d296")->where("email",$data_single);
+        echo $email->id;die;
         Mail::send("Public.ViewEvent.Partials.ContentMailMec",$data , function ($message) use ($data,$data_single){
             $message->to($data_single,"Asistente")
             ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
