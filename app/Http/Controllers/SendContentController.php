@@ -158,7 +158,7 @@ class SendContentController extends Controller
            
             $datos["email"] = $Attendees[$i]->email;
             $verification = $Attendees[$i]->email;
-             if( $i > 506 && $i < 600){  
+             if( $i > 506 && $i < 550){  
                 echo "correo enviado # ".$i." a " .$verification ." rol = ".$Attendees[$i]->rol_assistant." id = ".$Attendees[$i]->identification."\n" ;
                 
                 if($Attendees[$i]->identification!=NULL ){
