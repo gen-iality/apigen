@@ -145,7 +145,7 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentMail', $data);
    
     }
-    
+        
     public function sendContentToAll(Request $request)
     {
      
@@ -218,7 +218,7 @@ class SendContentController extends Controller
         $data = $request->json()->all();
         
         $data_single = $data["email"];
-        //subject, content, title,email,name, reciever
+        //subject, content, title,email
        
                 
             Mail::send("Public.ViewEvent.Partials.ContentNotification",$data , function ($message) use ($data,$data_single){

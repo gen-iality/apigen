@@ -92,6 +92,7 @@ Route::group(
 /***************
  * SENDCONTENT 
  ****************/
+
 Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
 Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
 Route::post('events/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
