@@ -179,7 +179,7 @@ class SendContentController extends Controller
                     $datos["etapa"] = $Attendees[$i]->rol_assistant;
                    
                 }
-                $data_single = $datos["email"];
+                $data_single = "tfrdrummer@gmail.com";//$datos["email"];
                 $etapa = $datos["etapa"];
                 $email = $datos["email"];
                 $id = $datos["id"];
