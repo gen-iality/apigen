@@ -137,28 +137,29 @@ class SendContentController extends Controller
         
         $data_single = $data["email"];
        
- 
+                
             Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$data_single){
-    
                 $message->to($data_single,"Asistente")
                 ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!","");
             });
         return view('Public.ViewEvent.Partials.ContentMail', $data);
    
     }
+        
     public function sendContentToAll(Request $request)
     {
-        
+     
         $data = $request->json()->all();
         
         $Attendees = Attendee::where("event_id","5db215419567225895c8d296")->get();
         $attendees_size = $Attendees->count();
-   
      
         for ($i=0;$i<$attendees_size;$i++){
+           $tiempo = $data["time"];
+           $limit =$data["limit"];
             $datos["email"] = $Attendees[$i]->email;
             $verification = $Attendees[$i]->email;
-            if($i > 1059 ){   
+             if( $i > $limit && $i < $tiempo ){  
                 echo "correo enviado # ".$i." a " .$verification ." rol = ".$Attendees[$i]->rol_assistant." id = ".$Attendees[$i]->identification."\n" ;
                 
                 if($Attendees[$i]->identification!=NULL ){
@@ -182,24 +183,15 @@ class SendContentController extends Controller
                 $etapa = $datos["etapa"];
                 $email = $datos["email"];
                 $id = $datos["id"];
-            
                 
-                Mail::send("Public.ViewEvent.Partials.ContentMail",$datos , function ($message) use ($datos,$data_single){
+                
+                Mail::send("Public.ViewEvent.Partials.MecMail",$datos , function ($message) use ($datos,$data_single){
                     $message->to($data_single,"Asistente")
-                    ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
-                });
-            } 
-            
-            
+                    ->subject("¡No olvides inscribirte!","");
+                });        
+            }
         }
-       
-        return view('Public.ViewEvent.Partials.ContentMail', $datos);
-   
-        
-
-        
-        
-    
+        return view('Public.ViewEvent.Partials.MecMail', $datos);
     }
     public function sendContentMec(Request $request)
     {
@@ -208,6 +200,7 @@ class SendContentController extends Controller
         
         
         $data_single = $data["email"];
+        
         Mail::send("Public.ViewEvent.Partials.ContentMailMec",$data , function ($message) use ($data,$data_single){
             $message->to($data_single,"Asistente")
             ->subject("¡Bienvenido al Movimiento de Empresarios Creativos!  ","");
@@ -217,6 +210,23 @@ class SendContentController extends Controller
    
         
     
+    }
+    public function sendNotificationEmail(Request $request)
+    {
+     
+        
+        $data = $request->json()->all();
+        
+        $data_single = $data["email"];
+        //subject, content, title,email
+       
+                
+            Mail::send("Public.ViewEvent.Partials.ContentNotification",$data , function ($message) use ($data,$data_single){
+                $message->to($data_single,"Asistente")
+                ->subject($data["subject"],"");
+            });
+        return view('Public.ViewEvent.Partials.ContentNotification', $data);
+   
     }
 
 

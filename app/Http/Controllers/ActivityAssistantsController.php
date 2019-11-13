@@ -64,7 +64,15 @@ class ActivityAssistantsController extends Controller
         $data["event_id"] = $event_id;
         $result = new ActivityAssistants($data);
         $model = ActivityAssistants::where("activity_id",$activity_id)->get();
+        $getsize = ActivityAssistants::find($model[0]["_id"])->user_ids;
+        $activities = Activities::find($activity_id)->capacity;
+        $size = $getsize;
+        
+        if(sizeof($size) < $activities){
+            
+        
         $arr = json_decode(json_encode($model), TRUE);
+        
         if(empty($arr)){
             $result->push("user_ids",$data["user_id"]);
             $result->save();
@@ -98,16 +106,47 @@ class ActivityAssistantsController extends Controller
             return $model;
         }
     }
+    return "Cupo lleno";
+    }
     
     public function deleteAssistant(Request $request, $event_id)
     {
+        //$users = Attendee::find();
+        $data = $request->json()->all();
+        $activity_id = $data["activity_id"];
+        $model = ActivityAssistants::where("activity_id",$activity_id)->get();
+        $model = ActivityAssistants::find($model[0]["_id"])->user_ids;
+        $activities = Activities::find($activity_id)->capacity;
+        $size = $model;
+        
+        if(sizeof($size) < $activities){
+            echo "cupo lleno";
+        }
+        echo sizeof($size);die;
+        $models = ActivityAssistants::find("5dc60160d74d5c74eb60dc82")->user_ids;
+        $modelreplace = ActivityAssistants::find("5dc60160d74d5c74eb60dc82");
+        
+        $arrayusers = $models;
+        $x = 0;
+        foreach($arrayusers as $arrayuser){
+
+            if($x>80){
+                unset($arrayusers[$x]);
+            }
+            $x++;
+        }
+
+        $modelreplace->user_ids = $arrayusers;
+        $modelreplace->push();
+
+        /* LO INICIAL NO ELIMINAR PERO USAR 
         $data = $request->json()->all();
         $activity_id =$data["activity_id"];
         $user = $data["user_id"];
         $model = ActivityAssistants::where("activity_id",$activity_id)->get();
         $modelreplace = ActivityAssistants::find($model[0]["_id"]);
         $model = ActivityAssistants::find($model[0]["_id"])->user_ids;
-        $x = 0;
+       
         $arrayUsers = $model;
         //mapea el array para detectar el usuario que se le parezca
         foreach($arrayUsers as $arrayUser){
@@ -117,11 +156,11 @@ class ActivityAssistantsController extends Controller
             $x++;
         }
         $modelreplace->user_ids = $arrayUsers;
-        $modelreplace->push();
+        $modelreplace->push();*/
          /*
             * calcular cupos restantes
             */
-         
+         /*
             $actualUsers = $modelreplace["user_ids"]; //extrae los usuarios
             $actualUsers = sizeof($actualUsers); //mide el array de usuarios 
             $totalCapacity = Activities::find($activity_id)->capacity; // capacidad actual de la actividad 
@@ -130,7 +169,7 @@ class ActivityAssistantsController extends Controller
             $remainingCapacity->remaining_capacity = $remaining;
             $remainingCapacity->save(); //guarda el resultado   
 
-        return $modelreplace;
+        return $modelreplace;*/
      }
 
     /**

@@ -92,9 +92,11 @@ Route::group(
 /***************
  * SENDCONTENT 
  ****************/
+
 Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
 Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
 Route::post('events/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
+Route::post('events/sendnotificationemail' ,  'SendContentController@sendNotificationEmail');
 
 Route::get('events/{event_id}/sendcontent' ,        'SendContentController@index');
 Route::post('events/{event_id}/sendcontent' ,       'SendContentController@store');
