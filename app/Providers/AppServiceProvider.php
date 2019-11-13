@@ -32,27 +32,39 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
 
                 $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
         
-                $db =  (new \Morrislaptop\Firestore\Factory)
+                $ft =  (new \Morrislaptop\Firestore\Factory)
                        ->withServiceAccount($serviceAccount)
-                       ->createFirestore()->database();                  
+                       ->createFirestore();
+		$db = $ft;                  
                  
                 $doc_ids = [];
                 $path = "event_activity_attendees/".$activityAttendee->event_id."/activities/".$activityAttendee->activity_id."/attendees";
 
-                $docsnapshot = $db->collection($path)->documents();
-
-                foreach ($docsnapshot as $document) {
-                    $doc_ids[] = $document->id();
-                }
 
                 foreach($activityAttendee->user_ids as $aid) {  
                     //creamos un id compuesto para saltarnos el bug que no tenemos ID para activityAttendee
                     $doc_id = $aid.$activityAttendee->activity_id;
                     
-                    //Ya existe no necesitamos actualizarlos
-                    if (in_array( $doc_id, $doc_ids)){
-                        continue;
-                    }
+
+
+$pathd = $activityAttendee->event_id."/activities/".$activityAttendee->activity_id."/attendees/".$doc_id;
+
+
+$r = $db->collection('event_activity_attendees')->document($pathd);
+
+
+
+try{
+$r->snapshot();	
+echo "existe";
+continue;
+}catch(\Exception $e){
+echo " >>  no existe <<";
+  
+}
+
+
+
 
                     $a = Attendee::find($aid);
                     if (!$a) {continue;}
