@@ -17,6 +17,8 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
  * ACITIVITY 
  ****************/
 
+Route::get  ('fillassitantsbug/{id}', 'ActivityAssistantsController@fillassitantsbug');
+
 Route::post  ('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
 Route::delete('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@deleteAssistant');
 

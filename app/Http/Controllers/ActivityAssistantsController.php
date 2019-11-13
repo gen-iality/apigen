@@ -16,6 +16,28 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class ActivityAssistantsController extends Controller
 {
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Inscription  $Inscription
+     * @return \Illuminate\Http\Response
+     */
+    public function fillassitantsbug($id)
+    {
+       // $ActivityAssistants = ActivityAssistants::all();
+       //Esta activityassistant se perdio 5dbc99bad74d5c5822693842
+       $ActivityAssistant = ActivityAssistants::find($id);
+       if ($ActivityAssistant)
+       $ActivityAssistant->save();
+
+        var_dump($ActivityAssistants->user_ids);
+        $response = new JsonResource($ActivityAssistants);
+        var_dump($response);
+        die;
+
+    }    
     /**
      * Display a listing of the resource.
      *

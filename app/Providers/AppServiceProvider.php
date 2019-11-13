@@ -27,7 +27,49 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         Resource::withoutWrapping();
 
         // \App\Attendee::observe(App\Observers\EventUserObserver::class);
+        \App\ActivityAssistants::saved(
+            function ($activityAttendee) {
 
+                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        
+                $db =  (new \Morrislaptop\Firestore\Factory)
+                       ->withServiceAccount($serviceAccount)
+                       ->createFirestore()->database();                  
+                 
+                $doc_ids = [];
+                $path = "event_activity_attendees/".$activityAttendee->event_id."/activities/".$activityAttendee->activity_id."/attendees";
+
+                $docsnapshot = $db->collection($path)->documents();
+
+                foreach ($docsnapshot as $document) {
+                    $doc_ids[] = $document->id();
+                }
+
+                foreach($activityAttendee->user_ids as $aid) {  
+                    //creamos un id compuesto para saltarnos el bug que no tenemos ID para activityAttendee
+                    $doc_id = $aid.$activityAttendee->activity_id;
+                    
+                    //Ya existe no necesitamos actualizarlos
+                    if (in_array( $doc_id, $doc_ids)){
+                        continue;
+                    }
+
+                    $a = Attendee::find($aid);
+                    if (!$a) {continue;}
+         
+                    $p  = [];
+                    $p["properties"]  = $a->properties;
+                    $p["rol_name"]    = $a->rol_assistant;
+                    $p["rol_id"]      = $a->rol_id;
+                    $p["event_id"]    = $activityAttendee->event_id;
+                    $p["attendee_id"] = $aid;
+                    $p["activity_id"] = $activityAttendee->activity_id;
+                    
+                    
+                    $resultado = self::storeDocInFirestore($path , $doc_id, $p);
+                }              
+            }
+        );
         \App\Attendee::saved(
             function ($eventUser) {
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
