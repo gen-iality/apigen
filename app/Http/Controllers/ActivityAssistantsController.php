@@ -120,7 +120,7 @@ class ActivityAssistantsController extends Controller
     return "Cupo lleno";
     }
     
-    public function deleteAssistant(Request $request, $event_id)
+    public function deleteAssistant(Request $request, $event_id,$activity_id)
     {
         $data = $request->json()->all();
         //$activitysize = $data["acitivity_id"];
