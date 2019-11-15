@@ -126,7 +126,10 @@ class ActivityAssistantsController extends Controller
         //$activitysize = $data["acitivity_id"];
 
         $activityname = Activities::find($data["activity_id"])->name;
+        $data["name"] = $activityname;
+
         $useremail = $data["user_email"];
+
         $activityname = str_replace(" ", "%20", $activityname);
         $data["url"] = "https://docs.google.com/forms/d/e/1FAIpQLSeKIA54wmkCOL38EZ8rUpEJWN86xqqQuHDDsYfW1_WoHwWtLg/viewform?usp=pp_url&entry.230442346=".$activityname;
         echo $data["url"];

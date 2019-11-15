@@ -65,7 +65,7 @@ body{
     <img style="width:90%;heigh:auto" src="https://api.evius.co/images/logoMecLong.png">  
     <h1>¡Te invitamos a llenar esta encuesta de satisfacción!</h1>
 <p>
-Te invitamos cordialmente a llenar la encuesta de satisfacción para la actividad {{$activity_name}}, del MEC 2019 
+Te invitamos cordialmente a llenar la encuesta de satisfacción para la actividad {{$name}}, del MEC 2019 
 </p>
 <a href="{{$url}}">https://docs.google.com/forms/d/e/1FAIpQLSeKIA54wmkCOL38EZ8rUpEJWN86xqqQuHDDsYfW1_WoHwWtLg/viewform?usp=pp_url&entry.230442346={{$activity_name}}</a>
 
