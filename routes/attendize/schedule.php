@@ -20,7 +20,7 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 Route::get  ('fillassitantsbug/{id}', 'ActivityAssistantsController@fillassitantsbug');
 
 Route::post  ('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
-Route::delete('events/{event_id}/activity/activity_attendee/{id}', 'ActivityAssistantsController@deleteAssistant');
+Route::post('events/{event_id}/activity/activity_attendee/{id}', 'ActivityAssistantsController@deleteAssistant');
 
 Route::get   ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@index');
 Route::post  ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@store');
