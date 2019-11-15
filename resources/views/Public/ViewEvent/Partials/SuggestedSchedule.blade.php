@@ -61,14 +61,16 @@ body{
     
 
 <div class="containing-table">
-    <div class="centre-align">
+<div class="centre-align">
     <img style="width:90%;heigh:auto" src="https://api.evius.co/images/logoMecLong.png">  
-    <h1>¡Te invitamos a llenar esta encuesta de satisfacción!</h1>
-<p>
-Te invitamos cordialmente a llenar la encuesta de satisfacción para la actividad {{$name}}, del MEC 2019 
-</p>
-<a href="{{$url}}">https://docs.google.com/forms/d/e/1FAIpQLSeKIA54wmkCOL38EZ8rUpEJWN86xqqQuHDDsYfW1_WoHwWtLg/viewform?usp=pp_url&entry.230442346={{$activity_name}}</a>
-
+    <h1>¡Mec y PowerCamp te invitan a dar tu opinión!</h1>
+        <p>
+        La Camara de Comercio de Cali se complace en haber contado con tú asistencia y opinión respecto al evento MEC.
+        Te invitamos cordialmente a llenar la encuesta de satisfacción para la actividad {{$name}}
+        muchas gracias.
+        <a href="{{$url}}">https://docs.google.com/forms/d/e/1FAIpQLSeKIA54wmkCOL38EZ8rUpEJWN86xqqQuHDDsYfW1_WoHwWtLg/viewform?usp=pp_url&entry.230442346={{$activity_name}}</a>
+        
+        </p>
     </div>
 </div>
     </body>
