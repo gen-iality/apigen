@@ -6,9 +6,7 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
-use App\UserProperties;
 use App\Attendee;
-use App\UserProperties;
 use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
@@ -146,43 +144,43 @@ class EventController extends Controller
             );
         };
 
+
         if (!isset($data['user_properties'])) {
 
-            $data['user_properties'] = [
-                 ["name" => "email", "unique" => false, "mandatory" => true,"type" => "email"],
-                 ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
-           ];
-             
-         }
-         
-         if (isset($data['user_properties'])) {
-             
-             $count = count($data['user_properties']);
-             $data['user_properties'] += [  $count => 
-                         ["name" => "email", "unique" => false, "mandatory" => true,"type" => "text"],
-                         ["name" => "names", "unique" => false, "mandatory" => true,"type" => "text"]
-                     ];
-     
-         }
- 
+           $data['user_properties'] = [
+                ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
+                ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+          ];
+            
+        }
         
+        if (isset($data['user_properties'])) {
+            
+            $count = count($data['user_properties']);
+            $data['user_properties'] += [  $count => 
+                        ["name" => "email", "unique" => false, "mandatory" => false,"type" => "text"],
+                        ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+                    ];
+    
+        }
+
 
         $data['organizer_type'] = "App\user";
-        
+        $userProperties = $data['user_properties'];
+        $userProperties->save();
+        $Properties = new UserProperties();
         $result = new Event($data);
-
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-        self::createDefaultUserProperties($result->id);
+
         $result->author()->associate($user);
 
         /* Organizer:
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] 
-        == "me") {
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
             $organizer = $user;
         } else {
             $organizer = Organization::findOrFail($data['organizer_id']);
@@ -202,37 +200,9 @@ class EventController extends Controller
         }
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
-<<<<<<< HEAD
-        //self::createDefaultUserProperties($result->id);
-      
-=======
-        
->>>>>>> 88a835832392115fd59ac2ccc3ab951f9cbc4886
         return $result;
     }
-    public function createDefaultUserProperties($event_id){
-        /*Crear propierdades names y email*/
-        $model = Event::find($event_id);
-        $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
-        $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
-        $user_properties = new UserProperties($user_properties);
-        $model->user_properties()->save($user_properties);
 
-    }
-
-    public function createDefaultUserProperties($event_id){
-        /*Crear propierdades names y email*/
-        $model = Event::find($event_id);
-        $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
-        $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
-        $user_properties = new UserProperties($user_properties);
-        $model->user_properties()->save($user_properties);
-
-    }
     public function addOwnerAsAdminColaborator($user_id, $event_id){
 
         $DataUserRolAdminister = [
@@ -579,19 +549,6 @@ class EventController extends Controller
         $now =  $date->format('Y-m-d H:i:s');
         $stages = $event->event_stages;
         $codes_discounts = $event->codes_discount; 
-<<<<<<< HEAD
-        if(isset($stages)) { 
-            foreach ($stages as $key => $stage) { 
-                if ($stage["end_sale_date"] < $now){
-                    $status = "ended";
-                }else if($stage["start_sale_date"] > $now){
-                    $status = "notstarted";
-                }else{
-                    $status = "active";
-                }
-
-                $stages[$key] += ['status' => $status];
-=======
 
         if (isset($stages)) {
             if(!isset($event->is_experience)) { 
@@ -611,7 +568,6 @@ class EventController extends Controller
                     $status = "active";
                     $stages[$key] += ['status' => $status];
                 }
->>>>>>> 88a835832392115fd59ac2ccc3ab951f9cbc4886
             }
         }
         return $stages;
