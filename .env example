@@ -8,7 +8,7 @@ LOG_CHANNEL=stack
 DB_CONNECTION=mongodb
 DB_HOST="cluster0-gp9gs.mongodb.net"
 DB_PORT=27017
-DB_DATABASE=eviusdev 
+DB_DATABASE=eviusdev
 DB_USERNAME=root
 DB_PASSWORD=amazonas.2040	
 
