@@ -566,7 +566,7 @@ class EventController extends Controller
      */
     public function stagesStatusActive($id){
 
-        //"start_sale_date": "2019-02-24 18:00",
+           //"start_sale_date": "2019-02-24 18:00",
         //"end_sale_date": "2019-05-16 05:59",
         
         //2019-04-11
@@ -575,19 +575,6 @@ class EventController extends Controller
         $now =  $date->format('Y-m-d H:i:s');
         $stages = $event->event_stages;
         $codes_discounts = $event->codes_discount; 
-<<<<<<< HEAD
-        if(isset($stages)) { 
-            foreach ($stages as $key => $stage) { 
-                if ($stage["end_sale_date"] < $now){
-                    $status = "ended";
-                }else if($stage["start_sale_date"] > $now){
-                    $status = "notstarted";
-                }else{
-                    $status = "active";
-                }
-
-                $stages[$key] += ['status' => $status];
-=======
 
         if (isset($stages)) {
             if(!isset($event->is_experience)) { 
@@ -607,7 +594,6 @@ class EventController extends Controller
                     $status = "active";
                     $stages[$key] += ['status' => $status];
                 }
->>>>>>> 88a835832392115fd59ac2ccc3ab951f9cbc4886
             }
         }
         return $stages;
