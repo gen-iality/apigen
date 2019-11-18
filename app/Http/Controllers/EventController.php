@@ -202,12 +202,8 @@ class EventController extends Controller
         }
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
-<<<<<<< HEAD
-        //self::createDefaultUserProperties($result->id);
+        self::createDefaultUserProperties($result->id);
       
-=======
-        
->>>>>>> 88a835832392115fd59ac2ccc3ab951f9cbc4886
         return $result;
     }
     public function createDefaultUserProperties($event_id){
