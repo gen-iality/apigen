@@ -165,7 +165,7 @@ class EventController extends Controller
      
          }
  
-        
+         self::createDefaultUserProperties($result->id);
 
         $data['organizer_type'] = "App\user";
         
@@ -202,7 +202,7 @@ class EventController extends Controller
         }
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
-        self::createDefaultUserProperties($result->id);
+        
       
         return $result;
     }
