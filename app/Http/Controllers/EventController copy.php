@@ -7,7 +7,6 @@ use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Attendee;
-use App\UserProperties;
 use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
@@ -174,7 +173,7 @@ class EventController extends Controller
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-        self::createDefaultUserProperties($result->id);
+
         $result->author()->associate($user);
 
         /* Organizer:
@@ -201,19 +200,7 @@ class EventController extends Controller
         }
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
-        
         return $result;
-    }
-    public function createDefaultUserProperties($event_id){
-        /*Crear propierdades names y email*/
-        $model = Event::find($event_id);
-        $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
-        $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
-        $user_properties = new UserProperties($user_properties);
-        $model->user_properties()->save($user_properties);
-
     }
 
     public function addOwnerAsAdminColaborator($user_id, $event_id){
