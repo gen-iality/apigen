@@ -165,7 +165,15 @@ class EventController extends Controller
      
          }
  
-         self::createDefaultUserProperties($result->id);
+        //Function to create user properties 
+        $model = Event::find($event_id);
+        $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
+        $user_properties = new UserProperties($name);
+        $model->user_properties()->save($user_properties);
+        $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
+        $user_properties = new UserProperties($user_properties);
+        $model->user_properties()->save($user_properties);
+        
 
         $data['organizer_type'] = "App\user";
         
