@@ -21,7 +21,7 @@ return [
     'name' => env('APP_NAME', 'Evius'),
 
     'front_url' => 'https://eviusco.netlify.com',
-    'page_size' => 90000,
+    'page_size' => 900,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     /*
