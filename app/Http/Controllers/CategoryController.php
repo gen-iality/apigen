@@ -31,7 +31,7 @@ class CategoryController extends Controller
     {
 
         return CategoryResource::collection(
-            Category::paginate(1000)
+            Category::paginate(config('app.page_size'))
         );
 
         //$events = Event::where('visibility', $request->input('name'))->get();
