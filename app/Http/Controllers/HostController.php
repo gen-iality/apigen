@@ -22,7 +22,7 @@ class HostController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Host::where("event_id", $event_id)->paginate(1000)
+            Host::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
