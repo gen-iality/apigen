@@ -39,9 +39,11 @@ class OrderMailer
         $event = Event::findOrFail($order->event_id);
         $stages = $event->event_stages;
         $eventusers = Attendee::where('order_id', $order->id)->get();
-        $location = $event["location"]["FormattedAddress"];
-
+        
+        //$location = $event["location"]["FormattedAddress"];
+        $location = "";
         $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
+        
         $orderService->calculateFinalCosts();
 
         Log::info("Sending ticket to: " . $order->email);
