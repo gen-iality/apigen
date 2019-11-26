@@ -220,16 +220,16 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
-    {   
+    {  
         //Esto es para medir el tiempo de ejecución se pone al inicio y el final
         //$i = round(microtime(true) * 1000); 
         //$i = round(microtime(true) * 1000); $f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         $event = Event::findOrFail($id);
         /* @TODO porque los stages se cargan aqui en el evento 
-        //$stages = $this->stagesStatusActive($id);
-        //$event->event_stages = $stages;
+        $stages = $this->stagesStatusActive($id);
+        $event->event_stages = $stages;
         */
-        $event->event_stages = [];
+      
         //$f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         return new EventResource($event);
     }
