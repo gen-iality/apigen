@@ -372,6 +372,9 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
+
+                                        <!-- MODULO PARA CREAR CAMPOS DE TICKETES-->
+                                        
                                             @foreach($fields as $field)
                                                 <div class="col-xs-12 col-sm-6">
                                                     <div class="form-group">
@@ -379,45 +382,25 @@
                                                         $optionns = ["Alimentos","Recreacion o Deporte","Salud o Medicina","Construccion o Infraestructura","Suministros Construccion o Infraestructura","Inmobiliaria","Banca o Finanzas","Gobierno","Defensa","Industria Militar","Organizacion sin ánimo de Lucro","Industria Automotriz","Industria Farmaceutica","Tecnologia","Telecomunicaciones","Otro"]; 
                                                         ?>
                                                     @if(!isset($field['visible']))
-                                                        @if($field['mandatory'] == 'true' && $event->id == '5cbe5231d74d5c0d251fa1e2') 
-                                                            @if(isset( $field['label']))
-                                                                {!! Form::label($field['name'], $field['label']) !!}
-                                                            @else
-                                                                {!! Form::label($field['name'], $field['name']) !!}
-                                                            @endif
-                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['required' => 'required', 'class' => 'form-control']) !!}
+
+                                                        @if(isset( $field['label']))
+                                                            {!! Form::label($field['name'], $field['label']) !!}
                                                         @else
-                                                            @if(isset( $field['label']))
-                                                                {!! Form::label($field['name'], $field['label']) !!}
-                                                            @else
-                                                                {!! Form::label($field['name'], $field['name']) !!}
-                                                            @endif
-                                                            @if($event->id == '5c3fb4ddfb8a3371ef79bd62')
-                                                            <!-- Select Dropdown -->
-                                                                @if($field['type'] == 'list')
-                                                                    {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
-                                                                <!-- Canal de inscripcion ACIS -->
-                                                                @elseif($field['name'] === 'canalDeInscripcion')
-                                                                    {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
-                                                                @else
-                                                                    {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
-                                                                @endif
-                                                            @endif
-                                                            @if($event->id == '5d2de182d74d5c28047d1f85')
-                                                                @if($field['type'] == 'boolean')
-                                                                    {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
-                                                                @elseif($field['type'] == 'list')
-                                                                    {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", $optionns, null, ['class' => 'form-control']) !!}
-                                                                @else
-                                                                    {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
-                                                                @endif
-                                                            @endif
+                                                            {!! Form::label($field['name'], $field['name']) !!}
                                                         @endif
-                                                    @endif
+                                                        
+                                                        @if($field['type'] == 'boolean')
+                                                                {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  ['Si','No'], null, ['class' => 'form-control']) !!}
+                                                        @elseif($field['type'] == 'list')
+                                                            {!! Form::select("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", $optionns, null, ['class' => 'form-control']) !!}
+                                                        @else
+                                                            {!! Form::text("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]", null, ['class' => 'form-control']) !!}
+                                                        @endif
+                                                          
+                                                    @endif   
+                                                  
                                                     </div>
-                                                    @if($field['name'] === 'canalDeInscripcion')
-                                                        {!! Form::hidden("tiket_holder_{$field['name']}[{$i}][{$ticket['ticket']['_id']}]",  'Evius', ['class' => 'form-control']) !!}
-                                                    @endif
+
                                                     {{ Form::hidden('ticket_id', $ticket['ticket']['_id']) }}
                                                     @if(isset($ticket['ticket']['number_person_per_ticket']))
                                                         {{ Form::hidden('person_per_ticket', $ticket['ticket']['number_person_per_ticket']) }}
