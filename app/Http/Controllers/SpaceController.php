@@ -29,7 +29,7 @@ class SpaceController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Space::where("event_id", $event_id)->paginate(1000)
+            Space::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
