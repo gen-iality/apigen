@@ -48,7 +48,7 @@ class EventController extends Controller
         $currentDate = new \Carbon\Carbon();
         //$currentDate = $currentDate->subWeek(2); 
 
-        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC ) //Public
                 ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '>', $currentDate)
                 ->orderBy('datetime_from', 'ASC');
@@ -62,7 +62,7 @@ class EventController extends Controller
     {
         $currentDate = new \Carbon\Carbon(); 
 
-        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC ) //Public
                 ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '<', $currentDate)
                 ->orderBy('datetime_from', 'DESC');
