@@ -131,6 +131,7 @@ class EventController extends Controller
         $user = Auth::user();
         $data = $request->json()->all();
        
+         
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
@@ -164,17 +165,30 @@ class EventController extends Controller
                     ];
     
         }
-
-
+        
+        //Color validator
+        
         $data['organizer_type'] = "App\user";
-        $userProperties = $data['user_properties'];
-        $userProperties->save();
+        //$userProperties = $data['user_properties'];
+        // $userProperties->save();
+        if(empty($data['event_color-image'])==1){
+            $data['event_color-image'] = '#FFF';   
+            
+        }
+        if(empty($data['banner_image-color'])==1){
+            $data['banner_image-color'] = '#676767';
+            echo 'banner_image-color';
+        }
+        if(empty($data['menu_color-image'])==1){
+            $data['menu_color-image'] = '#909090';
+            echo "menu_color-image";
+        }
         $Properties = new UserProperties();
         $result = new Event($data);
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-        self::createDefaultUserProperties($result->id);
+        
         $result->author()->associate($user);
 
         /* Organizer:
@@ -200,9 +214,10 @@ class EventController extends Controller
             $result->categories()->sync($data['category_ids']);
         }
 
-        self::addOwnerAsAdminColaborator($user->id, $result->id);
+        self::addOwnerAsAdminColaborator($user->id, $result->id);   
         
         return $result;
+        self::createDefaultUserProperties($result->id);
     }
     public function createDefaultUserProperties($event_id){
         /*Crear propierdades names y email*/
@@ -491,7 +506,6 @@ class EventController extends Controller
             $event->ticket_text_color = $defaults->ticket_text_color;
             $event->ticket_sub_text_color = $defaults->ticket_sub_text_color;
         }
-
 
         try {
             $event->save();
