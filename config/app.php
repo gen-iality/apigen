@@ -19,6 +19,8 @@ return [
     'front_url' => 'https://eviusco.netlify.com',
     'page_size' => 25,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
+    'default_event_styles' => ['event_color'=>"#FFF",'banner_color'=>"#FFF",'menu_color'=>"#FFF",'event_image'=>"#FFF",'banner_image'=>"#FFF",'menu_image'=>"#FFF"],
+    
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -146,43 +146,14 @@ class EventController extends Controller
             );
         };
 
-
-        if (!isset($data['user_properties'])) {
-
-           $data['user_properties'] = [
-                ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
-                ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
-          ];
-            
-        }
-        
-        if (isset($data['user_properties'])) {
-            
-            $count = count($data['user_properties']);
-            $data['user_properties'] += [  $count => 
-                        ["name" => "email", "unique" => false, "mandatory" => false,"type" => "text"],
-                        ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
-                    ];
-    
-        }
-        
-        //Color validator
-        
         $data['organizer_type'] = "App\user";
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
-        if(empty($data['event_color-image'])==1){
-            $data['event_color-image'] = '#FFF';   
-            
-        }
-        if(empty($data['banner_image-color'])==1){
-            $data['banner_image-color'] = '#676767';
-            echo 'banner_image-color';
-        }
-        if(empty($data['menu_color-image'])==1){
-            $data['menu_color-image'] = '#909090';
-            echo "menu_color-image";
-        }
+
+
+        $data['styles'] = self::AddDefaultStyles($data['styles']);
+
+
         $Properties = new UserProperties();
         $result = new Event($data);
         if ($request->file('picture')) {
@@ -214,23 +185,28 @@ class EventController extends Controller
             $result->categories()->sync($data['category_ids']);
         }
 
-        self::addOwnerAsAdminColaborator($user->id, $result->id);   
+        self::addOwnerAsAdminColaborator($user->id, $result->id);  
+        self::createDefaultUserProperties($result->id);
         
         return $result;
-        self::createDefaultUserProperties($result->id);
+        
     }
-    public function createDefaultUserProperties($event_id){
+
+    private static function createDefaultUserProperties($event_id){
         /*Crear propierdades names y email*/
         $model = Event::find($event_id);
         $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
         $user_properties = new UserProperties($name);
         $model->user_properties()->save($user_properties);
         $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
-        $user_properties = new UserProperties($user_properties);
-        $model->user_properties()->save($user_properties);
-
+        $user_properties = new UserProperties($email);
+        $model->user_properties()->except('author','categories','event_type')->save($user_properties);
     }
-
+    private static function AddDefaultStyles($styles){
+        $default_event_styles = config('app.default_event_styles');
+        $stlyes_validation = array_merge($default_event_styles,$styles);
+        return $stlyes_validation;
+    }    
     public function addOwnerAsAdminColaborator($user_id, $event_id){
 
         $DataUserRolAdminister = [
