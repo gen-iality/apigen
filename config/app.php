@@ -23,6 +23,7 @@ return [
     'front_url' => 'https://eviusco.netlify.com',
     'page_size' => 900,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
+    'default_event_styles' => ['event_color'=>"#FFF",'banner_color'=>"#FFF",'menu_color'=>"#FFF",'event_image'=>"#FFF",'banner_image'=>"#FFF",'menu_image'=>"#FFF"],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     /*
     |--------------------------------------------------------------------------

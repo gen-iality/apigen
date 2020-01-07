@@ -6,7 +6,6 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
-use App\UserProperties;
 use App\Attendee;
 use App\EventType;
 use App\Http\Resources\EventResource;
@@ -48,7 +47,7 @@ class EventController extends Controller
         $currentDate = new \Carbon\Carbon();
         //$currentDate = $currentDate->subWeek(2); 
 
-        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC ) //Public
+        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
                 ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '>', $currentDate)
                 ->orderBy('datetime_from', 'ASC');
@@ -62,7 +61,7 @@ class EventController extends Controller
     {
         $currentDate = new \Carbon\Carbon(); 
 
-        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC ) //Public
+        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
                 ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '<', $currentDate)
                 ->orderBy('datetime_from', 'DESC');
@@ -115,7 +114,7 @@ class EventController extends Controller
             return 'Error';
         }
     }
-   
+
     /**
      * Store a newly created event resource in storage.
      *
@@ -145,27 +144,43 @@ class EventController extends Controller
             );
         };
 
-        $data['organizer_type'] = "App\user";
-        //$userProperties = $data['user_properties'];
-        // $userProperties->save();
 
-        $data['styles'] = self::AddDefaultStyles($data['styles']);
+        if (!isset($data['user_properties'])) {
+
+           $data['user_properties'] = [
+                ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
+                ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+          ];
+            
+        }
         
+        if (isset($data['user_properties'])) {
+            
+            $count = count($data['user_properties']);
+            $data['user_properties'] += [  $count => 
+                        ["name" => "email", "unique" => false, "mandatory" => false,"type" => "text"],
+                        ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
+                    ];
+    
+        }
+
+
+        $data['organizer_type'] = "App\user";
+        $userProperties = $data['user_properties'];
+        $userProperties->save();
         $Properties = new UserProperties();
         $result = new Event($data);
-
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-        
+
         $result->author()->associate($user);
 
         /* Organizer:
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] 
-        == "me") {
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
             $organizer = $user;
         } else {
             $organizer = Organization::findOrFail($data['organizer_id']);
@@ -184,45 +199,20 @@ class EventController extends Controller
             $result->categories()->sync($data['category_ids']);
         }
 
-        self::addOwnerAsAdminColaborator($user->id, $result->id);  
-        self::createDefaultUserProperties($result->id);
-        
+        self::addOwnerAsAdminColaborator($user->id, $result->id);
         return $result;
     }
 
-    private static function createDefaultUserProperties($event_id){
-        /*Crear propierdades names y email*/
-        $model = Event::find($event_id);
-        $name = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "text");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
-        $email = array("name" => "name", "unique" => false, "mandatory" => false,"type" => "email");        
-        $user_properties = new UserProperties($email);
-        $model->user_properties()->except('author','categories','event_type')->save($user_properties);
-    }
-
-    private static function AddDefaultStyles($styles){
-        $default_event_styles = config('app.default_event_styles');
-        $stlyes_validation = array_merge($default_event_styles,$styles);
-        return $stlyes_validation;
-    }    
-
     public function addOwnerAsAdminColaborator($user_id, $event_id){
+
         $DataUserRolAdminister = [
             "role_id" => Event::ID_ROL_ADMINISTRATOR,
             "model_id" => $user_id,
             "event_id" => $event_id,
             "model_type" => "App\Account"
            ];
-        $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
-        return $DataUserRolAdminister;
-    }
-    public function addStyles(Request $request, String $id)
-    {
-        $data = $request->json()->all();
-        $event = Event::find($id);
-        $event->save($data);
-        return $event;
+           $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
+           return $DataUserRolAdminister;
     }
 
     /**
@@ -232,16 +222,16 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
-    {  
+    {   
         //Esto es para medir el tiempo de ejecución se pone al inicio y el final
         //$i = round(microtime(true) * 1000); 
         //$i = round(microtime(true) * 1000); $f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         $event = Event::findOrFail($id);
         /* @TODO porque los stages se cargan aqui en el evento 
-        $stages = $this->stagesStatusActive($id);
-        $event->event_stages = $stages;
+        //$stages = $this->stagesStatusActive($id);
+        //$event->event_stages = $stages;
         */
-      
+        $event->event_stages = [];
         //$f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         return new EventResource($event);
     }
@@ -271,15 +261,15 @@ class EventController extends Controller
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
         $user = Auth::user();
+
         $data = $request->json()->all();
+
         $event = Event::findOrFail($id);
 
         /* Organizer:
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
-         */ 
-        echo gettype($data['styles']);
-        $data['styles'] = self::AddDefaultStyles($data['styles']);
+         */
         if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
             if ($data['organizer_id'] == "me") {
                 $organizer = $user;
@@ -303,10 +293,8 @@ class EventController extends Controller
             $event->categories()->sync($data['category_ids']);
         }
 
-        
         $event->fill($data);
         $event->save();
-        
         return new EventResource($event);
     }
 
@@ -321,13 +309,6 @@ class EventController extends Controller
         $Event = Event::findOrFail($id);
         return (string)$Event->delete();
     }
-
-    public function showUserProperties(String $id)
-    {
-        $Event = Event::findOrFail($id);
-        return (string)$Event->delete();
-    }
-    
     /**
      * AddUserProperty: Add dynamic user property to the event
      *
@@ -498,6 +479,7 @@ class EventController extends Controller
             $event->ticket_sub_text_color = $defaults->ticket_sub_text_color;
         }
 
+
         try {
             $event->save();
         } catch (\Exception $e) {
@@ -558,7 +540,7 @@ class EventController extends Controller
      */
     public function stagesStatusActive($id){
 
-           //"start_sale_date": "2019-02-24 18:00",
+        //"start_sale_date": "2019-02-24 18:00",
         //"end_sale_date": "2019-05-16 05:59",
         
         //2019-04-11
