@@ -115,7 +115,7 @@ class EventController extends Controller
             return 'Error';
         }
     }
-
+   
     /**
      * Store a newly created event resource in storage.
      *
@@ -131,7 +131,6 @@ class EventController extends Controller
         $user = Auth::user();
         $data = $request->json()->all();
        
-         
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
@@ -150,16 +149,14 @@ class EventController extends Controller
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
 
-
         $data['styles'] = self::AddDefaultStyles($data['styles']);
-
-
+        
         $Properties = new UserProperties();
         $result = new Event($data);
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-        
+
         $result->author()->associate($user);
 
         /* Organizer:
@@ -189,7 +186,6 @@ class EventController extends Controller
         self::createDefaultUserProperties($result->id);
         
         return $result;
-        
     }
 
     private static function createDefaultUserProperties($event_id){
@@ -202,11 +198,13 @@ class EventController extends Controller
         $user_properties = new UserProperties($email);
         $model->user_properties()->except('author','categories','event_type')->save($user_properties);
     }
+
     private static function AddDefaultStyles($styles){
         $default_event_styles = config('app.default_event_styles');
         $stlyes_validation = array_merge($default_event_styles,$styles);
         return $stlyes_validation;
     }    
+
     public function addOwnerAsAdminColaborator($user_id, $event_id){
 
         $DataUserRolAdminister = [
@@ -215,8 +213,15 @@ class EventController extends Controller
             "event_id" => $event_id,
             "model_type" => "App\Account"
            ];
-           $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
-           return $DataUserRolAdminister;
+        $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
+        return $DataUserRolAdminister;
+    }
+    public function addStyles(Request $request, String $id)
+    {
+        $data = $request->json()->all();
+        $event = Event::find($id);
+        $event->save($data);
+        return $event;
     }
 
     /**
