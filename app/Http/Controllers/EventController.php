@@ -148,9 +148,9 @@ class EventController extends Controller
         $data['organizer_type'] = "App\user";
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
-
+        if(!empty($data['styles'])){
         $data['styles'] = self::AddDefaultStyles($data['styles']);
-        
+        }
         $Properties = new UserProperties();
         $result = new Event($data);
 
