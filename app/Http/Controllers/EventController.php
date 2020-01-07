@@ -211,13 +211,7 @@ class EventController extends Controller
         $DataUserRolAdminister =  ModelHasRole::create($DataUserRolAdminister);
         return $DataUserRolAdminister;
     }
-    public function addStyles(Request $request, String $id)
-    {
-        $data = $request->json()->all();
-        $event = Event::find($id);
-        $event->save($data);
-        return $event;
-    }
+   
 
     /**
      * Display the specified resource.
@@ -272,9 +266,9 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */ 
-      
-        $data['styles'] = self::AddDefaultStyles($data['styles']);
-        
+        if(!empty($data['styles'])){
+             $data['styles'] = self::AddDefaultStyles($data['styles']);
+        }
         /*Events Type*/
         if (isset($data['event_type_id'])) {
             $event_type = EventType::findOrFail($data['event_type_id']);
