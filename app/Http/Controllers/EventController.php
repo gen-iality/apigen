@@ -198,7 +198,7 @@ class EventController extends Controller
         $model->user_properties()->save($user_properties);
         $email = array("name" => "name", "unique" => false, "mandatory" => false,"type" => "email");        
         $user_properties = new UserProperties($email);
-        $model->user_properties()->except('author','categories','event_type')->save($user_properties);
+        $model->user_properties()->save($user_properties);
     }
 
     private static function AddDefaultStyles($styles){
@@ -278,8 +278,6 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */ 
-        echo gettype($data['styles']);
-        $data['styles'] = self::AddDefaultStyles($data['styles']);
         if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
             if ($data['organizer_id'] == "me") {
                 $organizer = $user;
@@ -308,6 +306,14 @@ class EventController extends Controller
         $event->save();
         
         return new EventResource($event);
+    }
+
+    public function updateStyles(Request $request, string $id)
+    {
+        $data = $request->json()->all();
+        $event = Event::findOrFail($id);
+        $event->update($data);
+        return $event;
     }
 
     /**
