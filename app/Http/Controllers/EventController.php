@@ -164,14 +164,8 @@ class EventController extends Controller
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] 
-        == "me") {
-            $organizer = $user;
-        } else {
-            $organizer = Organization::findOrFail($data['organizer_id']);
-        }
-        $result->organizer()->associate($organizer);
-
+        self::assingOrganizer($data, $result);
+        
         /*Events Type*/
         if (isset($data['event_type_id'])) {
             $event_type = EventType::findOrFail($data['event_type_id']);
@@ -198,7 +192,7 @@ class EventController extends Controller
         $model->user_properties()->save($user_properties);
         $email = array("name" => "name", "unique" => false, "mandatory" => false,"type" => "email");        
         $user_properties = new UserProperties($email);
-        $model->user_properties()->except('author','categories','event_type')->save($user_properties);
+        $model->user_properties()->save($user_properties);
     }
 
     private static function AddDefaultStyles($styles){
@@ -278,20 +272,9 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */ 
-        echo gettype($data['styles']);
+      
         $data['styles'] = self::AddDefaultStyles($data['styles']);
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
-            if ($data['organizer_id'] == "me") {
-                $organizer = $user;
-            } else {
-                $organizer = Account::findOrFail($data['organizer_id']);
-            }
-
-        } else {
-            $organizer = Organization::findOrFail($data['organizer_id']);
-        }
-        $event->organizer()->associate($organizer);
-
+        
         /*Events Type*/
         if (isset($data['event_type_id'])) {
             $event_type = EventType::findOrFail($data['event_type_id']);
@@ -303,13 +286,36 @@ class EventController extends Controller
             $event->categories()->sync($data['category_ids']);
         }
 
+        //si el evento se actualiza y no se envia el organizer_id suponemos que se conserva el mismo organizador
+        if(empty($event->organizer_id) || !empty($event->organizer_id)  &&!empty($data['organizer_id'])){
+            self::assingOrganizer($data, $event);
+        }
         
         $event->fill($data);
         $event->save();
         
         return new EventResource($event);
     }
-
+    
+    /**
+     * Organizer: 
+     * It could be "me"(current user) or a organization Id
+     * the relationship is polymorpic.   
+    **/  
+    private static function assingOrganizer ($data, $event){
+        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
+            if ($data['organizer_id'] == "me") {
+              $organizer = $user;
+            } else {
+            $organizer = Account::findOrFail($data['organizer_id']);
+        }
+        } else {
+            //organizer is an organization entity
+            $organizer = Organization::findOrFail($data['organizer_id']);
+        }
+        return $event->organizer()->associate($organizer);
+        
+    }
     /**
      * Remove the specified resource from storage.
      *

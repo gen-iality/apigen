@@ -41,6 +41,8 @@ Route::get('sync/firestore/{event_id}', 'synchronizationController@EventUsers');
 Route::get('sync/firestore/{id}', 'synchronizationController@Attendee');
 Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 
+Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
+
 /****************
  * eventUsers
  ****************/
@@ -237,7 +239,7 @@ Route::group(
 
 
 /****************
- * evnetContents
+ * eventContents
  ****************/
 Route::apiResource('eventContents', 'EventContentsController');
 
