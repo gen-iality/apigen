@@ -6,6 +6,7 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use Moloquent;
 use Carbon\Carbon;
+
 use App\Models\Event as ModelsEvent;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
@@ -22,7 +23,7 @@ class Event extends ModelsEvent
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
-    protected $with = ['author','categories','eventType', 'organiser','organizer','currency'];
+    protected $with = ['author','categories','eventType', 'organiser','organizer','currency', 'tickets'];
 
     protected $fillable = [
         'author', 'name', 'description', 'location', 'venue', 'address','pulep',

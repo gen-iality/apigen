@@ -3,7 +3,7 @@
 Route::get   ('events/{event_id}/eventusers',      'EventUserController@indexar');
 Route::get   ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
 
-/****************$request->get('per_page', 25)
+/****************
  * SPACES
  ****************/
 Route::get   ('events/{event_id}/spaces', 'SpaceController@index');
@@ -16,30 +16,18 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 /****************
  * ACITIVITY 
  ****************/
-Route::post  ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@activitieAssistant');
-Route::delete('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@deleteAssistant');
-Route::put   ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@updateUserActivities');
 
+Route::get  ('fillassitantsbug/{id}', 'ActivityAssistantsController@fillassitantsbug');
 
+Route::post  ('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
+Route::post('events/{event_id}/activity/activity_attendee/{id}', 'ActivityAssistantsController@deleteAssistant');
 
-/****************
- * QUANTITY
- ****************/
-Route::get   ('events/{event_id}/quantity',      'QuantityController@index');
-Route::post  ('events/{event_id}/quantity',      'QuantityController@store');
-Route::get   ('events/{event_id}/quantity/{id}', 'QuantityController@show');
-Route::put   ('events/{event_id}/quantity/{id}', 'QuantityController@update');
-Route::delete('events/{event_id}/quantity/{id}', 'QuantityController@destroy');
+Route::get   ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@index');
+Route::post  ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@store');
+Route::get   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@show');
+Route::put   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@update');
+Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@destroy');
 
-
-/****************
- * ACTIVITY USERS
- ****************/
-Route::get   ('events/{event_id}/activityusers',      'ActivityUsersController@index');
-Route::post  ('events/{event_id}/activityusers',      'ActivityUsersController@store');
-Route::get   ('events/{event_id}/activityusers/{id}', 'ActivityUsersController@show');
-Route::put   ('events/{event_id}/activityusers/{id}', 'ActivityUsersController@update');
-Route::delete('events/{event_id}/activityusers/{id}', 'ActivityUsersController@destroy');
 
 /***************
  * HOST
@@ -52,16 +40,6 @@ Route::post  ('events/{event_id}/host',      'HostController@store');
 Route::get   ('events/{event_id}/host/{id}', 'HostController@show');
 Route::put   ('events/{event_id}/host/{id}', 'HostController@update');
 Route::delete('events/{event_id}/host/{id}', 'HostController@destroy');
-
-
-/***************
- * USER PROPERTIES
- ****************/
-Route::get   ('events/{event_id}/userproperties',      'UserPropertiesController@index');
-Route::post  ('events/{event_id}/userproperties',      'UserPropertiesController@store');
-Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
-Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
-Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
 
 
 /***************
@@ -93,10 +71,5 @@ Route::post  ('events/{event_id}/categoryactivities',      'ActivityCategoriesCo
 Route::get   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@show');
 Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@update');
 Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
-
-
-
-
-
 
 ?>

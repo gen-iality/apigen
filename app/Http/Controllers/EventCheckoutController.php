@@ -1204,7 +1204,7 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($order->event_id);
         $stages = $event->event_stages;
         $eventusers = Attendee::where('order_id', $order->id)->get();
-        $location = $event["location"]["FormattedAddress"];
+        //$location = $event["location"]["FormattedAddress"];
         
         foreach ($eventusers as $eventuser) { 
             
@@ -1237,7 +1237,6 @@ class EventCheckoutController extends Controller
             'order' => $order,
             'event' => $order->event,
             'eventusers' => $eventusers,
-            'location' =>  $event["location"]["FormattedAddress"],
             'today' => $date->format('d-m-Y'),
             'logo_evius' => 'images/logo.png',
             /* Si es un evento con etapas continuas */

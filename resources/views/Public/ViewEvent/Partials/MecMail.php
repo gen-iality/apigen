@@ -63,35 +63,26 @@ body{
 <div class="containing-table">
     <div class="centre-align">
     <img style="width:90%;heigh:auto" src="https://api.evius.co/images/logoMecLong.png">  
-    <h1>¡Bienvenido al Movimiento de Empresarios Creativos!</h1>
+    <h1>¡No Olvides Inscribirte!</h1>
 <p>
-@if (strstr($etapa,"Etapa"))
+Si ya realizaste el pre registro al MEC – Power Camp en <a href="https://meccc.com.co/">www.meccc.com.co</a>
+no olvides inscribirte a las conferencias, masterclases, talleres, paneles y todas
+las actividades que este evento tiene programadas para potencializar el crecimiento de tu empresa creativa. 
+</p><br>
 
-Tu empresa está en {{ $etapa }}, por ello te invitamos a participar en los espacios diseñados a la
-@else
-
-Tu empresa está en etapa de {{ $etapa }}, por ello te invitamos a participar en los espacios diseñados a la
-@endif
-medida de tus necesidades, para ayudarte a crecer.
-
-Te compartimos el link para que armes tu agenda y vivas la experiencia PowerCamp.
-</p>
-
-<p>Visita el siguiente link  <a href="https://meccc.com.co/">www.meccc.com.co</a>
-Ingresa con tu usuario y contrasena y podras inscribirte en tus actividades sugeridas
-</p>
-<p>Tu usuario y contraseña son los siguientes</p> 
-<br>
+<p>Como ya te registraste, sigue estos pasos: <br><br>
+Digita el correo electrónico que usaste para tu registro, el cual es tu usuario.<br><br>
+Tu password, será el número de documento de identidad (sin puntos o comas).  
+</p><br>
+<p>Encontrarás una agenda sugerida, que ha sido diseñada según la etapa de crecimiento en la que está tu empresa o proyecto. </p> 
 
 
-<p>{{ $email}}</p>
 
-<p>{{ $id }}</p>
-<br>
-<p>¡La zona de registro será en Casa Merced!</p>
+<p>Son actividades que no puedes perderte. </p><br>
 
-<p>Recuerda que también puedes disfrutar el 14 y 15 de noviembre del MECx en el Bulevar del río,
-donde habrá exposiciones empresariales, conciertos, casa de arte y más experiencias.</p>
+<p>Selecciona las actividades de tu interés e ¡INSCRÍBETE! Recuerda que tenemos cupos limitados.</p>
+
+<p>Para finalizar, revisa en el botón “Mis actividades”, allí encontrarás los espacios, con horario, lugar, fecha y speaker, a los que puedes asistir.</p>
 
     </div>
 </div>

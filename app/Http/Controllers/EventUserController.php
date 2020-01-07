@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\evaLib\Services\FilterQuery;
-use App\evaLib\Services\UserEventService;
+use Validator;
 use App\Event;
-use App\Attendee;
-use App\Http\Requests\EventUserRequest;
-use App\Http\Resources\EventUserResource;
 use App\State;
 use App\Account;
+use App\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Validator;
+use App\evaLib\Services\FilterQuery;
+use App\Http\Requests\EventUserRequest;
+use App\Http\Resources\EventUserResource;
+use App\evaLib\Services\UserEventService;
+
+
 
 /**
  * @resource Attendee (Attendee)
@@ -158,6 +160,8 @@ class EventUserController extends Controller
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
+        
+
         return $response;
     }
 
@@ -171,7 +175,7 @@ class EventUserController extends Controller
     public function indexar(Request $request,$event_id)
     {
         return EventUserResource::collection(
-            Attendee::where('event_id',$event_id)->paginate(100)
+            Attendee::where('event_id',$event_id)->paginate(config("app.page_size"))
         );
     }
 

@@ -6,8 +6,8 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
-use App\Attendee;
 use App\UserProperties;
+use App\Attendee;
 use App\EventType;
 use App\Http\Resources\EventResource;
 use App\Organization;
@@ -48,7 +48,7 @@ class EventController extends Controller
         $currentDate = new \Carbon\Carbon();
         //$currentDate = $currentDate->subWeek(2); 
 
-        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC ) //Public
                 ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '>', $currentDate)
                 ->orderBy('datetime_from', 'ASC');
@@ -62,7 +62,7 @@ class EventController extends Controller
     {
         $currentDate = new \Carbon\Carbon(); 
 
-        $query = Event::where('visibility', '<>', Event::VISIBILITY_ORGANIZATION ) //Public
+        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC ) //Public
                 ->whereNotNull('visibility') //not null
                 ->Where('datetime_to', '<', $currentDate)
                 ->orderBy('datetime_from', 'DESC');
@@ -153,17 +153,19 @@ class EventController extends Controller
         
         $Properties = new UserProperties();
         $result = new Event($data);
+
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
-
+        
         $result->author()->associate($user);
 
         /* Organizer:
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me") {
+        if (!isset($data['organizer_id']) || $data['organizer_id'] 
+        == "me") {
             $organizer = $user;
         } else {
             $organizer = Organization::findOrFail($data['organizer_id']);
@@ -231,16 +233,16 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
-    {   
+    {  
         //Esto es para medir el tiempo de ejecución se pone al inicio y el final
         //$i = round(microtime(true) * 1000); 
         //$i = round(microtime(true) * 1000); $f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         $event = Event::findOrFail($id);
         /* @TODO porque los stages se cargan aqui en el evento 
-        //$stages = $this->stagesStatusActive($id);
-        //$event->event_stages = $stages;
+        $stages = $this->stagesStatusActive($id);
+        $event->event_stages = $stages;
         */
-        $event->event_stages = [];
+      
         //$f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         return new EventResource($event);
     }
@@ -548,7 +550,7 @@ class EventController extends Controller
      */
     public function stagesStatusActive($id){
 
-        //"start_sale_date": "2019-02-24 18:00",
+           //"start_sale_date": "2019-02-24 18:00",
         //"end_sale_date": "2019-05-16 05:59",
         
         //2019-04-11
