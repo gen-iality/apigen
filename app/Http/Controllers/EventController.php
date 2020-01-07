@@ -193,10 +193,10 @@ class EventController extends Controller
     private static function createDefaultUserProperties($event_id){
         /*Crear propierdades names y email*/
         $model = Event::find($event_id);
-        $name = array("name" => "campo1", "unique" => false, "mandatory" => false,"type" => "text");
+        $name = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "text");
         $user_properties = new UserProperties($name);
         $model->user_properties()->save($user_properties);
-        $email = array("name" => "campo2", "unique" => false, "mandatory" => false,"type" => "email");        
+        $email = array("name" => "name", "unique" => false, "mandatory" => false,"type" => "email");        
         $user_properties = new UserProperties($email);
         $model->user_properties()->except('author','categories','event_type')->save($user_properties);
     }
@@ -208,7 +208,6 @@ class EventController extends Controller
     }    
 
     public function addOwnerAsAdminColaborator($user_id, $event_id){
-
         $DataUserRolAdminister = [
             "role_id" => Event::ID_ROL_ADMINISTRATOR,
             "model_id" => $user_id,
@@ -272,15 +271,15 @@ class EventController extends Controller
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
         $user = Auth::user();
-
         $data = $request->json()->all();
-
         $event = Event::findOrFail($id);
 
         /* Organizer:
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
-         */
+         */ 
+        echo gettype($data['styles']);
+        $data['styles'] = self::AddDefaultStyles($data['styles']);
         if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
             if ($data['organizer_id'] == "me") {
                 $organizer = $user;
@@ -304,8 +303,10 @@ class EventController extends Controller
             $event->categories()->sync($data['category_ids']);
         }
 
+        
         $event->fill($data);
         $event->save();
+        
         return new EventResource($event);
     }
 
@@ -320,6 +321,13 @@ class EventController extends Controller
         $Event = Event::findOrFail($id);
         return (string)$Event->delete();
     }
+
+    public function showUserProperties(String $id)
+    {
+        $Event = Event::findOrFail($id);
+        return (string)$Event->delete();
+    }
+    
     /**
      * AddUserProperty: Add dynamic user property to the event
      *
