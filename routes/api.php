@@ -237,7 +237,7 @@ Route::group(
 
 
 /****************
- * evnetContents
+ * eventContents
  ****************/
 Route::apiResource('eventContents', 'EventContentsController');
 
