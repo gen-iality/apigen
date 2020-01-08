@@ -12,6 +12,11 @@ Route::get   ('events/{event_id}/spaces/{id}', 'SpaceController@show');
 Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
+/****************
+ * ACITIVITY 
+ ****************/
+
+Route::apiResource('events/{id}/configuration', 'AppConfigurationController');
 
 /****************
  * ACITIVITY 
