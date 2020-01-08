@@ -16,7 +16,7 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
  * ACITIVITY 
  ****************/
 
-Route::apiResource('events/{id}/configuration', 'AppConfigurationController');
+Route::apiResource('event/{id}/configuration', 'AppConfigurationController');
 
 /****************
  * ACITIVITY 
