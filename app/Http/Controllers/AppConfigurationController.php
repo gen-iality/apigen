@@ -10,11 +10,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppConfigurationController extends Controller
 {
-    public function index(Request $request, $event_id)
+    public function index($event_id)
     {
-        return JsonResource::collection(
-            AppConfiguration::where("event_id", $event_id)->paginate(config('app.page_size'))
-        );
+        $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+        $toarray = json_decode(json_encode($appconfiguration),true);
+        if(!empty($toarray)){
+            $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+            $idevent = $appconfiguration[0]->id;
+            $appconfiguration = AppConfiguration::find($idevent);
+            return $appconfiguration;
+        }else{
+            return JsonResource::collection(
+                AppConfiguration::where("event_id", $event_id)->paginate(config('app.page_size'))
+            );
+        }
     }
 
     /**
@@ -61,7 +70,6 @@ class AppConfigurationController extends Controller
         $appconfiguration->fill($data);
         $appconfiguration->save();
         return $data;
-
     }
 
     /**
