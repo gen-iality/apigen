@@ -13,10 +13,11 @@ Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
 /****************
- * ACITIVITY 
+ * APP CONFIGURATION
  ****************/
-
 Route::apiResource('event/{id}/configuration', 'AppConfigurationController');
+Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
+
 
 /****************
  * ACITIVITY 
@@ -71,10 +72,13 @@ Route::delete('events/{event_id}/type/{id}', 'TypeController@destroy');
  * ACTIVITYCATEGORIES (las categorias para las actividades de la agenda)
  ****************/
 
+
 Route::get   ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@index');
 Route::post  ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@store');
 Route::get   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@show');
 Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@update');
 Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
+
+Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
 
 ?>
