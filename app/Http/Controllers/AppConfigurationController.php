@@ -12,10 +12,9 @@ class AppConfigurationController extends Controller
 {
     public function index(Request $request, $event_id)
     {
-        
-        return JsonResource::collection(
-            AppConfiguration::where("event_id", $event_id)->paginate(config('app.page_size'))
-        );
+        $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+        $response = new JsonResource($appconfiguration);
+        return $response;
     }
 
     /**
@@ -24,13 +23,25 @@ class AppConfigurationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $event_id)
+    public function store(Request $request, $event_id)  
     {
-        $data = $request->json()->all();   
-        $data["event_id"] = $event_id;
-        $result = new AppConfiguration($data);
-        $result->save();
-        return $result;
+        $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+        $appconfiguration = json_decode(json_encode($appconfiguration),true);
+        if(empty($appconfiguration)){
+            $data = $request->json()->all();   
+            $data["event_id"] = $event_id;
+            $result = new AppConfiguration($data);
+            $result->save();
+            return $result;
+        }else{ 
+            $data = $request->json()->all();
+            $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+            $idevent = $appconfiguration[0]->id;
+            $appconfiguration = AppConfiguration::find($idevent);
+            $appconfiguration->fill($data);
+            $appconfiguration->save();            
+            return $appconfiguration;
+        }
     }
 
     /**
@@ -39,41 +50,24 @@ class AppConfigurationController extends Controller
      * @param  \App\AppConfiguration]  $AppConfiguration
      * @return \Illuminate\Http\Response
      */
-    public function show($event_id,$id)
+    public function show($event_id)
     {
-        $AppConfiguration = AppConfiguration::findOrFail($id);
-        $response = new JsonResource($AppConfiguration);
-        //if ($AppConfiguration["event_id"] = $event_id) {
+        $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+        $response = new JsonResource($appconfiguration);
         return $response;
-
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AppConfiguration  $AppConfiguration
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $event_id, $id)
-    {
-        $data = $request->json()->all();
-        $space = AppConfiguration::findOrFail($id);
-        //if($AppConfiguration["event_id"]= $event_id){
-        $space->fill($data);
-        $space->save();
-        return $data;
-
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $event_id, $id)
+    public function destroy($event_id)
     {
-        $AppConfiguration = AppConfiguration::findOrFail($id);
-        return (string) $AppConfiguration->delete();
+        $appconfiguration = AppConfiguration::where("event_id",$event_id)->get();
+        $idevent = $appconfiguration[0]->id;
+        $appconfiguration = AppConfiguration::find($idevent);
+        return (string) $appconfiguration->delete();
     }
 }
