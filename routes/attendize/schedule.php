@@ -1,22 +1,30 @@
 <?php
 
-Route::get   ('events/{event_id}/eventusers',      'EventUserController@indexar');
-Route::get   ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
+Route::get ('events/{event_id}/eventusers',      'EventUserController@indexar');
+Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
 
 /****************
  * SPACES
  ****************/
-Route::get   ('events/{event_id}/spaces', 'SpaceController@index');
-Route::post  ('events/{event_id}/spaces', 'SpaceController@store');
-Route::get   ('events/{event_id}/spaces/{id}', 'SpaceController@show');
-Route::put   ('events/{event_id}/spaces/{id}', 'SpaceController@update');
+Route::get ('events/{event_id}/spaces', 'SpaceController@index');
+Route::post ('events/{event_id}/spaces', 'SpaceController@store');
+Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show');
+Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
+
 
 /****************
  * APP CONFIGURATION
  ****************/
 Route::apiResource('event/{id}/configuration', 'AppConfigurationController');
 Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
+
+
+/****************
+ * APP CONFIGURATION
+ ****************/
+
+Route::apiResource('event/{id}/newsfeed', 'NewsfeedController');
 
 
 /****************
