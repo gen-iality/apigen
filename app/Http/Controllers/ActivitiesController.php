@@ -23,7 +23,7 @@ class ActivitiesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Activities::paginate(config('app.page_size'))
+            Activities::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
