@@ -273,11 +273,14 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */ 
+        if(!isset($data['app_configuration'])){
+            $data['app_configuration'] = array();
+        }
         
         if(!empty($data['styles'])){
              $data['styles'] = self::AddDefaultStyles($data['styles']);
         }
-
+       
         if(is_null($data['app_configuration'])){
             //$data['app_configuration'] = array();
             $data['app_configuration'] = array();
