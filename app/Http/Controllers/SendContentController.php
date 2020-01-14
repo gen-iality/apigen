@@ -215,13 +215,9 @@ class SendContentController extends Controller
     }
     public function sendNotificationEmail(Request $request)
     {
-     
-        
         $data = $request->json()->all();
-        
         $data_single = $data["email"];
-        //subject, content, title,email
-       
+        //subject, content, title,email       
                 
             Mail::send("Public.ViewEvent.Partials.ContentNotification",$data , function ($message) use ($data,$data_single){
                 $message->to($data_single,"Asistente")
@@ -235,13 +231,13 @@ class SendContentController extends Controller
         $eventUser = Attendee::find($id_user);
         $firestore = resolve('Morrislaptop\Firestore');
 
-        if($eventUser->user){
+       
             $collection = $firestore->collection($eventUser->event_id.'-event_users');
             $user = $collection->document($eventUser->_id);
             $dataUser = json_decode($eventUser,true);
             $result = $user->snapShot()->getValue();
             return $result;
-        }
+    
         return  response('the proccess was incompleted :c');
     }
     public function sendPasswordRecovery(Request $request){
