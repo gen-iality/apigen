@@ -235,8 +235,8 @@ class SendContentController extends Controller
             $collection = $firestore->collection($eventUser->event_id.'-event_users');
             $user = $collection->document($eventUser->_id);
             $dataUser = json_decode($eventUser,true);
-            $result = $user->snapShot();
-            return $result;
+            //$result = $user->snapShot();
+            return $user;
     
         return  response('the proccess was incompleted :c');
     }
