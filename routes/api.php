@@ -379,7 +379,6 @@ Route::middleware('auth:token')->get('permissions/{id}', 'PermissionController@g
 
 //Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
-Route::post('events/{id}/addeventstyles', 'EventController@addStyles');
 
 //Route::middleware('auth:token')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 //Route::middleware('auth:token')->post('user/event_users/create', 'EventUserController@store');
