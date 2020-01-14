@@ -278,9 +278,9 @@ class EventController extends Controller
              $data['styles'] = self::AddDefaultStyles($data['styles']);
         }
 
-        if(empty($data['app_configuration'])){
+        if(is_null($data['app_configuration'])){
             //$data['app_configuration'] = array();
-            $data['app_configuration'] = self::AddAppConfiguration($data['app_configuration']);
+            $data['app_configuration'] = array();
         }
 
         /*Events Type*/
