@@ -80,7 +80,6 @@ class EventController extends Controller
     public function currentUserindex(Request $request)
     {
         $user = Auth::user();
-
         return EventResource::collection(
             Event::where('author_id', $user->id)
                 ->paginate(config('app.page_size'))
@@ -112,7 +111,7 @@ class EventController extends Controller
         if ($res == true) {
             return 'True';
         } else {
-            return 'Error';
+            return 'Error'; 
         }
     }
    
@@ -200,6 +199,14 @@ class EventController extends Controller
         $stlyes_validation = array_merge($default_event_styles,$styles);
         return $stlyes_validation;
     }    
+    private static function AddAppConfiguration($styles){
+        $default_event_styles = config('app.app_configuration');
+        $stlyes_validation = array_merge($default_event_styles,$styles);
+        return $stlyes_validation;
+    }    
+
+
+
 
     public function addOwnerAsAdminColaborator($user_id, $event_id){
         $DataUserRolAdminister = [
@@ -266,9 +273,16 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */ 
+        
         if(!empty($data['styles'])){
              $data['styles'] = self::AddDefaultStyles($data['styles']);
         }
+
+        if(empty($data['app_configuration'])){
+            //$data['app_configuration'] = array();
+            $data['app_configuration'] = self::AddAppConfiguration($data['app_configuration']);
+        }
+
         /*Events Type*/
         if (isset($data['event_type_id'])) {
             $event_type = EventType::findOrFail($data['event_type_id']);
