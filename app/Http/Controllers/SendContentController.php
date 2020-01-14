@@ -255,8 +255,7 @@ class SendContentController extends Controller
         $ref = $db->getReference('config');
         $snapShot = $ref->getSnapshot()->getValue();
         echo var_dump($snapShot);die;    
-        $db->getReference('users/'.$eventUser->usecho $firestore
-        er->_id)->set($dataUser);
+        $db->getReference('users/'.$eventUser->user->_id)->set($dataUser);
         
         return ($db->getReference('config/website/name')->set('New name'));       
         echo $collection;die;
