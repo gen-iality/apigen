@@ -236,14 +236,12 @@ class SendContentController extends Controller
             $user = $collection->document($eventUser->_id);
             $dataUser = json_decode($eventUser,true);
             //$result = $user->snapShot();
-            return $user;
+            return var_dump($user);
     
         return  response('the proccess was incompleted :c');
     }
     public function sendPasswordRecovery(Request $request){
         
-
-
         $event_id = '5d6eb0cbd74d5c163179d0027';
         $eventUser = Attendee::find($event_id);
         $dataUser = json_decode($eventUser,true);
