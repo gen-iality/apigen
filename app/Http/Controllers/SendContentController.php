@@ -228,17 +228,19 @@ class SendContentController extends Controller
     }
     public function Attendee($id_user)
     {
+    
         $eventUser = Attendee::find($id_user);
         $firestore = resolve('Morrislaptop\Firestore');
 
-       
-            $collection = $firestore->collection($eventUser->event_id.'-event_users');
-            $user = $collection->document($eventUser->_id);
-            $dataUser = json_decode($eventUser,true);
-            //$result = $user->snapShot();
-            return var_dump($user);
-    
+        $collection = $firestore->collection($eventUser->event_id.'-event_users');
+        $user = $collection->document($eventUser->_id);
+        echo var_dump($user);
+        $dataUser = json_decode($eventUser,true);
+        echo var_dump($dataUser);
+        return var_dump($user);
+
         return  response('the proccess was incompleted :c');
+    
     }
     public function sendPasswordRecovery(Request $request){
         
@@ -253,7 +255,8 @@ class SendContentController extends Controller
         $ref = $db->getReference('config');
         $snapShot = $ref->getSnapshot()->getValue();
         echo var_dump($snapShot);die;    
-        $db->getReference('users/'.$eventUser->user->_id)->set($dataUser);
+        $db->getReference('users/'.$eventUser->usecho $firestore
+        er->_id)->set($dataUser);
         
         return ($db->getReference('config/website/name')->set('New name'));       
         echo $collection;die;
