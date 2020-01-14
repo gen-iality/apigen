@@ -7,6 +7,8 @@ use App\Event;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Morrislaptop\Firestore\Factory;
+use Kreait\Firebase\ServiceAccount;
 use Mail;
 use PDF;
 use Storage;
@@ -228,6 +230,66 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentNotification', $data);
    
     }
+    public function Attendee($id_user)
+    {
+        $eventUser = Attendee::find($id_user);
+        $firestore = resolve('Morrislaptop\Firestore');
+
+        if($eventUser->user){
+            $collection = $firestore->collection($eventUser->event_id.'-event_users');
+            $user = $collection->document($eventUser->_id);
+            $dataUser = json_decode($eventUser,true);
+            $result = $user->snapShot()->getValue();
+            return $result;
+        }
+        return  response('the proccess was incompleted :c');
+    }
+    public function sendPasswordRecovery(Request $request){
+        
 
 
+        $event_id = '5d6eb0cbd74d5c163179d0027';
+        $eventUser = Attendee::find($event_id);
+        $dataUser = json_decode($eventUser,true);
+
+        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        $firebase = (new \Kreait\Firebase\Factory)->withServiceAccount($serviceAccount)->create();
+
+        $db = $firebase->getDatabase();
+        $ref = $db->getReference('config');
+        $snapShot = $ref->getSnapshot()->getValue();
+        echo var_dump($snapShot);die;    
+        $db->getReference('users/'.$eventUser->user->_id)->set($dataUser);
+        
+        return ($db->getReference('config/website/name')->set('New name'));       
+        echo $collection;die;
+    
+    }
+    public function sendPushNotification(Request $request)
+    {
+        $data = $request->json()->all();
+        $to = $data["to"];
+        $notification = $data['notification'];
+
+        $apiKey = "AAAAXT-cAHM:APA91bGXwqFvaD_BnHeWrYwBW8M51YhqhvWpYtd1X_Knr8Q881KramBC4Swd0XA5zWac6_qbpwjWKWD_wWctbjrk1jexxTmFvySCqAucYMcws8RvuMQQ1XiWw72L0scG_Ge2aXyTpkFb";
+        $fields = array( 'to' => $to, 'notification' => $notification );
+        $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
+        $url = 'https://fcm.googleapis.com/fcm/send';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        
+        $result = curl_exec($ch);
+        curl_close($ch);
+        
+        return json_decode($result,true);
+    }
 }
+
+?>
