@@ -76,7 +76,7 @@ class FilesController extends Controller
         }
 
         //devolvemos una cadena o un arreglo segun sea el caso
-        return (count($imgurls) > 1) ? $imgurls : reset($imgurls). $request;
+        return (count($imgurls) > 1) ? $imgurls : reset($imgurls);
 
     }
 }
