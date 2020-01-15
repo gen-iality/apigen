@@ -226,20 +226,20 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentNotification', $data);
    
     }
-    public function Attendee($id_user)
+    public function Attendee(Request $request,$id_user)
     {
-    
+        $data = $request->json()->all();
+
         $eventUser = Attendee::find($id_user);
         $firestore = resolve('Morrislaptop\Firestore');
 
         $collection = $firestore->collection($eventUser->event_id.'-event_users');
         $user = $collection->document($eventUser->_id);
-        echo var_dump($user);
         $dataUser = json_decode($eventUser,true);
-        echo var_dump($dataUser);
-        return var_dump($user);
+        $result = $user->equalTo($data["email"]);
+        $value = $user->snapShot()->getValue();
+        return var_dump($value);
 
-        return  response('the proccess was incompleted :c');
     
     }
     public function sendPasswordRecovery(Request $request){
