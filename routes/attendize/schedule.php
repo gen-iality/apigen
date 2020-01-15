@@ -26,6 +26,11 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
 
 Route::apiResource('event/{id}/newsfeed', 'NewsfeedController');
 
+/****************
+ * SURVEYS
+ ****************/
+
+Route::apiResource('event/{id}/surveys', 'SurveysController');
 
 /****************
  * ACITIVITY 
@@ -91,6 +96,6 @@ Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesCo
  ****************/
 
 Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
-Route::post('findbase/{id}', 'SendContentController@Attendee');
+Route::post('findbase/findbase/{id}', 'SendContentController@Attendee');
 
 ?>
