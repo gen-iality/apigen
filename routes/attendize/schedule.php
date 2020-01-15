@@ -24,13 +24,13 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
  * APP CONFIGURATION
  ****************/
 
-Route::apiResource('event/{id}/newsfeed', 'NewsfeedController');
+Route::apiResource('events/{id}/newsfeed', 'NewsfeedController');
 
 /****************
  * SURVEYS
  ****************/
 
-Route::apiResource('event/{id}/surveys', 'SurveysController');
+Route::apiResource('events/{id}/surveys', 'SurveysController');
 
 /****************
  * ACITIVITY 
@@ -97,8 +97,11 @@ Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesCo
 
 Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
 Route::post('findbase/findbase/{id}', 'SendContentController@Attendee');
+Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage");
 
 
-
-Route::post('recoverypassword', 'SendContentController@PasswordRecovery');
+/*******************
+ * RECOVERY PASSWORD
+ ******************/
+Route::post('events/{event_id}/recoverypassword', 'SendContentController@PasswordRecovery');
 ?>
