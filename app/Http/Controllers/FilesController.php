@@ -39,7 +39,7 @@ class FilesController extends Controller
     public function upload(Request $request, string $field_name = null, GoogleFiles $gfService)
     { //@debug post $entityBody = file_get_contents('php://input');
         $imgurls = [];
-        echo $field_name;
+       
         //valor por defecto de campo que contiene el archivo
         $field_name = ($field_name) ? $field_name : "file";
 
@@ -76,7 +76,7 @@ class FilesController extends Controller
         }
 
         //devolvemos una cadena o un arreglo segun sea el caso
-        return (count($imgurls) > 1) ? $imgurls : reset($imgurls);
+        return (count($imgurls) > 1) ? $imgurls : reset($imgurls).$field_name;
 
     }
 }
