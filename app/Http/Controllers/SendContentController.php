@@ -226,40 +226,14 @@ class SendContentController extends Controller
         return view('Public.ViewEvent.Partials.ContentNotification', $data);
    
     }
-    public function Attendee(Request $request,$id_user)
+    public function PasswordRecovery()
     {
         $data = $request->json()->all();
-
-        $eventUser = Attendee::find($id_user);
-        $firestore = resolve('Morrislaptop\Firestore');
-
-        $collection = $firestore->collection($eventUser->event_id.'-event_users');
-        $user = $collection->document($eventUser->_id);
-        $dataUser = json_decode($eventUser,true);
-        $result = $user->equalTo($data["email"]);
-        $value = $user->snapShot()->getValue();
-        return var_dump($value);
-
-    
-    }
-    public function sendPasswordRecovery(Request $request){
-        
-        $event_id = '5d6eb0cbd74d5c163179d0027';
-        $eventUser = Attendee::find($event_id);
-        $dataUser = json_decode($eventUser,true);
-
+        $email = $data["email"];
         $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new \Kreait\Firebase\Factory)->withServiceAccount($serviceAccount)->create();
-
-        $db = $firebase->getDatabase();
-        $ref = $db->getReference('config');
-        $snapShot = $ref->getSnapshot()->getValue();
-        echo var_dump($snapShot);die;    
-        $db->getReference('users/'.$eventUser->user->_id)->set($dataUser);
-        
-        return ($db->getReference('config/website/name')->set('New name'));       
-        echo $collection;die;
-    
+        $auth = (new \Kreait\Firebase\Factory)->withServiceAccount($serviceAccount)->createAuth();
+        $auth->sendEmailVerificationLink($email);
+        return $auth;
     }
     public function sendPushNotification(Request $request)
     {
