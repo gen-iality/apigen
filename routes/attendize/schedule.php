@@ -92,10 +92,13 @@ Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesCo
 Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
 
 /***************
- * TEST API'S (las categorias para las actividades de la agenda)
+ * TEST API'S
  ****************/
 
 Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
 Route::post('findbase/findbase/{id}', 'SendContentController@Attendee');
 
+
+
+Route::post('recoverypassword', 'SendContentController@PasswordRecovery');
 ?>
