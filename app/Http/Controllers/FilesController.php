@@ -39,10 +39,9 @@ class FilesController extends Controller
     public function upload(Request $request, string $field_name = null, GoogleFiles $gfService)
     { //@debug post $entityBody = file_get_contents('php://input');
         $imgurls = [];
-        
         //valor por defecto de campo que contiene el archivo
         $field_name = ($field_name) ? $field_name : "file";
-
+        echo var_dump($request);
         //No viene ningun archivo
         if (!$request->hasFile($field_name)) {
             $statusCode = "400";
