@@ -93,7 +93,23 @@ class EventUserController extends Controller
         }
         return $response;
     }
-    /**
+
+    public function notifications(Request $request, $evenUserId){
+    
+        $data = $request->json()->all();
+        $eventUser = Attendee::findOrFail($evenUserId);
+        $eventUser->fill($data);
+        $eventUser->save();
+
+        $response = new EventUserResource($eventUser);
+        $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
+        return $response;
+   
+
+
+    }
+
+        /**
      * __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
      *
      * | Body Params   |
@@ -165,10 +181,10 @@ class EventUserController extends Controller
         return $response;
     }
 
-    public function index(Request $request)
+    public function index(Request $request,$event_id)
     {
         return EventUserResource::collection(
-            Attendee::paginate(config('app.page_size'))
+            Attendee::where('event_id',$event_id)->paginate(config("app.page_size"))
         );
     }
 
@@ -197,16 +213,12 @@ class EventUserController extends Controller
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
     }
-    public function mostrar($event_id, $id)
-    {
-        $eventUser = Attendee::findOrFail($id);
-        return new EventUserResource($eventUser);
-    }
+   
     /**
      * __Update:__ Update the specified resource in storage.
      *
@@ -231,7 +243,6 @@ class EventUserController extends Controller
 
         $response = new EventUserResource($eventUser);
         $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
-
         return $response;
     }
 
