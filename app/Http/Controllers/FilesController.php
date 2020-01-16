@@ -30,14 +30,16 @@ class FilesController extends Controller
  * Postman-Token: 2f16a68e-f8fd-4b1b-a0d6-635c5ba7e981
  * Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
  *
- *
  * @param Request $request
  * @param string $field_name
  * @param GoogleFiles $gfService
  * @return string of file uploaded url  or  array of urls for multiple files
+ * 
  */
     public function upload(Request $request, string $field_name = null, GoogleFiles $gfService)
-    { //@debug post $entityBody = file_get_contents('php://input');
+    { 
+        //@debug post $entityBody = file_get_contents('php://input');
+        
         $imgurls = [];
        
         //valor por defecto de campo que contiene el archivo
@@ -74,9 +76,20 @@ class FilesController extends Controller
 
             $imgurls[] = $gfService->storeFile($file, $name);
         }
-
         //devolvemos una cadena o un arreglo segun sea el caso
         return (count($imgurls) > 1) ? $imgurls : reset($imgurls);
 
+    }
+    /**
+    * Funcion destinada al guardado de imagenes en base 64 al google storage, XOXO
+    */
+    public function storeBaseImg(Request $request,  string $key = null, GoogleFiles $gfService)
+    {
+        $data = $request->all();
+        $name = $key;
+        $img = $data[$key];
+        $img = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
+        $imgurls[] = $gfService->storeFile($img, $name);
+        return $imgurls;
     }
 }
