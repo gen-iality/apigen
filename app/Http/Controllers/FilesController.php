@@ -86,8 +86,19 @@ class FilesController extends Controller
     public function storeBaseImg(Request $request,  string $key = null, GoogleFiles $gfService)
     {
         $data = $request->all();
+     
         $name = $key;
         $img = $data[$key];
+        $formats = array("png","jpg","jpeg");
+        $part = substr($img,0,20);
+        foreach ($formats as $format){
+            if(stristr($part,$format)){
+                $ext = $format;
+                break;
+            }
+        }
+        $name = $name.".".$ext;
+        echo $name;die;
         $img = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
         $imgurls[] = $gfService->storeFile($img, $name);
         return $imgurls;
