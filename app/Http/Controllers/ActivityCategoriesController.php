@@ -34,7 +34,7 @@ class ActivityCategoriesController extends Controller
     public function store(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        //$data["event_id"] = $event_id;
+        $data["event_id"] = $event_id;
         $result = new ActivityCategories($data);
         $result->save();
         return $result;
