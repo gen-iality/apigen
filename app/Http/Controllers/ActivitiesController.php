@@ -112,8 +112,7 @@ class ActivitiesController extends Controller
         if(isset($data["access_restriction_rol_ids"])){
             $ids = $data["access_restriction_rol_ids"];
             $Activities->access_restriction_roles()->detach();
-            $Activities->access_restriction_roles()->attach($ids);        
-         
+            $Activities->access_restriction_roles()->attach($ids);       
         }
         $activity = Activities::find($Activities->id);
         return $activity;
