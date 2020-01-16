@@ -22,7 +22,7 @@ class ActivityCategoriesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Survey::where("event_id", $event_id)->paginate(config('app.page_size'))
+            ActivityCategories::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
