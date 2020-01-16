@@ -98,7 +98,6 @@ class FilesController extends Controller
             }
         }
         $name = $name.".".$ext;
-        echo $name;die;
         $img = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
         $imgurls[] = $gfService->storeFile($img, $name);
         return $imgurls;
