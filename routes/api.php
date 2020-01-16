@@ -404,6 +404,7 @@ Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 
 //MISC Controllers
 Route::post("files/upload/{field_name?}", "FilesController@upload");
+Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
 /*
