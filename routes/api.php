@@ -57,13 +57,14 @@ Route::group(
     }
 );
 
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
+Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
-Route::get   ('events/{event_id}/eventusers',      'EventUserController@indexar');
-Route::get   ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
-Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
+Route::post('events/{event_id}/eventusers',      'EventUserController@createUserAndAddtoEvent');
+Route::get ('events/{event_id}/eventusers',      'EventUserController@index');
+Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
 
 /***************
