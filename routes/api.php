@@ -46,7 +46,7 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 /****************
  * eventUsers
  ****************/
-Route::apiResource('events/{event_id}/eventUsers', 'EventUserController');
+
  
 Route::group(
     ['middleware' => 'auth:token'], function () {
