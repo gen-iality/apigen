@@ -273,17 +273,16 @@ class EventController extends Controller
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
          */ 
-        if(!isset($data['app_configuration'])){
-            $data['app_configuration'] = array();
-        }
         
+        
+     
         if(!empty($data['styles'])){
              $data['styles'] = self::AddDefaultStyles($data['styles']);
         }
        
-        if(is_null($data['app_configuration'])){
-            //$data['app_configuration'] = array();
-            $data['app_configuration'] = array();
+        if(!isset($data['app_configuration']) && !empty($event->app_configuration)){
+            $data['app_configuration'] = $event->app_configuration;
+            
         }
 
         /*Events Type*/
@@ -298,7 +297,9 @@ class EventController extends Controller
         }
 
         //si el evento se actualiza y no se envia el organizer_id suponemos que se conserva el mismo organizador
-        if(empty($event->organizer_id) || !empty($event->organizer_id)  &&!empty($data['organizer_id'])){
+        if(!isset($data["organizer_id"]) && !empty($event->organizer_id)){
+            $data["organizer_id"] = $event->organizer_id;
+        }elseif(empty($event->organizer_id) || !empty($event->organizer_id)  && !empty($data['organizer_id'])){
             self::assingOrganizer($data, $event);
         }
         
