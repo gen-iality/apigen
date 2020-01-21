@@ -102,6 +102,7 @@ class Account extends User
             function ($model) {
                 try{
                     
+                    \Log::debug($model);
                     //Si ya existe un usuario con ese correo se jode
                     $fbuser = self::$auth->createUser(
                         [
