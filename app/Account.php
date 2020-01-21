@@ -59,6 +59,7 @@ class Account extends User
         'first_name',
         'last_name',
         'email',
+        'password',
         'timezone_id',
         'date_format_id',
         'datetime_format_id',
