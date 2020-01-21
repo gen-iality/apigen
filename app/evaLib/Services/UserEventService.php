@@ -150,7 +150,9 @@ class UserEventService
 
         /* guardamos el Attendee o eventUser */
         $eventUser = Attendee::updateOrCreate($matchAttributes, $eventUserFields);
-
+        \Log::debug($matchAttributes);
+        \Log::debug($eventUserFields);
+    
         /* Si viene el id de la orden en la variable eventUserFields
         buscamos la orden  */
         if (isset($eventUserFields["order_id"])) {
