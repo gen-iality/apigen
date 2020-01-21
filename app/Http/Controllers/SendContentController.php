@@ -235,16 +235,15 @@ class SendContentController extends Controller
         $auth->sendEmailVerificationLink($email);
         return $auth;
     }
-    public function sendPushNotification(Request $request)
+    public function sendPushNotification(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        $to = $data["to"];
-        $notification = $data['notification'];
-
-        $apiKey = "AAAAXT-cAHM:APA91bGXwqFvaD_BnHeWrYwBW8M51YhqhvWpYtd1X_Knr8Q881KramBC4Swd0XA5zWac6_qbpwjWKWD_wWctbjrk1jexxTmFvySCqAucYMcws8RvuMQQ1XiWw72L0scG_Ge2aXyTpkFb";
-        $fields = array( 'to' => $to, 'notification' => $notification );
-        $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
-        $url = 'https://fcm.googleapis.com/fcm/send';
+        $title = $data["title"];
+        $body = $data["body"];
+        $dat = $data["data"];
+        $fields = array( 'title' => $title, 'body' => $body, 'data' => $dat);
+        $headers = array('Content-Type: application/json');
+        $url = 'http://104.248.125.133:6477/pushNotification';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -257,7 +256,6 @@ class SendContentController extends Controller
         
         $result = curl_exec($ch);
         curl_close($ch);
-        
         return json_decode($result,true);
     }
 }

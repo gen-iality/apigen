@@ -104,4 +104,10 @@ Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage")
  * RECOVERY PASSWORD
  ******************/
 Route::post('events/{event_id}/recoverypassword', 'SendContentController@PasswordRecovery');
+
+/*******************
+ * PUSH NOTIFICATIONS
+ ******************/
+Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
+
 ?>
