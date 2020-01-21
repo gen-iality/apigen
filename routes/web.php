@@ -33,3 +33,6 @@ Route::get('/rsvptemplate', function () {
 
     return new App\Mail\RSVP("message", $event, $eventUser, null, "footer", "subject");
 });
+
+
+Route::post('testpush', 'SendContentController@sendPushNotification');
