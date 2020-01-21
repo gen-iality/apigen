@@ -66,6 +66,8 @@ Route::get ('events/{event_id}/eventusers',      'EventUserController@index');
 Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
+Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
+
 
 /***************
  * USER PROPERTIES
