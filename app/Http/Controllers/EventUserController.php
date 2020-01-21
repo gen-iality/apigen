@@ -134,7 +134,6 @@ class EventUserController extends Controller
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
-
             $userData = $request->json()->all();
 
             if (isset($eventUserData['properties'])) {
@@ -182,13 +181,6 @@ class EventUserController extends Controller
     }
 
     public function index(Request $request,$event_id)
-    {
-        return EventUserResource::collection(
-            Attendee::where('event_id',$event_id)->paginate(config("app.page_size"))
-        );
-    }
-
-    public function indexar(Request $request,$event_id)
     {
         return EventUserResource::collection(
             Attendee::where('event_id',$event_id)->paginate(config("app.page_size"))
@@ -268,4 +260,17 @@ class EventUserController extends Controller
     {
         return $eventUser->delete();
     }
+
+    public function destroyAll( $eventUser)
+    {
+        $attende = Attendee::where("event_id","5e1ceb50d74d5c1064437aa2")->get();
+        $attende = json_decode(json_encode($attende),true);
+        
+        foreach( $attende as $att ){
+            $attende = Attendee::find($att["_id"]);
+            echo $attende;
+            $attende->delete();
+        }
+
+         }
 }
