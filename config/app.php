@@ -26,6 +26,7 @@ return [
     'default_event_styles' => ['buttonColor'=>"#FFF",'banner_color'=>"#FFF",'menu_color'=>"#FFF",'event_image'=>"#FFF",'banner_image'=>"#FFF",'menu_image'=>"#FFF"],
     'app_configuration' => [],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
+    'pushdirection' => env('PUSH_URL','production'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -36,7 +37,7 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-    'pushdirection' => 'http://104.248.125.133:6477/pushNotification',
+    
     'env' => env('APP_ENV', 'development'),
 
     /*

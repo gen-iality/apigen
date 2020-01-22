@@ -44,7 +44,7 @@ class PushNotificationsController extends Controller
         $dat = $data["data"];
         $fields = array( 'title' => $title, 'body' => $body, 'data' => $dat);
         $headers = array('Content-Type: application/json');
-        $url = config('app.pushdirection');
+        $url = config('app.pushdirection')."/pushNotification";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
