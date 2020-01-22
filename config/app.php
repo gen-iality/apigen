@@ -36,7 +36,7 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-
+    'pushdirection' => 'http://104.248.125.133:6477/pushNotification',
     'env' => env('APP_ENV', 'development'),
 
     /*
