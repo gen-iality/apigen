@@ -237,26 +237,26 @@ class SendContentController extends Controller
     }
     public function sendPushNotification(Request $request, $event_id)
     {
-        $data = $request->json()->all();
-        $title = $data["title"];
-        $body = $data["body"];
-        $dat = $data["data"];
-        $fields = array( 'title' => $title, 'body' => $body, 'data' => $dat);
-        $headers = array('Content-Type: application/json');
-        $url = 'http://104.248.125.133:6477/pushNotification';
+            $data = $request->json()->all();
+            $title = $data["title"];
+            $body = $data["body"];
+            $dat = $data["data"];
+            $fields = array( 'title' => $title, 'body' => $body, 'data' => $dat);
+            $headers = array('Content-Type: application/json');
+            $url = config('app.pushdirection');
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-        
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return json_decode($result,true);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+            
+            $result = curl_exec($ch);
+            curl_close($ch);
+            return json_decode($result,true);
     }
 }
 

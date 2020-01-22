@@ -53,7 +53,6 @@ Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsCon
  * 
  * rutas para guardar la agenda de los eventos
  ****************/
-
 Route::get   ('events/{event_id}/host',      'HostController@index');
 Route::post  ('events/{event_id}/host',      'HostController@store');
 Route::get   ('events/{event_id}/host/{id}', 'HostController@show');
@@ -84,17 +83,16 @@ Route::delete('events/{event_id}/type/{id}', 'TypeController@destroy');
 /***************
  * ACTIVITYCATEGORIES (las categorias para las actividades de la agenda)
  ****************/
-
 Route::get   ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@index');
 Route::post  ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@store');
 Route::get   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@show');
 Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@update');
 Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
 
+
 /***************
  * TEST API'S
  ****************/
-
 Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
 Route::post('findbase/findbase/{id}', 'SendContentController@Attendee');
 Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage");
@@ -105,9 +103,18 @@ Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage")
  ******************/
 Route::post('events/{event_id}/recoverypassword', 'SendContentController@PasswordRecovery');
 
+
 /*******************
  * PUSH NOTIFICATIONS
  ******************/
-Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
+Route::post('event/{event_id}/sendpush', 'PushNotificationsController@sendPushNotification');
+Route::apiResource('events/{id}/push', 'PushNotificationsController');
+
+
+/*******************
+ * FAQ'S
+ ******************/
+Route::apiResource('events/{id}/faqs', 'PushNotificationsController');
+
 
 ?>
