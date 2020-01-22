@@ -265,11 +265,13 @@ class EventUserController extends Controller
     {
         $attende = Attendee::where("event_id","5e1ceb50d74d5c1064437aa2")->get();
         $attende = json_decode(json_encode($attende),true);
-        
+     
         foreach( $attende as $att ){
-            $id = $att["_id"];
-            $attende = Attendee::findOrFail($id);            
-            return $attende->forceDelete();
+             
+            $attende = Attendee::find($att["_id"]);      
+                
+           echo $attende->forceDelete();
+            
         }
 
     }
