@@ -243,7 +243,7 @@ class SendContentController extends Controller
             $dat = $data["data"];
             $fields = array( 'title' => $title, 'body' => $body, 'data' => $dat);
             $headers = array('Content-Type: application/json');
-            $url = config('app.pushdirection');
+            $url = "http://104.248.125.133:6477/pushNotification";
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
