@@ -114,7 +114,7 @@ Route::apiResource('events/{id}/push', 'PushNotificationsController');
 /*******************
  * FAQ'S
  ******************/
-Route::apiResource('events/{id}/faqs', 'PushNotificationsController');
+Route::apiResource('events/{id}/faqs', 'FaqController');
 
 
 ?>
