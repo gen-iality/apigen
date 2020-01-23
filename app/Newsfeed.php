@@ -20,7 +20,5 @@ class Newsfeed extends Moloquent
         return $this->belongsTo('App\Event');
     }
 
-    protected $fillable = [
-        'title' , 'desc' , 'article'  
-    ];
+    protected $guarded = [];
 }
