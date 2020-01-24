@@ -107,7 +107,7 @@ Route::post('events/{event_id}/recoverypassword', 'SendContentController@Passwor
 /*******************
  * PUSH NOTIFICATIONS
  ******************/
-Route::apiResource('events/{id}/push', 'PushNotificationsController');
+Route::post('events/{event_id}/sendpush', 'PushNotificationsController@store');
 Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
 
 
@@ -115,6 +115,5 @@ Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotifica
  * FAQ'S
  ******************/
 Route::apiResource('events/{id}/faqs', 'FaqController');
-
 
 ?>
