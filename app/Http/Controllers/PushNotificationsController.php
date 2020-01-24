@@ -39,6 +39,7 @@ class PushNotificationsController extends Controller
         $saveData = new PushNotification($data);
         $saveData->save();
 
+        
         $title = $data["title"];
         $body = $data["body"];
         $dat = $data["data"];
@@ -51,13 +52,13 @@ class PushNotificationsController extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         
         $result = curl_exec($ch);
         curl_close($ch);
         return json_decode($result,true);
-
     }
 
     /**
