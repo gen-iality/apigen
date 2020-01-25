@@ -1,9 +1,13 @@
+
+
+
 <?php
 namespace App\Http\Controllers;
 
 use App\evaLib\Services\GoogleFiles;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * @resource Files
@@ -85,10 +89,10 @@ class FilesController extends Controller
     */
     public function storeBaseImg(Request $request,  string $key = null, GoogleFiles $gfService)
     {
+        Image::configure(array('driver' => 'imagick'));
         $data = $request->all();
-     
         $name = $key;
-        $img = $data[$key];
+        $img = $data[$key]; //get the image b64
         $formats = array("png","jpg","jpeg");
         $part = substr($img,0,20);
         foreach ($formats as $format){
@@ -98,6 +102,16 @@ class FilesController extends Controller
             }
         }
         $name = $name.".".$ext;
+        $imgresize = Image::make($img)->resize(null,500, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($name,95);//resize it
+        
+        $getimage = file_get_contents(config("app.evius_url").$name);
+        
+        $data = base64_encode($getimage);
+        $data = base64_decode($data);//this is the image 
+        echo '<img src="data:image/gif;base64,' .  $data . '" >';die;   
+
         $img = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
         $imgurls[] = $gfService->storeFile($img, $name);
         return $imgurls;
