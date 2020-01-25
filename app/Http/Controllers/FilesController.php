@@ -89,7 +89,7 @@ class FilesController extends Controller
         Image::configure(array('driver' => 'imagick'));
         $data = $request->all();
         $name = $key;
-        $img = $data[$key]; //get the image b64
+        $img = $data[$key]; 
         $formats = array("png","jpg","jpeg");
         $part = substr($img,0,20);
         foreach ($formats as $format){
@@ -99,19 +99,11 @@ class FilesController extends Controller
             }
         }
         $name = $name.".".$ext;
-        $imgresize = Image::make($img)->resize(null,500, function ($constraint) {
+        $imgresize = Image::make($img)->resize(null,600, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($name,95);//resize itx
-        
-        $getimage = file_get_contents(config("app.evius_url").$name);
-        
-        $data = base64_encode($getimage);
-        echo '<img src="data:image/gif;base64,' .  $data . '" >';die;   
-        $data = base64_decode($data);//this is the image 
-        
-
-        $img = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
-        $imgurls[] = $gfService->storeFile($img, $name);
+        })->encode($ext);//resize itx
+        $data = base64_decode(base64_encode($imgresize));
+        $imgurls[] = $gfService->storeFile($data, $name);
         return $imgurls;
     }
 }
