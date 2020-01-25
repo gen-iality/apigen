@@ -22,6 +22,7 @@ return [
 
     'front_url' => 'https://eviusco.netlify.com',
     'page_size' => 900,
+    'evius_url' => 'https://api.evius.co/',
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
     'default_event_styles' => ['buttonColor'=>"#FFF",'banner_color'=>"#FFF",'menu_color'=>"#FFF",'event_image'=>"#FFF",'banner_image'=>"#FFF",'menu_image'=>"#FFF"],
     'app_configuration' => [],
