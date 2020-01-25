@@ -101,13 +101,14 @@ class FilesController extends Controller
         $name = $name.".".$ext;
         $imgresize = Image::make($img)->resize(null,500, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($name,95);//resize it
+        })->save($name,95);//resize itx
         
         $getimage = file_get_contents(config("app.evius_url").$name);
         
         $data = base64_encode($getimage);
-        $data = base64_decode($data);//this is the image 
         echo '<img src="data:image/gif;base64,' .  $data . '" >';die;   
+        $data = base64_decode($data);//this is the image 
+        
 
         $img = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
         $imgurls[] = $gfService->storeFile($img, $name);
