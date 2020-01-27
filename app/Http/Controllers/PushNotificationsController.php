@@ -37,13 +37,14 @@ class PushNotificationsController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $saveData = new PushNotification($data);
-        $saveData->save();
-
         
+        $saveData->save();
+   
+        $eventId = $data["event_id"];
         $title = $data["title"];
         $body = $data["body"];
-        $dat = $data["data"];
-        $fields = array( 'title' => $title, 'body' => $body, 'data' => $dat);
+        $otherdata = $data["data"];
+        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body, 'data' => $otherdata);
         $headers = array('Content-Type: application/json');
         $url = config('app.pushdirection')."/pushNotification";
 
@@ -58,15 +59,28 @@ class PushNotificationsController extends Controller
         
         $result = curl_exec($ch);
         curl_close($ch);
-        return json_decode($result,true);
+        return "enviado".json_decode($result,true);
     }
 
+
+    public function update(Request $request, $event_id, $id)
+    {
+        $data = $request->json()->all();
+        $push = PushNotification::findOrFail($id);
+        //if($Space["event_id"]= $event_id){
+        $push->fill($data);
+        $push->save();
+        return $data;
+
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\PushNotification  $PushNotification
      * @return \Illuminate\Http\Response
      */
+
+     
     public function show($event_id,$id)
     {
         $pushnotification = PushNotification::findOrFail($id);
