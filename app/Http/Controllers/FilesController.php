@@ -99,17 +99,24 @@ class FilesController extends Controller
             }
         }
         $name = $name.".".$ext;
-        if($data["type"] == "wall"){
-            $imgresize = Image::make($img)->resize(null,500, function ($constraint) {
-            $constraint->aspectRatio();
-        })->encode($ext);//resize itx
-        }elseif($data["type"] == "icon"){
-            $imgresize = Image::make($img)->resize(null,250, function ($constraint) {
-            $constraint->aspectRatio();
-        })->encode($ext);//resize itx
+        
+        if(isset($data['type'])){
+            if($data["type"] == "icon"){
+                $imgresize = self::imgResize($img, $ext, $width_size = 240);
+            }elseif($data["type"] == "wall"){
+                $imgresize = self::imgResize($img, $ext, $width_size = 500);
+            }
+        }else{
+            $imgresize = self::imgResize($img, $ext, $width_size = 600);
         }
         $image = base64_decode(base64_encode($imgresize));
         $imgurls[] = $gfService->storeFile($image, $name);
         return $imgurls;
     }
+
+    private static function imgResize($img, $ext, $width_size){
+        return Image::make($img)->resize(null,$width_size, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode($ext);
+    }    
 }
