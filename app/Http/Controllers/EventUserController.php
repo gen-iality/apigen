@@ -130,8 +130,9 @@ class EventUserController extends Controller
         
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
-            $datafromtypeform = $request->json()->all();
-            foreach ($datafromtypeform["answers"] as $answer) {
+            $datafromform = $request->json()->all();
+
+            foreach ($datafromform["answers"] as $answer) {
                 foreach ($answer as $single_answer){
                     foreach ($single_answer as $minimun_value){
                         if(isset($minimun_value["text"])){
@@ -145,28 +146,30 @@ class EventUserController extends Controller
                         }elseif(isset($minimun_value["email"])){
                             $eventUserData["email"] = $minimun_value["email"] ;
                             $eventUserData["correo"] = $minimun_value["email"] ;
+                        break;
                         }
+
                     }
                 }
             }
             $eventUserData["properties"] = [
-                "email" => $data["email"],
-                "correo" => $data["correo"],
-                "celular" => $data["celular"],
-                "telefono" => $data["telefono"],
-                "nombres" => $data["nombres"]
+                "email" => $eventUserData["email"],
+                "correo" => $eventUserData["correo"],
+                "celular" => $eventUserData["celular"],
+                "telefono" => $eventUserData["telefono"],
+                "nombres" => $eventUserData["nombres"]
             ];
-            echo var_dunp($eventUserData);die; 
+    
 
             try {
                 //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
                 //a estar dentro de un hijo llamado properties
-                $eventUserData = $request->json()->all();
+            
     
                 $field = Event::find($event_id);
                 $user_properties = $field->user_properties;
     
-                $userData = $request->json()->all();
+                $userData = $eventUserData;
     
                 if (isset($eventUserData['properties'])) {
                     $userData = $eventUserData['properties'];
@@ -175,6 +178,7 @@ class EventUserController extends Controller
                     'email' => 'required|email',
                     'other_fields' => 'sometimes',
                 ];
+                
                 foreach ($user_properties as $user_property){
                     if($user_property['mandatory'] !== true)continue;
                         $field = $user_property['name'];
