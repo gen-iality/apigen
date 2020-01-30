@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use QRCode;
 use Validator;
+use Mail;
 use App\Event;
 use App\State;
 use App\Account;
@@ -203,6 +204,7 @@ class EventUserController extends Controller
                 $message->to($data_single,"Asistente")
                 ->subject("asuntoxx","");
             });
+
         return view('Public.ViewEvent.Partials.ContentNotification', $data);
 
         return  $response.response($page, 200)->header('Content-Type', 'image/png');
