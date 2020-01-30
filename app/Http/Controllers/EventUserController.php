@@ -156,7 +156,8 @@ class EventUserController extends Controller
                 "email" => $eventUserData["email"],
                 "correo" => $eventUserData["correo"],
                 "cedula" => $eventUserData["cedula"],
-                "telefono" => $eventUserData["telefono"],
+                "celular" => $eventUserData["celular"],
+                "nombres" => $eventUserData["nombres"]
             ];
     
           
