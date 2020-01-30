@@ -142,7 +142,7 @@ class EventUserController extends Controller
         $eventUserData['email'] = $request->input('email');
         $eventUserData['password'] = $request->input('password');
 
-        $properties_array = [
+        $eventUserData['properties'] = [
             "cedula" => $eventUserData['cedula'],
             "nombres" => $eventUserData['nombres'], 
             "correo" => $eventUserData['correo'], 
@@ -151,8 +151,7 @@ class EventUserController extends Controller
             "email" => $eventUserData['email'], 
             "password" => $eventUserData['password']
         ];
-        $eventUserData['properties'] = $properties_array;
-   
+  
         try {
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
