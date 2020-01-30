@@ -141,7 +141,7 @@ class EventUserController extends Controller
         $eventUserData['municipio'] = $request->input('municipio');
         $eventUserData['email'] = $request->input('email');
         $eventUserData['password'] = $request->input('password');
-        $eventUserData['properties'] = (object)[
+        $eventUserData['properties'] = [
             "cedula" => $eventUserData['cedula'],
             "nombres" => $eventUserData['nombres'], 
             "correo" => $eventUserData['correo'], 
