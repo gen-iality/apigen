@@ -127,6 +127,61 @@ class EventUserController extends Controller
 
     public function createUserViaUrl(Request $request, string $event_id)    
     {
+        try {
+            //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
+            //a estar dentro de un hijo llamado properties
+            $eventUserData = $request->json()->all();
+            $eventUserData["answers"];
+            
+            foreach ($eventUserData["answers"] as $value) {
+                echo $value->text;
+                die; 
+            }
+            $field = Event::find($event_id);
+            $user_properties = $field->user_properties;
+
+            $userData = $request->json()->all();
+
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
+            }
+            $validations = [
+                'email' => 'required|email',
+                'other_fields' => 'sometimes',
+            ];
+            foreach ($user_properties as $user_property){
+
+                if($user_property['mandatory'] !== true)continue;
+                    $field = $user_property['name'];
+                    $validations [$field] = 'required';
+                }
+
+            //este validador pronto se va a su clase de validacion
+            $validator = Validator::make(
+                $userData, 
+                $validations
+            );
+
+            if ($validator->fails()) {
+                return response(
+                    $validator->errors(),
+                    422
+                );
+            }
+            
+            $event = Event::find($event_id);
+            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+            
+            $response = new EventUserResource($result->data);
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
+
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
+        return $response;
+
+
+
         $eventUserData['state_id'] = '5b0efc411d18160bce9bc706';
         $eventUserData['rol_id'] = '5afaf644500a7104f77189cd';
         $eventUserData['account_id'] = '5e3055b3d74d5c4967786c84';
@@ -151,62 +206,62 @@ class EventUserController extends Controller
             "password" => $eventUserData['password']
         ];
         $eventUserData['properties'] = $properties_array;
-   
-        try {
-     
-            $field = Event::find($event_id);
-            $user_properties = $field->user_properties;
-
-            if (isset($eventUserData['properties'])) {
-                $userData = $eventUserData['properties'];
-            }
-            $validations = [
-                'email' => 'required|email',
-                'other_fields' => 'sometimes',
-            ];
-            foreach ($user_properties as $user_property){
-
-                if($user_property['mandatory'] !== true)continue;
-                    $field = $user_property['name'];
-                    $validations [$field] = 'required';
-                }
-
-            //este validador pronto se va a su clase de validacion
-            $validator = Validator::make(
-                $userData, 
-                $validations
-            );
+   //
+       // try {
+     //
+       //     $field = Event::find($event_id);
+       //     $user_properties = $field->user_properties;
+//
+       //     if (isset($eventUserData['properties'])) {
+       //         $userData = $eventUserData['properties'];
+       //     }
+       //     $validations = [
+       //         'email' => 'required|email',
+       //         'other_fields' => 'sometimes',
+       //     ];
+       //     foreach ($user_properties as $user_property){
+//
+       //         if($user_property['mandatory'] !== true)continue;
+       //             $field = $user_property['name'];
+       //             $validations [$field] = 'required';
+       //         }
+//
+       //     //este validador pronto se va a su clase de validacion
+       //     $validator = Validator::make(
+       //         $userData, 
+       //         $validations
+       //     );
+       // 
+       //     $event = Event::find($event_id);
+       //    
+       //     $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+     //
+       //     $response = new EventUserResource($result->data);
+       //     $response->additional(['status' => $result->status, 'message' => $result->message]);
+       // } catch (\Exception $e) {
+       //     $response = response()->json((object) ["message" => $e->getMessage()], 500);
+       // }
+       // return 1;
         
-            $event = Event::find($event_id);
-           
-            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-     
-            $response = new EventUserResource($result->data);
-            $response->additional(['status' => $result->status, 'message' => $result->message]);
-        } catch (\Exception $e) {
-            $response = response()->json((object) ["message" => $e->getMessage()], 500);
-        }
-        return 1;
-        //generate
-        //ob_start(); 
-        //    $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
-        //    $qr = base64_encode($qr);
-        //    $page = ob_get_contents();
-        //    ob_end_clean();
-        //    $type = "png";
-        //    $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
-        //    
-        //    $qr = ["image" => base64_decode($image)];
-        //$email = $eventUserData['email'];
-        //$eventUserData['image'] = $image;
-        //subject, content, title,email       
-      
+        ob_start(); 
+            $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
+            $qr = base64_encode($qr);
+            $page = ob_get_contents();
+            ob_end_clean();
+            $type = "png";
+            $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+            
+            $qr = ["image" => base64_decode($image)];
+        $email = $eventUserData['email'];
+        $eventUserData['image'] = $image;
+   
+
        
-       // Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
-       //     $message->to($email,"Asistente")
-       //     ->subject("asuntoxx","");
-       //     ->attachData(base64_decode($image))
-       // });
+        Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
+            $message->to($email,"Asistente")
+            ->subject("asuntoxx","");
+            ->attachData(base64_decode($image))
+        });
         
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
