@@ -27,16 +27,15 @@ class Event extends ModelsEvent
 
     protected $fillable = [
         'author', 'name', 'description', 'location', 'venue', 'address','pulep',
-        'datetime_from', 'datetime_to',
-        'date_start', 'date_end', 'time_start', 'time_end',
+        'datetime_from', 'datetime_to', 'date_start', 'date_end', 'time_start', 'time_end',
         'visibility', 'picture', 'organization_id', 'category','extra_config', 
         'user_properties','properties_group', 'styles' , 'has_date' , 'app_configuration', 
-        'banner_image', 'homeSelectedScreen', 'allow_register' , 'allow_detail_calendar' , 'analytics'
+        'banner_image', 'homeSelectedScreen', 'allow_register' , 'allow_detail_calendar' , 'analytics',
+        'banner_image_link'
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
     
-
     public function __construct($data = array()){
          $this->dates = array_merge($this->dates , $this->times);
          parent::__construct($data);
