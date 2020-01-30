@@ -196,17 +196,15 @@ class EventUserController extends Controller
         $type = "png";
         $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
         $image = base64_decode($qr);
-        $data_single = $eventUserData['email'];
+        $email = $eventUserData['email'];
         //subject, content, title,email       
                 
-            Mail::send($image,$eventUserData , function ($message) use ($eventUserData,$data_single){
-                $message->to($data_single,"Asistente")
-                ->subject("asuntoxx","");
-            });
-
-        return view('Public.ViewEvent.Partials.ContentNotification', $data);
-
-        return  $response.response($page, 200)->header('Content-Type', 'image/png');
+        Mail::send("Public.ViewEvent.Partials.Qr",$qr , function ($message) use ($qr,$email){
+            $message->to($email,"Asistente")
+            ->subject("asuntoxx","");
+        });
+        
+        return  $response;
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
