@@ -195,11 +195,11 @@ class EventUserController extends Controller
         ob_end_clean();
         $type = "png";
         $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
-        $image = base64_decode($imgresize);
+        $image = base64_decode($qr);
         $data_single = $eventUserData['email'];
         //subject, content, title,email       
                 
-            Mail::send($qr,$eventUserData , function ($message) use ($eventUserData,$data_single){
+            Mail::send($image,$eventUserData , function ($message) use ($eventUserData,$data_single){
                 $message->to($data_single,"Asistente")
                 ->subject("asuntoxx","");
             });
