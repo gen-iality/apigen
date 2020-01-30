@@ -166,54 +166,7 @@ class EventUserController extends Controller
             $result->save();
             return $result;
 die;
-            try {
-                //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
-                //a estar dentro de un hijo llamado properties
-            
-    
-                $field = Event::find($event_id);
-                $user_properties = $field->user_properties;
-    
-                $userData = $eventUserData;
-    
-                if (isset($eventUserData['properties'])) {
-                    $userData = $eventUserData['properties'];
-                }
-                $validations = [
-                    'email' => 'required|email',
-                    'other_fields' => 'sometimes',
-                ];
-                
-                foreach ($user_properties as $user_property){
-                    if($user_property['mandatory'] !== true)continue;
-                        $field = $user_property['name'];
-                        $validations [$field] = 'required';
-                    }
-    
-                //este validador pronto se va a su clase de validacion
-                $validator = Validator::make(
-                    $userData, 
-                    $validations
-                );
-    
-                if ($validator->fails()) {
-                    return response(
-                        $validator->errors(),
-                        422
-                    );
-                }
-                
-                $event = Event::find($event_id);
-                $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-                
-                $response = new EventUserResource($result->data);
-                $response->additional(['status' => $result->status, 'message' => $result->message]);
-            } catch (\Exception $e) {
-    
-                $response = response()->json((object) ["message" => $e->getMessage()], 500);
-            }
-            return $response;
-    
+          
 
         $eventUserData['state_id'] = '5b0efc411d18160bce9bc706';
         $eventUserData['rol_id'] = '5afaf644500a7104f77189cd';
