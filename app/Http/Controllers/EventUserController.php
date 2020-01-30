@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use QRCode;
 use Validator;
 use App\Event;
 use App\State;
@@ -123,10 +124,83 @@ class EventUserController extends Controller
      *
      * @return EventUserResource
      */
+
+    public function createUserViaUrl(Request $request, string $event_id)    
+    {
+        $eventUserData['state_id'] = '5b0efc411d18160bce9bc706';
+        $eventUserData['rol_id'] = '5afaf644500a7104f77189cd';
+        $eventUserData['account_id'] = '5e3055b3d74d5c4967786c84';
+        $eventUserData['private_reference_number'] = '759093183';
+        $eventUserData['rol'] = 'ASISTENTE';
+        $eventUserData['checked_in'] = false;
+        $eventUserData['event_id'] = $event_id;
+        $eventUserData['cedula'] = $request->input('cedula');
+        $eventUserData['nombres'] = $request->input('nombres');
+        $eventUserData['correo'] = $request->input('correo');
+        $eventUserData['regional'] = $request->input('regional');
+        $eventUserData['municipio'] = $request->input('municipio');
+        $eventUserData['email'] = $request->input('email');
+        $eventUserData['password'] = $request->input('password');
+        $properties_array = [
+            "cedula" => $eventUserData['cedula'],
+            "nombres" => $eventUserData['nombres'], 
+            "correo" => $eventUserData['correo'], 
+            "regional" => $eventUserData['regional'], 
+            "municipio" => $eventUserData['municipio'], 
+            "email" => $eventUserData['email'], 
+            "password" => $eventUserData['password']
+        ];
+        $eventUserData['properties'] = $attendeproperties_array;
+   
+        try {
+     
+            $field = Event::find($event_id);
+            $user_properties = $field->user_properties;
+
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
+            }
+            $validations = [
+                'email' => 'required|email',
+                'other_fields' => 'sometimes',
+            ];
+            foreach ($user_properties as $user_property){
+
+                if($user_property['mandatory'] !== true)continue;
+                    $field = $user_property['name'];
+                    $validations [$field] = 'required';
+                }
+
+            //este validador pronto se va a su clase de validacion
+            $validator = Validator::make(
+                $userData, 
+                $validations
+            );
+        
+            $event = Event::find($event_id);
+           
+            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+            echo "stap";die;
+            $response = new EventUserResource($result->data);
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
+
+        //generate QR
+        ob_start(); 
+        QRCode::text($eventUserData['cedula'] )
+        ->setSize(8)
+        ->setMargin(4)
+        ->png();
+        $page = ob_get_contents();
+        ob_end_clean();
+
+        return  $response.response($page, 200)->header('Content-Type', 'image/png');
+    }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
         try {
-
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
@@ -146,11 +220,8 @@ class EventUserController extends Controller
             foreach ($user_properties as $user_property){
 
                 if($user_property['mandatory'] !== true)continue;
-
                     $field = $user_property['name'];
-
                     $validations [$field] = 'required';
-                    
                 }
 
             //este validador pronto se va a su clase de validacion
@@ -175,8 +246,6 @@ class EventUserController extends Controller
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        
-
         return $response;
     }
 
@@ -226,6 +295,7 @@ class EventUserController extends Controller
         $eventUser->save();
         return $eventUser;
     }
+
     public function updateWithStatus(Request $request, $evenUserId)
     {
         $data = $request->json()->all();
@@ -263,7 +333,8 @@ class EventUserController extends Controller
 
     public function destroyAll( $eventUser)
     {
-        $attende = Attendee::where("event_id","5e1ceb50d74d5c1064437aa2")->get();
+        $attende = Account::where("email",'like', '%@coomeva%')->forceDelete();
+        die;
         $attende = json_decode(json_encode($attende),true);
      
         foreach( $attende as $att ){
