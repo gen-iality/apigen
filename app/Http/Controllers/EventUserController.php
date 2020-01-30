@@ -150,7 +150,7 @@ class EventUserController extends Controller
             "email" => $eventUserData['email'], 
             "password" => $eventUserData['password']
         ];
-        $eventUserData['properties'] = $attendeproperties_array;
+        $eventUserData['properties'] = $properties_array;
    
         try {
      
