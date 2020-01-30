@@ -141,7 +141,7 @@ class EventUserController extends Controller
         $eventUserData['municipio'] = $request->input('municipio');
         $eventUserData['email'] = $request->input('email');
         $eventUserData['password'] = $request->input('password');
-        $eventUserData['properties'] = [
+        $properties_array = [
             "cedula" => $eventUserData['cedula'],
             "nombres" => $eventUserData['nombres'], 
             "correo" => $eventUserData['correo'], 
@@ -150,16 +150,33 @@ class EventUserController extends Controller
             "email" => $eventUserData['email'], 
             "password" => $eventUserData['password']
         ];
-  
+        $eventUserData['properties'] = $properties_array;
+   
         try {
+     
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
+            }
             $validations = [
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
-          
+            foreach ($user_properties as $user_property){
+
+                if($user_property['mandatory'] !== true)continue;
+                    $field = $user_property['name'];
+                    $validations [$field] = 'required';
+                }
+
+            //este validador pronto se va a su clase de validacion
+            $validator = Validator::make(
+                $userData, 
+                $validations
+            );
+        
             $event = Event::find($event_id);
            
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
@@ -169,8 +186,7 @@ class EventUserController extends Controller
         } catch (\Exception $e) {
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-
-        return $response;
+        return 1;
         //generate
         //ob_start(); 
         //    $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
