@@ -9,7 +9,7 @@ use App\Event;
 use App\State;
 use App\Account;
 use App\Attendee;
-use App\ActivityCategories;
+use App\ActivityAssistants;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
@@ -163,7 +163,7 @@ class EventUserController extends Controller
     
             
             $datafromform["event_id"] = $event_id;
-            $result = new ActivityCategories($datafromform);
+            $result = new ActivityAssistants($datafromform);
             $result->save();
             return $result;
 
