@@ -230,7 +230,7 @@ die;
        // }
        // return 1;
         
-        ob_start(); 
+       /* ob_start(); 
             $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
             $qr = base64_encode($qr);
             $page = ob_get_contents();
@@ -243,7 +243,7 @@ die;
         $eventUserData['image'] = $image;
    
 
-       
+       */
      //   Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
        //     $message->to($email,"Asistente")
        //     ->subject("asuntoxx","");
