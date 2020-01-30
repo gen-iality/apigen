@@ -160,13 +160,6 @@ class EventUserController extends Controller
                 'other_fields' => 'sometimes',
             ];
           
-
-            //este validador pronto se va a su clase de validacion
-            $validator = Validator::make(
-                $userData, 
-                $validations
-            );
-        
             $event = Event::find($event_id);
            
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
