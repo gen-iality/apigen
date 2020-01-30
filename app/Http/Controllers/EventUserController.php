@@ -141,6 +141,7 @@ class EventUserController extends Controller
         $eventUserData['municipio'] = $request->input('municipio');
         $eventUserData['email'] = $request->input('email');
         $eventUserData['password'] = $request->input('password');
+
         $properties_array = [
             "cedula" => $eventUserData['cedula'],
             "nombres" => $eventUserData['nombres'], 
@@ -153,7 +154,6 @@ class EventUserController extends Controller
         $eventUserData['properties'] = $properties_array;
    
         try {
-     
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
@@ -186,21 +186,22 @@ class EventUserController extends Controller
         } catch (\Exception $e) {
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-return $response;
+
+        return $response;
         //generate
-        ob_start(); 
-            $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
-            $qr = base64_encode($qr);
-            $page = ob_get_contents();
-            ob_end_clean();
-            $type = "png";
-            $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
-            
-            $qr = ["image" => base64_decode($image)];
-        $email = $eventUserData['email'];
-        $eventUserData['image'] = $image;
+        //ob_start(); 
+        //    $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
+        //    $qr = base64_encode($qr);
+        //    $page = ob_get_contents();
+        //    ob_end_clean();
+        //    $type = "png";
+        //    $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+        //    
+        //    $qr = ["image" => base64_decode($image)];
+        //$email = $eventUserData['email'];
+        //$eventUserData['image'] = $image;
         //subject, content, title,email       
-        return view("Public.ViewEvent.Partials.Qr",$image);        
+      
        
        // Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
        //     $message->to($email,"Asistente")
