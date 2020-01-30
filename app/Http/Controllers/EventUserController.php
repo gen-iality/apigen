@@ -132,8 +132,13 @@ class EventUserController extends Controller
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $datafromform = $request->json()->all();
-
-            //foreach ($datafromform["answers"] as $answer) {
+            $datafromform["event_id"] = $event_id;
+            $result = new ActivityAssistants($datafromform);
+            $result->save();
+            return $result;
+die;
+    //            
+// foreach ($datafromform["answers"] as $answer) {
              //   foreach ($answer as $single_answer){
              //       foreach ($single_answer as $minimun_value){
              //           if(isset($minimun_value["text"])){
@@ -161,11 +166,7 @@ class EventUserController extends Controller
             //];
     
             
-            $datafromform["event_id"] = $event_id;
-            $result = new ActivityAssistants($datafromform);
-            $result->save();
-            return $result;
-die;
+            
           
 
         $eventUserData['state_id'] = '5b0efc411d18160bce9bc706';
