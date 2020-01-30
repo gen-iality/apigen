@@ -17,7 +17,6 @@ use App\Http\Resources\EventUserResource;
 use App\evaLib\Services\UserEventService;
 
 
-
 /**
  * @resource Attendee (Attendee)
  *
@@ -196,7 +195,7 @@ class EventUserController extends Controller
         ob_end_clean();
         $type = "png";
         $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
-
+        $image = base64_decode($imgresize);
         $data_single = $eventUserData['email'];
         //subject, content, title,email       
                 
