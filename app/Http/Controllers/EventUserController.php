@@ -194,7 +194,7 @@ class EventUserController extends Controller
         $page = ob_get_contents();
         ob_end_clean();
         $type = "png";
-        $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+        $qr = ["image" => 'data:image/' . $type . ';base64,' . base64_encode($page)]; 
         $image = base64_decode($qr);
         $email = $eventUserData['email'];
         //subject, content, title,email       
