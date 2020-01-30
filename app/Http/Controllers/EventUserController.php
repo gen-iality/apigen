@@ -186,25 +186,28 @@ class EventUserController extends Controller
         } catch (\Exception $e) {
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-
-        //generate QR
+return $response;
+        //generate
         ob_start(); 
-        $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
-        $qr = base64_encode($qr);
-        $page = ob_get_contents();
-        ob_end_clean();
-        $type = "png";
-        $qr = ["image" => 'data:image/' . $type . ';base64,' . base64_encode($page)]; 
-        
+            $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
+            $qr = base64_encode($qr);
+            $page = ob_get_contents();
+            ob_end_clean();
+            $type = "png";
+            $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+            
+            $qr = ["image" => base64_decode($image)];
         $email = $eventUserData['email'];
+        $eventUserData['image'] = $image;
         //subject, content, title,email       
-                
-        Mail::send("Public.ViewEvent.Partials.Qr",$qr , function ($message) use ($qr,$email){
-            $message->to($email,"Asistente")
-            ->subject("asuntoxx","");
-        });
+        return view("Public.ViewEvent.Partials.Qr",$image);        
+       
+       // Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
+       //     $message->to($email,"Asistente")
+       //     ->subject("asuntoxx","");
+       //     ->attachData(base64_decode($image))
+       // });
         
-        return  $response;
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
