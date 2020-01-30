@@ -9,6 +9,7 @@ use App\Event;
 use App\State;
 use App\Account;
 use App\Attendee;
+use App\ActivityCategories;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
@@ -160,6 +161,11 @@ class EventUserController extends Controller
                 "nombres" => $eventUserData["nombres"]
             ];
     
+            
+            $datafromform["event_id"] = $event_id;
+            $result = new ActivityCategories($datafromform);
+            $result->save();
+            return $result;
 
             try {
                 //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
