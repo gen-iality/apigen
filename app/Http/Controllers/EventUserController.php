@@ -189,12 +189,21 @@ class EventUserController extends Controller
 
         //generate QR
         ob_start(); 
-        QRCode::text($eventUserData['cedula'] )
-        ->setSize(8)
-        ->setMargin(4)
-        ->png();
+        $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
+        $qr = base64_encode($qr);
         $page = ob_get_contents();
         ob_end_clean();
+        $type = "png";
+        $qr = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+
+        $data_single = $eventUserData['email'];
+        //subject, content, title,email       
+                
+            Mail::send($qr,$eventUserData , function ($message) use ($eventUserData,$data_single){
+                $message->to($data_single,"Asistente")
+                ->subject("asuntoxx","");
+            });
+        return view('Public.ViewEvent.Partials.ContentNotification', $data);
 
         return  $response.response($page, 200)->header('Content-Type', 'image/png');
     }
