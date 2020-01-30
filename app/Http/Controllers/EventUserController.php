@@ -139,7 +139,7 @@ class EventUserController extends Controller
                         if(isset($minimun_value["text"])){
                             $eventUserData["nombres"] = $minimun_value["text"] ;
                         }elseif(isset($minimun_value["number"])){
-                            $eventUserData["telefono"] = $minimun_value["number"] ;
+                            $eventUserData["cedula"] = $minimun_value["number"] ;
                           
                         }elseif(isset($minimun_value["phone_number"])){
                             $eventUserData["celular"] = $minimun_value["phone_number"] ;
@@ -155,7 +155,7 @@ class EventUserController extends Controller
             $eventUserData["properties"] = [
                 "email" => $eventUserData["email"],
                 "correo" => $eventUserData["correo"],
-                "celular" => $eventUserData["celular"],
+                "cedula" => $eventUserData["cedula"],
                 "telefono" => $eventUserData["telefono"],
             ];
     
