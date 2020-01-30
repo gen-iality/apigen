@@ -133,40 +133,39 @@ class EventUserController extends Controller
             //a estar dentro de un hijo llamado properties
             $datafromform = $request->json()->all();
 
-            foreach ($datafromform["answers"] as $answer) {
-                foreach ($answer as $single_answer){
-                    foreach ($single_answer as $minimun_value){
-                        if(isset($minimun_value["text"])){
-                            $eventUserData["nombres"] = $minimun_value["text"] ;
-                        }elseif(isset($minimun_value["number"])){
-                            $eventUserData["telefono"] = $minimun_value["number"] ;
-                          
-                        }elseif(isset($minimun_value["phone_number"])){
-                            $eventUserData["celular"] = $minimun_value["phone_number"] ;
-                            
-                        }elseif(isset($minimun_value["email"])){
-                            $eventUserData["email"] = $minimun_value["email"] ;
-                            $eventUserData["correo"] = $minimun_value["email"] ;
-                        break;
-                        }
-
-                    }
-                }
-            }
-            $eventUserData["properties"] = [
-                "email" => $eventUserData["email"],
-                "correo" => $eventUserData["correo"],
-                "celular" => $eventUserData["celular"],
-                "telefono" => $eventUserData["telefono"],
-                "nombres" => $eventUserData["nombres"]
-            ];
+            //foreach ($datafromform["answers"] as $answer) {
+             //   foreach ($answer as $single_answer){
+             //       foreach ($single_answer as $minimun_value){
+             //           if(isset($minimun_value["text"])){
+             //               $eventUserData["nombres"] = $minimun_value["text"] ;
+             //           }elseif(isset($minimun_value["number"])){
+             //               $eventUserData["telefono"] = $minimun_value["number"] ;
+             //             
+             //           }elseif(isset($minimun_value["phone_number"])){
+             //               $eventUserData["celular"] = $minimun_value["phone_number"] ;
+             //               
+             //           }elseif(isset($minimun_value["email"])){
+             //               $eventUserData["email"] = $minimun_value["email"] ;
+             //               $eventUserData["correo"] = $minimun_value["email"] ;
+             //           break;
+             //           }
+//
+             //       }
+             //   }
+            //}
+            //$eventUserData["properties"] = [
+            //    "email" => $eventUserData["email"],
+            //    "correo" => $eventUserData["correo"],
+            //    "celular" => $eventUserData["celular"],
+            //    "telefono" => $eventUserData["telefono"],
+            //];
     
             
             $datafromform["event_id"] = $event_id;
             $result = new ActivityAssistants($datafromform);
             $result->save();
             return $result;
-
+die;
             try {
                 //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
                 //a estar dentro de un hijo llamado properties
