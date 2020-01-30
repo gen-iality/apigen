@@ -132,42 +132,83 @@ class EventUserController extends Controller
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $datafromform = $request->json()->all();
-            $datafromform["event_id"] = $event_id;
-            $result = new ActivityAssistants($datafromform);
-            $result->save();
-            return $result;
-die;
-    //            
-// foreach ($datafromform["answers"] as $answer) {
-             //   foreach ($answer as $single_answer){
-             //       foreach ($single_answer as $minimun_value){
-             //           if(isset($minimun_value["text"])){
-             //               $eventUserData["nombres"] = $minimun_value["text"] ;
-             //           }elseif(isset($minimun_value["number"])){
-             //               $eventUserData["telefono"] = $minimun_value["number"] ;
-             //             
-             //           }elseif(isset($minimun_value["phone_number"])){
-             //               $eventUserData["celular"] = $minimun_value["phone_number"] ;
-             //               
-             //           }elseif(isset($minimun_value["email"])){
-             //               $eventUserData["email"] = $minimun_value["email"] ;
-             //               $eventUserData["correo"] = $minimun_value["email"] ;
-             //           break;
-             //           }
-//
-             //       }
-             //   }
-            //}
-            //$eventUserData["properties"] = [
-            //    "email" => $eventUserData["email"],
-            //    "correo" => $eventUserData["correo"],
-            //    "celular" => $eventUserData["celular"],
-            //    "telefono" => $eventUserData["telefono"],
-            //];
+
+            foreach ($datafromform["answers"] as $answer) {
+                foreach ($answer as $single_answer){
+                    foreach ($single_answer as $minimun_value){
+                        if(isset($minimun_value["text"])){
+                            $eventUserData["nombres"] = $minimun_value["text"] ;
+                        }elseif(isset($minimun_value["number"])){
+                            $eventUserData["telefono"] = $minimun_value["number"] ;
+                          
+                        }elseif(isset($minimun_value["phone_number"])){
+                            $eventUserData["celular"] = $minimun_value["phone_number"] ;
+                            
+                        }elseif(isset($minimun_value["email"])){
+                            $eventUserData["email"] = $minimun_value["email"] ;
+                            $eventUserData["correo"] = $minimun_value["email"] ;
+                        break;
+                        }
+                    }
+                }
+            }
+            $eventUserData["properties"] = [
+                "email" => $eventUserData["email"],
+                "correo" => $eventUserData["correo"],
+                "celular" => $eventUserData["celular"],
+                "telefono" => $eventUserData["telefono"],
+            ];
     
-            
-            
           
+
+            try {
+                //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
+                //a estar dentro de un hijo llamado properties
+            
+    
+                $field = Event::find($event_id);
+                $user_properties = $field->user_properties;
+    
+                $userData = $eventUserData;
+    
+                if (isset($eventUserData['properties'])) {
+                    $userData = $eventUserData['properties'];
+                }
+                $validations = [
+                    'email' => 'required|email',
+                    'other_fields' => 'sometimes',
+                ];
+                
+                foreach ($user_properties as $user_property){
+                    if($user_property['mandatory'] !== true)continue;
+                        $field = $user_property['name'];
+                        $validations [$field] = 'required';
+                    }
+    
+                //este validador pronto se va a su clase de validacion
+                $validator = Validator::make(
+                    $userData, 
+                    $validations
+                );
+    
+                if ($validator->fails()) {
+                    return response(
+                        $validator->errors(),
+                        422
+                    );
+                }
+                
+                $event = Event::find($event_id);
+                $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+                
+                $response = new EventUserResource($result->data);
+                $response->additional(['status' => $result->status, 'message' => $result->message]);
+            } catch (\Exception $e) {
+    
+                $response = response()->json((object) ["message" => $e->getMessage()], 500);
+            }
+            return $response;
+    die;
 
         $eventUserData['state_id'] = '5b0efc411d18160bce9bc706';
         $eventUserData['rol_id'] = '5afaf644500a7104f77189cd';
@@ -230,7 +271,7 @@ die;
        // }
        // return 1;
         
-       /* ob_start(); 
+        ob_start(); 
             $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
             $qr = base64_encode($qr);
             $page = ob_get_contents();
@@ -243,7 +284,7 @@ die;
         $eventUserData['image'] = $image;
    
 
-       */
+       
      //   Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
        //     $message->to($email,"Asistente")
        //     ->subject("asuntoxx","");
