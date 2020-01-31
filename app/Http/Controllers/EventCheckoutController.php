@@ -244,7 +244,7 @@ class EventCheckoutController extends Controller
             $eventAccount = $event->account;
             $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
             //$activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
-            $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
+            $paymentGateway = $activeAccountPaymentGateway && $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
         /* Método para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
