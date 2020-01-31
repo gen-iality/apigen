@@ -84,7 +84,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->png();
             */
                 ob_start(); 
-                QRCode::text($eventuser_id)
+                QRCode::text($this->$eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->png();
