@@ -88,11 +88,17 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->setSize(8)
                 ->setMargin(4)
                 ->png();
-                $image = ob_get_contents();                
+                $qr = base64_encode($qr);
+                $page = ob_get_contents();
+                ob_end_clean();
+                $type = "png";
+                $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);     
+                
 
             //$img = Storage::get("public/" . $file);
 
-            $url = $gfService->storeFile($image, $file);
+            $url = $gfService->storeFile($image, "qr".$this->eventuser_id);
+
             $this->qr = (string) $url;
             Log::debug("QR link: ".$url);
             //$img = Storage::delete("public/".$file);
