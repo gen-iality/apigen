@@ -215,20 +215,18 @@ class EventUserController extends Controller
                     422
                 );
             }
-            var_dump($datafromform);
-            var_dump($userData);
         
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $userData, $userData);
             
             $response = new EventUserResource($result->data);
-            var_dump($result->data);
+            
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        
+        $email = "pablo.trivino@mocionsoft.com";
          Mail::to($email)
          ->send(
              new BookingConfirmed($result->data)
