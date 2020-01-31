@@ -11,6 +11,7 @@ use App\State;
 use App\Account;
 use App\Attendee;
 use App\ActivityAssistants;
+use App\Mail\BookingConfirmed;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EventAttendeesController;
 use Illuminate\Http\Response;
