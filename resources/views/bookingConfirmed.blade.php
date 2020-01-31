@@ -1,4 +1,5 @@
 @component('mail::message')
+<img src="images/skandialogo.jpeg" />
 
 {{$event->name}}
 
@@ -15,7 +16,7 @@
     </span>
 </div>
 <br />
-<img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}">
+<!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 <img src="{{$qr}}" />
 
 @component('mail::table')
