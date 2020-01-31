@@ -220,7 +220,7 @@ class EventUserController extends Controller
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        $email = $datafromform['telefono'];
+        $email = $datafromform['email'];
          Mail::to($email)
          ->send(
              new BookingConfirmed($result->data)
