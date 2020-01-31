@@ -129,151 +129,86 @@ class EventUserController extends Controller
     public function createUserViaUrl(Request $request, string $event_id)    
     {
         
+    //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
+    //a estar dentro de un hijo llamado properties
+    $datafromform = $request->json()->all();
+
+    foreach ($datafromform["answers"] as $answer){
+            foreach ($answer as $minimun_value){
+                switch($minimun_value["type"]){
+                    case "text": 
+                        $datafromform['nombres'] = $minimun_value["text"];
+                        break;
+                    case "number":
+                        $datafromform['cedula'] = $minimun_value["number"];
+                        $datafromform['password'] = $minimun_value["number"];
+                        break;
+                    case "phone_number":
+                        $datafromform['telefono'] = $minimun_value["phone_number"];
+                        
+                        break;
+                    case "email":
+                        $datafromform['email'] = $minimun_value["textemail"];
+                        $datafromform['correo'] = $minimun_value["textemail"];
+                        
+                        break;
+    
+                }
+
+            
+        }
+    }
+    echo var_dump($datafromform);die;
+        try {
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $datafromform = $request->json()->all();
 
-            foreach ($datafromform["answers"] as $answer) {
-                foreach ($answer as $single_answer){
-                    foreach ($single_answer as $minimun_value){
-                        if(isset($minimun_value["text"])){
-                            $eventUserData["nombres"] = $minimun_value["text"] ;
-                        }elseif(isset($minimun_value["number"])){
-                            $eventUserData["cedula"] = $minimun_value["number"] ;
-                          
-                        }elseif(isset($minimun_value["phone_number"])){
-                            $eventUserData["celular"] = $minimun_value["phone_number"] ;
-                            
-                        }elseif(isset($minimun_value["email"])){
-                            $eventUserData["email"] = $minimun_value["email"] ;
-                            $eventUserData["correo"] = $minimun_value["email"] ;
-                        break;
-                        }
-                    }
-                }
+            $field = Event::find($event_id);
+            $user_properties = $field->user_properties;
+
+            $userData = $datafromform;
+
+            if (isset($datafromform['properties'])) {
+                $userData = $datafromform['properties'];
             }
-            $eventUserData["properties"] = [
-                "email" => $eventUserData["email"],
-                "correo" => $eventUserData["correo"],
-                "cedula" => $eventUserData["cedula"],
-                "celular" => $eventUserData["celular"],
-                "nombres" => $eventUserData["nombres"]
+            $validations = [
+                'email' => 'required|email',
+                'other_fields' => 'sometimes',
             ];
-    
-          
+            foreach ($user_properties as $user_property){
 
-            try {
-                //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
-                //a estar dentro de un hijo llamado properties
-            
-    
-                $field = Event::find($event_id);
-                $user_properties = $field->user_properties;
-    
-                $userData = $eventUserData;
-    
-                if (isset($eventUserData['properties'])) {
-                    $userData = $eventUserData['properties'];
+                if($user_property['mandatory'] !== true)continue;
+                    $field = $user_property['name'];
+                    $validations [$field] = 'required';
                 }
-                $validations = [
-                    'email' => 'required|email',
-                    'other_fields' => 'sometimes',
-                ];
-                
-                foreach ($user_properties as $user_property){
-                    if($user_property['mandatory'] !== true)continue;
-                        $field = $user_property['name'];
-                        $validations [$field] = 'required';
-                    }
-    
-                //este validador pronto se va a su clase de validacion
-                $validator = Validator::make(
-                    $userData, 
-                    $validations
+
+            //este validador pronto se va a su clase de validacion
+            $validator = Validator::make(
+                $userData, 
+                $validations
+            );
+
+            if ($validator->fails()) {
+                return response(
+                    $validator->errors(),
+                    422
                 );
-    
-                if ($validator->fails()) {
-                    return response(
-                        $validator->errors(),
-                        422
-                    );
-                }
-                
-                $event = Event::find($event_id);
-                $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-                
-                $response = new EventUserResource($result->data);
-                $response->additional(['status' => $result->status, 'message' => $result->message]);
-            } catch (\Exception $e) {
-    
-                $response = response()->json((object) ["message" => $e->getMessage()], 500);
             }
-            return $response;
-    die;
+            
+            $event = Event::find($event_id);
+            $result = UserEventService::importUserEvent($event, $datafromform, $userData);
+            
+            $response = new EventUserResource($result->data);
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
 
-        $eventUserData['state_id'] = '5b0efc411d18160bce9bc706';
-        $eventUserData['rol_id'] = '5afaf644500a7104f77189cd';
-        $eventUserData['account_id'] = '5e3055b3d74d5c4967786c84';
-        $eventUserData['private_reference_number'] = '759093183';
-        $eventUserData['rol'] = 'ASISTENTE';
-        $eventUserData['checked_in'] = false;
-        $eventUserData['event_id'] = $event_id;
-        $eventUserData['cedula'] = $request->input('cedula');
-        $eventUserData['nombres'] = $request->input('nombres');
-        $eventUserData['correo'] = $request->input('correo');
-        $eventUserData['regional'] = $request->input('regional');
-        $eventUserData['municipio'] = $request->input('municipio');
-        $eventUserData['email'] = $request->input('email');
-        $eventUserData['password'] = $request->input('password');
-        $properties_array = [
-            "cedula" => $eventUserData['cedula'],
-            "nombres" => $eventUserData['nombres'], 
-            "correo" => $eventUserData['correo'], 
-            "regional" => $eventUserData['regional'], 
-            "municipio" => $eventUserData['municipio'], 
-            "email" => $eventUserData['email'], 
-            "password" => $eventUserData['password']
-        ];
-        $eventUserData['properties'] = $properties_array;
-   //
-       // try {
-     //
-       //     $field = Event::find($event_id);
-       //     $user_properties = $field->user_properties;
-//
-       //     if (isset($eventUserData['properties'])) {
-       //         $userData = $eventUserData['properties'];
-       //     }
-       //     $validations = [
-       //         'email' => 'required|email',
-       //         'other_fields' => 'sometimes',
-       //     ];
-       //     foreach ($user_properties as $user_property){
-//
-       //         if($user_property['mandatory'] !== true)continue;
-       //             $field = $user_property['name'];
-       //             $validations [$field] = 'required';
-       //         }
-//
-       //     //este validador pronto se va a su clase de validacion
-       //     $validator = Validator::make(
-       //         $userData, 
-       //         $validations
-       //     );
-       // 
-       //     $event = Event::find($event_id);
-       //    
-       //     $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-     //
-       //     $response = new EventUserResource($result->data);
-       //     $response->additional(['status' => $result->status, 'message' => $result->message]);
-       // } catch (\Exception $e) {
-       //     $response = response()->json((object) ["message" => $e->getMessage()], 500);
-       // }
-       // return 1;
-        
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
+        return $response;
+
         ob_start(); 
-            $qr = QrCode::text($eventUserData['cedula'])->setSize(8)->png();
+            $qr = QrCode::text($datafromform['cedula'])->setSize(8)->png();
             $qr = base64_encode($qr);
             $page = ob_get_contents();
             ob_end_clean();
@@ -281,17 +216,13 @@ class EventUserController extends Controller
             $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
             
             $qr = ["image" => base64_decode($image)];
-        $email = $eventUserData['email'];
-        $eventUserData['image'] = $image;
+        $email = $datafromform['email'];
+        $datafromform['image'] = $image;
    
-
-       
-     //   Mail::send("Public.ViewEvent.Partials.Qr", $eventUserData, function ($message) use ($qr,$image,$email){
-       //     $message->to($email,"Asistente")
-       //     ->subject("asuntoxx","");
-       //     ->attachData(base64_decode($image))
-       // });
-        
+        Mail::send("Public.ViewEvent.Partials.SuggestedSchedule",$data , function ($message) use ($useremail,$activityname){    
+            $message->to($useremail,"Asistente")
+            ->subject("Encuesta de satisfacción MEC 2019","");
+        });     
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
