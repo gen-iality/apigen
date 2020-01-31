@@ -132,38 +132,47 @@ class EventUserController extends Controller
     //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
     //a estar dentro de un hijo llamado properties
     $datafromform = $request->json()->all();
+    //echo var_dump($datafromform["form_response"]['answers']);die;
 
-    foreach ($datafromform["answers"] as $answer){
-            foreach ($answer as $minimun_value){
-                switch($minimun_value["type"]){
+        foreach ($datafromform["form_response"]['answers'] as $answer){
+            
+                switch($answer["type"]){
                     case "text": 
-                        $datafromform['nombres'] = $minimun_value["text"];
-                        break;
+                        $datafromform['nombres'] = $answer[$answer["type"]];
+                        echo $datafromform['nombres'];
+                    break;
                     case "number":
-                        $datafromform['cedula'] = $minimun_value["number"];
-                        $datafromform['password'] = $minimun_value["number"];
-                        break;
+                        $datafromform['cedula'] = $answer[$answer["type"]];
+                        $datafromform['password'] = strval($answer[$answer["type"]]);
+                        echo $datafromform['cedula'].$datafromform['password'];
+                    break;
                     case "phone_number":
-                        $datafromform['telefono'] = $minimun_value["phone_number"];
-                        
+                        $datafromform['telefono'] = strval($answer[$answer["type"]]);
+                        echo $datafromform['telefono'];
                         break;
                     case "email":
-                        $datafromform['email'] = $minimun_value["textemail"];
-                        $datafromform['correo'] = $minimun_value["textemail"];
-                        
+                        $datafromform['email'] = $answer[$answer["type"]];
+                        $datafromform['correo'] = $answer[$answer["type"]];
+                        echo $datafromform['email'].$datafromform['correo'] ;
                         break;
     
                 }
 
             
-        }
+    
     }
-    echo var_dump($datafromform);die;
+        $datafromform['properties'] = [
+            'telefono' => $datafromform['telefono'],
+            'email' => $datafromform['email'],
+            'correo' => $datafromform['correo'],
+            'cedula' => $datafromform['cedula'],
+            'password' => $datafromform['password'],
+            'nombres' => $datafromform['nombres']
+        ];
         try {
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
-            $datafromform = $request->json()->all();
-
+            
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
