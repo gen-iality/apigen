@@ -82,9 +82,9 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->setMargin(4)
                 ->setOutfile($fullpath)
                 ->png();
-*/
+            */
                 ob_start(); 
-                QRCode::text($id)
+                QRCode::text($ticket_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->png();
