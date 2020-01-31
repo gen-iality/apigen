@@ -11,6 +11,7 @@ use App\Account;
 use App\Attendee;
 use App\ActivityAssistants;
 use Illuminate\Http\Request;
+use App\Http\Controllers\EventAttendeesController;
 use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
 use App\Http\Requests\EventUserRequest;
@@ -159,14 +160,25 @@ class EventUserController extends Controller
                 }
 
     }
+    ob_start(); 
+    $qr = QrCode::text($datafromform['cedula'])->setSize(8)->png();
+    $qr = base64_encode($qr);
+    $page = ob_get_contents();
+    ob_end_clean();
+    $type = "png";
+    $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);
+    
         $datafromform['properties'] = [
             'telefono' => strval($datafromform['telefono']),
             'email' => $datafromform['email'],
             'correo' => $datafromform['correo'],
             'cedula' => strval($datafromform['cedula']),
             'password' => strval($datafromform['password']),
-            'nombres' => $datafromform['nombres']
+            'nombres' => $datafromform['nombres'],
+            'qr' => $qr
         ];
+        $datafromform["qr"] = $qr;
+        
         try {
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
@@ -204,7 +216,7 @@ class EventUserController extends Controller
             }
             var_dump($datafromform);
             var_dump($userData);
-            
+        
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $userData, $userData);
             
@@ -214,24 +226,9 @@ class EventUserController extends Controller
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        return $response;
-//
-        //ob_start(); 
-        //    $qr = QrCode::text($datafromform['cedula'])->setSize(8)->png();
-        //    $qr = base64_encode($qr);
-        //    $page = ob_get_contents();
-        //    ob_end_clean();
-        //    $type = "png";
-        //    $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
-        //    
-        //    $qr = ["image" => base64_decode($image)];
-        //$email = $datafromform['email'];
-        //$datafromform['image'] = $image;
-   //
-        //Mail::send("Public.ViewEvent.Partials.SuggestedSchedule",$data , function ($message) use ($useremail,$activityname){    
-        //    $message->to($useremail,"Asistente")
-        //    ->subject("Encuesta de satisfacción MEC 2019","");
-        //});     
+    // Envío del email
+    EventAttendeesController::postResendTicketToAttendee($datafromform, $response->_id);
+     return $response;
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
