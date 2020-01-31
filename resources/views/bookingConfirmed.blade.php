@@ -1,6 +1,6 @@
 @component('mail::message')
 {{$event->name}}
-
+<img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/WhatsApp%20Image%202020-01-31%20at%204.38.14%20PM.jpeg?alt=media&token=6525767f-1c97-4cce-85d1-ecdc8277cea9">
  <!-- ![Evius]({{$logo}}) -->
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
@@ -16,6 +16,7 @@
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 <img src="{{$qr}}" />
+
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |
