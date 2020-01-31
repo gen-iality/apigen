@@ -142,7 +142,7 @@ class EventUserController extends Controller
                         echo $datafromform['nombres'];
                     break;
                     case "number":
-                        $datafromform['cedula'] = $answer[$answer["type"]];
+                        $datafromform['cedula'] = strval($answer[$answer["type"]]);
                         $datafromform['password'] = strval($answer[$answer["type"]]);
                         echo $datafromform['cedula'].$datafromform['password'];
                     break;
@@ -160,11 +160,11 @@ class EventUserController extends Controller
 
     }
         $datafromform['properties'] = [
-            'telefono' => $datafromform['telefono'],
+            'telefono' => strval($datafromform['telefono']),
             'email' => $datafromform['email'],
             'correo' => $datafromform['correo'],
-            'cedula' => $datafromform['cedula'],
-            'password' => $datafromform['password'],
+            'cedula' => strval($datafromform['cedula']),
+            'password' => strval($datafromform['password']),
             'nombres' => $datafromform['nombres']
         ];
         try {
@@ -202,6 +202,7 @@ class EventUserController extends Controller
                     422
                 );
             }
+            echo var_dump($datafromform).var_dump($userData);
             
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $datafromform, $userData);
