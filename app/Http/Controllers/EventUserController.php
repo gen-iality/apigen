@@ -158,8 +158,6 @@ class EventUserController extends Controller
     
                 }
 
-            
-    
     }
         $datafromform['properties'] = [
             'telefono' => $datafromform['telefono'],
@@ -215,23 +213,23 @@ class EventUserController extends Controller
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         return $response;
-
-        ob_start(); 
-            $qr = QrCode::text($datafromform['cedula'])->setSize(8)->png();
-            $qr = base64_encode($qr);
-            $page = ob_get_contents();
-            ob_end_clean();
-            $type = "png";
-            $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
-            
-            $qr = ["image" => base64_decode($image)];
-        $email = $datafromform['email'];
-        $datafromform['image'] = $image;
-   
-        Mail::send("Public.ViewEvent.Partials.SuggestedSchedule",$data , function ($message) use ($useremail,$activityname){    
-            $message->to($useremail,"Asistente")
-            ->subject("Encuesta de satisfacción MEC 2019","");
-        });     
+//
+        //ob_start(); 
+        //    $qr = QrCode::text($datafromform['cedula'])->setSize(8)->png();
+        //    $qr = base64_encode($qr);
+        //    $page = ob_get_contents();
+        //    ob_end_clean();
+        //    $type = "png";
+        //    $image = 'data:image/' . $type . ';base64,' . base64_encode($page); 
+        //    
+        //    $qr = ["image" => base64_decode($image)];
+        //$email = $datafromform['email'];
+        //$datafromform['image'] = $image;
+   //
+        //Mail::send("Public.ViewEvent.Partials.SuggestedSchedule",$data , function ($message) use ($useremail,$activityname){    
+        //    $message->to($useremail,"Asistente")
+        //    ->subject("Encuesta de satisfacción MEC 2019","");
+        //});     
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
