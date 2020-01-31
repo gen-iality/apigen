@@ -158,7 +158,7 @@ Route::group(
 // pero sin producir ningun tipo de errores.
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
-Route::apiResource('events', 'EventController', ['only' => ['index', 'show']]);
+Route::apiResource('events', 'EventController');
 //Route::get("eventsearch",'EventController');
 //     }
 // );
