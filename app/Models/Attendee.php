@@ -108,7 +108,7 @@ class Attendee extends MyBaseModel
      */
     public function getReferenceAttribute()
     {
-        return $this->order->order_reference . '-' . $this->reference_index;
+        return ($this->order)?$this->order->order_reference . '-' . $this->reference_index:"ticket-".$this->id;
     }
 
     /**
