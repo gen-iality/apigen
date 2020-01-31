@@ -229,13 +229,12 @@ class EventUserController extends Controller
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         
-        $this->dispatch(new SendAttendeeTicket($result->data));
-        
-         return response()->json([
-             'status'  => 'success',
-             'message' => trans("Controllers.ticket_successfully_resent"),
-         ]);
-    return $response;
+         Mail::to($email)
+         ->send(
+             new BookingConfirmed($result->data)
+         );
+
+         return $response;
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
