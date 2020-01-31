@@ -1,5 +1,5 @@
 @component('mail::message')
-
+<img src="images/skandialogo.jpeg" />
 {{$event->name}}
 
  <!-- ![Evius]({{$logo}}) -->
