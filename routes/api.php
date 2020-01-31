@@ -66,7 +66,7 @@ Route::get ('events/{event_id}/eventusers',      'EventUserController@index');
 Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
-Route::get('events/{event_id}/eventusersbyurl',      'EventUserController@createUserViaUrl');
+Route::post('events/{event_id}/eventusersbyurl',      'EventUserController@createUserViaUrl');
 Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
 
 
@@ -424,3 +424,4 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
  */
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
+Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
