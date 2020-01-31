@@ -84,7 +84,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->png();
             */
                 ob_start(); 
-                QRCode::text($this->eventuser_id)
+                $qr = QRCode::text($this->eventuser_id)
                 ->setSize(8)
                 ->setMargin(4)
                 ->png();
@@ -92,7 +92,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 $page = ob_get_contents();
                 ob_end_clean();
                 $type = "png";
-                $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);     
+                $image = 'data:image/' . $type . ';base64,' . base64_encode($page);     
                 
 
             //$img = Storage::get("public/" . $file);
