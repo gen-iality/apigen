@@ -162,13 +162,7 @@ class EventUserController extends Controller
                 }
 
     }
-    ob_start(); 
-    $qr = QrCode::text($datafromform['cedula'])->setSize(8)->png();
-    $qr = base64_encode($qr);
-    $page = ob_get_contents();
-    ob_end_clean();
-    $type = "png";
-    $qr = 'data:image/' . $type . ';base64,' . base64_encode($page);
+
     
         $datafromform['properties'] = [
             'telefono' => strval($datafromform['telefono']),
@@ -177,9 +171,8 @@ class EventUserController extends Controller
             'cedula' => strval($datafromform['cedula']),
             'password' => strval($datafromform['password']),
             'nombres' => $datafromform['nombres'],
-            'qr' => $qr
         ];
-        $datafromform["qr"] = $qr;
+
         
         try {
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
@@ -227,13 +220,13 @@ class EventUserController extends Controller
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        $email = "pablo.trivino@mocionsoft.com";
+        $email = $datafromform['telefono'];
          Mail::to($email)
          ->send(
              new BookingConfirmed($result->data)
          );
 
-         return $response;
+         return "ok";//$response;
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
