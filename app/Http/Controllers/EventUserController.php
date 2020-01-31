@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use QRCode;
 use Validator;
 use Mail;
+use PDF;
 use App\Event;
 use App\State;
 use App\Account;
@@ -17,6 +18,7 @@ use App\evaLib\Services\FilterQuery;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\evaLib\Services\UserEventService;
+use App\Jobs\SendAttendeeTicket;
 
 
 /**
@@ -129,12 +131,11 @@ class EventUserController extends Controller
 
     public function createUserViaUrl(Request $request, string $event_id)    
     {
-        
-    //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
-    //a estar dentro de un hijo llamado properties
+      //  data-route="https://api.evius.co/es/event/order/5d712f33d74d5c2aef354aa6/resend"
+    //EventAttendeesController::postResendTicketToAttendee($datafromform, $event_id);
+    
     $datafromform = $request->json()->all();
-    //echo var_dump($datafromform["form_response"]['answers']);die;
-
+    
         foreach ($datafromform["form_response"]['answers'] as $answer){
             
                 switch($answer["type"]){
@@ -221,14 +222,20 @@ class EventUserController extends Controller
             $result = UserEventService::importUserEvent($event, $userData, $userData);
             
             $response = new EventUserResource($result->data);
+            var_dump($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-    // Envío del email
-    EventAttendeesController::postResendTicketToAttendee($datafromform, $response->_id);
-     return $response;
+        
+        $this->dispatch(new SendAttendeeTicket($result->data));
+        
+         return response()->json([
+             'status'  => 'success',
+             'message' => trans("Controllers.ticket_successfully_resent"),
+         ]);
+    return $response;
     }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
