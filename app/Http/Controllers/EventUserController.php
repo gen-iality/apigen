@@ -202,10 +202,11 @@ class EventUserController extends Controller
                     422
                 );
             }
-            echo var_dump($datafromform).var_dump($userData);
+            var_dump($datafromform);
+            var_dump($userData);
             
             $event = Event::find($event_id);
-            $result = UserEventService::importUserEvent($event, $datafromform, $userData);
+            $result = UserEventService::importUserEvent($event, $userData, $userData);
             
             $response = new EventUserResource($result->data);
             $response->additional(['status' => $result->status, 'message' => $result->message]);
