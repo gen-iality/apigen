@@ -17,13 +17,12 @@ class ActivitiesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Activities::where("event_id", $event_id)->paginate(config('app.page_size'))
+            Activities::where("event_id", $event_id)->orderBy('datetime_start', 'asc')->paginate(config('app.page_size'))
         );
     }
 
