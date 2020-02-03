@@ -18,7 +18,7 @@
 </div>
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
-<img src="{{$qr}}" />
+<img style="display:block,margin:0 auto" src="{{$qr}}" />
 
 
 @component('mail::table')
