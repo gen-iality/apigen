@@ -1,8 +1,9 @@
 @component('mail::message')
-<div style="display:none">
-{{$event->name}
- </div>
+<div>
+
+
 <img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/WhatsApp%20Image%202020-01-31%20at%204.38.14%20PM.jpeg?alt=media&token=6525767f-1c97-4cce-85d1-ecdc8277cea9">
+</div>
  <!-- ![Evius]({{$logo}}) -->
 
  Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
