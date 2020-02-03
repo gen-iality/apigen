@@ -16,8 +16,8 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 
-<div style=" display: flex, justify-content: center, align-items: center, text-align: center">
-<img style=" display:block, margin:0 50px, text-align: center" src="{{$qr}}" />
+<div style=" display: block;">
+<img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" />
 </div>
 
 @component('mail::table')
