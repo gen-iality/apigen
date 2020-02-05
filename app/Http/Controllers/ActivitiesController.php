@@ -22,19 +22,8 @@ class ActivitiesController extends Controller
     public function index(Request $request, $event_id)
     {
         $data = $request->json()->all();
-
-        $locale = "";
-         
-        if(!empty($data['locale']){
-            $locale= $data['locale'];
-        }
-
-        if(!empty($data['locale']){
-            $locale= $data['locale'];
-        }
-
         //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
-        $res = () && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
 
         if($res=="en"){
             return JsonResource::collection(
