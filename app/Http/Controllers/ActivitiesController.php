@@ -27,10 +27,10 @@ class ActivitiesController extends Controller
 
         if($res=="en"){
             return JsonResource::collection(
-               Activities::where("event_id", $event_id)->where('locale', "en")->paginate(config('app.page_size')));
+               Activities::where("event_id", $event_id)->where('locale', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
         }else{
             return JsonResource::collection(
-                Activities::where("event_id", $event_id)->where('locale', '!=', "en")->paginate(config('app.page_size')));
+                Activities::where("event_id", $event_id)->where('locale', '!=', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
         }
     }
 
