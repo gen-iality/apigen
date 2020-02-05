@@ -74,6 +74,7 @@ class Activities extends Moloquent
         "event_id",
         "acitivity_users",
         "capacity",
+        "duplicate",
         "locale",
         "locale_original",
         "remaining_capacity",

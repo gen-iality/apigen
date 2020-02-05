@@ -45,7 +45,7 @@ class ActivitiesController extends Controller
         $data["event_id"] = $event_id;
         
         $activity = new Activities($data);     
-        $activity->save();       
+        $activity->save();
 
         if(isset($data["activity_categories_ids"])){
             $activity_categories_ids = $data["activity_categories_ids"];
@@ -87,19 +87,20 @@ class ActivitiesController extends Controller
     public function duplicate($event_id, $id)
     {
         $activities_in_es = Activities::findOrFail($id);
-
+        $Activities = Activities::findOrFail($id);
+        $data['duplicate'] = true;
+        $Activities->fill($data);
+        $Activities->save();     
+       
         if(!empty($activities_in_es->locale_original)){
             return "actividad ya duplicada";
         }
-
-    
         $activities_in_es->get();
         $activities_in_en = json_decode(json_encode($activities_in_es),true);
         $activities_in_en["locale"] = "en";
-        
         $activities_in_en["locale_original"] = $activities_in_en['_id'];
         $activity = new Activities($activities_in_en);
-        $activity->save(); 
+        $activity->save();
         return $activity;
     }
     /**
