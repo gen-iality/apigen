@@ -86,15 +86,19 @@ class ActivitiesController extends Controller
     
     public function duplicate($event_id, $id)
     {
-        $activities_in_es = Activities::findOrFail($id)->get();
-        if(empty($activities_in_es->locale_original)){
+        $activities_in_es = Activities::findOrFail($id);
+
+        if(!empty($activities_in_es->locale_original)){
             return "actividad ya duplicada";
-
         }
-        $activities_in_es->locale = "en";
-        $activities_in_es->locale_original = $activities_in_es->_id;
 
-        $activity = new Activities($activities_in_es);
+    
+        $activities_in_es->get();
+        $activities_in_en = json_decode(json_encode($activities_in_es),true);
+        $activities_in_en["locale"] = "en";
+        
+        $activities_in_en["locale_original"] = $activities_in_en['_id'];
+        $activity = new Activities($activities_in_en);
         $activity->save(); 
         return $activity;
     }
