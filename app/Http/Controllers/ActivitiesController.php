@@ -21,9 +21,17 @@ class ActivitiesController extends Controller
      */
     public function index(Request $request, $event_id)
     {
-        return JsonResource::collection(
-            Activities::where("event_id", $event_id)->orderBy('datetime_start', 'asc')->paginate(config('app.page_size'))
-        );
+        $data = $request->json()->all();
+        //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
+        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+
+        if($res=="en"){
+            return JsonResource::collection(
+               Activities::where("event_id", $event_id)->where('locale', "en")->paginate(config('app.page_size')));
+        }else{
+            return JsonResource::collection(
+                Activities::where("event_id", $event_id)->where('locale', '!=', "en")->paginate(config('app.page_size')));
+        }
     }
 
     /**
