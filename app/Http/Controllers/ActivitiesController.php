@@ -22,8 +22,19 @@ class ActivitiesController extends Controller
     public function index(Request $request, $event_id)
     {
         $data = $request->json()->all();
+
+        $locale = "";
+         
+        if(!empty($data['locale']){
+            $locale= $data['locale'];
+        }
+
+        if(!empty($data['locale']){
+            $locale= $data['locale'];
+        }
+
         //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
-        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+        $res = () && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
 
         if($res=="en"){
             return JsonResource::collection(
@@ -80,8 +91,23 @@ class ActivitiesController extends Controller
      */
     public function show($event_id, $id)
     {
-        $Activities = Activities::findOrFail($id);
-        return $Activities;
+        $activity = Activities::findOrFail($id);
+        return $activity;
+    }
+    
+    public function duplicate($event_id, $id)
+    {
+        $activities_in_es = Activities::findOrFail($id)->get();
+        if(empty($activities_in_es->locale_original)){
+            return "actividad ya duplicada";
+
+        }
+        $activities_in_es->locale = "en";
+        $activities_in_es->locale_original = $activities_in_es->_id;
+
+        $activity = new Activities($activities_in_es);
+        $activity->save(); 
+        return $activity;
     }
     /**
      * Update the specified resource in storage.
