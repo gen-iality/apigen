@@ -12,11 +12,14 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
         desde tu smartphone o si prefieres imprime el archivo
         PDF adjunto.
     </span>
+    
 </div>
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
-<img style="display:block,margin:0 auto" src="{{$qr}}" />
 
+<div style="text-align: center">
+<img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" />
+</div>
 
 @component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |
@@ -26,10 +29,10 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 @component('mail::table')
 | **Fecha Inicio:**            | **Hora:**                                                                       |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:s', strtotime($event->datetime_from)) }} |
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:m:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
 | **Fecha Finalizacion:**            | **Hora:**                                                                 |
-| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:s', strtotime($event->datetime_to)) }} |
+| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:m:s', strtotime($event->datetime_to)) }} |
 
 @endcomponent
 
