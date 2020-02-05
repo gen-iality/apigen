@@ -13,11 +13,19 @@ class SpeakerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(String $event_id)
+    public function index(Request $request, String $event_id)
     {
-        return SpeakerResource::collection(
-            Speaker::where('event_id', $event_id)
-            ->paginate(config('app.page_size')));
+        $data = $request->json()->all();
+        //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
+        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+
+        if($res=="en"){
+            return SpeakerResource::collection(
+                Speaker::where("event_id", $event_id)->where('locale', "en")->paginate(config('app.page_size')));
+        }else{
+            return SpeakerResource::collection(
+                Speaker::where("event_id", $event_id)->where('locale', '!=', "en")->paginate(config('app.page_size')));
+        }
     }
 
     /**
