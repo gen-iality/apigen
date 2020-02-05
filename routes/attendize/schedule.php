@@ -50,7 +50,6 @@ Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsCon
 
 /***************
  * HOST
- * 
  * rutas para guardar la agenda de los eventos
  ****************/
 Route::get   ('events/{event_id}/host',      'HostController@index');
@@ -63,11 +62,8 @@ Route::delete('events/{event_id}/host/{id}', 'HostController@destroy');
 /***************
  * ACTIVITIES
  ****************/
-Route::get   ('events/{event_id}/activities',      'ActivitiesController@index');
-Route::post  ('events/{event_id}/activities',      'ActivitiesController@store');
-Route::get   ('events/{event_id}/activities/{id}', 'ActivitiesController@show');
-Route::put   ('events/{event_id}/activities/{id}', 'ActivitiesController@update');
-Route::delete('events/{event_id}/activities/{id}', 'ActivitiesController@destroy');
+Route::post  ('events/{event_id}/duplicateactivitie',      'ActivitiesController@duplicate');
+Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
 
 
 /***************
@@ -96,6 +92,7 @@ Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesCo
 Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
 Route::post('findbase/findbase/{id}', 'SendContentController@Attendee');
 Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage");
+Route::post("verifyuser","VertifyController@validateUser");
 
 
 /*******************
