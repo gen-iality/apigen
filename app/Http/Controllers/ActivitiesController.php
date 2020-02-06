@@ -92,7 +92,7 @@ class ActivitiesController extends Controller
         $Activities->fill($data);
         $Activities->save();     
        
-        if(!empty($activities_in_es->locale_original)){
+        if(!empty($activities_in_es->duplicate)){
             return "actividad ya duplicada";
         }
         $activities_in_es->get();
