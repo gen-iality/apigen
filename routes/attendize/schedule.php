@@ -52,19 +52,15 @@ Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsCon
  * HOST
  * rutas para guardar la agenda de los eventos
  ****************/
-Route::get   ('events/{event_id}/host',      'HostController@index');
-Route::post  ('events/{event_id}/host',      'HostController@store');
-Route::get   ('events/{event_id}/host/{id}', 'HostController@show');
-Route::put   ('events/{event_id}/host/{id}', 'HostController@update');
-Route::delete('events/{event_id}/host/{id}', 'HostController@destroy');
 
+Route::post  ('events/{event_id}/duplicatehost/{id}','HostController@duplicate');
+Route::apiResource('events/{event_id}/host', 'HostController');
 
 /***************
  * ACTIVITIES
  ****************/
-Route::post  ('events/{event_id}/duplicateactivitie',      'ActivitiesController@duplicate');
+Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
 Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
-
 
 /***************
  * TYPE
@@ -112,5 +108,6 @@ Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotifica
  * FAQ'S
  ******************/
 Route::apiResource('events/{id}/faqs', 'FaqController');
+Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
 
 ?>

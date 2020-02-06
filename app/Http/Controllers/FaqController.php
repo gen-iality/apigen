@@ -55,7 +55,26 @@ class FaqController extends Controller
         $result->save();
         return $result;
     }
-
+    
+    public function duplicate($event_id, $id)
+    {
+        $faq = Faq::findOrFail($id);
+        $faqs_in_es = $faq;
+        $data['duplicate'] = true;
+        $faq->fill($data);
+        $faq->save();
+        //echo "original Faq :".var_dump($faq);
+        if(!empty($faqs_in_es->duplicate)){
+            return "actividad ya duplicada";
+        }
+        $faqs_in_es->get();
+        $faqs_in_en = json_decode(json_encode($faqs_in_es),true);
+        $faqs_in_en["locale"] = "en";
+        $faqs_in_en["locale_original"] = $faqs_in_en['_id'];
+        $new_faq = new Faq($faqs_in_en);
+        $new_faq->save();
+        return $new_faq;
+    }
     /**
      * Display the specified resource.
      *
