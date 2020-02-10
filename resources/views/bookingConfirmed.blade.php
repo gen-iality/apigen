@@ -29,10 +29,10 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 @component('mail::table')
 | **Fecha Inicio:**            | **Hora:**                                                                       |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:m:s', strtotime($event->datetime_from)) }} |
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
 | **Fecha Finalizacion:**            | **Hora:**                                                                 |
-| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:m:s', strtotime($event->datetime_to)) }} |
+| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:i:s', strtotime($event->datetime_to)) }} |
 
 @endcomponent
 
