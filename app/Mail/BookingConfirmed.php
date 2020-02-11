@@ -115,7 +115,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             //     'mime' => 'image/png',
             // ])
             // ->attachData($pdf->download(),'boleta.pdf')
-            ->from("apps@mocionsoft.com", $from)
+            ->from("apps@mocionsoft.com", "Recordatorio")
             ->subject($this->subject)
             ->markdown('bookingConfirmed');
     }
