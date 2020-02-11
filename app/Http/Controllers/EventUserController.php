@@ -237,14 +237,17 @@ class EventUserController extends Controller
         $emails = $eventUserData["emails"];
         $query = json_decode(json_encode($query),true);
         $emailsent = [];
+        $i = 0;
         foreach ($query as $value) {
             $id = $value["_id"];
         
             $attendee = Attendee::find($id);
-            Mail::to($attendee->email)
+            Mail::to("tfrdrummer@gmail.com")
             ->send(new BookingConfirmed($attendee));
             echo "enviado a " .$attendee->email;  
             array_push($emailsent,$attendee->email);
+        $i++;
+        if($i>3){break;}
         }
         return $emailsent;
     }
