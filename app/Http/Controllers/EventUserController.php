@@ -228,6 +228,26 @@ class EventUserController extends Controller
 
          return "ok";//$response;
     }
+
+
+    public function sendQrToUsers(Request $request, string $event_id)
+    {
+        $eventUserData = $request->json()->all();
+        $query = Attendee::where("event_id", $event_id)->get();
+        $emails = $eventUserData["emails"];
+        $query = json_decode(json_encode($query),true);
+        $emailsent = [];
+        foreach ($query as $value) {
+            $id = $value["_id"];
+        
+            $attendee = Attendee::find($id);
+            Mail::to($attendee->email)
+            ->send(new BookingConfirmed($attendee));
+            echo "enviado a " .$attendee->email;  
+            array_push($emailsent,$attendee->email);
+        }
+        return $emailsent;
+    }
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
         try {
