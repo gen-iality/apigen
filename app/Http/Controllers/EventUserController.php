@@ -241,7 +241,7 @@ class EventUserController extends Controller
         foreach ($query as $value) {
             $id = $value["_id"];
             $attendee = Attendee::find($id);
-           if($i>99 && $i<150){
+           if($i>149 && $i<200){
             Mail::to($attendee->email)
             ->send(new BookingConfirmed($attendee));
             echo "<br> enviado a " .$attendee->email;
