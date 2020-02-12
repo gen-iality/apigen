@@ -241,11 +241,13 @@ class EventUserController extends Controller
         foreach ($query as $value) {
             $id = $value["_id"];
             $attendee = Attendee::find($id);
+           if($i<50){
             Mail::to($attendee->email)
             ->send(new BookingConfirmed($attendee));
-            echo "enviado a " .$attendee->email;  
+            echo "<br> enviado a " .$attendee->email;
             array_push($emailsent,$attendee->email);
-        
+           }
+           $i++;
         }
         return $emailsent;
     }
