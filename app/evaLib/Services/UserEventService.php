@@ -147,7 +147,13 @@ class UserEventService
         }
 
 
-
+        $model = Attendee::where($matchAttributes)->first();
+        
+        //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
+        if ($model){
+            //var_dump($model->properties);die;
+            $eventUserFields["properties"] = array_merge($model->properties,$eventUserFields["properties"]);
+        }
         /* guardamos el Attendee o eventUser */
         $eventUser = Attendee::updateOrCreate($matchAttributes, $eventUserFields);
         \Log::debug($matchAttributes);
