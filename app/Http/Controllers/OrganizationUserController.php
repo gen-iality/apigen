@@ -85,8 +85,8 @@ class OrganizationUserController extends Controller
             unset($data['names']);
         }
         
-        $user = Account::where('email', $data['email'])->first();
-        if (!$user){
+        $user = Account::where('email', $data['email'])->first();        
+if (!$user){
         //Buscamos el usuario por email para saber si ya existe o crearlo
         $user = Account::updateOrCreate(['email'=>$data['email']],$data);
         }
@@ -109,7 +109,8 @@ class OrganizationUserController extends Controller
 
         
         $model = OrganizationUser::where('userid', $user->id)->first();
-        
+              
+
         //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
         if ($model){
             //var_dump($model->properties);die;
@@ -117,7 +118,7 @@ class OrganizationUserController extends Controller
         }
 
         
-        $result = OrganizationUser::updateOrCreate($UserOrganization);
+        $result = OrganizationUser::updateOrCreate(["userid"=>$user->id],$UserOrganization);
         //toca hacer esta consulta para traer los datos actualizados updateOrCreate no lo hace
         $model = OrganizationUser::find($result->id);
         
