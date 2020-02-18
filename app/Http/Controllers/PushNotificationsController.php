@@ -43,11 +43,11 @@ class PushNotificationsController extends Controller
         $eventId = $data["event_id"];
         $title = $data["title"];
         $body = $data["body"];
-        $otherdata = $data["data"];
-        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body, 'data' => $otherdata);
+        $route = $data["route"];
+        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body, 'route' => $route);
         $headers = array('Content-Type: application/json');
         $url = config('app.pushdirection')."/pushNotification";
-
+        echo "send to". config('app.pushdirection')."/pushNotification"; 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -71,7 +71,6 @@ class PushNotificationsController extends Controller
         $push->fill($data);
         $push->save();
         return $data;
-
     }
     /**
      * Display the specified resource.
