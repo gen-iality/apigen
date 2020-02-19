@@ -44,7 +44,7 @@ class PushNotificationsController extends Controller
         $title = $data["title"];
         $body = $data["body"];
 //        $route = $data["route"];
-        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body, 'route' => $route);
+        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body);
         $headers = array('Content-Type: application/json');
         $url = config('app.pushdirection')."/pushNotification";
         echo "send to". config('app.pushdirection')."/pushNotification"; 
