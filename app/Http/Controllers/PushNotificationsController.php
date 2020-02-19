@@ -39,21 +39,33 @@ class PushNotificationsController extends Controller
         $saveData = new PushNotification($data);
         
         $saveData->save();
-   
+        
+        if(!empty($data["userId"])){
+            $user_id = $data["userId"];
+        }else{
+            $user_id = "";
+        }
+
+        if(!empty($data["route"])){
+            $route = $data["route"];
+        }else{
+            $route = "HomeScreen";
+        }
+
         $eventId = $data["event_id"];
         $title = $data["title"];
         $body = $data["body"];
-//        $route = $data["route"];
-        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body);
+        $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body , 'route' => $route , 'user_id' => $user_id);
         $headers = array('Content-Type: application/json');
         $url = config('app.pushdirection')."/pushNotification";
         echo "send to". config('app.pushdirection')."/pushNotification"; 
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         
