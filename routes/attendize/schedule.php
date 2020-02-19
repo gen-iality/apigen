@@ -105,6 +105,12 @@ Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotifica
 
 
 /*******************
+ * DOCUMENTS UPLOAD
+ ******************/
+Route::apiResource('events/{event_id}/documents', 'DocumentsController');
+ 
+
+/*******************
  * FAQ'S
  ******************/
 Route::apiResource('events/{id}/faqs', 'FaqController');
