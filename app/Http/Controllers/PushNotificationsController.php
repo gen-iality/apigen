@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Attendee;
 use App\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -40,11 +41,13 @@ class PushNotificationsController extends Controller
         
         $saveData->save();
         
-        if(!empty($data["userId"])){
-            $user_id = $data["userId"];
+        if(!empty($data["userEmail"])){
+            $email = Attendee::where("event_id",$event_id)->where("email",$data["userEmail"])->first();
+            $user_id = $email->id;
         }else{
             $user_id = "";
         }
+        
 
         if(!empty($data["route"])){
             $route = $data["route"];
@@ -58,7 +61,6 @@ class PushNotificationsController extends Controller
         $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body , 'route' => $route , 'user_id' => $user_id);
         $headers = array('Content-Type: application/json');
         $url = config('app.pushdirection')."/pushNotification";
-        echo "send to". config('app.pushdirection')."/pushNotification"; 
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -73,8 +75,6 @@ class PushNotificationsController extends Controller
         curl_close($ch);
         return "enviado".json_decode($result,true);
     }
-
-
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
