@@ -38,12 +38,18 @@ class PushNotificationsController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $saveData = new PushNotification($data);
-        
+        $user_id = [];
         $saveData->save();
         
         if(!empty($data["userEmail"])){
-            $email = Attendee::where("event_id",$event_id)->where("email",$data["userEmail"])->first();
-            $user_id = $email->id;
+            $email = Attendee::where("event_id",$event_id)->where("email",$data["userEmail"])->get();
+            $list = json_decode(json_encode($email),true); 
+            foreach ($list as $value) {
+                array_push($user_id,$value["_id"]);
+            }
+          
+        }elseif (!empty($data["userId"])) {
+            $user_id = $data["userId"];
         }else{
             $user_id = "";
         }
