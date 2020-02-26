@@ -40,20 +40,22 @@ class DocumentsController extends Controller
      */
     public function store(Request $request, $event_id)
     {
+        $data = $request->json()->all();
         if(!empty($data["father_id"])){
             $data = $request->json()->all();
             $data["event_id"] = $event_id;
             $data["state"] = "child";     
             $result = new Documents($data);
                 $result->save();
-                return $result;
-            }
+            return $result;
+        }
 
             $data["event_id"] = $event_id;     
             $data["state"] = "father"; 
+
             $result = new Documents($data);
-                $result->save();
-                return $result;
+            $result->save();
+            return $result;
     }
 
 
