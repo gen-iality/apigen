@@ -136,7 +136,8 @@ class EventUserController extends Controller
     //EventAttendeesController::postResendTicketToAttendee($datafromform, $event_id);
     
     $datafromform = $request->json()->all();
-    
+    $language = $request->input("language");
+
         foreach ($datafromform["form_response"]['answers'] as $answer){
             switch($answer["field"]["id"]){
                 case "UHEADSVyhrBQ": 
@@ -173,7 +174,7 @@ class EventUserController extends Controller
             'company' =>  $datafromform['company'],
             'empresa' =>  $datafromform['empresa'],
             'nombres' => $datafromform['names'],
-            'language' => $datafromform["form_response"]['hidden']['language']
+            'language' => $language
         ];
 
         
