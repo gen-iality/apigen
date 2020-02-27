@@ -1,7 +1,7 @@
 @component('mail::message')
 
 {{$event->description}}
-<img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/WhatsApp%20Image%202020-01-31%20at%204.38.14%20PM.jpeg?alt=media&token=6525767f-1c97-4cce-85d1-ecdc8277cea9">
+<img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/output-onlinepngtools%20(6).png?alt=media&token=106a0f27-a2f8-48f8-a19b-9a936aac420a">
  <!-- ![Evius]({{$logo}}) -->
 Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <div style="text-align: justify">
@@ -12,13 +12,12 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
         desde tu smartphone o si prefieres imprime el archivo
         PDF adjunto.
     </span>
-    
 </div>
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 
 <div style="text-align: center">
-<img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" />
+<!-- <img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" /> -->
 </div>
 
 @component('mail::table')
