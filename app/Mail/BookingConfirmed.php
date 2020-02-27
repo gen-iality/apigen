@@ -67,7 +67,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->attach = $attachPath;
         Log::debug("Construyendo el correo de ticket");
         $gfService = new GoogleFiles();
-        echo $this->eventuser_lan; 
+       
         $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
@@ -76,6 +76,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $eventuser = $this->eventuser_name;
         $ticket_id = $this->eventuser_id;
         $location =  $this->event_location;
+        echo $this->eventuser_id; 
         if($this->eventuser_lan == "ES"){
             $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','location'));
         }else{
