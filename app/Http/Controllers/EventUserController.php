@@ -137,7 +137,7 @@ class EventUserController extends Controller
     
     $datafromform = $request->json()->all();
     $language = $request->input("language");
-
+    $datafromform["language"] = $language;
         foreach ($datafromform["form_response"]['answers'] as $answer){
             switch($answer["field"]["id"]){
                 case "UHEADSVyhrBQ": 
