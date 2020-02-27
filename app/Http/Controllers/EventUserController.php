@@ -154,11 +154,13 @@ class EventUserController extends Controller
                     case "nRPaTjeZABs0":
                     case "tvQOBq0hlycC";
                         $datafromform['company'] = strval($answer[$answer["type"]]);
+                        $datafromform['empresa'] = strval($answer[$answer["type"]]);
         
                         break;
                     case "YZmj5yyJ5xu6":
                     case "GmbrPQhNPJId":
                         $datafromform['charge'] = $answer[$answer["type"]];
+                        $datafromform['cargo'] = $answer[$answer["type"]];
 
                         break;
                 }
