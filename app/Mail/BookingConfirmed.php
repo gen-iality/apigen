@@ -47,7 +47,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
-        $this->eventUser_lan = $eventUser_lan;
+        $this->eventuser_lan = $eventUser_lan;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";  
         $gfService = new GoogleFiles();
