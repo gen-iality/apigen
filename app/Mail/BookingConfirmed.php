@@ -38,6 +38,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event = Event::find($eventUser->event_id);
         $event_location = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
         $eventUser_name = isset($eventUser["properties"]["Nombres"]) ? $eventUser["properties"]["Nombres"] : $eventUser["properties"]["names"];
+        $eventUser_lan = isset($eventUser["properties"]["language"]) ? $eventUser["properties"]["language"] : $eventUser["properties"]["language"];
         $eventUser_id = $eventUser->id;
 
         Log::debug("cargando datos event_user al correo");
@@ -45,6 +46,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
+        $this->eventUser_lan = $eventUser_lan;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";
         $gfService = new GoogleFiles();
