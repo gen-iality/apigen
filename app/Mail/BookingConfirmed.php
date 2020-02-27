@@ -67,7 +67,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->attach = $attachPath;
         Log::debug("Construyendo el correo de ticket");
         $gfService = new GoogleFiles();
-        echo $this->eventuser_lan; 
+        echo $this->eventUser_lan; 
         $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
         $file = $this->eventuser_id . '_qr.png';
