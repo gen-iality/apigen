@@ -37,6 +37,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         Log::debug("recibiendo event_user");
 
         $event = Event::find($eventUser->event_id);
+
         $event_location = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
         $eventUser_name = isset($eventUser["properties"]["Nombres"]) ? $eventUser["properties"]["Nombres"] : $eventUser["properties"]["names"];
         $eventUser_lan = isset($eventUser["properties"]["language"]) ? $eventUser["properties"]["language"] : $eventUser["properties"]["language"];
@@ -47,6 +48,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
+        $this->eventuser = $eventUser;
         $this->eventuser_lan = $eventUser_lan;
         $this->eventuser_id = $eventUser_id;
         $this->subject = "[Tu Ticket - " . $event->name . "]";  
@@ -76,7 +78,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $eventuser = $this->eventuser_name;
         $ticket_id = $this->eventuser_id;
         $location =  $this->event_location;
-        echo $this->eventUser; 
+        echo $this->eventuser; 
         if($this->eventuser_lan == "ES"){
             $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','location'));
         }else{
