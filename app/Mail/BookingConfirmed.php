@@ -74,7 +74,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $fullpath = storage_path('app/public/' . $file);
         $event = $this->event;
         $eventuser = $this->eventuser_name;
-        $eventUser_lan = $this->eventUser_lan;
+        $eventUser_lan = $this->eventuser_lan;
         $ticket_id = $this->eventuser_id;
         $location =  $this->event_location;
         if($eventUser_lan == "ES"){
