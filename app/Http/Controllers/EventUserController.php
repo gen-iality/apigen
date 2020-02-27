@@ -139,7 +139,7 @@ class EventUserController extends Controller
     
         foreach ($datafromform["form_response"]['answers'] as $answer){
             
-                switch($answer["id"]){
+                switch($answer["field"]["id"]){
                     case "UHEADSVyhrBQ": 
                         $datafromform['names'] = $answer[$answer["type"]];
 
