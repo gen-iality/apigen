@@ -168,9 +168,11 @@ class EventUserController extends Controller
     }
         $datafromform['properties'] = [
             'charge' => $datafromform['charge'],
+            'cargo' => $datafromform['cargo'],
             'email' => $datafromform['email'],
             'correo' => $datafromform['correo'],
             'company' =>  $datafromform['company'],
+            'empresa' =>  $datafromform['empresa'],
             'nombres' => $datafromform['names'],
         ];
 
