@@ -138,34 +138,33 @@ class EventUserController extends Controller
     $datafromform = $request->json()->all();
     
         foreach ($datafromform["form_response"]['answers'] as $answer){
-            
-                switch($answer["field"]["id"]){
-                    case "UHEADSVyhrBQ": 
-                    case "fqVfNrgrLJEb": 
-                        $datafromform['names'] = $answer[$answer["type"]];
-
+            switch($answer["field"]["id"]){
+                case "UHEADSVyhrBQ": 
+                case "fqVfNrgrLJEb": 
+                    $datafromform['names'] = $answer[$answer["type"]];
+                
+                break;
+                case "EiX4qlYKpQWl":
+                case "rnlJ8qb0LrBZ":
+                    $datafromform['email'] = $answer[$answer["type"]];
+                    $datafromform['correo'] = $answer[$answer["type"]];
+                
+                break;
+                case "nRPaTjeZABs0":
+                case "tvQOBq0hlycC";
+                    $datafromform['company'] = strval($answer[$answer["type"]]);
+                    $datafromform['empresa'] = strval($answer[$answer["type"]]);
+                
                     break;
-                    case "EiX4qlYKpQWl":
-                    case "rnlJ8qb0LrBZ":
-                        $datafromform['email'] = $answer[$answer["type"]];
-                        $datafromform['correo'] = $answer[$answer["type"]];
-
+                case "YZmj5yyJ5xu6":
+                case "GmbrPQhNPJId":
+                    $datafromform['charge'] = $answer[$answer["type"]];
+                    $datafromform['cargo'] = $answer[$answer["type"]];
+                
                     break;
-                    case "nRPaTjeZABs0":
-                    case "tvQOBq0hlycC";
-                        $datafromform['company'] = strval($answer[$answer["type"]]);
-                        $datafromform['empresa'] = strval($answer[$answer["type"]]);
+            }
         
-                        break;
-                    case "YZmj5yyJ5xu6":
-                    case "GmbrPQhNPJId":
-                        $datafromform['charge'] = $answer[$answer["type"]];
-                        $datafromform['cargo'] = $answer[$answer["type"]];
-
-                        break;
-                }
-
-    }
+            }   
         $datafromform['properties'] = [
             'charge' => $datafromform['charge'],
             'cargo' => $datafromform['cargo'],
@@ -174,6 +173,7 @@ class EventUserController extends Controller
             'company' =>  $datafromform['company'],
             'empresa' =>  $datafromform['empresa'],
             'nombres' => $datafromform['names'],
+            'language' => $datafromform["form_response"]['hidden']['language']
         ];
 
         
@@ -202,7 +202,7 @@ class EventUserController extends Controller
 
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
-                $userData, 
+                $userData,
                 $validations
             );
 
@@ -228,10 +228,8 @@ class EventUserController extends Controller
          ->send(
              new BookingConfirmed($result->data)
          );
-
          return "ok";//$response;
     }
-
 
     public function sendQrToUsers(Request $request, string $event_id)
     {
