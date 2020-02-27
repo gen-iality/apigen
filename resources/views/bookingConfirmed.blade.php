@@ -12,21 +12,22 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
         desde tu smartphone o si prefieres imprime el archivo
         PDF adjunto.
     </span>
+    
 </div>
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 
 <div style="text-align: center">
-<!-- <img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" /> -->
+<img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" />
 </div>
 
-@component('mail::table')   
+@component('mail::table')
 | **Tipo de Entrada:**            | **Precio:**                                                                  |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |General | Invitacion |
 @endcomponent
 @component('mail::table')
-| ** @if($eventUser_lan=="ES") Fecha Inicio: @else Datetiem start: @endif **            | ** @if($eventUser_lan=="ES") Hora: @else Hour: @endif **                                                                       |
+| **Fecha Inicio:**            | **Hora:**                                                                       |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
