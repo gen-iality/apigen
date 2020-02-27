@@ -139,38 +139,33 @@ class EventUserController extends Controller
     
         foreach ($datafromform["form_response"]['answers'] as $answer){
             
-                switch($answer["type"]){
-                    case "text": 
-                        $datafromform['nombres'] = $answer[$answer["type"]];
-                        echo $datafromform['nombres'];
+                switch($answer["id"]){
+                    case "UHEADSVyhrBQ": 
+                        $datafromform['names'] = $answer[$answer["type"]];
+
                     break;
-                    case "number":
-                        $datafromform['cedula'] = strval($answer[$answer["type"]]);
-                        $datafromform['password'] = strval($answer[$answer["type"]]);
-                        echo $datafromform['cedula'].$datafromform['password'];
-                    break;
-                    case "phone_number":
-                        $datafromform['telefono'] = strval($answer[$answer["type"]]);
-                        echo $datafromform['telefono'];
-                        break;
-                    case "email":
+                    case "EiX4qlYKpQWl":
                         $datafromform['email'] = $answer[$answer["type"]];
                         $datafromform['correo'] = $answer[$answer["type"]];
-                        echo $datafromform['email'].$datafromform['correo'] ;
+
+                    break;
+                    case "nRPaTjeZABs0":
+                        $datafromform['company'] = strval($answer[$answer["type"]]);
+        
                         break;
-    
+                    case "YZmj5yyJ5xu6":
+                        $datafromform['charge'] = $answer[$answer["type"]];
+
+                        break;
                 }
 
     }
-
-    
         $datafromform['properties'] = [
-            'telefono' => strval($datafromform['telefono']),
+            'charge' => $datafromform['charge'],
             'email' => $datafromform['email'],
             'correo' => $datafromform['correo'],
-            'cedula' => strval($datafromform['cedula']),
-            'password' => strval($datafromform['password']),
-            'nombres' => $datafromform['nombres'],
+            'company' =>  $datafromform['company'],
+            'nombres' => $datafromform['names'],
         ];
 
         
