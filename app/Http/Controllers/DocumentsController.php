@@ -21,10 +21,11 @@ class DocumentsController extends Controller
      */
     public function index(Request $request, $event_id)
     {
-        $data = $request->json()->all();
-        if(!empty($data["father_id"])){
+        $father_id = $request->input("father_id");
+        
+        if(!empty($father_id)){
             return JsonResource::collection(
-                Documents::where("event_id", $event_id)->where("father_id", $data["father_id"])->paginate(config('app.page_size'))
+                Documents::where("event_id", $event_id)->where("father_id", $father_id)->paginate(config('app.page_size'))
             );
         }
         return JsonResource::collection(
