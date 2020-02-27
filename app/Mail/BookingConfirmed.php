@@ -76,7 +76,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $eventuser = $this->eventuser_name;
         $ticket_id = $this->eventuser_id;
         $location =  $this->event_location;
-        echo $this->eventuser_id; 
+        echo $this->eventUser; 
         if($this->eventuser_lan == "ES"){
             $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','location'));
         }else{
