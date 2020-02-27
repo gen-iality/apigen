@@ -20,13 +20,13 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 <!-- <img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" /> -->
 </div>
 
-@component('mail::table')
+@component('mail::table')   
 | **Tipo de Entrada:**            | **Precio:**                                                                  |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |General | Invitacion |
 @endcomponent
 @component('mail::table')
-| **Fecha Inicio:**            | **Hora:**                                                                       |
+| ** @if($eventUser_lan=="ES") Fecha Inicio: @else Datetiem start: @endif **            | ** @if($eventUser_lan=="ES") Hora: @else Hour: @endif **                                                                       |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
