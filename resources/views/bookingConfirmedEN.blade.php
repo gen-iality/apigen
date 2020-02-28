@@ -23,11 +23,11 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 
 @component('mail::table')   
 | **Ticket Type:**            | **Price:**                                                                       |
-|:----------------------:|:-------------------------------------------------------------------------------------:|
+|<hr style="background-color:white;color:white">|<hr style="background-color:white;color:white">|
 |VIP | Invitation |
 |<br>|<br>
 | **Date Start:**             | **Time Start:**                                                                 |
-|:----------------------:|:-------------------------------------------------------------------------------------:|
+|<hr style="background-color:white;color:white">|<hr style="background-color:white;color:white">|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>|<br>
 
