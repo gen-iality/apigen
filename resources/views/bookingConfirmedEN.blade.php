@@ -35,7 +35,7 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 
 
 @component('mail::panel')
-Ubicación del evento<br>
+Venue<br>
 
 {{$event->venue}} <br>
 {{$event_address}} <br>
