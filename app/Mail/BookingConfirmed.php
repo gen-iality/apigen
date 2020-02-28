@@ -19,7 +19,10 @@ class BookingConfirmed extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;//, Dispatchable, InteractsWithQueue;
     public $event;
-    public $event_location;
+    public $event_address;
+    public $event_city;
+    public $event_state;
+    
     public $eventuser_name;
     public $eventuser_id;
     public $eventuser_lan;
@@ -38,15 +41,20 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         Log::debug("recibiendo event_user");
 
         $event = Event::find($eventUser->event_id);
-        $event_location = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
-        $eventUser_name = isset($eventUser["properties"]["Nombres"]) ? $eventUser["properties"]["Nombres"] : $eventUser["properties"]["names"];
+        $event_address = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
+        $event_city = isset($event["location"]["City"])?($event["location"]["City"]):" ";
+        $event_state = isset($event["location"]["state"])?($event["location"]["state"]):" ";
+
+        $eventUser_name = isset($eventUser["properties"]["nombres"]) ? $eventUser["properties"]["nombres"] : $eventUser["properties"]["names"];
         $eventUser_lan = isset($eventUser["properties"]["language"]) ? $eventUser["properties"]["language"] : $eventUser["properties"]["language"];
         $eventUser_id = $eventUser->id;
 
         Log::debug("cargando datos event_user al correo");
 
+        $this->event_address =$event_address ;
+        $this->event_city =$event_city;
+        $this->event_state =$event_state;
         $this->event = $event;
-        $this->event_location = $event_location;
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_lan = $eventUser_lan;
         $this->eventuser_id = $eventUser_id;
@@ -76,11 +84,10 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event = $this->event;
         $eventuser = $this->eventuser_name;
         $ticket_id = $this->eventuser_id;
-        $location =  $this->event_location;
-        
-       
-            $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','location'));
-        
+        $event_address = $this->event_address;
+        $event_city = $this->event_city;
+        $event_state = $this->event_state;
+        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','event_state','event_city','event_address'));
         
         $pdf->setPaper('legal','portrait');
         try {

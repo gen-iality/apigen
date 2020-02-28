@@ -21,10 +21,10 @@ Hi {{$eventuser}}, you have been invited to {{$event->name}} event
 <!-- <img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" /> -->
 </div>
 
-@component('mail::table')
+@component('mail::table')   
 | **Ticket Type:**            | **Price:**                                                                  |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
-|General | Invitation |
+|VIP | Invitation |
 @endcomponent
 @component('mail::table')
 | **Date Start:**            | **Time Start:**                                                                       |
@@ -35,9 +35,11 @@ Hi {{$eventuser}}, you have been invited to {{$event->name}} event
 @endcomponent
 
 @component('mail::panel')
-Event Location  <br>
+Ubicación del evento<br>
 
-{{$event_location}}
+{{$event->venue}} <br>
+{{$event_address}} <br>
+{{$event_state}}<br>
 -----------------------
 @endcomponent
 
