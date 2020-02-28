@@ -407,11 +407,13 @@ class EventUserController extends Controller
         $attendees = Attendee::where("event_id",$event_id_old)->get();
         $attendees = json_decode(json_encode($attendees),true);
         foreach ($attendees as $value) {
+            //echo  var_dump($value);
             $user = Attendee::find($value["_id"]);
             $newid["event_id"] = $event_id_new;
-            echo $newid."<br>".$user."<br>".$value;
-            //$user->fill($newid);
-            //$user->save();
+            echo var_dump($newid)."<br>";
+            $user->fill($newid);
+            $user->save();
+            return $user;
             die;
         }
 
