@@ -413,8 +413,7 @@ class EventUserController extends Controller
             echo var_dump($newid)."<br>";
             $user->fill($newid);
             $user->save();
-            return $user;
-          
+            
         }
 
     }
