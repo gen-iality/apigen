@@ -22,7 +22,6 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $event_address;
     public $event_city;
     public $event_state;
-    
     public $eventuser_name;
     public $eventuser_id;
     public $eventuser_lan;
@@ -87,7 +86,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event_address = $this->event_address;
         $event_city = $this->event_city;
         $event_state = $this->event_state;
-        $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','event_state','event_city','event_address'));
+        //$pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','event_state','event_city','event_address'));
         
         $pdf->setPaper('legal','portrait');
         try {
