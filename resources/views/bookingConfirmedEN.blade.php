@@ -39,7 +39,7 @@ Ubicación del evento<br>
 
 {{$event->venue}} <br>
 {{$event_address}} <br>
-{{$event_City}}<br>
+{{$event_city}}<br>
 -----------------------
 @endcomponent
 

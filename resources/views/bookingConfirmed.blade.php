@@ -12,7 +12,6 @@ Hola {{$eventuser}}, has sido invitad@ al evento {{$event->name}}
         desde tu smartphone o si prefieres imprime el archivo
         PDF adjunto.
     </span>
-    
 </div>
 <br />
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
@@ -39,7 +38,7 @@ Ubicación del evento<br>
 
 {{$event->venue}} <br>
 {{$event_address}} <br>
-{{$event_City}}<br>
+{{$event_city}}<br>
 -----------------------
 @endcomponent
 
