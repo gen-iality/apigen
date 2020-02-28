@@ -33,7 +33,6 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 
 @endcomponent
 
-
 @component('mail::panel')
 Venue<br>
 

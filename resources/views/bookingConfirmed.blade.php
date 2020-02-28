@@ -24,13 +24,10 @@ Hola {{$eventuser}}, has sido invitad@ al evento {{$event->name}}
 | **Tipo de Entrada:**         | **Precio:**                                                                     |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitación |
-@endcomponent
-@component('mail::table')
+|<br>|<br>
 | **Fecha Inicio:**            | **Hora:**                                                                       |
-|:---------------------:|:--------------------------------------------------------------------------------------:|
+|<hr style="background-color:white;color:white">|<hr style="background-color:white;color:white">|
 |{{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }}|
-|<br>                   |<br>
-
 @endcomponent
 
 @component('mail::panel')
