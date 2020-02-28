@@ -23,7 +23,7 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 </div>
 
 @component('mail::table')   
-|<br>|<br>|
+
 | **Ticket Type:**            | **Price:**                                                                       |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitation |
