@@ -88,7 +88,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event_state = $this->event_state;
         //$pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','event_state','event_city','event_address'));
         
-        $pdf->setPaper('legal','portrait');
+        //$pdf->setPaper('legal','portrait');
         try {
             /*$image = QRCode::text($this->eventuser_id)
                 ->setSize(8)
