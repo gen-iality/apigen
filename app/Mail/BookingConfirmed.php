@@ -78,11 +78,9 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $ticket_id = $this->eventuser_id;
         $location =  $this->event_location;
         
-        if($this->eventuser_lan == "ES"){
+       
             $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','location'));
-        }else{
-            $pdf = PDF::loadview('pdf_bookingConfirmedEN', compact('event','eventuser','ticket_id','location'));
-        }
+        
         
         $pdf->setPaper('legal','portrait');
         try {
@@ -115,8 +113,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
-       
-    
+        if($this->eventuser_lan == "ES"){
+
         return $this
             // ->attach($attachPath,[
             //     'as' => 'checkin',
@@ -126,5 +124,17 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             ->from("apps@mocionsoft.com", "Recordatorio")
             ->subject($this->subject)
             ->markdown('bookingConfirmed');
+        }else{
+            return $this
+            // ->attach($attachPath,[
+            //     'as' => 'checkin',
+            //     'mime' => 'image/png',
+            // ])
+            // ->attachData($pdf->download(),'boleta.pdf')
+            ->from("apps@mocionsoft.com", "Recordatorio")
+            ->subject($this->subject)
+            ->markdown('bookingConfirmedEN');
+        }
     }
+    
 }
