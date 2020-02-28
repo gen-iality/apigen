@@ -22,14 +22,14 @@ Hola {{$eventuser}}, has sido invitad@ al evento {{$event->name}}
 </div>
 
 @component('mail::table')
-| **Tipo de Entrada:**            | **Precio:**                                                                  |
+| **Tipo de Entrada:**         | **Precio:**                                                                     |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitación |
 @endcomponent
 @component('mail::table')
 | **Fecha Inicio:**            | **Hora:**                                                                       |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
+|{{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }}|
 |<br>                   |<br>
 
 @endcomponent
@@ -39,18 +39,9 @@ Ubicación del evento<br>
 
 {{$event->venue}} <br>
 {{$event_address}} <br>
-{{$event_state}}<br>
+{{$event_City}}<br>
 -----------------------
 @endcomponent
-
-<div style="text-align: center">
-    <span>
-        A través del sitio web de Evius.co puedes acceder
-        fácilmente a las entradas de tus eventos. Comienza
-        dando clic en el siguiente enlace para confirmar tu
-        cuenta y ver los eventos que esperan por ti 
-    </span>
-</div>
 
 <!-- Click aqui
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])

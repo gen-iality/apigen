@@ -22,12 +22,12 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 </div>
 
 @component('mail::table')   
-| **Ticket Type:**            | **Price:**                                                                  |
+| **Ticket Type:**            | **Price:**                                                                       |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitation |
 @endcomponent
 @component('mail::table')
-| **Date Start:**            | **Time Start:**                                                                       |
+| **Date Start:**             | **Time Start:**                                                                  |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
@@ -39,16 +39,15 @@ Ubicación del evento<br>
 
 {{$event->venue}} <br>
 {{$event_address}} <br>
-{{$event_state}}<br>
+{{$event_City}}<br>
 -----------------------
 @endcomponent
 
 <div style="text-align: center">
     <span>
         Through the Evius.co website you can access 
-        Easily to your event tickets. Begins 
-        by clicking on the following link to confirm your 
-        account and see the events waiting for you 
+        Easily to your event tickets. 
+        Begins by clicking on the following link for more information.
     </span>
 </div>
 
