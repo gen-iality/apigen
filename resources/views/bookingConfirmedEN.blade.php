@@ -6,6 +6,7 @@
 Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 <div style="text-align: justify">
     <span>
+    {{$event->description}}
     <!--Here you can find the event information
         Aquí podrás encontrar la información del evento y el
         código QR que deberás presentar a la entrada para
@@ -26,7 +27,7 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitation |
 |<br>|<br>
-| **Date Start:**             | **Time Start:**                                                                 |
+| **Start Date:**             | **Start Time:**                                                                 |
 |<hr style="background-color:white;color:white">|<hr style="background-color:white;color:white">|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>|<br>
