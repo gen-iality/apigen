@@ -414,7 +414,7 @@ class EventUserController extends Controller
             $user->fill($newid);
             $user->save();
             return $user;
-            die;
+          
         }
 
     }
