@@ -43,10 +43,10 @@ Event Location  <br>
 
 <div style="text-align: center">
     <span>
-        Through the Evius.co website you can access
-         Easily to your event tickets. Begins
-         by clicking on the following link to confirm your
-         account and see the events waiting for you
+        Through the Evius.co website you can access 
+        Easily to your event tickets. Begins 
+        by clicking on the following link to confirm your 
+        account and see the events waiting for you 
     </span>
 </div>
 
