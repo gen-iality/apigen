@@ -67,7 +67,7 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
 Route::post('events/{event_id}/eventusersbyurl',      'EventUserController@createUserViaUrl');
-Route::post('events/{event_id_old}/deleteEventid/{event_id_new}',      'EventUserController@changeEventId');
+
 //Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
 Route::post ('events/{event_id}/sendemailtoallusers',      'EventUserController@sendQrToUsers');
 
