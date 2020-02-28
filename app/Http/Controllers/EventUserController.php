@@ -402,4 +402,19 @@ class EventUserController extends Controller
         }
 
     }
+    public function changeEventId(Request $request, $event_id_old, $event_id_new)
+    {
+        $attendees = Attendee::where("event_id",$event_id_old)->get();
+        $attendees = json_decode(json_encode($attendees),true);
+        foreach ($attendees as $value) {
+            $user = Attendee::find($value["_id"]);
+            $newid["event_id"] = $event_id_new;
+            echo $newid."<br>".$user."<br>".$value;
+            //$user->fill($newid);
+            //$user->save();
+            die;
+        }
+
+    }
+
 }
