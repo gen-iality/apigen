@@ -1,12 +1,12 @@
 @component('mail::message')
 
-{{$event->description}}
+{{$event->name}}
 <img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/output-onlinepngtools%20(6).png?alt=media&token=106a0f27-a2f8-48f8-a19b-9a936aac420a">
  <!-- ![Evius]({{$logo}}) -->
 Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
 <div style="text-align: justify">
     <span>
-        {{$event->description}}
+        {{$event->description}}     
         <!--Aquí podrás encontrar la información del evento y el
         código QR que deberás presentar a la entrada para
         ingresar rápidamente al evento. Puedes mostrarlo
@@ -22,10 +22,11 @@ Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
 </div>
 
 @component('mail::table')
+|<br>|<br>|
 | **Tipo de Entrada:**         | **Precio:**                                                                     |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitación |
-|<br>|<br>
+|<br>|<br>|
 | **Fecha Inicio:**            | **Hora:**                                                                       |
 |<hr style="background-color:white;color:white">|<hr style="background-color:white;color:white">|
 |{{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }}|
