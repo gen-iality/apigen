@@ -4,7 +4,7 @@
 <img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/output-onlinepngtools%20(6).png?alt=media&token=106a0f27-a2f8-48f8-a19b-9a936aac420a">
  <!-- ![Evius]({{$logo}}) -->
 Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
-<div style="text-align: justify">
+<div style="text-align: center">
     <span>
         {{$event->description}}     
         <!--Aquí podrás encontrar la información del evento y el
