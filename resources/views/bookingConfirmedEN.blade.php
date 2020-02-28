@@ -6,8 +6,8 @@
 Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 <div style="text-align: justify">
     <span>
-    Here you can find the event information
-       <!-- Aquí podrás encontrar la información del evento y el
+    <!--Here you can find the event information
+        Aquí podrás encontrar la información del evento y el
         código QR que deberás presentar a la entrada para
         ingresar rápidamente al evento. Puedes mostrarlo
         desde tu smartphone o si prefieres imprime el archivo
@@ -25,14 +25,13 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 | **Ticket Type:**            | **Price:**                                                                       |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitation |
-@endcomponent
-@component('mail::table')
 | **Date Start:**             | **Time Start:**                                                                  |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
 
 @endcomponent
+
 
 @component('mail::panel')
 Ubicación del evento<br>
@@ -43,13 +42,6 @@ Ubicación del evento<br>
 -----------------------
 @endcomponent
 
-<div style="text-align: center">
-    <span>
-        Through the Evius.co website you can access 
-        Easily to your event tickets. 
-        Begins by clicking on the following link for more information.
-    </span>
-</div>
 
 <!-- Click aqui
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])
