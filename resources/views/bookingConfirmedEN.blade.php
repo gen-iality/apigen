@@ -3,14 +3,15 @@
 {{$event->description}}
 <img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/output-onlinepngtools%20(6).png?alt=media&token=106a0f27-a2f8-48f8-a19b-9a936aac420a">
  <!-- ![Evius]({{$logo}}) -->
-Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
+Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 <div style="text-align: justify">
     <span>
-        Aquí podrás encontrar la información del evento y el
+    Here you can find the event information
+       <!-- Aquí podrás encontrar la información del evento y el
         código QR que deberás presentar a la entrada para
         ingresar rápidamente al evento. Puedes mostrarlo
         desde tu smartphone o si prefieres imprime el archivo
-        PDF adjunto.
+        PDF adjunto.-->
     </span>
 </div>
 <br />
@@ -21,22 +22,20 @@ Hola {{$eventuser_name}}, has sido invitad@ a {{$event->name}}
 </div>
 
 @component('mail::table')
-| **Tipo de Entrada:**            | **Precio:**                                                                  |
+| **Ticket Type:**            | **Price:**                                                                  |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
-|General | Invitacion |
+|General | Invitation |
 @endcomponent
 @component('mail::table')
-| **Fecha Inicio:**            | **Hora:**                                                                       |
+| **Date Start:**            | **Time Start:**                                                                       |
 |:---------------------:|:--------------------------------------------------------------------------------------:|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
-| **Fecha Finalizacion:**            | **Hora:**                                                                 |
-| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:i:s', strtotime($event->datetime_to)) }} |
 
 @endcomponent
 
 @component('mail::panel')
-Ubicación del evento  <br>
+Event Location  <br>
 
 {{$event_location}}
 -----------------------
@@ -44,10 +43,10 @@ Ubicación del evento  <br>
 
 <div style="text-align: center">
     <span>
-        A través del sitio web de Evius.co puedes acceder
-        fácilmente a las entradas de tus eventos. Comienza
-        dando clic en el siguiente enlace para confirmar tu
-        cuenta y ver los eventos que esperan por ti 
+        Through the Evius.co website you can access
+         Easily to your event tickets. Begins
+         by clicking on the following link to confirm your
+         account and see the events waiting for you
     </span>
 </div>
 
@@ -59,14 +58,14 @@ Confirmar Cuenta
 @component('mail::subcopy')
 @endcomponent
 
-[Políticas de privacidad](https://evius.co/privacy) | 
-[Términos y Condiciones](https://evius.co/terms)
+[Privacy policies](https://evius.co/privacy) | 
+[Terms and Conditions](https://evius.co/terms)
 
 <div style="text-align: center">
     <span>
-        Recibiste este correo porque estás inscrito en un
-        evento gestionado a través de Evius.co o te has
-        registrado en el portal de Evius.co
+        You received this email because you are enrolled in a
+        event managed by Evius.co or you are
+        registered on the Evius.co portal
     </span>
 </div>
 <div style="text-align: center">
