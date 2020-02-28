@@ -6,11 +6,11 @@
 Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
 <div style="text-align: justify">
     <span>
-        Aquí podrás encontrar la información del evento y el
+        <!--Aquí podrás encontrar la información del evento y el
         código QR que deberás presentar a la entrada para
         ingresar rápidamente al evento. Puedes mostrarlo
         desde tu smartphone o si prefieres imprime el archivo
-        PDF adjunto.
+        PDF adjunto.-->
     </span>
 </div>
 <br />
