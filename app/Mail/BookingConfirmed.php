@@ -22,6 +22,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $event_location;
     public $eventuser_name;
     public $eventuser_id;
+    public $eventuser_lan;
     public $qr;
     public $logo;
     public $attach;
@@ -76,7 +77,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $eventuser = $this->eventuser_name;
         $ticket_id = $this->eventuser_id;
         $location =  $this->event_location;
-         
+        
         if($this->eventuser_lan == "ES"){
             $pdf = PDF::loadview('pdf_bookingConfirmed', compact('event','eventuser','ticket_id','location'));
         }else{
@@ -91,7 +92,6 @@ class BookingConfirmed extends Mailable implements ShouldQueue
                 ->setOutfile($fullpath)
                 ->png();
             */
-
 
                 ob_start(); 
                 $qr = QRCode::text($this->eventuser_id)->setSize(8)->setMargin(4)->png();
