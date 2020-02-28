@@ -25,9 +25,9 @@ Hi {{$eventuser_name}}, you have been invited to {{$event->name}} event
 | **Ticket Type:**            | **Price:**                                                                       |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
 |VIP | Invitation |
-|<hr>| <hr>|
+|<hr style="display:none">| <hr style="display:none">|
 | **Date Start:**             | **Time Start:**                                                                 |
-|:----------------------:|:------------------------------------------------------------------------------:|
+|<hr style="background-color:gray">| <hr style="background-color:gray">|
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>
 
