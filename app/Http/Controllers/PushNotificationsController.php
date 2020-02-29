@@ -27,6 +27,13 @@ class PushNotificationsController extends Controller
         );
     }
 
+    public function indexByUser(Request $request, $event_id)
+    {
+        return JsonResource::collection(
+            PushNotification::where("event_id", $event_id)->where("User_ids",$user_id)->paginate(config('app.page_size'))
+        );
+    }
+
     /**
      * Store a newly created resource in storage.
      *
