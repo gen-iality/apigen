@@ -43,7 +43,6 @@ class PushNotificationsController extends Controller
             $email = Attendee::where("event_id",$event_id)->where("email",$data["userEmail"])->get();
             $list = json_decode(json_encode($email),true); 
             foreach ($list as $value) {
-                $data['User_ids'] = $value["_id"];
                 array_push($user_id,$value["_id"]);
             }
           
@@ -52,7 +51,7 @@ class PushNotificationsController extends Controller
         }else{
             $user_id = "";
         }
-        
+        $data['User_ids'] = $user_id;
 
         if(!empty($data["route"])){
             $route = $data["route"];
