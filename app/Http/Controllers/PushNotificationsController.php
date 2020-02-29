@@ -37,7 +37,6 @@ class PushNotificationsController extends Controller
     {
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
-        $saveData = new PushNotification($data);
         $user_id = [];
         
         if(!empty($data["userEmail"])){
@@ -64,6 +63,9 @@ class PushNotificationsController extends Controller
         $eventId = $data["event_id"];
         $title = $data["title"];
         $body = $data["body"];
+
+        $saveData = new PushNotification($data);
+        $saveData->save();
         $fields = array('event_id' => $eventId, 'petitionId' => $saveData->_id ,'title' => $title, 'body' => $body , 'route' => $route , 'user_id' => $user_id);
         $headers = array('Content-Type: application/json');
         $url = config('app.pushdirection')."/pushNotification";
@@ -80,7 +82,6 @@ class PushNotificationsController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
 
-        $saveData->save();
         return "enviado".json_decode($result,true);
     }
     public function update(Request $request, $event_id, $id)
