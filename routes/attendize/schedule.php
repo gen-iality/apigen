@@ -102,6 +102,8 @@ Route::post('events/{event_id}/recoverypassword', 'SendContentController@Passwor
  ******************/
 Route::apiResource('events/{event_id}/sendpush', 'PushNotificationsController');
 Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
+Route::get('event/{event_id}/sendpush/user_id', 'PushNotificationsController@indexByUser');
+
 
 
 /*******************
