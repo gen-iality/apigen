@@ -31,7 +31,7 @@ class PushNotificationsController extends Controller
     {
 
         $notification = PushNotification::where("event_id", $event_id)->where("User_ids",$id)->get();
-        echo(var_dump($notification["User_ids"]));die;
+        echo(var_dump($notification["id"]));die;
         $userdelete = array_splice($notification['User_ids'],$id);
         $save = PushNotification::find($notification['_id']);
         $save->fill($userdelete);
