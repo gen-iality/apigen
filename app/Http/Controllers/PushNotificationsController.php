@@ -29,11 +29,25 @@ class PushNotificationsController extends Controller
 
     public function indexByUser(Request $request, $event_id, $id)
     {
+
+        $notification = PushNotification::where("event_id", $event_id)->where("User_ids",$id)->get();
+        $userdelete = array_splice($notification['User_ids'],$id);
+        $save = PushNotification::find($notification['_id']);
+        $save->fill($userdelete);
+        $save->save();
+        return 1 ;
+        //use this
         return JsonResource::collection(
             PushNotification::where("event_id", $event_id)->where("User_ids",$id)->paginate(config('app.page_size'))
         );
     }
 
+     
+    public function deleteNotification(Request $request, $event_id, $id)
+    {
+            
+
+    }   
     /**
      * Store a newly created resource in storage.
      *
