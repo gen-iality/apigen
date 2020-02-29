@@ -29,11 +29,8 @@ class PushNotificationsController extends Controller
 
     public function indexByUser(Request $request, $event_id, $id)
     {
-
-        $notification = PushNotification::where("event_id", $event_id)->where("User_ids",$id)->get();
-        echo(var_dump($notification[0]["id"]));die;
-        $userdelete = array_splice($notification['User_ids'],$id);
         $save = PushNotification::find($notification['_id']);
+        $userdelete = array_splice($notification->User_ids,$id);
         $save->fill($userdelete);
         $save->save();
         return 1 ;
