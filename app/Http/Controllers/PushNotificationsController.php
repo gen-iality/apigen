@@ -39,12 +39,12 @@ class PushNotificationsController extends Controller
         $data["event_id"] = $event_id;
         $saveData = new PushNotification($data);
         $user_id = [];
-        $saveData->save();
         
         if(!empty($data["userEmail"])){
             $email = Attendee::where("event_id",$event_id)->where("email",$data["userEmail"])->get();
             $list = json_decode(json_encode($email),true); 
             foreach ($list as $value) {
+                $data['User_ids'] = $value["_id"];
                 array_push($user_id,$value["_id"]);
             }
           
@@ -79,6 +79,8 @@ class PushNotificationsController extends Controller
         
         $result = curl_exec($ch);
         curl_close($ch);
+
+        $saveData->save();
         return "enviado".json_decode($result,true);
     }
     public function update(Request $request, $event_id, $id)
