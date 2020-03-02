@@ -175,7 +175,6 @@ class EventUserController extends Controller
                 case "GmbrPQhNPJId":
                     $datafromform['charge'] = $answer[$answer["type"]];
                     $datafromform['cargo'] = $answer[$answer["type"]];
-                
                     break;
             }
         
@@ -188,7 +187,13 @@ class EventUserController extends Controller
             'company' =>  $datafromform['company'],
             'empresa' =>  $datafromform['empresa'],
             'nombres' => $datafromform['names'],
-            'language' => $language
+            'language' => $language,
+            'departinglocation' => $datafromform['departinglocation'],
+            'lugarrecogida' => $datafromform['lugarrecogida'],
+            'pais' => $datafromform['pais'] ,
+            'country' => $datafromform['country'] ,
+            'id' => $datafromform['id'],
+            'identificacion' => $datafromform['identificacion'] 
         ];
 
         
