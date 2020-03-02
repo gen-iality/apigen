@@ -150,9 +150,24 @@ class EventUserController extends Controller
                     $datafromform['email'] = $answer[$answer["type"]];
                     $datafromform['correo'] = $answer[$answer["type"]];
                 
-                break;
+                    break;
+                case "bQx4x4U4qhn6": //id esp
+                case "vXMjPZAvAzex":
+                    $datafromform['id'] = strval($answer[$answer["type"]]);
+                    $datafromform['identificacion'] = strval($answer[$answer["type"]]);
+                    break;
+                case "jmqQSTlF0JR4": //pais esp
+                case "H0WzcAI63WBQ":
+                    $datafromform['pais'] = strval($answer[$answer["type"]]);
+                    $datafromform['country'] = strval($answer[$answer["type"]]);
+                    break;
+                case "aKdpmUbcqAur": //lugar de recogida esp
+                case "FqNKWbP7v8eK":
+                    $datafromform['pais'] = strval($answer[$answer["type"]]);
+                    $datafromform['country'] = strval($answer[$answer["type"]]);
+                    break;
                 case "nRPaTjeZABs0":
-                case "tvQOBq0hlycC";
+                case "tvQOBq0hlycC":
                     $datafromform['company'] = strval($answer[$answer["type"]]);
                     $datafromform['empresa'] = strval($answer[$answer["type"]]);
                 
