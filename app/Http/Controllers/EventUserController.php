@@ -161,7 +161,7 @@ class EventUserController extends Controller
                     $datafromform['country'] = strval($answer[$answer["type"]]);
                     break;
                 case "aKdpmUbcqAur": //lugar de recogida esp
-                case "FqNKWbP7v8eK":
+                case "qDxlVBBAZRuz":
                     $datafromform['lugarrecogida'] = strval($answer[$answer["type"]]);
                     $datafromform['departinglocation'] = strval($answer[$answer["type"]]);
                     break;
