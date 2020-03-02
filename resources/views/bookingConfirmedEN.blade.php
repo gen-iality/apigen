@@ -2,8 +2,6 @@
 
 @component('mail::message')
 
-{{$event->name}}
-
 @slot('footer')
 
 @component('mail::footer')
