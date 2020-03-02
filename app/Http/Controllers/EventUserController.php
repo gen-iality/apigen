@@ -149,7 +149,6 @@ class EventUserController extends Controller
                 case "rnlJ8qb0LrBZ":
                     $datafromform['email'] = $answer[$answer["type"]];
                     $datafromform['correo'] = $answer[$answer["type"]];
-                
                     break;
                 case "bQx4x4U4qhn6": //id esp
                 case "vXMjPZAvAzex":
@@ -163,8 +162,8 @@ class EventUserController extends Controller
                     break;
                 case "aKdpmUbcqAur": //lugar de recogida esp
                 case "FqNKWbP7v8eK":
-                    $datafromform['pais'] = strval($answer[$answer["type"]]);
-                    $datafromform['country'] = strval($answer[$answer["type"]]);
+                    $datafromform['lugarrecogida'] = strval($answer[$answer["type"]]);
+                    $datafromform['departinglocation'] = strval($answer[$answer["type"]]);
                     break;
                 case "nRPaTjeZABs0":
                 case "tvQOBq0hlycC":
