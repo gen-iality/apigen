@@ -142,7 +142,7 @@ class EventUserController extends Controller
             switch($answer["field"]["id"]){
                 case "UHEADSVyhrBQ": 
                 case "fqVfNrgrLJEb": 
-                    $datafromform['names'] = $answer[$answer["type"]];
+                    $datafromform['names'] = $answer["text"];
                 
                 break;
                 case "EiX4qlYKpQWl":
