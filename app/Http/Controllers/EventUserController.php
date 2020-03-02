@@ -167,8 +167,8 @@ class EventUserController extends Controller
                     break;
                 case "nRPaTjeZABs0":
                 case "tvQOBq0hlycC":
-                    $datafromform['company'] = strval($answer[$answer["type"]]);
-                    $datafromform['empresa'] = strval($answer[$answer["type"]]);
+                    $datafromform['company'] = strval($answer["choice"]["label"]);
+                    $datafromform['empresa'] = strval($answer["choice"]["label"]);
                 
                     break;
                 case "YZmj5yyJ5xu6":
