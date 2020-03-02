@@ -187,6 +187,8 @@ class EventUserController extends Controller
             'company' =>  $datafromform['company'],
             'empresa' =>  $datafromform['empresa'],
             'nombres' => $datafromform['names'],
+            'names' => $datafromform['names'],
+            'displayName' => $datafromform['names'],
             'language' => $language,
             'departinglocation' => $datafromform['departinglocation'],
             'lugarrecogida' => $datafromform['lugarrecogida'],
