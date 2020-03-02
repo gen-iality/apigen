@@ -2,12 +2,6 @@
 
 @component('mail::message')
 
-@slot('footer')
-
-@component('mail::footer')
-
-        © 2001-2020. All Rights Reserved - Evius.co
+        © 2020. All Rights Reserved - Evius.co
         is a registered trademark of MOCION
-@endcomponent
-@endslot
 @endcomponent
