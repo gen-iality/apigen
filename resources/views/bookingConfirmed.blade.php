@@ -1,27 +1,27 @@
 @component('mail::message')
 
 {{$event->name}}
-<img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/output-onlinepngtools%20(6).png?alt=media&token=106a0f27-a2f8-48f8-a19b-9a936aac420a">
+<img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/bancolombia%2FLandingBID_LandingESP3.jpg?alt=media&token=7179d085-133d-4852-bed2-24e8e76a5c45">
  <!-- ![Evius]({{$logo}}) -->
-Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
+<!-- QUITARRR  Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
 <div style="text-align: center">
     <span>
-        {{$event->description}}     
+        {{$event->description}}     -->
         <!--Aquí podrás encontrar la información del evento y el
         código QR que deberás presentar a la entrada para
         ingresar rápidamente al evento. Puedes mostrarlo
         desde tu smartphone o si prefieres imprime el archivo
         PDF adjunto.-->
-    </span>
+ <!-- QUITARRR     </span>
 </div>
-<br />
+<br />-->
 <!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 
-<div style="text-align: center">
+<!-- QUITARRR  <div style="text-align: center"> -->
 <!-- <img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" /> -->
-</div>
+<!-- QUITARRR  </div> -->
 
-@component('mail::table')
+<!-- QUITARRR  @component('mail::table')
 
 | **Tipo de Entrada:**         | **Precio:**                                                                     |
 |:----------------------:|:-------------------------------------------------------------------------------------:|
@@ -39,13 +39,13 @@ Ubicación del evento<br>
 {{$event_address}} <br>
 {{$event_city}}<br>
 -----------------------
-@endcomponent
+@endcomponent -->
 
 <!-- Click aqui
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])
 Confirmar Cuenta
 @endcomponent -->
-
+<!-- QUITARRR  
 @component('mail::subcopy')
 @endcomponent
 
@@ -64,7 +64,7 @@ Confirmar Cuenta
 
     </span>
     <span></span>
-</div>
+</div> -->
 @slot('footer')
 @component('mail::footer')
         © 2001-2018. All Rights Reserved - Evius.co
