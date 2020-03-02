@@ -186,10 +186,10 @@ class EventController extends Controller
     private static function createDefaultUserProperties($event_id){
         /*Crear propierdades names y email*/
         $model = Event::find($event_id);
-        $name = array("name" => "email", "unique" => false, "mandatory" => false,"type" => "text");
+        $name = array("name" => "email", "label" => "email", "unique" => false, "mandatory" => false,"type" => "email");
         $user_properties = new UserProperties($name);
         $model->user_properties()->save($user_properties);
-        $email = array("name" => "names", "unique" => false, "mandatory" => false,"type" => "email");        
+        $email = array("name" => "names", "label" => "names", "unique" => false, "mandatory" => false,"type" => "text");        
         $user_properties = new UserProperties($email);
         $model->user_properties()->save($user_properties);
     }
