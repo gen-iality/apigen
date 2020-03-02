@@ -162,13 +162,13 @@ class EventUserController extends Controller
                     break;
                 case "aKdpmUbcqAur": //lugar de recogida esp
                 case "qDxlVBBAZRuz":
-                    $datafromform['lugarrecogida'] = strval($answer[$answer["type"]]);
-                    $datafromform['departinglocation'] = strval($answer[$answer["type"]]);
+                    $datafromform['lugarrecogida'] = strval($answer["choice"]["label"]);
+                    $datafromform['departinglocation'] = strval($answer["choice"]["label"]);
                     break;
                 case "nRPaTjeZABs0":
                 case "tvQOBq0hlycC":
-                    $datafromform['company'] = strval($answer["choice"]["label"]);
-                    $datafromform['empresa'] = strval($answer["choice"]["label"]);
+                    $datafromform['company'] = strval($answer[$answer["type"]]);
+                    $datafromform['empresa'] = strval($answer[$answer["type"]]);
                 
                     break;
                 case "YZmj5yyJ5xu6":
