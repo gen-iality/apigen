@@ -2,69 +2,7 @@
 
 {{$event->name}}
 <img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/bancolombia%2FLandingBID_LandingESP3.jpg?alt=media&token=7179d085-133d-4852-bed2-24e8e76a5c45">
- <!-- ![Evius]({{$logo}}) -->
-<!-- QUITARRR  Hola {{$eventuser_name}}, has sido invitad@ al evento {{$event->name}}
-<div style="text-align: center">
-    <span>
-        {{$event->description}}     -->
-        <!--Aquí podrás encontrar la información del evento y el
-        código QR que deberás presentar a la entrada para
-        ingresar rápidamente al evento. Puedes mostrarlo
-        desde tu smartphone o si prefieres imprime el archivo
-        PDF adjunto.-->
- <!-- QUITARRR     </span>
-</div>
-<br />-->
-<!-- <img src="https://api.evius.co/api/generatorQr/{{$eventuser_id}}"> -->
 
-<!-- QUITARRR  <div style="text-align: center"> -->
-<!-- <img style=" display:block; margin:0 50px; text-align: center" src="{{$qr}}" /> -->
-<!-- QUITARRR  </div> -->
-
-<!-- QUITARRR  @component('mail::table')
-
-| **Tipo de Entrada:**         | **Precio:**                                                                     |
-|:----------------------:|:-------------------------------------------------------------------------------------:|
-|VIP | Invitación |
-|<br>|<br>|
-| **Fecha Inicio:**            | **Hora:**                                                                       |
-|<hr style="background-color:white;color:white">|<hr style="background-color:white;color:white">|
-|{{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }}|
-@endcomponent
-
-@component('mail::panel')
-Ubicación del evento<br>
-
-{{$event->venue}} <br>
-{{$event_address}} <br>
-{{$event_city}}<br>
------------------------
-@endcomponent -->
-
-<!-- Click aqui
-@component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])
-Confirmar Cuenta
-@endcomponent -->
-<!-- QUITARRR  
-@component('mail::subcopy')
-@endcomponent
-
-[Políticas de privacidad](https://evius.co/privacy) | 
-[Términos y Condiciones](https://evius.co/terms)
-
-<div style="text-align: center">
-    <span>
-        Recibiste este correo porque estás inscrito en un
-        evento gestionado a través de Evius.co o te has
-        registrado en el portal de Evius.co
-    </span>
-</div>
-<div style="text-align: center">
-    <span>
-
-    </span>
-    <span></span>
-</div> -->
 @slot('footer')
 @component('mail::footer')
         © 2001-2018. All Rights Reserved - Evius.co
