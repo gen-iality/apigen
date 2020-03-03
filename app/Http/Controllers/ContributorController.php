@@ -190,8 +190,8 @@ class ContributorController extends Controller
         $eventsOne = Event::with('userPermissions')->whereHas('userPermissions', function ($q) use ($user) {
             $q->where('model_id', $user->id);
         })->get();
-        echo $user->_id ;die;
-        $eventsTwo = Event::with('userPermissions')->where('author_id', $user->id)->get();
+
+        $eventsTwo = Event::with('userPermissions')->where('author_id', $user->_id)->get();
         $events = $eventsOne->merge($eventsTwo);
         return  $events ? ModelHasRoleResource::collection($events) : ModelHasRoleResource::collection($events);
     }
