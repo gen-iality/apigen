@@ -58,6 +58,7 @@ class Activities extends Moloquent
     {
         return $this->embedsMany('App\ActivityUsers');
     }
+   
     protected $dateformat = 'Y-m-d H:i';
     protected $fillable = [
         'name' , 
@@ -72,6 +73,7 @@ class Activities extends Moloquent
         "image" ,
         "user" , 
         "event_id",
+        "selected_document",
         "acitivity_users",
         "capacity",
         "duplicate",
