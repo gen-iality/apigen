@@ -379,7 +379,7 @@ class EventUserController extends Controller
         $eventUser = Attendee::findOrFail($evenUserId);
         $new_properties = $data['properties'];
         $old_properties = $eventUser->properties;
-        $properties_merge =  array_merge($before_properties,$properties);
+        $properties_merge =  array_merge($old_properties,$new_properties);
 
         $data['properties'] = $properties_merge;
         $eventUser->fill($data);
