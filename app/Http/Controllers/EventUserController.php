@@ -377,8 +377,12 @@ class EventUserController extends Controller
     {
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
+        $properties = $data['properties'];
+        $before_properties = $eventUser->properties;
+        array_merge($properties,$before_properties);
+
         $eventUser->fill($data);
-        $eventUser->save();
+        $eventUser->save();  
 
         $response = new EventUserResource($eventUser);
         $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
