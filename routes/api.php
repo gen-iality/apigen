@@ -47,7 +47,8 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
  * eventUsers
  ****************/
 
- 
+Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
+Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('eventUsers', 'EventUserController', ['except' => ['index', 'show']]);
