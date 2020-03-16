@@ -413,6 +413,15 @@ class EventUserController extends Controller
         return $eventUser->delete();
     }
 
+    public function destroyTemp(String $eventId, $id)
+    {
+    
+        $attendee = Attendee::findOrFail($id);
+        return (string) $attendee->delete();    
+    }
+
+
+    //nunca usar usar otras alternativas si es posible  
     public function destroyAll( $eventUser)
     {
         $attende = Account::where("email",'like', '%@coomeva%')->forceDelete();

@@ -50,13 +50,13 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 
-
 Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusers',      'EventUserController@createUserAndAddtoEvent');
 Route::get ('events/{event_id}/eventusers',      'EventUserController@index');
+Route::get ('events/{event_id}/eventusers/{id}',      'EventUserController@destroyTemp');
 Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
