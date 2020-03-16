@@ -30,9 +30,10 @@ class RoleAttendeeController extends Controller
     public function index(Request $request,String $event_id)
     {
 
-        return JsonResource::collection(
-            RoleAttendee::paginate(config('app.page_size'))
-        );
+        $results = RoleAttendee::where("event_id", $event_id)->get();
+
+
+        return JsonResource::collection($results);
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }

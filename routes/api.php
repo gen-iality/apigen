@@ -54,9 +54,9 @@ Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
-Route::post('events/{event_id}/eventusers',      'EventUserController@createUserAndAddtoEvent');
-Route::get ('events/{event_id}/eventusers',      'EventUserController@index');
-Route::delete ('events/{event_id}/eventuserdelete/{id}',      'EventUserController@destroyTemp');
+Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAddtoEvent');
+Route::get ('events/{event_id}/eventusers', 'EventUserController@index');
+Route::delete ('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
 Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
@@ -195,13 +195,8 @@ Route::group(
 /***************
  * RolesAttendees
  ****************/
+Route::apiResource('events/{event_id}/rolesattendees', 'RoleAttendeeController');
 
-
-Route::get      ('events/{event_id}/rolesattendees' , 'RoleAttendeeController@indexByEvent');
-Route::post     ('events/{event_id}/rolesattendees' , 'RoleAttendeeController@store');
-Route::get      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@show');
-Route::put      ('events/{event_id}/rolesattendees/{id}' , 'RoleAttendeeController@update');
-Route::delete   ('events/{event_id}/rolesattendees/{id}', 'RoleAttendeeController@destroy');
 
 /***************
  * CERTIFICATES
