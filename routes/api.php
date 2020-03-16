@@ -56,7 +56,7 @@ Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventU
 Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusers',      'EventUserController@createUserAndAddtoEvent');
 Route::get ('events/{event_id}/eventusers',      'EventUserController@index');
-Route::get ('events/{event_id}/eventuserdelete/{id}',      'EventUserController@destroyTemp');
+Route::delete ('events/{event_id}/eventuserdelete/{id}',      'EventUserController@destroyTemp');
 Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
