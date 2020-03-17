@@ -24,8 +24,8 @@ class reminder extends Mailable implements ShouldQueue
     public $event_state;
     public $logo;
     public $attach;
-    public $desc;
-    public $title;
+    public $description;
+    public $principal_title;
     /**
      * Create a new message instance.
      *
@@ -43,8 +43,10 @@ class reminder extends Mailable implements ShouldQueue
 
         Log::debug("cargando datos event_user al correo");
 
-        $this->$title = $title;
-        $this->$desc = $desc;
+        $principal_title = $title;
+        $description = $desc;
+        $this->$principal_title = $principal_title;
+        $this->$description = $description;
         $this->event_address =$event_address ;
         $this->event_city = $event_city;
         $this->event_state = $event_state;
@@ -69,9 +71,10 @@ class reminder extends Mailable implements ShouldQueue
         $event_address = $this->event_address;
         $event_city = $this->event_city;
         $event_state = $this->event_state;
-        $title = $this->title;
-        $desc = $this->desc;
+        $principal_title = $this->principal_title;
+        $description = $this->description;
       
+
         return $this
         // ->attach($attachPath,[
         //     'as' => 'checkin',
