@@ -11,6 +11,7 @@ class Attendee extends Models\Attendee
     const STATE_DRAFT = "5b0efc411d18160bce9bc706";//"DRAFT";
     const STATE_INVITED = "5ba8d213aac5b12a5a8ce749";//"INVITED";
     const STATE_RESERVED = "5ba8d200aac5b12a5a8ce748";//"RESERVED";
+    const ROL_ID = "5d7ac3f56b364a4042de9b08";//"BOOKED";
     const STATE_BOOKED = "5b859ed02039276ce2b996f0";//"BOOKED";
     
     protected $table = "event_users";
@@ -22,6 +23,7 @@ class Attendee extends Models\Attendee
     //Default values
     protected $attributes = [
         'state_id'  => self::STATE_DRAFT,
+        'rol_id' => self::ROL_ID,
         'checked_in' => false
     ];
      public function activities()
