@@ -31,7 +31,7 @@ class reminder extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($data, $title, $desc)
+    public function __construct($data,$title,$desc)
     {
         
         Log::debug("recibiendo event_user");
