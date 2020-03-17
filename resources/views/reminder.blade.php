@@ -2,7 +2,7 @@
 
 
 {{ $title }}
-<div style="text-align: justify">
+<div style="text-align: center">
     <span>
     {{$desc}}
 
