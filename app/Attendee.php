@@ -13,18 +13,15 @@ class Attendee extends Models\Attendee
     const STATE_RESERVED = "5ba8d200aac5b12a5a8ce748";//"RESERVED";
     const STATE_BOOKED = "5b859ed02039276ce2b996f0";//"BOOKED";
     
-    const ROL_ATTENDEE = "5afaf644500a7104f77189cd";
-
     protected $table = "event_users";
     protected $observables = ['saved', 'created','updated'];
     protected static $unguarded = true;
     protected $fillable = ['account_id', 'event_id', 'state_id', "checked_in", "checked_in_date", "properties", "activities"];
-    protected $with = ['user', 'state' ];
+    protected $with = ['role_attendees', 'user', 'state' ];
 
     //Default values
     protected $attributes = [
         'state_id'  => self::STATE_DRAFT,
-        'rol_id'   => self::ROL_ATTENDEE,
         'checked_in' => false
     ];
      public function activities()
@@ -43,6 +40,11 @@ class Attendee extends Models\Attendee
     public function user()
     {
         return $this->belongsTo('App\Account', 'account_id');
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo('App\RoleAttendee', 'rol_id');
     }
 
     public function confirm()
