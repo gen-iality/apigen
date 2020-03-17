@@ -1,7 +1,7 @@
 @component('mail::message')
 
 
- {{ $titulo_principal }}
+ {{ $title_principal }}
 <div style="text-align: justify">
     <span>
     {{ $description }}
