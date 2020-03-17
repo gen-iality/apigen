@@ -39,8 +39,6 @@ class MailController extends Controller
         $data["event_id"] = $event_id;
         $mails = $data["mails"];
         $result = new Mailing($data);
-       
-
         $title = $data["title"];
         $desc = $data["desc"];
         $result->save();
@@ -50,7 +48,7 @@ class MailController extends Controller
             Mail::to($value["email"])->send(
             new reminder($value,$title,$desc)
         );
-            return $value;
+            return $result;
         }
     }
 
