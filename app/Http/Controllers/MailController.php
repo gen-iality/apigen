@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mailing;
+use Mail;
 use App\Event;
 use App\Attendee;
-use App\Mail;
+use App\Mail\reminder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +23,7 @@ class MailController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Mail::where("event_id", $event_id)->paginate(config('app.page_size'))
+            Mailing::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
  
@@ -36,29 +38,25 @@ class MailController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $mails = $data["mails"];
-        $result = new Mail($data);
-        $user_id = [];
+        $result = new Mailing($data);
         
+        $title = $data["title"];
+        $desc = $data["desc"];
         $result->save();
-            $email = Attendee::where("event_id",$event_id)->where("email",$mails)->get();
-            $list = json_decode(json_encode($email),true); 
-            foreach ($list as $value) {
-                array_push($user_id,$value["_id"]);
-                Mail::to($value["email"])->send(
-                new RSVP($value)
-                );
-                return $value;
-            }
-        
-        Mail::to($email)->send(
-            new RSVP($result->data)
-        );
-        return $result;
+        $email = Attendee::where("event_id",$event_id)->where("email",$mails)->get();
+        $list = json_decode(json_encode($email),true); 
+        foreach ($list as $value) {
+            Mail::to($value["email"])->send(
+            new reminder($value,$title,$desc)
+            );
+            return $value;
+        }
     }
+
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
-        $mail = Mail::findOrFail($id);
+        $mail = Mailing::findOrFail($id);
         //if($Space["event_id"]= $event_id){
         $mail->fill($data);
         $mail->save();
@@ -74,7 +72,7 @@ class MailController extends Controller
      
     public function show($event_id,$id)
     {
-        $Mail = Mail::findOrFail($id);
+        $Mail = Mailing::findOrFail($id);
         $response = new JsonResource($Mail);
         //if ($Mail["event_id"] = $event_id) {
         return $response;
@@ -88,7 +86,7 @@ class MailController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {
-        $Mail = Mail::findOrFail($id);
+        $Mail = Mailing::findOrFail($id);
         return (string) $Mail->delete();
     }
 }
