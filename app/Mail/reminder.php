@@ -26,6 +26,8 @@ class reminder extends Mailable implements ShouldQueue
     public $attach;
     public $description;
     public $principal_title;
+    public $title;
+    public $desc;
     /**
      * Create a new message instance.
      *
@@ -51,6 +53,8 @@ class reminder extends Mailable implements ShouldQueue
         $this->event_city = $event_city;
         $this->event_state = $event_state;
         $this->event = $event;
+        $this->title = $title;
+        $this->desc = $desc;
         $gfService = new GoogleFiles();
    
         Log::debug("pasando a crear correo");
@@ -73,7 +77,8 @@ class reminder extends Mailable implements ShouldQueue
         $event_state = $this->event_state;
         $principal_title = $this->principal_title;
         $description = $this->description;
-      
+        $title = $this->title;
+        $desc = $this->desc;
 
         return $this
         // ->attach($attachPath,[
