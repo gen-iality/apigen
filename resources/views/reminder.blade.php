@@ -32,7 +32,7 @@ Ubicación del evento  <br>
 
 <div style="text-align: center">
     <span>
-    {{ $desc }}
+    {{ $description }}
         A través del sitio web de Evius.co puedes acceder
         fácilmente a las entradas de tus eventos. Comienza
         dando clic en el siguiente enlace para confirmar tu
