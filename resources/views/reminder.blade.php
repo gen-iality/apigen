@@ -1,5 +1,6 @@
 @component('mail::message')
 
+
  {{ $title }}
 <div style="text-align: justify">
     <span>
@@ -8,7 +9,6 @@
     
 </div>
 <br />
-
 
 <div style="text-align: center">
 </div>
@@ -32,6 +32,7 @@ Ubicación del evento  <br>
 
 <div style="text-align: center">
     <span>
+    {{$desc}}
         A través del sitio web de Evius.co puedes acceder
         fácilmente a las entradas de tus eventos. Comienza
         dando clic en el siguiente enlace para confirmar tu
