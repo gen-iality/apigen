@@ -18,7 +18,7 @@ class Attendee extends Models\Attendee
     protected $observables = ['saved', 'created','updated'];
     protected static $unguarded = true;
     protected $fillable = ['account_id', 'event_id', 'state_id', "checked_in", "checked_in_date", "properties", "activities"];
-    protected $with = ['role_attendees', 'user', 'state' ];
+    protected $with = ['rol_id', 'user', 'state' ];
 
     //Default values
     protected $attributes = [
