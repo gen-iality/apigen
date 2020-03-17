@@ -43,6 +43,8 @@ class reminder extends Mailable implements ShouldQueue
 
         Log::debug("cargando datos event_user al correo");
 
+        $this->$title = $title ;
+        $this->$desc = $desc ;
         $this->event_address =$event_address ;
         $this->event_city =$event_city;
         $this->event_state =$event_state;
@@ -68,7 +70,7 @@ class reminder extends Mailable implements ShouldQueue
         $event_address = $this->event_address;
         $event_city = $this->event_city;
         $event_state = $this->event_state;
-        $title = $this->title; 
+        $title = $this->title;
         $desc = $this->desc;
         try {
 
@@ -85,7 +87,7 @@ class reminder extends Mailable implements ShouldQueue
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
         ->from("apps@mocionsoft.com", "Recordatorio")
-        ->subject($this->subject)
+        ->subject("el sujeto")
         ->markdown('reminder');
         
     }
