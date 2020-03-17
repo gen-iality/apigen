@@ -199,6 +199,13 @@ Route::apiResource('events/{event_id}/rolesattendees', 'RoleAttendeeController')
 
 
 /***************
+ * Mail
+ ****************/
+Route::apiResource('events/{event_id}/mailing', 'MailController');
+
+
+
+/***************
  * CERTIFICATES
  ****************/
 
