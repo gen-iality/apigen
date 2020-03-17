@@ -47,7 +47,7 @@ class MailController extends Controller
         $list = json_decode(json_encode($email),true); 
         foreach ($list as $value) {
             Mail::to($value["email"])->send(
-            new reminder($value,$title,$desc)
+            new reminder($value, $title, $desc)
             );
             return $value;
         }
