@@ -41,12 +41,13 @@ class MailController extends Controller
         $result = new Mailing($data);
         $title = $data["title"];
         $desc = $data["desc"];
+        $subject = $data["subject"];
         $result->save();
         $email = Attendee::where("event_id",$event_id)->where("email",$mails)->get();
         $list = json_decode(json_encode($email),true); 
         foreach ($list as $value) {
             Mail::to($value["email"])->send(
-            new reminder($value,$title,$desc)
+            new reminder($value,$title,$desc,$subject)
         );
             return $result;
         }

@@ -28,12 +28,14 @@ class reminder extends Mailable implements ShouldQueue
     public $principal_title;
     public $title;
     public $desc;
+    public $subject;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data,$title,$desc)
+    public function __construct($data,$title,$desc,$subject)
     {
         
         Log::debug("recibiendo event_user");
@@ -55,6 +57,7 @@ class reminder extends Mailable implements ShouldQueue
         $this->event = $event;
         $this->title = $title;
         $this->desc = $desc;
+        $this->subject = $subject;
         $gfService = new GoogleFiles();
    
         Log::debug("pasando a crear correo");
@@ -79,6 +82,7 @@ class reminder extends Mailable implements ShouldQueue
         $description = $this->description;
         $title = $this->title;
         $desc = $this->desc;
+        $subject = $this->subject;
 
         return $this
         // ->attach($attachPath,[
@@ -86,8 +90,8 @@ class reminder extends Mailable implements ShouldQueue
         //     'mime' => 'image/png',
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
-        ->from("apps@mocionsoft.com", "Recordatorio")
-        ->subject("el sujeto")
+        ->from("apps@mocionsoft.com", $subject)
+        ->subject($subject)
         ->markdown('reminder');
         
     }
