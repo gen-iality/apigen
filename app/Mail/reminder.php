@@ -31,7 +31,7 @@ class reminder extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($data, $title, $desc)
+    public function __construct($data)
     {
         
         Log::debug("recibiendo event_user");
@@ -43,16 +43,17 @@ class reminder extends Mailable implements ShouldQueue
 
         Log::debug("cargando datos event_user al correo");
 
-        $this->$title = $title ;
-        $this->$desc = $desc ;
+        $this->$title = $data["title"];
+        $this->$desc = $data["desc"];
+        echo $desc.$title;
         $this->event_address =$event_address ;
-        $this->event_city =$event_city;
-        $this->event_state =$event_state;
+        $this->event_city = $event_city;
+        $this->event_state = $event_state;
         $this->event = $event;
+        
         $gfService = new GoogleFiles();
    
         Log::debug("pasando a crear correo");
-
     }
 
     /**
@@ -72,14 +73,7 @@ class reminder extends Mailable implements ShouldQueue
         $event_state = $this->event_state;
         $title = $this->title;
         $desc = $this->desc;
-        try {
-
-
-        } catch (\Exception $e) {
-            Log::debug("error: " . $e->getMessage());
-            var_dump($e->getMessage());
-        }
-      
+        echo $desc.$title;
         return $this
         // ->attach($attachPath,[
         //     'as' => 'checkin',
