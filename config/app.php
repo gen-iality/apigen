@@ -1,9 +1,9 @@
 <?php
 
 
-define ("SUGGESTED","SUGGESTED","OPEN");
-define ("EXCLUSIVE","EXCLUSIVE","OPEN");
-
+defined('SUGGESTED') or define ("SUGGESTED","SUGGESTED");
+defined('EXCLUSIVE') or define ("EXCLUSIVE","EXCLUSIVE");
+defined('OPEN') or  define ("OPEN","OPEN");
 return [
 
     /*
