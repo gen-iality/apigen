@@ -284,6 +284,8 @@ class EventUserController extends Controller
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
+
+            
             $userData = $request->json()->all();
 
             if (isset($eventUserData['properties'])) {
@@ -315,8 +317,15 @@ class EventUserController extends Controller
             
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            
+                        
             $response = new EventUserResource($result->data);
+            
+            
+            if(!is_null($eventUserData["rol_id"])){
+                $rol = $response["user"]["rol_id"];
+                $response->rol()->attach($rol);
+            }
+            
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
@@ -377,6 +386,8 @@ class EventUserController extends Controller
     {
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
+        
+        $data['properties'] = $data ;
         $new_properties = $data['properties'];
         $old_properties = $eventUser->properties;
         $properties_merge =  array_merge($old_properties,$new_properties);
