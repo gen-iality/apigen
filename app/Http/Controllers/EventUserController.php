@@ -387,7 +387,9 @@ class EventUserController extends Controller
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
         
-        $data['properties'] = $data ;
+        if(empty($data['properties'])){
+            $data['properties'] = $data ;    
+        }
         $new_properties = $data['properties'];
         $old_properties = $eventUser->properties;
         $properties_merge =  array_merge($old_properties,$new_properties);
