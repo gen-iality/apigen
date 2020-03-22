@@ -33,15 +33,6 @@ Ubicación del evento  <br>
 -----------------------
 @endcomponent
 
-<div style="text-align: center">
-    <span>
-    {{$description}}
-        A través del sitio web de Evius.co puedes acceder
-        fácilmente a las entradas de tus eventos. Comienza
-        dando clic en el siguiente enlace para confirmar tu
-        cuenta y ver los eventos que esperan por ti 
-    </span>
-</div>
 
 <!-- Click aqui
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])
@@ -56,7 +47,7 @@ Confirmar Cuenta
 
 <div style="text-align: center">
     <span>
-        Recibiste este correo porque estás inscrito en un
+        Recibiste este correo porque estás inscrito y/o invitado en un
         evento gestionado a través de Evius.co o te has
         registrado en el portal de Evius.co
     </span>
