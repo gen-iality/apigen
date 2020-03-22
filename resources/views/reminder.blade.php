@@ -9,7 +9,7 @@
     </span>
     
 </div>
-<img src="{{ $img }}" alt="">
+<img src="{{$img}}" alt="">
 
 <br />
 
