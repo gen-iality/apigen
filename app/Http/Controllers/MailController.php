@@ -45,6 +45,7 @@ class MailController extends Controller
         $title = $data["title"];
         $desc = $data["desc"];
         $img = $data["img"];
+        $sender = $data["sender"];
         $subject = $data["subject"];
         $result->save();
         $email = Attendee::where("event_id",$event_id)->where("email",$mails)->get();
@@ -54,7 +55,7 @@ class MailController extends Controller
         foreach ($mails as $key => $value) {
             
             Mail::to($value)->send(
-            new reminder($event_id,$title,$desc,$subject,$img)
+            new reminder($event_id,$title,$desc,$subject,$img,$sender)
         );
         }
         //return $result;
