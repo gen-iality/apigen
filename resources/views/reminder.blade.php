@@ -9,7 +9,8 @@
     </span>
     
 </div>
-<div>  {{HTML::image($img)}} </div>
+<img src="{{ $img }}" alt="">
+
 <br />
 
 <div style="text-align: center">
