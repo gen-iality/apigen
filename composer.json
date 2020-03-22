@@ -121,11 +121,11 @@
     "repositories" : [
         {
             "type": "git",
-            "url":  "https://davidfelipemartinez@bitbucket.org/modev/placetopay.git"
+            "url":  "https://gitlab.com/mocipublic/placetopay.git"
         },
         {
             "type": "git",
-            "url":  "https://cesarbarrios@bitbucket.org/modev/omnipay-payu.git"
+            "url":  "https://gitlab.com/mocipublic/omnipay-payu.git"
         }
     ],
     "minimum-stability": "dev",
