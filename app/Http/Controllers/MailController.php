@@ -44,13 +44,16 @@ class MailController extends Controller
         $subject = $data["subject"];
         $result->save();
         $email = Attendee::where("event_id",$event_id)->where("email",$mails)->get();
-        $list = json_decode(json_encode($email),true); 
-        foreach ($list as $value) {
-            Mail::to($value["email"])->send(
-            new reminder($value,$title,$desc,$subject)
+        $list = json_decode(json_encode($email),true);
+        
+        echo var_dump($list);
+        foreach ($mails as $key => $value) {
+            
+            Mail::to($value)->send(
+            new reminder($event_id,$title,$desc,$subject)
         );
-            return $result;
         }
+        //return $result;
     }
 
     public function update(Request $request, $event_id, $id)

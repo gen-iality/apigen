@@ -35,12 +35,12 @@ class reminder extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($data,$title,$desc,$subject)
+    public function __construct($event_id,$title,$desc,$subject)
     {
         
         Log::debug("recibiendo event_user");
       
-        $event = Event::find($data["event_id"]);
+        $event = Event::find($event_id);
         $event_address = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
         $event_city = isset($event["location"]["City"])?($event["location"]["City"]):" ";
         $event_state = isset($event["location"]["state"])?($event["location"]["state"]):" ";
