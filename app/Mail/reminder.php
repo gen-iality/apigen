@@ -26,6 +26,7 @@ class reminder extends Mailable implements ShouldQueue
     public $attach;
     public $description;
     public $principal_title;
+    public $img;
     public $title;
     public $desc;
     public $subject;
@@ -35,7 +36,7 @@ class reminder extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($event_id,$title,$desc,$subject)
+    public function __construct($event_id,$title,$desc,$subject,$img)
     {
         
         Log::debug("recibiendo event_user");
@@ -50,6 +51,7 @@ class reminder extends Mailable implements ShouldQueue
         $principal_title = $title;
         $description = $desc;
         $this->$principal_title = $principal_title;
+        $this->$img = $img;
         $this->$description = $description;
         $this->event_address =$event_address ;
         $this->event_city = $event_city;
@@ -83,6 +85,7 @@ class reminder extends Mailable implements ShouldQueue
         $title = $this->title;
         $desc = $this->desc;
         $subject = $this->subject;
+        $img = $this->img;
 
         return $this
         // ->attach($attachPath,[

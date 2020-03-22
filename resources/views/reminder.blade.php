@@ -9,6 +9,7 @@
     </span>
     
 </div>
+<div>  {{HTML::image($img)}} </div>
 <br />
 
 <div style="text-align: center">

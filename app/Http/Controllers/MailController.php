@@ -38,9 +38,13 @@ class MailController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $mails = $data["mails"];
+        if(empty($data["img"])){
+            $data["img"] = "public/images/logo.png";
+        }
         $result = new Mailing($data);
         $title = $data["title"];
         $desc = $data["desc"];
+        $img = $data["img"];
         $subject = $data["subject"];
         $result->save();
         $email = Attendee::where("event_id",$event_id)->where("email",$mails)->get();
@@ -50,7 +54,7 @@ class MailController extends Controller
         foreach ($mails as $key => $value) {
             
             Mail::to($value)->send(
-            new reminder($event_id,$title,$desc,$subject)
+            new reminder($event_id,$title,$desc,$subject,$img)
         );
         }
         //return $result;
