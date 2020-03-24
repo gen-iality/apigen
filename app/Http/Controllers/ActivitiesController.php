@@ -32,7 +32,15 @@ class ActivitiesController extends Controller
             return JsonResource::collection(
                 Activities::where("event_id", $event_id)->where('locale', '!=', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
         }
+    }   
+
+    public function indexByHost(Request $request, $event_id, $host_id)
+    {
+        return JsonResource::collection(
+            Activities::where("event_id", $event_id)->where('host_ids', $host_id)->paginate(config('app.page_size'))
+        );
     }
+
 
     /**
      * Store a newly created resource in storage.

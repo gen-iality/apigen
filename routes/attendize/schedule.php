@@ -21,7 +21,7 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
 
 
 /****************
- * APP CONFIGURATION
+ * NEWSFEED
  ****************/
 
 Route::apiResource('events/{id}/newsfeed', 'NewsfeedController');
@@ -60,6 +60,7 @@ Route::apiResource('events/{event_id}/host', 'HostController');
  * ACTIVITIES
  ****************/
 Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
+Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
 Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
 
 /***************
