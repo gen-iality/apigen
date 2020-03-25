@@ -4,7 +4,7 @@
 {{ $title }}
 <div style="text-align: center">
     <span>
-    {{$desc}}
+    {!!$desc  !!}
 
     </span>
     
