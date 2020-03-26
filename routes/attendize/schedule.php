@@ -114,6 +114,13 @@ Route::apiResource('events/{event_id}/documents', 'DocumentsController');
  
 
 /*******************
+ * WALL
+ ******************/
+Route::apiResource('events/{event_id}/wall', 'WallController');
+ 
+ 
+
+/*******************
  * FAQ'S
  ******************/
 Route::apiResource('events/{id}/faqs', 'FaqController');
