@@ -98,9 +98,9 @@ Route::post("verifyuser","VertifyController@validateUser");
 Route::post('events/{event_id}/recoverypassword', 'SendContentController@PasswordRecovery');
 
 
-/*******************
+/********************
  * PUSH NOTIFICATIONS
- ******************/
+ ********************/
 Route::apiResource('events/{event_id}/sendpush', 'PushNotificationsController');
 Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
 Route::get('event/{event_id}/notifications/{id}', 'PushNotificationsController@indexByUser');
@@ -113,9 +113,9 @@ Route::get('event/{event_id}/notifications/{id}', 'PushNotificationsController@i
 Route::apiResource('events/{event_id}/documents', 'DocumentsController');
  
 
-/*******************
+/*******
  * WALL
- ******************/
+ ******/
 Route::apiResource('events/{event_id}/wall', 'WallController');
  
  
