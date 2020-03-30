@@ -84,12 +84,12 @@ class ActivitiesController extends Controller
     {
         $data = $request->json()->all();
         $data["payload"]["object"]["id"];
-        $meeting_id = $data["payload"]["object"]["recording_files"][1]["meeting_id"];
+        $meeting_id = $data["payload"]["object"]["uuid"];
         
         $activity = Activities::where("meeting_id",$meeting_id)->first();
         
-        $values["meeting_play_url"] = $data["payload"]["object"]["recording_files"][1]["play_url"];
-        $values["meeting_download_url"] = $data["payload"]["object"]["recording_files"][1]["download_url"];
+        $values["meeting_play_url"] = $data["payload"]["object"]["recording_files"][0]["play_url"];
+        $values["meeting_download_url"] = $data["payload"]["object"]["recording_files"][0]["download_url"];
         $activity->fill($values);
         $activity->save();
     
