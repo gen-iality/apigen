@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Survey;
+use App\Activities;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,7 +15,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class surveysController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -34,12 +34,21 @@ class surveysController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $event_id)
-    {
+{
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Survey($data);
+
+        $activity = Activities::find($data["activity_id"]);
+        $activities_array = $activity->survey_ids;
+        array_push($activities_array,$data["activity_id"]);
+        $new_activities["survey_ids"] = $activities_array;
+        $activity->fill($new_activities);
+        $activity->save();
+        
+        $result->activities($data["activity_id"]);
         $result->save();
-        return $result;
+        return $result; 
     }
     /**
      * Display the specified resource.
@@ -57,7 +66,7 @@ class surveysController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  \App\survey  $survey
      * @return \Illuminate\Http\Response
      */

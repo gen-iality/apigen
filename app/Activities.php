@@ -49,9 +49,14 @@ class Activities extends Moloquent
         return $this->belongsTo('App\Type');
     }
 
+    public function survey()
+    {
+        return $this->belongsTo('App\Survey');
+    }
+
     public function access_restriction_roles()
     {
-        return $this->belongsToMany ('App\RoleAttendee');
+        return $this->belongsToMany('App\RoleAttendee');
     }
 
     public function users()
@@ -79,8 +84,11 @@ class Activities extends Moloquent
         "start_url", 
         "join_url", 
         "meeting_id", 
+        "meeting_play_url",
+        "meeting_download_url",
         "duplicate",
         "locale",
+        "survey_ids",
         "locale_original",
         "remaining_capacity",
         "access_restriction_type",

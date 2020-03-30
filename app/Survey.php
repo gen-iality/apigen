@@ -6,19 +6,18 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use Moloquent;
 
-/**
- * Category Model
- *
- */ 
 class Survey extends Moloquent
 {
-
-    //protected $with = ['staff'];
 
     public function event()
     {
         return $this->belongsTo('App\Event');
     }
   
+    public function activities()
+    {
+        return $this->belongsToMany('App\Activities');
+    }
+
     protected $guarded = [];
 }
