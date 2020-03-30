@@ -82,14 +82,15 @@ class ActivitiesController extends Controller
     
     public function storeMeetingRecording(Request $request)
     {
+
+        //
         $data = $request->json()->all();
         $data["payload"]["object"]["id"];
         $meeting_id = $data["payload"]["object"]["uuid"];
         
         $activity = Activities::where("meeting_id",$meeting_id)->first();
         
-        $values["meeting_play_url"] = $data["payload"]["object"]["recording_files"][0]["play_url"];
-        $values["meeting_download_url"] = $data["payload"]["object"]["recording_files"][0]["download_url"];
+        $values["meeting_video"] = $data["payload"]["object"]["recording_files"][0]["download_url"];
         $activity->fill($values);
         $activity->save();
     
