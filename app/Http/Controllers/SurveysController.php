@@ -40,7 +40,11 @@ class surveysController extends Controller
         $result = new Survey($data);
 
         $activity = Activities::find($data["activity_id"]);
+        if(empty($activity->survey_ids)){
+        $activities_array = [];
+        }else{
         $activities_array = $activity->survey_ids;
+    }
         array_push($activities_array,$data["activity_id"]);
         $new_activities["survey_ids"] = $activities_array;
         $activity->fill($new_activities);
