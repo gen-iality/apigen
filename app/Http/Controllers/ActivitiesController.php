@@ -86,7 +86,7 @@ class ActivitiesController extends Controller
         //
         $data = $request->json()->all();
         $data["payload"]["object"]["id"];
-        $meeting_id = $data["payload"]["object"]["uuid"];
+        $meeting_id = $data["payload"]["object"]["id"];
         
         $activity = Activities::where("meeting_id",$meeting_id)->first();
         
