@@ -33,6 +33,12 @@ class DocumentsController extends Controller
         );
     }
 
+    public function indexFiles(Request $request, $event_id)
+    {
+        return JsonResource::collection(
+            Documents::where("event_id", $event_id)->where("type", "file")->paginate(config('app.page_size'))
+        );
+    }
     /**
      * Store a newly created resource in storage.
      *

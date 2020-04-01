@@ -112,6 +112,7 @@ Route::get('event/{event_id}/notifications/{id}', 'PushNotificationsController@i
  * DOCUMENTS UPLOAD
  ******************/
 Route::apiResource('events/{event_id}/documents', 'DocumentsController');
+Route::get('events/{event_id}/getallfiles/', 'DocumentsController@indexFiles');
  
 
 /*******
