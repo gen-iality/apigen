@@ -103,11 +103,11 @@ class ActivitiesController extends Controller
              }
         }
         $values["meeting_video"] = $zoom_url;
-
+        $activity = Activities::where("meeting_id",$meeting_id)->first();
+        
         $activity->fill($values);
         $activity->save();
 
-        $activity = Activities::where("meeting_id",$meeting_id)->first();
         $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
 
         $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
