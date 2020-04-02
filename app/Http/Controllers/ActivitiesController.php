@@ -95,7 +95,14 @@ class ActivitiesController extends Controller
         $client = new \GuzzleHttp\Client(); 
         $data = $request->json()->all();
         $meeting_id = $data["payload"]["object"]["id"];
-        $zoom_url = $data["payload"]["object"]["recording_files"][0]["file_type"] == "MP4" ? $data["payload"]["object"]["recording_files"][0]["download_url"] : $data["payload"]["object"]["recording_files"][1]["download_url"];
+        $zoom_array = $data["payload"]["object"]["recording_files"];
+        foreach ($zoom_array as $key => $value) {
+            echo $value["file_type"];
+             if($value["file_type"] == "MP4" ){
+                $zoom_url = $value["download_url"];
+             }
+        }
+
         $activity = Activities::where("meeting_id",$meeting_id)->first();
         $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
 
