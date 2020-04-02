@@ -6,9 +6,17 @@ use App\Activities;
 use App\Category;
 use App\Event;
 use App\RoleAttendee;
-
+use Aws\S3\S3Client;
+use Aws\Credentials\Credentials;
+use Aws\S3\Transfer;
+use Aws\Common\Exception\MultipartUploadException;
+use Aws\S3\MultipartUploader;
+use Aws\Exception\AwsException;
+use Aws\S3\ObjectUploader;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 /**
  * @resource Event
@@ -19,6 +27,7 @@ class ActivitiesController extends Controller
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request, $event_id)
     {
         $data = $request->json()->all();
@@ -73,30 +82,49 @@ class ActivitiesController extends Controller
         }
         if(isset($data["access_restriction_rol_ids"])){
             $ids = $data["access_restriction_rol_ids"];
-            $activity->access_restriction_roles()->attach($ids);        
+            $activity->access_restriction_roles()->attach($ids);
         }
         //Cargamos de nuevo para traer la info de las categorias
         $activity = Activities::find($activity->id);        
         return $activity;
     }
     
+    // endpoint que recibe el webhook de zoom guarda la info en mongo y la traspasa a s3 de aws
     public function storeMeetingRecording(Request $request)
     {
-
-        //
+        $client = new \GuzzleHttp\Client(); 
         $data = $request->json()->all();
-        $data["payload"]["object"]["id"];
         $meeting_id = $data["payload"]["object"]["id"];
-        
         $activity = Activities::where("meeting_id",$meeting_id)->first();
+        $zoom_url = $data["payload"]["object"]["recording_files"][0]["download_url"];
+        $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
         
-        $values["meeting_video"] = $data["payload"]["object"]["recording_files"][0]["download_url"];
+        $request = $client->get($zoom_url, ['allow_redirects' => false]); 
+        
+        $source = $request->getHeaderLine('location');
+
+        $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
+        $s3 = new S3Client([
+            'version' => 'latest',
+            'region'  => 'sa-east-1',
+            'credentials' => $credentials
+        ]);
+
+        $key = $meeting_id.".".$data["payload"]["object"]["recording_files"][0]["file_type"];
+        
+        $uploader = new MultipartUploader($s3,$source, [
+            'bucket' => 'meetingsrecorded',
+            'key'    => $key,
+            'ACL'    => 'public-read'
+        ]);
+
+        $result = $uploader->upload();
+        $values["meeting_video"] = $result["Location"];
         $activity->fill($values);
         $activity->save();
-    
-        return $activity;
+            return $activity;
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -108,7 +136,9 @@ class ActivitiesController extends Controller
         $activity = Activities::findOrFail($id);
         return $activity;
     }
-    
+
+
+    // endpoint destinado a la duplicacion de una actividad a idioma ingles
     public function duplicate($event_id, $id)
     {
         $activities_in_es = Activities::findOrFail($id);
