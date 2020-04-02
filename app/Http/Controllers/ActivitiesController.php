@@ -95,21 +95,23 @@ class ActivitiesController extends Controller
         $client = new \GuzzleHttp\Client(); 
         $data = $request->json()->all();
         $meeting_id = $data["payload"]["object"]["id"];
+        $zoom_url = $data["payload"]["object"]["recording_files"][0]["file_type"] == "MP4" ? $data["payload"]["object"]["recording_files"][0]["download_url"] : $data["payload"]["object"]["recording_files"][1]["download_url"];
         $activity = Activities::where("meeting_id",$meeting_id)->first();
-        $zoom_url = ($data["payload"]["object"]["recording_files"][0]["file_type"] == "mp4") ? $data["payload"]["object"]["recording_files"][0]["download_url"] : $data["payload"]["object"]["recording_files"][1]["download_url"];
         $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
-        $request = $client->get($zoom_url, ['allow_redirects' => false]); 
-        
-        $source = $request->getHeaderLine('location');
 
         $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
+
         $s3 = new S3Client([
             'version' => 'latest',
             'region'  => 'sa-east-1',
             'credentials' => $credentials
         ]);
-
-        $key = $meeting_id.".".$data["payload"]["object"]["recording_files"][0]["file_type"];
+        
+        $request = $client->get($zoom_url, ['allow_redirects' => false]); 
+        
+        $source = $request->getHeaderLine('location');
+        
+        $key = $meeting_id.".mp4";
         
         $uploader = new MultipartUploader($s3,$source, [
             'bucket' => 'meetingsrecorded',
@@ -121,7 +123,21 @@ class ActivitiesController extends Controller
         $values["meeting_video"] = $result["Location"];
         $activity->fill($values);
         $activity->save();
-            return $activity;
+
+    }
+    // endpoint destinado a indexar las conferencias del s3 de aws
+    public function indexConferences(Request $request)
+    {
+        $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
+        $s3 = new S3Client([
+            'version' => 'latest',
+            'region'  => 'sa-east-1',
+            'credentials' => $credentials
+        ]);
+        
+        return $s3->getPaginator('ListObjects', [
+            'Bucket' => 'meetingsrecorded'
+        ]);
     }
     
     /**
