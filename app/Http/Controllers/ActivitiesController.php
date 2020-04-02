@@ -92,23 +92,30 @@ class ActivitiesController extends Controller
     // endpoint que recibe el webhook de zoom guarda la info en mongo y la traspasa a s3 de aws
     public function storeMeetingRecording(Request $request)
     {
-        $client = new \GuzzleHttp\Client(); 
         $data = $request->json()->all();
         $meeting_id = $data["payload"]["object"]["id"];
+        echo "id reunion".$meeting_id."<br>";
         $zoom_array = $data["payload"]["object"]["recording_files"];
         foreach ($zoom_array as $key => $value) {
-            echo $value["file_type"];
+            echo "tipo archivo".$value["file_type"]."<br>";
              if($value["file_type"] == "MP4" ){
                 $zoom_url = $value["download_url"];
+                echo "download_url".$zoom_url."<br>";break;
              }
         }
         $values["meeting_video"] = $zoom_url;
         $activity = Activities::where("meeting_id",$meeting_id)->first();
-        
+        echo "actividad".$activity->_id."<br>";
         $activity->fill($values);
         $activity->save();
 
-        $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
+        $client = new \GuzzleHttp\Client(); 
+        
+        $request = $client->get($zoom_url, ['allow_redirects' => false]); 
+        
+        $source = $request->getHeaderLine('location');
+        
+        $key = $meeting_id.".mp4";
 
         $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
 
@@ -117,13 +124,7 @@ class ActivitiesController extends Controller
             'region'  => 'sa-east-1',
             'credentials' => $credentials
         ]);
-        
-        $request = $client->get($zoom_url, ['allow_redirects' => false]); 
-        
-        $source = $request->getHeaderLine('location');
-        
-        $key = $meeting_id.".mp4";
-        
+          
         $uploader = new MultipartUploader($s3,$source, [
             'bucket' => 'meetingsrecorded',
             'key'    => $key,
@@ -131,9 +132,11 @@ class ActivitiesController extends Controller
         ]);
 
         $result = $uploader->upload();
+
         $values["meeting_video"] = $result["Location"];
         $activity->fill($values);
         $activity->save();
+        return $activity;
 
     }
     // endpoint destinado a indexar las conferencias del s3 de aws
