@@ -96,9 +96,8 @@ class ActivitiesController extends Controller
         $data = $request->json()->all();
         $meeting_id = $data["payload"]["object"]["id"];
         $activity = Activities::where("meeting_id",$meeting_id)->first();
-        $zoom_url = $data["payload"]["object"]["recording_files"][0]["download_url"];
+        $zoom_url = ($data["payload"]["object"]["recording_files"][0]["file_type"] == "mp4") ? $data["payload"]["object"]["recording_files"][0]["download_url"] : $data["payload"]["object"]["recording_files"][1]["download_url"];
         $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
-        
         $request = $client->get($zoom_url, ['allow_redirects' => false]); 
         
         $source = $request->getHeaderLine('location');
