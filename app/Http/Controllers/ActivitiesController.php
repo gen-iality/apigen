@@ -132,8 +132,8 @@ class ActivitiesController extends Controller
         ]);
 
         $result = $uploader->upload();
-
         $values["meeting_video"] = $result["Location"];
+        str_replace('\/','/',$values["meeting_video"]);
         $activity->fill($values);
         $activity->save();
         return $activity;
