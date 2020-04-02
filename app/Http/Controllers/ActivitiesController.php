@@ -102,6 +102,10 @@ class ActivitiesController extends Controller
                 $zoom_url = $value["download_url"];
              }
         }
+        $values["meeting_video"] = $zoom_url;
+
+        $activity->fill($values);
+        $activity->save();
 
         $activity = Activities::where("meeting_id",$meeting_id)->first();
         $filetype = $data["payload"]["object"]["recording_files"][0]["file_type"];
