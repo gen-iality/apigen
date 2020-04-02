@@ -19,7 +19,8 @@ return [
     
 
     'name' => env('APP_NAME', 'Evius'),
-
+    'aws_key' => env('AWS_KEY','production'),
+    'aws_secret' => env('AWS_SECRET','production'),
     'front_url' => 'https://eviusco.netlify.com',
     'page_size' => 900,
     'sendinblue_page' =>'https://api.sendinblue.com/v2.0',
@@ -182,6 +183,7 @@ return [
         /*
          * Third Party Service Providers attendize platform
          */
+        Aws\Laravel\AwsServiceProvider::class,
         Vinelab\Http\HttpServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
@@ -271,17 +273,16 @@ return [
         'Markdown'     => MaxHoffmann\Parsedown\ParsedownFacade::class,
         'Omnipay'      => Omnipay\Omnipay::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-
-
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
         //Not support by this version 'PDF' => Nitmedia\Wkhtml2pdf\Facades\Wkhtml2pdf::class,        
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
 
-    ],
+    ]
 
 ];
