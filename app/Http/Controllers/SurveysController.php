@@ -90,15 +90,12 @@ class surveysController extends Controller
         $survey->save();
         return $data;
         }
-        $newarray = $survey->questions;
-        array_push($newarray, $data);
-        echo $newarray;die;
-        
+    
             
         //if(!empty($question)){
         //    $survey->questions = [];
         //}
-        $survey->fill($questions);
+        $survey->fill($data);
         $survey->save();
         return $data;
     }
