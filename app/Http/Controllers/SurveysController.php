@@ -34,7 +34,7 @@ class surveysController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $event_id)
-{
+{   
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Survey($data);
@@ -44,7 +44,7 @@ class surveysController extends Controller
         $activities_array = [];
         }else{
         $activities_array = $activity->survey_ids;
-    }
+        }   
         array_push($activities_array,$data["activity_id"]);
         $new_activities["survey_ids"] = $activities_array;
         $activity->fill($new_activities);
@@ -79,7 +79,26 @@ class surveysController extends Controller
         $data = $request->json()->all();
         $survey = Survey::findOrFail($id);
         //if($survey["event_id"]= $event_id){
-        $survey->fill($data);
+        if($request->input("newquestion")){
+            if(is_null($survey->questions)){
+                $questions["questions"][0] = $data;
+            }else{
+                $questions["questions"] = $survey->questions;                
+                array_push($questions["questions"],$data);
+            }
+        $survey->fill($questions);
+        $survey->save();
+        return $data;
+        }
+        $newarray = $survey->questions;
+        array_push($newarray, $data);
+        echo $newarray;die;
+        
+            
+        //if(!empty($question)){
+        //    $survey->questions = [];
+        //}
+        $survey->fill($questions);
         $survey->save();
         return $data;
     }
@@ -92,7 +111,22 @@ class surveysController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {
+        $data = $request->json()->all();
         $survey = Survey::findOrFail($id);
+        if(!is_null($request->input("delete"))){
+            $questionnumber = $request->input("delete");
+            if(is_null($survey->questions)){
+                return "todavia no se han creado preguntas.";
+            }else{
+                $questions["questions"] = $survey->questions;                
+                unset($questions["questions"][$questionnumber]);
+                $questions["questions"] = array_values($questions["questions"]);
+            }
+        $survey->fill($questions);
+        $survey->save();
+        return "pregunta eliminada";
+        }
         return (string) $survey->delete();
     }
+
 }
