@@ -9,7 +9,6 @@
     </span>
     
 </div>
-![Logo]({{$img}})
 <br />
 
 
