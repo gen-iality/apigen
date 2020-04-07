@@ -13,25 +13,6 @@
 
 <br />
 
-<div style="text-align: center">
-</div>
-
-@component('mail::table')
-| **Fecha Inicio Evento:**            | **Hora:**                                                                       |
-|:---------------------:|:--------------------------------------------------------------------------------------:|
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
-|<br>                   |<br>
-| **Fecha Finalizacion:**            | **Hora:**                                                                 |
-| {{ date('l, F j Y ', strtotime($event->datetime_to)) }} |  {{date('H:i:s', strtotime($event->datetime_to)) }} |
-
-@endcomponent
-
-@component('mail::panel')
-Ubicación del evento  <br>
-
-{{ $event_address }}
------------------------
-@endcomponent
 
 
 <!-- Click aqui
