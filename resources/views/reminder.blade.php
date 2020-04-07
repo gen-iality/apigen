@@ -9,6 +9,7 @@
     </span>
     
 </div>
+
 <br />
 
 
@@ -19,6 +20,7 @@ Confirmar Cuenta
 @endcomponent -->
 
 @component('mail::subcopy')
+<img src="https://storage.googleapis.com/herba-images/evius/events/r3iw80h3baGMMjGiQaq1Zlnon7pcjbYQT0tjtzQd.png">
 @endcomponent
 
 [Políticas de privacidad](https://evius.co/privacy) | 
