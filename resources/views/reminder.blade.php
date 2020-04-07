@@ -9,8 +9,7 @@
     </span>
     
 </div>
-<img src="{{$img}}" alt="">
-
+![Logo]({{$img}})
 <br />
 
 
