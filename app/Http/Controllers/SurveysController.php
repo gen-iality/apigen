@@ -21,7 +21,15 @@ class surveysController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
-    {
+    {   
+        if($request->input("indexby") && $request->input("value")){
+            $index = $request->input("indexby");
+            $value = $request->input("value");
+            return JsonResource::collection(
+                Survey::where("event_id", $event_id)->where($index,$value)->paginate(config('app.page_size'))
+            );
+        }
+
         return JsonResource::collection(
             Survey::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
