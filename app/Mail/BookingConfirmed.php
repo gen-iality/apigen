@@ -25,6 +25,10 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_name;
     public $eventuser_id;
     public $eventuser_lan;
+    public $eventuser_email;
+    public $eventuser_password;
+    public $eventUser_email;
+    public $eventUser_password;
     public $qr;
     public $logo;
     public $attach;
@@ -44,8 +48,11 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event_city = isset($event["location"]["City"])?($event["location"]["City"]):" ";
         $event_state = isset($event["location"]["state"])?($event["location"]["state"]):" ";
 
+        $eventUser_email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["properties"]["email"];
+        $eventUser_password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        
         $eventUser_name = isset($eventUser["properties"]["nombres"]) ? $eventUser["properties"]["nombres"] : $eventUser["properties"]["names"];
-        $eventUser_lan = isset($eventUser["properties"]["language"]) ? $eventUser["properties"]["language"] : $eventUser["properties"]["language"];
+        $eventUser_lan = isset($eventUser["properties"]["language"]) ? $eventUser["properties"]["language"] : "ES";
         $eventUser_id = $eventUser->id;
 
         Log::debug("cargando datos event_user al correo");
@@ -119,8 +126,7 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
-        if($this->eventuser_lan == "ES"){
-
+        
         return $this
             // ->attach($attachPath,[
             //     'as' => 'checkin',
@@ -130,16 +136,6 @@ class BookingConfirmed extends Mailable implements ShouldQueue
             ->from("apps@mocionsoft.com", "Recordatorio")
             ->subject($this->subject)
             ->markdown('bookingConfirmed');
-        }else{
-            return $this
-            // ->attach($attachPath,[
-            //     'as' => 'checkin',
-            //     'mime' => 'image/png',
-            // ])
-            // ->attachData($pdf->download(),'boleta.pdf')
-            ->from("apps@mocionsoft.com", "Recordatorio")
-            ->subject($this->subject)
-            ->markdown('bookingConfirmedEN');
         }
     }
     
