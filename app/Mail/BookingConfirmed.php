@@ -25,10 +25,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
     public $eventuser_name;
     public $eventuser_id;
     public $eventuser_lan;
-    public $eventuser_email;
-    public $eventuser_password;
-    public $eventUser_email;
-    public $eventUser_password;
+    public $password;
+    public $email;
     public $qr;
     public $logo;
     public $attach;
@@ -48,8 +46,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event_city = isset($event["location"]["City"])?($event["location"]["City"]):" ";
         $event_state = isset($event["location"]["state"])?($event["location"]["state"]):" ";
 
-        $eventUser_email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["properties"]["email"];
-        $eventUser_password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
+        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         
         $eventUser_name = isset($eventUser["properties"]["nombres"]) ? $eventUser["properties"]["nombres"] : $eventUser["properties"]["names"];
         $eventUser_lan = isset($eventUser["properties"]["language"]) ? $eventUser["properties"]["language"] : "ES";
@@ -57,10 +55,12 @@ class BookingConfirmed extends Mailable implements ShouldQueue
 
         Log::debug("cargando datos event_user al correo");
 
-        $this->event_address =$event_address ;
-        $this->event_city =$event_city;
-        $this->event_state =$event_state;
+        $this->event_address = $event_address ;
+        $this->event_city = $event_city;
+        $this->event_state = $event_state;
         $this->event = $event;
+        $this->email = $email;
+        $this->password = $password;
         $this->eventuser_name = $eventUser_name;
         $this->eventuser_lan = $eventUser_lan;
         $this->eventuser_id = $eventUser_id;
@@ -90,6 +90,8 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         $event = $this->event;
         $eventuser = $this->eventuser_name;
         $ticket_id = $this->eventuser_id;
+        $email = $this->email;
+        $password = $this->password;
         $event_address = $this->event_address;
         $event_city = $this->event_city;
         $event_state = $this->event_state;
@@ -139,4 +141,4 @@ class BookingConfirmed extends Mailable implements ShouldQueue
         }
     }
     
-}
+

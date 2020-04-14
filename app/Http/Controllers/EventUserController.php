@@ -264,17 +264,76 @@ class EventUserController extends Controller
         foreach ($query as $value) {
             $id = $value["_id"];
             $attendee = Attendee::find($id);
-           if($i>249 && $i<300){
             Mail::to($attendee->email)
             ->send(new BookingConfirmed($attendee));
             echo "<br> enviado a " .$attendee->email;
             array_push($emailsent,$attendee->email);
-           }
            $i++;
         }
         return $emailsent;
     }
+    
     public function createUserAndAddtoEvent(Request $request, string $event_id)
+    {
+        try {
+            //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
+            //a estar dentro de un hijo llamado properties
+            $eventUserData = $request->json()->all();
+
+            $field = Event::find($event_id);
+            $user_properties = $field->user_properties;
+
+
+            
+            $userData = $request->json()->all();
+
+            if (isset($eventUserData['properties'])) {
+                $userData = $eventUserData['properties'];
+            }
+            $validations = [
+                'email' => 'required|email',
+                'other_fields' => 'sometimes',
+            ];
+            foreach ($user_properties as $user_property){
+
+                if($user_property['mandatory'] !== true)continue;
+                    $field = $user_property['name'];
+                    $validations [$field] = 'required';
+                }
+
+            //este validador pronto se va a su clase de validacion
+            $validator = Validator::make(
+                $userData, 
+                $validations
+            );
+
+            if ($validator->fails()) {
+                return response(
+                    $validator->errors(),
+                    422
+                );
+            }
+            
+            $event = Event::find($event_id);
+            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+                        
+            $response = new EventUserResource($result->data);
+            
+            
+            if(!empty($eventUserData["rol_id"])){
+                $rol = $response["user"]["rol_id"];
+                $response->rol()->attach($rol);
+            }
+            
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+        } catch (\Exception $e) {
+
+            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+        }
+        return $response;
+    }
+
+    public function testCreateUserAndAddtoEvent(Request $request, string $event_id)
     {
         try {
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
