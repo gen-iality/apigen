@@ -33,8 +33,8 @@ class RSVP extends Mailable implements ShouldQueue
     public function __construct(
         string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
     {
-
-        if(!is_null($event["location"]["FormattedAddress"])){
+        $event_location = null;
+        if(!empty($event["location"]["FormattedAddress"])){
             $event_location = $event["location"]["FormattedAddress"];
         }
 
