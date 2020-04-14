@@ -83,7 +83,7 @@ class RSVPController extends Controller implements ShouldQueue
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
-        //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
+        $eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
         
         $message->number_of_recipients = count($eventUsers);
@@ -103,6 +103,7 @@ class RSVPController extends Controller implements ShouldQueue
  * saveRSVP
  *
  * @param [type] $message
+
  * @param [type] $subject
  * @param [type] $image
  * @param [type] $footer
@@ -132,24 +133,19 @@ class RSVPController extends Controller implements ShouldQueue
  */
     private static function _sendRSVPmail($eventUsers, $message, $event)
     {
-
+        \Log::debug("attemp to send rsvp mail" . $message->subject);
+                
         foreach ($eventUsers as &$eventUser) {
-
-            if (!$eventUser || !isset($eventUser->user)) {
-                $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
-                \Log::debug("This eventUser doesn't have any assosiated user" . $usuariolog);
-                continue;
-            }
 
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
+            $email = (isset($eventUser->email)) ? $eventUser->email : "apps@mocionsoft.com";
 
             $messageUser = new MessageUser(
                 [
-                    'email' => $eventUser->user->email,
-                    'user_id' => $eventUser->user->id,
+                    'email' => $eventUser->email,
+                    'user_id' => $eventUser->id,
                     'event_user_id' => $eventUser->id,
                 ]
             );
@@ -159,7 +155,6 @@ class RSVPController extends Controller implements ShouldQueue
 
             if (!$eventUser->user) {
                 \Log::debug("Account doesn't exists for this eventUser: " . $eventUser->id);
-                return null;
             }
 
             Mail::to($email)
