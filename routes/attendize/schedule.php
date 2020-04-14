@@ -21,6 +21,12 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
 
 
 /****************
+ * EVIUS STYLES
+ ****************/
+Route::apiResource('events/{event_id}/styles', 'StylesController');
+
+
+/****************
  * NEWSFEED
  ****************/
 
