@@ -34,7 +34,9 @@ class RSVP extends Mailable implements ShouldQueue
         string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
     {
 
-        $event_location = ($event["location"]["FormattedAddress"]);
+        if(!is_null($event["location"]["FormattedAddress"])){
+            $event_location = $event["location"]["FormattedAddress"];
+        }
 
         $this->event          = $event;
         $this->event_location = $event_location;

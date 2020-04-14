@@ -38,7 +38,7 @@ Confirmar asistencia
 @component('mail::panel')
 Ubicación del evento  <br>
 
-{{$event_location}}
+@if($event_location != NULL){{$event_location}}
 -----------------------
 @endcomponent
 
