@@ -22,10 +22,21 @@ class StylesController extends Controller
     public function index(Request $request, $event_id)
     {
         return Styles::where("event_id", $event_id)->first();
-
     }
 
+
+    public function indexTemp(Request $request, $event_id)
+    {
+        
+        $Styles = Event::findOrFail($event_id);
+        $var = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
+        $hex = $var;
+        list($r, $g, $b) = sscanf($var, "#%02x%02x%02x");
+
+        return ".main section.landing{background-color:rgb(".$r.", ". $g.", ". $b.",0.4) !important;}";
+    }
     /**
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +58,6 @@ class StylesController extends Controller
      */
     public function show($event_id,$id)
     {
-        $Styles = Styles::findOrFail($id);
         $response = new JsonResource($Styles);
         return $response;
     }

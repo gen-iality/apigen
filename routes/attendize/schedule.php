@@ -24,6 +24,7 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
  * EVIUS STYLES
  ****************/
 Route::apiResource('events/{event_id}/styles', 'StylesController');
+Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
 
 
 /****************
