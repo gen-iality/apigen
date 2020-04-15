@@ -25,7 +25,5 @@ class Invitation extends Moloquent
         return $this->belongsTo('App\Event');
     }
 
-    protected $fillable = [
-        'name' , 'content' , 'image' , 'event_id' , 
-    ];
+    protected $guarded = [];
 }
