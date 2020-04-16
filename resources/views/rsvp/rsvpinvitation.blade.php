@@ -5,7 +5,7 @@ Hola @if ($eventUser->name) {{$eventUser->name}}, @endif has sido invitado a
 {{$event->name}}
 ----------------
 
-{{$message}}
+{!!$message!!}
 
 @component('mail::promotion')
 
@@ -19,7 +19,7 @@ Confirmar asistencia
 @endcomponent
 
 @component('mail::panel')
-{{$event->description}}
+{!!$event->description!!}
 -----------------------
 @endcomponent
 @component('mail::table')
