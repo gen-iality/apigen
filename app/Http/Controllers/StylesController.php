@@ -21,20 +21,22 @@ class StylesController extends Controller
      */
     public function index(Request $request, $event_id)
     {
+        
         return Styles::where("event_id", $event_id)->first();
     }
 
 
     public function indexTemp(Request $request, $event_id)
     {
-        
         $Styles = Event::findOrFail($event_id);
-        $var = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
-        $hex = $var;
-        list($r, $g, $b) = sscanf($var, "#%02x%02x%02x");
+        $var["url"] = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
+        
+        $var["styles"] = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
+        list($r, $g, $b) = sscanf($var["styles"], "#%02x%02x%02x");
+        $var["styles"] = ".main section.landing{background-color:rgb(".$r.", ". $g.", ". $b.",0.4) !important;}";
 
-        return ".main section.landing{background-color:rgb(".$r.", ". $g.", ". $b.",0.4) !important;}";
-    }
+        return var_dump($var);
+  }
     /**
      * 
      * Store a newly created resource in storage.
