@@ -65,11 +65,12 @@ class PushNotificationsController extends Controller
                 array_push($user_id,$value["_id"]);
             }
           
-        }elseif (!empty($data["userId"])) {
-            $user_id = $data["userId"];
+        }elseif (!empty($data["User_ids"])) {
+            $user_id = $data["User_ids"];
         }else{
             $user_id = "";
         }
+
         $data['User_ids'] = $user_id;
 
         if(!empty($data["route"])){
