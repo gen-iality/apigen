@@ -27,9 +27,10 @@ class StylesController extends Controller
 
     public function indexTemp(Request $request, $event_id)
     {
-       
+        $Styles = Event::find($event_id);
         $url = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
         $color = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
+        
         list($r, $g, $b) = sscanf($color, "#%02x%02x%02x");
         $colorOrUrl = ($url) ? 'background-image: url("'.$url.'"' : "background-color:rgb(".$r . ", ". $g.", ". $b. ",0.5" ;
         $colorOrUrl = ($url) ? stripslashes($colorOrUrl):$colorOrUrl;
