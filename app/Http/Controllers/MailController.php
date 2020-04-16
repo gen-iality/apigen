@@ -38,11 +38,12 @@ class MailController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $mails = $data["mails"];
-        if(empty($data["img"])){
-            $data["img"] = "public/images/logo.png";
+        $data["img"] = false;
+        if($event_id == "5e1ceb50d74d5c1064437aa2"){
+            $data["img"] = true;
         }
         $result = new Mailing($data);
-        $title = $data["title"];
+        $title = $data["title"];    
         $desc = $data["desc"];
         $img = $data["img"];
         $sender = $data["sender"];
