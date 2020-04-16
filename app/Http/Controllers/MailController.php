@@ -42,6 +42,7 @@ class MailController extends Controller
         if($event_id == "5e1ceb50d74d5c1064437aa2"){
             $data["img"] = true;
         }
+        echo $data["img"];
         $result = new Mailing($data);
         $title = $data["title"];    
         $desc = $data["desc"];
