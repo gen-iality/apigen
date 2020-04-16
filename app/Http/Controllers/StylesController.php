@@ -46,6 +46,7 @@ class StylesController extends Controller
         $var["styles"] ='.main section.landing{'.$colorOrUrl.') !important;}';
         $doc->styles = $var["styles"]; 
         return $doc;
+    }
     /**
      * 
      * Store a newly created resource in storage.
