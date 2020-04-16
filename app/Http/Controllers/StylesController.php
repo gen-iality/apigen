@@ -35,7 +35,7 @@ class StylesController extends Controller
         list($r, $g, $b) = sscanf($var["styles"], "#%02x%02x%02x");
         $var["styles"] = ".main section.landing{background-color:rgb(".$r.", ". $g.", ". $b.",0.4) !important;}";
 
-        return var_dump($var);
+        return $var;
   }
     /**
      * 
