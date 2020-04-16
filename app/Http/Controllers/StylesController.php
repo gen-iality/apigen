@@ -25,7 +25,6 @@ class StylesController extends Controller
 
         $Styles = Event::findOrFail($event_id);
         $url = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
-        
         $color = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
         list($r, $g, $b) = sscanf($color, "#%02x%02x%02x");
         $colorOrUrl = ($url) ? 'background-image: url("'.$url.'"' : "background-color:rgb(".$r . ", ". $g.", ". $b. ",0.5" ;
@@ -37,16 +36,16 @@ class StylesController extends Controller
 
     public function indexTemp(Request $request, $event_id)
     {
+        $doc = Styles::find("5e962fcffa98a42e413fc9f2");
+
         $Styles = Event::findOrFail($event_id);
         $url = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
-        
         $color = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
         list($r, $g, $b) = sscanf($color, "#%02x%02x%02x");
         $colorOrUrl = ($url) ? 'background-image: url("'.$url.'"' : "background-color:rgb(".$r . ", ". $g.", ". $b. ",0.5" ;
         $var["styles"] ='.main section.landing{'.$colorOrUrl.') !important;}';
-        
-        return $var;
-  }
+        $doc->styles = $var["styles"]; 
+        return $doc;
     /**
      * 
      * Store a newly created resource in storage.
