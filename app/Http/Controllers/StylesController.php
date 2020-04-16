@@ -29,12 +29,13 @@ class StylesController extends Controller
     public function indexTemp(Request $request, $event_id)
     {
         $Styles = Event::findOrFail($event_id);
-        $var["url"] = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
+        $url = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
         
-        $var["styles"] = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
-        list($r, $g, $b) = sscanf($var["styles"], "#%02x%02x%02x");
-        $var["styles"] = ".main section.landing{background-color:rgb(".$r.", ". $g.", ". $b.",0.4) !important;}";
-
+        $color = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
+        list($r, $g, $b) = sscanf($color, "#%02x%02x%02x");
+        $colorOrUrl = ($url) ? 'background-image: url("'.$url.'"' : "background-color:rgb(".$r . ", ". $g.", ". $b. ",0.5" ;
+        $var["styles"] ='.main section.landing{'.$colorOrUrl.') !important;}';
+        
         return $var;
   }
     /**
