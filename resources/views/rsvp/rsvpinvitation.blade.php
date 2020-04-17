@@ -9,8 +9,6 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
 
 ![Logo]({{$image}})
 
-@component('mail::button', ['url' => 'https://api.evius.co/api/rsvp/confirmrsvp/'.$eventUser->id, 'color' => 'evius'])
-
 Confirmar asistencia
 @endcomponent
 
