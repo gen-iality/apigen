@@ -1,8 +1,6 @@
 @component('mail::message')
 
-Hola @if ($eventUser->name) {{$eventUser->name}}, @endif has sido invitado a  
-
-{{$event->name}}
+Hola {{$eventuser_name}}, estas inscrito en: <br>{{$event->name}}
 ----------------
 
 {!!$message!!}
@@ -20,26 +18,44 @@ Confirmar asistencia
 
 @component('mail::panel')
 {!!$event->description!!}
+
+<div style="text-align: center">
+    <span>
+    Para ingresar visita el siguiente link:
+    @component('mail::button', ['url' => 'https://eviusauth.netlify.com/', 'color' => 'evius'])
+    Ingresar a EVIUS
+    @endcomponent
+
+Tus datos de acceso son:<br>
+
+Usuario: {{$email}} <br>
+Contraseña: {{$password}
+
+Te esperamos.
+    </span>
+</div>
 -----------------------
 @endcomponent
 @component('mail::table')
 |                       |                                                                                        | 
 | --------------------  |:--------------------------------------------------------------------------------------:| 
 | **Fecha:**            | **Hora:**                                                                              | 
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:s', strtotime($event->datetime_from)) }} |
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
 |<br>                   |<br>  
 @if($event->datetime_to)
 | **Hasta:**            | **Hora:**                                                                              | 
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:s', strtotime($event->datetime_to)) }}   | 
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_to)) }}   | 
 @endif
 
 @endcomponent
 
 @component('mail::panel')
+@if($event_location != null)
 Ubicación del evento  <br>
 
-@if($event_location != null){{$event_location}} @endif
+{{$event_location}} 
 -----------------------
+@endif
 @endcomponent
 
 

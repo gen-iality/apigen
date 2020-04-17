@@ -15,6 +15,11 @@ class RSVP extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $eventuser_name;
+    public $eventuser_id;
+    public $eventuser_lan;
+    public $password;
+    public $email;
     public $event;
     public $eventUser;
     public $image;
@@ -37,13 +42,22 @@ class RSVP extends Mailable implements ShouldQueue
         if(!empty($event["location"]["FormattedAddress"])){
             $event_location = $event["location"]["FormattedAddress"];
         }
-
+        $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
+        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["names"];
+        
         $this->event          = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
         $this->image     = ($image)?$image:null;
         $this->message   = $message;
         $this->footer    = $footer;
+
+        $this->eventuser_name = $eventuser_name;
+        $this->eventuser_id = $eventuser_id;
+        $this->eventuser_lan = $eventuser_lan;
+        $this->password = $password;
+        $this->email = $email;
         
         $this->subject   = "[Invitación - ".$event->name."]";
     }
