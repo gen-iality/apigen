@@ -3,9 +3,9 @@
 Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
 ----------------
 @component('mail::panel')
-<div style="text-align: center;font-size: 150%;">
+<div style="text-align: center;font-size: 130%;">
     <span>
-<p>Para ingresar al evento y ver mas informacion visitanos en:
+<p style="font-size: 130%">Para ingresar al evento y ver mas informacion visitanos en:
     @component('mail::button', ['url' => 'https://eviusauth.netlify.com/', 'color' => 'evius'])
     Ingresar a EVIUS
     @endcomponent
