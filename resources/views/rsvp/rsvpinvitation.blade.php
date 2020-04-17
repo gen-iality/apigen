@@ -29,7 +29,7 @@ Confirmar asistencia
 Tus datos de acceso son:<br>
 
 Usuario: {{$email}} <br>
-Contraseña: {{$password}
+Contraseña: {{$password}}
 
 Te esperamos.
     </span>
