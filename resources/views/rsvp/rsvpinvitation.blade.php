@@ -1,6 +1,6 @@
 @component('mail::message')
 
-Hola {{$eventuser_name}}, estas inscrito en: <br>{{$event->name}}
+Hola {{$eventUser_name}}, estas inscrito en: <br>{{$event->name}}
 ----------------
 
 {!!$message!!}

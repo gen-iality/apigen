@@ -15,7 +15,7 @@ class RSVP extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $eventuser_name;
+    public $eventUser_name;
     public $eventuser_id;
     public $eventuser_lan;
     public $password;
@@ -46,14 +46,14 @@ class RSVP extends Mailable implements ShouldQueue
         $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
         
-        $this->event          = $event;
+        $this->event = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
-        $this->image     = ($image)?$image:null;
-        $this->message   = $message;
-        $this->footer    = $footer;
+        $this->image = ($image)?$image:null;
+        $this->message = $message;
+        $this->footer = $footer;
 
-        $this->eventuser_name = $eventuser_name;
+        $this->eventUser_name = $eventUser_name;
         $this->eventuser_id = $eventuser_id;
         $this->eventuser_lan = $eventuser_lan;
         $this->password = $password;
