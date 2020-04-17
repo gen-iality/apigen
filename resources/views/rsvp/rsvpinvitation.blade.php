@@ -2,7 +2,7 @@
 
 Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
 ----------------
-
+@component('mail::panel')
 <div style="text-align: center">
     <span>
 Para ingresar al evento y ver mas informacion visitanos en:
@@ -20,7 +20,7 @@ Contraseña: {{$password}}
 Te esperamos.
 </span>
 </div>
-
+@endcomponent
 @component('mail::table')
 |                       |                                                                                        | 
 | --------------------  |:--------------------------------------------------------------------------------------:| 
@@ -32,7 +32,7 @@ Te esperamos.
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_to)) }}   | 
 @endif
 @endcomponent
-@endcomponent
+
 
 @component('mail::panel')
 @if($event_location != null)
@@ -43,8 +43,6 @@ Ubicación del evento  <br>
 @endif
 
 @endcomponent
-
-![Logo]({{$image}})
 
 {!!$message!!}
 
@@ -65,6 +63,6 @@ Ubicación del evento  <br>
 @component('mail::subcopy')
 {{$footer}}
 @endcomponent
-
+@endcomponent
 
 
