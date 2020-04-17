@@ -31,7 +31,7 @@ Te esperamos.
 | **Hasta:**            | **Hora:**                                                                              | 
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_to)) }}   | 
 @endif
-
+@endcomponent
 @endcomponent
 
 @component('mail::panel')
@@ -54,7 +54,6 @@ Ubicación del evento  <br>
 
 @endcomponent
 
-@endcomponent
 
 @component('mail::panel')
 {!!$event->description!!}
@@ -65,9 +64,6 @@ Ubicación del evento  <br>
 
 @component('mail::subcopy')
 {{$footer}}
-@endcomponent
-
-
 @endcomponent
 
 
