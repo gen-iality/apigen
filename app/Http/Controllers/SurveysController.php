@@ -108,6 +108,26 @@ class surveysController extends Controller
         return $data;
     }
 
+    public function updatequestions(Request $request, $event_id, $id)
+    {
+        $data = $request->json()->all();
+        $survey = Survey::findOrFail($id);
+        if($request->input("questionNo") && is_integer($int = (int)$request->input("questionNo"))){
+
+                //aqui se guarda la peticion
+                $questions["questions"][$request->input("questionNo")] = $data;// = $survey->questions[$request->input("questionNo")];                
+                //aqui se guardan los valores existentes de las preguntas de la bdd
+                $final_merge["questions"] = $survey->questions;
+                //aqui se combinan los valores de la pregunta a editar de la peticion y la base de datos
+                $new_questions = array_merge($survey->questions[$request->input("questionNo")],$questions["questions"][$request->input("questionNo")]);
+                //aqui la pregunta se actualiza 
+                $final_merge["questions"][$request->input("questionNo")] = $new_questions;
+                $survey->fill($final_merge);
+                $survey->save();
+                return $data;
+            }
+    return "no question id sent or invalid format";
+    }
     /** 
      * Remove the specified resource from storage.
      *

@@ -38,6 +38,8 @@ Route::apiResource('events/{id}/newsfeed', 'NewsfeedController');
  ****************/
 
 Route::apiResource('events/{id}/surveys', 'SurveysController');
+Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequestions');
+
 
 /****************
  * ACITIVITY ASSISTANTS 
@@ -110,7 +112,7 @@ Route::post('events/{event_id}/recoverypassword', 'SendContentController@Passwor
  * PUSH NOTIFICATIONS
  ********************/
 Route::apiResource('events/{event_id}/sendpush', 'PushNotificationsController');
-Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
+//Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
 Route::get('event/{event_id}/notifications/{id}', 'PushNotificationsController@indexByUser');
 
 
