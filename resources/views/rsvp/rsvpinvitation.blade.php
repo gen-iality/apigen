@@ -3,37 +3,24 @@
 Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
 ----------------
 
-{!!$message!!}
-
-@component('mail::promotion')
-
-![Logo]({{$image}})
-
-Confirmar asistencia
-@endcomponent
-
-@endcomponent
-
-@component('mail::panel')
-{!!$event->description!!}
-
 <div style="text-align: center">
     <span>
-    Para ingresar visita el siguiente link:
+Para ingresar al evento y ver mas informacion visitanos en:
     @component('mail::button', ['url' => 'https://eviusauth.netlify.com/', 'color' => 'evius'])
     Ingresar a EVIUS
     @endcomponent
-
+    </span>
+    <span>
 Tus datos de acceso son:<br>
 
-Usuario: {{$email}} <br>
-Contraseña: {{$password}}
-
+Usuario: {{$email}} 
+<br>
+Contraseña: {{$password}} 
+<br>
 Te esperamos.
-    </span>
+</span>
 </div>
------------------------
-@endcomponent
+
 @component('mail::table')
 |                       |                                                                                        | 
 | --------------------  |:--------------------------------------------------------------------------------------:| 
@@ -54,13 +41,27 @@ Ubicación del evento  <br>
 {{$event_location}} 
 -----------------------
 @endif
-@endcomponent
-
-
-@component('mail::button', ['url' => 'https://api.evius.co/api/rsvp/confirmrsvp/'.$eventUser->id, 'color' => 'evius'])
-Confirmar asistencia
 
 @endcomponent
+
+![Logo]({{$image}})
+
+{!!$message!!}
+
+@component('mail::promotion')
+
+![Logo]({{$image}})
+
+@endcomponent
+
+@endcomponent
+
+@component('mail::panel')
+{!!$event->description!!}
+
+-----------------------
+@endcomponent
+
 
 @component('mail::subcopy')
 {{$footer}}
