@@ -19,7 +19,7 @@
 Confirmar Cuenta
 @endcomponent -->
 
-@if ($img === true) <img src="https://storage.googleapis.com/herba-images/evius/events/r3iw80h3baGMMjGiQaq1Zlnon7pcjbYQT0tjtzQd.png"> @endif 
+@if ($img == true) <img src="https://storage.googleapis.com/herba-images/evius/events/r3iw80h3baGMMjGiQaq1Zlnon7pcjbYQT0tjtzQd.png"> @endif 
 
 [Políticas de privacidad](https://evius.co/privacy) | 
 [Términos y Condiciones](https://evius.co/terms)
