@@ -54,8 +54,6 @@ class RSVP extends Mailable implements ShouldQueue
         $this->footer = $footer;
 
         $this->eventUser_name = $eventUser_name;
-        $this->eventuser_id = $eventuser_id;
-        $this->eventuser_lan = $eventuser_lan;
         $this->password = $password;
         $this->email = $email;
         
