@@ -269,10 +269,12 @@ class EventUserController extends Controller
             echo "<br> enviado a " .$attendee->email;
             array_push($emailsent,$attendee->email);
            $i++;
+           // integrar RSVP con estas invitaciones a logearse 
+           // con registros 
         }
         return $emailsent;
     }
-    
+
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
         try {
@@ -419,6 +421,12 @@ class EventUserController extends Controller
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
+    public function searchInEvent(Request $request, $event_id){ 
+        $email = $request->input("email");
+        $check = Attendee::where("email",$email)->first();
+        return (!is_null($check)) ? "Usuario existente en el evento" : "Usuario no encontrado" ;
+    }
+
     public function show($event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);

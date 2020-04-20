@@ -46,27 +46,31 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 /****************
  * eventUsers
  ****************/
+//este api verifica un correo en la bdd
+Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 
-Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
-
+Route::put ('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
+
+Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
 Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAddtoEvent');
 Route::get ('events/{event_id}/eventusers', 'EventUserController@index');
-Route::delete ('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
+Route::get ('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
 Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 
+Route::delete ('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
+
+Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusersbyurl',      'EventUserController@createUserViaUrl');
 
-//Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
+//endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
 Route::post ('events/{event_id}/sendemailtoallusers',      'EventUserController@sendQrToUsers');
 
  
-/***************
+/***************    
  * USER PROPERTIES
  ****************/
 Route::get   ('events/{event_id}/userproperties',      'UserPropertiesController@index');
