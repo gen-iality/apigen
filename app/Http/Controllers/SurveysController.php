@@ -59,9 +59,9 @@ class surveysController extends Controller
             $activity->save();
 
             $result->activities($data["activity_id"]);
-            $result->save();
+            
         }
-
+        $result->save();
         return $result; 
     }
     /**
