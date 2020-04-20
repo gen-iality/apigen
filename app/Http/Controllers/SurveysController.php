@@ -46,7 +46,7 @@ class surveysController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Survey($data);
-        if(!empty($data["activity_id"]) || !is_null($data["activity_id"])){
+        if(!empty($data["activity_id"]) ){
             $activity = Activities::find($data["activity_id"]);
             if(empty($activity->survey_ids)){
                 $activities_array = [];
