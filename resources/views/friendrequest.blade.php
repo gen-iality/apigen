@@ -10,7 +10,7 @@
     
 </div>
 @component('mail::button', ['url' => 'https://eviusauth.netlify.com/', 'color' => 'evius'])
-    Ingresar a EVIUS
+    Ver Solicitudes en EVIUS
 @endcomponent
 <br />
 
