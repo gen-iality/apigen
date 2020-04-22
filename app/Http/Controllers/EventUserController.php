@@ -412,7 +412,6 @@ class EventUserController extends Controller
             array_push($events_id, $value["event_id"]);
         }
         
-        echo $request->input("email") . " is enrolled in the following events: <br>";
         foreach ($events_id as $id) {
 
             echo "-".Event::find($id)->name."<br>";
@@ -421,9 +420,10 @@ class EventUserController extends Controller
     }
 
     public function searchInEvent(Request $request, $event_id){ 
-        $email = $request->input("email");
+        $data = $request->json()->all();
+        $email = $data["email"];
         
-        $check = !empty($email) ?Attendee::where("email",$email)->first() : null;
+        $check = !empty($data["email"]) ?Attendee::where("email",$email)->first() : null;
         if(!is_null($check)){ 
             $user["id"] = $check->id;
             $user["status"] = "Usuario existente en el evento";
