@@ -403,14 +403,13 @@ class EventUserController extends Controller
         );
     }
 
-    public function indexByEventUser(Request $request,$event_id)
+    public function indexByEventUser(Request $request,$user_id)
     {
-        $email = Account::where("email",$request->input("email"))->first();
+        $email = Account::find($user_id);
         $events = Attendee::where('account_id',$email->id)->get();
         $events_id = [];
         foreach ($events as $key => $value) {
             array_push($events_id, $value["event_id"]);
-            
         }
         
         echo $request->input("email") . " is enrolled in the following events: <br>";
