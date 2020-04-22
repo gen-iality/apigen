@@ -6,8 +6,11 @@ use App\Invitation;
 use App\Event;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
+use App\Mail\friendRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mail;
+use GuzzleHttp\Client;
+use App\Mailing;
 use PDF;
 use Storage;
 
@@ -29,8 +32,6 @@ class InvitationController extends Controller
             Invitation::paginate(config('app.page_size'))
         );
     }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -39,11 +40,72 @@ class InvitationController extends Controller
      */
     public function store(Request $request,$event_id)
     {
-        $data = $request->json()->all();
-        $result = new Invitation($data);
-        $result->save();
-        return $result;
 
+        // end point para aceptar solicitud con redireccion a evius
+         
+        $data = $request->json()->all();   
+        $result = new Invitation($data);
+        $event = Event::find($event_id);
+	    $result->save();
+        $sender = Attendee::find($data["id_user_requesting"]);
+        $receiver = Attendee::find($data["id_user_requested"]);
+        $client = new Client(); 
+        
+        $push_notification["body"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
+        $push_notification["event_id"] = $event_id;
+        $push_notification["User_ids"] = [$receiver->id];
+
+        $mail["mails"] = [$receiver->email];
+        $mail["subject"] = "solicitud de amistad";
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
+        $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name  ;
+        $mail["sender"] = $event->name;
+        $mail["event_id"] = $event_id;
+        
+        //echo self::sendPushNotification($push_notification);
+        echo self::sendEmail($mail,$event_id);
+        return "Invitation send";
+    }
+
+    public function sendPushNotification($push_notification){
+        $url = config('app.api_evius')."/events/".$push_notification["event_id"]."/sendpush";
+        echo var_dump($push_notification);
+        $fields = array('event_id' => $push_notification["event_id"], 'title' => "Nueva solicitud",'img' => true, 'body' => $push_notification["body"] , 'User_ids' => [$push_notification["User_ids"]] );
+        
+        $headers = array('Content-Type: application/json');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        
+        $result = curl_exec($ch);
+        curl_close($ch);        
+        return $result;
+    } 
+
+    public function sendEmail($mail,$event_id){
+        
+        $mail["event_id"] = $event_id;
+        $mail["type"] = "friend request sent" ;
+        $result = new Mailing($mail);
+        $title = $mail["title"];    
+        $desc = $mail["desc"];
+        $img = "no img for now";
+        $sender = $mail["sender"];
+        $subject = $mail["subject"];
+        $result->save();
+        $email = Attendee::where("event_id",$event_id)->where("email",$mail["mails"])->get();
+        $list = json_decode(json_encode($email),true);
+        
+        foreach ($mail["mails"] as $key => $value) {    
+            Mail::to($value)->send(
+            new friendRequest($event_id,$title,$desc,$subject,$img,$sender)
+        );
+        }
     }
     /**
      * Display the specified resource.
@@ -53,7 +115,8 @@ class InvitationController extends Controller
      */
     public function show(string $event_id, string $id)
     {
-      
+        // esto muestra la informacion filtrada por event user
+
         $Invitation = Invitation::findOrFail($id);
         $response = new JsonResource($Invitation);
         return $response;
@@ -90,20 +153,20 @@ class InvitationController extends Controller
     public function SendInvitation(Request $request)
     {
         echo "hi"; die;
-        $data = $request->json()->all();
-        if ($request->get('send') == '1') {
-            $pdf = PDF::loadview('Public.ViewEvent.Partials.Invitation', $data);
-            $pdf->setPaper( 'letter',  'landscape' );
-            return $pdf->download('content.pdf');
-            return view('Public.ViewEvent.Partials.ContentMail', $data);
-            $data_single = "tfrdrummer@gmail.com";
-            Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$pdf,$data_single){
-                $message->to($data_single,"Evento PMI")
-                ->subject("HI¡","ni idea");
-            });
-
-        }
-        return view('Public.ViewEvent.Partials.Invitation', $data);
+   //     $data = $request->json()->all();
+   //     if ($request->get('send') == '1') {
+   //         $pdf = PDF::loadview('Public.ViewEvent.Partials.Invitation', $data);
+   //         $pdf->setPaper( 'letter',  'landscape' );
+   //         return $pdf->download('content.pdf');
+   //         return view('Public.ViewEvent.Partials.ContentMail', $data);
+   //         $data_single = "tfrdrummer@gmail.com";
+   //         Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$pdf,$data_single){
+   //             $message->to($data_single,"Evento PMI")
+   //             ->subject("HI¡","ni idea");
+   //         });
+//
+   //     }
+   //     return view('Public.ViewEvent.Partials.Invitation', $data);
     
     }
 
