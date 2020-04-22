@@ -403,6 +403,23 @@ class EventUserController extends Controller
         );
     }
 
+    public function indexByEventUser(Request $request,$event_id)
+    {
+        $email = Account::where("email",$request->input("email"))->first();
+        $events = Attendee::where('account_id',$email->id)->get();
+        $events_id = [];
+        foreach ($events as $key => $value) {
+            array_push($events_id, $value["event_id"]);
+            
+        }
+        
+        echo $request->input("email") . " is enrolled in the following events: <br>";
+        foreach ($events_id as $id) {
+
+            echo "-".Event::find($id)->name."<br>";
+        }
+    
+    }
     /**
      * __Store:__ Store a newly Attendee  in storage.
      *
@@ -424,7 +441,12 @@ class EventUserController extends Controller
     public function searchInEvent(Request $request, $event_id){ 
         $email = $request->input("email");
         $check = Attendee::where("email",$email)->first();
-        return (!is_null($check)) ? "Usuario existente en el evento" : "Usuario no encontrado" ;
+        if(!is_null($check)){ 
+            $user["id"] = $check->id;
+            $user["status"] = "Usuario existente en el evento";
+            return $user;
+        }
+        return "Usuario no encontrado" ;
     }
 
     public function show($event_id, $id)

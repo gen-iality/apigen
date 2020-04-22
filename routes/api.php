@@ -48,6 +48,8 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
  ****************/
 //este api verifica un correo en la bdd
 Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
+Route::get ('events/{event_id}/searchevents/', 'EventUserController@indexByEventUser');
+
 
 Route::put ('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
