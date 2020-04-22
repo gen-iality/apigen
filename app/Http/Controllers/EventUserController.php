@@ -419,6 +419,19 @@ class EventUserController extends Controller
         }
     
     }
+
+    public function searchInEvent(Request $request, $event_id){ 
+        $email = $request->input("email");
+        
+        $check = !empty($email) ?Attendee::where("email",$email)->first() : null;
+        if(!is_null($check)){ 
+            $user["id"] = $check->id;
+            $user["status"] = "Usuario existente en el evento";
+            return $user;
+        }
+        return "Usuario no encontrado" ;
+    }
+
     /**
      * __Store:__ Store a newly Attendee  in storage.
      *
@@ -437,16 +450,6 @@ class EventUserController extends Controller
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function searchInEvent(Request $request, $event_id){ 
-        $email = $request->input("email");
-        $check = Attendee::where("email",$email)->first();
-        if(!is_null($check)){ 
-            $user["id"] = $check->id;
-            $user["status"] = "Usuario existente en el evento";
-            return $user;
-        }
-        return "Usuario no encontrado" ;
-    }
 
     public function show($event_id, $id)
     {
