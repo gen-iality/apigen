@@ -117,6 +117,7 @@ Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destr
  ****************/
 Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
 Route::get('events/{event_id}/indexinvitations' , "InvitationController@invitations_sent");
+Route::put('events/{event_id}/acceptordecline/{id}' , "InvitationController@acceptOrDeclineFriendRequest");
 Route::apiResource('events/{event_id}/invitation', 'InvitationController');
 
 

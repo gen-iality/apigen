@@ -81,6 +81,12 @@ class InvitationController extends Controller
     public function acceptOrDeclineFriendRequest(Request $request,String $event_id,String $id){
         $data = $request->json()->all();
         $Invitation = Invitation::find($id);
+        
+        $resp["response"] = $data["response"];
+        $Invitation->fill($resp);
+        $resp["id_user_requested"] = $Invitation->id_user_requested;
+        $resp["id_user_requesting"] = $Invitation->id_user_requesting;
+        return self::buildMessage($resp,$event_id);
     }
 
     public function buildMessage($data,String $event_id){
@@ -89,7 +95,7 @@ class InvitationController extends Controller
         $sender = Attendee::find($data["id_user_requesting"]);
         $receiver = Attendee::find($data["id_user_requested"]);
         $client = new Client(); 
-
+        
         $mail["mails"] = [$receiver->email];
         $mail["subject"] = "solicitud de amistad";
         $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
@@ -97,10 +103,16 @@ class InvitationController extends Controller
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
 
+        if($data["response"]){
+            $mail["title"] = $data["response"] == "acepted" ? $receiver->properties["displayName"] . " Ha aceptado tu solicitud de amistad para el evento " : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad" ;    
+            $mail["subject"] = "Respuesta a solicitud de amistad";
+            $mail["desc"] = $data["response"] == "acepted" ? "Hola ".$receiver->properties["displayName"].", ha aceptado tu solicitud de amistad para el evento ".$event->name : "Lo sentimos ".$receiver->properties["displayName"].", ha declinado tu solicitud de amistad para el evento ".$event->name;
+        }
+
         //echo self::sendPushNotification($push_notification);
         echo self::sendEmail($mail,$event_id);
         return "Invitation send";
-    }
+    }   
 
     public function sendEmail($mail,$event_id){
         
