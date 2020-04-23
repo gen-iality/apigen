@@ -103,7 +103,7 @@ Route::group(
 
 Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
 Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
-Route::post('events/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
+Route::post('events/{event_id}/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
 Route::post('events/sendnotificationemail' ,  'SendContentController@sendNotificationEmail');
 
 Route::get('events/{event_id}/sendcontent' ,        'SendContentController@index');
@@ -116,7 +116,8 @@ Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destr
  * INVITATION 
  ****************/
 Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
-Route::get('events/{event_id}/indexinvitations/{user_id}' , "InvitationController@invitations_sent");
+Route::get('events/{event_id}/indexinvitations/{user_id}' , "InvitationController@invitationsSent");
+Route::get('events/{event_id}/indexinvitationsrecieved/{user_id}' , "InvitationController@invitationsReceived");
 Route::put('events/{event_id}/acceptordecline/{id}' , "InvitationController@acceptOrDeclineFriendRequest");
 Route::apiResource('events/{event_id}/invitation', 'InvitationController');
 
