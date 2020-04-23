@@ -60,7 +60,7 @@ class InvitationController extends Controller
         $data = $request->json()->all();   
         $result = new Invitation($data);
 	    $result->save();
-        echo self::buildMessage($data,$event_id);
+        echo self::buildMessage($data,$event_id);   
         return "Invitation send";
     }
 
@@ -100,7 +100,7 @@ class InvitationController extends Controller
         $event = Event::find($event_id);
         $receiver = Attendee::find($data["id_user_requesting"]);
         $sender = Attendee::find($data["id_user_requested"]);
-        $client = new Client(); 
+        $client = new Client();     
         
         $mail["mails"] = [$receiver->email];
         $mail["subject"] = "solicitud de amistad";
@@ -109,7 +109,7 @@ class InvitationController extends Controller
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
 
-        if($data["response"]){
+        if(!empty($data["response"])){
             $mail["mails"] = [$sender->email];
             $mail["title"] = $data["response"] == "acepted " ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad" ;    
             $mail["subject"] = "Respuesta a solicitud de amistad";
