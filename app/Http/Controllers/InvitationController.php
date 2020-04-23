@@ -104,6 +104,7 @@ class InvitationController extends Controller
         $mail["event_id"] = $event_id;
 
         if($data["response"]){
+            $mail["mails"] = [$sender->email];
             $mail["title"] = $data["response"] == "acepted" ? $receiver->properties["displayName"] . " Ha aceptado tu solicitud de amistad para el evento " : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad" ;    
             $mail["subject"] = "Respuesta a solicitud de amistad";
             $mail["desc"] = $data["response"] == "acepted" ? "Hola ".$receiver->properties["displayName"].", ha aceptado tu solicitud de amistad para el evento ".$event->name : "Lo sentimos ".$receiver->properties["displayName"].", ha declinado tu solicitud de amistad para el evento ".$event->name;
