@@ -14,6 +14,7 @@ use App\ActivityAssistants;
 use App\Mail\BookingConfirmed;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EventAttendeesController;
+use Kreait\Firebase\Auth;
 use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
 use App\Http\Requests\EventUserRequest;
@@ -420,14 +421,17 @@ class EventUserController extends Controller
     }
 
     public function searchInEvent(Request $request, $event_id){ 
+        
+        $auth = resolve('Kreait\Firebase\Auth');
         $data = $request->json()->all();
         $email = $data["email"];
-        
-        $check = !empty($data["email"]) ?Attendee::where("email",$email)->first() : null;
+        $check = !empty($data["email"]) ? Attendee::where("email",$email)->where("event_id",$event_id)->first() : null;
         if(!is_null($check)){ 
+            $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
             $user["id"] = $check->id;
             $user["status"] = "Usuario existente en el evento";
-            return $user;
+            $user["account_response"] = $auth->verifyPassword($email,$data["password"]);
+            return $user;   
         }
         return "Usuario no encontrado" ;
     }

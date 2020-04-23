@@ -29,7 +29,14 @@ class InvitationController extends Controller
     public function index(Request $request,$event_id)
     {
         return JsonResource::collection(
-            Invitation::paginate(config('app.page_size'))
+            Invitation::where()->paginate(config('app.page_size'))
+        );
+    }
+
+    public function invitations_sent(Request $request,$event_id,$user_id)
+    {
+        return JsonResource::collection(
+            Invitation::where("id_user_requesting",$user_id)->paginate(config('app.page_size'))
         );
     }
     /**
@@ -61,7 +68,7 @@ class InvitationController extends Controller
         $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name  ;
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
-        
+            
         //echo self::sendPushNotification($push_notification);
         echo self::sendEmail($mail,$event_id);
         return "Invitation send";

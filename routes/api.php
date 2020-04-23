@@ -47,9 +47,8 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
  * eventUsers
  ****************/
 //este api verifica un correo en la bdd
-Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
-Route::get ('events/{event_id}/searchevents/', 'EventUserController@indexByEventUser');
-
+Route::post ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
+Route::get ('events/{user_id}/eventsByuser/', 'EventUserController@indexByEventUser');
 
 Route::put ('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
@@ -116,13 +115,9 @@ Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destr
 /***************
  * INVITATION 
  ****************/
-
-Route::get('events/{event_id}/invitation' , 'InvitationController@index');
 Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
-Route::post('events/{event_id}/invitation' , 'InvitationController@store');
-Route::get('events/{event_id}/invitation/{id}' , 'InvitationController@show');
-Route::put('events/{event_id}/invitation/{id}' , 'InvitationController@update');
-Route::delete('events/{event_id}/invitation/{id}', 'InvitationController@destroy');
+Route::get('events/{event_id}/indexinvitations' , "InvitationController@invitations_sent");
+Route::apiResource('events/{event_id}/invitation', 'InvitationController');
 
 
 /****************

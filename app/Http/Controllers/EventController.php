@@ -275,6 +275,9 @@ class EventController extends Controller
          */ 
         
         
+        if(empty($data['itemsMenu']) && !empty($event->itemsMenu)){
+            $data['itemsMenu'] = $event->itemsMenu;
+       }
      
         if(!empty($data['styles'])){
              $data['styles'] = self::AddDefaultStyles($data['styles']);
@@ -282,7 +285,6 @@ class EventController extends Controller
        
         if(!isset($data['app_configuration']) && !empty($event->app_configuration)){
             $data['app_configuration'] = $event->app_configuration;
-            
         }
 
         /*Events Type*/
