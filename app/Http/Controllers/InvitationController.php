@@ -33,13 +33,19 @@ class InvitationController extends Controller
         );
     }
 
-    public function invitations_sent(Request $request,$event_id,$user_id)
+    public function invitationsSent(Request $request,$event_id,$user_id)
     {
         return JsonResource::collection(
-            Invitation::where("id_user_requesting",$user_id)->paginate(config('app.page_size'))
+            Invitation::where("id_user_requested",$user_id)->where("event_id",$event_id)->paginate(config('app.page_size'))
         );
     }
 
+    public function invitationsReceived(Request $request,$event_id,$user_id)
+    {
+        return JsonResource::collection(
+            Invitation::where("id_user_requesting",$user_id)->where("event_id",$event_id)->paginate(config('app.page_size'))
+        );
+    }
     
     /**
      * Store a newly created resource in storage.
@@ -92,8 +98,8 @@ class InvitationController extends Controller
     public function buildMessage($data,String $event_id){
 
         $event = Event::find($event_id);
-        $sender = Attendee::find($data["id_user_requesting"]);
-        $receiver = Attendee::find($data["id_user_requested"]);
+        $receiver = Attendee::find($data["id_user_requesting"]);
+        $sender = Attendee::find($data["id_user_requested"]);
         $client = new Client(); 
         
         $mail["mails"] = [$receiver->email];
