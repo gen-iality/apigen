@@ -29,7 +29,7 @@ class InvitationController extends Controller
     public function index(Request $request,$event_id)
     {
         return JsonResource::collection(
-            Invitation::where()->paginate(config('app.page_size'))
+            Invitation::where("event_id",$event_id)->paginate(config('app.page_size'))
         );
     }
 
@@ -39,6 +39,8 @@ class InvitationController extends Controller
             Invitation::where("id_user_requesting",$user_id)->paginate(config('app.page_size'))
         );
     }
+
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -48,29 +50,11 @@ class InvitationController extends Controller
     public function store(Request $request,$event_id)
     {
 
-        // end point para aceptar solicitud con redireccion a evius
-         
+        // end point para enviar solicitud con redireccion a evius
         $data = $request->json()->all();   
         $result = new Invitation($data);
-        $event = Event::find($event_id);
 	    $result->save();
-        $sender = Attendee::find($data["id_user_requesting"]);
-        $receiver = Attendee::find($data["id_user_requested"]);
-        $client = new Client(); 
-        
-        $push_notification["body"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
-        $push_notification["event_id"] = $event_id;
-        $push_notification["User_ids"] = [$receiver->id];
-
-        $mail["mails"] = [$receiver->email];
-        $mail["subject"] = "solicitud de amistad";
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
-        $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name  ;
-        $mail["sender"] = $event->name;
-        $mail["event_id"] = $event_id;
-            
-        //echo self::sendPushNotification($push_notification);
-        echo self::sendEmail($mail,$event_id);
+        echo self::buildMessage($data,$event_id);
         return "Invitation send";
     }
 
@@ -94,6 +78,30 @@ class InvitationController extends Controller
         return $result;
     } 
 
+    public function acceptOrDeclineFriendRequest(Request $request,String $event_id,String $id){
+        $data = $request->json()->all();
+        $Invitation = Invitation::find($id);
+    }
+
+    public function buildMessage($data,String $event_id){
+
+        $event = Event::find($event_id);
+        $sender = Attendee::find($data["id_user_requesting"]);
+        $receiver = Attendee::find($data["id_user_requested"]);
+        $client = new Client(); 
+
+        $mail["mails"] = [$receiver->email];
+        $mail["subject"] = "solicitud de amistad";
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
+        $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name;
+        $mail["sender"] = $event->name;
+        $mail["event_id"] = $event_id;
+
+        //echo self::sendPushNotification($push_notification);
+        echo self::sendEmail($mail,$event_id);
+        return "Invitation send";
+    }
+
     public function sendEmail($mail,$event_id){
         
         $mail["event_id"] = $event_id;
@@ -110,10 +118,12 @@ class InvitationController extends Controller
         
         foreach ($mail["mails"] as $key => $value) {    
             Mail::to($value)->send(
-            new friendRequest($event_id,$title,$desc,$subject,$img,$sender)
-        );
+                new friendRequest($event_id,$title,$desc,$subject,$img,$sender)
+            );
         }
     }
+
+
     /**
      * Display the specified resource.
      *
