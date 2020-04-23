@@ -62,7 +62,7 @@ class RSVPController extends Controller implements ShouldQueue
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
-        
+        $data["message"] = $data["message"] == "" || $data["message"] == NULL  ? "  " : $data["message"]  ;
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
         //~~~~~~~~~~~~~~~~~~~~~~
@@ -101,22 +101,18 @@ class RSVPController extends Controller implements ShouldQueue
         return $message;
     }
     
-/**
- * saveRSVP
- *
- * @param [type] $message
-
- * @param [type] $subject
- * @param [type] $image
- * @param [type] $footer
- * @param [type] $usersCount
- * @param [type] $eventId
- * @return void
- */
-
     /**
      * Store a newly created resource in storage.
      *
+     * saveRSVP
+     *
+     * @param [type] $message
+     * @param [type] $subject
+     * @param [type] $image
+     * @param [type] $footer
+     * @param [type] $usersCount
+     * @param [type] $eventId
+     * @return void
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -126,13 +122,13 @@ class RSVPController extends Controller implements ShouldQueue
         return new MessageUserResource($book);
     }
 
-/**
- * Undocumented function
- *
- * @param [type] $eventUsers
- * @param [type] $message
- * @return void
- */
+    /**
+     * Undocumented function
+     *
+     * @param [type] $eventUsers
+     * @param [type] $message
+     * @return void
+     */
     private static function _sendRSVPmail($eventUsers, $message, $event)
     {
         \Log::debug("attemp to send rsvp mail" . $message->subject);
@@ -155,9 +151,6 @@ class RSVPController extends Controller implements ShouldQueue
 
             $m = Message::find($message->id);
 
-            if (!$eventUser->user) {
-                \Log::debug("Account doesn't exists for this eventUser: " . $eventUser->id);
-            }
 
             Mail::to($email)
                 ->queue(
