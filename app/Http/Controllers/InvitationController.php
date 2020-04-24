@@ -90,6 +90,7 @@ class InvitationController extends Controller
         
         $resp["response"] = $data["response"];
         $Invitation->fill($resp);
+        $Invitation->save();
         $resp["id_user_requested"] = $Invitation->id_user_requested;
         $resp["id_user_requesting"] = $Invitation->id_user_requesting;
         return self::buildMessage($resp,$event_id);
