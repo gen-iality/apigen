@@ -4,14 +4,12 @@
  */
 namespace App\Http\Controllers;
 
-use App\evaLib\Services\UserEventService;
-use App\Event;
 use App\Attendee;
+use App\Event;
 use App\Mail\RSVP;
 use App\Message;
 use App\MessageUser;
 use App\State;
-use App\Account;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -24,10 +22,26 @@ use Illuminate\Support\Facades\Mail;
 class RSVPController extends Controller implements ShouldQueue
 {
 
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
     public function test()
     {
         echo "hola";
         echo Config::get('app.front_url', 'aaa');
+        $actionCodeSettings = ['url' => 'http://localhost:3000/linklogin?email=esteban.sanchez@mocionsoft.com',
+            'handleCodeInApp' => false,
+            //'dynamicLinkDomain' => 'evius.co'
+        ];
+
+
+            // Admin SDK API to generate the sign in with email link.
+            $usremail = 'esteban.sanchez@mocionsoft.com';
+            $link = $this->auth->getSignInWithEmailLink($usremail, $actionCodeSettings);
+            echo "<p>".$link."</p>";
+
     }
     /**
      * Display a listing of the resource.
@@ -62,7 +76,7 @@ class RSVPController extends Controller implements ShouldQueue
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
-        $data["message"] = $data["message"] == "" || $data["message"] == NULL  ? "  " : $data["message"]  ;
+        $data["message"] = $data["message"] == "" || $data["message"] == null ? "  " : $data["message"];
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
         //~~~~~~~~~~~~~~~~~~~~~~
@@ -70,12 +84,12 @@ class RSVPController extends Controller implements ShouldQueue
         $subject = $data['subject'];
         $subject = ($subject) ? $subject : "[Invitación] " . $event->name;
         $message->subject = $subject;
-        
+
         $message->message = $data['message'];
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
-        
+
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-        
+
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
@@ -87,9 +101,11 @@ class RSVPController extends Controller implements ShouldQueue
         //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
 
         $eventUsers = Attendee::find($eventUsersIds);
-        
+
         $message->number_of_recipients = count($eventUsers);
         $message->save();
+
+        //Generar link de única autnticación
 
         //var_dump($eventUsers);
         //Send RSVP
@@ -97,10 +113,10 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUsers, $message, $event
         );
         $mesage = $message->fresh();
-        
+
         return $message;
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -132,7 +148,7 @@ class RSVPController extends Controller implements ShouldQueue
     private static function _sendRSVPmail($eventUsers, $message, $event)
     {
         \Log::debug("attemp to send rsvp mail" . $message->subject);
-                
+
         foreach ($eventUsers as &$eventUser) {
 
             $eventUser->changeToInvite();
@@ -150,7 +166,6 @@ class RSVPController extends Controller implements ShouldQueue
             $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
-
 
             Mail::to($email)
                 ->queue(
