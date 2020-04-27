@@ -23,7 +23,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $event;
     public $eventUser;
     public $image;
-    public $link;
+    //public $link;
     public $message;
     public $footer;
     public $subject;
@@ -57,7 +57,7 @@ class RSVP extends Mailable implements ShouldQueue
             // Admin SDK API to generate the sign in with email link.
             //$usremail = 'esteban.sanchez@mocionsoft.com';
             //$link = $this->auth->getSignInWithEmailLink($email, $actionCodeSettings);
-        $this->link = $link;
+        //$this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
