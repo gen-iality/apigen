@@ -23,6 +23,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $event;
     public $eventUser;
     public $image;
+    public $link;
     public $message;
     public $footer;
     public $subject;
@@ -35,9 +36,10 @@ class RSVP extends Mailable implements ShouldQueue
      * @return void
      */
     
-    public function __construct(
-        string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
+    public function __construct( string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
     {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $this->auth = $auth;
         $event_location = null;
         if(!empty($event["location"]["FormattedAddress"])){
             $event_location = $event["location"]["FormattedAddress"];
@@ -46,6 +48,16 @@ class RSVP extends Mailable implements ShouldQueue
         $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
         
+        $actionCodeSettings = ['url' => 'http://localhost:3000/linklogin?email='.$email,
+            'handleCodeInApp' => false,
+            //'dynamicLinkDomain' => 'evius.co'
+        ];
+
+
+            // Admin SDK API to generate the sign in with email link.
+            $usremail = 'esteban.sanchez@mocionsoft.com';
+            $link = $this->auth->getSignInWithEmailLink($email, $actionCodeSettings);
+        $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
