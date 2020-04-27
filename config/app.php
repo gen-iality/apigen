@@ -183,7 +183,7 @@ return [
         /*
          * Third Party Service Providers attendize platform
          */
-        Aws\Laravel\AwsServiceProvider::class,
+        //Aws\Laravel\AwsServiceProvider::class,
         Vinelab\Http\HttpServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
