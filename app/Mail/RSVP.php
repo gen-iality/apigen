@@ -38,8 +38,8 @@ class RSVP extends Mailable implements ShouldQueue
     
     public function __construct( string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
     {
-        $auth = resolve('Kreait\Firebase\Auth');
-        $this->auth = $auth;
+        //$auth = resolve('Kreait\Firebase\Auth');
+        //$this->auth = $auth;
         $event_location = null;
         if(!empty($event["location"]["FormattedAddress"])){
             $event_location = $event["location"]["FormattedAddress"];
@@ -55,8 +55,8 @@ class RSVP extends Mailable implements ShouldQueue
 
 
             // Admin SDK API to generate the sign in with email link.
-            $usremail = 'esteban.sanchez@mocionsoft.com';
-            $link = $this->auth->getSignInWithEmailLink($email, $actionCodeSettings);
+            //$usremail = 'esteban.sanchez@mocionsoft.com';
+            //$link = $this->auth->getSignInWithEmailLink($email, $actionCodeSettings);
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
