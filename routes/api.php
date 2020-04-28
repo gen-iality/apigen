@@ -212,13 +212,13 @@ Route::apiResource('events/{event_id}/mailing', 'MailController');
  * CERTIFICATES
  ****************/
 
-Route::post('generatecertificate',"CertificateController@generateCertificate");
-Route::get      ('events/{event_id}/certificates' ,      'CertificateController@indexByEvent');
-Route::post     ('events/{event_id}/certificates' ,      'CertificateController@store');
-Route::get      ('events/{event_id}/certificates/{id}' , 'CertificateController@show');
-Route::put      ('events/{event_id}/certificates/{id}' , 'CertificateController@update');
-Route::delete   ('events/{event_id}/certificates/{id}',  'CertificateController@destroy');
 
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::apiResource('events/{event_id}/certificates', 'CertificateController', ['except' => []]);
+        Route::get('events/{event_id}/certificates' ,      'CertificateController@indexByEvent');
+    }
+);
 
 
 //Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
@@ -396,12 +396,14 @@ Route::get('states', 'StateController@index');
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
+Route::get('singinwithemail', 'RSVPController@singIn');
 Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
+
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
