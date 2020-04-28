@@ -157,11 +157,11 @@ class EventController extends Controller
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
         
-try {
-    $result->author()->associate($user);
-} catch (Exception $e) {
-    echo 'autor no se pudo asociar al evento, contacte el administrador, error: ',  $e->getMessage(), "\n";
-}
+        try {
+            $result->author()->associate($user);
+        } catch (Exception $e) {
+            echo 'autor no se pudo asociar al evento, contacte el administrador, error: ',  $e->getMessage(), "\n";
+        }
         
 
         /* Organizer:
