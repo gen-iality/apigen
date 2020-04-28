@@ -47,7 +47,7 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
  * eventUsers
  ****************/
 //este api verifica un correo en la bdd
-Route::post ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
+Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get ('events/{user_id}/eventsByuser/', 'EventUserController@indexByEventUser');
 
 Route::put ('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
@@ -211,8 +211,6 @@ Route::apiResource('events/{event_id}/mailing', 'MailController');
 /***************
  * CERTIFICATES
  ****************/
-
-
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events/{event_id}/certificates', 'CertificateController', ['except' => []]);
