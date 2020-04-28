@@ -157,7 +157,12 @@ class EventController extends Controller
             $result->picture = $gfService->storeFile($request->file('picture'));
         }
         
-        $result->author()->associate($user);
+try {
+    $result->author()->associate($user);
+} catch (Exception $e) {
+    echo 'autor no se pudo asociar al evento, contacte el administrador, error: ',  $e->getMessage(), "\n";
+}
+        
 
         /* Organizer:
         It could be "me"(current user) or a organization Id
@@ -166,9 +171,13 @@ class EventController extends Controller
         self::assingOrganizer($data, $result);
         
         /*Events Type*/
+
         if (isset($data['event_type_id'])) {
             $event_type = EventType::findOrFail($data['event_type_id']);
             $result->eventType()->associate($event_type);
+            if(!is_string($result->author_id)){
+                $result->author_id = [];
+            }
             $result->save();
         }
 
@@ -176,7 +185,7 @@ class EventController extends Controller
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
-
+        
         self::addOwnerAsAdminColaborator($user->id, $result->id);  
         self::createDefaultUserProperties($result->id);
         
@@ -204,9 +213,6 @@ class EventController extends Controller
         $stlyes_validation = array_merge($default_event_styles,$styles);
         return $stlyes_validation;
     }    
-
-
-
 
     public function addOwnerAsAdminColaborator($user_id, $event_id){
         $DataUserRolAdminister = [
