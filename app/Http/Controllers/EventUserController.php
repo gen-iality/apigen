@@ -14,7 +14,12 @@ use App\ActivityAssistants;
 use App\Mail\BookingConfirmed;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EventAttendeesController;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Auth;
+use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
+use Kreait\Firebase\JWT\IdTokenVerifier;       
+use Firebase\Auth\Token\Exception\InvalidToken;
 use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
 use App\Http\Requests\EventUserRequest;
@@ -423,17 +428,18 @@ class EventUserController extends Controller
     public function searchInEvent(Request $request, $event_id){ 
         
         $auth = resolve('Kreait\Firebase\Auth');
-        $data = $request->json()->all();
-        $email = $data["email"];
-        $check = !empty($data["email"]) ? Attendee::where("email",$email)->where("event_id",$event_id)->first() : null;
-        if(!is_null($check)){ 
+
+        $email = ($request->email) ? $request->email : $request->input("email");
+        $password = $request->password;
+        $check = !empty($email) ? Attendee::where("email",$email)->where("event_id",$event_id)->first() : null;
+        if(!is_null($check)){
             $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
             $user["id"] = $check->id;
             $user["status"] = "Usuario existente en el evento";
-            $user["account_response"] = $auth->verifyPassword($email,$data["password"]);
+            $user["account_response"] = $auth->getUserByEmail($email);
             return $user;   
         }
-        return "Usuario no encontrado" ;
+        return "Usuario no encontrado";
     }
 
     /**
