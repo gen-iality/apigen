@@ -9,6 +9,7 @@ use App\Event;
 use App\Mail\RSVP;
 use App\Message;
 use App\MessageUser;
+Use Redirect;
 use App\State;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
@@ -41,8 +42,20 @@ class RSVPController extends Controller implements ShouldQueue
             $usremail = 'esteban.sanchez@mocionsoft.com';
             $link = $this->auth->getSignInWithEmailLink($usremail, $actionCodeSettings);
             echo "<p>".$link."</p>";
-
     }
+
+    public function singIn(Request $request){
+
+        $actionCodeSettings = ['handleCodeInApp' => false];
+        $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
+        $parts = parse_url($link);
+        parse_str($parts['query'], $query);
+
+        $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email") , $query['oobCode']);
+        
+        return Redirect::to("https://evius.co/?token=".$signInResult->idToken());
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -154,8 +167,8 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->email)) ? $eventUser->email : "apps@mocionsoft.com";
-
+            $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
+            
             $messageUser = new MessageUser(
                 [
                     'email' => $eventUser->email,
