@@ -436,7 +436,12 @@ class EventUserController extends Controller
             $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
             $user["id"] = $check->id;
             $user["status"] = "Usuario existente en el evento";
-            $user["account_response"] = $auth->getUserByEmail($email);
+            try {
+                $user["account_response"] = $auth->getUserByEmail($email);
+            
+            } catch (Exception $e) {
+                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius"; 
+            }
             return $user;   
         }
         return "Usuario no encontrado";
