@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Morrislaptop\Firestore\Factory;
+use Google\Cloud\Storage\StorageClient;
+use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Illuminate\Http\Request;
+use Google\Cloud\Firestore\FirestoreClient;
 use App\Attendee;
 
 class synchronizationController extends Controller
@@ -16,7 +18,7 @@ class synchronizationController extends Controller
      * Realizando una migración completa,
      *
      * para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-     * https://github.com/morrislaptop/firestore-php
+     * https://firebase-php.readthedocs.io/en/4.44.0/
      * 
      * El controlador sigue los siguientes pasos:
      *      1. Se abre el servicio de firestore
@@ -37,8 +39,13 @@ class synchronizationController extends Controller
     public function EventUsers($event_id)
     {
         try{
-            $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-            $firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
+            //$storage = new StorageClient(base_path('firebase_credentials.json'));
+            $firestore = new FirestoreClient([
+                'keyFilePath' => base_path('firebase_credentials.json')
+            ]); 
+            //base_path('firebase_credentials.json')
+            //$serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+            //$firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
             
             $eventUsers = Attendee::where('event_id',$event_id)->get();
             $collection = $firestore->collection($event_id.'_event_attendees');
@@ -82,8 +89,9 @@ class synchronizationController extends Controller
     {
 
         $eventUser = Attendee::find($user);
-        $firestore = resolve('Morrislaptop\Firestore');
-
+        $firestore = new FirestoreClient([
+            'keyFilePath' => base_path('firebase_credentials.json')
+        ]); 
         if($eventUser->user){
             $collection = $firestore->collection($eventUser->event_id.'-event_users');
             $user = $collection->document($eventUser->_id);

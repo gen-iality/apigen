@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Kreait\Firebase\Factory;
+use Google\Cloud\Firestore\FirestoreClient;
 use Kreait\Firebase\ServiceAccount;
 
 //use Kreait\Firebase\Auth;
@@ -30,13 +31,17 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         \App\ActivityAssistants::saved(
             function ($activityAttendee) {
 
-                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        
-                $ft =  (new \Morrislaptop\Firestore\Factory)
-                       ->withServiceAccount($serviceAccount)
-                       ->createFirestore();
-		$db = $ft;                  
-                 
+            //        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+            //
+            //        $ft =  (new Factory)
+            //               ->withServiceAccount($serviceAccount)
+            //               ->createFirestore();
+		    //$db = $ft;                  
+            // new way
+            $ft = new FirestoreClient([
+                'keyFilePath' => base_path('firebase_credentials.json')
+            ]); 
+
                 $doc_ids = [];
                 $path = "event_activity_attendees/".$activityAttendee->event_id."/activities/".$activityAttendee->activity_id."/attendees";
 
@@ -134,7 +139,7 @@ echo " >>  no existe <<";
         $this->app->singleton(
             'Kreait\Firebase\Auth', function ($app) {
                 $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-                $firebase = (new \Kreait\Firebase\Factory)
+                $firebase = (new Factory)
                     ->withServiceAccount($serviceAccount)
                     ->create();
                 return $firebase->getAuth();
@@ -142,11 +147,12 @@ echo " >>  no existe <<";
         );
 
         $this->app->singleton(
-            'Morrislaptop\Firestore', function ($app) {
+            'Kreait\Firebase\Firestore', function ($app) {
                 $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-                $firebase = (new \Morrislaptop\Firestore\Factory)
+                $firebase = (new Factory)
                     ->withServiceAccount($serviceAccount)
                     ->createFirestore();
+
                 return $firebase;
             }
         );
@@ -185,11 +191,15 @@ echo " >>  no existe <<";
      */
     public function saveFirestore($collection, $document, $data)
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new \Morrislaptop\Firestore\Factory)
-            ->withServiceAccount($serviceAccount)
-            ->createFirestore();
-
+//        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+//        $firebase = (new Factory)
+//            ->withServiceAccount($serviceAccount)
+//            ->createFirestore();
+        // NEW WAY 
+        $firebase = new FirestoreClient([
+            'keyFilePath' => base_path('firebase_credentials.json')
+        ]); 
+        
         if ($data) {
             Log::debug($collection);
             $collection = $firebase->collection($collection);
@@ -231,6 +241,10 @@ echo " >>  no existe <<";
         $firebase = (new \Kreait\Firebase\Factory)
             ->withServiceAccount($serviceAccount)
             ->create();
+        // NEW WAY 
+        //$firebase = new FirestoreClient([
+        //    'keyFilePath' => base_path('firebase_credentials.json')
+        //]);     
         $db = $firebase->getDatabase();
 
         if ($data) {
