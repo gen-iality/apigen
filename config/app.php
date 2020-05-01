@@ -28,6 +28,7 @@ return [
     'app_configuration' => [],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     'pushdirection' => env('PUSH_URL','production'),
+    'evius_api' => env('EVIUS_API'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
