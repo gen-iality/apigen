@@ -32,9 +32,6 @@ class TokenToUserProvider implements UserProvider
 
     public function retrieveByToken($identifier, $token)
     {
-        //$token = $this->token->with('user')->where($identifier, $token)->first();
-        //return $token && $token->user ? $token->user : null;
-
         /*
          * Se verifica la valides del token
          * Si este se encuentra activamos la función validator, el cual nos devuelve el
@@ -65,13 +62,13 @@ class TokenToUserProvider implements UserProvider
             $refresh_token = $user->refresh_token;
 
             if (!$refresh_token) {
-                throw new Exception('Error: Token expired');
+                throw new \Exception('Error: Token expired');
             }
 
             $signInResult = $this->auth->signInWithRefreshToken($refresh_token);
 
             if (!$signInResult->accessToken()) {
-                throw new Exception('Error: Token expired');
+                throw new \Exception('Error: Token expired');
             }
 
             $token = $signInResult->accessToken();
