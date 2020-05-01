@@ -2,14 +2,11 @@
 
 namespace App\Mail;
 
+use App\Event;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
-use App\Event;
-use App\Attendee;
-use App\Account;
 
 class RSVP extends Mailable implements ShouldQueue
 {
@@ -35,14 +32,14 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    
-    public function __construct( string $message, Event $event, $eventUser, string $image = null,$footer=null,string $subject = null)
+
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
     {
-            
+
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
         $event_location = null;
-        if(!empty($event["location"]["FormattedAddress"])){
+        if (!empty($event["location"]["FormattedAddress"])) {
             $event_location = $event["location"]["FormattedAddress"];
         }
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
@@ -50,21 +47,21 @@ class RSVP extends Mailable implements ShouldQueue
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.evius_api')."/singinwithemail?email=".$email;
+        $link = config('app.url') . "/singinwithemail?email=" . $email;
 
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
-        $this->image = ($image)?$image:null;
+        $this->image = ($image) ? $image : null;
         $this->message = $message;
         $this->footer = $footer;
 
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
-        
-        $this->subject   = "[Invitación - ".$event->name."]";
+
+        $this->subject = "[Invitación - " . $event->name . "]";
     }
 
     /**
@@ -76,12 +73,12 @@ class RSVP extends Mailable implements ShouldQueue
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        $from = $this->event->organizer->name; 
+        $from = $this->event->organizer->name;
 
         return $this
-        ->from("alerts@evius.co", $from)
-        ->subject($this->subject)
-        ->markdown('rsvp.rsvpinvitation');
+            ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
     }
 }

@@ -4,14 +4,13 @@ namespace App\Providers;
 
 use App\Attendee;
 use App\Mail\BookingConfirmed;
-use App\Observers\EventUserObserver;
+use Google\Cloud\Firestore\FirestoreClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Kreait\Firebase\Factory;
-use Google\Cloud\Firestore\FirestoreClient;
 use Kreait\Firebase\ServiceAccount;
 
 //use Kreait\Firebase\Auth;
@@ -31,60 +30,50 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         \App\ActivityAssistants::saved(
             function ($activityAttendee) {
 
-            //        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-            //
-            //        $ft =  (new Factory)
-            //               ->withServiceAccount($serviceAccount)
-            //               ->createFirestore();
-		    //$db = $ft;                  
-            // new way
-            $ft = new FirestoreClient([
-                'keyFilePath' => base_path('firebase_credentials.json')
-            ]); 
+                //        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+                //
+                //        $ft =  (new Factory)
+                //               ->withServiceAccount($serviceAccount)
+                //               ->createFirestore();
+                //$db = $ft;
+                // new way
+                $ft = new FirestoreClient([
+                    'keyFilePath' => base_path('firebase_credentials.json'),
+                ]);
 
                 $doc_ids = [];
-                $path = "event_activity_attendees/".$activityAttendee->event_id."/activities/".$activityAttendee->activity_id."/attendees";
+                $path = "event_activity_attendees/" . $activityAttendee->event_id . "/activities/" . $activityAttendee->activity_id . "/attendees";
 
-
-                foreach($activityAttendee->user_ids as $aid) {  
+                foreach ($activityAttendee->user_ids as $aid) {
                     //creamos un id compuesto para saltarnos el bug que no tenemos ID para activityAttendee
-                    $doc_id = $aid.$activityAttendee->activity_id;
-                    
+                    $doc_id = $aid . $activityAttendee->activity_id;
 
+                    $pathd = $activityAttendee->event_id . "/activities/" . $activityAttendee->activity_id . "/attendees/" . $doc_id;
 
-$pathd = $activityAttendee->event_id."/activities/".$activityAttendee->activity_id."/attendees/".$doc_id;
+                    $r = $db->collection('event_activity_attendees')->document($pathd);
 
+                    try {
+                        $r->snapshot();
+                        echo "existe";
+                        continue;
+                    } catch (\Exception $e) {
+                        echo " >>  no existe <<";
 
-$r = $db->collection('event_activity_attendees')->document($pathd);
-
-
-
-try{
-$r->snapshot();	
-echo "existe";
-continue;
-}catch(\Exception $e){
-echo " >>  no existe <<";
-  
-}
-
-
-
+                    }
 
                     $a = Attendee::find($aid);
                     if (!$a) {continue;}
-         
-                    $p  = [];
-                    $p["properties"]  = $a->properties;
-                    $p["rol_name"]    = $a->rol_assistant;
-                    $p["rol_id"]      = $a->rol_id;
-                    $p["event_id"]    = $activityAttendee->event_id;
+
+                    $p = [];
+                    $p["properties"] = $a->properties;
+                    $p["rol_name"] = $a->rol_assistant;
+                    $p["rol_id"] = $a->rol_id;
+                    $p["event_id"] = $activityAttendee->event_id;
                     $p["attendee_id"] = $aid;
                     $p["activity_id"] = $activityAttendee->activity_id;
-                    
-                    
-                    $resultado = self::storeDocInFirestore($path , $doc_id, $p);
-                }              
+
+                    $resultado = self::storeDocInFirestore($path, $doc_id, $p);
+                }
             }
         );
         \App\Attendee::saved(
@@ -138,19 +127,18 @@ echo " >>  no existe <<";
 
         $this->app->singleton(
             'Kreait\Firebase\Auth', function ($app) {
-                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-                $firebase = (new Factory)
-                    ->withServiceAccount($serviceAccount)
-                    ->create();
-                return $firebase->getAuth();
+                $fireauth = (new Factory)
+                    ->withServiceAccount(base_path('firebase_credentials.json'))
+                    ->createAuth();
+
+                return $fireauth;
             }
         );
 
         $this->app->singleton(
             'Kreait\Firebase\Firestore', function ($app) {
-                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
                 $firebase = (new Factory)
-                    ->withServiceAccount($serviceAccount)
+                    ->withServiceAccount(base_path('firebase_credentials.json'))
                     ->createFirestore();
 
                 return $firebase;
@@ -192,14 +180,14 @@ echo " >>  no existe <<";
     public function saveFirestore($collection, $document, $data)
     {
 //        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-//        $firebase = (new Factory)
-//            ->withServiceAccount($serviceAccount)
-//            ->createFirestore();
-        // NEW WAY 
+        //        $firebase = (new Factory)
+        //            ->withServiceAccount($serviceAccount)
+        //            ->createFirestore();
+        // NEW WAY
         $firebase = new FirestoreClient([
-            'keyFilePath' => base_path('firebase_credentials.json')
-        ]); 
-        
+            'keyFilePath' => base_path('firebase_credentials.json'),
+        ]);
+
         if ($data) {
             Log::debug($collection);
             $collection = $firebase->collection($collection);
@@ -241,10 +229,10 @@ echo " >>  no existe <<";
         $firebase = (new \Kreait\Firebase\Factory)
             ->withServiceAccount($serviceAccount)
             ->create();
-        // NEW WAY 
+        // NEW WAY
         //$firebase = new FirestoreClient([
         //    'keyFilePath' => base_path('firebase_credentials.json')
-        //]);     
+        //]);
         $db = $firebase->getDatabase();
 
         if ($data) {

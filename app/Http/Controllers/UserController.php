@@ -30,63 +30,75 @@ class UserController extends UserControllerWeb
      * @param  \Closure  $next
      * @return mixed
      */
-
+//http://localhost:8000/api/user/loginorcreatefromtoken?evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg&evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg
     public function loginorcreatefromtoken(Request $request)
     {
-        /**
-         * Miramos si el token viene en la Petición
-         * El token viene en la petición el cual si llega con el nombre evius_token o token
-         * REQUEST,
-         *
-         * En la Petición viene el refresh_token
-         */
-        //
         $firebaseToken = null;
-        if ($request->has('evius_token')) {$firebaseToken = $request->input('evius_token');}
+        $refresh_token = null;
+        $url_final_params = [];
 
-        /**
-         * Si el token no viene en la petición
-         * Bota el error de que el token no fue enviado en la petición, recordar que esta ruta es
-         * una petición GET.
-         */
-        if (!$firebaseToken) {
-            return response(
-                [
-                    'status' => Response::HTTP_UNAUTHORIZED,
-                    'message' => 'Error: No token provided',
-                ], Response::HTTP_UNAUTHORIZED
-            );
+        try {
+            /**
+             * Miramos si el token viene en la Petición
+             * El token viene en la petición el cual si llega con el nombre evius_token o token
+             * REQUEST,
+             *
+             * En la Petición viene el refresh_token
+             */
+            //
+
+            if ($request->has('evius_token')) {$firebaseToken = $request->input('evius_token');}
+            if ($request->has('refresh_token')) {$firebaseToken = $request->input('refresh_token');}
+
+            /**
+             * Si el token no viene en la petición
+             * Bota el error de que el token no fue enviado en la petición, recordar que esta ruta es
+             * una petición GET.
+             */
+            if (!$firebaseToken) {
+                throw new Exception('Error: No token provided');
+            }
+
+            /*
+             * Se verifica la valides del token
+             * Si este se encuentra activamos la función validator, el cual nos devuelve el
+             * usuario y finalmente enviamos el request indicando que se puede continuar, con la página acutal.
+             */
+
+            $verifiedIdToken = $this->auth->verifyIdToken($firebaseToken);
+            $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
+
+            $user = Account::where('uid', '=', $user_auth->uid)->first();
+
+            if (!$user) {
+                $user = Account::create(get_object_vars($user_auth));
+                //We created a organization default, thus the name organitatios is the displayName user
+                $organization = new Organization();
+                $organization->author = $user->id;
+                $organization->name = $user->displayName;
+                $organization->save();
+
+                self::_sendConfirmationEmail(
+                    $user
+                );
+            }
+
+            //El token para refrescar tokens vencidos de expiración rápida
+            if ($refresh_token) {
+                $user->refresh_token = $refresh_token;
+                $user->save();
+            }
+
+            $url_final_params["token"] = $firebaseToken;
+
+        } catch (\Exception $e) {
+            $url_final_params["error"] = $e->getMessage();
+
+        } finally {
+            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url');
+            return redirect()->away($destination . "?" . http_build_query($url_final_params));
         }
-        /*
-         * Se verifica la valides del token
-         * Si este se encuentra activamos la función validator, el cual nos devuelve el
-         * usuario y finalmente enviamos el request indicando que se puede continuar, con la página acutal.
-         */
 
-        $verifiedIdToken = $this->auth->verifyIdToken($firebaseToken);
-        $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
-
-        $user = Account::where('uid', '=', $user_auth->uid)->first();
-
-        if (!$user) {
-            $user = Account::create(get_object_vars($user_auth));
-            //We created a organization default, thus the name organitatios is the displayName user
-            $organization = new Organization();
-            $organization->author = $user->id;
-            $organization->name = $user->displayName;
-            $organization->save();
-
-            self::_sendConfirmationEmail(
-                $user
-            );
-        }
-
-        if ($request->has('destination')) {
-            $destination = $request->input('destination');
-            return redirect($destination . '/?token=' . $firebaseToken);
-        } else {
-            return redirect('https://evius.co/?token=' . $firebaseToken);
-        }
     }
 
     /**
@@ -221,10 +233,9 @@ class UserController extends UserControllerWeb
             return $Account;
         } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
             return [];
-        } catch(\Exception $e){
-            return ["error"=>$e->getMessage()];
+        } catch (\Exception $e) {
+            return ["error" => $e->getMessage()];
         }
-         
 
     }
 
@@ -266,9 +277,8 @@ class UserController extends UserControllerWeb
         $user->emailVerified = true;
         $user->save();
 
-        return redirect()->away(Config::get('app.front_url', 'https://evius.co') . '/profile/' . $user->id);
+        return redirect()->away(config('app.front_url') . "/profile/" . $user->id);
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
-
     }
 
 }
