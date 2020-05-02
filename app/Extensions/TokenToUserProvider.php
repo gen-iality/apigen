@@ -10,6 +10,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Support\Facades\Log;
+use \Exception;
 
 class TokenToUserProvider implements UserProvider
 {
@@ -38,51 +39,57 @@ class TokenToUserProvider implements UserProvider
          * usuario
          */
         try {
-            $verifiedIdToken = $this->auth->verifyIdToken($token);
-            $user = $this->findUserByUID($verifiedIdToken);
 
-            Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
+            try {
+                $verifiedIdToken = $this->auth->verifyIdToken($token);
+                $user = $this->findUserByUID($verifiedIdToken);
+                Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
 
-        } catch (ExpiredToken | InvalidToken | \InvalidArgumentException $e) {
+            } catch (ExpiredToken | InvalidToken | \InvalidArgumentException $e) {
+                //Intentamos refrescar el token antes de fallar
 
-            /**
-             * Decodificación del token
-             * Para decodificar utilizamos JWT https://firebase.google.com/docs/auth/admin/verify-id-tokens
-             * o puede consultar lo siguiente https://stackoverflow.com/questions/42098150/how-to-verify-firebase-id-token-with-phpjwt
-             */
-            $token = $e->getToken()->getClaims();
-            $user_id = ((array) $token);
-            $user_id = $user_id['user_id'];
+                $outter_message = $e->getMessage();
+                $claims = $e->getToken()->getClaims();
+                $claims = ((array) $claims);
+                $user_id = $claims['user_id'];
 
-            /*
-             * Capturamos el usuario a partir del uid el cual se encuentra en el token codificado
-             * y recuperamos el refresh_token
-             */
-            $user = Account::where('uid', (string) $user_id)->first();
-            $refresh_token = $user->refresh_token;
+                $user = $this->signInWithRefreshToken($user_id, $outter_message);
+                header('new_token:' . $user->token);
 
-            if (!$refresh_token) {
-                throw new \Exception('Error: Token expired');
             }
 
-            $signInResult = $this->auth->signInWithRefreshToken($refresh_token);
-
-            if (!$signInResult->accessToken()) {
-                throw new \Exception('Error: Token expired');
-            }
-
-            $token = $signInResult->accessToken();
-            $user->token = $token;
-            header('new_token:' . $token);
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::debug("bug: " . $e->getMessage());
             throw new AuthenticationException($e->getMessage());
         }
-
         return $user;
 
     }
+    private function signInWithRefreshToken($user_id, $outter_message = "")
+    {
+        /*
+         * Capturamos el usuario a partir del uid el cual se encuentra en el token codificado
+         * y recuperamos el refresh_token
+         */
+
+        $user = Account::where('uid', (string) $user_id)->first();
+        $refresh_token = $user->refresh_token;
+
+        if (!$refresh_token) {
+            throw new Exception($outter_message . ' and  no refresh token found');
+        }
+
+        $signInResult = $this->auth->signInWithRefreshToken($refresh_token);
+
+        if (!$signInResult->accessToken()) {
+            throw new Exception($outter_message . ' and new token could not be generated');
+        }
+
+        $token = $signInResult->accessToken();
+        $user->token = $token;
+        return $user;
+    }
+
     public function updateRememberToken(Authenticatable $user, $token)
     {
         // update via remember token not necessary

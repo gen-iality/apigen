@@ -29,7 +29,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        
+
         // \App\Http\Middleware\ForceJsonResponse::class,
     ];
 
@@ -56,8 +56,8 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'token' => [
-            \App\Http\Middleware\ForceJsonResponse::class
-        ]
+            \App\Http\Middleware\ForceJsonResponse::class,
+        ],
     ];
 
     /**
@@ -68,10 +68,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'first.run'  => \App\Http\Middleware\FirstRunMiddleware::class,
-        'auth'       => \App\Http\Middleware\Authenticate::class,
+        'first.run' => \App\Http\Middleware\FirstRunMiddleware::class,
+        'auth' => \App\Http\Middleware\Authenticate::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -79,12 +78,10 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'auth.firebase' => \App\Http\Middleware\AuthFirebase::class,
         'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
-        'tokenauth.firebase' => \App\Http\Middleware\TokenAuthFirebase::class,
-        'installed'  => \App\Http\Middleware\CheckInstalled::class,
+        'installed' => \App\Http\Middleware\CheckInstalled::class,
     ];
 }
