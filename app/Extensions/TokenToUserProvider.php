@@ -45,10 +45,15 @@ class TokenToUserProvider implements UserProvider
                 $user = $this->findUserByUID($verifiedIdToken);
                 Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
 
-            } catch (ExpiredToken | InvalidToken | \InvalidArgumentException $e) {
+            } catch (ExpiredToken | InvalidToken $e) {
                 //Intentamos refrescar el token antes de fallar
-
                 $outter_message = $e->getMessage();
+
+                //Primero miramos si el error trae el token consigo
+                if (!method_exists($e, 'getToken')) {
+                    throw new Exception($e->getMessage());
+                }
+
                 $claims = $e->getToken()->getClaims();
                 $claims = ((array) $claims);
                 $user_id = $claims['user_id'];
@@ -57,8 +62,8 @@ class TokenToUserProvider implements UserProvider
                 header('new_token:' . $user->token);
 
             }
-
-        } catch (Exception $e) {
+            //| \InvalidArgumentException
+        } catch (\Exception $e) {
             Log::debug("bug: " . $e->getMessage());
             throw new AuthenticationException($e->getMessage());
         }
