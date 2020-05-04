@@ -53,24 +53,18 @@ class ActivityAssistantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $event_id, $activity_id_id)
+    public function index(Request $request, $event_id)
     {
-        $activity = ActivityAssistants::where("activity_id",$activity_id_id)->first();
-        
-        $user_ids = $activity->user_ids;
-        //foreach ($user_ids as $key => $value) {
-        //    
-        //}
-        //echo var_dump($user_ids);
-        $usuarios = Attendee::whereId($user_ids);
-        return var_dump($usuarios);
-        
-
         return JsonResource::collection(
-            Attendee::where("_id", $event_id)->paginate(config('app.page_size'))
+            ActivityAssistants::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
-    
+    public function indexUsers(Request $request, $event_id, $activity_id)
+    {
+        return JsonResource::collection(
+            ActivityAssistants::where("event_id", $event_id)->where("enrollment_activity",$activity_id)->paginate(config('app.page_size'))
+        );
+    }
     /**<
      * Store a newly created resource in storage.
      *
@@ -91,7 +85,7 @@ class ActivityAssistantsController extends Controller
         $user = Attendee::find($data["user_id"]);
         if(is_null(Attendee::find($data["user_id"])->enrollment_activity) || empty(Attendee::find($data["user_id"])->enrollment_activity )){
             $user_registration['enrollment_activity'] = [$data["activity_id"]];
-             
+             +
             $user->fill($user_registration);
             $user->save();
         }else{
