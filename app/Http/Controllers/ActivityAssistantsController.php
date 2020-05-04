@@ -53,13 +53,24 @@ class ActivityAssistantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $event_id)
+    public function index(Request $request, $event_id, $activity_id_id)
     {
+        $activity = ActivityAssistants::where("activity_id",$activity_id_id)->first();
+        
+        $user_ids = $activity->user_ids;
+        //foreach ($user_ids as $key => $value) {
+        //    
+        //}
+        //echo var_dump($user_ids);
+        $usuarios = Attendee::whereId($user_ids);
+        return var_dump($usuarios);
+        
+
         return JsonResource::collection(
-            ActivityAssistants::where("event_id", $event_id)->paginate(config('app.page_size'))
+            Attendee::where("_id", $event_id)->paginate(config('app.page_size'))
         );
     }
-
+    
     /**<
      * Store a newly created resource in storage.
      *
@@ -77,20 +88,33 @@ class ActivityAssistantsController extends Controller
         $getsize = ActivityAssistants::find($model[0]["_id"])->user_ids;
         $activities = Activities::find($activity_id)->capacity; 
         $size = $getsize;
-        
+        $user = Attendee::find($data["user_id"]);
+        if(is_null(Attendee::find($data["user_id"])->enrollment_activity) || empty(Attendee::find($data["user_id"])->enrollment_activity )){
+            $enrollment["enrollment_activity"] = [$data["activity_id"]];
+        }else{
+            $new_properties = $activity_id;
+            $old_properties = $eventUser->enrollment_activity;
+            $properties_merge =  array_merge($old_properties,$new_properties);
+            
+            $user_registration['enrollment_activity'] = $properties_merge;
+            $user->fill($user_registration);
+            $user->save();
+        }
+
+        $user->fill();
         if(sizeof($size) < $activities){
             
         
-        $arr = json_decode(json_encode($model), TRUE);
+            $arr = json_decode(json_encode($model), TRUE);
         
-        if(empty($arr)){
-            $result->push("user_ids",$data["user_id"]);
-            $result->save();
-            return $result;
-        }else{
-            $model = ActivityAssistants::where("activity_id",$activity_id)->get();
-            $model = ActivityAssistants::find($model[0]["_id"]);
-            $model->push("user_ids",$data["user_id"]);
+            if(empty($arr)){
+                $result->push("user_ids",$data["user_id"]);
+                $result->save();
+                return $result;
+            }else{
+                $model = ActivityAssistants::where("activity_id",$activity_id)->get();
+                $model = ActivityAssistants::find($model[0]["_id"]);
+                $model->push("user_ids",$data["user_id"]);
             /*
             * calcular cupos restantes
             */
