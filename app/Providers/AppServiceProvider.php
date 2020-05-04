@@ -225,12 +225,14 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     public function saveFirebase($collection, $user_id, $data)
     {
 
-        $db = (new Factory)
+        $firestore = (new Factory)
             ->withServiceAccount(base_path('firebase_credentials.json'))
             ->createFirestore();
 
+        $db = $firestore->database();
+
         if ($data) {
-            $db->getReference($collection . '/' . $user_id)->set($data);
+            $db->collection($collection)->document($user_id)->set($data);
         }
     }
 }
