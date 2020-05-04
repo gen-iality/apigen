@@ -16,8 +16,9 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
         <br>
         Te esperamos.
     </p>
-
-    <a href="{{'https://evius.co/landing/'.$event->id }}">{{$event->name}}</a>
+    <p>
+        <a href="{{$link}}">{{$event->name}}</a>
+    </p>
 
 </div>
 
