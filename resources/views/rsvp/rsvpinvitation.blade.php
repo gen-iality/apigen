@@ -6,7 +6,7 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
 <div style="text-align: center;font-size: 130%;">
     <p style="font-size: 130%">Para ingresar al evento y ver mas informacion visitanos en:
         @component('mail::button', ['url' => $link , 'color' => 'evius'])
-        Ingresar a al Evento
+        Ingresar a al Evento AQUÍ
         @endcomponent
         Tus datos de acceso son:<br>
 
@@ -16,6 +16,8 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
         <br>
         Te esperamos.
     </p>
+
+    [{{$event->name}}]({{ url('/landing/'.$event->id) }})
 </div>
 
 @endcomponent
