@@ -90,7 +90,10 @@ class ActivityAssistantsController extends Controller
         $size = $getsize;
         $user = Attendee::find($data["user_id"]);
         if(is_null(Attendee::find($data["user_id"])->enrollment_activity) || empty(Attendee::find($data["user_id"])->enrollment_activity )){
-            $enrollment["enrollment_activity"] = [$data["activity_id"]];
+            $user_registration['enrollment_activity'] = [$data["activity_id"]];
+             
+            $user->fill($user_registration);
+            $user->save();
         }else{
             $new_properties = $activity_id;
             $old_properties = $eventUser->enrollment_activity;
