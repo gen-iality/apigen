@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
 
 //use Kreait\Firebase\Auth;
 
@@ -225,15 +224,10 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      */
     public function saveFirebase($collection, $user_id, $data)
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new \Kreait\Firebase\Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        // NEW WAY
-        //$firebase = new FirestoreClient([
-        //    'keyFilePath' => base_path('firebase_credentials.json')
-        //]);
-        $db = $firebase->getDatabase();
+
+        $db = (new Factory)
+            ->withServiceAccount(base_path('firebase_credentials.json'))
+            ->createFirestore();
 
         if ($data) {
             $db->getReference($collection . '/' . $user_id)->set($data);
