@@ -17,7 +17,7 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
         Te esperamos.
     </p>
 
-    [{{$event->name}}]({{ url('/landing/'.$event->id) }})
+    [{{$event->name}}]({{'https://evius.co/landing/'.$event->id) }})
 </div>
 
 @endcomponent
