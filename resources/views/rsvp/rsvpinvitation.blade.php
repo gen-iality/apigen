@@ -6,12 +6,14 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
 <div style="text-align: center;font-size: 130%;">
     <span>
         <p style="font-size: 130%">Para ingresar al evento y ver mas informacion visitanos en:
-
+            @component('mail::button', ['url' => $link , 'color' => 'evius'])
+            Ingresar a EVIUS
+            @endcomponent
             Tus datos de acceso son:<br>
 
             Usuario: {{$email}}
             <br>
-            Contraseña: {{$password}}
+            Código: {{$password}}
             <br>
             Te esperamos.
         </p>
