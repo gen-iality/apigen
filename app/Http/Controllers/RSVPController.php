@@ -9,12 +9,12 @@ use App\Event;
 use App\Mail\RSVP;
 use App\Message;
 use App\MessageUser;
-Use Redirect;
 use App\State;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
+use Redirect;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
@@ -37,23 +37,26 @@ class RSVPController extends Controller implements ShouldQueue
             //'dynamicLinkDomain' => 'evius.co'
         ];
 
-
-            // Admin SDK API to generate the sign in with email link.
-            $usremail = 'esteban.sanchez@mocionsoft.com';
-            $link = $this->auth->getSignInWithEmailLink($usremail, $actionCodeSettings);
-            echo "<p>".$link."</p>";
+        // Admin SDK API to generate the sign in with email link.
+        $usremail = 'esteban.sanchez@mocionsoft.com';
+        $link = $this->auth->getSignInWithEmailLink($usremail, $actionCodeSettings);
+        echo "<p>" . $link . "</p>";
     }
 
-    public function singIn(Request $request){
+    public function singIn(Request $request)
+    {
 
         $actionCodeSettings = ['handleCodeInApp' => false];
         $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
+
+        $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+
         $parts = parse_url($link);
         parse_str($parts['query'], $query);
 
-        $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email") , $query['oobCode']);
-        
-        return Redirect::to("https://evius.co/?token=".$signInResult->idToken());
+        $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
+
+        return Redirect::to("https://evius.co/" . $innerpath . "?token=" . $signInResult->idToken());
     }
 
     /**
@@ -168,7 +171,7 @@ class RSVPController extends Controller implements ShouldQueue
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
             $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
-            
+
             $messageUser = new MessageUser(
                 [
                     'email' => $eventUser->email,
