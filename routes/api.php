@@ -391,8 +391,7 @@ Route::get('states', 'StateController@index');
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
-Route::get('
-', 'RSVPController@singIn');
+Route::get('singinwithemail', 'RSVPController@singIn');
 Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
