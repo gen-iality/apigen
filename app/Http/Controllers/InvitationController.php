@@ -48,12 +48,15 @@ class InvitationController extends Controller
         );
     }
     
-    public function indexcontacts(Request $request,$event_id,$user_id)
+    public function indexcontacts($event_id,$user_id)
     {
-        $contacts = NetworkingContacts::where("user_account",$user_id)->first();
-        return JsonResource::collection(
-            Attendee::find("id_user_requesting",$contacts->contacts_id)
-        );
+        $contacts = NetworkingContacts::where("user_account",$user_id)->where("event_id",$event_id)->get()->toArray();
+
+        $contacts_id = $contacts[0]["contacts_id"];
+        if(!is_null($contacts_id)){
+            return JsonResource::collection( Attendee::find($contacts_id)->makeHidden(["rol","activities"]));
+            
+        }
     }
 
     /**

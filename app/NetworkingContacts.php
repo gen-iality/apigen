@@ -23,6 +23,9 @@ class NetworkingContacts extends Moloquent
     {
         return $this->belongsTo('App\Event');
     }
-
+    public function attendee()
+    {
+        return $this->belongsTo('App\Attendee');
+    }
     protected $guarded = [];
 }
