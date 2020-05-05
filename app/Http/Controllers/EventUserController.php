@@ -413,7 +413,7 @@ class EventUserController extends Controller
     {
         $email = Account::find($user_id);
         $events = Attendee::where('account_id',$email->id)->get();
-        $events_id = [];
+        $events_id = [];    
         foreach ($events as $key => $value) {
             array_push($events_id, $value["event_id"]);
         }
@@ -431,7 +431,7 @@ class EventUserController extends Controller
 
         $email = ($request->email) ? $request->email : $request->input("email");
         $password = $request->password;
-        $check = !empty($email) ? Attendee::where("email",$email)->where("event_id",$event_id)->first() : null;
+        $check = !empty($email) ? Account::where("email",$email)->where("event_id",$event_id)->first() : null;
         if(!is_null($check)){
             $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
             $user["id"] = $check->id;
