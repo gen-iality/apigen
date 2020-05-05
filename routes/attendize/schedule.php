@@ -46,16 +46,13 @@ Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequest
  ****************/
 
 Route::get  ('fillassitantsbug/{id}', 'ActivityAssistantsController@fillassitantsbug');
+// get users enrroled on activities
+Route::get   ('events/{event_id}/activity_users/{activity_id}',      'ActivityAssistantsController@indexUsers');
 
 Route::post  ('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
 Route::post('events/{event_id}/activity/activity_attendee/{id}', 'ActivityAssistantsController@deleteAssistant');
 
-Route::get   ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@index');
-Route::post  ('events/{event_id}/activity_attendee',      'ActivityAssistantsController@store');
-Route::get   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@show');
-Route::put   ('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@update');
-Route::delete('events/{event_id}/activity_attendee/{id}', 'ActivityAssistantsController@destroy');
-
+Route::apiResource('events/{event_id}/activity_attendee', 'ActivityAssistantsController');
 
 /***************
  * HOST
@@ -76,22 +73,12 @@ Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
 /***************
  * TYPE
  ****************/
-Route::get   ('events/{event_id}/type',      'TypeController@index');
-Route::post  ('events/{event_id}/type',      'TypeController@store');
-Route::get   ('events/{event_id}/type/{id}', 'TypeController@show');
-Route::put   ('events/{event_id}/type/{id}', 'TypeController@update');
-Route::delete('events/{event_id}/type/{id}', 'TypeController@destroy');
-
+Route::apiResource('events/{event_id}/type','TypeController');
 
 /***************
  * ACTIVITYCATEGORIES (las categorias para las actividades de la agenda)
  ****************/
-Route::get   ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@index');
-Route::post  ('events/{event_id}/categoryactivities',      'ActivityCategoriesController@store');
-Route::get   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@show');
-Route::put   ('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@update');
-Route::delete('events/{event_id}/categoryactivities/{id}', 'ActivityCategoriesController@destroy');
-
+Route::apiResource('events/{event_id}/categoryactivities',      'ActivityCategoriesController');
 
 /***************
  * TEST API'S
