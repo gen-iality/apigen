@@ -75,7 +75,6 @@ class ActivityAssistantsController extends Controller
 
     public function activitieAssistant(Request $request, $event_id)
     {
-        
         $data = $request->json()->all();
         $activity_id =$data["activity_id"];
         $data["event_id"] = $event_id;
@@ -90,7 +89,7 @@ class ActivityAssistantsController extends Controller
             if(sizeof($user_ids) < $capacity){ 
                 
                 if(ActivityAssistants::where("user_ids",$data["user_id"])->first()){
-                    return "Usuario ya inscrito a la actividad";die;
+                    return "Usuario ya se encuentra inscrito a la actividad";
                 }
 
                 $new_user = [$data["user_id"]];

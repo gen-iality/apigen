@@ -10,14 +10,14 @@ use Moloquent;
  * Category Model
  *
  */ 
-class Invitation extends Moloquent
+class NetworkingContacts extends Moloquent
 {
     /**
      * Category is owned by an event
      * @return void
     **/
 
-    protected $table = "networking_request";
+    protected $table = "networking_contacts";
     
     public function event()
     {

@@ -101,54 +101,51 @@ Route::group(
  * SENDCONTENT 
  ****************/
 
-Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
-Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
-Route::post('events/{event_id}/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
-Route::post('events/sendnotificationemail' ,  'SendContentController@sendNotificationEmail');
-
-Route::get('events/{event_id}/sendcontent' ,        'SendContentController@index');
-Route::post('events/{event_id}/sendcontent' ,       'SendContentController@store');
-Route::get('events/{event_id}/sendcontent/{id}' ,   'SendContentController@show');
-Route::put('events/{event_id}/sendcontent/{id}' ,   'SendContentController@update');
-Route::delete('events/{event_id}/sendcontent/{id}', 'SendContentController@destroy');
+    Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
+    Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
+    Route::post('events/{event_id}/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
+    Route::post('events/sendnotificationemail' ,  'SendContentController@sendNotificationEmail');
+    
+    Route::apiResource('events/{event_id}/sendcontent' ,        'SendContentController@index');
 
 /***************
  * INVITATION 
  ****************/
-Route::post('events/{event_id}/sendinvitation' , "InvitationController@SendInvitation");
-Route::get('events/{event_id}/indexinvitations/{user_id}' , "InvitationController@invitationsSent");
-Route::get('events/{event_id}/indexinvitationsrecieved/{user_id}' , "InvitationController@invitationsReceived");
-Route::put('events/{event_id}/acceptordecline/{id}' , "InvitationController@acceptOrDeclineFriendRequest");
-Route::apiResource('events/{event_id}/invitation', 'InvitationController');
+//Route::post("events/{event_id}/sendinvitation" , "InvitationController@SendInvitation");
+Route::get("events/{event_id}/indexinvitations/{user_id}" , "InvitationController@invitationsSent");
+Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}" , "InvitationController@invitationsReceived");
+Route::put("events/{event_id}/acceptordecline/{id}" , "InvitationController@acceptOrDeclineFriendRequest");
+Route::get("events/{event_id}/contactlist/{user_id}" , "InvitationController@indexcontacts");
+Route::apiResource("events/{event_id}/invitation", "InvitationController");
 
 
 /****************
  * Users Organization
  ****************/
-Route::group(
-    ['middleware' => 'auth:token'], function () {
-        Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController',['except' => ['update']]);
-        Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
-        Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
-    }
-);
+    Route::group(
+        ['middleware' => 'auth:token'], function () {
+            Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController',['except' => ['update']]);
+            Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
+            Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
+        }
+    );
 
 
 /****************
  * Users
  ****************/
 
-Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
-Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+    Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+    Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
-Route::group(
-    ['middleware' => 'auth:token'], function () {
-        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
-        Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
-        Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
-        Route::get('me/eventUsers', 'EventUserController@meEvents');
-    }
-);
+    Route::group(
+        ['middleware' => 'auth:token'], function () {
+            Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
+            Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+            Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
+            Route::get('me/eventUsers', 'EventUserController@meEvents');
+        }
+    );
 
 /****************
  * events
@@ -394,7 +391,8 @@ Route::get('states', 'StateController@index');
 //Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
 
 //RSVP
-Route::get('singinwithemail', 'RSVPController@singIn');
+Route::get('
+', 'RSVPController@singIn');
 Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
