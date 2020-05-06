@@ -417,7 +417,8 @@ class EventUserController extends Controller
 
         $email = ($request->email) ? $request->email : $request->input("email");
         $password = $request->password;
-        $check = !empty($email) ? Account::where("email",$email)->where("event_id",$event_id)->first() : null;
+        $check = !empty($email) ? Account::where("email",$email)->first() : null;
+
         if(!is_null($check)){
             $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
             $user["id"] = $check->id;
