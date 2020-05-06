@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                 //        $ft =  (new Factory)
                 //               ->withServiceAccount($serviceAccount)
                 //               ->createFirestore();
-                
+
                 // new way
                 $ft = new FirestoreClient([
                     'keyFilePath' => base_path('firebase_credentials.json'),
@@ -95,7 +95,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                self::saveFirebase('users', $eventUseAppServiceProviderr->_id, $eventUser->properties);
+                self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
 
                 $original = $eventUser->getOriginal();
 
