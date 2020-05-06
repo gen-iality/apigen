@@ -20,13 +20,24 @@ use Storage;
  *
  *
  */
+
 class InvitationController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function exceptions_error_handler($severity, $message, $filename, $lineno) {
+        if (error_reporting() == 0) {
+          return;
+        }
+        if (error_reporting() & $severity) {
+          throw new ErrorException($message, 0, $severity, $filename, $lineno);
+        }
+    }
+
     public function index(Request $request,$event_id)
     {
         return JsonResource::collection(
@@ -50,13 +61,17 @@ class InvitationController extends Controller
     
     public function indexcontacts($event_id,$user_id)
     {
-        $contacts = NetworkingContacts::where("user_account",$user_id)->where("event_id",$event_id)->get()->toArray();
-
-        $contacts_id = $contacts[0]["contacts_id"];
-        if(!is_null($contacts_id)){
-            return JsonResource::collection( Attendee::find($contacts_id)->makeHidden(["rol","activities"]));
-            
-        }
+        
+            $contacts = NetworkingContacts::where("user_account",$user_id)->where("event_id",$event_id)->get()->toArray();
+        
+            if(!empty($contacts[0]["contacts_id"])){
+                $contacts_id = $contacts[0]["contacts_id"];
+            if(!is_null($contacts_id)){
+                return JsonResource::collection( Attendee::find($contacts_id)->makeHidden(["rol","activities"]));
+                
+            }}
+            return "aun no tienes contactos.";
+        
     }
 
     /**
