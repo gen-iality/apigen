@@ -15,6 +15,7 @@ use App\Mailing;
 use PDF;
 use Storage;
 use Redirect;
+use Illuminate\Support\Facades\Response;
 
 /**
  * @resource Event
@@ -34,14 +35,14 @@ class InvitationController extends Controller
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
 
         if($request->input("request")){
+                try{               
+                echo self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));die;
+                }
+                catch(Exception $e){
 
-            try{
-                return self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"));
-            }
-            catch(\Exception $e){
-            }
+                }
         }
-        
+
         $actionCodeSettings = ['handleCodeInApp' => false];
         $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
         
@@ -145,14 +146,15 @@ class InvitationController extends Controller
         return $result;
     } 
 
-    public function acceptOrDeclineFriendRequest(Request $request,String $event_id,String $id){
+    public function acceptOrDeclineFriendRequest(Request $request,String $event_id,String $id,$response_alt = null){
 
         $data = $request->json()->all();
         $Invitation = Invitation::find($id);
+        $data["response"] = $data ? $data["response"] : $response_alt ;
         self::verifyAndAddContact($Invitation,$data);
-        $resp["response"] = $data["response"];
+        $resp["response"] = $data["response"] ? $data["response"] : $response_alt ;
  
-        $Invitation->fill($resp);
+        $Invitation->fill($resp);   
         $Invitation->save();
         $resp["id_user_requested"] = $Invitation->id_user_requested;
         $resp["id_user_requesting"] = $Invitation->id_user_requesting;
@@ -215,7 +217,7 @@ class InvitationController extends Controller
         $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name;
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
-        if($data["request_id"]){
+        if(!empty($data["request_id"])){
             $mail["request_id"] = $data["request_id"];
         }
         if(!empty($data["response"])){
@@ -249,7 +251,7 @@ class InvitationController extends Controller
         $subject = $mail["subject"];
         $result->save();
         
-        $response = $mail["request_id"] ? $mail["request_id"] : null ;
+        $response = !empty($mail["request_id"]) ? $mail["request_id"] : null ;
         
         foreach ($mail["mails"] as $key => $email) {    
             Mail::to($email)->send(
