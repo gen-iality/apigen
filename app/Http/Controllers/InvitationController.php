@@ -36,11 +36,12 @@ class InvitationController extends Controller
 
         if($request->input("request")){
                 try{               
-                echo self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));
+                echo self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));die;
                 }
                 catch(Exception $e){
-                    
+
                 }
+            die;
         }
 
         $actionCodeSettings = ['handleCodeInApp' => false];
@@ -106,6 +107,18 @@ class InvitationController extends Controller
 
         // end point para enviar solicitud con redireccion a evius
         $data = $request->json()->all();   
+
+
+        // verifica si ya son contactos  
+        $id_user_requesting = $data["id_user_requesting"];
+        
+        $model = NetworkingContacts::where("user_account",$data["id_user_requested"])->first();
+        
+        if($model){
+            if(is_int(array_search($data["id_user_requesting"],$model->contacts_id))){
+                abort(409,"Ya se encuentra en tu lista de contactos");
+            }
+        }
         $model = Invitation::where("id_user_requesting",$data["id_user_requesting"])->where("id_user_requested",$data["id_user_requested"])->first();
         //verifica si ya se ha enviado una solicitud de amistad igual y el estado de esta 
         if($model){
@@ -114,10 +127,6 @@ class InvitationController extends Controller
             }
             return abort(409,"Solictiud ya ha sido enviada anteriormente, esperando respuesta de solicitud");
         }
-
-        //ahora verifica si ya son contactos  
-        $model = NetworkingContacts::where("user_account",$data["id_user_requested"])->where("contacts_id",$data["id_user_requesting"])->first();
-        if ($model){abort(409,"Ya se encuentra en tu lista de contactos"); }
 
         $result = new Invitation($data);
         $result->save();
@@ -217,12 +226,17 @@ class InvitationController extends Controller
         $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name;
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
-        if(!empty($data["request_id"])){
+        if($data["request_id"]){
             $mail["request_id"] = $data["request_id"];
         }
         if(!empty($data["response"])){
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]] ;
     
+            if($data["response"] == "accepted"){
+                $model = NetworkingContacts::where("user_account",$data["id_user_requested"])->where("contacts_id",$data["id_user_requesting"])->first();
+            if ($model){abort(409,"Ya se encuentra en tu lista de contactos"); }
+
+            } 
             $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad";
             $mail["desc"] = $data["response"] == "accepted" ? $receiver->properties["displayName"]." ha aceptado tu solicitud de amistad para el evento ".$event->name : " Lo sentimos ".$receiver->properties["displayName"]." ha declinado tu solicitud de amistad para el evento ".$event->name;
              
@@ -246,7 +260,7 @@ class InvitationController extends Controller
         $subject = $mail["subject"];
         $result->save();
         
-        $response = !empty($mail["request_id"]) ? $mail["request_id"] : null ;
+        $response = $mail["request_id"] ? $mail["request_id"] : null ;
         
         foreach ($mail["mails"] as $key => $email) {    
             Mail::to($email)->send(
