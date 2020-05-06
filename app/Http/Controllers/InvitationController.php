@@ -14,6 +14,7 @@ use GuzzleHttp\Client;
 use App\Mailing;
 use PDF;
 use Storage;
+use Redirect;
 
 /**
  * @resource Event
@@ -23,7 +24,33 @@ use Storage;
 
 class InvitationController extends Controller
 {
-    
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
+    public function singIn(Request $request)
+    {
+        if($request->input("request")){
+            $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+
+            try{
+                return self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"));
+            }
+            catch(\Exception $e){
+            }
+        }
+        
+        $actionCodeSettings = ['handleCodeInApp' => false];
+        $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
+        
+        $parts = parse_url($link);
+        parse_str($parts['query'], $query);
+        
+        $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
+
+        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
+    }
     /**
      * Display a listing of the resource.
      *
@@ -118,6 +145,7 @@ class InvitationController extends Controller
     } 
 
     public function acceptOrDeclineFriendRequest(Request $request,String $event_id,String $id){
+
         $data = $request->json()->all();
         $Invitation = Invitation::find($id);
         self::verifyAndAddContact($Invitation,$data);

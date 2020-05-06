@@ -53,12 +53,12 @@ class friendRequest extends Mailable implements ShouldQueue
 
         $principal_title = $title;
         $description = $desc;
-        $link = "https://api.evius.co" . "/api/singinwithemail?email=" . $subject ;
+        $link = config('app.api_evius') . "/singinwithemail?email=" . $subject ;
         
         if($response){
-            $link = "https://api.evius.co" . "/api/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&request=" . $response ;
+            $link = config('app.api_evius') . "/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&request=" . $response ;
         } 
-        
+
         $this->response = $response;
         $this->email = $email;
         $this->link = $link;
