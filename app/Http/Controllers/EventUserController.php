@@ -413,35 +413,25 @@ class EventUserController extends Controller
 
     public function searchInEvent(Request $request, $event_id)
     {
-
         $auth = resolve('Kreait\Firebase\Auth');
 
         $email = ($request->email) ? $request->email : $request->input("email");
-
         $password = $request->password;
-        $user = Account::where("email", $email)->first();
-
-        if (is_null($user)) {
-            $user["account_response"] = "Usuario no esta inscrito al evento";
-            return $user;
-        }
-
-        $eventUser = ($user) ? Attendee::where("account_id", $user->_id)->first() : null;
-
-        if (!is_null($eventUser)) {
-            $user["nombres"] = ($user->properties["names"]) ? $user->properties["names"] : $user->properties["displayName"];
-            $user["id"] = $user->_id;
+        $check = !empty($email) ? Account::where("email",$email)->where("event_id",$event_id)->first() : null;
+        if(!is_null($check)){
+            $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
+            $user["id"] = $check->id;
             $user["status"] = "Usuario existente en el evento";
             try {
                 $user["account_response"] = $auth->getUserByEmail($email);
-
+            
             } catch (Exception $e) {
-                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius";
+                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius"; 
             }
-            return $user;
+            return $user;   
         }
-
         return "Usuario no encontrado";
+    
     }
 
     /**
