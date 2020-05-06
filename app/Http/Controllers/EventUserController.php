@@ -2,31 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use QRCode;
-use Validator;
-use Mail;
-use PDF;
-use App\Event;
-use App\State;
 use App\Account;
 use App\Attendee;
-use App\ActivityAssistants;
-use App\Mail\BookingConfirmed;
-use Illuminate\Http\Request;
-use App\Http\Controllers\EventAttendeesController;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
-use Kreait\Firebase\Auth;
-use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
-use Kreait\Firebase\JWT\IdTokenVerifier;       
-use Firebase\Auth\Token\Exception\InvalidToken;
-use Illuminate\Http\Response;
 use App\evaLib\Services\FilterQuery;
+use App\evaLib\Services\UserEventService;
+use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\evaLib\Services\UserEventService;
-use App\Jobs\SendAttendeeTicket;
-
+use App\Mail\BookingConfirmed;
+use App\State;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Mail;
+use Validator;
 
 /**
  * @resource Attendee (Attendee)
@@ -62,7 +50,7 @@ class EventUserController extends Controller
      * EJemplo: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
      * https://docs.mongodb.com/manual/core/index-case-insensitive/
      * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
-     * 
+     *
      *  @return \Illuminate\Http\Response EventUserResource collection
      */
     public function indexByEvent(Request $request, String $event_id, FilterQuery $filterQuery)
@@ -76,15 +64,13 @@ class EventUserController extends Controller
 
     public function meEvents(Request $request)
     {
-       
+
         $user = $request->get('user');
 
-        $query   = Attendee::with("event")->where("account_id", $user->id);
+        $query = Attendee::with("event")->where("account_id", $user->id);
         $results = $query->paginate(config('app.page_size'));
         return EventUserResource::collection($results);
-    }    
-
-
+    }
 
     public function bookEventUsers(Request $request, Event $event)
     {
@@ -106,8 +92,9 @@ class EventUserController extends Controller
         return $response;
     }
 
-    public function notifications(Request $request, $evenUserId){
-    
+    public function notifications(Request $request, $evenUserId)
+    {
+
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
         $eventUser->fill($data);
@@ -116,12 +103,10 @@ class EventUserController extends Controller
         $response = new EventUserResource($eventUser);
         $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
         return $response;
-   
-
 
     }
 
-        /**
+    /**
      * __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
      *
      * | Body Params   |
@@ -136,21 +121,21 @@ class EventUserController extends Controller
      * @return EventUserResource
      */
 
-    public function createUserViaUrl(Request $request, string $event_id)    
+    public function createUserViaUrl(Request $request, string $event_id)
     {
-      //  data-route="https://api.evius.co/es/event/order/5d712f33d74d5c2aef354aa6/resend"
-    //EventAttendeesController::postResendTicketToAttendee($datafromform, $event_id);
-    
-    $datafromform = $request->json()->all();
-    $language = $request->input("language");
-    $datafromform["language"] = $language;
-        foreach ($datafromform["form_response"]['answers'] as $answer){
-            switch($answer["field"]["id"]){
-                case "UHEADSVyhrBQ": 
-                case "fqVfNrgrLJEb": 
+        //  data-route="https://api.evius.co/es/event/order/5d712f33d74d5c2aef354aa6/resend"
+        //EventAttendeesController::postResendTicketToAttendee($datafromform, $event_id);
+
+        $datafromform = $request->json()->all();
+        $language = $request->input("language");
+        $datafromform["language"] = $language;
+        foreach ($datafromform["form_response"]['answers'] as $answer) {
+            switch ($answer["field"]["id"]) {
+                case "UHEADSVyhrBQ":
+                case "fqVfNrgrLJEb":
                     $datafromform['names'] = $answer[$answer["type"]];
-                
-                break;
+
+                    break;
                 case "EiX4qlYKpQWl":
                 case "rnlJ8qb0LrBZ":
                     $datafromform['email'] = $answer[$answer["type"]];
@@ -175,7 +160,7 @@ class EventUserController extends Controller
                 case "tvQOBq0hlycC":
                     $datafromform['company'] = strval($answer[$answer["type"]]);
                     $datafromform['empresa'] = strval($answer[$answer["type"]]);
-                
+
                     break;
                 case "YZmj5yyJ5xu6":
                 case "GmbrPQhNPJId":
@@ -183,32 +168,31 @@ class EventUserController extends Controller
                     $datafromform['cargo'] = $answer[$answer["type"]];
                     break;
             }
-        
-            }   
+
+        }
         $datafromform['properties'] = [
             'charge' => $datafromform['charge'],
             'cargo' => $datafromform['cargo'],
             'email' => $datafromform['email'],
             'correo' => $datafromform['correo'],
-            'company' =>  $datafromform['company'],
-            'empresa' =>  $datafromform['empresa'],
+            'company' => $datafromform['company'],
+            'empresa' => $datafromform['empresa'],
             'nombres' => $datafromform['names'],
             'names' => $datafromform['names'],
             'displayName' => $datafromform['names'],
             'language' => $language,
             'departinglocation' => $datafromform['departinglocation'],
             'lugarrecogida' => $datafromform['lugarrecogida'],
-            'pais' => $datafromform['pais'] ,
-            'country' => $datafromform['country'] ,
+            'pais' => $datafromform['pais'],
+            'country' => $datafromform['country'],
             'id' => $datafromform['id'],
-            'identificacion' => $datafromform['identificacion'] 
+            'identificacion' => $datafromform['identificacion'],
         ];
 
-        
         try {
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
-            
+
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
@@ -221,12 +205,15 @@ class EventUserController extends Controller
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
-            foreach ($user_properties as $user_property){
+            foreach ($user_properties as $user_property) {
 
-                if($user_property['mandatory'] !== true)continue;
-                    $field = $user_property['name'];
-                    $validations [$field] = 'required';
+                if ($user_property['mandatory'] !== true) {
+                    continue;
                 }
+
+                $field = $user_property['name'];
+                $validations[$field] = 'required';
+            }
 
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
@@ -240,43 +227,43 @@ class EventUserController extends Controller
                     422
                 );
             }
-        
+
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $userData, $userData);
-            
+
             $response = new EventUserResource($result->data);
-            
+
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         $email = $datafromform['email'];
-         Mail::to($email)
-         ->send(
-             new BookingConfirmed($result->data)
-         );
-         return "ok";//$response;
+        Mail::to($email)
+            ->send(
+                new BookingConfirmed($result->data)
+            );
+        return "ok"; //$response;
     }
 
     public function sendQrToUsers(Request $request, string $event_id)
     {
         $eventUserData = $request->json()->all();
         $query = Attendee::where("event_id", $event_id)->get();
-    
-        $query = json_decode(json_encode($query),true);
+
+        $query = json_decode(json_encode($query), true);
         $emailsent = [];
         $i = 0;
         foreach ($query as $value) {
             $id = $value["_id"];
             $attendee = Attendee::find($id);
             Mail::to($attendee->email)
-            ->send(new BookingConfirmed($attendee));
-            echo "<br> enviado a " .$attendee->email;
-            array_push($emailsent,$attendee->email);
-           $i++;
-           // integrar RSVP con estas invitaciones a logearse 
-           // con registros 
+                ->send(new BookingConfirmed($attendee));
+            echo "<br> enviado a " . $attendee->email;
+            array_push($emailsent, $attendee->email);
+            $i++;
+            // integrar RSVP con estas invitaciones a logearse
+            // con registros
         }
         return $emailsent;
     }
@@ -291,8 +278,6 @@ class EventUserController extends Controller
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
-
-            
             $userData = $request->json()->all();
 
             if (isset($eventUserData['properties'])) {
@@ -302,16 +287,19 @@ class EventUserController extends Controller
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
-            foreach ($user_properties as $user_property){
+            foreach ($user_properties as $user_property) {
 
-                if($user_property['mandatory'] !== true)continue;
-                    $field = $user_property['name'];
-                    $validations [$field] = 'required';
+                if ($user_property['mandatory'] !== true) {
+                    continue;
                 }
+
+                $field = $user_property['name'];
+                $validations[$field] = 'required';
+            }
 
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
-                $userData, 
+                $userData,
                 $validations
             );
 
@@ -321,18 +309,17 @@ class EventUserController extends Controller
                     422
                 );
             }
-            
+
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-                        
+
             $response = new EventUserResource($result->data);
-            
-            
-            if(!empty($eventUserData["rol_id"])){
+
+            if (!empty($eventUserData["rol_id"])) {
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-            
+
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
@@ -351,8 +338,6 @@ class EventUserController extends Controller
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
-
-            
             $userData = $request->json()->all();
 
             if (isset($eventUserData['properties'])) {
@@ -362,16 +347,19 @@ class EventUserController extends Controller
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
-            foreach ($user_properties as $user_property){
+            foreach ($user_properties as $user_property) {
 
-                if($user_property['mandatory'] !== true)continue;
-                    $field = $user_property['name'];
-                    $validations [$field] = 'required';
+                if ($user_property['mandatory'] !== true) {
+                    continue;
                 }
+
+                $field = $user_property['name'];
+                $validations[$field] = 'required';
+            }
 
             //este validador pronto se va a su clase de validacion
             $validator = Validator::make(
-                $userData, 
+                $userData,
                 $validations
             );
 
@@ -381,18 +369,17 @@ class EventUserController extends Controller
                     422
                 );
             }
-            
+
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-                        
+
             $response = new EventUserResource($result->data);
-            
-            
-            if(!empty($eventUserData["rol_id"])){
+
+            if (!empty($eventUserData["rol_id"])) {
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-            
+
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
@@ -401,49 +388,59 @@ class EventUserController extends Controller
         return $response;
     }
 
-
-    public function index(Request $request,$event_id)
+    public function index(Request $request, $event_id)
     {
         return EventUserResource::collection(
-            Attendee::where('event_id',$event_id)->paginate(config("app.page_size"))
+            Attendee::where('event_id', $event_id)->paginate(config("app.page_size"))
         );
     }
 
-    public function indexByEventUser(Request $request,$user_id)
+    public function indexByEventUser(Request $request, $user_id)
     {
         $email = Account::find($user_id);
-        $events = Attendee::where('account_id',$email->id)->get();
-        $events_id = [];    
+        $events = Attendee::where('account_id', $email->id)->get();
+        $events_id = [];
         foreach ($events as $key => $value) {
             array_push($events_id, $value["event_id"]);
         }
-        
+
         foreach ($events_id as $id) {
 
-            echo "-".Event::find($id)->name."<br>";
+            echo "-" . Event::find($id)->name . "<br>";
         }
-    
+
     }
 
-    public function searchInEvent(Request $request, $event_id){ 
-        
+    public function searchInEvent(Request $request, $event_id)
+    {
+
         $auth = resolve('Kreait\Firebase\Auth');
 
         $email = ($request->email) ? $request->email : $request->input("email");
+
         $password = $request->password;
-        $check = !empty($email) ? Account::where("email",$email)->where("event_id",$event_id)->first() : null;
-        if(!is_null($check)){
-            $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
-            $user["id"] = $check->id;
+        $user = Account::where("email", $email)->first();
+
+        if (is_null($user)) {
+            $user["account_response"] = "Usuario no esta inscrito al evento";
+            return $user;
+        }
+
+        $eventUser = ($user) ? Attendee::where("account_id", $user->_id)->first() : null;
+
+        if (!is_null($eventUser)) {
+            $user["nombres"] = ($user->properties["names"]) ? $user->properties["names"] : $user->properties["displayName"];
+            $user["id"] = $user->_id;
             $user["status"] = "Usuario existente en el evento";
             try {
                 $user["account_response"] = $auth->getUserByEmail($email);
-            
+
             } catch (Exception $e) {
-                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius"; 
+                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius";
             }
-            return $user;   
+            return $user;
         }
+
         return "Usuario no encontrado";
     }
 
@@ -471,7 +468,7 @@ class EventUserController extends Controller
         $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
     }
-   
+
     /**
      * __Update:__ Update the specified resource in storage.
      *
@@ -492,17 +489,17 @@ class EventUserController extends Controller
     {
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
-        
-        if(empty($data['properties'])){
-            $data['properties'] = $data ;    
+
+        if (empty($data['properties'])) {
+            $data['properties'] = $data;
         }
         $new_properties = $data['properties'];
         $old_properties = $eventUser->properties;
-        $properties_merge =  array_merge($old_properties,$new_properties);
+        $properties_merge = array_merge($old_properties, $new_properties);
 
         $data['properties'] = $properties_merge;
         $eventUser->fill($data);
-        $eventUser->save();  
+        $eventUser->save();
 
         $response = new EventUserResource($eventUser);
         $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
@@ -517,7 +514,7 @@ class EventUserController extends Controller
      */
     public function checkIn($id)
     {
-        $eventUser = Attendee::findOrFail($id);      
+        $eventUser = Attendee::findOrFail($id);
         return $eventUser->checkIn();
     }
 
@@ -534,40 +531,39 @@ class EventUserController extends Controller
 
     public function destroyTemp(String $eventId, $id)
     {
-    
+
         $attendee = Attendee::findOrFail($id);
-        return (string) $attendee->delete();    
+        return (string) $attendee->delete();
     }
 
-
-    //nunca usar usar otras alternativas si es posible  
-    public function destroyAll( $eventUser)
+    //nunca usar usar otras alternativas si es posible
+    public function destroyAll($eventUser)
     {
-        $attende = Account::where("email",'like', '%@coomeva%')->forceDelete();
+        $attende = Account::where("email", 'like', '%@coomeva%')->forceDelete();
         die;
-        $attende = json_decode(json_encode($attende),true);
-     
-        foreach( $attende as $att ){
-             
-            $attende = Attendee::find($att["_id"]);      
-                
-           echo $attende->forceDelete();
-            
+        $attende = json_decode(json_encode($attende), true);
+
+        foreach ($attende as $att) {
+
+            $attende = Attendee::find($att["_id"]);
+
+            echo $attende->forceDelete();
+
         }
 
     }
     public function changeEventId(Request $request, $event_id_old, $event_id_new)
     {
-        $attendees = Attendee::where("event_id",$event_id_old)->get();
-        $attendees = json_decode(json_encode($attendees),true);
+        $attendees = Attendee::where("event_id", $event_id_old)->get();
+        $attendees = json_decode(json_encode($attendees), true);
         foreach ($attendees as $value) {
             //echo  var_dump($value);
             $user = Attendee::find($value["_id"]);
             $newid["event_id"] = $event_id_new;
-            echo var_dump($newid)."<br>";
+            echo var_dump($newid) . "<br>";
             $user->fill($newid);
             $user->save();
-            
+
         }
 
     }
