@@ -9,10 +9,21 @@
     </span>
     
 </div>
+@if ($response)
+@component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
+        Aceptar solicitud
+@endcomponent
+
+@component('mail::button', ['url' => $link . "&response=rejected" , 'color' => 'evius'])
+        Rechazar solicitud
+@endcomponent 
+
+@endif
+<br />
 @component('mail::button', ['url' => 'https://eviusauth.netlify.com/', 'color' => 'evius'])
     Ver Solicitudes en EVIUS
 @endcomponent
-<br />
+
 
 
 

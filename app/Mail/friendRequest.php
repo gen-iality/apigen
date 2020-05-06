@@ -27,17 +27,19 @@ class friendRequest extends Mailable implements ShouldQueue
     public $description;
     public $principal_title;
     public $img;
+    public $link;
     public $title;
     public $sender;
     public $desc;
     public $subject;
-
+    public $response;
+    public $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($event_id,$title,$desc,$subject,$img,$sender)
+    public function __construct($event_id,$title,$desc,$subject,$img,$sender,$response,$email)
     {
         
         Log::debug("recibiendo event_user");
@@ -51,6 +53,15 @@ class friendRequest extends Mailable implements ShouldQueue
 
         $principal_title = $title;
         $description = $desc;
+        $link = "https://api.evius.co" . "/api/singinwithemail?email=" . $subject ;
+        
+        if($response){
+            $link = "https://api.evius.co" . "/api/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&request=" . $response ;
+        } 
+        
+        $this->response = $response;
+        $this->email = $email;
+        $this->link = $link;
         $this->$principal_title = $principal_title;
         $this->$img = $img;
         $this->$description = $description;

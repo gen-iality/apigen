@@ -47,7 +47,7 @@ class RSVP extends Mailable implements ShouldQueue
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // Admin SDK API to generate the sign in with email link.
-        $link = "https://api.evius.co" . "/api/singinwithemail?email=" . $email . '&innerpath=' . "landing/" . $event->id;
+        $link = "https://api.evius.co" . "/api/singinwithemail?email=" . $email . '&innerpath=' .  $event->_id;
 
         $this->link = $link;
         $this->event = $event;

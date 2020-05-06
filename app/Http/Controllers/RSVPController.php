@@ -11,7 +11,10 @@ use App\Message;
 use App\MessageUser;
 use App\State;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use GuzzleHttp\Client;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;   
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Redirect;
@@ -50,13 +53,29 @@ class RSVPController extends Controller implements ShouldQueue
         $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
 
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+        if($request->input("request")){
 
+            $data["response"] = $request->input("response");
+
+            $url =  config('app.api_evius').'/events/'.$innerpath.'/acceptordecline/' . $request->input("request");
+            $client = new Client();
+            try{
+                $response = $client->request('PUT', $url, [
+                    'body' => json_encode($data),
+                    'headers' => [ 'Content-Type' => 'application/json' ]
+                    ]);
+            }
+            catch(\ClientErrorResponseException $e){
+                
+            }
+        }
+        
         $parts = parse_url($link);
         parse_str($parts['query'], $query);
-
+        
         $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
 
-        return Redirect::to("https://evius.co/" . $innerpath . "?token=" . $signInResult->idToken());
+        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
     }
 
     /**

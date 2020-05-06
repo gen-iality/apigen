@@ -29,14 +29,6 @@ class InvitationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function exceptions_error_handler($severity, $message, $filename, $lineno) {
-        if (error_reporting() == 0) {
-          return;
-        }
-        if (error_reporting() & $severity) {
-          throw new ErrorException($message, 0, $severity, $filename, $lineno);
-        }
-    }
 
     public function index(Request $request,$event_id)
     {
@@ -99,8 +91,9 @@ class InvitationController extends Controller
         if ($model){abort(409,"Ya se encuentra en tu lista de contactos"); }
 
         $result = new Invitation($data);
-	    $result->save();
-        echo self::buildMessage($data,$event_id);
+        $result->save();
+        $data["request_id"] = $result->_id;
+        self::buildMessage($data,$event_id);
         return "invitacion enviada";
     }
 
@@ -187,15 +180,17 @@ class InvitationController extends Controller
         $sender = Attendee::find($data["id_user_requested"]);
         $client = new Client();     
         
-        $mail["mails"] = [$receiver->email];
-        $mail["subject"] = "solicitud de amistad";
+        $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]] ;
+        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
         $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
         $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name;
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
-
+        if($data["request_id"]){
+            $mail["request_id"] = $data["request_id"];
+        }
         if(!empty($data["response"])){
-            $mail["mails"] = [$sender->email];
+            $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]] ;
     
             if($data["response"] == "accepted"){
                 $model = NetworkingContacts::where("user_account",$data["id_user_requested"])->where("contacts_id",$data["id_user_requesting"])->first();
@@ -224,12 +219,12 @@ class InvitationController extends Controller
         $sender = $mail["sender"];
         $subject = $mail["subject"];
         $result->save();
-        $email = Attendee::where("event_id",$event_id)->where("email",$mail["mails"])->get();
-        $list = json_decode(json_encode($email),true);
         
-        foreach ($mail["mails"] as $key => $value) {    
-            Mail::to($value)->send(
-                new friendRequest($event_id,$title,$desc,$subject,$img,$sender)
+        $response = $mail["request_id"] ? $mail["request_id"] : null ;
+        
+        foreach ($mail["mails"] as $key => $email) {    
+            Mail::to($email)->send(
+            new friendRequest($event_id,$title,$desc,$subject,$img,$sender,$response,$email)
             );
         }
     }
