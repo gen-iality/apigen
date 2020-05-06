@@ -31,8 +31,9 @@ class InvitationController extends Controller
 
     public function singIn(Request $request)
     {
+        $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+
         if($request->input("request")){
-            $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
 
             try{
                 return self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"));
