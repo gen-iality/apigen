@@ -367,7 +367,7 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-            echo "hi";die;
+            
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
@@ -377,7 +377,7 @@ class EventUserController extends Controller
 
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            echo "hoi".var_dump($result);die; 
+            
             $response = new EventUserResource($result->data);
 
             if (!empty($eventUserData["rol_id"])) {
