@@ -19,7 +19,7 @@ class Attendee extends Models\Attendee
     protected static $unguarded = true;
     protected $fillable = ['account_id', 'event_id', 'state_id', "checked_in", "checked_in_date", "properties", "activities" , "rol_id" , "enrollment_activity"];
     protected $with = ["rol", 'user', 'state' ];
-
+    protected $hidden = ['activities','event'];
     //Default values
     protected $attributes = [
         'state_id'  => self::STATE_DRAFT,

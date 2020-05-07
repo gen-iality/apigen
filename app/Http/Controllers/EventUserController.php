@@ -62,13 +62,13 @@ class EventUserController extends Controller
         return EventUserResource::collection($results);
     }
 
-    public function meEvents(Request $request)
+    public function meEvents(Request $request,String $id)
     {
-
         $user = $request->get('user');
 
-        $query = Attendee::with("event")->where("account_id", $user->id);
+        $query = Attendee::with("event")->where("account_id", $id);
         $results = $query->paginate(config('app.page_size'));
+        
         return EventUserResource::collection($results);
     }
 
@@ -287,6 +287,7 @@ class EventUserController extends Controller
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
+            
             foreach ($user_properties as $user_property) {
 
                 if ($user_property['mandatory'] !== true) {
@@ -302,14 +303,14 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-
+            echo "hola";
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
                     422
                 );
             }
-
+            
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
@@ -319,12 +320,16 @@ class EventUserController extends Controller
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-
+            echo "aqui se fue";
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
+        $object = json_decode(json_encode($response),true);
+
+        echo "no ha vuelto";
+        echo $response->private_reference_number;
         return $response;
     }
 
@@ -362,7 +367,7 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-
+            echo "hi";die;
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
@@ -372,7 +377,7 @@ class EventUserController extends Controller
 
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-
+            echo "hoi".var_dump($result);die; 
             $response = new EventUserResource($result->data);
 
             if (!empty($eventUserData["rol_id"])) {
