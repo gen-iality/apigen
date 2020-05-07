@@ -231,11 +231,6 @@ class InvitationController extends Controller
         if(!empty($data["response"])){
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]] ;
     
-            if($data["response"] == "accepted"){
-                $model = NetworkingContacts::where("user_account",$data["id_user_requested"])->where("contacts_id",$data["id_user_requesting"])->first();
-            if ($model){abort(409,"Ya se encuentra en tu lista de contactos"); }
-
-            } 
             $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad";
             $mail["desc"] = $data["response"] == "accepted" ? $receiver->properties["displayName"]." ha aceptado tu solicitud de amistad para el evento ".$event->name : " Lo sentimos ".$receiver->properties["displayName"]." ha declinado tu solicitud de amistad para el evento ".$event->name;
              
