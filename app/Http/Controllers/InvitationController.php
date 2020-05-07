@@ -225,7 +225,7 @@ class InvitationController extends Controller
         $mail["desc"] = "Hola ".$receiver->properties["displayName"].", quiero contactarte por medio del evento ".$event->name;
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
-        if($data["request_id"]){
+        if(!empty($data["request_id"])){
             $mail["request_id"] = $data["request_id"];
         }
         if(!empty($data["response"])){
@@ -259,7 +259,7 @@ class InvitationController extends Controller
         $subject = $mail["subject"];
         $result->save();
         
-        $response = $mail["request_id"] ? $mail["request_id"] : null ;
+        $response = !empty($mail["request_id"]) ? $mail["request_id"] : null ;
         
         foreach ($mail["mails"] as $key => $email) {    
             Mail::to($email)->send(
