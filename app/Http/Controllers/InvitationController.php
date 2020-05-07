@@ -36,12 +36,11 @@ class InvitationController extends Controller
 
         if($request->input("request")){
                 try{               
-                echo self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));die;
+                self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));
                 }
                 catch(Exception $e){
 
                 }
-            die;
         }
 
         $actionCodeSettings = ['handleCodeInApp' => false];
