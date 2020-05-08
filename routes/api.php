@@ -144,7 +144,7 @@ Route::apiResource("events/{event_id}/invitation", "InvitationController");
             Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
             Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
             Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
-            Route::get('me/eventUsers/{id}', 'EventUserController@meEvents');
+            Route::get('me/eventUsers', 'EventUserController@meEvents');
         }
     );
 

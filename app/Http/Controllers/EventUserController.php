@@ -64,13 +64,11 @@ class EventUserController extends Controller
         return EventUserResource::collection($results);
     }
 
-    public function meEvents(Request $request,String $id)
+    public function meEvents(Request $request)
     {
-        $user = $request->get('user');
-
-        $query = Attendee::with("event")->where("account_id", $id)->get();
+        $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
         $results = $query->makeHidden(['activities','event']);
-        
+       
         return EventUserResource::collection($results);
     }
 
