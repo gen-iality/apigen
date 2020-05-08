@@ -322,26 +322,42 @@ class EventUserController extends Controller
             }
             $response->additional(['status' => $result->status, 'message' => $result->message]);
 
-            if(!empty($event->sendemail) && $event->sendemail){ 
-                if($result->status == "CREATED"){
-                //todos apartense vamos a hacer pruebas 
+            if(!empty($request->input("sendemail"))){ 
+
+                    //todos apartense vamos a hacer pruebas 
                     $url = config('app.api_evius')."/rsvp/sendeventrsvp/" . $event->_id	;
                     //echo var_dump($push_notification);
                     $fields = array('subject' => $event->name, 'message' => " ",'image' => $event->picture, 'eventUsersIds' => [$response->_id] );
                     
-                    $headers = array('Content-Type: application/json');
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    //$headers = array('Content-Type: application/json');
+                    //$ch = curl_init();
+                    //curl_setopt($ch, CURLOPT_URL, $url);
+                    //curl_setopt($ch, CURLOPT_POST, true);
+                    //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    //
+                    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
                     
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+                    //$datas= array("subject" => $event->name , "message" => "" , "image" => $event->picture , "eventUsersIds" => $response->_id );
+                    $datas["subject"] = $event->name;
+                    $datas["message"] = " " ;
+                    $datas["image"] = $event->picture; 
+                    $datas["eventUsersIds"] = $response->_id ;
+                    $cliente = new Client();
                     
+                    $resp = $cliente->request('POST' , "http://api.evius.co/api/rsvp/sendeventrsvp/" . $event->_id	, [
+                        'json' => json_encode($datas),
+                        'headers' => [ 'Content-Type' => 'application/json' ]
+                    ]);
+    
+                    $resp = $resp->getBody()->getContents();
+                    $xml = simplexml_load_string($resp);
+                    $json = json_encode($xml);
+                    $array = json_decode($json,TRUE);
                     $result = curl_exec($ch);
                     curl_close($ch);        
-                }
+        
             }
 
         } catch (\Exception $e) {
