@@ -14,8 +14,6 @@ use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Mail;
-use GuzzleHttp\Client;
-use HttpClient;
 use Validator;
 
 /**
@@ -305,7 +303,7 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-            
+            echo "hola";
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
@@ -322,40 +320,16 @@ class EventUserController extends Controller
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-            
+            echo "aqui se fue";
             $response->additional(['status' => $result->status, 'message' => $result->message]);
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        
-        if(!empty($event->sendemailusercreated) && $event->sendemailusercreated){            
-            //echo "encontro el valor en el evento ";die;
-            if($result->status == 'UPDATED' ){
+        $object = json_decode(json_encode($response),true);
 
-                $datas["subject"] = $event->name;
-                $datas["message"] = " " ;
-                $datas["image"] = $event->picture; 
-                $datas["eventUsersIds"] = $response->_id ;
-                
-                $data= array("subject" => $event->name , "message" => "" , "image" => $event->picture , "eventUsersIds" => $response->_id );
-                $cliente = new Client();
-                echo $event->_id;
-                $resp = $cliente->request('POST', "https://api.evius.co/api/rsvp/sendeventrsvp/" . $event->_id, [
-                    'body' => json_encode($datas),
-                    'headers' => [ 'Content-Type' => 'application/json' ]
-                ]);
-
-                $resp = $resp->getBody()->getContents();
-                $xml = simplexml_load_string($resp);
-                $json = json_encode($xml);
-                $array = json_decode($json,TRUE);
-                    
-                echo $array;
-             }
-            
-        }
-
+        echo "no ha vuelto";
+        echo $response->private_reference_number;
         return $response;
     }
 
