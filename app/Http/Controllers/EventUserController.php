@@ -68,8 +68,8 @@ class EventUserController extends Controller
     {
         $user = $request->get('user');
 
-        $query = Attendee::with("event")->where("account_id", $id);
-        $results = $query->paginate(config('app.page_size'));
+        $query = Attendee::with("event")->where("account_id", $id)->get();
+        $results = $query->makeHidden(['activities','event']);
         
         return EventUserResource::collection($results);
     }
