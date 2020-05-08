@@ -13,6 +13,8 @@ use App\Mail\BookingConfirmed;
 use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Mail;
 use Validator;
 
@@ -303,7 +305,7 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-            echo "hola";
+            
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
@@ -320,16 +322,32 @@ class EventUserController extends Controller
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-            echo "aqui se fue";
             $response->additional(['status' => $result->status, 'message' => $result->message]);
+            
+            if($result->status == "CREATED"){
+                //todos apartense vamos a hacer pruebas 
+                $url = config('app.api_evius')."/rsvp/sendeventrsvp/" . $event->_id	;
+                //echo var_dump($push_notification);
+                $fields = array('subject' => $event->name, 'message' => " ",'image' => $event->picture, 'eventUsersIds' => [$response->_id] );
+                
+                $headers = array('Content-Type: application/json');
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+                
+                $result = curl_exec($ch);
+                curl_close($ch);        
+            }
+
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        $object = json_decode(json_encode($response),true);
-
-        echo "no ha vuelto";
-        echo $response->private_reference_number;
         return $response;
     }
 
@@ -380,17 +398,19 @@ class EventUserController extends Controller
             
             $response = new EventUserResource($result->data);
 
+            
             if (!empty($eventUserData["rol_id"])) {
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
 
             $response->additional(['status' => $result->status, 'message' => $result->message]);
+            
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
-        return $response;
+        //return $response;
     }
 
     public function index(Request $request, $event_id)
