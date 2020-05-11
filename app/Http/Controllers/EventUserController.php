@@ -274,6 +274,14 @@ class EventUserController extends Controller
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
+            
+            if(!empty($request->input("checkuser"))){
+                $userexists = Attendee::where("event_id",$event_id)->where("properties.email",$eventUserData["email"])->first();
+                if (!empty($userexists)){
+                    return "El correo ingresado ya se encuentra registrado en el evento";
+                }
+
+            }
 
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
