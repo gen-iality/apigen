@@ -36,6 +36,8 @@ return [
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     'pushdirection' => env('PUSH_URL', 'production'),
     'api_evius' => env('EVIUS_API', 'production'),
+    'encryption_iv' => env('ENCRYPTION_IV'),
+    'encryption_key' => env('ENCRYPTION_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Application URL

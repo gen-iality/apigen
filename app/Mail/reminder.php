@@ -97,7 +97,7 @@ class reminder extends Mailable implements ShouldQueue
         //     'mime' => 'image/png',
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
-        ->from("apps@mocionsoft.com", $sender)
+        ->from("alerts@evius.co", $sender)
         ->subject($subject)
         ->markdown('reminder');
         

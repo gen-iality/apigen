@@ -36,22 +36,39 @@ class InvitationController extends Controller
 
         if($request->input("request")){
                 try{               
-                self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));
+                    self::acceptOrDeclineFriendRequest($request,$innerpath,$request->input("request"),$request->input("response"));
                 }
                 catch(Exception $e){
 
                 }
         }
 
-        $actionCodeSettings = ['handleCodeInApp' => false];
-        $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
+        $pass = self::decryptdata($request->input("pass"));
+    
+        $userinfo = $this->auth->getUserByEmail($request->input("email"));
         
-        $parts = parse_url($link);
-        parse_str($parts['query'], $query);
+        $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
         
-        $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
+        $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
+        
+        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
+    }
+    
+    private function decryptdata($string){
 
-        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
+        $options = 0; 
+        $ciphering = "AES-128-CTR";
+        // Non-NULL Initialization Vector for encryption 
+        $decryption_iv = config('app.encryption_iv'); 
+        
+        // Store the encryption key 
+        $decryption_key = config('app.encryption_key'); 
+
+        // Use openssl_decrypt() function to decrypt the data 
+        $decryption = openssl_decrypt ($string, $ciphering,  
+        $decryption_key, $options, $decryption_iv); 
+
+        return $decryption;
     }
     /**
      * Display a listing of the resource.
