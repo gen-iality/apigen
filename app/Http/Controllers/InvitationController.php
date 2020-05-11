@@ -6,6 +6,7 @@ use App\Invitation;
 use App\NetworkingContacts;
 use App\Event;
 use App\Attendee;
+use App\Account;
 use Illuminate\Http\Request;
 use App\Mail\friendRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -50,6 +51,11 @@ class InvitationController extends Controller
         $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
         
         $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
+        
+        $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
+        
+        $save_refresh_token->refresh_token = $singin->refreshToken();
+        $save_refresh_token->save();
         
         return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
     }
