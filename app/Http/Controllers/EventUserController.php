@@ -267,6 +267,40 @@ class EventUserController extends Controller
         }
         return $emailsent;
     }
+    public function validateEmail(Request $request, string $event_id)
+    {
+        $eventUserData = $request->json()->all();
+        
+        $email = !empty($eventUserData["email"]) ? $eventUserData["email"] : $eventUserData["properties"]["email"];
+        if(!empty($email)){
+            $userexists = Attendee::where("event_id",$event_id)->where("properties.email",$email)->first();
+            if (!empty($userexists)){
+                return "El correo ingresado ya se encuentra registrado en el evento";
+            }
+            $event = Event::find($event_id);
+            $response = self::createUserAndAddtoEvent($request, $event_id);
+
+            //todos apartense vamos a hacer pruebas 
+            $url = config('app.api_evius')."/rsvp/sendeventrsvp/" . $event->_id	;
+            //echo var_dump($push_notification);
+            $fields = array('subject' => $event->name, 'message' => " ",'image' => $event->picture, 'eventUsersIds' => [$response->_id] );
+            
+            $headers = array('Content-Type: application/json');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+            
+            $result = curl_exec($ch);
+            curl_close($ch);      
+            return $response;
+        }
+
+    }
 
     public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
@@ -275,13 +309,6 @@ class EventUserController extends Controller
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
             
-            if(!empty($request->input("checkuser"))){
-                $userexists = Attendee::where("event_id",$event_id)->where("properties.email",$eventUserData["properties"][0]["email"])->first();
-                if (!empty($userexists)){
-                    return "El correo ingresado ya se encuentra registrado en el evento";
-                }
-
-            }
 
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
@@ -330,28 +357,7 @@ class EventUserController extends Controller
             }
             $response->additional(['status' => $result->status, 'message' => $result->message]);
 
-            if(!empty($request->input("sendemail"))){ 
-
-                    //todos apartense vamos a hacer pruebas 
-                    $url = config('app.api_evius')."/rsvp/sendeventrsvp/" . $event->_id	;
-                    //echo var_dump($push_notification);
-                    $fields = array('subject' => $event->name, 'message' => " ",'image' => $event->picture, 'eventUsersIds' => [$response->_id] );
-                    
-                    $headers = array('Content-Type: application/json');
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                    
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-                    
-                    $result = curl_exec($ch);
-                    curl_close($ch);      
-        
-            }
-
+            
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
