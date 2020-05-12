@@ -276,7 +276,7 @@ class EventUserController extends Controller
             $eventUserData = $request->json()->all();
             
             if(!empty($request->input("checkuser"))){
-                $userexists = Attendee::where("event_id",$event_id)->where("properties.email",$eventUserData["email"])->first();
+                $userexists = Attendee::where("event_id",$event_id)->where("properties.email",$eventUserData["properties"]["email"])->first();
                 if (!empty($userexists)){
                     return "El correo ingresado ya se encuentra registrado en el evento";
                 }
