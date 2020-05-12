@@ -124,4 +124,8 @@ Route::apiResource('events/{event_id}/wall', 'WallController');
 Route::apiResource('events/{id}/faqs', 'FaqController');
 Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
 
+//TEST 
+Route::apiResource('events/{id}/zoomhost', 'ZoomHostController@store');
+
+
 ?>
