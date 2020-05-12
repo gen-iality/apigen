@@ -278,68 +278,7 @@ class EventUserController extends Controller
                 return "El correo ingresado ya se encuentra registrado en el evento";
             }
             $event = Event::find($event_id);
-            
-            $eventUserData = $request->json()->all();
-            
-
-            $field = Event::find($event_id);
-            $user_properties = $field->user_properties;
-
-            $userData = $request->json()->all();
-
-            if (isset($eventUserData['properties'])) {
-                $userData = $eventUserData['properties'];
-            }
-            $validations = [
-                'email' => 'required|email',
-                'other_fields' => 'sometimes',
-            ];
-            
-            foreach ($user_properties as $user_property) {
-
-                if ($user_property['mandatory'] !== true) {
-                    continue;
-                }
-
-                $field = $user_property['name'];
-                $validations[$field] = 'required';
-            }
-
-            //este validador pronto se va a su clase de validacion
-            $validator = Validator::make(
-                $userData,
-                $validations
-            );
-            
-            if ($validator->fails()) {
-                return response(
-                    $validator->errors(),
-                    422
-                );
-            }
-            $event = Event::find($event_id);
-            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-
-            $response = new EventUserResource($result->data);
-
-            $response->_id;
-            //todos apartense vamos a hacer pruebas 
-            $url = config('app.api_evius')."/rsvp/sendeventrsvp/" . $event->_id	;
-            //echo var_dump($push_notification);
-            $fields = array('subject' => $event->name, 'message' => " ",'image' => $event->picture, 'eventUsersIds' => [$response->_id] );
-            
-            $headers = array('Content-Type: application/json');
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-            
-            $result = curl_exec($ch);
-            curl_close($ch);      
+            $response = self::createUserAndAddtoEvent($request, $event_id);
             return $response;
         }
 
@@ -388,6 +327,7 @@ class EventUserController extends Controller
                     422
                 );
             }
+            
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
@@ -397,7 +337,9 @@ class EventUserController extends Controller
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-            $response->additional(['status' => $result->status, 'message' => $result->message]);            
+            $response->additional(['status' => $result->status, 'message' => $result->message]);
+
+            
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
