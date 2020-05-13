@@ -32,7 +32,6 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-
     public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
     {
 
@@ -42,7 +41,12 @@ class RSVP extends Mailable implements ShouldQueue
         if (!empty($event["location"]["FormattedAddress"])) {
             $event_location = $event["location"]["FormattedAddress"];
         }
+
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
+        if(is_null($email)){
+            $email = $eventUser->properties["email"];
+        }
+        
         $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
         
