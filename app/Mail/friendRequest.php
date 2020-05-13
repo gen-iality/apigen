@@ -39,7 +39,7 @@ class friendRequest extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($event_id,$title,$desc,$subject,$img,$sender,$response,$email)
+    public function __construct($event_id,$title,$desc,$subject,$img,$sender,$response,$email,$receiver,$sender_user)
     {
         
         Log::debug("recibiendo event_user");
@@ -48,7 +48,8 @@ class friendRequest extends Mailable implements ShouldQueue
         $event_address = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
         $event_city = isset($event["location"]["City"])?($event["location"]["City"]):" ";
         $event_state = isset($event["location"]["state"])?($event["location"]["state"]):" ";
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        
+        $password = isset($receiver["properties"]["password"]) ? $receiver["properties"]["password"] : "mocion.2040";
         $pass = self::encryptdata($password);
 
         Log::debug("cargando datos event_user al correo");

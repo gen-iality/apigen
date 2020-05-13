@@ -241,7 +241,8 @@ class InvitationController extends Controller
         $receiver = Attendee::find($data["id_user_requesting"]);
         $sender = Attendee::find($data["id_user_requested"]);
         $client = new Client();     
-        
+        $mail["id_user_requesting"] =$data["id_user_requesting"];
+        $mail["id_user_requested"] = $data["id_user_requested"];
         $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]] ;
         $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
         $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
@@ -261,11 +262,11 @@ class InvitationController extends Controller
         }
 
         //echo self::sendPushNotification($push_notification);
-        self::sendEmail($mail,$event_id);
+        self::sendEmail($mail,$event_id,$receiver,$sender);
         return "Invitation send";
     }   
 
-    public function sendEmail($mail,$event_id){
+    public function sendEmail($mail,$event_id,$receiver,$sender_user){
         
         $mail["event_id"] = $event_id;
         $mail["type"] = "friend request sent" ;
@@ -276,12 +277,11 @@ class InvitationController extends Controller
         $sender = $mail["sender"];
         $subject = $mail["subject"];
         $result->save();
-        
         $response = !empty($mail["request_id"]) ? $mail["request_id"] : null ;
         
         foreach ($mail["mails"] as $key => $email) {    
             Mail::to($email)->send(
-            new friendRequest($event_id,$title,$desc,$subject,$img,$sender,$response,$email)
+            new friendRequest($event_id,$title,$desc,$subject,$img,$sender,$response,$email,$receiver,$sender_user)
             );
         }
     }
