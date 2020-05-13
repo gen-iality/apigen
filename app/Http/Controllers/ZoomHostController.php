@@ -60,7 +60,7 @@ class ZoomHostController extends Controller
      * @param  \App\Host  $Host
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $event_id, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->json()->all();
         $Host = ZoomHost::where("id",$id)->first();
