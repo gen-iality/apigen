@@ -48,15 +48,17 @@ class friendRequest extends Mailable implements ShouldQueue
         $event_address = isset($event["location"]["FormattedAddress"])?($event["location"]["FormattedAddress"]):" ";
         $event_city = isset($event["location"]["City"])?($event["location"]["City"]):" ";
         $event_state = isset($event["location"]["state"])?($event["location"]["state"]):" ";
+        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        $pass = self::encryptdata($password);
 
         Log::debug("cargando datos event_user al correo");
 
         $principal_title = $title;
         $description = $desc;
-        $link = config('app.api_evius') . "/singinwithemail?email=" . $subject ;
+        $link = config('app.api_evius') . "/singinwithemail?email=" . $subject ."&pass=".$pass;
         
         if($response){
-            $link = config('app.api_evius') . "/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&request=" . $response ;
+            $link = config('app.api_evius') . "/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&request=" . $response  . "&pass=" . $pass;
         } 
 
         $this->response = $response;
@@ -79,6 +81,28 @@ class friendRequest extends Mailable implements ShouldQueue
         Log::debug("pasando a crear correo");
     }
 
+    private function encryptdata($string){
+        
+        // Store the cipher method 
+        $ciphering = "AES-128-CTR"; //config(app.chiper);
+
+        // Use OpenSSl Encryption method 
+        $iv_length = openssl_cipher_iv_length($ciphering); 
+        $options = 0; 
+
+        // Non-NULL Initialization Vector for encryption 
+        $encryption_iv = config('app.encryption_iv'); 
+        
+        // Store the encryption key 
+        $encryption_key = config('app.encryption_key'); 
+
+        // Use openssl_encrypt() function to encrypt the data 
+        $encryption = openssl_encrypt($string, $ciphering, 
+                    $encryption_key, $options, $encryption_iv); 
+
+        // Display the encrypted string 
+        return $encryption; 
+    }
     /**
      * Build the message.
      *
