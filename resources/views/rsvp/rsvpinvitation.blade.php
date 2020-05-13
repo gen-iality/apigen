@@ -17,7 +17,11 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
         Te esperamos.
     </p>
     <p>
-    
+    @component('mail::promotion')
+
+    ![Logo]({{$image}})
+        
+    @endcomponent
         <a href="{{$link}}">{{$event->name}}</a>
     </p>
 
