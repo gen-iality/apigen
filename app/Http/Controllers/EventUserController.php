@@ -14,6 +14,9 @@ use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use GuzzleHttp\Client;
+use App\Mail\RSVP;
+use App\Message;
+use App\MessageUser;
 use GuzzleHttp\Exception\GuzzleException;
 use Mail;
 use Validator;
@@ -267,7 +270,7 @@ class EventUserController extends Controller
         }
         return $emailsent;
     }
-    public function validateEmail(Request $request, string $event_id)
+    public function validateEmail(Request $request, string $event_id,Message $message)
     {
         $eventUserData = $request->json()->all();
         
@@ -278,9 +281,16 @@ class EventUserController extends Controller
                 return "El correo ingresado ya se encuentra registrado en el evento";
             }
             $event = Event::find($event_id);
+            $image = $event->picture;
             $response = self::createUserAndAddtoEvent($request, $event_id);
-            return $response;
-        }
+ 
+            $message = [];
+            Mail::to($email)
+            ->queue(
+                new RSVP("", $event, $response, $image, "", "confirmar mail")
+            );
+                return $response;
+            }
 
     }
 
