@@ -42,6 +42,21 @@ class ZoomHostController extends Controller
         return $result;
     }
 
+
+
+    public function updateStatus(Request $request)
+    {
+        $data = $request->json()->all();
+        $host_id = $data["payload"]["object"]["host_id"];
+        $result = ZoomHost::where("id",$host_id)->first();
+        if($result){
+            $state["state"] = "available";
+            $result->fill($state);
+            $result->save();
+        }
+        return $result;
+    }
+
     /**
      * Display the specified resource.
      *
