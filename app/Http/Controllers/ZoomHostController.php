@@ -26,13 +26,15 @@ class ZoomHostController extends Controller
         );    
     }
 
+    
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $event_id)
+    public function store(Request $request)
     {
         $data = $request->json()->all();
         $result = new ZoomHost($data);
@@ -64,7 +66,7 @@ class ZoomHostController extends Controller
     {
         $data = $request->json()->all();
         $Host = ZoomHost::where("id",$id)->first();
-        $Host->fill($data);
+        $Host->fill($data);// = $data["state"];
         $Host->save();
         return $data;
     }
