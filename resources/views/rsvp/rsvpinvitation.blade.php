@@ -22,7 +22,7 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
     Si tuviste problemas con el botón de ingreso abre el siguiente enlace <br>
     Recuerda usar Google Chrome, Safari o Mozilla Firefox.
 
-    <a href="{{$link}}">{!! $link !!}</a>
+    <a href="{{$link}}">evius.co</a>
         
     @endcomponent
 
