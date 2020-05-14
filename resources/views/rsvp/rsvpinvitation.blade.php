@@ -19,10 +19,9 @@ Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
     @component('mail::promotion')
 
     ![Logo]({{$image}})
-    Si tuviste problemas con el botón de ingreso abre el siguiente enlace <br>
+    Si tuviste problemas con el botón de ingreso abre el siguiente enlace
+    <a href="{{$link}}">click acá</a>
     Recuerda usar Google Chrome, Safari o Mozilla Firefox.
-
-    <a href="{{$link}}">evius.co</a>
         
     @endcomponent
 
