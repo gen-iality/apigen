@@ -45,11 +45,12 @@ class RSVP extends Mailable implements ShouldQueue
             $image = $event->alt_image;
         }
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
+        
         if(is_null($email)){
             $email = $eventUser->properties["email"];
         }
         
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : self::createPass();    
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
         
         // lets encrypt ! 
@@ -97,6 +98,19 @@ class RSVP extends Mailable implements ShouldQueue
         // Display the encrypted string 
         return $encryption; 
     }
+
+    private function createPass(){
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ 
+           $input_length = strlen($permitted_chars);
+           $random_string = '';
+           for($i = 0; $i < 10; $i++) {
+               $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
+               $random_string .= $random_character;
+           }
+        return $random_string;
+ 
+        }
     /**
      * Build the message.
      *
