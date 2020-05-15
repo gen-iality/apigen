@@ -41,6 +41,7 @@ class RSVP extends Mailable implements ShouldQueue
         if (!empty($event["location"]["FormattedAddress"])) {
             $event_location = $event["location"]["FormattedAddress"];
         }
+        $image = $event->styles["banner_image"] ? $event->styles["banner_image"] : $image ;
 
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
         if(is_null($email)){
