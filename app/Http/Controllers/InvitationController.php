@@ -48,7 +48,7 @@ class InvitationController extends Controller
     
         $userinfo = $this->auth->getUserByEmail($request->input("email"));
         
-        $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+        $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $request->input("pass"));
         
         $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $request->input("pass"));
         
