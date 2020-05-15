@@ -1,10 +1,10 @@
 @component('mail::message')
 
-Hola {{$eventUser_name}}, estas inscrito en: {{$event->name}}
+Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 
 <div style="text-align: center;font-size: 130%;">
-    <p style="font-size: 130%">Para ingresar al evento, asistir a la conferencia, ver mas informacion visitanos en:
+    <p style="font-size: 130%">Para ingresar al evento, asistir a la conferencia y ver más información visítanos en:
         @component('mail::button', ['url' => $link , 'color' => 'evius'])
         Ingresar al Evento AQUÍ
         @endcomponent
