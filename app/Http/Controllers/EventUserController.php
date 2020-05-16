@@ -10,14 +10,11 @@ use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\Mail\BookingConfirmed;
+use App\Mail\RSVP;
+use App\Message;
 use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use GuzzleHttp\Client;
-use App\Mail\RSVP;
-use App\Message;
-use App\MessageUser;
-use GuzzleHttp\Exception\GuzzleException;
 use Mail;
 use Validator;
 
@@ -70,8 +67,8 @@ class EventUserController extends Controller
     public function meEvents(Request $request)
     {
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
-        $results = $query->makeHidden(['activities','event']);
-       
+        $results = $query->makeHidden(['activities', 'event']);
+
         return EventUserResource::collection($results);
     }
 
@@ -270,27 +267,27 @@ class EventUserController extends Controller
         }
         return $emailsent;
     }
-    public function validateEmail(Request $request, string $event_id,Message $message)
+    public function validateEmail(Request $request, string $event_id, Message $message)
     {
         $eventUserData = $request->json()->all();
-        
+
         $email = !empty($eventUserData["email"]) ? $eventUserData["email"] : $eventUserData["properties"]["email"];
-        if(!empty($email)){
-            $userexists = Attendee::where("event_id",$event_id)->where("properties.email",$email)->first();
-            if (!empty($userexists)){
+        if (!empty($email)) {
+            $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
+            if (!empty($userexists)) {
                 return "El correo ingresado ya se encuentra registrado en el evento";
             }
             $event = Event::find($event_id);
             $image = $event->picture;
             $response = self::createUserAndAddtoEvent($request, $event_id);
- 
+
             $message = [];
             Mail::to($email)
-            ->queue(
-                new RSVP("", $event, $response, $image, "", "confirmar mail")
-            );
-                return $response;
-            }
+                ->queue(
+                    new RSVP("", $event, $response, $image, "", "RELANZAMIENTO POSTDATA")
+                );
+            return $response;
+        }
 
     }
 
@@ -300,7 +297,6 @@ class EventUserController extends Controller
             //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
-            
 
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
@@ -314,7 +310,7 @@ class EventUserController extends Controller
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
-            
+
             foreach ($user_properties as $user_property) {
 
                 if ($user_property['mandatory'] !== true) {
@@ -330,14 +326,14 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-            
+
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
                     422
                 );
             }
-            
+
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
@@ -349,7 +345,6 @@ class EventUserController extends Controller
             }
             $response->additional(['status' => $result->status, 'message' => $result->message]);
 
-            
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
@@ -391,7 +386,7 @@ class EventUserController extends Controller
                 $userData,
                 $validations
             );
-            
+
             if ($validator->fails()) {
                 return response(
                     $validator->errors(),
@@ -401,17 +396,16 @@ class EventUserController extends Controller
 
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            
+
             $response = new EventUserResource($result->data);
 
-            
             if (!empty($eventUserData["rol_id"])) {
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
 
             $response->additional(['status' => $result->status, 'message' => $result->message]);
-            
+
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
@@ -448,22 +442,22 @@ class EventUserController extends Controller
 
         $email = ($request->email) ? $request->email : $request->input("email");
         $password = $request->password;
-        $check = !empty($email) ? Account::where("email",$email)->first() : null;
+        $check = !empty($email) ? Account::where("email", $email)->first() : null;
 
-        if(!is_null($check)){
-            $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"]:$check->properties["displayName"];
+        if (!is_null($check)) {
+            $user["nombres"] = ($check->properties["names"]) ? $check->properties["names"] : $check->properties["displayName"];
             $user["id"] = $check->id;
             $user["status"] = "Usuario existente en el evento";
             try {
                 $user["account_response"] = $auth->getUserByEmail($email);
-            
+
             } catch (Exception $e) {
-                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius"; 
+                $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius";
             }
-            return $user;   
+            return $user;
         }
         return "Usuario no encontrado";
-    
+
     }
 
     /**
