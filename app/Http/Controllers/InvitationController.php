@@ -50,7 +50,7 @@ class InvitationController extends Controller
         
         $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $request->input("pass"));
         
-        $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $request->input("pass"));
+        $singin = $this->auth->signInWithEmailAndPassword(urldecode($request->input("email")), urldecode($request->input("pass")));
         
         $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
         
