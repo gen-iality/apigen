@@ -127,6 +127,6 @@ Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
 //TEST 
 Route::put('events/{id}/zoomhost', 'ZoomHostController@update');
 Route::post('events/zoomhost', 'ZoomHostController@updateStatus');
-
+Route::get('events/zoomhost', 'ZoomHostController@index');
 
 ?>

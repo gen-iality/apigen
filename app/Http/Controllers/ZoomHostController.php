@@ -19,7 +19,7 @@ class ZoomHostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $event_id)
+    public function index(Request $request)
     {
         return JsonResource::collection(
             ZoomHost::all()
