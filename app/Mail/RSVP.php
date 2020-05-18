@@ -55,7 +55,7 @@ class RSVP extends Mailable implements ShouldQueue
         
         // lets encrypt ! 
         $pass = self::encryptdata($password);
-        
+        echo urlencode($email);die;
         // Admin SDK API to generate the sign in with email link.
         $link =  config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' .  $event->_id . "&pass=" . urlencode($password);
 
