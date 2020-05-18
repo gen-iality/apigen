@@ -46,9 +46,8 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 /****************
  * eventUsers
  ****************/
-//este api verifica un correo en la bdd
 Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
-Route::get ('events/{user_id}/eventsByuser/', 'EventUserController@indexByEventUser');
+Route::get ('events/myevents', 'EventUserController@indexByEventUser');
 Route::post ('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@validateEmail');
 
 
@@ -101,7 +100,7 @@ Route::group(
 );
 
 /***************
- * SENDCONTENT 
+ * SENDCONTENT  TEST CONTROLLER
  ****************/
 
     Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');

@@ -420,20 +420,14 @@ class EventUserController extends Controller
         );
     }
 
-    public function indexByEventUser(Request $request, $user_id)
+    public function indexByEventUser(Request $request)
     {
-        $email = Account::find($user_id);
-        $events = Attendee::where('account_id', $email->id)->get();
+        $events = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
         $events_id = [];
         foreach ($events as $key => $value) {
             array_push($events_id, $value["event_id"]);
         }
-
-        foreach ($events_id as $id) {
-
-            echo "-" . Event::find($id)->name . "<br>";
-        }
-
+            return Event::find($events_id);
     }
 
     public function searchInEvent(Request $request, $event_id)
