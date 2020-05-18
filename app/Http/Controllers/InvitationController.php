@@ -47,10 +47,11 @@ class InvitationController extends Controller
         $pass = self::decryptdata($request->input("pass"));
     
         $userinfo = $this->auth->getUserByEmail($request->input("email"));
-        
+            
         $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $request->input("pass"));
-        
-        $singin = $this->auth->signInWithEmailAndPassword(urldecode($request->input("email")), urldecode($request->input("pass")));
+        $usr = urldecode($request->input("email"));
+        $pss = urldecode($request->input("pass"));
+        $singin = $this->auth->signInWithEmailAndPassword($usr, $pss);
         
         $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
         
