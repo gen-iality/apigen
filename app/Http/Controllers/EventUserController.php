@@ -305,6 +305,9 @@ class EventUserController extends Controller
 
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
+                if(!empty($userData["password"]) && strlen($userData["password"]) < 6){
+                    return "minimun password length is 6 characters"; 
+                }
             }
             $validations = [
                 'email' => 'required|email',

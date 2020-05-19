@@ -17,6 +17,24 @@ use PDF;
 use Storage;
 use Redirect;
 use Illuminate\Support\Facades\Response;
+use Log;
+// firebase errro catch
+//use Kreait\Firebase\Exception\Auth\ApiConnectionFailed;
+use Kreait\Firebase\Exception\Auth\AuthError;
+use Kreait\Firebase\Exception\Auth\CredentialsMismatch;
+use Kreait\Firebase\Exception\Auth\EmailExists;
+use Kreait\Firebase\Exception\Auth\EmailNotFound;
+use Kreait\Firebase\Exception\Auth\ExpiredOobCode;
+use Kreait\Firebase\Exception\Auth\InvalidCustomToken;
+use Kreait\Firebase\Exception\Auth\InvalidOobCode;
+use Kreait\Firebase\Exception\Auth\InvalidPassword;
+use Kreait\Firebase\Exception\Auth\MissingPassword;
+use Kreait\Firebase\Exception\Auth\OperationNotAllowed;
+use Kreait\Firebase\Exception\Auth\PhoneNumberExists;
+use Kreait\Firebase\Exception\Auth\ProviderLinkFailed;
+use Kreait\Firebase\Exception\Auth\UserDisabled;
+use Kreait\Firebase\Exception\Auth\UserNotFound;
+use Kreait\Firebase\Exception\Auth\WeakPassword;
 
 /**
  * @resource Event
@@ -43,21 +61,42 @@ class InvitationController extends Controller
 
                 }
         }
+        try{
+            $pass = self::decryptdata($request->input("pass"));
+            
+            $userinfo = $this->auth->getUserByEmail($request->input("email"));
 
-        $pass = self::decryptdata($request->input("pass"));
-    
-        $userinfo = $this->auth->getUserByEmail($request->input("email"));
+            $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+
+            $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
+
+            $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
+            
+            $refresh_tok["refresh_token"] = $singin->refreshToken();
+            
+            $save_refresh_token->fill($refresh_tok);
+            
+            $save_refresh_token->save();
+
+            return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
+        }catch(EmailNotFound $e) {
+            Log::error("email no encontrado. " . $e->getMessage());
+            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            
+        }catch(UserNotFound $e) {
+            Log::error("usuario no encontrado. " . $e->getMessage());
+            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+
+        }catch(InvalidPassword $e) {
+            Log::error("contrasena invalida. " . $e->getMessage());
+            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            
+        }catch (Exception $e) {
         
-        $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $request->input("pass"));
+            Log::error("Error message. " . $e->getMessage());
+            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
         
-        $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $request->input("pass"));
-        
-        $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
-        
-        $save_refresh_token->refresh_token = $singin->refreshToken();
-        $save_refresh_token->save();
-        
-        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
+        }
     }
     
     private function decryptdata($string){
