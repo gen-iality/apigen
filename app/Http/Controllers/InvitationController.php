@@ -34,6 +34,7 @@ use Kreait\Firebase\Exception\Auth\PhoneNumberExists;
 use Kreait\Firebase\Exception\Auth\ProviderLinkFailed;
 use Kreait\Firebase\Exception\Auth\UserDisabled;
 use Kreait\Firebase\Exception\Auth\UserNotFound;
+use Kreait\Firebase\Exception\InvalidArgumentException;
 use Kreait\Firebase\Exception\Auth\WeakPassword;
 
 /**
@@ -62,24 +63,28 @@ class InvitationController extends Controller
                 }
         }
         try{
+            
             $pass = self::decryptdata($request->input("pass"));
             
             $userinfo = $this->auth->getUserByEmail($request->input("email"));
-
-            $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
-
+        
+            try{
+                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+            }catch(InvalidArgumentException $e){
+                $pass = $request->input("pass");
+                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+            }
             $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
 
             $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
-            
-            $refresh_tok["refresh_token"] = $singin->refreshToken();
-            
-            $save_refresh_token->fill($refresh_tok);
-            
+            $refresh_token["refresh_token"] = $singin->refreshToken();
+            $save_refresh_token->fill($refresh_token);
             $save_refresh_token->save();
 
             return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
+
         }catch(EmailNotFound $e) {
+            
             Log::error("email no encontrado. " . $e->getMessage());
             return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
             
