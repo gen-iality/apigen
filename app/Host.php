@@ -17,5 +17,5 @@ class Host extends Moloquent
     {
         return $this->belongsTo('App\Event');
     }
-    protected $fillable = ['name', 'profession' , 'description' ,'image','event_id', 'en_description', 'profession'];
+    protected $fillable = ['name', 'profession' , 'description' ,'image','event_id', 'en_description', 'profession', 'description_activity'];
 }
