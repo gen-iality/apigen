@@ -1243,18 +1243,18 @@ class EventCheckoutController extends Controller
             'stage' => isset($stage_name) ? $stage_name : "",
         ];
         
-        if ($request->get('download') == '1') {
-            $pdf = PDF::loadview(
-                'pdf_bookingConfirmed', $data
-            );
-            $pdf->setPaper(
-                'legal',  'portrait'
-            );
-            return $pdf->download('Tickets.pdf');
-        }
-        return view(
-            'pdf_bookingConfirmed', $data
-        );
+        //if ($request->get('download') == '1') {
+        //    $pdf = PDF::loadview(
+        //        'pdf_bookingConfirmed', $data
+        //    );
+        //    $pdf->setPaper(
+        //        'legal',  'portrait'
+        //    );
+        //    return $pdf->download('Tickets.pdf');
+        //}
+        //return view(
+        //    'pdf_bookingConfirmed', $data
+        //);
     }
 
     /**

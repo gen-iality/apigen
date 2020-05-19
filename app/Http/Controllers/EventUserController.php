@@ -239,10 +239,10 @@ class EventUserController extends Controller
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
         }
         $email = $datafromform['email'];
-        Mail::to($email)
-            ->send(
-                new BookingConfirmed($result->data)
-            );
+        //Mail::to($email)
+        //    ->send(
+        //        new BookingConfirmed($result->data)
+        //    );
         return "ok"; //$response;
     }
 
@@ -257,8 +257,8 @@ class EventUserController extends Controller
         foreach ($query as $value) {
             $id = $value["_id"];
             $attendee = Attendee::find($id);
-            Mail::to($attendee->email)
-                ->send(new BookingConfirmed($attendee));
+            //Mail::to($attendee->email)
+            //    ->send(new BookingConfirmed($attendee));
             echo "<br> enviado a " . $attendee->email;
             array_push($emailsent, $attendee->email);
             $i++;

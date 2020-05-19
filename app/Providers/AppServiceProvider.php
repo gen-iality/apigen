@@ -100,10 +100,10 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                 $original = $eventUser->getOriginal();
 
                 if ($eventUser->state_id == Attendee::STATE_BOOKED && isset($original['state_id']) && $original['state_id'] != Attendee::STATE_BOOKED) {
-                    Mail::to($email)
-                        ->queue(
-                            new BookingConfirmed($eventUser)
-                        );
+                   // Mail::to($email)
+                   //     ->queue(
+                   //         new BookingConfirmed($eventUser)
+                   //     );
                 }
             }
         );

@@ -165,10 +165,10 @@ class TestingController extends Controller
         $message = "mensaje";
         $subject = "[Invitación Máxim] kraken en Colombia";
 
-        Mail::to($email)
-            ->send(
-                new BookingConfirmed($eventuser)
-            );
+        //Mail::to($email)
+        //    ->send(
+        //        new BookingConfirmed($eventuser)
+        //    );
         return "ok";
         /*
 
