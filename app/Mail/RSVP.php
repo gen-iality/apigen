@@ -50,14 +50,14 @@ class RSVP extends Mailable implements ShouldQueue
             $email = $eventUser->properties["email"];
         }
         
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "pubb.2020";    
+        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";    
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
         
         // lets encrypt ! 
         $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
-        $link =  config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' .  $event->_id . "&pass=" . urlencode($password);
+        $link =  config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' .  $event->_id . "&pass=" . urlencode($pass);
 
         $this->link = $link;
         $this->event = $event;
@@ -111,7 +111,8 @@ class RSVP extends Mailable implements ShouldQueue
         return $random_string;
  
         }
-    /**
+
+        /**
      * Build the message.
      *
      * @return $this
