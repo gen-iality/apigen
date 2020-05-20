@@ -280,6 +280,12 @@ class EventUserController extends Controller
             $image = $event->picture;
             $response = self::createUserAndAddtoEvent($request, $event_id);
 
+            //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
+
+            if (get_class($response) == "Illuminate\Http\Response") {
+                return $response;
+            }
+
             $message = [];
             Mail::to($email)
                 ->queue(
@@ -316,7 +322,7 @@ class EventUserController extends Controller
 
             foreach ($user_properties as $user_property) {
 
-                if ($user_property['mandatory'] !== true) {
+                if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
                     continue;
                 }
 
@@ -351,6 +357,7 @@ class EventUserController extends Controller
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500)->send;
+
             exit;
 
         }
