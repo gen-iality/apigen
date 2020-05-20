@@ -78,9 +78,9 @@ class UserController extends UserControllerWeb
                 $organization->name = $user->displayName;
                 $organization->save();
 
-                self::_sendConfirmationEmail(
-                    $user
-                );
+                //self::_sendConfirmationEmail(
+                //    $user
+                //);
             }
 
             //El token para refrescar tokens vencidos de expiración rápida
@@ -259,10 +259,10 @@ class UserController extends UserControllerWeb
         // );
         // $message->messageUsers()->save($messageUser);
 
-        Mail::to($email)
-            ->queue(
-                new ConfirmationEmail($user)
-            );
+        //Mail::to($email)
+        //    ->queue(
+        //        new ConfirmationEmail($user)
+        //    );
     }
 
     /**
