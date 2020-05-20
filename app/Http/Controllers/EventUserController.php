@@ -9,7 +9,6 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\Mail\BookingConfirmed;
 use App\Mail\RSVP;
 use App\Message;
 use App\State;
@@ -284,7 +283,7 @@ class EventUserController extends Controller
             $message = [];
             Mail::to($email)
                 ->queue(
-                    new RSVP("", $event, $response, $image, "", "RELANZAMIENTO POSTDATA")
+                    new RSVP("", $event, $response, $image, "", $event->name)
                 );
             return $response;
         }
@@ -305,8 +304,8 @@ class EventUserController extends Controller
 
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
-                if(!empty($userData["password"]) && strlen($userData["password"]) < 6){
-                    return "minimun password length is 6 characters"; 
+                if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
+                    return "minimun password length is 6 characters";
                 }
             }
             $validations = [
@@ -430,7 +429,7 @@ class EventUserController extends Controller
         foreach ($events as $key => $value) {
             array_push($events_id, $value["event_id"]);
         }
-            return Event::find($events_id);
+        return Event::find($events_id);
     }
 
     public function searchInEvent(Request $request, $event_id)
