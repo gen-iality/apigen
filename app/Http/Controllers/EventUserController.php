@@ -283,6 +283,7 @@ class EventUserController extends Controller
             $message = [];
             Mail::to($email)
                 ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new RSVP("", $event, $response, $image, "", $event->name)
                 );
             return $response;
@@ -349,7 +350,9 @@ class EventUserController extends Controller
 
         } catch (\Exception $e) {
 
-            $response = response()->json((object) ["message" => $e->getMessage()], 500);
+            $response = response()->json((object) ["message" => $e->getMessage()], 500)->send;
+            exit;
+
         }
         return $response;
     }
