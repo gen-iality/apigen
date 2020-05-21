@@ -1,6 +1,6 @@
 @component('mail::message')
-<p>Bienvenida.</p>
-<!--Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
+
+Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 
 <div style="text-align: center;font-size: 130%;">
@@ -43,5 +43,5 @@
     
 
 </div>
--->
+
 @endcomponent
