@@ -57,20 +57,5 @@ Bienvenid@
 
 
 </div>
-<div style="text-align: center;font-size: 100%;background-color:#ECECEC;padding:20px">
-        <p>Si experimentas problemas al ingresar con los métodos anteriores dale click al botón a continuación "Ingresar a EVIUS" e ingresa el siguiente usuario y contraseña 
-        <br>Tus datos de acceso son:<br>
-        Usuario: {{$email}}
-        <br>
-        Contraseña: {{$password}}
-        <br>
-        @component('mail::button', ['url' => 'https://eviusauth.netlify.app/' , 'color' => 'evius'])
-        Ingresar a EVIUS
-        @endcomponent
-        
-        </p>
-    
-
-</div>
 
 @endcomponent
