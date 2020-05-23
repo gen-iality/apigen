@@ -1,6 +1,5 @@
 @component('mail::message')
-{!!$event->_id!!}}
-#prueba titulo
+#### Prueba titulo
 Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 @component('mail::promotion')
