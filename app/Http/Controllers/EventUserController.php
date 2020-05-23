@@ -287,8 +287,10 @@ class EventUserController extends Controller
             }
 
             $message = [];
+            
+            /* para probar rápido el correo lo renderiza como HTML más bien
             return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-
+            */
             Mail::to($email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
