@@ -9,9 +9,7 @@ Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 @if ($event->registration_message)
 
-<div>
-    {{$event->registration_message}}
-</div>
+{{$event->registration_message}}
 
 @else
 
