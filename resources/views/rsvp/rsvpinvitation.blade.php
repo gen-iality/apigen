@@ -1,22 +1,45 @@
 @component('mail::message')
 
-Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
+Bienvenid@
+
+@component('mail::promotion')
+    
+    ![Logo]({{$event->styles["banner_image"]}})
+    
+@endcomponent
+
+<h1>Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}</h1>
+
+@component('mail::table')
+|                       |                                                                                        | 
+| --------------------  |:--------------------------------------------------------------------------------------:| 
+| **Fecha:**            | **Hora:**                                                                              | 
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
+|<br>                   |<br>  
+@if($event->datetime_to)
+| **Hasta:**            | **Hora:**                                                                              | 
+| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_to)) }}   | 
+@endif
+
+@endcomponent
 
 
 <div style="text-align: center;font-size: 130%;">
 
-    @component('mail::promotion')
-    
-    ![Logo]({{$image}})
-    
-    @endcomponent
     <p style="font-size: 130%">Para ingresar al evento, asistir a la conferencia y ver más información visítanos en:
         @component('mail::button', ['url' => $link , 'color' => 'evius'])
         Ingresar al Evento AQUÍ
         @endcomponent
+        
         <br>
         Te esperamos.
     </p><br><br>
+    
+    
+    {!!$event->description!!}
+    
+
+
     <p style="font-size: 15px;color: gray;font-style: italic;">
     Se recomienda usar los navegadores Google Chrome, Safari o Mozilla Firefox para ingresar a evius, no se recomienda el uso de internet explorer. 
     </p>
@@ -26,21 +49,12 @@ Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
     <a href="{{$link}}">click acá</a>
     Recuerda usar Google Chrome, Safari o Mozilla Firefox.
         
-
-</div>
-<div style="text-align: center;font-size: 100%;background-color:#ECECEC;padding:20px">
-        <p>Si experimentas problemas al ingresar con los métodos anteriores dale click al botón a continuación "Ingresar a EVIUS" e ingresa el siguiente usuario y contraseña 
-        <br>Tus datos de acceso son:<br>
-        Usuario: {{$email}}
-        <br>
-        Contraseña: {{$password}}
-        <br>
-        @component('mail::button', ['url' => 'https://eviusauth.netlify.app/' , 'color' => 'evius'])
-        Ingresar a EVIUS
-        @endcomponent
-        
-        </p>
+    @component('mail::promotion')
     
+    ![Logo]({{$image}})
+    
+    @endcomponent
+
 
 </div>
 

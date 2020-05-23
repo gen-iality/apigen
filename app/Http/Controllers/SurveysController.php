@@ -114,7 +114,7 @@ class surveysController extends Controller
     {
         $data = $request->json()->all();
         $survey = Survey::findOrFail($id);
-        if($request->input("questionNo") && is_integer($int = (int)$request->input("questionNo"))){
+        if(is_integer($int = (int)$request->input("questionNo"))){
 
                 //aqui se guarda la peticion
                 $questions["questions"][$request->input("questionNo")] = $data;// = $survey->questions[$request->input("questionNo")];                
