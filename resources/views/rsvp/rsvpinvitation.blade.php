@@ -1,6 +1,6 @@
 @component('mail::message')
 
-<p>Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}</p>
+Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 @component('mail::promotion')
 ![Logo]({{$event->styles["banner_image"]}})
