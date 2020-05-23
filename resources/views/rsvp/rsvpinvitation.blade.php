@@ -9,7 +9,7 @@ Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 @if ($event->registration_message)
 
-{{$event->registration_message}}
+{!!$event->registration_message!!}
 
 @else
 
@@ -29,35 +29,35 @@ Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
 <div style="text-align: center;font-size: 130%;">
 
-    <p style="font-size: 130%">Para ingresar al evento, asistir a la conferencia y ver más información visítanos en:
-        @component('mail::button', ['url' => $link , 'color' => 'evius'])
-        Ingresar al Evento AQUÍ
-        @endcomponent
+<p style="font-size: 130%">Para ingresar al evento, asistir a la conferencia y ver más información visítanos en:
+@component('mail::button', ['url' => $link , 'color' => 'evius'])
+Ingresar al Evento AQUÍ
+@endcomponent
 
-        <br>
-        Te esperamos.
-    </p><br><br>
-
-
-    {!!$event->description!!}
+<br>
+Te esperamos.
+</p><br><br>
 
 
+{!!$event->description!!}
 
-    <p style="font-size: 15px;color: gray;font-style: italic;">
-        Se recomienda usar los navegadores Google Chrome, Safari o Mozilla Firefox para ingresar a evius, no se
-        recomienda el uso de internet explorer.
-    </p>
-    <hr style="border-right : 0;border-left: 0;">
-    <p>
-        Si tuviste problemas con el botón de ingreso abre el siguiente enlace
-        <a href="{{$link}}">click acá</a>
-        Recuerda usar Google Chrome, Safari o Mozilla Firefox.
 
-        @component('mail::promotion')
 
-        ![Logo]({{$image}})
+<p style="font-size: 15px;color: gray;font-style: italic;">
+Se recomienda usar los navegadores Google Chrome, Safari o Mozilla Firefox para ingresar a evius, no se
+recomienda el uso de internet explorer.
+</p>
+<hr style="border-right : 0;border-left: 0;">
+<p>
+Si tuviste problemas con el botón de ingreso abre el siguiente enlace
+<a href="{{$link}}">click acá</a>
+Recuerda usar Google Chrome, Safari o Mozilla Firefox.
 
-        @endcomponent
+@component('mail::promotion')
+
+![Logo]({{$image}})
+
+@endcomponent
 
 
 </div>
