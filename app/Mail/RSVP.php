@@ -77,7 +77,7 @@ class RSVP extends Mailable implements ShouldQueue
     }
 
     private function encryptdata($string){
-        
+        return $string;
         // Store the cipher method 
         $ciphering = "AES-128-CTR"; //config(app.chiper);
 

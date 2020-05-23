@@ -1,65 +1,54 @@
 @component('mail::message')
-#### Prueba titulo
-Hola {{$eventUser_name}}, estás inscrito en: {{$event->name}}
 
-@component('mail::promotion')
 ![Logo]({{$event->styles["banner_image"]}})
-@endcomponent
 
+** Hola {{$eventUser_name}}, su registro a {{$event->name}}  ha sido exitoso **
 
-@if ($event->registration_message)
-
-{!!$event->registration_message!!}
-
-@else
+En la parte inferior del correo encontraras un botón para ingresar al evento
 
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
-|<br> |<br>
+
+@if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
 | {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_to)) }} |
 @endif
+@endif
 @endcomponent
 
+@if ($event->registration_message)
+{!!$event->registration_message!!}
+@else
+{!!$event->description!!}
 @endif
 
-<div style="text-align: center;font-size: 130%;">
 
-<p style="font-size: 130%">Para ingresar al evento, asistir a la conferencia y ver más información visítanos en:
+** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: **
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
 
-<br>
-Te esperamos.
-</p><br><br>
-
-
-{!!$event->description!!}
-
-
 
 <p style="font-size: 15px;color: gray;font-style: italic;">
-Se recomienda usar los navegadores Google Chrome, Safari o Mozilla Firefox para ingresar a evius, no se
-recomienda el uso de internet explorer.
+Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, 
+algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
+
 <hr style="border-right : 0;border-left: 0;">
 <p>
 Si tuviste problemas con el botón de ingreso abre el siguiente enlace
 <a href="{{$link}}">click acá</a>
-Recuerda usar Google Chrome, Safari o Mozilla Firefox.
+</p>
 
 @component('mail::promotion')
-
 ![Logo]({{$image}})
-
 @endcomponent
 
+##Te esperamos.
 
-</div>
 
 @endcomponent

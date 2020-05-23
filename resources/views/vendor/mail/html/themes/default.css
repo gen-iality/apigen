@@ -31,8 +31,8 @@ blockquote {
 }
 
 pre {
-    font-weight: 900;
-    font-size: 3em;
+    font-weight: 600;
+    font-size: 1em;
     text-align: center;
 }
 
@@ -48,7 +48,7 @@ a img {
 
 h1 {
     color: #2F3133;
-    font-size: 19px;
+    font-size: 16px;
     font-weight: bold;
     margin-top: 0;
     text-align: center;

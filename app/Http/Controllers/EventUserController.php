@@ -287,6 +287,8 @@ class EventUserController extends Controller
             }
 
             $message = [];
+            return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
+
             Mail::to($email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)

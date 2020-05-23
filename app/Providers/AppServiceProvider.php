@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     {
         Resource::withoutWrapping();
 
+        //setlocale(LC_ALL, "es_ES.UTF-8");
+        //\Carbon\Carbon::setLocale(config('app.locale')); // sv
+
         // \App\Attendee::observe(App\Observers\EventUserObserver::class);
         \App\ActivityAssistants::saved(
             function ($activityAttendee) {
