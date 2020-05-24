@@ -4,21 +4,28 @@
 
 ** Hola {{$eventUser_name}}, su registro a {{$event->name}}  ha sido exitoso **
 
-En la parte inferior del correo encontraras un botón para ingresar al evento
 
+
+{{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_from)) }} |
+| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
+
 
 @if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
-| {{ date('l, F j Y ', strtotime($event->datetime_from)) }} | {{date('H:i:s', strtotime($event->datetime_to)) }} |
+| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
 @endif
 @endif
 @endcomponent
+
+@component('mail::button', ['url' => $link , 'color' => 'evius'])
+Ingresar al Evento AQUÍ
+@endcomponent
+
 
 @if ($event->registration_message)
 {!!$event->registration_message!!}

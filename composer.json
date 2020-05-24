@@ -52,6 +52,7 @@
     "predis/predis": "^1.0",
     "romm1/omnipay-payu": "^3.0",
     "seatsio/seatsio-php": "^43.0",
+    "spatie/icalendar-generator": "^1.0",
     "spatie/laravel-permission": "^2.28",
     "spatie/laravel-tail": "^3.2",
     "superbalist/laravel-google-cloud-storage": "^2.0",

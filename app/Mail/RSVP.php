@@ -117,15 +117,21 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return $this
      */
-    public function build()
+    
+     public function build()
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = $this->event->organizer->name;
 
+$ej = "BEGIN:VCALENDAR VERSION:2.0 PRODID:spatie/icalendar-generator NAME:Laracon online X-WR-CALNAME:Laracon online BEGIN:VEVENT UID:5eca9028e8bfe SUMMARY:Creating calender feeds DTSTART:20190306T150000 DTEND:20190306T160000 DTSTAMP:20200524T151800 END:VEVENT END:VCALENDAR";
+        
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
+            ->attachData($ej, 'ical.ics', [
+                'mime' => 'text/calendar',
+            ])            
             ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
     }

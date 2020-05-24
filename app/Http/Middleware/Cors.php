@@ -15,8 +15,8 @@ class Cors
     }
     public function handle($request, Closure $next)
     {
-        $originURL = "https://evius.co";
-        //$originURL = "http://localhost";
+        $originURL = "https://evius.co";//$originURL = "http://localhost";
+        
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             $originURL = $_SERVER['HTTP_ORIGIN'];
 
