@@ -25,6 +25,8 @@ installed
 /composer.phar
 _ide_helper.php
 *.swp
+*.save
+
 _docs/build
 public/assets/*
 public/vendor/*
