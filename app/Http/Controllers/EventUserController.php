@@ -16,8 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Mail;
 use Validator;
-use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
-use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 
 /**
  * @resource Attendee (Attendee)
@@ -281,19 +279,6 @@ class EventUserController extends Controller
             $event = Event::find($event_id);
             $image = $event->picture;
 
-            $ical = iCalCalendar::create('Laracon online')
-            ->event(iCalEvent::create('Creating calender feeds')
-                ->startsAt(new \DateTime('6 March 2019 15:00'))
-                ->endsAt(new \DateTime('6 March 2019 16:00'))
-            )
-            ->get();
-
-
-            //return  $ical;
-            //die;
-
-
-
             $response = self::createUserAndAddtoEvent($request, $event_id);
 
             //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
@@ -303,17 +288,17 @@ class EventUserController extends Controller
             }
 
             $message = [];
-            
+
             // para probar rápido el correo lo renderiza como HTML más bien
             //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-            
+
             Mail::to($email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new RSVP("", $event, $response, $image, "", $event->name)
                 );
             return $response;
-            
+
         }
 
     }
