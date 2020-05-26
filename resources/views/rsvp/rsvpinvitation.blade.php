@@ -2,7 +2,7 @@
 
 ![Logo]({{$event->styles["banner_image"]}})
 
-** Hola {{$eventUser_name}}, su registro a {{$event->name}}  ha sido exitoso **
+** Hola {{$eventUser_name}}, <strong>su registro a {{$event->name}}  ha sido exitoso </strong>**
 
 
 
