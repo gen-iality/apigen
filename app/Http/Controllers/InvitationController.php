@@ -73,7 +73,12 @@ class InvitationController extends Controller
             }catch(InvalidArgumentException $e){
                 $pass = $request->input("pass");
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+            }catch(AuthError $e){
+                Log::error("temp password used. " . $e->getMessage());
+                $pass = "temppassw123";
+                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
             }
+            
             $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
 
             $save_refresh_token = Account::where("uid",$userinfo->uid)->first();
