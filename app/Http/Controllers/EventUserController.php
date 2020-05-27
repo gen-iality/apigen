@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
-use App\Attendee;
-use App\evaLib\Services\FilterQuery;
-use App\evaLib\Services\UserEventService;
+use Mail;
+use Route;
 use App\Event;
-use App\Http\Requests\EventUserRequest;
-use App\Http\Resources\EventUserResource;
-use App\Mail\RSVP;
-use App\Message;
 use App\State;
+use Validator;
+use App\Account;
+use App\Message;
+use App\Attendee;
+use App\Mail\RSVP;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Route;
-use Mail;
-use Validator;
+use App\evaLib\Services\FilterQuery;
+use App\Http\Requests\EventUserRequest;
+use App\evaLib\Services\UserEventService;
+use App\Http\Resources\EventUserResource;
 use App\Http\Controllers\ActivityAssistantsController;
 
 /**
@@ -268,26 +268,28 @@ class EventUserController extends Controller
         }
         return $emailsent;
     }
-    public function validateEmail(Request $request, string $event_id, Message $message)
+
+    public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id, Message $message, string $eventuser_id = null)
     {
         $eventUserData = $request->json()->all();
 
         $email = !empty($eventUserData["email"]) ? $eventUserData["email"] : $eventUserData["properties"]["email"];
         if (!empty($email)) {
             $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
-            if (!empty($userexists)) {
-                return "El correo ingresado ya se encuentra registrado en el evento";
-            }
-            $event = Event::find($event_id);
+            
+            //if (!empty($userexists)) {        
+            //    return "El correo ingresado ya se encuentra registrado en el evento";
+            //}
+            
+            $event = Event::findOrFail($event_id);
             $image = $event->picture;
             
-            $response = self::createUserAndAddtoEvent($request, $event_id);
+            $response = self::createUserAndAddtoEvent($request, $event_id , $eventuser_id);           
+             //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
-            //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
-//
-            //if (get_class($response) == "Illuminate\Http\Response") {
-            //    return $response;
-            //}
+            if (get_class($response) == "Illuminate\Http\Response") {
+                return $response;
+            }
 
             $message = [];
 
@@ -302,13 +304,14 @@ class EventUserController extends Controller
             return $response;
 
         }
+        return abort(400, "no data has been send");
 
     }
 
-    public function createUserAndAddtoEvent(Request $request, string $event_id)
+    public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
         try {
-            //las propiedades dinamicas del usuario se estan migrando de una propiedad directa
+            //las propiedades dinámicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
 
@@ -352,6 +355,10 @@ class EventUserController extends Controller
             }
 
             $event = Event::find($event_id);
+            if ($eventuser_id){
+                $eventUserData["eventuser_id"] = $eventuser_id;
+            }
+
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
             $response = new EventUserResource($result->data);
@@ -363,7 +370,7 @@ class EventUserController extends Controller
             $response->additional(['status' => $result->status, 'message' => $result->message]);
 
         } catch (\Exception $e) {
-
+            echo $e->getMessage();die;
             $response = response()->json((object) ["message" => $e->getMessage()], 500)->send;
             exit;
 
@@ -583,35 +590,25 @@ class EventUserController extends Controller
             $attende = Attendee::find($att["_id"]);
 
             echo $attende->forceDelete();
-
         }
 
-    }
-    public function testEventUser(Request $request, $event_id,Message $message){
-
-        $user = Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->first();
+}
+    public function transferEventuserAndEnrollToActivity(Request $request, $event_id ,$eventuser_id,Message $message){   
+        //$event_user = Attendee::find($eventuser_id);
         
         $data = $request->json()->all();
-        if(!empty($user->properties["allowinvited"]) && $user->properties["allowinvited"] > 0){
-            
-            $user_invited = self::validateEmail($request, $event_id, $message); 
-            
-            if (empty($user_invited->_id)){ 
-                $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
-            }
-            $new_array["allowinvited"] = $user->properties["allowinvited"] - 1;
-            $new_array["usersinvited"] = array_merge($user->properties["usersinvited"],[$user_invited->_id]);
-            $new["properties"] = array_merge($user->properties,$new_array);
-            $user->update($new);
-            $user->save();
 
-            $request->request->add(['user_id' => $user_invited->_id]);
+            $user_invited = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id, $message); 
             
-            $activity = new ActivityAssistantsController();
-            $activity->activitieAssistant($request,$event_id);
+            //if (empty($user_invited->_id)){ 
+            //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
+            //}
             
-            return $user;
-        }
+            //$activity = new ActivityAssistantsController();
+            //$activity->activitieAssistant($request,$event_id);
+            
+            return $user_invited;
+        
         return "usuario no encontrado, o sin invitaciones disponibles";
     }
 
