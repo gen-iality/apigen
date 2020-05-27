@@ -14,8 +14,10 @@ use App\Message;
 use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Route;
 use Mail;
 use Validator;
+use App\Http\Controllers\ActivityAssistantsController;
 
 /**
  * @resource Attendee (Attendee)
@@ -278,14 +280,14 @@ class EventUserController extends Controller
             }
             $event = Event::find($event_id);
             $image = $event->picture;
-
+            
             $response = self::createUserAndAddtoEvent($request, $event_id);
 
             //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
-
-            if (get_class($response) == "Illuminate\Http\Response") {
-                return $response;
-            }
+//
+            //if (get_class($response) == "Illuminate\Http\Response") {
+            //    return $response;
+            //}
 
             $message = [];
 
@@ -363,7 +365,6 @@ class EventUserController extends Controller
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500)->send;
-
             exit;
 
         }
@@ -448,6 +449,12 @@ class EventUserController extends Controller
         return Event::find($events_id);
     }
 
+    public function indexByUserInEvent(Request $request,$event_id)
+    {
+        return EventUserResource::collection( 
+            Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
+        );
+    }
     public function searchInEvent(Request $request, $event_id)
     {
         $auth = resolve('Kreait\Firebase\Auth');
@@ -580,20 +587,32 @@ class EventUserController extends Controller
         }
 
     }
-    public function changeEventId(Request $request, $event_id_old, $event_id_new)
-    {
-        $attendees = Attendee::where("event_id", $event_id_old)->get();
-        $attendees = json_decode(json_encode($attendees), true);
-        foreach ($attendees as $value) {
-            //echo  var_dump($value);
-            $user = Attendee::find($value["_id"]);
-            $newid["event_id"] = $event_id_new;
-            echo var_dump($newid) . "<br>";
-            $user->fill($newid);
+    public function testEventUser(Request $request, $event_id,Message $message){
+
+        $user = Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->first();
+        
+        $data = $request->json()->all();
+        if(!empty($user->properties["allowinvited"]) && $user->properties["allowinvited"] > 0){
+            
+            $user_invited = self::validateEmail($request, $event_id, $message); 
+            
+            if (empty($user_invited->_id)){ 
+                $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
+            }
+            $new_array["allowinvited"] = $user->properties["allowinvited"] - 1;
+            $new_array["usersinvited"] = array_merge($user->properties["usersinvited"],[$user_invited->_id]);
+            $new["properties"] = array_merge($user->properties,$new_array);
+            $user->update($new);
             $user->save();
 
+            $request->request->add(['user_id' => $user_invited->_id]);
+            
+            $activity = new ActivityAssistantsController();
+            $activity->activitieAssistant($request,$event_id);
+            
+            return $user;
         }
-
+        return "usuario no encontrado, o sin invitaciones disponibles";
     }
 
 }

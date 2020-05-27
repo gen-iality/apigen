@@ -48,8 +48,8 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
  ****************/
 Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get ('events/myevents', 'EventUserController@indexByEventUser');
+Route::get ('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
 Route::post ('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@validateEmail');
-
 
 Route::put ('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
