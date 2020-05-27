@@ -155,7 +155,13 @@ class UserEventService
             $eventUserFields["properties"] = array_merge($model->properties,$eventUserFields["properties"]);
         }
         /* guardamos el Attendee o eventUser */
-        $eventUser = Attendee::updateOrCreate($matchAttributes, $eventUserFields);
+        if(!empty($eventUserFields["eventuser_id"])){
+            $eventUser = Attendee::find($eventUserFields["eventuser_id"]);
+            $eventUser->update($eventUserFields);
+        }else{
+            $eventUser = Attendee::updateOrCreate($eventUserFields);
+        } 
+
         \Log::debug($matchAttributes);
         \Log::debug($eventUserFields);
     
@@ -163,7 +169,7 @@ class UserEventService
         buscamos la orden  */
         if (isset($eventUserFields["order_id"])) {
             $order->save();
-        } 
+        }
 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
