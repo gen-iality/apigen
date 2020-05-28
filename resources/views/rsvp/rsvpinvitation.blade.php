@@ -57,7 +57,7 @@ Ingresar al Evento AQUÍ
 @endif
 
 
-** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: **
+<!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
