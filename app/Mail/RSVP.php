@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use App\Event;
-use App\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -28,8 +27,6 @@ class RSVP extends Mailable implements ShouldQueue
     public $footer;
     public $subject;
     public $urlconfirmacion;
-    public $image_header;
-    public $content_header;
     public $event_location;
     public $logo;
     public $ical = "";
@@ -38,9 +35,9 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
     {
-    
+
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
         $event_location = null;
@@ -50,7 +47,6 @@ class RSVP extends Mailable implements ShouldQueue
         if (!empty($event->alt_image)) {
             $image = $event->alt_image;
         }
-        
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
 
         if (is_null($email)) {
@@ -59,15 +55,13 @@ class RSVP extends Mailable implements ShouldQueue
 
         $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
-        
+
         // lets encrypt !
         $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
-        
-        $this->image_header = $image_header;
-        $this->content_header = $content_header;
+
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
@@ -79,12 +73,10 @@ class RSVP extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
-        
         if (!$subject) {
             "Invitación a " . $event->name . "";
         }
-
-        $this->subject = $subject;  
+        $this->subject = $subject;
         $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
@@ -107,7 +99,7 @@ class RSVP extends Mailable implements ShouldQueue
 
     private function encryptdata($string)
     {
-        
+        return $string;
         // Store the cipher method
         $ciphering = "AES-128-CTR"; //config(app.chiper);
 
@@ -153,7 +145,8 @@ class RSVP extends Mailable implements ShouldQueue
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
+        $from = $this->event->organizer->name;
+
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
