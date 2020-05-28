@@ -1,16 +1,9 @@
 @component('mail::message')
 
-@if(!empty($image_header))
-![Logo]({{$image_header}})<br>
-@else
 ![Logo]({{$event->styles["banner_image"]}})
-@endif
+
 ** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}}   **
 
-@if(!empty($content_header))
-{!!$content_header!!}
-@else
-@endif
 
 
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
@@ -33,9 +26,6 @@
 Ingresar al Evento AQUÍ
 @endcomponent
 
-@component('mail::promotion')
-![Logo]({{$image}})
-@endcomponent
 
 @if ($event->registration_message)
 {!!$event->registration_message!!}
@@ -61,6 +51,9 @@ Si tuviste problemas con el botón de ingreso abre el siguiente enlace
 <a href="{{$link}}">click acá</a>
 </p>
 
+@component('mail::promotion')
+![Logo]({{$image}})
+@endcomponent
 
 ##Te esperamos.
 
