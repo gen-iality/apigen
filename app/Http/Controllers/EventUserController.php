@@ -297,7 +297,7 @@ class EventUserController extends Controller
             Mail::to($email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new RSVP("", $event, $response, $image, "newuser", $event->name)
+                    new RSVP("", $event, $eventUser, $image, "newuser", $event->name)
                 );
             return $eventUser;
 
