@@ -43,6 +43,10 @@ Ingresar al Evento AQUÍ
 ![Logo]({{$image}})
 @endcomponent
 
+
+{!!$message!!}
+
+<br>
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @else
