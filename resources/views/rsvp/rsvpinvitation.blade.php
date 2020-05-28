@@ -36,9 +36,11 @@
 @endcomponent
 -->
 
+<!--
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
+-->
 
 @component('mail::promotion')
 ![Logo]({{$image}})
@@ -73,13 +75,11 @@ Ingresar al Evento AQUÍ
 </p>
 
 
-##Te esperamos.
-
 @if($image_footer != null)
 ![Logo]({{$image_footer}})
 @elseif($organization_picture != null)
 ![Logo]({{$organization_picture}})
 @else
-@endif 
+@endif
 
 @endcomponent
