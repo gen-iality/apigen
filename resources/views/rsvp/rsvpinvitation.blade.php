@@ -50,7 +50,7 @@ Ingresar al Evento AQUÍ
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @else
-{!!$event->description!!}
+
 @endif
 
 
