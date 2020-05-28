@@ -7,7 +7,7 @@
 @endif
 ** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
 @if(!empty($eventUser->ticket))
-** Sala {{$eventUser->ticket->title}} **
+# ** Sala: {{$eventUser->ticket->title}} **
 @endif
 
 
