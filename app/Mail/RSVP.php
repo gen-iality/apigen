@@ -31,6 +31,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $subject;
     public $urlconfirmacion;
     public $image_header;
+    public $type;
     public $content_header;
     public $event_location;
     public $logo;
@@ -43,6 +44,7 @@ class RSVP extends Mailable implements ShouldQueue
     public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null, $footer_image = null)
     {
     
+
         $auth = resolve('Kreait\Firebase\Auth');    
         $this->auth = $auth;
         $event_location = null;
@@ -52,7 +54,7 @@ class RSVP extends Mailable implements ShouldQueue
         if (!empty($event->alt_image)) {
             $image = $event->alt_image;
         }
-        
+        $type = null;
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
 
         if (is_null($email)) {
@@ -71,6 +73,7 @@ class RSVP extends Mailable implements ShouldQueue
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         
         $this->organization_picture = $organization_picture; 
+        $this->type = $type; 
         $this->image_header = $image_header;
         $this->content_header = $content_header;
         $this->footer_image = $footer_image;
