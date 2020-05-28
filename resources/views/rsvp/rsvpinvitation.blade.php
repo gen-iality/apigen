@@ -5,7 +5,11 @@
 @else
 ![Logo]({{$event->styles["banner_image"]}})
 @endif
-** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}}   **
+** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
+@if(!empty($eventUser->ticket))
+** Sala {{$eventUser->ticket->title}} **
+@endif
+
 
 @if(!empty($content_header))
 {!!$content_header!!}
@@ -18,13 +22,15 @@
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
+| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} |
+{{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
 
 
 @if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
+| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} |
+{{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
 @endif
 @endif
 @endcomponent
@@ -51,14 +57,14 @@ Ingresar al Evento AQUÍ
 
 
 <p style="font-size: 15px;color: gray;font-style: italic;">
-Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, 
-algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+    Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
+    algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-Si tuviste problemas con el botón de ingreso abre el siguiente enlace
-<a href="{{$link}}">click acá</a>
+    Si tuviste problemas con el botón de ingreso abre el siguiente enlace
+    <a href="{{$link}}">click acá</a>
 </p>
 
 
