@@ -6,10 +6,10 @@
 ![Logo]({{$event->styles["banner_image"]}})
 @endif
 ** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
-@if(!empty($eventUser->ticket))
+<!--@if(!empty($eventUser->ticket))
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
-
+-->
 
 @if(!empty($content_header))
 {!!$content_header!!}
