@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Mail;
-use Route;
-use App\Event;
-use App\State;
-use Validator;
 use App\Account;
-use App\Message;
 use App\Attendee;
+use App\evaLib\Services\FilterQuery;
+use App\evaLib\Services\UserEventService;
+use App\Event;
+use App\Http\Requests\EventUserRequest;
+use App\Http\Resources\EventUserResource;
 use App\Mail\RSVP;
+use App\Message;
+use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\evaLib\Services\FilterQuery;
-use App\Http\Requests\EventUserRequest;
-use App\evaLib\Services\UserEventService;
-use App\Http\Resources\EventUserResource;
-use App\Http\Controllers\ActivityAssistantsController;
+use Mail;
+use Validator;
 
 /**
  * @resource Attendee (Attendee)
@@ -276,19 +274,19 @@ class EventUserController extends Controller
         $email = !empty($eventUserData["email"]) ? $eventUserData["email"] : $eventUserData["properties"]["email"];
         if (!empty($email)) {
             $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
-            
-            //if (!empty($userexists)) {        
+
+            //if (!empty($userexists)) {
             //    return "El correo ingresado ya se encuentra registrado en el evento";
             //}
-            
+
             $event = Event::findOrFail($event_id);
             $image = $event->picture;
-            
-            $response = self::createUserAndAddtoEvent($request, $event_id , $eventuser_id);           
-             //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
-            if (get_class($response) == "Illuminate\Http\Response") {
-                return $response;
+            $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
+            //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
+
+            if (get_class($eventUser) == "Illuminate\Http\Response") {
+                return $eventUser;
             }
 
             $message = [];
@@ -301,7 +299,7 @@ class EventUserController extends Controller
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new RSVP("", $event, $response, $image, "newuser", $event->name)
                 );
-            return $response;
+            return $eventUser;
 
         }
         return abort(400, "no data has been send");
@@ -355,7 +353,7 @@ class EventUserController extends Controller
             }
 
             $event = Event::find($event_id);
-            if ($eventuser_id){
+            if ($eventuser_id) {
                 $eventUserData["eventuser_id"] = $eventuser_id;
             }
 
@@ -456,10 +454,10 @@ class EventUserController extends Controller
         return Event::find($events_id);
     }
 
-    public function indexByUserInEvent(Request $request,$event_id)
+    public function indexByUserInEvent(Request $request, $event_id)
     {
-        return EventUserResource::collection( 
-            Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
+        return EventUserResource::collection(
+            Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
     }
     public function searchInEvent(Request $request, $event_id)
@@ -592,23 +590,24 @@ class EventUserController extends Controller
             echo $attende->forceDelete();
         }
 
-}
-    public function transferEventuserAndEnrollToActivity(Request $request, $event_id ,$eventuser_id,Message $message){   
+    }
+    public function transferEventuserAndEnrollToActivity(Request $request, $event_id, $eventuser_id, Message $message)
+    {
         //$event_user = Attendee::find($eventuser_id);
-        
+
         $data = $request->json()->all();
 
-            $user_invited = self::SubscribeUserToEventAndSendEmail($request, $event_id, $message, $eventuser_id); 
-            
-            //if (empty($user_invited->_id)){ 
-            //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
-            //}
-            
-            //$activity = new ActivityAssistantsController();
-            //$activity->activitieAssistant($request,$event_id);
-            
-            return $user_invited;
-        
+        $user_invited = self::SubscribeUserToEventAndSendEmail($request, $event_id, $message, $eventuser_id);
+
+        //if (empty($user_invited->_id)){
+        //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
+        //}
+
+        //$activity = new ActivityAssistantsController();
+        //$activity->activitieAssistant($request,$event_id);
+
+        return $user_invited;
+
         return "usuario no encontrado, o sin invitaciones disponibles";
     }
 
