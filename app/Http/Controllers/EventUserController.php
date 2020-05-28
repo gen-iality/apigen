@@ -598,7 +598,7 @@ class EventUserController extends Controller
         
         $data = $request->json()->all();
 
-            $user_invited = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id, $message); 
+            $user_invited = self::SubscribeUserToEventAndSendEmail($request, $event_id, $message, $eventuser_id); 
             
             //if (empty($user_invited->_id)){ 
             //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
