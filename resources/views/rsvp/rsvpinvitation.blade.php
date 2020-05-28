@@ -16,7 +16,7 @@
 @else
 @endif
 
-
+<!--
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
@@ -34,6 +34,7 @@
 @endif
 @endif
 @endcomponent
+-->
 
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
