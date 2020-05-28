@@ -70,8 +70,8 @@ Ingresar al Evento AQUÍ
 
 ##Te esperamos.
 
-@if($footer_image != null)
-![Logo]({{$footer_image}})
+@if($image_footer != null)
+![Logo]({{$image_footer}})
 @elseif($organization_picture != null)
 ![Logo]({{$organization_picture}})
 @else

@@ -24,7 +24,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $eventUser;
     public $image;
     public $link;
-    public $footer_image;
+    public $image_footer;
     public $message;
     public $footer;
     public $organization_picture;
@@ -41,7 +41,7 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null, $footer_image = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null)
     {
     
 
@@ -76,7 +76,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->type = $type; 
         $this->image_header = $image_header;
         $this->content_header = $content_header;
-        $this->footer_image = $footer_image;
+        $this->image_footer = $image_footer;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
