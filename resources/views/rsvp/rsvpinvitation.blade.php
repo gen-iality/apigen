@@ -37,7 +37,7 @@ Ingresar al Evento AQUÍ
 ![Logo]({{$image}})
 @endcomponent
 
-@if ($event->registration_message)
+@if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @else
 {!!$event->description!!}
@@ -64,5 +64,11 @@ Si tuviste problemas con el botón de ingreso abre el siguiente enlace
 
 ##Te esperamos.
 
+@if($footer_image != null)
+![Logo]({{$footer_image}})
+@elseif($organization_picture != null)
+![Logo]({{$organization_picture}})
+@else
+@endif 
 
 @endcomponent

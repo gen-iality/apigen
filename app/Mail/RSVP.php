@@ -24,8 +24,10 @@ class RSVP extends Mailable implements ShouldQueue
     public $eventUser;
     public $image;
     public $link;
+    public $footer_image;
     public $message;
     public $footer;
+    public $organization_picture;
     public $subject;
     public $urlconfirmacion;
     public $image_header;
@@ -38,10 +40,10 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null, $footer_image = null)
     {
     
-        $auth = resolve('Kreait\Firebase\Auth');
+        $auth = resolve('Kreait\Firebase\Auth');    
         $this->auth = $auth;
         $event_location = null;
         if (!empty($event["location"]["FormattedAddress"])) {
@@ -56,7 +58,9 @@ class RSVP extends Mailable implements ShouldQueue
         if (is_null($email)) {
             $email = $eventUser->properties["email"];
         }
-
+       
+        $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null ;
+        
         $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
         
@@ -66,8 +70,10 @@ class RSVP extends Mailable implements ShouldQueue
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         
+        $this->organization_picture = $organization_picture; 
         $this->image_header = $image_header;
         $this->content_header = $content_header;
+        $this->footer_image = $footer_image;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
@@ -154,6 +160,7 @@ class RSVP extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
+
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
