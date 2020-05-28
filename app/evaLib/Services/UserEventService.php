@@ -159,7 +159,7 @@ class UserEventService
             $eventUser = Attendee::find($eventUserFields["eventuser_id"]);
             $eventUser->update($eventUserFields);
         }else{
-            $eventUser = Attendee::updateOrCreate($eventUserFields);
+            $eventUser = Attendee::create($eventUserFields);
         } 
 
         \Log::debug($matchAttributes);
