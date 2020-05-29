@@ -14,7 +14,6 @@
 {!!$content_header !!}
 @else
 @endif
-
 <!--
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
@@ -23,8 +22,6 @@
 | **Fecha:** | **Hora:** |
 | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} |
 {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
-
-
 @if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
@@ -34,26 +31,19 @@
 @endif
 @endcomponent
 -->
-
 <!--
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
--->
-
-@component('mail::promotion')
-![Logo]({{$image}})
-@endcomponent
-
-<div style="display: inline;margin-top:-100px">
-{!!$message!!}
-</div>
+--> 
+<br>    
+<img src="{{ $image }}"> 
+<br>
+{!!$message!!}  
 
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-
-
 <!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
