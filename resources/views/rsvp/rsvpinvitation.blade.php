@@ -10,9 +10,8 @@
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
 -->
-
 @if(!empty($content_header))
-{!!$content_header!!}
+{!!$content_header !!}
 @else
 @endif
 
@@ -44,14 +43,12 @@ Ingresar al Evento AQUÍ
 ![Logo]({{$image}})
 @endcomponent
 
-
+<div style="display: inline;margin-top:-100px">
 {!!$message!!}
+</div>
 
-<br>
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
-@else
-
 @endif
 
 
@@ -61,14 +58,14 @@ Ingresar al Evento AQUÍ
 @endcomponent
 
 
-<p style="font-size: 15px;color: gray;font-style: italic;">
+<p style="font-size: 15px;color: gray;font-style: italic">
     Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
     algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-    Si tuviste problemas con el botón de ingreso abre el siguiente enlace
+Si tiene problemas con el botón de ingreso abra el siguiente enlace
     <a href="{{$link}}">click acá</a>
 </p>
 
