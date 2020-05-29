@@ -35,9 +35,11 @@
 @endcomponent
 -->
 
+<!--
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
+-->
 
 @component('mail::promotion')
 ![Logo]({{$image}})
@@ -52,7 +54,7 @@ Ingresar al Evento AQUÍ
 @endif
 
 
-** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: **
+<!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
@@ -70,13 +72,11 @@ Si tiene problemas con el botón de ingreso abra el siguiente enlace
 </p>
 
 
-##Te esperamos.
-
 @if($image_footer != null)
 ![Logo]({{$image_footer}})
 @elseif($organization_picture != null)
 ![Logo]({{$organization_picture}})
 @else
-@endif 
+@endif
 
 @endcomponent
