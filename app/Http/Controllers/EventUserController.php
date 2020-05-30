@@ -9,7 +9,6 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\Mail\RSVP;
 use App\Mail\InvitationMail;
 use App\Message;
 use App\State;
@@ -290,7 +289,6 @@ class EventUserController extends Controller
                 return $eventUser;
             }
 
-
             // para probar rápido el correo lo renderiza como HTML más bien
             //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
 
@@ -456,8 +454,6 @@ class EventUserController extends Controller
 
     public function indexByUserInEvent(Request $request, $event_id)
     {
-        return auth()->user()->_id;
-
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
