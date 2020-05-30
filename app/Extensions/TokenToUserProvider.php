@@ -42,7 +42,9 @@ class TokenToUserProvider implements UserProvider
 
             try {
                 $verifiedIdToken = $this->auth->verifyIdToken($token);
+
                 $user = $this->findUserByUID($verifiedIdToken);
+
                 Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
 
             } catch (ExpiredToken | InvalidToken $e) {

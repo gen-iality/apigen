@@ -5,10 +5,10 @@ namespace App\Extensions;
 use Cookie;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\GuardHelpers;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class AccessTokenGuard implements Guard
 {
@@ -32,7 +32,7 @@ class AccessTokenGuard implements Guard
         return true;
     }
     public function user()
-    {  
+    {
         if (!is_null($this->user)) {
             return $this->user;
         }
@@ -108,7 +108,7 @@ class AccessTokenGuard implements Guard
      * @param //Authenticatable $user
      * @return void
      */
-    function setUser(Authenticatable $user)
+    public function setUser(Authenticatable $user)
     {
         var_dump($user);
         die("GUARDANDO");
