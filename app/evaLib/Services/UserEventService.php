@@ -73,7 +73,7 @@ class UserEventService
            $orderItem->unit_booking_fee = $ticket['booking_fee'] + $ticket['organiser_booking_fee'];
            $orderItem->save();
         }
-
+        
 
 
         /* Si no existe el correo le creamos uno, anteriormente se mostraba un error */
@@ -143,7 +143,7 @@ class UserEventService
             if (isset($eventUserFields["state"])) {
                 unset($eventUserFields["state"]);
             }
-            
+
         }
 
 
@@ -156,12 +156,34 @@ class UserEventService
         }
         /* guardamos el Attendee o eventUser */
         if(!empty($eventUserFields["eventuser_id"])){
-            $eventUser = Attendee::find($eventUserFields["eventuser_id"]);
-            $eventUser->update($eventUserFields);
+            $eventUserFound = Attendee::find($eventUserFields["eventuser_id"]);
+            $eventUserFound->update($eventUserFields);
+            $eventUser= $eventUserFound;
         }else{
             $eventUser = Attendee::create($eventUserFields);
-        } 
+            if($event->_id == "5ec3f3b6098c766b5c258df2"){
+                $s = 0;
+               
+                for ($i=0; $i < 8; $i++){
+                    //$eventUser = Attendee::create($eventUserFields);
+        
+                    $replicateeventuser = $eventUser->replicate();
+                    $replicateeventuser->push();
+                    if ($i%2==0){
+                        $Ticket= Ticket::where("event_id", "5ec3f3b6098c766b5c258df2")->skip($s)->first();
+                        $s++;
+                        
+                        //$eventUser->replicate();
+                    }
 
+                    $ticket_properties["ticket_id"] = $Ticket->_id;
+                    $ticket_properties["ticket_title"] = $Ticket->title;
+                    $replicateeventuser->fill($ticket_properties);
+                    $replicateeventuser->save();
+                        
+                }
+            }
+        }
         \Log::debug($matchAttributes);
         \Log::debug($eventUserFields);
     
@@ -175,9 +197,12 @@ class UserEventService
 
         //don't know why updateOrCreate doens't eager load related models
         $eventUser = Attendee::where($matchAttributes)->first();
+        
+        if(!empty($eventUserFields["eventuser_id"])){
+            $eventUser = $eventUserFound;
+        }
 
         $data = $eventUser;
-
         return (object) [
             "status" => $result_status,
             "data" => $data,

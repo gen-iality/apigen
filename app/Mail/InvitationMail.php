@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 
-class RSVP extends Mailable implements ShouldQueue
+class InvitationMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -24,15 +24,14 @@ class RSVP extends Mailable implements ShouldQueue
     public $eventUser;
     public $image;
     public $link;
-    public $image_footer;
     public $message;
-    public $footer;
     public $organization_picture;
     public $subject;
     public $urlconfirmacion;
     public $image_header;
     public $type;
-    public $content_header;
+    public $image_footer;
+    public $activity;
     public $event_location;
     public $logo;
     public $ical = "";
@@ -41,10 +40,9 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null)
     {
-    
-
+        
         $auth = resolve('Kreait\Firebase\Auth');    
         $this->auth = $auth;
         $event_location = null;
@@ -68,23 +66,22 @@ class RSVP extends Mailable implements ShouldQueue
         
         // lets encrypt !
         $pass = self::encryptdata($password);
-
+        
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='margin-top:-100px;text-align: center;font-size: 115%'>" . $content_header . "</div>";
+        //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
         $this->organization_picture = $organization_picture; 
         $this->type = $type; 
         $this->image_header = $image_header;
-        $this->content_header = $content_header;
-        $this->image_footer = $image_footer;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
         $this->eventUser = $eventUser;
         $this->image = ($image) ? $image : null;
+        $this->activity = $activity;
         $this->message = $message;
-        $this->footer = $footer;
-
+        $this->image_footer = $image_footer;
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
@@ -149,7 +146,6 @@ class RSVP extends Mailable implements ShouldQueue
             $random_string .= $random_character;
         }
         return $random_string;
-
     }
 
     /**
@@ -170,7 +166,7 @@ class RSVP extends Mailable implements ShouldQueue
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar',
             ])
-            ->markdown('rsvp.rsvpinvitation');
+            ->markdown('rsvp.invitation');
         //return $this->view('vendor.mail.html.message');
     }
 }
