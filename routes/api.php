@@ -1,6 +1,6 @@
 <?php
 
-include ("attendize/schedule.php");
+include "attendize/schedule.php";
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +17,7 @@ To crate a new API for model please follow this guidelines:
 - add other methods separated trying to use API estandar and if It get complex create another controller
  */
 
-/* EXAMPLE OF ROUTES PER MODEL using apiResourcelogin   
+/* EXAMPLE OF ROUTES PER MODEL using apiResourcelogin
 Verb           URI                        Action     Route Name
 GET            /photos                    index      photos.index
 POST           /photos                    store      photos.store
@@ -46,45 +46,43 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 /****************
  * eventUsers
  ****************/
-Route::get ('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
-Route::get ('events/myevents', 'EventUserController@indexByEventUser');
-Route::get ('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
-Route::post ('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
+Route::get('events/myevents', 'EventUserController@indexByEventUser');
+Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 
-// api para transferir eventuser 
+// api para transferir eventuser
 Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
+Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
 
-Route::put ('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
-Route::put ('eventUsers/{id}/checkin', 'EventUserController@checkIn');
+Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
+Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
-
 Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
 Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAddtoEvent');
-Route::get ('events/{event_id}/eventusers', 'EventUserController@index');
-Route::get ('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::get('events/{event_id}/eventusers', 'EventUserController@index');
+Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
+Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 
-Route::delete ('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
+Route::delete('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
 
-Route::put ('events/withstatus/{id}', 'EventUserController@updateWithStatus');
-Route::put ('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
-Route::post('events/{event_id}/eventusersbyurl',      'EventUserController@createUserViaUrl');
+Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
+Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 
 //endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
-Route::post ('events/{event_id}/sendemailtoallusers',      'EventUserController@sendQrToUsers');
+Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
 
- 
-/***************    
+/***************
  * USER PROPERTIES
  ****************/
-Route::get   ('events/{event_id}/userproperties',      'UserPropertiesController@index');
-Route::post  ('events/{event_id}/userproperties',      'UserPropertiesController@store');
-Route::get   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
-Route::put   ('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
+Route::get('events/{event_id}/userproperties', 'UserPropertiesController@index');
+Route::post('events/{event_id}/userproperties', 'UserPropertiesController@store');
+Route::get('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
+Route::put('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
 Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
-
 
 /****************
  * organizations
@@ -106,52 +104,50 @@ Route::group(
  * SENDCONTENT  TEST CONTROLLER
  ****************/
 
-    Route::post('events/sendMecPerfil' ,  'SendContentController@sendContentGenerated');
-    Route::post('events/sendMecPerfilMec' ,  'SendContentController@sendContentMec');
-    Route::post('events/{event_id}/sendMecPerfilMectoall' ,  'SendContentController@sendContentToAll');
-    Route::post('events/sendnotificationemail' ,  'SendContentController@sendNotificationEmail');
-    
-    Route::apiResource('events/{event_id}/sendcontent' ,        'SendContentController@index');
+Route::post('events/sendMecPerfil', 'SendContentController@sendContentGenerated');
+Route::post('events/sendMecPerfilMec', 'SendContentController@sendContentMec');
+Route::post('events/{event_id}/sendMecPerfilMectoall', 'SendContentController@sendContentToAll');
+Route::post('events/sendnotificationemail', 'SendContentController@sendNotificationEmail');
+
+Route::apiResource('events/{event_id}/sendcontent', 'SendContentController@index');
 
 /***************
- * INVITATION 
+ * INVITATION
  ****************/
 //Route::post("events/{event_id}/sendinvitation" , "InvitationController@SendInvitation");
 Route::get('singinwithemail', 'InvitationController@singIn');
-Route::get("events/{event_id}/indexinvitations/{user_id}" , "InvitationController@invitationsSent");
-Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}" , "InvitationController@invitationsReceived");
-Route::put("events/{event_id}/acceptordecline/{id}" , "InvitationController@acceptOrDeclineFriendRequest");
-Route::get("events/{event_id}/contactlist/{user_id}" , "InvitationController@indexcontacts");
+Route::get("events/{event_id}/indexinvitations/{user_id}", "InvitationController@invitationsSent");
+Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}", "InvitationController@invitationsReceived");
+Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@acceptOrDeclineFriendRequest");
+Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::apiResource("events/{event_id}/invitation", "InvitationController");
-
 
 /****************
  * Users Organization
  ****************/
-    Route::group(
-        ['middleware' => 'auth:token'], function () {
-            Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController',['except' => ['update']]);
-            Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
-            Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
-        }
-    );
-
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController', ['except' => ['update']]);
+        Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
+        Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
+    }
+);
 
 /****************
  * Users
  ****************/
 
-    Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
-    Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
-    Route::group(
-        ['middleware' => 'auth:token'], function () {
-            Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
-            Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
-            Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
-            Route::get('me/eventUsers', 'EventUserController@meEvents');
-        }
-    );
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
+        Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+        Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
+        Route::get('me/eventUsers', 'EventUserController@meEvents');
+    }
+);
 
 /****************
  * events
@@ -175,7 +171,7 @@ Route::group(
     }
 );
 
-Route::get('eventsbeforetoday','EventController@beforeToday');
+Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 
@@ -184,15 +180,13 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
  ****************/
 Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
 Route::group(
-    ['middleware' => 'auth:token'], function () {  
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
     }
 );
 
-
-
 Route::group(
-   ['middleware' => 'auth:token'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
         Route::delete('certificates/{id}', 'CertificateController@destroy');
     }
@@ -203,13 +197,10 @@ Route::group(
  ****************/
 Route::apiResource('events/{event_id}/rolesattendees', 'RoleAttendeeController');
 
-
 /***************
  * Mail
  ****************/
 Route::apiResource('events/{event_id}/mailing', 'MailController');
-
-
 
 /***************
  * CERTIFICATES
@@ -217,17 +208,16 @@ Route::apiResource('events/{event_id}/mailing', 'MailController');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events/{event_id}/certificates', 'CertificateController', ['except' => []]);
-        Route::get('events/{event_id}/certificates' ,      'CertificateController@indexByEvent');
+        Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
     }
 );
-
 
 //Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
 //Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
 Route::group(
-   ['middleware' => 'auth:token'], function () {
+    ['middleware' => 'auth:token'], function () {
         Route::apiResource('rolesattendees', 'RoleAttendeeController', ['except' => ['index', 'show']]);
         Route::delete('rolesattendees/{id}', 'RoleAttendeeController@destroy');
     }
@@ -243,7 +233,6 @@ Route::group(
         Route::apiResource('eventTypes', 'EventTypesController', ['except' => ['index', 'show']]);
     }
 );
-
 
 /****************
  * eventContents
@@ -268,60 +257,58 @@ Route::group(
 );
 
 /****************
- * Contributors = STAFF 
+ * Contributors = STAFF
  ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
 
-        //no sabemos como anteponerle el evento al apiresource lo deshabilitamos    
+        //no sabemos como anteponerle el evento al apiresource lo deshabilitamos
         //Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
-        Route::get   ('events/{event_id}/contributors', 'ContributorController@index');
-        Route::post  ('events/{event_id}/contributors', 'ContributorController@store');
-        Route::get   ('events/{event_id}/contributors/{id}', 'ContributorController@show');
-        Route::put   ('events/{event_id}/contributors/{id}', 'ContributorController@update');
+        Route::get('events/{event_id}/contributors', 'ContributorController@index');
+        Route::post('events/{event_id}/contributors', 'ContributorController@store');
+        Route::get('events/{event_id}/contributors/{id}', 'ContributorController@show');
+        Route::put('events/{event_id}/contributors/{id}', 'ContributorController@update');
         Route::delete('events/{event_id}/contributors/{id}', 'ContributorController@destroy');
 
-        //Carga los roles 
+        //Carga los roles
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
 
         //Para cargar informaci�n de contributor del usuario actual
-        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');    
+        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
         Route::get('me/contributors/events', 'ContributorController@myEvents');
-        
+
         //esto hace lo mismo que una ruta de arriba cual dejamos?
         Route::get('contributors/events/{event_id}', 'ContributorController@index');
     }
 );
-        
-        
 
 /****************
  * Contributors
  ****************/
 //Route::group(
-    //['middleware' => 'auth:token'], function () {
-        Route::apiResource('ticket', 'API\EventTicketsAPIController',['except' => ['index']]);
-        Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
+//['middleware' => 'auth:token'], function () {
+Route::apiResource('ticket', 'API\EventTicketsAPIController', ['except' => ['index']]);
+Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
 
-   // }
+// }
 //);
 
 /****************
  * Speakers
  ****************/
 // Route::group(
-    // ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events/{event_id}/speakers', 'SpeakerController');
-    // }
+// ['middleware' => 'auth:token'], function () {
+Route::apiResource('events/{event_id}/speakers', 'SpeakerController');
+// }
 // );
 
 /****************
  * Event Sessions
  ****************/
 // Route::group(
-    // ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
-    // }
+// ['middleware' => 'auth:token'], function () {
+Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
+// }
 // );
 
 /****************
@@ -329,23 +316,22 @@ Route::group(
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
-        Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
-        Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@createUserAndAddtoEvent');
-        Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
+Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
+Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
+Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@createUserAndAddtoEvent');
+Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
 //     }
 // );
 
 /****************
  * Orders Users
  ****************/
-    // ['middleware' => 'auth:token'], function () {
-        // Route::apiResource('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
-        Route::get('users/{user_id}/orders/', 'ApiOrdersController@ordersByUsers');
-        Route::get('me/orders/', 'ApiOrdersController@meOrders');
-    // }
+// ['middleware' => 'auth:token'], function () {
+// Route::apiResource('users/{user_id}/orders/', 'OrdersController@ordersByUsers');
+Route::get('users/{user_id}/orders/', 'ApiOrdersController@ordersByUsers');
+Route::get('me/orders/', 'ApiOrdersController@meOrders');
+// }
 // );
-
 
 Route::apiResource('photos', 'PhotoController');
 
@@ -403,7 +389,6 @@ Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
-
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 
