@@ -10,6 +10,7 @@ use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\Mail\RSVP;
+use App\Mail\InvitationMail;
 use App\Message;
 use App\State;
 use Illuminate\Http\Request;
@@ -289,7 +290,6 @@ class EventUserController extends Controller
                 return $eventUser;
             }
 
-            $message = [];
 
             // para probar rápido el correo lo renderiza como HTML más bien
             //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
@@ -297,7 +297,7 @@ class EventUserController extends Controller
             Mail::to($email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new RSVP("", $event, $eventUser, $image, "newuser", $event->name)
+                    new InvitationMail("", $event, $eventUser, $image, "", $event->name)
                 );
             return $eventUser;
 
@@ -456,6 +456,8 @@ class EventUserController extends Controller
 
     public function indexByUserInEvent(Request $request, $event_id)
     {
+        return auth()->user()->_id;
+
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
@@ -597,7 +599,7 @@ class EventUserController extends Controller
 
         $data = $request->json()->all();
 
-        $user_invited = self::SubscribeUserToEventAndSendEmail($request, $event_id, $message, $eventuser_id);
+        return $user_invited = self::SubscribeUserToEventAndSendEmail($request, $event_id, $message, $eventuser_id);
 
         //if (empty($user_invited->_id)){
         //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
