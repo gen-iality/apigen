@@ -10,6 +10,12 @@
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
 -->
+<br>
+@if(!empty($eventUser->ticket_title))
+ha sido invitado a la conferencia:
+<strong>{!! $eventUser->ticket_title!!}   </strong>
+@endif
+<br>
 @if(!empty($content_header))
 {!!$content_header !!}
 @else
@@ -25,7 +31,7 @@
 @if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} |
+| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B                                                   %Y') }} |
 {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
 @endif
 @endif
