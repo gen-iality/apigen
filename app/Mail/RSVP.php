@@ -43,11 +43,10 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null)
     {
-    
 
-        $auth = resolve('Kreait\Firebase\Auth');    
+        $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
         $event_location = null;
         if (!empty($event["location"]["FormattedAddress"])) {
@@ -62,28 +61,27 @@ class RSVP extends Mailable implements ShouldQueue
         if (is_null($email)) {
             $email = $eventUser->properties["email"];
         }
-       
-        $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null ;
-        
+
+        $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
+
         $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
-        
+
         // lets encrypt !
         $pass = self::encryptdata($password);
-        
+
         $ticket_title = null;
-        
-        if($eventUser->ticketid){
-           $ticket_title = Ticket::find($eventUser->ticketid);  
-           $ticket_title = $ticket_title->title;
+
+        if ($eventUser->ticket) {
+            $ticket_title = $eventUser->ticket->title;
         }
-    
+
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='margin-top:-100px;text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
-        $this->organization_picture = $organization_picture; 
-        $this->type = $type; 
+        $this->organization_picture = $organization_picture;
+        $this->type = $type;
         $this->image_header = $image_header;
         $this->content_header = $content_header;
         $this->image_footer = $image_footer;
@@ -98,20 +96,23 @@ class RSVP extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
-        
+
+        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->datetime_start)) ? $eventUser->ticket->datetime_start : $event->datetime_from;
+        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->datetime_end)) ? $eventUser->ticket->datetime_end : $event->datetime_to;
+
         if (!$subject) {
             "Invitación a " . $event->name . "";
         }
 
-        $this->subject = $subject;  
+        $this->subject = $subject;
         $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
         $this->ical = iCalCalendar::create($event->name)
             ->event(iCalEvent::create($event->name)
-                    ->startsAt($event->datetime_from)
-                    ->endsAt($event->datetime_to)
+                    ->startsAt($date_time_from)
+                    ->endsAt($date_time_to)
                     ->description($descripcion)
                     ->uniqueIdentifier($event->_id)
                     ->createdAt(new \DateTime())
@@ -126,7 +127,7 @@ class RSVP extends Mailable implements ShouldQueue
 
     private function encryptdata($string)
     {
-        
+
         // Store the cipher method
         $ciphering = "AES-128-CTR"; //config(app.chiper);
 
