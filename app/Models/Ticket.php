@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Ticket extends MyBaseModel
 {
     use SoftDeletes;
-    protected $with = ['activities'];
+    //protected $with = ['activities'];
     // protected $dates = ['start_sale_date', 'end_sale_date'];
 
     /**
