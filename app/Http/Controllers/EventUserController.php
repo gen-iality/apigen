@@ -310,7 +310,7 @@ class EventUserController extends Controller
             //las propiedades dinámicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             
-            $eventUserData = $request->json()->all();
+            $eventUserData = $request->json()->all();   
            
             //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
             //$eventUserData = $request->json()->all();
@@ -331,10 +331,12 @@ class EventUserController extends Controller
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
-            if(!empty($eventUserData["properties"]["ticketid"]) || !empty($eventUserData["ticketid"]) ){
-                $eventUserData["properties"]["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
+
+            if(!empty($eventUserData["ticketid"]) ){
+                //$eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
+                $eventUserData["ticket_id"] = $eventUserData["ticketid"];
+                $userData["ticket_id"] = $eventUserData["ticketid"]; 
+                //$userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
                 //$userData["ticket_id"]["properties"] = $eventUserData["properties"]["ticketid"]; 
                 //var_dump($userData);die;\
 
