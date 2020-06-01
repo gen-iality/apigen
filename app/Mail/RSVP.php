@@ -97,8 +97,8 @@ class RSVP extends Mailable implements ShouldQueue
         $this->password = $password;
         $this->email = $email;
 
-        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->datetime_start)) ? $eventUser->ticket->datetime_start : $event->datetime_from;
-        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->datetime_end)) ? $eventUser->ticket->datetime_end : $event->datetime_to;
+        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? $eventUser->ticket->activities->datetime_start : $event->datetime_from;
+        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? $eventUser->ticket->activities->datetime_end : $event->datetime_to;
 
         if (!$subject) {
             "Invitación a " . $event->name . "";
