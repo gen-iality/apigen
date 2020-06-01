@@ -162,7 +162,7 @@ class UserEventService
         }else{
             //$eventUserFields["properties"]["original"] = "bancolombiaregistrado";
             
-            $eventUser = Attendee::updateOrCreate($eventUserFields);
+            $eventUser = Attendee::create($eventUserFields);
             if($event->_id == "5ec3f3b6098c766b5c258df2"){
                 $s = 0;
                
