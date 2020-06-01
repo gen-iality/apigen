@@ -351,9 +351,9 @@ class EventUserController extends Controller
                 );
             }   
 
-            if(!empty($eventUserData["properties"]["ticket_id"])){
-                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticket_id"];
-                $userData["ticket_id"] = $eventUserData["properties"]["ticket_id"]; 
+            if(!empty($eventUserData["properties"]["ticketid"]) ){
+                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
+                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
             }
 
             $event = Event::find($event_id);
