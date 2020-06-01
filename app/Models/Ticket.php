@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Ticket extends MyBaseModel
 {
     use SoftDeletes;
-    protected $with = ['activity'];
+    protected $with = ['activities'];
     // protected $dates = ['start_sale_date', 'end_sale_date'];
 
     /**
@@ -67,11 +67,11 @@ class Ticket extends MyBaseModel
     /**
      * The activity associated with the ticket.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
-    public function activity()
+    public function activities()
     {
-        return $this->hasOne(\App\Activities::class);
+        return $this->belongsTo(\App\Activities::class);
     }
 
     /**
