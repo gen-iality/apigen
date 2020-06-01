@@ -290,6 +290,7 @@ Route::group(
 Route::apiResource('ticket', 'API\EventTicketsAPIController', ['except' => ['index']]);
 Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
 
+Route::get('ajustarticketid', 'API\EventTicketsAPIController@ajustarticketid');
 // }
 //);
 

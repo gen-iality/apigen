@@ -6,15 +6,35 @@
 ![Logo]({{$event->styles["banner_image"]}})
 @endif
 ** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
-<!--@if(!empty($eventUser->ticket))
-# ** Sala: {{$eventUser->ticket->title}} **
-@endif
--->
+
 
 @if($ticket_title)
 ha sido invitado a:
 <strong>{!! $ticket_title !!}</strong>
 @endif
+
+@if(!empty($eventUser->ticket) && !empty($eventUser->ticket->activities))
+
+{{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
+@component('mail::table')
+| | |
+| -------------------- |:--------------------------------------------------------------------------------------:|
+| **Fecha:** | **Hora:** |
+| {{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start)->formatLocalized('%A, %e de %B %Y') }} |
+{{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start)->formatLocalized('%l:%M %p') }} |
+@if (false)
+@if($event->datetime_end)
+| **Hasta:** | **Hora:** |
+|
+{{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end)->formatLocalized('%A, %e de %B                                                   %Y') }}
+|
+{{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end)->formatLocalized('%l:%M %p') }} |
+@endif
+@endif
+@endcomponent
+
+@endif
+
 
 @if(!empty($content_header))
 {!!$content_header !!}
@@ -41,11 +61,11 @@ ha sido invitado a:
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
---> 
-<br>    
-<img src="{{ $image }}"> 
+-->
 <br>
-{!!$message!!}  
+<img src="{{ $image }}">
+<br>
+{!!$message!!}
 
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
@@ -63,7 +83,7 @@ Ingresar al Evento AQUÍ
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-Si tiene problemas con el botón de ingreso abra el siguiente enlace
+    Si tiene problemas con el botón de ingreso abra el siguiente enlace
     <a href="{{$link}}">click acá</a>
 </p>
 
