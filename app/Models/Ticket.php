@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Ticket extends MyBaseModel
 {
     use SoftDeletes;
-
+    protected $with = ['activity'];
     // protected $dates = ['start_sale_date', 'end_sale_date'];
 
     /**
@@ -19,6 +19,7 @@ class Ticket extends MyBaseModel
      */
     public function rules()
     {
+
         $format = config('attendize.default_datetime_format');
         return [
             'title' => 'required',
