@@ -160,7 +160,7 @@ class UserEventService
             $eventUserFound->update($eventUserFields);
             $eventUser= $eventUserFound;
         }else{
-            $eventUser = Attendee::create($eventUserFields);
+            $eventUser = Attendee::updateOrCreate($eventUserFields);
             if($event->_id == "5ec3f3b6098c766b5c258df2"){
                 $s = 0;
                
@@ -312,7 +312,7 @@ class UserEventService
             $eventUser->properties = ["email" => $user->email, "name" => $user->name];
 
             $rol = Rol::where('level', 0)->first();
-            $eventUser->rol_id = $rol->_id;
+            $eventUser->rol_id = $rol->_id; 
             $eventUser->rol_id = "5afaf644500a7104f77189cd";
 
             $temp = State::first();
