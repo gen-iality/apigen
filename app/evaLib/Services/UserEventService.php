@@ -160,6 +160,8 @@ class UserEventService
             $eventUserFound->update($eventUserFields);
             $eventUser= $eventUserFound;
         }else{
+            //$eventUserFields["properties"]["original"] = "bancolombiaregistrado";
+            
             $eventUser = Attendee::updateOrCreate($eventUserFields);
             if($event->_id == "5ec3f3b6098c766b5c258df2"){
                 $s = 0;
@@ -168,7 +170,11 @@ class UserEventService
                     //$eventUser = Attendee::create($eventUserFields);
         
                     $replicateeventuser = $eventUser->replicate();
+                    $instead = $replicateeventuser->properties;
+                    unset($instead["original"]); 
+                    $replicateeventuser->properties = $instead;
                     $replicateeventuser->push();
+
                     if ($i%2==0){
                         $Ticket= Ticket::where("event_id", "5ec3f3b6098c766b5c258df2")->skip($s)->first();
                         $s++;
