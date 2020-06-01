@@ -310,17 +310,18 @@ class EventUserController extends Controller
             //las propiedades dinámicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
             $eventUserData = $request->json()->all();
-            if(!empty($eventUserData["properties"]["ticketid"]) ){
-                $eventUserData["properties"]["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
-            }
+           
 
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
             $userData = $request->json()->all();
-
+            if(!empty($eventUserData["properties"]["ticketid"]) ){
+                $eventUserData["properties"]["ticket_id"] = $eventUserData["properties"]["ticketid"];
+                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
+                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
+            }
+            
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
                 if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
