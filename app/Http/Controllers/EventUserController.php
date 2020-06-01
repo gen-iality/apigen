@@ -342,7 +342,22 @@ class EventUserController extends Controller
 
             }
             
-
+            if(!empty($eventUserData["ticketid"]) ){
+                
+                $eventUserData["ticket_id"] = $eventUserData["ticketid"];
+                $userData["ticket_id"] = $eventUserData["ticketid"]; 
+                unset($eventUserData["ticketid"]);
+                unset($userData["ticketid"]);
+                
+            }elseif (!empty($eventUserData["properties"]["ticketid"])) {
+                
+                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
+                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
+                unset($eventUserData["properties"]["ticketid"]);
+                unset($userData["properties"]["ticketid"]);
+                
+            }
+            
             foreach ($user_properties as $user_property) {
 
                 if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
