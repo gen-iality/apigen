@@ -327,6 +327,7 @@ class EventUserController extends Controller
                 'other_fields' => 'sometimes',
             ];
 
+
             foreach ($user_properties as $user_property) {
 
                 if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
@@ -348,6 +349,11 @@ class EventUserController extends Controller
                     $validator->errors(),
                     422
                 );
+            }   
+
+            if(!empty($eventUserData["properties"]["ticket_id"])){
+                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticket_id"];
+                $userData["ticket_id"] = $eventUserData["properties"]["ticket_id"]; 
             }
 
             $event = Event::find($event_id);
@@ -415,7 +421,7 @@ class EventUserController extends Controller
                     422
                 );
             }
-
+            
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
