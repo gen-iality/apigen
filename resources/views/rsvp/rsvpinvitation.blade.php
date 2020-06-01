@@ -10,12 +10,12 @@
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
 -->
-<br>
-@if(!empty($eventUser->ticket_title))
-ha sido invitado a la conferencia:
-<strong>{!! $eventUser->ticket_title!!}   </strong>
+
+@if($ticket_title)
+ha sido invitado a:
+<strong>{!! $ticket_title !!}</strong>
 @endif
-<br>
+
 @if(!empty($content_header))
 {!!$content_header !!}
 @else

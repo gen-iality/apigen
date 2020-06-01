@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Event;
+use App\Models\Ticket;
 use App\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,6 +28,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $image_footer;
     public $message;
     public $footer;
+    public $ticket_title;
     public $organization_picture;
     public $subject;
     public $urlconfirmacion;
@@ -68,10 +70,18 @@ class RSVP extends Mailable implements ShouldQueue
         
         // lets encrypt !
         $pass = self::encryptdata($password);
-
+        
+        $ticket_title = null;
+        
+        if($eventUser->ticketid){
+           $ticket_title = Ticket::find($eventUser->ticketid);  
+           $ticket_title = $ticket_title->title;
+        }
+    
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='margin-top:-100px;text-align: center;font-size: 115%'>" . $content_header . "</div>";
+        //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
         $this->organization_picture = $organization_picture; 
         $this->type = $type; 
         $this->image_header = $image_header;
@@ -84,7 +94,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->image = ($image) ? $image : null;
         $this->message = $message;
         $this->footer = $footer;
-
+        $this->ticket_title = $ticket_title;
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
