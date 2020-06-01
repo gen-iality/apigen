@@ -350,8 +350,9 @@ class EventUserController extends Controller
                     422
                 );
             }   
-
+            
             if(!empty($eventUserData["properties"]["ticketid"]) ){
+                $eventUserData["properties"]["ticket_id"] = $eventUserData["properties"]["ticketid"];
                 $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
                 $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
             }
