@@ -65,7 +65,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
-        $pass = $password; //self::encryptdata($password);
+        $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
@@ -90,8 +90,9 @@ class InvitationMail extends Mailable implements ShouldQueue
             "Invitación a " . $event->name . "";
         }
 
-        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? $eventUser->ticket->activities->datetime_start : $event->datetime_from;
-        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? $eventUser->ticket->activities->datetime_end : $event->datetime_to;
+        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start) : $event->datetime_from;
+        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
+
         $this->subject = $subject;
         $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
