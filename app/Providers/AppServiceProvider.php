@@ -86,6 +86,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
                 $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "apps@mocionsoft.com";
 
+                return 1;
                 /**
                  * Guardar en firestore
                  * Debes enviar:
@@ -93,7 +94,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                self::saveFirestore($eventUser->event_id . '_event_attendees', $eventUser->_id, $eventUser);
+                 self::saveFirestore($eventUser->event_id . '_event_attendees', $eventUser->_id, $eventUser);
                 /**
                  * Guardar en firebase Real Data Time
                  * Debes enviar:
