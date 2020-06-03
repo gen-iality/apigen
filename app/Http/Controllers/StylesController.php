@@ -29,7 +29,7 @@ class StylesController extends Controller
     {
         $Styles = Event::find($event_id);
         $url = !empty($Styles->styles["BackgroundImage"]) ? $Styles->styles["BackgroundImage"] : false;
-        $color = !empty($Styles->styles["toolbarDefaultBg"]) ? $Styles->styles["toolbarDefaultBg"] : "#FFFFFF";
+        $color = !empty($Styles->styles["containerBgColor"]) ? $Styles->styles["containerBgColor"] : "#FFFFFF";
         
         list($r, $g, $b) = sscanf($color, "#%02x%02x%02x");
         $colorOrUrl = ($url) ? 'background-image: url("'.$url.'"' : "background-color:rgb(".$r . ", ". $g.", ". $b. ",0.5" ;
