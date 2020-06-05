@@ -135,8 +135,7 @@ class RSVPController extends Controller implements ShouldQueue
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
 
-        $eventUsers = Attendee::find($eventUsersIds);
-
+        $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
         $message->number_of_recipients = count($eventUsers);
         $message->save();
 
