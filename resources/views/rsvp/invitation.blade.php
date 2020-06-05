@@ -1,16 +1,23 @@
 @component('mail::message')
 
-@if(!empty($image_header))
-![Logo]({{$image_header}})<br>
+
+
+@if(!empty($event->styles["EmailTopImage"]))
+![Logo]({{$event->styles["EmailTopImage"]}})
 @else
 ![Logo]({{$event->styles["banner_image"]}})
 @endif
-** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
-<br>
+<br />
+<br />
+** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} @if ($event->registration_message )
+{!!$event->registration_message!!}
+@endif **
+<!-- Por si tiene asociado un tickete con sala -->
 @if(!empty($eventUser->ticket_title))
-ha sido invitado a la conferencia:
-<strong>{!! $eventUser->ticket_title!!}   </strong>
+<strong>{!! $eventUser->ticket_title!!} </strong>
 @endif
+
+
 <!--@if(!empty($eventUser->ticket))
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
@@ -18,14 +25,14 @@ ha sido invitado a la conferencia:
 <!--
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
-| | |           
+| | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
 | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} |
 {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
 @if (false)
 @if($event->datetime_to)
-| **Hasta:** | **Hora:** |  
+| **Hasta:** | **Hora:** |
 | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} |
 {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
 @endif
@@ -36,13 +43,11 @@ ha sido invitado a la conferencia:
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
---> 
-<br>    
-<img src="{{ $image }}"> 
+-->
 <br>
-@if ($event->registration_message )
-{!!$event->registration_message!!}
-@endif
+<img src="{{ $image }}">
+<br>
+
 <!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
@@ -56,7 +61,7 @@ Ingresar al Evento AQUÍ
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-Si tiene problemas con el botón de ingreso abra el siguiente enlace
+    Si tiene problemas con el botón de ingreso abra el siguiente enlace
     <a href="{{$link}}">click acá</a>
 </p>
 

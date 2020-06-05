@@ -25,18 +25,22 @@ class EventTicketsAPIController extends Controller
 
     public function ajustarticketid(Request $request)
     {
-        $event_id = "5ec3f3b6098c766b5c258df2";
-        $nuevo = "5ed5532369165504c81f13ae";
-        $query = Attendee::where('event_id', $event_id)->paginate(1000);
+        $event_id = "5ed3ff9f6ba39d1c634fe3f2";
+        $ticket_id = "5ed4fa6adee5ee8998595b0c";
+
+        $query = Attendee::where('event_id', $event_id)
+            ->where('ticket_id', $ticket_id)
+        //->where('_id', "5ed5165812ad48472f079a22")
+            ->get();
 
         foreach ($query as $att) {
 
-            if ($att->event_id == $event_id) {
-                echo "<p>{$att->_id} </p>";
-            }
-
-            $att->event_id = $nuevo;
+            $propiedades = $att->properties;
+            $propiedades["ticket_id"] = $att->ticket_id;
+            $att->properties = $propiedades;
             $att->save();
+            //var_dump($att->properties);
+            echo "<p>" . $att->properties["ticket_id"] . "</p>";
 
         }
 
