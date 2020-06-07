@@ -38,6 +38,8 @@ class RSVP extends Mailable implements ShouldQueue
     public $event_location;
     public $logo;
     public $ical = "";
+    public $date_time_from;
+    public $date_time_to;
     /**
      * Create a new message instance.
      *
@@ -68,7 +70,7 @@ class RSVP extends Mailable implements ShouldQueue
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
-        $pass = self::encryptdata($password);
+        $pass = $password; //self::encryptdata($password);
 
         $ticket_title = null;
 
@@ -99,6 +101,9 @@ class RSVP extends Mailable implements ShouldQueue
 
         $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start) : $event->datetime_from;
         $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
+
+        $this->date_time_from = $date_time_from;
+        $this->date_time_to = $date_time_to;
 
         if (!$subject) {
             "Invitación a " . $event->name . "";

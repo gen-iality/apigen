@@ -35,14 +35,14 @@ class FilesController extends Controller
  * @param string $field_name
  * @param GoogleFiles $gfService
  * @return string of file uploaded url  or  array of urls for multiple files
- * 
+ *
  */
     public function upload(Request $request, string $field_name = null, GoogleFiles $gfService)
-    { 
+    {
         //@debug post $entityBody = file_get_contents('php://input');
-        
+
         $imgurls = [];
-       
+
         //valor por defecto de campo que contiene el archivo
         $field_name = ($field_name) ? $field_name : "file";
 
@@ -82,41 +82,42 @@ class FilesController extends Controller
 
     }
     /**
-    * Funcion destinada al guardado de imagenes en base 64 al google storage, XOXO
-    */
-    public function storeBaseImg(Request $request,  string $key = null, GoogleFiles $gfService)
+     * Funcion destinada al guardado de imagenes en base 64 al google storage, XOXO
+     */
+    public function storeBaseImg(Request $request, string $key = null, GoogleFiles $gfService)
     {
         Image::configure(array('driver' => 'imagick'));
         $data = $request->all();
         $name = $key;
-        $img = $data[$key]; 
-        $formats = array("png","jpg","jpeg");
-        $part = substr($img,0,20);
-        foreach ($formats as $format){
-            if(stristr($part,$format)){
+        $img = $data[$key];
+        $formats = array("png", "jpg", "jpeg");
+
+        $ext = "png";
+        foreach ($formats as $format) {
+            if (stristr($img, $format)) {
                 $ext = $format;
                 break;
             }
         }
-        $name = $name.".".$ext;
-        
-        if(isset($data['type'])){
-            if($data["type"] == "icon"){
-                $imgresize = self::imgResize($img, $ext, $width_size = 240);
-            }elseif($data["type"] == "wall"){
-                $imgresize = self::imgResize($img, $ext, $width_size = 500);
-            }
-        }else{
-            $imgresize = self::imgResize($img, $ext, $width_size = 600);
+        $name = $name . time() . "." . $ext;
+
+        $width_size = 600;
+        $width_sizes = ["icon" => 240, "wall" => 500, "default" => 600, "email" => 600];
+        if ((isset($data['type']) && isset($width_sizes[$data['type']]))) {
+            $width_size = $width_sizes[$data['type']];
         }
+
+        $imgresize = self::imgResize($img, $ext, $width_size);
+
         $image = base64_decode(base64_encode($imgresize));
-        $imgurls[] = $gfService->storeFile($image, $name);
-        return $imgurls;
+        $imgurl = $gfService->storeFile($image, $name);
+        return $imgurl;
     }
 
-    private static function imgResize($img, $ext, $width_size){
-        return Image::make($img)->resize(null,$width_size, function ($constraint) {
+    private static function imgResize($img, $ext, $width_size)
+    {
+        return Image::make($img)->resize($width_size, null, function ($constraint) {
             $constraint->aspectRatio();
         })->encode($ext);
-    }    
+    }
 }

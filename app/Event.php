@@ -28,8 +28,8 @@ class Event extends ModelsEvent
         'datetime_from', 'datetime_to', 'date_start', 'date_end', 'time_start', 'time_end',
         'visibility', 'picture', 'organization_id', 'category', 'extra_config',
         'user_properties', 'properties_group', 'styles', 'has_date', 'app_configuration',
-        'banner_image', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
-        'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates'
+        'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
+        'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];

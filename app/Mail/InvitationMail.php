@@ -111,7 +111,6 @@ class InvitationMail extends Mailable implements ShouldQueue
                     ->organizer('soporte@evius.co', $event->organizer->name)
                     ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
             )->get();
-
     }
 
     private function encryptdata($string)

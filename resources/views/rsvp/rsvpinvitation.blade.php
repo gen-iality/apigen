@@ -2,75 +2,43 @@
 
 @if(!empty($image_header))
 ![Logo]({{$image_header}})<br>
-@else
-![Logo]({{$event->styles["banner_image"]}})
+@elseif(!empty($event->styles["banner_image_email"]) || !empty($event->styles["banner_image"]))
+![Logo]({{($event->styles["banner_image_email"])?$event->styles["banner_image_email"]:$event->styles["banner_image"]}})
 @endif
-** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
 
+** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
 
 @if($ticket_title)
 ha sido invitado a:
 <strong>{!! $ticket_title !!}</strong>
 @endif
 
-@if(!empty($eventUser->ticket) && !empty($eventUser->ticket->activities))
-
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start)->formatLocalized('%A, %e de %B %Y') }} |
-{{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start)->formatLocalized('%l:%M %p') }} |
+| {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
 @if (false)
 @if($event->datetime_end)
 | **Hasta:** | **Hora:** |
-|
-{{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end)->formatLocalized('%A, %e de %B                                                   %Y') }}
-|
-{{ \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end)->formatLocalized('%l:%M %p') }} |
+| {{ $date_time_to->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_to->formatLocalized('%l:%M %p') }} |
 @endif
 @endif
 @endcomponent
-
-@endif
-
-
-@if(!empty($content_header))
+@if(!empty($content_header) && $content_header != '<p><br></p>')
 {!!$content_header !!}
 @else
 @endif
-<!--
-{{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
-@component('mail::table')
-| | |
-| -------------------- |:--------------------------------------------------------------------------------------:|
-| **Fecha:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} |
-{{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
-@if (false)
-@if($event->datetime_to)
-| **Hasta:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B                                                   %Y') }} |
-{{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
-@endif
-@endif
-@endcomponent
--->
-<!--
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
-@endcomponent
--->
-<br>
+@if(!empty($image))
 <img src="{{ $image }}">
-<br>
+@endif
+@if(!empty($message) && $message != '<p><br></p>')
 {!!$message!!}
-
+@endif
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-<!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent

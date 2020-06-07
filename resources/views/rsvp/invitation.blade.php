@@ -1,14 +1,12 @@
 @component('mail::message')
 
-
-
-@if(!empty($event->styles["EmailTopImage"]))
-![Logo]({{$event->styles["EmailTopImage"]}})
-@else
-![Logo]({{$event->styles["banner_image"]}})
+@if(!empty($event->styles["banner_image_email"]) || !empty($event->styles["banner_image"]))
+![Logo]({{($event->styles["banner_image_email"])?$event->styles["banner_image_email"]:$event->styles["banner_image"]}})
 @endif
+
 <br />
 <br />
+
 ** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} @if ($event->registration_message )
 {!!$event->registration_message!!}
 @endif **
