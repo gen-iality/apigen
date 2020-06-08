@@ -174,14 +174,14 @@ class RSVP extends Mailable implements ShouldQueue
      * @return $this
      */
 
-    public function build()
+public function build()
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
 
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@evius.co", "Evius ".$from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar',
@@ -189,4 +189,4 @@ class RSVP extends Mailable implements ShouldQueue
             ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
     }
-}
+}   

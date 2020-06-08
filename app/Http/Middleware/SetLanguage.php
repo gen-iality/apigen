@@ -10,7 +10,7 @@ class SetLanguage
     public function handle($request, Closure $next)
     {
 
-        setlocale(LC_ALL, "es_ES.UTF-8","es_ES","es");
+        setlocale(LC_ALL, "es_ES.utf8","es_ES","es");
         \Carbon\Carbon::setLocale(config('app.locale'));
         return $next($request);
     }
