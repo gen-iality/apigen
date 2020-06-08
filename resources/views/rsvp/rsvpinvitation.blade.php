@@ -1,3 +1,4 @@
+{{Carbon::setLocale('hr')}}
 @component('mail::message')
 
 @if(!empty($image_header))
@@ -13,20 +14,15 @@
 ha sido invitado a:
 <strong>{!! $ticket_title !!}</strong>
 @endif
-
+@if($including_date)
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
 | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
-@if (false)
-@if($event->datetime_end)
-| **Hasta:** | **Hora:** |
-| {{ $date_time_to->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_to->formatLocalized('%l:%M %p') }} |
-@endif
-@endif
 @endcomponent
+@endif
 @if(!empty($content_header) && $content_header != '<p><br></p>')
 {!!$content_header !!}
 @else
