@@ -1,9 +1,9 @@
 @component('mail::message')
-
+{{\Carbon\Carbon::setLocale('es')}}
 @if(!empty($event->styles["banner_image_email"]))
 ![Logo]({{$event->styles["banner_image_email"]}})
-@else
-![Logo]({{$event->styles["banner_image_email"]}})
+@elseif(!empty($event->styles["banner_image"]))
+![Logo]({{$event->styles["banner_image"]}})
 @endif
 
 

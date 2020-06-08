@@ -2,9 +2,12 @@
 
 @if(!empty($image_header))
 ![Logo]({{$image_header}})<br>
-@elseif(!empty($event->styles["banner_image_email"]) || !empty($event->styles["banner_image"]))
-![Logo]({{($event->styles["banner_image_email"])?$event->styles["banner_image_email"]:$event->styles["banner_image"]}})
+@if(!empty($event->styles["banner_image_email"]))
+![Logo]({{$event->styles["banner_image_email"]}})
+@elseif(!empty($event->styles["banner_image"]))
+![Logo]({{$event->styles["banner_image"]}})
 @endif
+
 
 ** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
 
