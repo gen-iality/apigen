@@ -1,7 +1,7 @@
 @component('mail::message')
 
 @if(!empty($event->styles["banner_image_email"]))
-![Logo]({{$event->styles["banner_image_email"])}})
+![Logo]({{$event->styles["banner_image_email"]}})
 @else
 ![Logo]({{$event->styles["banner_image_email"]}})
 @endif
