@@ -1,8 +1,11 @@
 @component('mail::message')
 
-@if(!empty($event->styles["banner_image_email"]) || !empty($event->styles["banner_image"]))
-![Logo]({{($event->styles["banner_image_email"])?$event->styles["banner_image_email"]:$event->styles["banner_image"]}})
+@if(!empty($event->styles["banner_image_email"]))
+![Logo]({{$event->styles["banner_image_email"])}})
+@else
+![Logo]({{$event->styles["banner_image_email"]}})
 @endif
+
 
 <br />
 <br />
@@ -20,7 +23,6 @@
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
 -->
-<!--
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
@@ -36,7 +38,7 @@
 @endif
 @endif
 @endcomponent
--->
+
 <!--
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
