@@ -25,7 +25,7 @@ GET            /photos/{photo}            show       photos.show
 PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
-
+Route::get('test/queue', 'TestingController@testQueue');
 Route::get('test/auth', 'TestingController@auth');
 Route::get('test/Gateway', 'TestingController@Gateway');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
