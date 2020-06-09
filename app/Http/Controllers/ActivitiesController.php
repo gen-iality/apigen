@@ -94,26 +94,35 @@ class ActivitiesController extends Controller
     {
         $data = $request->json()->all();
         $meeting_id = $data["payload"]["object"]["id"];
+        $token = $data["download_token"];
         echo "id reunion".$meeting_id."<br>";
         $zoom_array = $data["payload"]["object"]["recording_files"];
         foreach ($zoom_array as $key => $value) {
             echo "tipo archivo".$value["file_type"]."<br>";
              if($value["file_type"] == "MP4" ){
                 $zoom_url = $value["download_url"];
-                echo "download_url".$zoom_url."<br>";break;
+                echo $zoom_url;
+
+                break;
              }
         }
         $values["meeting_video"] = $zoom_url;
         $activity = Activities::where("meeting_id",$meeting_id)->first();
+
         echo "actividad".$activity->_id."<br>";
         $activity->fill($values);
         $activity->save();
 
-        $client = new \GuzzleHttp\Client(); 
-        
-        $request = $client->get($zoom_url, ['allow_redirects' => false]); 
-        
-        $source = $request->getHeaderLine('location');
+        $client = new \GuzzleHttp\Client();     
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,        
+        ];
+        $request = $client->get($zoom_url."?access_token=".$token, ['allow_redirects' => false],[
+            'headers' => $headers
+        ]); 
+
+        $cookies = $request->getHeaderLine('Set-Cookie');
+        $source = $request->getHeaderLine('Location');
         
         $key = $meeting_id.".mp4";
 
@@ -126,6 +135,7 @@ class ActivitiesController extends Controller
         ]);
           
         $uploader = new MultipartUploader($s3,$source, [
+            'cookies' => $cookies,
             'bucket' => 'meetingsrecorded',
             'key'    => $key,
             'ACL'    => 'public-read'
