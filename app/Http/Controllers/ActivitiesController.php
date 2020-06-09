@@ -9,6 +9,7 @@ use App\RoleAttendee;
 use Aws\S3\S3Client;
 use Aws\Credentials\Credentials;
 use Aws\S3\Transfer;
+use Carbon\Carbon;
 use Aws\Common\Exception\MultipartUploadException;
 use Aws\S3\MultipartUploader;
 use Aws\Exception\AwsException;
@@ -124,7 +125,7 @@ class ActivitiesController extends Controller
         $cookies = $request->getHeaderLine('Set-Cookie');
         $source = $request->getHeaderLine('Location');
         
-        $key = $meeting_id.".mp4";
+        $key = $meeting_id.Carbon::now().".mp4";
 
         $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
 
