@@ -14,7 +14,7 @@
 ha sido invitado a:
 <strong>{!! $ticket_title !!}</strong>
 @endif
-@if($including_date)
+@if($include_date)
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
