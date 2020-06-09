@@ -34,6 +34,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $urlconfirmacion;
     public $image_header;
     public $type;
+    public $including_date;
     public $content_header;
     public $event_location;
     public $logo;
@@ -45,7 +46,7 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $including_date = null)
     {
 
         $auth = resolve('Kreait\Firebase\Auth');
@@ -87,6 +88,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->image_header = $image_header;
         $this->content_header = $content_header;
         $this->image_footer = $image_footer;
+        $this->including_date = $including_date;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
