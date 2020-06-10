@@ -208,7 +208,7 @@ class RSVPController extends Controller implements ShouldQueue
             }
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header,$content_header,$data["image_footer"],$including_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header,$content_header,$data["image_footer"],$include_date)
                 );
 
             //->cc('juan.lopez@mocionsoft.com');
