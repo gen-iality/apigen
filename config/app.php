@@ -38,6 +38,7 @@ return [
     'api_evius' => env('EVIUS_API', 'production'),
     'encryption_iv' => env('ENCRYPTION_IV'),
     'encryption_key' => env('ENCRYPTION_KEY'),
+    'zoom_server' => env('ZOOM_API'),
     /*
     |--------------------------------------------------------------------------
     | Application URL

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activities;
 use App\Category;
 use App\Event;
+use App\ZoomHost;
 use App\RoleAttendee;
 use Aws\S3\S3Client;
 use Aws\Credentials\Credentials;
@@ -90,6 +91,42 @@ class ActivitiesController extends Controller
         return $activity;
     }
     
+
+    public function createMeeting(Request $request,$event_id,$activity_id){
+
+        $data = $request->json()->all();
+
+        $datetime_start_activity = date_format(Carbon::parse($data["activity_datetime_start"]),'Y-m-d');
+
+        $where_date_exist = Activities::where('datetime_start', 'like', '%'.$datetime_start_activity.'%')->where("zoom_host_id","!=",null)->pluck("zoom_host_id");
+        
+        $available_host = ZoomHost::whereNotIn("id", $where_date_exist)->first();
+        if( $available_host == null){
+            return "No available host for this day :(";
+        }
+    
+        $client = new Client();
+        $url = config('app.zoom_server')."/crearroom";
+        $headers =  [ 'Content-Type' => 'application/json' ];
+        
+        $request = $client->post($url, 
+            ['json' => [
+                "activity_name" => $data["activity_name"],
+                "agenda" => $data["activity_description"],
+                "activity_id" => $activity_id,
+                "event_id" => $event_id,
+                "host_id" => $available_host->id
+                ]
+            ],
+            ['headers' => $headers
+        ]); 
+
+        $activity = Activities::find($activity_id);
+        
+
+        return $request;
+    }
+
     // endpoint que recibe el webhook de zoom guarda la info en mongo y la traspasa a s3 de aws
     public function storeMeetingRecording(Request $request)
     {
