@@ -2,24 +2,30 @@
 
 namespace App;
 
-//use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-//Importante usar moloquent!!!!!!
+////Importante usar moloquent!!!!!!
 use Moloquent;
-use Carbon\Carbon;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 /**
  * Category Model
  *
- */ 
+ */
 class Activities extends Moloquent
 {
-    protected $with = ['activity_categories','space','hosts','type','access_restriction_roles'];
-    protected $appends = ['access_restriction_types_available']; 
+    protected $with = ['activity_categories', 'space', 'hosts', 'type', 'access_restriction_roles'];
+    protected $appends = ['access_restriction_types_available'];
+
+    /** Overriding  */
+    public function toJson($options = 0)
+    {
+        $options = $options | JSON_INVALID_UTF8_SUBSTITUTE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+        return parent::toJson($options);
+    }
+
 /*
- * magic property to return type of restrictions activities 
-*/
-    public function getAccessRestrictionTypesAvailableAttribute(){
+ * magic property to return type of restrictions activities
+ */
+    public function getAccessRestrictionTypesAvailableAttribute()
+    {
 
         return config('app.activity_access_restriction_types');
     }
@@ -36,14 +42,14 @@ class Activities extends Moloquent
 
     public function activity_categories()
     {
-        return $this->belongsToMany('App\ActivityCategories' );
+        return $this->belongsToMany('App\ActivityCategories');
     }
 
     public function hosts()
     {
         return $this->belongsToMany('App\Host');
     }
-    
+
     public function type()
     {
         return $this->belongsTo('App\Type');
@@ -63,27 +69,27 @@ class Activities extends Moloquent
     {
         return $this->embedsMany('App\ActivityUsers');
     }
-   
+
     protected $dateformat = 'Y-m-d H:i';
     protected $fillable = [
-        'name' , 
+        'name',
         'subtitle',
-        'datetime_start' , 
-        "datetime_end" , 
-        "space_id" ,
-        "activity_categories_ids" , 
-        "host_ids" , 
-        "type_id" , 
-        "description" ,
-        "image" ,
-        "user" , 
+        'datetime_start',
+        "datetime_end",
+        "space_id",
+        "activity_categories_ids",
+        "host_ids",
+        "type_id",
+        "description",
+        "image",
+        "user",
         "event_id",
         "selected_document",
         "acitivity_users",
         "capacity",
-        "start_url", 
-        "join_url", 
-        "meeting_id", 
+        "start_url",
+        "join_url",
+        "meeting_id",
         "meeting_video",
         "duplicate",
         "locale",
@@ -93,6 +99,6 @@ class Activities extends Moloquent
         "access_restriction_type",
         "access_restriction_rol_ids",
         "has_date",
-        "zoom_meeting_video"
+        "zoom_meeting_video",
     ];
 }

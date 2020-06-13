@@ -18,10 +18,19 @@ use Omnipay;
 use QRCode;
 use Sendinblue\Mailin;
 use Spatie\Permission\Models\Permission;
+use \App\Attendee;
 use \App\Message;
 
 class TestingController extends Controller
 {
+
+    public function serialization()
+    {
+        $eventuser = Attendee::find("5ee44aae1801874b5d124a15");
+
+        return $eventuser->toJson();
+
+    }
 
     public function testQueue()
     {

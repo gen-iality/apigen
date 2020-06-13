@@ -25,6 +25,8 @@ GET            /photos/{photo}            show       photos.show
 PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
+
+Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');
 Route::get('test/auth', 'TestingController@auth');
 Route::get('test/Gateway', 'TestingController@Gateway');
@@ -53,6 +55,8 @@ Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserControlle
 
 // api para transferir eventuser
 Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
+Route::get('eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
+
 Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
 
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');

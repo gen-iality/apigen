@@ -36,6 +36,25 @@ class EventUserManagementController extends Controller
     //5e835f95d74d5c6d246f7894 Marketing Digital
     //5e835f66d74d5c6cfd379995 Planeación Financiera
 
+    public function makeTicketIdaProperty(Request $request, String $event_id, String $ticket_id)
+    {
+        $query = Attendee::where("event_id", $event_id)
+            ->where("ticket_id", "5ecee1cb4e08757151b063fb");
+        //    ->where("account_id", "5b89bf37c065864f7b5bf80e");
+        return $eventUsers = $query->get()->count();
+        $eventUsers = $query->get()->all();
+
+        foreach ($eventUsers as $eventuser) {
+
+            $propiedades = $eventuser["properties"];
+            $propiedades["ticketid"] = $eventuser->ticket_id;
+            $eventuser["properties"] = $propiedades;
+            $eventuser->save();
+        }
+
+        return $eventUsers;
+    }
+
     public function asignTicketsToUser(Request $request, String $event_id, String $user_id, $tickets = [])
     {
 
