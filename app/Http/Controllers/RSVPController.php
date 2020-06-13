@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Attendee;
 use App\Event;
 use App\Mail\RSVP;
+use App\Mail\wallActivity;
 use App\Message;
 use App\MessageUser;
 use App\State;
@@ -46,7 +47,7 @@ class RSVPController extends Controller implements ShouldQueue
         echo "<p>" . $link . "</p>";
     }
 
-    public function singIn(Request $request)
+        public function singIn(Request $request)
     {
 
         $actionCodeSettings = ['handleCodeInApp' => false];
@@ -76,6 +77,40 @@ class RSVPController extends Controller implements ShouldQueue
         $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
 
         return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
+    }
+
+
+    /** 
+    **  notificaciones al correo por actividad en el muro 
+    **/
+    public function wallActivity(Request $request,String $event_id)
+    {
+        $data = $request->json()->all();
+
+        if($data["type"] == "post"){
+            $eventUsers = Attendee::where("event_id",$event_id)->get();
+            $user_sender = Attendee::find($data["user_sender_id"]);
+            
+            foreach ($eventUsers as $event_user) {
+                $user_receiver = $event_user;
+                Mail::to($user_receiver->properties["email"])->queue(        
+                  new wallActivity($data,$event_id,$user_sender,$user_receiver)
+                );
+            
+            }
+
+        }elseif($data["type"] == "comment"){
+
+            $user_sender = Attendee::find($data["user_sender_id"]);
+            $user_receiver = Attendee::find($data["user_receiver_id"]);
+            return Mail::to($user_receiver->properties["email"])->queue(
+                new wallActivity($data,$event_id,$user_sender,$user_receiver)
+            );
+        }
+        //Mail::to($email)->queue(
+        //    new wallActivity($data,$event_id)
+        //);
+
     }
 
     /**
@@ -170,6 +205,7 @@ class RSVPController extends Controller implements ShouldQueue
     {
         $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
+
     }
 
     /**
@@ -190,8 +226,7 @@ class RSVPController extends Controller implements ShouldQueue
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
             $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
 
-            $messageUser = new MessageUser(
-                [
+            $messageUser = new MessageUser([
                     'email' => $eventUser->email,
                     'user_id' => $eventUser->id,
                     'event_user_id' => $eventUser->id,
@@ -202,13 +237,13 @@ class RSVPController extends Controller implements ShouldQueue
             $m = Message::find($message->id);
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null ;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null ;
-            $including_date = false;
-            if(!empty($data["including_date"])){
-                $including_date = $data["including_date"] ? true: false ;
+            $include_date = false;
+            if(!empty($data["include_date"])){
+                $include_date = $data["include_date"] ? true: false ;
             }
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header,$content_header,$data["image_footer"],$including_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header,$content_header,$data["image_footer"],$include_date)
                 );
 
             //->cc('juan.lopez@mocionsoft.com');
@@ -218,7 +253,7 @@ class RSVPController extends Controller implements ShouldQueue
     /**
      * Undocumented function
      *
-     * @return void
+     * @Ireturn void
      */
     public function confirmRSVP(Attendee $eventUser)
     {

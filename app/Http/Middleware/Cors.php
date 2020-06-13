@@ -17,6 +17,14 @@ class Cors
     {
         $originURL = "https://evius.co";//$originURL = "http://localhost";
         
+
+        header('Access-Control-Allow-Origin', $originURL);
+        header('Vary', 'origin');
+        header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Credentials', 'true');
+        header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN, new_token");
+
+
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             $originURL = $_SERVER['HTTP_ORIGIN'];
 
@@ -27,11 +35,11 @@ class Cors
             $originURL = $_SERVER['REMOTE_ADDR'];
         }
         return $next($request)
-            ->header('Access-Control-Allow-Origin', $originURL)
-            ->header('Vary', 'origin')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Credentials', 'true')
-            ->header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN, new_token");
+        ->header('Access-Control-Allow-Origin', $originURL)
+        ->header('Vary', 'origin')
+        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        ->header('Access-Control-Allow-Credentials', 'true')
+        ->header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN, new_token");
         //  ->header("Access-Control-Expose-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN, new_token");
     }
 

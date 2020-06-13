@@ -34,7 +34,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $urlconfirmacion;
     public $image_header;
     public $type;
-    public $including_date;
+    public $include_date;
     public $content_header;
     public $event_location;
     public $logo;
@@ -46,7 +46,7 @@ class RSVP extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $including_date = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null)
     {
 
         $auth = resolve('Kreait\Firebase\Auth');
@@ -85,10 +85,11 @@ class RSVP extends Mailable implements ShouldQueue
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
         $this->organization_picture = $organization_picture;
         $this->type = $type;
+        
         $this->image_header = $image_header;
         $this->content_header = $content_header;
         $this->image_footer = $image_footer;
-        $this->including_date = $including_date;
+        $this->include_date = $include_date;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
@@ -185,9 +186,6 @@ class RSVP extends Mailable implements ShouldQueue
         return $this
             ->from("alerts@evius.co", $from . " EVIUS")
             ->subject($this->subject)
-            ->attachData($this->ical, 'ical.ics', [
-                'mime' => 'text/calendar',
-            ])
             ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
     }

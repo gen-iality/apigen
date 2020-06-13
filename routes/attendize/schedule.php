@@ -65,10 +65,12 @@ Route::apiResource('events/{event_id}/host', 'HostController');
 /***************
  * ACTIVITIES
  ****************/
+
 Route::post  ('/meetingrecording',      'ActivitiesController@storeMeetingRecording');
 Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
 Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
+Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
 
 /***************
  * TYPE
@@ -128,5 +130,10 @@ Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
 Route::put('events/{id}/zoomhost', 'ZoomHostController@update');
 Route::post('events/zoomhost', 'ZoomHostController@updateStatus');
 Route::get('events/zoomhost', 'ZoomHostController@index');
+
+/*******
+ * RSVP
+ ******/
+ Route::post("events/{event_id}/wallnotifications", "RSVPController@wallActivity")
 
 ?>

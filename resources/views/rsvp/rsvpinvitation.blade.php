@@ -1,4 +1,3 @@
-{{Carbon::setLocale('hr')}}
 @component('mail::message')
 
 @if(!empty($image_header))
@@ -14,7 +13,7 @@
 ha sido invitado a:
 <strong>{!! $ticket_title !!}</strong>
 @endif
-@if($including_date)
+@if(is_null($include_date) || $include_date == true || $include_date != false )
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |

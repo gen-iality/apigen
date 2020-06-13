@@ -100,5 +100,6 @@ class Activities extends Moloquent
         "access_restriction_rol_ids",
         "has_date",
         "zoom_meeting_video",
+        "zoom_host_id",
     ];
 }
