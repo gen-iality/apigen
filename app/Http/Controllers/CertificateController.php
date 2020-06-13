@@ -7,7 +7,6 @@ use App\Event;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mail;
 use PDF;
 use Storage;
 
@@ -30,7 +29,7 @@ class CertificateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,string $event_id)
+    public function index(Request $request, string $event_id)
     {
         return JsonResource::collection(
             Certificate::paginate(config('app.page_size'))
@@ -38,14 +37,13 @@ class CertificateController extends Controller
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,string $event_id)
+    public function store(Request $request, string $event_id)
     {
         $data = $request->json()->all();
         $result = new Certificate($data);
@@ -67,7 +65,7 @@ class CertificateController extends Controller
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function show(string $event_id,string $id)
+    public function show(string $event_id, string $id)
     {
         $Certificate = Certificate::find($id);
         $response = new JsonResource($Certificate);
@@ -80,7 +78,7 @@ class CertificateController extends Controller
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,string $event_id,string $id)
+    public function update(Request $request, string $event_id, string $id)
     {
         $data = $request->json()->all();
         $Certificate = Certificate::find($id);
@@ -95,7 +93,7 @@ class CertificateController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,string $event_id,string $id)
+    public function destroy(Request $request, string $event_id, string $id)
     {
         $Certificate = Certificate::find($id);
         return (string) $Certificate->delete();
@@ -111,7 +109,6 @@ class CertificateController extends Controller
 
     public function certificatePdf(Request $request)
     {
-        echo "hola";
         $contentqry = Attendee::findOrFail("event_id", "5d2de182d74d5c28047d1f85")->get();
         echo var_dump($contentqry);
         die;
@@ -146,7 +143,7 @@ class CertificateController extends Controller
 
             //Busca en el content la identificacion, la separa con funciones de string y luego busca la cedula en la base de datos
             //cuando encuentra la cedula extrae el correo asociado a la cedula, cuando el usuario oprime descargar tambien se envia al correo
-           /* $cedula = $data["content"];
+            /* $cedula = $data["content"];
             $nombreEvento = $data["content"];
             //para separar este evento de los demas se agrega una clase "iden" que permite saber que ese certificado es unico para ese evento y usara esta funcion
             if(strpos($cedula, 'class="iden"')){
@@ -181,14 +178,14 @@ class CertificateController extends Controller
     public function generateCertificate(Request $request)
     {
         $data = $request->json()->all();
-            if ($request->get('download') == '1') {
-        
-                $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
-                $pdf->setPaper( 'letter',  'landscape' );
-                return $pdf->download('Tickets.pdf');
+        if ($request->get('download') == '1') {
+
+            $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+            $pdf->setPaper('letter', 'landscape');
+            return $pdf->download('Tickets.pdf');
         }
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
-    
+
     }
 
 }

@@ -11,11 +11,10 @@ use App\Mail\wallActivity;
 use App\Message;
 use App\MessageUser;
 use App\State;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use GuzzleHttp\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;   
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Redirect;
@@ -34,7 +33,6 @@ class RSVPController extends Controller implements ShouldQueue
 
     public function test()
     {
-        echo "hola";
         echo Config::get('app.front_url', 'aaa');
         $actionCodeSettings = ['url' => 'http://localhost:3000/linklogin?email=esteban.sanchez@mocionsoft.com',
             'handleCodeInApp' => false,
@@ -47,64 +45,62 @@ class RSVPController extends Controller implements ShouldQueue
         echo "<p>" . $link . "</p>";
     }
 
-        public function singIn(Request $request)
+    public function singIn(Request $request)
     {
 
         $actionCodeSettings = ['handleCodeInApp' => false];
         $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
 
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
-        if($request->input("request")){
+        if ($request->input("request")) {
 
             $data["response"] = $request->input("response");
 
-            $url =  config('app.api_evius').'/events/'.$innerpath.'/acceptordecline/' . $request->input("request");
+            $url = config('app.api_evius') . '/events/' . $innerpath . '/acceptordecline/' . $request->input("request");
             $client = new Client();
-            try{
+            try {
                 $response = $client->request('PUT', $url, [
                     'body' => json_encode($data),
-                    'headers' => [ 'Content-Type' => 'application/json' ]
-                    ]);
-            }
-            catch(\ClientErrorResponseException $e){
-                
+                    'headers' => ['Content-Type' => 'application/json'],
+                ]);
+            } catch (\ClientErrorResponseException $e) {
+
             }
         }
-        
+
         $parts = parse_url($link);
         parse_str($parts['query'], $query);
-        
+
         $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
 
         return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
     }
 
-
-    /** 
-    **  notificaciones al correo por actividad en el muro 
-    **/
-    public function wallActivity(Request $request,String $event_id)
+    /**
+     **  notificaciones al correo por actividad en el muro
+     **/
+    public function wallActivity(Request $request, String $event_id)
     {
         $data = $request->json()->all();
 
-        if($data["type"] == "post"){
-            $eventUsers = Attendee::where("event_id",$event_id)->get();
+        if ($data["type"] == "post") {
+            $eventUsers = Attendee::where("event_id", $event_id)->get();
             $user_sender = Attendee::find($data["user_sender_id"]);
-            
+
             foreach ($eventUsers as $event_user) {
                 $user_receiver = $event_user;
-                Mail::to($user_receiver->properties["email"])->queue(        
-                  new wallActivity($data,$event_id,$user_sender,$user_receiver)
+                Mail::to($user_receiver->properties["email"])->queue(
+                    new wallActivity($data, $event_id, $user_sender, $user_receiver)
                 );
-            
+
             }
 
-        }elseif($data["type"] == "comment"){
+        } elseif ($data["type"] == "comment") {
 
             $user_sender = Attendee::find($data["user_sender_id"]);
             $user_receiver = Attendee::find($data["user_receiver_id"]);
             return Mail::to($user_receiver->properties["email"])->queue(
-                new wallActivity($data,$event_id,$user_sender,$user_receiver)
+                new wallActivity($data, $event_id, $user_sender, $user_receiver)
             );
         }
         //Mail::to($email)->queue(
@@ -227,23 +223,23 @@ class RSVPController extends Controller implements ShouldQueue
             $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
 
             $messageUser = new MessageUser([
-                    'email' => $eventUser->email,
-                    'user_id' => $eventUser->id,
-                    'event_user_id' => $eventUser->id,
-                ]
+                'email' => $eventUser->email,
+                'user_id' => $eventUser->id,
+                'event_user_id' => $eventUser->id,
+            ]
             );
             $message->messageUsers()->save($messageUser);
-            
+
             $m = Message::find($message->id);
-            $image_header = !empty($data["image_header"]) ? $data["image_header"] : null ;
-            $content_header = !empty($data["content_header"]) ? $data["content_header"] : null ;
+            $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
+            $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
             $include_date = false;
-            if(!empty($data["include_date"])){
-                $include_date = $data["include_date"] ? true: false ;
+            if (!empty($data["include_date"])) {
+                $include_date = $data["include_date"] ? true : false;
             }
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header,$content_header,$data["image_footer"],$include_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
                 );
 
             //->cc('juan.lopez@mocionsoft.com');

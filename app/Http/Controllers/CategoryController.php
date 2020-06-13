@@ -29,7 +29,6 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-
         return CategoryResource::collection(
             Category::paginate(config('app.page_size'))
         );
@@ -46,7 +45,7 @@ class CategoryController extends Controller
     {
         //
     }
-   /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,7 +58,7 @@ class CategoryController extends Controller
         $result->save();
 
         return $result;
-        
+
     }
     public function delete(Category $id)
     {
