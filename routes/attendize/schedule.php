@@ -131,4 +131,9 @@ Route::put('events/{id}/zoomhost', 'ZoomHostController@update');
 Route::post('events/zoomhost', 'ZoomHostController@updateStatus');
 Route::get('events/zoomhost', 'ZoomHostController@index');
 
+/*******
+ * RSVP
+ ******/
+ Route::post("events/{event_id}/wallnotifications", "RSVPController@wallActivity")
+
 ?>
