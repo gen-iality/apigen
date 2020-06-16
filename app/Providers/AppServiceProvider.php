@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Attendee;
 use Google\Cloud\Firestore\FirestoreClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Resources\Json\Resource;
@@ -21,19 +20,25 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      */
     public function boot()
     {
+
         setlocale(LC_ALL, "es_ES.utf8");
         \Carbon\Carbon::setLocale(config('app.locale'));
-
+        Log::debug("Booting");
         Resource::withoutWrapping();
 
-        // \App\Attendee::observe(App\Observers\EventUserObserver::class);
+        //Esta duplicando los eventos aún no entiendo porque
+        //\App\Attendee::observe(\App\Observers\EventUserObserver::class);
+
+        /*\App\Attendee::saved(function ($eventUser) {
+        Log::debug("\App\Attendee::saved boot");
+        });
+         */
 
         \App\Attendee::saved(
             function ($eventUser) {
+                Log::debug("\App\Attendee::saved boot");
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
                 $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "apps@mocionsoft.com";
-
-                return 1;
                 /**
                  * Guardar en firestore
                  * Debes enviar:
@@ -64,6 +69,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         );
         setlocale(LC_ALL, "es_ES.UTF-8");
         \Carbon\Carbon::setLocale(config('app.locale'));
+
     }
 
     /**

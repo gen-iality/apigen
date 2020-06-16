@@ -51,6 +51,8 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');
 Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
+
 Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 
 // api para transferir eventuser
@@ -69,6 +71,7 @@ Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAd
 Route::get('events/{event_id}/eventusers', 'EventUserController@index');
 Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
 Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::put('events/{event_id}/eventusers/{id}', 'EventUserController@update');
 
 Route::delete('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
 

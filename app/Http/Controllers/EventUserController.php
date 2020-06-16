@@ -309,9 +309,9 @@ class EventUserController extends Controller
         try {
             //las propiedades dinámicas del usuario se estan migrando de una propiedad directa
             //a estar dentro de un hijo llamado properties
-            
-            $eventUserData = $request->json()->all();   
-           
+
+            $eventUserData = $request->json()->all();
+
             //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
             //$eventUserData = $request->json()->all();
 
@@ -319,45 +319,44 @@ class EventUserController extends Controller
             $user_properties = $field->user_properties;
 
             $userData = $request->json()->all();
-            
-           
+
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
                 if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
                     return "minimun password length is 6 characters";
                 }
             }
-            $validations = [    
+            $validations = [
                 'email' => 'required|email',
                 'other_fields' => 'sometimes',
             ];
 
-            if(!empty($eventUserData["ticketid"]) ){
+            if (!empty($eventUserData["ticketid"])) {
                 //$eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
                 $eventUserData["ticket_id"] = $eventUserData["ticketid"];
-                $userData["ticket_id"] = $eventUserData["ticketid"]; 
-                //$userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
-                //$userData["ticket_id"]["properties"] = $eventUserData["properties"]["ticketid"]; 
+                $userData["ticket_id"] = $eventUserData["ticketid"];
+                //$userData["ticket_id"] = $eventUserData["properties"]["ticketid"];
+                //$userData["ticket_id"]["properties"] = $eventUserData["properties"]["ticketid"];
                 //var_dump($userData);die;\
 
             }
-            
-            if(!empty($eventUserData["ticketid"]) ){
-                
+
+            if (!empty($eventUserData["ticketid"])) {
+
                 $eventUserData["ticket_id"] = $eventUserData["ticketid"];
-                $userData["ticket_id"] = $eventUserData["ticketid"]; 
+                $userData["ticket_id"] = $eventUserData["ticketid"];
                 unset($eventUserData["ticketid"]);
                 unset($userData["ticketid"]);
-                
-            }elseif (!empty($eventUserData["properties"]["ticketid"])) {
-                
+
+            } elseif (!empty($eventUserData["properties"]["ticketid"])) {
+
                 $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"]; 
+                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"];
                 unset($eventUserData["properties"]["ticketid"]);
                 unset($userData["properties"]["ticketid"]);
-                
+
             }
-            
+
             foreach ($user_properties as $user_property) {
 
                 if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
@@ -379,9 +378,8 @@ class EventUserController extends Controller
                     $validator->errors(),
                     422
                 );
-            }   
-            
-            
+            }
+
             $event = Event::find($event_id);
             if ($eventuser_id) {
                 $eventUserData["eventuser_id"] = $eventuser_id;
@@ -447,7 +445,7 @@ class EventUserController extends Controller
                     422
                 );
             }
-            
+
             $event = Event::find($event_id);
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
 
@@ -482,6 +480,13 @@ class EventUserController extends Controller
             array_push($events_id, $value["event_id"]);
         }
         return Event::find($events_id);
+    }
+
+    public function ByUserInEvent(Request $request, $event_id)
+    {
+        return EventUserResource::collection(
+            Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
+        );
     }
 
     public function indexByUserInEvent(Request $request, $event_id)
