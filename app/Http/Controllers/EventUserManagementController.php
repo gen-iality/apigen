@@ -39,9 +39,9 @@ class EventUserManagementController extends Controller
     public function makeTicketIdaProperty(Request $request, String $event_id, String $ticket_id)
     {
         $query = Attendee::where("event_id", $event_id)
-            ->where("ticket_id", "5ecee1cb4e08757151b063fb");
-        //    ->where("account_id", "5b89bf37c065864f7b5bf80e");
-        return $eventUsers = $query->get()->count();
+            ->where("ticket_id", $ticket_id);
+        //->where("account_id", "5b89bf37c065864f7b5bf80e");
+        //return $eventUsers = $query->get()->count();
         $eventUsers = $query->get()->all();
 
         foreach ($eventUsers as $eventuser) {
