@@ -43,16 +43,16 @@ class EventUserManagementController extends Controller
         //->where("account_id", "5b89bf37c065864f7b5bf80e");
         //return $eventUsers = $query->get()->count();
         $eventUsers = $query->get()->all();
-
+        $i = 0;
         foreach ($eventUsers as $eventuser) {
-
+            $i++;
             $propiedades = $eventuser["properties"];
             $propiedades["ticketid"] = $eventuser->ticket_id;
             $eventuser["properties"] = $propiedades;
             $eventuser->save();
         }
 
-        return $eventUsers;
+        return $i; //$eventUsers;
     }
 
     public function asignTicketsToUser(Request $request, String $event_id, String $user_id, $tickets = [])
