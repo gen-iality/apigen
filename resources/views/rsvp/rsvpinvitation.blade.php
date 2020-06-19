@@ -7,13 +7,18 @@
 @endif
 
 
-** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} **
+** Hola {{$eventUser_name}}, **
+@if(!empty($content_header) && $content_header != '<p><br></p>')
+{!!$content_header !!}
+@endif
 
+
+@if(is_null($include_date) || $include_date == true || $include_date != false )
 @if($ticket_title)
 ha sido invitado a:
 <strong>{!! $ticket_title !!}</strong>
 @endif
-@if(is_null($include_date) || $include_date == true || $include_date != false )
+
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 @component('mail::table')
 | | |
@@ -22,10 +27,8 @@ ha sido invitado a:
 | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
 @endcomponent
 @endif
-@if(!empty($content_header) && $content_header != '<p><br></p>')
-{!!$content_header !!}
-@else
-@endif
+
+
 @if(!empty($image))
 <img src="{{ $image }}">
 @endif
