@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         Log::debug("\App\Attendee::saved boot");
         });
          */
-        return;
+
         \App\Attendee::saved(
             function ($eventUser) {
                 Log::debug("\App\Attendee::saved boot");
