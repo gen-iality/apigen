@@ -29,9 +29,10 @@ ha sido invitado a:
 @endif
 
 
-@if(!empty($image))
+@if(!empty($image) && false)
 <img src="{{ $image }}">
 @endif
+
 @if(!empty($message) && $message != '<p><br></p>')
 {!!$message!!}
 @endif
