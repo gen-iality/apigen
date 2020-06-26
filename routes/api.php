@@ -192,13 +192,6 @@ Route::group(
     }
 );
 
-Route::group(
-    ['middleware' => 'auth:token'], function () {
-        Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
-        Route::delete('certificates/{id}', 'CertificateController@destroy');
-    }
-);
-
 /***************
  * RolesAttendees
  ****************/
@@ -212,10 +205,20 @@ Route::apiResource('events/{event_id}/mailing', 'MailController');
 /***************
  * CERTIFICATES
  ****************/
+
+Route::post('generatecertificate', 'CertificateController@generateCertificate');
+
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('events/{event_id}/certificates', 'CertificateController', ['except' => []]);
         Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
+    }
+);
+
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
+        Route::delete('certificates/{id}', 'CertificateController@destroy');
     }
 );
 

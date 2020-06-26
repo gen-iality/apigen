@@ -43,7 +43,7 @@ class CertificateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, string $event_id)
+    public function store(Request $request)
     {
         $data = $request->json()->all();
         $result = new Certificate($data);
@@ -178,8 +178,10 @@ class CertificateController extends Controller
     public function generateCertificate(Request $request)
     {
         $data = $request->json()->all();
-        if ($request->get('download') == '1') {
 
+        if ($request->get('download') == '1') {
+            //return view('Public.ViewEvent.Partials.PDFTicket', $data);
+            return view('Public.ViewEvent.Partials.certificate', $data);
             $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
             $pdf->setPaper('letter', 'landscape');
             return $pdf->download('Tickets.pdf');

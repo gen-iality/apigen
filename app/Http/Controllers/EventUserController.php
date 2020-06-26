@@ -491,6 +491,9 @@ class EventUserController extends Controller
 
     public function indexByUserInEvent(Request $request, $event_id)
     {
+
+        return auth()->user();
+
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
