@@ -181,7 +181,7 @@ class CertificateController extends Controller
 
         if ($request->get('download') == '1') {
             //return view('Public.ViewEvent.Partials.PDFTicket', $data);
-            return view('Public.ViewEvent.Partials.certificate', $data);
+            //return view('Public.ViewEvent.Partials.certificate', $data);
             $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
             $pdf->setPaper('letter', 'landscape');
             return $pdf->download('Tickets.pdf');
