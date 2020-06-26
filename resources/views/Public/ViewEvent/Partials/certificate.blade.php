@@ -24,10 +24,10 @@
         width: 100%;
         margin: 0;
         padding: 0;
-        /font-family: "Verdana", "Geneva", "Sans serif", "Open Sans", "Titillium", "Oswald";
+        font-family: "Verdana", "Geneva", "Sans serif", "Open Sans", "Titillium", "Oswald";
         /*font-family: Arial, Helvetica, sans-serif;*/
-        font-size: 30px;
-        color: #DDD;
+        font-size: 100px;
+        color: #666;
     }
 
     .imagen {
