@@ -31,8 +31,10 @@
     }
 
     .imagen {
-        width: 3300px;
-        height: 2550px;
+        /*width: 3300px;
+        height: 2550px;*/
+        width: 1920px;
+        height: 1080px;
         position: fixed;
         top: 0px;
         bottom: 0px;
