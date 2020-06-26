@@ -93,7 +93,7 @@ class CertificateController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, string $event_id, string $id)
+    public function destroy(Request $request, string $id)
     {
         $Certificate = Certificate::find($id);
         return (string) $Certificate->delete();
