@@ -78,7 +78,7 @@ class CertificateController extends Controller
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $event_id, string $id)
+    public function update(Request $request, string $id)
     {
         $data = $request->json()->all();
         $Certificate = Certificate::find($id);
