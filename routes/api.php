@@ -297,10 +297,11 @@ Route::group(
  ****************/
 //Route::group(
 //['middleware' => 'auth:token'], function () {
-Route::apiResource('ticket', 'API\EventTicketsAPIController', ['except' => ['index']]);
-Route::get('ticket/event/{event_id}', 'API\EventTicketsAPIController@index');
 
-Route::get('ajustarticketid', 'API\EventTicketsAPIController@ajustarticketid');
+Route::apiResource('events/{event_id}/tickets', 'TicketController');
+Route::get('ticket/event/{event_id}', 'TicketController@index');
+
+//Route::get('ajustarticketid', 'API\EventTicketsAPIController@ajustarticketid');
 // }
 //);
 
