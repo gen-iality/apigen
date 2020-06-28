@@ -3,15 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Ticket extends MyBaseModel
 {
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $fillable = ['title', 'event_id'];
     //protected $with = ['activities'];
-    // protected $dates = ['start_sale_date', 'end_sale_date'];
+    //protected $dates = ['start_sale_date', 'end_sale_date', 'deleted_at'];
 
     /**
      * The rules to validate the model.
