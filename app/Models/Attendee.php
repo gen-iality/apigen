@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 /*
-  Attendize.com   - Event Management & Ticketing
+Attendize.com   - Event Management & Ticketing
  */
 
 /**
@@ -15,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Attendee extends MyBaseModel
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +22,7 @@ class Attendee extends MyBaseModel
      */
     protected $table = "event_users";
     protected static $unguarded = true;
-    
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -35,7 +33,7 @@ class Attendee extends MyBaseModel
         'account_id',
         'reference',
         'has_arrived',
-        'arrival_time'
+        'arrival_time',
     ];
 
     /**
@@ -108,7 +106,7 @@ class Attendee extends MyBaseModel
      */
     public function getReferenceAttribute()
     {
-        return ($this->order)?$this->order->order_reference . '-' . $this->reference_index:"ticket-".$this->id;
+        return ($this->order) ? $this->order->order_reference . '-' . $this->reference_index : "ticket-" . $this->id;
     }
 
     /**
@@ -120,7 +118,6 @@ class Attendee extends MyBaseModel
     {
         return $this->first_name . ' ' . $this->last_name;
     }
-
 
     /**
      * The attributes that should be mutated to dates.
