@@ -538,7 +538,7 @@ class EventUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show($event_id, $id)
+    public function show(Request $request, $event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
@@ -551,7 +551,7 @@ class EventUserController extends Controller
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $evenUserId)
+    public function update(Request $request, $event_id, $evenUserId)
     {
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
