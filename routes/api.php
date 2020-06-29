@@ -72,8 +72,7 @@ Route::get('events/{event_id}/eventusers', 'EventUserController@index');
 Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
 Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put('events/{event_id}/eventusers/{id}', 'EventUserController@update');
-
-Route::delete('events/{event_id}/eventuserdelete/{id}', 'EventUserController@destroyTemp');
+Route::delete('events/{event_id}/eventuser/{id}', 'EventUserController@destroy');
 
 Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');

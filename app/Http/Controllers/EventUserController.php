@@ -599,15 +599,9 @@ class EventUserController extends Controller
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attendee $eventUser)
+    public function destroy(Request $request, $eventId, $eventUserId)
     {
-        return $eventUser->delete();
-    }
-
-    public function destroyTemp(String $eventId, $id)
-    {
-
-        $attendee = Attendee::findOrFail($id);
+        $attendee = Attendee::findOrFail($eventUserId);
         return (string) $attendee->delete();
     }
 
