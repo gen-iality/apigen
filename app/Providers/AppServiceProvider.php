@@ -33,6 +33,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         Log::debug("\App\Attendee::saved boot");
         });
          */
+        \App\Attendee::deleted(function ($eventUser) {
+            self::deleteFirestore($eventUser->event_id . '_event_attendees', $eventUser->_id);
+        });
 
         \App\Attendee::saved(
             function ($eventUser) {
@@ -155,5 +158,17 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $user->set($dataUser);
 
         }
+    }
+
+    public function deleteFirestore($collectionpath, $document)
+    {
+        $firebase = new FirestoreClient([
+            'keyFilePath' => base_path('firebase_credentials.json'),
+        ]);
+
+        $collection = $firebase->collection($collectionpath);
+        $doc = $collection->document($document);
+        $doc->delete();
+
     }
 }
