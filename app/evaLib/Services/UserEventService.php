@@ -41,9 +41,6 @@ class UserEventService
         $date = Carbon::now();
         $date = $date->format('his');
 
-        var_dump($eventUserFields);
-        die;
-
         /* Buscamos el ticket */
         if (isset($eventUserFields['ticket_id'])) {
             $ticket = Ticket::findOrFail($eventUserFields['ticket_id']);
