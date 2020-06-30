@@ -35,21 +35,25 @@ class Attendee extends MyBaseModel
         'has_arrived',
         'arrival_time',
         'checkedin_at',
+        'test',
     ];
 
-    protected $dates = [
-        'checkedin_at',
-    ];
+    protected $dates = ['checkedin_at', 'created_at', 'updated_at', 'test'];
 
     /*
 
     Mutator creado para darle soporte a laravel de fecha ISO8601 antes de laravel 5.8
     @link https://github.com/laravel/framework/issues/24112
      */
-    public function setCheckedinAtAttribute($value)
-    {
-        $this->attributes['checkedin_at'] = \Carbon::parse($value)->toDateTimeString();
-    }
+    // public function setCheckedinAtAttribute($date)
+    // {
+    //     echo $date;
+    //     $date = "2020-06-30T03:53Z";
+    //     $format = "Y-m-d\TH:i\Z";
+    //     $this->attributes['checkedin_at'] = \Carbon::createFromFormat($format, $date);
+    //     //var_dump($this->attributes['checkedin_at']);die;
+    //     //$this->attributes['checkedin_at'] = \Carbon::parse($value)->toDateTimeString();
+    // }
 
     /**
      * Generate a private reference number for the attendee. Use for checking in the attendee.
@@ -132,15 +136,5 @@ class Attendee extends MyBaseModel
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
-    }
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @return array $dates
-     */
-    public function getDates()
-    {
-        return ['created_at', 'updated_at', 'arrival_time', "checkedin_at"];
     }
 }
