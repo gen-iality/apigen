@@ -131,6 +131,6 @@ class Attendee extends MyBaseModel
      */
     public function getDates()
     {
-        return ['created_at', 'updated_at', 'arrival_time'];
+        return ['created_at', 'updated_at', 'arrival_time', "checkedin_at"];
     }
 }
