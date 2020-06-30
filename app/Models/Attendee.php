@@ -48,7 +48,7 @@ class Attendee extends MyBaseModel
      */
     public function setCheckedinAtAttribute($value)
     {
-        $this->attributes['checkin_at'] = \Carbon::parse($value)->toDateTimeString();
+        $this->attributes['checkedin_at'] = \Carbon::parse($value)->toDateTimeString();
     }
 
     /**
