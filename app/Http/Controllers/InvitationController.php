@@ -76,6 +76,10 @@ class InvitationController extends Controller
             $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
 
             $save_refresh_token = Account::where("uid", $userinfo->uid)->first();
+            if (!$save_refresh_token) {
+                return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            }
+
             $refresh_token["refresh_token"] = $singin->refreshToken();
             $save_refresh_token->fill($refresh_token);
             $save_refresh_token->save();

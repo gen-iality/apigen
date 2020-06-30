@@ -29,7 +29,7 @@ ha sido invitado a:
 @endif
 
 
-@if(!empty($image) && false)
+@if(!empty($image))
 <img src="{{ $image }}">
 @endif
 
