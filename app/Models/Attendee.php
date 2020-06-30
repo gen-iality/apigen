@@ -41,6 +41,16 @@ class Attendee extends MyBaseModel
         'checkedin_at',
     ];
 
+    /*
+
+    Mutator creado para darle soporte a laravel de fecha ISO8601 antes de laravel 5.8
+    @link https://github.com/laravel/framework/issues/24112
+     */
+    public function setCheckedinAtAttribute($value)
+    {
+        $this->attributes['checkin_at'] = \Carbon::parse($value)->toDateTimeString();
+    }
+
     /**
      * Generate a private reference number for the attendee. Use for checking in the attendee.
      *
