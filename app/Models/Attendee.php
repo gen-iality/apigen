@@ -34,6 +34,11 @@ class Attendee extends MyBaseModel
         'reference',
         'has_arrived',
         'arrival_time',
+        'checkedin_at',
+    ];
+
+    protected $dates = [
+        'checkedin_at',
     ];
 
     /**
