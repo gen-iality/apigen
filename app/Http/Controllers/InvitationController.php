@@ -42,7 +42,18 @@ class InvitationController extends Controller
     {
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
 
-        $correos_emproblemados = ["FCARDARELLI@SOLUCIONES.COM.AR", "JOSE.MARTINEZ@TELEFONICA.COM", "CARAUZ@VIRTUALIT.COM.EC", "CESTEBAN@ADISTEC.COM&", "JEFFERSON.CAMARGO@V2S.US", "TMORENO@OVNICOM.COM", "PABLO@ZENTEC.PE", "KZUNIGA%40FUSIONETCORP.COM", "JUANC@BLUENETSRL.COM"];
+        $correos_emproblemados =
+            ["FCARDARELLI@SOLUCIONES.COM.AR",
+            "JOSE.MARTINEZ@TELEFONICA.COM",
+            "CARAUZ@VIRTUALIT.COM.EC",
+            "CESTEBAN@ADISTEC.COM",
+            "JEFFERSON.CAMARGO@V2S.US",
+            "TMORENO@OVNICOM.COM",
+            "PABLO@ZENTEC.PE",
+            "KZUNIGA@FUSIONETCORP.COM",
+            "JUANC@BLUENETSRL.COM",
+            "FCARDARELLI%40SOLCUIOENS.COM",
+        ];
         $email = $request->input("email");
 
         if (in_array($email, $correos_emproblemados)) {
