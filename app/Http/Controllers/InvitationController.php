@@ -52,7 +52,8 @@ class InvitationController extends Controller
             "PABLO@ZENTEC.PE",
             "KZUNIGA@FUSIONETCORP.COM",
             "JUANC@BLUENETSRL.COM",
-            "FCARDARELLI%40SOLCUIOENS.COM",
+            "FCARDARELLI@SOLCUIOENS.COM",
+            "FCARDARELLI@SOLCUIOENS.COM.AR",
         ];
         $email = $request->input("email");
 
