@@ -42,18 +42,17 @@ class UserEventService
         $date = $date->format('his');
 
         /* Buscamos el ticket */
-        if (isset($eventUserFields['ticket_id'])) {
-            $ticket = Ticket::findOrFail($eventUserFields['ticket_id']);
-            $ticket_details['qty'] = 1;
-
-            // return $ticket;
-
-            /*
-             * Update some ticket info
-             */
-            $ticket->increment('quantity_sold', $ticket_details['qty']);
-            $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
-            $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
+        if (isset($eventUserFields['ticket_id']) && !empty($eventUserFields['ticket_id'])) {
+            $ticket = Ticket::find($eventUserFields['ticket_id']);
+            if ($ticket) {
+                $ticket_details['qty'] = 1;
+                /*
+                 * Update some ticket info
+                 */
+                $ticket->increment('quantity_sold', $ticket_details['qty']);
+                $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
+                $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
+            }
         }
 
         /* Si viene el id de la orden en la variable eventUserFields
@@ -82,24 +81,21 @@ class UserEventService
             throw new \Exception('email is missing and is required');
         }
 
-        /* Buscamos primero el usuario por email y sino existe lo creamos */
-        $email = $userData['email'];
-        $matchAttributes = ['email' => $email];
-
+        //LLenamos dos campos importantes con valores por defecto por si no vienen
         if (!isset($userData['names'])) {
             $userData['names'] = isset($userData['firstName']) ? $userData['firstName'] : $userData['email'];
         }
+        $userData['displayName'] = $userData['names'];
 
-        if (isset($userData['names'])) {
-            $userData['displayName'] = $userData['names'];
-            // unset($userData['names']);
-        }
-
+        /* Buscamos primero el usuario por email y sino existe lo creamos */
+        $email = $userData['email'];
+        $matchAttributes = ['email' => $email];
         $user = Account::updateOrCreate($matchAttributes, $userData);
 
         /* ya con el usuario actualizamos o creamos el eventUser */
         $matchAttributes = ["event_id" => $event->id, "account_id" => $user->id];
 
+        /**** HACEMOS ALGUNOS AJUSTES A LOS CAMPOS antes de importar el eventUser */
         $eventUserFields += $matchAttributes;
 
         //avoid saving uid as user properties
@@ -142,49 +138,18 @@ class UserEventService
 
         }
 
+        /* FINALMENTE */
+        $eventUser = null;
         $model = Attendee::where($matchAttributes)->first();
-
-        //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
         if ($model) {
-            //var_dump($model->properties);die;
+            //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
             $eventUserFields["properties"] = array_merge($model->properties, $eventUserFields["properties"]);
-        }
-        /* guardamos el Attendee o eventUser */
-        if (!empty($eventUserFields["eventuser_id"])) {
-            $eventUserFound = Attendee::find($eventUserFields["eventuser_id"]);
-            $eventUserFound->update($eventUserFields);
-            $eventUser = $eventUserFound;
+            $model->update($eventUserFields);
+            $eventUser = $model;
         } else {
-            //$eventUserFields["properties"]["original"] = "bancolombiaregistrado";
-
             $eventUser = Attendee::create($eventUserFields);
-            if ($event->_id == "5ec3f3b6098c766b5c258df2") {
-                $s = 0;
-
-                for ($i = 0; $i < 8; $i++) {
-                    //$eventUser = Attendee::create($eventUserFields);
-
-                    $replicateeventuser = $eventUser->replicate();
-                    $instead = $replicateeventuser->properties;
-                    unset($instead["original"]);
-                    $replicateeventuser->properties = $instead;
-                    $replicateeventuser->push();
-
-                    if ($i % 2 == 0) {
-                        $Ticket = Ticket::where("event_id", "5ec3f3b6098c766b5c258df2")->skip($s)->first();
-                        $s++;
-
-                        //$eventUser->replicate();
-                    }
-
-                    $ticket_properties["ticket_id"] = $Ticket->_id;
-                    $ticket_properties["ticket_title"] = $Ticket->title;
-                    $replicateeventuser->fill($ticket_properties);
-                    $replicateeventuser->save();
-
-                }
-            }
         }
+
         \Log::debug($matchAttributes);
         \Log::debug($eventUserFields);
 
@@ -199,14 +164,9 @@ class UserEventService
         //don't know why updateOrCreate doens't eager load related models
         $eventUser = Attendee::where($matchAttributes)->first();
 
-        if (!empty($eventUserFields["eventuser_id"])) {
-            $eventUser = $eventUserFound;
-        }
-
-        $data = $eventUser;
         return (object) [
             "status" => $result_status,
-            "data" => $data,
+            "data" => $eventUser,
             "message" => $message,
         ];
     }
