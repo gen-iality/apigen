@@ -40,7 +40,7 @@ ha sido invitado a:
 {!!$event->registration_message!!}
 @endif
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
+Aceptar tratamiento de datos e Ingresar al Evento AQUÍ
 @endcomponent
 
 
