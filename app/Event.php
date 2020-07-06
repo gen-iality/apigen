@@ -30,7 +30,7 @@ class Event extends ModelsEvent
         'user_properties', 'properties_group', 'styles', 'has_date', 'app_configuration',
         'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
         'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
-        'include_date'
+        'include_date', 'event_platform',
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];

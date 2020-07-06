@@ -2,14 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Moloquent;
 
 class Message extends Moloquent
 {
+
+    const STATUS_QUEUED = 'queued';
+    const SENT = 'sent';
+    const VIEWED = 'viewed';
+    const FAILED = 'failed';
+
     protected $table = ('messages');
-    protected $with  = ['messageUsers'];
-    protected $fillable = ['subject','message','footer','image','number_of_recipients'];
+    protected $with = ['messageUsers'];
+    protected $fillable = ['subject', 'message', 'footer', 'image', 'number_of_recipients'];
     /**
      * The messages that belong to the user.
      */
