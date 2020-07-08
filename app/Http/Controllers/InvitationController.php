@@ -145,7 +145,7 @@ class InvitationController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            Invitation::where("event_id", $event_id)->paginate(config('app.page_size'))
+            Invitation::where("event_id", $event_id)->paginate(config(10000))
         );
     }
 
