@@ -18,12 +18,8 @@ class AwsSnsController extends Controller
     {
 
         $response = $request->json()->all(); 
-
         Log::info('request json->all: '.json_encode($response));
         
-        // Log::info('$response[notificationType]: '.$response['notificationType']);
-        // MessageUser::where('response', $response)->get();
-
         return json_encode($response);                
     }
 
