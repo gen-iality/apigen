@@ -11,6 +11,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
+use Log;
+
 
 class RSVP extends Mailable implements ShouldQueue
 {
@@ -184,9 +186,11 @@ class RSVP extends Mailable implements ShouldQueue
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
 
         $this->withSwiftMessage(function ($message) {
+            Log::info($message);
             $headers = $message->getHeaders();
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
         });
+
 
         return $this
             ->from("alerts@evius.co", $from . " EVIUS")
