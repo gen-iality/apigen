@@ -181,7 +181,7 @@ class RSVP extends Mailable implements ShouldQueue
 
     public function build()
     {
-        Log::log('build');
+        Log::info('build');
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
