@@ -188,9 +188,9 @@ class RSVP extends Mailable implements ShouldQueue
         $this->withSwiftMessage(function ($message) {
             
             $headers = $message->getHeaders();       
-            $headers->addTextHeader('X-SES-MESSAGE-TAGS', 'tagName1=1, tagName2=2');              
-            $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
-            
+            // $headers->addTextHeader('X-SES-MESSAGE-TAGS', 'tagName1=1, tagName2=2');              
+            $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');            
+
         });
 
 
