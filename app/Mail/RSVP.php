@@ -181,15 +181,17 @@ class RSVP extends Mailable implements ShouldQueue
 
     public function build()
     {
+        
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
 
         $this->withSwiftMessage(function ($message) {
-            Log::info('SEnd Message');
+            
             $headers = $message->getHeaders();
-            Log::info('headers '.$headers);
+            
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
+            
         });
 
 
