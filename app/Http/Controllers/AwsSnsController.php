@@ -19,7 +19,7 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
 
-        Log::info('json_encode($response[mail]) '.json_encode($response['mail']));
+        Log::info('json_encode($response[mail][destination]) '.json_encode($response['mail']['destination']));
 
 
 
