@@ -22,7 +22,9 @@ class AwsSnsController extends Controller
         // Log::info('request json->all: '.json_encode($response));
 
 
-        Log::info('request gettype(json->all): '.gettype(json_encode($response)));
+        // Log::info('request gettype(json->all): '.gettype(json_encode($response)));
+        
+        Log::info('request gettype($response): '.gettype($response));
 
         $messageUserModel->save();
         
