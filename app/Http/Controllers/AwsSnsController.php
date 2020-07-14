@@ -19,20 +19,18 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
         
-        $messageUserModel = new MessageUser();
-        Log::info('$messageUserModel->response '.$messageUserModel->response);
-        // Log::info('request json->all: '.json_encode($response));
+        $messageUserModel = MessageUser::create($request->json()->all());
+        Log::info('$messageUserModel '.$messageUserModel);
+
+
+        // $messageUserModel->response = $response
+
+
+
 
 
 
         
-
-        // Log::info('request gettype(json->all): '.gettype(json_encode($response)));
-        
-        // Log::info('request gettype($response): '.gettype($response));
-        
-
-        // Log::info('$messageUserModel '.$messageUserModel->status);
         //$messageUserModel->save();
         
         
