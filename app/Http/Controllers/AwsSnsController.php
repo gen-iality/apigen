@@ -30,14 +30,7 @@ class AwsSnsController extends Controller
              ]
         );
 
-        Log::info([
-                 'response' => $response,
-                 'status' => $response['eventType'],
-                 'email_destinations' => json_encode($response['mail']['destination']),
-                 'status_message' => $response['eventType'],
-                 'message_id' => $response['messageId'],
-                 'timestamp_event' => $response['timestamp_event']
-             ]);
+        Log::info('response');
         // $messageUserModel->save();            
         return $response;                
     }
