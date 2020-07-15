@@ -18,8 +18,6 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
 
-        Log::info('json_encode($response): '.json_encode($response));
-
 
         $messageUserModel = new MessageUser(
              [
@@ -32,7 +30,7 @@ class AwsSnsController extends Controller
              ]
         );
 
-        // Log::info('$messageUserModel '.strval($messageUserModel));
+        Log::info('strval($messageUserModel) '.strval($messageUserModel));
         // $messageUserModel->save();            
         return $response;                
     }
