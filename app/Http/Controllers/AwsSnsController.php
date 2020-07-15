@@ -18,7 +18,7 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
 
-        Log::info('$response->eventType: '.$response->eventType);
+        Log::info('$response[eventType]: '.$response['eventType']);
 
         $messageUserModel = new MessageUser(
              [
