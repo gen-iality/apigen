@@ -19,8 +19,8 @@ class AwsSnsController extends Controller
 
         $response = $request->json()->all();
 
-        
-        
+        Log::info('$response: '.$response);
+
         $messageUserModel = new MessageUser(
              [
                  'response' => $response, 
@@ -30,9 +30,11 @@ class AwsSnsController extends Controller
                  'message_id' => $response['messageId'],
                  'timestamp_event' => $response['timestamp_event']
              ]
-         );
-         Log::info('$messageUserModel '.strval($messageUserModel));
+        );
+
+        Log::info('$messageUserModel '.strval($messageUserModel));
         
+
         // $messageUserModel->save();            
         return $response;                
     }
