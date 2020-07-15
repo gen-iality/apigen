@@ -26,7 +26,7 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['timestamp_event']
         ];
 
-        Log::info(json_encode($array));
+        Log::info(print_r($array, true));
 
         $messageUserModel = new MessageUser(
              [
