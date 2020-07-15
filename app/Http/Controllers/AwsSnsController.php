@@ -25,8 +25,8 @@ class AwsSnsController extends Controller
             'message_id' => $response['messageId'],
             'timestamp_event' => $response['timestamp_event']
         ];
-         
-        Log::info(print_r($array));
+
+        Log::info(strval($array));
 
         $messageUserModel = new MessageUser(
              [
