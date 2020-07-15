@@ -24,7 +24,8 @@ POST           /photos                    store      photos.store
 GET            /photos/{photo}            show       photos.show
 PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
- */
+*/
+
 
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
 Route::get('test/serialization', 'TestingController@serialization');
