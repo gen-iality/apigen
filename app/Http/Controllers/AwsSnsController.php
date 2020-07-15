@@ -23,10 +23,10 @@ class AwsSnsController extends Controller
 
         $messageUserModel = new MessageUser(
              [
-                 'response' => $response, 
-                 'status' => $response['eventType'], 
-                 'email_destinations' => json_encode($response['mail']['destination']), 
-                 'status_message' => $response['eventType'], 
+                 'response' => $response,
+                 'status' => $response['eventType'],
+                 'email_destinations' => json_encode($response['mail']['destination']),
+                 'status_message' => $response['eventType'],
                  'message_id' => $response['messageId'],
                  'timestamp_event' => $response['timestamp_event']
              ]
