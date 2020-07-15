@@ -16,12 +16,12 @@ class AwsSnsController extends Controller
 
     public function updateSnsMessages(Request $request)
     {
-        
+
         $response = $request->json()->all();
 
-        Log::info('json_encode($response[mail][destination]) '.json_encode($response['mail']['destination']));
+        // Log::info('json_encode($response[mail][destination]) '.json_encode($response['mail']['destination']));
 
-
+        Log::info('$response[mail][destination] '.$response['mail']->destination);
 
         // $messageUserModel = new MessageUser(
         //     [
