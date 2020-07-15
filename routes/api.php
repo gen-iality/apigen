@@ -26,7 +26,9 @@ PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
 */
 
+
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
+Route::post('prueba', 'AwsSnsController@prueba');
 Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');
 Route::get('test/auth', 'TestingController@auth');

@@ -14,6 +14,11 @@ use App\MessageUser;
 class AwsSnsController extends Controller
 {    
     
+    public function prueba()
+    {
+        Log::info('prueba');
+    } 
+
     public function updateSnsMessages(Request $request)
     {
         Log::info('updateSnsMessages');
