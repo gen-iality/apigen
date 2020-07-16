@@ -18,33 +18,21 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
         
-        
-        Log::info(
-        'Message User '.new MessageUser(
-                [
-                    'response' => json_encode($response),
-                    'email_destinations' => json_encode($response['mail']['destination']),
-                    'status_message' => $response['eventType'],
-                    'message_id' => $response['messageId'],
-                    'timestamp_event' => $response['mail']['timestamp']
-                ]
-            )
-        );
 
-        // $messageUserModel = new MessageUser(
-        //      [
-        //          'response' => json_encode($response),
-        //          'email_destinations' => json_encode($response['mail']['destination']),
-        //          'status_message' => $response['eventType'],
-        //          'message_id' => $response['messageId'],
-        //          'timestamp_event' => $response['mail']['timestamp']
-        //      ]
-        // );
+        $messageUserModel = new MessageUser(
+             [
+                 'response' => json_encode($response)
+                //, 'email_destinations' => json_encode($response['mail']['destination']),
+                // 'status_message' => $response['eventType'],
+                // 'message_id' => $response['messageId'],
+                // 'timestamp_event' => $response['mail']['timestamp']
+             ]
+        );
 
         Log::info('Message User '.$messageUserModel);
 
         // $messageUserModel->save();            
-        return $response;                
+        return $messageUserModel;                
     }
 
     /*
