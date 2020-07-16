@@ -18,7 +18,7 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
         
-        Log::info('gettype($response) '.gettype($response));
+        
         Log::info(
         'Message User '.new MessageUser(
                 [
@@ -41,7 +41,7 @@ class AwsSnsController extends Controller
         //      ]
         // );
 
-        // Log::info('Message User '.$messageUserModel);
+        Log::info('Message User '.$messageUserModel);
 
         // $messageUserModel->save();            
         return $response;                
