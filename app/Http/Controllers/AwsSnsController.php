@@ -29,9 +29,8 @@ class AwsSnsController extends Controller
              ]
         );
 
-        Log::info('$messageUserModel->message_id: '.$messageUserModel->timestamp_event);
-
-        // $messageUserModel->save();            
+        
+        $messageUserModel->save();            
         return $messageUserModel;                
     }
 
