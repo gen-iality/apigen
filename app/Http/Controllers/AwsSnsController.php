@@ -28,7 +28,20 @@ class AwsSnsController extends Controller
 
         // Log::info('$data: '.json_encode($data));
         $messageUserModel = new MessageUser($data);
+        $message = Message::fromRawPostData();
+        $validator = new MessageValidator();
 
+        // Validate the message
+        try {
+            $validator->validate($message);
+        } catch (InvalidSnsMessageException $e) {
+            Log::error('SNS Message Validation Error: ' . $e->getMessage());
+        }
+
+        // find which notification is failing, you can notify the sender to change the correct email address
+        $notification = Notification::where('ses_message_id', $message['Message']['mail']['messageId'])->first();
+
+        Log::info('$notification: '.$notification);
 
         $messageUserModel->save();            
 
