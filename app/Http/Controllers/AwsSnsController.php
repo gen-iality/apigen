@@ -22,10 +22,10 @@ class AwsSnsController extends Controller
 
         Log::info([
             'response' => json_encode($response),
-            'email_destinations' => json_encode($response['mail']['destination']),
-            'status_message' => $response['eventType'],
-            'message_id' => $response['messageId'],
-        //  'timestamp_event' => $response['timestamp_event']
+            'email_destinations' => json_encode($response['mail']['destination'])
+            //, 'status_message' => $response['eventType'],
+            // 'message_id' => $response['messageId']
+            // 'timestamp_event' => $response['timestamp_event']
         ]);
 
         $messageUserModel = new MessageUser(
