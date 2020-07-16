@@ -29,7 +29,7 @@ class AwsSnsController extends Controller
              ]
         );
 
-        Log::info('Message User: '.$messageUserModel);
+        Log::info('$messageUserModel->message_id: '.$messageUserModel->message_id);
 
         // $messageUserModel->save();            
         return $messageUserModel;                
