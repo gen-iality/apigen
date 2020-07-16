@@ -24,6 +24,24 @@ use \App\Message;
 class TestingController extends Controller
 {
 
+    public function awsnotification() {
+        return MessageUser::count();
+        $data = [
+            'response' => '0',
+            'email_destinations' => '0',
+            'status_message' => '0',
+            'message_id' => '0',
+            'timestamp_event' => '0'
+        ];
+
+        $messageUserModel = new MessageUser($data);
+        
+        // Log::info('$messageUserModel: '.$messageUserModel);
+
+        // $messageUserModel->save();            
+        
+        return $messageUserModel;                
+    }
     public function serialization()
     {
         $eventuser = Attendee::find("5ee44aae1801874b5d124a15");

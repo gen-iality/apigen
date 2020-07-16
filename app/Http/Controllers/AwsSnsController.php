@@ -28,7 +28,9 @@ class AwsSnsController extends Controller
         $messageUserModel = new MessageUser($data);
 
         // Log::info('$messageUserModel: '.$messageUserModel);
+
         $messageUserModel->save();            
+        
         return $messageUserModel;                
     }
 
