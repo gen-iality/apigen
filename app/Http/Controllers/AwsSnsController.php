@@ -45,7 +45,7 @@ class AwsSnsController extends Controller
 
         $messageUserModel->save();            
 
-        return $request;                
+        return json_encode($request);                
     }
 
     /*
