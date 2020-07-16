@@ -25,12 +25,13 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['mail']['timestamp']
         ];
 
+        Log::info('$data: '.$data);
         $messageUserModel = new MessageUser($data);
 
         // Log::info('$messageUserModel: '.$messageUserModel);
 
         $messageUserModel->save();            
-        
+
         return $messageUserModel;                
     }
 

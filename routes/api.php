@@ -32,7 +32,7 @@ Route::get('test/queue', 'TestingController@testQueue');
 Route::get('test/auth', 'TestingController@auth');
 Route::get('test/Gateway', 'TestingController@Gateway');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
-Route::get('test/error', 'TestingController@error');
+// Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
 Route::get('test/awsnotification', 'TestingController@awsnotification');
 Route::get('test/permissions', 'TestingController@permissions');

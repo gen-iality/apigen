@@ -25,7 +25,7 @@ class TestingController extends Controller
 {
 
     public function awsnotification() {
-        return MessageUser::count();
+
         $data = [
             'response' => '0',
             'email_destinations' => '0',
@@ -38,8 +38,10 @@ class TestingController extends Controller
         
         // Log::info('$messageUserModel: '.$messageUserModel);
 
-        // $messageUserModel->save();            
-        
+        $messageUserModel->save();            
+        // return $messageUserModel->save();            
+        return MessageUser::count();
+
         return $messageUserModel;                
     }
     public function serialization()
