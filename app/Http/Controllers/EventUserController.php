@@ -291,11 +291,11 @@ class EventUserController extends Controller
             // para probar rápido el correo lo renderiza como HTML más bien
             //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
 
-            // Mail::to($email)
-            //     ->queue(
-            //         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-            //         new InvitationMail("", $event, $eventUser, $image, "", $event->name)
-            //     );
+            Mail::to($email)
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new InvitationMail("", $event, $eventUser, $image, "", $event->name)
+                );
             return $eventUser;
 
         }
