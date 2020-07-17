@@ -9,7 +9,6 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\Mail\InvitationMail;
 use App\Message;
 use App\State;
 use Illuminate\Http\Request;
@@ -292,11 +291,11 @@ class EventUserController extends Controller
             // para probar rápido el correo lo renderiza como HTML más bien
             //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
 
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new InvitationMail("", $event, $eventUser, $image, "", $event->name)
-                );
+            // Mail::to($email)
+            //     ->queue(
+            //         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            //         new InvitationMail("", $event, $eventUser, $image, "", $event->name)
+            //     );
             return $eventUser;
 
         }
@@ -393,7 +392,9 @@ class EventUserController extends Controller
                 $rol = $response["user"]["rol_id"];
                 $response->rol()->attach($rol);
             }
-            $response->additional(['status' => $result->status, 'message' => $result->message]);
+
+            $additional = ['status' => $result->status, 'message' => $result->message];
+            $response->additional($additional);
 
         } catch (\Exception $e) {
             echo $e->getMessage();die;
