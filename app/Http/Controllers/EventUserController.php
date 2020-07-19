@@ -9,6 +9,7 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
+use App\Mail\InvitationMail;
 use App\Message;
 use App\State;
 use Illuminate\Http\Request;
