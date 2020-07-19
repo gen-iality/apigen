@@ -46,6 +46,12 @@ Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 
 /****************
+ * bigmaker.com conferencing integration
+ * https://docs.bigmarker.com/#entering-a-conference
+ ****************/
+Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerController@conferencesenter');
+
+/****************
  * eventUsers
  ****************/
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
