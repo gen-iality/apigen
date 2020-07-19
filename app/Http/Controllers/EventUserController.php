@@ -9,7 +9,6 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\Mail\InvitationMail;
 use App\Message;
 use App\State;
 use Illuminate\Http\Request;
@@ -271,35 +270,42 @@ class EventUserController extends Controller
     {
         $eventUserData = $request->json()->all();
 
-        $email = !empty($eventUserData["email"]) ? $eventUserData["email"] : $eventUserData["properties"]["email"];
-        if (!empty($email)) {
-            $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
-
-            //if (!empty($userexists)) {
-            //    return "El correo ingresado ya se encuentra registrado en el evento";
-            //}
-
-            $event = Event::findOrFail($event_id);
-            $image = $event->picture;
-
-            $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
-            //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
-
-            if (get_class($eventUser) == "Illuminate\Http\Response") {
-                return $eventUser;
-            }
-
-            // para probar rápido el correo lo renderiza como HTML más bien
-            //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new InvitationMail("", $event, $eventUser, $image, "", $event->name)
-                );
-            return $eventUser;
-
+        $email = (isset($eventUserData["email"]) && $eventUserData["email"]) ? $eventUserData["email"] : null;
+        if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
+            $email = $eventUserData["properties"]["email"];
         }
+
+        //El correo es super obligatorio para el registro
+        if (!$email) {
+            return abort(400, "Email is required");
+        }
+
+        $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
+
+        //if (!empty($userexists)) {
+        //    return "El correo ingresado ya se encuentra registrado en el evento";
+        //}
+
+        $event = Event::findOrFail($event_id);
+        $image = $event->picture;
+
+        $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
+        //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
+
+        if (get_class($eventUser) == "Illuminate\Http\Response") {
+            return $eventUser;
+        }
+
+        // para probar rápido el correo lo renderiza como HTML más bien
+        //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
+
+        // Mail::to($email)
+        //     ->queue(
+        //         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+        //         new InvitationMail("", $event, $eventUser, $image, "", $event->name)
+        //     );
+        return $eventUser;
+
         return abort(400, "no data has been send");
 
     }
@@ -386,8 +392,30 @@ class EventUserController extends Controller
             }
 
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
+            $eventUser = $result->data;
+            /**
+             *
+             *Creamos un token para que se pueda autologuear el usuario
+             **/
+            $auth = resolve('Kreait\Firebase\Auth');
+            $signInResult = null;
+            if (isset($eventUser->user->refresh_token)) {
+                $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
+            } else {
+                $pass = "mocion.2040";
+                if (isset($eventUser->user->uid)) {
+                    $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
+                    $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
+                    $eventUser->user->refresh_token = $singin->refreshToken();
+                    $eventUser->user->save();
+                }
+            }
+            if ($signInResult && $signInResult->accessToken()) {
+                //throw new Exception($outter_message . ' and new token could not be generated');
+                $eventUser->user->initial_token = $signInResult->accessToken();
+            }
 
-            $response = new EventUserResource($result->data);
+            $response = new EventUserResource($eventUser);
 
             if (!empty($eventUserData["rol_id"])) {
                 $rol = $response["user"]["rol_id"];
@@ -398,9 +426,8 @@ class EventUserController extends Controller
             $response->additional($additional);
 
         } catch (\Exception $e) {
-            echo $e->getMessage();die;
-            $response = response()->json((object) ["message" => $e->getMessage()], 500)->send;
-            exit;
+
+            return response()->json((object) ["message" => $e->getMessage()], 400);
 
         }
         return $response;
