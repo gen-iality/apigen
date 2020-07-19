@@ -9,7 +9,6 @@ use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
-use App\Mail\InvitationMail;
 use App\Message;
 use App\State;
 use Illuminate\Http\Request;
@@ -293,7 +292,7 @@ class EventUserController extends Controller
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
-        if (get_class($eventUser) == "Illuminate\Http\Response") {
+        if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
         }
 
@@ -303,11 +302,9 @@ class EventUserController extends Controller
         Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new InvitationMail("", $event, $eventUser, $image, "", $event->name)
+                new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name)
             );
         return $eventUser;
-
-        return abort(400, "no data has been send");
 
     }
 
@@ -407,7 +404,7 @@ class EventUserController extends Controller
                 if (isset($eventUser->user->uid)) {
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
-                    $eventUser->user->refresh_token = $singin->refreshToken();
+                    $eventUser->user->refresh_token = $signInResult->refreshToken();
                     $eventUser->user->save();
                 }
             }
