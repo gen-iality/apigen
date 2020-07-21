@@ -78,7 +78,7 @@ class AwsSnsController extends Controller
                 
                 $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
 
-                Log::info('$headers->get(Message-ID) '.$headers->get('Message-ID'));
+                // Log::info('$headers->get(Message-ID) '.$headers->get('Message-ID'));
         });
         // Log::info($message);   
         // Log::info('$mens: '.$message->json()->all());          

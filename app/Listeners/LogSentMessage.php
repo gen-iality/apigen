@@ -41,10 +41,14 @@ class LogSentMessage
 
         $emailId = $event->message->getId();
 
-        $messageUserModel = MessageUser::where('notification_id', $emailId);
+        $messageUserModel = MessageUser::where('notification_id', '=', $sesMessageId);
         
-        // var_dump($messageUserModel);
-        Log::info('$messageUserModel->status_message '.$messageUserModel->status_message);
+
+        var_dump($messageUserModel);
+
+        Log::info('$sesMessageId '.$sesMessageId);
+
+        // Log::info('$messageUserModel '.json_encode($messageUserModel));
     
     }
 }
