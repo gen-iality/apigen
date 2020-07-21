@@ -103,5 +103,6 @@ class Activities extends Moloquent
         "zoom_host_id",
         "video",
         "bigmaker_meeting_id",
+        "vimeo_id",
     ];
 }
