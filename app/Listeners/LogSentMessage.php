@@ -43,8 +43,8 @@ class LogSentMessage
 
         $messageUserModel = MessageUser::where('notification_id', $emailId);
         
-        // var_dump($messageUserModel);
-        Log::info($messageUserModel['database']);
+        var_dump($messageUserModel);
+        
     
     }
 }
