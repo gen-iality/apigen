@@ -37,7 +37,7 @@ class AwsSnsController extends Controller
         ];
 
         $messageUserModel = new MessageUser($data);
-        Log::info('$data: '.json_encode($data));        
+        // Log::info('$data: '.json_encode($data));        
 
     
 
