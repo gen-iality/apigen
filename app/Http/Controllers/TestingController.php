@@ -21,8 +21,41 @@ use Spatie\Permission\Models\Permission;
 use \App\Attendee;
 use \App\Message;
 
+use Log;
+//add to AwsNotification
+
+require '../vendor/autoload.php';
+
+use Notification;
+
+use Aws\Sns\MessageValidator;
+use Aws\Sns\Exception\InvalidSnsMessageException;
+//end of add to AwsNotification
+
+
 class TestingController extends Controller
 {
+    public function getMessage(){
+
+        $data = [
+            'template'  => $template,
+            'email'     => $email,
+            'name'      => $name,
+            'subject'   => $subject
+        ];
+        
+        try {
+          $this->dispatch(new SendNotificationEmail($this, $emailInfo, $data));
+        } catch (Exception $e) {
+          Log::error('Notification error' . $e->getMessage());
+        }
+        
+
+    }
+
+
+        
+    
 
     public function awsnotification() {
 

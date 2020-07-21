@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Log;
-
+use App\MessageUser;
 
 class RSVP extends Mailable implements ShouldQueue
 {
@@ -181,16 +181,15 @@ class RSVP extends Mailable implements ShouldQueue
 
     public function build()
     {
+
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
-
-        $this->withSwiftMessage(function ($message) {
-            
+        $this->withSwiftMessage(function ($message) {            
             $headers = $message->getHeaders();       
-            //$headers->addTextHeader('X-SES-MESSAGE-TAGS', 'id=0'); 
-            $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');            
-
+            Log::info('$headers: '.$headers);       
+            
+            $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
         });
 
 

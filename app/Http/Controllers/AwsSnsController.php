@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 use Log;
 
+use App\Jobs\SendNotificationEmailJob;
 use Aws\Sns\SnsClient;
 use Aws\Exception\AwsException;
 
+use Illuminate\Contracts\Mail\Mailer;
+
+use Aws\Sns\Message;
+use Aws\Sns\MessageValidator;
+
+
 use App\MessageUser;
+
+
 
 class AwsSnsController extends Controller
 {    
@@ -17,36 +27,76 @@ class AwsSnsController extends Controller
     {
         
         $response = $request->json()->all();
-
+        
         $data = [
             'response' => json_encode($response),
             'email_destinations' => json_encode($response['mail']['destination']),
             'status_message' => $response['eventType'],
-            'message_id' => $response['mail']['messageId'],
+            'notification_id' => $response['mail']['messageId'],
             'timestamp_event' => $response['mail']['timestamp']
         ];
 
-        // Log::info('$data: '.json_encode($data));
         $messageUserModel = new MessageUser($data);
-        $message = Message::fromRawPostData();
-        $validator = new MessageValidator();
+        Log::info('$data: '.json_encode($data));        
 
-        // Validate the message
-        try {
-            $validator->validate($message);
-        } catch (InvalidSnsMessageException $e) {
-            Log::error('SNS Message Validation Error: ' . $e->getMessage());
-        }
-
-        // find which notification is failing, you can notify the sender to change the correct email address
-        $notification = Notification::where('ses_message_id', $message['Message']['mail']['messageId'])->first();
-
-        Log::info('$notification: '.$notification);
+    
 
         $messageUserModel->save();            
 
         return json_encode($request);                
     }
+
+    public function sendEmailSnsNotification($destinatary, array $remitent)
+    {
+        
+        try {
+            $this->dispatch(new SendNotificationEmailJob($destinatary, $remitent));
+        } catch (Exception $e) {
+            Log::error('Notification error' . $e->getMessage());
+        }
+
+    }
+
+    public function testEmail(Mailer $mailer)
+    {
+
+        $sesMessage = '';
+
+        $data = [
+            'nombre' => 'Marina'
+        ];
+               
+        
+        $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) {
+            $message
+                ->to('emilio.vargas@mocionsoft.com', 'dslfnsd')
+                ->subject('prueba')
+                ->from('alerts@evius.co'); 
+                
+                $headers = $message->getHeaders();       
+                // var_dump($message);      
+                
+                $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
+
+                Log::info('$headers->get(Message-ID) '.$headers->get('Message-ID'));
+        });
+        // Log::info($message);   
+        // Log::info('$mens: '.$message->json()->all());          
+                 
+        var_dump($sesMessage);
+        
+
+        // Log::info(json_encode($sesMessage));
+
+        return 'Enviado';
+    }
+
+    // public function getMessage()
+    // {
+    //     $message = Message::fromRawPostData();
+
+    // }
+
 
     /*
     public function sendSnsNotification(Request $request)
@@ -65,6 +115,5 @@ class AwsSnsController extends Controller
 
     }
     */
-
 
 }

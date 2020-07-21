@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\providerSentEmail'=> [
             'App\Listeners\providerSentEmailEventListener',
+        ],
+        'Illuminate\Mail\Events\MessageSent' => [
+            'App\Listeners\LogSentMessage',
         ]
     ];
 

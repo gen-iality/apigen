@@ -9,7 +9,6 @@
   "type": "project",
   "require": {
     "php": "^7.1",
-    "aws/aws-php-sns-message-validator": "^1.6",
     "aws/aws-sdk-php-laravel": "~3.0",
     "barryvdh/laravel-dompdf": "^0.8.3",
     "barryvdh/laravel-ide-helper": "^2.5",

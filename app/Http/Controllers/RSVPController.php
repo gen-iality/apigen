@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Redirect;
+use Log;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
@@ -216,7 +217,7 @@ class RSVPController extends Controller implements ShouldQueue
         \Log::debug("attemp to send rsvp mail" . $message->subject);
 
         foreach ($eventUsers as &$eventUser) {
-
+            Log::info('foreach');
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
@@ -228,6 +229,7 @@ class RSVPController extends Controller implements ShouldQueue
                 'event_user_id' => $eventUser->id,
             ]
             );
+            Log::info('messageUser');
             $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
@@ -237,10 +239,16 @@ class RSVPController extends Controller implements ShouldQueue
             if (!empty($data["include_date"])) {
                 $include_date = $data["include_date"] ? true : false;
             }
+
+            Log::info('info antes de $mail ');   
             Mail::to($email)
                 ->queue(
                     new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
                 );
+
+                
+            Log::info('$mail '.$mail);    
+            
 
             //->cc('juan.lopez@mocionsoft.com');
         }
