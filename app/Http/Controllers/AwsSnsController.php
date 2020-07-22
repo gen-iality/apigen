@@ -42,105 +42,86 @@ class AwsSnsController extends Controller
         // ];
 
         
-        $this->setFieldsMessageCollection($response, 'Delivery', 'total_delivered');
-        // if ($response['eventType'] == 'Delivery')
-        // {
-        //     if(isset($eviusmessage->total_delivered))
-        //     {
-        //         $count = $eviusmessage->total_delivered;
-        //     }
-        //     else
-        //     {
-        //         $count++;
-        //     }                        
-        //     $eviusmessage->update(['total_delivered' => $count]);
-        // }
-        // elseif ($response['eventType'] == 'Send') 
-        // {
-        //     if(isset($eviusmessage->total_sent))
-        //     {
-        //         $count = $eviusmessage->total_sent;
-        //     }
-        //     else
-        //     {
-        //         $count++;
-        //     }                        
-        //     $eviusmessage->update(['total_sent' => $count]);
-        // }
-        // elseif ($response['eventType'] == 'Click')
-        // {
-        //     if(isset($eviusmessage->total_clicked))
-        //     {
-        //         $count = $eviusmessage->total_clicked;
-        //     }
-        //     else
-        //     {
-        //         $count++;
-        //     }                        
-        //     $eviusmessage->update(['total_clicked' => $count]);
-        // }
-        // elseif ($response['eventType'] == 'Bounce')
-        // {
-        //     if(isset($eviusmessage->total_bounced))
-        //     {
-        //         $count = $eviusmessage->total_bounced;
-        //     }
-        //     else
-        //     {
-        //         $count++;
-        //     }                        
-        //     $eviusmessage->update(['total_bounced' => $count]);
-        // }
-        // elseif ($response['eventType'] == 'Open')
-        // {
-        //     if(isset($eviusmessage->total_opened))
-        //     {
-        //         $count = $eviusmessage->total_opened;
-        //     }
-        //     else
-        //     {
-        //         $count++;
-        //     }                        
-        //     $eviusmessage->update(['total_opened' => $count]);
-        // }
-        // elseif ($response['eventType'] == 'Complaint')
-        // {
-        //     if(isset($eviusmessage->total_complained))
-        //     {
-        //         $count = $eviusmessage->total_complained;
-        //     }
-        //     else
-        //     {
-        //         $count++;
-        //     }                        
-        //     $eviusmessage->update(['total_complained' => $count]);
-        // }
-        // 
+                
+        if ($response['eventType'] == 'Delivery')
+        {
+            if(isset($eviusmessage->total_delivered))
+            {
+                $count = $eviusmessage->total_delivered;
+            }
+            else
+            {
+                $count++;
+            }                        
+            $eviusmessage->update(['total_delivered' => $count]);
+        }
+        elseif ($response['eventType'] == 'Send') 
+        {
+            if(isset($eviusmessage->total_sent))
+            {
+                $count = $eviusmessage->total_sent;
+            }
+            else
+            {
+                $count++;
+            }                        
+            $eviusmessage->update(['total_sent' => $count]);
+        }
+        elseif ($response['eventType'] == 'Click')
+        {
+            if(isset($eviusmessage->total_clicked))
+            {
+                $count = $eviusmessage->total_clicked;
+            }
+            else
+            {
+                $count++;
+            }                        
+            $eviusmessage->update(['total_clicked' => $count]);
+        }
+        elseif ($response['eventType'] == 'Bounce')
+        {
+            if(isset($eviusmessage->total_bounced))
+            {
+                $count = $eviusmessage->total_bounced;
+            }
+            else
+            {
+                $count++;
+            }                        
+            $eviusmessage->update(['total_bounced' => $count]);
+        }
+        elseif ($response['eventType'] == 'Open')
+        {
+            if(isset($eviusmessage->total_opened))
+            {
+                $count = $eviusmessage->total_opened;
+            }
+            else
+            {
+                $count++;
+            }                        
+            $eviusmessage->update(['total_opened' => $count]);
+        }
+        elseif ($response['eventType'] == 'Complaint')
+        {
+            if(isset($eviusmessage->total_complained))
+            {
+                $count = $eviusmessage->total_complained;
+            }
+            else
+            {
+                $count++;
+            }                        
+            $eviusmessage->update(['total_complained' => $count]);
+        }
+        
         // $eviusmessage->save();            
         // $messageUserModel = new MessageUser($data);
         // $messageUserModel->save();            
         
 
         return json_encode($request);                
-    }
-
-    private function setFieldsMessageCollection(EviusMessage $eviusmessage, $response, $event, $field)
-    {
-        if ($response['eventType'] == $event)
-        {
-            if(isset($eviusmessage[$field]))
-            {
-                $count = $eviusmessage[$field];
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update([$field => $count]);
-            Log::info($eviusmessage->get());
-
-        }
-       
     }
 
     public function testEmail(Mailer $mailer)
