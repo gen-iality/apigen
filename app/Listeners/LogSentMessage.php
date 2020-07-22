@@ -40,7 +40,7 @@ class LogSentMessage
                                ->getHeaders()
                                ->get('Subject')
                                ->getValue(),
-            'server_message_id' => '01030173785e4547-fabc9133-6bda-4612-af8f-aa8c2e913183-000000', // $sesMessageId,
+            'server_message_id' => $sesMessageId,
             'message' => $event->message->getBody()
         ];
 

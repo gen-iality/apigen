@@ -29,8 +29,9 @@ class AwsSnsController extends Controller
         $response = $request->json()->all();
         
         Log::info($response['eventType']);
-        $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
-
+        $eviusmessage = EviusMessage::where('server_message_id', $response['mail']['messageId']);
+        
+        Log::info($eviusmessage->get());
         
         // $data = [
         //     'response' => json_encode($response),
@@ -40,11 +41,10 @@ class AwsSnsController extends Controller
         //     'timestamp_event' => $response['mail']['timestamp']
         // ];
 
-        $eviusmessage->update(['total_delivered' => $count]);    
-        if ($response['eventType'] == 'Delivery' && isset($eviusmessage->total_delivery))
+           
+        if ($response['eventType'] == 'Delivery')
         {
-            $count = $eviusmessage->total_delivery;
-            Log::info(gettype($count));
+            $count++;
             $eviusmessage->update(['total_delivery' => count]);    
         }
         // else if ($response['eventType'] == 'Clicked')
