@@ -46,7 +46,8 @@ class AwsSnsController extends Controller
         {
             Log::info($response['eventType']);
 
-            if(isset($eviusmessage->total_sent)){
+            if(isset($eviusmessage->total_sent))
+            {
                 $count = $eviusmessage->total_sent;
             }            
             $count++;
