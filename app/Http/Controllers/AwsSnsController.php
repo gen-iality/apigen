@@ -16,70 +16,59 @@ use Illuminate\Contracts\Mail\Mailer;
 use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 
-
-use App\MessageUser;
-
+// use App\MessageUser;
+use App\Message as EviusMessage;
 
 
 class AwsSnsController extends Controller
 {    
     public function updateSnsMessages(Request $request)
     {
-        
+
         $response = $request->json()->all();
+        Log::info($response);
+        // $data = [
+        //     'response' => json_encode($response),
+        //     'email_destinations' => json_encode($response['mail']['destination']),
+        //     'status_message' => $response['eventType'],
+        //     'notification_id' => $response['mail']['messageId'],
+        //     'timestamp_event' => $response['mail']['timestamp']
+        // ];
+
         
-        $data = [
-            'response' => json_encode($response),
-            'email_destinations' => json_encode($response['mail']['destination']),
-            'status_message' => $response['eventType'],
-            'notification_id' => $response['mail']['messageId'],
-            'timestamp_event' => $response['mail']['timestamp']
-        ];
-
-        $messageUserModel = new MessageUser($data);
+        // $messageUserModel = new MessageUser($data);
+        // $messageUserModel->save();            
         // Log::info('$data: '.json_encode($data));        
-
-    
-
-        $messageUserModel->save();            
 
         return json_encode($request);                
     }
 
-    public function sendEmailSnsNotification($destinatary, array $remitent)
-    {
-        
-        try {
-            $this->dispatch(new SendNotificationEmailJob($destinatary, $remitent));
-        } catch (Exception $e) {
-            Log::error('Notification error' . $e->getMessage());
-        }
-
-    }
 
     public function testEmail(Mailer $mailer)
     {
 
-        $sesMessage = '';
-
         $data = [
             'nombre' => 'Marina'
         ];
-               
-        
+                            
         $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) {
             $message
                 ->to('emilio.vargas@mocionsoft.com', 'dslfnsd')
                 ->subject('prueba')
                 ->from('alerts@evius.co'); 
-                
+                                
                 $headers = $message->getHeaders();       
-                // var_dump($message);      
+
+                // $eviusmessage->subject = $headers->get('Subject')->getValue();
+                // $eviusmessage->message = $message->getBody();
+                // $eviusmessage->save();
+
                 
                 $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
 
-                // Log::info('$headers->get(Message-ID) '.$headers->get('Message-ID'));
         });
+
+        
         // Log::info($message);   
         // Log::info('$mens: '.$message->json()->all());          
                  
