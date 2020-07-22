@@ -44,15 +44,13 @@ class AwsSnsController extends Controller
            
         if ($response['eventType'] == 'Delivery')
         {
-            Log::info($response['eventType']);
-
             if(isset($eviusmessage->total_sent))
             {
                 $count = $eviusmessage->total_sent;
             }            
             $count++;
             Log::info('$count: '.$count);
-            $eviusmessage->update(['total_sent' => count]);
+            $eviusmessage->update(['total_sent' => $count]);
             Log::info(json_encode($eviusmessage->get()));    
         }
         // elseif ($response['eventType'] == 'Send') 
