@@ -54,7 +54,7 @@ class AwsSnsController extends Controller
         {
             $eviusmessage->total_complaint += 1;
         }
-                    
+        $eviusmessage->save();            
         // $messageUserModel = new MessageUser($data);
         // $messageUserModel->save();            
         // Log::info('$data: '.json_encode($data));        
