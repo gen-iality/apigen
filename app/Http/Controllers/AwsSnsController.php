@@ -25,6 +25,7 @@ class AwsSnsController extends Controller
     public function updateSnsMessages(Request $request)
     {
 
+        $count = 0;
         $response = $request->json()->all();
         
         Log::info($response['eventType']);
@@ -38,22 +39,29 @@ class AwsSnsController extends Controller
         //     'timestamp_event' => $response['mail']['timestamp']
         // ];
 
-        if ($response['eventType'] == 'Delivery')
-        {
-            $eviusmessage->total_delivery += 1;    
-        }
-        else if ($response['eventType'] == 'Clicked')
-        {
-            $eviusmessage->total_clicked += 1;
-        }
-        else if ($response['eventType'] == 'Bounced')
-        {
-            $eviusmessage->total_bounced += 1;
-        }
-        else if ($response['eventType'] == 'Complaint')
-        {
-            $eviusmessage->total_complaint += 1;
-        }
+        $eviusmessage->update('total_delivery', count);    
+        // if ($response['eventType'] == 'Delivery')
+        // {
+        //     if (isset($eviusmessage->get()['total_delivery']))
+        //     {
+        //         // count
+        //         $eviusmessage->update('total_delivery', count);    
+        //     }
+// 
+        // }
+        // else if ($response['eventType'] == 'Clicked')
+        // {
+        //     $eviusmessage->total_clicked += 1;
+        // }
+        // else if ($response['eventType'] == 'Bounced')
+        // {
+        //     $eviusmessage->total_bounced += 1;
+        // }
+        // else if ($response['eventType'] == 'Complaint')
+        // {
+        //     $eviusmessage->total_complaint += 1;
+        // }
+        
         $eviusmessage->save();            
         // $messageUserModel = new MessageUser($data);
         // $messageUserModel->save();            
