@@ -42,21 +42,27 @@ class AwsSnsController extends Controller
         // ];
 
            
-        if ($response['eventType'] == 'Send')
+        if ($response['eventType'] == 'Delivery')
         {
             $count++;
             $eviusmessage->update(['total_sent' => count]);
             Log::info(json_encode($eviusmessage->get()));    
         }
-        // else if ($response['eventType'] == 'Clicked')
+        elseif ($response['eventType'] == 'Send') 
+        {
+            $count++;
+            $eviusmessage->update(['total_sent' => count]);
+            Log::info(json_encode($eviusmessage->get()));  
+        }
+        // elseif ($response['eventType'] == 'Click')
         // {
         //     $eviusmessage->total_clicked += 1;
         // }
-        // else if ($response['eventType'] == 'Bounced')
+        // elseif ($response['eventType'] == 'Bounce')
         // {
         //     $eviusmessage->total_bounced += 1;
         // }
-        // else if ($response['eventType'] == 'Complaint')
+        // elseif ($response['eventType'] == 'Complaint')
         // {
         //     $eviusmessage->total_complaint += 1;
         // }
