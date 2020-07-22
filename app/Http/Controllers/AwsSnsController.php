@@ -39,7 +39,7 @@ class AwsSnsController extends Controller
         //     'timestamp_event' => $response['mail']['timestamp']
         // ];
 
-        $eviusmessage->update('total_delivery', count);    
+        $eviusmessage->update('total_delivered', count);    
         // if ($response['eventType'] == 'Delivery')
         // {
         //     if (isset($eviusmessage->get()['total_delivery']))
@@ -62,7 +62,7 @@ class AwsSnsController extends Controller
         //     $eviusmessage->total_complaint += 1;
         // }
         
-        $eviusmessage->save();            
+        // $eviusmessage->save();            
         // $messageUserModel = new MessageUser($data);
         // $messageUserModel->save();            
         // Log::info('$data: '.json_encode($data));        
