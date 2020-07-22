@@ -31,6 +31,7 @@ class AwsSnsController extends Controller
         Log::info($response['eventType']);
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
 
+        Log::info(json_encode($eviusmessage));
         // $data = [
         //     'response' => json_encode($response),
         //     'email_destinations' => json_encode($response['mail']['destination']),
