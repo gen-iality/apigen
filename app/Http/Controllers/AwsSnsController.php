@@ -26,8 +26,10 @@ class AwsSnsController extends Controller
     {
 
         $response = $request->json()->all();
-        Log::info(gettype($response));
-        echo (gettype($response));
+        
+        Log::info($response['eventType']);
+        $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
+
         // $data = [
         //     'response' => json_encode($response),
         //     'email_destinations' => json_encode($response['mail']['destination']),
@@ -36,7 +38,23 @@ class AwsSnsController extends Controller
         //     'timestamp_event' => $response['mail']['timestamp']
         // ];
 
-        
+        if ($response['eventType'] == 'Delivery')
+        {
+            $eviusmessage->total_delivery += 1;    
+        }
+        else if ($response['eventType'] == 'Clicked')
+        {
+            $eviusmessage->total_clicked += 1;
+        }
+        else if ($response['eventType'] == 'Bounced')
+        {
+            $eviusmessage->total_bounced += 1;
+        }
+        else if ($response['eventType'] == 'Complaint')
+        {
+            $eviusmessage->total_complaint += 1;
+        }
+                    
         // $messageUserModel = new MessageUser($data);
         // $messageUserModel->save();            
         // Log::info('$data: '.json_encode($data));        

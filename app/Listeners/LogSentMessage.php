@@ -36,8 +36,10 @@ class LogSentMessage
                               ->getValue();
 
         $data = [
-            'subject' => $event->message->getHeaders()
-                             ->get('Subject')->getValue(),
+            'subject' => $event->message
+                               ->getHeaders()
+                               ->get('Subject')
+                               ->getValue(),
             'server_message_id' => $sesMessageId,
             'message' => $event->message->getBody()
         ];
@@ -45,7 +47,7 @@ class LogSentMessage
         
         $eviusMessage = new EviusMessage($data);
 
-        
+
         $eviusMessage->save();
 
         // Log::info($event->message->getHeaders());
