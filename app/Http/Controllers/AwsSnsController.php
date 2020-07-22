@@ -83,7 +83,6 @@ class AwsSnsController extends Controller
         // Log::info($message);   
         // Log::info('$mens: '.$message->json()->all());          
                  
-        var_dump($sesMessage);
         
 
         // Log::info(json_encode($sesMessage));
