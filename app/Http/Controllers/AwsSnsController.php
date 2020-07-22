@@ -43,7 +43,6 @@ class AwsSnsController extends Controller
 
         
         $this->setFieldsMessageCollection($response, 'Delivery', 'total_delivered');
-        Log::info($eviusmessage->get());
         // if ($response['eventType'] == 'Delivery')
         // {
         //     if(isset($eviusmessage->total_delivered))
@@ -138,6 +137,8 @@ class AwsSnsController extends Controller
                 $count++;
             }                        
             $eviusmessage->update([$field => $count]);
+            Log::info($eviusmessage->get());
+
         }
        
     }
