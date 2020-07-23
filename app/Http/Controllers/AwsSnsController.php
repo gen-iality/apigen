@@ -23,11 +23,11 @@ use App\Message as EviusMessage;
 class AwsSnsController extends Controller
 {
     public function updateSnsMessages(Request $request)
-    {
-        var_dump($request);
+    {        
         $count = 0;
         $response = $request->json()->all();
-        // Log::info(json_encode($response));
+        Log::info(json_encode($response));
+        
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->get();
 
         // Log::info(json_encode($eviusmessage));
