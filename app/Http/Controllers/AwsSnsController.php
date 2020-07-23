@@ -31,8 +31,7 @@ class AwsSnsController extends Controller
         
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
         
-        
-        
+                
         $data = [
             'response' => json_encode($response),
             'email_destinations' => json_encode($response['mail']['destination']),
@@ -41,88 +40,53 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['mail']['timestamp']
         ];
 
-        $eviusmessage->save();            
+        
         $messageUserModel = new MessageUser($data);
         $messageUserModel->save();            
                 
-        if ($response['eventType'] == 'Delivery')
+        switch ($response['eventType'])
         {
-            if(isset($eviusmessage->total_delivered))
-            {
-                $count = $eviusmessage->total_delivered;
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update(['total_delivered' => $count]);
-        }
-        elseif ($response['eventType'] == 'Send') 
-        {
-            if(isset($eviusmessage->total_sent))
-            {
-                $count = $eviusmessage->total_sent;
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update(['total_sent' => $count]);
-        }
-        elseif ($response['eventType'] == 'Click')
-        {
-            if(isset($eviusmessage->total_clicked))
-            {
-                $count = $eviusmessage->total_clicked;
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update(['total_clicked' => $count]);
-        }
-        elseif ($response['eventType'] == 'Bounce')
-        {
-            if(isset($eviusmessage->total_bounced))
-            {
-                $count = $eviusmessage->total_bounced;
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update(['total_bounced' => $count]);
-        }
-        elseif ($response['eventType'] == 'Open')
-        {
-            if(isset($eviusmessage->total_opened))
-            {
-                $count = $eviusmessage->total_opened;
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update(['total_opened' => $count]);
-        }
-        elseif ($response['eventType'] == 'Complaint')
-        {
-            if(isset($eviusmessage->total_complained))
-            {
-                $count = $eviusmessage->total_complained;
-            }
-            else
-            {
-                $count++;
-            }                        
-            $eviusmessage->update(['total_complained' => $count]);
-        }
-        
-        
-        
-        
-        
 
+            case 'Delivery':
+
+                $count = (isset($eviusmessage->total_delivered)) ? $eviusmessage->total_delivered++ : 1;
+                $eviusmessage->update(['total_delivered' => $count]);
+                break;
+            
+            case 'Send':
+
+                $count = (isset($eviusmessage->total_sent)) ? $eviusmessage->total_sent++ : 1;
+                $eviusmessage->update(['total_sent' => $count]);
+                break;
+
+            case 'Click':
+
+                $count = (isset($eviusmessage->total_clicked)) ? $eviusmessage->total_clicked++ : 1;
+                $eviusmessage->update(['total_clicked' => $count]);
+                break;  
+
+            case 'Bounce':
+
+                $count = (isset($eviusmessage->total_bounced)) ? $eviusmessage->total_bounced++ : 1;
+                $eviusmessage->update(['total_bounced' => $count]);
+                break;
+            
+            case 'Open':
+
+                $count = (isset($eviusmessage->total_opened)) ? $eviusmessage->total_opened++ : 1;
+                $eviusmessage->update(['total_opened' => $count]);
+                break;
+
+            case 'Complaint':
+
+                $count = (isset($eviusmessage->total_complained)) ? $eviusmessage->total_complained++ : 1;
+                $eviusmessage->update(['total_complained' => $count]);
+                break;
+
+        }
+                        
+        $eviusmessage->save();            
+        
         return json_encode($request);                
     }
 
@@ -142,7 +106,8 @@ class AwsSnsController extends Controller
                 $headers = $message->getHeaders();       
 
                 // $eviusmessage->subject = $headers->get('Subject')->getValue();
-                // $eviusmessage->message = $message->getBody();
+                // $eviusmessage->message = $message;
+                // Log::info(strval($eviusmessage->message));
                 // $eviusmessage->save();
 
                 
