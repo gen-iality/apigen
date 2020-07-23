@@ -40,13 +40,12 @@ class AwsSnsController extends Controller
         ];
 
 
-        Log::info(json_encode($eviusmessage->get()));
+        Log::info(json_encode($eviusmessage->get()->server_message_id));
 
         // if (isset($notificationId))
         // {
         //     $messageUserModel = new MessageUser($data);
         //     $messageUserModel->save();            
-// 
         // }
                 
         switch ($response['eventType'])
