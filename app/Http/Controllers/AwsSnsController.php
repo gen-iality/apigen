@@ -21,7 +21,7 @@ use App\Message as EviusMessage;
 
 
 class AwsSnsController extends Controller
-{    
+{
     public function updateSnsMessages(Request $request)
     {
         Log::info('updateSnsMessages');
