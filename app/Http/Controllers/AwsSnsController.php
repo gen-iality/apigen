@@ -39,7 +39,15 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['mail']['timestamp']
         ];
 
-        
+
+        Log::info(json_encode($eviusmessage->get()));
+
+        // if (isset($notificationId))
+        // {
+        //     $messageUserModel = new MessageUser($data);
+        //     $messageUserModel->save();            
+// 
+        // }
                 
         switch ($response['eventType'])
         {
@@ -84,15 +92,9 @@ class AwsSnsController extends Controller
         $eviusmessage->save();     
 
         
-        Log::info(json_encode($eviusmessage->get()));
 
-        // if (isset($notificationId))
-        // {
-        //     $messageUserModel = new MessageUser($data);
-        //     $messageUserModel->save();            
-// 
-        // }
-        // 
+        
+        
         
 
         return json_encode($request);                
