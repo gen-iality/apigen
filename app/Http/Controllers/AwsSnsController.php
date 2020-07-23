@@ -27,9 +27,8 @@ class AwsSnsController extends Controller
         $count = 0;
         $response = $request->json()->all();
 
-        $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
+        $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->first();
 
-        Log::info($eviusmessage->first());
         
         $data = [
             'response' => json_encode($response),
@@ -40,11 +39,11 @@ class AwsSnsController extends Controller
         ];
 
         
-        // if (isset($notificationId))
-        // {
-        //     $messageUserModel = new MessageUser($data);
-        //     $messageUserModel->save();            
-        // }
+        if (isset($eviusmessage))
+        {
+            $messageUserModel = new MessageUser($data);
+            $messageUserModel->save();            
+        }
                 
         switch ($response['eventType'])
         {
