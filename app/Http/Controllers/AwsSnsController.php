@@ -45,33 +45,32 @@ class AwsSnsController extends Controller
                 
         switch ($response['eventType'])
         {
-
             case 'Delivery':
-                Log::info('$response[eventType] '.$response['eventType']);
+                Log::info('Delivery');
                 $count = (isset($eviusmessage->total_delivered)) ? $eviusmessage->total_delivered++ : 1;
                 $eviusmessage->update(['total_delivered' => $count]);
                 break;
             
             case 'Send':
-                Log::info('$response[eventType] '.$response['eventType']);
+                Log::info('Send');
                 $count = (isset($eviusmessage->total_sent)) ? $eviusmessage->total_sent++ : 1;
                 $eviusmessage->update(['total_sent' => $count]);
                 break;
 
             case 'Click':
-                Log::info('$response[eventType] '.$response['eventType']);
+                Log::info('Click');
                 $count = (isset($eviusmessage->total_clicked)) ? $eviusmessage->total_clicked++ : 1;
                 $eviusmessage->update(['total_clicked' => $count]);
                 break;  
 
             case 'Bounce':
-                Log::info('$response[eventType] '.$response['eventType']);
+                Log::info('Bounce');
                 $count = (isset($eviusmessage->total_bounced)) ? $eviusmessage->total_bounced++ : 1;
                 $eviusmessage->update(['total_bounced' => $count]);
                 break;
             
             case 'Open':
-                Log::info('$response[eventType] '.$response['eventType']);
+                Log::info('Open');
                 $count = (isset($eviusmessage->total_opened)) ? $eviusmessage->total_opened++ : 1;
                 $eviusmessage->update(['total_opened' => $count]);
                 break;
@@ -108,7 +107,6 @@ class AwsSnsController extends Controller
                 // $eviusmessage->message = $message;
                 // Log::info(strval($eviusmessage->message));
                 // $eviusmessage->save();
-
                 
                 $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
 
