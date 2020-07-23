@@ -88,9 +88,9 @@ class AwsSnsController extends Controller
         if (isset($notificationId))
         {
             $messageUserModel = new MessageUser($data);
+            $messageUserModel->save();            
         }
             
-        $messageUserModel->save();            
 
         return json_encode($request);                
     }
