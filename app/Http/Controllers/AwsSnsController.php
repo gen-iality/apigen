@@ -24,8 +24,7 @@ class AwsSnsController extends Controller
 {    
     public function updateSnsMessages(Request $request)
     {
-        Log::info('request');
-        echo 'hola';
+        Log::info('updateSnsMessages');
         $count = 0;
         $response = $request->json()->all();
         // Log::info(json_encode($response));
