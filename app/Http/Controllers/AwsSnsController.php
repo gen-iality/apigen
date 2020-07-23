@@ -33,15 +33,17 @@ class AwsSnsController extends Controller
         
         
         
-        // $data = [
-        //     'response' => json_encode($response),
-        //     'email_destinations' => json_encode($response['mail']['destination']),
-        //     'status_message' => $response['eventType'],
-        //     'notification_id' => $response['mail']['messageId'],
-        //     'timestamp_event' => $response['mail']['timestamp']
-        // ];
+        $data = [
+            'response' => json_encode($response),
+            'email_destinations' => json_encode($response['mail']['destination']),
+            'status_message' => $response['eventType'],
+            'notification_id' => $response['mail']['messageId'],
+            'timestamp_event' => $response['mail']['timestamp']
+        ];
 
-        
+        $eviusmessage->save();            
+        $messageUserModel = new MessageUser($data);
+        $messageUserModel->save();            
                 
         if ($response['eventType'] == 'Delivery')
         {
@@ -116,9 +118,9 @@ class AwsSnsController extends Controller
             $eviusmessage->update(['total_complained' => $count]);
         }
         
-        // $eviusmessage->save();            
-        // $messageUserModel = new MessageUser($data);
-        // $messageUserModel->save();            
+        
+        
+        
         
 
         return json_encode($request);                
