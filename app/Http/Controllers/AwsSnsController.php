@@ -84,7 +84,7 @@ class AwsSnsController extends Controller
         $eviusmessage->save();     
 
         $eviusmessage = $eviusmessage->where('notification_id', '=', $response['mail']['messageId'])->get();
-        Log::info('$eviusmessage '.$eviusmessage); 
+        Log::info('json_encode($eviusmessage) '.json_encode($eviusmessage)); 
 
         if (isset($notificationId))
         {
