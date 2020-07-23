@@ -40,8 +40,6 @@ class AwsSnsController extends Controller
         ];
 
         
-        // $messageUserModel = new MessageUser($data);
-        // $messageUserModel->save();            
                 
         switch ($response['eventType'])
         {
@@ -76,7 +74,7 @@ class AwsSnsController extends Controller
                 break;
 
             case 'Complaint':
-                Log::info('$response[eventType] '.$response['eventType']);
+                Log::info('Complaint');
                 $count = (isset($eviusmessage->total_complained)) ? $eviusmessage->total_complained++ : 1;
                 $eviusmessage->update(['total_complained' => $count]);
                 break;
@@ -85,6 +83,9 @@ class AwsSnsController extends Controller
                         
         $eviusmessage->save();            
         
+        $messageUserModel = new MessageUser($data);
+        $messageUserModel->save();            
+
         return json_encode($request);                
     }
 
