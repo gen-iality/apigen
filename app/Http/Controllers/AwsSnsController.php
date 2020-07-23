@@ -24,13 +24,13 @@ class AwsSnsController extends Controller
 {    
     public function updateSnsMessages(Request $request)
     {
-
+        Log::info('request');
         $count = 0;
         $response = $request->json()->all();
         Log::info(json_encode($response));
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->get();
 
-        // Log::info(json_encode($eviusmessage));
+        Log::info(json_encode($eviusmessage));
         
         $data = [
             'response' => json_encode($response),
