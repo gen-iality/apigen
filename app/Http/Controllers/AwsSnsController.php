@@ -27,7 +27,7 @@ class AwsSnsController extends Controller
 
         $count = 0;
         $response = $request->json()->all();
-                
+        Log::info(json_encode($response));
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
 
         var_dump($eviusmessage);
@@ -41,7 +41,7 @@ class AwsSnsController extends Controller
         ];
 
 
-        var_dump($eviusmessage);
+        
 
         // if (isset($notificationId))
         // {
