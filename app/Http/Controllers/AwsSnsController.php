@@ -40,8 +40,8 @@ class AwsSnsController extends Controller
         ];
 
         
-        $messageUserModel = new MessageUser($data);
-        $messageUserModel->save();            
+        // $messageUserModel = new MessageUser($data);
+        // $messageUserModel->save();            
                 
         switch ($response['eventType'])
         {
