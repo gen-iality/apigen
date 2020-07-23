@@ -16,7 +16,7 @@ use Illuminate\Contracts\Mail\Mailer;
 use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 
-// use App\MessageUser;
+use App\MessageUser;
 use App\Message as EviusMessage;
 
 
@@ -81,9 +81,15 @@ class AwsSnsController extends Controller
 
         }
                         
-        $eviusmessage->save();            
-        
-        $messageUserModel = new MessageUser($data);
+        $eviusmessage->save();     
+
+        $notificationId = MessageUser::where('notification_id', $response['mail']['messageId'])->get('notification_id');
+        Log::info('$notificationId '.$notificationId);
+        if (isset($notificationId))
+        {
+            $messageUserModel = new MessageUser($data);
+        }
+            
         $messageUserModel->save();            
 
         return json_encode($request);                
