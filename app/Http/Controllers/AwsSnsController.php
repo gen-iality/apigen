@@ -83,9 +83,9 @@ class AwsSnsController extends Controller
                         
         $eviusmessage->save();     
 
-        $eviusmessage = $eviusmessage->where('notification_id', $response['mail']['messageId']);
+        $eviusmessage = $eviusmessage->where('notification_id', $response['mail']['messageId'])->get();
         Log::info('$eviusmessage '.$eviusmessage); 
-                   
+
         if (isset($notificationId))
         {
             $messageUserModel = new MessageUser($data);
