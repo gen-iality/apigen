@@ -27,7 +27,7 @@ class AwsSnsController extends Controller
         Log::info('request');
         $count = 0;
         $response = $request->json()->all();
-        Log::info(json_encode($response));
+        // Log::info(json_encode($response));
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->get();
 
         // Log::info(json_encode($eviusmessage));
@@ -124,7 +124,7 @@ class AwsSnsController extends Controller
 
         // Log::info(json_encode($sesMessage));
 
-        return 'Enviado';
+        return '<h1>Enviado</h1>';
     }
 
     // public function getMessage()
