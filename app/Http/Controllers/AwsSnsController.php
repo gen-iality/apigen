@@ -27,11 +27,10 @@ class AwsSnsController extends Controller
 
         $count = 0;
         $response = $request->json()->all();
-        
-        
+                
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId']);
         
-                
+        
         $data = [
             'response' => json_encode($response),
             'email_destinations' => json_encode($response['mail']['destination']),
@@ -40,10 +39,11 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['mail']['timestamp']
         ];
 
-        
+        Log::info('$response[eventType] '.$response['eventType']);
         $messageUserModel = new MessageUser($data);
         $messageUserModel->save();            
                 
+
         switch ($response['eventType'])
         {
 
