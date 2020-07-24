@@ -29,7 +29,6 @@ class AwsSnsController extends Controller
 
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->first();
 
-        
         $data = [
             'response' => json_encode($response),
             'email_destinations' => json_encode($response['mail']['destination']),
@@ -50,16 +49,15 @@ class AwsSnsController extends Controller
         {
             case 'Delivery':
                 Log::info('Delivery');
-                $count = (isset($eviusmessage->total_delivered)) ? $eviusmessage->total_delivered++ : 1;
-                Log::info('count '.$count);
-                Log::info('$eviusmessage->total_delivered '.$eviusmessage->total_delivered);
-                $eviusmessage->update(['total_delivered' => $count]);
-                break;
-            
+                $count = (isset($eviusmessage->total_delivered)) ? $eviusmessage->total_delivered++ : 1;                
+                $eviusmessage->update(['total_delivered' => $count]);                
+                break;            
             case 'Send':
                 Log::info('Send');
                 $count = (isset($eviusmessage->total_sent)) ? $eviusmessage->total_sent++ : 1;
                 $eviusmessage->update(['total_sent' => $count]);
+                Log::info('count '.$count);
+                Log::info('$eviusmessage->total_sent '.$eviusmessage->total_sent);
                 break;
 
             case 'Click':
@@ -78,6 +76,8 @@ class AwsSnsController extends Controller
                 Log::info('Open');
                 $count = (isset($eviusmessage->total_opened)) ? $eviusmessage->total_opened++ : 1;
                 $eviusmessage->update(['total_opened' => $count]);
+                Log::info('count '.$count);
+                Log::info('$eviusmessage->total_opened '.$eviusmessage->total_opened);
                 break;
 
             case 'Complaint':
