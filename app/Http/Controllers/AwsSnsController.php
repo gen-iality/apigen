@@ -94,10 +94,15 @@ class AwsSnsController extends Controller
         $data = [
             'nombre' => 'Marina'
         ];
+
+        $emails = [
+            'emilio.vargas@mocionsoft.com' //,
+          //'emjvp37@gmail.com'
+        ];      
                             
-        $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) {
+        $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) use ($emails) {
             $message
-                ->to('emilio.vargas@mocionsoft.com', 'dslfnsd')
+                ->to($emails, 'dslfnsd')
                 ->subject('prueba')
                 ->from('alerts@evius.co'); 
                                 
@@ -109,15 +114,10 @@ class AwsSnsController extends Controller
                 // $eviusmessage->save();
                 
                 $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
-
         });
-
         
         // Log::info($message);   
         // Log::info('$mens: '.$message->json()->all());          
-                 
-        
-
         // Log::info(json_encode($sesMessage));
 
         return '<h1>Enviado</h1>';

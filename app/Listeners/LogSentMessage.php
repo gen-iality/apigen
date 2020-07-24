@@ -29,6 +29,11 @@ class LogSentMessage
      */
     public function handle($event)
     {    
+        $recipents = $event->message->getHeaders()->get('To');
+
+        
+        $arregloRecip = explode(': ', strval($recipents));
+        Log::info(sizeof(explode(' ', $arregloRecip[1])));
         
         $sesMessageId = $event->message
                               ->getHeaders()
@@ -41,7 +46,8 @@ class LogSentMessage
                                ->get('Subject')
                                ->getValue(),
             'server_message_id' => $sesMessageId, 
-            'message' => $event->message->getBody()
+            'message' => $event->message->getBody(),
+            'number_of_recipients' => sizeof(explode(' ', $arregloRecip[1]))
         ];
 
         
