@@ -96,8 +96,9 @@ class AwsSnsController extends Controller
         ];
 
         $emails = [
-            'emilio.vargas@mocionsoft.com' //,
-          //'emjvp37@gmail.com'
+            'emilio.vargas@mocionsoft.com',
+            'juan.lopez@mocionsoft.com',
+            'apps@mocionsoft.com'
         ];      
                             
         $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) use ($emails) {
