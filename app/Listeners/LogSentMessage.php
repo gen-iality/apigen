@@ -33,7 +33,7 @@ class LogSentMessage
 
         
         $arregloRecip = explode(': ', strval($recipents));
-        Log::info(sizeof(explode(' ', $arregloRecip[1])));
+        // Log::info(sizeof(explode(' ', $arregloRecip[1])));
         
         $sesMessageId = $event->message
                               ->getHeaders()
