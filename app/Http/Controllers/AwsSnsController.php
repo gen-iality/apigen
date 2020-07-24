@@ -45,6 +45,7 @@ class AwsSnsController extends Controller
             $messageUserModel->save();            
         }
                 
+        
         switch ($response['eventType'])
         {
             case 'Delivery':
