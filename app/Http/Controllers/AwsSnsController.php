@@ -52,6 +52,7 @@ class AwsSnsController extends Controller
                 Log::info('Delivery');
                 $count = (isset($eviusmessage->total_delivered)) ? $eviusmessage->total_delivered++ : 1;
                 Log::info('count '.$count);
+                Log::info('$eviusmessage->total_delivered '.$eviusmessage->total_delivered);
                 $eviusmessage->update(['total_delivered' => $count]);
                 break;
             
