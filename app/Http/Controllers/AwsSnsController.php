@@ -94,8 +94,9 @@ class AwsSnsController extends Controller
     
     public function testEmail(/*Mailer $mailer,*/ Request $request)
     {
+        $response = $request->json()->all();
 
-        Log::info(json_encode($request));
+        Log::info(json_encode($response));
 
         $data = [
             'nombre' => 'Marina'
