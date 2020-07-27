@@ -121,21 +121,7 @@ class AwsSnsController extends Controller
                 $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
         });
         
-        $sesMessage1 = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) use ($emails) {
-            $message
-                ->to($emails, 'dslfnsd')
-                ->subject('prueba')
-                ->from('alerts@evius.co'); 
-                                
-                $headers = $message->getHeaders();       
-
-                // $eviusmessage->subject = $headers->get('Subject')->getValue();
-                // $eviusmessage->message = $message;
-                // Log::info(strval($eviusmessage->message));
-                // $eviusmessage->save();
-                
-                $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
-        });
+        
         // Log::info($message);   
         // Log::info('$mens: '.$message->json()->all());          
         // Log::info(json_encode($sesMessage));
