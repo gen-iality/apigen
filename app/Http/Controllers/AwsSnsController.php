@@ -92,8 +92,10 @@ class AwsSnsController extends Controller
         return json_encode($request);                
     }
     
-    public function testEmail(Mailer $mailer)
+    public function testEmail(Mailer $mailer, Request $response)
     {
+
+        Log::info(json_encode($response));
 
         $data = [
             'nombre' => 'Marina'
