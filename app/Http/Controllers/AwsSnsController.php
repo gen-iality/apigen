@@ -92,12 +92,9 @@ class AwsSnsController extends Controller
         return json_encode($request);                
     }
     
-    public function testEmail(/*Mailer $mailer,*/ Request $request)
+    public function testEmail(Mailer $mailer)
     {
-        $response = $request->json()->all();
-
-        Log::info(json_encode($response));
-
+        
         $data = [
             'nombre' => 'Marina'
         ];
@@ -108,21 +105,21 @@ class AwsSnsController extends Controller
             'apps@mocionsoft.com'
         ];      
                             
-        // $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) use ($emails) {
-        //     $message
-        //         ->to($emails, 'dslfnsd')
-        //         ->subject('prueba')
-        //         ->from('alerts@evius.co'); 
-        //                         
-        //         $headers = $message->getHeaders();       
-// 
-        //         // $eviusmessage->subject = $headers->get('Subject')->getValue();
-        //         // $eviusmessage->message = $message;
-        //         // Log::info(strval($eviusmessage->message));
-        //         // $eviusmessage->save();
-        //         
-        //         $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
-        // });
+        $sesMessage = $mailer->send('Mailers/TicketMailer/plantillaprueba', $data, function ($message) use ($emails) {
+            $message
+                ->to($emails, 'dslfnsd')
+                ->subject('prueba')
+                ->from('alerts@evius.co'); 
+                                
+                $headers = $message->getHeaders();       
+
+                // $eviusmessage->subject = $headers->get('Subject')->getValue();
+                // $eviusmessage->message = $message;
+                // Log::info(strval($eviusmessage->message));
+                // $eviusmessage->save();
+                
+                $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
+        });
         
         // Log::info($message);   
         // Log::info('$mens: '.$message->json()->all());          
