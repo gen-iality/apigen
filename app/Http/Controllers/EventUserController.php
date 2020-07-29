@@ -210,7 +210,7 @@ class EventUserController extends Controller
                 }
 
                 $field = $user_property['name'];
-                $validations[$field] = 'required';
+                //$validations[$field] = 'required';
             }
 
             //este validador pronto se va a su clase de validacion
@@ -332,7 +332,7 @@ class EventUserController extends Controller
             }
             $validations = [
                 'email' => 'required|email',
-                'other_fields' => 'sometimes',
+                //'other_fields' => 'sometimes',
             ];
 
             if (!empty($eventUserData["ticketid"])) {
@@ -368,7 +368,7 @@ class EventUserController extends Controller
                 }
 
                 $field = $user_property['name'];
-                $validations[$field] = 'required';
+                //$validations[$field] = 'required';
             }
 
             //este validador pronto se va a su clase de validacion
@@ -457,7 +457,7 @@ class EventUserController extends Controller
                 }
 
                 $field = $user_property['name'];
-                $validations[$field] = 'required';
+                //$validations[$field] = 'required';
             }
 
             //este validador pronto se va a su clase de validacion
