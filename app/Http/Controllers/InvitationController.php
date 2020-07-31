@@ -42,25 +42,6 @@ class InvitationController extends Controller
     {
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
 
-        $correos_emproblemados =
-            ["FCARDARELLI@SOLUCIONES.COM.AR",
-            "JOSE.MARTINEZ@TELEFONICA.COM",
-            "CARAUZ@VIRTUALIT.COM.EC",
-            "CESTEBAN@ADISTEC.COM",
-            "JEFFERSON.CAMARGO@V2S.US",
-            "TMORENO@OVNICOM.COM",
-            "PABLO@ZENTEC.PE",
-            "KZUNIGA@FUSIONETCORP.COM",
-            "JUANC@BLUENETSRL.COM",
-            "FCARDARELLI@SOLCUIOENS.COM",
-            "FCARDARELLI@SOLCUIOENS.COM.AR",
-        ];
-        $email = $request->input("email");
-
-        if (in_array($email, $correos_emproblemados)) {
-            $innerpath = "5ed6a74b7e2bc067381ad164";
-        }
-
         if ($request->input("request")) {
             try {
                 self::acceptOrDeclineFriendRequest($request, $innerpath, $request->input("request"), $request->input("response"));
@@ -76,10 +57,13 @@ class InvitationController extends Controller
 
             try {
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+
             } catch (InvalidArgumentException $e) {
                 $pass = $request->input("pass");
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+
             } catch (AuthError $e) {
+
                 Log::error("temp password used. " . $e->getMessage());
                 $pass = "temppassw123";
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
@@ -87,14 +71,19 @@ class InvitationController extends Controller
 
             $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
 
-            $save_refresh_token = Account::where("uid", $userinfo->uid)->first();
-            if (!$save_refresh_token) {
-                return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            $user = Account::where("uid", $userinfo->uid)->first();
+            if (!$user) {
+                //intentamos buscar por correo cómo segunda opción
+                $user = Account::where("email", $request->input("email"))->first();
+                if (!$user) {
+                    return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+                }
+                $user->uid = $userinfo->uid;
             }
 
             $refresh_token["refresh_token"] = $singin->refreshToken();
-            $save_refresh_token->fill($refresh_token);
-            $save_refresh_token->save();
+            $user->fill($refresh_token);
+            $user->save();
 
             return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
 
