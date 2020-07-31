@@ -40,19 +40,19 @@ ha sido invitado a:
 {!!$event->registration_message!!}
 @endif
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
-Aceptar tratamiento de datos e Ingresar al Evento AQUÍ
+Ingresar al Evento AQUÍ
 @endcomponent
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-    Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
-    algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
+	algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-    Si tiene problemas con el botón de ingreso abra el siguiente enlace
-    <a href="{{$link}}">click acá</a>
+	Si tiene problemas con el botón de ingreso abra el siguiente enlace
+	<a href="{{$link}}">click acá</a>
 </p>
 
 
