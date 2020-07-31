@@ -60,7 +60,7 @@ class Attendee extends Models\Attendee
 
     public function rol()
     {
-        return $this->belongsTo('App\RoleAttendee');
+        return $this->belongsTo('App\RoleAttendee', 'rol_id');
     }
 
     public function confirm()

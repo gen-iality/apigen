@@ -108,9 +108,14 @@ class UserEventService
         //Account rol assigned by default
         if (!isset($eventUserFields["rol_id"])) {
             $rol = Rol::where('level', 0)->first();
-            $eventUserFields["rol_id"] = $rol->_id;
+            if ($rol) {
+                $eventUserFields["rol_id"] = $rol->_id;
+            } else {
+                //Se supone este es un rol por defecto (asistente) si todo el resto falla
+                $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
+            }
+
         }
-        $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
 
         //esto por que se nos fue un error en el excel al princiopo
         if (isset($eventUserFields["state_id"])) {

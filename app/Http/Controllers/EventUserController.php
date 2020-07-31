@@ -415,11 +415,6 @@ class EventUserController extends Controller
 
             $response = new EventUserResource($eventUser);
 
-            if (!empty($eventUserData["rol_id"])) {
-                $rol = $response["user"]["rol_id"];
-                $response->rol()->attach($rol);
-            }
-
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
 
