@@ -312,7 +312,7 @@ class InvitationController extends Controller
             $mail["request_id"] = $data["request_id"];
         }
 
-        $meetingStartTime = (isset($data["meeting_start_time"])) ? $data["meeting_start_time"] : "";
+        $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
 
         $request_type = "meeting";
         $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
@@ -382,11 +382,18 @@ class InvitationController extends Controller
         $response = !empty($mail["request_id"]) ? $mail["request_id"] : null;
 
         foreach ($mail["mails"] as $key => $email) {
+            Mail::to($email)->send(
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+            );
+        }
+
+        foreach ($mail["mails"] as $key => $email) {
             $email = "juan.lopez@mocionsoft.com";
             Mail::to($email)->send(
                 new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
             );
         }
+
     }
 
     /**
