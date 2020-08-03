@@ -132,6 +132,13 @@ Route::get("events/{event_id}/indexinvitations/{user_id}", "InvitationController
 Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}", "InvitationController@invitationsReceived");
 Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@acceptOrDeclineFriendRequest");
 Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post("events/{event_id}/meetingrequest/notify", "InvitationController@meetingrequestnotify");
+    }
+);
+
+Route::post("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::apiResource("events/{event_id}/invitation", "InvitationController");
 
 /****************

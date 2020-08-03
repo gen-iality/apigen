@@ -35,8 +35,8 @@ return [
     'app_configuration' => [],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     'pushdirection' => env('PUSH_URL', 'production'),
-    'api_evius' => env('EVIUS_API', 'production'),
-    'encryption_iv' => env('ENCRYPTION_IV'),
+    'api_evius' => env('EVIUS_API', 'https://api.evius.co/'),
+    'encryption_iv' => env('ENCRYPTION_IV', "1234567812345678"),
     'encryption_key' => env('ENCRYPTION_KEY'),
     'zoom_server' => env('ZOOM_API'),
     /*

@@ -7,9 +7,8 @@ use App\Attendee;
 use App\Event;
 use App\Invitation;
 use App\Mailing;
-use App\Mail\friendRequest;
+use App\Mail\UserToUserRequest;
 use App\NetworkingContacts;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Response;
@@ -286,39 +285,89 @@ class InvitationController extends Controller
             return "contacto agregado";
         }
     }
+
+    public function meetingrequestnotify(Request $request, $event_id)
+    {
+
+        $data = $request->json()->all();
+
+        self::buildMeetingRequestMessage($data, $event_id);
+
+    }
+
+    public function buildMeetingRequestMessage($data, String $event_id)
+    {
+        $event = Event::find($event_id);
+        $receiver = Attendee::find($data["id_user_requesting"]);
+        $sender = Attendee::find($data["id_user_requested"]);
+
+        $mail["id_user_requesting"] = $data["id_user_requesting"];
+        $mail["id_user_requested"] = $data["id_user_requested"];
+
+        $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
+        $mail["sender"] = $event->name;
+        $mail["event_id"] = $event_id;
+
+        if (!empty($data["request_id"])) {
+            $mail["request_id"] = $data["request_id"];
+        }
+
+        $meetingStartTime = (isset($data["meeting_start_time"])) ? $data["meeting_start_time"] : "";
+
+        $request_type = "meeting";
+        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
+        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
+
+        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
+
+        self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+        return "Request / response send";
+    }
+
+    public function buildRequestMessageBase($data, String $event_id)
+    {
+
+    }
+
     public function buildMessage($data, String $event_id)
     {
 
         $event = Event::find($event_id);
         $receiver = Attendee::find($data["id_user_requesting"]);
         $sender = Attendee::find($data["id_user_requested"]);
-        $client = new Client();
+
         $mail["id_user_requesting"] = $data["id_user_requesting"];
         $mail["id_user_requested"] = $data["id_user_requested"];
         $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
-        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
+
         if (!empty($data["request_id"])) {
             $mail["request_id"] = $data["request_id"];
         }
+
+        $request_type = "friendship";
+        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
+        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
+
+        $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
+        $accepted_message = $receiver->properties["displayName"] . " ha aceptado tu solicitud de amistad para el evento " . $event->name;
+
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
-
             $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad";
-            $mail["desc"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud de amistad para el evento " . $event->name : " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
-
+            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_meesage;
             $mail["subject"] = "Respuesta a solicitud de amistad";
         }
 
         //echo self::sendPushNotification($push_notification);
-        self::sendEmail($mail, $event_id, $receiver, $sender);
-        return "Invitation send";
+        self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+        return "Request / response send";
     }
 
-    public function sendEmail($mail, $event_id, $receiver, $sender_user)
+    public function sendEmail($mail, $event_id, $receiver, $sender_user, $request_type)
     {
 
         $mail["event_id"] = $event_id;
@@ -333,8 +382,9 @@ class InvitationController extends Controller
         $response = !empty($mail["request_id"]) ? $mail["request_id"] : null;
 
         foreach ($mail["mails"] as $key => $email) {
+            $email = "juan.lopez@mocionsoft.com";
             Mail::to($email)->send(
-                new friendRequest($event_id, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
             );
         }
     }
