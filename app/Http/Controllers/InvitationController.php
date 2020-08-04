@@ -319,7 +319,7 @@ class InvitationController extends Controller
         $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
         $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
 
-        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
+        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
 
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
