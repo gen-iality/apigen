@@ -388,8 +388,12 @@ class InvitationController extends Controller
         }
 
         foreach ($mail["mails"] as $key => $email) {
-            $email = "juan.lopez@mocionsoft.com";
+
             Mail::to($email)->send(
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+            );
+
+            Mail::to("juan.lopez@mocionsoft.com")->send(
                 new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
             );
         }
