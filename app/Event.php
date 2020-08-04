@@ -41,7 +41,7 @@ class Event extends ModelsEvent
         parent::__construct($data);
     }
     /**
-     * The currency associated with the event.
+     * The  currency associated with the event.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
