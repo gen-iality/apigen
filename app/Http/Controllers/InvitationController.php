@@ -182,20 +182,21 @@ class InvitationController extends Controller
         $id_user_requesting = $data["id_user_requesting"];
 
         $model = NetworkingContacts::where("user_account", $data["id_user_requested"])->first();
-
+        /*
         if ($model) {
-            if (is_int(array_search($data["id_user_requesting"], $model->contacts_id))) {
-                abort(409, "Ya se encuentra en tu lista de contactos");
-            }
+        if (is_int(array_search($data["id_user_requesting"], $model->contacts_id))) {
+        abort(409, "Ya se encuentra en tu lista de contactos");
+        }
         }
         $model = Invitation::where("id_user_requesting", $data["id_user_requesting"])->where("id_user_requested", $data["id_user_requested"])->first();
         //verifica si ya se ha enviado una solicitud de amistad igual y el estado de esta
         if ($model) {
-            if ($model->response) {
-                return $model->response == "rejected" ? abort(409, "Solictiud ya ha sido enviada anteriormente y se encuentra rechazada") : abort(409, "Solictiud ya ha sido  enviada anteriormente y se encuentra aceptada");
-            }
-            return abort(409, "Solictiud ya ha sido enviada anteriormente, esperando respuesta de solicitud");
+        if ($model->response) {
+        return $model->response == "rejected" ? abort(409, "Solictiud ya ha sido enviada anteriormente y se encuentra rechazada") : abort(409, "Solictiud ya ha sido  enviada anteriormente y se encuentra aceptada");
         }
+        return abort(409, "Solictiud ya ha sido enviada anteriormente, esperando respuesta de solicitud");
+        }
+         */
 
         $result = new Invitation($data);
         $result->save();
@@ -348,12 +349,47 @@ class InvitationController extends Controller
         }
 
         $request_type = "friendship";
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de amistad";
-        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
+        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de contacto";
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de contacto";
+        $mail["desc"] = <<<EOT
+        Hola  {$receiver->properties["displayName"]} , quiero contactarte por medio del evento  {$event->name}; <br/><br/>
 
+        Las personas que no son contactos tuyos solamente ven una cantidad limiteada de información, con lo cual pueden
+        buscarte en el evento pero no contactarte. <br/><br/>
+
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
+        de esta manera podrá contactarte.
+EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
-        $accepted_message = $receiver->properties["displayName"] . " ha aceptado tu solicitud de amistad para el evento " . $event->name;
+
+        $datos_usuario = "";
+        $i = 0;
+        foreach ($event->user_properties as $property) {
+            if ($i <= 3) {
+
+                if (isset($receiver->properties[$property->name]) && $receiver->properties[$property->name]) {
+                    $i++;
+                    $datos_usuario .= "<p>{$property->label}: {$receiver->properties[$property->name]}</p>";
+                }
+            }
+        }
+
+        $cuantos = count($event->user_properties);
+
+        $accepted_message = <<<EOT
+
+        {$receiver->properties["displayName"]} ha aceptado tu solicitud de contacto para el evento {$event->name} <br/>
+
+        <br />
+        {$datos_usuario}
+        <br/>
+        Mostrando {$i} datos de {$cuantos}
+        <br />
+        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
+        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
+<br/>
+        No olvides disfrutar el resto de experiencias del evento.
+EOT;
 
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];

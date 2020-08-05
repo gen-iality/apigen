@@ -52,11 +52,11 @@ class UserToUserRequest extends Mailable implements ShouldQueue
 
         $principal_title = $title;
         $description = $desc;
-        $link = config('app.api_evius') . "/singinwithemail?email=" . $subject . '&innerpath=' . $event_id . "&pass=" . $pass;
-        $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&pass=" . $pass;
+        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
+        $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
 
         if ($response) {
-            $link = config('app.api_evius') . "/singinwithemail?email=" . $email . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
+            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
         }
 
         $this->response = $response;
