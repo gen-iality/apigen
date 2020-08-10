@@ -11,9 +11,9 @@ class Speaker extends Moloquent
 
     protected $table = ('speaker');
 
-    protected $fillable = ['id','name','lastname','email',
-    'rol','category','photo','position','company','social_media',
-    'video','country','description','order','event_id' , 'description_activity'];
+    protected $fillable = ['id', 'name', 'lastname', 'email',
+        'rol', 'category', 'photo', 'position', 'company', 'social_media',
+        'video', 'country', 'description', 'order', 'event_id', 'description_activity', 'order'];
 
     public function events()
     {
@@ -21,5 +21,3 @@ class Speaker extends Moloquent
     }
 
 }
-
-  
