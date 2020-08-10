@@ -354,7 +354,7 @@ class InvitationController extends Controller
         $mail["desc"] = <<<EOT
         Hola  {$receiver->properties["displayName"]} , quiero contactarte por medio del evento  {$event->name}; <br/><br/>
 
-        Las personas que no son contactos tuyos solamente ven una cantidad limiteada de información, con lo cual pueden
+        Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
         Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
