@@ -76,13 +76,12 @@ Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
 ![Logo]({{!empty($image_footer)}})
-<img src={{$image_footer}} /> <p>aaaaa</p>
-@elseif(isset($image_footer_default) && !empty($image_footer_default))
-<img src={{$image_footer_default}} /><p>bbbb</p>
+<img src={{$image_footer}} /> 
+@elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
+<img src={{$event->styles["banner_footer"]}} />           
 @elseif(isset($organization_picture) && !empty($organization_picture))
-<img src={{$organization_picture}} /><p>cccc</p>
+<img src={{$organization_picture}} />           
 @endif
 
 </div>
-
 @endcomponent
