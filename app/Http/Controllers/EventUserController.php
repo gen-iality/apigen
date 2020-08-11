@@ -287,7 +287,7 @@ class EventUserController extends Controller
         //}
 
         $event = Event::findOrFail($event_id);
-        $image = $event->picture;
+        $image = null;//$event->picture;
 
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
