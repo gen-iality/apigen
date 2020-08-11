@@ -51,7 +51,7 @@ class InvitationMail extends Mailable implements ShouldQueue
             $event_location = $event["location"]["FormattedAddress"];
         }
         if (!empty($event->alt_image)) {
-            $image = $event->alt_image;
+           // $image = $event->alt_image;
         }
         $type = null;
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];

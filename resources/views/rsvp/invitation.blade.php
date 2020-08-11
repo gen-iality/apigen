@@ -1,18 +1,14 @@
 @component('mail::message')
-{{\Carbon\Carbon::setLocale('es')}}
 @if(!empty($event->styles["banner_image_email"]))
-<div style="text-align: center">
-	![Logo]({{$event->styles["banner_image_email"]}})
-	@elseif(!empty($event->styles["banner_image"]))
-	![Logo]({{$event->styles["banner_image"]}})
+<div class="centered">
+![Logo]({{$event->styles["banner_image_email"]}})
+@elseif(!empty($event->styles["banner_image"]))
+![Logo]({{$event->styles["banner_image"]}})
 </div>
 @endif
-
-
 <br />
 <br />
-
-** Hola {{$eventUser_name}} **, su inscripción se ha realizado con éxito al evento:
+**Hola {{$eventUser_name}} **, su inscripción se ha realizado con éxito al evento:
 <b>{{$event->name}}</b>
 <!-- Mensaje configurable desde el CMS en la sección configuración asistentes -->
 @if ($event->registration_message )
@@ -33,15 +29,16 @@
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} |
-{{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
+| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
+
 @if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} |
-{{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
+| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
+
 @endif
 @endif
+
 @endcomponent
 
 <!--
@@ -49,12 +46,12 @@
 Ingresar al Evento AQUÍ
 @endcomponent
 -->
-<br>
-<div style="width:100%;text-align: center">
+@if (!empty($image))
+<div class="centered">
 	<img src="{{ $image }}">
 </div>
 <br>
-
+@endif
 <!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
@@ -63,22 +60,26 @@ Ingresar al Evento AQUÍ
 
 <p style="font-size: 15px;color: gray;font-style: italic">
 	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
-	algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+    algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+    Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co    
 </p>
 
-<hr style="border-right : 0;border-left: 0;">
+<hr style="border-right : 0;border-left: 0;" />
 <p>
 	Si tiene problemas con el botón de ingreso abra el siguiente enlace
 	<a href="{{$link}}">click acá</a>
 </p>
 
-<div style="text-align: center">
-	@if($image_footer && !empty(image_footer))
-	![Logo]({{$image_footer}}) <p>image_footer</p>
-	@elseif($image_footer_default && !empty($image_footer_default))
-	![Logo]({{$image_footer_default}}) <p>image_footer_default</p>
-	@elseif($organization_picture && !empty($organization_picture))
-	![Logo]({{$organization_picture}}) <p>organization_picture</p>
-	@endif
+<div class="centered">
+@if(isset($image_footer) && !empty($image_footer))
+![Logo]({{!empty($image_footer)}})
+<img src={{$image_footer}} />
+@elseif(isset($image_footer_default) && !empty($image_footer_default))
+<img src={{$image_footer_default}} />
+@elseif(isset($organization_picture) && !empty($organization_picture))
+<img src={{$organization_picture}} />
+@endif
+
 </div>
+
 @endcomponent
