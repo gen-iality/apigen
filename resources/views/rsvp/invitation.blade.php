@@ -50,7 +50,7 @@ Ingresar al Evento AQUÍ
 @endcomponent
 -->
 <br>
-<div style="text-align: center">
+<div style="width:100%;text-align: center">
 	<img src="{{ $image }}">
 </div>
 <br>
