@@ -80,7 +80,7 @@ Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no
 @elseif(isset($image_footer_default) && !empty($image_footer_default))
 <img src={{$image_footer_default}} /><p>bbbb</p>
 @elseif(isset($organization_picture) && !empty($organization_picture))
-<img src={{$organization_picture}} />
+<img src={{$organization_picture}} /><p>cccc</p>
 @endif
 
 </div>
