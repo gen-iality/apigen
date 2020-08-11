@@ -31,6 +31,7 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $image_header;
     public $type;
     public $image_footer;
+    public $image_footer_default;
     public $activity;
     public $event_location;
     public $logo;
@@ -82,6 +83,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->activity = $activity;
         $this->message = $message;
         $this->image_footer = $image_footer;
+        $this->image_footer_default = (isset($event->styles) && isset($event->styles['banner_footer']) && $event->styles['banner_footer']) ? $event->styles['banner_footer'] : null;
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
