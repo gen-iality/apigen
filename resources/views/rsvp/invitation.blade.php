@@ -1,8 +1,10 @@
-@component('mail::message')
+@component('mail::message')  
 @if(!empty($event->styles["banner_image_email"]))
 <div class="centered">
 ![Logo]({{$event->styles["banner_image_email"]}})
+</div>
 @elseif(!empty($event->styles["banner_image"]))
+<div class="centered">
 ![Logo]({{$event->styles["banner_image"]}})
 </div>
 @endif
@@ -77,6 +79,8 @@ Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no
 @if(isset($image_footer) && !empty($image_footer))
 ![Logo]({{!empty($image_footer)}})
 <img src={{$image_footer}} /> 
+@elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
+<img src={{$event->styles["banner_footer_email"]}} />  
 @elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
 <img src={{$event->styles["banner_footer"]}} />           
 @elseif(isset($organization_picture) && !empty($organization_picture))
