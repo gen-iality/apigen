@@ -1,11 +1,11 @@
 @component('mail::message')  
 @if(!empty($event->styles["banner_image_email"]))
 <div class="centered">
-![Logo]({{$event->styles["banner_image_email"]}})
+<img src={{$event->styles["banner_image_email"]}} /> 
 </div>
 @elseif(!empty($event->styles["banner_image"]))
 <div class="centered">
-![Logo]({{$event->styles["banner_image"]}})
+<img src={{$event->styles["banner_image"]}} />  
 </div>
 @endif
 <br />
