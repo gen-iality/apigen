@@ -145,6 +145,8 @@ class RSVPController extends Controller implements ShouldQueue
         $data["message"] = $data["message"] == "" || $data["message"] == null ? "  " : $data["message"];
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
+
+        
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
         $subject = $data['subject'];
@@ -155,7 +157,6 @@ class RSVPController extends Controller implements ShouldQueue
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
 
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
@@ -166,11 +167,14 @@ class RSVPController extends Controller implements ShouldQueue
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
 
-        $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
+        $eventUsers = Attendee::where("ticket_id","5f3c6a168c430216a252ee72")->get();
+        
         $message->number_of_recipients = count($eventUsers);
+        
         $message->save();
 
         //Generar link de única autnticación
+       
 
         //var_dump($eventUsers);
         //Send RSVP
