@@ -116,20 +116,21 @@ class RSVP extends Mailable implements ShouldQueue
         $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
+        $this->ical = "";
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-        $this->ical = iCalCalendar::create($event->name)
-            ->event(iCalEvent::create($event->name)
-                    ->startsAt($date_time_from)
-                    ->endsAt($date_time_to)
-                    ->description($descripcion)
-                    ->uniqueIdentifier($event->_id)
-                    ->createdAt(new \DateTime())
-                    ->address(($event->address) ? $event->address : "Virtual en web evius.co")
-                    ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
-                //->coordinates(51.2343, 4.4287)
-                    ->organizer('soporte@evius.co', $event->organizer->name)
-                    ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
-            )->get();
+        // $this->ical = iCalCalendar::create($event->name)
+        //     ->event(iCalEvent::create($event->name)
+        //             ->startsAt($date_time_from)
+        //             ->endsAt($date_time_to)
+        //             ->description($descripcion)
+        //             ->uniqueIdentifier($event->_id)
+        //             ->createdAt(new \DateTime())
+        //             ->address(($event->address) ? $event->address : "Virtual en web evius.co")
+        //             ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+        //         //->coordinates(51.2343, 4.4287)
+        //             ->organizer('soporte@evius.co', $event->organizer->name)
+        //             ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+        //     )->get();
 
     }
 
