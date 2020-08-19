@@ -167,7 +167,7 @@ class RSVPController extends Controller implements ShouldQueue
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
         //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
 
-        $eventUsers = Attendee::where("ticket_id","5f3c6a168c430216a252ee72")->get();
+        $eventUsers = Attendee::where("ticket_id",'!=',"5f3c6a168c430216a252ee72")->where("event_id","5ee7e8653569fc5dfe51c644")->get();
         
         $message->number_of_recipients = count($eventUsers);
         
@@ -176,7 +176,7 @@ class RSVPController extends Controller implements ShouldQueue
         //Generar link de única autnticación
        
 
-        //var_dump($eventUsers);
+     
         //Send RSVP
         self::_sendRSVPmail(
             $eventUsers, $message, $event, $data
