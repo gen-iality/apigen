@@ -1,0 +1,91 @@
+<?php
+
+namespace App\Http\Controllers;
+
+
+use App\Attendee;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Validator;
+use Illuminate\Validation\Rule;
+
+/**
+ * @resource Event
+ */
+class DuncanGameController extends Controller
+{
+
+
+    const DUNCAN_EVENT_ID = "5f3fecdc5480a53a9f721bc2";
+    const LIMITESEGUNDOSPARAJUGARNUEVAMENTE= 3600;
+    const AVALIABLE_GAMES = ["darts","spaceinvaders","annie","rullettee"];
+
+    /**
+     * duncan juego guardamos el puntaje con el timestamp para después poder 
+     * limitar la cantiadad de veces jugadas por tiempo
+     * @return \App\Attendee
+     */
+    public function guardarpuntaje(Request $request)
+    {
+        $data = $request->json()->all();
+        $rules = [
+            'user_id' => 'required', //Must be a number and length of value is 8
+            'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
+            'puntaje' => 'numeric'
+        ];
+        $messages = ['in' => "Game should be one of: ".implode(", ",DuncanGameController::AVALIABLE_GAMES)];
+        $validator = Validator::make($data, $rules,$messages);
+        if (!$validator->passes()){
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
+             
+
+        $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
+        $nombre_campo_juego = $data['game']."_timestamp";
+        
+        $properties = $attendee->properties;
+
+        $properties[$nombre_campo_juego] = time();
+        $attendee->properties = $properties;
+
+        $attendee->save();
+        return $attendee;
+
+    }   
+
+    /**
+     *  Undocumented function
+     *
+     * @param Request $request
+     * @return int numero de segundos desde que jugue, menos una hora que es limite de tiempo para volver a jugar
+     * si el número es positivo no puedo jugar, si es negativo significa que ya paso más de una hora
+     */
+    public function minutosparajugar(Request $request)
+    {
+        $data = $request->input();
+        $rules = [
+            'user_id' => 'required', //Must be a number and length of value is 8
+            'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
+        ];
+        $messages = ['in' => "Game should be one of: ".implode(", ",DuncanGameController::AVALIABLE_GAMES)];
+        $validator = Validator::make($data, $rules,$messages);
+        if (!$validator->passes()){
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
+
+
+        $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
+        $nombre_campo_juego = $data['game']."_timestamp";
+                
+        $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+
+        $timestampahora = time();
+
+        $limitesegundosparajugardenuevo = 3600;
+        return  DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
+
+    }
+
+
+}
