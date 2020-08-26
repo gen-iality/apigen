@@ -270,6 +270,8 @@ class EventUserController extends Controller
     {
         $eventUserData = $request->json()->all();
 
+        $noSendMail = $request->query('no_send_mail');
+
         $email = (isset($eventUserData["email"]) && $eventUserData["email"]) ? $eventUserData["email"] : null;
         if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
             $email = $eventUserData["properties"]["email"];
@@ -298,7 +300,9 @@ class EventUserController extends Controller
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-
+        if($noSendMail === 'true'){
+            return $eventUser;
+        }
         Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
