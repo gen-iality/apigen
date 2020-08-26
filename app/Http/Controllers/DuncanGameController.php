@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Attendee;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Validator;
 use Illuminate\Validation\Rule;
+use Validator;
 
 /**
- * @resource Event
+ * Controla la dinámica de puntajes para una experiencia de un cliente (disney)
+ * pra un juego de lanzamiento que se realizo en agosto del 2020
  */
 class DuncanGameController extends Controller
 {
 
-
     const DUNCAN_EVENT_ID = "5f3fecdc5480a53a9f721bc2";
-    const LIMITESEGUNDOSPARAJUGARNUEVAMENTE= 3600;
-    const AVALIABLE_GAMES = ["darts","spaceinvaders","annie","rullettee"];
+    const LIMITESEGUNDOSPARAJUGARNUEVAMENTE = 3600;
+    const AVALIABLE_GAMES = ["darts", "spaceinvaders", "annie", "rullettee"];
 
     /**
-     * duncan juego guardamos el puntaje con el timestamp para después poder 
+     * duncan juego guardamos el puntaje con el timestamp para después poder
      * limitar la cantiadad de veces jugadas por tiempo
      * @return \App\Attendee
      */
@@ -30,50 +27,47 @@ class DuncanGameController extends Controller
     {
         $data = $request->json()->all();
         $rules = [
-            'user_id' => 'required', //Must be a number and length of value is 8
+            'user_id' => 'required',
             'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
-            'puntaje' => ['required','numeric']
+            'puntaje' => ['required', 'numeric'],
         ];
-        $messages = ['in' => "Game should be one of: ".implode(", ",DuncanGameController::AVALIABLE_GAMES)];
-        $validator = Validator::make($data, $rules,$messages);
-        if (!$validator->passes()){
+        $messages = ['in' => "Game should be one of: " . implode(", ", DuncanGameController::AVALIABLE_GAMES)];
+        $validator = Validator::make($data, $rules, $messages);
+        if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
         }
-             
 
         $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
-        $nombre_campo_juego = $data['game']."_timestamp";
-        
+        $nombre_campo_juego = $data['game'] . "_timestamp";
+
         $properties = $attendee->properties;
 
-
         //Vamos a limitar la guardada de puntaje para que guarde si la condición de tiempo se cumple, sino error.
-        DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE;
-        $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
-        if ($timestampultimojuego){
-            $timestampahora = time();  
-            if (DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego)>0){
-                return response()->json(['errors' => "No se ha cumplido el tiempo para jugar, el puntaje no se suma, se necesitan ".DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE." segundos entre juego y juego"], 400);
+        if (isset($attendee->properties[$nombre_campo_juego])) {
+            DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE;
+            $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+            if ($timestampultimojuego) {
+                $timestampahora = time();
+                if (DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego) > 0) {
+                    return response()->json(['errors' => "No se ha cumplido el tiempo para jugar, el puntaje no se suma, se necesitan " . DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE . " segundos entre juego y juego"], 400);
+                }
             }
         }
-             
 
         //actualizamos el tiempo de la última jugada
         $properties[$nombre_campo_juego] = time();
         //sumamos el puntaje al puntaje que ya tiene el usuario si exsite
-        $properties["puntaje"] = (isset($properties["puntaje"]) && $properties["puntaje"])?($properties["puntaje"]+$data["puntaje"]):$data["puntaje"];
+        $properties["puntaje"] = (isset($properties["puntaje"]) && $properties["puntaje"]) ? ($properties["puntaje"] + $data["puntaje"]) : $data["puntaje"];
 
         $attendee->properties = $properties;
-
-
 
         $attendee->save();
         return $attendee;
 
-    }   
+    }
 
     /**
-     *  Undocumented function
+     *  numero de segundos desde que jugue,
      *
      * @param Request $request
      * @return int numero de segundos desde que jugue, menos una hora que es limite de tiempo para volver a jugar
@@ -83,30 +77,27 @@ class DuncanGameController extends Controller
     {
         $data = $request->input();
 
-
         $rules = [
             'user_id' => 'required', //Must be a number and length of value is 8
             'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
         ];
-        $messages = ['in' => "Game should be one of: ".implode(", ",DuncanGameController::AVALIABLE_GAMES)];
-        $validator = Validator::make($data, $rules,$messages);
-        if (!$validator->passes()){
+        $messages = ['in' => "Game should be one of: " . implode(", ", DuncanGameController::AVALIABLE_GAMES)];
+        $validator = Validator::make($data, $rules, $messages);
+        if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
         }
 
-
         $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
-        $nombre_campo_juego = $data['game']."_timestamp";
-                
-        $timestampultimojuego = isset($attendee->properties[$nombre_campo_juego])?$attendee->properties[$nombre_campo_juego]:NULL;
+        $nombre_campo_juego = $data['game'] . "_timestamp";
 
+        $timestampultimojuego = isset($attendee->properties[$nombre_campo_juego]) ? $attendee->properties[$nombre_campo_juego] : null;
         $timestampahora = time();
 
         //Condición si núnca  ha jugado retornamos un número negativo para indicar que puede jugar
-        if (!$timestampultimojuego){
+        if (!$timestampultimojuego) {
             return -1;
         }
-        return  DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
+        return DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
 
     }
 
