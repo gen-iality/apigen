@@ -98,7 +98,7 @@ class DuncanGameController extends Controller
         $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
         $nombre_campo_juego = $data['game']."_timestamp";
                 
-        $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+        $timestampultimojuego = isset($attendee->properties[$nombre_campo_juego])?$attendee->properties[$nombre_campo_juego]:NULL;
 
         $timestampahora = time();
 
@@ -109,6 +109,5 @@ class DuncanGameController extends Controller
         return  DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
 
     }
-
 
 }
