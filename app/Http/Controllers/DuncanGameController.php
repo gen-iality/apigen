@@ -32,7 +32,7 @@ class DuncanGameController extends Controller
         $rules = [
             'user_id' => 'required', //Must be a number and length of value is 8
             'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
-            'puntaje' => 'numeric'
+            'puntaje' => ['required','numeric']
         ];
         $messages = ['in' => "Game should be one of: ".implode(", ",DuncanGameController::AVALIABLE_GAMES)];
         $validator = Validator::make($data, $rules,$messages);
@@ -46,8 +46,26 @@ class DuncanGameController extends Controller
         
         $properties = $attendee->properties;
 
+
+        //Vamos a limitar la guardada de puntaje para que guarde si la condición de tiempo se cumple, sino error.
+        DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE;
+        $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+        if ($timestampultimojuego){
+            $timestampahora = time();  
+            if (DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego)>0){
+                return response()->json(['errors' => "No se ha cumplido el tiempo para jugar, el puntaje no se suma, se necesitan ".DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE." segundos entre juego y juego"], 400);
+            }
+        }
+             
+
+        //actualizamos el tiempo de la última jugada
         $properties[$nombre_campo_juego] = time();
+        //sumamos el puntaje al puntaje que ya tiene el usuario si exsite
+        $properties["puntaje"] = (isset($properties["puntaje"]) && $properties["puntaje"])?($properties["puntaje"]+$data["puntaje"]):$data["puntaje"];
+
         $attendee->properties = $properties;
+
+
 
         $attendee->save();
         return $attendee;
@@ -64,6 +82,8 @@ class DuncanGameController extends Controller
     public function minutosparajugar(Request $request)
     {
         $data = $request->input();
+
+
         $rules = [
             'user_id' => 'required', //Must be a number and length of value is 8
             'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
@@ -79,10 +99,8 @@ class DuncanGameController extends Controller
         $nombre_campo_juego = $data['game']."_timestamp";
                 
         $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
-
         $timestampahora = time();
 
-        $limitesegundosparajugardenuevo = 3600;
         return  DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
 
     }
