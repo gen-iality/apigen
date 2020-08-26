@@ -99,8 +99,13 @@ class DuncanGameController extends Controller
         $nombre_campo_juego = $data['game']."_timestamp";
                 
         $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+
         $timestampahora = time();
 
+        //Condición si núnca  ha jugado retornamos un número negativo para indicar que puede jugar
+        if (!$timestampultimojuego){
+            return -1;
+        }
         return  DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
 
     }
