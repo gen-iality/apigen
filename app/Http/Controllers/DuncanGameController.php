@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+// firebase errro catch
+//use Kreait\Firebase\Exception\Auth\ApiConnectionFailed;
 use Validator;
 
 /**
@@ -13,6 +15,10 @@ use Validator;
  */
 class DuncanGameController extends Controller
 {
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }
 
     const DUNCAN_EVENT_ID = "5f3fecdc5480a53a9f721bc2";
     const LIMITESEGUNDOSPARAJUGARNUEVAMENTE = 3600;
@@ -106,9 +112,10 @@ class DuncanGameController extends Controller
      *
      * @param Request $request
      * @return string confirmación de que el mensaje fue enviado
-     * 
+     *
      */
-    public function invitaramigos(Request $request){
+    public function invitaramigos(Request $request)
+    {
 
         $data = $request->json()->all();
         
@@ -142,11 +149,11 @@ class DuncanGameController extends Controller
                 "to" => "57".$item['phone'],
                 "text" => "Hola! " .$item['name'].", ". $item['username']." te quiere invitar a conocer una familia diferente, igual a todas. Ingresa a https://llegaduncanville.com y disfruta el evento. Aplican T&C."
             ];
-            $client = new \GuzzleHttp\Client();     
+            $client = new \GuzzleHttp\Client();
             $headers = [
                 'Authorization' => 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json'        
+                'Accept' => 'application/json',
             ];
             $response = $client->request('POST','http://api.messaging-service.com/sms/1/text/single', 
             [
@@ -166,6 +173,59 @@ class DuncanGameController extends Controller
                 
         return "Mensaje enviado";
 
+    }
+
+    /* Estos usuarios no tienen teléfono Sin telefono
+    <p>JxFocNoaLjcl7pP1fFdrtmiGJtb2 </p>
+    <p>Wg1SKUEJ4XTxYFvcEI4qsKsf3Pg2 </p>1000
+
+    Estos usuarios no tienen un registro de auth para loguearse es un error mirar porque paso
+    <p>5f483dd494494c7ed06e1ebc </p>
+    <p>5f47b05e68826960ce50b560 </p>1266
+
+    Estos usuarios no tienen uid tampoco
+    <p>-->>5f46a7abbb0594163467fc27 +573007506738</p>
+    <p>-->>5f469276e280f66e4e6e1763 3017864991</p>
+    <p>-->>5f46b99b90341c66523916d5 313448594454</p>
+    <p>-->>5f47f9f4a741d37add114f23 3224818611</p>
+    <p>-->>5f46957f1928da3e842ef446 3176937873</p>
+    <p>-->>5f46b22965ee6d123a04ef49 3143590550</p>
+    <p>-->>5f45f8a4bc24a362bf367e23 3254698485</p>
+    <p>-->>5f4359719a09f70150203708 3134859666</p>
+    <p>-->>5f48259c5a5e1777dc023207 3007819686</p>1266
+
+     */
+
+    public function setphoneaspassword()
+    {
+        $asistentes = Attendee::where("event_id", DuncanGameController::DUNCAN_EVENT_ID)->limit(10000)->get();
+        foreach ($asistentes as $asistente) {
+            if (!isset($asistente->properties["phone"])) {
+                continue;
+            }
+            if (!isset($asistente->user)) {
+                continue;
+            }
+            if (!isset($asistente->user->uid) || !$asistente->user->uid) {
+                continue; //echo "<p>-->>" . $asistente->_id . " " . $asistente->properties["phone"] . "</p>"; 
+            }
+ 
+            if (strlen($asistente->properties["phone"]) < 6) {
+                continue; //echo "<p>-->>" . $asistente->_id . " " . $asistente->properties["phone"] . "</p>"; 
+            }            
+            
+
+
+
+            // if ($asistente->properties["email"] !== "ivan.sanchez@mocionsoft.com") {
+            //     continue;
+            // }
+
+            echo "<p>" . $asistente->user->uid . " " . $asistente->properties["phone"] . "</p>";
+            $updatedUser = $this->auth->changeUserPassword($asistente->user->uid, $asistente->properties["phone"]);
+        }
+
+        return count($asistentes);
     }
 
 }

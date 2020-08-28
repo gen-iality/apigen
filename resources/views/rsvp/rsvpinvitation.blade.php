@@ -40,7 +40,7 @@ ha sido invitado a:
 {!!$event->registration_message!!}
 @endif
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
+Ingresar al Evento AQUÃ
 @endcomponent
 
 
@@ -51,8 +51,8 @@ Ingresar al Evento AQUÍ
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-	Si tiene problemas con el botón de ingreso abra el siguiente enlace
-	<a href="{{$link}}">click acá</a>
+	Si tiene problemas con el botÃ³n de ingreso abra el siguiente enlace
+	<a href="{{$link}}">click acÃ¡</a>
 </p>
 
 

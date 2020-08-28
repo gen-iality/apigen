@@ -90,11 +90,13 @@ class UserEventService
         /* Buscamos primero el usuario por email y sino existe lo creamos */
         $email = $userData['email'];
         $matchAttributes = ['email' => $email];
+
+        
         $user = Account::updateOrCreate($matchAttributes, $userData);
 
         /* ya con el usuario actualizamos o creamos el eventUser */
-        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->id];
-
+        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->_id];
+        
         /**** HACEMOS ALGUNOS AJUSTES A LOS CAMPOS antes de importar el eventUser */
         $eventUserFields += $matchAttributes;
 
@@ -146,6 +148,8 @@ class UserEventService
         /* FINALMENTE */
         $eventUser = null;
         $model = Attendee::where($matchAttributes)->first();
+
+        
         if ($model) {
             //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
             $eventUserFields["properties"] = array_merge($model->properties, $eventUserFields["properties"]);
@@ -163,11 +167,22 @@ class UserEventService
         if (isset($eventUserFields["order_id"])) {
             $order->save();
         }
-
+/*
+array(2) {
+["a"]=>
+string(24) "5f49421b1985d661d57af862"
+["b"]=>
+string(10) "1030522402"
+5bef34f2854baf00995e018d
+}*/ 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
         //don't know why updateOrCreate doens't eager load related models
         $eventUser = Attendee::where($matchAttributes)->first();
+
+        $user = Account::find($eventUser->account_id);
+        $eventUser->user = $user;
+        
 
         return (object) [
             "status" => $result_status,
