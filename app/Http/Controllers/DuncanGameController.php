@@ -117,7 +117,7 @@ class DuncanGameController extends Controller
             $info = [
                 "from" => "InfoSMS",
                 "to" => "57".$item['phone'],
-                "text" => "Hola! " .$item['name'].", ". $item['username']." te quiere invitar a conocer una familia diferente, igual a todas. Ingresa a llegaduncanville.com y disfruta el evento. Aplican T&C."
+                "text" => "Hola! " .$item['name'].", ". $item['username']." te quiere invitar a conocer una familia diferente, igual a todas. Ingresa a https://llegaduncanville.com/ y disfruta el evento. Aplican T&C."
             ];
             $client = new \GuzzleHttp\Client();     
             $headers = [
