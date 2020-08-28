@@ -239,7 +239,7 @@ class RSVPController extends Controller implements ShouldQueue
             }
 
             // sino existe la propiedad names lo más posible es que el usuario tenga un error
-            if (!isset($eventuser->user) || !isset($eventuser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
+            if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
                 continue;
             }
             Mail::to($email)
