@@ -101,4 +101,45 @@ class DuncanGameController extends Controller
 
     }
 
+    /**
+     *  Mensaje que se enviará mediante SMS al usuario invitado
+     *
+     * @param Request $request
+     * @return string confirmación de que el mensaje fue enviado
+     * 
+     */
+    public function invitaramigos(Request $request){
+
+        $data = $request->json()->all();
+        
+        foreach ($data as $key => $item){
+
+            $info = [
+                "from" => "InfoSMS",
+                "to" => "57".$item['phone'],
+                "text" => "Bienvenido a Duncanville"
+            ];
+
+            $client = new \GuzzleHttp\Client();     
+            $headers = [
+                'Authorization' => 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'        
+            ];
+            $response = $client->request('POST','http://api.messaging-service.com/sms/1/text/single', 
+            [
+                'allow_redirects' => false , 
+                'auth' => ['mocionsoft' , 'Mocion_77725!'], 
+                'json' => $info,
+                'headers' => $headers,
+            ]); 
+            echo $response->getBody()->getContents();
+
+        }
+        
+        
+        return "Mensaje enviado";
+
+    }
+
 }

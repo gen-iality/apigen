@@ -28,6 +28,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 
 Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
 Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
+Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
 
 Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');
