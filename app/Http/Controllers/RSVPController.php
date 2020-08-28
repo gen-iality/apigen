@@ -237,11 +237,12 @@ class RSVPController extends Controller implements ShouldQueue
             if (!empty($data["include_date"])) {
                 $include_date = $data["include_date"] ? true : false;
             }
-
+            echo "a";
             // sino existe la propiedad names lo más posible es que el usuario tenga un error
             if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
                 continue;
             }
+            echo "b";
             Mail::to($email)
                 ->queue(
                     new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
