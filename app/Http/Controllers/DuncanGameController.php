@@ -118,13 +118,29 @@ class DuncanGameController extends Controller
     {
 
         $data = $request->json()->all();
+        
+        foreach ($data as $key => $item){
+            //Se le asigna 200 puntos al usuario por cada invitación
+            $attendee = Attendee::where('account_id', $item['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
 
-        foreach ($data as $key => $item) {
+            $properties = $attendee->properties;
 
+            //actualizamos el tiempo de la última invitación
+            $nombre_campo_juego = 'arboltimestamp';
+            $properties[$nombre_campo_juego] = time();
+
+            $properties["puntaje"] = (isset($properties["puntaje"]) && $properties["puntaje"]) ? ($properties["puntaje"] + 200) : 200;
+
+            $attendee->properties = $properties;
+
+            $attendee->save();
+
+
+            //Paso de parámetros para SMS
             $info = [
                 "from" => "InfoSMS",
-                "to" => "57" . $item['phone'],
-                "text" => "Hola! " . $item['name'] . ", " . $item['username'] . " te quiere invitar a conocer una familia diferente, igual a todas. Ingresa a llegaduncanville.com y disfruta el evento. Aplican T&C.",
+                "to" => "57".$item['phone'],
+                "text" => "Hola! " .$item['name'].", ". $item['username']." te quiere invitar a conocer una familia diferente, igual a todas. Ingresa a https://llegaduncanville.com y disfruta el evento. Aplican T&C."
             ];
             $client = new \GuzzleHttp\Client();
             $headers = [
@@ -132,17 +148,16 @@ class DuncanGameController extends Controller
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ];
-            $response = $client->request('POST', 'http://api.messaging-service.com/sms/1/text/single',
-                [
-                    'allow_redirects' => false,
-                    'auth' => ['mocionsoft', 'Mocion_77725!'],
-                    'json' => $info,
-                    'headers' => $headers,
-                ]);
-            echo $response->getBody()->getContents();
+            $response = $client->request('POST','http://api.messaging-service.com/sms/1/text/single', 
+            [
+                'allow_redirects' => false , 
+                'auth' => ['mocionsoft' , 'Mocion_77725!'], 
+                'json' => $info,
+                'headers' => $headers,
+            ]); 
 
         }
-
+                
         return "Mensaje enviado";
 
     }
