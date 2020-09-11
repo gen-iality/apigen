@@ -125,9 +125,16 @@ class DuncanGameController extends Controller
 
             $properties = $attendee->properties;
 
-            //actualizamos el tiempo de la última invitación
-            $nombre_campo_juego = 'arboltimestamp';
-            $properties[$nombre_campo_juego] = time();
+            
+            $nombre_campo_juego = 'arboltimestamp';                        
+
+            if (isset($attendee->properties[$nombre_campo_juego])) {
+                $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+                var_dump($attendee->properties[$nombre_campo_juego]);
+                    if ($timestampultimojuego >  0) {
+                        return  "Lo sentimos ya has invitado a tus amigos";
+                    }                
+            }
 
             $properties["puntaje"] = (isset($properties["puntaje"]) && $properties["puntaje"]) ? ($properties["puntaje"] + 200) : 200;
 
@@ -157,6 +164,12 @@ class DuncanGameController extends Controller
             ]); 
 
         }
+
+        //actualizamos el tiempo de la última invitación
+        $properties[$nombre_campo_juego] = time();
+        $attendee->properties = $properties;
+        $attendee->save(); 
+
                 
         return "Mensaje enviado";
 
