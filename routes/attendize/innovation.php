@@ -14,15 +14,6 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
 
 /****************
- * ACITIVITY 
- ****************/
-Route::post  ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@activitieAssistant');
-Route::delete('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@deleteAssistant');
-Route::put   ('events/{event_id}/activity/{acitivy_id}/activity_attendee', 'InscriptionController@updateUserActivities');
-
-
-
-/****************
  * QUANTITY
  ****************/
 Route::get   ('events/{event_id}/quantity',      'QuantityController@index');

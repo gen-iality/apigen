@@ -55,16 +55,27 @@ class ActivityAssistantsController extends Controller
      */
     public function index(Request $request, $event_id)
     {
-        return JsonResource::collection(
-            ActivityAssistants::where("event_id", $event_id)->paginate(config('app.page_size'))
-        );
+        $activity_id = $request->input("activity_id");
+        $user_id = $request->input("user_id");
+
+        $query = ActivityAssistants::where("event_id", $event_id);
+
+        //Filtro por actividad
+        if ($activity_id){
+            $query->where("activity_id",$activity_id);       
+        }
+
+        //Filtro por usuario
+        if ($user_id){
+            $query->where("user_id",$user_id);       
+        }
+
+        return JsonResource::collection($query->paginate(config('app.page_size')));
     }
-    public function indexUsers(Request $request, $event_id, $activity_id)
-    {
-        $model = ActivityAssistants::where("activity_id",$activity_id)->first();
-        return JsonResource::collection(
-            Attendee::find($model->user_ids)->makeHidden(["rol","activities"])
-        );
+    public function meIndex(Request $request, $event_id)
+    {   
+        $user = auth()->user();      
+        return JsonResource::collection(ActivityAssistants::where("user_id", $user->_id)->paginate(config('app.page_size')));
     }
     /**<
      * Store a newly created resource in storage.
@@ -73,13 +84,22 @@ class ActivityAssistantsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function activitieAssistant(Request $request, $event_id)
+    public function store(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        $activity_id =$data["activity_id"];
+        //$data["user_id"] $data["activity_id"]  $data["event_id"]
         $data["event_id"] = $event_id;
         
+        //reduceAvailability   
+        $result = new ActivityAssistants($data);   
+        $result->save();
+        return $result;
+    }
+
+    private function  reduceAvailability(){
+        $activity_id      = $data["activity_id"];
         $model = ActivityAssistants::where("activity_id",$activity_id)->first();
+       
         if(!is_null($model)){
             
             $user_ids = $model->user_ids;
@@ -103,12 +123,6 @@ class ActivityAssistantsController extends Controller
             }else{
                 return "Capacidad completada, le invitamos a visitar otras actividades";
             }
-        }else{
-            // si no existe lo crea
-            $data["user_ids"] = [$data["user_id"]];   
-            $result = new ActivityAssistants($data);   
-            $result->save();
-            return $result;
         }
     }
     
