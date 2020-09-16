@@ -171,10 +171,10 @@ class InvitationMail extends Mailable implements ShouldQueue
             return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
-            ->attachData($this->ical, 'ical.ics', [
-                'mime' => 'text/calendar',
-            ])
-            ->markdown('rsvp.invitationCustom');
+            // ->attachData($this->ical, 'ical.ics', [
+            //     'mime' => 'text/calendar',
+            // ])
+            ->markdown('rsvp.invitationcustom');
         //return $this->view('vendor.mail.html.message');
         }
         return $this
