@@ -41,19 +41,6 @@ Route::apiResource('events/{id}/surveys', 'SurveysController');
 Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequestions');
 
 
-/****************
- * ACITIVITY ASSISTANTS 
- ****************/
-
-Route::get  ('fillassitantsbug/{id}', 'ActivityAssistantsController@fillassitantsbug');
-// get users enrroled on activities
-Route::get   ('events/{event_id}/activity_users/{activity_id}',      'ActivityAssistantsController@indexUsers');
-
-Route::post  ('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
-Route::post('events/{event_id}/activity/activity_attendee/{id}', 'ActivityAssistantsController@deleteAssistant');
-
-Route::apiResource('events/{event_id}/activity_attendee', 'ActivityAssistantsController');
-
 /***************
  * HOST
  * rutas para guardar la agenda de los eventos
