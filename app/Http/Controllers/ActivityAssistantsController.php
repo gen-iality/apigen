@@ -100,9 +100,24 @@ class ActivityAssistantsController extends Controller
         }
         
         //reduceAvailability   
-        $result = new ActivityAssistants($data);   
-        $result->save();
-        return $result;
+        $activityAssistant = new ActivityAssistants($data);   
+        $activityAssistant->save();
+       
+        
+        $user     = Account::find($data["user_id"]);
+        $activity = Activities::find($data["activity_id"]);
+        
+
+        $subject = "Tu registro ha sido exitoso a".$activity->name;
+        Mail::to($user->email)
+        ->queue(
+            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            new \App\Mail\ActivityRegistration($subject,$activityAssistant,$activity)
+        );
+
+
+
+        return $activityAssistant;
     }
 
     private function  reduceAvailability(){
