@@ -303,11 +303,19 @@ class EventUserController extends Controller
         if($noSendMail === 'true'){
             return $eventUser;
         }
+        if($event->send_custom_email)
+        {
+            Mail::to($email)
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+                );
+        }     
         Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                 new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name)
-            );
+            ); 
         return $eventUser;
 
     }
