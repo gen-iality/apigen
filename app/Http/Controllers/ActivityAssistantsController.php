@@ -19,6 +19,7 @@ use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\evaLib\Services\UserEventService;
 
+
 /**
  * @resource Event
  *
@@ -78,6 +79,14 @@ class ActivityAssistantsController extends Controller
         $data = $request->json()->all();
         $activity_id =$data["activity_id"];
         $data["event_id"] = $event_id;
+        $rules = [
+            'user_id' => 'required',
+            'activity_id' => 'required'
+        ];
+        $validator = Validator::make($data, $rules);
+        if (!$validator->passes()) {
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
         
         $model = ActivityAssistants::where("activity_id",$activity_id)->first();
         if(!is_null($model)){

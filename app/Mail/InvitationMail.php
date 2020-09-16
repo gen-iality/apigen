@@ -68,6 +68,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         // lets encrypt !
         $pass = self::encryptdata($password);
 
+
         // Admin SDK API to generate the sign in with email link.
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
@@ -160,10 +161,22 @@ class InvitationMail extends Mailable implements ShouldQueue
 
     public function build()
     {
+
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
 
+        if($this->event->send_custom_email)
+        {
+            return $this
+            ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->attachData($this->ical, 'ical.ics', [
+                'mime' => 'text/calendar',
+            ])
+            ->markdown('rsvp.invitationCustom');
+        //return $this->view('vendor.mail.html.message');
+        }
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
