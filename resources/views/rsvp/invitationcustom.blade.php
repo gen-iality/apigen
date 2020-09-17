@@ -18,7 +18,7 @@
 @endif
 
 <p>
-	Si tiene problemas con el botón de ingreso abra el siguiente enlace
+	Si tiene problemas con el ingreso abra el siguiente enlace
 	<a href="{{$link}}">click acá</a>
 </p>
 
