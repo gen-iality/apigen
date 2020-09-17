@@ -310,6 +310,7 @@ class EventUserController extends Controller
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
                 );
+            return $eventUser;            
         }     
         Mail::to($email)
             ->queue(
