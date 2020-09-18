@@ -1,13 +1,13 @@
 @component('mail::message') 
 <div class="centered"> 
 
+<h2>Su registro ha sido exitoso a:  {{$activity->name}}</h2>
 
 <!-- Mensaje personalizado del CMS -->
 @if ($activity->registration_message)
-<p>{{$activity->registration_message}}</p>
+{!!$activity->registration_message!!}
 @endif
 
-<p>Tu registro ha sido exitoso a:  {{$activity->name}}</p>
 
 </div>
 
