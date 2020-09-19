@@ -501,9 +501,11 @@ class EventUserController extends Controller
     }
 
     public function index(Request $request, $event_id)
-    {
+    {   
+        $pageSize = (int) $request->input('pageSize');
+        $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
         return EventUserResource::collection(
-            Attendee::where('event_id', $event_id)->paginate(config("app.page_size"))
+            Attendee::where('event_id', $event_id)->paginate($pageSize)
         );
     }
 
