@@ -667,7 +667,7 @@ class EventUserController extends Controller
         //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
         //}
 
-        //$activity = new ActivityAssistantsController();
+        //$activity = new ActivityAssistantController();
         //$activity->activitieAssistant($request,$event_id);
 
         return $user_invited;

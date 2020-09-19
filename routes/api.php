@@ -97,8 +97,10 @@ Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQr
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento
  ****************/
 
-Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantsController');
-Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantsController@meIndex');
+Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantController');
+Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantController@meIndex');
+Route::put    ('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
+
 
 /***************
  * USER PROPERTIES

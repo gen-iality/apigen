@@ -10,9 +10,9 @@ use Moloquent;
  * Category Model
  *
  */ 
-class ActivityAssistants extends Moloquent
+class ActivityAssistant extends Moloquent
 {
-    
+    protected $dates = ['checkedin_at'];
     public function eventusers()
     {
         return $this->hasMany('App\Attendee');
