@@ -53,12 +53,17 @@ class EventUserController extends Controller
      *
      *  @return \Illuminate\Http\Response EventUserResource collection
      */
-    public function indexByEvent(Request $request, String $event_id, FilterQuery $filterQuery)
+   
+    public function index(Request $request, String $event_id, FilterQuery $filterQuery)
     {
         $query = Attendee::where("event_id", $event_id);
-
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
-
+        return EventUserResource::collection($results);
+    }
+    public function meInEvent(Request $request, $event_id)
+    {
+        $query = Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->get();
+        $results = $query->makeHidden(['activities', 'event']);
         return EventUserResource::collection($results);
     }
 
@@ -66,7 +71,6 @@ class EventUserController extends Controller
     {
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
         $results = $query->makeHidden(['activities', 'event']);
-
         return EventUserResource::collection($results);
     }
 
@@ -491,12 +495,6 @@ class EventUserController extends Controller
         //return $response;
     }
 
-    public function index(Request $request, $event_id)
-    {
-        return EventUserResource::collection(
-            Attendee::where('event_id', $event_id)->paginate(config("app.page_size"))
-        );
-    }
 
     public function indexByEventUser(Request $request)
     {

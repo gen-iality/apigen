@@ -61,31 +61,37 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
  ****************/
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');
-Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+Route::get('events/{event_id}/eventusers', 'EventUserController@indexByUserInEvent');
+
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
 Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 
 // api para transferir eventuser
 Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
-Route::get('eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
+Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
 
 Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
 
+Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
+
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
-Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAddtoEvent');
-Route::get('events/{event_id}/eventusers', 'EventUserController@index');
-Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put('events/{event_id}/eventusers/{id}', 'EventUserController@update');
+
+Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
+
+Route::get    ('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
+//CRUD
+Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
+Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
 
-Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+
 Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 
