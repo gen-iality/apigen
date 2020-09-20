@@ -89,6 +89,7 @@ Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInE
 Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
 //CRUD
 Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
+Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
 Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
