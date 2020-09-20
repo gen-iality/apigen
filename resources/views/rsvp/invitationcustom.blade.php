@@ -9,7 +9,7 @@
 </a>
 @endif -->
 
-<a href="{{$link}}"><img src="https://firebasestorage.googleapis.com/v0/b/coltest-eb7de.appspot.com/o/imagemckinsey.png?alt=media&token=4a77a418-6bda-4f19-9e15-2c9369cf6b2d"/> </a>
+<a href="{{$link}}"><img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/MckinseyRegistroImagen.jpeg?alt=media&token=8b5ff869-8215-47af-9098-770d3131ead6"/> </a>
 
 
 <!-- Por si tiene asociado un tickete con sala -->
@@ -18,7 +18,7 @@
 @endif
 
 <p>
-	Si tiene problemas con el botón de ingreso abra el siguiente enlace
+	Si tiene problemas con el ingreso abra el siguiente enlace
 	<a href="{{$link}}">click acá</a>
 </p>
 

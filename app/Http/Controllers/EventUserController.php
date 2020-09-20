@@ -307,11 +307,20 @@ class EventUserController extends Controller
         if($noSendMail === 'true'){
             return $eventUser;
         }
+        if($event->send_custom_email)
+        {
+            Mail::to($email)
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+                );
+            return $eventUser;            
+        }     
         Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                 new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name)
-            );
+            ); 
         return $eventUser;
 
     }
@@ -495,7 +504,6 @@ class EventUserController extends Controller
         //return $response;
     }
 
-
     public function indexByEventUser(Request $request)
     {
         $events = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
@@ -656,7 +664,7 @@ class EventUserController extends Controller
         //    $user_invited = Attendee::where("event_id",$event_id)->where("properties.email", $data["properties"]["email"])->first();
         //}
 
-        //$activity = new ActivityAssistantsController();
+        //$activity = new ActivityAssistantController();
         //$activity->activitieAssistant($request,$event_id);
 
         return $user_invited;
