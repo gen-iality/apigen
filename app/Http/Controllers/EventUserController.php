@@ -62,9 +62,10 @@ class EventUserController extends Controller
     }
     public function meInEvent(Request $request, $event_id)
     {
-        $query = Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->get();
+        $query = Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->first();
+
         $results = $query->makeHidden(['activities', 'event']);
-        return EventUserResource::collection($results);
+        return new EventUserResource($results);
     }
 
     public function meEvents(Request $request)
