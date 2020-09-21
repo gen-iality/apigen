@@ -11,7 +11,7 @@ use Moloquent;
  */
 class Activities extends Moloquent
 {
-    protected $with = ['activity_categories', 'space', 'hosts', 'type', 'access_restriction_roles', 'language'];
+    protected $with = ['activity_categories', 'space', 'hosts', 'type', 'access_restriction_roles'];
     protected $appends = ['access_restriction_types_available'];
 
     /** Overriding  */
