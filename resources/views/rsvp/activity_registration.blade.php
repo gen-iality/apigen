@@ -15,7 +15,6 @@
 
 <p style="font-size: 15px;color: gray;font-style: italic">
 Si tiene algúna duda o inconveniente, no dude en escribirnos al siguiente correo soporte@evius.co  
-o al whatsapp +573002162757
 </p>
 @endcomponent
 
