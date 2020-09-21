@@ -11,7 +11,7 @@ use Moloquent;
  */
 class Activities extends Moloquent
 {
-    protected $with = ['activity_categories', 'space', 'hosts', 'type', 'access_restriction_roles'];
+    protected $with = ['activity_categories', 'space', 'hosts', 'type', 'access_restriction_roles', 'language'];
     protected $appends = ['access_restriction_types_available'];
 
     /** Overriding  */
@@ -105,5 +105,6 @@ class Activities extends Moloquent
         "bigmaker_meeting_id",
         "vimeo_id",
         "registration_message",
+        "related_meetings"
     ];
 }
