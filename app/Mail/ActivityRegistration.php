@@ -34,12 +34,8 @@ class ActivityRegistration extends Mailable implements ShouldQueue
         $this->activity = $activity;
         $this->subject = $subject;
         $this->event_link = 'https://evius.co/landing/'.$activity->event->_id;
-        $datetime_start = \Carbon\Carbon::parse($activity->datetime_start);
-        $datetime_end = ($activity->datetime_end)?\Carbon\Carbon::parse($activity->datetime_end):$datetime_start->addHour();
-
-        //Corrigiendo zona horaria
-        $datetime_start .= "-5000";
-        $datetime_end .= "-5000";
+        $datetime_start = \Carbon\Carbon::parse($activity->datetime_start."-05:00");
+        $datetime_end = ($activity->datetime_end)?\Carbon\Carbon::parse($activity->datetime_end."-05:00"):$datetime_start->addHour();
 
 /*
 EJEMPLO GOOGLE CALENDAR
@@ -92,9 +88,12 @@ MDhiNDhiMTUzN2QwZGE0NTQ4YWU4ZmJlZjZkMjg0MWMyOGZmODU&ctz=America%2FBogota&hl
 :~:~:~:~:~:~:~:~:~::~:~::-
 EOF;
 
+$description = $activity->name." Ver el evento en: ".$this->event_link;
+
 
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
         $this->ical = iCalCalendar::create($activity->name)
+        ->withTimezone()
             ->appendProperty(
                 TextPropertyType::create('URL', $this->event_link) 
             )
@@ -118,7 +117,7 @@ EOF;
             )
             
             ->get();
-            var_dump( $this->ical );
+            
     }
 
     /**
