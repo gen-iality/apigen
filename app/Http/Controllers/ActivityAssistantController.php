@@ -108,7 +108,7 @@ class ActivityAssistantController extends Controller
         $activity = Activities::find($data["activity_id"]);
         
 
-        $subject = "Tu registro ha sido exitoso a:  ".$activity->name;
+        $subject = "Confirmación de regsitro ".$activity->name;
         Mail::to($user->email)
         ->queue(
             //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
