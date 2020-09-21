@@ -34,7 +34,6 @@ class ActivityRegistration extends Mailable implements ShouldQueue
         $this->activity = $activity;
         $this->subject = $subject;
         $this->event_link = 'https://evius.co/landing/'.$activity->event->_id;
-
         $datetime_start = \Carbon\Carbon::parse($activity->datetime_start);
         $datetime_end = ($activity->datetime_end)?\Carbon\Carbon::parse($activity->datetime_end):$datetime_start->addHour();
 
@@ -102,8 +101,8 @@ EOF;
             //     TextPropertyType::create('X-ALT-DESC', $activity->description.' <a href="'.$this->event_link.'">visita el evento</a>') 
             // )
             ->event(iCalEvent::create($activity->name)
-                    ->startsAt($datetime_start)
-                    ->endsAt($datetime_end)
+                    ->startsAt($datetime_start)."-5000"
+                    ->endsAt($datetime_end)."-5000"
                     ->description($description)
                     ->uniqueIdentifier($activity->_id)
                     ->createdAt(new \DateTime())
@@ -115,6 +114,7 @@ EOF;
             )
             
             ->get();
+            var_dump( $this->ical );
     }
 
     /**
