@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
+use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
 {
