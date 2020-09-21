@@ -125,7 +125,7 @@ EOF;
     public function build()
     {
         $event = $this->activity->event;
-        $from = !empty($event->organizer_id) ? Organization::find($event->organizer_id)->name : "Evius Event ";
+        $from = !empty($event->organizer_id) ? Organization::find($event->organizer_id)->name. "- EVIUS" : "Eventos Evius";
 
         $subject = $this->subject;
         return $this
