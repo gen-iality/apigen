@@ -108,7 +108,7 @@ EOF;
                     ->uniqueIdentifier($activity->_id)
                     ->createdAt(new \DateTime())
                     ->address(($activity->address) ? $activity->address : $event_link)
-                    ->addressName(($activity->address) ? $activity->address : $event_link)
+                    //->addressName(($activity->address) ? $activity->address : $event_link)
                 //->coordinates(51.2343, 4.4287)
                     ->organizer('alerts@evius.co', $activity->organizer)
                     //->alertMinutesBefore(60, $activity->name . " empezará dentro de poco.")
@@ -133,7 +133,7 @@ EOF;
             ->subject($subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
-                'Content-Type' => 'text/calendar; charset="UTF-8"; method=REQUEST',
+                //'Content-Type' => 'text/calendar; charset="UTF-8"; method=REQUEST',
             ]) 
             ->markdown('rsvp.activity_registration');
     }
