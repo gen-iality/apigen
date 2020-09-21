@@ -21,6 +21,7 @@ class ActivityRegistration extends Mailable implements ShouldQueue
     public $activityAssistant;
     public $activity;
     public $ical = "";
+    public $event_link;
 
     /**
      * Create a new message instance.
@@ -32,8 +33,7 @@ class ActivityRegistration extends Mailable implements ShouldQueue
         $this->activityAssistant = $activityAssistant;
         $this->activity = $activity;
         $this->subject = $subject;
-
-        $event_link = 'https://evius.co/landing/'.$activity->event->_id;
+        $this->event_link = 'https://evius.co/landing/'.$activity->event->_id;
 
         $datetime_start = \Carbon\Carbon::parse($activity->datetime_start);
         $datetime_end = ($activity->datetime_end)?\Carbon\Carbon::parse($activity->datetime_end):$datetime_start->addHour();
@@ -93,13 +93,13 @@ EOF;
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
         $this->ical = iCalCalendar::create($activity->name)
             ->appendProperty(
-                TextPropertyType::create('URL', $event_link) 
+                TextPropertyType::create('URL', $this->event_link) 
             )
             ->appendProperty(
                 TextPropertyType::create('METHOD', "REQUEST") 
             )
             // ->appendProperty(
-            //     TextPropertyType::create('X-ALT-DESC', $activity->description.' <a href="'.$event_link.'">visita el evento</a>') 
+            //     TextPropertyType::create('X-ALT-DESC', $activity->description.' <a href="'.$this->event_link.'">visita el evento</a>') 
             // )
             ->event(iCalEvent::create($activity->name)
                     ->startsAt($datetime_start)
@@ -107,7 +107,7 @@ EOF;
                     ->description($description)
                     ->uniqueIdentifier($activity->_id)
                     ->createdAt(new \DateTime())
-                    ->address(($activity->address) ? $activity->address : $event_link)
+                    ->address(($activity->address) ? $activity->address : $this->event_link)
                     //->addressName(($activity->address) ? $activity->address : $event_link)
                 //->coordinates(51.2343, 4.4287)
                     ->organizer('alerts@evius.co', $activity->organizer)
@@ -125,7 +125,7 @@ EOF;
     public function build()
     {
         $event = $this->activity->event;
-        $from = !empty($event->organizer_id) ? Organization::find($event->organizer_id)->name. "- EVIUS" : "Eventos Evius";
+        $from = !empty($event->organizer_id) ? Organization::find($event->organizer_id)->name. " - EVIUS" : "Eventos Evius";
 
         $subject = $this->subject;
         return $this
