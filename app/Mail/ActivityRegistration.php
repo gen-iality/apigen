@@ -115,8 +115,6 @@ EOF;
             )
             
             ->get();
-
-            var_dump($this->ical);die;
     }
 
     /**
