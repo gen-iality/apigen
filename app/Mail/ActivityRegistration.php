@@ -107,10 +107,10 @@ EOF;
                     ->description($description)
                     ->uniqueIdentifier($activity->_id)
                     ->createdAt(new \DateTime())
-                    ->address(($activity->address) ? $activity->address : "Virtual en web evius.co")
-                    ->addressName(($activity->address) ? $activity->address : "Virtual en web evius.co")
+                    ->address(($activity->address) ? $activity->address : $event_link)
+                    ->addressName(($activity->address) ? $activity->address : $event_link)
                 //->coordinates(51.2343, 4.4287)
-                    ->organizer('soporte@evius.co', $activity->organizer)
+                    ->organizer('alerts@evius.co', $activity->organizer)
                     //->alertMinutesBefore(60, $activity->name . " empezará dentro de poco.")
             )
             
