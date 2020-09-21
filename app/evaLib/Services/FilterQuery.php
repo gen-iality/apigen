@@ -46,7 +46,7 @@ class FilterQuery
     public static function addDynamicQueryFiltersFromUrl($query, $request)
     {
 
-
+        
         $filteredBy = json_decode($request->input('filtered'));
         $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
 
@@ -59,7 +59,7 @@ class FilterQuery
             }
 
             //for any eventUser inner properties enable text like partial search by default is the most common use case
-            if (strpos($condition->id, 'properties.') === 0) {
+            if (strpos($condition->id, 'properties.') === 0 &&  !isset($condition->comparator)) {
                 $condition->comparator = "like";
             }
 
@@ -75,7 +75,7 @@ class FilterQuery
                 $query->whereIn($condition->id, $condition->value);
             }
         }
-
+        
         foreach ((array) $orderedBy as $order) {
 
             if (!isset($order->id)) {
