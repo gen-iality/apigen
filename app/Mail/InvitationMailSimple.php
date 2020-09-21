@@ -37,6 +37,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
     public $event_location;
     public $logo;
     public $ical = "";
+    public $event_link;
     /**
      * Create a new message instance.
      *
@@ -89,6 +90,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
+        $this->event_link = "https://evius.co/landing/".$event->_id;
 
         if (!$subject) {
             "Invitación a " . $event->name . "";
