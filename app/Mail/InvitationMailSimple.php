@@ -100,8 +100,15 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
+        $description = $event->name." Ver el evento en: ".$this->link;
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
         $this->ical = iCalCalendar::create($event->name)
+            ->appendProperty(
+                TextPropertyType::create('URL', $this->event_link) 
+            )
+            ->appendProperty(
+                TextPropertyType::create('METHOD', "REQUEST") 
+            )
             ->event(iCalEvent::create($event->name)
                     ->startsAt($date_time_from)
                     ->endsAt($date_time_to)
@@ -182,7 +189,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
-                'mime' => 'text/calendar',
+                'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
             ])
             ->markdown('rsvp.invitation');
         //return $this->view('vendor.mail.html.message');

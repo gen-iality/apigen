@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
+use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 
 class InvitationMail extends Mailable implements ShouldQueue
 {
@@ -36,6 +37,7 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $event_location;
     public $logo;
     public $ical = "";
+    
     /**
      * Create a new message instance.
      *
@@ -88,6 +90,8 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
+        $this->urlconfirmacion = 'https://evius.co/landing/'.$event->_id;
+        
 
         if (!$subject) {
             "Invitación a " . $event->name . "";
@@ -97,19 +101,27 @@ class InvitationMail extends Mailable implements ShouldQueue
         $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
 
         $this->subject = $subject;
-        $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
-        $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
+        // $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
+        // $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
+        $descripcion = $event->name." Ver el evento en: ".$this->link;
+     
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
         $this->ical = iCalCalendar::create($event->name)
+            ->appendProperty(
+                TextPropertyType::create('URL', $this->urlconfirmacion) 
+            )
+            ->appendProperty(
+                TextPropertyType::create('METHOD', "REQUEST") 
+            )
             ->event(iCalEvent::create($event->name)
                     ->startsAt($date_time_from)
                     ->endsAt($date_time_to)
                     ->description($descripcion)
                     ->uniqueIdentifier($event->_id)
                     ->createdAt(new \DateTime())
-                    ->address(($event->address) ? $event->address : "Virtual en web evius.co")
-                    ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                    ->address(($event->address) ? $event->address :  $this->urlconfirmacion)
+                    // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
                 //->coordinates(51.2343, 4.4287)
                     ->organizer('soporte@evius.co', $event->organizer->name)
                     ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
@@ -181,7 +193,7 @@ class InvitationMail extends Mailable implements ShouldQueue
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
-                'mime' => 'text/calendar',
+                'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
             ])
             ->markdown('rsvp.invitation');
         //return $this->view('vendor.mail.html.message');
