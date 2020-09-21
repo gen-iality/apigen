@@ -92,12 +92,12 @@
   },
   "extra": {
     "enable-patching": true,
-    "patches": {
-      "webup/laravel-sendinblue": {
-        "Add event providerSendEmail into SendinBlueTransport": "patches/add-event-in-sendinblue.patch"
-      },
+    "patches": {      
       "spatie/laravel-permission": {
-        "Change eloquent to moloquent in spatie": "patches/spatieToMoloquent.patch"
+        "Change eloquent to moloquent in spatie": "eviuspatches/spatieToMoloquent.patch"
+      },
+       "spatie/icalendar-generator": {
+        "Agregando la letra Z al final de la fecha del evento": "eviuspatches/parchetimezone.patch"
       }
     },
     "laravel": {
