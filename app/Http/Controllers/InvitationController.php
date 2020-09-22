@@ -64,7 +64,7 @@ class InvitationController extends Controller
             } catch (AuthError $e) {
 
                 Log::error("temp password used. " . $e->getMessage());
-                $pass = "temppassw123";
+                $pass = "evius.2040";
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
             }
 

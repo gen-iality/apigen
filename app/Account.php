@@ -100,7 +100,7 @@ class Account extends User
 
                     \Log::debug($model);
                     //Si ya existe un usuario con ese correo se jode
-                    $newpassword = isset($model->password) ? $model->password : "mocion.2040";
+                    $newpassword = isset($model->password) ? $model->password : "evius.2040";
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
