@@ -416,16 +416,17 @@ class EventUserController extends Controller
             $auth = resolve('Kreait\Firebase\Auth');
             $signInResult = null;
 
-            try {
-                if (isset($eventUser->user->refresh_token)) {
-                    $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
-                }
-            } catch (\Exception $e) {
-                if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
-                } else {
-                    return response()->json((object) ["message" => $e->getMessage()], 400);
-                }
-            }
+            // 
+            //try {
+            //     if (isset($eventUser->user->refresh_token)) {
+            //         $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
+            //     }
+            // } catch (\Exception $e) {
+            //     if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
+            //     } else {
+            //         return response()->json((object) ["message" => $e->getMessage()], 400);
+            //     }
+            // }
 
             if (!$signInResult) {
                 $pass = (isset($userData["password"])) ? $userData["password"] : "evius.2040";
