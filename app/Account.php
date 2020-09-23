@@ -124,6 +124,45 @@ class Account extends User
                 }
             }
         );
+        self::saving(function($model){
+       
+        });
+
+        self::saving(function ($model) {
+        
+            try {
+                if ($model->uid) {
+                    return;
+                }
+
+                $fbuser = self::$auth->getUserByEmail($model->email);
+                if ($fbuser) {
+                    $model->uid = $fbuser->uid;
+                } else {
+                    //Si ya existe un usuario con ese correo se jode
+                    $newpassword = isset($model->password) ? $model->password : "evius.2040";
+                    $fbuser = self::$auth->createUser(
+                        [
+                            "email" => $model->email,
+                            //emailVerified: false,
+                            //phoneNumber: "+11234567890",
+                            "password" => $newpassword,
+                            "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                            //photoURL: "http://www.example.com/12345678/photo.png",
+                            //disabled: false
+                        ]
+                    );
+                    $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+                    $model->uid = $fbuser->uid;
+                    $model->initial_token = $singed->idToken();
+                    $model->refresh_token = $singed->refreshToken();
+                }
+
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        });
+
     }
 
     /**

@@ -416,6 +416,7 @@ class EventUserController extends Controller
             $auth = resolve('Kreait\Firebase\Auth');
             $signInResult = null;
 
+
             // 
             //try {
             //     if (isset($eventUser->user->refresh_token)) {
@@ -427,13 +428,15 @@ class EventUserController extends Controller
             //         return response()->json((object) ["message" => $e->getMessage()], 400);
             //     }
             // }
-
+            
             if (!$signInResult) {
                 $pass = (isset($userData["password"])) ? $userData["password"] : "evius.2040";
 
                 if (isset($eventUser->user->uid)) {
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
+                    
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
+                    
                     $eventUser->user->refresh_token = $signInResult->refreshToken();
                     $eventUser->user->save();
                 }
@@ -443,6 +446,7 @@ class EventUserController extends Controller
                 //throw new Exception($outter_message . ' and new token could not be generated');
                 $eventUser->user->initial_token = $signInResult->accessToken();
             }
+            
 
             $response = new EventUserResource($eventUser);
 
