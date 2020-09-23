@@ -9,7 +9,7 @@
 	</span>
 
 </div>
-@if ($response)
+@if ($request_type == 'friendship')
 @component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
 Aceptar solicitud
 @endcomponent
@@ -18,6 +18,17 @@ Aceptar solicitud
 Rechazar solicitud
 @endcomponent
 @endif
+
+@if ($request_type == 'meeting')
+@component('mail::button', ['url' => $link_front . "&response=accepted" , 'color' => 'evius'])
+Aceptar reunión
+@endcomponent
+
+@component('mail::button', ['url' => $link_front . "&response=rejected" , 'color' => 'evius'])
+Rechazar reunión
+@endcomponent
+@endif
+
 
 <br />
 @component('mail::button', ['url' => $link_authenticated, 'color' => 'evius'])
