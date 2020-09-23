@@ -53,7 +53,7 @@ class EventUserController extends Controller
      *
      *  @return \Illuminate\Http\Response EventUserResource collection
      */
-   
+
     public function index(Request $request, String $event_id, FilterQuery $filterQuery)
     {
         $query = Attendee::where("event_id", $event_id);
@@ -62,7 +62,7 @@ class EventUserController extends Controller
     }
     public function meInEvent(Request $request, $event_id)
     {
-        $query = Attendee::where("event_id",$event_id)->where("account_id", auth()->user()->_id)->first();
+        $query = Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->first();
 
         $results = $query->makeHidden(['activities', 'event']);
         return new EventUserResource($results);
@@ -294,7 +294,7 @@ class EventUserController extends Controller
         //}
 
         $event = Event::findOrFail($event_id);
-        $image = null;//$event->picture;
+        $image = null; //$event->picture;
 
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
@@ -305,23 +305,22 @@ class EventUserController extends Controller
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-        if($noSendMail === 'true'){
+        if ($noSendMail === 'true') {
             return $eventUser;
         }
-        if($event->send_custom_email)
-        {
+        if ($event->send_custom_email) {
             Mail::to($email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
                 );
-            return $eventUser;            
-        } 
+            return $eventUser;
+        }
         Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                 new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name)
-            ); 
+            );
         return $eventUser;
 
     }
@@ -409,27 +408,45 @@ class EventUserController extends Controller
 
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
             $eventUser = $result->data;
+
             /**
              *
              *Creamos un token para que se pueda autologuear el usuario
              **/
             $auth = resolve('Kreait\Firebase\Auth');
             $signInResult = null;
-            if (isset($eventUser->user->refresh_token)) {
-                $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
-            } else {
-                $pass = "mocion.2040";
+
+
+            // 
+            //try {
+            //     if (isset($eventUser->user->refresh_token)) {
+            //         $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
+            //     }
+            // } catch (\Exception $e) {
+            //     if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
+            //     } else {
+            //         return response()->json((object) ["message" => $e->getMessage()], 400);
+            //     }
+            // }
+            
+            if (!$signInResult) {
+                $pass = (isset($userData["password"])) ? $userData["password"] : "evius.2040";
+
                 if (isset($eventUser->user->uid)) {
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
+                    
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
+                    
                     $eventUser->user->refresh_token = $signInResult->refreshToken();
                     $eventUser->user->save();
                 }
             }
+
             if ($signInResult && $signInResult->accessToken()) {
                 //throw new Exception($outter_message . ' and new token could not be generated');
                 $eventUser->user->initial_token = $signInResult->accessToken();
             }
+            
 
             $response = new EventUserResource($eventUser);
 
@@ -437,7 +454,9 @@ class EventUserController extends Controller
             $response->additional($additional);
 
         } catch (\Exception $e) {
-
+            var_dump(get_class($e));
+            echo "fin";
+            var_dump($e->getMessage());die;
             return response()->json((object) ["message" => $e->getMessage()], 400);
 
         }
