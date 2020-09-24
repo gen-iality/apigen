@@ -13,13 +13,16 @@ use Moloquent;
 class ActivityAssistant extends Moloquent
 {
     protected $dates = ['checkedin_at'];
-    public function eventusers()
+    protected $with = ['user'];
+
+
+    public function user()
     {
-        return $this->hasMany('App\Attendee');
+        return $this->belongsTo('App\Account','user_id','_id');
     }
-    public function Acitivities()
+    public function Acitivity()
     {
-        return $this->hasMany('App\Activities');
+        return $this->hasOne('App\Activities');
     }
     protected $guarded = [];
 }

@@ -71,7 +71,21 @@ class ActivityAssistantController extends Controller
             $query->where("user_id",$user_id);       
         }
 
-        return JsonResource::collection($query->paginate(config('app.page_size')));
+        
+        //$usuarios_ids = $query->pluck('user_id')->toArray();
+        $activity_attendees = $query->get();
+        $usuarios_ids = $activity_attendees->pluck('user_id')->toArray();
+        
+        //extraemos los attendees relacionados
+        //->whereIn('account_id',$usuarios_ids)-
+        $event_attendees = Attendee::where("event_id", $event_id)->get()->keyBy("account_id");
+        $total = 0;
+        foreach($activity_attendees as $key=>$attendee){
+            if (isset($event_attendees[$attendee['user_id']])){
+            $activity_attendees[$key]["attendee"] = $event_attendees[$attendee['user_id']];
+            }
+        }
+        return JsonResource::collection($activity_attendees);
     }
     public function meIndex(Request $request, $event_id)
     {   
