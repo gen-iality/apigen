@@ -27,7 +27,7 @@ class ContributorController extends Controller
     public function index(String $event_id)
     {
         $usersRolesEvent = ModelHasRole::where('event_id', $event_id)->get();
-        return ModelHasRoleResource::collection($usersRolesEvent);
+        return ModelHasRoleResource::collection($usersRdolesEvent);
     }
 
     /**
@@ -64,8 +64,8 @@ class ContributorController extends Controller
             if (isset($rol['properties'])) {
                 $email = $rol['properties']['email'];
                 $names = $rol['properties']['Nombres'];
-                $Nombres = $rol['properties']['Nombres'];
-                $matchAttributes = ['email' => $email, 'names' => $names, 'Nombres' => $Nombres];
+                $Nombres = $rol['properties'][''];
+                $matchAttributes = ['email' => $email, 'names' => $names, '' => $Nombres];
                 $user = Account::updateOrCreate($matchAttributes, $rol['properties']);
                 $rol['model_id'] = $user->id;
             } else {
@@ -186,14 +186,13 @@ class ContributorController extends Controller
      */
     public function myEvents(Request $request)
     {
-
         $user = Auth::user();
         $eventsOne = Event::with('userPermissions')->whereHas('userPermissions', function ($q) use ($user) {
             $q->where('model_id', $user->id);
         })->get();
 
-        $eventsTwo = Event::with('userPermissions')->where('author_id', $user->id)->get();
+        $eventsTwo = Event::with('userPermissions')->where('author_id', $user->_id)->get();
         $events = $eventsOne->merge($eventsTwo);
-        return  $events ? ModelHasRoleResource::collection($events) : [];
+        return  $events ? ModelHasRoleResource::collection($events) : ModelHasRoleResource::collection($events);
     }
 }

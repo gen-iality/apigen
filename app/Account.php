@@ -3,25 +3,21 @@
 namespace App;
 
 use App\Attendize\Utils;
+use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Hash;
-use DB;
-use App\Models\User;
 
 class Account extends User
 {
     use SoftDeletes;
     use Notifiable;
     use HasRoles;
-    
+
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
 
-
-    
     /**
      * The validation rules
      *
@@ -29,8 +25,8 @@ class Account extends User
      */
     protected $rules = [
         'first_name' => ['required'],
-        'last_name'  => ['required'],
-        'email'      => ['required', 'email'],
+        'last_name' => ['required'],
+        'email' => ['required', 'email'],
     ];
 
     /**
@@ -39,7 +35,6 @@ class Account extends User
      * @var array $dates
      */
     public $dates = ['deleted_at'];
-
 
     /**
      * The validation error error_messages.
@@ -59,6 +54,7 @@ class Account extends User
         'first_name',
         'last_name',
         'email',
+        'password',
         'timezone_id',
         'date_format_id',
         'datetime_format_id',
@@ -81,7 +77,7 @@ class Account extends User
         'stripe_secret_key',
         'stripe_publishable_key',
         'stripe_data_raw',
-        'payment_gateway_id'
+        'payment_gateway_id',
     ];
 
     public function __construct($attributes = array())
@@ -100,27 +96,81 @@ class Account extends User
         //Creamos el usuario en firebase
         self::creating(
             function ($model) {
-                try{
-                    
+                try {
+
+                    \Log::debug($model);
                     //Si ya existe un usuario con ese correo se jode
+                    $newpassword = isset($model->password) ? $model->password : "evius.2040";
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
                             //emailVerified: false,
                             //phoneNumber: "+11234567890",
-                            "password" => isset($model->password) ? $model->password : "mocion.2040",
+                            "password" => $newpassword,
                             "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
                             //photoURL: "http://www.example.com/12345678/photo.png",
                             //disabled: false
                         ]
                     );
+
+                    $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+
                     $model->uid = $fbuser->uid;
-                    //var_dump($fbuser);
-                }catch(\Exception $e){
+                    $model->initial_token = $singed->idToken();
+                    $model->refresh_token = $singed->refreshToken();
+
+                } catch (\Exception $e) {
                     var_dump($e->getMessage());
                 }
             }
         );
+
+        /** Idealmente se debe usar self::updating pero por alguna razón no lo llama */
+        self::saving(function ($model) {
+            //aplica solo para el evento update
+            if (!$model->exists) {return;}
+
+            //Si ya tiene un UID es decir su usario en firebase no hay necesidad se volverlo a crear
+            if ($model->uid) {return;}
+
+            $fbuser = null;
+            try {
+                $fbuser = self::$auth->getUserByEmail($model->email);
+                $model->uid = $fbuser->uid;
+                return;
+
+            } catch (\Exception $e) {
+                //No existe el usuario en firebase
+                $fbuser = null;
+            }
+
+
+            try {
+                //Sino existe el usuario el firebase lo creamos
+                $newpassword = isset($model->password) ? $model->password : "evius.2040";
+                $fbuser = self::$auth->createUser(
+                    [
+                        "email" => $model->email,
+                        //emailVerified: false,
+                        //phoneNumber: "+11234567890",
+                        "password" => $newpassword,
+                        "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                        //photoURL: "http://www.example.com/12345678/photo.png",
+                        //disabled: false
+                    ]
+                );
+
+                //lo autologueamos de una vez
+                $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+                $model->uid = $fbuser->uid;
+                $model->initial_token = $singed->idToken();
+                $model->refresh_token = $singed->refreshToken();
+
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        });
+
     }
 
     /**
@@ -197,7 +247,8 @@ class Account extends User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function gateways() {
+    public function gateways()
+    {
         return $this->account_payment_gateways();
     }
 
@@ -233,14 +284,12 @@ class Account extends User
     {
         $gateway = $this->getGateway($gateway_id);
 
-        if($gateway && is_array($gateway->config)) {
+        if ($gateway && is_array($gateway->config)) {
             return isset($gateway->config[$key]) ? $gateway->config[$key] : false;
         }
 
         return false;
     }
-
-
 
     /**
      * Get the stripe api key.

@@ -36,11 +36,7 @@ body{
 }
 
 
-.containing-table {
-    display: table;
-    width: 97%;
-    height: 70%;
-}
+
 .centre-align {
     display: table-cell;
     text-align: center;
@@ -60,11 +56,43 @@ body{
         </style>
     </head>
     <body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
-    <img class="imagen" src="{{$image}}" />        
+    
+
+    
 
 <div class="containing-table">
+    <div class="centre-align">
+    <img style="width:90%;heigh:auto" src="https://api.evius.co/images/logoMecLong.png">  
+    <h1>¡Bienvenido al Movimiento de Empresarios Creativos!</h1>
+<p>
+@if (strstr($etapa,"Etapa"))
 
-    <div class="centre-align">{!! $content !!}
+Tu empresa está en {{ $etapa }}, por ello te invitamos a participar en los espacios diseñados a la
+@else
+
+Tu empresa está en etapa de {{ $etapa }}, por ello te invitamos a participar en los espacios diseñados a la
+@endif
+medida de tus necesidades, para ayudarte a crecer.
+
+Te compartimos el link para que armes tu agenda y vivas la experiencia PowerCamp.
+</p>
+
+<p>Visita el siguiente link  <a href="https://meccc.com.co/">www.meccc.com.co</a>
+Ingresa con tu usuario y contrasena y podras inscribirte en tus actividades sugeridas
+</p>
+<p>Tu usuario y contraseña son los siguientes</p> 
+<br>
+
+
+<p>{{ $email}}</p>
+
+<p>{{ $id }}</p>
+<br>
+<p>¡La zona de registro será en Casa Merced!</p>
+
+<p>Recuerda que también puedes disfrutar el 14 y 15 de noviembre del MECx en el Bulevar del río,
+donde habrá exposiciones empresariales, conciertos, casa de arte y más experiencias.</p>
+
     </div>
 </div>
     </body>

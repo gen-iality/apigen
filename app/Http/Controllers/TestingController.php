@@ -6,84 +6,41 @@ use App;
 use App\Account;
 use App\Event;
 use App\Extensions\payment_placetopay\src\Gateway;
+use App\Jobs\ProcessTest;
 use App\Jobs\SendOrderTickets;
-use App\Mail\BookingConfirmed;
 use App\MessageUser;
 use App\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
+use Omnipay;
 use QRCode;
 use Sendinblue\Mailin;
 use Spatie\Permission\Models\Permission;
+use \App\Attendee;
 use \App\Message;
-use Omnipay;
-use Log;
 
 class TestingController extends Controller
 {
 
-    public function pendingOrders(){
+    public function serialization()
+    {
+        $eventuser = Attendee::find("5ee44aae1801874b5d124a15");
 
-/*
-        $orders = Order::select('order_reference')->where('event_id',"5c3fb4ddfb8a3371ef79bd62")->get();
-        echo "cuantas: ". $orders->count();
-
-        foreach($orders as $order){
-
-            $this->dispatch(new SendOrderTickets($order));
-            echo "<p>";
-            echo $order->order_reference;
-            echo "</p>";
-            @ob_end_flush(); // to get php's internal buffers out into the operating system
-            flush();           
-        }
-        
-
-        die;
-
-*/
-
-
-        $pending_code = "5c4a299c5c93dc0eb199214a";
-        $waiting_payment = "5c4232c1477041612349941e";
-        $orders = Order::select('order_reference')->where('order_status_id',$waiting_payment)->get();
-        echo "Cuantos en estado pendiente: ".($orders->count())."<br/><br/>";
-        
-         $count = 0;
-         foreach($orders as $order){
-             $EventCheckoutController = app()->make('App\Http\Controllers\EventCheckoutController');
-
-             //No tenemos un registro para saber por que pasarela fue hecho el pago
-             //nos toca probar con las dos pasarelas que usamos
-             $response = app()->call([$EventCheckoutController, 'showOrderPaymentStatusPaymentGateway'], 
-             ['order_reference' => $order->order_reference, 'payment_gateway' => 'payu']);
-             $respuesta1 = $response;
-
-             if ($response == "NOT FOUND")
-             $response = app()->call([$EventCheckoutController, 'showOrderPaymentStatusPaymentGateway'], 
-             ['order_reference' => $order->order_reference, 'payment_gateway' => 'placetopay']);      
-             $respuesta2 = $response;
-
-             echo "<p>";
-             echo $order->order_reference."  payu ".$respuesta1." ptp ".$respuesta2 ;
-
-/*              $order = app()->call([$EventCheckoutController, 'changeStatusOrder'], 
-             ['order_reference' => $order->order_reference, 'status' => $response]);   */          
-              
-             echo " status ".$order->order_status_id;
-
-             echo "</p>";
-             @ob_end_flush(); // to get php's internal buffers out into the operating system
-             flush(); // to tell the operating system to flush it's buffers to the user.
-             if ($count++>6)die;
-         }
+        return $eventuser->toJson();
 
     }
 
+    public function testQueue()
+    {
+        ProcessTest::dispatch();
+    }
 
+    public function pendingOrders()
+    {
+
+    }
 
     public function resendOrder($order_id)
     {
@@ -165,10 +122,10 @@ class TestingController extends Controller
         $message = "mensaje";
         $subject = "[Invitación Máxim] kraken en Colombia";
 
-        Mail::to($email)
-            ->send(
-                new BookingConfirmed($eventuser)
-            );
+        //Mail::to($email)
+        //    ->send(
+        //        new BookingConfirmed($eventuser)
+        //    );
         return "ok";
         /*
 
@@ -272,7 +229,7 @@ class TestingController extends Controller
 
         $reference = '123456789';
         $request = [
-    
+
             "payer" => [
                 "name" => "DIANA FULTON",
                 "surname" => "Yost",
@@ -286,8 +243,8 @@ class TestingController extends Controller
                     "state" => "Antioquia",
                     "postalCode" => "46292",
                     "country" => "US",
-                    "phone" => "363-547-1441 x383"
-                ]
+                    "phone" => "363-547-1441 x383",
+                ],
             ],
             "buyer" => [
                 "name" => "DIANA FULTON",
@@ -302,36 +259,37 @@ class TestingController extends Controller
                     "state" => "Antioquia",
                     "postalCode" => "46292",
                     "country" => "US",
-                    "phone" => "363-547-1441 x383"
+                    "phone" => "363-547-1441 x383",
                 ],
             ],
-        'payment' => [
-        'reference' => $reference,
-        'description' => 'Testing payment',
-        'amount' => [
-            'currency' => 'COP',
-            'total' => 120000,
-        ],
-        ],
-        'expiration' => date('c', strtotime('+2 days')),
-        'returnUrl' => 'http://evius.co/response?reference=' . $reference,
-        'ipAddress' => '127.0.0.1',
-        'userAgent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+            'payment' => [
+                'reference' => $reference,
+                'description' => 'Testing payment',
+                'amount' => [
+                    'currency' => 'COP',
+                    'total' => 120000,
+                ],
+            ],
+            'expiration' => date('c', strtotime('+2 days')),
+            'returnUrl' => 'http://evius.co/response?reference=' . $reference,
+            'ipAddress' => '127.0.0.1',
+            'userAgent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
         ];
 
         $response = $placetopay->request($request);
         if ($response->isSuccessful()) {
-        // STORE THE $response->requestId() and $response->processUrl() on your DB associated with the payment order
-        // Redirect the client to the processUrl or display it on the JS extension
-        return $response->processUrl();
-        // header('Location: ' . $response->processUrl());
+            // STORE THE $response->requestId() and $response->processUrl() on your DB associated with the payment order
+            // Redirect the client to the processUrl or display it on the JS extension
+            return $response->processUrl();
+            // header('Location: ' . $response->processUrl());
         } else {
-        // There was some error so check the message and log it
-        var_dump($response->status());die;
+            // There was some error so check the message and log it
+            var_dump($response->status());die;
         }
     }
 
-    public function Gateway(){
+    public function Gateway()
+    {
 
         $gateway = Omnipay::create('placetopay');
         return $gateway->initialize();
@@ -339,43 +297,50 @@ class TestingController extends Controller
 
     }
 
-    public function orderSave($order_id){
+    public function orderSave($order_id)
+    {
         $order = Order::find($order_id);
 /*         $event = Event::find($order->event_id);
-        $event_properties = $event->user_properties;
-        $attendees_order = $order->attendees;
-        $amount = 0;
+$event_properties = $event->user_properties;
+$attendees_order = $order->attendees;
+$amount = 0;
 
-        //Vamos a recorrer los asistentes que contiene una orden
-        foreach($attendees_order as $attendee){
-            //Capturarmos los campos con su valor de los asistentes que contienen una orden
-            $properties = $attendee->properties;
-            //Recorremos las propiedades del asistente 
-            foreach($properties as $key_attendize=>$attendize){
-                //Recorremos los campos definidos en el evento para encontrar cual tiene monto
-                foreach($event_properties as $key_event_property => $event_property){
-                    //Si el valor del campo es igual al que se configuro en el evento entramos
-                    if($event_property['name'] == $key_attendize){
-                        //Si dentro de campo existe las opciones significa que es un dropdown y entramos
-                        if(isset($event_property['options'])){
-                            //Recorremos las opciones del dropdown
-                            foreach($event_property['options'] as $key_property=>$property){
-                                //Si el input tiene definido un monto entramos
-                                if(isset($property['amount'])){
-                                    //Si el valor del attendize es igual al campo de la propiedad entra
-                                    if($key_property == $attendize){
-                                        $amount += $property['amount'];
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }
-        $order->amount = $amount+$order->amount;
-        return $order->amount; */
+//Vamos a recorrer los asistentes que contiene una orden
+foreach($attendees_order as $attendee){
+//Capturarmos los campos con su valor de los asistentes que contienen una orden
+$properties = $attendee->properties;
+//Recorremos las propiedades del asistente
+//Recorremos las propiedades del asistente
+//Recorremos las propiedades del asistente
+//Recorremos las propiedades del asistente
+//Recorremos las propiedades del asistente
+//Recorremos las propiedades del asistente
+//Recorremos las propiedades del asistente
+foreach($properties as $key_attendize=>$attendize){
+//Recorremos los campos definidos en el evento para encontrar cual tiene monto
+foreach($event_properties as $key_event_property => $event_property){
+//Si el valor del campo es igual al que se configuro en el evento entramos
+if($event_property['name'] == $key_attendize){
+//Si dentro de campo existe las opciones significa que es un dropdown y entramos
+if(isset($event_property['options'])){
+//Recorremos las opciones del dropdown
+foreach($event_property['options'] as $key_property=>$property){
+//Si el input tiene definido un monto entramos
+if(isset($property['amount'])){
+//Si el valor del attendize es igual al campo de la propiedad entra
+if($key_property == $attendize){
+$amount += $property['amount'];
+}
+}
+}
+}
+}
+}
+}
+
+}
+$order->amount = $amount+$order->amount;
+return $order->amount; */
         $order->save();
     }
 

@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use App\Activities;
 use App\Category;
 use App\Event;
+use App\ZoomHost;
 use App\RoleAttendee;
-
+use Aws\S3\S3Client;
+use Aws\Credentials\Credentials;
+use Aws\S3\Transfer;
+use Carbon\Carbon;
+use Aws\Common\Exception\MultipartUploadException;
+use Aws\S3\MultipartUploader;
+use Aws\Exception\AwsException;
+use Aws\S3\ObjectUploader;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 /**
  * @resource Event
@@ -17,15 +27,31 @@ class ActivitiesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request, $event_id)
     {
+        $data = $request->json()->all();
+        //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
+        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+
+        if($res=="en"){
+            return JsonResource::collection(
+               Activities::where("event_id", $event_id)->where('locale', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
+        }else{
+            return JsonResource::collection(
+                Activities::where("event_id", $event_id)->where('locale', '!=', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
+        }
+    }   
+
+    public function indexByHost(Request $request, $event_id, $host_id)
+    {
         return JsonResource::collection(
-            Activities::paginate(config('app.page_size'))
+            Activities::where("event_id", $event_id)->where('host_ids', $host_id)->paginate(config('app.page_size'))
         );
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +64,7 @@ class ActivitiesController extends Controller
         $data["event_id"] = $event_id;
         
         $activity = new Activities($data);     
-        $activity->save();       
+        $activity->save();
 
         if(isset($data["activity_categories_ids"])){
             $activity_categories_ids = $data["activity_categories_ids"];
@@ -58,11 +84,122 @@ class ActivitiesController extends Controller
         }
         if(isset($data["access_restriction_rol_ids"])){
             $ids = $data["access_restriction_rol_ids"];
-            $activity->access_restriction_roles()->attach($ids);        
+            $activity->access_restriction_roles()->attach($ids);
         }
         //Cargamos de nuevo para traer la info de las categorias
         $activity = Activities::find($activity->id);        
         return $activity;
+    }
+    
+
+    public function createMeeting(Request $request,$event_id,$activity_id){
+
+        $data = $request->json()->all();
+
+        $datetime_start_activity = date_format(Carbon::parse($data["activity_datetime_start"]),'Y-m-d');
+
+        $where_date_exist = Activities::where('datetime_start', 'like', '%'.$datetime_start_activity.'%')->where("zoom_host_id","!=",null)->pluck("zoom_host_id");
+        
+        $available_host = ZoomHost::whereNotIn("id", $where_date_exist)->first();
+        if( $available_host == null){
+            return "No available host for this day :(";
+        }
+    
+        $client = new Client();
+        $url = config('app.zoom_server')."/crearroom";
+        $headers =  [ 'Content-Type' => 'application/json' ];
+        
+        $request = $client->post($url, 
+            ['json' => [
+                "activity_name" => $data["activity_name"],
+                "agenda" => $data["activity_description"],
+                "activity_id" => $activity_id,
+                "event_id" => $event_id,
+                "host_id" => $available_host->id
+                ]
+            ],
+            ['headers' => $headers
+        ]); 
+
+        $activity = Activities::find($activity_id);
+        
+
+        return $request;
+    }
+
+    // endpoint que recibe el webhook de zoom guarda la info en mongo y la traspasa a s3 de aws
+    public function storeMeetingRecording(Request $request)
+    {
+        $data = $request->json()->all();
+        $meeting_id = $data["payload"]["object"]["id"];
+        $token = $data["download_token"];
+        echo "id reunion".$meeting_id."<br>";
+        $zoom_array = $data["payload"]["object"]["recording_files"];
+        foreach ($zoom_array as $key => $value) {
+            echo "tipo archivo".$value["file_type"]."<br>";
+             if($value["file_type"] == "MP4" ){
+                $zoom_url = $value["download_url"];
+                echo $zoom_url;
+
+                break;
+             }
+        }
+        $values["meeting_video"] = $zoom_url;
+        $activity = Activities::where("meeting_id",$meeting_id)->first();
+
+        echo "actividad".$activity->_id."<br>";
+        $activity->fill($values);
+        $activity->save();
+
+        $client = new \GuzzleHttp\Client();     
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,        
+        ];
+        $request = $client->get($zoom_url."?access_token=".$token, ['allow_redirects' => false],[
+            'headers' => $headers
+        ]); 
+
+        $cookies = $request->getHeaderLine('Set-Cookie');
+        $source = $request->getHeaderLine('Location');
+        
+        $key = $meeting_id.Carbon::now().".mp4";
+
+        $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
+
+        $s3 = new S3Client([
+            'version' => 'latest',
+            'region'  => 'sa-east-1',
+            'credentials' => $credentials
+        ]);
+          
+        $uploader = new MultipartUploader($s3,$source, [
+            'cookies' => $cookies,
+            'bucket' => 'meetingsrecorded',
+            'key'    => $key,
+            'ACL'    => 'public-read'
+        ]);
+
+        $result = $uploader->upload();
+        $values["zoom_meeting_video"] = $result["Location"];
+        str_replace('//','/',$values["meeting_video"]);
+        $activity->fill($values);
+        $activity->save();
+        return $activity;
+
+    }
+    // endpoint destinado a indexar las conferencias del s3 de aws
+    public function indexConferences(Request $request)
+    {
+        $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
+        $s3 = new S3Client([
+            'version' => 'latest',
+            'region'  => 'sa-east-1',
+            'credentials' => $credentials
+        ]);
+        
+        return $s3->getPaginator('ListObjects', [
+            'Bucket' => 'meetingsrecorded'
+        ]);
     }
     
     /**
@@ -73,8 +210,30 @@ class ActivitiesController extends Controller
      */
     public function show($event_id, $id)
     {
+        $activity = Activities::findOrFail($id);
+        return $activity;
+    }
+
+
+    // endpoint destinado a la duplicacion de una actividad a idioma ingles
+    public function duplicate($event_id, $id)
+    {
+        $activities_in_es = Activities::findOrFail($id);
         $Activities = Activities::findOrFail($id);
-        return $Activities;
+        $data['duplicate'] = true;
+        $Activities->fill($data);
+        $Activities->save();     
+       
+        if(!empty($activities_in_es->duplicate)){
+            return "actividad ya duplicada";
+        }
+        $activities_in_es->get();
+        $activities_in_en = json_decode(json_encode($activities_in_es),true);
+        $activities_in_en["locale"] = "en";
+        $activities_in_en["locale_original"] = $activities_in_en['_id'];
+        $activity = new Activities($activities_in_en);
+        $activity->save();
+        return $activity;
     }
     /**
      * Update the specified resource in storage.
@@ -112,8 +271,7 @@ class ActivitiesController extends Controller
         if(isset($data["access_restriction_rol_ids"])){
             $ids = $data["access_restriction_rol_ids"];
             $Activities->access_restriction_roles()->detach();
-            $Activities->access_restriction_roles()->attach($ids);        
-         
+            $Activities->access_restriction_roles()->attach($ids);       
         }
         $activity = Activities::find($Activities->id);
         return $activity;

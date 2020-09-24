@@ -4,18 +4,20 @@
  */
 namespace App\Http\Controllers;
 
-use App\evaLib\Services\UserEventService;
-use App\Event;
 use App\Attendee;
+use App\Event;
 use App\Mail\RSVP;
+use App\Mail\wallActivity;
 use App\Message;
 use App\MessageUser;
 use App\State;
-use App\Account;
+use GuzzleHttp\Client;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
+use Redirect;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
@@ -24,11 +26,89 @@ use Illuminate\Support\Facades\Mail;
 class RSVPController extends Controller implements ShouldQueue
 {
 
+    public function __construct(\Kreait\Firebase\Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
     public function test()
     {
-        echo "hola";
         echo Config::get('app.front_url', 'aaa');
+        $actionCodeSettings = ['url' => 'http://localhost:3000/linklogin?email=esteban.sanchez@mocionsoft.com',
+            'handleCodeInApp' => false,
+            //'dynamicLinkDomain' => 'evius.co'
+        ];
+
+        // Admin SDK API to generate the sign in with email link.
+        $usremail = 'esteban.sanchez@mocionsoft.com';
+        $link = $this->auth->getSignInWithEmailLink($usremail, $actionCodeSettings);
+        echo "<p>" . $link . "</p>";
     }
+
+    public function singIn(Request $request)
+    {
+
+        $actionCodeSettings = ['handleCodeInApp' => false];
+        $link = $this->auth->getSignInWithEmailLink($request->input("email"), $actionCodeSettings);
+
+        $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+        if ($request->input("request")) {
+
+            $data["response"] = $request->input("response");
+
+            $url = config('app.api_evius') . '/events/' . $innerpath . '/acceptordecline/' . $request->input("request");
+            $client = new Client();
+            try {
+                $response = $client->request('PUT', $url, [
+                    'body' => json_encode($data),
+                    'headers' => ['Content-Type' => 'application/json'],
+                ]);
+            } catch (\ClientErrorResponseException $e) {
+
+            }
+        }
+
+        $parts = parse_url($link);
+        parse_str($parts['query'], $query);
+
+        $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
+
+        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
+    }
+
+    /**
+     **  notificaciones al correo por actividad en el muro
+     **/
+    public function wallActivity(Request $request, String $event_id)
+    {
+        $data = $request->json()->all();
+
+        if ($data["type"] == "post") {
+            $eventUsers = Attendee::where("event_id", $event_id)->get();
+            $user_sender = Attendee::find($data["user_sender_id"]);
+
+            foreach ($eventUsers as $event_user) {
+                $user_receiver = $event_user;
+                Mail::to($user_receiver->properties["email"])->queue(
+                    new wallActivity($data, $event_id, $user_sender, $user_receiver)
+                );
+
+            }
+
+        } elseif ($data["type"] == "comment") {
+
+            $user_sender = Attendee::find($data["user_sender_id"]);
+            $user_receiver = Attendee::find($data["user_receiver_id"]);
+            return Mail::to($user_receiver->properties["email"])->queue(
+                new wallActivity($data, $event_id, $user_sender, $user_receiver)
+            );
+        }
+        //Mail::to($email)->queue(
+        //    new wallActivity($data,$event_id)
+        //);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,20 +142,22 @@ class RSVPController extends Controller implements ShouldQueue
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
-        
+        $data["message"] = $data["message"] == "" || $data["message"] == null ? "  " : $data["message"];
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
+
+        
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
         $subject = $data['subject'];
         $subject = ($subject) ? $subject : "[Invitación] " . $event->name;
         $message->subject = $subject;
-        
+
         $message->message = $data['message'];
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
-        
+
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-        
+      
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
@@ -84,36 +166,34 @@ class RSVPController extends Controller implements ShouldQueue
         //addUsers - recipients of message
         //https://stackoverflow.com/questions/33005815/laravel-5-retrieve-json-array-from-request
         //$eventUsers = UserEventService::addUsersToAnEvent($event, $eventUsersIds);
-        $eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
-        
+        //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
+
+        $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
         $message->number_of_recipients = count($eventUsers);
         $message->save();
 
         //var_dump($eventUsers);
         //Send RSVP
         self::_sendRSVPmail(
-            $eventUsers, $message, $event
+            $eventUsers, $message, $event, $data
         );
         $mesage = $message->fresh();
-        
+
         return $message;
     }
-    
-/**
- * saveRSVP
- *
- * @param [type] $message
- * @param [type] $subject
- * @param [type] $image
- * @param [type] $footer
- * @param [type] $usersCount
- * @param [type] $eventId
- * @return void
- */
 
     /**
      * Store a newly created resource in storage.
      *
+     * saveRSVP
+     *
+     * @param [type] $message
+     * @param [type] $subject
+     * @param [type] $image
+     * @param [type] $footer
+     * @param [type] $usersCount
+     * @param [type] $eventId
+     * @return void
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -121,50 +201,51 @@ class RSVPController extends Controller implements ShouldQueue
     {
         $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
+
     }
 
-/**
- * Undocumented function
- *
- * @param [type] $eventUsers
- * @param [type] $message
- * @return void
- */
-    private static function _sendRSVPmail($eventUsers, $message, $event)
+    /**
+     * Undocumented function
+     *
+     * @param [type] $eventUsers
+     * @param [type] $message
+     * @return void
+     */
+    private static function _sendRSVPmail($eventUsers, $message, $event, $data = null)
     {
+        \Log::debug("attemp to send rsvp mail" . $message->subject);
 
         foreach ($eventUsers as &$eventUser) {
-
-            if (!$eventUser || !isset($eventUser->user)) {
-                $usuariolog = (isset($eventUser)) ? $eventUser->toJson() : "";
-                \Log::debug("This eventUser doesn't have any assosiated user" . $usuariolog);
-                continue;
-            }
 
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "juan.lopez@mocionsoft.com";
+            $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
 
-            $messageUser = new MessageUser(
-                [
-                    'email' => $eventUser->user->email,
-                    'user_id' => $eventUser->user->id,
-                    'event_user_id' => $eventUser->id,
-                ]
+            $messageUser = new MessageUser([
+                'email' => $eventUser->email,
+                'user_id' => $eventUser->id,
+                'event_user_id' => $eventUser->id,
+            ]
             );
             $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
-
-            if (!$eventUser->user) {
-                \Log::debug("Account doesn't exists for this eventUser: " . $eventUser->id);
-                return null;
+            $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
+            $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
+            $include_date = false;
+            if (!empty($data["include_date"])) {
+                $include_date = $data["include_date"] ? true : false;
             }
-
+            echo "a";
+            // sino existe la propiedad names lo más posible es que el usuario tenga un error
+            if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
+                continue;
+            }
+            echo "b";
             Mail::to($email)
                 ->queue(
-                    new RSVP($message->message, $event, $eventUser, $message->image, $message->footer, $message->subject)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
                 );
 
             //->cc('juan.lopez@mocionsoft.com');
@@ -174,7 +255,7 @@ class RSVPController extends Controller implements ShouldQueue
     /**
      * Undocumented function
      *
-     * @return void
+     * @Ireturn void
      */
     public function confirmRSVP(Attendee $eventUser)
     {

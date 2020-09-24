@@ -12,7 +12,6 @@ use Moloquent;
  */
 class RoleAttendee extends Moloquent
 {
-
     //protected $with = ['event'];
 
     //protected $table = 'category';
@@ -24,7 +23,13 @@ class RoleAttendee extends Moloquent
     {
         return $this->belongsTo('App\Event');
     }
-    protected $fillable = [ 
-        'name','event_id','rol_id'
+
+    public function attendee()
+    {
+        return $this->hasMany('App\Attendee');
+
+    }
+    protected $fillable = [
+        'name', 'event_id', 'rol_id',
     ];
 }

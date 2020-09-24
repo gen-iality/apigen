@@ -4,15 +4,15 @@
  */
 namespace App\evaLib\Services;
 
-use App\Event;
-use App\Attendee;
-use App\Rol;
-use App\Order;
-use App\State;
 use App\Account;
-use Carbon\Carbon;
+use App\Attendee;
+use App\Event;
 use App\Models\OrderItem;
 use App\Models\Ticket;
+use App\Order;
+use App\Rol;
+use App\State;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -40,70 +40,64 @@ class UserEventService
         $message = "OK";
         $date = Carbon::now();
         $date = $date->format('his');
-        
+
         /* Buscamos el ticket */
-        if(isset($eventUserFields['ticket_id'])){
-            $ticket = Ticket::findOrFail($eventUserFields['ticket_id']);
-            $ticket_details['qty'] = 1;
-
-            // return $ticket;
-
-            /*
-            * Update some ticket info
-            */
-            $ticket->increment('quantity_sold', $ticket_details['qty']);
-            $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
-            $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
+        if (isset($eventUserFields['ticket_id']) && !empty($eventUserFields['ticket_id'])) {
+            $ticket = Ticket::find($eventUserFields['ticket_id']);
+            if ($ticket) {
+                $ticket_details['qty'] = 1;
+                /*
+                 * Update some ticket info
+                 */
+                $ticket->increment('quantity_sold', $ticket_details['qty']);
+                $ticket->increment('sales_volume', ($ticket['price'] * $ticket_details['qty']));
+                $ticket->increment('organiser_fees_volume', ($ticket['organiser_booking_fee'] * $ticket_details['qty']));
+            }
         }
 
-         /* Si viene el id de la orden en la variable eventUserFields
+        /* Si viene el id de la orden en la variable eventUserFields
         buscamos la orden  */
         if (isset($eventUserFields["order_id"])) {
 
             $order = Order::findOrFail($eventUserFields["order_id"]);
 
-           
             //Insert order items (for use in generating invoices)
 
-           $orderItem = new OrderItem();
-           $orderItem->title = $ticket['title'];
-           $orderItem->quantity = 1;
-           $orderItem->order_id = $order->id;
-           $orderItem->unit_price = $ticket['price'];
-           $orderItem->unit_booking_fee = $ticket['booking_fee'] + $ticket['organiser_booking_fee'];
-           $orderItem->save();
+            $orderItem = new OrderItem();
+            $orderItem->title = $ticket['title'];
+            $orderItem->quantity = 1;
+            $orderItem->order_id = $order->id;
+            $orderItem->unit_price = $ticket['price'];
+            $orderItem->unit_booking_fee = $ticket['booking_fee'] + $ticket['organiser_booking_fee'];
+            $orderItem->save();
         }
-
-
 
         /* Si no existe el correo le creamos uno, anteriormente se mostraba un error */
         // if (!isset($userData['email'])) {
         //     $userData['email'] = 'event_'.$date.'@evius.co';
         // }
-         /* Si no existe el correo le mostramos el error */
-         if (!isset($userData['email'])) {
+        /* Si no existe el correo le mostramos el error */
+        if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
         }
+
+        //LLenamos dos campos importantes con valores por defecto por si no vienen
+        if (!isset($userData['names'])) {
+            $userData['names'] = isset($userData['firstName']) ? $userData['firstName'] : $userData['email'];
+        }
+        $userData['displayName'] = $userData['names'];
 
         /* Buscamos primero el usuario por email y sino existe lo creamos */
         $email = $userData['email'];
         $matchAttributes = ['email' => $email];
-    
-        if (!isset($userData['names'])) {
-            $userData['names'] = isset($userData['firstName']) ? $userData['firstName'] : $userData['email'];
-        }
 
-        if (isset($userData['names'])) {
-            $userData['displayName'] = $userData['names'];
-            // unset($userData['names']);
-        }
-
+        
         $user = Account::updateOrCreate($matchAttributes, $userData);
 
-
         /* ya con el usuario actualizamos o creamos el eventUser */
-        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->id];
-
+        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->_id];
+        
+        /**** HACEMOS ALGUNOS AJUSTES A LOS CAMPOS antes de importar el eventUser */
         $eventUserFields += $matchAttributes;
 
         //avoid saving uid as user properties
@@ -116,26 +110,31 @@ class UserEventService
         //Account rol assigned by default
         if (!isset($eventUserFields["rol_id"])) {
             $rol = Rol::where('level', 0)->first();
-            $eventUserFields["rol_id"] = $rol->_id;
+            if ($rol) {
+                $eventUserFields["rol_id"] = $rol->_id;
+            } else {
+                //Se supone este es un rol por defecto (asistente) si todo el resto falla
+                $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
+            }
+
         }
-        $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
 
         //esto por que se nos fue un error en el excel al princiopo
         if (isset($eventUserFields["state_id"])) {
             unset($eventUserFields["state_id"]);
-        }       
-                
+        }
+
         //eventUser booking status default value
         // Si el usuario no tiene asignado un estado, poner un estado por defecto
         if (!isset($user->state_id) || !$user->state_id) {
             $temp = State::first();
             $eventUserFields["state_id"] = $temp->_id;
         }
- 
+
         // Si dentro de la petición viene el estado, colocarle el estado que viene en la petición
         if (isset($eventUserFields["state"])) {
             $temp = State::where('name', strtoupper($eventUserFields["state"]))->first();
-            //Si encuentra el estado por nombre, es finalmente colocado por id, 
+            //Si encuentra el estado por nombre, es finalmente colocado por id,
             //Si no lo encuentra borra el valor del estado de la petición
             if ($temp && isset($temp->_id)) {
                 $eventUserFields["state_id"] = $temp->_id;
@@ -143,30 +142,51 @@ class UserEventService
             if (isset($eventUserFields["state"])) {
                 unset($eventUserFields["state"]);
             }
-            
+
         }
 
+        /* FINALMENTE */
+        $eventUser = null;
+        $model = Attendee::where($matchAttributes)->first();
 
+        
+        if ($model) {
+            //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
+            $eventUserFields["properties"] = array_merge($model->properties, $eventUserFields["properties"]);
+            $model->update($eventUserFields);
+            $eventUser = $model;
+        } else {
+            $eventUser = Attendee::create($eventUserFields);
+        }
 
-        /* guardamos el Attendee o eventUser */
-        $eventUser = Attendee::updateOrCreate($matchAttributes, $eventUserFields);
+        \Log::debug($matchAttributes);
+        \Log::debug($eventUserFields);
 
         /* Si viene el id de la orden en la variable eventUserFields
         buscamos la orden  */
         if (isset($eventUserFields["order_id"])) {
             $order->save();
-        } 
-
+        }
+/*
+array(2) {
+["a"]=>
+string(24) "5f49421b1985d661d57af862"
+["b"]=>
+string(10) "1030522402"
+5bef34f2854baf00995e018d
+}*/ 
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
         //don't know why updateOrCreate doens't eager load related models
         $eventUser = Attendee::where($matchAttributes)->first();
 
-        $data = $eventUser;
+        $user = Account::find($eventUser->account_id);
+        $eventUser->user = $user;
+        
 
         return (object) [
             "status" => $result_status,
-            "data" => $data,
+            "data" => $eventUser,
             "message" => $message,
         ];
     }
@@ -186,7 +206,6 @@ class UserEventService
 
         $eventUsers = Attendee::find($eventusersIds);
 
-        
         foreach ($eventUsers as $eventUser) {
 
             if ($eventUser->event_id == $event->id) {
@@ -197,14 +216,13 @@ class UserEventService
                 $newEventUser->stated_id = Attendee::STATE_DRAFT;
                 $newEventUser->save();
                 $eventAttendees[] = $newEventUser;
-                echo  " NuevoeventUser:>> ".$newEventUser->id." <<";
+                echo " NuevoeventUser:>> " . $newEventUser->id . " <<";
             }
         }
 
-        return  $eventAttendees;
+        return $eventAttendees;
 
     }
-
 
     /**
      * Undocumented function
@@ -223,22 +241,22 @@ class UserEventService
         $eventUsers = Attendee::find($eventusersIds);
 
         foreach ($eventUsers as $eventUser) {
-            Log::debug("eventUser: ".$eventUser->id);
+            Log::debug("eventUser: " . $eventUser->id);
             if ($eventUser->event_id == $event->id) {
                 $newEventUser = $eventUser;
             } else {
                 $newEventUser = $eventUser->replicate();
                 $newEventUser->event_id = $event->id;
-                echo  " NuevoeventUser:>> ".$newEventUser->id." <<";
+                echo " NuevoeventUser:>> " . $newEventUser->id . " <<";
             }
 
             $newEventUser->book()->save();
             $eventAttendees[] = $newEventUser;
         }
 
-        return  $eventAttendees;
+        return $eventAttendees;
 
-    }    
+    }
 
     /**
      * Add Users to an event in draft status
@@ -305,41 +323,41 @@ class UserEventService
         return $usersIdNotInEvent;
     }
 
-        /**
+    /**
      * Store
-     * 
+     *
      * | Body Params   |
      * | ------------- |
      * | @body $_POST[role_id] required field       |
      * | @body $_POST[event_id]  required field     |
-     * | @body $_POST[model_id] required field      |  
-     * 
+     * | @body $_POST[model_id] required field      |
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response Contributors Resources
      */
     public static function saveRolUser($request)
     {
         return $request;
-        $rol = $request;  
+        $rol = $request;
 
         //find or create user
-        if (!isset($rol['model_id'])){
-            if(isset($rol['properties'])){
+        if (!isset($rol['model_id'])) {
+            if (isset($rol['properties'])) {
                 $email = $rol['properties']['email'];
                 $matchAttributes = ['email' => $email];
                 $user = Account::updateOrCreate($matchAttributes, $rol['properties']);
                 $rol['model_id'] = $user->id;
-            }else{
-                throw new Exception("model_id and properties are mandatory", 1);                
+            } else {
+                throw new Exception("model_id and properties are mandatory", 1);
             }
         }
 
         //add the user as contributor to the event with the specific rol
         $rol['model_type'] = "App\Account";
         $matchAttributesRol = [
-         "role_id" => $rol['role_id'],
-         "model_id" => $rol['model_id'],
-         "event_id" => $rol["event_id"] 
+            "role_id" => $rol['role_id'],
+            "model_id" => $rol['model_id'],
+            "event_id" => $rol["event_id"],
         ];
         $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);

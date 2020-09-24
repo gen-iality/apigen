@@ -6,7 +6,7 @@ use App\Event;
 use App\Activities;
 use App\Inscription;
 use App\Attendee;
-use App\ActivityAssistants;
+use App\ActivityAssistant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -52,15 +52,15 @@ class InscriptionController extends Controller
         echo var_dump($save->properties["email"]);die;
         $data = $request->json()->all();
         $data["activity_id"] = $activity_id;
-        $result = new ActivityAssistants($data);
-        $search = ActivityAssistants::where("activity_id",$activity_id)->get();
+        $result = new ActivityAssistant($data);
+        $search = ActivityAssistant::where("activity_id",$activity_id)->get();
         $arr = json_decode(json_encode($search), TRUE);
         if(empty($arr)){
             $result->save();
             return $result;
         }else{
-            $search = ActivityAssistants::where("activity_id",$activity_id)->get();
-            $search = ActivityAssistants::find($search[0]["_id"]);
+            $search = ActivityAssistant::where("activity_id",$activity_id)->get();
+            $search = ActivityAssistant::find($search[0]["_id"]);
             $search->push("user",$data["user"]);
 
             /*
@@ -81,7 +81,7 @@ class InscriptionController extends Controller
     public function updateUserActivities(Request $request, $event_id, $activity_id)
     {
         //ACTUALIZAR ACTIVIDADES DE LOS USUARIOS
-       $activityUsers = ActivityAssistants::paginate();
+       $activityUsers = ActivityAssistant::paginate();
        
          for($i=0;$i < sizeof($activityUsers);$i++){
             for($s=0;$s < sizeof($activityUsers[$i]["user"]);$s++){
@@ -107,9 +107,9 @@ class InscriptionController extends Controller
         $data = $request->json()->all();
        // $data["activity_id"] = $activity_id;
         $user = $data["user"][0];
-        $search = ActivityAssistants::where("activity_id",$activity_id)->get();
-        $search2 = ActivityAssistants::find($search[0]["_id"]);
-        $search = ActivityAssistants::find($search[0]["_id"])->user;
+        $search = ActivityAssistant::where("activity_id",$activity_id)->get();
+        $search2 = ActivityAssistant::find($search[0]["_id"]);
+        $search = ActivityAssistant::find($search[0]["_id"])->user;
         $x = 0;
         $arrayUsers = $search;
         //mapea el array para

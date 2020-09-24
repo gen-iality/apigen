@@ -84,9 +84,17 @@ class OrganizationUserController extends Controller
             $data['displayName'] = $data['name'];
             unset($data['names']);
         }
-        // return $data;
-        $user = Account::updateOrCreate($data);
+        
+        $user = Account::where('email', $data['email'])->first();        
+if (!$user){
+        //Buscamos el usuario por email para saber si ya existe o crearlo
+        $user = Account::updateOrCreate(['email'=>$data['email']],$data);
+        }
 
+    
+
+
+        //Esto como que no se usa de afan no pudimos probar lo dejamos
         if (isset($data['properties'])) {
             $tmp = $data['properties'];
             if (isset($data["email"])) $tmp["email"] = $data["email"];
@@ -99,8 +107,22 @@ class OrganizationUserController extends Controller
             "properties" => $data
         ];
 
-        $result = OrganizationUser::updateOrCreate($UserOrganization);
+        
+        $model = OrganizationUser::where('userid', $user->id)->first();
+              
+
+        //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
+        if ($model){
+            //var_dump($model->properties);die;
+            $UserOrganization["properties"] = array_merge($model->properties,$UserOrganization["properties"]);
+        }
+
+        
+        $result = OrganizationUser::updateOrCreate(["userid"=>$user->id],$UserOrganization);
+        //toca hacer esta consulta para traer los datos actualizados updateOrCreate no lo hace
         $model = OrganizationUser::find($result->id);
+        
+       
         return $model;
     }
   

@@ -20,7 +20,7 @@ class FilterQuery
      *
      *    *** filtered: parameters to alter the where part of the query that means to filter the query
      *                  is accepts a JSON array of filters in the form:
-     *                    [{"id":"column","value":"anyvalue","comparator":"anycomparator}]
+     *                    [{"field":"column","value":"anyvalue","comparator":"anycomparator}]
      * comparator could be:
      *     +   '='
      *     +   'like'
@@ -30,23 +30,23 @@ class FilterQuery
      *
      *
      *    *** orderBy:  parameters to change the order of the query maybe by date, name or any order
-     *               [{"id":"column","order":"desc|asc"}]
+     *               [{"field":"column","order":"desc|asc"}]
      *
      * Exmaple of filtered param:
      *  ```
-     *  filtered=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     *  filtered=[{"field":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      *  ```
      *
      * Example of orderBy param:
      *  ```
-     *  orderBy=[{"id":"name","order":"desc"}]
+     *  orderBy=[{"field":"name","order":"desc"}]
      *
      * @return Illuminate\Database\Query\Builder $query  the altered query with the order and filter options provided by url params filtered and orderBy
      */
     public static function addDynamicQueryFiltersFromUrl($query, $request)
     {
 
-
+        
         $filteredBy = json_decode($request->input('filtered'));
         $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
 
@@ -54,12 +54,12 @@ class FilterQuery
         $orderedBy = is_array($orderedBy) ? $orderedBy : [$orderedBy];
 
         foreach ((array) $filteredBy as $condition) {
-            if (!$condition || !isset($condition->id) || !isset($condition->value)) {
+            if (!$condition || !isset($condition->field) || !isset($condition->value)) {
                 continue;
             }
 
             //for any eventUser inner properties enable text like partial search by default is the most common use case
-            if (strpos($condition->id, 'properties.') === 0) {
+            if (strpos($condition->field, 'properties.') === 0 &&  !isset($condition->comparator)) {
                 $condition->comparator = "like";
             }
 
@@ -70,20 +70,20 @@ class FilterQuery
             }
 
             if (!is_array($condition->value)) {
-                $query->where($condition->id, $comparator, $condition->value);
+                $query->where($condition->field, $comparator, $condition->value);
             } else {
-                $query->whereIn($condition->id, $condition->value);
+                $query->whereIn($condition->field, $condition->value);
             }
         }
 
         foreach ((array) $orderedBy as $order) {
 
-            if (!isset($order->id)) {
+            if (!isset($order->field)) {
                 continue;
             }
 
             $direccion = (isset($order->order) && $order->order) ? $order->order : "desc";
-            $query->orderBy($order->id, $direccion);
+            $query->orderBy($order->field, $direccion);
 
         }
 

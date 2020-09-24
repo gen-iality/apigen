@@ -40,8 +40,10 @@ class UserPropertiesController extends Controller
      */
     public function store(Request $request, $event_id)
     {        
+        $data = $request->json()->all();
         $event = Event::find($event_id)->user_properties();
         $model = new UserProperties($data);
+        $event->save($model);
         return $model; 
     }
 
@@ -53,7 +55,7 @@ class UserPropertiesController extends Controller
      */
     public function show($event_id,$id)
     {
-
+        
         $UserProperties = Event::find($event_id)->user_properties()->find($id);
         
         $response = new JsonResource($UserProperties);
@@ -74,14 +76,20 @@ class UserPropertiesController extends Controller
     {
         
         $data = $request->json()->all();
-        
-        $userProperty = Event::findOrFail($event_id)->user_properties()->find($id);
+        $userProperty = Event::find($event_id)->user_properties()->find($id);
         if (!$userProperty){
             return abort(404);
         }
+        
         $userProperty->fill($data);
+     
         $userProperty->save();
-        return new JsonResource($userProperty);
+         /* echo "hiee";
+        
+        }catch(Exception $e){
+            
+       
+        }*/
     }
 
     /**
@@ -92,12 +100,10 @@ class UserPropertiesController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {   
-        $event = Event::findOrFail($event_id);
-       
-        $userProperty = $event->user_properties()->find($id);
-        if (!$userProperty){
+        $event = Event::find($event_id)->user_properties()->find($id);
+        if (!$event){
             return abort(404);
         }
-        return (string) $userProperty->delete();
+        return (string) $event->delete();
     }
 }

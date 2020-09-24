@@ -7,20 +7,33 @@ use Illuminate\Support\Facades\Log;
 
 class EventUserObserver
 {
+    public function __construct()
+    {
+        Log::debug("__construct observer");
+    }
+
+    public function handle($eventUser)
+    {
+        Log::debug("model handle");
+    }
     /**
      * Handle the event user "created" event.
      *
      * @param  \App\Attendee  $eventUser
      * @return void
      */
-    public function created( $eventUser)
+    public function created($eventUser)
     {
         Log::debug("model created");
     }
 
     public function saving($eventUser)
     {
-        Log::debug("model saving");
+        Log::debug("model saving in Observer");
+    }
+    public function saved($eventUser)
+    {
+        Log::debug("model saved in Observer");
     }
     /**
      * Handle the event user "updated" event.
@@ -28,9 +41,9 @@ class EventUserObserver
      * @param  \App\Attendee  $eventUser
      * @return void
      */
-    public function updated( $eventUser)
+    public function updated($eventUser)
     {
-        Log::debug("model updated");
+        Log::debug("model updated in Observer");
     }
 
     /**

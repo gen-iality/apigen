@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\GoogleFiles;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * @resource Files
@@ -30,16 +31,18 @@ class FilesController extends Controller
  * Postman-Token: 2f16a68e-f8fd-4b1b-a0d6-635c5ba7e981
  * Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
  *
- *
  * @param Request $request
  * @param string $field_name
  * @param GoogleFiles $gfService
  * @return string of file uploaded url  or  array of urls for multiple files
+ *
  */
     public function upload(Request $request, string $field_name = null, GoogleFiles $gfService)
-    { //@debug post $entityBody = file_get_contents('php://input');
+    {
+        //@debug post $entityBody = file_get_contents('php://input');
+
         $imgurls = [];
-        
+
         //valor por defecto de campo que contiene el archivo
         $field_name = ($field_name) ? $field_name : "file";
 
@@ -74,9 +77,47 @@ class FilesController extends Controller
 
             $imgurls[] = $gfService->storeFile($file, $name);
         }
-
         //devolvemos una cadena o un arreglo segun sea el caso
         return (count($imgurls) > 1) ? $imgurls : reset($imgurls);
 
+    }
+    /**
+     * Funcion destinada al guardado de imagenes en base 64 al google storage, XOXO
+     */
+    public function storeBaseImg(Request $request, string $key = null, GoogleFiles $gfService)
+    {
+        Image::configure(array('driver' => 'imagick'));
+        $data = $request->all();
+        $name = $key;
+        $img = $data[$key];
+        $formats = array("png", "jpg", "jpeg");
+
+        $ext = "png";
+        foreach ($formats as $format) {
+            if (stristr($img, $format)) {
+                $ext = $format;
+                break;
+            }
+        }
+        $name = $name . time() . "." . $ext;
+
+        $width_size = 600;
+        $width_sizes = ["icon" => 240, "wall" => 500, "default" => 600, "email" => 600];
+        if ((isset($data['type']) && isset($width_sizes[$data['type']]))) {
+            $width_size = $width_sizes[$data['type']];
+        }
+
+        $imgresize = self::imgResize($img, $ext, $width_size);
+
+        $image = base64_decode(base64_encode($imgresize));
+        $imgurl = $gfService->storeFile($image, $name);
+        return $imgurl;
+    }
+
+    private static function imgResize($img, $ext, $width_size)
+    {
+        return Image::make($img)->resize($width_size, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode($ext);
     }
 }

@@ -21,9 +21,24 @@ class HostController extends Controller
      */
     public function index(Request $request, $event_id)
     {
-        return JsonResource::collection(
-            Host::where("event_id", $event_id)->paginate(1000)
-        );
+        $data = $request->json()->all();
+        //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
+        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+
+        if ($res == "en") {
+            return JsonResource::collection(
+                Host::where("event_id", $event_id)
+                    ->where('locale', "en")
+                    ->orderBy('order', 'asc')
+                    ->paginate(config('app.page_size')));
+        } else {
+            return JsonResource::collection(
+                Host::where("event_id", $event_id)
+                    ->where('locale', '!=', "en")
+                    ->orderBy('order', 'asc')
+                    ->paginate(config('app.page_size')));
+        }
+
     }
 
     /**
@@ -47,7 +62,7 @@ class HostController extends Controller
      * @param  \App\Host  $Host
      * @return \Illuminate\Http\Response
      */
-    public function show($event_id,$id )
+    public function show($event_id, $id)
     {
         $Host = Host::findOrFail($id);
         $response = new JsonResource($Host);

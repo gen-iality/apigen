@@ -29,9 +29,8 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-
         return CategoryResource::collection(
-            Category::paginate(1000)
+            Category::paginate(config('app.page_size'))
         );
 
         //$events = Event::where('visibility', $request->input('name'))->get();
@@ -46,7 +45,7 @@ class CategoryController extends Controller
     {
         //
     }
-   /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,7 +58,7 @@ class CategoryController extends Controller
         $result->save();
 
         return $result;
-        
+
     }
     public function delete(Category $id)
     {

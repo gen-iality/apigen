@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 /*
-  Attendize.com   - Event Management & Ticketing
+Attendize.com   - Event Management & Ticketing
  */
 
 /**
@@ -15,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Attendee extends MyBaseModel
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +22,7 @@ class Attendee extends MyBaseModel
      */
     protected $table = "event_users";
     protected static $unguarded = true;
-    
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -35,8 +33,27 @@ class Attendee extends MyBaseModel
         'account_id',
         'reference',
         'has_arrived',
-        'arrival_time'
+        'arrival_time',
+        'checkedin_at',
+        'test',
     ];
+
+    protected $dates = ['checkedin_at', 'created_at', 'updated_at', 'test'];
+
+    /*
+
+    Mutator creado para darle soporte a laravel de fecha ISO8601 antes de laravel 5.8
+    @link https://github.com/laravel/framework/issues/24112
+     */
+    // public function setCheckedinAtAttribute($date)
+    // {
+    //     echo $date;
+    //     $date = "2020-06-30T03:53Z";
+    //     $format = "Y-m-d\TH:i\Z";
+    //     $this->attributes['checkedin_at'] = \Carbon::createFromFormat($format, $date);
+    //     //var_dump($this->attributes['checkedin_at']);die;
+    //     //$this->attributes['checkedin_at'] = \Carbon::parse($value)->toDateTimeString();
+    // }
 
     /**
      * Generate a private reference number for the attendee. Use for checking in the attendee.
@@ -108,7 +125,7 @@ class Attendee extends MyBaseModel
      */
     public function getReferenceAttribute()
     {
-        return $this->order->order_reference . '-' . $this->reference_index;
+        return ($this->order) ? $this->order->order_reference . '-' . $this->reference_index : "ticket-" . $this->id;
     }
 
     /**
@@ -119,16 +136,5 @@ class Attendee extends MyBaseModel
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
-    }
-
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @return array $dates
-     */
-    public function getDates()
-    {
-        return ['created_at', 'updated_at', 'arrival_time'];
     }
 }

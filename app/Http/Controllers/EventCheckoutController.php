@@ -244,7 +244,7 @@ class EventCheckoutController extends Controller
             $eventAccount = $event->account;
             $activeAccountPaymentGateway = $eventAccount->active_payment_gateway;
             //$activeAccountPaymentGateway = ($eventPaymentGateway->count()) ? $eventPaymentGateway->firstOrFail() : false;
-            $paymentGateway = $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
+            $paymentGateway = $activeAccountPaymentGateway && $activeAccountPaymentGateway->count() ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
         /* Método para tomar las iniciales de los eventos y agregarlos al ticket_order_  */
@@ -1154,7 +1154,7 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($order->event_id);
         $stages = $event->event_stages;
         $eventusers = Attendee::where('order_id', $order->id)->get();
-        $location = $event["location"]["FormattedAddress"];
+        //$location = $event["location"]["FormattedAddress"];
         
         foreach ($eventusers as $eventuser) { 
             
@@ -1187,25 +1187,24 @@ class EventCheckoutController extends Controller
             'order' => $order,
             'event' => $order->event,
             'eventusers' => $eventusers,
-            'location' =>  $event["location"]["FormattedAddress"],
             'today' => $date->format('d-m-Y'),
             'logo_evius' => 'images/logo.png',
             /* Si es un evento con etapas continuas */
             'stage' => isset($stage_name) ? $stage_name : "",
         ];
         
-        if ($request->get('download') == '1') {
-            $pdf = PDF::loadview(
-                'pdf_bookingConfirmed', $data
-            );
-            $pdf->setPaper(
-                'legal',  'portrait'
-            );
-            return $pdf->download('Tickets.pdf');
-        }
-        return view(
-            'pdf_bookingConfirmed', $data
-        );
+        //if ($request->get('download') == '1') {
+        //    $pdf = PDF::loadview(
+        //        'pdf_bookingConfirmed', $data
+        //    );
+        //    $pdf->setPaper(
+        //        'legal',  'portrait'
+        //    );
+        //    return $pdf->download('Tickets.pdf');
+        //}
+        //return view(
+        //    'pdf_bookingConfirmed', $data
+        //);
     }
 
     /**

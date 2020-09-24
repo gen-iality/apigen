@@ -22,7 +22,7 @@ class ActivityCategoriesController extends Controller
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
-            ActivityCategories::paginate(1000)
+            ActivityCategories::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
@@ -34,7 +34,7 @@ class ActivityCategoriesController extends Controller
     public function store(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        //$data["event_id"] = $event_id;
+        $data["event_id"] = $event_id;
         $result = new ActivityCategories($data);
         $result->save();
         return $result;

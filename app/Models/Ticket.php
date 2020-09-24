@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends MyBaseModel
 {
-    use SoftDeletes;
-
-    // protected $dates = ['start_sale_date', 'end_sale_date'];
+    //use SoftDeletes;
+    protected $fillable = ['title', 'event_id', 'allowed_to_vote'];
+    //protected $with = ['activities'];
+    //protected $dates = ['start_sale_date', 'end_sale_date', 'deleted_at'];
 
     /**
      * The rules to validate the model.
@@ -19,15 +19,16 @@ class Ticket extends MyBaseModel
      */
     public function rules()
     {
+
         $format = config('attendize.default_datetime_format');
         return [
-            'title'              => 'required',
-            'price'              => 'required|numeric|min:0',
-            'description'        => '',
-            'stage_id'              => 'required',
+            'title' => 'required',
+            'price' => 'required|numeric|min:0',
+            'description' => '',
+            'stage_id' => 'required',
             // 'start_sale_date'    => 'date_format:"'.$format.'"',
             // 'end_sale_date'      => 'date_format:"'.$format.'"|after:start_sale_date',
-            'quantity_available' => 'integer|min:'.($this->quantity_sold + $this->quantity_reserved)
+            'quantity_available' => 'integer|min:' . ($this->quantity_sold + $this->quantity_reserved),
         ];
     }
 
@@ -37,8 +38,8 @@ class Ticket extends MyBaseModel
      * @var array $messages
      */
     public $messages = [
-        'price.numeric'              => 'The price must be a valid number (e.g 12.50)',
-        'title.required'             => 'You must at least give a title for your ticket. (e.g Early Bird)',
+        'price.numeric' => 'The price must be a valid number (e.g 12.50)',
+        'title.required' => 'You must at least give a title for your ticket. (e.g Early Bird)',
         'quantity_available.integer' => 'Please ensure the quantity available is a number.',
     ];
     protected $perPage = 10;
@@ -61,6 +62,16 @@ class Ticket extends MyBaseModel
     public function order()
     {
         return $this->belongsToMany(\App\Models\Order::class);
+    }
+
+    /**
+     * The activity associated with the ticket.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function activities()
+    {
+        return $this->belongsTo(\App\Activities::class);
     }
 
     /**
@@ -180,7 +191,7 @@ class Ticket extends MyBaseModel
      */
     public function getBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(
+        return (int) ceil($this->price) === 0 ? 0 : round(
             ($this->price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
             2
         );
@@ -193,7 +204,7 @@ class Ticket extends MyBaseModel
      */
     public function getOrganiserBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(
+        return (int) ceil($this->price) === 0 ? 0 : round(
             ($this->price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
             2
         );
@@ -231,23 +242,23 @@ class Ticket extends MyBaseModel
      * @return int
      */
 /*     public function getSaleStatusAttribute()
-    {
-        if ($this->start_sale_date !== null && $this->start_sale_date->isFuture()) {
-            return config('attendize.ticket_status_before_sale_date');
-        }
+{
+if ($this->start_sale_date !== null && $this->start_sale_date->isFuture()) {
+return config('attendize.ticket_status_before_sale_date');
+}
 
-        if ($this->end_sale_date !== null && $this->end_sale_date->isPast()) {
-            return config('attendize.ticket_status_after_sale_date');
-        }
+if ($this->end_sale_date !== null && $this->end_sale_date->isPast()) {
+return config('attendize.ticket_status_after_sale_date');
+}
 
-        if ((int)$this->quantity_available > 0 && (int)$this->quantity_remaining <= 0) {
-            return config('attendize.ticket_status_sold_out');
-        }
+if ((int)$this->quantity_available > 0 && (int)$this->quantity_remaining <= 0) {
+return config('attendize.ticket_status_sold_out');
+}
 
-        if ($this->event->start_date->lte(Carbon::now())) {
-            return config('attendize.ticket_status_off_sale');
-        }
+if ($this->event->start_date->lte(Carbon::now())) {
+return config('attendize.ticket_status_off_sale');
+}
 
-        return config('attendize.ticket_status_on_sale');
-    } */
+return config('attendize.ticket_status_on_sale');
+} */
 }

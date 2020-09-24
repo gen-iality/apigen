@@ -39,7 +39,13 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
-
-
+    'firebase' => [
+        'api_key' => 'AIzaSyDDnc9WHXf4CWwXCVggeiarYGu_xBgibJY', // Only used for JS integration
+        'auth_domain' => 'eviusauth.firebaseapp.com', // Only used for JS integration
+        'database_url' => 'https://eviusauth.firebaseio.com',
+        'projectId' => "eviusauth",
+        'storage_bucket' => 'eviusauth.appspot.com', 
+        'messagingSenderId' => "400499146867",
+        'appId' => "1:400499146867:web:5d0021573a43a1df"
+    ]
 ];

@@ -2,16 +2,12 @@
 
 namespace App\Providers;
 
-use App\Attendee;
-use App\Mail\BookingConfirmed;
-use App\Observers\EventUserObserver;
+use Google\Cloud\Firestore\FirestoreClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
 
 //use Kreait\Firebase\Auth;
 
@@ -24,15 +20,28 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      */
     public function boot()
     {
+
+        setlocale(LC_ALL, "es_ES.utf8");
+        \Carbon\Carbon::setLocale(config('app.locale'));
+        Log::debug("Booting");
         Resource::withoutWrapping();
 
-        // \App\Attendee::observe(App\Observers\EventUserObserver::class);
+        //Esta duplicando los eventos aún no entiendo porque
+        //\App\Attendee::observe(\App\Observers\EventUserObserver::class);
+
+        /*\App\Attendee::saved(function ($eventUser) {
+        Log::debug("\App\Attendee::saved boot");
+        });
+         */
+        \App\Attendee::deleted(function ($eventUser) {
+            self::deleteFirestore($eventUser->event_id . '_event_attendees', $eventUser->_id);
+        });
 
         \App\Attendee::saved(
             function ($eventUser) {
+                Log::debug("\App\Attendee::saved boot");
                 //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
                 $email = (isset($eventUser->user->email)) ? $eventUser->user->email : "apps@mocionsoft.com";
-
                 /**
                  * Guardar en firestore
                  * Debes enviar:
@@ -48,18 +57,21 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
                  *      2. El id del DOCUMENTO
                  *      3. La información que desear guardar en el documento COLLECCIÓN.
                  */
-                self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
+                //self::saveFirebase('users', $eventUser->_id, $eventUser->properties);
 
-                $original = $eventUser->getOriginal();
+                /* Esto se uso cuando un usuario estaba con reserva y luego compraba el tickete
+            $original = $eventUser->getOriginal();
 
-                if ($eventUser->state_id == Attendee::STATE_BOOKED && isset($original['state_id']) && $original['state_id'] != Attendee::STATE_BOOKED) {
-                    Mail::to($email)
-                        ->queue(
-                            new BookingConfirmed($eventUser)
-                        );
-                }
+            if ($eventUser->state_id == Attendee::STATE_BOOKED && isset($original['state_id']) && $original['state_id'] != Attendee::STATE_BOOKED) {
+            // Mail::to($email)
+            //     ->queue(
+            //         new BookingConfirmed($eventUser)
+            //     );
+            }*/
             }
         );
+        setlocale(LC_ALL, "es_ES.UTF-8");
+        \Carbon\Carbon::setLocale(config('app.locale'));
 
     }
 
@@ -79,20 +91,20 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
 
         $this->app->singleton(
             'Kreait\Firebase\Auth', function ($app) {
-                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-                $firebase = (new \Kreait\Firebase\Factory)
-                    ->withServiceAccount($serviceAccount)
-                    ->create();
-                return $firebase->getAuth();
+                $fireauth = (new Factory)
+                    ->withServiceAccount(base_path('firebase_credentials.json'))
+                    ->createAuth();
+
+                return $fireauth;
             }
         );
 
         $this->app->singleton(
-            'Morrislaptop\Firestore', function ($app) {
-                $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-                $firebase = (new \Morrislaptop\Firestore\Factory)
-                    ->withServiceAccount($serviceAccount)
+            'Kreait\Firebase\Firestore', function ($app) {
+                $firebase = (new Factory)
+                    ->withServiceAccount(base_path('firebase_credentials.json'))
                     ->createFirestore();
+
                 return $firebase;
             }
         );
@@ -129,58 +141,40 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveFirestore($collection, $document, $data)
+    public function saveFirestore($collectionpath, $document, $data)
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new \Morrislaptop\Firestore\Factory)
-            ->withServiceAccount($serviceAccount)
-            ->createFirestore();
+        $firebase = new FirestoreClient([
+            'keyFilePath' => base_path('firebase_credentials.json'),
+        ]);
 
         if ($data) {
-            Log::debug($collection);
-            $collection = $firebase->collection($collection);
+            Log::debug($collectionpath);
+            $collection = $firebase->collection($collectionpath);
             $user = $collection->document($document);
             $dataUser = json_decode($data, true);
             $dataUser['updated_at'] = date_create();
+            $dataUser['updated_at'] = date_create();
+
             $dataUser['created_at'] = ($dataUser['created_at']) ? date_create($dataUser['created_at']) : date_create();
+            if (isset($dataUser['checkedin_at'])) {
+                $dataUser['checkedin_at'] = ($dataUser['checkedin_at']) ? date_create($dataUser['checkedin_at']) : null;
+            }
+
             // var_dump($dataUser);
             $user->set($dataUser);
 
         }
     }
 
-    /**
-     * Event Account
-     *
-     * Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
-     * Realizando una migración por medio del id,
-     *
-     * para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-     * https://github.com/morrislaptop/firestore-php
-     *
-     * El controlador sigue los siguientes pasos:
-     *      1. Se abre el servicio de firestore
-     *      2. Captura toda la información del event_users
-     *      3. Se diríge a la collección, el cual es el mismo nombre "event_users"
-     *      4. Recorre todos los usuarios encontrados anteriormente pero.
-     *          4.1. Si los datos del usuario existen entonces.
-     *          4.2. Guarda un nuevo documento con el id del event_user.
-     *          4.3. Convertimos los datos del usuario en un array para poder guardarlo.
-     *          4.4. Dentro del documento guardamos los datos del usuario.
-     *      5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function saveFirebase($collection, $user_id, $data)
+    public function deleteFirestore($collectionpath, $document)
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
-        $firebase = (new \Kreait\Firebase\Factory)
-            ->withServiceAccount($serviceAccount)
-            ->create();
-        $db = $firebase->getDatabase();
+        $firebase = new FirestoreClient([
+            'keyFilePath' => base_path('firebase_credentials.json'),
+        ]);
 
-        if ($data) {
-            $db->getReference($collection . '/' . $user_id)->set($data);
-        }
+        $collection = $firebase->collection($collectionpath);
+        $doc = $collection->document($document);
+        $doc->delete();
+
     }
 }

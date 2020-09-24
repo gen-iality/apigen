@@ -1,71 +1,80 @@
 <html>
-    <!--    Keep this page lean as possible.-->
-    <head>
-        <title>
-            Ticket(s)
-        </title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-<style>
+<!--    Keep this page lean as possible.-->
 
-</style>
+<head>
+    <title>
+        Ticket(s)
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <style>
 
-        <style>
-@page{
- margin:0px 0px 0px 0px !important;
- padding:0px 0px 0px 0px !important;
-}
-body{
+    </style>
 
-    background-size:cover;
-    height:100%;
-    width:100%;
-    margin:0;
-    padding:0;
-    /*font-family: "Verdana", "Geneva","Sans serif","Open Sans", "Titillium","Oswald";*/
-   /*font-family:Arial, Helvetica, sans-serif;*/
+    <style>
+    @page {
+        margin: 0px 0px 0px 0px !important;
+        padding: 0px 0px 0px 0px !important;
     }
 
-.imagen{
-    width:3300px;
-    height:2550px;
-    position:fixed;
-    top:0px;
-    bottom:0px; 
-    z-index:-100;       
-}
+    body {
+
+        background-size: cover;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: "Verdana", "Geneva", "Sans serif", "Open Sans", "Titillium", "Oswald";
+        /*font-family: Arial, Helvetica, sans-serif;*/
+        font-size: 100px;
+        color: #666;
+    }
+
+    .imagen {
+        width: 3300px;
+        height: 2550px;
+        /*width: 1920px;
+        height: 1080px;*/
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        z-index: -100;
+    }
 
 
-.containing-table {
-    display: table;
-    width: 97%;
-    height: 70%;
-}
-.centre-align {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    width:60%;
-    font-size:1em;
-    padding-left:7%;
-}
-.content {
-    width: 60%;
-    height: 70%;
-    background-color: blue;
-    display: inline-block;
-    vertical-align: middle;
-}
+    .containing-table {
+        display: table;
+        width: 97%;
+        height: 70%;
+    }
 
-        </style>
-    </head>
-    <body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
-    <img class="imagen" src="{{$image}}" />        
+    .centre-align {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        width: 60%;
+        font-size: 1em;
+        padding-left: 7%;
+    }
 
-<div class="containing-table">
+    .content {
+        width: 60%;
+        height: 70%;
+        background-color: blue;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    </style>
+</head>
 
-    <div class="centre-align">{!! $content !!}
+<body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
+    <img class="imagen" src="{{$image}}" />
+
+    <div class="containing-table">
+
+        <div class="centre-align">{!! $content !!}
+        </div>
     </div>
-</div>
-    </body>
+</body>
+
 </html>
