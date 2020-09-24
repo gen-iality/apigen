@@ -19,6 +19,7 @@ Rechazar solicitud
 @endcomponent
 @endif
 
+<!-- 
 @if ($request_type == 'meeting')
 @component('mail::button', ['url' => $link_front . "&response=accepted" , 'color' => 'evius'])
 Aceptar reunión
@@ -28,7 +29,7 @@ Aceptar reunión
 Rechazar reunión
 @endcomponent
 @endif
-
+-->
 
 <br />
 @component('mail::button', ['url' => $link_authenticated, 'color' => 'evius'])
