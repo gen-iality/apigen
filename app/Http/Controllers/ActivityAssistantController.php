@@ -49,12 +49,39 @@ class ActivityAssistantController extends Controller
         die;
 
     }    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
+    {
+        $activity_id = $request->input("activity_id");
+        $user_id = $request->input("user_id");
+
+        $query = ActivityAssistant::where("event_id", $event_id);
+
+        //Filtro por actividad
+        if ($activity_id){
+            $query->where("activity_id",$activity_id);       
+        }
+
+        //Filtro por usuario
+        if ($user_id){
+            $query->where("user_id",$user_id);       
+        }
+
+        return JsonResource::collection($query->paginate(config('app.page_size')));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexForAdmin(Request $request, $event_id)
     {
         $activity_id = $request->input("activity_id");
         $user_id = $request->input("user_id");
