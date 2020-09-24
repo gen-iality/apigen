@@ -48,7 +48,7 @@
                                     <div  style="display: none">
                                     @foreach($tickets as $ticket)
                                         @if($ticket->stage_id != $stage["stage_id"]) @continue @endif
-                                        <!-- Como validamos la cantidad y enviamos la informaciÃ³n por hora-->
+                                        <!-- Como validamos la cantidad y enviamos la información por hora-->
                                         <div>
                                             {!! Form::hidden('tickets[]', $ticket->id) !!}
                                             <select id="ticket_{{ $ticket->id }}" name="ticket_{{ $ticket->id }}" class=" ticket_dropdown dropdown-tickets">

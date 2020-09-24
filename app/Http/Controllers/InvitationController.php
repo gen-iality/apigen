@@ -72,7 +72,7 @@ class InvitationController extends Controller
 
             $user = Account::where("uid", $userinfo->uid)->first();
             if (!$user) {
-                //intentamos buscar por correo cÃ³mo segunda opciÃ³n
+                //intentamos buscar por correo cómo segunda opción
                 $user = Account::where("email", $request->input("email"))->first();
                 if (!$user) {
                     return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
@@ -316,11 +316,11 @@ class InvitationController extends Controller
         $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
 
         $request_type = "meeting";
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reuniÃ³n a las: " . $meetingStartTime;
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reuniÃ³n";
+        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
         $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
 
-        $mail["desc"] .= "<br><p>Ingresa al evento a la secciÃ³n Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
+        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
 
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
@@ -354,10 +354,10 @@ class InvitationController extends Controller
         $mail["desc"] = <<<EOT
         Hola  {$receiver->properties["displayName"]} , quiero contactarte por medio del evento  {$event->name}; <br/><br/>
 
-        Las personas que no son contactos tuyos solamente ven una cantidad limitada de informaciÃ³n, con lo cual pueden
+        Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu informaciÃ³n oculta en el evento en la secciÃ³n conecta/networking
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu información oculta en el evento en la sección conecta/networking
         de esta manera podrÃ¡ contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
@@ -385,8 +385,8 @@ EOT;
         <br/>
         Mostrando {$i} datos de {$cuantos}
         <br />
-        Para ver toda la informaciÃ³n del nuevo contacto dirigete al evento con el botÃ³n inferior ve a la secciÃ³n contecta/networking
-        y visita Mis Contactos, alli encontraras toda la nueva informaciÃ³n.<br/>
+        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
+        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
 <br/>
         No olvides disfrutar el resto de experiencias del evento.
 EOT;
