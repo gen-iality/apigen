@@ -72,7 +72,7 @@ class InvitationController extends Controller
 
             $user = Account::where("uid", $userinfo->uid)->first();
             if (!$user) {
-                //intentamos buscar por correo cómo segunda opción
+                //intentamos buscar por correo cÃ³mo segunda opciÃ³n
                 $user = Account::where("email", $request->input("email"))->first();
                 if (!$user) {
                     return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
@@ -178,10 +178,6 @@ class InvitationController extends Controller
         // end point para enviar solicitud con redireccion a evius
         $data = $request->json()->all();
 
-        $evius_token = $request->input();
-        $evius_token = $evius_token["evius_token"];
-
-
         // verifica si ya son contactos
         $id_user_requesting = $data["id_user_requesting"];
 
@@ -201,12 +197,11 @@ class InvitationController extends Controller
         return abort(409, "Solictiud ya ha sido enviada anteriormente, esperando respuesta de solicitud");
         }
          */
-        // var_dump($evius_token);die;
 
         $result = new Invitation($data);
         $result->save();
         $data["request_id"] = $result->_id;
-        self::buildMessage($data, $event_id,$evius_token);
+        self::buildMessage($data, $event_id);
         return "invitacion enviada";
     }
 
@@ -231,15 +226,12 @@ class InvitationController extends Controller
         return $result;
     }
 
-    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = null)
+    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = "accepted")
     {
 
         $data = $request->json()->all();
-        $evius_token = $request->input();
-        $evius_token = $evius_token["evius_token"];
-
         $Invitation = Invitation::find($id);
-        $data["response"] = $data ? $data["response"] : $response_alt;
+        $data["response"] = ($data && isset($data["response"])) ? $data["response"] : $response_alt;
         self::verifyAndAddContact($Invitation, $data);
         $resp["response"] = $data["response"] ? $data["response"] : $response_alt;
 
@@ -247,7 +239,7 @@ class InvitationController extends Controller
         $Invitation->save();
         $resp["id_user_requested"] = $Invitation->id_user_requested;
         $resp["id_user_requesting"] = $Invitation->id_user_requesting;
-        return self::buildMessage($resp, $event_id , $evius_token);
+        return self::buildMessage($resp, $event_id);
     }
 
     public function verifyAndAddContact($Invitation, $data)
@@ -299,15 +291,12 @@ class InvitationController extends Controller
     {
 
         $data = $request->json()->all();
-        $evius_token = $request->input();
-        $evius_token = $evius_token['evius_token'];
 
-        // var_dump($evius_token);die;
-        self::buildMeetingRequestMessage($data, $event_id , $evius_token);
+        self::buildMeetingRequestMessage($data, $event_id);
 
     }
 
-    public function buildMeetingRequestMessage($data, String $event_id , String $evius_token)
+    public function buildMeetingRequestMessage($data, String $event_id)
     {
         $event = Event::find($event_id);
         $receiver = Attendee::find($data["id_user_requested"]);
@@ -320,8 +309,6 @@ class InvitationController extends Controller
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
 
-        $mail["evius_token"]=$evius_token;
-
         if (!empty($data["request_id"])) {
             $mail["request_id"] = $data["request_id"];
         }
@@ -329,11 +316,11 @@ class InvitationController extends Controller
         $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
 
         $request_type = "meeting";
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
+        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reuniÃ³n a las: " . $meetingStartTime;
+        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reuniÃ³n";
         $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
 
-        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
+        $mail["desc"] .= "<br><p>Ingresa al evento a la secciÃ³n Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
 
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
@@ -344,8 +331,9 @@ class InvitationController extends Controller
 
     }
 
-    public function buildMessage($data, String $event_id, String $evius_token)
+    public function buildMessage($data, String $event_id)
     {
+
         $event = Event::find($event_id);
         $receiver = Attendee::find($data["id_user_requesting"]);
         $sender = Attendee::find($data["id_user_requested"]);
@@ -355,11 +343,10 @@ class InvitationController extends Controller
         $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
         $mail["sender"] = $event->name;
         $mail["event_id"] = $event_id;
-        $mail["evius_token"] = $evius_token;
 
         if (!empty($data["request_id"])) {
             $mail["request_id"] = $data["request_id"];
-        } 
+        }
 
         $request_type = "friendship";
         $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de contacto";
@@ -367,11 +354,11 @@ class InvitationController extends Controller
         $mail["desc"] = <<<EOT
         Hola  {$receiver->properties["displayName"]} , quiero contactarte por medio del evento  {$event->name}; <br/><br/>
 
-        Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
+        Las personas que no son contactos tuyos solamente ven una cantidad limitada de informaciÃ³n, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
-        de esta manera podrá contactarte.
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu informaciÃ³n oculta en el evento en la secciÃ³n conecta/networking
+        de esta manera podrÃ¡ contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
@@ -398,11 +385,11 @@ EOT;
         <br/>
         Mostrando {$i} datos de {$cuantos}
         <br />
-        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
-        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
-        <br/>
+        Para ver toda la informaciÃ³n del nuevo contacto dirigete al evento con el botÃ³n inferior ve a la secciÃ³n contecta/networking
+        y visita Mis Contactos, alli encontraras toda la nueva informaciÃ³n.<br/>
+<br/>
         No olvides disfrutar el resto de experiencias del evento.
-        EOT;
+EOT;
 
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
@@ -415,7 +402,6 @@ EOT;
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
     }
-
 
     public function sendEmail($mail, $event_id, $receiver, $sender_user, $request_type)
     {
@@ -430,21 +416,21 @@ EOT;
         $subject = $mail["subject"];
         $result->save();
         $response = !empty($mail["request_id"]) ? $mail["request_id"] : null;
-        $evius_token = $mail["evius_token"];
 
-        $id_user_requested = $mail["id_user_requested"];
-
-        
         foreach ($mail["mails"] as $key => $email) {
             Mail::to($email)->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $evius_token, $id_user_requested)
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
             );
         }
 
         foreach ($mail["mails"] as $key => $email) {
 
+            Mail::to($email)->send(
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+            );
+
             Mail::to("juan.lopez@mocionsoft.com")->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $evius_token, $id_user_requested)
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
             );
         }
 
@@ -505,7 +491,7 @@ EOT;
         //         $data_single = "tfrdrummer@gmail.com";
         //         Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$pdf,$data_single){
         //             $message->to($data_single,"Evento PMI")
-        //             ->subject("HI¡","ni idea");
+        //             ->subject("HIÂ¡","ni idea");
         //         });
         //
         //     }

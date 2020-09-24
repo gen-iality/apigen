@@ -9,7 +9,7 @@
 	</span>
 
 </div>
-@if ($request_type == 'friendship')
+@if ($response)
 @component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
 Aceptar solicitud
 @endcomponent
@@ -18,18 +18,6 @@ Aceptar solicitud
 Rechazar solicitud
 @endcomponent
 @endif
-
-<!-- 
-@if ($request_type == 'meeting')
-@component('mail::button', ['url' => $link_front . "&response=accepted" , 'color' => 'evius'])
-Aceptar reunión
-@endcomponent
-
-@component('mail::button', ['url' => $link_front . "&response=rejected" , 'color' => 'evius'])
-Rechazar reunión
-@endcomponent
-@endif
--->
 
 <br />
 @component('mail::button', ['url' => $link_authenticated, 'color' => 'evius'])
@@ -44,13 +32,13 @@ Ver Solicitudes en el Evento
 Confirmar Cuenta
 @endcomponent -->
 
-[Políticas de privacidad](https://evius.co/privacy) |
-[Términos y Condiciones](https://evius.co/terms)
+[PolÃ­ticas de privacidad](https://evius.co/privacy) |
+[TÃ©rminos y Condiciones](https://evius.co/terms)
 
 <div style="text-align: center">
 	<span>
-		Recibiste este correo porque estás inscrito y/o invitado en un
-		evento gestionado a través de Evius.co o te has
+		Recibiste este correo porque estÃ¡s inscrito y/o invitado en un
+		evento gestionado a travÃ©s de Evius.co o te has
 		registrado en el portal de Evius.co
 	</span>
 </div>
@@ -62,7 +50,7 @@ Confirmar Cuenta
 </div>
 @slot('footer')
 @component('mail::footer')
-© 2001-2020. All Rights Reserved - Evius.co
+Â© 2001-2020. All Rights Reserved - Evius.co
 @endcomponent
 @endslot
 @endcomponent

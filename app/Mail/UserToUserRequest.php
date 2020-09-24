@@ -30,17 +30,14 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public $response;
     public $email;
     public $link_authenticated;
-    public $request_type;
-    public $link_front;
-    public $receiver;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $evius_token, $id_user_requested)
+    public function __construct($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
     {
-        
+
         Log::debug("recibiendo event_user");
         $request_type = ($request_type) ? $request_type : "friendship";
         $event = Event::find($event_id);
@@ -57,8 +54,6 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $description = $desc;
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
         $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
-
-        $link_front = "https://evius.co/meetings/".$event_id . "/acceptmeeting/" . $response ."/id_user_requested/". $id_user_requested . "?evius_token=". $evius_token;
 
         if ($response) {
             $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
@@ -79,8 +74,6 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $this->desc = $desc;
         $this->sender = $sender;
         $this->request_type = $request_type;
-        $this->link_front = $link_front;
-        $this->receiver = $receiver;
 
         $this->subject = $subject;
         $gfService = new GoogleFiles();
