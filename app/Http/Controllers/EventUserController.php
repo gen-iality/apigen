@@ -340,7 +340,7 @@ class EventUserController extends Controller
         
         //En caso de que no exita el usuario se finaliza la función
             if (empty($eventUser)){
-               return "El correo ingresado no se encuentra registrado en el evento";
+               abort(401,"El correo ingresado no se encuentra registrado en el evento");
             }
        
         //Envio de correo para la contraseña
