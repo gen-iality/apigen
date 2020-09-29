@@ -37,13 +37,13 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $event_location;
     public $logo;
     public $ical = "";
-    
+    public $changePassword;    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false)
     {
 
         $auth = resolve('Kreait\Firebase\Auth');
@@ -61,10 +61,33 @@ class InvitationMail extends Mailable implements ShouldQueue
         if (is_null($email)) {
             $email = $eventUser->properties["email"];
         }
-
+        
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
+        
+        $userPassword = $eventUser["properties"]["password"];
+        $password = isset($userPassword) ? $userPassword : "mocion.2040";
+        
+        
 
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        if($changePassword){
+            
+            $password =  self::createPass();
+            try {
+                $updatedUser = $this->auth->changeUserPassword($eventUser['user']['uid'], $password);
+                $properties = $eventUser["properties"];
+                $properties["password"] = $password;
+                $eventUser["properties"] = $properties;
+                $eventUser->save();                 
+
+            }catch (AuthError $e) {
+
+                Log::error("temp password used. " . $e->getMessage());
+                $password = "evius.2040";
+                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $password);
+            }
+        }
+
+        // var_dump($password);die;
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
@@ -91,6 +114,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->password = $password;
         $this->email = $email;
         $this->urlconfirmacion = 'https://evius.co/landing/'.$event->_id;
+        $this->changePassword = $changePassword;
         
 
         if (!$subject) {
@@ -177,7 +201,12 @@ class InvitationMail extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
-
+        if($this->changePassword){
+            return $this
+            ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.changepassword');
+        }
         if($this->event->send_custom_email)
         {
             return $this
