@@ -212,7 +212,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
-        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
+        //Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
