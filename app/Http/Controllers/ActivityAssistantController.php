@@ -325,15 +325,11 @@ class ActivityAssistantController extends Controller
             $activityAssistant = ActivityAssistant::where("activity_id",$data["activity_id"])
             ->where("user_id",$data["user_id"])->first();
             if (!$activityAssistant){
-                var_dump("vmos a crearlo");
                 $activityAssistant = new ActivityAssistant($data);  
-                
-                
             }else{
                 $activityAssistant->fill($data);
                 $activityAssistant->save();
             }
-
             return $activityAssistant;
         }else{
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
