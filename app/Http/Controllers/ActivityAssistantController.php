@@ -50,6 +50,8 @@ class ActivityAssistantController extends Controller
 
     }    
 
+
+
     /**
      * Display a listing of the resource.
      *
@@ -314,13 +316,32 @@ class ActivityAssistantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $id)
-    {
+    {   
+        
         $data = $request->json()->all();
+        //Esto esta aca por un error en las rutas, la ruta del checkin del front dirige es aqui toca cambiarlo emergencia
+        if (isset( $data["user_id"])  && isset($data["activity_id"])  && isset($data["checkedin_at"])){
+            $activityAssistant =null;
+            $activityAssistant = ActivityAssistant::where("activity_id",$data["activity_id"])
+            ->where("user_id",$data["user_id"])->first();
+            if (!$activityAssistant){
+                var_dump("vmos a crearlo");
+                $activityAssistant = new ActivityAssistant($data);  
+                
+                
+            }else{
+                $activityAssistant->fill($data);
+                $activityAssistant->save();
+            }
+
+            return $activityAssistant;
+        }else{
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
         //if($Inscription["event_id"]= $event_id){
         $ActivityAssistant->fill($data);
         $ActivityAssistant->save();
         return $data;
+        }
 
     }
 
@@ -346,7 +367,7 @@ class ActivityAssistantController extends Controller
      */
     public function checkIn(Request $request , $event_id, $id)
     {
-
+        
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
         $date = new \DateTime();
         $ActivityAssistant->fill(['checkedin_at' => $date]); 
@@ -354,5 +375,19 @@ class ActivityAssistantController extends Controller
 
         return $ActivityAssistant;
     }
+
+    public function checkInWithSearch(Request $request , $event_id)
+    {
+        $data = $request->json()->all();
+        var_dump($data);die;
+        $ActivityAssistant = ActivityAssistant::findOrFail($id);
+        $date = new \DateTime();
+        $ActivityAssistant->fill(['checkedin_at' => $date]); 
+        $ActivityAssistant->save();
+
+        return $ActivityAssistant;
+    }
+
+   
 
 }
