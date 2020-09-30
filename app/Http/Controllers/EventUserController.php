@@ -325,6 +325,34 @@ class EventUserController extends Controller
 
     }
 
+    //FUnción para cambio de contraseña
+    public function ChangeUserPassword(Request $request, string $event_id)
+    {
+        $data = $request->json()->all();
+
+        //Validar si el usuario está registrado en el evento
+            $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
+            $eventUser = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
+            // var_dump($eventUser);die;
+
+        $event = Event::findOrFail($event_id);
+        $image = null; //$event->picture;
+        
+        //En caso de que no exita el usuario se finaliza la función
+            if (empty($eventUser)){
+               return "El correo ingresado no se encuentra registrado en el evento";
+            }
+       
+        //Envio de correo para la contraseña
+            Mail::to($email)
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null,null,null,true)
+                );
+            return $eventUser;
+
+    }
+
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
         try {

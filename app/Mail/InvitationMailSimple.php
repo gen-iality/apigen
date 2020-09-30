@@ -63,8 +63,11 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         }
 
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
-
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        
+        $userPassword = $eventUser["properties"]["password"];
+        $password = isset($userPassword) ? $userPassword : "mocion.2040";
+        
+        
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
@@ -172,11 +175,11 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
     public function build()
     {
-
+        
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
-
+        // var_dump($this->password);die;
         if($this->event->send_custom_email)
         {
             return $this
