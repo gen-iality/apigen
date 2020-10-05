@@ -105,6 +105,7 @@ class Activities extends Moloquent
         "bigmaker_meeting_id",
         "vimeo_id",
         "registration_message",
-        "related_meetings"
+        "related_meetings",
+        "platform"
     ];
 }
