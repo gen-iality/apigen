@@ -271,6 +271,7 @@ class EventUserController extends Controller
         return $emailsent;
     }
 
+    //Registro y envio de confirmación de correo
     public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id, Message $message, string $eventuser_id = null)
     {
         $eventUserData = $request->json()->all();
