@@ -408,6 +408,8 @@ Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
+Route::get('borradorepetidos/activity/{activity_id}', 'ActivityAssistantController@borradorepetidos');
+
 
 Route::post('order/{order_id}/resend', [
     'as' => 'resendOrder',

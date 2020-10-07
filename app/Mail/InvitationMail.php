@@ -120,7 +120,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         if (!$subject) {
             "Invitación a " . $event->name . "";
         }
-
+        
         //Definición de horario de inicio y fin del evento.Se le agrega -05:00 para que quede hora Colombia
             $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start."-05:00") : \Carbon\Carbon::parse($event->datetime_from ."-05:00");
             $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end."-05:00") : \Carbon\Carbon::parse($event->datetime_to."-05:00");        
