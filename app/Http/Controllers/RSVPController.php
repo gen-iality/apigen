@@ -142,8 +142,7 @@ class RSVPController extends Controller implements ShouldQueue
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
-        // var_dump($data["message"]);die;
-        // $data["message"] = $data["message"] == "" || $dat["message"] == null ? "  " : $dat["message"];
+        $data["message"] = $data["message"] == "" || $data["message"] == null ? "  " : $data["message"];
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
 
