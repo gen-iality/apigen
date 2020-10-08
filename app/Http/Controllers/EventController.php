@@ -311,10 +311,14 @@ class EventController extends Controller
             self::assingOrganizer($data, $event);
         }
         
-        //Convertir el id de satring a ObjectId al hacer cambio con Droc and drop
-        foreach($data['user_properties'] as $key => $value){
-            $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();           
+        //Convertir el id de string a ObjectId al hacer cambio con drag and drop
+        if (isset($data["user_properties"]))
+        {
+            foreach($data['user_properties'] as $key => $value){
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();           
+            }
         }
+        
 
         $event->fill($data);
         $event->save();
