@@ -26,15 +26,15 @@ Route::group(
      * Installer
      * -------------------------
      */
-    Route::get('install', [
-        'as'   => 'showInstaller',
-        'uses' => 'InstallerController@showInstaller',
-    ]);
+    // Route::get('install', [
+    //     'as'   => 'showInstaller',
+    //     'uses' => 'InstallerController@showInstaller',
+    // ]);
 
-    Route::post('install', [
-        'as'   => 'postInstaller',
-        'uses' => 'InstallerController@postInstaller',
-    ]);
+    // Route::post('install', [
+    //     'as'   => 'postInstaller',
+    //     'uses' => 'InstallerController@postInstaller',
+    // ]);
 
     /*
      * Stripe connect return
@@ -81,27 +81,27 @@ Route::group(
         /*
          * Forgot password
          */
-        Route::get('login/forgot-password', [
-            'as'   => 'forgotPassword',
-            'uses' => 'RemindersController@getRemind',
-        ]);
+        // Route::get('login/forgot-password', [
+        //     'as'   => 'forgotPassword',
+        //     'uses' => 'RemindersController@getRemind',
+        // ]);
 
-        Route::post('login/forgot-password', [
-            'as'   => 'postForgotPassword',
-            'uses' => 'RemindersController@postRemind',
-        ]);
+        // Route::post('login/forgot-password', [
+        //     'as'   => 'postForgotPassword',
+        //     'uses' => 'RemindersController@postRemind',
+        // ]);
 
-        /*
-         * Reset Password
-         */
-        Route::get('login/reset-password/{token}', [
-            'uses' => 'RemindersController@getReset',
-        ])->name('password.reset');
+        // /*
+        //  * Reset Password
+        //  */
+        // Route::get('login/reset-password/{token}', [
+        //     'uses' => 'RemindersController@getReset',
+        // ])->name('password.reset');
 
-        Route::post('login/reset-password', [
-            'as'   => 'postResetPassword',
-            'uses' => 'RemindersController@postReset',
-        ]);
+        // Route::post('login/reset-password', [
+        //     'as'   => 'postResetPassword',
+        //     'uses' => 'RemindersController@postReset',
+        // ]);
 
         /*
          * Registration / User creation
@@ -141,10 +141,10 @@ Route::group(
         /*
          * Embedded events
          */
-        Route::get('/{event_id}/embed', [
-            'as'   => 'showEmbeddedEventPage',
-            'uses' => 'EventViewEmbeddedController@showEmbeddedEvent',
-        ]);
+        // Route::get('/{event_id}/embed', [
+        //     'as'   => 'showEmbeddedEventPage',
+        //     'uses' => 'EventViewEmbeddedController@showEmbeddedEvent',
+        // ]);
 
         Route::get('/{event_id}/calendar.ics', [
             'as'   => 'downloadCalendarIcs',
@@ -686,65 +686,65 @@ Route::group(
              * Event Widget page
              * -------
              */
-            Route::get('{event_id}/widgets', [
-                'as'   => 'showEventWidgets',
-                'uses' => 'EventWidgetsController@showEventWidgets',
-            ]);
+            // Route::get('{event_id}/widgets', [
+            //     'as'   => 'showEventWidgets',
+            //     'uses' => 'EventWidgetsController@showEventWidgets',
+            // ]);
 
             /*
              * -------
              * Event Survey page
              * -------
              */
-            Route::get('{event_id}/surveys', [
-                'as'   => 'showEventSurveys',
-                'uses' => 'EventSurveyController@showEventSurveys',
-            ]);
-            Route::get('{event_id}/question/create', [
-                'as'   => 'showCreateEventQuestion',
-                'uses' => 'EventSurveyController@showCreateEventQuestion'
-            ]);
+            // Route::get('{event_id}/surveys', [
+            //     'as'   => 'showEventSurveys',
+            //     'uses' => 'EventSurveyController@showEventSurveys',
+            // ]);
+            // Route::get('{event_id}/question/create', [
+            //     'as'   => 'showCreateEventQuestion',
+            //     'uses' => 'EventSurveyController@showCreateEventQuestion'
+            // ]);
 
-            Route::post('{event_id}/question/create', [
-                'as'   => 'postCreateEventQuestion',
-                'uses' => 'EventSurveyController@postCreateEventQuestion'
-            ]);
+            // Route::post('{event_id}/question/create', [
+            //     'as'   => 'postCreateEventQuestion',
+            //     'uses' => 'EventSurveyController@postCreateEventQuestion'
+            // ]);
 
 
-            Route::get('{event_id}/question/{question_id}', [
-                'as'   => 'showEditEventQuestion',
-                'uses' => 'EventSurveyController@showEditEventQuestion'
-            ]);
+            // Route::get('{event_id}/question/{question_id}', [
+            //     'as'   => 'showEditEventQuestion',
+            //     'uses' => 'EventSurveyController@showEditEventQuestion'
+            // ]);
 
-            Route::post('{event_id}/question/{question_id}', [
-                'as'   => 'postEditEventQuestion',
-                'uses' => 'EventSurveyController@postEditEventQuestion'
-            ]);
+            // Route::post('{event_id}/question/{question_id}', [
+            //     'as'   => 'postEditEventQuestion',
+            //     'uses' => 'EventSurveyController@postEditEventQuestion'
+            // ]);
 
-            Route::post('{event_id}/question/delete/{question_id}', [
-                'as'   => 'postDeleteEventQuestion',
-                'uses' => 'EventSurveyController@postDeleteEventQuestion'
-            ]);
+            // Route::post('{event_id}/question/delete/{question_id}', [
+            //     'as'   => 'postDeleteEventQuestion',
+            //     'uses' => 'EventSurveyController@postDeleteEventQuestion'
+            // ]);
 
-            Route::get('{event_id}/question/{question_id}/answers', [
-                'as'   => 'showEventQuestionAnswers',
-                'uses' => 'EventSurveyController@showEventQuestionAnswers',
-            ]);
+            // Route::get('{event_id}/question/{question_id}/answers', [
+            //     'as'   => 'showEventQuestionAnswers',
+            //     'uses' => 'EventSurveyController@showEventQuestionAnswers',
+            // ]);
 
-            Route::post('{event_id}/questions/update_order', [
-                'as'   => 'postUpdateQuestionsOrder',
-                'uses' => 'EventSurveyController@postUpdateQuestionsOrder'
-            ]);
+            // Route::post('{event_id}/questions/update_order', [
+            //     'as'   => 'postUpdateQuestionsOrder',
+            //     'uses' => 'EventSurveyController@postUpdateQuestionsOrder'
+            // ]);
 
-            Route::get('{event_id}/answers/export/{export_as?}', [
-                'as'   => 'showExportAnswers',
-                'uses' => 'EventSurveyController@showExportAnswers',
-            ]);
+            // Route::get('{event_id}/answers/export/{export_as?}', [
+            //     'as'   => 'showExportAnswers',
+            //     'uses' => 'EventSurveyController@showExportAnswers',
+            // ]);
 
-            Route::post('{event_id}/question/{question_id}/enable', [
-                'as'   => 'postEnableQuestion',
-                'uses' => 'EventSurveyController@postEnableQuestion',
-            ]);
+            // Route::post('{event_id}/question/{question_id}/enable', [
+            //     'as'   => 'postEnableQuestion',
+            //     'uses' => 'EventSurveyController@postEnableQuestion',
+            // ]);
 
 
             /*
@@ -752,28 +752,28 @@ Route::group(
              * Check In App
              * -------
              */
-            Route::get('{event_id}/check_in', [
-                'as'   => 'showCheckIn',
-                'uses' => 'EventCheckInController@showCheckIn',
-            ]);
-            Route::post('{event_id}/check_in/search', [
-                'as'   => 'postCheckInSearch',
-                'uses' => 'EventCheckInController@postCheckInSearch',
-            ]);
-            Route::post('{event_id}/check_in/', [
-                'as'   => 'postCheckInAttendee',
-                'uses' => 'EventCheckInController@postCheckInAttendee',
-            ]);
+            // Route::get('{event_id}/check_in', [
+            //     'as'   => 'showCheckIn',
+            //     'uses' => 'EventCheckInController@showCheckIn',
+            // ]);
+            // Route::post('{event_id}/check_in/search', [
+            //     'as'   => 'postCheckInSearch',
+            //     'uses' => 'EventCheckInController@postCheckInSearch',
+            // ]);
+            // Route::post('{event_id}/check_in/', [
+            //     'as'   => 'postCheckInAttendee',
+            //     'uses' => 'EventCheckInController@postCheckInAttendee',
+            // ]);
 
-            Route::post('{event_id}/qrcode_check_in', [
-                'as'   => 'postQRCodeCheckInAttendee',
-                'uses' => 'EventCheckInController@postCheckInAttendeeQr',
-            ]);
+            // Route::post('{event_id}/qrcode_check_in', [
+            //     'as'   => 'postQRCodeCheckInAttendee',
+            //     'uses' => 'EventCheckInController@postCheckInAttendeeQr',
+            // ]);
 
-            Route::post('{event_id}/confirm_order_tickets/{order_id}', [
-                'as'   => 'confirmCheckInOrderTickets',
-                'uses' => 'EventCheckInController@confirmOrderTicketsQr',
-            ]);
+            // Route::post('{event_id}/confirm_order_tickets/{order_id}', [
+            //     'as'   => 'confirmCheckInOrderTickets',
+            //     'uses' => 'EventCheckInController@confirmOrderTicketsQr',
+            // ]);
 
 
             /*
@@ -781,10 +781,10 @@ Route::group(
              * Promote
              * -------
              */
-            Route::get('{event_id}/promote', [
-                'as'   => 'showEventPromote',
-                'uses' => 'EventPromoteController@showPromote',
-            ]);
+            // Route::get('{event_id}/promote', [
+            //     'as'   => 'showEventPromote',
+            //     'uses' => 'EventPromoteController@showPromote',
+            // ]);
         });
     });
 

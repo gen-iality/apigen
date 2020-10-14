@@ -32,13 +32,13 @@ Ver Solicitudes en el Evento
 Confirmar Cuenta
 @endcomponent -->
 
-[Políticas de privacidad](https://evius.co/privacy) |
-[Términos y Condiciones](https://evius.co/terms)
+[PolÃ­ticas de privacidad](https://evius.co/privacy) |
+[TÃ©rminos y Condiciones](https://evius.co/terms)
 
 <div style="text-align: center">
 	<span>
-		Recibiste este correo porque estás inscrito y/o invitado en un
-		evento gestionado a través de Evius.co o te has
+		Recibiste este correo porque estÃ¡s inscrito y/o invitado en un
+		evento gestionado a travÃ©s de Evius.co o te has
 		registrado en el portal de Evius.co
 	</span>
 </div>
@@ -50,7 +50,7 @@ Confirmar Cuenta
 </div>
 @slot('footer')
 @component('mail::footer')
-© 2001-2020. All Rights Reserved - Evius.co
+Â© 2001-2020. All Rights Reserved - Evius.co
 @endcomponent
 @endslot
 @endcomponent

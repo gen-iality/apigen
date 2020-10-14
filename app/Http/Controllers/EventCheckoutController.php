@@ -260,11 +260,11 @@ class EventCheckoutController extends Controller
         //Descuento de los tikets del porcentaje a agregar a una cantidad de ticketes.
 
 
-        $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
-        $percentage_discount = isset($event->percentage_discount) ? $event->percentage_discount: 0;
-        
-        //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
-        //Se realiza el descuento
+            $tickets_discount = isset($event->tickets_discount) ? $event->tickets_discount: 0;
+            $percentage_discount = is_empty($event->percentage_discount) ? $event->percentage_discount: 0;
+            
+            //Si la cantidad de tiquetes es mayor o igual al que esta permitido en la base de datos y este sea diferente de 0 
+            //Se realiza el descuento
             
         if ($total_ticket_quantity >= $tickets_discount && $tickets_discount != 0) {
             $discount = $percentage_discount*$order_total/100;
@@ -273,64 +273,14 @@ class EventCheckoutController extends Controller
 
         $code_discount = $request->get('code_discount');
 
-
-        if (isset($code_discount)) {
-
-            $percentage_discount = 0;
-
-            if ($code_discount && is_array($event->codes_discount)) {
-
-                foreach ($event->codes_discount as $code) {
-
-                    if ($code['id'] == $code_discount && $code['available'] == true) {
-
-                        $percentage_discount = $code['percentage'];
-                        $discount = $percentage_discount*$order_total/100;
-                        $order_total = $order_total - $discount;
-                        break;
-                        
-
-                        if ( !isset($code['ticket_assigned'])) { 
-
-
-                         }
-                        
-                        foreach ($code['ticket_assigned'] as $ticket_assigned_id) {
-
-                                if ($ticket_assigned_id == $ticket_id) { 
-                                    $percentage_discount = $code['percentage'];
-                                    $discount = $percentage_discount*$order_total/100;
-                                    $order_total = $order_total - $discount;
-                                    break;
-                                } elseif ($ticket_assigned_id == 1000) {
-                                    $percentage_discount = $code['percentage'];
-                                    $discount = $percentage_discount*$order_total/100;
-                                    $order_total = $order_total - $discount;
-                                    break;
-                                } else {
-                                    return response()->json(
-                                        [
-                                            'message' => 'Code not allowed for the selected ticket',
-                                        ]
-                                    );
-                                }
-                        }
-                    } /* else {
-                                $percentage_discount = $code['percentage'];
-                                $discount = $percentage_discount*$order_total/100;
-                                $order_total = $order_total - $discount;
-                                break;
-                                
-                        }*/
-                    }
-            }
-
-            if ($percentage_discount == 0){
-                return response()->json(
-                    [
-                        'message' => 'Código no valido para este evento',
-                    ]
-                );       
+        if($code_discount){
+            foreach($event->codes_discount as $code){
+                if($code['id'] == $code_discount && $code['available'] == true){
+                    $percentage_discount = $code['percentage'];
+                    $discount = $percentage_discount*$order_total/100;
+                    $order_total = $order_total - $discount;
+                    break;
+                }
             }
 
         }

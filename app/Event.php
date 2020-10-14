@@ -31,6 +31,7 @@ class Event extends ModelsEvent
         'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
         'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
+        'send_custom_email'
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];

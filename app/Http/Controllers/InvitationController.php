@@ -64,7 +64,7 @@ class InvitationController extends Controller
             } catch (AuthError $e) {
 
                 Log::error("temp password used. " . $e->getMessage());
-                $pass = "temppassw123";
+                $pass = "evius.2040";
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
             }
 
@@ -226,12 +226,12 @@ class InvitationController extends Controller
         return $result;
     }
 
-    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = null)
+    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = "accepted")
     {
 
         $data = $request->json()->all();
         $Invitation = Invitation::find($id);
-        $data["response"] = $data ? $data["response"] : $response_alt;
+        $data["response"] = ($data && isset($data["response"])) ? $data["response"] : $response_alt;
         self::verifyAndAddContact($Invitation, $data);
         $resp["response"] = $data["response"] ? $data["response"] : $response_alt;
 
@@ -357,8 +357,8 @@ class InvitationController extends Controller
         Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
-        de esta manera podrá contactarte.
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu información oculta en el evento en la sección conecta/networking
+        de esta manera podrÃ¡ contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
@@ -491,7 +491,7 @@ EOT;
         //         $data_single = "tfrdrummer@gmail.com";
         //         Mail::send("Public.ViewEvent.Partials.ContentMail",$data , function ($message) use ($data,$pdf,$data_single){
         //             $message->to($data_single,"Evento PMI")
-        //             ->subject("HI¡","ni idea");
+        //             ->subject("HIÂ¡","ni idea");
         //         });
         //
         //     }

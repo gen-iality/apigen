@@ -100,7 +100,7 @@ class Account extends User
 
                     \Log::debug($model);
                     //Si ya existe un usuario con ese correo se jode
-                    $newpassword = isset($model->password) ? $model->password : "mocion.2040";
+                    $newpassword = isset($model->password) ? $model->password : "evius.2040";
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
@@ -124,6 +124,53 @@ class Account extends User
                 }
             }
         );
+
+        /** Idealmente se debe usar self::updating pero por alguna razón no lo llama */
+        self::saving(function ($model) {
+            //aplica solo para el evento update
+            if (!$model->exists) {return;}
+
+            //Si ya tiene un UID es decir su usario en firebase no hay necesidad se volverlo a crear
+            if ($model->uid) {return;}
+
+            $fbuser = null;
+            try {
+                $fbuser = self::$auth->getUserByEmail($model->email);
+                $model->uid = $fbuser->uid;
+                return;
+
+            } catch (\Exception $e) {
+                //No existe el usuario en firebase
+                $fbuser = null;
+            }
+
+
+            try {
+                //Sino existe el usuario el firebase lo creamos
+                $newpassword = isset($model->password) ? $model->password : "evius.2040";
+                $fbuser = self::$auth->createUser(
+                    [
+                        "email" => $model->email,
+                        //emailVerified: false,
+                        //phoneNumber: "+11234567890",
+                        "password" => $newpassword,
+                        "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                        //photoURL: "http://www.example.com/12345678/photo.png",
+                        //disabled: false
+                    ]
+                );
+
+                //lo autologueamos de una vez
+                $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+                $model->uid = $fbuser->uid;
+                $model->initial_token = $singed->idToken();
+                $model->refresh_token = $singed->refreshToken();
+
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        });
+
     }
 
     /**

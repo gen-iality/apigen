@@ -72,8 +72,8 @@ Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no
 
 <hr style="border-right : 0;border-left: 0;" />
 <p>
-	Si tiene problemas con el botón de ingreso abra el siguiente enlace
-	<a href="{{$link}}">click acá</a>
+	También puede ingresar al evento usando el siguiente enlace
+	<a href="{{$link}}">Ingresar a evento</a>
 </p>
 
 <div class="centered">

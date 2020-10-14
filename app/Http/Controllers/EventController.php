@@ -310,6 +310,15 @@ class EventController extends Controller
         } elseif (empty($event->organizer_id) || !empty($event->organizer_id) && !empty($data['organizer_id'])) {
             self::assingOrganizer($data, $event);
         }
+        
+        //Convertir el id de string a ObjectId al hacer cambio con drag and drop
+        if (isset($data["user_properties"]))
+        {
+            foreach($data['user_properties'] as $key => $value){
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();           
+            }
+        }
+        
 
         $event->fill($data);
         $event->save();

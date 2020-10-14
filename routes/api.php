@@ -61,31 +61,42 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
  ****************/
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');
-Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+
+
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
 Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+
 
 // api para transferir eventuser
 Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
-Route::get('eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
+Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
 
 Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
 
+Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
+
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
-Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAddtoEvent');
-Route::get('events/{event_id}/eventusers', 'EventUserController@index');
-Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put('events/{event_id}/eventusers/{id}', 'EventUserController@update');
+
+Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
+
+
+Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
+//CRUD
+Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
+Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
+Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
 
-Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+
 Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 
@@ -96,9 +107,12 @@ Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQr
 /***************
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento
  ****************/
+//Route::get    ('events/{event_id}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
+Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantController');
+Route::get('events/{event_id}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
+Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantController@meIndex');
+Route::put    ('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
 
-Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantsController');
-Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantsController@meIndex');
 
 /***************
  * USER PROPERTIES
@@ -258,6 +272,16 @@ Route::group(
     }
 );
 
+/***************
+ * Certificate
+ ****************/
+//Route::apiResource('certificate', 'CertificateController', ['only' => ['index', 'show']]);
+Route::apiResource('certificate', 'CertificateController');
+/*Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::apiResource('certificate', 'CertificateController', ['except' => ['index', 'show']]);
+    }
+);*/
 /****************
  * eventTypes
  ****************/
@@ -370,7 +394,7 @@ Route::get('me/orders/', 'ApiOrdersController@meOrders');
 // }
 // );
 
-Route::apiResource('photos', 'PhotoController');
+// Route::apiResource('photos', 'PhotoController');
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 
@@ -384,6 +408,8 @@ Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
+Route::get('borradorepetidos/activity/{activity_id}', 'ActivityAssistantController@borradorepetidos');
+
 
 Route::post('order/{order_id}/resend', [
     'as' => 'resendOrder',
