@@ -25,8 +25,8 @@ class DuncanGameController extends Controller
     const AVALIABLE_GAMES = ["darts", "spaceinvaders", "annie", "rullettee"];
 
     /**
-     * duncan juego guardamos el puntaje con el timestamp para después poder
-     * limitar la cantiadad de veces jugadas por tiempo
+     * duncan juego guardamos el puntaje con el timestamp para después poder limitar la cantiadad de veces jugadas por tiempo
+     * 
      * @return \App\Attendee
      */
     public function guardarpuntaje(Request $request)

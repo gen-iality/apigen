@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Storage;
 
+/**
+ * @group  User management
+ *
+ * APIs for managing users
+ */
 class UserController extends UserControllerWeb
 {
 
@@ -114,6 +119,12 @@ class UserController extends UserControllerWeb
     }
 
     /**
+     * 
+	 * Create a user
+	 *
+	 * [Insert optional longer description of the API endpoint here.]
+	 *
+	 *
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
