@@ -13,7 +13,7 @@
 **Hola {{$eventUser_name}} **, su inscripción se ha realizado con éxito al evento:
 <b>{{$event->name}}</b>
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
-@component('mail::table')
+<!-- @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
@@ -26,7 +26,7 @@
 | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
 @endif
 @endif
-@endcomponent
+@endcomponent -->
 
 <!-- Mensaje configurable desde el CMS en la sección configuración asistentes -->
 @if ($event->registration_message )
