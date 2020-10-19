@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "8ee1f385-a1b6-4ef3-8266-a2d9b580fa05",
+        "_postman_id": "8e34c6d7-7daf-40e3-a519-06a7755c43e3",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -23,7 +23,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "soluta",
+                                    "value": "ut",
                                     "description": ""
                                 }
                             ]
@@ -41,14 +41,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_id\": \"animi\",\n    \"user_id\": \"cumque\"\n}"
+                            "raw": "{\n    \"activity_id\": \"earum\",\n    \"user_id\": \"harum\"\n}"
                         },
                         "description": "Display a listing of the resource.",
                         "response": []
                     }
                 },
                 {
-                    "name": "_store:_ Crear de asistencia de usuario por actividad.",
+                    "name": "_store_: Store a newly created resource in storage\nCrear de asistencia de usuario por actividad",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -69,9 +69,9 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"user_id\": \"aut\",\n    \"activity_id\": \"dolores\"\n}"
+                            "raw": "{\n    \"user_id\": \"sit\",\n    \"activity_id\": \"commodi\"\n}"
                         },
-                        "description": "Store a newly created resource in storage.",
+                        "description": "",
                         "response": []
                     }
                 },
@@ -87,7 +87,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "expedita",
+                                    "value": "in",
                                     "description": ""
                                 }
                             ]
@@ -133,7 +133,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"checkedin_at\": \"et\"\n}"
+                            "raw": "{\n    \"checkedin_at\": \"numquam\"\n}"
                         },
                         "description": "Actualizar registro de actividad-asistente.",
                         "response": []
@@ -151,7 +151,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nihil",
+                                    "value": "facere",
                                     "description": "string required"
                                 }
                             ]
@@ -187,7 +187,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "fugiat",
+                                    "value": "iusto",
                                     "description": ""
                                 }
                             ]
@@ -205,7 +205,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_id\": \"illo\",\n    \"user_id\": \"ad\"\n}"
+                            "raw": "{\n    \"activity_id\": \"eaque\",\n    \"user_id\": \"dignissimos\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -223,7 +223,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "illum",
+                                    "value": "tenetur",
                                     "description": ""
                                 }
                             ]
@@ -287,7 +287,7 @@
                                 {
                                     "id": "activity_id",
                                     "key": "activity_id",
-                                    "value": "aut",
+                                    "value": "perferendis",
                                     "description": "Id de Actividad a la que se le borran usuarios repetidos."
                                 }
                             ]
@@ -363,7 +363,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aperiam",
+                                    "value": "vero",
                                     "description": "string required id de Attendee"
                                 }
                             ]
@@ -483,7 +483,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "commodi",
+                                    "value": "voluptatem",
                                     "description": "string required"
                                 }
                             ]
@@ -501,7 +501,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"dolorem\",\n    \"name\": \"at\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"incidunt\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"asperiores\",\n    \"name\": \"sunt\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"tenetur\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -519,7 +519,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "praesentium",
+                                    "value": "est",
                                     "description": "string required"
                                 }
                             ]
@@ -537,7 +537,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"sit\"\n}"
+                            "raw": "{\n    \"email\": \"sunt\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -639,7 +639,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quisquam",
+                                    "value": "maxime",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -675,7 +675,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "recusandae",
+                                    "value": "odit",
                                     "description": "string required"
                                 }
                             ]
@@ -693,7 +693,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"quia\",\n    \"name\": \"rerum\",\n    \"password\": \"et\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"debitis\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"consectetur\",\n    \"name\": \"et\",\n    \"password\": \"maiores\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"possimus\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -767,7 +767,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "pariatur",
+                                    "value": "sint",
                                     "description": "string required"
                                 }
                             ]
@@ -785,7 +785,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"deleniti\",\n    \"name\": \"qui\",\n    \"password\": \"et\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"et\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"illum\",\n    \"name\": \"laboriosam\",\n    \"password\": \"perferendis\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"qui\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -887,7 +887,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "placeat",
+                                    "value": "est",
                                     "description": "string required"
                                 }
                             ]
@@ -905,7 +905,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"ut\",\n    \"name\": \"ducimus\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"placeat\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"maiores\",\n    \"name\": \"voluptatibus\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"officiis\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -923,7 +923,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "enim",
+                                    "value": "officia",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -959,7 +959,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sequi",
+                                    "value": "cumque",
                                     "description": "string required"
                                 }
                             ]
@@ -977,7 +977,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"consequatur\",\n    \"name\": \"perferendis\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"non\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"quam\",\n    \"name\": \"voluptatibus\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"ullam\"\n            }\n        }\n    }\n}"
                         },
                         "description": "Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo agrega al evento especificado",
                         "response": []
@@ -1085,13 +1085,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nesciunt",
+                                    "value": "vel",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "ab",
+                                    "value": "nulla",
                                     "description": ""
                                 }
                             ]
@@ -1127,13 +1127,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "harum",
+                                    "value": "quae",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "dolorem",
+                                    "value": "ea",
                                     "description": ""
                                 }
                             ]
@@ -1169,13 +1169,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quasi",
+                                    "value": "nostrum",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "praesentium",
+                                    "value": "velit",
                                     "description": "user who accepts or rejects the application"
                                 }
                             ]
@@ -1193,7 +1193,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"response\": \"et\"\n}"
+                            "raw": "{\n    \"response\": \"quis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1211,13 +1211,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "rerum",
+                                    "value": "tenetur",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "itaque",
+                                    "value": "unde",
                                     "description": ""
                                 }
                             ]
@@ -1281,13 +1281,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "necessitatibus",
+                                    "value": "adipisci",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "vero",
+                                    "value": "placeat",
                                     "description": ""
                                 }
                             ]
@@ -1323,7 +1323,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "suscipit",
+                                    "value": "ullam",
                                     "description": ""
                                 }
                             ]
@@ -1359,7 +1359,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "porro",
+                                    "value": "et",
                                     "description": ""
                                 }
                             ]
@@ -1377,7 +1377,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id_user_requested\": \"impedit\"\n}"
+                            "raw": "{\n    \"id_user_requested\": \"quisquam\"\n}"
                         },
                         "description": "Enviar solicitud con redirecci\u00f3n a evius",
                         "response": []
@@ -1715,7 +1715,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "corrupti",
+                                    "value": "autem",
                                     "description": ""
                                 }
                             ]
@@ -1733,7 +1733,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"usersIds\": {\n        \"\": \"aut\"\n    },\n    \"message\": \"doloremque\",\n    \"image\": \"enim\",\n    \"subject\": \"sit\",\n    \"footer\": \"quia\"\n}"
+                            "raw": "{\n    \"usersIds\": {\n        \"\": \"atque\"\n    },\n    \"message\": \"neque\",\n    \"image\": \"atque\",\n    \"subject\": \"architecto\",\n    \"footer\": \"recusandae\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1751,7 +1751,7 @@
                                 {
                                     "id": "eventUser",
                                     "key": "eventUser",
-                                    "value": "soluta",
+                                    "value": "reprehenderit",
                                     "description": ""
                                 }
                             ]
@@ -1806,6 +1806,96 @@
             ]
         },
         {
+            "name": "Synchronization",
+            "description": "",
+            "item": [
+                {
+                    "name": "Event Users",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/sync\/firestore\/:event_id",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "This driver was designed to export all event_users found on mongo.\nEste controlador fue dise\u00f1ado para exportar todos los event_users que se encuentran en mongo\nRealizando una migraci\u00f3n completa, para mas informaci\u00f3n acerca del funcionamiento de firestore con php sigue el siguiente link https:\/\/firebase-php.readthedocs.io\/en\/4.44.0\/\n\nEl controlador sigue los siguientes pasos:\n     1. Se abre el servicio de firestore\n     2. Captura toda la informaci\u00f3n de la table event_users\n     3. Crea la collecci\u00f3n, el cual es el mismo nombre \"event_users\"\n     4. Recorre todos los usuarios encontrados anteriormente pero.\n         4.1. Si los datos del usuario existen entonces.\n         4.2. Guarda un nuevo documento con el id del event_user.\n         4.3. Convertimos los datos del usuario en un array para poder guardarlo.\n         4.4. Dentro del documento guardamos los datos del usuario.\n     5. Al finalizar retornamos un mensaje sobre la culminaci\u00f3n del trabajo\n\nInconvenientes: La cantidad de usuarios, hace que la p\u00e1gina no responda arrogando un\nerror por limite de tiempo.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Event Account",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/sync\/firestore\/:id",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "Este controlador fue dise\u00f1ado para exportar un event_user que se encuentran en mongo\nRealizando una migraci\u00f3n por medio del id,\n\npara mas informaci\u00f3n acerca del funcionamiento de firestore con php sigue el siguiente link\nhttps:\/\/github.com\/morrislaptop\/firestore-php\n\nEl controlador sigue los siguientes pasos:\n     1. Se abre el servicio de firestore\n     2. Captura toda la informaci\u00f3n del event_users\n     3. Se dir\u00edge a la collecci\u00f3n, el cual es el mismo nombre \"event_users\"\n     4. Recorre todos los usuarios encontrados anteriormente pero.\n         4.1. Si los datos del usuario existen entonces.\n         4.2. Guarda un nuevo documento con el id del event_user.\n         4.3. Convertimos los datos del usuario en un array para poder guardarlo.\n         4.4. Dentro del documento guardamos los datos del usuario.\n     5. Al finalizar retornamos un mensaje sobre la culminaci\u00f3n del trabajo",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/sync\/firebase\/{id}",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/sync\/firebase\/:id",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
             "name": "UserProperties",
             "description": "",
             "item": [
@@ -1821,7 +1911,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "libero",
+                                    "value": "est",
                                     "description": "."
                                 }
                             ]
@@ -1867,7 +1957,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"aliquid\",\n    \"name\": \"quia\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"dolores\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"quas\",\n    \"name\": \"omnis\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"laborum\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1885,13 +1975,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "qui",
+                                    "value": "inventore",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "fuga",
+                                    "value": "quaerat",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -1909,7 +1999,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"veniam\",\n    \"name\": \"alias\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"id\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"quod\",\n    \"name\": \"iure\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"delectus\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1927,13 +2017,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "exercitationem",
+                                    "value": "vitae",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "minima",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -1951,7 +2041,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"iusto\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"et\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1969,13 +2059,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sunt",
+                                    "value": "sequi",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
+                                    "value": "eos",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4700,90 +4790,6 @@
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/generatorQr\/:id",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Event Users",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/sync\/firestore\/:event_id",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "Este controlador fue dise\u00f1ado para exportar todos los event_users que se encuentran en mongo\nRealizando una migraci\u00f3n completa,\n\npara mas informaci\u00f3n acerca del funcionamiento de firestore con php sigue el siguiente link\nhttps:\/\/firebase-php.readthedocs.io\/en\/4.44.0\/\n\nEl controlador sigue los siguientes pasos:\n     1. Se abre el servicio de firestore\n     2. Captura toda la informaci\u00f3n de la table event_users\n     3. Crea la collecci\u00f3n, el cual es el mismo nombre \"event_users\"\n     4. Recorre todos los usuarios encontrados anteriormente pero.\n         4.1. Si los datos del usuario existen entonces.\n         4.2. Guarda un nuevo documento con el id del event_user.\n         4.3. Convertimos los datos del usuario en un array para poder guardarlo.\n         4.4. Dentro del documento guardamos los datos del usuario.\n     5. Al finalizar retornamos un mensaje sobre la culminaci\u00f3n del trabajo\n\nInconvenientes: La cantidad de usuarios, hace que la p\u00e1gina no responda arrogando un\nerror por limite de tiempo.",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Event Account",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/sync\/firestore\/:id",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "Este controlador fue dise\u00f1ado para exportar un event_user que se encuentran en mongo\nRealizando una migraci\u00f3n por medio del id,\n\npara mas informaci\u00f3n acerca del funcionamiento de firestore con php sigue el siguiente link\nhttps:\/\/github.com\/morrislaptop\/firestore-php\n\nEl controlador sigue los siguientes pasos:\n     1. Se abre el servicio de firestore\n     2. Captura toda la informaci\u00f3n del event_users\n     3. Se dir\u00edge a la collecci\u00f3n, el cual es el mismo nombre \"event_users\"\n     4. Recorre todos los usuarios encontrados anteriormente pero.\n         4.1. Si los datos del usuario existen entonces.\n         4.2. Guarda un nuevo documento con el id del event_user.\n         4.3. Convertimos los datos del usuario en un array para poder guardarlo.\n         4.4. Dentro del documento guardamos los datos del usuario.\n     5. Al finalizar retornamos un mensaje sobre la culminaci\u00f3n del trabajo",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/sync\/firebase\/{id}",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/sync\/firebase\/:id",
                             "query": []
                         },
                         "method": "GET",

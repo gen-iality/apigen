@@ -32,16 +32,16 @@ Display a listing of the resource.
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/soluta/activities_attendees" \
+    -G "http://localhost/api/events/ut/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"animi","user_id":"cumque"}'
+    -d '{"activity_id":"earum","user_id":"harum"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/soluta/activities_attendees"
+    "http://localhost/api/events/ut/activities_attendees"
 );
 
 let headers = {
@@ -50,8 +50,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "animi",
-    "user_id": "cumque"
+    "activity_id": "earum",
+    "user_id": "harum"
 }
 
 fetch(url, {
@@ -89,9 +89,8 @@ Parameter | Type | Status | Description
 <!-- END_eca15b751105fbb8f3ff752e6f4428a7 -->
 
 <!-- START_368722239d745a97771b933ab15b57a2 -->
-## _store:_ Crear de asistencia de usuario por actividad.
-
-Store a newly created resource in storage.
+## _store_: Store a newly created resource in storage
+Crear de asistencia de usuario por actividad
 
 > Example request:
 
@@ -100,7 +99,7 @@ curl -X POST \
     "http://localhost/api/events/1/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":"aut","activity_id":"dolores"}'
+    -d '{"user_id":"sit","activity_id":"commodi"}'
 
 ```
 
@@ -115,8 +114,8 @@ let headers = {
 };
 
 let body = {
-    "user_id": "aut",
-    "activity_id": "dolores"
+    "user_id": "sit",
+    "activity_id": "commodi"
 }
 
 fetch(url, {
@@ -148,14 +147,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/expedita/activities_attendees/1" \
+    -G "http://localhost/api/events/in/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/expedita/activities_attendees/1"
+    "http://localhost/api/events/in/activities_attendees/1"
 );
 
 let headers = {
@@ -204,7 +203,7 @@ curl -X PUT \
     "http://localhost/api/events/1/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"checkedin_at":"et"}'
+    -d '{"checkedin_at":"numquam"}'
 
 ```
 
@@ -219,7 +218,7 @@ let headers = {
 };
 
 let body = {
-    "checkedin_at": "et"
+    "checkedin_at": "numquam"
 }
 
 fetch(url, {
@@ -253,14 +252,14 @@ Eliminar registro específico de ActivityAssistant
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/nihil/activities_attendees/1" \
+    "http://localhost/api/events/facere/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/nihil/activities_attendees/1"
+    "http://localhost/api/events/facere/activities_attendees/1"
 );
 
 let headers = {
@@ -297,16 +296,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/fugiat/activities_attendeesAdmin" \
+    -G "http://localhost/api/events/iusto/activities_attendeesAdmin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"illo","user_id":"ad"}'
+    -d '{"activity_id":"eaque","user_id":"dignissimos"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/fugiat/activities_attendeesAdmin"
+    "http://localhost/api/events/iusto/activities_attendeesAdmin"
 );
 
 let headers = {
@@ -315,8 +314,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "illo",
-    "user_id": "ad"
+    "activity_id": "eaque",
+    "user_id": "dignissimos"
 }
 
 fetch(url, {
@@ -360,14 +359,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/illum/activities_attendees" \
+    -G "http://localhost/api/me/events/tenetur/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/illum/activities_attendees"
+    "http://localhost/api/me/events/tenetur/activities_attendees"
 );
 
 let headers = {
@@ -448,14 +447,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/borradorepetidos/activity/aut" \
+    -G "http://localhost/api/borradorepetidos/activity/perferendis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/borradorepetidos/activity/aut"
+    "http://localhost/api/borradorepetidos/activity/perferendis"
 );
 
 let headers = {
@@ -550,14 +549,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/corrupti/eventusers/aperiam" \
+    -G "http://localhost/api/events/corrupti/eventusers/vero" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/corrupti/eventusers/aperiam"
+    "http://localhost/api/events/corrupti/eventusers/vero"
 );
 
 let headers = {
@@ -734,16 +733,16 @@ Registrar usuario a un evento y enviar correo de confirmación
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/commodi/adduserwithemailvalidation" \
+    "http://localhost/api/events/voluptatem/adduserwithemailvalidation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"dolorem","name":"at","other_params,":{"":{"":{"":"incidunt"}}}}'
+    -d '{"email":"asperiores","name":"sunt","other_params,":{"":{"":{"":"tenetur"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/commodi/adduserwithemailvalidation"
+    "http://localhost/api/events/voluptatem/adduserwithemailvalidation"
 );
 
 let headers = {
@@ -752,12 +751,12 @@ let headers = {
 };
 
 let body = {
-    "email": "dolorem",
-    "name": "at",
+    "email": "asperiores",
+    "name": "sunt",
     "other_params,": {
         "": {
             "": {
-                "": "incidunt"
+                "": "tenetur"
             }
         }
     }
@@ -799,16 +798,16 @@ Cambiar contraseña del usuario
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/praesentium/changeUserPassword" \
+    "http://localhost/api/events/est/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"sit"}'
+    -d '{"email":"sunt"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/praesentium/changeUserPassword"
+    "http://localhost/api/events/est/changeUserPassword"
 );
 
 let headers = {
@@ -817,7 +816,7 @@ let headers = {
 };
 
 let body = {
-    "email": "sit"
+    "email": "sunt"
 }
 
 fetch(url, {
@@ -964,14 +963,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/eventUsers/quisquam/checkin" \
+    "http://localhost/api/eventUsers/maxime/checkin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/eventUsers/quisquam/checkin"
+    "http://localhost/api/eventUsers/maxime/checkin"
 );
 
 let headers = {
@@ -1008,16 +1007,16 @@ Crear un usuario y añadirlo a un evento
 
 ```bash
 curl -X POST \
-    "http://localhost/api/eventUsers/createUserAndAddtoEvent/recusandae" \
+    "http://localhost/api/eventUsers/createUserAndAddtoEvent/odit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quia","name":"rerum","password":"et","other_params,":{"":{"":{"":"debitis"}}}}'
+    -d '{"email":"consectetur","name":"et","password":"maiores","other_params,":{"":{"":{"":"possimus"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/eventUsers/createUserAndAddtoEvent/recusandae"
+    "http://localhost/api/eventUsers/createUserAndAddtoEvent/odit"
 );
 
 let headers = {
@@ -1026,13 +1025,13 @@ let headers = {
 };
 
 let body = {
-    "email": "quia",
-    "name": "rerum",
-    "password": "et",
+    "email": "consectetur",
+    "name": "et",
+    "password": "maiores",
     "other_params,": {
         "": {
             "": {
-                "": "debitis"
+                "": "possimus"
             }
         }
     }
@@ -1150,16 +1149,16 @@ Crear un usuario y añadirlo a un evento
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/pariatur/eventusers" \
+    "http://localhost/api/events/sint/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"deleniti","name":"qui","password":"et","other_params,":{"":{"":{"":"et"}}}}'
+    -d '{"email":"illum","name":"laboriosam","password":"perferendis","other_params,":{"":{"":{"":"qui"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/pariatur/eventusers"
+    "http://localhost/api/events/sint/eventusers"
 );
 
 let headers = {
@@ -1168,13 +1167,13 @@ let headers = {
 };
 
 let body = {
-    "email": "deleniti",
-    "name": "qui",
-    "password": "et",
+    "email": "illum",
+    "name": "laboriosam",
+    "password": "perferendis",
     "other_params,": {
         "": {
             "": {
-                "": "et"
+                "": "qui"
             }
         }
     }
@@ -1354,16 +1353,16 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/placeat/eventusers/1" \
+    "http://localhost/api/events/est/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"ut","name":"ducimus","other_params,":{"":{"":{"":"placeat"}}}}'
+    -d '{"email":"maiores","name":"voluptatibus","other_params,":{"":{"":{"":"officiis"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/placeat/eventusers/1"
+    "http://localhost/api/events/est/eventusers/1"
 );
 
 let headers = {
@@ -1372,12 +1371,12 @@ let headers = {
 };
 
 let body = {
-    "email": "ut",
-    "name": "ducimus",
+    "email": "maiores",
+    "name": "voluptatibus",
     "other_params,": {
         "": {
             "": {
-                "": "placeat"
+                "": "officiis"
             }
         }
     }
@@ -1419,14 +1418,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/1/eventusers/enim" \
+    "http://localhost/api/events/1/eventusers/officia" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/eventusers/enim"
+    "http://localhost/api/events/1/eventusers/officia"
 );
 
 let headers = {
@@ -1464,16 +1463,16 @@ Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo a
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/sequi/eventusersbyurl" \
+    "http://localhost/api/events/cumque/eventusersbyurl" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"consequatur","name":"perferendis","other_params,":{"":{"":{"":"non"}}}}'
+    -d '{"email":"quam","name":"voluptatibus","other_params,":{"":{"":{"":"ullam"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/sequi/eventusersbyurl"
+    "http://localhost/api/events/cumque/eventusersbyurl"
 );
 
 let headers = {
@@ -1482,12 +1481,12 @@ let headers = {
 };
 
 let body = {
-    "email": "consequatur",
-    "name": "perferendis",
+    "email": "quam",
+    "name": "voluptatibus",
     "other_params,": {
         "": {
             "": {
-                "": "non"
+                "": "ullam"
             }
         }
     }
@@ -1657,14 +1656,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/nesciunt/indexinvitations/ab" \
+    -G "http://localhost/api/events/vel/indexinvitations/nulla" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/nesciunt/indexinvitations/ab"
+    "http://localhost/api/events/vel/indexinvitations/nulla"
 );
 
 let headers = {
@@ -1708,14 +1707,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/harum/indexinvitationsrecieved/dolorem" \
+    -G "http://localhost/api/events/quae/indexinvitationsrecieved/ea" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/harum/indexinvitationsrecieved/dolorem"
+    "http://localhost/api/events/quae/indexinvitationsrecieved/ea"
 );
 
 let headers = {
@@ -1759,16 +1758,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/quasi/acceptordecline/praesentium" \
+    "http://localhost/api/events/nostrum/acceptordecline/velit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"response":"et"}'
+    -d '{"response":"quis"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quasi/acceptordecline/praesentium"
+    "http://localhost/api/events/nostrum/acceptordecline/velit"
 );
 
 let headers = {
@@ -1777,7 +1776,7 @@ let headers = {
 };
 
 let body = {
-    "response": "et"
+    "response": "quis"
 }
 
 fetch(url, {
@@ -1814,14 +1813,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/rerum/contactlist/itaque" \
+    -G "http://localhost/api/events/tenetur/contactlist/unde" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/rerum/contactlist/itaque"
+    "http://localhost/api/events/tenetur/contactlist/unde"
 );
 
 let headers = {
@@ -1902,14 +1901,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/necessitatibus/contactlist/vero" \
+    "http://localhost/api/events/adipisci/contactlist/placeat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/necessitatibus/contactlist/vero"
+    "http://localhost/api/events/adipisci/contactlist/placeat"
 );
 
 let headers = {
@@ -1946,14 +1945,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/suscipit/invitation" \
+    -G "http://localhost/api/events/ullam/invitation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/suscipit/invitation"
+    "http://localhost/api/events/ullam/invitation"
 );
 
 let headers = {
@@ -1998,16 +1997,16 @@ Enviar solicitud con redirección a evius
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/porro/invitation" \
+    "http://localhost/api/events/et/invitation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"id_user_requested":"impedit"}'
+    -d '{"id_user_requested":"quisquam"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/porro/invitation"
+    "http://localhost/api/events/et/invitation"
 );
 
 let headers = {
@@ -2016,7 +2015,7 @@ let headers = {
 };
 
 let body = {
-    "id_user_requested": "impedit"
+    "id_user_requested": "quisquam"
 }
 
 fetch(url, {
@@ -2540,16 +2539,16 @@ Enviar RSVP a los usuarios en un evento, tomando usersIds[] en solicitud para fi
 
 ```bash
 curl -X POST \
-    "http://localhost/api/rsvp/sendeventrsvp/corrupti" \
+    "http://localhost/api/rsvp/sendeventrsvp/autem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"usersIds":{"":"aut"},"message":"doloremque","image":"enim","subject":"sit","footer":"quia"}'
+    -d '{"usersIds":{"":"atque"},"message":"neque","image":"atque","subject":"architecto","footer":"recusandae"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/sendeventrsvp/corrupti"
+    "http://localhost/api/rsvp/sendeventrsvp/autem"
 );
 
 let headers = {
@@ -2559,12 +2558,12 @@ let headers = {
 
 let body = {
     "usersIds": {
-        "": "aut"
+        "": "atque"
     },
-    "message": "doloremque",
-    "image": "enim",
-    "subject": "sit",
-    "footer": "quia"
+    "message": "neque",
+    "image": "atque",
+    "subject": "architecto",
+    "footer": "recusandae"
 }
 
 fetch(url, {
@@ -2604,14 +2603,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/rsvp/confirmrsvp/soluta" \
+    -G "http://localhost/api/rsvp/confirmrsvp/reprehenderit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/confirmrsvp/soluta"
+    "http://localhost/api/rsvp/confirmrsvp/reprehenderit"
 );
 
 let headers = {
@@ -2691,6 +2690,178 @@ fetch(url, {
 
 <!-- END_f0266492be1eb40c7fae7d7b7c12402e -->
 
+#Synchronization
+
+
+<!-- START_713b263eae14561e1e999503e124ba0c -->
+## Event Users
+
+This driver was designed to export all event_users found on mongo.
+Este controlador fue diseñado para exportar todos los event_users que se encuentran en mongo
+Realizando una migración completa, para mas información acerca del funcionamiento de firestore con php sigue el siguiente link https://firebase-php.readthedocs.io/en/4.44.0/
+
+El controlador sigue los siguientes pasos:
+     1. Se abre el servicio de firestore
+     2. Captura toda la información de la table event_users
+     3. Crea la collección, el cual es el mismo nombre "event_users"
+     4. Recorre todos los usuarios encontrados anteriormente pero.
+         4.1. Si los datos del usuario existen entonces.
+         4.2. Guarda un nuevo documento con el id del event_user.
+         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
+         4.4. Dentro del documento guardamos los datos del usuario.
+     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+
+Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogando un
+error por limite de tiempo.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/sync/firestore/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/sync/firestore/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/sync/firestore/{event_id}`
+
+
+<!-- END_713b263eae14561e1e999503e124ba0c -->
+
+<!-- START_1b510062bbbf529fbc9099f8ed51139d -->
+## Event Account
+
+Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
+Realizando una migración por medio del id,
+
+para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
+https://github.com/morrislaptop/firestore-php
+
+El controlador sigue los siguientes pasos:
+     1. Se abre el servicio de firestore
+     2. Captura toda la información del event_users
+     3. Se diríge a la collección, el cual es el mismo nombre "event_users"
+     4. Recorre todos los usuarios encontrados anteriormente pero.
+         4.1. Si los datos del usuario existen entonces.
+         4.2. Guarda un nuevo documento con el id del event_user.
+         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
+         4.4. Dentro del documento guardamos los datos del usuario.
+     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/sync/firestore/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/sync/firestore/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/sync/firestore/{id}`
+
+
+<!-- END_1b510062bbbf529fbc9099f8ed51139d -->
+
+<!-- START_0a90f007ba0181dc120f51a029d014c9 -->
+## api/sync/firebase/{id}
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/sync/firebase/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/sync/firebase/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/sync/firebase/{id}`
+
+
+<!-- END_0a90f007ba0181dc120f51a029d014c9 -->
+
 #UserProperties
 
 
@@ -2701,14 +2872,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/libero/userproperties" \
+    -G "http://localhost/api/events/est/userproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/libero/userproperties"
+    "http://localhost/api/events/est/userproperties"
 );
 
 let headers = {
@@ -2754,7 +2925,7 @@ curl -X POST \
     "http://localhost/api/events/1/userproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"aliquid","name":"quia","other_params,":{"":{"":{"":"dolores"}}}}'
+    -d '{"email":"quas","name":"omnis","other_params,":{"":{"":{"":"laborum"}}}}'
 
 ```
 
@@ -2769,12 +2940,12 @@ let headers = {
 };
 
 let body = {
-    "email": "aliquid",
-    "name": "quia",
+    "email": "quas",
+    "name": "omnis",
     "other_params,": {
         "": {
             "": {
-                "": "dolores"
+                "": "laborum"
             }
         }
     }
@@ -2810,16 +2981,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/qui/userproperties/fuga" \
+    -G "http://localhost/api/events/inventore/userproperties/quaerat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"veniam","name":"alias","other_params,":{"":{"":{"":"id"}}}}'
+    -d '{"email":"quod","name":"iure","other_params,":{"":{"":{"":"delectus"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/qui/userproperties/fuga"
+    "http://localhost/api/events/inventore/userproperties/quaerat"
 );
 
 let headers = {
@@ -2828,12 +2999,12 @@ let headers = {
 };
 
 let body = {
-    "email": "veniam",
-    "name": "alias",
+    "email": "quod",
+    "name": "iure",
     "other_params,": {
         "": {
             "": {
-                "": "id"
+                "": "delectus"
             }
         }
     }
@@ -2882,16 +3053,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/exercitationem/userproperties/et" \
+    "http://localhost/api/events/vitae/userproperties/minima" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"other_params,":{"":{"":{"":"iusto"}}}}'
+    -d '{"other_params,":{"":{"":{"":"et"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/exercitationem/userproperties/et"
+    "http://localhost/api/events/vitae/userproperties/minima"
 );
 
 let headers = {
@@ -2903,7 +3074,7 @@ let body = {
     "other_params,": {
         "": {
             "": {
-                "": "iusto"
+                "": "et"
             }
         }
     }
@@ -2943,14 +3114,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/sunt/userproperties/voluptatem" \
+    "http://localhost/api/events/sequi/userproperties/eos" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/sunt/userproperties/voluptatem"
+    "http://localhost/api/events/sequi/userproperties/eos"
 );
 
 let headers = {
@@ -7010,177 +7181,6 @@ fetch(url, {
 
 
 <!-- END_c1b602605e9866557de0bafd3e253c34 -->
-
-<!-- START_713b263eae14561e1e999503e124ba0c -->
-## Event Users
-
-Este controlador fue diseñado para exportar todos los event_users que se encuentran en mongo
-Realizando una migración completa,
-
-para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-https://firebase-php.readthedocs.io/en/4.44.0/
-
-El controlador sigue los siguientes pasos:
-     1. Se abre el servicio de firestore
-     2. Captura toda la información de la table event_users
-     3. Crea la collección, el cual es el mismo nombre "event_users"
-     4. Recorre todos los usuarios encontrados anteriormente pero.
-         4.1. Si los datos del usuario existen entonces.
-         4.2. Guarda un nuevo documento con el id del event_user.
-         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
-         4.4. Dentro del documento guardamos los datos del usuario.
-     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
-
-Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogando un
-error por limite de tiempo.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/sync/firestore/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/sync/firestore/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/sync/firestore/{event_id}`
-
-
-<!-- END_713b263eae14561e1e999503e124ba0c -->
-
-<!-- START_1b510062bbbf529fbc9099f8ed51139d -->
-## Event Account
-
-Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
-Realizando una migración por medio del id,
-
-para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-https://github.com/morrislaptop/firestore-php
-
-El controlador sigue los siguientes pasos:
-     1. Se abre el servicio de firestore
-     2. Captura toda la información del event_users
-     3. Se diríge a la collección, el cual es el mismo nombre "event_users"
-     4. Recorre todos los usuarios encontrados anteriormente pero.
-         4.1. Si los datos del usuario existen entonces.
-         4.2. Guarda un nuevo documento con el id del event_user.
-         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
-         4.4. Dentro del documento guardamos los datos del usuario.
-     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/sync/firestore/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/sync/firestore/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/sync/firestore/{id}`
-
-
-<!-- END_1b510062bbbf529fbc9099f8ed51139d -->
-
-<!-- START_0a90f007ba0181dc120f51a029d014c9 -->
-## api/sync/firebase/{id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/sync/firebase/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/sync/firebase/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/sync/firebase/{id}`
-
-
-<!-- END_0a90f007ba0181dc120f51a029d014c9 -->
 
 <!-- START_a2d0406589ef05ab05b1e3a3cac469f6 -->
 ## api/integration/bigmaker/conferences/enter
