@@ -17,6 +17,7 @@ use Mail;
 use Validator;
 
 /**
+ * @group EventUser.
  * @resource Attendee (Attendee)
  *
  * Handles the relation bewteeen user and event.  It handles user booking into an event
@@ -60,6 +61,8 @@ class EventUserController extends Controller
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
         return EventUserResource::collection($results);
     }
+
+    
     public function meInEvent(Request $request, $event_id)
     {
         $query = Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->first();
@@ -68,6 +71,13 @@ class EventUserController extends Controller
         return new EventUserResource($results);
     }
 
+    /**
+     * _meEvents:_ Listado de eventos incritos del usuario logueado.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @param  $event_id
+     * @return EventUserResource
+     */
     public function meEvents(Request $request)
     {
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
@@ -110,20 +120,21 @@ class EventUserController extends Controller
     }
 
     /**
-     * __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
-     *
-     * | Body Params   |
-     * | ------------- |
-     * | @body $_POST[email] required field |
-     * | @body $_POST[name]     |
-     * | @body $_POST[other_params],... any other params  will be saved in user and eventUser
+     * __createUserViaUrl:__ Tries to create a new user from provided data and then add that user to specified event
+     *  
+     * Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo agrega al evento especificado
+     * 
+     * @urlParam event_id string required
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
      *
      * @param Request $request HTTP request
      * @param String  $event_id to add the user to.
      *
      * @return EventUserResource
-     */
-
+    */
     public function createUserViaUrl(Request $request, string $event_id)
     {
         //  data-route="https://api.evius.co/es/event/order/5d712f33d74d5c2aef354aa6/resend"
@@ -271,7 +282,22 @@ class EventUserController extends Controller
         return $emailsent;
     }
 
-    //Registro y envio de confirmación de correo
+    /**
+     * _SubscribeUserToEventAndSendEmail_: Register user to an event and send confirmation email
+     * Registrar usuario a un evento y enviar correo de confirmación
+     * 
+     * @urlParam event_id string required
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @param Message $message
+     * @param string $eventuser_id
+     * @return void
+     */
     public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id, Message $message, string $eventuser_id = null)
     {
         $eventUserData = $request->json()->all();
@@ -326,7 +352,18 @@ class EventUserController extends Controller
 
     }
 
-    //FUnción para cambio de contraseña
+    /**
+     * _ChangeUserPassword_: Change user password
+     * Cambiar contraseña del usuario
+     * 
+     * @urlParam event_id string required
+     * 
+     * @bodyParam email email required Email of the user who will change his password
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function ChangeUserPassword(Request $request, string $event_id)
     {
         $data = $request->json()->all();
@@ -354,6 +391,23 @@ class EventUserController extends Controller
 
     }
 
+    /**
+     * _createUserAndAddtoEvent_:Create user and add it to an event
+     * Crear un usuario y añadirlo a un evento
+     * 
+     * @urlParam event_id string required
+     * @urlParam eventuser_id  string      
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam password string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @param string $eventuser_id
+     * @return void
+     */
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
         try {
@@ -602,6 +656,12 @@ class EventUserController extends Controller
 
     /**
      * __Store:__ Store a newly Attendee  in storage.
+     * 
+     * Creau un asistente
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -614,11 +674,13 @@ class EventUserController extends Controller
 
     /**
      * __Show:__ Display an Attendee by id
-     *
+     * 
+     * @urlParam event_id string required
+     * @urlParam id string required id de Attendee
+     * 
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
-     */
-
+    */
     public function show(Request $request, $event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);
@@ -628,6 +690,13 @@ class EventUserController extends Controller
     /**
      * __Update:__ Update the specified resource in storage.
      *
+     * @urlParam event_id string required
+     * @urlParam evenUserId string required id de Attendee
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
@@ -664,7 +733,9 @@ class EventUserController extends Controller
 
     /**
      * __CheckIn:__ Checks In an existent Attendee to the related event
-     *
+     *  
+     * @urlParam id string required id Attendee to checkin into the event
+     * 
      * @param  string $id Attendee to checkin into the event
      * @return void
      */
@@ -676,7 +747,9 @@ class EventUserController extends Controller
 
     /**
      * __delete:__ Remove the specified resource from storage.
-     *
+     * 
+     * @urlParam id string required id Attendee to checkin into the event
+     * 
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */

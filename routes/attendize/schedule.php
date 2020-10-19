@@ -72,10 +72,10 @@ Route::apiResource('events/{event_id}/categoryactivities',      'ActivityCategor
 /***************
  * TEST API'S
  ****************/
-Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
+// Route::apiResource('testsendrecovery', 'TestEmailRecoveryController',['only' => ['index']]);
 Route::post('findbase/findbase/{id}', 'SendContentController@Attendee');
 Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage");
-Route::post("verifyuser","VertifyController@validateUser");
+// Route::post("verifyuser","VertifyController@validateUser");
 
 
 /*******************

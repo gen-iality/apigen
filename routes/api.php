@@ -394,7 +394,7 @@ Route::get('me/orders/', 'ApiOrdersController@meOrders');
 // }
 // );
 
-Route::apiResource('photos', 'PhotoController');
+// Route::apiResource('photos', 'PhotoController');
 
 /* FROM HERE DOWNWARDS UNORGANIZED API ROUTES  WILL DISAPEAR */
 

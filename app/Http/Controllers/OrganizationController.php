@@ -9,13 +9,15 @@ use App\Event;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 use Auth;
+
+/**
+ * @group Organization
+ */
 class OrganizationController extends Controller
 {
-
-
-
     /**
-     * Display the specified resource.
+     * _meOrganizations_: List the organizations of the logged-in user.
+     * Listar las organizaciones del usuario logueado
      *
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
@@ -29,7 +31,7 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     *  _index_:Display a listing of the organizations.
      *
      * @return \Illuminate\Http\Response
      */
@@ -41,8 +43,10 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * _store_:Store a newly created resource in organizations.
+     * 
+     * @bodyParam properties[name,email] array 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -50,7 +54,7 @@ class OrganizationController extends Controller
     {
         $data = $request->json()->all();
 
-        /* Se le agregan campos obligatorios a la organización*/
+        /* Se le agregan campos obligatorios a la organizaciï¿½n*/
 
             if(isset($data['properties'])){ 
                 $data['properties'] += [
@@ -84,7 +88,7 @@ class OrganizationController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * _show_: Display the specified organization.
      *
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
@@ -96,8 +100,10 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * _update_: Update the specified resource in organization.
      *
+     * @urlParam organization_id required
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
@@ -119,8 +125,10 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * _destroy_: Remove the specified organization from storage.
      *
+     * @urlParam organization_id required
+     * 
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */

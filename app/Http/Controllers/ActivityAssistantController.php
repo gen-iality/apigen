@@ -21,14 +21,19 @@ use App\evaLib\Services\UserEventService;
 
 
 /**
- * @resource Event
- *
+ * @group ActivityAssistant.
  *
  */
 class ActivityAssistantController extends Controller
 {
 
-    public function borradorepetidos(Request $request, $activity_id ){
+    /**
+     * _borradorepetidos:_ Borrar usuarios repetidos en las actividades.
+     *
+     * @urlParam activity_id required Id de Actividad a la que se le borran usuarios repetidos. 
+     * @return void
+     */
+    public function borradorepetidos($activity_id ){
 
         $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->get();  
         // var_dump($ActivityUsers);die;
@@ -49,10 +54,10 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Inscription  $Inscription
-     * @return \Illuminate\Http\Response
+     * _fillassitantsbug:_ Display the specified resource.
+     *  
+     * @urlParam id required
+     * 
      */
     public function fillassitantsbug($id)
     {
@@ -72,9 +77,14 @@ class ActivityAssistantController extends Controller
 
 
     /**
+     * _index:_ Listado de los usuarios de las actividades.
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @urlParam event_id required
+     * @bodyParam activity_id string required id de la actividad a listar
+     * @bodyParam user_id string required id del usuario a listar
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * 
      */
     public function index(Request $request, $event_id)
     {
@@ -98,9 +108,13 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * _indexForAdmin:_ Display a listing of the resource.
      *
+     * @urlParam event_id required
+     * @bodyParam activity_id string required id de la actividad a listar
+     * @bodyParam user_id string required id del usuario a listar
      * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
      */
     public function indexForAdmin(Request $request, $event_id)
     {
@@ -135,18 +149,32 @@ class ActivityAssistantController extends Controller
         }
         return JsonResource::collection($activity_attendees);
     }
-    public function meIndex(Request $request, $event_id)
+
+    /**
+     * _meIndex:_ Consultar las actividades inscritas del usuario logueado.
+     * 
+     * @urlParam event_id required
+     * @param  $event_id
+     * @return void
+     */
+    public function meIndex($event_id)
     {   
         $user = auth()->user();      
         return JsonResource::collection(ActivityAssistant::where("user_id", $user->_id)->paginate(config('app.page_size')));
     }
-    /**<
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+
+    /**
+     * _store_: Store a newly created resource in storage
+     * Crear de asistencia de usuario por actividad
+     * 
+     * @ulrParam event_id required string
+     * 
+     * @bodyParam user_id required string id del usuario que asistirá a la actividad
+     * @bodyParam activity_id required string id del de la actividad a las que asistirá el usuario.
+     *      
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request, $event_id)
     {
         $data = $request->json()->all();
@@ -182,6 +210,11 @@ class ActivityAssistantController extends Controller
         return $activityAssistant;
     }
 
+    /**
+     * _reduceAvailability:_ Consultar capacidad disponible de la actividad.
+     *
+     * @return string
+     */
     private function  reduceAvailability(){
         $activity_id      = $data["activity_id"];
         $model = ActivityAssistant::where("activity_id",$activity_id)->first();
@@ -212,6 +245,15 @@ class ActivityAssistantController extends Controller
         }
     }
     
+    /**
+     * _deleteAssistant:_ Eliminar asistentes de una actividad.
+     * 
+     * @ulrParam event_id required string
+     * @ulrParam activity_id required string
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
     public function deleteAssistant(Request $request, $event_id,$activity_id)
     {
         $data = $request->json()->all();
@@ -229,13 +271,7 @@ class ActivityAssistantController extends Controller
         Mail::send("Public.ViewEvent.Partials.SuggestedSchedule",$data , function ($message) use ($useremail,$activityname){    
             $message->to($useremail,"Asistente")
             ->subject("Encuesta de satisfacción MEC 2019","");
-        });
-        
-        
-        
-        
-        
-        
+        });        
         
        // 
        /* 
@@ -313,11 +349,14 @@ class ActivityAssistantController extends Controller
         return $modelreplace;*/
      }
 
+    
     /**
-     * Display the specified resource.
+     * _show:_ Mostrar asistente-actividad.
      *
-     * @param  \App\Inscription  $Inscription
-     * @return \Illuminate\Http\Response
+     * @urlParam event_id required 
+     * @urlParam id required  id ActivityAssistant
+     * 
+     * @return void
      */
     public function show($event_id,$id)
     {
@@ -327,11 +366,17 @@ class ActivityAssistantController extends Controller
         return $response;
 
     }
+
     /**
-     * Update the specified resource in storage.
+     * _update:_ Update the specified resource in storage.
+     * Actualizar registro de actividad-asistente.
      *
+     * @ulrParam event_id required string
+     * @ulrParam id required string id de ActivityAssistant
+     * 
+     * @bodyParam checkedin_at dateTime required 
+     * 
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $id)
@@ -361,10 +406,15 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
+     * _destroy_: Remove specific record from ActivityAssistant
+     * Eliminar registro específico de ActivityAssistant
+     * 
+     * @urlParam event_id string required
+     * @urlParam id string required id de Attendee
+     *  
+     * 
+     * @param  \Illuminate\Http\Request  $request     
+     * @return void
      */
     public function destroy(Request $request, $event_id, $id)
     {
@@ -373,11 +423,12 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * Undocumented function
+     * _checkIn:_ Actualizar checkIn cuando un usuario entra a la actividad.
      *
-     * @param Request $request
-     * @param [type] $event_id
-     * @param [type] $id
+     * @ulrParam event_id required string
+     * @ulrParam id required string id de ActivityAssistant
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     public function checkIn(Request $request , $event_id, $id)
@@ -391,6 +442,13 @@ class ActivityAssistantController extends Controller
         return $ActivityAssistant;
     }
 
+    /**
+     * CheckInWithSearch
+     * @ulrParam event_id required string
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
     public function checkInWithSearch(Request $request , $event_id)
     {
         $data = $request->json()->all();
