@@ -20,7 +20,7 @@ use Storage;
 use Validator;
 
 /**
- * @resource Event
+ * @group Event
  *
  */
 
@@ -28,20 +28,18 @@ class EventController extends Controller
 {
     /**
      *
+     *  _index:_ Listado de todos los eventos
+     *
+     * Este método permite la consulta dinámica de cualquier propiedad a través de la URL utilizando los servicios FilterQuery.
+     * 
+     * @queryParam id Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     * 
+     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
      * @param Illuminate\Http\Request $request [injected]
      * @param App\evaLib\Services\FilterQuery $filterQuery [injected]
-     * all params are injected
-     *
-     *  __index:__ Display all the events
-     *
-     * this methods allows dynamic quering by any property via URL using the services FilterQuery.
-     * Exmaple:
-     *  - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
-     *
      * @return \Illuminate\Http\Response EventResource collection
      */
-
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
@@ -57,6 +55,16 @@ class EventController extends Controller
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
+
+    /**
+     * _beforeToday_: Listado de los próximos eventos
+     *
+     * @queryParam id required Exmaple: - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     * @param Request $request
+     * @param FilterQuery $filterQuery
+     * @return void
+     */
     public function beforeToday(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
@@ -86,6 +94,14 @@ class EventController extends Controller
 
     }
 
+    /**
+     * _EventbyUsers_: Busqueda de eventos por usuario organizador.
+     * 
+     * @urlParam id required  organiser_id
+     *
+     * @param string $id
+     * @return void
+     */
     public function EventbyUsers(string $id)
     {
         return EventResource::collection(
@@ -95,6 +111,14 @@ class EventController extends Controller
 
     }
 
+    /**
+     * _EventbyOrganizations_: Busqueda de eventos por udsuario organizador.
+     * 
+     * @urlParam id required  organiser_id
+     *
+     * @param string $id
+     * @return void
+     */
     public function EventbyOrganizations(string $id)
     {
         return EventResource::collection(
@@ -104,6 +128,14 @@ class EventController extends Controller
 
     }
 
+    /**
+     * _delete_: Eliminar evento.
+     * 
+     * @urlParam id required id del evento a eliminar.
+     *
+     * @param string $id
+     * @return void
+     */
     public function delete(string $id)
     {
         $res = $id->delete();
@@ -115,11 +147,9 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created event resource in storage.
+     * _store_: Crear nuevo evento.
      *
-     * there is a special event relation called organizer Its polymorphic relationship.
-     * related to user and organization
-     * organizer: It could be "me"(current user) or an organization Id
+     * Hay una relación de evento especial llamada organizador Su relación polimórfica. Relacionada con el usuario y el organizador de la organización: Podría ser "yo" (usuario actual) o una organización Id.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -190,6 +220,14 @@ class EventController extends Controller
         return $result;
     }
 
+    /**
+     * _createDefaultUserProperties_: Crear propiedades email y names de usuario por defecto.
+     * 
+     * @urlParam event_id required
+     *
+     * @param string $event_id
+     * @return void
+     */
     private static function createDefaultUserProperties($event_id)
     {
         /*Crear propierdades names y email*/
@@ -228,7 +266,9 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * _show_: Mostrar información de un evento especifico.
+     * 
+     * @urlParam id requires id del evento
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -259,16 +299,17 @@ class EventController extends Controller
         echo $gfService->doSomethingUseful();
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: Actualizar información de un evento especifico.
+     * 
+
+     * @debug post $entityBody = file_get_contents('php://input');
+     * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      *
+     * @urlParam event required id del evento
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
-     *
-     * How was images upload before
-     *
-     * @debug post $entityBody = file_get_contents('php://input');
-     * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
@@ -327,9 +368,10 @@ class EventController extends Controller
     }
 
     /**
-     * Organizer:
-     * It could be "me"(current user) or a organization Id
-     * the relationship is polymorpic.
+     * _assingOrganizer_: Asociar organizador a un evento.
+     * It could be "me"(current user) or a organization Id the relationship is polymorpic.
+     * 
+     * @bodyParam data array required
      **/
     private static function assingOrganizer($data, $event)
     {
@@ -347,8 +389,10 @@ class EventController extends Controller
 
     }
     /**
-     * Remove the specified resource from storage.
+     * _destroy_: Eliminar evento.
      *
+     * @urlParam event required id del evento a eliminar
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
@@ -365,16 +409,21 @@ class EventController extends Controller
     }
 
     /**
-     * AddUserProperty: Add dynamic user property to the event
+     * AddUserProperty: 
+     * Añadir la propiedad de usuario dinámico al evento
      *
-     * each dynamic property must be composed of following parameters:
+     * Cada propiedad dinámica debe estar compuesta por los siguientes parámetros:
      *
-     * * name     text
-     * * required boolean - this field is not yet used  for anything
-     * * type     text    - this field is not yet used for anything
+     * * texto del nombre
+     * * requerido booleano - este campo no se utiliza todavía para nada
+     * * escriba el texto - este campo no se utiliza todavía para nada
      *
-     * Once created user dynamic event properties could be get directly from $event->userProperties.
-     * Dynamic properties are returned inside each UserEvent like regular properties
+     * Una vez creadas las propiedades de los eventos dinámicos de usuario se pueden obtener directamente de $evento->propiedades de usuario.
+     * Las propiedades dinámicas son devueltas dentro de cada UserEvent como las propiedades normales
+     * 
+     * @urlParam id required id del evento
+     * 
+     * 
      * @param Event $event
      * @param array $properties
      * @return void
@@ -409,8 +458,13 @@ class EventController extends Controller
     }
 
     /**
-     * Create an event
+     * _postCreateEvent_: Crear un nuevo evento.
      *
+     * @boddyParam title required
+     * @boddyParam description required
+     * @boddyParam start_date required    
+     * @boddyParam name required    
+     * 
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -582,7 +636,9 @@ class EventController extends Controller
     // FUNCTIONS SPECIFICS
 
     /**
-     * Put status of stage depend day
+     * _stagesStatusActive_: Poner el estado de la etapa depende del día
+     * 
+     * @urlParam id required event_Id
      * @param $id  event Id
      * @return  $stages
      *

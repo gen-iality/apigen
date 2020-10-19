@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Validator;
 
 /**
+ * @group Duncan
  * Controla la dinámica de puntajes para una experiencia de un cliente (disney) pra un juego de lanzamiento que se realizo en agosto del 2020
  */
 class DuncanGameController extends Controller
@@ -73,7 +74,7 @@ class DuncanGameController extends Controller
 
     /**
      * 
-     * Duncan juego. Número de segundos desde que jugue.
+     * _minutosparajugar_:Duncan juego. Número de segundos desde que jugue.
      * Número de segundos desde que jugue menos una hora que es límite de tiempo para volver a jugar, si el número es positivo no puedo jugar, si es negativo significa que ya paso más de una hora.
      * @param Request $request
      * @return int
@@ -108,7 +109,7 @@ class DuncanGameController extends Controller
     }
 
     /**
-     *  Mensaje que se enviará mediante SMS al usuario invitado
+     * _invitaramigos_:Mensaje que se enviará mediante SMS al usuario invitado
      *
      * @param Request $request
      * @return string confirmación de que el mensaje fue enviado

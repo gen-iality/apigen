@@ -126,7 +126,7 @@ class EventUserController extends Controller
      * 
      * @urlParam event_id string required
      * 
-     * @bodyParam email email required field 
+     * @bodyParam email email required 
      * @bodyParam name  string required
      * @bodyParam other_params,... any other params  will be saved in user and eventUser
      *

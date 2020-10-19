@@ -14,9 +14,7 @@ use PDF;
 use Storage;
 
 /**
- * @resource Event
- *
- *
+ * @group SendContent
  */
 class SendContentController extends Controller
 {

@@ -78,8 +78,9 @@ class ActivityAssistantController extends Controller
 
     /**
      * _index:_ Listado de los usuarios de las actividades.
-     * Display a listing of the resource.
+     * 
      * @urlParam event_id required
+     * 
      * @bodyParam activity_id string required id de la actividad a listar
      * @bodyParam user_id string required id del usuario a listar
      * 
@@ -108,7 +109,7 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * _indexForAdmin:_ Display a listing of the resource.
+     * _indexForAdmin:_ Listado de usuarios por el administrador.
      *
      * @urlParam event_id required
      * @bodyParam activity_id string required id de la actividad a listar
@@ -164,8 +165,7 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * _store_: Store a newly created resource in storage
-     * Crear de asistencia de usuario por actividad
+     * _store_: Crear de asistencia de usuario por actividad
      * 
      * @ulrParam event_id required string
      * 
@@ -211,7 +211,7 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * _reduceAvailability:_ Consultar capacidad disponible de la actividad.
+     * _reduceAvailability:_ Consultar capacidad de usuarios disponible de la actividad.
      *
      * @return string
      */
@@ -368,9 +368,8 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * _update:_ Update the specified resource in storage.
-     * Actualizar registro de actividad-asistente.
-     *
+     * _update:_ Actualizar registro de actividad-asistente.
+     * 
      * @ulrParam event_id required string
      * @ulrParam id required string id de ActivityAssistant
      * 
@@ -406,8 +405,7 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * _destroy_: Remove specific record from ActivityAssistant
-     * Eliminar registro específico de ActivityAssistant
+     * _destroy_: Eliminar registro específico de ActivityAssistant
      * 
      * @urlParam event_id string required
      * @urlParam id string required id de Attendee
@@ -444,6 +442,7 @@ class ActivityAssistantController extends Controller
 
     /**
      * CheckInWithSearch
+     * 
      * @ulrParam event_id required string
      * 
      * @param  \Illuminate\Http\Request  $request

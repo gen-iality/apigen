@@ -16,8 +16,8 @@ use Auth;
 class OrganizationController extends Controller
 {
     /**
-     * _meOrganizations_: List the organizations of the logged-in user.
-     * Listar las organizaciones del usuario logueado
+     * _meOrganizations_: Listar las organizaciones del usuario logueado
+     * 
      *
      * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response

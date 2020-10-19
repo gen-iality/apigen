@@ -23,11 +23,13 @@ class RoleAttendeeController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * _index_: Listado de los roles de los asistentes.
+     * 
+     * @urlParam event_id required
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request,String $event_id)
+    */
+    public function index(String $event_id)
     {
 
         $results = RoleAttendee::where("event_id", $event_id)->get();
@@ -38,8 +40,15 @@ class RoleAttendeeController extends Controller
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-
-    public function indexByEvent(Request $request, String $event_id)
+    /**
+     * _indexByEvent_: Buscar roles por evento.
+     * 
+     * @urlParam event_id required
+     * 
+     * @param String $event_id
+     * @return void
+     */
+    public function indexByEvent(String $event_id)
     {
         $results = RoleAttendee::where("event_id", $event_id)->get();
 
@@ -47,32 +56,27 @@ class RoleAttendeeController extends Controller
         return JsonResource::collection($results);
     }
 
-   /**
-     * Store a newly created resource in storage.
+    /**
+     * _store_:Crear un nuevo rol de asistente para un evento.
+     * 
+     * @bodyParam name string required nombre del rol 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, String $event_id)
+    */
+    public function store(Request $request)
     {
         $data = $request->json()->all();
         $result = new RoleAttendee($data);
         $result->save();
         return $result;   
-    }
-    
-
+    }    
 
     /**
-     * Store a newly created resource in storage.
+     * _show_: Ver información de un rol de asistente específico.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Display the specified resource.
-     *
+     * @urlParam id required id de RoleAttendee
+     * 
      * @param  \App\RoleAttendee  $RoleAttendee
      * @return \Illuminate\Http\Response
      */
@@ -83,13 +87,15 @@ class RoleAttendeeController extends Controller
         return $response;
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: Actualizar un rol del evento
      *
+     * @urlParam id required id de RoleAttendee
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Role  $RoleAttendee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, String $event_id, String $id)
+    public function update(Request $request, String $id)
     {
         $data = $request->json()->all();
         $RoleAttendee = RoleAttendee::find($id);
@@ -99,11 +105,15 @@ class RoleAttendeeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
+     * _destroy_: Eliminar un rol específico de asistente.
+     * 
+     * @urlParam id required id de RoleAttendee
+     * 
      * @param  \App\Event $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,String $event_id, String $id)
+    public function destroy(Request $request, String $id)
     {  
         $RoleAttendee = RoleAttendee::findOrFail($id);
         return (string)$RoleAttendee->delete();
