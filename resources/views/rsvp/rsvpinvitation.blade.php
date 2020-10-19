@@ -30,7 +30,7 @@ ha sido invitado a:
 
 
 @if(!empty($image))
-<img src="{{ $image }}">
+<img alt="{{$event->name}}" src="{{ $image }}">
 @endif
 
 @if(!empty($message) && $message != '<p><br></p>')
@@ -59,10 +59,10 @@ Ingresar al Evento AQUÍ
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
 <!-- ![Logo]({{!empty($image_footer)}}) -->
-<img src={{$image_footer}} /> 
+<img alt="{{$event->name}}" src={{$image_footer}} /> 
 @elseif($organization_picture != null)
 ![Logo]({{$organization_picture}})
-<img src={{$organization_picture}} /> 
+<img alt="{{$event->name}}" src={{$organization_picture}} /> 
 @else
 @endif
 </div>
