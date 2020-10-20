@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Redirect;
 
 /**
+ * @group RSVP
  * @resource RSVP Handle RSVP(invitations for events)
  *
  */
@@ -110,7 +111,7 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Display a listing of the resource.
+     * _index_: Display a listing of the RSVP.
      *
      * @return \Illuminate\Http\Response
      */
@@ -123,22 +124,22 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Send RSVP to users in an event, taking usersIds[] in
-     * request to filter which users the RSVP is going to be send to
-     *
-     *      +@@post body usersIds[]
-     *      +@@post body message
-     *      +@@post body image link
-     *      +@@post body subject
-     *      +@@post body footer
-     *      +@body message asdfasdf
+     * _createAndSendRSVP_:Send RSVP to users in an event, taking usersIds[] in request to filter which users the RSVP is going to be send to
+     * Enviar RSVP a los usuarios en un evento, tomando usersIds[] en solicitud para filtrar a qué usuarios se va a enviar la RSVP
+     * 
+     * @urlParam event required
+     * 
+     * @bodyParam usersIds[] required
+     * @bodyParam message required
+     * @bodyParam image required
+     * @bodyParam subject required
+     * @bodyParam footer required
      *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
      * @param Message $message auto injected
      * @return int Number of email sent
-     */
-
+    */
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
@@ -183,17 +184,15 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Store a newly created resource in storage.
+     * _store_:Store a newly created resource in RSVP.
      *
-     * saveRSVP
-     *
-     * @param [type] $message
-     * @param [type] $subject
-     * @param [type] $image
-     * @param [type] $footer
-     * @param [type] $usersCount
-     * @param [type] $eventId
-     * @return void
+     * @bodyParam $message
+     * @bodyParam $subject
+     * @bodyParam $image
+     * @bodyParam $footer
+     * @bodyParam $usersCount
+     * @bodyParam $eventId
+
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -253,7 +252,8 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Undocumented function
+     * _confirmRSVP_: Confirmation de RSVP
+     * @urlParam eventUser required
      *
      * @Ireturn void
      */

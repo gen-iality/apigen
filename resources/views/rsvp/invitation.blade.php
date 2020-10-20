@@ -1,11 +1,11 @@
 @component('mail::message')  
 @if(!empty($event->styles["banner_image_email"]))
 <div class="centered">
-<img src={{$event->styles["banner_image_email"]}} /> 
+<img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
 </div>
 @elseif(!empty($event->styles["banner_image"]))
 <div class="centered">
-<img src={{$event->styles["banner_image"]}} />  
+<img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
 </div>
 @endif
 <br />
@@ -13,7 +13,7 @@
 **Hola {{$eventUser_name}} **, su inscripción se ha realizado con éxito al evento:
 <b>{{$event->name}}</b>
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
-@component('mail::table')
+<!-- @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **Fecha:** | **Hora:** |
@@ -26,7 +26,7 @@
 | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
 @endif
 @endif
-@endcomponent
+@endcomponent -->
 
 <!-- Mensaje configurable desde el CMS en la sección configuración asistentes -->
 @if ($event->registration_message )
@@ -51,7 +51,7 @@ Ingresar al Evento AQUÍ
 -->
 @if (!empty($image))
 <div class="centered">
-	<img src="{{ $image }}">
+	<img alt="{{$event->name}}" src="{{ $image }}">
 </div>
 <br>
 @endif
@@ -79,13 +79,13 @@ Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
 ![Logo]({{!empty($image_footer)}})
-<img src={{$image_footer}} /> 
+<img alt="{{$event->name}}" src={{$image_footer}} /> 
 @elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
-<img src={{$event->styles["banner_footer_email"]}} />  
+<img alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} />  
 @elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
-<img src={{$event->styles["banner_footer"]}} />           
+<img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
 @elseif(isset($organization_picture) && !empty($organization_picture))
-<img src={{$organization_picture}} />           
+<img alt="{{$event->name}}" src={{$organization_picture}} />           
 @endif
 
 </div>

@@ -20,24 +20,833 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
-#User management
+#Certificate
 
+En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.
+<!-- START_491853e99011901472276c04a2028910 -->
+## _generateCertificate_: Generar certificado
 
-APIs for managing users
-<!-- START_d84649799f33244554dc0cd2568792d4 -->
-## api/users/verifyAccount/{uid}
 > Example request:
 
 ```bash
-curl -X PUT \
-    "http://localhost/api/users/verifyAccount/1" \
+curl -X POST \
+    "http://localhost/api/generatecertificate" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"occaecati","content":"ipsum","background":"voluptas"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/generatecertificate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "occaecati",
+    "content": "ipsum",
+    "background": "voluptas"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/generatecertificate`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo
+    
+<!-- END_491853e99011901472276c04a2028910 -->
+
+<!-- START_68adc3f6281f21cf39ff45bbccede6e2 -->
+## _indexByEvent_: Listar los certificados por evento.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/rerum/certificates" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/verifyAccount/1"
+    "http://localhost/api/events/rerum/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/certificates`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_68adc3f6281f21cf39ff45bbccede6e2 -->
+
+<!-- START_f079297f56fef66382c899397b2114a6 -->
+## _store_:Creación de certificados.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/certificates" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"dignissimos","content":"ad","background":"ullam"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "dignissimos",
+    "content": "ad",
+    "background": "ullam"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/certificates`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo.
+    
+<!-- END_f079297f56fef66382c899397b2114a6 -->
+
+<!-- START_38c251cd2137c789af7ddd3c87749979 -->
+## _show_: Ver la información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a mostrar
+
+<!-- END_38c251cd2137c789af7ddd3c87749979 -->
+
+<!-- START_6266c97cac89368b9901a5e2e1f313e2 -->
+## _update_: Actualizar información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"libero","content":"quis","background":"fuga"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "libero",
+    "content": "quis",
+    "background": "fuga"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/certificates/{certificate}`
+
+`PATCH api/events/{event_id}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo
+    
+<!-- END_6266c97cac89368b9901a5e2e1f313e2 -->
+
+<!-- START_9d1f5720c227f04584ffa14fcdd26837 -->
+## _destroy_: Eliminar registro de un certificado.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event_id}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+
+<!-- END_9d1f5720c227f04584ffa14fcdd26837 -->
+
+<!-- START_4c9efcf47162dba5a71705010c1d5cc7 -->
+## _store_:Creación de certificados.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/certificates" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"eos","content":"voluptatem","background":"a"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "eos",
+    "content": "voluptatem",
+    "background": "a"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/certificates`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo.
+    
+<!-- END_4c9efcf47162dba5a71705010c1d5cc7 -->
+
+<!-- START_80fcb3c92345683d3dc174755e5183ab -->
+## _update_: Actualizar información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"dolorem","content":"sunt","background":"blanditiis"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "dolorem",
+    "content": "sunt",
+    "background": "blanditiis"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/certificates/{certificate}`
+
+`PATCH api/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo
+    
+<!-- END_80fcb3c92345683d3dc174755e5183ab -->
+
+<!-- START_3984f7a219b9fb6506187360e1d541c8 -->
+## _destroy_: Eliminar registro de un certificado.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+
+<!-- END_3984f7a219b9fb6506187360e1d541c8 -->
+
+<!-- START_4a1857b8b0fa2e53e019d8fba0f88994 -->
+## _destroy_: Eliminar registro de un certificado.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/certificates/enim" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificates/enim"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/certificates/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+
+<!-- END_4a1857b8b0fa2e53e019d8fba0f88994 -->
+
+<!-- START_20357dac1999c588c85ffe24bc8cdd8d -->
+## _index_: Lista de certificados generados.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/certificate" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/certificate`
+
+
+<!-- END_20357dac1999c588c85ffe24bc8cdd8d -->
+
+<!-- START_63fc0e87430a7e884b4feef38a9ab61a -->
+## _store_:Creación de certificados.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/certificate" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"quidem","content":"necessitatibus","background":"et"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "quidem",
+    "content": "necessitatibus",
+    "background": "et"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/certificate`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo.
+    
+<!-- END_63fc0e87430a7e884b4feef38a9ab61a -->
+
+<!-- START_d4de594f6e18a81ef1d37b4e4c7a8fe3 -->
+## _show_: Ver la información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/certificate/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificate/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/certificate/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a mostrar
+
+<!-- END_d4de594f6e18a81ef1d37b4e4c7a8fe3 -->
+
+<!-- START_359fc0e6c033060787ded1d7676a4d05 -->
+## _update_: Actualizar información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/certificate/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"eaque","content":"minima","background":"et"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificate/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "eaque",
+    "content": "minima",
+    "background": "et"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/certificate/{certificate}`
+
+`PATCH api/certificate/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo
+    
+<!-- END_359fc0e6c033060787ded1d7676a4d05 -->
+
+<!-- START_ff42e90196178b087d14163d009b736c -->
+## _destroy_: Eliminar registro de un certificado.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/certificate/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/certificate/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/certificate/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+
+<!-- END_ff42e90196178b087d14163d009b736c -->
+
+#Duncan
+
+Controla la dinámica de puntajes para una experiencia de un cliente (disney) pra un juego de lanzamiento que se realizo en agosto del 2020
+<!-- START_f6e0be661d33f868c8d4a36f00b2aa62 -->
+## _minutosparajugar_:Duncan juego. Número de segundos desde que jugue.
+
+Número de segundos desde que jugue menos una hora que es límite de tiempo para volver a jugar, si el número es positivo no puedo jugar, si es negativo significa que ya paso más de una hora.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/duncan/minutosparajugar" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/duncan/minutosparajugar"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/duncan/minutosparajugar`
+
+
+<!-- END_f6e0be661d33f868c8d4a36f00b2aa62 -->
+
+<!-- START_e368abcfeb54ef4e5e5981f3e2d6f5aa -->
+## Duncan juego. Guardamos el puntaje con el timestamp para después poder limitar la cantiadad de veces jugadas por tiempo
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/duncan/guardarpuntaje" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/duncan/guardarpuntaje"
 );
 
 let headers = {
@@ -56,9 +865,3766 @@ fetch(url, {
 
 
 ### HTTP Request
+`PUT api/duncan/guardarpuntaje`
+
+
+<!-- END_e368abcfeb54ef4e5e5981f3e2d6f5aa -->
+
+<!-- START_7c8179f222715a3db70f08a120bf7211 -->
+## _invitaramigos_:Mensaje que se enviará mediante SMS al usuario invitado
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/duncan/invitaramigos" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/duncan/invitaramigos"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/duncan/invitaramigos`
+
+
+<!-- END_7c8179f222715a3db70f08a120bf7211 -->
+
+<!-- START_743b4a67e5ae97894be70c681e219cef -->
+## api/duncan/setphoneaspassword
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/duncan/setphoneaspassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/duncan/setphoneaspassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/duncan/setphoneaspassword`
+
+
+<!-- END_743b4a67e5ae97894be70c681e219cef -->
+
+#Event
+
+
+<!-- START_742a1cbd4a274c7269f0db99a704ff41 -->
+## _index:_ Listado de todos los eventos
+
+Este método permite la consulta dinámica de cualquier propiedad a través de la URL utilizando los servicios FilterQuery.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events?id=vitae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events"
+);
+
+let params = {
+    "id": "vitae",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `id` |  optional  | Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+
+<!-- END_742a1cbd4a274c7269f0db99a704ff41 -->
+
+<!-- START_de3413bf02c9bb71627fa96e1c1c409f -->
+## _store_: Crear nuevo evento.
+
+Hay una relación de evento especial llamada organizador Su relación polimórfica. Relacionada con el usuario y el organizador de la organización: Podría ser "yo" (usuario actual) o una organización Id.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events`
+
+
+<!-- END_de3413bf02c9bb71627fa96e1c1c409f -->
+
+<!-- START_379a3beb17bbb91528d80d8507f69655 -->
+## _show_: Mostrar información de un evento especifico.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  optional  | requires id del evento
+
+<!-- END_379a3beb17bbb91528d80d8507f69655 -->
+
+<!-- START_d16967fd1d3d935666f7e8112a1a4451 -->
+## _update_: Actualizar información de un evento especifico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/reprehenderit" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/reprehenderit"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}`
+
+`PATCH api/events/{event}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | id del evento
+
+<!-- END_d16967fd1d3d935666f7e8112a1a4451 -->
+
+<!-- START_379a30feb2949828b5f95efbfd7649c3 -->
+## _destroy_: Eliminar evento.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/events/inventore" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/inventore"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | id del evento a eliminar
+
+<!-- END_379a30feb2949828b5f95efbfd7649c3 -->
+
+<!-- START_aec83efbad5ec636ec1b29352c041932 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/me/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/me/events"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/me/events`
+
+
+<!-- END_aec83efbad5ec636ec1b29352c041932 -->
+
+<!-- START_2478aef777186232e8bca32fdf09efe3 -->
+## _store_: Crear nuevo evento.
+
+Hay una relación de evento especial llamada organizador Su relación polimórfica. Relacionada con el usuario y el organizador de la organización: Podría ser "yo" (usuario actual) o una organización Id.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/user/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user/events"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/user/events`
+
+
+<!-- END_2478aef777186232e8bca32fdf09efe3 -->
+
+<!-- START_26fd0ed6db820ca28bb674ba1d761a2e -->
+## _update_: Actualizar información de un evento especifico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/user/events/qui" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user/events/qui"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/user/events/{event}`
+
+`PATCH api/user/events/{event}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | id del evento
+
+<!-- END_26fd0ed6db820ca28bb674ba1d761a2e -->
+
+<!-- START_ed1c02a70ed814c85d464077d0854e00 -->
+## _destroy_: Eliminar evento.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/user/events/dolores" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user/events/dolores"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/user/events/{event}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | id del evento a eliminar
+
+<!-- END_ed1c02a70ed814c85d464077d0854e00 -->
+
+<!-- START_f59d4cbbf9176342893379adb70dc1a5 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/user/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user/events"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/user/events`
+
+
+<!-- END_f59d4cbbf9176342893379adb70dc1a5 -->
+
+<!-- START_7488288e859ba4fe861385339c81371a -->
+## _beforeToday_: Listado de los próximos eventos
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/eventsbeforetoday?id=sint" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventsbeforetoday"
+);
+
+let params = {
+    "id": "sint",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/eventsbeforetoday`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `id` |  required  | Exmaple: - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+
+<!-- END_7488288e859ba4fe861385339c81371a -->
+
+<!-- START_08180c1785ee9a816b6fa5cdf32ece34 -->
+## _EventbyUsers_: Busqueda de eventos por usuario organizador.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/users/quia/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/users/quia/events"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/users/{id}/events`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | organiser_id
+
+<!-- END_08180c1785ee9a816b6fa5cdf32ece34 -->
+
+<!-- START_84149f81b1537e6bcfc498d67a92d685 -->
+## _EventbyOrganizations_: Busqueda de eventos por udsuario organizador.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/organizations/qui/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/organizations/qui/events"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/organizations/{id}/events`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | organiser_id
+
+<!-- END_84149f81b1537e6bcfc498d67a92d685 -->
+
+<!-- START_04c928fb7ec045888fb969784cc3eb7e -->
+## AddUserProperty:
+Añadir la propiedad de usuario dinámico al evento
+
+Cada propiedad dinámica debe estar compuesta por los siguientes parámetros:
+
+* texto del nombre
+* requerido booleano - este campo no se utiliza todavía para nada
+* escriba el texto - este campo no se utiliza todavía para nada
+
+Una vez creadas las propiedades de los eventos dinámicos de usuario se pueden obtener directamente de $evento->propiedades de usuario.
+Las propiedades dinámicas son devueltas dentro de cada UserEvent como las propiedades normales
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/user/events/ipsam/addUserProperty" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user/events/ipsam/addUserProperty"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/user/events/{id}/addUserProperty`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del evento
+
+<!-- END_04c928fb7ec045888fb969784cc3eb7e -->
+
+<!-- START_92b328319f49439288d157a4c5e241e1 -->
+## Show the &#039;Create Event&#039; Modal
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/events/create" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/events/create"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET events/create`
+
+
+<!-- END_92b328319f49439288d157a4c5e241e1 -->
+
+<!-- START_421dd5ccdba33e6e944a6d5f27b46bb3 -->
+## _postCreateEvent_: Crear un nuevo evento.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/events/create" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/events/create"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST events/create`
+
+
+<!-- END_421dd5ccdba33e6e944a6d5f27b46bb3 -->
+
+<!-- START_c1aa27515bf03f12d5698af59e31585a -->
+## _index:_ Listado de todos los eventos
+
+Este método permite la consulta dinámica de cualquier propiedad a través de la URL utilizando los servicios FilterQuery.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/test?id=animi" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/test"
+);
+
+let params = {
+    "id": "animi",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET test`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `id` |  optional  | Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+
+<!-- END_c1aa27515bf03f12d5698af59e31585a -->
+
+#EventUser.
+
+
+<!-- START_741efed688409cc5b0c2673b73da037b -->
+## __index:__ Display all the EventUsers of an event
+
+this methods allows dynamic quering by any property via URL using the services FilterQuery.
+Exmaple:
+ - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/eventusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/eventusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/eventusers`
+
+
+<!-- END_741efed688409cc5b0c2673b73da037b -->
+
+<!-- START_a365aa3932cace4bde297c80cef75050 -->
+## __Show:__ Display an Attendee by id
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/molestias/eventusers/rerum" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/molestias/eventusers/rerum"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/eventusers/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+    `id` |  optional  | string required id de Attendee
+
+<!-- END_a365aa3932cace4bde297c80cef75050 -->
+
+<!-- START_64ba4676dd80d161a4fc09b243f63433 -->
+## api/events/{event_id}/searchinevent
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/searchinevent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/searchinevent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/searchinevent`
+
+
+<!-- END_64ba4676dd80d161a4fc09b243f63433 -->
+
+<!-- START_f4ee022bcd35d6d38fadedb070189787 -->
+## api/events/myevents
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/myevents" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/myevents"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/myevents`
+
+
+<!-- END_f4ee022bcd35d6d38fadedb070189787 -->
+
+<!-- START_314ab10189ffcbcaaab1ed19eb9dd21f -->
+## api/eventusers/event/{event_id}/user/{user_id}
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/eventusers/event/1/user/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventusers/event/1/user/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/eventusers/event/{event_id}/user/{user_id}`
+
+
+<!-- END_314ab10189ffcbcaaab1ed19eb9dd21f -->
+
+<!-- START_017b9c2694857efdd5c16863bc1aaea7 -->
+## _SubscribeUserToEventAndSendEmail_: Register user to an event and send confirmation email
+Registrar usuario a un evento y enviar correo de confirmación
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/qui/adduserwithemailvalidation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"a","name":"voluptatem","other_params,":{"":{"":{"":"nihil"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/qui/adduserwithemailvalidation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "a",
+    "name": "voluptatem",
+    "other_params,": {
+        "": {
+            "": {
+                "": "nihil"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/adduserwithemailvalidation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_017b9c2694857efdd5c16863bc1aaea7 -->
+
+<!-- START_cd20adcf5c26e47f21f72d0301544be1 -->
+## _ChangeUserPassword_: Change user password
+Cambiar contraseña del usuario
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/mollitia/changeUserPassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"eligendi"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/mollitia/changeUserPassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "eligendi"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/changeUserPassword`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | Email of the user who will change his password
+    
+<!-- END_cd20adcf5c26e47f21f72d0301544be1 -->
+
+<!-- START_6b56a32b833284ebacc99706a28295f7 -->
+## api/eventusers/{event_id}/tranfereventuser/{event_user}
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/eventusers/1/tranfereventuser/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventusers/1/tranfereventuser/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/eventusers/{event_id}/tranfereventuser/{event_user}`
+
+
+<!-- END_6b56a32b833284ebacc99706a28295f7 -->
+
+<!-- START_6b9ba84498ac309ef3cc779bb6c6279f -->
+## api/events/withstatus/{id}
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/withstatus/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/withstatus/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/withstatus/{id}`
+
+
+<!-- END_6b9ba84498ac309ef3cc779bb6c6279f -->
+
+<!-- START_62f0c5655d8d2562857a8516c1822886 -->
+## api/eventUsers/{id}/withStatus
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/eventUsers/1/withStatus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventUsers/1/withStatus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/eventUsers/{id}/withStatus`
+
+
+<!-- END_62f0c5655d8d2562857a8516c1822886 -->
+
+<!-- START_897c85bf5d7fd99f7b7f7aa4e4dd66f2 -->
+## __CheckIn:__ Checks In an existent Attendee to the related event
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/eventUsers/eum/checkin" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventUsers/eum/checkin"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/eventUsers/{id}/checkin`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  optional  | string required id Attendee to checkin into the event
+
+<!-- END_897c85bf5d7fd99f7b7f7aa4e4dd66f2 -->
+
+<!-- START_f4a1ecb28e0dc1d6236e81e49658f03c -->
+## _createUserAndAddtoEvent_:Create user and add it to an event
+Crear un usuario y añadirlo a un evento
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/eventUsers/createUserAndAddtoEvent/cupiditate" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"dolores","name":"aliquid","password":"eos","other_params,":{"":{"":{"":"praesentium"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventUsers/createUserAndAddtoEvent/cupiditate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "dolores",
+    "name": "aliquid",
+    "password": "eos",
+    "other_params,": {
+        "": {
+            "": {
+                "": "praesentium"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/eventUsers/createUserAndAddtoEvent/{event_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+    `eventuser_id` |  optional  | string
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `name` | string |  required  | 
+        `password` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_f4a1ecb28e0dc1d6236e81e49658f03c -->
+
+<!-- START_8584edbef5108e01985db1d291b64c2e -->
+## api/eventUsers/bookEventUsers/{event}
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/eventUsers/bookEventUsers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/eventUsers/bookEventUsers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/eventUsers/bookEventUsers/{event}`
+
+
+<!-- END_8584edbef5108e01985db1d291b64c2e -->
+
+<!-- START_249ab20f97f221e40760858747d9b006 -->
+## api/events/{event_id}/testeventusers
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/testeventusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/testeventusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/testeventusers`
+
+
+<!-- END_249ab20f97f221e40760858747d9b006 -->
+
+<!-- START_eed9d2ac9ae0f6e3669f6613fa1d351c -->
+## _createUserAndAddtoEvent_:Create user and add it to an event
+Crear un usuario y añadirlo a un evento
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/quo/eventusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"molestiae","name":"itaque","password":"alias","other_params,":{"":{"":{"":"error"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/quo/eventusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "molestiae",
+    "name": "itaque",
+    "password": "alias",
+    "other_params,": {
+        "": {
+            "": {
+                "": "error"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/eventusers`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+    `eventuser_id` |  optional  | string
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `name` | string |  required  | 
+        `password` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_eed9d2ac9ae0f6e3669f6613fa1d351c -->
+
+<!-- START_7ea69d252da861fe068b097ff9fb8ec9 -->
+## api/me/eventusers/event/{event_id}
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/me/eventusers/event/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/me/eventusers/event/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/me/eventusers/event/{event_id}`
+
+
+<!-- END_7ea69d252da861fe068b097ff9fb8ec9 -->
+
+<!-- START_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
+## api/me/events/{event_id}/eventusers
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/me/events/1/eventusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/me/events/1/eventusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/me/events/{event_id}/eventusers`
+
+
+<!-- END_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
+
+<!-- START_7d2c50077b648a794a56934c47fae532 -->
+## __index:__ Display all the EventUsers of an event
+
+this methods allows dynamic quering by any property via URL using the services FilterQuery.
+Exmaple:
+ - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/eventUsers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/eventUsers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/eventUsers`
+
+
+<!-- END_7d2c50077b648a794a56934c47fae532 -->
+
+<!-- START_882953c7fc55a0465ff69cdc398811be -->
+## __Update:__ Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/ullam/eventusers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"debitis","name":"molestiae","other_params,":{"":{"":{"":"corrupti"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/ullam/eventusers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "debitis",
+    "name": "molestiae",
+    "other_params,": {
+        "": {
+            "": {
+                "": "corrupti"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/eventusers/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+    `evenUserId` |  optional  | string required id de Attendee
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_882953c7fc55a0465ff69cdc398811be -->
+
+<!-- START_8229080007df704aa1e43dbfa7bf3ea8 -->
+## __delete:__ Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/events/1/eventusers/autem" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/eventusers/autem"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event_id}/eventusers/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  optional  | string required id Attendee to checkin into the event
+
+<!-- END_8229080007df704aa1e43dbfa7bf3ea8 -->
+
+<!-- START_8cc5dbbd6d1dd06913d7bbb6ce8cec8d -->
+## __createUserViaUrl:__ Tries to create a new user from provided data and then add that user to specified event
+
+Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo agrega al evento especificado
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/numquam/eventusersbyurl" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"quo","name":"voluptate","other_params,":{"":{"":{"":"dolorem"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/numquam/eventusersbyurl"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "quo",
+    "name": "voluptate",
+    "other_params,": {
+        "": {
+            "": {
+                "": "dolorem"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/eventusersbyurl`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | 
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_8cc5dbbd6d1dd06913d7bbb6ce8cec8d -->
+
+<!-- START_49dfc5f0a26b6a7a13efa07e31d9e131 -->
+## api/events/{event_id}/sendemailtoallusers
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/sendemailtoallusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendemailtoallusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/sendemailtoallusers`
+
+
+<!-- END_49dfc5f0a26b6a7a13efa07e31d9e131 -->
+
+<!-- START_b517d383c710e2dea5f2e97ab7bb8b43 -->
+## _meEvents:_ Listado de eventos incritos del usuario logueado.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/me/eventUsers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/me/eventUsers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/me/eventUsers`
+
+
+<!-- END_b517d383c710e2dea5f2e97ab7bb8b43 -->
+
+#Invitation
+
+
+<!-- START_e37bb54d9c879f83a7481d706567da04 -->
+## api/singinwithemail
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/singinwithemail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/singinwithemail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/singinwithemail`
+
+
+<!-- END_e37bb54d9c879f83a7481d706567da04 -->
+
+<!-- START_14f5adf45c9b14e7cb29dbe4d4d66bed -->
+## _invitationsSent_:List of applications sent
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/esse/indexinvitations/dolore" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/esse/indexinvitations/dolore"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/indexinvitations/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_14f5adf45c9b14e7cb29dbe4d4d66bed -->
+
+<!-- START_64d2cbddd78e2a020c86f89cc3e88d1a -->
+## _invitationsReceived_: List of applications recived
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/non/indexinvitationsrecieved/ea" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/non/indexinvitationsrecieved/ea"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/indexinvitationsrecieved/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_64d2cbddd78e2a020c86f89cc3e88d1a -->
+
+<!-- START_ac223e224f8317ff1a01fccd8ef736e7 -->
+## _acceptOrDeclineFriendRequest_: Accept Or Decline Friend Request
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/maiores/acceptordecline/velit" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"response":"aliquam"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/maiores/acceptordecline/velit"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "response": "aliquam"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/acceptordecline/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+    `id` |  required  | user who accepts or rejects the application
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `response` | string |  required  | 
+    
+<!-- END_ac223e224f8317ff1a01fccd8ef736e7 -->
+
+<!-- START_bd81320f3c4511edb1925655907b488f -->
+## _indexcontacts_: List of current contacts
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/quia/contactlist/consequatur" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/quia/contactlist/consequatur"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/contactlist/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_bd81320f3c4511edb1925655907b488f -->
+
+<!-- START_b38652249ac82e5c106c2a3355efaeed -->
+## api/events/{event_id}/meetingrequest/notify
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/meetingrequest/notify" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/meetingrequest/notify"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/meetingrequest/notify`
+
+
+<!-- END_b38652249ac82e5c106c2a3355efaeed -->
+
+<!-- START_6ca4e171737001f583fce1bb4bb9ddb2 -->
+## _indexcontacts_: List of current contacts
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/laborum/contactlist/architecto" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/laborum/contactlist/architecto"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/contactlist/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_6ca4e171737001f583fce1bb4bb9ddb2 -->
+
+<!-- START_980c7fcb3212d1a5166f9b32292c06f1 -->
+## _index_: Display a listing of the Invitation.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/impedit/invitation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/impedit/invitation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/invitation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_980c7fcb3212d1a5166f9b32292c06f1 -->
+
+<!-- START_9517f6b677db242e4a1cf6a04daf4e1d -->
+## _store_: Send request with redirection to evius
+
+Enviar solicitud con redirección a evius
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/cum/invitation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"id_user_requested":"aut"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/cum/invitation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id_user_requested": "aut"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/invitation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `id_user_requested` | string |  required  | 
+    
+<!-- END_9517f6b677db242e4a1cf6a04daf4e1d -->
+
+<!-- START_cfcc08fc7d6b3ebcd309681e30856e8c -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/invitation/{invitation}`
+
+
+<!-- END_cfcc08fc7d6b3ebcd309681e30856e8c -->
+
+<!-- START_2a0c45e501d0cc663f127e9a5a157c6e -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/invitation/{invitation}`
+
+`PATCH api/events/{event_id}/invitation/{invitation}`
+
+
+<!-- END_2a0c45e501d0cc663f127e9a5a157c6e -->
+
+<!-- START_0f3398960f180ac8c24d54336d7ffdbb -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event_id}/invitation/{invitation}`
+
+
+<!-- END_0f3398960f180ac8c24d54336d7ffdbb -->
+
+#Organization
+
+
+<!-- START_434c81a9abb0283f205ef7cb7378688e -->
+## _index_:Display a listing of the organizations.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/organizations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/organizations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/organizations`
+
+
+<!-- END_434c81a9abb0283f205ef7cb7378688e -->
+
+<!-- START_7d1f86cd2d17ff6e8f7bce97aeabc7f3 -->
+## _show_: Display the specified organization.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/organizations/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/organizations/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/organizations/{organization}`
+
+
+<!-- END_7d1f86cd2d17ff6e8f7bce97aeabc7f3 -->
+
+<!-- START_a3d4660c575d6fd59c9718ff69a12cc7 -->
+## _store_:Store a newly created resource in organizations.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/organizations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"properties":{"name,email":[]}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/organizations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "properties": {
+        "name,email": []
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/organizations`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `properties[name,email]` | array |  optional  | 
+    
+<!-- END_a3d4660c575d6fd59c9718ff69a12cc7 -->
+
+<!-- START_e6c758d4cc6e3b90231537145573cfd8 -->
+## _update_: Update the specified resource in organization.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/organizations/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/organizations/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/organizations/{organization}`
+
+`PATCH api/organizations/{organization}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `organization_id` |  required  | 
+
+<!-- END_e6c758d4cc6e3b90231537145573cfd8 -->
+
+<!-- START_b9047b90f047db47c77810fd8de29af9 -->
+## _destroy_: Remove the specified organization from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/organizations/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/organizations/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/organizations/{organization}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `organization_id` |  required  | 
+
+<!-- END_b9047b90f047db47c77810fd8de29af9 -->
+
+<!-- START_4c6145b46f1c2242e8bb6de5f5447d52 -->
+## _meOrganizations_: Listar las organizaciones del usuario logueado
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/me/organizations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/me/organizations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/me/organizations`
+
+
+<!-- END_4c6145b46f1c2242e8bb6de5f5447d52 -->
+
+#RSVP
+
+
+<!-- START_9b477f276b762a5f390fd3dc38df8cdb -->
+## *  notificaciones al correo por actividad en el muro
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/wallnotifications" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/wallnotifications"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/wallnotifications`
+
+
+<!-- END_9b477f276b762a5f390fd3dc38df8cdb -->
+
+<!-- START_01aa68de7cc9bc01aac7cf1947206db3 -->
+## api/rsvp/test
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/rsvp/test" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/rsvp/test"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/rsvp/test`
+
+
+<!-- END_01aa68de7cc9bc01aac7cf1947206db3 -->
+
+<!-- START_6b8165cc7da505120fbe6aa7aba5356e -->
+## _createAndSendRSVP_:Send RSVP to users in an event, taking usersIds[] in request to filter which users the RSVP is going to be send to
+Enviar RSVP a los usuarios en un evento, tomando usersIds[] en solicitud para filtrar a qué usuarios se va a enviar la RSVP
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/rsvp/sendeventrsvp/repudiandae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"usersIds":{"":"saepe"},"message":"fuga","image":"numquam","subject":"perferendis","footer":"illo"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/rsvp/sendeventrsvp/repudiandae"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "usersIds": {
+        "": "saepe"
+    },
+    "message": "fuga",
+    "image": "numquam",
+    "subject": "perferendis",
+    "footer": "illo"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/rsvp/sendeventrsvp/{event}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `usersIds[]` | required |  optional  | 
+        `message` | required |  optional  | 
+        `image` | required |  optional  | 
+        `subject` | required |  optional  | 
+        `footer` | required |  optional  | 
+    
+<!-- END_6b8165cc7da505120fbe6aa7aba5356e -->
+
+<!-- START_1ce8e6bee5951ce85fa8ccdc35da0865 -->
+## _confirmRSVP_: Confirmation de RSVP
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/rsvp/confirmrsvp/consequatur" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/rsvp/confirmrsvp/consequatur"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/rsvp/confirmrsvp/{eventUser}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `eventUser` |  required  | 
+
+<!-- END_1ce8e6bee5951ce85fa8ccdc35da0865 -->
+
+<!-- START_f0266492be1eb40c7fae7d7b7c12402e -->
+## api/rsvp/confirmrsvptest/{eventUser}
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/rsvp/confirmrsvptest/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/rsvp/confirmrsvptest/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/rsvp/confirmrsvptest/{eventUser}`
+
+
+<!-- END_f0266492be1eb40c7fae7d7b7c12402e -->
+
+#SendContent
+
+
+<!-- START_e1637ef61b41584b6bcdea0d55291e55 -->
+## api/events/{event_id}/recoverypassword
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/recoverypassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/recoverypassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/recoverypassword`
+
+
+<!-- END_e1637ef61b41584b6bcdea0d55291e55 -->
+
+<!-- START_e6b3cb8f3e1edf3605287cd526c7f97b -->
+## api/events/sendMecPerfil
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/sendMecPerfil" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/sendMecPerfil"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/sendMecPerfil`
+
+
+<!-- END_e6b3cb8f3e1edf3605287cd526c7f97b -->
+
+<!-- START_e91cb003b68fa252dcfc2b6391edc20a -->
+## api/events/sendMecPerfilMec
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/sendMecPerfilMec" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/sendMecPerfilMec"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/sendMecPerfilMec`
+
+
+<!-- END_e91cb003b68fa252dcfc2b6391edc20a -->
+
+<!-- START_19f04c8aa5404ee0ff1ced42e5b6f30b -->
+## api/events/{event_id}/sendMecPerfilMectoall
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/sendMecPerfilMectoall" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendMecPerfilMectoall"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/sendMecPerfilMectoall`
+
+
+<!-- END_19f04c8aa5404ee0ff1ced42e5b6f30b -->
+
+<!-- START_8b57b71ba02b021a6361ad07c15afefd -->
+## api/events/sendnotificationemail
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/sendnotificationemail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/sendnotificationemail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/sendnotificationemail`
+
+
+<!-- END_8b57b71ba02b021a6361ad07c15afefd -->
+
+<!-- START_304a10fe7e2fad2fbb4ed3e49ac28907 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/sendcontent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendcontent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/sendcontent`
+
+
+<!-- END_304a10fe7e2fad2fbb4ed3e49ac28907 -->
+
+<!-- START_57b56057ac2c130fe00099a3fdab7a57 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/sendcontent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendcontent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/sendcontent`
+
+
+<!-- END_57b56057ac2c130fe00099a3fdab7a57 -->
+
+<!-- START_9e47585578f520ac7ee0abee9100c368 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/sendcontent/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendcontent/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/sendcontent/{sendcontent}`
+
+
+<!-- END_9e47585578f520ac7ee0abee9100c368 -->
+
+<!-- START_5b22035049f5bef5e640779214c4cb65 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/1/sendcontent/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendcontent/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/sendcontent/{sendcontent}`
+
+`PATCH api/events/{event_id}/sendcontent/{sendcontent}`
+
+
+<!-- END_5b22035049f5bef5e640779214c4cb65 -->
+
+<!-- START_572e9fa5a01e48e49c2ce9e213fbaf39 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/events/1/sendcontent/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/sendcontent/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event_id}/sendcontent/{sendcontent}`
+
+
+<!-- END_572e9fa5a01e48e49c2ce9e213fbaf39 -->
+
+<!-- START_fe527ea723c09bf9aa5f91451af188f8 -->
+## testpush
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/testpush" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/testpush"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST testpush`
+
+
+<!-- END_fe527ea723c09bf9aa5f91451af188f8 -->
+
+#Synchronization
+
+
+<!-- START_713b263eae14561e1e999503e124ba0c -->
+## _EventUsers_: este controlador fue diseñado para exportar todos los event_users que se encuentran en mongo
+Realizando una migración completa, para mas información acerca del funcionamiento de firestore con php sigue el siguiente link https://firebase-php.readthedocs.io/en/4.44.0/
+
+El controlador sigue los siguientes pasos:
+     1. Se abre el servicio de firestore
+     2. Captura toda la información de la table event_users
+     3. Crea la collección, el cual es el mismo nombre "event_users"
+     4. Recorre todos los usuarios encontrados anteriormente pero.
+         4.1. Si los datos del usuario existen entonces.
+         4.2. Guarda un nuevo documento con el id del event_user.
+         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
+         4.4. Dentro del documento guardamos los datos del usuario.
+     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+
+Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogando un error por limite de tiempo.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/sync/firestore/itaque" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/sync/firestore/itaque"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/sync/firestore/{event_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_713b263eae14561e1e999503e124ba0c -->
+
+<!-- START_1b510062bbbf529fbc9099f8ed51139d -->
+## Event Account
+
+Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
+Realizando una migración por medio del id.
+
+Para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
+https://github.com/morrislaptop/firestore-php
+
+El controlador sigue los siguientes pasos:
+     1. Se abre el servicio de firestore
+     2. Captura toda la información del event_users
+     3. Se diríge a la collección, el cual es el mismo nombre "event_users"
+     4. Recorre todos los usuarios encontrados anteriormente pero.
+         4.1. Si los datos del usuario existen entonces.
+         4.2. Guarda un nuevo documento con el id del event_user.
+         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
+         4.4. Dentro del documento guardamos los datos del usuario.
+     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/sync/firestore/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/sync/firestore/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/sync/firestore/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_1b510062bbbf529fbc9099f8ed51139d -->
+
+<!-- START_0a90f007ba0181dc120f51a029d014c9 -->
+## api/sync/firebase/{id}
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/sync/firebase/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/sync/firebase/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/sync/firebase/{id}`
+
+
+<!-- END_0a90f007ba0181dc120f51a029d014c9 -->
+
+#User
+
+
+<!-- START_d84649799f33244554dc0cd2568792d4 -->
+## _VerifyAccount_: Verificar correo de usuario
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/users/verifyAccount/aut" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"aliquid","name":"voluptates","auth":"excepturi"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/users/verifyAccount/aut"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "aliquid",
+    "name": "voluptates",
+    "auth": "excepturi"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
 `PUT api/users/verifyAccount/{uid}`
 
+#### URL Parameters
 
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `uid` |  required  | id del usuario
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | 
+        `name` | string |  required  | 
+        `auth` | \Kreait\Firebase\Auth |  required  | 
+    
 <!-- END_d84649799f33244554dc0cd2568792d4 -->
 
 <!-- START_65d864b61072aea751734b0dfbc4e90a -->
@@ -107,7 +4673,7 @@ fetch(url, {
 <!-- END_65d864b61072aea751734b0dfbc4e90a -->
 
 <!-- START_fc1e4f6a697e3c48257de845299b71d5 -->
-## Display a listing of the resource.
+## _index_: Listado de usuario resgistrados.
 
 > Example request:
 
@@ -152,7 +4718,7 @@ fetch(url, {
 <!-- END_fc1e4f6a697e3c48257de845299b71d5 -->
 
 <!-- START_8653614346cb0e3d444d164579a0a0a2 -->
-## Display the specified resource.
+## _show_: Eliminar usurio registrado
 
 > Example request:
 
@@ -193,16 +4759,16 @@ fetch(url, {
 ### HTTP Request
 `GET api/users/{user}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del usuario
 
 <!-- END_8653614346cb0e3d444d164579a0a0a2 -->
 
 <!-- START_12e37982cc5398c7100e59625ebb5514 -->
-## Create a user
-
-[Insert optional longer description of the API endpoint here.]
-
-
-Store a newly created resource in storage.
+## _store_: Creación de un nuevo usuario.
 
 > Example request:
 
@@ -210,7 +4776,9 @@ Store a newly created resource in storage.
 curl -X POST \
     "http://localhost/api/users" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"email":"enim","name":"maiores"}'
+
 ```
 
 ```javascript
@@ -223,9 +4791,15 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "enim",
+    "name": "maiores"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -236,11 +4810,16 @@ fetch(url, {
 ### HTTP Request
 `POST api/users`
 
-
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | 
+        `name` | string |  required  | 
+    
 <!-- END_12e37982cc5398c7100e59625ebb5514 -->
 
 <!-- START_48a3115be98493a3c866eb0e23347262 -->
-## Update the specified resource in storage.
+## _update_: Actualizar usuario registrado
 
 > Example request:
 
@@ -248,7 +4827,9 @@ fetch(url, {
 curl -X PUT \
     "http://localhost/api/users/1" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"email":"minus","name":"et"}'
+
 ```
 
 ```javascript
@@ -261,9 +4842,15 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "minus",
+    "name": "et"
+}
+
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -276,11 +4863,21 @@ fetch(url, {
 
 `PATCH api/users/{user}`
 
+#### URL Parameters
 
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del usuario
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | 
+        `name` | string |  required  | 
+    
 <!-- END_48a3115be98493a3c866eb0e23347262 -->
 
 <!-- START_d2db7a9fe3abd141d5adbc367a88e969 -->
-## Remove the specified resource from storage.
+## _delete_: Eliminar usuario registrado
 
 > Example request:
 
@@ -314,24 +4911,29 @@ fetch(url, {
 ### HTTP Request
 `DELETE api/users/{user}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del usuario
 
 <!-- END_d2db7a9fe3abd141d5adbc367a88e969 -->
 
 <!-- START_5c81529453d31c0784de076ff21f89c2 -->
-## Undocumented function
+## _confirmEmail_: Obtener confirmación de email
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/confirmEmail/1" \
+    -G "http://localhost/api/confirmEmail/voluptatibus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/confirmEmail/1"
+    "http://localhost/api/confirmEmail/voluptatibus"
 );
 
 let headers = {
@@ -359,6 +4961,11 @@ fetch(url, {
 ### HTTP Request
 `GET api/confirmEmail/{id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del usuario
 
 <!-- END_5c81529453d31c0784de076ff21f89c2 -->
 
@@ -445,291 +5052,297 @@ fetch(url, {
 
 <!-- END_3efbce72c5183a8fae61143a8bcdd44a -->
 
+#UserProperties
+
+
+<!-- START_80e4098ecf7c46e19bc2ae66dee69b0a -->
+## Display a listing of the resource UserProperties.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/repellendus/userproperties" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/repellendus/userproperties"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/userproperties`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | .
+
+<!-- END_80e4098ecf7c46e19bc2ae66dee69b0a -->
+
+<!-- START_ebb5857491760d6d919fb2ee88948798 -->
+## Store a newly created resource in UserProperties.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/events/1/userproperties" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"facilis","name":"doloremque","other_params,":{"":{"":{"":"est"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/userproperties"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "facilis",
+    "name": "doloremque",
+    "other_params,": {
+        "": {
+            "": {
+                "": "est"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/userproperties`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in UserProperties
+    
+<!-- END_ebb5857491760d6d919fb2ee88948798 -->
+
+<!-- START_fe05ac86d035509adf2f42088dba696d -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/praesentium/userproperties/molestiae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"laudantium","name":"laborum","other_params,":{"":{"":{"":"fuga"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/praesentium/userproperties/molestiae"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "laudantium",
+    "name": "laborum",
+    "other_params,": {
+        "": {
+            "": {
+                "": "fuga"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "No token provided. Unauthenticated"
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/userproperties/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+    `id` |  required  | id UserProperties
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in UserProperties
+    
+<!-- END_fe05ac86d035509adf2f42088dba696d -->
+
+<!-- START_ed027bf50129713419477bccfbfba928 -->
+## Update the specified resource in UserProperties.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/events/libero/userproperties/molestiae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"other_params,":{"":{"":{"":"dolorem"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/libero/userproperties/molestiae"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "other_params,": {
+        "": {
+            "": {
+                "": "dolorem"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event_id}/userproperties/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+    `id` |  required  | id UserProperties
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `other_params,...` | any |  optional  | other params  will be saved in UserProperties
+    
+<!-- END_ed027bf50129713419477bccfbfba928 -->
+
+<!-- START_c9fea00fc5c42be6bb3201c8cb649333 -->
+## Remove the specified resource from UserProperties.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/events/sunt/userproperties/iure" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/sunt/userproperties/iure"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event_id}/userproperties/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+    `id` |  required  | id UserProperties
+
+<!-- END_c9fea00fc5c42be6bb3201c8cb649333 -->
+
 #general
 
-
-<!-- START_f7b7ea397f8939c8bb93e6cab64603ce -->
-## Display Swagger API page.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/documentation" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/documentation"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/documentation`
-
-
-<!-- END_f7b7ea397f8939c8bb93e6cab64603ce -->
-
-<!-- START_1ead214f30a5e235e7140eb2aaa29eee -->
-## Dump api-docs.json content endpoint.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/docs/" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/docs/"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET docs/{jsonFile?}`
-
-`POST docs/{jsonFile?}`
-
-`PUT docs/{jsonFile?}`
-
-`PATCH docs/{jsonFile?}`
-
-`DELETE docs/{jsonFile?}`
-
-`OPTIONS docs/{jsonFile?}`
-
-
-<!-- END_1ead214f30a5e235e7140eb2aaa29eee -->
-
-<!-- START_1a23c1337818a4de9e417863aebaca33 -->
-## docs/asset/{asset}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/docs/asset/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/docs/asset/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET docs/asset/{asset}`
-
-
-<!-- END_1a23c1337818a4de9e417863aebaca33 -->
-
-<!-- START_a2c4ea37605c6d2e3c93b7269030af0a -->
-## Display Oauth2 callback pages.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/oauth2-callback" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/oauth2-callback"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/oauth2-callback`
-
-
-<!-- END_a2c4ea37605c6d2e3c93b7269030af0a -->
-
-<!-- START_741efed688409cc5b0c2673b73da037b -->
-## __index:__ Display all the EventUsers of an event
-
-this methods allows dynamic quering by any property via URL using the services FilterQuery.
-Exmaple:
- - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/eventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/eventusers`
-
-
-<!-- END_741efed688409cc5b0c2673b73da037b -->
-
-<!-- START_a365aa3932cace4bde297c80cef75050 -->
-## __Show:__ Display an Attendee by id
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/eventusers/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusers/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/eventusers/{id}`
-
-
-<!-- END_a365aa3932cace4bde297c80cef75050 -->
 
 <!-- START_f9be2084aff68c858acd388059207b79 -->
 ## Display a listing of the resource.
@@ -2856,43 +7469,6 @@ fetch(url, {
 
 <!-- END_29451dde1051fbdd10afe021d8064d2f -->
 
-<!-- START_e1637ef61b41584b6bcdea0d55291e55 -->
-## api/events/{event_id}/recoverypassword
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/recoverypassword" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/recoverypassword"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/recoverypassword`
-
-
-<!-- END_e1637ef61b41584b6bcdea0d55291e55 -->
-
 <!-- START_5ed094292849b54364e74db0b9de0d66 -->
 ## Display a listing of the resource.
 
@@ -3960,209 +8536,6 @@ fetch(url, {
 
 <!-- END_b49acd106f42b7cc8661f913a2fa318b -->
 
-<!-- START_9b477f276b762a5f390fd3dc38df8cdb -->
-## *  notificaciones al correo por actividad en el muro
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/wallnotifications" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/wallnotifications"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/wallnotifications`
-
-
-<!-- END_9b477f276b762a5f390fd3dc38df8cdb -->
-
-<!-- START_f6e0be661d33f868c8d4a36f00b2aa62 -->
-## numero de segundos desde que jugue,
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/duncan/minutosparajugar" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/duncan/minutosparajugar"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/duncan/minutosparajugar`
-
-
-<!-- END_f6e0be661d33f868c8d4a36f00b2aa62 -->
-
-<!-- START_e368abcfeb54ef4e5e5981f3e2d6f5aa -->
-## duncan juego guardamos el puntaje con el timestamp para después poder limitar la cantiadad de veces jugadas por tiempo
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/duncan/guardarpuntaje" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/duncan/guardarpuntaje"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/duncan/guardarpuntaje`
-
-
-<!-- END_e368abcfeb54ef4e5e5981f3e2d6f5aa -->
-
-<!-- START_7c8179f222715a3db70f08a120bf7211 -->
-## Mensaje que se enviará mediante SMS al usuario invitado
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/duncan/invitaramigos" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/duncan/invitaramigos"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/duncan/invitaramigos`
-
-
-<!-- END_7c8179f222715a3db70f08a120bf7211 -->
-
-<!-- START_743b4a67e5ae97894be70c681e219cef -->
-## api/duncan/setphoneaspassword
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/duncan/setphoneaspassword" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/duncan/setphoneaspassword"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/duncan/setphoneaspassword`
-
-
-<!-- END_743b4a67e5ae97894be70c681e219cef -->
-
 <!-- START_5d1892b870c3f7272db3ceb2ceb45e4d -->
 ## api/test/serialization
 > Example request:
@@ -4606,177 +8979,6 @@ fetch(url, {
 
 <!-- END_c1b602605e9866557de0bafd3e253c34 -->
 
-<!-- START_713b263eae14561e1e999503e124ba0c -->
-## Event Users
-
-Este controlador fue diseñado para exportar todos los event_users que se encuentran en mongo
-Realizando una migración completa,
-
-para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-https://firebase-php.readthedocs.io/en/4.44.0/
-
-El controlador sigue los siguientes pasos:
-     1. Se abre el servicio de firestore
-     2. Captura toda la información de la table event_users
-     3. Crea la collección, el cual es el mismo nombre "event_users"
-     4. Recorre todos los usuarios encontrados anteriormente pero.
-         4.1. Si los datos del usuario existen entonces.
-         4.2. Guarda un nuevo documento con el id del event_user.
-         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
-         4.4. Dentro del documento guardamos los datos del usuario.
-     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
-
-Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogando un
-error por limite de tiempo.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/sync/firestore/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/sync/firestore/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/sync/firestore/{event_id}`
-
-
-<!-- END_713b263eae14561e1e999503e124ba0c -->
-
-<!-- START_1b510062bbbf529fbc9099f8ed51139d -->
-## Event Account
-
-Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
-Realizando una migración por medio del id,
-
-para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-https://github.com/morrislaptop/firestore-php
-
-El controlador sigue los siguientes pasos:
-     1. Se abre el servicio de firestore
-     2. Captura toda la información del event_users
-     3. Se diríge a la collección, el cual es el mismo nombre "event_users"
-     4. Recorre todos los usuarios encontrados anteriormente pero.
-         4.1. Si los datos del usuario existen entonces.
-         4.2. Guarda un nuevo documento con el id del event_user.
-         4.3. Convertimos los datos del usuario en un array para poder guardarlo.
-         4.4. Dentro del documento guardamos los datos del usuario.
-     5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/sync/firestore/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/sync/firestore/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/sync/firestore/{id}`
-
-
-<!-- END_1b510062bbbf529fbc9099f8ed51139d -->
-
-<!-- START_0a90f007ba0181dc120f51a029d014c9 -->
-## api/sync/firebase/{id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/sync/firebase/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/sync/firebase/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/sync/firebase/{id}`
-
-
-<!-- END_0a90f007ba0181dc120f51a029d014c9 -->
-
 <!-- START_a2d0406589ef05ab05b1e3a3cac469f6 -->
 ## api/integration/bigmaker/conferences/enter
 > Example request:
@@ -4813,249 +9015,6 @@ fetch(url, {
 
 
 <!-- END_a2d0406589ef05ab05b1e3a3cac469f6 -->
-
-<!-- START_64ba4676dd80d161a4fc09b243f63433 -->
-## api/events/{event_id}/searchinevent
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/searchinevent" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/searchinevent"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/searchinevent`
-
-
-<!-- END_64ba4676dd80d161a4fc09b243f63433 -->
-
-<!-- START_f4ee022bcd35d6d38fadedb070189787 -->
-## api/events/myevents
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/myevents" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/myevents"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/myevents`
-
-
-<!-- END_f4ee022bcd35d6d38fadedb070189787 -->
-
-<!-- START_314ab10189ffcbcaaab1ed19eb9dd21f -->
-## api/eventusers/event/{event_id}/user/{user_id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/eventusers/event/1/user/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventusers/event/1/user/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/eventusers/event/{event_id}/user/{user_id}`
-
-
-<!-- END_314ab10189ffcbcaaab1ed19eb9dd21f -->
-
-<!-- START_017b9c2694857efdd5c16863bc1aaea7 -->
-## api/events/{event_id}/adduserwithemailvalidation
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/adduserwithemailvalidation" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/adduserwithemailvalidation"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/adduserwithemailvalidation`
-
-
-<!-- END_017b9c2694857efdd5c16863bc1aaea7 -->
-
-<!-- START_cd20adcf5c26e47f21f72d0301544be1 -->
-## api/events/{event_id}/changeUserPassword
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/changeUserPassword" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/changeUserPassword"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/changeUserPassword`
-
-
-<!-- END_cd20adcf5c26e47f21f72d0301544be1 -->
-
-<!-- START_6b56a32b833284ebacc99706a28295f7 -->
-## api/eventusers/{event_id}/tranfereventuser/{event_user}
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/eventusers/1/tranfereventuser/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventusers/1/tranfereventuser/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/eventusers/{event_id}/tranfereventuser/{event_user}`
-
-
-<!-- END_6b56a32b833284ebacc99706a28295f7 -->
 
 <!-- START_33830f7d0c3c97eb68e98898c2d22ae2 -->
 ## api/eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}
@@ -5144,560 +9103,6 @@ fetch(url, {
 
 
 <!-- END_e3cf9cc35163eea18b0500dea24447d3 -->
-
-<!-- START_6b9ba84498ac309ef3cc779bb6c6279f -->
-## api/events/withstatus/{id}
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/withstatus/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/withstatus/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/withstatus/{id}`
-
-
-<!-- END_6b9ba84498ac309ef3cc779bb6c6279f -->
-
-<!-- START_62f0c5655d8d2562857a8516c1822886 -->
-## api/eventUsers/{id}/withStatus
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/eventUsers/1/withStatus" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventUsers/1/withStatus"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/eventUsers/{id}/withStatus`
-
-
-<!-- END_62f0c5655d8d2562857a8516c1822886 -->
-
-<!-- START_897c85bf5d7fd99f7b7f7aa4e4dd66f2 -->
-## __CheckIn:__ Checks In an existent Attendee to the related event
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/eventUsers/1/checkin" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventUsers/1/checkin"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/eventUsers/{id}/checkin`
-
-
-<!-- END_897c85bf5d7fd99f7b7f7aa4e4dd66f2 -->
-
-<!-- START_f4a1ecb28e0dc1d6236e81e49658f03c -->
-## api/eventUsers/createUserAndAddtoEvent/{event_id}
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/eventUsers/createUserAndAddtoEvent/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventUsers/createUserAndAddtoEvent/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/eventUsers/createUserAndAddtoEvent/{event_id}`
-
-
-<!-- END_f4a1ecb28e0dc1d6236e81e49658f03c -->
-
-<!-- START_8584edbef5108e01985db1d291b64c2e -->
-## api/eventUsers/bookEventUsers/{event}
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/eventUsers/bookEventUsers/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventUsers/bookEventUsers/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/eventUsers/bookEventUsers/{event}`
-
-
-<!-- END_8584edbef5108e01985db1d291b64c2e -->
-
-<!-- START_249ab20f97f221e40760858747d9b006 -->
-## api/events/{event_id}/testeventusers
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/testeventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/testeventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/testeventusers`
-
-
-<!-- END_249ab20f97f221e40760858747d9b006 -->
-
-<!-- START_eed9d2ac9ae0f6e3669f6613fa1d351c -->
-## api/events/{event_id}/eventusers
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/eventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/eventusers`
-
-
-<!-- END_eed9d2ac9ae0f6e3669f6613fa1d351c -->
-
-<!-- START_7ea69d252da861fe068b097ff9fb8ec9 -->
-## api/me/eventusers/event/{event_id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/me/eventusers/event/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/me/eventusers/event/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/me/eventusers/event/{event_id}`
-
-
-<!-- END_7ea69d252da861fe068b097ff9fb8ec9 -->
-
-<!-- START_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
-## api/me/events/{event_id}/eventusers
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/me/events/1/eventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/me/events/1/eventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/me/events/{event_id}/eventusers`
-
-
-<!-- END_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
-
-<!-- START_7d2c50077b648a794a56934c47fae532 -->
-## __index:__ Display all the EventUsers of an event
-
-this methods allows dynamic quering by any property via URL using the services FilterQuery.
-Exmaple:
- - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/eventUsers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventUsers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/eventUsers`
-
-
-<!-- END_7d2c50077b648a794a56934c47fae532 -->
-
-<!-- START_882953c7fc55a0465ff69cdc398811be -->
-## __Update:__ Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/eventusers/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusers/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/eventusers/{id}`
-
-
-<!-- END_882953c7fc55a0465ff69cdc398811be -->
-
-<!-- START_8229080007df704aa1e43dbfa7bf3ea8 -->
-## __delete:__ Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/events/1/eventusers/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusers/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/events/{event_id}/eventusers/{id}`
-
-
-<!-- END_8229080007df704aa1e43dbfa7bf3ea8 -->
-
-<!-- START_8cc5dbbd6d1dd06913d7bbb6ce8cec8d -->
-## __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
-
-| Body Params   |
-| ------------- |
-| @body $_POST[email] required field |
-| @body $_POST[name]     |
-| @body $_POST[other_params],... any other params  will be saved in user and eventUser
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/eventusersbyurl" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusersbyurl"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/eventusersbyurl`
-
-
-<!-- END_8cc5dbbd6d1dd06913d7bbb6ce8cec8d -->
-
-<!-- START_49dfc5f0a26b6a7a13efa07e31d9e131 -->
-## api/events/{event_id}/sendemailtoallusers
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/sendemailtoallusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendemailtoallusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/sendemailtoallusers`
-
-
-<!-- END_49dfc5f0a26b6a7a13efa07e31d9e131 -->
 
 <!-- START_eca15b751105fbb8f3ff752e6f4428a7 -->
 ## Display a listing of the resource.
@@ -6031,1308 +9436,6 @@ fetch(url, {
 
 <!-- END_40ddf68733d3f5fd481f254ccf82b550 -->
 
-<!-- START_80e4098ecf7c46e19bc2ae66dee69b0a -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/userproperties" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/userproperties"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/userproperties`
-
-
-<!-- END_80e4098ecf7c46e19bc2ae66dee69b0a -->
-
-<!-- START_ebb5857491760d6d919fb2ee88948798 -->
-## Store a newly created resource in storage.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/userproperties" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/userproperties"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/userproperties`
-
-
-<!-- END_ebb5857491760d6d919fb2ee88948798 -->
-
-<!-- START_fe05ac86d035509adf2f42088dba696d -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/userproperties/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/userproperties/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/userproperties/{id}`
-
-
-<!-- END_fe05ac86d035509adf2f42088dba696d -->
-
-<!-- START_ed027bf50129713419477bccfbfba928 -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/userproperties/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/userproperties/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/userproperties/{id}`
-
-
-<!-- END_ed027bf50129713419477bccfbfba928 -->
-
-<!-- START_c9fea00fc5c42be6bb3201c8cb649333 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/events/1/userproperties/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/userproperties/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/events/{event_id}/userproperties/{id}`
-
-
-<!-- END_c9fea00fc5c42be6bb3201c8cb649333 -->
-
-<!-- START_434c81a9abb0283f205ef7cb7378688e -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/organizations" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/organizations"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/organizations`
-
-
-<!-- END_434c81a9abb0283f205ef7cb7378688e -->
-
-<!-- START_7d1f86cd2d17ff6e8f7bce97aeabc7f3 -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/organizations/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/organizations/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/organizations/{organization}`
-
-
-<!-- END_7d1f86cd2d17ff6e8f7bce97aeabc7f3 -->
-
-<!-- START_a3d4660c575d6fd59c9718ff69a12cc7 -->
-## Store a newly created resource in storage.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/organizations" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/organizations"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/organizations`
-
-
-<!-- END_a3d4660c575d6fd59c9718ff69a12cc7 -->
-
-<!-- START_e6c758d4cc6e3b90231537145573cfd8 -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/organizations/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/organizations/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/organizations/{organization}`
-
-`PATCH api/organizations/{organization}`
-
-
-<!-- END_e6c758d4cc6e3b90231537145573cfd8 -->
-
-<!-- START_b9047b90f047db47c77810fd8de29af9 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/organizations/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/organizations/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/organizations/{organization}`
-
-
-<!-- END_b9047b90f047db47c77810fd8de29af9 -->
-
-<!-- START_4c6145b46f1c2242e8bb6de5f5447d52 -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/me/organizations" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/me/organizations"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/me/organizations`
-
-
-<!-- END_4c6145b46f1c2242e8bb6de5f5447d52 -->
-
-<!-- START_e6b3cb8f3e1edf3605287cd526c7f97b -->
-## api/events/sendMecPerfil
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/sendMecPerfil" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/sendMecPerfil"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/sendMecPerfil`
-
-
-<!-- END_e6b3cb8f3e1edf3605287cd526c7f97b -->
-
-<!-- START_e91cb003b68fa252dcfc2b6391edc20a -->
-## api/events/sendMecPerfilMec
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/sendMecPerfilMec" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/sendMecPerfilMec"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/sendMecPerfilMec`
-
-
-<!-- END_e91cb003b68fa252dcfc2b6391edc20a -->
-
-<!-- START_19f04c8aa5404ee0ff1ced42e5b6f30b -->
-## api/events/{event_id}/sendMecPerfilMectoall
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/sendMecPerfilMectoall" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendMecPerfilMectoall"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/sendMecPerfilMectoall`
-
-
-<!-- END_19f04c8aa5404ee0ff1ced42e5b6f30b -->
-
-<!-- START_8b57b71ba02b021a6361ad07c15afefd -->
-## api/events/sendnotificationemail
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/sendnotificationemail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/sendnotificationemail"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/sendnotificationemail`
-
-
-<!-- END_8b57b71ba02b021a6361ad07c15afefd -->
-
-<!-- START_304a10fe7e2fad2fbb4ed3e49ac28907 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/sendcontent" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendcontent"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/sendcontent`
-
-
-<!-- END_304a10fe7e2fad2fbb4ed3e49ac28907 -->
-
-<!-- START_57b56057ac2c130fe00099a3fdab7a57 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/sendcontent" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendcontent"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/sendcontent`
-
-
-<!-- END_57b56057ac2c130fe00099a3fdab7a57 -->
-
-<!-- START_9e47585578f520ac7ee0abee9100c368 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/sendcontent/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendcontent/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/sendcontent/{sendcontent}`
-
-
-<!-- END_9e47585578f520ac7ee0abee9100c368 -->
-
-<!-- START_5b22035049f5bef5e640779214c4cb65 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/sendcontent/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendcontent/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/sendcontent/{sendcontent}`
-
-`PATCH api/events/{event_id}/sendcontent/{sendcontent}`
-
-
-<!-- END_5b22035049f5bef5e640779214c4cb65 -->
-
-<!-- START_572e9fa5a01e48e49c2ce9e213fbaf39 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/events/1/sendcontent/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/sendcontent/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/events/{event_id}/sendcontent/{sendcontent}`
-
-
-<!-- END_572e9fa5a01e48e49c2ce9e213fbaf39 -->
-
-<!-- START_e37bb54d9c879f83a7481d706567da04 -->
-## api/singinwithemail
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/singinwithemail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/singinwithemail"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/singinwithemail`
-
-
-<!-- END_e37bb54d9c879f83a7481d706567da04 -->
-
-<!-- START_14f5adf45c9b14e7cb29dbe4d4d66bed -->
-## api/events/{event_id}/indexinvitations/{user_id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/indexinvitations/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/indexinvitations/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/indexinvitations/{user_id}`
-
-
-<!-- END_14f5adf45c9b14e7cb29dbe4d4d66bed -->
-
-<!-- START_64d2cbddd78e2a020c86f89cc3e88d1a -->
-## api/events/{event_id}/indexinvitationsrecieved/{user_id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/indexinvitationsrecieved/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/indexinvitationsrecieved/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/indexinvitationsrecieved/{user_id}`
-
-
-<!-- END_64d2cbddd78e2a020c86f89cc3e88d1a -->
-
-<!-- START_ac223e224f8317ff1a01fccd8ef736e7 -->
-## api/events/{event_id}/acceptordecline/{id}
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/acceptordecline/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/acceptordecline/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/acceptordecline/{id}`
-
-
-<!-- END_ac223e224f8317ff1a01fccd8ef736e7 -->
-
-<!-- START_bd81320f3c4511edb1925655907b488f -->
-## api/events/{event_id}/contactlist/{user_id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/contactlist/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/contactlist/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/contactlist/{user_id}`
-
-
-<!-- END_bd81320f3c4511edb1925655907b488f -->
-
-<!-- START_b38652249ac82e5c106c2a3355efaeed -->
-## api/events/{event_id}/meetingrequest/notify
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/meetingrequest/notify" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/meetingrequest/notify"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/meetingrequest/notify`
-
-
-<!-- END_b38652249ac82e5c106c2a3355efaeed -->
-
-<!-- START_6ca4e171737001f583fce1bb4bb9ddb2 -->
-## api/events/{event_id}/contactlist/{user_id}
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/contactlist/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/contactlist/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/contactlist/{user_id}`
-
-
-<!-- END_6ca4e171737001f583fce1bb4bb9ddb2 -->
-
-<!-- START_980c7fcb3212d1a5166f9b32292c06f1 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/invitation" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/invitation"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/invitation`
-
-
-<!-- END_980c7fcb3212d1a5166f9b32292c06f1 -->
-
-<!-- START_9517f6b677db242e4a1cf6a04daf4e1d -->
-## Store a newly created resource in storage.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/invitation" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/invitation"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/invitation`
-
-
-<!-- END_9517f6b677db242e4a1cf6a04daf4e1d -->
-
-<!-- START_cfcc08fc7d6b3ebcd309681e30856e8c -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/invitation/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/invitation/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/invitation/{invitation}`
-
-
-<!-- END_cfcc08fc7d6b3ebcd309681e30856e8c -->
-
-<!-- START_2a0c45e501d0cc663f127e9a5a157c6e -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/invitation/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/invitation/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/invitation/{invitation}`
-
-`PATCH api/events/{event_id}/invitation/{invitation}`
-
-
-<!-- END_2a0c45e501d0cc663f127e9a5a157c6e -->
-
-<!-- START_0f3398960f180ac8c24d54336d7ffdbb -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/events/1/invitation/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/invitation/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/events/{event_id}/invitation/{invitation}`
-
-
-<!-- END_0f3398960f180ac8c24d54336d7ffdbb -->
-
 <!-- START_5311daf9c1595e9d9e1570e62c42f532 -->
 ## Display a listing of the resource.
 
@@ -7548,601 +9651,6 @@ fetch(url, {
 
 <!-- END_38b0238db31dd47cbd26822cacdc51e9 -->
 
-<!-- START_b517d383c710e2dea5f2e97ab7bb8b43 -->
-## api/me/eventUsers
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/me/eventUsers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/me/eventUsers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/me/eventUsers`
-
-
-<!-- END_b517d383c710e2dea5f2e97ab7bb8b43 -->
-
-<!-- START_742a1cbd4a274c7269f0db99a704ff41 -->
-## api/events
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events`
-
-
-<!-- END_742a1cbd4a274c7269f0db99a704ff41 -->
-
-<!-- START_de3413bf02c9bb71627fa96e1c1c409f -->
-## Store a newly created event resource in storage.
-
-there is a special event relation called organizer Its polymorphic relationship.
-related to user and organization
-organizer: It could be "me"(current user) or an organization Id
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events`
-
-
-<!-- END_de3413bf02c9bb71627fa96e1c1c409f -->
-
-<!-- START_379a3beb17bbb91528d80d8507f69655 -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event}`
-
-
-<!-- END_379a3beb17bbb91528d80d8507f69655 -->
-
-<!-- START_d16967fd1d3d935666f7e8112a1a4451 -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event}`
-
-`PATCH api/events/{event}`
-
-
-<!-- END_d16967fd1d3d935666f7e8112a1a4451 -->
-
-<!-- START_379a30feb2949828b5f95efbfd7649c3 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/events/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/events/{event}`
-
-
-<!-- END_379a30feb2949828b5f95efbfd7649c3 -->
-
-<!-- START_aec83efbad5ec636ec1b29352c041932 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/me/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/me/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/me/events`
-
-
-<!-- END_aec83efbad5ec636ec1b29352c041932 -->
-
-<!-- START_2478aef777186232e8bca32fdf09efe3 -->
-## Store a newly created event resource in storage.
-
-there is a special event relation called organizer Its polymorphic relationship.
-related to user and organization
-organizer: It could be "me"(current user) or an organization Id
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/user/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/user/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/user/events`
-
-
-<!-- END_2478aef777186232e8bca32fdf09efe3 -->
-
-<!-- START_26fd0ed6db820ca28bb674ba1d761a2e -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/user/events/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/user/events/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/user/events/{event}`
-
-`PATCH api/user/events/{event}`
-
-
-<!-- END_26fd0ed6db820ca28bb674ba1d761a2e -->
-
-<!-- START_ed1c02a70ed814c85d464077d0854e00 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/user/events/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/user/events/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/user/events/{event}`
-
-
-<!-- END_ed1c02a70ed814c85d464077d0854e00 -->
-
-<!-- START_f59d4cbbf9176342893379adb70dc1a5 -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/user/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/user/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/user/events`
-
-
-<!-- END_f59d4cbbf9176342893379adb70dc1a5 -->
-
-<!-- START_7488288e859ba4fe861385339c81371a -->
-## api/eventsbeforetoday
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/eventsbeforetoday" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/eventsbeforetoday"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/eventsbeforetoday`
-
-
-<!-- END_7488288e859ba4fe861385339c81371a -->
-
-<!-- START_08180c1785ee9a816b6fa5cdf32ece34 -->
-## api/users/{id}/events
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/users/1/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/users/1/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/users/{id}/events`
-
-
-<!-- END_08180c1785ee9a816b6fa5cdf32ece34 -->
-
-<!-- START_84149f81b1537e6bcfc498d67a92d685 -->
-## api/organizations/{id}/events
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/organizations/1/events" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/organizations/1/events"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/organizations/{id}/events`
-
-
-<!-- END_84149f81b1537e6bcfc498d67a92d685 -->
-
 <!-- START_109013899e0bc43247b0f00b67f889cf -->
 ## Display a listing of the resource.
 
@@ -8350,20 +9858,20 @@ fetch(url, {
 <!-- END_7513823f87b59040507bd5ab26f9ceb5 -->
 
 <!-- START_c326d3af496947220548e32f2e10ba93 -->
-## Display a listing of the resource.
+## _index_: Listado de los roles de los asistentes.
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/1/rolesattendees" \
+    -G "http://localhost/api/events/repellat/rolesattendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/rolesattendees"
+    "http://localhost/api/events/repellat/rolesattendees"
 );
 
 let headers = {
@@ -8391,11 +9899,16 @@ fetch(url, {
 ### HTTP Request
 `GET api/events/{event_id}/rolesattendees`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
 
 <!-- END_c326d3af496947220548e32f2e10ba93 -->
 
 <!-- START_1640bc5878f3f3b6698f1fafb9b2b09d -->
-## Store a newly created resource in storage.
+## _store_:Crear un nuevo rol de asistente para un evento.
 
 > Example request:
 
@@ -8403,7 +9916,9 @@ fetch(url, {
 curl -X POST \
     "http://localhost/api/events/1/rolesattendees" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"minima"}'
+
 ```
 
 ```javascript
@@ -8416,9 +9931,14 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "minima"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -8429,11 +9949,15 @@ fetch(url, {
 ### HTTP Request
 `POST api/events/{event_id}/rolesattendees`
 
-
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del rol
+    
 <!-- END_1640bc5878f3f3b6698f1fafb9b2b09d -->
 
 <!-- START_761128fefeeda477ce81ce2f0051aad6 -->
-## Display the specified resource.
+## _show_: Ver información de un rol de asistente específico.
 
 > Example request:
 
@@ -8474,11 +9998,16 @@ fetch(url, {
 ### HTTP Request
 `GET api/events/{event_id}/rolesattendees/{rolesattendee}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_761128fefeeda477ce81ce2f0051aad6 -->
 
 <!-- START_0d430b692f1997c2147d78272af1f468 -->
-## Update the specified resource in storage.
+## _update_: Actualizar un rol del evento
 
 > Example request:
 
@@ -8514,11 +10043,16 @@ fetch(url, {
 
 `PATCH api/events/{event_id}/rolesattendees/{rolesattendee}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_0d430b692f1997c2147d78272af1f468 -->
 
 <!-- START_730da4f67177565f46a1d6dfab2006d5 -->
-## Remove the specified resource from storage.
+## _destroy_: Eliminar un rol específico de asistente.
 
 > Example request:
 
@@ -8552,6 +10086,11 @@ fetch(url, {
 ### HTTP Request
 `DELETE api/events/{event_id}/rolesattendees/{rolesattendee}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_730da4f67177565f46a1d6dfab2006d5 -->
 
@@ -8760,404 +10299,8 @@ fetch(url, {
 
 <!-- END_e3cb4d552df96d7acd1195a69b889ca4 -->
 
-<!-- START_491853e99011901472276c04a2028910 -->
-## api/generatecertificate
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/generatecertificate" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/generatecertificate"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/generatecertificate`
-
-
-<!-- END_491853e99011901472276c04a2028910 -->
-
-<!-- START_68adc3f6281f21cf39ff45bbccede6e2 -->
-## api/events/{event_id}/certificates
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/certificates" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/certificates"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/certificates`
-
-
-<!-- END_68adc3f6281f21cf39ff45bbccede6e2 -->
-
-<!-- START_f079297f56fef66382c899397b2114a6 -->
-## Store a newly created resource in storage.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/events/1/certificates" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/certificates"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/certificates`
-
-
-<!-- END_f079297f56fef66382c899397b2114a6 -->
-
-<!-- START_38c251cd2137c789af7ddd3c87749979 -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/certificates/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/certificates/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/certificates/{certificate}`
-
-
-<!-- END_38c251cd2137c789af7ddd3c87749979 -->
-
-<!-- START_6266c97cac89368b9901a5e2e1f313e2 -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/events/1/certificates/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/certificates/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/events/{event_id}/certificates/{certificate}`
-
-`PATCH api/events/{event_id}/certificates/{certificate}`
-
-
-<!-- END_6266c97cac89368b9901a5e2e1f313e2 -->
-
-<!-- START_9d1f5720c227f04584ffa14fcdd26837 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/events/1/certificates/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/certificates/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/events/{event_id}/certificates/{certificate}`
-
-
-<!-- END_9d1f5720c227f04584ffa14fcdd26837 -->
-
-<!-- START_4c9efcf47162dba5a71705010c1d5cc7 -->
-## Store a newly created resource in storage.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/certificates" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificates"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/certificates`
-
-
-<!-- END_4c9efcf47162dba5a71705010c1d5cc7 -->
-
-<!-- START_80fcb3c92345683d3dc174755e5183ab -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/certificates/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificates/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/certificates/{certificate}`
-
-`PATCH api/certificates/{certificate}`
-
-
-<!-- END_80fcb3c92345683d3dc174755e5183ab -->
-
-<!-- START_3984f7a219b9fb6506187360e1d541c8 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/certificates/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificates/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/certificates/{certificate}`
-
-
-<!-- END_3984f7a219b9fb6506187360e1d541c8 -->
-
-<!-- START_4a1857b8b0fa2e53e019d8fba0f88994 -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/certificates/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificates/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/certificates/{id}`
-
-
-<!-- END_4a1857b8b0fa2e53e019d8fba0f88994 -->
-
 <!-- START_5ae624c6977784b7a830ad9eab832b35 -->
-## Display a listing of the resource.
+## _index_: Listado de los roles de los asistentes.
 
 > Example request:
 
@@ -9198,11 +10341,16 @@ fetch(url, {
 ### HTTP Request
 `GET api/rolesattendees`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
 
 <!-- END_5ae624c6977784b7a830ad9eab832b35 -->
 
 <!-- START_cf1028f6126759f733fee604202cd964 -->
-## Display the specified resource.
+## _show_: Ver información de un rol de asistente específico.
 
 > Example request:
 
@@ -9243,11 +10391,16 @@ fetch(url, {
 ### HTTP Request
 `GET api/rolesattendees/{rolesattendee}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_cf1028f6126759f733fee604202cd964 -->
 
 <!-- START_b2a28d12952f6be38c94e5f73dfd299d -->
-## Store a newly created resource in storage.
+## _store_:Crear un nuevo rol de asistente para un evento.
 
 > Example request:
 
@@ -9255,7 +10408,9 @@ fetch(url, {
 curl -X POST \
     "http://localhost/api/rolesattendees" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"quia"}'
+
 ```
 
 ```javascript
@@ -9268,9 +10423,14 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "quia"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -9281,11 +10441,15 @@ fetch(url, {
 ### HTTP Request
 `POST api/rolesattendees`
 
-
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del rol
+    
 <!-- END_b2a28d12952f6be38c94e5f73dfd299d -->
 
 <!-- START_386fae58600cc4aaab7e40611552e7f8 -->
-## Update the specified resource in storage.
+## _update_: Actualizar un rol del evento
 
 > Example request:
 
@@ -9321,11 +10485,16 @@ fetch(url, {
 
 `PATCH api/rolesattendees/{rolesattendee}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_386fae58600cc4aaab7e40611552e7f8 -->
 
 <!-- START_20bcc935d9c85f19ae2a05947d0add4b -->
-## Remove the specified resource from storage.
+## _destroy_: Eliminar un rol específico de asistente.
 
 > Example request:
 
@@ -9359,24 +10528,29 @@ fetch(url, {
 ### HTTP Request
 `DELETE api/rolesattendees/{rolesattendee}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_20bcc935d9c85f19ae2a05947d0add4b -->
 
 <!-- START_67f0cc9990d72d5faeb7e08ced97043b -->
-## Remove the specified resource from storage.
+## _destroy_: Eliminar un rol específico de asistente.
 
 > Example request:
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/rolesattendees/1" \
+    "http://localhost/api/rolesattendees/facilis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rolesattendees/1"
+    "http://localhost/api/rolesattendees/facilis"
 );
 
 let headers = {
@@ -9397,214 +10571,13 @@ fetch(url, {
 ### HTTP Request
 `DELETE api/rolesattendees/{id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id de RoleAttendee
 
 <!-- END_67f0cc9990d72d5faeb7e08ced97043b -->
-
-<!-- START_20357dac1999c588c85ffe24bc8cdd8d -->
-## Display a listing of the resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/certificate" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificate"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/certificate`
-
-
-<!-- END_20357dac1999c588c85ffe24bc8cdd8d -->
-
-<!-- START_63fc0e87430a7e884b4feef38a9ab61a -->
-## Store a newly created resource in storage.
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/certificate" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificate"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/certificate`
-
-
-<!-- END_63fc0e87430a7e884b4feef38a9ab61a -->
-
-<!-- START_d4de594f6e18a81ef1d37b4e4c7a8fe3 -->
-## Display the specified resource.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/certificate/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificate/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/certificate/{certificate}`
-
-
-<!-- END_d4de594f6e18a81ef1d37b4e4c7a8fe3 -->
-
-<!-- START_359fc0e6c033060787ded1d7676a4d05 -->
-## Update the specified resource in storage.
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/certificate/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificate/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/certificate/{certificate}`
-
-`PATCH api/certificate/{certificate}`
-
-
-<!-- END_359fc0e6c033060787ded1d7676a4d05 -->
-
-<!-- START_ff42e90196178b087d14163d009b736c -->
-## Remove the specified resource from storage.
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/api/certificate/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/certificate/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE api/certificate/{certificate}`
-
-
-<!-- END_ff42e90196178b087d14163d009b736c -->
 
 <!-- START_d075018d0f5c4b4c28eebc2ea6c990a2 -->
 ## Display a listing of the resource.
@@ -12475,53 +13448,6 @@ fetch(url, {
 
 <!-- END_737aa8371e5a0ca4c14f51dc6baab31a -->
 
-<!-- START_04c928fb7ec045888fb969784cc3eb7e -->
-## AddUserProperty: Add dynamic user property to the event
-
-each dynamic property must be composed of following parameters:
-
-* name     text
-* required boolean - this field is not yet used  for anything
-* type     text    - this field is not yet used for anything
-
-Once created user dynamic event properties could be get directly from $event->userProperties.
-Dynamic properties are returned inside each UserEvent like regular properties
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/user/events/1/addUserProperty" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/user/events/1/addUserProperty"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/user/events/{id}/addUserProperty`
-
-
-<!-- END_04c928fb7ec045888fb969784cc3eb7e -->
-
 <!-- START_7fc3643705ffb59eed1a17830c3ca58a -->
 ## Display a listing of the resource.
 
@@ -12612,50 +13538,6 @@ fetch(url, {
 
 <!-- END_b8f0c94729c67ebf9f447d6c0d713dc8 -->
 
-<!-- START_01aa68de7cc9bc01aac7cf1947206db3 -->
-## api/rsvp/test
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/rsvp/test" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/rsvp/test"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/rsvp/test`
-
-
-<!-- END_01aa68de7cc9bc01aac7cf1947206db3 -->
-
 <!-- START_4fd14a1648567263b13dc56b81d79a88 -->
 ## Display the specified resource.
 
@@ -12700,141 +13582,6 @@ fetch(url, {
 
 
 <!-- END_4fd14a1648567263b13dc56b81d79a88 -->
-
-<!-- START_6b8165cc7da505120fbe6aa7aba5356e -->
-## Send RSVP to users in an event, taking usersIds[] in
-request to filter which users the RSVP is going to be send to
-
-+@@post body usersIds[]
-     +@@post body message
-     +@@post body image link
-     +@@post body subject
-     +@@post body footer
-     +@body message asdfasdf
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/rsvp/sendeventrsvp/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/rsvp/sendeventrsvp/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/rsvp/sendeventrsvp/{event}`
-
-
-<!-- END_6b8165cc7da505120fbe6aa7aba5356e -->
-
-<!-- START_1ce8e6bee5951ce85fa8ccdc35da0865 -->
-## Undocumented function
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/rsvp/confirmrsvp/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/rsvp/confirmrsvp/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/rsvp/confirmrsvp/{eventUser}`
-
-
-<!-- END_1ce8e6bee5951ce85fa8ccdc35da0865 -->
-
-<!-- START_f0266492be1eb40c7fae7d7b7c12402e -->
-## api/rsvp/confirmrsvptest/{eventUser}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/rsvp/confirmrsvptest/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/rsvp/confirmrsvptest/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/rsvp/confirmrsvptest/{eventUser}`
-
-
-<!-- END_f0266492be1eb40c7fae7d7b7c12402e -->
 
 <!-- START_f0cc04c2ae10aa8188fc7ac2315efdd1 -->
 ## Display a listing of the resource.
@@ -14767,89 +15514,6 @@ fetch(url, {
 
 
 <!-- END_714b431891bf77d9be776c06b846bb6d -->
-
-<!-- START_92b328319f49439288d157a4c5e241e1 -->
-## Show the &#039;Create Event&#039; Modal
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/events/create" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/events/create"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET events/create`
-
-
-<!-- END_92b328319f49439288d157a4c5e241e1 -->
-
-<!-- START_421dd5ccdba33e6e944a6d5f27b46bb3 -->
-## Create an event
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/events/create" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/events/create"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST events/create`
-
-
-<!-- END_421dd5ccdba33e6e944a6d5f27b46bb3 -->
 
 <!-- START_71d14c7dfe3087c0431f2d1a9a0734b8 -->
 ## Show the event dashboard
@@ -17406,87 +18070,6 @@ fetch(url, {
 
 
 <!-- END_87ed3e2e425668b72f10723f4d20495b -->
-
-<!-- START_c1aa27515bf03f12d5698af59e31585a -->
-## test
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/test" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/test"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET test`
-
-
-<!-- END_c1aa27515bf03f12d5698af59e31585a -->
-
-<!-- START_fe527ea723c09bf9aa5f91451af188f8 -->
-## testpush
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/testpush" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/testpush"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST testpush`
-
-
-<!-- END_fe527ea723c09bf9aa5f91451af188f8 -->
 
 <!-- START_7106b230a124bdfa15ece6cd430c5724 -->
 ## getCurrentUser

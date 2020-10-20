@@ -37,7 +37,7 @@ return [
         'database' => [
             'driver' => 'mongodb',
             // You can also specify your jobs specific database created on config/database.php
-            'connection' => 'mongodb',
+            'connection' => 'mongodb-job',
             'table' => 'jobs',
             'queue' => 'default',
             'expire' => 60,
@@ -83,7 +83,7 @@ return [
     'failed' => [
         'driver' => 'mongodb',
         // You can also specify your jobs specific database created on config/database.php
-        'database' => 'mongodb',
+        'database' => 'mongodb-job',
         'table' => 'failed_jobs',
     ],
 

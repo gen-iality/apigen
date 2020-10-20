@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Storage;
 
 /**
- * @group  User management
- *
- * APIs for managing users
+ * @group User
  */
 class UserController extends UserControllerWeb
 {
@@ -35,7 +33,7 @@ class UserController extends UserControllerWeb
      * @param  \Closure  $next
      * @return mixed
      */
-//http://localhost:8000/api/user/loginorcreatefromtoken?evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg&evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg
+    //http://localhost:8000/api/user/loginorcreatefromtoken?evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg&evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg
     public function loginorcreatefromtoken(Request $request)
     {
         $firebaseToken = null;
@@ -107,7 +105,7 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Display a listing of the resource.
+     * _index_: Listado de usuario resgistrados.
      *
      * @return \Illuminate\Http\Response
      */
@@ -119,13 +117,10 @@ class UserController extends UserControllerWeb
     }
 
     /**
+     * _store_: Creación de un nuevo usuario.
      * 
-	 * Create a user
-	 *
-	 * [Insert optional longer description of the API endpoint here.]
-	 *
-	 *
-     * Store a newly created resource in storage.
+     * @bodyParam email email required 
+     * @bodyParam name  string required
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -137,9 +132,8 @@ class UserController extends UserControllerWeb
         $result->save();
         return $result;
     }
+
     /**
-     * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -149,8 +143,10 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Display the specified resource.
+     * _show_: Eliminar usurio registrado
      *
+     * @urlParam id required id del usuario
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -174,8 +170,13 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Update the specified resource in storage.
+     * _update_: Actualizar usuario registrado
+     * 
+     * @urlParam id required id del usuario
      *
+     * @bodyParam email email required 
+     * @bodyParam name  string required
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -196,6 +197,21 @@ class UserController extends UserControllerWeb
         return $data;
     }
 
+    /**
+     * _VerifyAccount_: Verificar correo de usuario 
+     *
+     * @urlParam uid required id del usuario
+     *
+     * @bodyParam email email required 
+     * @bodyParam name  string required
+     * @bodyParam auth  \Kreait\Firebase\Auth required
+     * 
+     * 
+     * @param Request $request
+     * @param \Kreait\Firebase\Auth $auth
+     * @param string $uid
+     * @return void
+     */
     public function VerifyAccount(Request $request, \Kreait\Firebase\Auth $auth, $uid)
     {
         $data = $request->json()->all();
@@ -209,7 +225,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Remove the specified resource from storage.
+     * _delete_: Eliminar usuario registrado
+     * 
+     * @urlParam id required id del usuario
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -226,10 +244,11 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Find the specified resource from storage.
-     * by email.
+     * _findByEmail_: Buscar usuario específico busacdo por correo.
      *
-     * @param  int  $email
+     * @urlParam email required email del usuario buscado
+     * 
+     * @param  email  $email
      * @return \Illuminate\Http\Response
      */
     public function findByEmail(\Kreait\Firebase\Auth $auth, $email)
@@ -251,10 +270,10 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Undocumented function
+     * _sendConfirmationEmail_: Envio de confimación de correo.
      *
-     * @param [type] $eventUsers
-     * @param [type] $message
+     * @urlParam id required id del usuario 
+     * 
      * @return void
      */
     private static function _sendConfirmationEmail($user)
@@ -277,8 +296,10 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * Undocumented function
-     *
+     * _confirmEmail_: Obtener confirmación de email
+     * 
+     * @urlParam id required id del usuario 
+     * 
      * @return void
      */
     public function confirmEmail(String $id)

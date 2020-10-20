@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @group UserProperties
  * @resource Event
- *
  *
  */
 class UserPropertiesController extends Controller
@@ -22,8 +22,9 @@ class UserPropertiesController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource UserProperties.
      *
+     * @urlParam  event_id required .
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
@@ -33,8 +34,12 @@ class UserPropertiesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in UserProperties.
      *
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in UserProperties
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -49,7 +54,14 @@ class UserPropertiesController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * 
+     * @urlParam  event_id required 
+     * @urlParam  id required id UserProperties
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in UserProperties
+     * 
      * @param  \App\UserProperties  $UserProperties
      * @return \Illuminate\Http\Response
      */
@@ -66,8 +78,13 @@ class UserPropertiesController extends Controller
 
     
     /**
-     * Update the specified resource in storage.
-     *
+     * Update the specified resource in UserProperties.
+     * 
+     * @urlParam  event_id required 
+     * @urlParam  id required id UserProperties
+     * 
+     * @bodyParam other_params,... any other params  will be saved in UserProperties
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\UserProperties  $UserProperties
      * @return \Illuminate\Http\Response
@@ -93,7 +110,10 @@ class UserPropertiesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from UserProperties.
+     * 
+     * @urlParam  event_id required 
+     * @urlParam  id required id UserProperties
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
