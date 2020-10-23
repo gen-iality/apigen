@@ -56,8 +56,14 @@ class EventUserController extends Controller
 
     public function index(Request $request, String $event_id, FilterQuery $filterQuery)
     {
+
+        $input = $request->all();
+        //arreglo temporal para Yanbal
+        if ($event_id == "5f622ab4fd452e39b3677996" ){
+            $input["pageSize"] = 10;
+        }
         $query = Attendee::where("event_id", $event_id);
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventUserResource::collection($results);
     }
     public function meInEvent(Request $request, $event_id)
