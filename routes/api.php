@@ -224,7 +224,11 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 /***************
  * categories
  ****************/
-Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
+        Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+    }
+);
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
@@ -285,7 +289,11 @@ Route::apiResource('certificate', 'CertificateController');
 /****************
  * eventTypes
  ****************/
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+    }
+);
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
@@ -408,6 +416,8 @@ Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
+Route::get('borradorepetidos/activity/{activity_id}', 'ActivityAssistantController@borradorepetidos');
+
 
 Route::post('order/{order_id}/resend', [
     'as' => 'resendOrder',

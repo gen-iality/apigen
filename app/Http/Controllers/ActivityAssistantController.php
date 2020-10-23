@@ -28,6 +28,25 @@ use App\evaLib\Services\UserEventService;
 class ActivityAssistantController extends Controller
 {
 
+    public function borradorepetidos(Request $request, $activity_id ){
+
+        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->get();  
+        // var_dump($ActivityUsers);die;
+
+        $ids=[];
+        var_dump(count($ActivityUsers));
+        foreach ($ActivityUsers as $key => $activitiUser) {            
+            $ids[$activitiUser->user_id] = $activitiUser->_id; 
+        }
+        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->whereNotIn('_id', $ids)->get();
+        var_dump(count($ActivityUsers));  
+
+        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->whereNotIn('_id', $ids)->delete();  
+
+        // var_dump(count($ActivityUsers));die;
+        
+    }
+
 
     /**
      * Display the specified resource.

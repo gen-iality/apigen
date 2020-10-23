@@ -120,9 +120,12 @@ class InvitationMail extends Mailable implements ShouldQueue
         if (!$subject) {
             "Invitación a " . $event->name . "";
         }
-
-        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start) : $event->datetime_from;
-        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
+        
+        //Definición de horario de inicio y fin del evento.Se le agrega -05:00 para que quede hora Colombia
+            $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start."-05:00") : \Carbon\Carbon::parse($event->datetime_from ."-05:00");
+            $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end."-05:00") : \Carbon\Carbon::parse($event->datetime_to."-05:00");        
+            $date_time_from = $date_time_from->setTimezone("UTC");
+            $date_time_to = $date_time_to->setTimezone("UTC");
 
         $this->subject = $subject;
         // $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
@@ -131,25 +134,27 @@ class InvitationMail extends Mailable implements ShouldQueue
         $descripcion = $event->name." Ver el evento en: ".$this->link;
      
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-        $this->ical = iCalCalendar::create($event->name)
-            ->appendProperty(
-                TextPropertyType::create('URL', $this->urlconfirmacion) 
-            )
-            ->appendProperty(
-                TextPropertyType::create('METHOD', "REQUEST") 
-            )
-            ->event(iCalEvent::create($event->name)
-                    ->startsAt($date_time_from)
-                    ->endsAt($date_time_to)
-                    ->description($descripcion)
-                    ->uniqueIdentifier($event->_id)
-                    ->createdAt(new \DateTime())
-                    ->address(($event->address) ? $event->address :  $this->urlconfirmacion)
-                    // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
-                //->coordinates(51.2343, 4.4287)
-                    ->organizer('soporte@evius.co', $event->organizer->name)
-                    ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
-            )->get();
+            $this->ical = iCalCalendar::create($event->name)
+                ->appendProperty(
+                    TextPropertyType::create('URL', $this->urlconfirmacion) 
+                )
+                ->appendProperty(
+                    TextPropertyType::create('METHOD', "REQUEST") 
+                )
+                ->event(iCalEvent::create($event->name)
+                        ->startsAt($date_time_from)
+                        ->endsAt($date_time_to)
+                        ->description($descripcion)
+                        ->uniqueIdentifier($event->_id)
+                        ->createdAt(new \DateTime())
+                        ->address(($event->address) ? $event->address :  $this->urlconfirmacion)
+                        // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                    //->coordinates(51.2343, 4.4287)
+                        ->organizer('soporte@evius.co', $event->organizer->name)
+                        ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+                )->get();
+        // var_dump($date_time_from);die;
+
     }
 
     private function encryptdata($string)
