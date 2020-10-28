@@ -394,7 +394,7 @@ EOT;
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
             $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad";
-            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_meesage;
+            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_message;
             $mail["subject"] = "Respuesta a solicitud de amistad";
         }
 
