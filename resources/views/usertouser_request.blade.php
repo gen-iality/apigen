@@ -9,7 +9,7 @@
 	</span>
 
 </div>
-@if ($response)
+@if ($request_type == 'friendship' && $response)
 @component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
 Aceptar solicitud
 @endcomponent
