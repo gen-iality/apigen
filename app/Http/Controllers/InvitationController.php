@@ -357,8 +357,8 @@ class InvitationController extends Controller
         Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu información oculta en el evento en la sección conecta/networking
-        de esta manera podrÃ¡ contactarte.
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
+        de esta manera podrá contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
