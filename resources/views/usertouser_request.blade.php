@@ -19,8 +19,18 @@ Rechazar solicitud
 @endcomponent
 @endif
 
+@if ($request_type == 'meeting' && $response && $status != "accepted" && $status != "rejected")
+@component('mail::button', ['url' => $link . "/accept" , 'color' => 'evius'])
+Aceptar solicitud
+@endcomponent
+
+@component('mail::button', ['url' => $link . "/reject" , 'color' => 'evius'])
+Rechazar solicitud
+@endcomponent
+@endif
+
 <br />
-@component('mail::button', ['url' => $link_authenticated, 'color' => 'evius'])
+@component('mail::button', ['url' => $link_authenticatedalevento, 'color' => 'evius'])
 Ver Solicitudes en el Evento
 @endcomponent
 
@@ -50,7 +60,7 @@ Confirmar Cuenta
 </div>
 @slot('footer')
 @component('mail::footer')
-Â© 2001-2020. All Rights Reserved - Evius.co
+© 2001-2020. All Rights Reserved - Evius.co
 @endcomponent
 @endslot
 @endcomponent

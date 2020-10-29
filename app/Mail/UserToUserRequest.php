@@ -30,15 +30,18 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public $response;
     public $email;
     public $link_authenticated;
+    public $linkalevento;
+    public $link_authenticatedalevento;
     public $request_type;
+    public $status;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+    public function __construct($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user,$status=null)
     {
-
+        //$response es el request_id
         Log::debug("recibiendo event_user");
         $request_type = ($request_type) ? $request_type : "friendship";
         $event = Event::find($event_id);
@@ -46,24 +49,41 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $event_city = isset($event["location"]["City"]) ? ($event["location"]["City"]) : " ";
         $event_state = isset($event["location"]["state"]) ? ($event["location"]["state"]) : " ";
 
-        $password = isset($receiver["properties"]["password"]) ? $receiver["properties"]["password"] : "mocion.2040";
+        $password = isset($receiver["properties"]["password"]) ? $receiver["properties"]["password"] : "evius.2040";
         $pass = self::encryptdata($password);
 
         Log::debug("cargando datos event_user al correo");
 
         $principal_title = $title;
         $description = $desc;
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
-        $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
 
+        //response es el id de la petición ya sea reunión o solicitud de amistad
         if ($response) {
-            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
+            switch($request_type){
+                case "meeting":
+                    $link = config('app.api_evius') . "/event/{$event_id}/meeting/{$response}";
+                    $link_authenticated = config('app.api_evius') . "/event/{$event_id}/meeting/{$response}";
+                break;
+                case "friendship":
+                default:
+                   $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
+            break;
+            }       
+       
+        }else{
+            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
+            $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
         }
+
+        $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
+        $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
 
         $this->response = $response;
         $this->email = $email;
         $this->link = $link;
         $this->link_authenticated = $link_authenticated;
+        $this->linkalevento = $linkalevento;
+        $this->link_authenticatedalevento = $link_authenticatedalevento;        
         $this->$principal_title = $principal_title;
         $this->$img = $img;
         $this->$description = $description;
@@ -75,6 +95,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $this->desc = $desc;
         $this->sender = $sender;
         $this->request_type = $request_type;
+        $this->status = $status;
 
         $this->subject = $subject;
         $gfService = new GoogleFiles();
