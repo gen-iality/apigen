@@ -296,37 +296,6 @@ class InvitationController extends Controller
 
     }
 
-    public function buildMeetingRequestMessage($data, String $event_id)
-    {
-        $event = Event::find($event_id);
-        $receiver = Attendee::find($data["id_user_requested"]);
-        $sender = Attendee::find($data["id_user_requesting"]);
-
-        $mail["id_user_requesting"] = $data["id_user_requesting"];
-        $mail["id_user_requested"] = $data["id_user_requested"];
-
-        $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
-        $mail["sender"] = $event->name;
-        $mail["event_id"] = $event_id;
-
-        if (!empty($data["request_id"])) {
-            $mail["request_id"] = $data["request_id"];
-        }
-
-        $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
-
-        $request_type = "meeting";
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
-        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
-
-        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Agendate y revisa las solicitudes para aceptarlas rechazarlas</p>";
-
-        self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
-        return "Request / response send";
-    }
-
-    
     public function buildMeetingResponseMessage($data, String $event_id){
         $request_type = "meeting";
         $event = Event::find($event_id);
