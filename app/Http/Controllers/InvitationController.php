@@ -320,7 +320,7 @@ class InvitationController extends Controller
         $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
         $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
 
-        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
+        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Agendate y revisa las solicitudes para aceptarlas rechazarlas</p>";
 
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
@@ -357,8 +357,8 @@ class InvitationController extends Controller
         Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu información oculta en el evento en la sección conecta/networking
-        de esta manera podrÃ¡ contactarte.
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
+        de esta manera podrá contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
@@ -394,7 +394,7 @@ EOT;
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
             $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad";
-            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_meesage;
+            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_message;
             $mail["subject"] = "Respuesta a solicitud de amistad";
         }
 

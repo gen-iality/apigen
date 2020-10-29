@@ -9,7 +9,7 @@
 	</span>
 
 </div>
-@if ($response)
+@if ($request_type == 'friendship' && $response)
 @component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
 Aceptar solicitud
 @endcomponent
@@ -32,13 +32,13 @@ Ver Solicitudes en el Evento
 Confirmar Cuenta
 @endcomponent -->
 
-[PolÃ­ticas de privacidad](https://evius.co/privacy) |
-[TÃ©rminos y Condiciones](https://evius.co/terms)
+[Políticas de privacidad](https://evius.co/privacy) |
+[Términos y Condiciones](https://evius.co/terms)
 
 <div style="text-align: center">
 	<span>
-		Recibiste este correo porque estÃ¡s inscrito y/o invitado en un
-		evento gestionado a travÃ©s de Evius.co o te has
+		Recibiste este correo porque estás inscrito y/o invitado en un
+		evento gestionado a través de Evius.co o te has
 		registrado en el portal de Evius.co
 	</span>
 </div>

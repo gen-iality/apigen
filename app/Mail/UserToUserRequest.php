@@ -30,6 +30,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public $response;
     public $email;
     public $link_authenticated;
+    public $request_type;
     /**
      * Create a new message instance.
      *
@@ -110,7 +111,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
      * @return $this
      */
     public function build()
-    {
+    {          
         Log::debug("Construyendo el correo de ticket");
         $gfService = new GoogleFiles();
         $from = $this->event->organizer->name;
