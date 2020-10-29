@@ -326,11 +326,73 @@ class InvitationController extends Controller
         return "Request / response send";
     }
 
-    public function buildRequestMessageBase($data, String $event_id)
-    {
+    
+    public function buildMeetingResponseMessage($data, String $event_id){
+        $request_type = "meeting";
+        $event = Event::find($event_id);
+        $receiver = Attendee::find($data["id_user_requesting"]);
+        $sender = Attendee::find($data["id_user_requested"]);
+        
+        $mail["id_user_requesting"] = $data["id_user_requesting"];
+        $mail["id_user_requested"] = $data["id_user_requested"];
+        $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
+        $mail["sender"] = $event->name;
+        $mail["event_id"] = $event_id;
+
+        if (!empty($data["request_id"])) {
+            $mail["request_id"] = $data["request_id"];
+        } 
+        
+        
+        $datos_usuario = "";
+        $i = 0;
+        foreach ($event->user_properties as $property) {
+            if ($i <= 3) {
+
+                if (isset($receiver->properties[$property->name]) && $receiver->properties[$property->name]) {
+                    $i++;
+                    $datos_usuario .= "<p>{$property->label}: {$receiver->properties[$property->name]}</p>";
+                }
+            }
+        }
+
+        $cuantos = count($event->user_properties);        
+        
+        $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
+        $accepted_message = <<<EOT
+
+        {$receiver->properties["displayName"]} ha aceptado tu solicitud de reunión para el evento {$event->name} <br/>
+
+        <br />
+        {$datos_usuario}
+        <br/>
+        Mostrando {$i} datos de {$cuantos}
+        <br />
+        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
+        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
+<br/>
+        No olvides disfrutar el resto de experiencias del evento.
+EOT;  
+
+
+
+        $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
+        $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de reunión";
+        $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_message;
+        $mail["subject"] = "Respuesta a solicitud de reunión";
+
+        self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+        return "Request / response send";        
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Arrat [request_id,id_user_requesting, id_user_requested ]
+     * @param String $event_id
+     * @return void
+     */
     public function buildMessage($data, String $event_id)
     {
 
@@ -417,18 +479,13 @@ EOT;
         $result->save();
         $response = !empty($mail["request_id"]) ? $mail["request_id"] : null;
 
-        foreach ($mail["mails"] as $key => $email) {
-            Mail::to($email)->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
-            );
-        }
+        // foreach ($mail["mails"] as $key => $email) {
+        //     Mail::to($email)->send(
+        //         new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+        //     );
+        // }
 
         foreach ($mail["mails"] as $key => $email) {
-
-            Mail::to($email)->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
-            );
-
             Mail::to("juan.lopez@mocionsoft.com")->send(
                 new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
             );
