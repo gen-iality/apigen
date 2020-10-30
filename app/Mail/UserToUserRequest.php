@@ -56,7 +56,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
 
         $principal_title = $title;
         $description = $desc;
-
+        $link_authenticated = "";
         //response es el id de la petición ya sea reunión o solicitud de amistad
         if ($response) {
             switch($request_type){
