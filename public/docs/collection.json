@@ -2,11 +2,657 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "cea88a67-3931-450c-b5d5-d32b468bf1f2",
+        "_postman_id": "b13f891c-0f73-429f-800b-50f1bcb9e536",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
     "item": [
+        {
+            "name": "Activity",
+            "description": "\nThe activities within an event are **sessions, talks, lessons or conferences** in which specific topics are discussed.\n\nEach activity has its **date , time and duration**.\n\nThese activities, according to the organizer, can be carried out either in person or virtually.",
+            "item": [
+                {
+                    "name": "_storeMeetingRecording_: endpoint receiving the zoom webhook saves the info on mongo and transfers it to aws s3",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/meetingrecording",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_duplicate_: endpoint destined to the duplication of an activity to english language",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/duplicateactivitie\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "earum",
+                                    "description": "id of the event to which the activities belong."
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "accusantium",
+                                    "description": "id of the activity you want to see."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_indexByHost_: list activities by host",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activitiesbyhost\/:host_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "voluptatibus",
+                                    "description": "id of the event to which the activities belong."
+                                },
+                                {
+                                    "id": "host_id",
+                                    "key": "host_id",
+                                    "value": "quo",
+                                    "description": "id of the host for which you want to filter the activities."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_index_: List of activities",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "eius",
+                                    "description": "id of the event to which the activities belong"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: Create a new activity",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "cupiditate",
+                                    "description": "id of the event in which a new activity is to be created"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"nostrum\",\n    \"subtitle\": \"est\",\n    \"space_id\": \"voluptas\",\n    \"image\": \"nostrum\",\n    \"description\": \"dicta\",\n    \"capacity\": 13\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: View information on a specific activity",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities\/:activity",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_:update an activity specific.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities\/:activity",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "reiciendis",
+                                    "description": "id of the event to which the activities belong."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: Remove the specified activity",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities\/:activity",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "corporis",
+                                    "description": "id of the event to which the activities belong 5dbc9c65d74d5c5853222222"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event_id}\/createmeeting\/{id}",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/createmeeting\/:id",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ActivityAssistant",
+            "description": "",
+            "item": [
+                {
+                    "name": "_index_: List of the activity_assitens",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendees",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "est",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"activity_id\": \"harum\",\n    \"user_id\": \"eum\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: create new record activity_assitant",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendees",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "assumenda",
+                                    "description": "event to which the activity belongs"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"user_id\": \"non\",\n    \"activity_id\": \"quidem\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: view the specific information of an activity_assitant record",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "illum",
+                                    "description": "event to which the activity belongs"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_:Update the specific information of an activity_assitant record",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "et",
+                                    "description": "event to which the activity belongs"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_:Remove the specific register of an activity_assitant record",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "placeat",
+                                    "description": "event to which the activity belongs"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_indexForAdmin_: list the activities and users that will attend from the administrator",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendeesAdmin",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_meIndex_: list of registered activities of the logged-in user",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/me\/events\/:event_id\/activities_attendees",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "totam",
+                                    "description": "event to which the activity belongs"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_checkIn_: status indicating that the user entered the activity",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/activities_attendees\/:id\/check_in",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "accusamus",
+                                    "description": "event to which the activity belongs"
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "molestiae",
+                                    "description": "id of activity_assitant"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_borradorepetidos_: Eliminate duplicate user records in activities",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/borradorepetidos\/activity\/:activity_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "activity_id",
+                                    "key": "activity_id",
+                                    "value": "fugit",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
         {
             "name": "Certificate",
             "description": "En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.",
@@ -33,7 +679,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"occaecati\",\n    \"content\": \"ipsum\",\n    \"background\": \"voluptas\"\n}"
+                            "raw": "{\n    \"name\": \"accusamus\",\n    \"content\": \"commodi\",\n    \"background\": \"ut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -51,7 +697,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "rerum",
+                                    "value": "dolore",
                                     "description": ""
                                 }
                             ]
@@ -97,7 +743,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"dignissimos\",\n    \"content\": \"ad\",\n    \"background\": \"ullam\"\n}"
+                            "raw": "{\n    \"name\": \"doloremque\",\n    \"content\": \"corporis\",\n    \"background\": \"quaerat\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -153,7 +799,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"libero\",\n    \"content\": \"quis\",\n    \"background\": \"fuga\"\n}"
+                            "raw": "{\n    \"name\": \"voluptatem\",\n    \"content\": \"fugit\",\n    \"background\": \"ratione\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -209,7 +855,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"eos\",\n    \"content\": \"voluptatem\",\n    \"background\": \"a\"\n}"
+                            "raw": "{\n    \"name\": \"delectus\",\n    \"content\": \"numquam\",\n    \"background\": \"quod\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -237,7 +883,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"dolorem\",\n    \"content\": \"sunt\",\n    \"background\": \"blanditiis\"\n}"
+                            "raw": "{\n    \"name\": \"molestias\",\n    \"content\": \"sit\",\n    \"background\": \"dolore\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -283,7 +929,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "enim",
+                                    "value": "aperiam",
                                     "description": "id del certificado a actualizar"
                                 }
                             ]
@@ -357,7 +1003,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quidem\",\n    \"content\": \"necessitatibus\",\n    \"background\": \"et\"\n}"
+                            "raw": "{\n    \"name\": \"sunt\",\n    \"content\": \"aut\",\n    \"background\": \"corporis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -413,7 +1059,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"eaque\",\n    \"content\": \"minima\",\n    \"background\": \"et\"\n}"
+                            "raw": "{\n    \"name\": \"minima\",\n    \"content\": \"ut\",\n    \"background\": \"aperiam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -581,7 +1227,7 @@
                             "query": [
                                 {
                                     "key": "id",
-                                    "value": "vitae",
+                                    "value": "libero",
                                     "description": "Exmaple: ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
                                     "disabled": false
                                 }
@@ -674,7 +1320,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "reprehenderit",
+                                    "value": "commodi",
                                     "description": "id del evento"
                                 }
                             ]
@@ -710,7 +1356,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "inventore",
+                                    "value": "nesciunt",
                                     "description": "id del evento a eliminar"
                                 }
                             ]
@@ -802,7 +1448,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "qui",
+                                    "value": "voluptates",
                                     "description": "id del evento"
                                 }
                             ]
@@ -838,7 +1484,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "dolores",
+                                    "value": "totam",
                                     "description": "id del evento a eliminar"
                                 }
                             ]
@@ -900,7 +1546,7 @@
                             "query": [
                                 {
                                     "key": "id",
-                                    "value": "sint",
+                                    "value": "in",
                                     "description": "Exmaple: - ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
                                     "disabled": false
                                 }
@@ -937,7 +1583,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quia",
+                                    "value": "et",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -973,7 +1619,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "aut",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -1009,7 +1655,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ipsam",
+                                    "value": "voluptate",
                                     "description": "id del evento"
                                 }
                             ]
@@ -1099,7 +1745,7 @@
                             "query": [
                                 {
                                     "key": "id",
-                                    "value": "animi",
+                                    "value": "placeat",
                                     "description": "Exmaple: ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
                                     "disabled": false
                                 }
@@ -1170,13 +1816,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "molestias",
+                                    "value": "illum",
                                     "description": "string required"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "rerum",
+                                    "value": "ut",
                                     "description": "string required id de Attendee"
                                 }
                             ]
@@ -1296,7 +1942,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "qui",
+                                    "value": "dolores",
                                     "description": "string required"
                                 }
                             ]
@@ -1314,7 +1960,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"a\",\n    \"name\": \"voluptatem\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"nihil\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"doloribus\",\n    \"name\": \"cum\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"voluptas\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1332,7 +1978,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "mollitia",
+                                    "value": "ad",
                                     "description": "string required"
                                 }
                             ]
@@ -1350,7 +1996,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"eligendi\"\n}"
+                            "raw": "{\n    \"email\": \"ut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1452,7 +2098,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eum",
+                                    "value": "similique",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -1488,7 +2134,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "cupiditate",
+                                    "value": "veritatis",
                                     "description": "string required"
                                 }
                             ]
@@ -1506,7 +2152,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"dolores\",\n    \"name\": \"aliquid\",\n    \"password\": \"eos\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"praesentium\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"suscipit\",\n    \"name\": \"laboriosam\",\n    \"password\": \"qui\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"suscipit\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1580,7 +2226,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quo",
+                                    "value": "ullam",
                                     "description": "string required"
                                 }
                             ]
@@ -1598,7 +2244,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"molestiae\",\n    \"name\": \"itaque\",\n    \"password\": \"alias\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"error\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"rerum\",\n    \"name\": \"omnis\",\n    \"password\": \"ad\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"fuga\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1700,7 +2346,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ullam",
+                                    "value": "temporibus",
                                     "description": "string required"
                                 }
                             ]
@@ -1718,7 +2364,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"debitis\",\n    \"name\": \"molestiae\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"corrupti\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"facilis\",\n    \"name\": \"eos\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"aliquam\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1736,7 +2382,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "autem",
+                                    "value": "beatae",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -1772,7 +2418,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "numquam",
+                                    "value": "repudiandae",
                                     "description": "string required"
                                 }
                             ]
@@ -1790,7 +2436,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"quo\",\n    \"name\": \"voluptate\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"dolorem\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"doloremque\",\n    \"name\": \"iste\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"eos\"\n            }\n        }\n    }\n}"
                         },
                         "description": "Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo agrega al evento especificado",
                         "response": []
@@ -1898,13 +2544,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "esse",
+                                    "value": "est",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "dolore",
+                                    "value": "natus",
                                     "description": ""
                                 }
                             ]
@@ -1940,13 +2586,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "non",
+                                    "value": "consequuntur",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "ea",
+                                    "value": "corporis",
                                     "description": ""
                                 }
                             ]
@@ -1982,13 +2628,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "maiores",
+                                    "value": "ullam",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "velit",
+                                    "value": "et",
                                     "description": "user who accepts or rejects the application"
                                 }
                             ]
@@ -2006,7 +2652,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"response\": \"aliquam\"\n}"
+                            "raw": "{\n    \"response\": \"sint\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2024,13 +2670,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quia",
+                                    "value": "dicta",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "consequatur",
+                                    "value": "perspiciatis",
                                     "description": ""
                                 }
                             ]
@@ -2094,13 +2740,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "laborum",
+                                    "value": "ab",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "architecto",
+                                    "value": "minima",
                                     "description": ""
                                 }
                             ]
@@ -2136,7 +2782,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "impedit",
+                                    "value": "nihil",
                                     "description": ""
                                 }
                             ]
@@ -2172,7 +2818,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "cum",
+                                    "value": "quidem",
                                     "description": ""
                                 }
                             ]
@@ -2190,7 +2836,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id_user_requested\": \"aut\"\n}"
+                            "raw": "{\n    \"id_user_requested\": \"ab\"\n}"
                         },
                         "description": "Enviar solicitud con redirecci\u00f3n a evius",
                         "response": []
@@ -2528,7 +3174,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "repudiandae",
+                                    "value": "quas",
                                     "description": ""
                                 }
                             ]
@@ -2546,7 +3192,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"usersIds\": {\n        \"\": \"saepe\"\n    },\n    \"message\": \"fuga\",\n    \"image\": \"numquam\",\n    \"subject\": \"perferendis\",\n    \"footer\": \"illo\"\n}"
+                            "raw": "{\n    \"usersIds\": {\n        \"\": \"dicta\"\n    },\n    \"message\": \"autem\",\n    \"image\": \"occaecati\",\n    \"subject\": \"similique\",\n    \"footer\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2564,7 +3210,7 @@
                                 {
                                     "id": "eventUser",
                                     "key": "eventUser",
-                                    "value": "consequatur",
+                                    "value": "ratione",
                                     "description": ""
                                 }
                             ]
@@ -2948,7 +3594,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "itaque",
+                                    "value": "dolores",
                                     "description": ""
                                 }
                             ]
@@ -3046,7 +3692,7 @@
                                 {
                                     "id": "uid",
                                     "key": "uid",
-                                    "value": "aut",
+                                    "value": "quam",
                                     "description": "id del usuario"
                                 }
                             ]
@@ -3064,7 +3710,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"aliquid\",\n    \"name\": \"voluptates\",\n    \"auth\": \"excepturi\"\n}"
+                            "raw": "{\n    \"email\": \"provident\",\n    \"name\": \"qui\",\n    \"auth\": \"ipsum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3176,7 +3822,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"enim\",\n    \"name\": \"maiores\"\n}"
+                            "raw": "{\n    \"email\": \"non\",\n    \"name\": \"sunt\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3204,7 +3850,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"minus\",\n    \"name\": \"et\"\n}"
+                            "raw": "{\n    \"email\": \"porro\",\n    \"name\": \"doloremque\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3250,7 +3896,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatibus",
+                                    "value": "harum",
                                     "description": "id del usuario"
                                 }
                             ]
@@ -3348,7 +3994,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "repellendus",
+                                    "value": "quia",
                                     "description": "."
                                 }
                             ]
@@ -3394,7 +4040,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"facilis\",\n    \"name\": \"doloremque\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"est\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"dolore\",\n    \"name\": \"esse\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"vitae\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -3412,13 +4058,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "praesentium",
+                                    "value": "laboriosam",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "molestiae",
+                                    "value": "impedit",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -3436,7 +4082,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"laudantium\",\n    \"name\": \"laborum\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"fuga\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"in\",\n    \"name\": \"ratione\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"et\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -3454,13 +4100,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "libero",
+                                    "value": "vero",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "molestiae",
+                                    "value": "quos",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -3478,7 +4124,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"dolorem\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"nihil\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -3496,13 +4142,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sunt",
+                                    "value": "aut",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "iure",
+                                    "value": "aut",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4438,258 +5084,6 @@
                             "query": []
                         },
                         "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/meetingrecording",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/meetingrecording",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event_id}\/duplicateactivitie\/{id}",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/duplicateactivitie\/:id",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event_id}\/activitiesbyhost\/{host_id}",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activitiesbyhost\/:host_id",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities\/:activity",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities\/:activity",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities\/:activity",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event_id}\/createmeeting\/{id}",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/createmeeting\/:id",
-                            "query": []
-                        },
-                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -6086,230 +6480,6 @@
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendees",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event_id}\/activities_attendees",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendees",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendeesAdmin",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/me\/events\/{event_id}\/activities_attendees",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/me\/events\/:event_id\/activities_attendees",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Undocumented function",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:id\/check_in",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
                             "path": "api\/organizations\/:organization_id\/users",
                             "query": []
                         },
@@ -6596,7 +6766,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "repellat",
+                                    "value": "voluptas",
                                     "description": ""
                                 }
                             ]
@@ -6642,7 +6812,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"minima\"\n}"
+                            "raw": "{\n    \"name\": \"rerum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6950,7 +7120,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quia\"\n}"
+                            "raw": "{\n    \"name\": \"porro\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -7024,7 +7194,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "facilis",
+                                    "value": "itaque",
                                     "description": "id de RoleAttendee"
                                 }
                             ]
@@ -8707,34 +8877,6 @@
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/pdftest",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/borradorepetidos\/activity\/{activity_id}",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/borradorepetidos\/activity\/:activity_id",
                             "query": []
                         },
                         "method": "GET",

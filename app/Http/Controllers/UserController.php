@@ -106,7 +106,17 @@ class UserController extends UserControllerWeb
 
     /**
      * _index_: Listado de usuario resgistrados.
-     *
+     * 
+     * @response {
+     *       "_id": "5b98395ec06586792153148b",
+     *       "email": "otro@gmail.com",
+     *       "name": "otro",
+     *       "lastname": "usuario",
+     *       "departamente": "titirib",
+     *       "uid": "otro@gmail.com",
+     *       "updated_at": "2018-09-11 21:53:34",
+     *       "created_at": "2018-09-11 21:53:34"
+     * }
      * @return \Illuminate\Http\Response
      */
     public function index()

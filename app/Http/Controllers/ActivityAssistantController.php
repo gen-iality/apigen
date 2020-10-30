@@ -21,13 +21,22 @@ use App\evaLib\Services\UserEventService;
 
 
 /**
- * @resource Event
+ * @group  ActivityAssistant
  *
  *
  */
 class ActivityAssistantController extends Controller
 {
 
+    /**
+     * _borradorepetidos_: Eliminate duplicate user records in activities
+     *
+     * @urlParam activity_id
+     * 
+     * @param Request $request
+     * @param [type] $activity_id
+     * @return void
+     */
     public function borradorepetidos(Request $request, $activity_id ){
 
         $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->get();  
@@ -49,7 +58,7 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * _fillassitantsbug_:sisplay the specified resource.
      *
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
@@ -72,8 +81,27 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display a listing of the resource.
-     *
+     * _index_: List of the activity_assitans 
+     * 
+     * @urlParam event_id 
+     * 
+     * @bodyParam activity_id string required
+     * @bodyParam user_id string required
+     * 
+     * @response {
+     *       "_id": "5f6250852399da563131d375",
+     *       "user_id": "5b89bf37c065864f7b5bf80e",
+     *       "activity_id": "5f613dc32bda9a05204b63b6",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-09-16 17:51:01",
+     *       "created_at": "2020-09-16 17:51:01",
+     *       "user": {
+     *           "_id": "5b89bf37c065864f7b5bf80e",
+     *           "email": "correo@mocionsoft.com",
+     *           "name": "User Name"
+     *        }
+     * }
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
@@ -98,7 +126,7 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * _indexForAdmin_: list the activities and users that will attend from the administrator
      *
      * @return \Illuminate\Http\Response
      */
@@ -135,14 +163,27 @@ class ActivityAssistantController extends Controller
         }
         return JsonResource::collection($activity_attendees);
     }
-    public function meIndex(Request $request, $event_id)
+
+    /**
+     * _meIndex_: list of registered activities of the logged-in user
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * 
+     * @param string $event_id
+     * @return void
+     */
+    public function meIndex($event_id)
     {   
         $user = auth()->user();      
         return JsonResource::collection(ActivityAssistant::where("user_id", $user->_id)->paginate(config('app.page_size')));
     }
-    /**<
-     * Store a newly created resource in storage.
+    /**
+     * _store_: create new record activity_assitant
      *
+     * @urlParam event_id required event to which the activity belongs
+     * 
+     * @bodyParam user_id required id of the user who signs up for the activity
+     * @bodyParam activity_id id of the activity to which the user subscribes
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -182,6 +223,11 @@ class ActivityAssistantController extends Controller
         return $activityAssistant;
     }
 
+    /**
+     * _reduceAvailability_:this endpoint allows you to discount the availability of each activity for each user who signs up.
+     *
+     * @return void
+     */
     private function  reduceAvailability(){
         $activity_id      = $data["activity_id"];
         $model = ActivityAssistant::where("activity_id",$activity_id)->first();
@@ -212,6 +258,7 @@ class ActivityAssistantController extends Controller
         }
     }
     
+
     public function deleteAssistant(Request $request, $event_id,$activity_id)
     {
         $data = $request->json()->all();
@@ -311,11 +358,13 @@ class ActivityAssistantController extends Controller
             $remainingCapacity->save(); //guarda el resultado   
 
         return $modelreplace;*/
-     }
+    }
 
     /**
-     * Display the specified resource.
-     *
+     * _show_: view the specific information of an activity_assitant record
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id de activity_assitant
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
      */
@@ -328,8 +377,11 @@ class ActivityAssistantController extends Controller
 
     }
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_:Update the specific information of an activity_assitant record
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id de activity_assitant
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
@@ -361,8 +413,11 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * _destroy_:Remove the specific register of an activity_assitant record
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id of activity_assitant to remove
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
@@ -373,11 +428,14 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * Undocumented function
-     *
+     * _checkIn_: status indicating that the user entered the activity
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id of activity_assitant
+     * 
      * @param Request $request
-     * @param [type] $event_id
-     * @param [type] $id
+     * @param string $event_id
+     * @param string $id
      * @return void
      */
     public function checkIn(Request $request , $event_id, $id)

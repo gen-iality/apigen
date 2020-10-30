@@ -34,6 +34,24 @@ class EventController extends Controller
      * 
      * @queryParam id Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
+     * @response {          
+     *          "_id": "5e9cae6bd74d5c2f5f0c61f2",
+     *          "name": "Edificio Izarra 3",
+     *          "datetime_from": "2020-10-16 18:00:00",
+     *          "datetime_to": "2020-10-16 21:00:00",
+     *          "picture": "https://storage.googleapis.com/herba-images/evius/events/TdFX2bAdJenUnFoF9EwyH2LQYq8Fnk3yqUhwgQVQ.jpeg",
+     *          "venue": "Bogotá",
+     *          "location": [],
+     *          "visibility": "PUBLIC",
+     *          "description": "<p><strong>INSTRUCCIONES DE ASAMBLEA GENERAL ORDINARIA DE COPROPIETARIOS NO PRESENCIAL DE FORMA VIRTUAL</strong></p><p><br></p><p>Con el fin de fijar normas claras que permitan que la reunión de ASAMBLEA GENERAL ORDINARIA NO PRESENCIAL programada para el viernes 16 octubre a las 6:00 p.m. se desarrolle con orden, respeto, democracia y legalidad nos permitimos presentar y poner a consideración de la asamblea el procedimiento:</p><p><br></p><p>\t<strong>PROCEDIMIENTO PARA EL DESARROLLO DE LA ASAMBLEA:</strong></p>
+     *          "user_properties": [{}],
+     *          "author_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *          "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
+     *          "event_type_id": "5bf47226754e2317e4300b6a",
+     *          "updated_at": "2020-10-21 14:06:19",
+     *          "created_at": "2020-04-19 20:02:51",
+     * 
+     * }
      * 
      * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
      * @param Illuminate\Http\Request $request [injected]

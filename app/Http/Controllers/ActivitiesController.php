@@ -21,15 +21,48 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
 /**
- * @resource Event
+ * @group Activity
+ * 
+ * The activities within an event are **sessions, talks, lessons or conferences** in which specific topics are discussed.
+ *
+ * Each activity has its **date , time and duration**.
+ *
+ * These activities, according to the organizer, can be carried out either in person or virtually.
  */
 class ActivitiesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * _index_: List of activities
+     * 
+     * @urlParam event_id required id of the event to which the activities belong
+     * 
+     * @response {
+     *          "_id": "5e9cbf60d74d5c2fba01ae26",
+     *       "name": "Elección del presidente y secretario de la Asamblea Extraordinaria",
+     *       "subtitle": null,
+     *       "datetime_start": "2020-05-28 08:00",
+     *       "datetime_end": "2020-05-28 08:00",
+     *       "space_id": "5e9cb013d74d5c2fba01ae23",
+     *       "image": null,
+     *       "description": null,
+     *       "capacity": 0,
+     *       "activity_categories_ids": [
+     *           "5e9cbef8d74d5c2f6a02a3c7"
+     *       ],
+     *      "space": {
+     *          "_id": "5e9cb013d74d5c2fba01ae23",
+     *          "name": "Salón Comunal",
+     *          "event_id": "5e9cae6bd74d5c2f5f0c61f2",
+     *          "updated_at": "2020-04-19 20:09:55",
+     *          "created_at": "2020-04-19 20:09:55",
+     *          "5e9cb013d74d5c2fba01ae23": [
+     *              null
+     *          ]
+     *      }
+     * }
+     * 
      * @return \Illuminate\Http\Response
-     */
-
+    */
     public function index(Request $request, $event_id)
     {
         $data = $request->json()->all();
@@ -45,7 +78,17 @@ class ActivitiesController extends Controller
         }
     }   
 
-    public function indexByHost(Request $request, $event_id, $host_id)
+    /**
+     * _indexByHost_: list activities by host
+     * 
+     * @urlParam event_id required id of the event to which the activities belong. 
+     * @urlParam host_id required id of the host for which you want to filter the activities. 
+     *
+     * @param string $event_id
+     * @param string $host_id
+     * @return void
+     */
+    public function indexByHost($event_id, $host_id)
     {
         return JsonResource::collection(
             Activities::where("event_id", $event_id)->where('host_ids', $host_id)->paginate(config('app.page_size'))
@@ -54,7 +97,17 @@ class ActivitiesController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * _store_: Create a new activity
+     * 
+     * @urlParam event_id id of the event in which a new activity is to be created
+     * 
+     * @bodyParam name string required
+     * @bodyParam subtitle string required     
+     * @bodyParam space_id string required
+     * @bodyParam image string
+     * @bodyParam description string required
+     * @bodyParam capacity integer required
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -127,7 +180,13 @@ class ActivitiesController extends Controller
         return $request;
     }
 
-    // endpoint que recibe el webhook de zoom guarda la info en mongo y la traspasa a s3 de aws
+    
+    /**
+     * _storeMeetingRecording_: endpoint receiving the zoom webhook saves the info on mongo and transfers it to aws s3
+     *
+     * @param Request $request
+     * @return void
+     */
     public function storeMeetingRecording(Request $request)
     {
         $data = $request->json()->all();
@@ -187,7 +246,12 @@ class ActivitiesController extends Controller
         return $activity;
 
     }
-    // endpoint destinado a indexar las conferencias del s3 de aws
+    /**
+     * _indexConferences_ :endpoint for indexing aws s3 conferences
+     *
+     * @param Request $request
+     * @return void
+     */
     public function indexConferences(Request $request)
     {
         $credentials = new Credentials(config('app.aws_key'),config('app.aws_secret'));
@@ -203,10 +267,11 @@ class ActivitiesController extends Controller
     }
     
     /**
-     * Display the specified resource.
+     * _show_: View information on a specific activity
+     * 
+     * @urlParam id required id of the activity you want to see. 
      *
      * @param  \App\Activities  $Activities
-     * @return \Illuminate\Http\Response
      */
     public function show($event_id, $id)
     {
@@ -214,8 +279,16 @@ class ActivitiesController extends Controller
         return $activity;
     }
 
-
-    // endpoint destinado a la duplicacion de una actividad a idioma ingles
+    /**
+     * _duplicate_: endpoint destined to the duplication of an activity to english language
+     * 
+     * @urlParam event_id required id of the event to which the activities belong. 
+     * @urlParam id required id of the activity you want to see. 
+     * 
+     * @param string $event_id
+     * @param [string $id
+     * @return void
+     */
     public function duplicate($event_id, $id)
     {
         $activities_in_es = Activities::findOrFail($id);
@@ -236,8 +309,11 @@ class ActivitiesController extends Controller
         return $activity;
     }
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_:update an activity specific.
+     * 
+     * @urlParam event_id required id of the event to which the activities belong. 
+     * @urlParam id required id of the activity you want to update. 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Activities  $Activities
      * @return \Illuminate\Http\Response
@@ -278,12 +354,15 @@ class ActivitiesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * _destroy_: Remove the specified activity
+     * 
+     * @urlParam event_id required id of the event to which the activities belong 5dbc9c65d74d5c5853222222
+     * @urlParam id required id of the activity you want to destroy 5dbc99bad74d5c5822691111
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $event_id, $id)
+    public function destroy($event_id, $id)
     {
         $Activities = Activities::findOrFail($id);
         return (string) $Activities->delete();
