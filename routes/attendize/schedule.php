@@ -7,7 +7,7 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
  * SPACES
  ****************/
 
-Route::get ('events/{event_id}/spaces', 'SpaceController@index')->middleware('cacheResponse');
+Route::get ('events/{event_id}/spaces', 'SpaceController@index');
 Route::post ('events/{event_id}/spaces', 'SpaceController@store');
 Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show');
 Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
