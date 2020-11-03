@@ -41,11 +41,12 @@ class AccessTokenGuard implements Guard
 
         // retrieve via token
         $token = $this->_getTokenForRequest();
-
+        
         if (!empty($token)) {
             // the token was found, how you want to pass?
             $user = $this->provider->retrieveByToken($this->storageKey, $token);
         } else {
+            return $this->user = null;
             throw new AuthenticationException("No token provided. Unauthenticated");
         }
 

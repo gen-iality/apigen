@@ -127,9 +127,7 @@ Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController
  * organizations
  ****************/
 Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
-
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
-
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
@@ -138,6 +136,14 @@ Route::group(
         // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
     }
 );
+
+
+/****************
+ * meetings
+ ****************/
+Route::apiResource('networking', 'MeetingsController');
+Route::get('event/{event_id}/meeting/{meeting_id}/accept', 'MeetingsController@accept');
+Route::get('event/{event_id}/meeting/{meeting_id}/reject', 'MeetingsController@reject');
 
 /***************
  * SENDCONTENT  TEST CONTROLLER
@@ -224,7 +230,11 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 /***************
  * categories
  ****************/
-Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
+        Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+    }
+);
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
@@ -285,7 +295,11 @@ Route::apiResource('certificate', 'CertificateController');
 /****************
  * eventTypes
  ****************/
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+    }
+);
 
 Route::group(
     ['middleware' => 'auth:token'], function () {

@@ -73,14 +73,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/earum/duplicateactivitie/accusantium" \
+    "http://localhost/api/events/iure/duplicateactivitie/deleniti" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/earum/duplicateactivitie/accusantium"
+    "http://localhost/api/events/iure/duplicateactivitie/deleniti"
 );
 
 let headers = {
@@ -117,14 +117,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/voluptatibus/activitiesbyhost/quo" \
+    -G "http://localhost/api/events/quis/activitiesbyhost/commodi" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/voluptatibus/activitiesbyhost/quo"
+    "http://localhost/api/events/quis/activitiesbyhost/commodi"
 );
 
 let headers = {
@@ -141,11 +141,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -168,14 +168,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/eius/activities" \
+    -G "http://localhost/api/events/accusamus/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eius/activities"
+    "http://localhost/api/events/accusamus/activities"
 );
 
 let headers = {
@@ -239,16 +239,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/cupiditate/activities" \
+    "http://localhost/api/events/laborum/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"nostrum","subtitle":"est","space_id":"voluptas","image":"nostrum","description":"dicta","capacity":13}'
+    -d '{"name":"quas","subtitle":"quam","space_id":"optio","image":"rerum","description":"alias","capacity":18}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/cupiditate/activities"
+    "http://localhost/api/events/laborum/activities"
 );
 
 let headers = {
@@ -257,12 +257,12 @@ let headers = {
 };
 
 let body = {
-    "name": "nostrum",
-    "subtitle": "est",
-    "space_id": "voluptas",
-    "image": "nostrum",
-    "description": "dicta",
-    "capacity": 13
+    "name": "quas",
+    "subtitle": "quam",
+    "space_id": "optio",
+    "image": "rerum",
+    "description": "alias",
+    "capacity": 18
 }
 
 fetch(url, {
@@ -327,11 +327,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -353,14 +353,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/reiciendis/activities/1" \
+    "http://localhost/api/events/id/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/reiciendis/activities/1"
+    "http://localhost/api/events/id/activities/1"
 );
 
 let headers = {
@@ -399,14 +399,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/corporis/activities/1" \
+    "http://localhost/api/events/assumenda/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/corporis/activities/1"
+    "http://localhost/api/events/assumenda/activities/1"
 );
 
 let headers = {
@@ -477,22 +477,22 @@ fetch(url, {
 
 
 <!-- START_eca15b751105fbb8f3ff752e6f4428a7 -->
-## _index_: List of the activity_assitens
+## _index_: List of the activity_assitans
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/est/activities_attendees" \
+    -G "http://localhost/api/events/neque/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"harum","user_id":"eum"}'
+    -d '{"activity_id":"temporibus","user_id":"numquam"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/est/activities_attendees"
+    "http://localhost/api/events/neque/activities_attendees"
 );
 
 let headers = {
@@ -501,8 +501,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "harum",
-    "user_id": "eum"
+    "activity_id": "temporibus",
+    "user_id": "numquam"
 }
 
 fetch(url, {
@@ -556,16 +556,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/assumenda/activities_attendees" \
+    "http://localhost/api/events/voluptatem/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":"non","activity_id":"quidem"}'
+    -d '{"user_id":"minima","activity_id":"et"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/assumenda/activities_attendees"
+    "http://localhost/api/events/voluptatem/activities_attendees"
 );
 
 let headers = {
@@ -574,8 +574,8 @@ let headers = {
 };
 
 let body = {
-    "user_id": "non",
-    "activity_id": "quidem"
+    "user_id": "minima",
+    "activity_id": "et"
 }
 
 fetch(url, {
@@ -612,14 +612,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/illum/activities_attendees/1" \
+    -G "http://localhost/api/events/magni/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/illum/activities_attendees/1"
+    "http://localhost/api/events/magni/activities_attendees/1"
 );
 
 let headers = {
@@ -636,11 +636,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -663,14 +663,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/et/activities_attendees/1" \
+    "http://localhost/api/events/suscipit/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/et/activities_attendees/1"
+    "http://localhost/api/events/suscipit/activities_attendees/1"
 );
 
 let headers = {
@@ -709,14 +709,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/placeat/activities_attendees/1" \
+    "http://localhost/api/events/esse/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/placeat/activities_attendees/1"
+    "http://localhost/api/events/esse/activities_attendees/1"
 );
 
 let headers = {
@@ -777,11 +777,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -798,14 +798,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/totam/activities_attendees" \
+    -G "http://localhost/api/me/events/ut/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/totam/activities_attendees"
+    "http://localhost/api/me/events/ut/activities_attendees"
 );
 
 let headers = {
@@ -822,11 +822,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -848,14 +848,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/accusamus/activities_attendees/molestiae/check_in" \
+    "http://localhost/api/events/consequatur/activities_attendees/quam/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/accusamus/activities_attendees/molestiae/check_in"
+    "http://localhost/api/events/consequatur/activities_attendees/quam/check_in"
 );
 
 let headers = {
@@ -892,14 +892,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/borradorepetidos/activity/fugit" \
+    -G "http://localhost/api/borradorepetidos/activity/exercitationem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/borradorepetidos/activity/fugit"
+    "http://localhost/api/borradorepetidos/activity/exercitationem"
 );
 
 let headers = {
@@ -916,11 +916,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -948,7 +948,7 @@ curl -X POST \
     "http://localhost/api/generatecertificate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"accusamus","content":"commodi","background":"ut"}'
+    -d '{"name":"quo","content":"alias","background":"ut"}'
 
 ```
 
@@ -963,8 +963,8 @@ let headers = {
 };
 
 let body = {
-    "name": "accusamus",
-    "content": "commodi",
+    "name": "quo",
+    "content": "alias",
     "background": "ut"
 }
 
@@ -998,14 +998,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/dolore/certificates" \
+    -G "http://localhost/api/events/ullam/certificates" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/dolore/certificates"
+    "http://localhost/api/events/ullam/certificates"
 );
 
 let headers = {
@@ -1026,7 +1026,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -1051,7 +1051,7 @@ curl -X POST \
     "http://localhost/api/events/1/certificates" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"doloremque","content":"corporis","background":"quaerat"}'
+    -d '{"name":"dolor","content":"voluptatem","background":"nobis"}'
 
 ```
 
@@ -1066,9 +1066,9 @@ let headers = {
 };
 
 let body = {
-    "name": "doloremque",
-    "content": "corporis",
-    "background": "quaerat"
+    "name": "dolor",
+    "content": "voluptatem",
+    "background": "nobis"
 }
 
 fetch(url, {
@@ -1129,7 +1129,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -1154,7 +1154,7 @@ curl -X PUT \
     "http://localhost/api/events/1/certificates/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatem","content":"fugit","background":"ratione"}'
+    -d '{"name":"inventore","content":"voluptates","background":"non"}'
 
 ```
 
@@ -1169,9 +1169,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatem",
-    "content": "fugit",
-    "background": "ratione"
+    "name": "inventore",
+    "content": "voluptates",
+    "background": "non"
 }
 
 fetch(url, {
@@ -1257,7 +1257,7 @@ curl -X POST \
     "http://localhost/api/certificates" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"delectus","content":"numquam","background":"quod"}'
+    -d '{"name":"expedita","content":"rem","background":"minima"}'
 
 ```
 
@@ -1272,9 +1272,9 @@ let headers = {
 };
 
 let body = {
-    "name": "delectus",
-    "content": "numquam",
-    "background": "quod"
+    "name": "expedita",
+    "content": "rem",
+    "background": "minima"
 }
 
 fetch(url, {
@@ -1310,7 +1310,7 @@ curl -X PUT \
     "http://localhost/api/certificates/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"molestias","content":"sit","background":"dolore"}'
+    -d '{"name":"cupiditate","content":"vero","background":"corporis"}'
 
 ```
 
@@ -1325,9 +1325,9 @@ let headers = {
 };
 
 let body = {
-    "name": "molestias",
-    "content": "sit",
-    "background": "dolore"
+    "name": "cupiditate",
+    "content": "vero",
+    "background": "corporis"
 }
 
 fetch(url, {
@@ -1410,14 +1410,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/certificates/aperiam" \
+    "http://localhost/api/certificates/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/certificates/aperiam"
+    "http://localhost/api/certificates/et"
 );
 
 let headers = {
@@ -1477,11 +1477,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -1501,7 +1501,7 @@ curl -X POST \
     "http://localhost/api/certificate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"sunt","content":"aut","background":"corporis"}'
+    -d '{"name":"ullam","content":"porro","background":"cumque"}'
 
 ```
 
@@ -1516,9 +1516,9 @@ let headers = {
 };
 
 let body = {
-    "name": "sunt",
-    "content": "aut",
-    "background": "corporis"
+    "name": "ullam",
+    "content": "porro",
+    "background": "cumque"
 }
 
 fetch(url, {
@@ -1575,11 +1575,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -1604,7 +1604,7 @@ curl -X PUT \
     "http://localhost/api/certificate/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"minima","content":"ut","background":"aperiam"}'
+    -d '{"name":"minus","content":"qui","background":"occaecati"}'
 
 ```
 
@@ -1619,9 +1619,9 @@ let headers = {
 };
 
 let body = {
-    "name": "minima",
-    "content": "ut",
-    "background": "aperiam"
+    "name": "minus",
+    "content": "qui",
+    "background": "occaecati"
 }
 
 fetch(url, {
@@ -1733,11 +1733,14 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (400):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "errors": [
+        "El campo user id es obligatorio.",
+        "El campo game es obligatorio."
+    ]
 }
 ```
 
@@ -1853,11 +1856,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -1871,15 +1874,15 @@ fetch(url, {
 
 
 <!-- START_742a1cbd4a274c7269f0db99a704ff41 -->
-## _index:_ Listado de todos los eventos
+## _index:_ Listing of all events
 
-Este método permite la consulta dinámica de cualquier propiedad a través de la URL utilizando los servicios FilterQuery.
+This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events?id=libero" \
+    -G "http://localhost/api/events?filteredBy=%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1890,7 +1893,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "libero",
+    "filteredBy": "[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1912,7 +1915,32 @@ fetch(url, {
 > Example response (200):
 
 ```json
-null
+{
+    "_id": "5e9cae6bd74d5c2f5f0c61f2",
+    "name": "Edificio Izarra 3",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "https:\/\/storage.googleapis.com\/herba-images\/evius\/events\/TdFX2bAdJenUnFoF9EwyH2LQYq8Fnk3yqUhwgQVQ.jpeg",
+    "venue": "Bogotá",
+    "location": [],
+    "visibility": "PUBLIC",
+    "user_properties": [
+        {
+            "name": "nombredeempresa",
+            "mandatory": true,
+            "visibleByContacts": false,
+            "visibleByAdmin": false,
+            "label": "Nombre de empresa",
+            "description": null,
+            "order_weight": "12"
+        }
+    ],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c2",
+    "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a",
+    "updated_at": "2020-10-21 14:06:19",
+    "created_at": "2020-04-19 20:02:51"
+}
 ```
 
 ### HTTP Request
@@ -1922,14 +1950,14 @@ null
 
 Parameter | Status | Description
 --------- | ------- | ------- | -----------
-    `id` |  optional  | Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+    `filteredBy` |  optional  | optional filter parameters
 
 <!-- END_742a1cbd4a274c7269f0db99a704ff41 -->
 
 <!-- START_de3413bf02c9bb71627fa96e1c1c409f -->
-## _store_: Crear nuevo evento.
+## _store_: Create new event of the organizer.
 
-Hay una relación de evento especial llamada organizador Su relación polimórfica. Relacionada con el usuario y el organizador de la organización: Podría ser "yo" (usuario actual) o una organización Id.
+There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
 
 > Example request:
 
@@ -1937,7 +1965,9 @@ Hay una relación de evento especial llamada organizador Su relación polimórfi
 curl -X POST \
     "http://localhost/api/events" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"doloremque","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+
 ```
 
 ```javascript
@@ -1950,9 +1980,21 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "\"Programming course\"",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "doloremque",
+    "visibility": "PUBLIC",
+    "user_properties": [],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -1963,11 +2005,22 @@ fetch(url, {
 ### HTTP Request
 `POST api/events`
 
-
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | name to event
+        `datetime_from` | datetime |  required  | date and time of start of the event
+        `datetime_to` | datetime |  required  | date and time of the end of the event
+        `picture` | string |  optional  | image of the event
+        `visibility` | string |  required  | restricts access for registered users or any unregistered user
+        `user_properties` | array |  optional  | user registration properties
+        `author_id` | string |  required  | 
+        `event_type_id` | string |  required  | 
+    
 <!-- END_de3413bf02c9bb71627fa96e1c1c409f -->
 
 <!-- START_379a3beb17bbb91528d80d8507f69655 -->
-## _show_: Mostrar información de un evento especifico.
+## _show_: display information about a specific event.
 
 > Example request:
 
@@ -1997,11 +2050,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -2012,25 +2065,27 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  optional  | requires id del evento
+    `id` |  required  | id of the event you want to consult
 
 <!-- END_379a3beb17bbb91528d80d8507f69655 -->
 
 <!-- START_d16967fd1d3d935666f7e8112a1a4451 -->
-## _update_: Actualizar información de un evento especifico.
+## _update_: update information on a specific event.
 
 > Example request:
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/commodi" \
+    "http://localhost/api/events/temporibus" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"praesentium","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/commodi"
+    "http://localhost/api/events/temporibus"
 );
 
 let headers = {
@@ -2038,9 +2093,21 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "\"Programming course\"",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "praesentium",
+    "visibility": "PUBLIC",
+    "user_properties": [],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a"
+}
+
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2057,25 +2124,36 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event` |  required  | id del evento
-
+    `event` |  required  | id of the event to be updated
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  optional  | name to event
+        `datetime_from` | datetime |  optional  | date and time of start of the event
+        `datetime_to` | datetime |  optional  | date and time of the end of the event
+        `picture` | string |  optional  | image of the event
+        `visibility` | string |  optional  | restricts access for registered users or any unregistered user
+        `user_properties` | array |  optional  | user registration properties
+        `author_id` | string |  optional  | 
+        `event_type_id` | string |  optional  | 
+    
 <!-- END_d16967fd1d3d935666f7e8112a1a4451 -->
 
 <!-- START_379a30feb2949828b5f95efbfd7649c3 -->
-## _destroy_: Eliminar evento.
+## _destroy_: delete event.
 
 > Example request:
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/nesciunt" \
+    "http://localhost/api/events/eum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/nesciunt"
+    "http://localhost/api/events/eum"
 );
 
 let headers = {
@@ -2100,12 +2178,12 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event` |  required  | id del evento a eliminar
+    `event` |  required  | id of the event to be eliminated
 
 <!-- END_379a30feb2949828b5f95efbfd7649c3 -->
 
 <!-- START_aec83efbad5ec636ec1b29352c041932 -->
-## Display a listing of the resource.
+## _currentUserindex_: list of events of the organizer
 
 > Example request:
 
@@ -2139,7 +2217,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -2150,9 +2228,9 @@ fetch(url, {
 <!-- END_aec83efbad5ec636ec1b29352c041932 -->
 
 <!-- START_2478aef777186232e8bca32fdf09efe3 -->
-## _store_: Crear nuevo evento.
+## _store_: Create new event of the organizer.
 
-Hay una relación de evento especial llamada organizador Su relación polimórfica. Relacionada con el usuario y el organizador de la organización: Podría ser "yo" (usuario actual) o una organización Id.
+There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
 
 > Example request:
 
@@ -2160,7 +2238,9 @@ Hay una relación de evento especial llamada organizador Su relación polimórfi
 curl -X POST \
     "http://localhost/api/user/events" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"amet","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+
 ```
 
 ```javascript
@@ -2173,9 +2253,21 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "\"Programming course\"",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "amet",
+    "visibility": "PUBLIC",
+    "user_properties": [],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2186,24 +2278,37 @@ fetch(url, {
 ### HTTP Request
 `POST api/user/events`
 
-
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | name to event
+        `datetime_from` | datetime |  required  | date and time of start of the event
+        `datetime_to` | datetime |  required  | date and time of the end of the event
+        `picture` | string |  optional  | image of the event
+        `visibility` | string |  required  | restricts access for registered users or any unregistered user
+        `user_properties` | array |  optional  | user registration properties
+        `author_id` | string |  required  | 
+        `event_type_id` | string |  required  | 
+    
 <!-- END_2478aef777186232e8bca32fdf09efe3 -->
 
 <!-- START_26fd0ed6db820ca28bb674ba1d761a2e -->
-## _update_: Actualizar información de un evento especifico.
+## _update_: update information on a specific event.
 
 > Example request:
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/user/events/voluptates" \
+    "http://localhost/api/user/events/a" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"nostrum","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/user/events/voluptates"
+    "http://localhost/api/user/events/a"
 );
 
 let headers = {
@@ -2211,9 +2316,21 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "\"Programming course\"",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "nostrum",
+    "visibility": "PUBLIC",
+    "user_properties": [],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a"
+}
+
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2230,25 +2347,36 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event` |  required  | id del evento
-
+    `event` |  required  | id of the event to be updated
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  optional  | name to event
+        `datetime_from` | datetime |  optional  | date and time of start of the event
+        `datetime_to` | datetime |  optional  | date and time of the end of the event
+        `picture` | string |  optional  | image of the event
+        `visibility` | string |  optional  | restricts access for registered users or any unregistered user
+        `user_properties` | array |  optional  | user registration properties
+        `author_id` | string |  optional  | 
+        `event_type_id` | string |  optional  | 
+    
 <!-- END_26fd0ed6db820ca28bb674ba1d761a2e -->
 
 <!-- START_ed1c02a70ed814c85d464077d0854e00 -->
-## _destroy_: Eliminar evento.
+## _destroy_: delete event.
 
 > Example request:
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/user/events/totam" \
+    "http://localhost/api/user/events/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/user/events/totam"
+    "http://localhost/api/user/events/aut"
 );
 
 let headers = {
@@ -2273,12 +2401,12 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event` |  required  | id del evento a eliminar
+    `event` |  required  | id of the event to be eliminated
 
 <!-- END_ed1c02a70ed814c85d464077d0854e00 -->
 
 <!-- START_f59d4cbbf9176342893379adb70dc1a5 -->
-## Display a listing of the resource.
+## _currentUserindex_: list of events of the organizer
 
 > Example request:
 
@@ -2312,7 +2440,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -2323,13 +2451,13 @@ fetch(url, {
 <!-- END_f59d4cbbf9176342893379adb70dc1a5 -->
 
 <!-- START_7488288e859ba4fe861385339c81371a -->
-## _beforeToday_: Listado de los próximos eventos
+## _beforeToday_: list of upcoming events
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/eventsbeforetoday?id=in" \
+    -G "http://localhost/api/eventsbeforetoday?filteredBy=%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -2340,7 +2468,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "in",
+    "filteredBy": "[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -2359,11 +2487,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -2374,25 +2502,25 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -----------
-    `id` |  required  | Exmaple: - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+    `filteredBy` |  optional  | optional filter parameters
 
 <!-- END_7488288e859ba4fe861385339c81371a -->
 
 <!-- START_08180c1785ee9a816b6fa5cdf32ece34 -->
-## _EventbyUsers_: Busqueda de eventos por usuario organizador.
+## _EventbyUsers_: search of events by user organizer.
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/users/et/events" \
+    -G "http://localhost/api/users/quis/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/et/events"
+    "http://localhost/api/users/quis/events"
 );
 
 let headers = {
@@ -2409,11 +2537,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -2429,20 +2557,20 @@ Parameter | Status | Description
 <!-- END_08180c1785ee9a816b6fa5cdf32ece34 -->
 
 <!-- START_84149f81b1537e6bcfc498d67a92d685 -->
-## _EventbyOrganizations_: Busqueda de eventos por udsuario organizador.
+## _EventbyOrganizations_: search of events by user organizer.
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/organizations/aut/events" \
+    -G "http://localhost/api/organizations/officiis/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/organizations/aut/events"
+    "http://localhost/api/organizations/officiis/events"
 );
 
 let headers = {
@@ -2459,11 +2587,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -2474,35 +2602,30 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  required  | organiser_id
+    `id` |  required  | organizer_id
 
 <!-- END_84149f81b1537e6bcfc498d67a92d685 -->
 
 <!-- START_04c928fb7ec045888fb969784cc3eb7e -->
-## AddUserProperty:
-Añadir la propiedad de usuario dinámico al evento
+## _addUserProperty_: Adding dynamic user property to the event
 
-Cada propiedad dinámica debe estar compuesta por los siguientes parámetros:
-
-* texto del nombre
-* requerido booleano - este campo no se utiliza todavía para nada
-* escriba el texto - este campo no se utiliza todavía para nada
-
-Una vez creadas las propiedades de los eventos dinámicos de usuario se pueden obtener directamente de $evento->propiedades de usuario.
-Las propiedades dinámicas son devueltas dentro de cada UserEvent como las propiedades normales
+Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.
+The dynamic properties are returned within each UserEvent as the normal properties.
 
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/user/events/voluptate/addUserProperty" \
+    "http://localhost/api/user/events/iusto/addUserProperty" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"name":"harum","label":"consectetur","mandatory":true,"visibleByAdmin":true,"visibleByContacts":true,"description":"eveniet"}'
+
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/user/events/voluptate/addUserProperty"
+    "http://localhost/api/user/events/iusto/addUserProperty"
 );
 
 let headers = {
@@ -2510,9 +2633,19 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "harum",
+    "label": "consectetur",
+    "mandatory": true,
+    "visibleByAdmin": true,
+    "visibleByContacts": true,
+    "description": "eveniet"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2528,11 +2661,20 @@ fetch(url, {
 Parameter | Status | Description
 --------- | ------- | ------- | -------
     `id` |  required  | id del evento
-
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | field name in database
+        `label` | string |  required  | 
+        `mandatory` | boolean |  required  | indicates if the field is mandatory or optional
+        `visibleByAdmin` | boolean |  required  | 
+        `visibleByContacts` | boolean |  required  | 
+        `description` | string |  optional  | 
+    
 <!-- END_04c928fb7ec045888fb969784cc3eb7e -->
 
 <!-- START_92b328319f49439288d157a4c5e241e1 -->
-## Show the &#039;Create Event&#039; Modal
+## _showCreateEvent_ : show the &#039;Create Event&#039; Modal
 
 > Example request:
 
@@ -2540,12 +2682,319 @@ Parameter | Status | Description
 curl -X GET \
     -G "http://localhost/events/create" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"modal_id":"inventore","organiser_id":"amet"}'
+
 ```
 
 ```javascript
 const url = new URL(
     "http://localhost/events/create"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "modal_id": "inventore",
+    "organiser_id": "amet"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET events/create`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `modal_id` | strng |  required  | 
+        `organiser_id` | strng |  required  | 
+    
+<!-- END_92b328319f49439288d157a4c5e241e1 -->
+
+<!-- START_421dd5ccdba33e6e944a6d5f27b46bb3 -->
+## _postCreateEvent_: Create a new event.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/events/create" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"culpa","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/events/create"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "\"Programming course\"",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "culpa",
+    "visibility": "PUBLIC",
+    "user_properties": [],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST events/create`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  optional  | name to event
+        `datetime_from` | datetime |  optional  | date and time of start of the event
+        `datetime_to` | datetime |  optional  | date and time of the end of the event
+        `picture` | string |  optional  | image of the event
+        `visibility` | string |  optional  | restricts access for registered users or any unregistered user
+        `user_properties` | array |  optional  | user registration properties
+        `author_id` | string |  optional  | 
+        `event_type_id` | string |  optional  | 
+    
+<!-- END_421dd5ccdba33e6e944a6d5f27b46bb3 -->
+
+<!-- START_c1aa27515bf03f12d5698af59e31585a -->
+## _index:_ Listing of all events
+
+This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/test?filteredBy=%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/test"
+);
+
+let params = {
+    "filteredBy": "[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "_id": "5e9cae6bd74d5c2f5f0c61f2",
+    "name": "Edificio Izarra 3",
+    "datetime_from": "2020-10-16 18:00:00",
+    "datetime_to": "2020-10-16 21:00:00",
+    "picture": "https:\/\/storage.googleapis.com\/herba-images\/evius\/events\/TdFX2bAdJenUnFoF9EwyH2LQYq8Fnk3yqUhwgQVQ.jpeg",
+    "venue": "Bogotá",
+    "location": [],
+    "visibility": "PUBLIC",
+    "user_properties": [
+        {
+            "name": "nombredeempresa",
+            "mandatory": true,
+            "visibleByContacts": false,
+            "visibleByAdmin": false,
+            "label": "Nombre de empresa",
+            "description": null,
+            "order_weight": "12"
+        }
+    ],
+    "author_id": "5e9caaa1d74d5c2f6a02a3c2",
+    "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
+    "event_type_id": "5bf47226754e2317e4300b6a",
+    "updated_at": "2020-10-21 14:06:19",
+    "created_at": "2020-04-19 20:02:51"
+}
+```
+
+### HTTP Request
+`GET test`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `filteredBy` |  optional  | optional filter parameters
+
+<!-- END_c1aa27515bf03f12d5698af59e31585a -->
+
+#EventUser
+
+
+
+Handles the relation bewteeen user and event.  It handles user booking into an event
+Account relation to an event is one of the fundamental aspects of this platform
+Most of the user functionality is executed under "Attendee" model and not directly under Account, because is an events platform.
+
+
+<p style="border: 1px solid #DDD">
+Attendee has one user though user_id
+<br> and one event though event_id
+<br> This relation has states that represent the booking status of the user into the event
+</p>
+<!-- START_741efed688409cc5b0c2673b73da037b -->
+## __index:__ Display all the EventUsers of an event
+
+ORDERING PROBLEM WITH CAPITAL LETTERS
+Collections must be created with case-insensitive default collation
+
+Example: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
+https://docs.mongodb.com/manual/core/index-case-insensitive/
+https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/1/eventusers?filteredBy=%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/1/eventusers"
+);
+
+let params = {
+    "filteredBy": "[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "_id": "5f9055454e6953792a54fd43",
+    "state_id": "5b0efc411d18160bce9bc706",
+    "checked_in": false,
+    "rol_id": "5afaf644500a7104f77189cd",
+    "properties": {
+        "names": "Burke Maldonado",
+        "email": "vygufiqe@mailinator.com",
+        "password": null,
+        "displayName": "Burke Maldonado"
+    },
+    "event_id": "5e9cae6bd74d5c2f5f0c61f2",
+    "account_id": "5f9055454e6953792a54fd42",
+    "updated_at": "2020-10-21 15:35:33",
+    "created_at": "2020-10-21 15:35:33",
+    "rol": null,
+    "user": {
+        "_id": "5f9055454e6953792a54fd42",
+        "email": "vygufiqe@mailinator.com",
+        "names": "Burke Maldonado",
+        "displayName": "Burke Maldonado",
+        "confirmation_code": "mSCaqtrRujVotLrG",
+        "api_token": "gEXBxQHw5NW1BOjrC97If7stp9jODtpuLiW6MCeaZ45mUOMcfu20dJMwJedQ",
+        "uid": "UOlROJM9hASVfUsbZofEubXrM5j2",
+        "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlM2FlZWUyYjVjMDhjMGMyODFhNGZmN2..",
+        "refresh_token": "AG8BCndDGp2u4dbDaA0Q0QvfUfFCJd55iJoOrgJDr84lhXXpd4B34a2Bk8Y8UWl..",
+        "updated_at": "2020-10-21 15:35:34",
+        "created_at": "2020-10-21 15:35:33"
+    },
+    "ticket": null
+}
+```
+
+### HTTP Request
+`GET api/events/{event_id}/eventusers`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `filteredBy` |  optional  | optional filter parameters
+
+<!-- END_741efed688409cc5b0c2673b73da037b -->
+
+<!-- START_a365aa3932cace4bde297c80cef75050 -->
+## _Show:_ Dconsult an EventUser by assistant id
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/events/voluptatem/eventusers/dolorem" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/events/voluptatem/eventusers/dolorem"
 );
 
 let headers = {
@@ -2562,82 +3011,42 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
 ### HTTP Request
-`GET events/create`
+`GET api/events/{event_id}/eventusers/{id}`
 
+#### URL Parameters
 
-<!-- END_92b328319f49439288d157a4c5e241e1 -->
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+    `id` |  optional  | string required id Attendee
 
-<!-- START_421dd5ccdba33e6e944a6d5f27b46bb3 -->
-## _postCreateEvent_: Crear un nuevo evento.
+<!-- END_a365aa3932cace4bde297c80cef75050 -->
 
-> Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/events/create" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/events/create"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST events/create`
-
-
-<!-- END_421dd5ccdba33e6e944a6d5f27b46bb3 -->
-
-<!-- START_c1aa27515bf03f12d5698af59e31585a -->
-## _index:_ Listado de todos los eventos
-
-Este método permite la consulta dinámica de cualquier propiedad a través de la URL utilizando los servicios FilterQuery.
+<!-- START_64ba4676dd80d161a4fc09b243f63433 -->
+## _searchInEvent_: search user within the event to verify if you are registered
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/test?id=placeat" \
+    -G "http://localhost/api/events/et/searchinevent" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/test"
+    "http://localhost/api/events/et/searchinevent"
 );
-
-let params = {
-    "id": "placeat",
-};
-Object.keys(params)
-    .forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -2660,165 +3069,19 @@ null
 ```
 
 ### HTTP Request
-`GET test`
-
-#### Query Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -----------
-    `id` |  optional  | Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-
-<!-- END_c1aa27515bf03f12d5698af59e31585a -->
-
-#EventUser.
-
-
-<!-- START_741efed688409cc5b0c2673b73da037b -->
-## __index:__ Display all the EventUsers of an event
-
-this methods allows dynamic quering by any property via URL using the services FilterQuery.
-Exmaple:
- - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/eventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/eventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/eventusers`
-
-
-<!-- END_741efed688409cc5b0c2673b73da037b -->
-
-<!-- START_a365aa3932cace4bde297c80cef75050 -->
-## __Show:__ Display an Attendee by id
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/illum/eventusers/ut" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/illum/eventusers/ut"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/eventusers/{id}`
+`GET api/events/{event_id}/searchinevent`
 
 #### URL Parameters
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
     `event_id` |  optional  | string required
-    `id` |  optional  | string required id de Attendee
-
-<!-- END_a365aa3932cace4bde297c80cef75050 -->
-
-<!-- START_64ba4676dd80d161a4fc09b243f63433 -->
-## api/events/{event_id}/searchinevent
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/events/1/searchinevent" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/events/1/searchinevent"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/searchinevent`
-
 
 <!-- END_64ba4676dd80d161a4fc09b243f63433 -->
 
 <!-- START_f4ee022bcd35d6d38fadedb070189787 -->
-## api/events/myevents
+## _indexByEventUser_: list of events by logged in user
+
 > Example request:
 
 ```bash
@@ -2847,11 +3110,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -2862,19 +3125,20 @@ fetch(url, {
 <!-- END_f4ee022bcd35d6d38fadedb070189787 -->
 
 <!-- START_314ab10189ffcbcaaab1ed19eb9dd21f -->
-## api/eventusers/event/{event_id}/user/{user_id}
+## _ByUserInEvent_ : list of users by events
+
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/eventusers/event/1/user/1" \
+    -G "http://localhost/api/eventusers/event/eos/user/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/eventusers/event/1/user/1"
+    "http://localhost/api/eventusers/event/eos/user/1"
 );
 
 let headers = {
@@ -2891,38 +3155,42 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
 ### HTTP Request
 `GET api/eventusers/event/{event_id}/user/{user_id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
 
 <!-- END_314ab10189ffcbcaaab1ed19eb9dd21f -->
 
 <!-- START_017b9c2694857efdd5c16863bc1aaea7 -->
 ## _SubscribeUserToEventAndSendEmail_: Register user to an event and send confirmation email
-Registrar usuario a un evento y enviar correo de confirmación
 
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/dolores/adduserwithemailvalidation" \
+    "http://localhost/api/events/nisi/adduserwithemailvalidation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"doloribus","name":"cum","other_params,":{"":{"":{"":"voluptas"}}}}'
+    -d '{"email":"ea","name":"qui","password":"eum","other_params,":{"":{"":{"":"voluptatibus"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/dolores/adduserwithemailvalidation"
+    "http://localhost/api/events/nisi/adduserwithemailvalidation"
 );
 
 let headers = {
@@ -2931,12 +3199,13 @@ let headers = {
 };
 
 let body = {
-    "email": "doloribus",
-    "name": "cum",
+    "email": "ea",
+    "name": "qui",
+    "password": "eum",
     "other_params,": {
         "": {
             "": {
-                "": "voluptas"
+                "": "voluptatibus"
             }
         }
     }
@@ -2966,28 +3235,28 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `email` | email |  required  | field
         `name` | string |  required  | 
+        `password` | string |  required  | 
         `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
     
 <!-- END_017b9c2694857efdd5c16863bc1aaea7 -->
 
 <!-- START_cd20adcf5c26e47f21f72d0301544be1 -->
 ## _ChangeUserPassword_: Change user password
-Cambiar contraseña del usuario
 
 > Example request:
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/ad/changeUserPassword" \
+    "http://localhost/api/events/molestiae/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"ut"}'
+    -d '{"email":"corrupti"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ad/changeUserPassword"
+    "http://localhost/api/events/molestiae/changeUserPassword"
 );
 
 let headers = {
@@ -2996,7 +3265,7 @@ let headers = {
 };
 
 let body = {
-    "email": "ut"
+    "email": "corrupti"
 }
 
 fetch(url, {
@@ -3026,7 +3295,8 @@ Parameter | Type | Status | Description
 <!-- END_cd20adcf5c26e47f21f72d0301544be1 -->
 
 <!-- START_6b56a32b833284ebacc99706a28295f7 -->
-## api/eventusers/{event_id}/tranfereventuser/{event_user}
+## _transferEventuserAndEnrollToActivity_ : transfer Eventuser And Enroll To Activity
+
 > Example request:
 
 ```bash
@@ -3063,7 +3333,8 @@ fetch(url, {
 <!-- END_6b56a32b833284ebacc99706a28295f7 -->
 
 <!-- START_6b9ba84498ac309ef3cc779bb6c6279f -->
-## api/events/withstatus/{id}
+## _updateWithStatus_: update With Status
+
 > Example request:
 
 ```bash
@@ -3096,11 +3367,17 @@ fetch(url, {
 ### HTTP Request
 `PUT api/events/withstatus/{id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
 
 <!-- END_6b9ba84498ac309ef3cc779bb6c6279f -->
 
 <!-- START_62f0c5655d8d2562857a8516c1822886 -->
-## api/eventUsers/{id}/withStatus
+## _updateWithStatus_: update With Status
+
 > Example request:
 
 ```bash
@@ -3133,24 +3410,29 @@ fetch(url, {
 ### HTTP Request
 `PUT api/eventUsers/{id}/withStatus`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
 
 <!-- END_62f0c5655d8d2562857a8516c1822886 -->
 
 <!-- START_897c85bf5d7fd99f7b7f7aa4e4dd66f2 -->
-## __CheckIn:__ Checks In an existent Attendee to the related event
+## __CheckIn:__ checks In an existent Attendee to the related event
 
 > Example request:
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/eventUsers/similique/checkin" \
+    "http://localhost/api/eventUsers/sed/checkin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/eventUsers/similique/checkin"
+    "http://localhost/api/eventUsers/sed/checkin"
 );
 
 let headers = {
@@ -3181,22 +3463,21 @@ Parameter | Status | Description
 
 <!-- START_f4a1ecb28e0dc1d6236e81e49658f03c -->
 ## _createUserAndAddtoEvent_:Create user and add it to an event
-Crear un usuario y añadirlo a un evento
 
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/eventUsers/createUserAndAddtoEvent/veritatis" \
+    "http://localhost/api/eventUsers/createUserAndAddtoEvent/ut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"suscipit","name":"laboriosam","password":"qui","other_params,":{"":{"":{"":"suscipit"}}}}'
+    -d '{"email":"et","name":"eum","password":"eum","other_params,":{"":{"":{"":"ex"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/eventUsers/createUserAndAddtoEvent/veritatis"
+    "http://localhost/api/eventUsers/createUserAndAddtoEvent/ut"
 );
 
 let headers = {
@@ -3205,13 +3486,13 @@ let headers = {
 };
 
 let body = {
-    "email": "suscipit",
-    "name": "laboriosam",
-    "password": "qui",
+    "email": "et",
+    "name": "eum",
+    "password": "eum",
     "other_params,": {
         "": {
             "": {
-                "": "suscipit"
+                "": "ex"
             }
         }
     }
@@ -3248,7 +3529,8 @@ Parameter | Type | Status | Description
 <!-- END_f4a1ecb28e0dc1d6236e81e49658f03c -->
 
 <!-- START_8584edbef5108e01985db1d291b64c2e -->
-## api/eventUsers/bookEventUsers/{event}
+## _bookEventUsers_: book Event Users
+
 > Example request:
 
 ```bash
@@ -3285,19 +3567,20 @@ fetch(url, {
 <!-- END_8584edbef5108e01985db1d291b64c2e -->
 
 <!-- START_249ab20f97f221e40760858747d9b006 -->
-## api/events/{event_id}/testeventusers
+## _testCreateUserAndAddtoEvent_: test Create User And Add to Event
+
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/1/testeventusers" \
+    "http://localhost/api/events/qui/testeventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/testeventusers"
+    "http://localhost/api/events/qui/testeventusers"
 );
 
 let headers = {
@@ -3318,27 +3601,31 @@ fetch(url, {
 ### HTTP Request
 `POST api/events/{event_id}/testeventusers`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
 
 <!-- END_249ab20f97f221e40760858747d9b006 -->
 
 <!-- START_eed9d2ac9ae0f6e3669f6613fa1d351c -->
 ## _createUserAndAddtoEvent_:Create user and add it to an event
-Crear un usuario y añadirlo a un evento
 
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/ullam/eventusers" \
+    "http://localhost/api/events/provident/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"rerum","name":"omnis","password":"ad","other_params,":{"":{"":{"":"fuga"}}}}'
+    -d '{"email":"dolor","name":"aperiam","password":"voluptate","other_params,":{"":{"":{"":"maxime"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ullam/eventusers"
+    "http://localhost/api/events/provident/eventusers"
 );
 
 let headers = {
@@ -3347,13 +3634,13 @@ let headers = {
 };
 
 let body = {
-    "email": "rerum",
-    "name": "omnis",
-    "password": "ad",
+    "email": "dolor",
+    "name": "aperiam",
+    "password": "voluptate",
     "other_params,": {
         "": {
             "": {
-                "": "fuga"
+                "": "maxime"
             }
         }
     }
@@ -3390,19 +3677,20 @@ Parameter | Type | Status | Description
 <!-- END_eed9d2ac9ae0f6e3669f6613fa1d351c -->
 
 <!-- START_7ea69d252da861fe068b097ff9fb8ec9 -->
-## api/me/eventusers/event/{event_id}
+## _indexByUserInEvent_: list of users by events
+
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/eventusers/event/1" \
+    -G "http://localhost/api/me/eventusers/event/cupiditate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/eventusers/event/1"
+    "http://localhost/api/me/eventusers/event/cupiditate"
 );
 
 let headers = {
@@ -3419,34 +3707,40 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
 ### HTTP Request
 `GET api/me/eventusers/event/{event_id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
 
 <!-- END_7ea69d252da861fe068b097ff9fb8ec9 -->
 
 <!-- START_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
-## api/me/events/{event_id}/eventusers
+## _meInEvent_: user information logged into the event
+
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/1/eventusers" \
+    -G "http://localhost/api/me/events/debitis/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/1/eventusers"
+    "http://localhost/api/me/events/debitis/eventusers"
 );
 
 let headers = {
@@ -3463,32 +3757,40 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
 ### HTTP Request
 `GET api/me/events/{event_id}/eventusers`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
 
 <!-- END_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
 
 <!-- START_7d2c50077b648a794a56934c47fae532 -->
 ## __index:__ Display all the EventUsers of an event
 
-this methods allows dynamic quering by any property via URL using the services FilterQuery.
-Exmaple:
- - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+ORDERING PROBLEM WITH CAPITAL LETTERS
+Collections must be created with case-insensitive default collation
+
+Example: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
+https://docs.mongodb.com/manual/core/index-case-insensitive/
+https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/1/eventUsers" \
+    -G "http://localhost/api/events/1/eventUsers?filteredBy=%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -3498,6 +3800,12 @@ const url = new URL(
     "http://localhost/api/events/1/eventUsers"
 );
 
+let params = {
+    "filteredBy": "[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -3512,37 +3820,70 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (200):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "_id": "5f9055454e6953792a54fd43",
+    "state_id": "5b0efc411d18160bce9bc706",
+    "checked_in": false,
+    "rol_id": "5afaf644500a7104f77189cd",
+    "properties": {
+        "names": "Burke Maldonado",
+        "email": "vygufiqe@mailinator.com",
+        "password": null,
+        "displayName": "Burke Maldonado"
+    },
+    "event_id": "5e9cae6bd74d5c2f5f0c61f2",
+    "account_id": "5f9055454e6953792a54fd42",
+    "updated_at": "2020-10-21 15:35:33",
+    "created_at": "2020-10-21 15:35:33",
+    "rol": null,
+    "user": {
+        "_id": "5f9055454e6953792a54fd42",
+        "email": "vygufiqe@mailinator.com",
+        "names": "Burke Maldonado",
+        "displayName": "Burke Maldonado",
+        "confirmation_code": "mSCaqtrRujVotLrG",
+        "api_token": "gEXBxQHw5NW1BOjrC97If7stp9jODtpuLiW6MCeaZ45mUOMcfu20dJMwJedQ",
+        "uid": "UOlROJM9hASVfUsbZofEubXrM5j2",
+        "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlM2FlZWUyYjVjMDhjMGMyODFhNGZmN2..",
+        "refresh_token": "AG8BCndDGp2u4dbDaA0Q0QvfUfFCJd55iJoOrgJDr84lhXXpd4B34a2Bk8Y8UWl..",
+        "updated_at": "2020-10-21 15:35:34",
+        "created_at": "2020-10-21 15:35:33"
+    },
+    "ticket": null
 }
 ```
 
 ### HTTP Request
 `GET api/events/{event_id}/eventUsers`
 
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `filteredBy` |  optional  | optional filter parameters
 
 <!-- END_7d2c50077b648a794a56934c47fae532 -->
 
 <!-- START_882953c7fc55a0465ff69cdc398811be -->
-## __Update:__ Update the specified resource in storage.
+## _Update_:update a specific assistant
 
 > Example request:
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/temporibus/eventusers/1" \
+    "http://localhost/api/events/autem/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"facilis","name":"eos","other_params,":{"":{"":{"":"aliquam"}}}}'
+    -d '{"email":"libero","name":"ut","other_params,":{"":{"":{"":"quia"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/temporibus/eventusers/1"
+    "http://localhost/api/events/autem/eventusers/1"
 );
 
 let headers = {
@@ -3551,12 +3892,12 @@ let headers = {
 };
 
 let body = {
-    "email": "facilis",
-    "name": "eos",
+    "email": "libero",
+    "name": "ut",
     "other_params,": {
         "": {
             "": {
-                "": "aliquam"
+                "": "quia"
             }
         }
     }
@@ -3592,20 +3933,20 @@ Parameter | Type | Status | Description
 <!-- END_882953c7fc55a0465ff69cdc398811be -->
 
 <!-- START_8229080007df704aa1e43dbfa7bf3ea8 -->
-## __delete:__ Remove the specified resource from storage.
+## __delete:__ remove a specific attendee from an event.
 
 > Example request:
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/1/eventusers/beatae" \
+    "http://localhost/api/events/1/eventusers/at" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/eventusers/beatae"
+    "http://localhost/api/events/1/eventusers/at"
 );
 
 let headers = {
@@ -3630,29 +3971,28 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
+    `eventId` |  optional  | string required
     `id` |  optional  | string required id Attendee to checkin into the event
 
 <!-- END_8229080007df704aa1e43dbfa7bf3ea8 -->
 
 <!-- START_8cc5dbbd6d1dd06913d7bbb6ce8cec8d -->
-## __createUserViaUrl:__ Tries to create a new user from provided data and then add that user to specified event
-
-Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo agrega al evento especificado
+## _createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event
 
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/repudiandae/eventusersbyurl" \
+    "http://localhost/api/events/officia/eventusersbyurl" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"doloremque","name":"iste","other_params,":{"":{"":{"":"eos"}}}}'
+    -d '{"email":"praesentium","name":"quis","other_params,":{"":{"":{"":"praesentium"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/repudiandae/eventusersbyurl"
+    "http://localhost/api/events/officia/eventusersbyurl"
 );
 
 let headers = {
@@ -3661,12 +4001,12 @@ let headers = {
 };
 
 let body = {
-    "email": "doloremque",
-    "name": "iste",
+    "email": "praesentium",
+    "name": "quis",
     "other_params,": {
         "": {
             "": {
-                "": "eos"
+                "": "praesentium"
             }
         }
     }
@@ -3701,19 +4041,20 @@ Parameter | Type | Status | Description
 <!-- END_8cc5dbbd6d1dd06913d7bbb6ce8cec8d -->
 
 <!-- START_49dfc5f0a26b6a7a13efa07e31d9e131 -->
-## api/events/{event_id}/sendemailtoallusers
+## _sendQrToUsers_: send Qr To Users.
+
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/1/sendemailtoallusers" \
+    "http://localhost/api/events/aperiam/sendemailtoallusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/sendemailtoallusers"
+    "http://localhost/api/events/aperiam/sendemailtoallusers"
 );
 
 let headers = {
@@ -3734,11 +4075,16 @@ fetch(url, {
 ### HTTP Request
 `POST api/events/{event_id}/sendemailtoallusers`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
 
 <!-- END_49dfc5f0a26b6a7a13efa07e31d9e131 -->
 
 <!-- START_b517d383c710e2dea5f2e97ab7bb8b43 -->
-## _meEvents:_ Listado de eventos incritos del usuario logueado.
+## _meEvents:_ list of registered events of the logged in user.
 
 > Example request:
 
@@ -3772,7 +4118,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -3815,11 +4161,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -3836,14 +4182,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/est/indexinvitations/natus" \
+    -G "http://localhost/api/events/consequatur/indexinvitations/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/est/indexinvitations/natus"
+    "http://localhost/api/events/consequatur/indexinvitations/aut"
 );
 
 let headers = {
@@ -3860,11 +4206,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -3887,14 +4233,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/consequuntur/indexinvitationsrecieved/corporis" \
+    -G "http://localhost/api/events/praesentium/indexinvitationsrecieved/illum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/consequuntur/indexinvitationsrecieved/corporis"
+    "http://localhost/api/events/praesentium/indexinvitationsrecieved/illum"
 );
 
 let headers = {
@@ -3911,11 +4257,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -3938,16 +4284,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/ullam/acceptordecline/et" \
+    "http://localhost/api/events/corporis/acceptordecline/dicta" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"response":"sint"}'
+    -d '{"response":"doloribus"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ullam/acceptordecline/et"
+    "http://localhost/api/events/corporis/acceptordecline/dicta"
 );
 
 let headers = {
@@ -3956,7 +4302,7 @@ let headers = {
 };
 
 let body = {
-    "response": "sint"
+    "response": "doloribus"
 }
 
 fetch(url, {
@@ -3993,14 +4339,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/dicta/contactlist/perspiciatis" \
+    -G "http://localhost/api/events/ut/contactlist/cupiditate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/dicta/contactlist/perspiciatis"
+    "http://localhost/api/events/ut/contactlist/cupiditate"
 );
 
 let headers = {
@@ -4017,11 +4363,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -4081,14 +4427,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/ab/contactlist/minima" \
+    "http://localhost/api/events/aliquam/contactlist/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ab/contactlist/minima"
+    "http://localhost/api/events/aliquam/contactlist/et"
 );
 
 let headers = {
@@ -4125,14 +4471,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/nihil/invitation" \
+    -G "http://localhost/api/events/qui/invitation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/nihil/invitation"
+    "http://localhost/api/events/qui/invitation"
 );
 
 let headers = {
@@ -4149,11 +4495,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -4177,16 +4523,16 @@ Enviar solicitud con redirección a evius
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/quidem/invitation" \
+    "http://localhost/api/events/laboriosam/invitation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"id_user_requested":"ab"}'
+    -d '{"id_user_requested":"qui"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quidem/invitation"
+    "http://localhost/api/events/laboriosam/invitation"
 );
 
 let headers = {
@@ -4195,7 +4541,7 @@ let headers = {
 };
 
 let body = {
-    "id_user_requested": "ab"
+    "id_user_requested": "qui"
 }
 
 fetch(url, {
@@ -4255,11 +4601,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -4381,11 +4727,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -4426,11 +4772,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -4614,7 +4960,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -4695,13 +5041,6 @@ fetch(url, {
 ```
 
 
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
 
 ### HTTP Request
 `GET api/rsvp/test`
@@ -4717,16 +5056,16 @@ Enviar RSVP a los usuarios en un evento, tomando usersIds[] en solicitud para fi
 
 ```bash
 curl -X POST \
-    "http://localhost/api/rsvp/sendeventrsvp/quas" \
+    "http://localhost/api/rsvp/sendeventrsvp/quod" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"usersIds":{"":"dicta"},"message":"autem","image":"occaecati","subject":"similique","footer":"et"}'
+    -d '{"usersIds":{"":"beatae"},"message":"molestiae","image":"asperiores","subject":"molestiae","footer":"quam"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/sendeventrsvp/quas"
+    "http://localhost/api/rsvp/sendeventrsvp/quod"
 );
 
 let headers = {
@@ -4736,12 +5075,12 @@ let headers = {
 
 let body = {
     "usersIds": {
-        "": "dicta"
+        "": "beatae"
     },
-    "message": "autem",
-    "image": "occaecati",
-    "subject": "similique",
-    "footer": "et"
+    "message": "molestiae",
+    "image": "asperiores",
+    "subject": "molestiae",
+    "footer": "quam"
 }
 
 fetch(url, {
@@ -4781,14 +5120,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/rsvp/confirmrsvp/ratione" \
+    -G "http://localhost/api/rsvp/confirmrsvp/cum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/confirmrsvp/ratione"
+    "http://localhost/api/rsvp/confirmrsvp/cum"
 );
 
 let headers = {
@@ -4805,11 +5144,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -4854,11 +5193,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5087,11 +5426,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5170,11 +5509,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5323,14 +5662,14 @@ Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogan
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/sync/firestore/dolores" \
+    -G "http://localhost/api/sync/firestore/qui" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/sync/firestore/dolores"
+    "http://localhost/api/sync/firestore/qui"
 );
 
 let headers = {
@@ -5347,11 +5686,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5414,11 +5753,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5463,11 +5802,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5487,16 +5826,16 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/users/verifyAccount/quam" \
+    "http://localhost/api/users/verifyAccount/incidunt" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"provident","name":"qui","auth":"ipsum"}'
+    -d '{"email":"a","name":"odit","auth":"voluptas"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/verifyAccount/quam"
+    "http://localhost/api/users/verifyAccount/incidunt"
 );
 
 let headers = {
@@ -5505,9 +5844,9 @@ let headers = {
 };
 
 let body = {
-    "email": "provident",
-    "name": "qui",
-    "auth": "ipsum"
+    "email": "a",
+    "name": "odit",
+    "auth": "voluptas"
 }
 
 fetch(url, {
@@ -5569,12 +5908,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -5666,11 +6003,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5695,7 +6032,7 @@ curl -X POST \
     "http://localhost/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"non","name":"sunt"}'
+    -d '{"email":"voluptatem","name":"est"}'
 
 ```
 
@@ -5710,8 +6047,8 @@ let headers = {
 };
 
 let body = {
-    "email": "non",
-    "name": "sunt"
+    "email": "voluptatem",
+    "name": "est"
 }
 
 fetch(url, {
@@ -5746,7 +6083,7 @@ curl -X PUT \
     "http://localhost/api/users/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"porro","name":"doloremque"}'
+    -d '{"email":"et","name":"reprehenderit"}'
 
 ```
 
@@ -5761,8 +6098,8 @@ let headers = {
 };
 
 let body = {
-    "email": "porro",
-    "name": "doloremque"
+    "email": "et",
+    "name": "reprehenderit"
 }
 
 fetch(url, {
@@ -5844,14 +6181,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/confirmEmail/harum" \
+    -G "http://localhost/api/confirmEmail/non" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/confirmEmail/harum"
+    "http://localhost/api/confirmEmail/non"
 );
 
 let headers = {
@@ -5868,11 +6205,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -5922,7 +6259,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -5980,14 +6317,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/quia/userproperties" \
+    -G "http://localhost/api/events/atque/userproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quia/userproperties"
+    "http://localhost/api/events/atque/userproperties"
 );
 
 let headers = {
@@ -6004,11 +6341,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6033,7 +6370,7 @@ curl -X POST \
     "http://localhost/api/events/1/userproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"dolore","name":"esse","other_params,":{"":{"":{"":"vitae"}}}}'
+    -d '{"email":"laboriosam","name":"necessitatibus","other_params,":{"":{"":{"":"est"}}}}'
 
 ```
 
@@ -6048,12 +6385,12 @@ let headers = {
 };
 
 let body = {
-    "email": "dolore",
-    "name": "esse",
+    "email": "laboriosam",
+    "name": "necessitatibus",
     "other_params,": {
         "": {
             "": {
-                "": "vitae"
+                "": "est"
             }
         }
     }
@@ -6089,16 +6426,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/laboriosam/userproperties/impedit" \
+    -G "http://localhost/api/events/ratione/userproperties/dolore" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"in","name":"ratione","other_params,":{"":{"":{"":"et"}}}}'
+    -d '{"email":"vel","name":"quidem","other_params,":{"":{"":{"":"aut"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/laboriosam/userproperties/impedit"
+    "http://localhost/api/events/ratione/userproperties/dolore"
 );
 
 let headers = {
@@ -6107,12 +6444,12 @@ let headers = {
 };
 
 let body = {
-    "email": "in",
-    "name": "ratione",
+    "email": "vel",
+    "name": "quidem",
     "other_params,": {
         "": {
             "": {
-                "": "et"
+                "": "aut"
             }
         }
     }
@@ -6128,11 +6465,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6161,16 +6498,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/vero/userproperties/quos" \
+    "http://localhost/api/events/cum/userproperties/ducimus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"other_params,":{"":{"":{"":"nihil"}}}}'
+    -d '{"other_params,":{"":{"":{"":"quae"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/vero/userproperties/quos"
+    "http://localhost/api/events/cum/userproperties/ducimus"
 );
 
 let headers = {
@@ -6182,7 +6519,7 @@ let body = {
     "other_params,": {
         "": {
             "": {
-                "": "nihil"
+                "": "quae"
             }
         }
     }
@@ -6222,14 +6559,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/aut/userproperties/aut" \
+    "http://localhost/api/events/sit/userproperties/vero" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/aut/userproperties/aut"
+    "http://localhost/api/events/sit/userproperties/vero"
 );
 
 let headers = {
@@ -6293,11 +6630,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6376,11 +6713,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6496,11 +6833,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6579,11 +6916,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6740,11 +7077,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6823,11 +7160,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6945,11 +7282,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -6990,11 +7327,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7073,11 +7410,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7196,11 +7533,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7279,11 +7616,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7439,11 +7776,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7522,11 +7859,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7645,11 +7982,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7728,11 +8065,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7851,11 +8188,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -7934,11 +8271,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8057,11 +8394,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8140,11 +8477,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8261,11 +8598,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8306,11 +8643,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8389,11 +8726,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8510,11 +8847,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8555,11 +8892,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8638,11 +8975,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8761,11 +9098,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -8844,11 +9181,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9079,11 +9416,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9123,11 +9460,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9167,13 +9504,6 @@ fetch(url, {
 ```
 
 
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
 
 ### HTTP Request
 `GET api/test/queue`
@@ -9212,11 +9542,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9256,11 +9586,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9300,11 +9630,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9344,11 +9674,12 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "status": 500,
+    "message": "Error: Tremendo"
 }
 ```
 
@@ -9388,11 +9719,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9432,11 +9763,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9477,11 +9808,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9522,13 +9853,6 @@ fetch(url, {
 ```
 
 
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
 
 ### HTTP Request
 `GET api/generatorQr/{id}`
@@ -9603,11 +9927,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9647,11 +9971,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9660,6 +9984,287 @@ fetch(url, {
 
 
 <!-- END_e3cf9cc35163eea18b0500dea24447d3 -->
+
+<!-- START_f83165bdc9e7bd83cc05bf48b67e1ca4 -->
+## api/networking
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/networking" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/networking"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/networking`
+
+
+<!-- END_f83165bdc9e7bd83cc05bf48b67e1ca4 -->
+
+<!-- START_63846e2f75df2bfc36c2844eae5137ec -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/networking" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/networking"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/networking`
+
+
+<!-- END_63846e2f75df2bfc36c2844eae5137ec -->
+
+<!-- START_48b3311d8e416f59b34f89d683680af6 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/networking/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/networking/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/networking/{networking}`
+
+
+<!-- END_48b3311d8e416f59b34f89d683680af6 -->
+
+<!-- START_abd89f9a0db6882325df11f403826cd5 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/networking/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/networking/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/networking/{networking}`
+
+`PATCH api/networking/{networking}`
+
+
+<!-- END_abd89f9a0db6882325df11f403826cd5 -->
+
+<!-- START_cc0c5a287108e6e52ff2ac8cd80ba019 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/networking/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/networking/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/networking/{networking}`
+
+
+<!-- END_cc0c5a287108e6e52ff2ac8cd80ba019 -->
+
+<!-- START_c249f3da33ed51025402608bc86ac27d -->
+## Accepts a meeting
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/event/1/meeting/1/accept" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/event/1/meeting/1/accept"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "Model doesn't exists"
+}
+```
+
+### HTTP Request
+`GET api/event/{event_id}/meeting/{meeting_id}/accept`
+
+
+<!-- END_c249f3da33ed51025402608bc86ac27d -->
+
+<!-- START_3990319437dd359bb4d9dbea7044cf8e -->
+## Rejects a meeting
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/event/1/meeting/1/reject" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/event/1/meeting/1/reject"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "Model doesn't exists"
+}
+```
+
+### HTTP Request
+`GET api/event/{event_id}/meeting/{meeting_id}/reject`
+
+
+<!-- END_3990319437dd359bb4d9dbea7044cf8e -->
 
 <!-- START_5311daf9c1595e9d9e1570e62c42f532 -->
 ## Display a listing of the resource.
@@ -9698,7 +10303,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -9828,7 +10433,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -9907,11 +10512,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -9952,11 +10557,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10089,14 +10694,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/voluptas/rolesattendees" \
+    -G "http://localhost/api/events/velit/rolesattendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/voluptas/rolesattendees"
+    "http://localhost/api/events/velit/rolesattendees"
 );
 
 let headers = {
@@ -10113,11 +10718,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10142,7 +10747,7 @@ curl -X POST \
     "http://localhost/api/events/1/rolesattendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"rerum"}'
+    -d '{"name":"harum"}'
 
 ```
 
@@ -10157,7 +10762,7 @@ let headers = {
 };
 
 let body = {
-    "name": "rerum"
+    "name": "harum"
 }
 
 fetch(url, {
@@ -10212,11 +10817,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10350,11 +10955,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10433,11 +11038,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10555,11 +11160,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10605,11 +11210,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10634,7 +11239,7 @@ curl -X POST \
     "http://localhost/api/rolesattendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"porro"}'
+    -d '{"name":"laudantium"}'
 
 ```
 
@@ -10649,7 +11254,7 @@ let headers = {
 };
 
 let body = {
-    "name": "porro"
+    "name": "laudantium"
 }
 
 fetch(url, {
@@ -10768,14 +11373,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/rolesattendees/itaque" \
+    "http://localhost/api/rolesattendees/libero" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rolesattendees/itaque"
+    "http://localhost/api/rolesattendees/libero"
 );
 
 let headers = {
@@ -10835,11 +11440,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -10880,11 +11485,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -11041,11 +11646,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -11124,11 +11729,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -11247,11 +11852,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -11292,11 +11897,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -11457,7 +12062,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -11546,7 +12151,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -11673,7 +12278,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -11721,7 +12326,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -11769,7 +12374,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -11814,7 +12419,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -11855,11 +12460,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -11938,11 +12543,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12061,11 +12666,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12106,11 +12711,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12189,11 +12794,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12312,11 +12917,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12395,11 +13000,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12518,11 +13123,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12601,11 +13206,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12724,11 +13329,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12844,11 +13449,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12889,11 +13494,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12934,11 +13539,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -12978,11 +13583,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13061,11 +13666,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13105,11 +13710,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13227,11 +13832,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13271,12 +13876,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (200):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -13315,12 +13918,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (200):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -13436,11 +14037,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13480,11 +14081,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13571,11 +14172,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13619,7 +14220,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -13664,7 +14265,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -13705,11 +14306,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13750,11 +14351,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13795,11 +14396,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -13969,11 +14570,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -14052,12 +14653,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14096,12 +14695,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14140,12 +14737,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14195,12 +14790,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14250,12 +14843,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14332,11 +14923,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -14415,11 +15006,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -14460,12 +15051,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14504,12 +15093,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14549,12 +15136,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14632,12 +15217,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14717,12 +15300,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14763,12 +15344,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14848,12 +15427,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14893,12 +15470,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14939,12 +15514,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -14986,12 +15559,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -15031,12 +15602,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -15077,12 +15646,10 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (302):
 
 ```json
-{
-    "message": "No token provided. Unauthenticated"
-}
+null
 ```
 
 ### HTTP Request
@@ -15126,7 +15693,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15437,7 +16004,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15482,7 +16049,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15527,7 +16094,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15610,7 +16177,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15731,7 +16298,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15775,7 +16342,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15820,7 +16387,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -15903,7 +16470,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16100,7 +16667,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16145,7 +16712,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16228,7 +16795,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16311,7 +16878,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16394,7 +16961,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16477,7 +17044,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16560,7 +17127,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16604,7 +17171,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16649,7 +17216,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16694,7 +17261,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16739,7 +17306,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16822,7 +17389,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16904,7 +17471,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -16949,7 +17516,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17032,7 +17599,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17115,7 +17682,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17160,7 +17727,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17243,7 +17810,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17288,7 +17855,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17371,7 +17938,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17492,7 +18059,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17537,7 +18104,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17620,7 +18187,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17665,7 +18232,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -17936,11 +18503,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -17981,11 +18548,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -18066,11 +18633,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -18149,11 +18716,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -18194,11 +18761,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -18238,11 +18805,11 @@ fetch(url, {
 ```
 
 
-> Example response (401):
+> Example response (500):
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Server Error"
 }
 ```
 
@@ -18290,7 +18857,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No token provided. Unauthenticated"
+    "message": "Unauthenticated."
 }
 ```
 
@@ -18331,13 +18898,6 @@ fetch(url, {
 ```
 
 
-> Example response (401):
-
-```json
-{
-    "message": "No token provided. Unauthenticated"
-}
-```
 
 ### HTTP Request
 `GET broadcasting/auth`

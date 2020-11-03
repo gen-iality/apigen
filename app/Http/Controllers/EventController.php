@@ -28,29 +28,36 @@ class EventController extends Controller
 {
     /**
      *
-     *  _index:_ Listado de todos los eventos
+     *  _index:_ Listing of all events
      *
-     * Este método permite la consulta dinámica de cualquier propiedad a través de la URL utilizando los servicios FilterQuery.
+     * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
-     * @queryParam id Exmaple: ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
      * 
      * @response {          
-     *          "_id": "5e9cae6bd74d5c2f5f0c61f2",
-     *          "name": "Edificio Izarra 3",
-     *          "datetime_from": "2020-10-16 18:00:00",
-     *          "datetime_to": "2020-10-16 21:00:00",
-     *          "picture": "https://storage.googleapis.com/herba-images/evius/events/TdFX2bAdJenUnFoF9EwyH2LQYq8Fnk3yqUhwgQVQ.jpeg",
-     *          "venue": "Bogotá",
-     *          "location": [],
-     *          "visibility": "PUBLIC",
-     *          "description": "<p><strong>INSTRUCCIONES DE ASAMBLEA GENERAL ORDINARIA DE COPROPIETARIOS NO PRESENCIAL DE FORMA VIRTUAL</strong></p><p><br></p><p>Con el fin de fijar normas claras que permitan que la reunión de ASAMBLEA GENERAL ORDINARIA NO PRESENCIAL programada para el viernes 16 octubre a las 6:00 p.m. se desarrolle con orden, respeto, democracia y legalidad nos permitimos presentar y poner a consideración de la asamblea el procedimiento:</p><p><br></p><p>\t<strong>PROCEDIMIENTO PARA EL DESARROLLO DE LA ASAMBLEA:</strong></p>
-     *          "user_properties": [{}],
-     *          "author_id": "5e9caaa1d74d5c2f6a02a3c2",
-     *          "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
-     *          "event_type_id": "5bf47226754e2317e4300b6a",
-     *          "updated_at": "2020-10-21 14:06:19",
-     *          "created_at": "2020-04-19 20:02:51",
-     * 
+     *    "_id": "5e9cae6bd74d5c2f5f0c61f2",
+     *    "name": "Edificio Izarra 3",
+     *    "datetime_from": "2020-10-16 18:00:00",
+     *    "datetime_to": "2020-10-16 21:00:00",
+     *    "picture": "https://storage.googleapis.com/herba-images/evius/events/TdFX2bAdJenUnFoF9EwyH2LQYq8Fnk3yqUhwgQVQ.jpeg",
+     *    "venue": "Bogotá",
+     *    "location": [],
+     *    "visibility": "PUBLIC",
+     *    "user_properties": [{
+     *          "name": "nombredeempresa",
+     *          "mandatory": true,
+     *          "visibleByContacts": false,
+     *          "visibleByAdmin": false,
+     *          "label": "Nombre de empresa",
+     *          "description": null,
+     *          "order_weight": "12"
+     *     }],
+     *    "author_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *    "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
+     *    "event_type_id": "5bf47226754e2317e4300b6a",
+     *    "updated_at": "2020-10-21 14:06:19",  
+     *    "created_at": "2020-04-19 20:02:51"
      * }
      * 
      * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
@@ -68,16 +75,17 @@ class EventController extends Controller
             ->Where('datetime_to', '>', $currentDate)
             ->orderBy('datetime_from', 'ASC');
 
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+        $input = $request->all();
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
     /**
-     * _beforeToday_: Listado de los próximos eventos
+     * _beforeToday_: list of upcoming events
      *
-     * @queryParam id required Exmaple: - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
      * @param Request $request
      * @param FilterQuery $filterQuery
@@ -91,14 +99,15 @@ class EventController extends Controller
             ->whereNotNull('visibility') //not null
             ->Where('datetime_to', '<', $currentDate)
             ->orderBy('datetime_from', 'DESC');
-
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
+            
+        $input = $request->all();
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
     /**
-     * Display a listing of the resource.
+     * _currentUserindex_: list of events of the organizer
      *
      * @return \Illuminate\Http\Response
      */
@@ -113,7 +122,7 @@ class EventController extends Controller
     }
 
     /**
-     * _EventbyUsers_: Busqueda de eventos por usuario organizador.
+     * _EventbyUsers_: search of events by user organizer.
      * 
      * @urlParam id required  organiser_id
      *
@@ -130,9 +139,9 @@ class EventController extends Controller
     }
 
     /**
-     * _EventbyOrganizations_: Busqueda de eventos por udsuario organizador.
+     * _EventbyOrganizations_: search of events by user organizer.
      * 
-     * @urlParam id required  organiser_id
+     * @urlParam id required  organizer_id
      *
      * @param string $id
      * @return void
@@ -147,7 +156,7 @@ class EventController extends Controller
     }
 
     /**
-     * _delete_: Eliminar evento.
+     * _delete_: delete event.
      * 
      * @urlParam id required id del evento a eliminar.
      *
@@ -165,10 +174,19 @@ class EventController extends Controller
     }
 
     /**
-     * _store_: Crear nuevo evento.
+     * _store_: Create new event of the organizer.
      *
-     * Hay una relación de evento especial llamada organizador Su relación polimórfica. Relacionada con el usuario y el organizador de la organización: Podría ser "yo" (usuario actual) o una organización Id.
-     *
+     * There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
+     * 
+     * @bodyParam name string required name to event Example: "Programming course" 
+     * @bodyParam datetime_from datetime required date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to datetime required date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture string image of the event
+     * @bodyParam visibility string required restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam user_properties array user registration properties
+     * @bodyParam author_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam event_type_id string required Example: 5bf47226754e2317e4300b6a
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -284,9 +302,9 @@ class EventController extends Controller
     }
 
     /**
-     * _show_: Mostrar información de un evento especifico.
+     * _show_: display information about a specific event.
      * 
-     * @urlParam id requires id del evento
+     * @urlParam id required id of the event you want to consult
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -317,14 +335,22 @@ class EventController extends Controller
         echo $gfService->doSomethingUseful();
     }
     /**
-     * _update_: Actualizar información de un evento especifico.
+     * _update_: update information on a specific event.
      * 
-
+     * @urlParam event required id of the event to be updated
+     * 
+     * @bodyParam name string name to event Example: "Programming course" 
+     * @bodyParam datetime_from datetime date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to datetime date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture string image of the event
+     * @bodyParam visibility string restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam user_properties array user registration properties
+     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam event_type_id string Example: 5bf47226754e2317e4300b6a
+     * 
      * @debug post $entityBody = file_get_contents('php://input');
      * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      *
-     * @urlParam event required id del evento
-     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -386,10 +412,10 @@ class EventController extends Controller
     }
 
     /**
-     * _assingOrganizer_: Asociar organizador a un evento.
+     * _assingOrganizer_: Associate organizer to an event.
      * It could be "me"(current user) or a organization Id the relationship is polymorpic.
      * 
-     * @bodyParam data array required
+     * @bodyParam data array required organizer_id Exmaple : ['organizer_id']
      **/
     private static function assingOrganizer($data, $event)
     {
@@ -407,9 +433,9 @@ class EventController extends Controller
 
     }
     /**
-     * _destroy_: Eliminar evento.
+     * _destroy_: delete event.
      *
-     * @urlParam event required id del evento a eliminar
+     * @urlParam event required id of the event to be eliminated
      * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -427,20 +453,22 @@ class EventController extends Controller
     }
 
     /**
-     * AddUserProperty: 
-     * Añadir la propiedad de usuario dinámico al evento
+     * _addUserProperty_: Adding dynamic user property to the event
+     * 
      *
-     * Cada propiedad dinámica debe estar compuesta por los siguientes parámetros:
-     *
-     * * texto del nombre
-     * * requerido booleano - este campo no se utiliza todavía para nada
-     * * escriba el texto - este campo no se utiliza todavía para nada
-     *
-     * Una vez creadas las propiedades de los eventos dinámicos de usuario se pueden obtener directamente de $evento->propiedades de usuario.
-     * Las propiedades dinámicas son devueltas dentro de cada UserEvent como las propiedades normales
+     * Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.
+     * The dynamic properties are returned within each UserEvent as the normal properties.
      * 
      * @urlParam id required id del evento
      * 
+     * @bodyParam name string required field name in database 
+     * @bodyParam label string required 
+     * @bodyParam mandatory boolean required indicates if the field is mandatory or optional
+     * @bodyPram type string required indicates the data type of the field 
+     * @bodyParam visibleByAdmin boolean required
+     * @bodyParam visibleByContacts boolean required
+     * @bodyParm order_weight string order of the fields in the form
+     * @bodyParam description string 
      * 
      * @param Event $event
      * @param array $properties
@@ -459,8 +487,11 @@ class EventController extends Controller
     }
 
     /**
-     * Show the 'Create Event' Modal
-     *
+     * _showCreateEvent_ : show the 'Create Event' Modal
+     * 
+     * @bodyParam modal_id strng required
+     * @bodyParam organiser_id strng required
+     * 
      * @param Request $request
      * @return \Illuminate\View\View
      */
@@ -476,12 +507,16 @@ class EventController extends Controller
     }
 
     /**
-     * _postCreateEvent_: Crear un nuevo evento.
+     * _postCreateEvent_: Create a new event.
      *
-     * @boddyParam title required
-     * @boddyParam description required
-     * @boddyParam start_date required    
-     * @boddyParam name required    
+     * @bodyParam name string name to event Example: "Programming course" 
+     * @bodyParam datetime_from datetime date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to datetime date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture string image of the event
+     * @bodyParam visibility string restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam user_properties array user registration properties
+     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam event_type_id string Example: 5bf47226754e2317e4300b6a  
      * 
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse

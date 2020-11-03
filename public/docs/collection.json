@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "b13f891c-0f73-429f-800b-50f1bcb9e536",
+        "_postman_id": "fd3bddab-ebc1-49ae-8da4-c22735780f35",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -51,13 +51,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "earum",
+                                    "value": "iure",
                                     "description": "id of the event to which the activities belong."
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "accusantium",
+                                    "value": "deleniti",
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -93,13 +93,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "voluptatibus",
+                                    "value": "quis",
                                     "description": "id of the event to which the activities belong."
                                 },
                                 {
                                     "id": "host_id",
                                     "key": "host_id",
-                                    "value": "quo",
+                                    "value": "commodi",
                                     "description": "id of the host for which you want to filter the activities."
                                 }
                             ]
@@ -135,7 +135,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "eius",
+                                    "value": "accusamus",
                                     "description": "id of the event to which the activities belong"
                                 }
                             ]
@@ -171,7 +171,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "cupiditate",
+                                    "value": "laborum",
                                     "description": "id of the event in which a new activity is to be created"
                                 }
                             ]
@@ -189,7 +189,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"nostrum\",\n    \"subtitle\": \"est\",\n    \"space_id\": \"voluptas\",\n    \"image\": \"nostrum\",\n    \"description\": \"dicta\",\n    \"capacity\": 13\n}"
+                            "raw": "{\n    \"name\": \"quas\",\n    \"subtitle\": \"quam\",\n    \"space_id\": \"optio\",\n    \"image\": \"rerum\",\n    \"description\": \"alias\",\n    \"capacity\": 18\n}"
                         },
                         "description": "",
                         "response": []
@@ -235,7 +235,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "reiciendis",
+                                    "value": "id",
                                     "description": "id of the event to which the activities belong."
                                 }
                             ]
@@ -271,7 +271,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "corporis",
+                                    "value": "assumenda",
                                     "description": "id of the event to which the activities belong 5dbc9c65d74d5c5853222222"
                                 }
                             ]
@@ -330,7 +330,7 @@
             "description": "",
             "item": [
                 {
-                    "name": "_index_: List of the activity_assitens",
+                    "name": "_index_: List of the activity_assitans",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -341,7 +341,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "est",
+                                    "value": "neque",
                                     "description": ""
                                 }
                             ]
@@ -359,7 +359,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_id\": \"harum\",\n    \"user_id\": \"eum\"\n}"
+                            "raw": "{\n    \"activity_id\": \"temporibus\",\n    \"user_id\": \"numquam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -377,7 +377,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "assumenda",
+                                    "value": "voluptatem",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -395,7 +395,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"user_id\": \"non\",\n    \"activity_id\": \"quidem\"\n}"
+                            "raw": "{\n    \"user_id\": \"minima\",\n    \"activity_id\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -413,7 +413,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "illum",
+                                    "value": "magni",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -449,7 +449,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "et",
+                                    "value": "suscipit",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -485,7 +485,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "placeat",
+                                    "value": "esse",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -549,7 +549,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "totam",
+                                    "value": "ut",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -585,13 +585,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "accusamus",
+                                    "value": "consequatur",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "molestiae",
+                                    "value": "quam",
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -627,7 +627,7 @@
                                 {
                                     "id": "activity_id",
                                     "key": "activity_id",
-                                    "value": "fugit",
+                                    "value": "exercitationem",
                                     "description": ""
                                 }
                             ]
@@ -679,7 +679,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"accusamus\",\n    \"content\": \"commodi\",\n    \"background\": \"ut\"\n}"
+                            "raw": "{\n    \"name\": \"quo\",\n    \"content\": \"alias\",\n    \"background\": \"ut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -697,7 +697,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dolore",
+                                    "value": "ullam",
                                     "description": ""
                                 }
                             ]
@@ -743,7 +743,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"doloremque\",\n    \"content\": \"corporis\",\n    \"background\": \"quaerat\"\n}"
+                            "raw": "{\n    \"name\": \"dolor\",\n    \"content\": \"voluptatem\",\n    \"background\": \"nobis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -799,7 +799,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"voluptatem\",\n    \"content\": \"fugit\",\n    \"background\": \"ratione\"\n}"
+                            "raw": "{\n    \"name\": \"inventore\",\n    \"content\": \"voluptates\",\n    \"background\": \"non\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -855,7 +855,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"delectus\",\n    \"content\": \"numquam\",\n    \"background\": \"quod\"\n}"
+                            "raw": "{\n    \"name\": \"expedita\",\n    \"content\": \"rem\",\n    \"background\": \"minima\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -883,7 +883,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"molestias\",\n    \"content\": \"sit\",\n    \"background\": \"dolore\"\n}"
+                            "raw": "{\n    \"name\": \"cupiditate\",\n    \"content\": \"vero\",\n    \"background\": \"corporis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -929,7 +929,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aperiam",
+                                    "value": "et",
                                     "description": "id del certificado a actualizar"
                                 }
                             ]
@@ -1003,7 +1003,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"sunt\",\n    \"content\": \"aut\",\n    \"background\": \"corporis\"\n}"
+                            "raw": "{\n    \"name\": \"ullam\",\n    \"content\": \"porro\",\n    \"background\": \"cumque\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1059,7 +1059,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"minima\",\n    \"content\": \"ut\",\n    \"background\": \"aperiam\"\n}"
+                            "raw": "{\n    \"name\": \"minus\",\n    \"content\": \"qui\",\n    \"background\": \"occaecati\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1218,7 +1218,7 @@
             "description": "",
             "item": [
                 {
-                    "name": "_index:_ Listado de todos los eventos",
+                    "name": "_index:_ Listing of all events",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1226,9 +1226,9 @@
                             "path": "api\/events",
                             "query": [
                                 {
-                                    "key": "id",
-                                    "value": "libero",
-                                    "description": "Exmaple: ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
+                                    "key": "filteredBy",
+                                    "value": "%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D",
+                                    "description": "optional filter parameters",
                                     "disabled": false
                                 }
                             ]
@@ -1248,12 +1248,12 @@
                             "mode": "raw",
                             "raw": "[]"
                         },
-                        "description": "Este m\u00e9todo permite la consulta din\u00e1mica de cualquier propiedad a trav\u00e9s de la URL utilizando los servicios FilterQuery.",
+                        "description": "This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
                         "response": []
                     }
                 },
                 {
-                    "name": "_store_: Crear nuevo evento.",
+                    "name": "_store_: Create new event of the organizer.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1274,14 +1274,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"doloremque\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\"\n}"
                         },
-                        "description": "Hay una relaci\u00f3n de evento especial llamada organizador Su relaci\u00f3n polim\u00f3rfica. Relacionada con el usuario y el organizador de la organizaci\u00f3n: Podr\u00eda ser \"yo\" (usuario actual) o una organizaci\u00f3n Id.",
+                        "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
                         "response": []
                     }
                 },
                 {
-                    "name": "_show_: Mostrar informaci\u00f3n de un evento especifico.",
+                    "name": "_show_: display information about a specific event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1309,7 +1309,7 @@
                     }
                 },
                 {
-                    "name": "_update_: Actualizar informaci\u00f3n de un evento especifico.",
+                    "name": "_update_: update information on a specific event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1320,8 +1320,8 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "commodi",
-                                    "description": "id del evento"
+                                    "value": "temporibus",
+                                    "description": "id of the event to be updated"
                                 }
                             ]
                         },
@@ -1338,14 +1338,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"praesentium\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\"\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_destroy_: Eliminar evento.",
+                    "name": "_destroy_: delete event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1356,8 +1356,8 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "nesciunt",
-                                    "description": "id del evento a eliminar"
+                                    "value": "eum",
+                                    "description": "id of the event to be eliminated"
                                 }
                             ]
                         },
@@ -1381,7 +1381,7 @@
                     }
                 },
                 {
-                    "name": "Display a listing of the resource.",
+                    "name": "_currentUserindex_: list of events of the organizer",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1409,7 +1409,7 @@
                     }
                 },
                 {
-                    "name": "_store_: Crear nuevo evento.",
+                    "name": "_store_: Create new event of the organizer.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1430,14 +1430,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"amet\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\"\n}"
                         },
-                        "description": "Hay una relaci\u00f3n de evento especial llamada organizador Su relaci\u00f3n polim\u00f3rfica. Relacionada con el usuario y el organizador de la organizaci\u00f3n: Podr\u00eda ser \"yo\" (usuario actual) o una organizaci\u00f3n Id.",
+                        "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
                         "response": []
                     }
                 },
                 {
-                    "name": "_update_: Actualizar informaci\u00f3n de un evento especifico.",
+                    "name": "_update_: update information on a specific event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1448,8 +1448,8 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "voluptates",
-                                    "description": "id del evento"
+                                    "value": "a",
+                                    "description": "id of the event to be updated"
                                 }
                             ]
                         },
@@ -1466,14 +1466,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"nostrum\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\"\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_destroy_: Eliminar evento.",
+                    "name": "_destroy_: delete event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1484,8 +1484,8 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "totam",
-                                    "description": "id del evento a eliminar"
+                                    "value": "aut",
+                                    "description": "id of the event to be eliminated"
                                 }
                             ]
                         },
@@ -1509,7 +1509,7 @@
                     }
                 },
                 {
-                    "name": "Display a listing of the resource.",
+                    "name": "_currentUserindex_: list of events of the organizer",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1537,7 +1537,7 @@
                     }
                 },
                 {
-                    "name": "_beforeToday_: Listado de los pr\u00f3ximos eventos",
+                    "name": "_beforeToday_: list of upcoming events",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1545,9 +1545,9 @@
                             "path": "api\/eventsbeforetoday",
                             "query": [
                                 {
-                                    "key": "id",
-                                    "value": "in",
-                                    "description": "Exmaple: - ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
+                                    "key": "filteredBy",
+                                    "value": "%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D",
+                                    "description": "optional filter parameters",
                                     "disabled": false
                                 }
                             ]
@@ -1572,7 +1572,7 @@
                     }
                 },
                 {
-                    "name": "_EventbyUsers_: Busqueda de eventos por usuario organizador.",
+                    "name": "_EventbyUsers_: search of events by user organizer.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1583,7 +1583,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "quis",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -1608,7 +1608,7 @@
                     }
                 },
                 {
-                    "name": "_EventbyOrganizations_: Busqueda de eventos por udsuario organizador.",
+                    "name": "_EventbyOrganizations_: search of events by user organizer.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1619,8 +1619,8 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aut",
-                                    "description": "organiser_id"
+                                    "value": "officiis",
+                                    "description": "organizer_id"
                                 }
                             ]
                         },
@@ -1644,7 +1644,7 @@
                     }
                 },
                 {
-                    "name": "AddUserProperty:\nA\u00f1adir la propiedad de usuario din\u00e1mico al evento",
+                    "name": "_addUserProperty_: Adding dynamic user property to the event",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1655,7 +1655,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptate",
+                                    "value": "iusto",
                                     "description": "id del evento"
                                 }
                             ]
@@ -1673,14 +1673,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"name\": \"harum\",\n    \"label\": \"consectetur\",\n    \"mandatory\": true,\n    \"visibleByAdmin\": true,\n    \"visibleByContacts\": true,\n    \"description\": \"eveniet\"\n}"
                         },
-                        "description": "Cada propiedad din\u00e1mica debe estar compuesta por los siguientes par\u00e1metros:\n\n* texto del nombre\n* requerido booleano - este campo no se utiliza todav\u00eda para nada\n* escriba el texto - este campo no se utiliza todav\u00eda para nada\n\nUna vez creadas las propiedades de los eventos din\u00e1micos de usuario se pueden obtener directamente de $evento->propiedades de usuario.\nLas propiedades din\u00e1micas son devueltas dentro de cada UserEvent como las propiedades normales",
+                        "description": "Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.\nThe dynamic properties are returned within each UserEvent as the normal properties.",
                         "response": []
                     }
                 },
                 {
-                    "name": "Show the 'Create Event' Modal",
+                    "name": "_showCreateEvent_ : show the 'Create Event' Modal",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1701,14 +1701,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"modal_id\": \"inventore\",\n    \"organiser_id\": \"amet\"\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_postCreateEvent_: Crear un nuevo evento.",
+                    "name": "_postCreateEvent_: Create a new event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1729,14 +1729,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "[]"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"culpa\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\"\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_index:_ Listado de todos los eventos",
+                    "name": "_index:_ Listing of all events",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1744,9 +1744,9 @@
                             "path": "test",
                             "query": [
                                 {
-                                    "key": "id",
-                                    "value": "placeat",
-                                    "description": "Exmaple: ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
+                                    "key": "filteredBy",
+                                    "value": "%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D",
+                                    "description": "optional filter parameters",
                                     "disabled": false
                                 }
                             ]
@@ -1766,15 +1766,15 @@
                             "mode": "raw",
                             "raw": "[]"
                         },
-                        "description": "Este m\u00e9todo permite la consulta din\u00e1mica de cualquier propiedad a trav\u00e9s de la URL utilizando los servicios FilterQuery.",
+                        "description": "This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
                         "response": []
                     }
                 }
             ]
         },
         {
-            "name": "EventUser.",
-            "description": "",
+            "name": "EventUser",
+            "description": "\n\nHandles the relation bewteeen user and event.  It handles user booking into an event\nAccount relation to an event is one of the fundamental aspects of this platform\nMost of the user functionality is executed under \"Attendee\" model and not directly under Account, because is an events platform.\n\n\n<p style=\"border: 1px solid #DDD\">\nAttendee has one user though user_id\n<br> and one event though event_id\n<br> This relation has states that represent the booking status of the user into the event\n<\/p>",
             "item": [
                 {
                     "name": "__index:__ Display all the EventUsers of an event",
@@ -1783,7 +1783,14 @@
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers",
-                            "query": []
+                            "query": [
+                                {
+                                    "key": "filteredBy",
+                                    "value": "%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D",
+                                    "description": "optional filter parameters",
+                                    "disabled": false
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -1800,12 +1807,12 @@
                             "mode": "raw",
                             "raw": "[]"
                         },
-                        "description": "this methods allows dynamic quering by any property via URL using the services FilterQuery.\nExmaple:\n - ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
+                        "description": "ORDERING PROBLEM WITH CAPITAL LETTERS\nCollections must be created with case-insensitive default collation\n\nExample: db.createCollection(\"names\", { collation: { locale: 'en_US', strength: 1 } } )\nhttps:\/\/docs.mongodb.com\/manual\/core\/index-case-insensitive\/\nhttps:\/\/stackoverflow.com\/questions\/44682160\/add-default-collation-to-existing-mongodb-collection",
                         "response": []
                     }
                 },
                 {
-                    "name": "__Show:__ Display an Attendee by id",
+                    "name": "_Show:_ Dconsult an EventUser by assistant id",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1816,14 +1823,14 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "illum",
+                                    "value": "voluptatem",
                                     "description": "string required"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ut",
-                                    "description": "string required id de Attendee"
+                                    "value": "dolorem",
+                                    "description": "string required id Attendee"
                                 }
                             ]
                         },
@@ -1847,13 +1854,21 @@
                     }
                 },
                 {
-                    "name": "api\/events\/{event_id}\/searchinevent",
+                    "name": "_searchInEvent_: search user within the event to verify if you are registered",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/events\/:event_id\/searchinevent",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "et",
+                                    "description": "string required"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -1875,7 +1890,7 @@
                     }
                 },
                 {
-                    "name": "api\/events\/myevents",
+                    "name": "_indexByEventUser_: list of events by logged in user",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1903,13 +1918,21 @@
                     }
                 },
                 {
-                    "name": "api\/eventusers\/event\/{event_id}\/user\/{user_id}",
+                    "name": "_ByUserInEvent_ : list of users by events",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/eventusers\/event\/:event_id\/user\/:user_id",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "eos",
+                                    "description": "string required"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -1931,7 +1954,7 @@
                     }
                 },
                 {
-                    "name": "_SubscribeUserToEventAndSendEmail_: Register user to an event and send confirmation email\nRegistrar usuario a un evento y enviar correo de confirmaci\u00f3n",
+                    "name": "_SubscribeUserToEventAndSendEmail_: Register user to an event and send confirmation email",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1942,7 +1965,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dolores",
+                                    "value": "nisi",
                                     "description": "string required"
                                 }
                             ]
@@ -1960,14 +1983,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"doloribus\",\n    \"name\": \"cum\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"voluptas\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"ea\",\n    \"name\": \"qui\",\n    \"password\": \"eum\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"voluptatibus\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_ChangeUserPassword_: Change user password\nCambiar contrase\u00f1a del usuario",
+                    "name": "_ChangeUserPassword_: Change user password",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -1978,7 +2001,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ad",
+                                    "value": "molestiae",
                                     "description": "string required"
                                 }
                             ]
@@ -1996,14 +2019,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"ut\"\n}"
+                            "raw": "{\n    \"email\": \"corrupti\"\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "api\/eventusers\/{event_id}\/tranfereventuser\/{event_user}",
+                    "name": "_transferEventuserAndEnrollToActivity_ : transfer Eventuser And Enroll To Activity",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2031,7 +2054,7 @@
                     }
                 },
                 {
-                    "name": "api\/events\/withstatus\/{id}",
+                    "name": "_updateWithStatus_: update With Status",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2059,7 +2082,7 @@
                     }
                 },
                 {
-                    "name": "api\/eventUsers\/{id}\/withStatus",
+                    "name": "_updateWithStatus_: update With Status",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2087,7 +2110,7 @@
                     }
                 },
                 {
-                    "name": "__CheckIn:__ Checks In an existent Attendee to the related event",
+                    "name": "__CheckIn:__ checks In an existent Attendee to the related event",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2098,7 +2121,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "similique",
+                                    "value": "sed",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -2123,7 +2146,7 @@
                     }
                 },
                 {
-                    "name": "_createUserAndAddtoEvent_:Create user and add it to an event\nCrear un usuario y a\u00f1adirlo a un evento",
+                    "name": "_createUserAndAddtoEvent_:Create user and add it to an event",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2134,7 +2157,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "veritatis",
+                                    "value": "ut",
                                     "description": "string required"
                                 }
                             ]
@@ -2152,14 +2175,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"suscipit\",\n    \"name\": \"laboriosam\",\n    \"password\": \"qui\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"suscipit\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"et\",\n    \"name\": \"eum\",\n    \"password\": \"eum\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"ex\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "api\/eventUsers\/bookEventUsers\/{event}",
+                    "name": "_bookEventUsers_: book Event Users",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2187,13 +2210,21 @@
                     }
                 },
                 {
-                    "name": "api\/events\/{event_id}\/testeventusers",
+                    "name": "_testCreateUserAndAddtoEvent_: test Create User And Add to Event",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/events\/:event_id\/testeventusers",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "qui",
+                                    "description": "string required"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -2215,7 +2246,7 @@
                     }
                 },
                 {
-                    "name": "_createUserAndAddtoEvent_:Create user and add it to an event\nCrear un usuario y a\u00f1adirlo a un evento",
+                    "name": "_createUserAndAddtoEvent_:Create user and add it to an event",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2226,7 +2257,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ullam",
+                                    "value": "provident",
                                     "description": "string required"
                                 }
                             ]
@@ -2244,20 +2275,28 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"rerum\",\n    \"name\": \"omnis\",\n    \"password\": \"ad\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"fuga\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"dolor\",\n    \"name\": \"aperiam\",\n    \"password\": \"voluptate\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"maxime\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "api\/me\/eventusers\/event\/{event_id}",
+                    "name": "_indexByUserInEvent_: list of users by events",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/me\/eventusers\/event\/:event_id",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "cupiditate",
+                                    "description": "string required"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -2279,13 +2318,21 @@
                     }
                 },
                 {
-                    "name": "api\/me\/events\/{event_id}\/eventusers",
+                    "name": "_meInEvent_: user information logged into the event",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/me\/events\/:event_id\/eventusers",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "debitis",
+                                    "description": ""
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -2313,7 +2360,14 @@
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/events\/:event_id\/eventUsers",
-                            "query": []
+                            "query": [
+                                {
+                                    "key": "filteredBy",
+                                    "value": "%5B%7B%22id%22%3A%22event_type_id%22%2C%22value%22%3A%5B%225bb21557af7ea71be746e98x%22%2C%225bb21557af7ea71be746e98b%22%5D%7D%5D",
+                                    "description": "optional filter parameters",
+                                    "disabled": false
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -2330,12 +2384,12 @@
                             "mode": "raw",
                             "raw": "[]"
                         },
-                        "description": "this methods allows dynamic quering by any property via URL using the services FilterQuery.\nExmaple:\n - ?filteredBy=[{\"id\":\"event_type_id\",\"value\":[\"5bb21557af7ea71be746e98x\",\"5bb21557af7ea71be746e98b\"]}]",
+                        "description": "ORDERING PROBLEM WITH CAPITAL LETTERS\nCollections must be created with case-insensitive default collation\n\nExample: db.createCollection(\"names\", { collation: { locale: 'en_US', strength: 1 } } )\nhttps:\/\/docs.mongodb.com\/manual\/core\/index-case-insensitive\/\nhttps:\/\/stackoverflow.com\/questions\/44682160\/add-default-collation-to-existing-mongodb-collection",
                         "response": []
                     }
                 },
                 {
-                    "name": "__Update:__ Update the specified resource in storage.",
+                    "name": "_Update_:update a specific assistant",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2346,7 +2400,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "temporibus",
+                                    "value": "autem",
                                     "description": "string required"
                                 }
                             ]
@@ -2364,14 +2418,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"facilis\",\n    \"name\": \"eos\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"aliquam\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"libero\",\n    \"name\": \"ut\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"quia\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "__delete:__ Remove the specified resource from storage.",
+                    "name": "__delete:__ remove a specific attendee from an event.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2382,7 +2436,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "beatae",
+                                    "value": "at",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -2407,7 +2461,7 @@
                     }
                 },
                 {
-                    "name": "__createUserViaUrl:__ Tries to create a new user from provided data and then add that user to specified event",
+                    "name": "_createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2418,7 +2472,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "repudiandae",
+                                    "value": "officia",
                                     "description": "string required"
                                 }
                             ]
@@ -2436,20 +2490,28 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"doloremque\",\n    \"name\": \"iste\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"eos\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"praesentium\",\n    \"name\": \"quis\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"praesentium\"\n            }\n        }\n    }\n}"
                         },
-                        "description": "Intenta crear un nuevo usuario a partir de los datos proporcionados y luego lo agrega al evento especificado",
+                        "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "api\/events\/{event_id}\/sendemailtoallusers",
+                    "name": "_sendQrToUsers_: send Qr To Users.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/events\/:event_id\/sendemailtoallusers",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "aperiam",
+                                    "description": "string required"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -2471,7 +2533,7 @@
                     }
                 },
                 {
-                    "name": "_meEvents:_ Listado de eventos incritos del usuario logueado.",
+                    "name": "_meEvents:_ list of registered events of the logged in user.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -2544,13 +2606,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "est",
+                                    "value": "consequatur",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "natus",
+                                    "value": "aut",
                                     "description": ""
                                 }
                             ]
@@ -2586,13 +2648,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "consequuntur",
+                                    "value": "praesentium",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "corporis",
+                                    "value": "illum",
                                     "description": ""
                                 }
                             ]
@@ -2628,13 +2690,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ullam",
+                                    "value": "corporis",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "dicta",
                                     "description": "user who accepts or rejects the application"
                                 }
                             ]
@@ -2652,7 +2714,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"response\": \"sint\"\n}"
+                            "raw": "{\n    \"response\": \"doloribus\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2670,13 +2732,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dicta",
+                                    "value": "ut",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "perspiciatis",
+                                    "value": "cupiditate",
                                     "description": ""
                                 }
                             ]
@@ -2740,13 +2802,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ab",
+                                    "value": "aliquam",
                                     "description": ""
                                 },
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "minima",
+                                    "value": "et",
                                     "description": ""
                                 }
                             ]
@@ -2782,7 +2844,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nihil",
+                                    "value": "qui",
                                     "description": ""
                                 }
                             ]
@@ -2818,7 +2880,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quidem",
+                                    "value": "laboriosam",
                                     "description": ""
                                 }
                             ]
@@ -2836,7 +2898,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id_user_requested\": \"ab\"\n}"
+                            "raw": "{\n    \"id_user_requested\": \"qui\"\n}"
                         },
                         "description": "Enviar solicitud con redirecci\u00f3n a evius",
                         "response": []
@@ -3174,7 +3236,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "quas",
+                                    "value": "quod",
                                     "description": ""
                                 }
                             ]
@@ -3192,7 +3254,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"usersIds\": {\n        \"\": \"dicta\"\n    },\n    \"message\": \"autem\",\n    \"image\": \"occaecati\",\n    \"subject\": \"similique\",\n    \"footer\": \"et\"\n}"
+                            "raw": "{\n    \"usersIds\": {\n        \"\": \"beatae\"\n    },\n    \"message\": \"molestiae\",\n    \"image\": \"asperiores\",\n    \"subject\": \"molestiae\",\n    \"footer\": \"quam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3210,7 +3272,7 @@
                                 {
                                     "id": "eventUser",
                                     "key": "eventUser",
-                                    "value": "ratione",
+                                    "value": "cum",
                                     "description": ""
                                 }
                             ]
@@ -3594,7 +3656,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dolores",
+                                    "value": "qui",
                                     "description": ""
                                 }
                             ]
@@ -3692,7 +3754,7 @@
                                 {
                                     "id": "uid",
                                     "key": "uid",
-                                    "value": "quam",
+                                    "value": "incidunt",
                                     "description": "id del usuario"
                                 }
                             ]
@@ -3710,7 +3772,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"provident\",\n    \"name\": \"qui\",\n    \"auth\": \"ipsum\"\n}"
+                            "raw": "{\n    \"email\": \"a\",\n    \"name\": \"odit\",\n    \"auth\": \"voluptas\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3822,7 +3884,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"non\",\n    \"name\": \"sunt\"\n}"
+                            "raw": "{\n    \"email\": \"voluptatem\",\n    \"name\": \"est\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3850,7 +3912,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"porro\",\n    \"name\": \"doloremque\"\n}"
+                            "raw": "{\n    \"email\": \"et\",\n    \"name\": \"reprehenderit\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3896,7 +3958,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "harum",
+                                    "value": "non",
                                     "description": "id del usuario"
                                 }
                             ]
@@ -3994,7 +4056,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quia",
+                                    "value": "atque",
                                     "description": "."
                                 }
                             ]
@@ -4040,7 +4102,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"dolore\",\n    \"name\": \"esse\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"vitae\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"laboriosam\",\n    \"name\": \"necessitatibus\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"est\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -4058,13 +4120,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "laboriosam",
+                                    "value": "ratione",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "impedit",
+                                    "value": "dolore",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4082,7 +4144,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"in\",\n    \"name\": \"ratione\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"et\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"vel\",\n    \"name\": \"quidem\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"aut\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -4100,13 +4162,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "vero",
+                                    "value": "cum",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quos",
+                                    "value": "ducimus",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4124,7 +4186,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"nihil\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"quae\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -4142,13 +4204,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "aut",
+                                    "value": "sit",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aut",
+                                    "value": "vero",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6475,6 +6537,202 @@
                     }
                 },
                 {
+                    "name": "api\/networking",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/networking",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/networking",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/networking\/:networking",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/networking\/:networking",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/networking\/:networking",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Accepts a meeting",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/event\/:event_id\/meeting\/:meeting_id\/accept",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Rejects a meeting",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/event\/:event_id\/meeting\/:meeting_id\/reject",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "Display a listing of the resource.",
                     "request": {
                         "url": {
@@ -6766,7 +7024,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "voluptas",
+                                    "value": "velit",
                                     "description": ""
                                 }
                             ]
@@ -6812,7 +7070,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"rerum\"\n}"
+                            "raw": "{\n    \"name\": \"harum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -7120,7 +7378,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"porro\"\n}"
+                            "raw": "{\n    \"name\": \"laudantium\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -7194,7 +7452,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "itaque",
+                                    "value": "libero",
                                     "description": "id de RoleAttendee"
                                 }
                             ]

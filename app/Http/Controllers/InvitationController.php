@@ -10,6 +10,7 @@ use App\Mailing;
 use App\Mail\UserToUserRequest;
 use App\NetworkingContacts;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Response;
 use Kreait\Firebase\Exception\Auth\AuthError;
@@ -36,43 +37,45 @@ class InvitationController extends Controller
         $this->auth = $auth;
     }
 
-    public function singIn(Request $request)
-    {
-        $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
 
-        if ($request->input("request")) {
-            try {
-                self::acceptOrDeclineFriendRequest($request, $innerpath, $request->input("request"), $request->input("response"));
-            } catch (Exception $e) {
+    /**
+     * _generateLoginLinkAndRedirect_ : generate login link and redirect
+     * 
+     * @bodyParam email email required
+     * @bodyParam password string 
+     * 
+     * @param string $email
+     * @param string $pass
+     * @param string $innerpath
+     * @return void
+     */
+    public function generateLoginLinkAndRedirect($email, $pass=null, $innerpath ="") {
 
-            }
-        }
         try {
 
-            $pass = self::decryptdata($request->input("pass"));
-
-            $userinfo = $this->auth->getUserByEmail($request->input("email"));
+            $passdecrypt = ($pass)?self::decryptdata($pass):'evius.2040';
+            $userinfo = $this->auth->getUserByEmail($email);
 
             try {
-                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $passdecrypt);
+                
 
             } catch (InvalidArgumentException $e) {
-                $pass = $request->input("pass");
                 $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
 
             } catch (AuthError $e) {
-
                 Log::error("temp password used. " . $e->getMessage());
-                $pass = "evius.2040";
-                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $pass);
+                $passdecrypt  = "evius.2040";
+                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $passdecrypt );
             }
+           
 
-            $singin = $this->auth->signInWithEmailAndPassword($request->input("email"), $pass);
-
+            $singin = $this->auth->signInWithEmailAndPassword($email, $passdecrypt );
+            
             $user = Account::where("uid", $userinfo->uid)->first();
             if (!$user) {
                 //intentamos buscar por correo cómo segunda opción
-                $user = Account::where("email", $request->input("email"))->first();
+                $user = Account::where("email", $email)->first();
                 if (!$user) {
                     return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
                 }
@@ -104,6 +107,26 @@ class InvitationController extends Controller
             return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
 
         }
+
+    }
+
+    public function singIn(Request $request)
+    {
+        $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+
+        if ($request->input("request")) {
+            try {
+                self::acceptOrDeclineFriendRequest($request, $innerpath, $request->input("request"), $request->input("response"));
+            } catch (Exception $e) {
+
+            }
+        }
+
+        $pass  = $request->input("pass");
+        $email = $request->input("email");
+
+        return self::generateLoginLinkAndRedirect( $email, $pass,  $innerpath);
+
     }
 
     private function decryptdata($string)
@@ -373,16 +396,75 @@ class InvitationController extends Controller
         $request_type = "meeting";
         $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
         $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
-        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name;
+        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión a las ". $meetingStartTime;
 
-        $mail["desc"] .= "<br><p>Ingresa al evento a la sección Conecta / Networking y revisa las solicitudes para aceptarlas rechazarlas</p>";
+        $mail["desc"] .= "<br><p>Puedes ingresar al evento a la sección Conecta / Agendate para revisar las solicitudes para aceptarlas rechazarlas</p>";
 
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
     }
 
-    public function buildRequestMessageBase($data, String $event_id)
-    {
+    
+    public function buildMeetingResponseMessage($data, String $event_id){
+        $request_type = "meeting";
+        $event = Event::find($event_id);
+        $sender = Attendee::find($data["id_user_requesting"]);
+        $receiver  = Attendee::find($data["id_user_requested"]);
+        
+        $mail["id_user_requesting"] = $data["id_user_requesting"];
+        $mail["id_user_requested"] = $data["id_user_requested"];
+        $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
+        $mail["sender"] = $event->name;
+        $mail["event_id"] = $event_id;
+        $mail["status"] = $data["response"];
+
+        $formated_meeting_time = isset($data["timestamp_start"])? Carbon::parse($data["timestamp_start"])->format('F d h:m a'):'';  
+
+        if (!empty($data["request_id"])) {
+            $mail["request_id"] = $data["request_id"];
+        } 
+        
+        
+        $datos_usuario = "";
+        $i = 0;
+        foreach ($event->user_properties as $property) {
+            if ($i <= 3) {
+
+                if (isset($receiver->properties[$property->name]) && $receiver->properties[$property->name]) {
+                    $i++;
+                    $datos_usuario .= "<p>{$property->label}: {$receiver->properties[$property->name]}</p>";
+                }
+            }
+        }
+
+        $cuantos = count($event->user_properties);        
+        
+        $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de reunión para el evento " . $event->name;
+        $accepted_message = <<<EOT
+
+        {$receiver->properties["displayName"]} ha aceptado tu solicitud de reunión para el evento {$event->name} <br/>
+        Cuando {$formated_meeting_time}
+
+        <br />
+        {$datos_usuario}
+        <br/>
+        Mostrando {$i} datos de {$cuantos}
+        <br />
+        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
+        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
+<br/>
+        No olvides disfrutar el resto de experiencias del evento.
+EOT;  
+
+
+
+        $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
+        $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de reunión";
+        $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_message;
+        $mail["subject"] = "Respuesta a solicitud de reunión ".$formated_meeting_time;
+
+        self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+        return "Request / response send";        
 
     }
 
@@ -419,8 +501,8 @@ class InvitationController extends Controller
         Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
         buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrÃ¡ ver tu información oculta en el evento en la sección conecta/networking
-        de esta manera podrÃ¡ contactarte.
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
+        de esta manera podrá contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
@@ -456,7 +538,7 @@ EOT;
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
             $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["displayName"] . " ha aceptado tu solicitud" : $receiver->properties["displayName"] . " Ha declinado tu solicitud de amistad";
-            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_meesage;
+            $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_message;
             $mail["subject"] = "Respuesta a solicitud de amistad";
         }
 
@@ -488,21 +570,17 @@ EOT;
         $subject = $mail["subject"];
         $result->save();
         $response = !empty($mail["request_id"]) ? $mail["request_id"] : null;
+        $status = !empty($mail["status"]) ? $mail["status"] : null;
 
         foreach ($mail["mails"] as $key => $email) {
             Mail::to($email)->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $status)
             );
         }
 
         foreach ($mail["mails"] as $key => $email) {
-
-            Mail::to($email)->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
-            );
-
             Mail::to("juan.lopez@mocionsoft.com")->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user)
+                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $status)
             );
         }
 

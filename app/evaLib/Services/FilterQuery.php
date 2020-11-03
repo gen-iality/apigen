@@ -43,14 +43,14 @@ class FilterQuery
      *
      * @return Illuminate\Database\Query\Builder $query  the altered query with the order and filter options provided by url params filtered and orderBy
      */
-    public static function addDynamicQueryFiltersFromUrl($query, $request)
+    public static function addDynamicQueryFiltersFromUrl($query, $input)
     {
 
         
-        $filteredBy = json_decode($request->input('filtered'));
+        $filteredBy = isset($input['filtered'])?json_decode($input['filtered']):null;
         $filteredBy = is_array($filteredBy) ? $filteredBy : [$filteredBy];
-
-        $orderedBy = json_decode($request->input('orderBy'));
+        
+        $orderedBy = isset($input['orderBy'])?json_decode($input['orderBy']):null;
         $orderedBy = is_array($orderedBy) ? $orderedBy : [$orderedBy];
 
         foreach ((array) $filteredBy as $condition) {
@@ -87,12 +87,8 @@ class FilterQuery
 
         }
 
-
-        //páginacion pordefecto
-        $pageSize = (int) $request->input('pageSize');
-        $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
+        $pageSize = (int)(isset(($input['pageSize'])) ? $input['pageSize'] : config('app.page_size'));
         $result = $query->paginate($pageSize);
-
 
         return $result;
     }
