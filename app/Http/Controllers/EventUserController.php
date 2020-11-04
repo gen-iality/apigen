@@ -88,9 +88,9 @@ class EventUserController extends Controller
     {
 
         $input = $request->all();
-        //arreglo temporal para Yanbal
-        if ($event_id == "5f622ab4fd452e39b3677996" ){
-            $input["pageSize"] = 10;
+        //arreglo temporal para Yanbal/landing/5f99a20378f48e50a571e3b6
+        if ($event_id == "5f99a20378f48e50a571e3b6" ){
+            $input["pageSize"] = 2;
         }
         $query = Attendee::where("event_id", $event_id);
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
@@ -723,6 +723,9 @@ class EventUserController extends Controller
      */
     public function indexByUserInEvent(Request $request, $event_id)
     {
+        $user = auth()->user();
+        //truco si no viene el usuario para que no se rompa.
+        if (!$user) return EventUserResource::collection(Attendee::where("event_id", "-1")->paginate(config("app.page_size")));
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
