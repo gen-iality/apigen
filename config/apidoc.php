@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 return [
     /*
@@ -97,8 +97,15 @@ return [
                  * Match only routes whose paths match this pattern (use * as a wildcard to match any characters).
                  */
                 'prefixes' => [
-                    '*',
-                    // 'users/*',
+                    // '*',
+                    '*/activities_attendees',  
+                    'activities_attendees/*',
+                    '*/events',
+                    '*/activities',
+                    '*/activities/*',    
+                    '*/duplicateactivitie/*',      
+                    '*/eventusers',
+                    '*/users'                                                   
                 ],
 
                 /*

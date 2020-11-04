@@ -34,32 +34,10 @@ class ActivitiesController extends Controller
     /**
      * _index_: List of activities
      * 
-     * @urlParam event_id required id of the event to which the activities belong
+     * @urlParam event_id required id of the event to which the activities belong Example: 5e9cae6bd74d5c2f5f0c61f2
      * 
-     * @response {
-     *          "_id": "5e9cbf60d74d5c2fba01ae26",
-     *       "name": "Elección del presidente y secretario de la Asamblea Extraordinaria",
-     *       "subtitle": null,
-     *       "datetime_start": "2020-05-28 08:00",
-     *       "datetime_end": "2020-05-28 08:00",
-     *       "space_id": "5e9cb013d74d5c2fba01ae23",
-     *       "image": null,
-     *       "description": null,
-     *       "capacity": 0,
-     *       "activity_categories_ids": [
-     *           "5e9cbef8d74d5c2f6a02a3c7"
-     *       ],
-     *      "space": {
-     *          "_id": "5e9cb013d74d5c2fba01ae23",
-     *          "name": "Salón Comunal",
-     *          "event_id": "5e9cae6bd74d5c2f5f0c61f2",
-     *          "updated_at": "2020-04-19 20:09:55",
-     *          "created_at": "2020-04-19 20:09:55",
-     *          "5e9cb013d74d5c2fba01ae23": [
-     *              null
-     *          ]
-     *      }
-     * }
+     * @apiResourceCollection Illuminate\Http\Resources\Json\JsonResource
+     * @apiResourceModel App\Activities
      * 
      * @return \Illuminate\Http\Response
     */

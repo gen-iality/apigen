@@ -25,14 +25,16 @@ use Validator;
  */
 
 class EventController extends Controller
-{
+{   
+    // @apiResourceCollection App\Http\Resources\EventResource
+    // * @apiResourceModel App\Event
     /**
      *
      *  _index:_ Listing of all events
      *
      * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5ea6df83cf57da4a52065562"]}]
      * 
      * 
      * @response {          
@@ -257,7 +259,7 @@ class EventController extends Controller
     }
 
     /**
-     * _createDefaultUserProperties_: Crear propiedades email y names de usuario por defecto.
+     * _createDefaultUserProperties_: create default properties (name and email) for the user
      * 
      * @urlParam event_id required
      *
@@ -325,7 +327,7 @@ class EventController extends Controller
     }
 
     /**
-     * Simply testing service providers
+     * _test_:simply testing service providers
      *
      * @param GoogleFiles $gfService
      * @return void
@@ -412,7 +414,7 @@ class EventController extends Controller
     }
 
     /**
-     * _assingOrganizer_: Associate organizer to an event.
+     * _assingOrganizer_: associate organizer to an event.
      * It could be "me"(current user) or a organization Id the relationship is polymorpic.
      * 
      * @bodyParam data array required organizer_id Exmaple : ['organizer_id']
@@ -453,7 +455,7 @@ class EventController extends Controller
     }
 
     /**
-     * _addUserProperty_: Adding dynamic user property to the event
+     * _addUserProperty_: adding dynamic user property to the event
      * 
      *
      * Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.
@@ -689,7 +691,7 @@ class EventController extends Controller
     // FUNCTIONS SPECIFICS
 
     /**
-     * _stagesStatusActive_: Poner el estado de la etapa depende del día
+     * _stagesStatusActive_: put the state of the stage depends on the day
      * 
      * @urlParam id required event_Id
      * @param $id  event Id

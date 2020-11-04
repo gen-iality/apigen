@@ -105,7 +105,7 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _index_: Listado de usuario resgistrados.
+     * _index_: list of registered users
      * 
      * @response {
      *       "_id": "5b98395ec06586792153148b",
@@ -127,7 +127,7 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _store_: Creación de un nuevo usuario.
+     * _store_: Create new user.
      * 
      * @bodyParam email email required 
      * @bodyParam name  string required
@@ -153,9 +153,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _show_: Eliminar usurio registrado
+     * _show_: delete a registered user
      *
-     * @urlParam id required id del usuario
+     * @urlParam id required id user
      * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -180,9 +180,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _update_: Actualizar usuario registrado
+     * _update_: update registered user
      * 
-     * @urlParam id required id del usuario
+     * @urlParam id required id user
      *
      * @bodyParam email email required 
      * @bodyParam name  string required
@@ -208,9 +208,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _VerifyAccount_: Verificar correo de usuario 
+     * _VerifyAccount_: check user mail 
      *
-     * @urlParam uid required id del usuario
+     * @urlParam uid required id user
      *
      * @bodyParam email email required 
      * @bodyParam name  string required
@@ -235,9 +235,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _delete_: Eliminar usuario registrado
+     * _delete_: dele a user register
      * 
-     * @urlParam id required id del usuario
+     * @urlParam id required id user
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -254,7 +254,7 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _findByEmail_: Buscar usuario específico busacdo por correo.
+     * _findByEmail_: search for specific user by mail
      *
      * @urlParam email required email del usuario buscado
      * 
@@ -280,9 +280,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _sendConfirmationEmail_: Envio de confimación de correo.
+     * _sendConfirmationEmail_: sending of mail confirmation.
      *
-     * @urlParam id required id del usuario 
+     * @urlParam id required id user
      * 
      * @return void
      */
@@ -306,9 +306,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _confirmEmail_: Obtener confirmación de email
+     * _confirmEmail_: get email confirmation
      * 
-     * @urlParam id required id del usuario 
+     * @urlParam id required id user
      * 
      * @return void
      */

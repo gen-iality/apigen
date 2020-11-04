@@ -110,6 +110,12 @@ class InvitationController extends Controller
 
     }
 
+    /**
+     * _singIn_: singIn
+     *
+     * @param Request $request
+     * @return void
+     */
     public function singIn(Request $request)
     {
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
