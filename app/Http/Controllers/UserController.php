@@ -111,8 +111,7 @@ class UserController extends UserControllerWeb
      *       "_id": "5b98395ec06586792153148b",
      *       "email": "otro@gmail.com",
      *       "name": "otro",
-     *       "lastname": "usuario",
-     *       "departamente": "titirib",
+     *       "others_properties": "dynamic properties of the user you want to place",
      *       "uid": "otro@gmail.com",
      *       "updated_at": "2018-09-11 21:53:34",
      *       "created_at": "2018-09-11 21:53:34"
@@ -127,10 +126,11 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _store_: Create new user.
+     * _store_: create new user.
      * 
      * @bodyParam email email required 
-     * @bodyParam name  string required
+     * @bodyParam name  string required 
+     * @bodyParam others_properties string dynamic properties of the user you want to place
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -186,6 +186,7 @@ class UserController extends UserControllerWeb
      *
      * @bodyParam email email required 
      * @bodyParam name  string required
+     * @bodyParam others_properties string dynamic properties of the user you want to place
      * 
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

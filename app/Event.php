@@ -21,6 +21,8 @@ class Event extends ModelsEvent
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
+    protected $hidden = array('activity_categories');
+
     protected $with = ['author', 'categories', 'eventType', 'organiser', 'organizer', 'currency', 'tickets'];
 
     protected $fillable = [

@@ -88,18 +88,13 @@ class ActivityAssistantController extends Controller
      * @bodyParam activity_id string required
      * @bodyParam user_id string required
      * 
-     * @response {
-     *       "_id": "5f6250852399da563131d375",
-     *       "user_id": "5b89bf37c065864f7b5bf80e",
-     *       "activity_id": "5f613dc32bda9a05204b63b6",
-     *       "event_id": "5ea23acbd74d5c4b360ddde2",
-     *       "updated_at": "2020-09-16 17:51:01",
-     *       "created_at": "2020-09-16 17:51:01",
-     *       "user": {
-     *           "_id": "5b89bf37c065864f7b5bf80e",
-     *           "email": "correo@mocionsoft.com",
-     *           "name": "User Name"
-     *        }
+     * @response {{
+     *     "activity_id": "5fa44f6ba8bf7449e65dae32",
+     *     "user_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *     "event_id": "5fa423eee086ea2d1163343e",
+     *     "updated_at": "2020-11-05 21:49:44",
+     *     "created_at": "2020-11-05 21:49:44",
+     *     "_id": "5fa4737865ec151b7f383442"
      * }
      * 
      * @return \Illuminate\Http\Response
@@ -182,8 +177,9 @@ class ActivityAssistantController extends Controller
      *
      * @urlParam event_id required event to which the activity belongs
      * 
-     * @bodyParam user_id required id of the user who signs up for the activity
-     * @bodyParam activity_id id of the activity to which the user subscribes
+     * @bodyParam user_id required id of the user who signs up for the activity Example: 5e9caaa1d74d5c2f6a02a3c2
+     * @bodyParam activity_id id of the activity to which the user subscribes Example: 5fa44f6ba8bf7449e65dae32
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */

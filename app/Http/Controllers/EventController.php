@@ -37,30 +37,58 @@ class EventController extends Controller
      * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5ea6df83cf57da4a52065562"]}]
      * 
      * 
-     * @response {          
-     *    "_id": "5e9cae6bd74d5c2f5f0c61f2",
-     *    "name": "Edificio Izarra 3",
-     *    "datetime_from": "2020-10-16 18:00:00",
-     *    "datetime_to": "2020-10-16 21:00:00",
-     *    "picture": "https://storage.googleapis.com/herba-images/evius/events/TdFX2bAdJenUnFoF9EwyH2LQYq8Fnk3yqUhwgQVQ.jpeg",
-     *    "venue": "Bogotá",
-     *    "location": [],
-     *    "visibility": "PUBLIC",
-     *    "user_properties": [{
-     *          "name": "nombredeempresa",
-     *          "mandatory": true,
-     *          "visibleByContacts": false,
-     *          "visibleByAdmin": false,
-     *          "label": "Nombre de empresa",
-     *          "description": null,
-     *          "order_weight": "12"
-     *     }],
-     *    "author_id": "5e9caaa1d74d5c2f6a02a3c2",
-     *    "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
-     *    "event_type_id": "5bf47226754e2317e4300b6a",
-     *    "updated_at": "2020-10-21 14:06:19",  
-     *    "created_at": "2020-04-19 20:02:51"
+     * @response{
+     *     "_id": "5fa423eee086ea2d1163343e",
+     *     "name": "Evento de bienvenida",
+     *     "datetime_from": "2020-10-14T07:00:00.000-05:00",
+     *     "datetime_to": "2020-10-14T07:00:00.000-05:00",
+     *     "author_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
+     *     "event_type_id": "5bf47203754e2317e4300b68",
+     *     "updated_at": "2020-11-05T11:45:01.000-05:00",
+     *     "created_at": "2020-11-05T11:10:22.189-05:00",
+     *     "category_ids": [
+     *         "5bf470c9754e2317e4300b62"
+     *     ],
+     *     "user_properties": [
+     *         {
+     *             "name": "email",
+     *             "label": "Correo",
+     *             "unique": false,
+     *             "mandatory": false,
+     *             "type": "email",
+     *             "updated_at": "2020-11-05T11:10:23.360-05:00",
+     *             "created_at": "2020-11-05T11:10:23.360-05:00",
+     *             "_id": "5fa423efe086ea2d11633440"
+     *         },
+     *         {
+     *             "name": "names",
+     *             "label": "Nombres Y Apellidos",
+     *             "unique": false,
+     *             "mandatory": false,
+     *             "type": "text",
+     *             "updated_at": "2020-11-05T11:10:24.442-05:00",
+     *             "created_at": "2020-11-05T11:10:24.442-05:00",
+     *             "_id": "5fa423f0e086ea2d11633441"
+     *         }
+     *     ],
+     *     "description": "<p>Evento de prueba en testeo de plataforma evius</p>",
+     *     "location": [],
+     *     "venue": "Mocion",
+     *     "visibility": "PUBLIC",
+     *     "itemsMenu": {
+     *         "Home": {
+     *             "name": "Homa",
+     *             "position": null,
+     *             "section": "home",
+     *             "icon": "CalendarOutlined",
+     *             "checked": true,
+     *             "permissions": "public"
+     *         }
+     *     }
      * }
+     *
+     * 
      * 
      * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
      * @param Illuminate\Http\Request $request [injected]
@@ -341,14 +369,15 @@ class EventController extends Controller
      * 
      * @urlParam event required id of the event to be updated
      * 
-     * @bodyParam name string name to event Example: "Programming course" 
+     * @bodyParam name          string name to event Example: "Programming course" 
+     * @bodyParam description   string description of teh event Example : "Event to study"
      * @bodyParam datetime_from datetime date and time of start of the event Example: 2020-10-16 18:00:00
-     * @bodyParam datetime_to datetime date and time of the end of the event Example: 2020-10-16 21:00:00
-     * @bodyParam picture string image of the event
-     * @bodyParam visibility string restricts access for registered users or any unregistered user Example: PUBLIC
-     * @bodyParam user_properties array user registration properties
-     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c3
-     * @bodyParam event_type_id string Example: 5bf47226754e2317e4300b6a
+     * @bodyParam datetime_to   datetime date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture       string image of the event
+     * @bodyParam visibility    string restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam organizer_id string Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c2
+     * @bodyParam event_type_id string Example: 5bf47203754e2317e4300b68
      * 
      * @debug post $entityBody = file_get_contents('php://input');
      * $data['picture'] =  $gfService->storeFile($request->file('picture'));

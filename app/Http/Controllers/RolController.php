@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Rol;
 use Illuminate\Http\Request;
 
+/**
+ * @group Rol
+ */
 class RolController extends Controller
 {
     /**
@@ -29,7 +32,10 @@ class RolController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
+     * @bodyParam name string required
+     * @bodyParam event_id string required 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -66,7 +72,12 @@ class RolController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * 
+     * @urlParam id id rol
+     * 
+     * @bodyParam name string required
+     * @bodyParam event_id string required 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response

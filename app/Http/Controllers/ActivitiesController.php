@@ -32,14 +32,48 @@ use GuzzleHttp\Client;
 class ActivitiesController extends Controller
 {
     /**
-     * _index_: List of activities
+     *
+     *  _index:_ Listing of all activities
+     *
+     *
+     * @urlParam event_id required
      * 
-     * @urlParam event_id required id of the event to which the activities belong Example: 5e9cae6bd74d5c2f5f0c61f2
      * 
-     * @apiResourceCollection Illuminate\Http\Resources\Json\JsonResource
-     * @apiResourceModel App\Activities
+     * @response{
+     *  "access_restriction_rol_ids": [],
+     *  "access_restriction_roles": [],
+     *  "access_restriction_type": "OPEN",
+     *  "access_restriction_types_available": null,
+     *  "activity_categories": [],
+     *  "activity_categories_ids": [[]],
+     *  "bigmaker_meeting_id": null,
+     *  "capacity": 30,
+     *  "created_at": "2020-11-05 19:15:55",
+     *  "datetime_end": "2020-10-14 14:11",
+     *  "datetime_start": "2020-10-14 14:11",
+     *  "description": "<p>Descripción de la actividad</p>",
+     *  "event_id": "5fa423eee086ea2d1163343e",
+     *  "has_date": null,
+     *  "host_ids": [[]],
+     *  "hosts": [],
+     *  "image": "https://storage.googleapis.com/herba-images/evius/events/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg",
+     *  "meeting_id": null,
+     *  "name": "Segunda actividad del evento",
+     *  "registration_message": "<p>Su registro a la segunda actividad ha sido exitoso</p>",
+     *  "role_attendee_ids": [[]],
+     *  "0": [],
+     *  "selected_document": [],
+     *  "space": null,
+     *  "space_id": null,
+     *  "subtitle": "Subtitulo de la segunda actividad",
+     *  "type_id": "5dbb3211d74d5c542150ccc3",
+     *  "updated_at": "2020-11-05 19:15:55",
+     *  "vimeo_id": null,
+     *  "_id": "5fa44f6ba8bf7449e65dae32"
+     * }
+     *
      * 
-     * @return \Illuminate\Http\Response
+     * 
     */
     public function index(Request $request, $event_id)
     {
@@ -75,16 +109,18 @@ class ActivitiesController extends Controller
 
 
     /**
-     * _store_: Create a new activity
+     * _store_: create a new activity
      * 
      * @urlParam event_id id of the event in which a new activity is to be created
      * 
-     * @bodyParam name string required
-     * @bodyParam subtitle string required     
-     * @bodyParam space_id string required
-     * @bodyParam image string
-     * @bodyParam description string required
-     * @bodyParam capacity integer required
+     * @bodyParam name string required name Example: PRIMERA ACTIVIDAD
+     * @bodyParam subtitle string optional Example: Subtitulo primera actividad       
+     * @bodyParam image string Example: https://storage.googleapis.com/herba-images/evius/events/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg
+     * @bodyParam description string  Example: Primera actividad del evento 
+     * @bodyParam capacity integer  number of people who can enter the activity. Example: 50
+     * @bodyParam event_id string required event with which the activity is associated Example: 5fa423eee086ea2d1163343e
+     * @bodyParam datetime_end datetime required Example: 2020-10-14 14:11
+     * @bodyParam datetime_start datetime required  Example: 2020-10-14 14:50
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

@@ -98,14 +98,25 @@ return [
                  */
                 'prefixes' => [
                     // '*',
-                    '*/activities_attendees',  
-                    'activities_attendees/*',
-                    '*/events',
-                    '*/activities',
-                    '*/activities/*',    
-                    '*/duplicateactivitie/*',      
-                    '*/eventusers',
-                    '*/users'                                                   
+                    //ActivityAssistant
+                        '*/activities_attendees',  
+                        '*/activities_attendees/*',
+                    //Events
+                        '*/events',
+                    // Activities
+                        '*/activities',
+                        '*/activities/*',    
+                        '*/duplicateactivitie/*', 
+                        '*/createmeeting/*',   
+                    // EventUser  
+                        '*/eventusers',
+                        '*/eventusers/*',
+                    //Users
+                        '*/users',
+                        '*/users/*',
+                    //Host
+                        '*/host/*',    
+                        '*/host'
                 ],
 
                 /*
