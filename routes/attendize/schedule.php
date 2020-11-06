@@ -7,7 +7,7 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
  * SPACES
  ****************/
 
-Route::get ('events/{event_id}/spaces', 'SpaceController@index')->middleware('cacheResponse');
+Route::get ('events/{event_id}/spaces', 'SpaceController@index');
 Route::post ('events/{event_id}/spaces', 'SpaceController@store');
 Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show');
 Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
@@ -25,7 +25,8 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
  * EVIUS STYLES
  ****************/
 Route::apiResource('events/{event_id}/styles', 'StylesController');
-Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
+
+Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp')->middleware('cacheResponse:300');
 
 
 /****************

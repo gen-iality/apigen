@@ -343,8 +343,8 @@ class InvitationController extends Controller
     public function buildMeetingResponseMessage($data, String $event_id){
         $request_type = "meeting";
         $event = Event::find($event_id);
-        $receiver = Attendee::find($data["id_user_requesting"]);
-        $sender = Attendee::find($data["id_user_requested"]);
+        $sender = Attendee::find($data["id_user_requesting"]);
+        $receiver  = Attendee::find($data["id_user_requested"]);
         
         $mail["id_user_requesting"] = $data["id_user_requesting"];
         $mail["id_user_requested"] = $data["id_user_requested"];
