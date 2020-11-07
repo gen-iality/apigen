@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Intervention\Image\ImageManagerStatic as Image;
 
 /**
- * @resource Files
+ * @group Files
  *
  * Files handing mostly used to upload new files
  */
@@ -45,7 +45,7 @@ class FilesController extends Controller
 
         //valor por defecto de campo que contiene el archivo
         $field_name = ($field_name) ? $field_name : "file";
-
+        var_dump($request->file($field_name));die;
         //No viene ningun archivo
         if (!$request->hasFile($field_name)) {
             $statusCode = "400";
@@ -82,7 +82,7 @@ class FilesController extends Controller
 
     }
     /**
-     * Funcion destinada al guardado de imagenes en base 64 al google storage, XOXO
+     * _storeBaseImg_: Function intended for saving images on the basis of 64 al google storage
      */
     public function storeBaseImg(Request $request, string $key = null, GoogleFiles $gfService)
     {

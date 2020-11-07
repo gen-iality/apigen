@@ -113,11 +113,13 @@ return [
                         '*/eventusers/*',
                     //Users
                         '*/users',
-                        '*/users/*',
+                        '*/users/*',                
                     //Host
                         '*/host/*',    
-                        '*/host'
-                ],
+                        '*/host',
+                    //files
+                        '*/files/*'
+                ],  
 
                 /*
                  * Match only routes registered under this version. This option is ignored for Laravel router.

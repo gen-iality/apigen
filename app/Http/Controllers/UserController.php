@@ -27,6 +27,34 @@ class UserController extends UserControllerWeb
         $this->auth = $auth;
     }
     /**
+     * _signInWithEmailAndPassword_: login user
+     * 
+     * @bodyParam email email required
+     * @bodyParam password string reuired
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function signInWithEmailAndPassword(Request $request){
+        $data = $request->json()->all();
+        $email = isset($data['email']) ? $data['email'] : '' ;
+        $pass = isset($data['password']) ? $data['password'] : '' ;
+        
+        $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
+        $uid = $signInResult->firebaseUserId();
+
+        $user = Account::where('uid' , $uid)->first();
+
+        $user->refresh_token = $signInResult->refreshToken();
+
+        $user->save();
+
+        $user->initial_token = $signInResult->idToken();
+
+        return $user;
+        
+    }
+    /**
      * loginorcreatefromtoken
      *
      * @param  \Illuminate\Http\Request  $request
@@ -126,7 +154,7 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _store_: create new user.
+     * _store_: create new user SignUp.
      * 
      * @bodyParam email email required 
      * @bodyParam name  string required 

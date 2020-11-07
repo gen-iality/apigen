@@ -191,6 +191,7 @@ Route::group(
 
 Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+Route::post("users/signInWithEmailAndPassword" , "UserController@signInWithEmailAndPassword");
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
@@ -490,3 +491,6 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
+
+
+
