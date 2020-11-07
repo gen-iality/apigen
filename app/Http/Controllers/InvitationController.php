@@ -329,11 +329,11 @@ class InvitationController extends Controller
         $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
 
         $request_type = "meeting";
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión a las: " . $meetingStartTime;
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de reunión";
-        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión a las ". $meetingStartTime;
+        $mail["subject"] = $sender->properties["displayName"] . " te ha enviado una solicitud de reunión a las: " . $meetingStartTime . ".";
+        $mail["title"] = $sender->properties["displayName"] . " te ha enviado una solicitud de reunión" . ".";
+        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión a las ". $meetingStartTime . ".";
 
-        $mail["desc"] .= "<br><p>Puedes ingresar al evento a la sección Conecta / Agendate para revisar las solicitudes para aceptarlas rechazarlas</p>";
+        $mail["desc"] .= "<br><br><p>Puedes ingresar al evento a la sección Networking / Agéndate para revisar las solicitudes, para aceptarlas ó rechazarlas.</p>";
 
         self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
         return "Request / response send";
@@ -428,16 +428,16 @@ EOT;
         }
 
         $request_type = "friendship";
-        $mail["subject"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de contacto";
-        $mail["title"] = $sender->properties["displayName"] . " Te ha enviado una solicitud de contacto";
+        $mail["subject"] = $sender->properties["displayName"] . " te ha enviado una solicitud de contacto";
+        $mail["title"] = $sender->properties["displayName"] . " te ha enviado una solicitud de contacto";
         $mail["desc"] = <<<EOT
-        Hola  {$receiver->properties["displayName"]} , quiero contactarte por medio del evento  {$event->name}; <br/><br/>
+        Hola  {$receiver->properties["displayName"]} , quiero contactarte por medio del evento  {$event->name}. <br/><br/>
 
-        Las personas que no son contactos tuyos solamente ven una cantidad limitada de información, con lo cual pueden
-        buscarte en el evento pero no contactarte. <br/><br/>
+        Las personas que no son contactos tuyos solamente tienen visible una parte de tu información, 
+        por lo cual pueden buscarte en el evento pero no contactarte. <br/><br/>
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información oculta en el evento en la sección conecta/networking
-        de esta manera podrá contactarte.
+        Una vez aceptes la solicitud de contacto {$receiver->properties["displayName"]} podrá ver tu información completa en el evento en la sección Networking / Agéndate
+        de esta forma podrá contactarte.
 EOT;
         $rejected_message = " Lo sentimos " . $receiver->properties["displayName"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
