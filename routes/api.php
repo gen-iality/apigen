@@ -193,9 +193,11 @@ Route::group(
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
     }
 );
+
+Route::post("users/signInWithEmailAndPassword" , "UserController@signInWithEmailAndPassword");
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
-Route::post("users/signInWithEmailAndPassword" , "UserController@signInWithEmailAndPassword");
+
 
 /****************
  * events
