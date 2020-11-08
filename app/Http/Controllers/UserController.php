@@ -12,11 +12,22 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Storage;
 
 /**
  * @group User
+ * Manage users, the users info are stored in the  backend and the user auth info (password, email, sms login)
+ * is stored in firebase auth.
+ * firebaseauth user and backend user are connected thought the uid field generated in firebaseauth.
+ *
+ * El manejo de la sessión (si un usuario ingreso al sistema) se maneja usando tokens JWT generados por firebase
+ * se maneja un token en la url que se vence cada media hora y un refresh_token almacenado en el usuario
+ * para refrescar el token que se pasa por la URL.
+ *
+ * Del token en la url se extrae la información del usuario
+ * se pasa de esta manera
+ * ?token=xxxxxxxxxxxxxxxxx
  */
+
 class UserController extends UserControllerWeb
 {
 
@@ -26,40 +37,177 @@ class UserController extends UserControllerWeb
     {
         $this->auth = $auth;
     }
+
     /**
-     * _signInWithEmailAndPassword_: login user
-     * 
-     * @bodyParam email email required
-     * @bodyParam password string reuired
+     * _index_: It's not posible to query all users in the platform.
+     *
+     * Doesn't make sense to query all users. Users main function is to assits to an event
+     * thus make sense to query users going to an event.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return json_encode(["data" => "Can't query all users of the platform maximun scope is by event, please query particular user by _id or findByEmail"]);
+        /*return UsersResource::collection(
+    Account::paginate(config('app.page_size'))
+    );*/
+    }
+
+    /**
+     * _show_: registered User
+     *
+     * @urlParam user required  id of user. Example: 5e9caaa1d74d5c2f6a02a3c2
+     *
+     *
+     */
+    public function show(String $id)
+    {
+        //
+        $Account = Account::findOrFail($id);
+        $response = new UsersResource($Account);
+        return $response;
+    }
+
+    /**
+     * _store_: create new user SignUp.
+     *
+     * @bodyParam email email required. Example: evius@evius.co
+     * @bodyParam names  string required  person name
+     * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
+     * @bodyParam password  string  optional if not provided a default evius.2040 password is assigned
+     * @bodyParam others_properties Array  dynamic properties of the user you want to place Example:[]
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|unique:App\Account|email',
+            'names' => 'required',
+            'picture' => 'string',
+            'password' => 'string',
+            'others_properties' => 'array',
+        ]);
+
+        $data = $request->json()->all();
+        $result = new Account($data);
+        $result->save();
+        return $result;
+    }
+
+    /**
+     * _update_: update registered user
+     * @authenticated
+     * @urlParam user required id user. Example: 5e9caaa1d74d5c2f6a02a3c2
+     *
+     * @bodyParam email email optional. Example: evius@evius.co
+     * @bodyParam names  string optional. Example: evius lopez
+     * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
+     * @bodyParam others_properties array optional dynamic properties of the user you want to place. Example: []
+     * @return App\Http\Resources\UsersResource
+     */
+    public function update(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'email' => 'email',
+            'names' => 'string',
+            'picture' => 'string',
+            'password' => 'string',
+            'others_properties' => 'array',
+        ]);
+
+        $data = $request->json()->all();
+
+        $Account = Account::find($id);
+        $Account->fill($data);
+        $Account->save();
+        return $data;
+    }
+
+    /**
+     * _delete_: dele a registered user
+     * @authenticated
+     * @urlParam id required id user
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $Account = Account::find($id);
+        $res = $Account->delete();
+        if ($res == true) {
+            return 'True';
+        } else {
+            return 'Error';
+        }
+    }
+
+    /**
+     * _signInWithEmailAndPassword_: login a user
+     *
+     * @bodyParam email email required. Example: evius@evius.co
+     * @bodyParam password string required Example: evius.2040
+     * It returns the userdata and inside that data
+     * the initial_token to be stored in front and be used in following api request
      *
      * @param Request $request
      * @return void
      */
-    public function signInWithEmailAndPassword(Request $request){
+    public function signInWithEmailAndPassword(Request $request)
+    {
+
         $data = $request->json()->all();
-        $email = isset($data['email']) ? $data['email'] : '' ;
-        $pass = isset($data['password']) ? $data['password'] : '' ;
-        
+        $email = isset($data['email']) ? $data['email'] : '';
+        $pass = isset($data['password']) ? $data['password'] : '';
+
         $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
         $uid = $signInResult->firebaseUserId();
 
-        $user = Account::where('uid' , $uid)->first();
-
+        $user = Account::where('uid', $uid)->first();
         $user->refresh_token = $signInResult->refreshToken();
-
         $user->save();
-
         $user->initial_token = $signInResult->idToken();
 
         return $user;
-        
     }
+
     /**
-     * loginorcreatefromtoken
+     * _findByEmail_: search for specific user by mail
      *
+     * @urlParam email required email del usuario buscado. Example: evius@evius.co
+     *
+     * @param  email  $email
+     * @return \Illuminate\Http\Response
+     */
+    public function findByEmail($email)
+    {
+        try {
+            $Account = Account::where('email', '=', $email)
+                ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
+            $response = new UsersResource($Account);
+
+        } catch (\Exception $e) {
+            return ["error" => $e->getMessage()];
+        }
+        return $Account;
+    }
+
+    /**
+     * loginorcreatefromtoken: create a user from auth data.
+     * 
+     * If a userauth is created  in frontend using firebaseatuh javascript JDK
+     * this method can be called to create respective user in the backend
+     * data is extracted from the token.
+     * 
+     * authuser in firebaseauth and user are related by the field uid created by firebase
+     *
+     * @urlParam token required auth token used to extract the user info
+     * @urlParam destination optional url to redirect after user is created
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @return  redirect to evius front
      */
     //http://localhost:8000/api/user/loginorcreatefromtoken?evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg&evius_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVlOWVlOTdjODQwZjk3ZTAyNTM2ODhhM2I3ZTk0NDczZTUyOGE3YjUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZXZpdXMgY28iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXZpdXNhdXRoIiwiYXVkIjoiZXZpdXNhdXRoIiwiYXV0aF90aW1lIjoxNTg3OTE0MjAxLCJ1c2VyX2lkIjoiNU14bXdEUlZ5MWRVTEczb1NraWdFMXNoaTd6MSIsInN1YiI6IjVNeG13RFJWeTFkVUxHM29Ta2lnRTFzaGk3ejEiLCJpYXQiOjE1ODc5MTQyMDEsImV4cCI6MTU4NzkxNzgwMSwiZW1haWwiOiJldml1c0Bldml1cy5jbyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJldml1c0Bldml1cy5jbyJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.SpgxWQeZkzXCtI3JoHuVpSU_FxhC7bhLkMpe9foQAY10KkRGEvgLp0A2Wiah7B0QKPsgMv02apTsPgl6I9Y7drV4YTq_6JaCTTjJNAJII3ani1E9lgXyXbYww60SFzuO1HDFh3BL8qLtIm07KK8tncGloHfYBoI5PxFo9OIwS5672GWaAZHwQ_5MA4gBkRxl4I4IF-T5yOr8qqEOM4T7u1kdBlWtI1xx-YOgzDu-4usAd9b8tyk0yKYNfPqP3cCClXV9WoG51hWLzdjgjUPkdhoLXXa0-U2HqmjG_WtQTQkjtrQyFHV5q7piOemqNRGJbPNMUp3P1QYL-YQax7TYWg
     public function loginorcreatefromtoken(Request $request)
@@ -132,187 +280,12 @@ class UserController extends UserControllerWeb
 
     }
 
-    /**
-     * _index_: list of registered users
-     * 
-     * @response {
-     *       "_id": "5b98395ec06586792153148b",
-     *       "email": "otro@gmail.com",
-     *       "name": "otro",
-     *       "others_properties": "dynamic properties of the user you want to place",
-     *       "uid": "otro@gmail.com",
-     *       "updated_at": "2018-09-11 21:53:34",
-     *       "created_at": "2018-09-11 21:53:34"
-     * }
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return UsersResource::collection(
-            Account::paginate(config('app.page_size'))
-        );
-    }
-
-    /**
-     * _store_: create new user SignUp.
-     * 
-     * @bodyParam email email required 
-     * @bodyParam name  string required 
-     * @bodyParam others_properties string dynamic properties of the user you want to place
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $data = $request->json()->all();
-        $result = new Account($data);
-        $result->save();
-        return $result;
-    }
-
-    /**
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Account $id)
-    {
-
-    }
-
-    /**
-     * _show_: delete a registered user
-     *
-     * @urlParam id required id user
-     * 
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(String $id)
-    {
-        //
-        $Account = Account::find($id);
-        $response = new UsersResource($Account);
-        return $response;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * _update_: update registered user
-     * 
-     * @urlParam id required id user
-     *
-     * @bodyParam email email required 
-     * @bodyParam name  string required
-     * @bodyParam others_properties string dynamic properties of the user you want to place
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, string $id)
-    {
-        $data = $request->json()->all();
-
-        if (isset($data['phoneNumber']) && isset($data['picture'])) {
-            $data['profile_completed'] = ($data['phoneNumber'] != "" && $data['picture'] != "") ? true : false;
-        } else {
-            $data['profile_completed'] = false;
-        }
-
-        $Account = Account::find($id);
-        $Account->fill($data);
-        $Account->save();
-        return $data;
-    }
-
-    /**
-     * _VerifyAccount_: check user mail 
-     *
-     * @urlParam uid required id user
-     *
-     * @bodyParam email email required 
-     * @bodyParam name  string required
-     * @bodyParam auth  \Kreait\Firebase\Auth required
-     * 
-     * 
-     * @param Request $request
-     * @param \Kreait\Firebase\Auth $auth
-     * @param string $uid
-     * @return void
-     */
-    public function VerifyAccount(Request $request, \Kreait\Firebase\Auth $auth, $uid)
-    {
-        $data = $request->json()->all();
-        $user = Account::where("uid", $uid);
-        $password = $data["password"];
-
-        $user_auth = $auth->updateUser($uid, [
-            "password" => $password,
-            "emailVerified" => true,
-        ]);
-    }
-
-    /**
-     * _delete_: dele a user register
-     * 
-     * @urlParam id required id user
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $Account = Account::find($id);
-        $res = $Account->delete();
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
-        }
-    }
-
-    /**
-     * _findByEmail_: search for specific user by mail
-     *
-     * @urlParam email required email del usuario buscado
-     * 
-     * @param  email  $email
-     * @return \Illuminate\Http\Response
-     */
-    public function findByEmail(\Kreait\Firebase\Auth $auth, $email)
-    {
-        try {
-            $user = $auth->getUserByEmail($email);
-
-            $Account = Account::where('uid', '=', $user->uid)
-                ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
-            $response = new UsersResource($Account);
-
-            return $Account;
-        } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
-            return [];
-        } catch (\Exception $e) {
-            return ["error" => $e->getMessage()];
-        }
-
-    }
 
     /**
      * _sendConfirmationEmail_: sending of mail confirmation.
      *
      * @urlParam id required id user
-     * 
+     *
      * @return void
      */
     private static function _sendConfirmationEmail($user)
@@ -336,9 +309,9 @@ class UserController extends UserControllerWeb
 
     /**
      * _confirmEmail_: get email confirmation
-     * 
+     *
      * @urlParam id required id user
-     * 
+     *
      * @return void
      */
     public function confirmEmail(String $id)

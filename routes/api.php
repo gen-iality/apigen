@@ -96,8 +96,6 @@ Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
 
-
-Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 
 //endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
@@ -184,23 +182,20 @@ Route::group(
         Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
     }
 );
-
+ //Route::get('me/eventUsers', 'EventUserController@meEvents');
 /****************
  * Users
  ****************/
-
-Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
-Route::post("users/signInWithEmailAndPassword" , "UserController@signInWithEmailAndPassword");
-
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
-        Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
-        Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
+Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
+Route::post("users/signInWithEmailAndPassword" , "UserController@signInWithEmailAndPassword");
 
 /****************
  * events
