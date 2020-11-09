@@ -98,6 +98,7 @@ return [
                  */
                 'prefixes' => [
                     // '*',
+                        'files/*',
                     //ActivityAssistant
                         '*/activities_attendees',  
                         '*/activities_attendees/*',
