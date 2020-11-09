@@ -72,7 +72,7 @@ class UserController extends UserControllerWeb
     /**
      * _store_: create new user SignUp.
      *
-     * @bodyParam email email required. Example: evius@evius.co
+     * @bodyParam email email required Example: evius@evius.co
      * @bodyParam names  string required  person name
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
      * @bodyParam password  string  optional if not provided a default evius.2040 password is assigned
@@ -148,7 +148,7 @@ class UserController extends UserControllerWeb
     /**
      * _signInWithEmailAndPassword_: login a user
      *
-     * @bodyParam email email required. Example: evius@evius.co
+     * @bodyParam email email required Example: evius@evius.co
      * @bodyParam password string required Example: evius.2040
      * It returns the userdata and inside that data
      * the initial_token to be stored in front and be used in following api request
