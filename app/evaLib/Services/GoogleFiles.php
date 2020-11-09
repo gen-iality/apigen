@@ -44,7 +44,7 @@ class GoogleFiles
         } else {
             $hola = $disk->put('evius/events', $fileContent);
             Storage::disk('gcs')->setVisibility($hola, 'public');
-            return 'https://storage.googleapis.com/herba-images/' . $hola;
+            return 'https://storage.googleapis.com/eviusauth.appspot.com/' . $hola;
         }
 
     }
