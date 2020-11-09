@@ -26,7 +26,7 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
  ****************/
 Route::apiResource('events/{event_id}/styles', 'StylesController');
 
-Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp')->middleware('cacheResponse:300');
+Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
 
 
 /****************
