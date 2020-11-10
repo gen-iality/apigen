@@ -126,14 +126,16 @@ class MeetingsController extends Controller
             $mail["request_id"] = $data["request_id"];
         }
 
-        $meetingStartTime = (isset($data["timestamp_start"])) ? $data["timestamp_start"] : "";
-        $meetingStartTime = date_format(Carbon::parse($meetingStartTime),'Y-m-d g:i A');
+        $meetingStartDate = (isset($data["timestamp_start"])) ? $data["timestamp_start"] : "";
+        $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
 
+        $meetingStartDate = date_format(Carbon::parse($meetingStartDate),'Y-m-d');
+        
 
         $request_type = "meeting";
-        $mail["subject"] = $sender->properties["displayName"] . " te ha enviado una solicitud de reunión el: " . $meetingStartTime . ".";
+        $mail["subject"] = $sender->properties["displayName"] . " te ha enviado una solicitud de reunión el: " . $meetingStartDate;
         $mail["title"] = $sender->properties["displayName"] . " te ha enviado una solicitud de reunión" . ".";
-        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión el ". $meetingStartTime . ".";
+        $mail["desc"] = "Hola " . $receiver->properties["displayName"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión el ". $meetingStartDate . " a las ". $meetingStartTime . ".";
 
         $mail["desc"] .= "<br><br><p>Puedes ingresar al evento a la sección Networking / Agéndate para revisar las solicitudes, para aceptarlas ó rechazarlas.</p>";
         
