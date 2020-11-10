@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/qui/duplicateactivitie/deleniti" \
+    "https://api.evius.co/api/events/facere/duplicateactivitie/voluptatem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/qui/duplicateactivitie/deleniti"
+    "https://api.evius.co/api/events/facere/duplicateactivitie/voluptatem"
 );
 
 let headers = {
@@ -79,14 +79,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/aperiam/activities" \
+    -G "https://api.evius.co/api/events/corporis/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/aperiam/activities"
+    "https://api.evius.co/api/events/corporis/activities"
 );
 
 let headers = {
@@ -164,7 +164,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/dolores/activities" \
+    "https://api.evius.co/api/events/totam/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"PRIMERA ACTIVIDAD","subtitle":"Subtitulo primera actividad","image":"https:\/\/storage.googleapis.com\/herba-images\/evius\/events\/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg","description":"Primera actividad del evento","capacity":50,"event_id":"5fa423eee086ea2d1163343e","datetime_end":"2020-10-14 14:11","datetime_start":"2020-10-14 14:50"}'
@@ -173,7 +173,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/dolores/activities"
+    "https://api.evius.co/api/events/totam/activities"
 );
 
 let headers = {
@@ -282,14 +282,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/id/activities/1" \
+    "https://api.evius.co/api/events/autem/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/id/activities/1"
+    "https://api.evius.co/api/events/autem/activities/1"
 );
 
 let headers = {
@@ -328,14 +328,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/et/activities/1" \
+    "https://api.evius.co/api/events/perferendis/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/et/activities/1"
+    "https://api.evius.co/api/events/perferendis/activities/1"
 );
 
 let headers = {
@@ -412,16 +412,16 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/nihil/activities_attendees" \
+    -G "https://api.evius.co/api/events/hic/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"harum","user_id":"qui"}'
+    -d '{"activity_id":"commodi","user_id":"libero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/nihil/activities_attendees"
+    "https://api.evius.co/api/events/hic/activities_attendees"
 );
 
 let headers = {
@@ -430,8 +430,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "harum",
-    "user_id": "qui"
+    "activity_id": "commodi",
+    "user_id": "libero"
 }
 
 fetch(url, {
@@ -473,7 +473,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/eligendi/activities_attendees" \
+    "https://api.evius.co/api/events/incidunt/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -482,7 +482,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/eligendi/activities_attendees"
+    "https://api.evius.co/api/events/incidunt/activities_attendees"
 );
 
 let headers = {
@@ -529,14 +529,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/eos/activities_attendees/1" \
+    -G "https://api.evius.co/api/events/aut/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/eos/activities_attendees/1"
+    "https://api.evius.co/api/events/aut/activities_attendees/1"
 );
 
 let headers = {
@@ -580,14 +580,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/repellat/activities_attendees/1" \
+    "https://api.evius.co/api/events/illo/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/repellat/activities_attendees/1"
+    "https://api.evius.co/api/events/illo/activities_attendees/1"
 );
 
 let headers = {
@@ -626,14 +626,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/tenetur/activities_attendees/1" \
+    "https://api.evius.co/api/events/blanditiis/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/tenetur/activities_attendees/1"
+    "https://api.evius.co/api/events/blanditiis/activities_attendees/1"
 );
 
 let headers = {
@@ -670,14 +670,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/me/events/neque/activities_attendees" \
+    -G "https://api.evius.co/api/me/events/sed/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/me/events/neque/activities_attendees"
+    "https://api.evius.co/api/me/events/sed/activities_attendees"
 );
 
 let headers = {
@@ -720,14 +720,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/omnis/activities_attendees/doloremque/check_in" \
+    "https://api.evius.co/api/events/facere/activities_attendees/explicabo/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/omnis/activities_attendees/doloremque/check_in"
+    "https://api.evius.co/api/events/facere/activities_attendees/explicabo/check_in"
 );
 
 let headers = {
@@ -877,7 +877,7 @@ curl -X POST \
     "https://api.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"voluptate","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"occaecati","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
 
 ```
 
@@ -895,7 +895,7 @@ let body = {
     "name": "\"Programming course\"",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "voluptate",
+    "picture": "occaecati",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
@@ -987,7 +987,7 @@ curl -X POST \
     "https://api.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"adipisci","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
+    -d '{"name":"\"Programming course\"","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"et","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a"}'
 
 ```
 
@@ -1005,7 +1005,7 @@ let body = {
     "name": "\"Programming course\"",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "adipisci",
+    "picture": "et",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
@@ -1092,14 +1092,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/users/est/events" \
+    -G "https://api.evius.co/api/users/a/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/users/est/events"
+    "https://api.evius.co/api/users/a/events"
 );
 
 let headers = {
@@ -1122,8 +1122,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/est\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/est\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/a\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/a\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -1131,7 +1131,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/est\/events",
+        "path": "http:\/\/localhost\/api\/users\/a\/events",
         "per_page": 900,
         "to": null,
         "total": 0
@@ -1157,14 +1157,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/organizations/exercitationem/events" \
+    -G "https://api.evius.co/api/organizations/et/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/exercitationem/events"
+    "https://api.evius.co/api/organizations/et/events"
 );
 
 let headers = {
@@ -1187,8 +1187,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/organizations\/exercitationem\/events?page=1",
-        "last": "http:\/\/localhost\/api\/organizations\/exercitationem\/events?page=1",
+        "first": "http:\/\/localhost\/api\/organizations\/et\/events?page=1",
+        "last": "http:\/\/localhost\/api\/organizations\/et\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -1196,7 +1196,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/organizations\/exercitationem\/events",
+        "path": "http:\/\/localhost\/api\/organizations\/et\/events",
         "per_page": 900,
         "to": null,
         "total": 0
@@ -1321,20 +1321,20 @@ Parameter | Status | Description
 <!-- END_741efed688409cc5b0c2673b73da037b -->
 
 <!-- START_a365aa3932cace4bde297c80cef75050 -->
-## _Show:_ consult an EventUser by assistant id
+## _show:_ consult an EventUser by assistant id
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/sit/eventusers/ut" \
+    -G "https://api.evius.co/api/events/dolor/eventusers/quisquam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/sit/eventusers/ut"
+    "https://api.evius.co/api/events/dolor/eventusers/quisquam"
 );
 
 let headers = {
@@ -1355,7 +1355,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Attendee] ut"
+    "message": "No query results for model [App\\Attendee] quisquam"
 }
 ```
 
@@ -1371,293 +1371,23 @@ Parameter | Status | Description
 
 <!-- END_a365aa3932cace4bde297c80cef75050 -->
 
-<!-- START_314ab10189ffcbcaaab1ed19eb9dd21f -->
-## _ByUserInEvent_ : list of users by events
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/eventusers/event/aliquam/user/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/eventusers/event/aliquam/user/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (500):
-
-```json
-{
-    "message": "Server Error"
-}
-```
-
-### HTTP Request
-`GET api/eventusers/event/{event_id}/user/{user_id}`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `event_id` |  optional  | string required
-
-<!-- END_314ab10189ffcbcaaab1ed19eb9dd21f -->
-
-<!-- START_6b56a32b833284ebacc99706a28295f7 -->
-## _transferEventuserAndEnrollToActivity_ : transfer Eventuser And Enroll To Activity
-
-> Example request:
-
-```bash
-curl -X POST \
-    "https://api.evius.co/api/eventusers/1/tranfereventuser/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/eventusers/1/tranfereventuser/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/eventusers/{event_id}/tranfereventuser/{event_user}`
-
-
-<!-- END_6b56a32b833284ebacc99706a28295f7 -->
-
-<!-- START_eed9d2ac9ae0f6e3669f6613fa1d351c -->
-## _createUserAndAddtoEvent_:create user and add it to an event
-
-> Example request:
-
-```bash
-curl -X POST \
-    "https://api.evius.co/api/events/placeat/eventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"email":"quasi","name":"quasi","password":"est","other_params,":{"":{"":{"":"quia"}}}}'
-
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/events/placeat/eventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "email": "quasi",
-    "name": "quasi",
-    "password": "est",
-    "other_params,": {
-        "": {
-            "": {
-                "": "quia"
-            }
-        }
-    }
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`POST api/events/{event_id}/eventusers`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `event_id` |  optional  | string required
-    `eventuser_id` |  optional  | string
-#### Body Parameters
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    `email` | email |  required  | field
-        `name` | string |  required  | 
-        `password` | string |  required  | 
-        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
-    
-<!-- END_eed9d2ac9ae0f6e3669f6613fa1d351c -->
-
-<!-- START_7ea69d252da861fe068b097ff9fb8ec9 -->
-## _indexByUserInEvent_: list of users by events
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/me/eventusers/event/libero" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/me/eventusers/event/libero"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (200):
-
-```json
-{
-    "data": [],
-    "links": {
-        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/libero?page=1",
-        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/libero?page=1",
-        "prev": null,
-        "next": null
-    },
-    "meta": {
-        "current_page": 1,
-        "from": null,
-        "last_page": 1,
-        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/libero",
-        "per_page": 900,
-        "to": null,
-        "total": 0
-    }
-}
-```
-
-### HTTP Request
-`GET api/me/eventusers/event/{event_id}`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `event_id` |  optional  | string required
-
-<!-- END_7ea69d252da861fe068b097ff9fb8ec9 -->
-
-<!-- START_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
-## _meInEvent_: user information logged into the event
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/me/events/aliquid/eventusers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/me/events/aliquid/eventusers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (500):
-
-```json
-{
-    "message": "Server Error"
-}
-```
-
-### HTTP Request
-`GET api/me/events/{event_id}/eventusers`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `event_id` |  optional  | 
-
-<!-- END_1b30bab6e9ef7c312e1ee78d85ac2dfa -->
-
 <!-- START_882953c7fc55a0465ff69cdc398811be -->
-## _Update_:update a specific assistant
+## _update_:update a specific assistant
 
 > Example request:
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/nobis/eventusers/1" \
+    "https://api.evius.co/api/events/error/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"praesentium","name":"voluptas","other_params,":{"":{"":{"":"atque"}}}}'
+    -d '{"email":"earum","name":"eum","other_params,":{"":{"":{"":"praesentium"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/nobis/eventusers/1"
+    "https://api.evius.co/api/events/error/eventusers/1"
 );
 
 let headers = {
@@ -1666,12 +1396,12 @@ let headers = {
 };
 
 let body = {
-    "email": "praesentium",
-    "name": "voluptas",
+    "email": "earum",
+    "name": "eum",
     "other_params,": {
         "": {
             "": {
-                "": "atque"
+                "": "praesentium"
             }
         }
     }
@@ -1706,6 +1436,66 @@ Parameter | Type | Status | Description
     
 <!-- END_882953c7fc55a0465ff69cdc398811be -->
 
+<!-- START_eed9d2ac9ae0f6e3669f6613fa1d351c -->
+## _store:_ Store a newly Attendee  in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://api.evius.co/api/events/qui/eventusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"culpa","user_id":"qui","names":"quaerat","properties":[]}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/events/qui/eventusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "culpa",
+    "user_id": "qui",
+    "names": "quaerat",
+    "properties": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event_id}/eventusers`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | field
+        `user_id` | string |  required  | user id
+        `names` | string |  required  | 
+        `properties` | array |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_eed9d2ac9ae0f6e3669f6613fa1d351c -->
+
 <!-- START_8229080007df704aa1e43dbfa7bf3ea8 -->
 ## __delete:__ remove a specific attendee from an event.
 
@@ -1713,14 +1503,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/1/eventusers/consequatur" \
+    "https://api.evius.co/api/events/1/eventusers/illo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/1/eventusers/consequatur"
+    "https://api.evius.co/api/events/1/eventusers/illo"
 );
 
 let headers = {
@@ -1777,7 +1567,7 @@ curl -X POST \
     "https://api.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"qui"}'
+    -d '{"file":"magnam"}'
 
 ```
 
@@ -1792,7 +1582,7 @@ let headers = {
 };
 
 let body = {
-    "file": "qui"
+    "file": "magnam"
 }
 
 fetch(url, {
@@ -1838,16 +1628,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/files/uploadbase/error" \
+    "https://api.evius.co/api/files/uploadbase/voluptatibus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"deleniti","type":"cum"}'
+    -d '{"file":"blanditiis","type":"qui"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/files/uploadbase/error"
+    "https://api.evius.co/api/files/uploadbase/voluptatibus"
 );
 
 let headers = {
@@ -1856,8 +1646,8 @@ let headers = {
 };
 
 let body = {
-    "file": "deleniti",
-    "type": "cum"
+    "file": "blanditiis",
+    "type": "qui"
 }
 
 fetch(url, {
@@ -1898,14 +1688,14 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/sit/host" \
+    -G "https://api.evius.co/api/events/pariatur/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/sit/host"
+    "https://api.evius.co/api/events/pariatur/host"
 );
 
 let headers = {
@@ -1957,16 +1747,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/consectetur/host" \
+    "https://api.evius.co/api/events/quaerat/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"est","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"et","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/consectetur/host"
+    "https://api.evius.co/api/events/quaerat/host"
 );
 
 let headers = {
@@ -1977,7 +1767,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "est",
+    "image": "et",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -2021,14 +1811,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/in/host/1" \
+    -G "https://api.evius.co/api/events/sint/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/in/host/1"
+    "https://api.evius.co/api/events/sint/host/1"
 );
 
 let headers = {
@@ -2072,16 +1862,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/et/host/1" \
+    "https://api.evius.co/api/events/in/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"laboriosam","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"repudiandae","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/et/host/1"
+    "https://api.evius.co/api/events/in/host/1"
 );
 
 let headers = {
@@ -2092,7 +1882,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "laboriosam",
+    "image": "repudiandae",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -2138,14 +1928,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/repudiandae/host/1" \
+    "https://api.evius.co/api/events/quia/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/repudiandae/host/1"
+    "https://api.evius.co/api/events/quia/host/1"
 );
 
 let headers = {
@@ -2310,10 +2100,10 @@ fetch(url, {
     },
     "confirmation_code": "Fmg1DjO8NAavTRaS",
     "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-    "updated_at": "2020-11-08 22:49:50",
+    "updated_at": "2020-11-10 00:12:38",
     "created_at": "2020-04-19 19:46:41",
     "names": "evius lopez",
-    "refresh_token": "AG8BCncUhVtMmK7up5iRRgNf4NQoJQyRw2ZJxK5jjPsJGY8muqf3t4MV8ijv2kv2e0PNa4CJYrvn-qWPD9n_YdmcZozxW2sRehjwbvAJ836kQBVs9s7jh_z0OVzTdeD3zLawo0yuWGHoBJ5O2qqE3QyPjO50yvvVE9i1IfVGVakgLSxd6GAGJ6d0SBdV99PkPs-arhjb8PZE0Ua7QeiL3TSH0U9Z5qISQQ",
+    "refresh_token": "AG8BCncdaPhPhgCmprMdO-TFKreGtarSI1RvnvYoX5WUIFBwoJL8BxGfJMeqi0225p_uKMEltFse0KDJ5ihUH3pg2-5jArwIPStAQcWw1Ai3x9qxHY3r9dQg6blAjo4280nISbMw1ca4Kj5Wq5KnDm3BSkkTUsGYzY1eGfdWJWVY6H3vPcBBuLqjTGH4gcsU40cC872qD2A-No5V5afPZSugzH6zmhxPtg",
     "aerolineapreferida": "Avianca",
     "genero": "Masculino",
     "tipodecerveza": "Ale",
@@ -2566,7 +2356,7 @@ curl -X POST \
     "https://api.evius.co/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"voluptas","picture":"http:\/\/www.gravatar.com\/avatar","password":"quia","others_properties":"[]"}'
+    -d '{"email":"evius@evius.co","names":"nostrum","picture":"http:\/\/www.gravatar.com\/avatar","password":"similique","others_properties":"[]"}'
 
 ```
 
@@ -2582,9 +2372,9 @@ let headers = {
 
 let body = {
     "email": "evius@evius.co",
-    "names": "voluptas",
+    "names": "nostrum",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "password": "quia",
+    "password": "similique",
     "others_properties": "[]"
 }
 
@@ -2887,92 +2677,6 @@ Parameter | Status | Description
 
 #general
 
-
-<!-- START_33830f7d0c3c97eb68e98898c2d22ae2 -->
-## api/eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/eventusers/1/makeTicketIdaProperty/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/eventusers/1/makeTicketIdaProperty/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (200):
-
-```json
-0
-```
-
-### HTTP Request
-`GET api/eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}`
-
-
-<!-- END_33830f7d0c3c97eb68e98898c2d22ae2 -->
-
-<!-- START_e3cf9cc35163eea18b0500dea24447d3 -->
-## api/events/{event_id}/users/{user_id}/asignticketstouser
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/events/1/users/1/asignticketstouser" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/events/1/users/1/asignticketstouser"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (500):
-
-```json
-{
-    "message": "Server Error"
-}
-```
-
-### HTTP Request
-`GET api/events/{event_id}/users/{user_id}/asignticketstouser`
-
-
-<!-- END_e3cf9cc35163eea18b0500dea24447d3 -->
 
 <!-- START_5311daf9c1595e9d9e1570e62c42f532 -->
 ## Display a listing of the resource.

@@ -765,12 +765,12 @@ class EventUserController extends Controller
     }
 
     /**
-     * __Store:__ Store a newly Attendee  in storage.
+     * _store:_ Store a newly Attendee  in storage.
      * 
+     * @urlParam event_id required
      * 
-     * @bodyParam email email required field 
-     * @bodyParam name  string required
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * @bodyParam user_id string required user id      
+     * @bodyParam properties array other params  will be saved in user and eventUser each event can require aditional properties for registration
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -782,7 +782,7 @@ class EventUserController extends Controller
     }
 
     /**
-     * _Show:_ consult an EventUser by assistant id
+     * _show:_ consult an EventUser by assistant id
      * 
      * @urlParam event_id string required
      * @urlParam id string required id Attendee
@@ -797,7 +797,7 @@ class EventUserController extends Controller
     }
 
     /**
-     * _Update_:update a specific assistant
+     * _update_:update a specific assistant
      *
      * @urlParam event_id string required
      * @urlParam evenUserId string required id de Attendee
