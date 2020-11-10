@@ -10,7 +10,7 @@
 @endif
 <br />
 <br />
-**Hola {{$eventUser_name}} **, su inscripción se ha realizado con éxito al evento:
+**Hola {{$eventUser_name}} **, la inscripción se ha realizado con éxito al evento:
 <b>{{$event->name}}</b>
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 <!-- @component('mail::table')
