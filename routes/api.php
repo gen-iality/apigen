@@ -167,7 +167,7 @@ Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@accep
 Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::post("events/{event_id}/meetingrequest/notify", "InvitationController@meetingrequestnotify");
+        Route::post("events/{event_id}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
     }
 );
 
