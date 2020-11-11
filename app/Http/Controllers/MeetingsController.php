@@ -133,9 +133,9 @@ class MeetingsController extends Controller
         
 
         $request_type = "meeting";
-        $mail["subject"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión el: " . $meetingStartDate;
+        $mail["subject"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión el: " . $meetingStartDate." - " . $meetingStartTime;
         $mail["title"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión" . ".";
-        $mail["desc"] = "Hola " . $receiver->properties["names"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión el ". $meetingStartDate . " ". $meetingStartTime . ".";
+        $mail["desc"] = "Hola " . $receiver->properties["names"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión el <strong>". $meetingStartDate . " ". $meetingStartTime . "</strong>.";
 
         $mail["desc"] .= "<br><br><p>Puedes ingresar al evento a la sección Networking / Agéndate para revisar las solicitudes, para aceptarlas ó rechazarlas.</p>";
         
