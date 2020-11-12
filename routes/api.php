@@ -189,11 +189,11 @@ Route::group(
 /****************
  * Users
  ****************/
-Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+Route::apiResource('users', 'UserController', ['only' => ['index', 'show','store']]);
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
-        Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+        Route::apiResource('users', 'UserController', ['except' => ['index', 'show','store']]);
     }
 );
 
