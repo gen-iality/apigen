@@ -104,6 +104,7 @@ return [
                         '*/activities_attendees/*',
                     //Events
                         '*/events',
+                        '*/eventTypes',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -120,6 +121,7 @@ return [
                         '*/host',
                     //files
                         '*/files/*'
+                    
                 ],  
 
                 /*
