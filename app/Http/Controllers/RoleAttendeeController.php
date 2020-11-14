@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 use Storage;
 
 /**
- * @resource Event
- *
- *
+ * @group RoleAttendee
  */
 class RoleAttendeeController extends Controller
 {
@@ -23,9 +21,9 @@ class RoleAttendeeController extends Controller
      */
 
     /**
-     * _index_: Listado de los roles de los asistentes.
+     * _index_: list of the roles of the attendees of an event
      * 
-     * @urlParam event_id required
+     * @urlParam event_id required event id Example: 5ea23acbd74d5c4b360ddde2
      *
      * @return \Illuminate\Http\Response
     */
@@ -41,9 +39,9 @@ class RoleAttendeeController extends Controller
     }
 
     /**
-     * _indexByEvent_: Buscar roles por evento.
+     * _indexByEvent_: search roles by event
      * 
-     * @urlParam event_id required
+     * @urlParam event_id required Example: 5fa423eee086ea2d1163343e
      * 
      * @param String $event_id
      * @return void
@@ -57,9 +55,12 @@ class RoleAttendeeController extends Controller
     }
 
     /**
-     * _store_:Crear un nuevo rol de asistente para un evento.
+     * _store_:create a new assistant role for an event
      * 
-     * @bodyParam name string required nombre del rol 
+     * @urlParam event_id required Example: 5fa423eee086ea2d1163343e
+     * 
+     * @bodyParam name string required rol name Example: Profesor
+     * @bodyParam event_id string required event id  Example: 5fa423eee086ea2d1163343e     
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -73,9 +74,10 @@ class RoleAttendeeController extends Controller
     }    
 
     /**
-     * _show_: Ver información de un rol de asistente específico.
+     * _show_: view information for a specific assistant role
      *
-     * @urlParam id required id de RoleAttendee
+     * @urlParam event_id required Example: 5ea23acbd74d5c4b360ddde2
+     * @urlParam rolesattendee required RoleAttendee id Example: 5faefba6b68d6316213f7cc2
      * 
      * @param  \App\RoleAttendee  $RoleAttendee
      * @return \Illuminate\Http\Response
@@ -87,9 +89,9 @@ class RoleAttendeeController extends Controller
         return $response;
     }
     /**
-     * _update_: Actualizar un rol del evento
+     * _update_: update role event
      *
-     * @urlParam id required id de RoleAttendee
+     * @urlParam id required id de RoleAttendee Example: 5faefba6b68d6316213f7cc2
      * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Role  $RoleAttendee
@@ -106,7 +108,7 @@ class RoleAttendeeController extends Controller
 
     /**
      * 
-     * _destroy_: Eliminar un rol específico de asistente.
+     * _destroy_: delete rol.
      * 
      * @urlParam id required id de RoleAttendee
      * 

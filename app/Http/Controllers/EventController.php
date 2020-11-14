@@ -34,7 +34,7 @@ class EventController extends Controller
      *
      * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5ea6df83cf57da4a52065562"]}]
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["SUBASTA DE ARTE"]}]
      * 
      * 
      * @response{
@@ -208,14 +208,15 @@ class EventController extends Controller
      *
      * There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
      * 
-     * @bodyParam name string required name to event Example: "Programming course" 
+     * @bodyParam name string required name to event Example: Programming course 
      * @bodyParam datetime_from datetime required date and time of start of the event Example: 2020-10-16 18:00:00
-     * @bodyParam datetime_to datetime required date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam datetime_to datetime  date and time of the end of the event Example: 2020-10-16 21:00:00
      * @bodyParam picture string image of the event
      * @bodyParam visibility string required restricts access for registered users or any unregistered user Example: PUBLIC
      * @bodyParam user_properties array user registration properties
      * @bodyParam author_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
      * @bodyParam event_type_id string required Example: 5bf47226754e2317e4300b6a
+     * @bodyParam organizer_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

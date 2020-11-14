@@ -38,7 +38,7 @@ class EventTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      * 
-     * @bodyParam name required name event type
+     * @bodyParam name required name event types
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */

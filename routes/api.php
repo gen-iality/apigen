@@ -481,6 +481,10 @@ Route::post("files/upload/{field_name?}", "FilesController@upload");
 Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
+Route::get('rols', 'RolController@index');
+Route::post('rols', 'RolController@store');
+Route::put('rols/{id}', 'RolController@update');
+Route::get('rols/{id}', 'RolController@show');
 /*
 Route::middleware('cors')->get('rols', 'RolController@index');
 Route::middleware('cors')->post('rols', 'RolController@store');
