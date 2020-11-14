@@ -146,6 +146,9 @@ Route::apiResource('networking', 'MeetingsController');
 Route::get('event/{event_id}/meeting/{meeting_id}/accept', 'MeetingsController@accept');
 Route::get('event/{event_id}/meeting/{meeting_id}/reject', 'MeetingsController@reject');
 
+Route::get('event/{event_id}/meeting', 'MeetingsController@index');
+
+
 /***************
  * SENDCONTENT  TEST CONTROLLER
  ****************/

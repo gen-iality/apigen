@@ -87,8 +87,34 @@ class MeetingsController extends Controller
 
     }
 
-    public function index(Request $request)
+
+    
+    public function index(Request $request, $event_id)
     {
+        $path = "event_agendas/{$event_id}/agendas";
+        $documents = $this->database->collection($path)->documents();
+
+        foreach($documents as $document){
+            if ($document->exists()) {
+                $data = $document->data();
+
+                $attendees = [];
+                foreach($data['attendees'] as $attendee){
+                    $a = Attendee::find($attendee);
+                    $attendees[] = isset($a)?$a['properties']['names']." ".$a['properties']['email']: "--";
+                }
+
+                $attendees=implode(",", $attendees);
+
+                echo "{$data['timestamp_start']}, {$attendees}, {$data['request_status']}<br/>";
+                //printf('Document data for document %s:' . PHP_EOL, $document->id());
+                //print_r($document->data());
+                //printf(PHP_EOL);
+            } else {
+                printf('Document %s does not exist!' . PHP_EOL, $snapshot->id());
+            }
+        }
+        return "FIN";
 
 
     }
