@@ -70,8 +70,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _store_: create new user SignUp.
-     *
+     * _store_: create new user SignUp
+     * 
+     * 
      * @bodyParam email email required Example: evius@evius.co
      * @bodyParam names  string required  person name
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
