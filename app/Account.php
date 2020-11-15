@@ -96,8 +96,6 @@ class Account extends User
         //Creamos el usuario en firebase
         self::creating(
             function ($model) {
-                try {
-
                     \Log::debug($model);
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
@@ -118,10 +116,6 @@ class Account extends User
                     $model->uid = $fbuser->uid;
                     $model->initial_token = $singed->idToken();
                     $model->refresh_token = $singed->refreshToken();
-
-                } catch (\Exception $e) {
-                    var_dump($e->getMessage());
-                }
             }
         );
 
