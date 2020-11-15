@@ -217,6 +217,9 @@ class EventController extends Controller
      * @bodyParam author_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
      * @bodyParam event_type_id string required Example: 5bf47226754e2317e4300b6a
      * @bodyParam organizer_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam category array App\Category
+     * @bodyParam localtion String VIRTUAL | VENUE_NAME
+     * @bodyParam extra_config object json of additional values to be stored
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

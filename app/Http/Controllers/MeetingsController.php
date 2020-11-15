@@ -94,15 +94,17 @@ class MeetingsController extends Controller
         $path = "event_agendas/{$event_id}/agendas";
         $documents = $this->database->collection($path)->documents();
 
+        $count = 0;
         foreach($documents as $document){
+            $count++;
             if ($document->exists()) {
                 $data = $document->data();
 
                 $attendees = [];
-                foreach($data['attendees'] as $attendee){
-                    $a = Attendee::find($attendee);
-                    $attendees[] = isset($a)?$a['properties']['names']." ".$a['properties']['email']: "--";
-                }
+                // foreach($data['attendees'] as $attendee){
+                //     $a = Attendee::find($attendee);
+                //     $attendees[] = isset($a)?$a['properties']['email']: "--";
+                // }
 
                 $attendees=implode(",", $attendees);
 
@@ -114,7 +116,7 @@ class MeetingsController extends Controller
                 printf('Document %s does not exist!' . PHP_EOL, $snapshot->id());
             }
         }
-        return "FIN";
+        return "total: {$count}";
 
 
     }

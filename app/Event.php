@@ -31,8 +31,11 @@ class Event extends ModelsEvent
         'visibility', 'picture', 'organization_id', 'category', 'extra_config',
         'user_properties', 'properties_group', 'styles', 'has_date', 'app_configuration',
         'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
-        'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
-        'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
+        'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 
+        'meetinghostname', 'meetinghostemail', 'dates',
+        'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 
+        'loader_page', 'data_loader_page', 
+        'show_banner', 'initial_page', 'show_banner_footer',
         'send_custom_email'
     ];
 
