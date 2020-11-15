@@ -120,8 +120,10 @@ return [
                         '*/host/*',    
                         '*/host',
                     //files
-                        '*/files/*'
-                    
+                        '*/files/*',
+                    //Rols
+                        '*/rolesattendees',
+                        '*/rolesattendees/*'                        
                 ],  
 
                 /*
