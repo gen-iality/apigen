@@ -197,6 +197,7 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show','store']]);
+        Route::get('users/currentUser', 'FireBaseAuthController@getCurrentUser');
     }
 );
 

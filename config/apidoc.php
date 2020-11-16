@@ -115,7 +115,9 @@ return [
                         '*/eventusers/*',
                     //Users
                         '*/users',
-                        '*/users/*',                
+                        '*/users/*',
+                        '*/auth',
+                        '*/auth/*',             
                     //Host
                         '*/host/*',    
                         '*/host',
