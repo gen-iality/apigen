@@ -406,6 +406,17 @@ Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
 Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
 Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@createUserAndAddtoEvent');
 Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
+
+/****************
+ * Orders Events
+ ****************/
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+    Route::apiResource('events/{event_id}/discountcodes', 'DiscountCodeController');
+    Route::post('event/{event_id}/discountcodes', 'DiscountCodeController@import');
+    
+    
+
 //     }
 // );
 
