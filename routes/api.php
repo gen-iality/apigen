@@ -74,7 +74,7 @@ Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy'
 // Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
 // Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
-// Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
 
 
 // // api para transferir eventuser
@@ -171,7 +171,7 @@ Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@accep
 Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::post("events/{event_id}/meetingrequest/notify", "InvitationController@meetingrequestnotify");
+        Route::post("events/{event_id}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
     }
 );
 
@@ -193,6 +193,12 @@ Route::group(
  * Users
  ****************/
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show','store']]);
+
+Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+//Se deja la ruta duplicada mientras en el front el cache se actualiza, con ruta 'users'
+Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");

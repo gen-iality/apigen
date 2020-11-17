@@ -6,6 +6,9 @@ use App\Attendee;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Firestore;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Event;
+use Carbon\Carbon;
+
 
 /**
  *
@@ -87,9 +90,60 @@ class MeetingsController extends Controller
 
     }
 
+    public function meetingrequestnotify(Request $request, $event_id)
+    {
 
-    
-    public function index(Request $request, $event_id)
+        $data = $request->json()->all();
+        $meeting_id = $data['request_id'];
+
+        $path = "event_agendas/{$event_id}/agendas/{$meeting_id}";
+        $d = $this->database->document($path);
+        if (!$d->snapshot()->exists()) {
+            throw new ModelNotFoundException("Model doesn't exists");
+        }
+
+        $meeting = $d->snapshot()->data();
+
+        $data['timestamp_start'] = $meeting['timestamp_start']; 
+        
+        self::buildMeetingRequestMessage($data, $event_id);
+
+    }   
+
+    public function buildMeetingRequestMessage($data, String $event_id)
+    {
+        $event = Event::find($event_id);
+        $receiver = Attendee::find($data["id_user_requested"]);
+        $sender = Attendee::find($data["id_user_requesting"]);        
+        $mail["id_user_requesting"] = $data["id_user_requesting"];
+        $mail["id_user_requested"] = $data["id_user_requested"];
+
+        $mail["mails"] = $receiver->email ? [$receiver->email] : [$receiver->properties["email"]];
+        $mail["sender"] = $event->name;
+        $mail["event_id"] = $event_id;
+
+        if (!empty($data["request_id"])) {
+            $mail["request_id"] = $data["request_id"];
+        }
+
+        $meetingStartDate = (isset($data["timestamp_start"])) ? $data["timestamp_start"] : "";
+        $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
+
+        $meetingStartDate = date_format(Carbon::parse($meetingStartDate),'Y-m-d');
+        
+
+        $request_type = "meeting";
+        $mail["subject"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión el: " . $meetingStartDate." - " . $meetingStartTime;
+        $mail["title"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión" . ".";
+        $mail["desc"] = "Hola " . $receiver->properties["names"] . ", quiero contactarte por medio del evento " . $event->name. " para tener una reunión el <strong>". $meetingStartDate . " ". $meetingStartTime . "</strong>.";
+
+        $mail["desc"] .= "<br><br><p>Puedes ingresar al evento a la sección Networking / Agéndate para revisar las solicitudes, para aceptarlas ó rechazarlas.</p>";
+        
+        app('App\Http\Controllers\InvitationController')->sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+
+        return "Request / response send";
+    }
+    public function index(Request $request)
     {
         $path = "event_agendas/{$event_id}/agendas";
         $documents = $this->database->collection($path)->documents();

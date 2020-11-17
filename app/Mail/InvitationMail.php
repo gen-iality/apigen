@@ -71,7 +71,7 @@ class InvitationMail extends Mailable implements ShouldQueue
 
         if($changePassword){
             
-            $password =  "chile.2020";
+            $password =  self::createPass();
             try {
                 $updatedUser = $this->auth->changeUserPassword($eventUser['user']['uid'], $password);
                 $properties = $eventUser["properties"];
