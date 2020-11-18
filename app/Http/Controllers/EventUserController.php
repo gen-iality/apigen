@@ -59,7 +59,7 @@ class EventUserController extends Controller
 
         $input = $request->all();
         //arreglo temporal para Yanbal/landing/5f99a20378f48e50a571e3b6
-        if ($event_id == "5f99a20378f48e50a571e3b6" ){
+        if ($event_id == "5f99a20378f48e50a571e3b6") {
             $input["pageSize"] = 2;
         }
         $query = Attendee::where("event_id", $event_id);
@@ -336,27 +336,28 @@ class EventUserController extends Controller
     public function ChangeUserPassword(Request $request, string $event_id)
     {
         $data = $request->json()->all();
+        $destination = $request->input("destination");
+        $onlylink = $request->input("onlylink");
 
         //Validar si el usuario está registrado en el evento
-            $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
-            $eventUser = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
-            // var_dump($eventUser);die;
+        $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
+        $eventUser = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
 
         $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
-        
+
         //En caso de que no exita el usuario se finaliza la función
-            if (empty($eventUser)){
-               abort(401,"El correo ingresado no se encuentra registrado en el evento");
-            }
-       
+        if (empty($eventUser)) {
+            abort(401, "El correo ingresado no se encuentra registrado en el evento");
+        }
+
         //Envio de correo para la contraseña
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null,null,null,true)
-                );
-            return $eventUser;
+        Mail::to($email)
+            ->queue(
+                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null, null, null, true, $destination, $onlylink)
+            );
+        return $eventUser;
 
     }
 
@@ -451,8 +452,7 @@ class EventUserController extends Controller
             $auth = resolve('Kreait\Firebase\Auth');
             $signInResult = null;
 
-
-            // 
+            //
             //try {
             //     if (isset($eventUser->user->refresh_token)) {
             //         $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
@@ -463,15 +463,15 @@ class EventUserController extends Controller
             //         return response()->json((object) ["message" => $e->getMessage()], 400);
             //     }
             // }
-            
+
             if (!$signInResult) {
                 $pass = (isset($userData["password"])) ? $userData["password"] : "evius.2040";
 
                 if (isset($eventUser->user->uid)) {
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
-                    
+
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
-                    
+
                     $eventUser->user->refresh_token = $signInResult->refreshToken();
                     $eventUser->user->save();
                 }
@@ -481,7 +481,6 @@ class EventUserController extends Controller
                 //throw new Exception($outter_message . ' and new token could not be generated');
                 $eventUser->user->initial_token = $signInResult->accessToken();
             }
-            
 
             $response = new EventUserResource($eventUser);
 
@@ -580,7 +579,10 @@ class EventUserController extends Controller
     {
         $user = auth()->user();
         //truco si no viene el usuario para que no se rompa.
-        if (!$user) return EventUserResource::collection(Attendee::where("event_id", "-1")->paginate(config("app.page_size")));
+        if (!$user) {
+            return EventUserResource::collection(Attendee::where("event_id", "-1")->paginate(config("app.page_size")));
+        }
+
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );

@@ -28,7 +28,7 @@
         <div style="width:75%; margin:1em auto; height: auto; border: 1px solid lightgrey;">
             <div style="width:70%; margin:0 auto; padding: 3em 0">
             
-            <a href="https://evius.co" class="button">volver</a>
+            <a href=config('app.front_url')."" class="button">volver</a>
 
                 <div style="width:100%">
                     <div style=" width:40%; margin: 0 auto">

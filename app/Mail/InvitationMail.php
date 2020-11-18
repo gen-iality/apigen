@@ -38,16 +38,21 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $logo;
     public $ical = "";
     public $changePassword;    
+    public $onlylink;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false,$destination=null,$onlylink=null)
     {
 
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
+
+
+        $destination  = ($destination)?$destination:config('app.front_url');
+
         $event_location = null;
         if (!empty($event["location"]["FormattedAddress"])) {
             $event_location = $event["location"]["FormattedAddress"];
@@ -93,9 +98,8 @@ class InvitationMail extends Mailable implements ShouldQueue
         // lets encrypt !
         $pass = self::encryptdata($password);
 
-
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
+        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass)."&destination=".$destination;
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
         $this->organization_picture = $organization_picture;
@@ -113,8 +117,10 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
-        $this->urlconfirmacion = 'https://evius.co/landing/'.$event->_id;
+        $this->urlconfirmacion = $destination.'/landing/'.$event->_id;
         $this->changePassword = $changePassword;
+        $this->onlylink = $onlylink;
+        
         
 
         if (!$subject) {
@@ -206,11 +212,26 @@ class InvitationMail extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
+
+        if($this->onlylink){
+           
+            return $this
+            ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.onetimelogin');
+        }
+        
         if($this->changePassword){
             return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.changepassword');
+        }
+        if($this->onetimelogin){
+            return $this
+            ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.onetimelogin');
         }
         if($this->event->send_custom_email)
         {

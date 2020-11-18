@@ -93,7 +93,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
-        $this->event_link = "https://evius.co/landing/".$event->_id;
+        $this->event_link = config('app.front_url')."/landing/".$event->_id;
 
         if (!$subject) {
             "Invitación a " . $event->name . "";
