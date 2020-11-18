@@ -143,7 +143,8 @@ class MeetingsController extends Controller
 
         return "Request / response send";
     }
-    public function index(Request $request)
+
+    public function index(Request $request, $event_id)
     {
         $path = "event_agendas/{$event_id}/agendas";
         $documents = $this->database->collection($path)->documents();
@@ -155,10 +156,10 @@ class MeetingsController extends Controller
                 $data = $document->data();
 
                 $attendees = [];
-                // foreach($data['attendees'] as $attendee){
-                //     $a = Attendee::find($attendee);
-                //     $attendees[] = isset($a)?$a['properties']['email']: "--";
-                // }
+                foreach($data['attendees'] as $attendee){
+                    $a = Attendee::find($attendee);
+                    $attendees[] = isset($a)?$a['properties']['email']: "--";
+                }
 
                 $attendees=implode(",", $attendees);
 
