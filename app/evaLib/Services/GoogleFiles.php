@@ -42,7 +42,6 @@ class GoogleFiles
             $disk->setVisibility($path, 'public');
             return $url;
         } else {
-            
             $filepath = $disk->put('evius/events', $fileContent);
             $disk->setVisibility($filepath, 'public');
             return $disk->url($filepath);
