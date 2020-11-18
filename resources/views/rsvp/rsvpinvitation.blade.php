@@ -28,10 +28,11 @@ ha sido invitado a:
 @endcomponent
 @endif
 
-
+<div class="centered">
 @if(!empty($image))
 <img alt="{{$event->name}}" src="{{ $image }}">
 @endif
+</div>
 
 @if(!empty($message) && $message != '<p><br></p>')
 {!!$message!!}
