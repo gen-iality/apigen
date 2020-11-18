@@ -39,12 +39,12 @@ class GoogleFiles
         if (!is_object($fileContent)) {
             $file = $disk->put($path, $fileContent);
             $url = $disk->url($path);
-            Storage::disk('gcs')->setVisibility($path, 'public');
+            $disk->setVisibility($path, 'public');
             return $url;
         } else {
-            $hola = $disk->put('evius/events', $fileContent);
-            Storage::disk('gcs')->setVisibility($hola, 'public');
-            return 'https://storage.googleapis.com/herba-images/' . $hola;
+            $filepath = $disk->put('evius/events', $fileContent);
+            $disk->setVisibility($filepath, 'public');
+            return $disk->url($filepath);
         }
 
     }

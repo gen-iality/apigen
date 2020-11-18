@@ -167,7 +167,7 @@ Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@accep
 Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::post("events/{event_id}/meetingrequest/notify", "InvitationController@meetingrequestnotify");
+        Route::post("events/{event_id}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
     }
 );
 
@@ -189,6 +189,8 @@ Route::group(
  * Users
  ****************/
 
+Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+//Se deja la ruta duplicada mientras en el front el cache se actualiza, con ruta 'users'
 Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
