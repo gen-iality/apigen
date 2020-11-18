@@ -45,6 +45,10 @@ class InvitationController extends Controller
         try {
 
             $destination  = ($destination)?$destination:config('app.front_url');
+
+            if(substr($destination, -1) == '/') {
+                $destination = substr($destination, 0, -1);
+            }
            
             $passdecrypt = ($pass)?self::decryptdata($pass):'evius.2040';
             $userinfo = $this->auth->getUserByEmail($email);
