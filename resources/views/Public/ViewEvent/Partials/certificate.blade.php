@@ -19,7 +19,7 @@
 
     body {
 
-        background-size: cover;
+        background-size: contain;
         height: 100%;
         width: 100%;
         margin: 0;
