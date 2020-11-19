@@ -58,7 +58,7 @@ Route::apiResource('events/{event_id}/host', 'HostController');
 Route::post  ('/meetingrecording',      'ActivitiesController@storeMeetingRecording');
 Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
-Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
+Route::apiResource('events/{event_id}/activities', 'ActivitiesController')->middleware('cacheResponse');
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
 
 /***************
