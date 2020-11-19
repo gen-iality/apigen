@@ -39,6 +39,7 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $ical = "";
     public $changePassword;    
     public $onlylink;
+    public $onetimelogin;
     /**
      * Create a new message instance.
      *
