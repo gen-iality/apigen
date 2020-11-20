@@ -8,6 +8,7 @@ use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 use Storage;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use \Exception;
 
 /**
  * @resource Event
@@ -114,13 +115,16 @@ class CategoryController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $id)
-    {
-        $res = $id->delete();        
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
+    public function destroy($id)
+    {   
+        $category = Category::findOrFail($id);
+        $events = Event::where('category_ids' , $category->_id)->first();
+
+        if($events){
+            abort(400,'Las categorías asociadas a un evento no se pueden eliminar');
         }
+
+        return  (string) $category->delete();
+
     }
 }
