@@ -158,13 +158,15 @@ class MeetingsController extends Controller
                 $attendees = [];
                 foreach($data['attendees'] as $attendee){
                     $a = Attendee::find($attendee);
-                    $attendees[] = isset($a)?$a['properties']['email']: "--";
+                    $attendees[] = isset($a)?$a->_id:"-".",".isset($a)?$a['properties']['email']: "--";
+                   //var_dump($a->_id);
+                  
                 }
-                
-
+                $time = new Carbon($data['timestamp_start']);
+                $time->setTimezone('America/Bogota');
                 $attendees=implode(",", $attendees);
 
-                echo "{$data['timestamp_start']}, {$attendees}, {$data['request_status']}<br/>";
+                echo "{$document->id()}, {$time->format('Y-m-d H:s a')}, {$attendees}, {$data['request_status']}<br/>";
                 //printf('Document data for document %s:' . PHP_EOL, $document->id());
                 //print_r($document->data());
                 //printf(PHP_EOL);
