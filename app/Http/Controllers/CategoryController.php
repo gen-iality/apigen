@@ -7,6 +7,7 @@ use App\Event;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 use Storage;
+use Spatie\ResponseCache\Facades\ResponseCache;
 
 /**
  * @group Category
@@ -59,6 +60,7 @@ class CategoryController extends Controller
         $data = $request->json()->all();
         $result = new Category($data);
         $result->save();
+        ResponseCache::clear();
 
         return $result;
 
@@ -74,7 +76,7 @@ class CategoryController extends Controller
      */
     public function delete(Category $id)
     {
-        $res = $id->delete();
+        $res = $id->delete();       
         if ($res == true) {
             return 'True';
         } else {
@@ -120,6 +122,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->fill($data);
         $category->save();
+        ResponseCache::clear();
         return $data;
     }
 
@@ -133,7 +136,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $id)
     {
-        $res = $id->delete();
+        $res = $id->delete();        
         if ($res == true) {
             return 'True';
         } else {

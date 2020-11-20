@@ -360,7 +360,7 @@ class EventCheckoutController extends Controller
         $pending = Pending::where('reference',$order_reference)->first();
         
         if (!isset($pending) || !Auth::user()) {
-            header('Location: '.'https://evius.co'); die;
+            header('Location: '.config('app.front_url').''); die;
         }
         
         $order_session = json_decode($pending->value, true);
