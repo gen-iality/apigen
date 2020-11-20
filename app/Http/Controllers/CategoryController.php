@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use Storage;
 
 /**
- * @resource Event
- *
- *
+ * @group Category
+ * 
+ * The categories are a facility for classification of events
  */
 class CategoryController extends Controller
 {
@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * _index_: List of categories
      *
      * @return \Illuminate\Http\Response
      */
@@ -46,7 +46,10 @@ class CategoryController extends Controller
         //
     }
     /**
-     * Store a newly created resource in storage.
+     * _store_: create new category
+     * 
+     * @authenticated
+     * @bodyParam name string required name category Example: Lectura
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -60,6 +63,15 @@ class CategoryController extends Controller
         return $result;
 
     }
+
+    /**
+     * _delete_: delete category
+     * 
+     * @urlParam id category
+     *
+     * @param Category $id
+     * @return void
+     */
     public function delete(Category $id)
     {
         $res = $id->delete();
@@ -78,10 +90,10 @@ class CategoryController extends Controller
      */
 
     /**
-     * Display the specified resource.
+     * _show_: consult information on a specific category
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @urlParam category required category Example: 5fb6e8d76dbaeb3738258092
+     * 
      */
     public function show(String $id)
     {
@@ -90,8 +102,14 @@ class CategoryController extends Controller
         return $response;
     }
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_: update a specific category
+     * 
+     * @authenticated
+     * 
+     * 
+     * @urlParam category category Example: 5fb6e8d76dbaeb3738258092
+     * @bodyParam name string name category
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
@@ -106,10 +124,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
+     * _destroy_: Remove the specified resource from storage.
+     * 
+     * @authenticated
+     * 
+     * @urlParam category category Example: 5fb6e8d76dbaeb3738258092
+     * 
      */
     public function destroy(Category $id)
     {
