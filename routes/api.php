@@ -210,7 +210,7 @@ Route::group(
 // pero sin producir ningun tipo de errores.
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
-Route::apiResource('events', 'EventController');
+Route::apiResource('events', 'EventController')->middleware('cacheResponse');;
 //Route::get("eventsearch",'EventController');
 //     }
 // );
@@ -393,10 +393,9 @@ Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
-Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
-Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@createUserAndAddtoEvent');
-Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
+Route::apiResource('orders', 'ApiOrdersController');
+Route::get('orders/{order_id}', 'ApiOrdersController@show');
+Route::post("payment_webhook_response","ApiCheckoutController@paymentWebhookesponse");
 //     }
 // );
 

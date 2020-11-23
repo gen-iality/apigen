@@ -36,7 +36,7 @@ class Order extends Orders
     ];
 
 
-    protected $with = ['event', 'tickets'];
+    protected $with = ['tickets', 'orderStatus'];
 
     /**
      * The items associated with the order.
@@ -211,7 +211,7 @@ class Order extends Orders
         if (!$attendees_order) return;
 
         foreach ($attendees_order as $attendee) {
-            if ($attendee->ticket->price) $total += $attendee->ticket->price;
+            if ($attendee->ticket && $attendee->ticket->price) $total += $attendee->ticket->price;
         }
 
         //Vamos a recorrer los asistentes que contiene una orden
