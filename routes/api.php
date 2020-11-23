@@ -68,7 +68,7 @@ Route::post( 'events/{event_id}/eventusers',     'EventUserController@store');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
 Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
 // Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
-// Route::get('events/myevents', 'EventUserController@indexByEventUser');
+Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
 
 // Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
