@@ -66,7 +66,7 @@ Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::post( 'events/{event_id}/eventusers',     'EventUserController@store');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
-
+Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
 // Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 // Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
@@ -95,7 +95,7 @@ Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeU
 // Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
 
 
-// Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+
 // Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
 
 
