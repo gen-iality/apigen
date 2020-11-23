@@ -53,6 +53,12 @@ class InvitationController extends Controller
 
         try {
 
+            $destination  = ($destination)?$destination:config('app.front_url');
+
+            if(substr($destination, -1) == '/') {
+                $destination = substr($destination, 0, -1);
+            }
+           
             $passdecrypt = ($pass)?self::decryptdata($pass):'evius.2040';
             $userinfo = $this->auth->getUserByEmail($email);
 
@@ -77,7 +83,7 @@ class InvitationController extends Controller
                 //intentamos buscar por correo cómo segunda opción
                 $user = Account::where("email", $email)->first();
                 if (!$user) {
-                    return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+                    return Redirect::to($destination."/" . "landing/" . $innerpath);
                 }
                 $user->uid = $userinfo->uid;
             }
@@ -86,25 +92,27 @@ class InvitationController extends Controller
             $user->fill($refresh_token);
             $user->save();
 
-            return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
+            
+
+            return Redirect::to($destination."/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
 
         } catch (EmailNotFound $e) {
 
             Log::error("email no encontrado. " . $e->getMessage());
-            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $innerpath);
 
         } catch (UserNotFound $e) {
             Log::error("usuario no encontrado. " . $e->getMessage());
-            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $innerpath);
 
         } catch (InvalidPassword $e) {
             Log::error("contrasena invalida. " . $e->getMessage());
-            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $innerpath);
 
         } catch (Exception $e) {
 
             Log::error("Error message. " . $e->getMessage());
-            return Redirect::to("https://evius.co/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $innerpath);
 
         }
 
@@ -119,6 +127,8 @@ class InvitationController extends Controller
     public function singIn(Request $request)
     {
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+        $destination = ($request->has("destination")) ? $request->input("destination") : null;
+
 
         if ($request->input("request")) {
             try {
@@ -131,7 +141,7 @@ class InvitationController extends Controller
         $pass  = $request->input("pass");
         $email = $request->input("email");
 
-        return self::generateLoginLinkAndRedirect( $email, $pass,  $innerpath);
+        return self::generateLoginLinkAndRedirect( $email, $pass,  $innerpath, $destination);
 
     }
 

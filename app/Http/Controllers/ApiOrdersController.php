@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\User;
+use App\Account;
+use App\Attendee;
 use App\Event;
 use App\Http\Resources\OrderResource;
 use App\evaLib\Services\OrdersServices;
@@ -36,17 +38,21 @@ class ApiOrdersController extends Controller
      * @param bool|true $return_json
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, String $event_id, $return_json = true)
+    public function store(Request $request, $return_json = true)
     {
-        $request_data = $request;
-        $event = Event::findOrFail($event_id);
+        $request_data = $request->json()->all();
+        
+        $ids  =  $request_data['items'];
+
+        $event = Event::findOrFail($ids[0]);
+        $account = Account::findOrFail($request_data['account_id']);
         $fields = $event->user_properties;
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $activeAccountPaymentGateway = 3;
         $paymentGateway = 3;
         $order_expires_time = Carbon::now()->addMinutes(1000000);
-        $order_total = 300000;
+        $order_total =  $request_data['amount'];
         $tickets = [];
         $total_ticket_quantity = 0;
 
@@ -55,6 +61,7 @@ class ApiOrdersController extends Controller
             // 'validation_messages' => $validation_messages,
             'event_id' => $event->id,
             'tickets' => $tickets,
+            'items' => $ids,
             'total_ticket_quantity' => $total_ticket_quantity,
             'order_started' => time(),
             'expires' => $order_expires_time,
@@ -64,37 +71,21 @@ class ApiOrdersController extends Controller
             'organiser_booking_fee' => $organiser_booking_fee,
             'total_booking_fee' => $booking_fee + $organiser_booking_fee,
             'order_requires_payment' => (ceil($order_total) == 0) ? false : true,
-            'account_id' => $event->account->id,
+            'account_id' => $account->_id,
             // 'affiliate_referral' => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway' => $paymentGateway,
         ];
 
+        $request_data['order_first_name'] = $account->names;
+        $request_data['order_last_name'] ="";
+        $request_data['order_email'] = $account->email;
+        $request_data['properties'] = [];
+
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
 
         return $result;
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        var_dump("Hello World");die;
     }
 
     /**

@@ -38,7 +38,7 @@ class IntegrationBigmarkerController extends Controller
         //     id: "23a1ae7fc1af",
         //     attendee_name: displayName,
         //     attendee_email: email,
-        //     exit_uri: "https://evius.co"
+        //     exit_uri: config('app.front_url').""
         //   };
 
     }

@@ -33,7 +33,7 @@ class ActivityRegistration extends Mailable implements ShouldQueue
         $this->activityAssistant = $activityAssistant;
         $this->activity = $activity;
         $this->subject = $subject;
-        $this->event_link = 'https://evius.co/landing/'.$activity->event->_id;
+        $this->event_link = config('app.front_url').'/landing/'.$activity->event->_id;
         $datetime_start = \Carbon\Carbon::parse($activity->datetime_start."-05:00");
         $datetime_end = ($activity->datetime_end)?\Carbon\Carbon::parse($activity->datetime_end."-05:00"):$datetime_start->addHour();
         $datetime_start->setTimezone("UTC");
