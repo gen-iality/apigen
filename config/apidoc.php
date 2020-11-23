@@ -125,7 +125,10 @@ return [
                         '*/files/*',
                     //Rols
                         '*/rolesattendees',
-                        '*/rolesattendees/*'                        
+                        '*/rolesattendees/*',
+                    //Categories
+                        '*/categories',
+                        '*/categories/*'                        
                 ],  
 
                 /*

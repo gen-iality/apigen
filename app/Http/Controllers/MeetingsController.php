@@ -154,7 +154,7 @@ class MeetingsController extends Controller
             $count++;
             if ($document->exists()) {
                 $data = $document->data();
-
+                
                 $attendees = [];
                 foreach($data['attendees'] as $attendee){
                     $a = Attendee::find($attendee);

@@ -49,7 +49,7 @@ class InvitationController extends Controller
      * @param string $innerpath
      * @return void
      */
-    public function generateLoginLinkAndRedirect($email, $pass=null, $innerpath ="") {
+    public function generateLoginLinkAndRedirect($email, $pass=null, $innerpath ="",$destination=null) {
 
         try {
 

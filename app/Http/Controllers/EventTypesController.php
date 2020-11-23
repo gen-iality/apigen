@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\EventType;
 use App\Event;
 use Storage;
+use Spatie\ResponseCache\Facades\ResponseCache;
 
 
 /**
@@ -47,6 +48,10 @@ class EventTypesController extends Controller
         $data = $request->json()->all();
         $result = new EventType($data);
         $result->save();
+        ResponseCache::clear();
+
+
+
         return $result;
     }
     /**
@@ -98,6 +103,8 @@ class EventTypesController extends Controller
         $EventType = EventType::find($id);
         $EventType->fill($data);
         $EventType->save();
+        ResponseCache::clear();
+
         return $data;
     }
 
@@ -111,6 +118,8 @@ class EventTypesController extends Controller
     {
         $eventType = EventType::find($id);
         $res = $eventType->delete();
+        ResponseCache::clear();
+        
         if ($res == true) {
             return 'True';
         } else {
