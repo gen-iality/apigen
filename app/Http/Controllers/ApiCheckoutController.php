@@ -15,6 +15,10 @@ use App\Events\OrderCompletedEvent;
 class ApiCheckoutController extends Controller
 {
 	/** 
+	 * para revisar más documentación de los datos de la compra
+	 * http://developers.payulatam.com/en/web_checkout/sandbox.html
+	 * para exponer temporalmente mi localhost usar la app ngrok para que servicios
+	 * o personas externas puedan acceder a los servidores en mi computador
 	* Process purshase status from PayU via POST
 	* (Rejected, accepted purshase)
 	* Este endpoint es para llamarlo con un cron cada cierto tiempo
@@ -133,7 +137,6 @@ class ApiCheckoutController extends Controller
                     /*
                      * Create the attendees
                      */
-
 					foreach($order->items as $item) {
 
                         $attendee = new Attendee();
