@@ -51,7 +51,8 @@ class CategoryController extends Controller
      * _store_: create new category
      * 
      * @authenticated
-     * @bodyParam name string required name category Example: Lectura
+     * @bodyParam name string required name category Example: Animales
+     * @bodyParam image string category image Example: https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/gato-atigrado-triste-redes.jpg?alt=media&token=2cd2161b-43f7-42a8-87e6-cf571e83e660
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

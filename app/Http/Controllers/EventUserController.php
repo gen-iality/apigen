@@ -444,17 +444,10 @@ class EventUserController extends Controller
         $image = null; //$event->picture;
 
         //En caso de que no exita el usuario se finaliza la función
-<<<<<<< HEAD
-            // if (empty($eventUser)){
-            //    abort(401,"El correo ingresado no se encuentra registrado en el evento");
-            // }
-       
-=======
         if (empty($eventUser)) {
             abort(401, "El correo ingresado no se encuentra registrado en el evento");
         }
 
->>>>>>> 5042d4c598eabb8e501016312b4c034556d8c84e
         //Envio de correo para la contraseña
         Mail::to($email)
             ->queue(

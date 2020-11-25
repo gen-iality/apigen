@@ -15,11 +15,15 @@ use Carbon\Carbon;
 use App\Models\Ticket;
 use Auth;
 use Validator;
-
+/**
+ * @group Orders
+ * 
+ * The purpose of this end point is to store all the information of a user's payment orders 
+ */
 class ApiOrdersController extends Controller
 {
     /**
-     * Display all the Orders.
+     * _index_: list of all orders  
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,8 +35,12 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Store a newly created Order in storage.
-     * 
+     * _store_: create new order
+     *
+     * @bodyParam items array required id of the event from which the purchase is made Example:  ["5ea23acbd74d5c4b360ddde2"]
+     * @bodyParam account_id string required id of the user making the purchase Example: 5f450fb3d4267837bb128102
+     * @bodyParam amount integer required total order value Example: 10000
+     *  
      * @param request $request
      * @param string $event_id
      * @param bool|true $return_json
@@ -89,7 +97,7 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * _destroy_: remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -100,20 +108,24 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
+     * _show_: view order-specific information
+     * 
+     * @urlParam order required order id Example: 5fbd84e345611e292f04ab92
+     * 
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(String $event_id, String $orders_id)
+    public function show(String $orders_id)
     {    
         $order = Order::findOrFail($orders_id);
         return new OrderResource($order);
     }
 
-        /**
-     * __index:__ Display all the Orders of an event
+    /**
+     * _index_: display all the Orders of an event
      *
+     * @urlParam event_id required Example: 5ea23acbd74d5c4b360ddde2
+     * 
      * @return \Illuminate\Http\Response
      */
     public function indexByEvent(Request $request, String $event_id)
@@ -126,8 +138,10 @@ class ApiOrdersController extends Controller
 
     }
     /**
-     * __index:__ Display all the Orders of an user
-     *
+     * _index_: display all the Orders of an user 
+     * 
+     * @urlParam user_id required Example: 5f450fb3d4267837bb128102
+     * 
      * @return \Illuminate\Http\Response
      */
     public function ordersByUsers(Request $request, String $user_id)
@@ -141,9 +155,11 @@ class ApiOrdersController extends Controller
         );
     }
 
-       /**
-     * __index:__ Display all the Orders of an user
-     *
+    /**
+     * _index:_ display all the Orders of an user logueado
+     * 
+     * @authenticated
+     * 
      * @return \Illuminate\Http\Response
      */
     public function meOrders(Request $request)
@@ -157,8 +173,10 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Cancels an order
-     *
+     * _cancelOrder_: cancels an order
+     * 
+     * @urlParam order_id required 5fbd84e345611e292f04ab92
+     * 
      * @param Request $request
      * @param $order_id
      * @return mixed
@@ -197,8 +215,12 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * _update_: update the specified resource in storage.
      *
+     * @bodyParam items array  id of the event from which the purchase is made Example:  ["5ea23acbd74d5c4b360ddde2"]
+     * @bodyParam account_id string  id of the user making the purchase Example: 5f450fb3d4267837bb128102
+     * @bodyParam amount integer  total order value Example: 10000
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response

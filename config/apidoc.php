@@ -128,7 +128,11 @@ return [
                         '*/rolesattendees/*',
                     //Categories
                         '*/categories',
-                        '*/categories/*'                        
+                        '*/categories/*', 
+                    //Orders
+                        '*/orders',
+                        '*/orders/*',
+                        'orders/*'
                 ],  
 
                 /*
