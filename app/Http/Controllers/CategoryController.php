@@ -8,6 +8,7 @@ use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 use Storage;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use \Exception;
 
 /**
  * @group Category
@@ -134,13 +135,16 @@ class CategoryController extends Controller
      * @urlParam category category Example: 5fb6e8d76dbaeb3738258092
      * 
      */
-    public function destroy(Category $id)
-    {
-        $res = $id->delete();        
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
+    public function destroy($id)
+    {   
+        $category = Category::findOrFail($id);
+        $events = Event::where('category_ids' , $category->_id)->first();
+
+        if($events){
+            abort(400,'Las categorías asociadas a un evento no se pueden eliminar');
         }
+
+        return  (string) $category->delete();
+
     }
 }
