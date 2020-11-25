@@ -117,7 +117,9 @@ return [
                         '*/users',
                         '*/users/*',
                         '*/auth',
-                        '*/auth/*',             
+                        '*/auth/*',  
+                        '*/changeUserPassword',        
+                              
                     //Host
                         '*/host/*',    
                         '*/host',
