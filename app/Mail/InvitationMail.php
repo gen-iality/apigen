@@ -40,6 +40,7 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $changePassword;    
     public $onlylink;
     public $onetimelogin;
+    public $mensajepersonalizado;
     /**
      * Create a new message instance.
      *
@@ -51,6 +52,8 @@ class InvitationMail extends Mailable implements ShouldQueue
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
 
+        
+        
 
         $destination  = ($destination)?$destination:config('app.front_url');
 
@@ -103,6 +106,16 @@ class InvitationMail extends Mailable implements ShouldQueue
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass)."&destination=".$destination;
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
+
+        // [LINK_EVENTO:TEXTO]
+        $pattern = '/\[LINK_EVENTO\:(.*)\]/i';
+
+        $replacement = '<a href='.$link.'>$1</a>';
+        
+        $mensajepersonalizado = preg_replace($pattern, $replacement, $event->registration_message);
+
+        // var_dump($mensajepersonalizado);die;
+
         $this->organization_picture = $organization_picture;
         $this->type = $type;
         $this->image_header = $image_header;
@@ -121,6 +134,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->urlconfirmacion = $destination.'/landing/'.$event->_id;
         $this->changePassword = $changePassword;
         $this->onlylink = $onlylink;
+        $this->mensajepersonalizado = $mensajepersonalizado;
         
         
 
