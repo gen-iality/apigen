@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Spatie\ResponseCache\Facades\ResponseCache;
 
 /**
  * @resource Event
@@ -87,7 +88,9 @@ class ActivitiesController extends Controller
             $activity->access_restriction_roles()->attach($ids);
         }
         //Cargamos de nuevo para traer la info de las categorias
-        $activity = Activities::find($activity->id);        
+        $activity = Activities::find($activity->id);  
+        ResponseCache::clear();
+
         return $activity;
     }
     
@@ -274,6 +277,8 @@ class ActivitiesController extends Controller
             $Activities->access_restriction_roles()->attach($ids);       
         }
         $activity = Activities::find($Activities->id);
+        ResponseCache::clear();
+
         return $activity;
     }
 
@@ -286,6 +291,8 @@ class ActivitiesController extends Controller
     public function destroy(Request $request, $event_id, $id)
     {
         $Activities = Activities::findOrFail($id);
+        ResponseCache::clear();
+
         return (string) $Activities->delete();
     }
 }
