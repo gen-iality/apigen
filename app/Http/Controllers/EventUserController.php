@@ -420,9 +420,9 @@ class EventUserController extends Controller
     }
 
     /**
-     * _ChangeUserPassword_: change user password
+     * _changeUserPassword_: change user password
      * 
-     * @urlParam event_id string required
+     * @urlParam event_id required string id of the event in which the user is registered
      * 
      * @bodyParam email email required Email of the user who will change his password
      * 
@@ -444,17 +444,10 @@ class EventUserController extends Controller
         $image = null; //$event->picture;
 
         //En caso de que no exita el usuario se finaliza la función
-<<<<<<< HEAD
-            // if (empty($eventUser)){
-            //    abort(401,"El correo ingresado no se encuentra registrado en el evento");
-            // }
-       
-=======
         if (empty($eventUser)) {
             abort(401, "El correo ingresado no se encuentra registrado en el evento");
         }
 
->>>>>>> 5042d4c598eabb8e501016312b4c034556d8c84e
         //Envio de correo para la contraseña
         Mail::to($email)
             ->queue(
@@ -778,7 +771,7 @@ class EventUserController extends Controller
      * 
      * @urlParam event_id required
      * 
-     * @bodyParam user_id string required user id      
+     * @bodyParam account_id string required user id      
      * @bodyParam properties array other params  will be saved in user and eventUser each event can require aditional properties for registration
      *
      * @param  \Illuminate\Http\Request  $request

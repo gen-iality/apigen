@@ -8,6 +8,7 @@ use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 use Storage;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use \Exception;
 
 /**
  * @group Category
@@ -50,7 +51,8 @@ class CategoryController extends Controller
      * _store_: create new category
      * 
      * @authenticated
-     * @bodyParam name string required name category Example: Lectura
+     * @bodyParam name string required name category Example: Animales
+     * @bodyParam image string category image Example: https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/gato-atigrado-triste-redes.jpg?alt=media&token=2cd2161b-43f7-42a8-87e6-cf571e83e660
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -134,13 +136,16 @@ class CategoryController extends Controller
      * @urlParam category category Example: 5fb6e8d76dbaeb3738258092
      * 
      */
-    public function destroy(Category $id)
-    {
-        $res = $id->delete();        
-        if ($res == true) {
-            return 'True';
-        } else {
-            return 'Error';
+    public function destroy($id)
+    {   
+        $category = Category::findOrFail($id);
+        $events = Event::where('category_ids' , $category->_id)->first();
+
+        if($events){
+            abort(400,'Las categorías asociadas a un evento no se pueden eliminar');
         }
+
+        return  (string) $category->delete();
+
     }
 }

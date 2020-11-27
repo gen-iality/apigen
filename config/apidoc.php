@@ -117,7 +117,9 @@ return [
                         '*/users',
                         '*/users/*',
                         '*/auth',
-                        '*/auth/*',             
+                        '*/auth/*',  
+                        '*/changeUserPassword',        
+                              
                     //Host
                         '*/host/*',    
                         '*/host',
@@ -128,7 +130,11 @@ return [
                         '*/rolesattendees/*',
                     //Categories
                         '*/categories',
-                        '*/categories/*'                        
+                        '*/categories/*', 
+                    //Orders
+                        '*/orders',
+                        '*/orders/*',
+                        'orders/*'
                 ],  
 
                 /*

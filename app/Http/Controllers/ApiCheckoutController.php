@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Log;
 use App\Attendee;
 use App\Events\OrderCompletedEvent;
+use Mail;
 class ApiCheckoutController extends Controller
 {
 	/** 
@@ -31,7 +32,8 @@ class ApiCheckoutController extends Controller
 	public function paymentWebhookesponse(Request $request){
 
 		//reference_sale response_message_pol
-		$data = $request->input();
+        $data = $request->input();
+        Log::info("paymentWebhookesponse " . json_encode($data));
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fbb3fc287fbc02ffa74e11d";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
 		$order = Order::find($order_id);
@@ -61,6 +63,27 @@ class ApiCheckoutController extends Controller
             case 'APPROVED':
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
+                Log::info("Enviamos el correo");
+                Mail::to($order->email)
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\ConfirmationPayU()
+                );
+                Mail::to("juan.lopez@mocionsoft.com")
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\ConfirmationPayU()
+                );
+                Mail::to('deltorosalazar@gmail.com')
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\ConfirmationPayU()
+                );
+                Mail::to('geraldine.garcia@mocionsoft.com')
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\ConfirmationPayU()
+                );
                 if ($order->order_status_id != config('attendize.order_complete')) {
                     $order->order_status_id = config('attendize.order_complete');
                     Log::info("Completamos la orden");
@@ -68,6 +91,7 @@ class ApiCheckoutController extends Controller
                     if (config('attendize.send_email')) {
                         Log::info("Enviamos el correo");
                         //$this->dispatch(new SendOrderTickets($order));
+
                     }
                 }
                 break;

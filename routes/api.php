@@ -403,7 +403,7 @@ Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
 Route::apiResource('orders', 'ApiOrdersController');
-Route::get('orders/{order_id}', 'ApiOrdersController@show');
+// Route::get('orders/{order_id}', 'ApiOrdersController@show');
 Route::post("payment_webhook_response","ApiCheckoutController@paymentWebhookesponse");
 //     }
 // );
