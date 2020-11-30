@@ -134,7 +134,9 @@ return [
                     //Orders
                         '*/orders',
                         '*/orders/*',
-                        'orders/*'
+                        'orders/*',
+                    //RSVP
+                        '*/sendeventrsvp/*'
                 ],  
 
                 /*

@@ -21,6 +21,7 @@ use Redirect;
 
 /**
  * @group RSVP
+ * Handle RSVP(invitations for events)
  * @resource RSVP Handle RSVP(invitations for events)
  *
  */
@@ -124,16 +125,19 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * _createAndSendRSVP_:Send RSVP to users in an event, taking usersIds[] in request to filter which users the RSVP is going to be send to
-     * Enviar RSVP a los usuarios en un evento, tomando usersIds[] en solicitud para filtrar a qué usuarios se va a enviar la RSVP
+     * _createAndSendRSVP_: send RSVP to users in an event, taking eventUsersIds[] in request to filter which users the RSVP is going to be send to
+     * 
+     * @autenticathed
      * 
      * @urlParam event required
      * 
-     * @bodyParam usersIds[] required
-     * @bodyParam message required
-     * @bodyParam image required
-     * @bodyParam subject required
-     * @bodyParam footer required
+     * @bodyParam subject string required mail subject Evento virtual Ucronio     
+     * @bodyParam image_header string  imagen header 
+     * @bodyParam content_header string Example: Has sido invitado a el evento
+     * @bodyParam message string message that will go in the body of the mail 
+     * @bodyParam image string image that will go in the body of the mail       
+     * @bodyParam image_footer string image footer     
+     * @bodyParam eventUsersIds[] array required id of users to whom the mail will be sent Example: "eventUsersIds": ["5f8734c81730821f216b6202"]    
      *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
