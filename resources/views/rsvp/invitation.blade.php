@@ -30,7 +30,9 @@
 
 <!-- Mensaje configurable desde el CMS en la sección configuración asistentes -->
 @if ($event->registration_message )
-{!!$event->registration_message!!}
+
+{!!$mensajepersonalizado!!}
+
 @endif
 <!-- Por si tiene asociado un tickete con sala -->
 @if(!empty($eventUser->ticket_title))
