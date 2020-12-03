@@ -13,7 +13,8 @@ use Validator;
 
 /**
  * @group DiscountCodeTemplate
- *
+ * 
+ * The discount template is used to generate the discount codes, along with their percentage and the limit of uses for each code. 
  *
  */
 class DiscountCodeTemplateController extends Controller
@@ -26,14 +27,14 @@ class DiscountCodeTemplateController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * _index_: list all Discount Code Templates
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {   
         return JsonResource::collection(
-            DiscountCode::get()
+            DiscountCodeTemplate::get()
         );
     }
 
@@ -48,7 +49,12 @@ class DiscountCodeTemplateController extends Controller
         //
     }
     /**
-     * Store a newly created resource in storage.
+     * _store_:create new discount code template
+     * 
+     * @bodyParam name string required Example: Curso de regalo
+     * @bodyParam use_limit number required the number of uses for each code Example: 1
+     * @bodyParam discount number required discount percentage Example: 100
+     * æbodyParam even_id string required event with which the template will be associated Exmaple: 5ea23acbd74d5c4b360ddde2
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -62,6 +68,7 @@ class DiscountCodeTemplateController extends Controller
             'name' => "required",
             'use_limit' => "required",
             'discount' => 'required',
+            'event_id' => 'required',
         ];
         
 
@@ -83,21 +90,28 @@ class DiscountCodeTemplateController extends Controller
 
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
+     * _show_ : information from a specific template
+     * 
+     * @urlParam id discount template id 
+     * 
+     * @param  \App\DiscountCodeTemplate  $codegroup
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
     {
-        $codegroup = DiscountCode::findOrFail($id);
+        $codegroup = DiscountCodeTemplate::findOrFail($id);
         $response = new JsonResource($codegroup);
         //if ($Inscription["event_id"] = $event_id) {
         return $response;
     }
+
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_: update information from a specific template
+     * 
+     * @bodyParam name string  Example: Curso de regalo
+     * @bodyParam use_limit number  the number of uses for each code Example: 1
+     * @bodyParam discount number discount percentage Example: 100
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
@@ -105,15 +119,17 @@ class DiscountCodeTemplateController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->json()->all();
-        $category = DiscountCode::find($id);
+        $category = DiscountCodeTemplate::find($id);
         $category->fill($data);
         $category->save();
         return $data;
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * _destroy_: delete the specified docunt code template
+     * 
+     * @urlParam id discount template id 
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */

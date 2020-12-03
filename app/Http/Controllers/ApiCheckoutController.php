@@ -6,12 +6,15 @@ use App\Event;
 use App\Models\OrderItem;
 use App\Order;
 use App\Pending;
+use App\DiscountCode;
+use App\DiscountCodeTemplate;
 use App\Services\Order as OrderService;
 use Auth;
 use Illuminate\Http\Request;
 use Log;
 use App\Attendee;
 use App\Events\OrderCompletedEvent;
+use \Mail;
 class ApiCheckoutController extends Controller
 {
 	/** 
@@ -28,7 +31,7 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fbb3fc287fbc02ffa74e11d";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc80e2931be4a3ca2419dc5";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
 		$order = Order::find($order_id);
 		
@@ -36,7 +39,7 @@ class ApiCheckoutController extends Controller
 		$order->data = json_encode($data);
 		$order->save();
 
-		$this->changeStatusOrder($order_id, $order_status);
+		$this->changeStatusOrder($order_id, 'APPROVED');
 
 		return "listo";
 	}
@@ -55,12 +58,15 @@ class ApiCheckoutController extends Controller
 		
         switch ($status) {
             case 'APPROVED':
+
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
                 if ($order->order_status_id != config('attendize.order_complete')) {
+                   
                     $order->order_status_id = config('attendize.order_complete');
                     Log::info("Completamos la orden");
                     $this->completeOrder($order_id);
+                    
                     if (config('attendize.send_email')) {
                         Log::info("Enviamos el correo");
                         //$this->dispatch(new SendOrderTickets($order));
@@ -108,50 +114,69 @@ class ApiCheckoutController extends Controller
         //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no
         //vamos a crear la orden a partir del cache.
         //EL CACHE ES INDISPENSABLE EN ESTE CONTROLADOR
-
+        
         try {
 
             $order = Order::find($order_reference);
-
                 Log::info('completamos la orden: ' . $order_reference);
 
-					
-                    /*
-                     * Insert order items (for use in generating invoices)
-                     */
-					foreach($order->items as $item) {
-					$event = Event::find($item);
-                    $orderItem = new OrderItem();
-                    $orderItem->title    = $event->name;
-                    $orderItem->quantity = 1;
-                    $orderItem->order_id = $order->id;
-                    $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
-                    $orderItem->unit_booking_fee = 0;
-					$orderItem->save();
-					}
+                    switch($order->item_type){
+                        case 'discountCode' : 
+                            //Logica para agregar codigos
+                            $x=1;
+                            while($x <= 1) {            
+                                $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    
+                                $input_length = strlen($permitted_chars);
+                                $random_string = '';
+                                for ($j = 0; $j < 8; $j++) {
+                                    $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
+                                    $random_string .= $random_character;
+                                } 
+                                
+                                $codeTemplate = DiscountCodeTemplate::find($order->items[0]);
+                                
+                                
+                                $data['code'] = $random_string;
+                                $data['discount_code_template_id'] = $codeTemplate->_id;
+                                $data['event_id'] = $codeTemplate->event_id;
+                    
+                                $resultCode = new DiscountCode($data);
+                                $repeated =  DiscountCode::where('code' , $random_string)->first();
+                                if(!isset($repeated))
+                                {                                             
+                                    $resultCode->save();   
+                                    $x++;                                    
+                                }   
+                                $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
+                                Mail::to($order->email)
+                                ->queue(
+                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                    new \App\Mail\DiscountCodeMail($codes , $order)
+                                );          
+                                       
+                            }
+                        break;
+                        case 'event' :
+                        default:
 
-                    /*
-                     * Create the attendees
-                     */
-
-					foreach($order->items as $item) {
-
-                        $attendee = new Attendee();
-						$attendee->properties = (object) [];
-
-
-						$attendee->properties->names = $order->account->names;
-						$attendee->properties->email = $order->account->email;	
-
-                        $attendee->event_id = $item;
-                        $attendee->order_id = $order->id;
-                        //$attendee->ticket_id = $attendee_details['ticket']['_id'];
-                        $attendee->account_id = $order->account->_id;
-                        $attendee->save();
-
+                            /*
+                            * Insert order items (for use in generating invoices)
+                            */
+                            foreach($order->items as $item) {                    
+                                $event = Event::find($item);
+                                $orderItem = new OrderItem();
+                                $orderItem->title    = $event->name;
+                                $orderItem->quantity = 1;
+                                $orderItem->order_id = $order->id;
+                                $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
+                                $orderItem->unit_booking_fee = 0;
+                                $orderItem->save();
+                            }
+                            //Lógica para agregar event_user
+                            $this->createAteendes($order);
+                        break;
                     }
-
-            
 
         } catch (Exception $e) {
 
@@ -172,6 +197,27 @@ class ApiCheckoutController extends Controller
 
 		return $order;
 
+    }
+
+    public function createAteendes($order){
+        /*
+        * Create the attendees
+        */
+        foreach($order->items as $item) {
+
+            $attendee = new Attendee();
+            $attendee->properties = (object) [];
+
+
+            $attendee->properties->names = $order->account->names;
+            $attendee->properties->email = $order->account->email;	
+
+            $attendee->event_id = $item;
+            $attendee->order_id = $order->id;
+            //$attendee->ticket_id = $attendee_details['ticket']['_id'];
+            $attendee->account_id = $order->account->_id;
+            $attendee->save();
+        }
     }
 
 

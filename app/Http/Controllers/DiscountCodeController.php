@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\DiscountCode;
 use App\DiscountCodeTemplate;
+use App\Mail\DiscountCodeMail;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
@@ -26,7 +27,7 @@ class DiscountCodeController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * _index_: list of discount codes by template
      *
      * @return \Illuminate\Http\Response
      */
@@ -102,11 +103,10 @@ class DiscountCodeController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show($event_id ,$id)
     {
-        $codegroup = DiscountCode::find($id);
-        $response = new DiscountCode($codegroup);
-        return $response;
+        $code = DiscountCode::find($id);
+        return $code;
     }
     /**
      * Update the specified resource in storage.

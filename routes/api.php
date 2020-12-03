@@ -498,11 +498,7 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-        Route::post("discountcodetemplate", "DiscountCodeTemplateController@store");
-        Route::get("discountcodetemplate", "DiscountCodeTemplateController@index");
-        Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@show");
-        Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@update");
-
+        Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
 //     }
 // );
 
@@ -511,8 +507,7 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-        Route::post("discountcodetemplate/{group_id}/code", "DiscountCodeController@store");
-        Route::put("discountcode/validateCode", "DiscountCodeController@validateCode");
+        Route::apiResource("discountcodetemplate/{group_id}/code", "DiscountCodeController");
         // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
         // Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
         // Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");

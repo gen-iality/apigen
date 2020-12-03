@@ -7,6 +7,7 @@ use App\User;
 use App\Account;
 use App\Attendee;
 use App\Event;
+use App\DiscountCodeTemplate;
 use App\Http\Resources\OrderResource;
 use App\evaLib\Services\OrdersServices;
 use App\evaLib\Services\UserEventService;
@@ -44,7 +45,20 @@ class ApiOrdersController extends Controller
         
         $ids  =  $request_data['items'];
 
-        $event = Event::findOrFail($ids[0]);
+        $event = '';
+
+        if( $request_data['item_type'] == 'discountCode')
+        {
+            $codeTemplate = DiscountCodeTemplate::findOrFail($ids[0]);
+            // var_dump($codeTemplate);die;
+            $event = Event::findOrFail($codeTemplate->event_id);
+        }else{
+
+            $event = Event::findOrFail($ids[0]);
+        }
+        
+
+        
         $account = Account::findOrFail($request_data['account_id']);
         $fields = $event->user_properties;
         $booking_fee = 0;

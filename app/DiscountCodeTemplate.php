@@ -18,6 +18,7 @@ class DiscountCodeTemplate extends Moloquent
         // 'group_code', 
         'discount',
         'name',
-        'use_limit',        
+        'use_limit',    
+        'event_id'               
     ];        
 }
