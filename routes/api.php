@@ -210,11 +210,13 @@ Route::group(
 // pero sin producir ningun tipo de errores.
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
+
 Route::group(
     ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('events', 'EventController');
     }
 );
+
 //Route::get("eventsearch",'EventController');
 //     }
 // );
@@ -397,10 +399,9 @@ Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
-Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
-Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@createUserAndAddtoEvent');
-Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
+Route::apiResource('orders', 'ApiOrdersController');
+Route::get('orders/{order_id}', 'ApiOrdersController@show');
+Route::post("payment_webhook_response","ApiCheckoutController@paymentWebhookesponse");
 //     }
 // );
 
@@ -496,3 +497,27 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
+
+
+/****************
+ * Discount Code Group
+ ****************/
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+    Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+    //     }
+    // );
+    
+    /****************
+     * Discount Code 
+     ****************/
+    // Route::group(
+    //     ['middleware' => 'auth:token'], function () {
+            Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
+            Route::put("discountcodetemplate/{template_id}/code/changeCode", "DiscountCodeController@changeCode");
+            // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
+            // Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
+            // Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
+    
+    //     }
+    // );
