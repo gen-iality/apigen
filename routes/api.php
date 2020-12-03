@@ -210,7 +210,11 @@ Route::group(
 // pero sin producir ningun tipo de errores.
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('events', 'EventController');
+    }
+);
 //Route::get("eventsearch",'EventController');
 //     }
 // );
