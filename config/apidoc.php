@@ -136,7 +136,9 @@ return [
                         '*/orders/*',
                         'orders/*',
                     //RSVP
-                        '*/sendeventrsvp/*'
+                        '*/sendeventrsvp/*',
+                    //Discount code
+                        '*/discountcodetemplate/*'
                 ],  
 
                 /*

@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/sint/duplicateactivitie/sunt" \
+    "https://api.evius.co/api/events/voluptatem/duplicateactivitie/a" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/sint/duplicateactivitie/sunt"
+    "https://api.evius.co/api/events/voluptatem/duplicateactivitie/a"
 );
 
 let headers = {
@@ -79,14 +79,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/ea/activities" \
+    -G "https://api.evius.co/api/events/qui/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/ea/activities"
+    "https://api.evius.co/api/events/qui/activities"
 );
 
 let headers = {
@@ -282,14 +282,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/reprehenderit/activities/1" \
+    "https://api.evius.co/api/events/ab/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/reprehenderit/activities/1"
+    "https://api.evius.co/api/events/ab/activities/1"
 );
 
 let headers = {
@@ -328,14 +328,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/earum/activities/1" \
+    "https://api.evius.co/api/events/illum/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/earum/activities/1"
+    "https://api.evius.co/api/events/illum/activities/1"
 );
 
 let headers = {
@@ -412,16 +412,16 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/non/activities_attendees" \
+    -G "https://api.evius.co/api/events/beatae/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"non","user_id":"eos"}'
+    -d '{"activity_id":"et","user_id":"exercitationem"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/non/activities_attendees"
+    "https://api.evius.co/api/events/beatae/activities_attendees"
 );
 
 let headers = {
@@ -430,8 +430,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "non",
-    "user_id": "eos"
+    "activity_id": "et",
+    "user_id": "exercitationem"
 }
 
 fetch(url, {
@@ -473,7 +473,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/voluptas/activities_attendees" \
+    "https://api.evius.co/api/events/magni/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -482,7 +482,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/voluptas/activities_attendees"
+    "https://api.evius.co/api/events/magni/activities_attendees"
 );
 
 let headers = {
@@ -529,14 +529,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/cum/activities_attendees/1" \
+    -G "https://api.evius.co/api/events/facere/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/cum/activities_attendees/1"
+    "https://api.evius.co/api/events/facere/activities_attendees/1"
 );
 
 let headers = {
@@ -580,14 +580,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/sit/activities_attendees/1" \
+    "https://api.evius.co/api/events/excepturi/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/sit/activities_attendees/1"
+    "https://api.evius.co/api/events/excepturi/activities_attendees/1"
 );
 
 let headers = {
@@ -626,14 +626,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/omnis/activities_attendees/1" \
+    "https://api.evius.co/api/events/adipisci/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/omnis/activities_attendees/1"
+    "https://api.evius.co/api/events/adipisci/activities_attendees/1"
 );
 
 let headers = {
@@ -670,14 +670,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/me/events/aliquid/activities_attendees" \
+    -G "https://api.evius.co/api/me/events/natus/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/me/events/aliquid/activities_attendees"
+    "https://api.evius.co/api/me/events/natus/activities_attendees"
 );
 
 let headers = {
@@ -720,14 +720,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/eaque/activities_attendees/molestiae/check_in" \
+    "https://api.evius.co/api/events/doloribus/activities_attendees/quam/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/eaque/activities_attendees/molestiae/check_in"
+    "https://api.evius.co/api/events/doloribus/activities_attendees/quam/check_in"
 );
 
 let headers = {
@@ -1110,7 +1110,17 @@ fetch(url, {
                 "5fbfb374568d5458e51c4a42",
                 "5fbfdda21460a534b03c0036",
                 "5fbffcb215a4154ee5490712",
-                "5fc137befa20384c97540824"
+                "5fc137befa20384c97540824",
+                "5fc50ea553ae8379e04d7ee2",
+                "5fc530d3b9e3221f3122c8b2",
+                "5fc54a6069023503282497c4",
+                "5fc56559285bb445c976c42a",
+                "5fc56d383028462f76441172",
+                "5fc667e25de01016af732584",
+                "5fc69d3304fc9d5fb73ff2d2",
+                "5fc6c20decccab4b726f95c2",
+                "5fc7cbe32600e3427b719cc2",
+                "5fc7e8f00c02527b1a411b03"
             ]
         },
         {
@@ -1164,7 +1174,8 @@ fetch(url, {
                 "5f7f3022cc68cf2a0143c324",
                 "5f879935c2d65a166840c516",
                 "5fbc495875007c315d522854",
-                "5fbfbe6ecc8d9356be76ccc2"
+                "5fbfbe6ecc8d9356be76ccc2",
+                "5fc7c2e8bae4cd15267b1492"
             ]
         },
         {
@@ -1474,7 +1485,7 @@ curl -X PUT \
     "https://api.evius.co/api/categories/5fb6e8d76dbaeb3738258092" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"doloribus"}'
+    -d '{"name":"temporibus"}'
 
 ```
 
@@ -1489,7 +1500,7 @@ let headers = {
 };
 
 let body = {
-    "name": "doloribus"
+    "name": "temporibus"
 }
 
 fetch(url, {
@@ -1563,6 +1574,358 @@ Parameter | Status | Description
     `category` |  optional  | category
 
 <!-- END_7513823f87b59040507bd5ab26f9ceb5 -->
+
+#DiscountCode
+
+
+<!-- START_17a786825133a730de969fc6a23589ee -->
+## _index_: list of discount codes by template
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://api.evius.co/api/discountcodetemplate/1/code" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1/code"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/discountcodetemplate/{group_id}/code`
+
+
+<!-- END_17a786825133a730de969fc6a23589ee -->
+
+<!-- START_832b9100e9baf5da44b7a98387a2064e -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://api.evius.co/api/discountcodetemplate/1/code" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1/code"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/discountcodetemplate/{group_id}/code`
+
+
+<!-- END_832b9100e9baf5da44b7a98387a2064e -->
+
+<!-- START_1aa1a9a8adaf21e9aca59e202a45fdda -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://api.evius.co/api/discountcodetemplate/1/code/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1/code/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/discountcodetemplate/{group_id}/code/{code}`
+
+
+<!-- END_1aa1a9a8adaf21e9aca59e202a45fdda -->
+
+<!-- START_d58de381aa8fdebfdbfeef04cfadfe15 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://api.evius.co/api/discountcodetemplate/1/code/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1/code/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/discountcodetemplate/{group_id}/code/{code}`
+
+`PATCH api/discountcodetemplate/{group_id}/code/{code}`
+
+
+<!-- END_d58de381aa8fdebfdbfeef04cfadfe15 -->
+
+<!-- START_853d05e8a3c5e3a6daafc48bf97ef325 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://api.evius.co/api/discountcodetemplate/1/code/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1/code/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/discountcodetemplate/{group_id}/code/{code}`
+
+
+<!-- END_853d05e8a3c5e3a6daafc48bf97ef325 -->
+
+#DiscountCodeTemplate
+
+
+The discount template is used to generate the discount codes, along with their percentage and the limit of uses for each code.
+<!-- START_27da3fb1931735a783b6af918eeb8072 -->
+## _show_ : information from a specific template
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://api.evius.co/api/discountcodetemplate/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\DiscountCodeTemplate] 1"
+}
+```
+
+### HTTP Request
+`GET api/discountcodetemplate/{discountcodetemplate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  optional  | discount template id
+
+<!-- END_27da3fb1931735a783b6af918eeb8072 -->
+
+<!-- START_9ec4381af827ff532415a8fe08101924 -->
+## _update_: update information from a specific template
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://api.evius.co/api/discountcodetemplate/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Curso de regalo",
+    "use_limit": 1,
+    "discount": 100
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/discountcodetemplate/{discountcodetemplate}`
+
+`PATCH api/discountcodetemplate/{discountcodetemplate}`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  optional  | 
+        `use_limit` | number |  optional  | the number of uses for each code
+        `discount` | number |  optional  | discount percentage
+    
+<!-- END_9ec4381af827ff532415a8fe08101924 -->
+
+<!-- START_ed37ebe6fa3939018ea0dcd848cbb868 -->
+## _destroy_: delete the specified docunt code template
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://api.evius.co/api/discountcodetemplate/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/discountcodetemplate/{discountcodetemplate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  optional  | discount template id
+
+<!-- END_ed37ebe6fa3939018ea0dcd848cbb868 -->
 
 #Event
 
@@ -1684,7 +2047,7 @@ curl -X POST \
     "https://api.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"est","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"nihil","extra_config":{}}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"et","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"voluptas","extra_config":{}}'
 
 ```
 
@@ -1702,14 +2065,14 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "est",
+    "picture": "et",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "nihil",
+    "location": "voluptas",
     "extra_config": {}
 }
 
@@ -1802,7 +2165,7 @@ curl -X POST \
     "https://api.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"sed","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"dolorum","extra_config":{}}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"nisi","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"molestiae","extra_config":{}}'
 
 ```
 
@@ -1820,14 +2183,14 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "sed",
+    "picture": "nisi",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "dolorum",
+    "location": "molestiae",
     "extra_config": {}
 }
 
@@ -1915,14 +2278,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/users/accusantium/events" \
+    -G "https://api.evius.co/api/users/ipsa/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/users/accusantium/events"
+    "https://api.evius.co/api/users/ipsa/events"
 );
 
 let headers = {
@@ -1945,8 +2308,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/accusantium\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/accusantium\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/ipsa\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/ipsa\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -1954,7 +2317,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/accusantium\/events",
+        "path": "http:\/\/localhost\/api\/users\/ipsa\/events",
         "per_page": 900,
         "to": null,
         "total": 0
@@ -1980,14 +2343,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/organizations/quia/events" \
+    -G "https://api.evius.co/api/organizations/id/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/quia/events"
+    "https://api.evius.co/api/organizations/id/events"
 );
 
 let headers = {
@@ -2010,8 +2373,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/organizations\/quia\/events?page=1",
-        "last": "http:\/\/localhost\/api\/organizations\/quia\/events?page=1",
+        "first": "http:\/\/localhost\/api\/organizations\/id\/events?page=1",
+        "last": "http:\/\/localhost\/api\/organizations\/id\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -2019,7 +2382,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/organizations\/quia\/events",
+        "path": "http:\/\/localhost\/api\/organizations\/id\/events",
         "per_page": 900,
         "to": null,
         "total": 0
@@ -2156,7 +2519,7 @@ curl -X POST \
     "https://api.evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"culpa"}'
+    -d '{"name":"sed"}'
 
 ```
 
@@ -2171,7 +2534,7 @@ let headers = {
 };
 
 let body = {
-    "name": "culpa"
+    "name": "sed"
 }
 
 fetch(url, {
@@ -2307,14 +2670,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/sit/eventusers/eligendi" \
+    -G "https://api.evius.co/api/events/officia/eventusers/quasi" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/sit/eventusers/eligendi"
+    "https://api.evius.co/api/events/officia/eventusers/quasi"
 );
 
 let headers = {
@@ -2335,7 +2698,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Attendee] eligendi"
+    "message": "No query results for model [App\\Attendee] quasi"
 }
 ```
 
@@ -2358,16 +2721,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/ut/eventusers/1" \
+    "https://api.evius.co/api/events/delectus/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"est","name":"qui","other_params,":{"":{"":{"":"debitis"}}}}'
+    -d '{"email":"et","name":"aut","other_params,":{"":{"":{"":"minima"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/ut/eventusers/1"
+    "https://api.evius.co/api/events/delectus/eventusers/1"
 );
 
 let headers = {
@@ -2376,12 +2739,12 @@ let headers = {
 };
 
 let body = {
-    "email": "est",
-    "name": "qui",
+    "email": "et",
+    "name": "aut",
     "other_params,": {
         "": {
             "": {
-                "": "debitis"
+                "": "minima"
             }
         }
     }
@@ -2423,16 +2786,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/voluptatem/eventusers" \
+    "https://api.evius.co/api/events/in/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"account_id":"placeat","properties":[]}'
+    -d '{"account_id":"ullam","properties":[]}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/voluptatem/eventusers"
+    "https://api.evius.co/api/events/in/eventusers"
 );
 
 let headers = {
@@ -2441,7 +2804,7 @@ let headers = {
 };
 
 let body = {
-    "account_id": "placeat",
+    "account_id": "ullam",
     "properties": []
 }
 
@@ -2479,14 +2842,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/1/eventusers/voluptatem" \
+    "https://api.evius.co/api/events/1/eventusers/omnis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/1/eventusers/voluptatem"
+    "https://api.evius.co/api/events/1/eventusers/omnis"
 );
 
 let headers = {
@@ -2523,14 +2886,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/me/eventusers/event/cumque" \
+    -G "https://api.evius.co/api/me/eventusers/event/quo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/me/eventusers/event/cumque"
+    "https://api.evius.co/api/me/eventusers/event/quo"
 );
 
 let headers = {
@@ -2553,8 +2916,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/cumque?page=1",
-        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/cumque?page=1",
+        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/quo?page=1",
+        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/quo?page=1",
         "prev": null,
         "next": null
     },
@@ -2562,7 +2925,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/cumque",
+        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/quo",
         "per_page": 900,
         "to": null,
         "total": 0
@@ -2588,16 +2951,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/eligendi/changeUserPassword" \
+    "https://api.evius.co/api/events/eaque/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"saepe"}'
+    -d '{"email":"quisquam"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/eligendi/changeUserPassword"
+    "https://api.evius.co/api/events/eaque/changeUserPassword"
 );
 
 let headers = {
@@ -2606,7 +2969,7 @@ let headers = {
 };
 
 let body = {
-    "email": "saepe"
+    "email": "quisquam"
 }
 
 fetch(url, {
@@ -2662,7 +3025,7 @@ curl -X POST \
     "https://api.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"enim"}'
+    -d '{"file":"pariatur"}'
 
 ```
 
@@ -2677,7 +3040,7 @@ let headers = {
 };
 
 let body = {
-    "file": "enim"
+    "file": "pariatur"
 }
 
 fetch(url, {
@@ -2723,16 +3086,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/files/uploadbase/magnam" \
+    "https://api.evius.co/api/files/uploadbase/dolores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"nisi","type":"recusandae"}'
+    -d '{"file":"fuga","type":"aut"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/files/uploadbase/magnam"
+    "https://api.evius.co/api/files/uploadbase/dolores"
 );
 
 let headers = {
@@ -2741,8 +3104,8 @@ let headers = {
 };
 
 let body = {
-    "file": "nisi",
-    "type": "recusandae"
+    "file": "fuga",
+    "type": "aut"
 }
 
 fetch(url, {
@@ -2783,14 +3146,14 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/et/host" \
+    -G "https://api.evius.co/api/events/deleniti/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/et/host"
+    "https://api.evius.co/api/events/deleniti/host"
 );
 
 let headers = {
@@ -2842,16 +3205,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/error/host" \
+    "https://api.evius.co/api/events/accusamus/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"dolorum","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"sint","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/error/host"
+    "https://api.evius.co/api/events/accusamus/host"
 );
 
 let headers = {
@@ -2862,7 +3225,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "dolorum",
+    "image": "sint",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -2906,14 +3269,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/et/host/1" \
+    -G "https://api.evius.co/api/events/atque/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/et/host/1"
+    "https://api.evius.co/api/events/atque/host/1"
 );
 
 let headers = {
@@ -2957,16 +3320,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/alias/host/1" \
+    "https://api.evius.co/api/events/repudiandae/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"eius","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"assumenda","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/alias/host/1"
+    "https://api.evius.co/api/events/repudiandae/host/1"
 );
 
 let headers = {
@@ -2977,7 +3340,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "eius",
+    "image": "assumenda",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -3023,14 +3386,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/repellat/host/1" \
+    "https://api.evius.co/api/events/officia/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/repellat/host/1"
+    "https://api.evius.co/api/events/officia/host/1"
 );
 
 let headers = {
@@ -28659,7 +29022,7 @@ fetch(url, {
         "path": "http:\/\/localhost\/api\/orders",
         "per_page": 900,
         "to": 900,
-        "total": 3701
+        "total": 3707
     }
 }
 ```
@@ -28754,34 +29117,11 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (404):
 
 ```json
 {
-    "_id": "5fbd84e345611e292f04ab92",
-    "first_name": "Juliana Geraldine",
-    "last_name": "",
-    "email": "geraldine.garcia@mocionsoft.com",
-    "items": [
-        "5ea23acbd74d5c4b360ddde2"
-    ],
-    "order_status_id": "5c423232c9a4c86123236dcd",
-    "amount": 10000,
-    "properties": [],
-    "organiser_booking_fee": 0,
-    "discount": 0,
-    "account_id": "5f450fb3d4267837bb128102",
-    "event_id": "5ea23acbd74d5c4b360ddde2",
-    "is_payment_received": 1,
-    "updated_at": "2020-11-25 14:58:15",
-    "created_at": "2020-11-24 22:10:43",
-    "data": "{\"date\":\"2020.11.25 09:57:41\",\"pse_reference3\":null,\"payment_method_type\":\"2\",\"pse_reference2\":null,\"franchise\":\"VISA\",\"commision_pol\":\"0.00\",\"pse_reference1\":null,\"shipping_city\":null,\"bank_referenced_name\":null,\"sign\":\"7137fbe4b5cd69bd75bb4330153a0ba0\",\"extra2\":null,\"extra3\":null,\"operation_date\":\"2020-11-25 09:57:41\",\"payment_request_state\":\"A\",\"billing_address\":null,\"extra1\":null,\"administrative_fee\":\"0.00\",\"administrative_fee_tax\":\"0.00\",\"bank_id\":\"10\",\"nickname_buyer\":null,\"payment_method\":\"10\",\"attempts\":\"1\",\"transaction_id\":\"e5890208-ca8d-451e-bb19-2d60a2d3905e\",\"transaction_date\":\"2020-11-25 09:57:41\",\"test\":\"0\",\"exchange_rate\":\"1.00\",\"ip\":\"10.0.0.2\",\"reference_pol\":\"120939197\",\"cc_holder\":\"Ricky Stevens\",\"tax\":\"0.00\",\"antifraudMerchantId\":null,\"pse_bank\":null,\"transaction_type\":\"AUTHORIZATION_AND_CAPTURE\",\"state_pol\":\"4\",\"billing_city\":null,\"phone\":null,\"error_message_bank\":null,\"shipping_country\":\"CO\",\"error_code_bank\":\"77\",\"cus\":\"CRED - 666149477\",\"commision_pol_currency\":null,\"customer_number\":null,\"description\":\"asdfsadf\",\"merchant_id\":\"508029\",\"administrative_fee_base\":\"0.00\",\"authorization_code\":\"984407\",\"currency\":\"COP\",\"shipping_address\":null,\"nickname_seller\":null,\"cc_number\":\"************5026\",\"installments_number\":\"1\",\"value\":\"10000.00\",\"transaction_bank_id\":\"984407\",\"billing_country\":\"CO\",\"cardType\":\"DEBIT\",\"response_code_pol\":\"1\",\"payment_method_name\":\"VISA\",\"office_phone\":null,\"email_buyer\":\"apps@mocionsoft.com\",\"payment_method_id\":\"2\",\"response_message_pol\":\"APPROVED\",\"account_id\":\"512321\",\"bank_referenced_code\":\"DEBIT\",\"airline_code\":null,\"pseCycle\":\"null\",\"risk\":\"0.0\",\"reference_sale\":\"5fbd84e345611e292f04ab92\",\"additional_value\":\"0.00\"}",
-    "tickets": [],
-    "order_status": {
-        "_id": "5c423232c9a4c86123236dcd",
-        "id": "1",
-        "name": "Completado"
-    }
+    "message": "No query results for model [App\\Order] 5fbd84e345611e292f04ab92"
 }
 ```
 
@@ -28926,24 +29266,157 @@ fetch(url, {
 {
     "data": [
         {
-            "_id": "5fbd84e345611e292f04ab92",
-            "first_name": "Juliana Geraldine",
+            "_id": "5fc7c45f31be4a3ca2419db3",
+            "first_name": "Test User",
             "last_name": "",
             "email": "geraldine.garcia@mocionsoft.com",
             "items": [
-                "5ea23acbd74d5c4b360ddde2"
+                "5fa423eee086ea2d1163343e"
             ],
             "order_status_id": "5c423232c9a4c86123236dcd",
             "amount": 10000,
+            "item_type": "event",
+            "properties": [],
+            "organiser_booking_fee": 0,
+            "discount": 0,
+            "account_id": "5f450fb3d4267837bb128102",
+            "event_id": "5fa423eee086ea2d1163343e",
+            "is_payment_received": 1,
+            "updated_at": "2020-12-02 19:47:31",
+            "created_at": "2020-12-02 16:44:15",
+            "data": "{\"id\":null,\"key\":\"282739a01171d896799545acf9a57851\",\"isPaymentAttempt\":true,\"payer\":{\"fullName\":\"PRUEBA\",\"emailAddress\":null,\"contactPhone\":\"311 111 1111\",\"phoneCountryCode\":\"57\",\"dniNumber\":\"123456789\",\"isDniNumberEncrypt\":null,\"dniType\":\"CC\",\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantBuyerId\":null,\"billingAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"birthDate\":null},\"state\":\"CAPTURING_DATA\",\"merchantId\":508029,\"orderId\":null,\"order\":{\"id\":null,\"referenceCode\":\"123123\",\"airlineCode\":null,\"description\":\"asdfsadf\",\"isTest\":true,\"signature\":\"f4e3464bd14ced86996a7e835f615a33\",\"language\":\"es\",\"buyer\":{\"fullName\":null,\"emailAddress\":\"apps@mocionsoft.com\",\"contactPhone\":null,\"phoneCountryCode\":null,\"dniNumber\":null,\"isDniNumberEncrypt\":null,\"dniType\":null,\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantBuyerId\":null,\"buyerAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"comments\":null},\"shipment\":{\"fullName\":null,\"emailAddress\":\"apps@mocionsoft.com\",\"contactPhone\":null,\"phoneCountryCode\":null,\"dniNumber\":null,\"isDniNumberEncrypt\":null,\"dniType\":null,\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantShipmentId\":null,\"shippingAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"comments\":null},\"state\":null,\"status\":null,\"paymentApprovalDate\":null,\"creationDate\":null,\"accountId\":512321,\"amount\":{\"value\":10000,\"symbol\":\"$\",\"currency\":\"COP\"},\"tax\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"totalPurchase\":{\"value\":10000,\"symbol\":\"$\",\"currency\":\"COP\"},\"currency\":null,\"amountConvertedValue\":{\"value\":10000,\"currency\":\"COP\",\"symbol\":\"$\"},\"taxConvertedValue\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"taxReturnBase\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"taxReturnBaseConvertedValue\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"additionalValue\":null,\"administrativeFee\":null,\"taxAdministrativeFee\":null,\"taxAdministrativeFeeReturnBase\":null,\"enabledPaymentMethods\":[],\"enabledInstallments\":[],\"enabledPaymentMethodTypes\":[],\"enabledIin\":[],\"enabledPseBanks\":[],\"paymentMethodsDescription\":null,\"urlEncodedId\":\"NW1nZUY2cDA0WVZqUTRETTE2Vk82SWozVHBYUEFKbkhWank1RG8zWFNzYU1sL3ZtSmNLMkEyTEgwNExTWktTSw==\",\"shippingValue\":null,\"paymentRequestLinkId\":null,\"airlineDescription\":null,\"displayShipping\":null,\"displayBuyerComments\":false,\"buyerCommentsLabel\":null,\"dispersion\":false},\"paymentNetwork\":null,\"paymentMethodType\":\"CREDIT_CARD\",\"paymentMethodMain\":\"MASTERCARD\",\"paymentAgreementId\":null,\"paymentCountry\":null,\"paymentExchangeRate\":null,\"expirationDate\":null,\"lastUpdatedDate\":null,\"creationDate\":1606161599698,\"termsAndConditionId\":202,\"installments\":\"1\",\"installmentValue\":null,\"internationalCard\":false,\"checkoutVersion\":\"V3\",\"payerCommissionValue\":null,\"payerInterestValue\":null,\"payerPricingValue\":null,\"promotionId\":null,\"shippingValue\":null,\"shipmentMerchantValue\":null,\"additionalValue\":null,\"administrativeFee\":null,\"payerTotalAmount\":null,\"source\":null,\"integrationMethod\":\"STANDARD_HTML_v4_0\",\"cardType\":\"CREDIT\",\"creditCardCountry\":null,\"shippingInfo\":{\"userLogin\":null,\"id\":null,\"reference\":null,\"description\":null,\"currency\":null,\"deliveryCity\":null,\"deliveryCityName\":null,\"deliveryAddress1\":null,\"deliveryAddress2\":null,\"deliveryAddress3\":null,\"postalCode\":null,\"fullName\":null,\"documentType\":null,\"document\":null,\"phoneNumber\":null,\"observationsReceivingShipment\":null,\"destinationState\":null,\"destinationStateName\":null,\"destinationCountry\":null,\"destinationEmail\":null,\"originFullName\":null,\"originIdentificationType\":null,\"originIdentification\":null,\"originCity\":null,\"originState\":null,\"originCountry\":null,\"originAddress\":null,\"originZipCode\":null,\"originPhone\":null,\"originEmail\":null,\"kilogramWeight\":null,\"volumetricWeight\":null,\"totalValue\":null,\"declaredValue\":null,\"shippingValue\":null,\"guideNumber\":null,\"enlistmentApplies\":null,\"deliveryDate\":null,\"deliveryDays\":null,\"minDeliveryDays\":null,\"packageHeight\":null,\"packageWidth\":null,\"packageLength\":null,\"shippingProvider\":null,\"shippingState\":null,\"creationDate\":null,\"lastUpdateDate\":null,\"expirationDate\":null,\"signature\":null,\"strCreationDate\":null,\"comment\":null,\"warehouseId\":null,\"additionalDeliveryDays\":0,\"shippingMerchantValue\":null},\"questionnaire\":null,\"merchantSoftDescriptor\":null,\"pmNetworkValue\":null,\"tea\":null,\"cft\":null,\"hasPaymentByPoints\":null,\"loyaltyProgramRedeemedAmount\":null,\"loyaltyProgramRedeemedPoints\":null,\"lendingEligible\":false,\"registerLendingDevice\":false,\"lendingDeviceToken\":null,\"abandonedLendingTransaction\":false,\"masterpassObfuscateCreditCardNumber\":null,\"isMasterpass\":false,\"brandName\":null,\"transactionType\":\"AUTHORIZATION_AND_CAPTURE\",\"nossoNumero\":null,\"paymentTaxesDetails\":[],\"checkoutCreditCard\":{\"number\":\"5493 4058 2254 8115\",\"expirationDateMonth\":6,\"expirationDateYear\":23,\"securityCode\":\"729\",\"cardType\":\"CREDIT\"},\"isRegisterPayer\":false}",
+            "tickets": [],
+            "order_status": {
+                "_id": "5c423232c9a4c86123236dcd",
+                "id": "1",
+                "name": "Completado"
+            }
+        },
+        {
+            "_id": "5fc7c5b831be4a3ca2419db4",
+            "first_name": "Test User",
+            "last_name": "",
+            "email": "geraldine.garcia@mocionsoft.com",
+            "items": [
+                "5fa423eee086ea2d1163343e"
+            ],
+            "order_status_id": "5c4232c1477041612349941e",
+            "amount": 10000,
+            "item_type": "discountCode",
+            "properties": [],
+            "organiser_booking_fee": 0,
+            "discount": 0,
+            "account_id": "5f450fb3d4267837bb128102",
+            "event_id": "5fa423eee086ea2d1163343e",
+            "is_payment_received": 1,
+            "updated_at": "2020-12-02 19:48:12",
+            "created_at": "2020-12-02 16:50:00",
+            "data": "{\"id\":null,\"key\":\"282739a01171d896799545acf9a57851\",\"isPaymentAttempt\":true,\"payer\":{\"fullName\":\"PRUEBA\",\"emailAddress\":null,\"contactPhone\":\"311 111 1111\",\"phoneCountryCode\":\"57\",\"dniNumber\":\"123456789\",\"isDniNumberEncrypt\":null,\"dniType\":\"CC\",\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantBuyerId\":null,\"billingAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"birthDate\":null},\"state\":\"CAPTURING_DATA\",\"merchantId\":508029,\"orderId\":null,\"order\":{\"id\":null,\"referenceCode\":\"123123\",\"airlineCode\":null,\"description\":\"asdfsadf\",\"isTest\":true,\"signature\":\"f4e3464bd14ced86996a7e835f615a33\",\"language\":\"es\",\"buyer\":{\"fullName\":null,\"emailAddress\":\"apps@mocionsoft.com\",\"contactPhone\":null,\"phoneCountryCode\":null,\"dniNumber\":null,\"isDniNumberEncrypt\":null,\"dniType\":null,\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantBuyerId\":null,\"buyerAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"comments\":null},\"shipment\":{\"fullName\":null,\"emailAddress\":\"apps@mocionsoft.com\",\"contactPhone\":null,\"phoneCountryCode\":null,\"dniNumber\":null,\"isDniNumberEncrypt\":null,\"dniType\":null,\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantShipmentId\":null,\"shippingAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"comments\":null},\"state\":null,\"status\":null,\"paymentApprovalDate\":null,\"creationDate\":null,\"accountId\":512321,\"amount\":{\"value\":10000,\"symbol\":\"$\",\"currency\":\"COP\"},\"tax\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"totalPurchase\":{\"value\":10000,\"symbol\":\"$\",\"currency\":\"COP\"},\"currency\":null,\"amountConvertedValue\":{\"value\":10000,\"currency\":\"COP\",\"symbol\":\"$\"},\"taxConvertedValue\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"taxReturnBase\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"taxReturnBaseConvertedValue\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"additionalValue\":null,\"administrativeFee\":null,\"taxAdministrativeFee\":null,\"taxAdministrativeFeeReturnBase\":null,\"enabledPaymentMethods\":[],\"enabledInstallments\":[],\"enabledPaymentMethodTypes\":[],\"enabledIin\":[],\"enabledPseBanks\":[],\"paymentMethodsDescription\":null,\"urlEncodedId\":\"NW1nZUY2cDA0WVZqUTRETTE2Vk82SWozVHBYUEFKbkhWank1RG8zWFNzYU1sL3ZtSmNLMkEyTEgwNExTWktTSw==\",\"shippingValue\":null,\"paymentRequestLinkId\":null,\"airlineDescription\":null,\"displayShipping\":null,\"displayBuyerComments\":false,\"buyerCommentsLabel\":null,\"dispersion\":false},\"paymentNetwork\":null,\"paymentMethodType\":\"CREDIT_CARD\",\"paymentMethodMain\":\"MASTERCARD\",\"paymentAgreementId\":null,\"paymentCountry\":null,\"paymentExchangeRate\":null,\"expirationDate\":null,\"lastUpdatedDate\":null,\"creationDate\":1606161599698,\"termsAndConditionId\":202,\"installments\":\"1\",\"installmentValue\":null,\"internationalCard\":false,\"checkoutVersion\":\"V3\",\"payerCommissionValue\":null,\"payerInterestValue\":null,\"payerPricingValue\":null,\"promotionId\":null,\"shippingValue\":null,\"shipmentMerchantValue\":null,\"additionalValue\":null,\"administrativeFee\":null,\"payerTotalAmount\":null,\"source\":null,\"integrationMethod\":\"STANDARD_HTML_v4_0\",\"cardType\":\"CREDIT\",\"creditCardCountry\":null,\"shippingInfo\":{\"userLogin\":null,\"id\":null,\"reference\":null,\"description\":null,\"currency\":null,\"deliveryCity\":null,\"deliveryCityName\":null,\"deliveryAddress1\":null,\"deliveryAddress2\":null,\"deliveryAddress3\":null,\"postalCode\":null,\"fullName\":null,\"documentType\":null,\"document\":null,\"phoneNumber\":null,\"observationsReceivingShipment\":null,\"destinationState\":null,\"destinationStateName\":null,\"destinationCountry\":null,\"destinationEmail\":null,\"originFullName\":null,\"originIdentificationType\":null,\"originIdentification\":null,\"originCity\":null,\"originState\":null,\"originCountry\":null,\"originAddress\":null,\"originZipCode\":null,\"originPhone\":null,\"originEmail\":null,\"kilogramWeight\":null,\"volumetricWeight\":null,\"totalValue\":null,\"declaredValue\":null,\"shippingValue\":null,\"guideNumber\":null,\"enlistmentApplies\":null,\"deliveryDate\":null,\"deliveryDays\":null,\"minDeliveryDays\":null,\"packageHeight\":null,\"packageWidth\":null,\"packageLength\":null,\"shippingProvider\":null,\"shippingState\":null,\"creationDate\":null,\"lastUpdateDate\":null,\"expirationDate\":null,\"signature\":null,\"strCreationDate\":null,\"comment\":null,\"warehouseId\":null,\"additionalDeliveryDays\":0,\"shippingMerchantValue\":null},\"questionnaire\":null,\"merchantSoftDescriptor\":null,\"pmNetworkValue\":null,\"tea\":null,\"cft\":null,\"hasPaymentByPoints\":null,\"loyaltyProgramRedeemedAmount\":null,\"loyaltyProgramRedeemedPoints\":null,\"lendingEligible\":false,\"registerLendingDevice\":false,\"lendingDeviceToken\":null,\"abandonedLendingTransaction\":false,\"masterpassObfuscateCreditCardNumber\":null,\"isMasterpass\":false,\"brandName\":null,\"transactionType\":\"AUTHORIZATION_AND_CAPTURE\",\"nossoNumero\":null,\"paymentTaxesDetails\":[],\"checkoutCreditCard\":{\"number\":\"5493 4058 2254 8115\",\"expirationDateMonth\":6,\"expirationDateYear\":23,\"securityCode\":\"729\",\"cardType\":\"CREDIT\"},\"isRegisterPayer\":false}",
+            "tickets": [],
+            "order_status": {
+                "_id": "5c4232c1477041612349941e",
+                "id": "5",
+                "name": "Esperando Pago"
+            }
+        },
+        {
+            "_id": "5fc7eed131be4a3ca2419db5",
+            "first_name": "Test User",
+            "last_name": "",
+            "email": "geraldine.garcia@mocionsoft.com",
+            "items": [
+                "5fa423eee086ea2d1163343e"
+            ],
+            "order_status_id": "5c4232c1477041612349941e",
+            "amount": 10000,
+            "item_type": "discountCode",
+            "properties": [],
+            "organiser_booking_fee": 0,
+            "discount": 0,
+            "account_id": "5f450fb3d4267837bb128102",
+            "event_id": "5fa423eee086ea2d1163343e",
+            "is_payment_received": 1,
+            "updated_at": "2020-12-02 19:45:21",
+            "created_at": "2020-12-02 19:45:21",
+            "tickets": [],
+            "order_status": {
+                "_id": "5c4232c1477041612349941e",
+                "id": "5",
+                "name": "Esperando Pago"
+            }
+        },
+        {
+            "_id": "5fc7ef3531be4a3ca2419db6",
+            "first_name": "Test User",
+            "last_name": "",
+            "email": "geraldine.garcia@mocionsoft.com",
+            "items": [
+                "5fa423eee086ea2d1163343e"
+            ],
+            "order_status_id": "5c4232c1477041612349941e",
+            "amount": 10000,
+            "item_type": "discountCode",
+            "properties": [],
+            "organiser_booking_fee": 0,
+            "discount": 0,
+            "account_id": "5f450fb3d4267837bb128102",
+            "event_id": "5fa423eee086ea2d1163343e",
+            "is_payment_received": 1,
+            "updated_at": "2020-12-02 19:47:01",
+            "created_at": "2020-12-02 19:47:01",
+            "tickets": [],
+            "order_status": {
+                "_id": "5c4232c1477041612349941e",
+                "id": "5",
+                "name": "Esperando Pago"
+            }
+        },
+        {
+            "_id": "5fc80a6c31be4a3ca2419dc3",
+            "first_name": "Test User",
+            "last_name": "",
+            "email": "geraldine.garcia@mocionsoft.com",
+            "items": [
+                "5fa423eee086ea2d1163343e"
+            ],
+            "order_status_id": "5c4232c1477041612349941e",
+            "amount": 10000,
+            "item_type": "discountCode",
+            "properties": [],
+            "organiser_booking_fee": 0,
+            "discount": 0,
+            "account_id": "5f450fb3d4267837bb128102",
+            "event_id": "5fa423eee086ea2d1163343e",
+            "is_payment_received": 1,
+            "updated_at": "2020-12-02 21:43:08",
+            "created_at": "2020-12-02 21:43:08",
+            "tickets": [],
+            "order_status": {
+                "_id": "5c4232c1477041612349941e",
+                "id": "5",
+                "name": "Esperando Pago"
+            }
+        },
+        {
+            "_id": "5fc80e2931be4a3ca2419dc5",
+            "first_name": "Test User",
+            "last_name": "",
+            "email": "geraldine.garcia@mocionsoft.com",
+            "items": [
+                "5fc80b2a31be4a3ca2419dc4"
+            ],
+            "order_status_id": "5c423232c9a4c86123236dcd",
+            "amount": 10000,
+            "item_type": "discountCode",
             "properties": [],
             "organiser_booking_fee": 0,
             "discount": 0,
             "account_id": "5f450fb3d4267837bb128102",
             "event_id": "5ea23acbd74d5c4b360ddde2",
             "is_payment_received": 1,
-            "updated_at": "2020-11-25 14:58:15",
-            "created_at": "2020-11-24 22:10:43",
-            "data": "{\"date\":\"2020.11.25 09:57:41\",\"pse_reference3\":null,\"payment_method_type\":\"2\",\"pse_reference2\":null,\"franchise\":\"VISA\",\"commision_pol\":\"0.00\",\"pse_reference1\":null,\"shipping_city\":null,\"bank_referenced_name\":null,\"sign\":\"7137fbe4b5cd69bd75bb4330153a0ba0\",\"extra2\":null,\"extra3\":null,\"operation_date\":\"2020-11-25 09:57:41\",\"payment_request_state\":\"A\",\"billing_address\":null,\"extra1\":null,\"administrative_fee\":\"0.00\",\"administrative_fee_tax\":\"0.00\",\"bank_id\":\"10\",\"nickname_buyer\":null,\"payment_method\":\"10\",\"attempts\":\"1\",\"transaction_id\":\"e5890208-ca8d-451e-bb19-2d60a2d3905e\",\"transaction_date\":\"2020-11-25 09:57:41\",\"test\":\"0\",\"exchange_rate\":\"1.00\",\"ip\":\"10.0.0.2\",\"reference_pol\":\"120939197\",\"cc_holder\":\"Ricky Stevens\",\"tax\":\"0.00\",\"antifraudMerchantId\":null,\"pse_bank\":null,\"transaction_type\":\"AUTHORIZATION_AND_CAPTURE\",\"state_pol\":\"4\",\"billing_city\":null,\"phone\":null,\"error_message_bank\":null,\"shipping_country\":\"CO\",\"error_code_bank\":\"77\",\"cus\":\"CRED - 666149477\",\"commision_pol_currency\":null,\"customer_number\":null,\"description\":\"asdfsadf\",\"merchant_id\":\"508029\",\"administrative_fee_base\":\"0.00\",\"authorization_code\":\"984407\",\"currency\":\"COP\",\"shipping_address\":null,\"nickname_seller\":null,\"cc_number\":\"************5026\",\"installments_number\":\"1\",\"value\":\"10000.00\",\"transaction_bank_id\":\"984407\",\"billing_country\":\"CO\",\"cardType\":\"DEBIT\",\"response_code_pol\":\"1\",\"payment_method_name\":\"VISA\",\"office_phone\":null,\"email_buyer\":\"apps@mocionsoft.com\",\"payment_method_id\":\"2\",\"response_message_pol\":\"APPROVED\",\"account_id\":\"512321\",\"bank_referenced_code\":\"DEBIT\",\"airline_code\":null,\"pseCycle\":\"null\",\"risk\":\"0.0\",\"reference_sale\":\"5fbd84e345611e292f04ab92\",\"additional_value\":\"0.00\"}",
+            "updated_at": "2020-12-02 23:40:25",
+            "created_at": "2020-12-02 21:59:05",
+            "data": "{\"id\":null,\"key\":\"282739a01171d896799545acf9a57851\",\"isPaymentAttempt\":true,\"payer\":{\"fullName\":\"PRUEBA\",\"emailAddress\":null,\"contactPhone\":\"311 111 1111\",\"phoneCountryCode\":\"57\",\"dniNumber\":\"123456789\",\"isDniNumberEncrypt\":null,\"dniType\":\"CC\",\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantBuyerId\":null,\"billingAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"birthDate\":null},\"state\":\"CAPTURING_DATA\",\"merchantId\":508029,\"orderId\":null,\"order\":{\"id\":null,\"referenceCode\":\"123123\",\"airlineCode\":null,\"description\":\"asdfsadf\",\"isTest\":true,\"signature\":\"f4e3464bd14ced86996a7e835f615a33\",\"language\":\"es\",\"buyer\":{\"fullName\":null,\"emailAddress\":\"apps@mocionsoft.com\",\"contactPhone\":null,\"phoneCountryCode\":null,\"dniNumber\":null,\"isDniNumberEncrypt\":null,\"dniType\":null,\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantBuyerId\":null,\"buyerAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"comments\":null},\"shipment\":{\"fullName\":null,\"emailAddress\":\"apps@mocionsoft.com\",\"contactPhone\":null,\"phoneCountryCode\":null,\"dniNumber\":null,\"isDniNumberEncrypt\":null,\"dniType\":null,\"personType\":null,\"businessName\":null,\"cnpj\":null,\"gender\":null,\"merchantShipmentId\":null,\"shippingAddress\":{\"street1\":null,\"street2\":null,\"street3\":null,\"city\":null,\"state\":null,\"country\":\"CO\",\"postalCode\":null,\"phone\":null},\"comments\":null},\"state\":null,\"status\":null,\"paymentApprovalDate\":null,\"creationDate\":null,\"accountId\":512321,\"amount\":{\"value\":10000,\"symbol\":\"$\",\"currency\":\"COP\"},\"tax\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"totalPurchase\":{\"value\":10000,\"symbol\":\"$\",\"currency\":\"COP\"},\"currency\":null,\"amountConvertedValue\":{\"value\":10000,\"currency\":\"COP\",\"symbol\":\"$\"},\"taxConvertedValue\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"taxReturnBase\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"taxReturnBaseConvertedValue\":{\"value\":0,\"symbol\":\"$\",\"currency\":\"COP\"},\"additionalValue\":null,\"administrativeFee\":null,\"taxAdministrativeFee\":null,\"taxAdministrativeFeeReturnBase\":null,\"enabledPaymentMethods\":[],\"enabledInstallments\":[],\"enabledPaymentMethodTypes\":[],\"enabledIin\":[],\"enabledPseBanks\":[],\"paymentMethodsDescription\":null,\"urlEncodedId\":\"NW1nZUY2cDA0WVZqUTRETTE2Vk82SWozVHBYUEFKbkhWank1RG8zWFNzYU1sL3ZtSmNLMkEyTEgwNExTWktTSw==\",\"shippingValue\":null,\"paymentRequestLinkId\":null,\"airlineDescription\":null,\"displayShipping\":null,\"displayBuyerComments\":false,\"buyerCommentsLabel\":null,\"dispersion\":false},\"paymentNetwork\":null,\"paymentMethodType\":\"CREDIT_CARD\",\"paymentMethodMain\":\"MASTERCARD\",\"paymentAgreementId\":null,\"paymentCountry\":null,\"paymentExchangeRate\":null,\"expirationDate\":null,\"lastUpdatedDate\":null,\"creationDate\":1606161599698,\"termsAndConditionId\":202,\"installments\":\"1\",\"installmentValue\":null,\"internationalCard\":false,\"checkoutVersion\":\"V3\",\"payerCommissionValue\":null,\"payerInterestValue\":null,\"payerPricingValue\":null,\"promotionId\":null,\"shippingValue\":null,\"shipmentMerchantValue\":null,\"additionalValue\":null,\"administrativeFee\":null,\"payerTotalAmount\":null,\"source\":null,\"integrationMethod\":\"STANDARD_HTML_v4_0\",\"cardType\":\"CREDIT\",\"creditCardCountry\":null,\"shippingInfo\":{\"userLogin\":null,\"id\":null,\"reference\":null,\"description\":null,\"currency\":null,\"deliveryCity\":null,\"deliveryCityName\":null,\"deliveryAddress1\":null,\"deliveryAddress2\":null,\"deliveryAddress3\":null,\"postalCode\":null,\"fullName\":null,\"documentType\":null,\"document\":null,\"phoneNumber\":null,\"observationsReceivingShipment\":null,\"destinationState\":null,\"destinationStateName\":null,\"destinationCountry\":null,\"destinationEmail\":null,\"originFullName\":null,\"originIdentificationType\":null,\"originIdentification\":null,\"originCity\":null,\"originState\":null,\"originCountry\":null,\"originAddress\":null,\"originZipCode\":null,\"originPhone\":null,\"originEmail\":null,\"kilogramWeight\":null,\"volumetricWeight\":null,\"totalValue\":null,\"declaredValue\":null,\"shippingValue\":null,\"guideNumber\":null,\"enlistmentApplies\":null,\"deliveryDate\":null,\"deliveryDays\":null,\"minDeliveryDays\":null,\"packageHeight\":null,\"packageWidth\":null,\"packageLength\":null,\"shippingProvider\":null,\"shippingState\":null,\"creationDate\":null,\"lastUpdateDate\":null,\"expirationDate\":null,\"signature\":null,\"strCreationDate\":null,\"comment\":null,\"warehouseId\":null,\"additionalDeliveryDays\":0,\"shippingMerchantValue\":null},\"questionnaire\":null,\"merchantSoftDescriptor\":null,\"pmNetworkValue\":null,\"tea\":null,\"cft\":null,\"hasPaymentByPoints\":null,\"loyaltyProgramRedeemedAmount\":null,\"loyaltyProgramRedeemedPoints\":null,\"lendingEligible\":false,\"registerLendingDevice\":false,\"lendingDeviceToken\":null,\"abandonedLendingTransaction\":false,\"masterpassObfuscateCreditCardNumber\":null,\"isMasterpass\":false,\"brandName\":null,\"transactionType\":\"AUTHORIZATION_AND_CAPTURE\",\"nossoNumero\":null,\"paymentTaxesDetails\":[],\"checkoutCreditCard\":{\"number\":\"5493 4058 2254 8115\",\"expirationDateMonth\":6,\"expirationDateYear\":23,\"securityCode\":\"729\",\"cardType\":\"CREDIT\"},\"isRegisterPayer\":false}",
             "tickets": [],
             "order_status": {
                 "_id": "5c423232c9a4c86123236dcd",
@@ -28964,8 +29437,8 @@ fetch(url, {
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/users\/5f450fb3d4267837bb128102\/orders",
         "per_page": 900,
-        "to": 1,
-        "total": 1
+        "to": 6,
+        "total": 6
     }
 }
 ```
@@ -29037,16 +29510,16 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/rsvp/sendeventrsvp/labore" \
+    "https://api.evius.co/api/rsvp/sendeventrsvp/iusto" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"quas","image_header":"voluptas","content_header":"Has sido invitado a el evento","message":"est","image":"qui","image_footer":"dolore","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
+    -d '{"subject":"saepe","image_header":"molestias","content_header":"Has sido invitado a el evento","message":"error","image":"facilis","image_footer":"voluptate","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/rsvp/sendeventrsvp/labore"
+    "https://api.evius.co/api/rsvp/sendeventrsvp/iusto"
 );
 
 let headers = {
@@ -29055,12 +29528,12 @@ let headers = {
 };
 
 let body = {
-    "subject": "quas",
-    "image_header": "voluptas",
+    "subject": "saepe",
+    "image_header": "molestias",
     "content_header": "Has sido invitado a el evento",
-    "message": "est",
-    "image": "qui",
-    "image_footer": "dolore",
+    "message": "error",
+    "image": "facilis",
+    "image_footer": "voluptate",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     }
@@ -29608,14 +30081,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/rolesattendees/et" \
+    "https://api.evius.co/api/rolesattendees/qui" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/rolesattendees/et"
+    "https://api.evius.co/api/rolesattendees/qui"
 );
 
 let headers = {
@@ -29715,7 +30188,7 @@ curl -X POST \
     "https://api.evius.co/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"dolor","picture":"http:\/\/www.gravatar.com\/avatar","password":"eos","others_properties":"[]"}'
+    -d '{"email":"evius@evius.co","names":"impedit","picture":"http:\/\/www.gravatar.com\/avatar","password":"velit","others_properties":"[]"}'
 
 ```
 
@@ -29731,9 +30204,9 @@ let headers = {
 
 let body = {
     "email": "evius@evius.co",
-    "names": "dolor",
+    "names": "impedit",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "password": "eos",
+    "password": "velit",
     "others_properties": "[]"
 }
 
@@ -29836,10 +30309,10 @@ fetch(url, {
     },
     "confirmation_code": "Fmg1DjO8NAavTRaS",
     "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-    "updated_at": "2020-11-30 13:28:34",
+    "updated_at": "2020-12-02 21:01:54",
     "created_at": "2020-04-19 19:46:41",
     "names": "Evius",
-    "refresh_token": "AG8BCneUvhrX-pfJplZqycLdvang8ezQyOvx3SNB11HxRyaBH8-zzc-pB3VYRVyLmdjuw5bvu_peQv8wBycNWK-3s-JAILkHV7qhpNx8npDgwbcFA__Cu7CnlR4mzL2GxN0c2zpRncBFiqQ8B1niYIsQPcnwkJc2y_rVxgSgvwCdAagJ9GLIhqubd5h4MGyo-P35qewgGwlUry5T3Zc4gN9D-wIdYXDVKg",
+    "refresh_token": "AG8BCnfv3soYvy2AshABYBF5e9vubNz0LljD_AP4_Zkcyzf3G9eTwvEdQs2SumeVmfh_fLqDLXi1jqFbi4Nkxj_4OeQz6LFFZsdh_N9uNFTQdjAYM0uNwn2cH6FVztqKjBWNFlxnOGEb0CA-VGObLMpOEtblD-hRY8lw2Tdtoq8b_XmOkYNcdKjQcvqiqezq8f_SaZfY1TB4K1R8o_Rzv_S895_JeQjaeQ",
     "aerolineapreferida": "Avianca",
     "genero": "Masculino",
     "tipodecerveza": "Ale",
