@@ -28,12 +28,13 @@ class DiscountCodeController extends Controller
 
     /**
      * _index_: list of discount codes by template
-     *
+     * @urlParam template_id required Example: 5fc80b2a31be4a3ca2419dc4
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function index($group_id)
+    public function index($template_id)
     {   
-        $query = DiscountCode::where('discount_code_group_id', $group_id);
+        $query = DiscountCode::where('discount_code_template_id', $template_id);
         return JsonResource::collection($query->get());
     }
 
@@ -48,7 +49,9 @@ class DiscountCodeController extends Controller
         //
     }
     /**
-     * Store a newly created resource in storage.
+     * _store_: ceate new discount code
+     * 
+     * @bodyParam quantity number required number of codes to be generated.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -98,18 +101,21 @@ class DiscountCodeController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * _show_: view information for a specific code
+     * 
+     * @urlParam template_id required discount code template with which the code is associated Example: 5fc80b2a31be4a3ca2419dc4
+     * @urlParam code required code to be consulted Example: 5fc81e8631be4a3ca2419dcc
      *
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($event_id ,$id)
+    public function show($template_id, $id)
     {
         $code = DiscountCode::find($id);
         return $code;
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Category  $category
@@ -147,16 +153,21 @@ class DiscountCodeController extends Controller
 
 
     /**
-     * _validateCode_ : 
+     * _changeCode_ :  redeem the discount code
+     * 
+     * @urlParam template_id required discount code template with which the code is associated Example: 5fc80b2a31be4a3ca2419dc4
+     * 
+     * @bodyParam code string required code to redeem
+     * @bodyParam event_id string required event for which the code was purchased
      */
-    public function changeCode(Request $request)
+    public function changeCode(Request $request , $template_id)
     {   
 
         $data = $request->json()->all();
         $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
 
         if($code){
-            $group = DiscountCodeTemplate::where('_id',$code->discount_code_group_id)->first();
+            $group = DiscountCodeTemplate::where('_id',$template_id)->first();
             
         
             if($code->number_uses < $group->use_limit  ){

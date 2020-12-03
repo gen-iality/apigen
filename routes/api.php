@@ -520,7 +520,8 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-        Route::apiResource("discountcodetemplate/{group_id}/code", "DiscountCodeController");
+        Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
+        Route::put("discountcodetemplate/{template_id}/code/changeCode", "DiscountCodeController@changeCode");
         // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
         // Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
         // Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");

@@ -92,7 +92,7 @@ class DiscountCodeTemplateController extends Controller
     /**
      * _show_ : information from a specific template
      * 
-     * @urlParam id discount template id 
+     * @urlParam discountcodetemplate id Example: 5fc80b2a31be4a3ca2419dc4
      * 
      * @param  \App\DiscountCodeTemplate  $codegroup
      * @return \Illuminate\Http\Response

@@ -138,7 +138,8 @@ return [
                     //RSVP
                         '*/sendeventrsvp/*',
                     //Discount code
-                        '*/discountcodetemplate/*'
+                        '*/discountcodetemplate/*',
+                        '*/discountcodetemplate'
                 ],  
 
                 /*
