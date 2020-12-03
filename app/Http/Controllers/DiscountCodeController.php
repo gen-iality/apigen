@@ -146,10 +146,36 @@ class DiscountCodeController extends Controller
     }
 
 
+    // /**
+    //  * _validateCode_ : 
+    //  */
+    // public function changeCode(Request $request)
+    // {   
+
+    //     $data = $request->json()->all();
+    //     $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
+
+    //     if($code){
+    //         $group = DiscountCodeTemplate::where('_id',$code->discount_code_group_id)->first();
+            
+        
+    //         if($code->number_uses < $group->use_limit  ){
+    //             $code->number_uses =$code->number_uses + 1; 
+    //             $code->save();
+    //             return "Código válido";
+    //         }
+            
+    //         return abort(403 , 'El código ya se uso');
+    //     }
+        
+    //     return abort(404 , 'El código no existe');
+    // }
+
+
     /**
-     * _validateCode_ : 
+     * _validateCode_ : valid if the code is redeemed, exists or is valid
      */
-    public function changeCode(Request $request)
+    public function validateCode(Request $request)
     {   
 
         $data = $request->json()->all();
@@ -160,7 +186,7 @@ class DiscountCodeController extends Controller
             
         
             if($code->number_uses < $group->use_limit  ){
-                $code->number_uses =$code->number_uses + 1; 
+                // $code->number_uses =$code->number_uses + 1; 
                 $code->save();
                 return "Código válido";
             }
@@ -170,5 +196,9 @@ class DiscountCodeController extends Controller
         
         return abort(404 , 'El código no existe');
     }
+
+    
+
+
    
 }
