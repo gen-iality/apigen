@@ -180,6 +180,8 @@ class OrdersServices
             $order->items = $ticket_order['items'];
             $order->order_status_id = config('attendize.order_awaiting_payment');
             $order->amount = $ticket_order['order_total'];
+            $order->item_type = strip_tags($request_data['item_type']);
+
 
             $order->properties = $request_data['properties'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];

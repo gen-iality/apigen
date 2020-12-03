@@ -506,4 +506,25 @@ Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder")
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
 
 
+/****************
+ * Discount Code Group
+ ****************/
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+        Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+//     }
+// );
+
+/****************
+ * Discount Code 
+ ****************/
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+        Route::apiResource("discountcodetemplate/{group_id}/code", "DiscountCodeController");
+        // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
+        // Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
+        // Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
+
+//     }
+// );
 

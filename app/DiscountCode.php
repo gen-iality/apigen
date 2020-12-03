@@ -9,18 +9,26 @@ use Moloquent;
 /**
  * Category Model
  *
- */ 
+ */
 class DiscountCode extends Moloquent
 {
-    protected $fillable = ['code','quantity'];
+    //protected $with = ['event'];
+    //protected $table = 'category';
+    protected $fillable = [
+        'code', 
+        'number_uses',
+        'discount_code_template_id', 
+        'event_id'               
+    ];
+   
+    public function discount_code_template()
+    {
+        return $this->hasOne('App\DiscountCodeTemplate');
+    }
 
     public function event()
     {
         return $this->belongsTo('App\Event');
     }
-    public function eventusers()
-    {
-        return $this->hasMany('App\Attendee');
-    }
-    protected $guarded = [];
+    
 }
