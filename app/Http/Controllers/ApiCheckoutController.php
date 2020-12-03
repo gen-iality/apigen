@@ -123,8 +123,8 @@ class ApiCheckoutController extends Controller
                     switch($order->item_type){
                         case 'discountCode' : 
                             //Logica para agregar codigos
-                            $x=1;
-                            while($x <= 1) {            
+                            $x=0;
+                            while($x < count($order->items)) {            
                                 $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     
                                 $input_length = strlen($permitted_chars);
@@ -134,7 +134,7 @@ class ApiCheckoutController extends Controller
                                     $random_string .= $random_character;
                                 } 
                                 
-                                $codeTemplate = DiscountCodeTemplate::find($order->items[0]);
+                                $codeTemplate = DiscountCodeTemplate::find($order->items[$x]);
                                 
                                 
                                 $data['code'] = $random_string;
