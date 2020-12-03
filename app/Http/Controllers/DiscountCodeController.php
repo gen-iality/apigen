@@ -146,30 +146,28 @@ class DiscountCodeController extends Controller
     }
 
 
-    // /**
-    //  * _validateCode_ : 
-    //  */
-    // public function changeCode(Request $request)
-    // {   
+    /**
+     * 
+     */
+    public function changeCode(Request $request)
+    {   
+        $data = $request->json()->all();
+        $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
 
-    //     $data = $request->json()->all();
-    //     $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
-
-    //     if($code){
-    //         $group = DiscountCodeTemplate::where('_id',$code->discount_code_group_id)->first();
+        if($code){
+           
+            $group = $code->discount_code_template;
+            if($code->number_uses < $group->use_limit  ){
+                $code->number_uses =$code->number_uses + 1; 
+                $code->save();
+                return "Código canjeado";
+            }
             
+            return abort(403 , 'El código ya se usó');
+        }
         
-    //         if($code->number_uses < $group->use_limit  ){
-    //             $code->number_uses =$code->number_uses + 1; 
-    //             $code->save();
-    //             return "Código válido";
-    //         }
-            
-    //         return abort(403 , 'El código ya se uso');
-    //     }
-        
-    //     return abort(404 , 'El código no existe');
-    // }
+        return abort(404 , 'El código no existe');
+    }
 
 
     /**
@@ -180,15 +178,15 @@ class DiscountCodeController extends Controller
 
         $data = $request->json()->all();
         $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
-
+        var_dump($code , );die;
         if($code){
             $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
         
             if($code->number_uses < $group->use_limit  ){
                 // $code->number_uses =$code->number_uses + 1; 
-                $code->save();
-                return "Código válido";
+                // $code->save();
+                return $code;
             }
             
             return abort(403 , 'El código ya se uso');

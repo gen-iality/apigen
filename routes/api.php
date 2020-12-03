@@ -26,6 +26,9 @@ PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
+
+
+
 Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
 Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
 Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
@@ -491,6 +494,8 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
+Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
+Route::put("code/exchangeCode", "DiscountCodeController@changeCode");
 
 
 /****************
@@ -501,17 +506,4 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
     Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
     //     }
     // );
-    
-    /****************
-     * Discount Code 
-     ****************/
-    // Route::group(
-    //     ['middleware' => 'auth:token'], function () {
-            Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
-            Route::put("discountcodetemplate/{template_id}/code/changeCode", "DiscountCodeController@changeCode");
-            // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
-            // Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
-            // Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
-    
-    //     }
-    // );
+;
