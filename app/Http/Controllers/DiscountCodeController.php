@@ -31,9 +31,9 @@ class DiscountCodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($group_id)
+    public function index($template_id)
     {   
-        $query = DiscountCode::where('discount_code_group_id', $group_id);
+        $query = DiscountCode::where('discount_code_template_id', $template_id);
         return JsonResource::collection($query->get());
     }
 
@@ -135,7 +135,7 @@ class DiscountCodeController extends Controller
     public function destroy($id)
     {   
         // $codegroup = DiscountCode::findOrFail($id);
-        // $events = DiscountCode::where('discount_code_group_id' , $codegroup->_id)->first();
+        // $events = DiscountCode::where('discount_code_template_id' , $codegroup->_id)->first();
 
         // if($events){
         //     abort(400,'El grupo no se puede eliminar si está asociado a un código');
@@ -156,7 +156,7 @@ class DiscountCodeController extends Controller
         $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
 
         if($code){
-            $group = DiscountCodeTemplate::where('_id',$code->discount_code_group_id)->first();
+            $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
         
             if($code->number_uses < $group->use_limit  ){
