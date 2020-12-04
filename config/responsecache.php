@@ -33,7 +33,11 @@ return [
      * requests. This can be the name of any store that is
      * configured in app/config/cache.php
      */
+<<<<<<< HEAD
     'cache_store' => env('RESPONSE_CACHE_DRIVER', 'file'),
+=======
+    'cache_store' => env('RESPONSE_CACHE_DRIVER', 'redis'),
+>>>>>>> d4bfab4de3646af3fd725f11dd0bc2bbf2ad6a13
 
     /*
      * If the cache driver you configured supports tags, you may specify a tag name

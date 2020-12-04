@@ -23,7 +23,7 @@ class DiscountCode extends Moloquent
    
     public function discount_code_template()
     {
-        return $this->hasOne('App\DiscountCodeTemplate');
+        return $this->belongsTo('App\DiscountCodeTemplate');
     }
 
     public function event()
