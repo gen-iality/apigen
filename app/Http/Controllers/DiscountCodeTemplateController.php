@@ -54,7 +54,7 @@ class DiscountCodeTemplateController extends Controller
      * @bodyParam name string required Example: Curso de regalo
      * @bodyParam use_limit number required the number of uses for each code Example: 1
      * @bodyParam discount number required discount percentage Example: 100
-     * @bodyParam even_id string required event with which the template will be associated Exmaple: 5ea23acbd74d5c4b360ddde2
+     * @bodyParam event_id string required event with which the template will be associated Example: 5ea23acbd74d5c4b360ddde2
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

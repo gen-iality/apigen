@@ -37,13 +37,14 @@ class ApiCheckoutController extends Controller
 		$data = $request->input();
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc80e2931be4a3ca2419dc5";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
-		$order = Order::find($order_id);
-		
+        $order = Order::find($order_id);
+        // var_dump(json_encode($data));die;
+		Log::info("paymentWebhookesponse " . json_encode($data));
 
 		$order->data = json_encode($data);
 		$order->save();
 
-		$this->changeStatusOrder($order_id, 'APPROVED');
+		$this->changeStatusOrder($order_id, $order_status);
 
 		return "listo";
 	}

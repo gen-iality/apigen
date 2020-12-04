@@ -52,8 +52,8 @@ class DiscountCodeController extends Controller
     /**
      * _store_: ceate new discount code
      * 
-     * @bodyParam quantity number required number of codes to be generated.
-     *
+     * @bodyParam quantity number required number of codes to be generated Example : 1
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
