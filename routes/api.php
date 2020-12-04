@@ -26,20 +26,10 @@ PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
-<<<<<<< HEAD
 // Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
 // Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
 // // Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
 // Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
-=======
-
-
-
-Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
-Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
-Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
-Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
->>>>>>> 5619702c3897beea4c5faddfd817cfb544be57dd
 
 Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');
@@ -531,19 +521,7 @@ Route::get("code/validatecode", "DiscountCodeController@validateCode");
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-<<<<<<< HEAD
-        Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
-        Route::put("discountcodetemplate/{template_id}/code/changeCode", "DiscountCodeController@changeCode");
-        // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
-        // Route::get("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
-        // Route::put("discountcodetemplate/{id}", "DiscountCodeTemplateController@store");
-
-//     }
-// );
-
-=======
     Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
     //     }
     // );
 ;
->>>>>>> 5619702c3897beea4c5faddfd817cfb544be57dd
