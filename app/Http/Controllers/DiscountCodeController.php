@@ -165,7 +165,7 @@ class DiscountCodeController extends Controller
 
     /**
      * 
-     *  _validateCode_ : valid if the code is redeemed, exists or is valid.
+     * _validateCode_ : valid if the code is redeemed, exists or is valid.
      * 
      * @bodyParam code string required code to redeem
      * @bodyParam event_id string required event for which the code was purchased

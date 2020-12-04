@@ -139,7 +139,8 @@ return [
                         '*/sendeventrsvp/*',
                     //Discount code
                         '*/discountcodetemplate/*',
-                        '*/discountcodetemplate'
+                        '*/discountcodetemplate',
+                        '*/code/*'
                 ],  
 
                 /*
