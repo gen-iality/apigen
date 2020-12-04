@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
+use App\evaLib\Services\CodeServices;
 
 
 /**
@@ -141,7 +142,7 @@ class DiscountCodeController extends Controller
     public function destroy($id)
     {   
         // $codegroup = DiscountCode::findOrFail($id);
-        // $events = DiscountCode::where('discount_code_group_id' , $codegroup->_id)->first();
+        // $events = DiscountCode::where('discount_code_template_id' , $codegroup->_id)->first();
 
         // if($events){
         //     abort(400,'El grupo no se puede eliminar si está asociado a un código');
@@ -153,27 +154,37 @@ class DiscountCodeController extends Controller
 
 
     /**
-     * _changeCode_ :  redeem the discount code
+     *  _changeCode_ :  redeem the discount code
+     */
+    public function exchangeCode(Request $request)
+    {   
+        $data = $request->json()->all();
+        $result = CodeServices::exchangeCode($data);
+    }
+
+
+    /**
      * 
-     * @urlParam template_id required discount code template with which the code is associated Example: 5fc80b2a31be4a3ca2419dc4
+     *  _validateCode_ : valid if the code is redeemed, exists or is valid.
      * 
      * @bodyParam code string required code to redeem
      * @bodyParam event_id string required event for which the code was purchased
+     * 
      */
-    public function changeCode(Request $request , $template_id)
+    public function validateCode(Request $request)
     {   
 
         $data = $request->json()->all();
         $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
-
-        if($code){
-            $group = DiscountCodeTemplate::where('_id',$template_id)->first();
-            
         
+        if($code){
+            $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
+            
+            
             if($code->number_uses < $group->use_limit  ){
-                $code->number_uses =$code->number_uses + 1; 
-                $code->save();
-                return "Código válido";
+                // $code->number_uses =$code->number_uses + 1; 
+                // $code->save();
+                return $code;
             }
             
             return abort(403 , 'El código ya se uso');
@@ -181,5 +192,4 @@ class DiscountCodeController extends Controller
         
         return abort(404 , 'El código no existe');
     }
-   
 }

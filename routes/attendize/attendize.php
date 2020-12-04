@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 Route::group(
@@ -844,3 +845,5 @@ Route::get('{event_id}/exportExcel/{export_as?}', [
     'as'   => 'showEventsReportsExport',
     'uses' => 'EventOrdersController@showExportOrders',
 ]);
+=======
+>>>>>>> 5619702c3897beea4c5faddfd817cfb544be57dd

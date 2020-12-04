@@ -136,7 +136,7 @@ class DiscountCodeTemplateController extends Controller
     public function destroy($id)
     {   
         $codegroup = DiscountCode::findOrFail($id);
-        $codes = DiscountCode::where('discount_code_group_id' , $codegroup->_id)->first();
+        $codes = DiscountCode::where('discount_code_template_id' , $codegroup->_id)->first();
 
         if($codes){
             abort(400,'El grupo no se puede eliminar si está asociado a un código de descuento');
@@ -164,7 +164,7 @@ class DiscountCodeTemplateController extends Controller
     //         } 
 
     //         $dataCode['code'] = $random_string;
-    //         $dataCode['discount_code_group_id'] = $group_id;
+    //         $dataCode['discount_code_template_id'] = $group_id;
     //         $dataCode['event_id'] = $event_id;
 
     //         $resultCode = new DiscountCode($dataCode); 

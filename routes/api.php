@@ -26,10 +26,20 @@ PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
  */
 
+<<<<<<< HEAD
 // Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
 // Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
 // // Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
 // Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
+=======
+
+
+
+Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
+Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
+Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
+Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
+>>>>>>> 5619702c3897beea4c5faddfd817cfb544be57dd
 
 Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');
@@ -219,7 +229,13 @@ Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
 // pero sin producir ningun tipo de errores.
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
-Route::apiResource('events', 'EventController')->middleware('cacheResponse');;
+
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
+Route::apiResource('events', 'EventController');
+    }
+);
+
 //Route::get("eventsearch",'EventController');
 //     }
 // );
@@ -504,6 +520,10 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
+Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
+Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
+Route::get("code/validatecode", "DiscountCodeController@validateCode");
+
 
 
 /****************
@@ -511,15 +531,7 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-        Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
-//     }
-// );
-
-/****************
- * Discount Code 
- ****************/
-// Route::group(
-//     ['middleware' => 'auth:token'], function () {
+<<<<<<< HEAD
         Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
         Route::put("discountcodetemplate/{template_id}/code/changeCode", "DiscountCodeController@changeCode");
         // Route::get("discountcodetemplate", "DiscountCodeTemplateController@store");
@@ -529,3 +541,9 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
 //     }
 // );
 
+=======
+    Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+    //     }
+    // );
+;
+>>>>>>> 5619702c3897beea4c5faddfd817cfb544be57dd
