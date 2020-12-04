@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
+use App\evaLib\Services\CodeServices;
 
 
 /**
@@ -149,40 +150,27 @@ class DiscountCodeController extends Controller
     /**
      * 
      */
-    public function changeCode(Request $request)
+    public function exchangeCode(Request $request)
     {   
         $data = $request->json()->all();
-        $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
-
-        if($code){
-           
-            $group = $code->discount_code_template;
-            if($code->number_uses < $group->use_limit  ){
-                $code->number_uses =$code->number_uses + 1; 
-                $code->save();
-                return "Código canjeado";
-            }
-            
-            return abort(403 , 'El código ya se usó');
-        }
-        
-        return abort(404 , 'El código no existe');
+        $result = CodeServices::exchangeCode($data);
     }
 
 
     /**
-     * _validateCode_ : valid if the code is redeemed, exists or is valid
+     * _validateCode_ : valid if the code is redeemed, exists or is valid.
+     * 
      */
     public function validateCode(Request $request)
     {   
 
         $data = $request->json()->all();
         $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
-        var_dump($code , );die;
+        
         if($code){
             $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
-        
+            
             if($code->number_uses < $group->use_limit  ){
                 // $code->number_uses =$code->number_uses + 1; 
                 // $code->save();
@@ -194,9 +182,4 @@ class DiscountCodeController extends Controller
         
         return abort(404 , 'El código no existe');
     }
-
-    
-
-
-   
 }
