@@ -181,6 +181,8 @@ class OrdersServices
             $order->order_status_id = config('attendize.order_awaiting_payment');
             $order->amount = $ticket_order['order_total'];
             $order->item_type = strip_tags($request_data['item_type']);
+            $order->discount_codes = strip_tags(isset($request_data['discount_codes']) ? $request_data['discount_codes'] : [] );
+
 
 
             $order->properties = $request_data['properties'];
