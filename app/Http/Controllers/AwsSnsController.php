@@ -22,6 +22,13 @@ use App\Message as EviusMessage;
 
 class AwsSnsController extends Controller
 {
+
+    public function testreqS3()
+    {
+        Log::info('testS3');
+        return 'testS3';
+    }
+    
     public function updateSnsMessages(Request $request)
     {        
         Log::info('update');
