@@ -40,7 +40,7 @@ class ApiCheckoutController extends Controller
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
-		Log::info("paymentWebhookesponse " . json_encode($data));
+		
 
 		$order->data = json_encode($data);
 		$order->save();

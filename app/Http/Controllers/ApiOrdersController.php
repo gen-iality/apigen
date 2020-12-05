@@ -42,7 +42,7 @@ class ApiOrdersController extends Controller
      * @bodyParam account_id string required id of the user making the purchase Example: 5f450fb3d4267837bb128102
      * @bodyParam amount integer required total order value Example: 10000
      * @bodyParam item_type string required item type discountCode or event Example: discountCode
-     * @bodyParam discount_codes string disount code
+     * @bodyParam discount_codes array disount code 
      * 
      *  
      * @param request $request
