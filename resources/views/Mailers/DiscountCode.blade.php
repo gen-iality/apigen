@@ -9,7 +9,7 @@
 @endcomponent --}}
 
 @component('mail::message')  
-@if(!empty($event->styles["banner_image_email"]))
+{{-- @if(!empty($event->styles["banner_image_email"]))
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
 </div>
@@ -17,7 +17,7 @@
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
 </div>
-@endif
+@endif --}}
 <br />
 <br />
 ¡FELICITACIONES! tu compra del código de regalo para el curso  <b>{{$event->name}}</b> ha sido exitosa.
@@ -35,7 +35,7 @@ Tu código de regalo es: <b>{{$code->code}}</b>
     Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
 </p>
 
-<div class="centered">
+{{-- <div class="centered">
     @if(isset($image_footer) && !empty($image_footer))
         ![Logo]({{!empty($image_footer)}})
         <img alt="{{$event->name}}" src={{$image_footer}} /> 
@@ -46,6 +46,6 @@ Tu código de regalo es: <b>{{$code->code}}</b>
     @elseif(isset($organization_picture) && !empty($organization_picture))
         <img alt="{{$event->name}}" src={{$organization_picture}} />           
     @endif
-</div>
+</div> --}}
 
 @endcomponent

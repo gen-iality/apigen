@@ -36,7 +36,7 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc80e2931be4a3ca2419dc5";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fcacc94a1050f70925549e2";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -198,6 +198,7 @@ class ApiCheckoutController extends Controller
                                     $x++;                                    
                                 }   
                                 $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
+                                // var_dump($order->email);die;                                
                                 Mail::to($order->email)
                                 ->queue(
                                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
