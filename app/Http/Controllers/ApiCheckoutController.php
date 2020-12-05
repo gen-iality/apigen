@@ -157,8 +157,7 @@ class ApiCheckoutController extends Controller
                             if(isset($code)){
                                 if($code->event_id == $event->_id){
                                     $code->number_uses =$code->number_uses + 1; 
-                                    $code->save();
-                                    $x = 0;
+                                    $code->save();                                   
                                 } 
                             }                            
                         }
@@ -168,11 +167,10 @@ class ApiCheckoutController extends Controller
                         case 'discountCode' : 
                             //Logica para agregar codigos
 
-                            $x=0;
+                            $j=0;
 
                             // Cycle while for each item of discount code template purchased
-                            while($x < count($order->items)) {           
-                                
+                            while($j < count($order->items)) {                                     
                                 //  Generate random code for the discount code
                                     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     
@@ -183,7 +181,7 @@ class ApiCheckoutController extends Controller
                                         $random_string .= $random_character;
                                     } 
                                 
-                                $codeTemplate = DiscountCodeTemplate::find($order->items[$x]);
+                                $codeTemplate = DiscountCodeTemplate::find($order->items[$j]);
                                 
                                 
                                 $data['code'] = $random_string;
@@ -195,7 +193,7 @@ class ApiCheckoutController extends Controller
                                 if(!isset($repeated))
                                 {                                             
                                     $resultCode->save();   
-                                    $x++;                                    
+                                    $j++;                                    
                                 }   
                                 // $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
                                 // var_dump($order->email);die;  
@@ -211,7 +209,7 @@ class ApiCheckoutController extends Controller
                                 );          
                                         
                             }
-                            
+                            // var_dump($x);                                                            
                         break;
                         case 'event' :
                         default:
