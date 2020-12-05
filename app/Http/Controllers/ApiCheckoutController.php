@@ -167,7 +167,7 @@ class ApiCheckoutController extends Controller
                         case 'discountCode' : 
                             //Logica para agregar codigos
 
-                            $j=0;
+                            $k=0;
 
                             // Cycle while for each item of discount code template purchased
                             while($k < count($order->items)) {                                     
