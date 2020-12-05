@@ -37,7 +37,7 @@ class ApiCheckoutController extends Controller
 		//reference_sale response_message_pol
 		$data = $request->input();
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fcacc94a1050f70925549e2";
-		$order_status = isset($data ['state_pol'])?$data ['state_pol']:"APPROVED";
+		$order_status ="APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
 		
