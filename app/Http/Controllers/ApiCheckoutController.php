@@ -170,7 +170,7 @@ class ApiCheckoutController extends Controller
                             $j=0;
 
                             // Cycle while for each item of discount code template purchased
-                            while($j < count($order->items)) {                                     
+                            while($k < count($order->items)) {                                     
                                 //  Generate random code for the discount code
                                     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     
@@ -181,7 +181,7 @@ class ApiCheckoutController extends Controller
                                         $random_string .= $random_character;
                                     } 
                                 
-                                $codeTemplate = DiscountCodeTemplate::find($order->items[$j]);
+                                $codeTemplate = DiscountCodeTemplate::find($order->items[$k]);
                                 
                                 
                                 $data['code'] = $random_string;
@@ -191,9 +191,10 @@ class ApiCheckoutController extends Controller
                                 $resultCode = new DiscountCode($data);
                                 $repeated =  DiscountCode::where('code' , $random_string)->first();
                                 if(!isset($repeated))
-                                {                                             
+                                {   
+                                    $k++;                                         
                                     $resultCode->save();   
-                                    $j++;                                    
+                                                                        
                                 }   
                                 // $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
                                 // var_dump($order->email);die;  
