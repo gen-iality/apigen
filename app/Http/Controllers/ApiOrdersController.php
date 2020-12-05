@@ -38,7 +38,7 @@ class ApiOrdersController extends Controller
     /**
      * _store_: create new order
      *
-     * @bodyParam items array required id of the event from which the purchase is made Example:  ["5ea23acbd74d5c4b360ddde2"]
+     * @bodyParam items array required the items are the id of the event in case of buying a course or the id of the discount code template in case of buying a code Example:  ["5ea23acbd74d5c4b360ddde2"]
      * @bodyParam account_id string required id of the user making the purchase Example: 5f450fb3d4267837bb128102
      * @bodyParam amount integer required total order value Example: 10000
      * @bodyParam item_type string required item type discountCode or event Example: discountCode
