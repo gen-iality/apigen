@@ -29,6 +29,7 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
     public function __construct($code , $order)
     {   
         // var_dump($code);die;
+        // var_dump($code->_id);    
         $event = Event::findOrFail($code->event_id);
 
         $this->code = $code;
