@@ -190,9 +190,9 @@ class ApiCheckoutController extends Controller
                     
                                 $resultCode = new DiscountCode($data);
                                 $repeated =  DiscountCode::where('code' , $random_string)->first();
+                                $k++;  
                                 if(!isset($repeated))
-                                {   
-                                    $k++;                                         
+                                {                                                                              
                                     $resultCode->save();   
                                                                         
                                 }   
