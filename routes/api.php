@@ -73,7 +73,7 @@ Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
 // Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
-// Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
 
 
