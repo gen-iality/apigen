@@ -18,12 +18,14 @@ class DiscountCode extends Moloquent
         'code', 
         'number_uses',
         'discount_code_template_id', 
-        'event_id'               
+        'event_id',         
     ];
+
+    protected $with = ['discount_code_template'];
    
     public function discount_code_template()
     {
-        return $this->belongsTo('App\DiscountCodeTemplate');
+        return $this->belongsTo('App\DiscountCodeTemplate', 'discount_code_template_id');
     }
     
 }
