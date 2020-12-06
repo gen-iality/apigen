@@ -20,5 +20,12 @@ class DiscountCodeTemplate extends Moloquent
         'name',
         'use_limit',    
         'event_id'               
-    ];        
+    ];
+
+    protected $with = ['event'];
+   
+    public function event()
+    {
+        return $this->belongsTo('App\Event', 'event_id');
+    }        
 }
