@@ -24,7 +24,7 @@ class Event extends ModelsEvent
     protected $with = ['author', 'categories', 'eventType', 'organiser', 'organizer', 'currency', 'tickets'];
 
     protected $fillable = [
-        'author', 'name', 'description', 'location', 'venue', 'address', 'pulep', 'registration_message',
+        'has_payment','author', 'name', 'description', 'location', 'venue', 'address', 'pulep', 'registration_message',
         'datetime_from', 'datetime_to', 'date_start', 'date_end', 'time_start', 'time_end',
         'visibility', 'picture', 'organization_id', 'category', 'extra_config',
         'user_properties', 'properties_group', 'styles', 'has_date', 'app_configuration',
