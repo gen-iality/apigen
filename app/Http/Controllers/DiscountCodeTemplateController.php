@@ -135,7 +135,7 @@ class DiscountCodeTemplateController extends Controller
      */
     public function destroy($id)
     {   
-        $codegroup = DiscountCode::findOrFail($id);
+        $codegroup = DiscountCodeTemplate::findOrFail($id);
         $codes = DiscountCode::where('discount_code_template_id' , $codegroup->_id)->first();
 
         if($codes){
