@@ -83,7 +83,7 @@ class UserController extends UserControllerWeb
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {           
         $validatedData = $request->validate([
             'email' => 'required|unique:App\Account|email',
             'names' => 'required',
@@ -95,8 +95,16 @@ class UserController extends UserControllerWeb
         $data = $request->json()->all();
         $result = new Account($data);
         $result->save();
+
+               
+        Mail::to($result->email)
+        ->queue(            
+            new \App\Mail\UserRegistrationMail($result)
+        );
         return $result;
     }
+
+
 
     /**
      * _update_: update registered user

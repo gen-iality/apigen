@@ -78,11 +78,6 @@ class ApiCheckoutController extends Controller
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new \App\Mail\ConfirmationPayU()
                 );
-                Mail::to('deltorosalazar@gmail.com')
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU()
-                );
                 Mail::to('geraldine.garcia@mocionsoft.com')
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
