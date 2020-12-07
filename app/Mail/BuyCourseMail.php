@@ -12,7 +12,7 @@ use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 
-class ConfirmationPayU extends Mailable implements ShouldQueue
+class BuyCourseMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -24,9 +24,9 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($event)
     {        
-        
+        $this->event = $event;
 
     }
     /**
@@ -40,8 +40,8 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
         
         return $this
             ->from("alerts@evius.co", "Ucronio")
-            ->subject("PayU Pago exitoso")
-            ->markdown('rsvp.payU');
+            ->subject("Bienvenido a " . $this->event->name)
+            ->markdown('rsvp.buyCourse');
 
 
     }

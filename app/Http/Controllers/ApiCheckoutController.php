@@ -36,7 +36,7 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fcc153d51ab2c41884e4dcc";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -71,17 +71,17 @@ class ApiCheckoutController extends Controller
                 Mail::to($order->email)
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU()
+                    new \App\Mail\ConfirmationPayU($order)
                 );
                 Mail::to("juan.lopez@mocionsoft.com")
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU()
+                    new \App\Mail\ConfirmationPayU($order)
                 );
                 Mail::to('geraldine.garcia@mocionsoft.com')
                 ->queue(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU()
+                    new \App\Mail\ConfirmationPayU($order)
                 );
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
@@ -222,6 +222,11 @@ class ApiCheckoutController extends Controller
                                 $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
                                 $orderItem->unit_booking_fee = 0;
                                 $orderItem->save();
+                                Mail::to($order->email)
+                                ->queue(
+                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                    new \App\Mail\BuyCourseMail($event)
+                                ); 
                             }
                             //Lógica para agregar event_user
                             $this->createAteendes($order);

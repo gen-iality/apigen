@@ -94,13 +94,18 @@ class UserController extends UserControllerWeb
 
         $data = $request->json()->all();
         $result = new Account($data);
-        $result->save();
 
-               
+        $result->save();
+        if(isset($data['organization_ids'])){
+            $result->organizations()->attach($data['organization_ids']);
+        }               
+
         Mail::to($result->email)
         ->queue(            
             new \App\Mail\UserRegistrationMail($result)
         );
+        
+        $result = Account::find($result->_id);
         return $result;
     }
 
@@ -114,6 +119,7 @@ class UserController extends UserControllerWeb
      * @bodyParam email email optional. Example: evius@evius.co
      * @bodyParam names  string optional. Example: evius lopez
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
+     * @bodyParam organization_ids string. 
      * @bodyParam others_properties array optional dynamic properties of the user you want to place. Example: []
      * @return App\Http\Resources\UsersResource
      */
@@ -132,7 +138,14 @@ class UserController extends UserControllerWeb
         $Account = Account::find($id);
         $Account->fill($data);
         $Account->save();
-        return $data;
+
+        if(isset($data['organization_ids'])){
+            $result->organizations()->sync($data['organization_ids']);
+        }     
+
+        $Account = Account::find($Account->_id);
+
+        return $Account;
     }
 
     /**
