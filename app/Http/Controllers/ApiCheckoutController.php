@@ -71,19 +71,16 @@ class ApiCheckoutController extends Controller
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
                 Log::info("Enviamos el correo");
-                Mail::to($order->email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU($order)
-                );
+                // Mail::to($order->email)
+                // ->queue(                    
+                //     new \App\Mail\ConfirmationPayU($order)
+                // );
                 Mail::to("juan.lopez@mocionsoft.com")
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                ->queue(                    
                     new \App\Mail\ConfirmationPayU($order)
                 );
                 Mail::to('geraldine.garcia@mocionsoft.com')
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                ->queue(                    
                     new \App\Mail\ConfirmationPayU($order)
                 );
                 if ($order->order_status_id != config('attendize.order_complete')) {
