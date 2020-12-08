@@ -33,13 +33,17 @@ class ApiCheckoutController extends Controller
 
 
 	public function paymentWebhookesponse(Request $request){
-        Mail::to("deltorosalazar@gmail.com")
-        ->queue(                                    
-            new \App\Mail\ConfirmationPayU('Prueba')
-        );
+        
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
+        $order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
+        $test = "Sale " . $data['reference_sale'] . " Autorization  " . $data['authorization_code'] .
+                         " cc_number " . $data['cc_number'] . " response_message_pol " .$data ['response_message_pol'] ;
+        Mail::to("deltorosalazar@gmail.com")
+        ->queue(                                    
+            new \App\Mail\ConfirmationPayU($test)
+        );
+
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -83,7 +87,7 @@ class ApiCheckoutController extends Controller
                 ->queue(                    
                     new \App\Mail\ConfirmationPayU($order)
                 );
-                if ($order->order_status_id != config('attendize.order_complete')) {
+                if($order->order_status_id != config('attendize.order_complete')) {
                    
                     $order->order_status_id = config('attendize.order_complete');
                     Log::info("Completamos la orden");
@@ -191,16 +195,17 @@ class ApiCheckoutController extends Controller
                                 {                                                                              
                                     $resultCode->save();   
                                     $k++;
+
+                                    Mail::to("geraldine.garcia@mocionsoft.com")
+                                    ->queue(                                    
+                                        new \App\Mail\DiscountCodeMail($resultCode , $order)
+                                    );                              
+                                    Mail::to($order->email)
+                                    ->queue(                                    
+                                        new \App\Mail\DiscountCodeMail($resultCode , $order)
+                                    );
                                                                         
-                                }    
-                                Mail::to("geraldine.garcia@mocionsoft.com")
-                                ->queue(                                    
-                                    new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                );                              
-                                Mail::to($order->email)
-                                ->queue(                                    
-                                    new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                );          
+                                }        
                                         
                             }
                             // var_dump($x);                                                            
