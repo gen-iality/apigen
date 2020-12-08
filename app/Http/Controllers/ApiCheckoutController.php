@@ -37,8 +37,12 @@ class ApiCheckoutController extends Controller
 		//reference_sale response_message_pol
 		$data = $request->input();
         $order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
-        $test = "Sale " . $data['reference_sale'] . " Autorization  " . $data['authorization_code'] .
-                         " cc_number " . $data['cc_number'] . " response_message_pol " .$data ['response_message_pol'] ;
+
+        $test = "Sale " . $data['reference_sale']  || 'no llegó' . 
+                " Autorization  " . $data['authorization_code']  || 'no llegó'.
+                " cc_number " . $data['cc_number']  || 'no llegó' . 
+                " response_message_pol " .$data ['response_message_pol'] || 'no llegó';
+                
         Mail::to("deltorosalazar@gmail.com")
         ->queue(                                    
             new \App\Mail\ConfirmationPayU($test)
