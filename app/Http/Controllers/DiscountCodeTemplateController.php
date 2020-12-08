@@ -68,21 +68,24 @@ class DiscountCodeTemplateController extends Controller
             'name' => "required",
             'use_limit' => "required",
             'discount' => 'required',
-            'event_id' => 'required',
         ];
         
 
         $validator = Validator::make($data, $rules);
         if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
-        }        
+        }   
+        
+        if(!isset($data['event_id']) && !isset($data['organization_id']))
+        {
+            return response()->json(['errors' => "Debe ingresar organization_id o event_id "], 400);
+        }
 
         $result->save();
 
         $group_id = $result->_id;   
         
-        // self::createCodes($group_id , $event_id, $quantity);
-        
+        // self::createCodes($group_id , $event_id, $quantity);        
 
         return $result;
 
