@@ -33,9 +33,9 @@ class ApiCheckoutController extends Controller
 
 
 	public function paymentWebhookesponse(Request $request){
-        Mail::to("deltorosalazar@gmail.com")
+        Mail::to("geraldine.garcia@mocionsoft.com")
         ->queue(                                    
-            new \App\Mail\ConfirmationPayU('Hola')
+            new \App\Mail\ConfirmationPayU('Prueba')
         );
 		//reference_sale response_message_pol
 		$data = $request->input();
@@ -73,7 +73,7 @@ class ApiCheckoutController extends Controller
                 Log::info("Enviamos el correo");
                 Mail::to($order->email)
                 ->queue(                    
-                    new \App\Mail\ConfirmationPayU($order)
+                    new \App\Mail\ConfirmationPayU('compra exitosa')
                 );
                 Mail::to("juan.lopez@mocionsoft.com")
                 ->queue(                    
@@ -212,11 +212,11 @@ class ApiCheckoutController extends Controller
                             * Insert order items (for use in generating invoices)
                             */                            
                             $items_length = count($order->items);
-                            var_dump('Items' , $items_length);die; 
+                            // var_dump('Items' , $items_length);die; 
                             foreach($order->items as $item) {                    
                                 $event = Event::find($item);
                                 $orderItem = new OrderItem();
-                                $ordetItem->items_length = $items_length;
+                                // $ordetItem->items_length = $items_length;
                                 $orderItem->title    = $event->name;
                                 $orderItem->quantity = 1;
                                 $orderItem->order_id = $order->id;
