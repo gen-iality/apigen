@@ -31,6 +31,34 @@ class DiscountCodeController extends Controller
      * _index_: list of discount codes by template
      * @urlParam template_id required Example: 5fc80b2a31be4a3ca2419dc4
      * 
+     * @response {
+     *  {
+     *       "_id": "5fc81e8631be4a3ca2419dcc",
+     *       "code": "puBdF3zCs",
+     *       "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-12-04 17:17:07",
+     *       "created_at": "2020-12-02 23:08:54",
+     *       "number_uses": 1
+     *   },
+     *   {
+     *       "_id": "5fc825e431be4a3ca2419ddf",
+     *       "code": "9L54R947",
+     *       "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-12-03 21:01:20",
+     *       "created_at": "2020-12-02 23:40:20",
+     *       "number_uses": 1
+     *   },
+     *   {
+     *       "_id": "5fcbf67721bfcb1393450fc3",
+     *       "code": "Nyd0jOpQ",
+     *       "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-12-05 21:07:03",
+     *       "created_at": "2020-12-05 21:07:03"
+     *   },
+     * }
      * @return \Illuminate\Http\Response
      */
     public function index($template_id)
