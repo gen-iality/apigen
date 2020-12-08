@@ -185,24 +185,23 @@ class ApiCheckoutController extends Controller
                     
                                 $resultCode = new DiscountCode($data);
                                 $repeated =  DiscountCode::where('code' , $random_string)->first();
-                                $k++;  
+                                
                                 if(!isset($repeated))
                                 {                                                                              
                                     $resultCode->save();   
-                                                                        
+                                    $k++;  
+
+                                    Mail::to("geraldine.garcia@mocionsoft.com")
+                                    ->queue(
+                                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                        new \App\Mail\DiscountCodeMail($resultCode , $order)
+                                    );                              
+                                    Mail::to($order->email)
+                                    ->queue(
+                                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                        new \App\Mail\DiscountCodeMail($resultCode , $order)
+                                    );  
                                 }   
-                                // $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
-                                // var_dump($order->email);die;  
-                                Mail::to("geraldine.garcia@mocionsoft.com")
-                                ->queue(
-                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                                    new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                );                              
-                                Mail::to($order->email)
-                                ->queue(
-                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                                    new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                );          
                                         
                             }
                             // var_dump($x);                                                            

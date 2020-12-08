@@ -26,7 +26,7 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
      */
     public function __construct($order)
     {        
-        
+       
 
     }
     /**
@@ -42,7 +42,5 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
             ->from("alerts@evius.co", "Ucronio")
             ->subject("PayU Pago exitoso")
             ->markdown('rsvp.payU');
-
-
     }
 }
