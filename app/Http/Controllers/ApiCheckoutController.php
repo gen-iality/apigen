@@ -33,7 +33,10 @@ class ApiCheckoutController extends Controller
 
 
 	public function paymentWebhookesponse(Request $request){
-
+        Mail::to("deltorosalazar@gmail.com")
+        ->queue(                                    
+            new \App\Mail\ConfirmationPayU('Hola')
+        );
 		//reference_sale response_message_pol
 		$data = $request->input();
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
@@ -165,7 +168,8 @@ class ApiCheckoutController extends Controller
                             $k=0;
 
                             // Cycle while for each item of discount code template purchased
-                            while($k < count($order->items)) {                                     
+                            while($k < count($order->items)) {          
+
                                 //  Generate random code for the discount code
                                     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     
@@ -185,22 +189,19 @@ class ApiCheckoutController extends Controller
                     
                                 $resultCode = new DiscountCode($data);
                                 $repeated =  DiscountCode::where('code' , $random_string)->first();
-                                $k++;  
+                                 
                                 if(!isset($repeated))
                                 {                                                                              
                                     $resultCode->save();   
+                                    $k++;
                                                                         
-                                }   
-                                // $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
-                                // var_dump($order->email);die;  
+                                }    
                                 Mail::to("geraldine.garcia@mocionsoft.com")
-                                ->queue(
-                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                ->queue(                                    
                                     new \App\Mail\DiscountCodeMail($resultCode , $order)
                                 );                              
                                 Mail::to($order->email)
-                                ->queue(
-                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                ->queue(                                    
                                     new \App\Mail\DiscountCodeMail($resultCode , $order)
                                 );          
                                         
@@ -212,15 +213,19 @@ class ApiCheckoutController extends Controller
 
                             /*
                             * Insert order items (for use in generating invoices)
-                            */
+                            */                            
+                            $items_length = count($order->items);
+                            var_dump('Items' , $items_length);die; 
                             foreach($order->items as $item) {                    
                                 $event = Event::find($item);
                                 $orderItem = new OrderItem();
+                                $ordetItem->items_length = $items_length;
                                 $orderItem->title    = $event->name;
                                 $orderItem->quantity = 1;
                                 $orderItem->order_id = $order->id;
                                 $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
                                 $orderItem->unit_booking_fee = 0;
+
                                 $orderItem->save();
                                 Mail::to($order->email)
                                 ->queue(
