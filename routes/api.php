@@ -511,6 +511,16 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
+
+
+
+
+Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+Route::post("discountcodetemplate/{id}/importCodes", "DiscountCodeTemplateController@importCodes");
+
+
+
+//y esto que fue? ese api más sospechozso
 Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
@@ -522,7 +532,7 @@ Route::post("code/validatecode", "DiscountCodeController@validateCode");
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-    Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+    
     //     }
     // );
 ;
