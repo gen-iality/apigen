@@ -26,7 +26,7 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
      */
     public function __construct($order)
     {        
-        $this->message = $order;
+       
 
     }
     /**
