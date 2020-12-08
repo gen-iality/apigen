@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
+use Log;
 
 
 /**
@@ -144,6 +145,16 @@ class DiscountCodeTemplateController extends Controller
 
         return  (string) $codegroup->delete();
 
+    }
+
+
+    public function importCodes(Request $request){
+        $input1 = $request->all();
+
+        $data = $request->json()->all();
+        Log::info('data from etiqueta blanca normal: '.json_encode($input1));
+        Log::info('data from etiqueta blanca json    '.json_encode($data));
+        return $data;
     }
 
 
