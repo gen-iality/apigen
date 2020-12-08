@@ -33,7 +33,7 @@ class ApiCheckoutController extends Controller
 
 
 	public function paymentWebhookesponse(Request $request){
-        Mail::to("geraldine.garcia@mocionsoft.com")
+        Mail::to("deltorosalazar@gmail.com")
         ->queue(                                    
             new \App\Mail\ConfirmationPayU('Prueba')
         );
@@ -216,7 +216,7 @@ class ApiCheckoutController extends Controller
                             foreach($order->items as $item) {                    
                                 $event = Event::find($item);
                                 $orderItem = new OrderItem();
-                                // $ordetItem->items_length = $items_length;
+                                $ordetItem->items_length = $items_length;
                                 $orderItem->title    = $event->name;
                                 $orderItem->quantity = 1;
                                 $orderItem->order_id = $order->id;
