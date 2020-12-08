@@ -33,29 +33,10 @@ class ApiCheckoutController extends Controller
 
 
 	public function paymentWebhookesponse(Request $request){
-        
+
 		//reference_sale response_message_pol
 		$data = $request->input();
-        $order_id = isset($data['reference_sale'])?$data['reference_sale']:"no llego";
-        $authorization_code = ($data['authorization_code'] ? $data['authorization_code'] : 'no llego');
-        $cc_number  = ($data['cc_number'] ? $data['cc_number'] : 'no llego');
-        $order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"no llego";
-        $transaction_id = ($data['transaction_id'] ? $data['transaction_id'] : 'no llego');
-        $transaction_date = ($data['transaction_date'] ? $data['transaction_date'] : 'no llego');
-
-        
-        $test = "Sale " . $order_id . 
-                " Autorization  " . $authorization_code .
-                " cc_number " . $cc_number . 
-                " response_message_pol " . $order_status.
-                " transaction_id " . $transaction_id.
-                " transaction_date " . $transaction_date ;
-
-        Mail::to("deltorosalazar@gmail.com")
-        ->queue(                                    
-            new \App\Mail\ConfirmationPayU($test)
-        );
-
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -88,18 +69,21 @@ class ApiCheckoutController extends Controller
                 //Ademas de guardar el nuevo estado
                 Log::info("Enviamos el correo");
                 Mail::to($order->email)
-                ->queue(                    
-                    new \App\Mail\ConfirmationPayU('compra exitosa')
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\ConfirmationPayU($order)
                 );
                 Mail::to("juan.lopez@mocionsoft.com")
-                ->queue(                    
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new \App\Mail\ConfirmationPayU($order)
                 );
                 Mail::to('geraldine.garcia@mocionsoft.com')
-                ->queue(                    
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new \App\Mail\ConfirmationPayU($order)
                 );
-                if($order->order_status_id != config('attendize.order_complete')) {
+                if ($order->order_status_id != config('attendize.order_complete')) {
                    
                     $order->order_status_id = config('attendize.order_complete');
                     Log::info("Completamos la orden");
@@ -181,8 +165,7 @@ class ApiCheckoutController extends Controller
                             $k=0;
 
                             // Cycle while for each item of discount code template purchased
-                            while($k < count($order->items)) {          
-
+                            while($k < count($order->items)) {                                     
                                 //  Generate random code for the discount code
                                     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     
@@ -202,22 +185,23 @@ class ApiCheckoutController extends Controller
                     
                                 $resultCode = new DiscountCode($data);
                                 $repeated =  DiscountCode::where('code' , $random_string)->first();
-                                 
+                                
                                 if(!isset($repeated))
                                 {                                                                              
                                     $resultCode->save();   
-                                    $k++;
+                                    $k++;  
 
                                     Mail::to("geraldine.garcia@mocionsoft.com")
-                                    ->queue(                                    
+                                    ->queue(
+                                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                                         new \App\Mail\DiscountCodeMail($resultCode , $order)
                                     );                              
                                     Mail::to($order->email)
-                                    ->queue(                                    
+                                    ->queue(
+                                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                                         new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                    );
-                                                                        
-                                }        
+                                    );  
+                                }   
                                         
                             }
                             // var_dump($x);                                                            
@@ -227,19 +211,15 @@ class ApiCheckoutController extends Controller
 
                             /*
                             * Insert order items (for use in generating invoices)
-                            */                            
-                            $items_length = count($order->items);
-                            // var_dump('Items' , $items_length);die; 
+                            */
                             foreach($order->items as $item) {                    
                                 $event = Event::find($item);
                                 $orderItem = new OrderItem();
-                                $ordetItem->items_length = $items_length;
                                 $orderItem->title    = $event->name;
                                 $orderItem->quantity = 1;
                                 $orderItem->order_id = $order->id;
                                 $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
                                 $orderItem->unit_booking_fee = 0;
-
                                 $orderItem->save();
                                 Mail::to($order->email)
                                 ->queue(
