@@ -40,11 +40,16 @@ class ApiCheckoutController extends Controller
         $authorization_code = ($data['authorization_code'] ? $data['authorization_code'] : 'no llego');
         $cc_number  = ($data['cc_number'] ? $data['cc_number'] : 'no llego');
         $order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"no llego";
+        $transaction_id = ($data['transaction_id'] ? $data['transaction_id'] : 'no llego');
+        $transaction_date = ($data['transaction_date'] ? $data['transaction_date'] : 'no llego');
+
         
         $test = "Sale " . $order_id . 
                 " Autorization  " . $authorization_code .
                 " cc_number " . $cc_number . 
-                " response_message_pol " . $order_status;
+                " response_message_pol " . $order_status.
+                " transaction_id " . $transaction_id.
+                " transaction_date " . $transaction_date ;
 
         Mail::to("deltorosalazar@gmail.com")
         ->queue(                                    
