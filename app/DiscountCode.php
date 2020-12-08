@@ -18,7 +18,8 @@ class DiscountCode extends Moloquent
         'code', 
         'number_uses',
         'discount_code_template_id', 
-        'event_id',         
+        'event_id', 
+        'organization_id'        
     ];
 
     protected $with = ['discount_code_template'];
@@ -30,7 +31,12 @@ class DiscountCode extends Moloquent
 
     public function event()
     {
-        return $this->belongsTo('App\Event');
+        return $this->belongsTo('App\Event', 'event_id');
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo('App\Organization', 'organization_id');
     }
     
 }

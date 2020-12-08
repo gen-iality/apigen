@@ -54,8 +54,9 @@ class DiscountCodeTemplateController extends Controller
      * @bodyParam name string required Example: Curso de regalo
      * @bodyParam use_limit number required the number of uses for each code Example: 1
      * @bodyParam discount number required discount percentage Example: 100
-     * @bodyParam event_id string required event with which the template will be associated Example: 5ea23acbd74d5c4b360ddde2
-     *
+     * @bodyParam event_id string  event with which the template will be associated Example: 5ea23acbd74d5c4b360ddde2
+     * @bodyParam organization_id string  eorganization_id if you want the discount template to be applicable to any course Example: 5e9caaa1d74d5c2f6a02a3c3
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -68,21 +69,28 @@ class DiscountCodeTemplateController extends Controller
             'name' => "required",
             'use_limit' => "required",
             'discount' => 'required',
-            'event_id' => 'required',
         ];
         
 
         $validator = Validator::make($data, $rules);
         if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
-        }        
+        }   
+        
+        if(!isset($data['event_id']) && !isset($data['organization_id']))
+        {
+            return response()->json(['errors' => "Debe ingresar organization_id o event_id "], 400);
+        }
+        else if(isset($data['event_id']) && isset($data['organization_id']))
+        {
+            return response()->json(['errors' => "Solo debe ingresar uno de los campos, organization_id o event_id "], 400);
+        }
 
         $result->save();
 
         $group_id = $result->_id;   
         
-        // self::createCodes($group_id , $event_id, $quantity);
-        
+        // self::createCodes($group_id , $event_id, $quantity);        
 
         return $result;
 

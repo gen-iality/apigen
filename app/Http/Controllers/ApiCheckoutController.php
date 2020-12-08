@@ -78,11 +78,6 @@ class ApiCheckoutController extends Controller
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                     new \App\Mail\ConfirmationPayU($order)
                 );
-                Mail::to('geraldine.garcia@mocionsoft.com')
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU($order)
-                );
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
                     $order->order_status_id = config('attendize.order_complete');
@@ -189,13 +184,7 @@ class ApiCheckoutController extends Controller
                                 if(!isset($repeated))
                                 {                                                                              
                                     $resultCode->save();   
-                                    $k++;  
-
-                                    Mail::to("geraldine.garcia@mocionsoft.com")
-                                    ->queue(
-                                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                                        new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                    );                              
+                                    $k++;                              
                                     Mail::to($order->email)
                                     ->queue(
                                         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
@@ -214,8 +203,7 @@ class ApiCheckoutController extends Controller
                             */
                             foreach($order->items as $item) {                    
                                 $event = Event::find($item);
-                                $orderItem = new OrderItem();
-                                $orderItem->title    = $event->name;
+                                $orderItem = new OrderItem();                                
                                 $orderItem->quantity = 1;
                                 $orderItem->order_id = $order->id;
                                 $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
