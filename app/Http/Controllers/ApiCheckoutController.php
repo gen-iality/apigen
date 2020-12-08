@@ -40,7 +40,6 @@ class ApiCheckoutController extends Controller
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
-		
 
 		$order->data = json_encode($data);
 		$order->save();
@@ -67,20 +66,21 @@ class ApiCheckoutController extends Controller
 
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
-                Log::info("Enviamos el correo");
-                Mail::to($order->email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU($order)
-                );
-                Mail::to("juan.lopez@mocionsoft.com")
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\ConfirmationPayU($order)
-                );
+                
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
                     $order->order_status_id = config('attendize.order_complete');
+                    $order->save();
+                    Mail::to($order->email)
+                    ->queue(
+                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                        new \App\Mail\ConfirmationPayU($order)
+                    );
+                    Mail::to("juan.lopez@mocionsoft.com")
+                    ->queue(
+                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                        new \App\Mail\ConfirmationPayU($order)
+                    );
                     Log::info("Completamos la orden");
                     $this->completeOrder($order_id);
                     
