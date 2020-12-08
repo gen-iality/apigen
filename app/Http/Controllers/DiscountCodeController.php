@@ -81,7 +81,8 @@ class DiscountCodeController extends Controller
             
             $data['code'] = $random_string;
             $data['discount_code_template_id'] = $group_id;
-            $data['event_id'] = $data['event_id'];
+            $group  = DiscountCodeTemplate::find($group_id);
+            $data['event_id'] = isset($data['event_id']) ? $data['event_id'] : $group->event_id;
 
             $resultCode = new DiscountCode($data);
             $repeated =  DiscountCode::where('code' , $random_string)->first();
