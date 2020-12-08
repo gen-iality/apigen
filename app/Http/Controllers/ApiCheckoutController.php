@@ -71,10 +71,10 @@ class ApiCheckoutController extends Controller
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
                 Log::info("Enviamos el correo");
-                // Mail::to($order->email)
-                // ->queue(                    
-                //     new \App\Mail\ConfirmationPayU($order)
-                // );
+                Mail::to($order->email)
+                ->queue(                    
+                    new \App\Mail\ConfirmationPayU($order)
+                );
                 Mail::to("juan.lopez@mocionsoft.com")
                 ->queue(                    
                     new \App\Mail\ConfirmationPayU($order)
