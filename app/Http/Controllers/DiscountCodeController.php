@@ -31,6 +31,34 @@ class DiscountCodeController extends Controller
      * _index_: list of discount codes by template
      * @urlParam template_id required Example: 5fc80b2a31be4a3ca2419dc4
      * 
+     * @response {
+     *  {
+     *       "_id": "5fc81e8631be4a3ca2419dcc",
+     *       "code": "puBdF3zCs",
+     *       "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-12-04 17:17:07",
+     *       "created_at": "2020-12-02 23:08:54",
+     *       "number_uses": 1
+     *   },
+     *   {
+     *       "_id": "5fc825e431be4a3ca2419ddf",
+     *       "code": "9L54R947",
+     *       "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-12-03 21:01:20",
+     *       "created_at": "2020-12-02 23:40:20",
+     *       "number_uses": 1
+     *   },
+     *   {
+     *       "_id": "5fcbf67721bfcb1393450fc3",
+     *       "code": "Nyd0jOpQ",
+     *       "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "updated_at": "2020-12-05 21:07:03",
+     *       "created_at": "2020-12-05 21:07:03"
+     *   },
+     * }
      * @return \Illuminate\Http\Response
      */
     public function index($template_id)
@@ -69,7 +97,8 @@ class DiscountCodeController extends Controller
         if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
         }
-
+        
+        
         $resultCode = '';
         $x = 1;
         while($x <= $data['quantity']) {            
@@ -84,9 +113,17 @@ class DiscountCodeController extends Controller
             
             $data['code'] = $random_string;
             $data['discount_code_template_id'] = $group_id;
-            $group  = DiscountCodeTemplate::find($group_id);
-            $data['event_id'] = isset($data['event_id']) ? $data['event_id'] : $group->event_id;
+            
 
+            $group  = DiscountCodeTemplate::find($group_id);
+
+            if(!isset($group->event_id))
+            {
+                $data['organization_id'] =  $group->organization_id;
+            }else{                
+                $data['event_id'] = $group->event_id;
+            }
+                       
             $resultCode = new DiscountCode($data);
             $repeated =  DiscountCode::where('code' , $random_string)->first();
 
@@ -168,15 +205,22 @@ class DiscountCodeController extends Controller
      * 
      * _validateCode_ : valid if the code is redeemed, exists or is valid.
      * 
+     * To verify the code you must send code and event_id or organization_id as the case may be
+     * 
      * @bodyParam code string required code to redeem
-     * @bodyParam event_id string required event for which the code was purchased
+     * @bodyParam event_id string event for which the code was purchased
+     * @bodyParam organization_id string organization so that the code applies to any event
+     * 
      * 
      */
     public function validateCode(Request $request)
     {   
 
         $data = $request->json()->all();
-        $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
+
+        $code = isset($data['event_id']) ? 
+                DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
+                DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
         
         if($code){
             $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();

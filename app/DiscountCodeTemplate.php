@@ -19,13 +19,19 @@ class DiscountCodeTemplate extends Moloquent
         'discount',
         'name',
         'use_limit',    
-        'event_id'               
+        'event_id',
+        'organization_id'               
     ];
 
-    protected $with = ['event'];
+    protected $with = ['event',  'organization' ];
    
     public function event()
     {
         return $this->belongsTo('App\Event', 'event_id');
-    }        
+    }  
+    
+    public function organization()
+    {
+        return $this->belongsTo('App\Organization', 'organization_id');
+    } 
 }
