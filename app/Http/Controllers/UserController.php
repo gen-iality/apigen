@@ -349,4 +349,13 @@ class UserController extends UserControllerWeb
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
     }
 
+    /**
+     * _userByOrganization_: search users by organization
+     */
+    public function userByOrganization($organization_id){
+            
+        $Account = Account::where('organization_ids', $organization_id)                
+        ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
+        return $Account;
+    }
 }
