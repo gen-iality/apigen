@@ -37,12 +37,6 @@ class MessageUser extends Moloquent
         'timestamp_event', 
         'user_id', 
         'event_user_id', 
-        'total_delivered',
-        'total_sent',
-        'total_clicked',
-        'total_bounced',
-        'total_opened',
-        'total_complained'
     ];
 
     /**
