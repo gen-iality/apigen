@@ -77,7 +77,9 @@ class UserController extends UserControllerWeb
      * @bodyParam names  string required  person name
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
      * @bodyParam password  string  optional if not provided a default evius.2040 password is assigned
-     * @bodyParam others_properties Array  dynamic properties of the user you want to place Example:[]
+     * @bodyParam others_properties array  dynamic properties of the user you want to place Example:[]
+     * @bodyParam organization_ids array organizations to which the user belongs, in order to access their events Example: ["5f7e33ba3abc2119442e83e8" , "5e9caaa1d74d5c2f6a02a3c3"]["5f7e33ba3abc2119442e83e8" , "5e9caaa1d74d5c2f6a02a3c3"]
+     * 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -347,4 +349,13 @@ class UserController extends UserControllerWeb
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
     }
 
+    /**
+     * _userByOrganization_: search users by organization
+     */
+    public function userByOrganization($organization_id){
+            
+        $Account = Account::where('organization_ids', $organization_id)                
+        ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
+        return $Account;
+    }
 }

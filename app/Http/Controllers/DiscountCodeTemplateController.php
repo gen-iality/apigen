@@ -258,4 +258,13 @@ class DiscountCodeTemplateController extends Controller
 
     // }
 
-}
+    /**
+     * _findByOrganization_: find disount code template by organization
+     * 
+     * @urlParam organization required organization id Example: 5e9caaa1d74d5c2f6a02a3c3
+     */
+    public function findByOrganization($organization_id){
+        $template = DiscountCodeTemplate::where('organization_id', $organization_id)->get();
+        return $template;
+    }
+}   

@@ -197,13 +197,17 @@ Route::apiResource('users', 'UserController', ['only' => ['index', 'show','store
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 //Se deja la ruta duplicada mientras en el front el cache se actualiza, con ruta 'users'
 Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
-Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
+// Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show','store']]);
         Route::get('users/currentUser', 'FireBaseAuthController@getCurrentUser');
+        // Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
+        Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
+        Route::get('me/eventUsers', 'EventUserController@meEvents');
+        Route::get('users/findByOrganization/{organization}', 'UserController@findByOrganization');
     }
 );
 
@@ -517,6 +521,8 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
 
 Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
 Route::post("discountcodetemplate/{id}/importCodes", "DiscountCodeTemplateController@importCodes");
+Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
+
 
 
 
@@ -525,14 +531,3 @@ Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeContr
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
 
-
-
-/****************
- * Discount Code Group
- ****************/
-// Route::group(
-//     ['middleware' => 'auth:token'], function () {
-    
-    //     }
-    // );
-;
