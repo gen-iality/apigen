@@ -187,7 +187,7 @@ class Account extends User
 
     public function organizations()
     {
-        return $this->belongsToMany('App\Organization');
+        return $this->belongsToMany('App\Organization')->using("App\OrganizationUser");
     }
     //->as('subscription')
     //->withTimestamps();

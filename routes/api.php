@@ -521,6 +521,8 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
 
 Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
 Route::post("discountcodetemplate/{id}/importCodes", "DiscountCodeTemplateController@importCodes");
+Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
+
 
 
 
@@ -529,15 +531,3 @@ Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeContr
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
 
-
-
-/****************
- * Discount Code Group
- ****************/
-// Route::group(
-//     ['middleware' => 'auth:token'], function () {
-        Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
-        Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
-//     }
-// );
-;
