@@ -158,9 +158,7 @@ class UserEventService
         } else {
             $eventUser = Attendee::create($eventUserFields);
         }
-
-        \Log::debug($matchAttributes);
-        \Log::debug($eventUserFields);
+       
 
         /* Si viene el id de la orden en la variable eventUserFields
         buscamos la orden  */
