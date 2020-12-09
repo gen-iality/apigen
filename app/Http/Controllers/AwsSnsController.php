@@ -31,11 +31,11 @@ class AwsSnsController extends Controller
     
     public function updateSnsMessages(Request $request)
     {        
-        Log::info('update');
+        // Log::info('update');
         $count = 0;
         $response = $request->json()->all();
         Log::info(json_encode($response));
-        // Log::info('eventType '.json_encode($response)['eventType']);
+        Log::info('eventType '.json_encode($response)['eventType']);
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->first();
 
         $data = [
