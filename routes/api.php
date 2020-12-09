@@ -203,6 +203,7 @@ Route::group(
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
+        Route::get('users/findByOrganization/{organization}', 'UserController@findByOrganization');
     }
 );
 
@@ -511,7 +512,8 @@ Route::post("code/validatecode", "DiscountCodeController@validateCode");
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-    Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
-    //     }
-    // );
+        Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+        Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
+//     }
+// );
 ;
