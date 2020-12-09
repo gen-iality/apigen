@@ -28,7 +28,21 @@ class MessageUser extends Moloquent
         'status_message' => '',
     ];
     protected $fillable = [
-        'response', 'status', 'email_destinations', 'status_message', 'notification_id', 'message', 'timestamp_event', 'user_id', 'event_user_id'
+        'response',
+        'status', 
+        'email_destinations', 
+        'status_message',
+        'notification_id', 
+        'message', 
+        'timestamp_event', 
+        'user_id', 
+        'event_user_id', 
+        'total_delivered',
+        'total_sent',
+        'total_clicked',
+        'total_bounced',
+        'total_opened',
+        'total_complained'
     ];
 
     /**

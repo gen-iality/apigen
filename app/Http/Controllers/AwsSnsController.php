@@ -54,46 +54,50 @@ class AwsSnsController extends Controller
         }
                 
         
-        switch ($response['eventType'])
+        if (isset($response['eventType']))
         {
-            case 'Delivery':
+            if($response['eventType'] == 'Delivery')
+            {
                 Log::info('Delivery');
                 $count = (isset($eviusmessage->total_delivered)) ? $eviusmessage->total_delivered++ : 1;                
                 $eviusmessage->update(['total_delivered' => $count]);                
-                break;            
-            case 'Send':
+                            
+            } 
+            else if($response['eventType'] == 'Send')
+            {
                 Log::info('Send');
                 $count = (isset($eviusmessage->total_sent)) ? $eviusmessage->total_sent++ : 1;
                 $eviusmessage->update(['total_sent' => $count]);
                 Log::info('count '.$count);
                 Log::info('$eviusmessage->total_sent '.$eviusmessage->total_sent);
-                break;
+            }
 
-            case 'Click':
+            else if ($response['eventType'] == 'Click')
+            {
                 Log::info('Click');
                 $count = (isset($eviusmessage->total_clicked)) ? $eviusmessage->total_clicked++ : 1;
                 $eviusmessage->update(['total_clicked' => $count]);
-                break;  
-
-            case 'Bounce':
+                  
+            }
+            else if($response['eventType'] == 'Bounce')
+            {
                 Log::info('Bounce');
                 $count = (isset($eviusmessage->total_bounced)) ? $eviusmessage->total_bounced++ : 1;
                 $eviusmessage->update(['total_bounced' => $count]);
-                break;
-            
-            case 'Open':
-                Log::info('Open');
+                
+            }
+            else if($response['eventType'] == 'Open')
+            {    Log::info('Open');
                 $count = (isset($eviusmessage->total_opened)) ? $eviusmessage->total_opened++ : 1;
                 $eviusmessage->update(['total_opened' => $count]);
                 Log::info('count '.$count);
-                Log::info('$eviusmessage->total_opened '.$eviusmessage->total_opened);
-                break;
-
-            case 'Complaint':
-                Log::info('Complaint');
+                Log::info('$eviusmessage->total_opened '.$eviusmessage->total_opened);                
+            }
+            else if($response['eventType'] == 'Complaint')
+            {    Log::info('Complaint');
                 $count = (isset($eviusmessage->total_complained)) ? $eviusmessage->total_complained++ : 1;
                 $eviusmessage->update(['total_complained' => $count]);
-                break;
+            }    
 
         }
                         
