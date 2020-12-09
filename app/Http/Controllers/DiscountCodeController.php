@@ -66,7 +66,8 @@ class DiscountCodeController extends Controller
         if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
         }
-
+        
+        
         $resultCode = '';
         $x = 1;
         while($x <= $data['quantity']) {            
@@ -81,8 +82,17 @@ class DiscountCodeController extends Controller
             
             $data['code'] = $random_string;
             $data['discount_code_template_id'] = $group_id;
-            $data['event_id'] = $data['event_id'];
+            
 
+            $group  = DiscountCodeTemplate::find($group_id);
+
+            if(!isset($group->event_id))
+            {
+                $data['organization_id'] =  $group->organization_id;
+            }else{                
+                $data['event_id'] = $group->event_id;
+            }
+                       
             $resultCode = new DiscountCode($data);
             $repeated =  DiscountCode::where('code' , $random_string)->first();
 
@@ -165,7 +175,10 @@ class DiscountCodeController extends Controller
     {   
 
         $data = $request->json()->all();
-        $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
+
+        $code = isset($data['event_id']) ? 
+                DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
+                DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
         
         if($code){
             $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();

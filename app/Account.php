@@ -98,7 +98,7 @@ class Account extends User
             function ($model) {
                 try {
 
-                    \Log::debug($model);
+                    
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
                     $fbuser = self::$auth->createUser(
@@ -193,7 +193,7 @@ class Account extends User
 
     public function organizations()
     {
-        return $this->belongsToMany('App\Organization');
+        return $this->belongsToMany('App\Organization' , "organization_users");
     }
     //->as('subscription')
     //->withTimestamps();

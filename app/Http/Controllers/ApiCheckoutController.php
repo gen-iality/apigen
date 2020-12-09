@@ -62,6 +62,12 @@ class ApiCheckoutController extends Controller
 
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
+                Log::info("Enviamos el correo");
+                // Mail::to($order->email)
+                // ->queue(
+                //     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                //     new \App\Mail\ConfirmationPayU()
+                // );
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
                     $order->order_status_id = config('attendize.order_complete');
@@ -71,6 +77,7 @@ class ApiCheckoutController extends Controller
                     if (config('attendize.send_email')) {
                         Log::info("Enviamos el correo");
                         //$this->dispatch(new SendOrderTickets($order));
+
                     }
                 }
                 break;
@@ -189,8 +196,7 @@ class ApiCheckoutController extends Controller
                             */
                             foreach($order->items as $item) {                    
                                 $event = Event::find($item);
-                                $orderItem = new OrderItem();
-                                $orderItem->title    = $event->name;
+                                $orderItem = new OrderItem();                                
                                 $orderItem->quantity = 1;
                                 $orderItem->order_id = $order->id;
                                 $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
