@@ -47,7 +47,7 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
 
     public function build()
     {
-        var_dump($this->event->name);
+        
 
         return $this
             ->from("alerts@evius.co", 'Ucronio')
