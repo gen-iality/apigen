@@ -13,6 +13,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Storage;
+use App\evaLib\Services\FilterQuery;
+use App\Http\Resources\EventUserResource;
 
 class UserController extends UserControllerWeb
 {
@@ -279,6 +281,27 @@ class UserController extends UserControllerWeb
 
         return redirect()->away(config('app.front_url') . "/profile/" . $user->id);
         // return ['id'=>$eventUser->id,'message'=>'Confirmed'];
+    }
+
+    /**
+     * _userOrganization_: user lists all the users that belong to an organization, besides this you can filter all the users by **any of the properties** that have
+     * 
+     * 
+     * @autenticathed
+     * 
+     * @queryParam filtered optional filter parameters Example: [{"field":"other_properties.rol","value":["admin"]}]
+     * 
+     * @urlParam organization_id required organization to which the users belong
+     * 
+     */
+    public function userOrganization(Request $request, String $organization_id, FilterQuery $filterQuery){
+
+        $input = $request->all();
+
+        $query = Account::where("organization_ids", $organization_id);
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return UsersResource::collection($results);          
+
     }
 
 }
