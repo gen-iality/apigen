@@ -17,7 +17,7 @@ class Account extends User
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
-    protected $with = ['organizations'];
+
     /**
      * The validation rules
      *
@@ -96,7 +96,9 @@ class Account extends User
         //Creamos el usuario en firebase
         self::creating(
             function ($model) {
-                    \Log::debug($model);
+                try {
+
+                    
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
                     $fbuser = self::$auth->createUser(
@@ -116,6 +118,10 @@ class Account extends User
                     $model->uid = $fbuser->uid;
                     $model->initial_token = $singed->idToken();
                     $model->refresh_token = $singed->refreshToken();
+
+                } catch (\Exception $e) {
+                    var_dump($e->getMessage());
+                }
             }
         );
 
@@ -187,7 +193,7 @@ class Account extends User
 
     public function organizations()
     {
-        return $this->belongsToMany('App\Organization')->using("App\OrganizationUser");
+        return $this->belongsToMany('App\Organization' , "organization_users");
     }
     //->as('subscription')
     //->withTimestamps();

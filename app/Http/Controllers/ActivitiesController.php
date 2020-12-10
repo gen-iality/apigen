@@ -20,6 +20,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use App\evaLib\Services\FilterQuery;
 
 /**
  * @group Activity
@@ -78,17 +79,15 @@ class ActivitiesController extends Controller
     */
     public function index(Request $request, $event_id)
     {
-        $data = $request->json()->all();
-        //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
-        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+        $input = $request->all();
+        $query  = Activities::where("event_id", $event_id);
 
-        if($res=="en"){
-            return JsonResource::collection(
-               Activities::where("event_id", $event_id)->where('locale', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
-        }else{
-            return JsonResource::collection(
-                Activities::where("event_id", $event_id)->where('locale', '!=', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
+        //por defecto lo ordenamos por fecha de inicio descentente
+        if (!isset($input['orderBy'])){
+            $input['orderBy'] = '[{"field":"datetime_start","order":"asc"}]';
         }
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return JsonResource::collection($results);
     }   
 
     /**

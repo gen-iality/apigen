@@ -45,14 +45,16 @@ class DiscountCodeTemplateController extends Controller
     {
         //
     }
+
     /**
      * _store_:create new discount code template
      *
      * @bodyParam name string required Example: Curso de regalo
      * @bodyParam use_limit number required the number of uses for each code Example: 1
-     * @bodyParam discount number required discount percentage Example: 100
+     * @bodyParam discount number required price to be discounted or percentage discount Example: 100
      * @bodyParam event_id string  event with which the template will be associated Example: 5ea23acbd74d5c4b360ddde2
-     * @bodyParam organization_id string  eorganization_id if you want the discount template to be applicable to any course Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam organization_id string  organization_id if you want the discount template to be applicable to any course Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam discount_type string required  percentage or price
      * 
      * @response {
      * {

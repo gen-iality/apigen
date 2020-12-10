@@ -12,22 +12,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
+use Storage;
+use App\evaLib\Services\FilterQuery;
+use App\Http\Resources\EventUserResource;
 
 /**
  * @group User
- * Manage users, the users info are stored in the  backend and the user auth info (password, email, sms login)
- * is stored in firebase auth.
- * firebaseauth user and backend user are connected thought the uid field generated in firebaseauth.
+ * 
+ * Manage users, the users info are stored in the backend and the user auth info (password, email, sms login) is stored in firebase auth. firebaseauth user and backend user are connected thought the uid field generated in firebaseauth.
  *
- * El manejo de la sessión (si un usuario ingreso al sistema) se maneja usando tokens JWT generados por firebase
- * se maneja un token en la url que se vence cada media hora y un refresh_token almacenado en el usuario
- * para refrescar el token que se pasa por la URL.
+ * El manejo de la sessión (si un usuario ingreso al sistema) se maneja usando tokens JWT generados por firebase se maneja un token en la url que se vence cada media hora y un refresh_token almacenado en el usuario para refrescar el token que se pasa por la URL.
  *
- * Del token en la url se extrae la información del usuario
- * se pasa de esta manera
- * ?token=xxxxxxxxxxxxxxxxx
+ * Del token en la url se extrae la información del usuario se pasa de esta manera ?token=xxxxxxxxxxxxxxxxx
  */
-
 class UserController extends UserControllerWeb
 {
 
@@ -350,12 +347,24 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _userByOrganization_: search users by organization
+     * _userOrganization_: user lists all the users that belong to an organization, besides this you can filter all the users by **any of the properties** that have
+     * 
+     * 
+     * @autenticathed
+     * 
+     * @queryParam filtered optional filter parameters Example: [{"field":"other_properties.rol","value":["admin"]}]
+     * 
+     * @urlParam organization_id required organization to which the users belong
+     * 
      */
-    public function userByOrganization($organization_id){
-            
-        $Account = Account::where('organization_ids', $organization_id)                
-        ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
-        return $Account;
+    public function userOrganization(Request $request, String $organization_id, FilterQuery $filterQuery){
+
+        $input = $request->all();
+
+        $query = Account::where("organization_ids", $organization_id);
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return UsersResource::collection($results);          
+
     }
+
 }

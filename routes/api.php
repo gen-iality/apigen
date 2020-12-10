@@ -207,7 +207,7 @@ Route::group(
         // Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
-        Route::get('users/findByOrganization/{organization}', 'UserController@findByOrganization');
+        Route::get('organizations/{organzation_id}/users', 'UserController@userOrganization');
     }
 );
 
