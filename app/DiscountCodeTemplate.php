@@ -20,7 +20,8 @@ class DiscountCodeTemplate extends Moloquent
         'name',
         'use_limit',    
         'event_id',
-        'organization_id'               
+        'organization_id',
+        'discount_type'               
     ];
 
     protected $with = ['event',  'organization' ];

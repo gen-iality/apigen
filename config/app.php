@@ -29,7 +29,7 @@ return [
     'aws_key' => env('AWS_KEY', 'production'),
     'aws_secret' => env('AWS_SECRET', 'production'),
     'front_url' => env('FRONT_URL', 'https://evius.co'),
-    'page_size' => 5000,
+    'page_size' => 900,
     'sendinblue_page' => 'https://api.sendinblue.com/v2.0',
     'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF"],
     'app_configuration' => [],

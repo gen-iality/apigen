@@ -48,14 +48,47 @@ class DiscountCodeTemplateController extends Controller
     {
         //
     }
+
     /**
      * _store_:create new discount code template
-     * 
+     *
      * @bodyParam name string required Example: Curso de regalo
      * @bodyParam use_limit number required the number of uses for each code Example: 1
-     * @bodyParam discount number required discount percentage Example: 100
-     * æbodyParam even_id string required event with which the template will be associated Exmaple: 5ea23acbd74d5c4b360ddde2
-     *
+     * @bodyParam discount number required price to be discounted or percentage discount Example: 100
+     * @bodyParam event_id string  event with which the template will be associated Example: 5ea23acbd74d5c4b360ddde2
+     * @bodyParam organization_id string  eorganization_id if you want the discount template to be applicable to any course Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam discount_type string required  percentage or price
+     * 
+     * @response {
+     * {
+     *       "_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "name": "Código de regalo",
+     *       "discount": 100,
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "use_limit": 1,
+     *       "updated_at": "2020-12-02 21:46:18",
+     *       "created_at": "2020-12-02 21:46:18"
+     *   },
+     *   {
+     *       "_id": "5fc93d5eccba7b16a74bd538",
+     *       "name": "Acceso",
+     *       "discount": 100,
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "use_limit": 1,
+     *       "updated_at": "2020-12-03 19:32:46",
+     *       "created_at": "2020-12-03 19:32:46"
+     *   },
+     *   {
+     *       "_id": "5fc97a186b7e7f2ff822bc92",
+     *       "name": "Acceso1",
+     *       "discount": "20",
+     *       "use_limit": "10",
+     *       "event_id": "5fba0649f2d08642eb750ba0",
+     *       "updated_at": "2020-12-03 23:51:52",
+     *       "created_at": "2020-12-03 23:51:52"
+     *   },
+     * }
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
