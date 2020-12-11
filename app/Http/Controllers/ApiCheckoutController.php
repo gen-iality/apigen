@@ -36,7 +36,7 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd38b1967263023575a7652";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -138,20 +138,7 @@ class ApiCheckoutController extends Controller
 
             $order = Order::find($order_reference);
                 Log::info('completamos la orden: ' . $order_reference);   
-                    //In case discount codes are entered for the purchase of courses, they will be browsed and the number of uses will be increased
-                        foreach($order->discount_codes as $discount_code)
-                        {   
-                            foreach($order->items as $item) {                    
-                                $event = Event::find($item);
-                                $code =DiscountCode::where('code' , $discount_code)->first(); 
-                                if(isset($code)){
-                                    if($code->event_id == $event->_id){
-                                        $code->number_uses =$code->number_uses + 1; 
-                                        $code->save();                                        
-                                    } 
-                                }                            
-                            }
-                        }
+                    
 
                     switch($order->item_type){
                         case 'discountCode' : 
@@ -161,6 +148,21 @@ class ApiCheckoutController extends Controller
                         break;
                         case 'event' :
                         default:
+
+                            //In case discount codes are entered for the purchase of courses, they will be browsed and the number of uses will be increased
+                            foreach($order->discount_codes as $discount_code)
+                            {   
+                                foreach($order->items as $item) {                   
+                                    $event = Event::find($item);
+                                    $code =DiscountCode::where('code' , $discount_code)->first(); 
+                                    if(isset($code)){
+                                        if($code->event_id == $event->_id){
+                                            $code->number_uses =$code->number_uses + 1; 
+                                            $code->save();                                        
+                                        } 
+                                    }                            
+                                }
+                            }
 
                             /*
                             * Insert order items (for use in generating invoices)
@@ -174,12 +176,14 @@ class ApiCheckoutController extends Controller
                                 $orderItem->unit_booking_fee = 0;
                                 $orderItem->save();
                                 Mail::to($order->email)
-                                ->queue(
-                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                ->queue(                                   
                                     new \App\Mail\BuyCourseMail($event)
                                 ); 
                             }
                             //Lógica para agregar event_user
+
+                            
+
                             $this->createAteendes($order);
                         break;
                     }
@@ -258,6 +262,7 @@ class ApiCheckoutController extends Controller
                 $x++;                                    
             }   
             $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
+            
             Mail::to($order->email)
             ->queue(
                 new \App\Mail\DiscountCodeMail($codes , $order)

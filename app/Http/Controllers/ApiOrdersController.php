@@ -61,17 +61,19 @@ class ApiOrdersController extends Controller
         if( $request_data['item_type'] == 'discountCode')
         {
             $codeTemplate = DiscountCodeTemplate::findOrFail($ids[0]);
-            // var_dump($codeTemplate);die;
-            $event = Event::findOrFail($codeTemplate->event_id);
-        }else{
 
+            //Since the purchase of the codes will be taken into account in the orders. 
+            //These will not always be for an event but also for an organization so the event_id may or may not come
+            if(isset($codeTemplate->event_id)){
+                $event = Event::findOrFail($codeTemplate->event_id);            
+            }
+
+        }else{
             $event = Event::findOrFail($ids[0]);
         }
-        
 
-        
         $account = Account::findOrFail($request_data['account_id']);
-        $fields = $event->user_properties;
+        $fields = isset($event->user_properties) ? $event->user_properties : '';
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $activeAccountPaymentGateway = 3;
@@ -84,7 +86,7 @@ class ApiOrdersController extends Controller
         $ticket_order = [
             // 'validation_rules' => $validation_rules,
             // 'validation_messages' => $validation_messages,
-            'event_id' => $event->id,
+            'event_id' => isset($event->id) ? $event->id : '' ,
             'tickets' => $tickets,
             'items' => $ids,
             'total_ticket_quantity' => $total_ticket_quantity,
@@ -106,7 +108,7 @@ class ApiOrdersController extends Controller
         $request_data['order_last_name'] ="";
         $request_data['order_email'] = $account->email;
         $request_data['properties'] = [];
-
+        
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
 
         return $result;
