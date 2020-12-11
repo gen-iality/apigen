@@ -14,7 +14,11 @@ class Category extends Moloquent
 {
     //protected $with = ['event'];
     //protected $table = 'category';
+<<<<<<< HEAD
     protected $hidden = array('activities_ids');
+=======
+    protected $hidden = ['event_ids','activities_ids'];
+>>>>>>> 41a12c515f578f1e547b762234332fccaab722d9
     /**
      * Category is owned by an event
      * @return void

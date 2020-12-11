@@ -252,8 +252,15 @@ class ApiCheckoutController extends Controller
             
             $data['code'] = $random_string;
             $data['discount_code_template_id'] = $codeTemplate->_id;
-            $data['event_id'] = $codeTemplate->event_id;
+            
+            if(isset($codeTemplate->event_id))
+            {   
+                $data['event_id'] =  $codeTemplate->event_id;
 
+            }else{
+                $data['organization_id'] =  $codeTemplate->organization_id;
+            }
+            
             $resultCode = new DiscountCode($data);
             $repeated =  DiscountCode::where('code' , $random_string)->first();
             if(!isset($repeated))
