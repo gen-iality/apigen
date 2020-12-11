@@ -34,9 +34,9 @@ class AwsSnsController extends Controller
         // Log::info('update');
         $count = 0;
         $response = $request->json()->all();
-        Log::info('response '.json_encode($response));
+        // Log::info('response '.json_encode($response));
         // Log::info('eventType '.json_encode($response)['eventType']);
-        Log::info('notificationType '.json_encode($response)['notificationType']);
+        Log::info('notificationType '.json_decode($response)['notificationType']);
         
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->first();
 
