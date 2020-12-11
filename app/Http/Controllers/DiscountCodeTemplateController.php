@@ -98,6 +98,7 @@ class DiscountCodeTemplateController extends Controller
             'name' => "required",
             'use_limit' => "required",
             'discount' => 'required',
+            'discount_type' => "required"
         ];
 
         $validator = Validator::make($data, $rules);
