@@ -36,7 +36,7 @@ class MessageUser extends Moloquent
         'message', 
         'timestamp_event', 
         'user_id', 
-        'event_user_id', 
+        'event_user_id'
     ];
 
     /**
