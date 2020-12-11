@@ -249,7 +249,6 @@ class ApiCheckoutController extends Controller
             
             $codeTemplate = DiscountCodeTemplate::find($order->items[$x]);
             
-            
             $data['code'] = $random_string;
             $data['discount_code_template_id'] = $codeTemplate->_id;
             
@@ -272,7 +271,7 @@ class ApiCheckoutController extends Controller
             
             Mail::to($order->email)
             ->queue(
-                new \App\Mail\DiscountCodeMail($codes , $order)
+                new \App\Mail\DiscountCodeMail($resultCode , $order)
             );          
                     
         }
