@@ -77,7 +77,7 @@ class ActivitiesController extends Controller
      * 
      * 
     */
-    public function index(Request $request, $event_id)
+    public function index(Request $request, $event_id , FilterQuery $filterQuery)
     {
         $input = $request->all();
         $query  = Activities::where("event_id", $event_id);

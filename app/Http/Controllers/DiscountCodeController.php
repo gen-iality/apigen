@@ -182,16 +182,11 @@ class DiscountCodeController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($template_id ,$id)
     {   
-        // $codegroup = DiscountCode::findOrFail($id);
-        // $events = DiscountCode::where('discount_code_template_id' , $codegroup->_id)->first();
+        $discountCode = DiscountCode::findOrFail($id);
 
-        // if($events){
-        //     abort(400,'El grupo no se puede eliminar si está asociado a un código');
-        // }
-
-        // return  (string) $codegroup->delete();
+        return (string) $discountCode->delete();
 
     }
 
