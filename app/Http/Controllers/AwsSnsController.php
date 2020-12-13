@@ -48,6 +48,7 @@ class AwsSnsController extends Controller
         {
             $status_message = $response['notificationType']; 
         }
+        Log::info('$response[mail][messageId] ',$response['mail']['messageId']);
 
 
         $data = [
@@ -58,7 +59,6 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['mail']['timestamp']
         ];
         
-        Log::info('$response[mail][messageId] ',$response['mail']['messageId']);
         
         if (isset($eviusmessage))
         {
