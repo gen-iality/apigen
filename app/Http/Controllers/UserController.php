@@ -139,7 +139,7 @@ class UserController extends UserControllerWeb
         $Account->save();
 
         if(isset($data['organization_ids'])){
-            $result->organizations()->sync($data['organization_ids']);
+            $Account->organizations()->sync($data['organization_ids']);
         }     
 
         $Account = Account::find($Account->_id);
