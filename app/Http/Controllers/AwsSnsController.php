@@ -29,7 +29,7 @@ class AwsSnsController extends Controller
         $count = 0;
         $response = $request->json()->all();
         Log::info('response '.json_encode($response));
-        Log::info('print_r '.print_r($response));
+        Log::info('print_r($response, true) '.print_r($response, true));
         $responseMail = $response['mail'];
         Log::info('gettype($responseMail) ',gettype($responseMail));
 
