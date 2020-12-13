@@ -61,6 +61,7 @@ class AwsSnsController extends Controller
             'timestamp_event' => $responseMail['timestamp']
         ];
         
+        Log::info('print_r($data, true) ',print_r($data, true));
         
         if (isset($eviusmessage))
         {
