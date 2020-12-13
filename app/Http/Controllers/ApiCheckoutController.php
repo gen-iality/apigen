@@ -36,7 +36,7 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd38b1967263023575a7652";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -156,10 +156,16 @@ class ApiCheckoutController extends Controller
                                     $event = Event::find($item);
                                     $code =DiscountCode::where('code' , $discount_code)->first(); 
                                     if(isset($code)){
-                                        if($code->event_id == $event->_id){
+                                        if(isset($code->organization_id))
+                                        {                                               
                                             $code->number_uses =$code->number_uses + 1; 
-                                            $code->save();                                        
-                                        } 
+                                            $code->save(); 
+
+                                        }else if($code->event_id == $event->_id){
+                                            $code->number_uses =$code->number_uses + 1; 
+                                            $code->save();                                                                                   
+                                        }
+                                        
                                     }                            
                                 }
                             }
