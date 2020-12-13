@@ -22,12 +22,6 @@ use App\Message as EviusMessage;
 
 class AwsSnsController extends Controller
 {
-
-    public function testreqS3()
-    {
-        Log::info('testS3');
-        return 'testS3';
-    }
     
     public function updateSnsMessages(Request $request)
     {        
@@ -40,7 +34,7 @@ class AwsSnsController extends Controller
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
         // Log::info('notificationType '.$response['notificationType']);
 
-        Log::info('$response[mail][destination] '.$response['mail']['destination']);
+        Log::info('$response[mail][destination] '.json_encode($response['mail']['destination']));
 
         $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->first();
 
