@@ -28,7 +28,7 @@ class AwsSnsController extends Controller
         // Log::info('update');
         $count = 0;
         $response = $request->json()->all();
-        Log::info('response '.json_encode($response));
+        // Log::info('response '.json_encode($response));
         
         // Log::info('eventType '.json_encode($response)['eventType']);
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
@@ -58,6 +58,7 @@ class AwsSnsController extends Controller
             'timestamp_event' => $response['mail']['timestamp']
         ];
         
+        Log::info('json_encode($data) ',json_encode($data));
         
         if (isset($eviusmessage))
         {
