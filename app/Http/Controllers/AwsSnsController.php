@@ -31,7 +31,7 @@ class AwsSnsController extends Controller
         // Log::info('response '.json_encode($response));
         $responseMail = $response['mail'];
         
-        Log::info('$responseMail[messageId] ',$responseMail['messageId']);
+        Log::info('$responseMail',vardump($responseMail));
 
         // Log::info('eventType '.json_encode($response)['eventType']);
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
