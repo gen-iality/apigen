@@ -31,7 +31,7 @@ class AwsSnsController extends Controller
         Log::info('response '.json_encode($response));
         // Log::info('print_r($response, true) '.print_r($response['notificationType'], true));
         $responseMail = $response['mail'];
-        Log::info('$responseMail[messageId] '.$responseMail['messageId']);
+        Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
         
         // Log::info('eventType '.json_encode($response)['eventType']);
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
@@ -39,7 +39,7 @@ class AwsSnsController extends Controller
 
         // Log::info('$response[mail][destination] '.json_encode($response['mail']['destination']));
 
-        $eviusmessage = EviusMessage::where('server_message_id', '=', $response['mail']['messageId'])->first();
+        $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
 
         $status_message = null;
 
@@ -57,8 +57,8 @@ class AwsSnsController extends Controller
             'response' => json_encode($response),
             'email_destinations' => json_encode($response['mail']['destination']),
             'status_message' => isset($status_message) ? $status_message : 'queued',
-            'notification_id' => $response['mail']['messageId'],
-            'timestamp_event' => $response['mail']['timestamp']
+            'notification_id' => $responseMail['messageId'],
+            'timestamp_event' => $responseMail['timestamp']
         ];
         
         
