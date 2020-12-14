@@ -16,7 +16,7 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $event;
+    public $order;
     public $message;
 
     /**
@@ -26,8 +26,7 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
      */
     public function __construct($order)
     {        
-       
-
+        $this->order = $order;
     }
     /**
      * Build the message.
@@ -40,7 +39,7 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
         
         return $this
             ->from("alerts@evius.co", "Ucronio")
-            ->subject("PayU Pago exitoso")
+            ->subject("Pago exitoso")
             ->markdown('rsvp.payU');
     }
 }
