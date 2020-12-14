@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d6f22d9d27f500cfa46e57452471d84",
+    "content-hash": "903167bea25066cdb1ae841b49ace687",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2491,20 +2491,20 @@
         },
         {
             "name": "grpc/grpc",
-            "version": "1.30.0",
+            "version": "1.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "31952d18884d91c674b73f8b4da831f708706f20"
+                "reference": "f84e39861fd9f48ce6cc671688a05df13c7cd7e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/31952d18884d91c674b73f8b4da831f708706f20",
-                "reference": "31952d18884d91c674b73f8b4da831f708706f20",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/f84e39861fd9f48ce6cc671688a05df13c7cd7e8",
+                "reference": "f84e39861fd9f48ce6cc671688a05df13c7cd7e8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=7.0.0"
             },
             "require-dev": {
                 "google/auth": "^v1.3.0"
@@ -2528,7 +2528,10 @@
             "keywords": [
                 "rpc"
             ],
-            "time": "2020-06-23T01:49:02+00:00"
+            "support": {
+                "source": "https://github.com/grpc/grpc-php/tree/v1.34.0"
+            },
+            "time": "2020-12-02T22:47:45+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

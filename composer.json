@@ -20,6 +20,7 @@
     "filp/whoops": "~2.2",
     "google/cloud": "^0.132.0",
     "google/cloud-firestore": "^1.12",
+    "grpc/grpc": "^v1.27.0",
     "guzzlehttp/guzzle": "^6.3",
     "guzzlehttp/psr7": "~1.4",
     "illuminate/support": "~5.6",
