@@ -6,9 +6,11 @@ use App\evaLib\Services\EvaRol;
 use App\Http\Resources\OrganizationResource;
 use App\Organization;
 use App\Event;
+use App\Account;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 
 /**
  * @group Organization
@@ -142,6 +144,27 @@ class OrganizationController extends Controller
         }
     }
 
+/**
+ * Send email to the admin users of an organization
+ *
+ * @param Request $request
+ * @param Sting $organization
+ * @return void
+ */
+    public function contactbyemail(Request $request,$organization){
 
-    
+        $data = $request->json()->all();
+
+        $organization = Organization::find("5e9caaa1d74d5c2f6a02a3c3");
+        $author = Account::find($organization->author);
+       
+        $email =$author->email;
+        
+        $message = isset($data['message'])?$data['message']:"";
+        Mail::to($email)->send(
+            new \App\Mail\genericMail($message)
+        );
+        
+        return "sent";
+    }
 }
