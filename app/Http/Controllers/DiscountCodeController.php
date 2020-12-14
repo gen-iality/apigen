@@ -100,41 +100,46 @@ class DiscountCodeController extends Controller
         
         
         $resultCode = '';
-        $x = 1;
-        while($x <= $data['quantity']) {            
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-            $input_length = strlen($permitted_chars);
-            $random_string = '';
-            for ($j = 0; $j < 8; $j++) {
-                $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
-                $random_string .= $random_character;
-            } 
-            
-            $data['code'] = $random_string;
-            $data['discount_code_template_id'] = $group_id;
-            
+        //Generate codes automatically according to the quantity entered 
+            $x = 1;
+            while($x <= $data['quantity']) {            
+                //Generate code randomly
+                    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-            $group  = DiscountCodeTemplate::find($group_id);
+                    $input_length = strlen($permitted_chars);
+                    $random_string = '';
+                    for ($j = 0; $j < 8; $j++) {
+                        $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
+                        $random_string .= $random_character;
+                    } 
+                    
+                    $data['code'] = $random_string;
+                    $data['discount_code_template_id'] = $group_id;
+                    
+                //Find the templater to which the code is associated and enter the organizer_id or event_id as appropriate
+                    $group  = DiscountCodeTemplate::find($group_id);
 
-            if(!isset($group->event_id))
-            {
-                $data['organization_id'] =  $group->organization_id;
-            }else{                
-                $data['event_id'] = $group->event_id;
+                    if(!isset($group->event_id))
+                    {
+                        $data['organization_id'] =  $group->organization_id;
+                    }else{                
+                        $data['event_id'] = $group->event_id;
+                    }
+                            
+                    $resultCode = new DiscountCode($data);
+
+                //It checks if the code is repeated so as not to save it and generate another
+                    $repeated =  DiscountCode::where('code' , $random_string)->first();
+
+                    if(!isset($repeated))
+                    {                                             
+                        $resultCode->save();   
+                        $x++;
+                    }             
+                        
             }
-                       
-            $resultCode = new DiscountCode($data);
-            $repeated =  DiscountCode::where('code' , $random_string)->first();
-
-            if(!isset($repeated))
-            {                                             
-                $resultCode->save();   
-                $x++;
-            }             
-                   
-        }
-        return DiscountCode::where('discount_code_template_id', $group_id)->get();
+            return DiscountCode::where('discount_code_template_id', $group_id)->paginate(config('app.page_size'));
 
     }
 
@@ -177,16 +182,11 @@ class DiscountCodeController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($template_id ,$id)
     {   
-        // $codegroup = DiscountCode::findOrFail($id);
-        // $events = DiscountCode::where('discount_code_template_id' , $codegroup->_id)->first();
+        $discountCode = DiscountCode::findOrFail($id);
 
-        // if($events){
-        //     abort(400,'El grupo no se puede eliminar si está asociado a un código');
-        // }
-
-        // return  (string) $codegroup->delete();
+        return (string) $discountCode->delete();
 
     }
 
@@ -218,7 +218,8 @@ class DiscountCodeController extends Controller
 
         $data = $request->json()->all();
 
-        $code = isset($data['event_id']) ? 
+        // The entered code is searched for to validate if it exists 
+            $code = isset($data['event_id']) ? 
                 DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
                 DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
         
@@ -227,8 +228,6 @@ class DiscountCodeController extends Controller
             
             
             if($code->number_uses < $group->use_limit  ){
-                // $code->number_uses =$code->number_uses + 1; 
-                // $code->save();
                 return $code;
             }
             

@@ -76,6 +76,7 @@ class ApiCheckoutController extends Controller
                         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
                         new \App\Mail\ConfirmationPayU($order)
                     );
+                    
                     Mail::to("juan.lopez@mocionsoft.com")
                     ->queue(
                         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
@@ -137,66 +138,37 @@ class ApiCheckoutController extends Controller
 
             $order = Order::find($order_reference);
                 Log::info('completamos la orden: ' . $order_reference);   
-                
-                    foreach($order->discount_codes as $discount_code)
-                    {   
-
-                        foreach($order->items as $item) {                    
-                            $event = Event::find($item);
-                            $code =DiscountCode::where('code' , $discount_code)->first(); 
-                            if(isset($code)){
-                                if($code->event_id == $event->_id){
-                                    $code->number_uses =$code->number_uses + 1; 
-                                    $code->save();                                   
-                                } 
-                            }                            
-                        }
-                    }
+                    
 
                     switch($order->item_type){
                         case 'discountCode' : 
                             //Logica para agregar codigos
-
-                            $k=0;
-
-                            // Cycle while for each item of discount code template purchased
-                            while($k < count($order->items)) {                                     
-                                //  Generate random code for the discount code
-                                    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    
-                                    $input_length = strlen($permitted_chars);
-                                    $random_string = '';
-                                    for ($j = 0; $j < 8; $j++) {
-                                        $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
-                                        $random_string .= $random_character;
-                                    } 
-                                
-                                $codeTemplate = DiscountCodeTemplate::find($order->items[$k]);
-                                
-                                
-                                $data['code'] = $random_string;
-                                $data['discount_code_template_id'] = $codeTemplate->_id;
-                                $data['event_id'] = $codeTemplate->event_id;
-                    
-                                $resultCode = new DiscountCode($data);
-                                $repeated =  DiscountCode::where('code' , $random_string)->first();
-                                
-                                if(!isset($repeated))
-                                {                                                                              
-                                    $resultCode->save();   
-                                    $k++;                              
-                                    Mail::to($order->email)
-                                    ->queue(
-                                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                                        new \App\Mail\DiscountCodeMail($resultCode , $order)
-                                    );  
-                                }   
-                                        
-                            }
-                            // var_dump($x);                                                            
+                            $this->generateCodes($order);
+                            
                         break;
                         case 'event' :
                         default:
+
+                            //In case discount codes are entered for the purchase of courses, they will be browsed and the number of uses will be increased
+                            foreach($order->discount_codes as $discount_code)
+                            {   
+                                foreach($order->items as $item) {                   
+                                    $event = Event::find($item);
+                                    $code =DiscountCode::where('code' , $discount_code)->first(); 
+                                    if(isset($code)){
+                                        if(isset($code->organization_id))
+                                        {                                               
+                                            $code->number_uses =$code->number_uses + 1; 
+                                            $code->save(); 
+
+                                        }else if($code->event_id == $event->_id){
+                                            $code->number_uses =$code->number_uses + 1; 
+                                            $code->save();                                                                                   
+                                        }
+                                        
+                                    }                            
+                                }
+                            }
 
                             /*
                             * Insert order items (for use in generating invoices)
@@ -210,12 +182,14 @@ class ApiCheckoutController extends Controller
                                 $orderItem->unit_booking_fee = 0;
                                 $orderItem->save();
                                 Mail::to($order->email)
-                                ->queue(
-                                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                                ->queue(                                   
                                     new \App\Mail\BuyCourseMail($event)
                                 ); 
                             }
                             //Lógica para agregar event_user
+
+                            
+
                             $this->createAteendes($order);
                         break;
                     }
@@ -265,12 +239,10 @@ class ApiCheckoutController extends Controller
     /**
      * _generateCodes_: generates the discount codes when making the purchase
      */
-    public function generateCodes(){
+    public function generateCodes($order){
         $x=0;
-
         // Cycle while for each item of discount code template purchased
         while($x < count($order->items)) {           
-            
             //  Generate random code for the discount code
                 $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -283,11 +255,17 @@ class ApiCheckoutController extends Controller
             
             $codeTemplate = DiscountCodeTemplate::find($order->items[$x]);
             
-            
             $data['code'] = $random_string;
             $data['discount_code_template_id'] = $codeTemplate->_id;
-            $data['event_id'] = $codeTemplate->event_id;
+            
+            if(isset($codeTemplate->event_id))
+            {   
+                $data['event_id'] =  $codeTemplate->event_id;
 
+            }else{
+                $data['organization_id'] =  $codeTemplate->organization_id;
+            }
+            
             $resultCode = new DiscountCode($data);
             $repeated =  DiscountCode::where('code' , $random_string)->first();
             if(!isset($repeated))
@@ -296,10 +274,10 @@ class ApiCheckoutController extends Controller
                 $x++;                                    
             }   
             $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
+            
             Mail::to($order->email)
             ->queue(
-                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new \App\Mail\DiscountCodeMail($codes , $order)
+                new \App\Mail\DiscountCodeMail($resultCode , $order)
             );          
                     
         }

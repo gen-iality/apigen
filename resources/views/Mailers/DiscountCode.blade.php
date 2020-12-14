@@ -20,7 +20,11 @@
 @endif --}}
 <br />
 <br />
-¡FELICITACIONES! tu compra del código de regalo para el curso  <b>{{$event->name}}</b> ha sido exitosa.
+@if(isset($event->name))
+    ¡FELICITACIONES! tu compra del código  para el curso  <b>{{$event->name}}</b> ha sido exitosa.
+@else
+    ¡FELICITACIONES! tu compra del código para redimidir en cualquier curso de neustra plataforma ha sido exitosa.    
+@endif
 <br />
 Tu código de regalo es: <b>{{$code->code}}</b>
 

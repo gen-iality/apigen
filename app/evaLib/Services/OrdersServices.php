@@ -245,7 +245,8 @@ class OrdersServices
         //save the order to the database
         // DB::commit();
         //forget the order in the session
-        session()->forget('ticket_order_' . $event->id);
+
+        session()->forget('ticket_order_' . isset($event->id));
 
         // Queue up some tasks - Emails to be sent, PDFs etc.
         Log::info('Firing the event');
@@ -367,7 +368,7 @@ class OrdersServices
      *  
      */ 
     public static function addAttendee($attendee_details, $order_id, $event_id, $request_data)
-    {
+    {   
         $event = Event::findOrFail($event_id);
         $order = Order::findOrFail($order_id);
         $fields = $event->user_properties;

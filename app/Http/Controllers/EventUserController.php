@@ -45,7 +45,7 @@ class EventUserController extends Controller
      * https://docs.mongodb.com/manual/core/index-case-insensitive/
      * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
      * 
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filtered optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
      * @response {
      *     "_id": "5f9055454e6953792a54fd43",

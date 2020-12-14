@@ -68,10 +68,10 @@ class ActivitiesController extends Controller
      *  "_id": "5fa44f6ba8bf7449e65dae32"
      * }
      *
-     *
-     *
-     */
-    public function index(Request $request, $event_id, FilterQuery $filterQuery)
+     * 
+     * 
+    */
+    public function index(Request $request, $event_id , FilterQuery $filterQuery)
     {
         $input = $request->all();
         $query  = Activities::where("event_id", $event_id);
@@ -82,7 +82,7 @@ class ActivitiesController extends Controller
         }
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return JsonResource::collection($results);
-    }
+    }   
 
     /**
      * _indexByHost_: list activities by host
