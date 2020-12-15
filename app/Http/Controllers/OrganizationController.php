@@ -175,7 +175,7 @@ class OrganizationController extends Controller
         $data['email_user'] = isset($data['email_user'])?$data['email_user']:"";
 
         
-        $emails = ['deltorosalazar@gmail.com' ,'geraldine.garcia@mocionsoft.com', 'julianageraldineco@gmail.com'];
+        $emails = ['deltorosalazar@gmail.com' ,'geraldine.garcia@mocionsoft.com' , 'mdts.dev@gmail.com'];
 
         foreach($emails as $email){
             Mail::to($email)->send(
