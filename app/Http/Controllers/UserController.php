@@ -187,6 +187,9 @@ class UserController extends UserControllerWeb
             'password' => 'string|min:6',
         ]);
 
+        $email = $data['email'];
+        $pass = $data['password'];
+        
         $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
         $uid = $signInResult->firebaseUserId();
 
