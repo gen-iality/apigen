@@ -140,7 +140,9 @@ return [
                     //Discount code
                         '*/discountcodetemplate/*',
                         '*/discountcodetemplate',
-                        '*/code/*'
+                        '*/code/*',
+                    //Organizations
+                        '*/contactbyemail'
                 ],  
 
                 /*

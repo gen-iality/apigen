@@ -12,15 +12,21 @@ class genericMail extends Mailable
     use Queueable, SerializesModels;
 
     public $message = '';
+    public $subject = '';
+    public $emailUser = '';
+    public $userName = '';
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($messageContent)
     {
-        $this->messsage = $message;
-        $this->messsage  = "a";
+         $this->message = $messageContent['message'] ;
+         $this->subject = $messageContent['subject'];
+         $this->emailUser = $messageContent['email_user'];
+         $this->userName = $messageContent['name'];
     }
 
     /**
@@ -33,8 +39,8 @@ class genericMail extends Mailable
 
 
         return $this
-        ->from("alerts@evius.co", 'eventos evius')
-        ->subject('Contacto')
+        ->from("alerts@evius.co", 'Fromulario de contacto Ucronio')
+        ->subject($this->subject)
         ->markdown('genericMail');
         //return $this->view('genericMail');
     }

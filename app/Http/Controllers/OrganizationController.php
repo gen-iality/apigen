@@ -145,26 +145,44 @@ class OrganizationController extends Controller
     }
 
 /**
- * Send email to the admin users of an organization
- *
- * @param Request $request
+ * _contactbyemail_: send email to the admin users of an organization
+ *  
+ * @bodyParam message string required 
+ * @bodyParam subject string required 
+ * @bodyParam name string required user name
+ * @bodyParam email_user string required 
+ * 
+ * @param Request string $request 
  * @param Sting $organization
  * @return void
  */
-    public function contactbyemail(Request $request,$organization){
+    public function contactbyemail(Request $request, $organization){
 
         $data = $request->json()->all();
 
-        $organization = Organization::find("5e9caaa1d74d5c2f6a02a3c3");
+        $organization = isset($organization) ? 
+            Organization::find($organization) : 
+            Organization::find("5e9caaa1d74d5c2f6a02a3c3");
+
+            
         $author = Account::find($organization->author);
        
-        $email =$author->email;
+        // $email =$author->email;
         
-        $message = isset($data['message'])?$data['message']:"";
-        Mail::to($email)->send(
-            new \App\Mail\genericMail($message)
-        );
+        $data['message'] = isset($data['message'])?$data['message']:"";
+        $data['subject'] = isset($data['subject'])?$data['subject']:"";
+        $data['name'] = isset($data['name'])?$data['name']:"";
+        $data['email_user'] = isset($data['email_user'])?$data['email_user']:"";
+
         
-        return "sent";
+        $emails = ['deltorosalazar@gmail.com' ,'geraldine.garcia@mocionsoft.com', 'julianageraldineco@gmail.com'];
+
+        foreach($emails as $email){
+            Mail::to($email)->send(
+                new \App\Mail\genericMail($data)
+            );
+        }       
+        
+        return "Sent";
     }
 }
