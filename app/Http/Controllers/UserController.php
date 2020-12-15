@@ -184,12 +184,12 @@ class UserController extends UserControllerWeb
 
         $validatedData = $request->validate([
             'email' => 'required',
-            'password' => 'string|min:6',
+            'password' => 'required',
         ]);
 
         $email = $data['email'];
         $pass = $data['password'];
-        
+
         $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
         $uid = $signInResult->firebaseUserId();
 
