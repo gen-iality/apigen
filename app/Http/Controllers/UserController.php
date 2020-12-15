@@ -84,7 +84,7 @@ class UserController extends UserControllerWeb
     public function store(Request $request)
     {           
         $validatedData = $request->validate([
-            'email' => 'required|unique:App\Account|email',
+            'email' => 'required|unique:users|email',
             'names' => 'required',
             'picture' => 'string',
             'password' => 'string',
