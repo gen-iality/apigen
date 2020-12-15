@@ -87,7 +87,7 @@ class UserController extends UserControllerWeb
             'email' => 'required|unique:users|email',
             'names' => 'required',
             'picture' => 'string',
-            'password' => 'string',
+            'password' => 'string|min:6',
             'others_properties' => 'array',
         ]);
 
