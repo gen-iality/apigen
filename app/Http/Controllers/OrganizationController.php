@@ -11,6 +11,7 @@ use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
+use Validator;
 
 /**
  * @group Organization
@@ -168,11 +169,19 @@ class OrganizationController extends Controller
         $author = Account::find($organization->author);
        
         // $email =$author->email;
-        
-        $data['message'] = isset($data['message'])?$data['message']:"";
-        $data['subject'] = isset($data['subject'])?$data['subject']:"";
-        $data['name'] = isset($data['name'])?$data['name']:"";
-        $data['email_user'] = isset($data['email_user'])?$data['email_user']:"";
+
+        $rules = [
+            'message' => 'required',
+            'subject' => 'required',
+            'name' => 'required',
+            'email_user' => 'required'
+
+        ];
+
+        $validator = Validator::make($data, $rules);
+        if (!$validator->passes()) {
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
 
         
         $emails = ['deltorosalazar@gmail.com' ,'geraldine.garcia@mocionsoft.com' , 'mdts.dev@gmail.com'];
@@ -183,6 +192,12 @@ class OrganizationController extends Controller
             );
         }       
         
-        return "Sent";
+        return response()->json([
+            'name' => $data['name'],
+            'subject' => $data['subject'],
+            'email_user' => $data['email_user'],
+            'message' => $data['message']
+
+        ]);
     }
 }
