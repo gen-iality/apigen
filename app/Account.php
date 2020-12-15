@@ -120,7 +120,8 @@ class Account extends User
                     $model->refresh_token = $singed->refreshToken();
 
                 } catch (\Exception $e) {
-                    $e->getMessage();
+                    var_dump($e->getMessage());
+                    $e->getMessage();                    
                 }
             }
         );
