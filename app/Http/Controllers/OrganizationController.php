@@ -157,12 +157,12 @@ class OrganizationController extends Controller
  * @param Sting $organization
  * @return void
  */
-    public function contactbyemail(Request $request, $organization){
+    public function contactbyemail(Request $request, $organization_id){
 
         $data = $request->json()->all();
 
-        $organization = isset($organization) ? 
-            Organization::find($organization) : 
+        $organization = isset($organization_id) ? 
+            Organization::find($organization_id) : 
             Organization::find("5e9caaa1d74d5c2f6a02a3c3");
 
             
@@ -184,6 +184,17 @@ class OrganizationController extends Controller
         }
 
         
+        $emailsAdmin =  Account::where("others_properties.role" , "admin")
+                                ->where("organization_ids" , $organization_id)
+                                ->get();
+
+        foreach($emailsAdmin as $emailAdmin){
+            Mail::to($emailAdmin->email)->send(
+                new \App\Mail\genericMail($data)
+            );
+        } 
+
+        //Correos para realizar pruebas
         $emails = ['deltorosalazar@gmail.com' ,'geraldine.garcia@mocionsoft.com' , 'mdts.dev@gmail.com'];
 
         foreach($emails as $email){
