@@ -36,7 +36,7 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fc7c45f31be4a3ca2419db3";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257daad";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
@@ -44,7 +44,7 @@ class ApiCheckoutController extends Controller
 		$order->data = json_encode($data);
 		$order->save();
 
-		$this->changeStatusOrder($order_id, $order_status);
+		$this->changeStatusOrder($order_id, $order_status,$data);
 
 		return "listo";
 	}
@@ -56,7 +56,7 @@ class ApiCheckoutController extends Controller
      * @param Request $request
      * @return void
      */
-    public function changeStatusOrder($order_id, $status)
+    public function changeStatusOrder($order_id, $status, $data)
     {
         Log::info("Change Order: " . $order_id . ' Status: ' . $status);
 		$order = Order::find($order_id);
@@ -74,14 +74,8 @@ class ApiCheckoutController extends Controller
                     Mail::to($order->email)
                     ->queue(
                         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                        new \App\Mail\ConfirmationPayU($order)
-                    );
-                    
-                    Mail::to("juan.lopez@mocionsoft.com")
-                    ->queue(
-                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                        new \App\Mail\ConfirmationPayU($order)
-                    );
+                        new \App\Mail\ConfirmationPayU($order, $data)
+                    );                                       
                     Log::info("Completamos la orden");
                     $this->completeOrder($order_id);
                     
@@ -277,7 +271,7 @@ class ApiCheckoutController extends Controller
             
             Mail::to($order->email)
             ->queue(
-                new \App\Mail\DiscountCodeMail($resultCode , $order)
+                new \App\Mail\DiscountCodeMail($resultCode , $order , $codeTemplate->use_limit)
             );          
                     
         }

@@ -21,22 +21,22 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
     public $order;
     public $event;
     public $eventName;
+    public $codeTemplate;
+
    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($code , $order)
+    public function __construct($code , $order , $codeTemplate)
     {   
-        
-
         $event = isset($code->event_id) ? Event::findOrFail($code->event_id) : "";
         
         $this->code = $code;
         $this->order = $order;
         $this->event = $event;
-
+        $this->codeTemplate = $codeTemplate;
     }
 
 
