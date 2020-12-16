@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/occaecati/duplicateactivitie/velit" \
+    "http://localhost/api/events/saepe/duplicateactivitie/debitis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/occaecati/duplicateactivitie/velit"
+    "http://localhost/api/events/saepe/duplicateactivitie/debitis"
 );
 
 let headers = {
@@ -79,14 +79,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/reiciendis/activities" \
+    -G "http://localhost/api/events/possimus/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/reiciendis/activities"
+    "http://localhost/api/events/possimus/activities"
 );
 
 let headers = {
@@ -282,14 +282,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/aperiam/activities/1" \
+    "http://localhost/api/events/porro/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/aperiam/activities/1"
+    "http://localhost/api/events/porro/activities/1"
 );
 
 let headers = {
@@ -328,14 +328,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/debitis/activities/1" \
+    "http://localhost/api/events/rerum/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/debitis/activities/1"
+    "http://localhost/api/events/rerum/activities/1"
 );
 
 let headers = {
@@ -412,16 +412,16 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/aspernatur/activities_attendees" \
+    -G "http://localhost/api/events/dignissimos/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"rerum","user_id":"eveniet"}'
+    -d '{"activity_id":"ipsa","user_id":"omnis"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/aspernatur/activities_attendees"
+    "http://localhost/api/events/dignissimos/activities_attendees"
 );
 
 let headers = {
@@ -430,8 +430,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "rerum",
-    "user_id": "eveniet"
+    "activity_id": "ipsa",
+    "user_id": "omnis"
 }
 
 fetch(url, {
@@ -473,7 +473,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/laudantium/activities_attendees" \
+    "http://localhost/api/events/modi/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -482,7 +482,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/laudantium/activities_attendees"
+    "http://localhost/api/events/modi/activities_attendees"
 );
 
 let headers = {
@@ -529,14 +529,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/rem/activities_attendees/1" \
+    -G "http://localhost/api/events/quae/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/rem/activities_attendees/1"
+    "http://localhost/api/events/quae/activities_attendees/1"
 );
 
 let headers = {
@@ -580,14 +580,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/aliquid/activities_attendees/1" \
+    "http://localhost/api/events/consequuntur/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/aliquid/activities_attendees/1"
+    "http://localhost/api/events/consequuntur/activities_attendees/1"
 );
 
 let headers = {
@@ -626,14 +626,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/possimus/activities_attendees/1" \
+    "http://localhost/api/events/enim/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/possimus/activities_attendees/1"
+    "http://localhost/api/events/enim/activities_attendees/1"
 );
 
 let headers = {
@@ -670,14 +670,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/tempora/activities_attendees" \
+    -G "http://localhost/api/me/events/accusamus/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/tempora/activities_attendees"
+    "http://localhost/api/me/events/accusamus/activities_attendees"
 );
 
 let headers = {
@@ -720,14 +720,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/mollitia/activities_attendees/deleniti/check_in" \
+    "http://localhost/api/events/aspernatur/activities_attendees/iusto/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/mollitia/activities_attendees/deleniti/check_in"
+    "http://localhost/api/events/aspernatur/activities_attendees/iusto/check_in"
 );
 
 let headers = {
@@ -1011,7 +1011,7 @@ curl -X PUT \
     "http://localhost/api/categories/5fb6e8d76dbaeb3738258092" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"est"}'
+    -d '{"name":"sit"}'
 
 ```
 
@@ -1026,7 +1026,7 @@ let headers = {
 };
 
 let body = {
-    "name": "est"
+    "name": "sit"
 }
 
 fetch(url, {
@@ -1162,7 +1162,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate/1/code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"quantity":1165.2}'
+    -d '{"quantity":41192429.4502}'
 
 ```
 
@@ -1177,7 +1177,7 @@ let headers = {
 };
 
 let body = {
-    "quantity": 1165.2
+    "quantity": 41192429.4502
 }
 
 fetch(url, {
@@ -1373,7 +1373,7 @@ curl -X POST \
     "http://localhost/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"voluptatem","event_id":"atque","organization_id":"consequatur"}'
+    -d '{"code":"est","event_id":"nihil","organization_id":"praesentium"}'
 
 ```
 
@@ -1388,9 +1388,9 @@ let headers = {
 };
 
 let body = {
-    "code": "voluptatem",
-    "event_id": "atque",
-    "organization_id": "consequatur"
+    "code": "est",
+    "event_id": "nihil",
+    "organization_id": "praesentium"
 }
 
 fetch(url, {
@@ -1555,7 +1555,7 @@ fetch(url, {
             "author_id": "5e9caaa1d74d5c2f6a02a3c2",
             "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-14 23:33:58",
+            "updated_at": "2020-12-15 19:42:49",
             "created_at": "2020-04-24 01:03:07",
             "category_ids": [
                 "5bf47083754e2317e4300b5f",
@@ -1614,6 +1614,22 @@ fetch(url, {
                     "checked": true,
                     "permissions": "public"
                 },
+                "tickets": {
+                    "name": "Boletería",
+                    "position": null,
+                    "section": "tickets",
+                    "icon": "CreditCardOutlined",
+                    "checked": true,
+                    "permissions": "public"
+                },
+                "certs": {
+                    "name": "Certificados",
+                    "position": null,
+                    "section": "certs",
+                    "icon": "FileDoneOutlined",
+                    "checked": true,
+                    "permissions": "public"
+                },
                 "survey": {
                     "name": "Encuestas",
                     "position": null,
@@ -1622,11 +1638,11 @@ fetch(url, {
                     "checked": true,
                     "permissions": "public"
                 },
-                "tickets": {
-                    "name": "Boletería",
+                "agenda": {
+                    "name": "Agenda",
                     "position": null,
-                    "section": "tickets",
-                    "icon": "CreditCardOutlined",
+                    "section": "agenda",
+                    "icon": "ReadOutlined",
                     "checked": true,
                     "permissions": "public"
                 }
@@ -1649,7 +1665,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -1684,10 +1700,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -1697,7 +1713,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -1716,7 +1732,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -1915,7 +1931,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -2070,7 +2087,7 @@ fetch(url, {
             "author_id": "5e9caaa1d74d5c2f6a02a3c2",
             "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-14 23:33:58",
+            "updated_at": "2020-12-15 19:42:49",
             "created_at": "2020-04-24 01:03:07",
             "category_ids": [
                 "5bf47083754e2317e4300b5f",
@@ -2129,6 +2146,22 @@ fetch(url, {
                     "checked": true,
                     "permissions": "public"
                 },
+                "tickets": {
+                    "name": "Boletería",
+                    "position": null,
+                    "section": "tickets",
+                    "icon": "CreditCardOutlined",
+                    "checked": true,
+                    "permissions": "public"
+                },
+                "certs": {
+                    "name": "Certificados",
+                    "position": null,
+                    "section": "certs",
+                    "icon": "FileDoneOutlined",
+                    "checked": true,
+                    "permissions": "public"
+                },
                 "survey": {
                     "name": "Encuestas",
                     "position": null,
@@ -2137,11 +2170,11 @@ fetch(url, {
                     "checked": true,
                     "permissions": "public"
                 },
-                "tickets": {
-                    "name": "Boletería",
+                "agenda": {
+                    "name": "Agenda",
                     "position": null,
-                    "section": "tickets",
-                    "icon": "CreditCardOutlined",
+                    "section": "agenda",
+                    "icon": "ReadOutlined",
                     "checked": true,
                     "permissions": "public"
                 }
@@ -2164,7 +2197,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -2199,10 +2232,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -2212,7 +2245,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -2231,7 +2264,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -2430,7 +2463,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -2575,8 +2609,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -2726,8 +2760,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -2877,8 +2911,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3028,8 +3062,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3179,8 +3213,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3799,7 +3833,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -3834,10 +3868,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -3847,7 +3881,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -3866,7 +3900,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -4065,7 +4099,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -4262,8 +4297,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -4413,8 +4448,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -4564,8 +4599,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -4715,8 +4750,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -4866,178 +4901,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
-                "created_at": "2020-11-16 03:50:19",
-                "name": "tito pulo2",
-                "role": "admin",
-                "organization_ids": [
-                    "5f7e33ba3abc2119442e83e8"
-                ]
-            },
-            "categories": [
-                {
-                    "_id": "5fbee701a75d483665317ee3",
-                    "name": "Planeta",
-                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fplaneta.jpg?alt=media&token=54c3c6d0-de27-4298-b5a0-fda6a1409759",
-                    "updated_at": "2020-11-25 23:21:37",
-                    "created_at": "2020-11-25 23:21:37"
-                }
-            ],
-            "event_type": {
-                "_id": "5bf47203754e2317e4300b68",
-                "name": "Educación"
-            },
-            "organiser": {
-                "_id": "5f7e33ba3abc2119442e83e8",
-                "tax_name": "Tax Name",
-                "tax_value": "Tax Rate",
-                "tax_id": "Tax ID",
-                "author": "5f7e33ba3abc2119442e83e7",
-                "name": "Ucronio",
-                "updated_at": "2020-10-07 21:31:38",
-                "created_at": "2020-10-07 21:31:38"
-            },
-            "organizer": {
-                "_id": "5f7e33ba3abc2119442e83e8",
-                "tax_name": "Tax Name",
-                "tax_value": "Tax Rate",
-                "tax_id": "Tax ID",
-                "author": "5f7e33ba3abc2119442e83e7",
-                "name": "Ucronio",
-                "updated_at": "2020-10-07 21:31:38",
-                "created_at": "2020-10-07 21:31:38"
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        "organization": null
-    },
-    {
-        "_id": "5fcd4c5a0776557ea552ea82",
-        "name": "100%",
-        "discount": "100",
-        "use_limit": "100",
-        "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-06 21:25:46",
-        "created_at": "2020-12-06 21:25:46",
-        "event": {
-            "_id": "5fbad14c1c1fe93d8d4c20cc",
-            "category": [
-                "5fbee701a75d483665317ee3"
-            ],
-            "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2021-03-13 00:00:00",
-            "description": "Este curso llevará al estudiante por una introducción contundente al posterior desarrollo de sus habilidades como diseñador y operador de sistemas de iluminación para eventos como conciertos, conferencias, festivales, eventos corporativos. Le dará al estudiante las herramientas bases para enfrentar proyectos de pequeña a gran escala donde la iluminación es un recurso vital para el desarrollo del mismo. Se trabajará desde la conceptualización, creación y presentación de ideas y diseños para potenciales clientes.",
-            "name": "Introducción a la Iluminación Escénica",
-            "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F02_CURSO_DE_PRODUCCION_ILUMINACION_ESCENICA.jpg?alt=media&token=df40600d-c7b6-4a68-a00b-a8466102e229",
-            "visibility": "PUBLIC",
-            "extra_config": {
-                "duration": "24 HORAS",
-                "modules": [
-                    {
-                        "name": "¿Cómo funciona la Iluminación?"
-                    },
-                    {
-                        "name": "Terminología y Conceptos Básicos"
-                    },
-                    {
-                        "name": "Teoría, Psicología y Reproducción del Color"
-                    },
-                    {
-                        "name": "Tipos de Luminarias"
-                    },
-                    {
-                        "name": "Protocolos de comunicación"
-                    },
-                    {
-                        "name": "Diseños en 3D y Renderización"
-                    }
-                ],
-                "price": "1250000",
-                "requirements": [
-                    "Contar con computador personal.",
-                    "Contar con acceso a internet."
-                ],
-                "weeklyIntensity": "4 HORAS"
-            },
-            "author_id": "5fb1f6fb7bf68702e345b5d2",
-            "organizer_id": "5f7e33ba3abc2119442e83e8",
-            "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-08 02:09:51",
-            "created_at": "2020-11-22 20:59:56",
-            "user_properties": [
-                {
-                    "name": "email",
-                    "label": "Correo",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "email",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1606078796000"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1606078796000"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "5fbad14c1c1fe93d8d4c20ce"
-                    }
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres Y Apellidos",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "text",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1606078797000"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1606078797000"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "5fbad14d1c1fe93d8d4c20cf"
-                    }
-                }
-            ],
-            "category_ids": [
-                "5fbee701a75d483665317ee3"
-            ],
-            "author": {
-                "_id": "5fb1f6fb7bf68702e345b5d2",
-                "names": "tito pulo234",
-                "email": "tito@gmail.com",
-                "others_properties": {
-                    "role": "admin"
-                },
-                "confirmation_code": "AT7J1anWbGD1dF8B",
-                "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
-                "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
-                "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5103,8 +4968,9 @@ fetch(url, {
         "discount": "10",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:18:42",
+        "updated_at": "2020-12-16 13:47:19",
         "created_at": "2020-12-06 21:31:39",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -5206,8 +5072,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5273,8 +5139,9 @@ fetch(url, {
         "discount": "20",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:18:54",
+        "updated_at": "2020-12-16 13:47:23",
         "created_at": "2020-12-06 21:38:45",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -5376,8 +5243,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5443,8 +5310,9 @@ fetch(url, {
         "discount": "30",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:19:05",
+        "updated_at": "2020-12-16 13:47:34",
         "created_at": "2020-12-06 21:39:29",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -5546,178 +5414,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
-                "created_at": "2020-11-16 03:50:19",
-                "name": "tito pulo2",
-                "role": "admin",
-                "organization_ids": [
-                    "5f7e33ba3abc2119442e83e8"
-                ]
-            },
-            "categories": [
-                {
-                    "_id": "5fbee701a75d483665317ee3",
-                    "name": "Planeta",
-                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fplaneta.jpg?alt=media&token=54c3c6d0-de27-4298-b5a0-fda6a1409759",
-                    "updated_at": "2020-11-25 23:21:37",
-                    "created_at": "2020-11-25 23:21:37"
-                }
-            ],
-            "event_type": {
-                "_id": "5bf47203754e2317e4300b68",
-                "name": "Educación"
-            },
-            "organiser": {
-                "_id": "5f7e33ba3abc2119442e83e8",
-                "tax_name": "Tax Name",
-                "tax_value": "Tax Rate",
-                "tax_id": "Tax ID",
-                "author": "5f7e33ba3abc2119442e83e7",
-                "name": "Ucronio",
-                "updated_at": "2020-10-07 21:31:38",
-                "created_at": "2020-10-07 21:31:38"
-            },
-            "organizer": {
-                "_id": "5f7e33ba3abc2119442e83e8",
-                "tax_name": "Tax Name",
-                "tax_value": "Tax Rate",
-                "tax_id": "Tax ID",
-                "author": "5f7e33ba3abc2119442e83e7",
-                "name": "Ucronio",
-                "updated_at": "2020-10-07 21:31:38",
-                "created_at": "2020-10-07 21:31:38"
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        "organization": null
-    },
-    {
-        "_id": "5fcd52e699bf5c5eec211c92",
-        "name": "prueba categoria",
-        "discount": "25",
-        "use_limit": "123",
-        "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-06 21:53:42",
-        "created_at": "2020-12-06 21:53:42",
-        "event": {
-            "_id": "5fbad14c1c1fe93d8d4c20cc",
-            "category": [
-                "5fbee701a75d483665317ee3"
-            ],
-            "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2021-03-13 00:00:00",
-            "description": "Este curso llevará al estudiante por una introducción contundente al posterior desarrollo de sus habilidades como diseñador y operador de sistemas de iluminación para eventos como conciertos, conferencias, festivales, eventos corporativos. Le dará al estudiante las herramientas bases para enfrentar proyectos de pequeña a gran escala donde la iluminación es un recurso vital para el desarrollo del mismo. Se trabajará desde la conceptualización, creación y presentación de ideas y diseños para potenciales clientes.",
-            "name": "Introducción a la Iluminación Escénica",
-            "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F02_CURSO_DE_PRODUCCION_ILUMINACION_ESCENICA.jpg?alt=media&token=df40600d-c7b6-4a68-a00b-a8466102e229",
-            "visibility": "PUBLIC",
-            "extra_config": {
-                "duration": "24 HORAS",
-                "modules": [
-                    {
-                        "name": "¿Cómo funciona la Iluminación?"
-                    },
-                    {
-                        "name": "Terminología y Conceptos Básicos"
-                    },
-                    {
-                        "name": "Teoría, Psicología y Reproducción del Color"
-                    },
-                    {
-                        "name": "Tipos de Luminarias"
-                    },
-                    {
-                        "name": "Protocolos de comunicación"
-                    },
-                    {
-                        "name": "Diseños en 3D y Renderización"
-                    }
-                ],
-                "price": "1250000",
-                "requirements": [
-                    "Contar con computador personal.",
-                    "Contar con acceso a internet."
-                ],
-                "weeklyIntensity": "4 HORAS"
-            },
-            "author_id": "5fb1f6fb7bf68702e345b5d2",
-            "organizer_id": "5f7e33ba3abc2119442e83e8",
-            "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-08 02:09:51",
-            "created_at": "2020-11-22 20:59:56",
-            "user_properties": [
-                {
-                    "name": "email",
-                    "label": "Correo",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "email",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1606078796000"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1606078796000"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "5fbad14c1c1fe93d8d4c20ce"
-                    }
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres Y Apellidos",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "text",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1606078797000"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1606078797000"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "5fbad14d1c1fe93d8d4c20cf"
-                    }
-                }
-            ],
-            "category_ids": [
-                "5fbee701a75d483665317ee3"
-            ],
-            "author": {
-                "_id": "5fb1f6fb7bf68702e345b5d2",
-                "names": "tito pulo234",
-                "email": "tito@gmail.com",
-                "others_properties": {
-                    "role": "admin"
-                },
-                "confirmation_code": "AT7J1anWbGD1dF8B",
-                "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
-                "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
-                "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5969,7 +5667,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -6004,10 +5702,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -6017,7 +5715,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -6036,7 +5734,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -6235,7 +5933,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -6448,8 +6147,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -6615,8 +6314,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -6782,8 +6481,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -6949,8 +6648,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7116,8 +6815,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7283,8 +6982,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7450,8 +7149,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7617,8 +7316,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7784,8 +7483,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7951,8 +7650,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8050,7 +7749,7 @@ fetch(url, {
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -8081,7 +7780,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -8139,8 +7838,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8215,7 +7914,7 @@ fetch(url, {
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -8246,7 +7945,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -8304,8 +8003,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8380,7 +8079,7 @@ fetch(url, {
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -8411,7 +8110,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -8469,8 +8168,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8545,7 +8244,7 @@ fetch(url, {
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -8576,7 +8275,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -8634,8 +8333,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8701,15 +8400,16 @@ fetch(url, {
         "discount": "60",
         "use_limit": "100",
         "event_id": "5fcea9dfe03c41005c7a1b06",
-        "updated_at": "2020-12-08 02:17:23",
+        "updated_at": "2020-12-15 21:05:22",
         "created_at": "2020-12-08 02:17:23",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fcea9dfe03c41005c7a1b06",
             "category": [
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -8740,7 +8440,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -8798,8 +8498,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8874,7 +8574,7 @@ fetch(url, {
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -8905,7 +8605,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -8963,8 +8663,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9030,15 +8730,16 @@ fetch(url, {
         "discount": "80",
         "use_limit": "100",
         "event_id": "5fcea9dfe03c41005c7a1b06",
-        "updated_at": "2020-12-08 02:17:38",
+        "updated_at": "2020-12-15 21:05:16",
         "created_at": "2020-12-08 02:17:38",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fcea9dfe03c41005c7a1b06",
             "category": [
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -9069,7 +8770,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -9127,8 +8828,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9194,15 +8895,16 @@ fetch(url, {
         "discount": "90",
         "use_limit": "100",
         "event_id": "5fcea9dfe03c41005c7a1b06",
-        "updated_at": "2020-12-08 02:17:48",
+        "updated_at": "2020-12-15 21:05:07",
         "created_at": "2020-12-08 02:17:48",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fcea9dfe03c41005c7a1b06",
             "category": [
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -9233,7 +8935,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -9291,8 +8993,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9358,15 +9060,16 @@ fetch(url, {
         "discount": "100",
         "use_limit": "100",
         "event_id": "5fcea9dfe03c41005c7a1b06",
-        "updated_at": "2020-12-08 02:17:55",
+        "updated_at": "2020-12-15 21:05:02",
         "created_at": "2020-12-08 02:17:55",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fcea9dfe03c41005c7a1b06",
             "category": [
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -9397,7 +9100,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -9455,8 +9158,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9522,8 +9225,9 @@ fetch(url, {
         "discount": "40",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:19:23",
+        "updated_at": "2020-12-16 14:28:01",
         "created_at": "2020-12-08 02:19:23",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -9625,8 +9329,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9692,8 +9396,9 @@ fetch(url, {
         "discount": "50",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:19:30",
+        "updated_at": "2020-12-16 14:28:07",
         "created_at": "2020-12-08 02:19:30",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -9795,8 +9500,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9862,8 +9567,9 @@ fetch(url, {
         "discount": "60",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:19:45",
+        "updated_at": "2020-12-16 14:28:14",
         "created_at": "2020-12-08 02:19:45",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -9965,8 +9671,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10032,8 +9738,9 @@ fetch(url, {
         "discount": "70",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:19:58",
+        "updated_at": "2020-12-16 14:28:29",
         "created_at": "2020-12-08 02:19:58",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -10135,8 +9842,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10202,8 +9909,9 @@ fetch(url, {
         "discount": "80",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:20:08",
+        "updated_at": "2020-12-16 13:47:11",
         "created_at": "2020-12-08 02:20:08",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -10305,8 +10013,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10372,8 +10080,9 @@ fetch(url, {
         "discount": "90",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:20:19",
+        "updated_at": "2020-12-16 13:47:03",
         "created_at": "2020-12-08 02:20:19",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -10475,8 +10184,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10542,8 +10251,9 @@ fetch(url, {
         "discount": "100",
         "use_limit": "100",
         "event_id": "5fbad14c1c1fe93d8d4c20cc",
-        "updated_at": "2020-12-08 02:20:26",
+        "updated_at": "2020-12-16 13:46:00",
         "created_at": "2020-12-08 02:20:26",
+        "discount_type": "percentage",
         "event": {
             "_id": "5fbad14c1c1fe93d8d4c20cc",
             "category": [
@@ -10645,8 +10355,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10796,8 +10506,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10947,8 +10657,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11098,8 +10808,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11249,8 +10959,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11400,8 +11110,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11551,8 +11261,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11702,8 +11412,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11853,8 +11563,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12004,8 +11714,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12155,8 +11865,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12306,8 +12016,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12457,8 +12167,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12608,8 +12318,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12759,8 +12469,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12910,8 +12620,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13061,8 +12771,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13212,8 +12922,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13363,8 +13073,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13514,8 +13224,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13665,8 +13375,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13816,8 +13526,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13967,8 +13677,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14118,8 +13828,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14269,8 +13979,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14420,8 +14130,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14571,8 +14281,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14722,8 +14432,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14873,8 +14583,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15024,8 +14734,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15175,8 +14885,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15326,8 +15036,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15477,8 +15187,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15628,8 +15338,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15779,8 +15489,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15930,8 +15640,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16081,8 +15791,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16232,8 +15942,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16383,8 +16093,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16534,8 +16244,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16685,8 +16395,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16836,8 +16546,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16987,8 +16697,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17138,8 +16848,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17289,8 +16999,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17440,8 +17150,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17591,8 +17301,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17742,8 +17452,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17893,8 +17603,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -18044,8 +17754,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -18195,8 +17905,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -18354,7 +18064,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -18389,10 +18099,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -18402,7 +18112,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -18421,7 +18131,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -18620,7 +18330,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -18769,7 +18480,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -18804,10 +18515,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -18817,7 +18528,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -18836,7 +18547,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -19035,7 +18746,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -19907,170 +19619,6 @@ fetch(url, {
         }
     },
     {
-        "_id": "5fd0c1c594b42d003f4a8fc9",
-        "name": "prueba categoria",
-        "discount": "55",
-        "use_limit": "30",
-        "event_id": "5fcea9dfe03c41005c7a1b06",
-        "updated_at": "2020-12-09 12:23:33",
-        "created_at": "2020-12-09 12:23:33",
-        "event": {
-            "_id": "5fcea9dfe03c41005c7a1b06",
-            "category": [
-                "5fbee701a75d483665317ee3"
-            ],
-            "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
-            "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
-            "name": "Introducción al Rigging para Construcción de Escenarios",
-            "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
-            "visibility": "PUBLIC",
-            "extra_config": {
-                "duration": "16 horas",
-                "modules": [
-                    {
-                        "name": "Fundamentos y Teoría del Rigging : Terminología, Fundamentos y Funciones."
-                    },
-                    {
-                        "name": "Normatividad y Cumplimiento en Colombia para el Trabajo en Alturas."
-                    },
-                    {
-                        "name": "Tipos y Clases de Estructuras para Construcción de Escenarios."
-                    },
-                    {
-                        "name": "Fundamentos y Conceptos Básicos de Física aplicada y electricidad."
-                    }
-                ],
-                "price": "860000",
-                "requirements": [
-                    "Contar con computador personal.",
-                    "Contar con acceso a internet."
-                ],
-                "weeklyIntensity": "4 horas"
-            },
-            "author_id": "5fb1f6fb7bf68702e345b5d2",
-            "organizer_id": "5f7e33ba3abc2119442e83e8",
-            "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
-            "created_at": "2020-12-07 22:17:03",
-            "user_properties": [
-                {
-                    "name": "email",
-                    "label": "Correo",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "email",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1607379423000"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1607379423000"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "5fcea9dfe03c41005c7a1b08"
-                    }
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres Y Apellidos",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "text",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1607379423000"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1607379423000"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "5fcea9dfe03c41005c7a1b09"
-                    }
-                }
-            ],
-            "category_ids": [
-                "5fbee701a75d483665317ee3"
-            ],
-            "author": {
-                "_id": "5fb1f6fb7bf68702e345b5d2",
-                "names": "tito pulo234",
-                "email": "tito@gmail.com",
-                "others_properties": {
-                    "role": "admin"
-                },
-                "confirmation_code": "AT7J1anWbGD1dF8B",
-                "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
-                "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
-                "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
-                "created_at": "2020-11-16 03:50:19",
-                "name": "tito pulo2",
-                "role": "admin",
-                "organization_ids": [
-                    "5f7e33ba3abc2119442e83e8"
-                ]
-            },
-            "categories": [
-                {
-                    "_id": "5fbee701a75d483665317ee3",
-                    "name": "Planeta",
-                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fplaneta.jpg?alt=media&token=54c3c6d0-de27-4298-b5a0-fda6a1409759",
-                    "updated_at": "2020-11-25 23:21:37",
-                    "created_at": "2020-11-25 23:21:37"
-                }
-            ],
-            "event_type": {
-                "_id": "5bf47203754e2317e4300b68",
-                "name": "Educación"
-            },
-            "organiser": {
-                "_id": "5f7e33ba3abc2119442e83e8",
-                "tax_name": "Tax Name",
-                "tax_value": "Tax Rate",
-                "tax_id": "Tax ID",
-                "author": "5f7e33ba3abc2119442e83e7",
-                "name": "Ucronio",
-                "updated_at": "2020-10-07 21:31:38",
-                "created_at": "2020-10-07 21:31:38"
-            },
-            "organizer": {
-                "_id": "5f7e33ba3abc2119442e83e8",
-                "tax_name": "Tax Name",
-                "tax_value": "Tax Rate",
-                "tax_id": "Tax ID",
-                "author": "5f7e33ba3abc2119442e83e7",
-                "name": "Ucronio",
-                "updated_at": "2020-10-07 21:31:38",
-                "created_at": "2020-10-07 21:31:38"
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        "organization": null
-    },
-    {
         "_id": "5fd395fff2bc433939565224",
         "name": "Curso de regalo",
         "use_limit": 1,
@@ -20263,7 +19811,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -20298,10 +19846,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -20311,7 +19859,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -20330,7 +19878,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -20529,7 +20077,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -20850,7 +20399,7 @@ fetch(url, {
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
                 "email": "evius@evius.co",
                 "emailVerified": false,
-                "displayName": "Evius",
+                "displayName": "test",
                 "photoUrl": null,
                 "phoneNumber": null,
                 "disabled": false,
@@ -20885,10 +20434,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2020-12-14 16:56:13",
+                "updated_at": "2020-12-16 15:34:43",
                 "created_at": "2020-04-19 19:46:41",
-                "names": "Evius",
-                "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+                "names": "test",
+                "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -20898,7 +20447,7 @@ fetch(url, {
                 "compania": "asdf",
                 "numerodecelular": 3002162757,
                 "pais": "Åland Islands",
-                "celular": "123456",
+                "celular": "12123",
                 "condicion": "Mostrar",
                 "lugardenacimiento": "Bogotá",
                 "seleccionmultiple": [
@@ -20917,7 +20466,7 @@ fetch(url, {
                 "nombredequiendiligencia": "67890",
                 "telefono": "123123",
                 "ticketid": "5efb3da70787930c06043c32",
-                "cedula": 0,
+                "cedula": "53069491",
                 "address": "Cra 7a 94a - 08",
                 "birthDate": "1998-04-22",
                 "city": "Bogotá",
@@ -21116,7 +20665,8 @@ fetch(url, {
                 "terminosycondiciones": true,
                 "others_properties": [],
                 "profile_completed": false,
-                "picture": "http:\/\/www.gravatar.com\/avatar"
+                "picture": "http:\/\/www.gravatar.com\/avatar",
+                "estainteresadoenadquirirproductosepson": true
             },
             "categories": [
                 {
@@ -21238,7 +20788,7 @@ fetch(url, {
                 "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-01 00:00:00",
-            "datetime_to": "2020-12-28 00:00:00",
+            "datetime_to": "2021-02-28 00:00:00",
             "description": "Este curso le dará al estudiante una introducción sólida a los conceptos, oficios y terminología del Rigging, como elemento esencial para la correcta construcción de escenarios seguros para todo tipo de eventos y presentaciones. Este curso le dará al estudiante los componentes teóricos del oficio del rigging para poder posteriormente aplicarlo a entrenamientos presenciales y físicos de la labor del Rigger.",
             "name": "Introducción al Rigging para Construcción de Escenarios",
             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F04_Curso_introduccion_al_rigging.jpg?alt=media&token=b74853d1-d454-41d7-af81-768e108ccf1b",
@@ -21269,7 +20819,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2020-12-13 18:35:40",
+            "updated_at": "2020-12-16 03:33:59",
             "created_at": "2020-12-07 22:17:03",
             "user_properties": [
                 {
@@ -21327,8 +20877,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -21495,8 +21045,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNTQyN2NkMzUxMDhiNDc2NjUyMDhlYTA0YjhjYTZjODZkMDljOTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYwNTQ5ODYxOSwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjA1NDk4NjE5LCJleHAiOjE2MDU1MDIyMTksImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KPhFX-tHLan9BmjcX72WgtqAvLVqdO8w077wyeARhC0yA6Ad4kTj8KjEB3qrPgzQ3RWZUYvlUPRKUzA-YR-T-QeJJ7gAotc1jrJtOmg3YXyQNtClSDtAzlTgsDvTOndosdjJ9OFBAeLhNtXsdF7t3he9vIUJ_84Fcu6PiqSPQiE1zhIUleN1J8JKoKWusB4F3bYpVq-bNFGHIFIYirE7KVFXi39YAZx6SvnHYHDVMcgQVQDl7yziCXq627fiRXKEM17RWdvKerufytm5VJU2e7NhmNjWMNswHaOqPHswzbauUl_J60GTUB6fXJNix-Olygs3Oq3z3nkDseXBh3_D0A",
-                "refresh_token": "AG8BCndDGcrNSV1OzEjfSCEkdcEAIkBZTQpYdnGY0TEAmRB8fmOUI9_wekG3b8C5ZHBgcLZ34AfXkozurDkHOrcH99_6xm5BMWBlusOJYno1VFlNXwmbb-Q8ApAYNptyNJMU_i-J3qDq9Z-r8k0SIlLY8xamxz1MRe3V1Acpgzl-YY9Cor2RWw4IWjbCBvcY_GMWTVI0XAskWfI2TW58095IO568qJTOYA",
-                "updated_at": "2020-12-15 01:20:02",
+                "refresh_token": "AG8BCnd0ZtBuxiYk7uuUxey8zJraXrYVeu6x8mdyJmYQRfDDtA9VvNpsjPITrIqgdcAuIbkjEYMfIPa77NYVdOqP-JXab3cH1_D3RXpH2H6RpaC7kZD7ZN1qSjs-eHtdi6JCeJUd-J95zH94lPIkJXQy3tWDmKJCU9DJiApb8hLpcMWbvnVNGYdY_sc_SypiIk8Xs_m3bFb1xBiPP9xpLyAPBmiRmavflQ",
+                "updated_at": "2020-12-16 15:17:13",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -21617,7 +21167,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"a"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"vel"}'
 
 ```
 
@@ -21637,7 +21187,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "a"
+    "discount_type": "vel"
 }
 
 fetch(url, {
@@ -21805,7 +21355,7 @@ fetch(url, {
         "author_id": "5e9caaa1d74d5c2f6a02a3c2",
         "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
         "event_type_id": "5bf47203754e2317e4300b68",
-        "updated_at": "2020-12-14 23:33:58",
+        "updated_at": "2020-12-15 19:42:49",
         "created_at": "2020-04-24 01:03:07",
         "category_ids": [
             "5bf47083754e2317e4300b5f",
@@ -21864,6 +21414,22 @@ fetch(url, {
                 "checked": true,
                 "permissions": "public"
             },
+            "tickets": {
+                "name": "Boletería",
+                "position": null,
+                "section": "tickets",
+                "icon": "CreditCardOutlined",
+                "checked": true,
+                "permissions": "public"
+            },
+            "certs": {
+                "name": "Certificados",
+                "position": null,
+                "section": "certs",
+                "icon": "FileDoneOutlined",
+                "checked": true,
+                "permissions": "public"
+            },
             "survey": {
                 "name": "Encuestas",
                 "position": null,
@@ -21872,11 +21438,11 @@ fetch(url, {
                 "checked": true,
                 "permissions": "public"
             },
-            "tickets": {
-                "name": "Boletería",
+            "agenda": {
+                "name": "Agenda",
                 "position": null,
-                "section": "tickets",
-                "icon": "CreditCardOutlined",
+                "section": "agenda",
+                "icon": "ReadOutlined",
                 "checked": true,
                 "permissions": "public"
             }
@@ -21899,7 +21465,7 @@ fetch(url, {
             "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
             "email": "evius@evius.co",
             "emailVerified": false,
-            "displayName": "Evius",
+            "displayName": "test",
             "photoUrl": null,
             "phoneNumber": null,
             "disabled": false,
@@ -21934,10 +21500,10 @@ fetch(url, {
             },
             "confirmation_code": "Fmg1DjO8NAavTRaS",
             "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-            "updated_at": "2020-12-14 16:56:13",
+            "updated_at": "2020-12-16 15:34:43",
             "created_at": "2020-04-19 19:46:41",
-            "names": "Evius",
-            "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+            "names": "test",
+            "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
             "aerolineapreferida": "Avianca",
             "genero": "Masculino",
             "tipodecerveza": "Ale",
@@ -21947,7 +21513,7 @@ fetch(url, {
             "compania": "asdf",
             "numerodecelular": 3002162757,
             "pais": "Åland Islands",
-            "celular": "123456",
+            "celular": "12123",
             "condicion": "Mostrar",
             "lugardenacimiento": "Bogotá",
             "seleccionmultiple": [
@@ -21966,7 +21532,7 @@ fetch(url, {
             "nombredequiendiligencia": "67890",
             "telefono": "123123",
             "ticketid": "5efb3da70787930c06043c32",
-            "cedula": 0,
+            "cedula": "53069491",
             "address": "Cra 7a 94a - 08",
             "birthDate": "1998-04-22",
             "city": "Bogotá",
@@ -22165,7 +21731,8 @@ fetch(url, {
             "terminosycondiciones": true,
             "others_properties": [],
             "profile_completed": false,
-            "picture": "http:\/\/www.gravatar.com\/avatar"
+            "picture": "http:\/\/www.gravatar.com\/avatar",
+            "estainteresadoenadquirirproductosepson": true
         },
         "categories": [
             {
@@ -22342,7 +21909,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate/1/importCodes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"":{"json":"quisquam"}}'
+    -d '{"":{"json":"aut"}}'
 
 ```
 
@@ -22358,7 +21925,7 @@ let headers = {
 
 let body = {
     "": {
-        "json": "quisquam"
+        "json": "aut"
     }
 }
 
@@ -22592,7 +22159,7 @@ curl -X POST \
     "http://localhost/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"cum","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"rerum","extra_config":{}}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"et","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"aut","extra_config":{}}'
 
 ```
 
@@ -22610,14 +22177,14 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "cum",
+    "picture": "et",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "rerum",
+    "location": "aut",
     "extra_config": {}
 }
 
@@ -22710,7 +22277,7 @@ curl -X POST \
     "http://localhost/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"quos","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"molestias","extra_config":{}}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"magnam","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"qui","extra_config":{}}'
 
 ```
 
@@ -22728,14 +22295,14 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "quos",
+    "picture": "magnam",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "molestias",
+    "location": "qui",
     "extra_config": {}
 }
 
@@ -22823,14 +22390,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/users/fugit/events" \
+    -G "http://localhost/api/users/qui/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/fugit/events"
+    "http://localhost/api/users/qui/events"
 );
 
 let headers = {
@@ -22853,8 +22420,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/fugit\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/fugit\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/qui\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/qui\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -22862,7 +22429,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/fugit\/events",
+        "path": "http:\/\/localhost\/api\/users\/qui\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -22888,14 +22455,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/organizations/doloribus/events" \
+    -G "http://localhost/api/organizations/dolores/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/organizations/doloribus/events"
+    "http://localhost/api/organizations/dolores/events"
 );
 
 let headers = {
@@ -22918,8 +22485,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/organizations\/doloribus\/events?page=1",
-        "last": "http:\/\/localhost\/api\/organizations\/doloribus\/events?page=1",
+        "first": "http:\/\/localhost\/api\/organizations\/dolores\/events?page=1",
+        "last": "http:\/\/localhost\/api\/organizations\/dolores\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -22927,7 +22494,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/organizations\/doloribus\/events",
+        "path": "http:\/\/localhost\/api\/organizations\/dolores\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -23064,7 +22631,7 @@ curl -X POST \
     "http://localhost/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"et"}'
+    -d '{"name":"dolores"}'
 
 ```
 
@@ -23079,7 +22646,7 @@ let headers = {
 };
 
 let body = {
-    "name": "et"
+    "name": "dolores"
 }
 
 fetch(url, {
@@ -23215,14 +22782,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/illum/eventusers/et" \
+    -G "http://localhost/api/events/atque/eventusers/rem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/illum/eventusers/et"
+    "http://localhost/api/events/atque/eventusers/rem"
 );
 
 let headers = {
@@ -23243,7 +22810,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Attendee] et"
+    "message": "No query results for model [App\\Attendee] rem"
 }
 ```
 
@@ -23266,16 +22833,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/inventore/eventusers/1" \
+    "http://localhost/api/events/omnis/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"eaque","name":"et","other_params,":{"":{"":{"":"doloribus"}}}}'
+    -d '{"email":"earum","name":"quidem","other_params,":{"":{"":{"":"distinctio"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/inventore/eventusers/1"
+    "http://localhost/api/events/omnis/eventusers/1"
 );
 
 let headers = {
@@ -23284,12 +22851,12 @@ let headers = {
 };
 
 let body = {
-    "email": "eaque",
-    "name": "et",
+    "email": "earum",
+    "name": "quidem",
     "other_params,": {
         "": {
             "": {
-                "": "doloribus"
+                "": "distinctio"
             }
         }
     }
@@ -23331,16 +22898,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/eius/eventusers" \
+    "http://localhost/api/events/sit/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"account_id":"natus","properties":[]}'
+    -d '{"account_id":"quasi","properties":[]}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eius/eventusers"
+    "http://localhost/api/events/sit/eventusers"
 );
 
 let headers = {
@@ -23349,7 +22916,7 @@ let headers = {
 };
 
 let body = {
-    "account_id": "natus",
+    "account_id": "quasi",
     "properties": []
 }
 
@@ -23387,14 +22954,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/1/eventusers/exercitationem" \
+    "http://localhost/api/events/1/eventusers/autem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/eventusers/exercitationem"
+    "http://localhost/api/events/1/eventusers/autem"
 );
 
 let headers = {
@@ -23431,14 +22998,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/eventusers/event/iusto" \
+    -G "http://localhost/api/me/eventusers/event/quae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/eventusers/event/iusto"
+    "http://localhost/api/me/eventusers/event/quae"
 );
 
 let headers = {
@@ -23461,8 +23028,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/iusto?page=1",
-        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/iusto?page=1",
+        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/quae?page=1",
+        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/quae?page=1",
         "prev": null,
         "next": null
     },
@@ -23470,7 +23037,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/iusto",
+        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/quae",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -23496,16 +23063,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/aut/changeUserPassword" \
+    "http://localhost/api/events/voluptas/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"recusandae"}'
+    -d '{"email":"temporibus"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/aut/changeUserPassword"
+    "http://localhost/api/events/voluptas/changeUserPassword"
 );
 
 let headers = {
@@ -23514,7 +23081,7 @@ let headers = {
 };
 
 let body = {
-    "email": "recusandae"
+    "email": "temporibus"
 }
 
 fetch(url, {
@@ -23570,7 +23137,7 @@ curl -X POST \
     "http://localhost/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"qui"}'
+    -d '{"file":"consectetur"}'
 
 ```
 
@@ -23585,7 +23152,7 @@ let headers = {
 };
 
 let body = {
-    "file": "qui"
+    "file": "consectetur"
 }
 
 fetch(url, {
@@ -23631,16 +23198,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "http://localhost/api/files/uploadbase/praesentium" \
+    "http://localhost/api/files/uploadbase/maiores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"non","type":"sit"}'
+    -d '{"file":"nobis","type":"ut"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/files/uploadbase/praesentium"
+    "http://localhost/api/files/uploadbase/maiores"
 );
 
 let headers = {
@@ -23649,8 +23216,8 @@ let headers = {
 };
 
 let body = {
-    "file": "non",
-    "type": "sit"
+    "file": "nobis",
+    "type": "ut"
 }
 
 fetch(url, {
@@ -23691,14 +23258,14 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/qui/host" \
+    -G "http://localhost/api/events/quo/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/qui/host"
+    "http://localhost/api/events/quo/host"
 );
 
 let headers = {
@@ -23750,16 +23317,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/iusto/host" \
+    "http://localhost/api/events/sunt/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"ut","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"qui","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/iusto/host"
+    "http://localhost/api/events/sunt/host"
 );
 
 let headers = {
@@ -23770,7 +23337,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "ut",
+    "image": "qui",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -23814,14 +23381,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/officia/host/1" \
+    -G "http://localhost/api/events/consequatur/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/officia/host/1"
+    "http://localhost/api/events/consequatur/host/1"
 );
 
 let headers = {
@@ -23865,16 +23432,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/quo/host/1" \
+    "http://localhost/api/events/enim/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"quia","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"autem","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quo/host/1"
+    "http://localhost/api/events/enim/host/1"
 );
 
 let headers = {
@@ -23885,7 +23452,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "quia",
+    "image": "autem",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -23931,14 +23498,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/natus/host/1" \
+    "http://localhost/api/events/voluptate/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/natus/host/1"
+    "http://localhost/api/events/voluptate/host/1"
 );
 
 let headers = {
@@ -94372,7 +93939,7 @@ fetch(url, {
         "path": "http:\/\/localhost\/api\/orders",
         "per_page": 2500,
         "to": 2500,
-        "total": 3745
+        "total": 3781
     }
 }
 ```
@@ -95142,7 +94709,7 @@ curl -X POST \
     "http://localhost/api/organizations/1/contactbyemail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"message":"autem","subject":"perspiciatis","name":"tenetur","email_user":"rerum"}'
+    -d '{"message":"enim","subject":"molestiae","name":"qui","email_user":"facere"}'
 
 ```
 
@@ -95157,10 +94724,10 @@ let headers = {
 };
 
 let body = {
-    "message": "autem",
-    "subject": "perspiciatis",
-    "name": "tenetur",
-    "email_user": "rerum"
+    "message": "enim",
+    "subject": "molestiae",
+    "name": "qui",
+    "email_user": "facere"
 }
 
 fetch(url, {
@@ -95197,16 +94764,16 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
-    "http://localhost/api/rsvp/sendeventrsvp/exercitationem" \
+    "http://localhost/api/rsvp/sendeventrsvp/perferendis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"quod","image_header":"atque","content_header":"Has sido invitado a el evento","message":"enim","image":"eum","image_footer":"officiis","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
+    -d '{"subject":"at","image_header":"sit","content_header":"Has sido invitado a el evento","message":"omnis","image":"consequatur","image_footer":"doloremque","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/sendeventrsvp/exercitationem"
+    "http://localhost/api/rsvp/sendeventrsvp/perferendis"
 );
 
 let headers = {
@@ -95215,12 +94782,12 @@ let headers = {
 };
 
 let body = {
-    "subject": "quod",
-    "image_header": "atque",
+    "subject": "at",
+    "image_header": "sit",
     "content_header": "Has sido invitado a el evento",
-    "message": "enim",
-    "image": "eum",
-    "image_footer": "officiis",
+    "message": "omnis",
+    "image": "consequatur",
+    "image_footer": "doloremque",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     }
@@ -95768,14 +95335,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/rolesattendees/error" \
+    "http://localhost/api/rolesattendees/molestiae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rolesattendees/error"
+    "http://localhost/api/rolesattendees/molestiae"
 );
 
 let headers = {
@@ -95870,7 +95437,7 @@ curl -X POST \
     "http://localhost/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"molestiae","picture":"http:\/\/www.gravatar.com\/avatar","password":"inventore","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
+    -d '{"email":"evius@evius.co","names":"ut","picture":"http:\/\/www.gravatar.com\/avatar","password":"harum","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
 
 ```
 
@@ -95886,9 +95453,9 @@ let headers = {
 
 let body = {
     "email": "evius@evius.co",
-    "names": "molestiae",
+    "names": "ut",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "password": "inventore",
+    "password": "harum",
     "others_properties": "[]",
     "organization_ids": "[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"
 }
@@ -95958,7 +95525,7 @@ fetch(url, {
     "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
     "email": "evius@evius.co",
     "emailVerified": false,
-    "displayName": "Evius",
+    "displayName": "test",
     "photoUrl": null,
     "phoneNumber": null,
     "disabled": false,
@@ -95993,10 +95560,10 @@ fetch(url, {
     },
     "confirmation_code": "Fmg1DjO8NAavTRaS",
     "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-    "updated_at": "2020-12-14 16:56:13",
+    "updated_at": "2020-12-16 15:34:43",
     "created_at": "2020-04-19 19:46:41",
-    "names": "Evius",
-    "refresh_token": "AG8BCnd9Iy_REKTlBzwzo9MCHa3CfZhTE83XwtGh-_b4NRkE4GibTR5qOSpEI_6Cw4GNMah1RV-szwntJG6HrIx6-aw8JiGtQL1ZZqzQpSmYRe7AymAHlhUKvosUCu2Me-98kAt8fP8hVVK_wq4X_PEFj-9gYyf8nhsKBmbET5-gmqiN7KeYwqRF9EMwT4r16b24WrO0QRQQbLOcD5ygoDSzZfQW6itkwg",
+    "names": "test",
+    "refresh_token": "AG8BCneq2W56wVRPviP1JnMcIrlGt_zfwsJNa8qDNq_fPkwDk3onRYWjGfKeD7nbkMnYlSl6fVD5oIgLLqDgyMdMx4No2wkhqduASFYmakQ-N9NkBFVVMmGxXRIo40GALy7v9g4koBY1kKdwZKQCWKROfr6GV4dB9oZtndK-ROLKSOMZoSeQvC5XApc5Tv--jjEy2SHShmge7_ERFhwQh2sMiQzyA2zIDg",
     "aerolineapreferida": "Avianca",
     "genero": "Masculino",
     "tipodecerveza": "Ale",
@@ -96006,7 +95573,7 @@ fetch(url, {
     "compania": "asdf",
     "numerodecelular": 3002162757,
     "pais": "Åland Islands",
-    "celular": "123456",
+    "celular": "12123",
     "condicion": "Mostrar",
     "lugardenacimiento": "Bogotá",
     "seleccionmultiple": [
@@ -96025,7 +95592,7 @@ fetch(url, {
     "nombredequiendiligencia": "67890",
     "telefono": "123123",
     "ticketid": "5efb3da70787930c06043c32",
-    "cedula": 0,
+    "cedula": "53069491",
     "address": "Cra 7a 94a - 08",
     "birthDate": "1998-04-22",
     "city": "Bogotá",
@@ -96224,7 +95791,8 @@ fetch(url, {
     "terminosycondiciones": true,
     "others_properties": [],
     "profile_completed": false,
-    "picture": "http:\/\/www.gravatar.com\/avatar"
+    "picture": "http:\/\/www.gravatar.com\/avatar",
+    "estainteresadoenadquirirproductosepson": true
 }
 ```
 
@@ -96307,7 +95875,7 @@ curl -X PUT \
     "http://localhost/api/users/5e9caaa1d74d5c2f6a02a3c2" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"evius lopez","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"amet","others_properties":"[]"}'
+    -d '{"email":"evius@evius.co","names":"evius lopez","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"accusamus","others_properties":"[]"}'
 
 ```
 
@@ -96325,7 +95893,7 @@ let body = {
     "email": "evius@evius.co",
     "names": "evius lopez",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "organization_ids": "amet",
+    "organization_ids": "accusamus",
     "others_properties": "[]"
 }
 
@@ -96492,10 +96060,20 @@ fetch(url, {
     {
         "_id": "5e9caaa1d74d5c2f6a02a3c2",
         "email": "evius@evius.co",
-        "displayName": "Evius",
-        "names": "Evius",
+        "displayName": "test",
+        "names": "test",
         "id": "1019140079",
         "name": "Juan Ramirez"
+    },
+    {
+        "_id": "5fd8acedef1a2c4aff16aed5",
+        "email": "evius@evius.co",
+        "names": "evius"
+    },
+    {
+        "_id": "5fd8ad83ae5762445257daa6",
+        "email": "evius@evius.co",
+        "names": "evius"
     }
 ]
 ```
@@ -96855,6 +96433,49 @@ fetch(url, {
 
 
 <!-- END_739442a2495f200cd4de63da705ac98e -->
+
+<!-- START_e2472f0dc8400d5818ee0a4fb92cf7ce -->
+## _validateFreeorder_: validates the order in case the purchase value is 0
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/orders/voluptas/validateFreeorder" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/orders/voluptas/validateFreeorder"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/orders/{order_id}/validateFreeorder`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `order_id` |  required  | 
+
+<!-- END_e2472f0dc8400d5818ee0a4fb92cf7ce -->
 
 <!-- START_66df3678904adde969490f2278b8f47f -->
 ## Authenticate the request for channel access.

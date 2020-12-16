@@ -142,7 +142,8 @@ return [
                         '*/discountcodetemplate',
                         '*/code/*',
                     //Organizations
-                        '*/contactbyemail'
+                        '*/contactbyemail',
+                        '*/validateFreeorder'
                 ],  
 
                 /*

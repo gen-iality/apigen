@@ -175,7 +175,7 @@ class OrganizationController extends Controller
             'subject' => 'required',
             'name' => 'required',
             'email_user' => 'required'
-
+ 
         ];
 
         $validator = Validator::make($data, $rules);
