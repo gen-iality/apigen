@@ -29,7 +29,15 @@
         @endif
         <br />
         Tu código de regalo es: <b>{{$code->code}}</b><br>
-        Límite de usos : <b>{{$codeTemplate}}</b>
+        Límite de usos : <b>{{$codeTemplate->use_limit}}</b>
+        <br />
+        Descuento:
+        @if($codeTemplate->discount_type == "percentage")
+            <b>{{$codeTemplate->discount}}%</b>
+        @else
+            <b>${{$codeTemplate->discount}}</b>    
+        @endif
+        <br />
     </p>
 </div>
 

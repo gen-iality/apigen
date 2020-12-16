@@ -271,7 +271,7 @@ class ApiCheckoutController extends Controller
             
             Mail::to($order->email)
             ->queue(
-                new \App\Mail\DiscountCodeMail($resultCode , $order , $codeTemplate->use_limit)
+                new \App\Mail\DiscountCodeMail($resultCode , $order , $codeTemplate)
             );          
                     
         }
@@ -338,5 +338,25 @@ class ApiCheckoutController extends Controller
 	   return $changes;
    }
 
+    /**
+     * _validateFreeorder_: validates the order in case the purchase value is 0
+     * 
+     * @urlParam order_id required 
+     * 
+     */
+    public function validateFreeorder($order_id){
+        $order = Order::find($order_id);
+
+        if($order->amount == 0 && $order->order_status_id != config('attendize.order_complete')){
+            $order->order_status_id = config('attendize.order_complete');
+            $order->save();
+            $this->completeOrder($order->_id);
+            return $order;
+        }
+
+        return response()->json([
+            'error' => 'El valor es superior a $0',
+        ]);        
+    }
 
 }
