@@ -28,6 +28,18 @@ ha sido invitado a:
 @endcomponent
 @endif
 
+<div style="text-align: center">
+	@if($event->type_event == "physicalEvent")
+		<img  src="{{$qr}}" />
+	@else
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			Ingresar al Evento AQUÍ
+		@endcomponent
+	@endif
+</div>
+
+
+
 <div class="centered">
 @if(!empty($image))
 <img alt="{{$event->name}}" src="{{ $image }}">
@@ -40,9 +52,9 @@ ha sido invitado a:
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
-@endcomponent
+
+
+
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
@@ -61,10 +73,6 @@ Ingresar al Evento AQUÍ
 @if(isset($image_footer) && !empty($image_footer))
 <!-- ![Logo]({{!empty($image_footer)}}) -->
 <img alt="{{$event->name}}" src={{$image_footer}} /> 
-@elseif($organization_picture != null)
-![Logo]({{$organization_picture}})
-<img alt="{{$event->name}}" src={{$organization_picture}} /> 
-@else
 @endif
 </div>
 

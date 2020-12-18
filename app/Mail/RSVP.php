@@ -10,7 +10,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
+use App\evaLib\Services\GoogleFiles;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
+use QRCode;
+use Illuminate\Support\Facades\Log;
 
 class RSVP extends Mailable implements ShouldQueue
 {
@@ -41,6 +44,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $ical = "";
     public $date_time_from;
     public $date_time_to;
+    public $qr;
     /**
      * Create a new message instance.
      *
@@ -179,10 +183,35 @@ class RSVP extends Mailable implements ShouldQueue
      */
 
     public function build()
-    {
+    {   
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
+
+
+        $gfService = new GoogleFiles();
+        $event = $this->event;
+
+        try {
+
+            ob_start(); 
+            $qr = QRCode::text($this->eventUser->_id)->setSize(8)->setMargin(4)->png();
+            $page = ob_get_contents();
+            ob_end_clean();
+            $type = "png";
+            $image = $page;
+            $url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
+
+            $this->qr = (string) $url;
+            Log::debug("QR link: ".$url);
+            //$img = Storage::delete("public/".$file);
+            $this->logo = url($logo_evius);
+
+
+        } catch (\Exception $e) {
+            Log::debug("error: " . $e->getMessage());
+            var_dump($e->getMessage());
+        }
 
         $this->withSwiftMessage(function ($message) {
             $headers = $message->getHeaders();
@@ -193,6 +222,6 @@ class RSVP extends Mailable implements ShouldQueue
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.rsvpinvitation');
-        //return $this->view('vendor.mail.html.message');
+
     }
 }

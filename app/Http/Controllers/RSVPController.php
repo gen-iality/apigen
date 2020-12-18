@@ -238,6 +238,7 @@ class RSVPController extends Controller implements ShouldQueue
 
             $m = Message::find($message->id);
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
+            $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
             $include_date = false;
             if (!empty($data["include_date"])) {
@@ -251,7 +252,7 @@ class RSVPController extends Controller implements ShouldQueue
             echo "b";
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date)
                 );
 
             //->cc('juan.lopez@mocionsoft.com');
