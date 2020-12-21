@@ -11,6 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
+use App\evaLib\Services\GoogleFiles;use QRCode;
+
 
 class InvitationMail extends Mailable implements ShouldQueue
 {
@@ -41,6 +43,7 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $onlylink;
     public $onetimelogin;
     public $mensajepersonalizado;
+    public $qr;
     /**
      * Create a new message instance.
      *
@@ -227,6 +230,28 @@ class InvitationMail extends Mailable implements ShouldQueue
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
+
+        $gfService = new GoogleFiles();
+        $event = $this->event;
+
+        try {
+
+            ob_start(); 
+            $qr = QRCode::text($this->eventUser->_id)->setSize(8)->setMargin(4)->png();
+            $page = ob_get_contents();
+            ob_end_clean();
+            $type = "png";
+            $image = $page;
+            $url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
+
+            $this->qr = (string) $url;
+            $this->logo = url($logo_evius);
+
+
+        } catch (\Exception $e) {
+            Log::debug("error: " . $e->getMessage());
+            var_dump($e->getMessage());
+        }
 
         if($this->onlylink){
            

@@ -58,9 +58,15 @@ Ingresar al Evento AQUÍ
 <br>
 @endif
 <!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
-@endcomponent
+<div style="text-align: center">
+	@if($event->type_event == "physicalEvent")
+		<img  src="{{$qr}}" />
+	@else
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			Ingresar al Evento AQUÍ
+		@endcomponent
+	@endif
+</div>
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
