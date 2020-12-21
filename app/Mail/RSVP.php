@@ -203,8 +203,6 @@ class RSVP extends Mailable implements ShouldQueue
             $url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
 
             $this->qr = (string) $url;
-            Log::debug("QR link: ".$url);
-            //$img = Storage::delete("public/".$file);
             $this->logo = url($logo_evius);
 
 
