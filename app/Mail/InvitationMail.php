@@ -156,6 +156,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         // $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
         $descripcion = $event->name." Ver el evento en: ".$this->link;
+        
      
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
             $this->ical = iCalCalendar::create($event->name)
@@ -226,7 +227,6 @@ class InvitationMail extends Mailable implements ShouldQueue
 
     public function build()
     {
-
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
@@ -274,7 +274,8 @@ class InvitationMail extends Mailable implements ShouldQueue
             ->markdown('rsvp.onetimelogin');
         }
         if($this->event->send_custom_email)
-        {
+        {   
+            
             return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
@@ -284,6 +285,7 @@ class InvitationMail extends Mailable implements ShouldQueue
             ->markdown('rsvp.invitationcustom');
         //return $this->view('vendor.mail.html.message');
         }
+
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
