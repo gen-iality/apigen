@@ -41,7 +41,7 @@ class ApiCheckoutController extends Controller
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
 
-        
+        Log::info("DATA PAYU" .json_encode($data));
 		$order->data = json_encode($data);
         $order->save();
         

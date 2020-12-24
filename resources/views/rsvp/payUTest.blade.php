@@ -5,6 +5,7 @@
     </p>
 </div>
 <div>    
-    {{$order->data}}       
+    Pago realizado con éxito.
+    {{-- {{$order->data}}        --}}
 </div>  
 @endcomponent
