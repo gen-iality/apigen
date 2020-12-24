@@ -40,7 +40,6 @@
     "mews/purifier": "~2.0",
     "milon/barcode": "^5.3",
     "modev/omnipay-payu": "dev-master",
-    "modev/placetopay": "^1.0",
     "mpociot/laravel-apidoc-generator": "^2.0",
     "nitmedia/wkhtml2pdf": "dev-master",
     "omnipay/common": "~3",
