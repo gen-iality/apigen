@@ -189,13 +189,14 @@ class OrganizationController extends Controller
                                 ->get();
 
         foreach($emailsAdmin as $emailAdmin){
-            Mail::to($emailAdmin->email)->send(
-                new \App\Mail\genericMail($data)
-            );
+            var_dump($emailAdmin->email);
+            // Mail::to($emailAdmin->email)->send(
+            //     new \App\Mail\genericMail($data)
+            // );
         } 
 
         //Correos para realizar pruebas
-        $emails = ['deltorosalazar@gmail.com' ,'geraldine.garcia@mocionsoft.com' , 'mdts.dev@gmail.com'];
+        $emails = ['deltorosalazar@gmail.com' , 'mdts.dev@gmail.com'];
 
         foreach($emails as $email){
             Mail::to($email)->send(

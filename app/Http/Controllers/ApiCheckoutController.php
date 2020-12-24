@@ -36,14 +36,21 @@ class ApiCheckoutController extends Controller
 
 		//reference_sale response_message_pol
 		$data = $request->input();
-		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257daad";
+		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257dsaads";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
 
+        
 		$order->data = json_encode($data);
-		$order->save();
-
+        $order->save();
+        
+        Mail::to($order->email)
+            ->queue(
+                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                new \App\Mail\ConfirmationPayU($order, $data, "Prueba")
+        ); 
+        
 		$this->changeStatusOrder($order_id, $order_status,$data);
 
 		return "listo";
