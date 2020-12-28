@@ -35,8 +35,8 @@ class AwsSnsController extends Controller
         $dataEviusMessage = [
             'server_message_id' => $responseMail['messageId']
         ];
-        $eviusMessageModel = new EviusMessage($dataEviusMessage);
-        $eviusMessageModel->save();
+        // $eviusMessageModel = new EviusMessage($dataEviusMessage);
+        // $eviusMessageModel->save();
         // Log::info('eventType '.json_encode($response)['eventType']);
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
         // Log::info('notificationType '.$response['notificationType']);
