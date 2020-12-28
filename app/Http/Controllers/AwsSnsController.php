@@ -32,7 +32,7 @@ class AwsSnsController extends Controller
         // Log::info('print_r($response, true) '.print_r($response['notificationType'], true));
         $responseMail = $response['mail'];
         // Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
-        Log::info('json_encode($responseMail) ', json_encode($responseMail));        
+        Log::info('print_r($responseMail, true) ', print_r($responseMail, true));        
 
         $dataEviusMessage = [
             'server_message_id' => $responseMail['messageId']
