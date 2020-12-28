@@ -31,21 +31,20 @@ class AwsSnsController extends Controller
         Log::info('response '.json_encode($response));
         // Log::info('print_r($response, true) '.print_r($response['notificationType'], true));
         $responseMail = $response['mail'];
-        Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
-        // $dataEviusMessage = [
-        //     'server_message_id' => $responseMail['messageId']
-        // ];
-        // $eviusMessageModel = new EviusMessage($dataEviusMessage);
-        // $eviusMessageModel->save();
+        // Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
+        $dataEviusMessage = [
+            'server_message_id' => $responseMail['messageId']
+        ];
+        $eviusMessageModel = new EviusMessage($dataEviusMessage);
+        $eviusMessageModel->save();
         // Log::info('eventType '.json_encode($response)['eventType']);
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
         // Log::info('notificationType '.$response['notificationType']);
 
         // Log::info('$response[mail][destination] '.json_encode($response['mail']['destination']));
-
-        // $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
-        $eviusmessage = EviusMessage::where('server_message_id', '=', '01030176a4cf1b35-f8e3429b-8888-47f3-86db-b51d3229b2d6-000000')->first();
-        Log::info('$eviusmessage ',json_encode($eviusmessage));
+        
+        $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
+        Log::info('json_encode($eviusmessage) ', json_encode($eviusmessage));        
         $status_message = null;
 
         if(isset($response['eventType']))
