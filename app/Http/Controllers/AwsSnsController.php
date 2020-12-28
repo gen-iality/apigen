@@ -45,7 +45,7 @@ class AwsSnsController extends Controller
         
         $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
         Log::info('EviusMessage');
-        Log::info('print_r($responseMail[messageId], true) ', print_r($responseMail['messageId'], true));        
+        Log::info('gettype($responseMail[messageId]) ', gettype($responseMail['messageId']));        
         $status_message = null;
 
         if(isset($response['eventType']))
