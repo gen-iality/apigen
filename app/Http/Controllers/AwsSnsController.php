@@ -32,7 +32,11 @@ class AwsSnsController extends Controller
         // Log::info('print_r($response, true) '.print_r($response['notificationType'], true));
         $responseMail = $response['mail'];
         Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
-        
+        $dataEviusMessage = [
+            'server_message_id' => $responseMail['messageId']
+        ];
+        $eviusMessageModel = new EviusMessage($dataEviusMessage);
+        $eviusMessageModel->save();
         // Log::info('eventType '.json_encode($response)['eventType']);
         // Log::info('notificationType '.json_decode($response, true)['notificationType']);
         // Log::info('notificationType '.$response['notificationType']);
@@ -53,7 +57,7 @@ class AwsSnsController extends Controller
         }
 
 
-        $data = [
+        $dataMessageUser = [
             'response' => json_encode($response),
             'email_destinations' => json_encode($response['mail']['destination']),
             'status_message' => isset($status_message) ? $status_message : 'queued',
@@ -61,11 +65,11 @@ class AwsSnsController extends Controller
             'timestamp_event' => $responseMail['timestamp']
         ];
         
-        Log::info('print_r($data, true) ',print_r($data, true));
+        Log::info('print_r($dataMessageUser, true) ',print_r($dataMessageUser, true));
         
         if (isset($eviusmessage))
         {
-            $messageUserModel = new MessageUser($data);
+            $messageUserModel = new MessageUser($dataMessageUser);
             $messageUserModel->save();            
         }
                 
