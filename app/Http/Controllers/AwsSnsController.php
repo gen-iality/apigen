@@ -22,31 +22,14 @@ use App\Message as EviusMessage;
 
 class AwsSnsController extends Controller
 {
-    // public function getMessage(){
-    //     $eviusmessage = EviusMessage::where('server_message_id', '=', '')->first();
-    //     var_dump($eviusmessage);
-    //     return json_encode($eviusmessage);
-    // }
-
+   
     public function updateSnsMessages(Request $request)
     {        
         
         $response = $request->json()->all();
-        // Log::info('response '.json_encode($response));        
+                 
+        $responseMail = $response['mail'];                                
         
-         
-        $responseMail = $response['mail'];        
-        
-        // Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
-                
-        // Log::info('eventType '.json_encode($response)['eventType']);
-        // Log::info('notificationType '.json_decode($response, true)['notificationType']);
-        // Log::info('notificationType '.$response['notificationType']);
-
-        // Log::info('$response[mail][destination] '.json_encode($response['mail']['destination']));
-        
-        $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
-        // Log::info('$eviusmessage ', json_encode($eviusmessage));
         $status_message = null;
 
         if(isset($response['eventType']))
@@ -68,7 +51,8 @@ class AwsSnsController extends Controller
         ];
                 
         
-        
+        $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
+
         if (isset($eviusmessage))
         {
             $messageUserModel = new MessageUser($dataMessageUser);
