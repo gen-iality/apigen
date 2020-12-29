@@ -29,7 +29,7 @@ class AwsSnsController extends Controller
         $response = $request->json()->all();
                  
         $responseMail = $response['mail'];                                
-        
+        Log::info('$responseMail '. json_encode($responseMail));
         $status_message = null;
 
         if(isset($response['eventType']))
@@ -47,7 +47,7 @@ class AwsSnsController extends Controller
         {
             $dataMessageUser = [
                 'response' => json_encode($response),
-                'email_destinations' => json_encode($response['mail']['destination']),
+                'email_destinations' => json_encode($responseMail['destination']),
                 'status_message' => isset($status_message) ? $status_message : 'queued',
                 'notification_id' => $responseMail['messageId'],
                 'timestamp_event' => $responseMail['timestamp']
@@ -57,8 +57,10 @@ class AwsSnsController extends Controller
         }
         else
         {
+            
             $dataEviusMessage = [
-                'server_message_id' => $responseMail['messageId']
+                'server_message_id' => $responseMail['messageId'],
+                
             ];
             $eviusMessageModel = new EviusMessage($dataEviusMessage);
             $eviusMessageModel->save();
