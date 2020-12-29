@@ -31,7 +31,7 @@ class AwsSnsController extends Controller
         Log::info('response '.json_encode($response));        
         
          
-        $responseMail = $response['mail'];
+        $responseMail = $response['mail'];        
         // $dataEviusMessage = [
         //     'server_message_id' => $responseMail['messageId']
         // ];
@@ -67,7 +67,7 @@ class AwsSnsController extends Controller
             'timestamp_event' => $responseMail['timestamp']
         ];
         
-        // Log::info('print_r($dataMessageUser, true) ',print_r($dataMessageUser, true));
+        Log::info('print_r($eviusmessage, true) ',print_r($eviusmessage, true));
         
         
         if (isset($eviusmessage))
