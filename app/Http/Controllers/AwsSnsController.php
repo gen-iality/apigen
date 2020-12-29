@@ -30,8 +30,7 @@ class AwsSnsController extends Controller
 
     public function updateSnsMessages(Request $request)
     {        
-        // Log::info('update');
-        $count = 0;
+        
         $response = $request->json()->all();
         // Log::info('response '.json_encode($response));        
         
@@ -84,22 +83,37 @@ class AwsSnsController extends Controller
             $eviusMessageModel->save();
         }
         
-                
-        
+        $count = 0;        
         if (isset($response['notificationType']) || isset($response['eventType']))
         {
             if($response['notificationType'] === 'Delivery' || $response['eventType'] === 'Delivery')
             {
                 Log::info('Delivery');
-                $count = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered++ : 1;                
-                $eviusmessage->update(['total_delivered' => $count]);                
-                            
+                $count = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered++ : 1; 
+                if(isset($eviusmessage))
+                {
+                    $eviusmessage->update(['total_delivered' => $count]);                
+                }
+                else if(isset($eviusMessageModel))
+                {
+                    $eviusMessageModel->update(['total_delivered' => $count]);        
+                }                                                            
             } 
             else if($response['notificationType'] === 'Send' || $response['eventType'] === 'Send')
             {
                 Log::info('Send');
                 $count = isset($eviusmessage->total_sent) ? $eviusmessage->total_sent++ : 1;
-                $eviusmessage->update(['total_sent' => $count]);
+                
+                if(isset($eviusmessage))
+                {
+                    $eviusmessage->update(['total_sent' => $count]);
+                }
+                else if(isset($eviusMessageModel))
+                {
+                    $eviusMessageModel->update(['total_sent' => $count]);        
+                }                                                            
+                
+                
                 Log::info('count '.$count);
                 Log::info('$eviusmessage->total_sent '.$eviusmessage->total_sent);
             }
@@ -115,7 +129,15 @@ class AwsSnsController extends Controller
             {
                 Log::info('Bounce');
                 $count = isset($eviusmessage->total_bounced) ? $eviusmessage->total_bounced++ : 1;
-                $eviusmessage->update(['total_bounced' => $count]);
+                
+                if(isset($eviusmessage))
+                {
+                    $eviusmessage->update(['total_bounced' => $count]);
+                }
+                else if(isset($eviusMessageModel))
+                {
+                    $eviusMessageModel->update(['total_bounced' => $count]);        
+                }                       
                 
             }
             else if($response['notificationType'] === 'Open' || $response['eventType'] === 'Open')
