@@ -30,7 +30,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
 Route::get('aws/sendemail', 'AwsSnsController@testEmail');
 Route::get('aws/test', 'AwsSnsController@testreqS3');
-
+Route::get('aws/message','AwsSnsController@getMessage');
 
 
 Route::get('test/serialization', 'TestingController@serialization');
