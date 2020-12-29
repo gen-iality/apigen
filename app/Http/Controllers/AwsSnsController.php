@@ -32,6 +32,11 @@ class AwsSnsController extends Controller
         
          
         $responseMail = $response['mail'];
+        $dataEviusMessage = [
+            'server_message_id' => $responseMail['messageId']
+        ];
+        $eviusMessageModel = new EviusMessage($dataEviusMessage);
+        $eviusMessageModel->save();
         // Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
                 
         // Log::info('eventType '.json_encode($response)['eventType']);
@@ -69,13 +74,6 @@ class AwsSnsController extends Controller
         {
             $messageUserModel = new MessageUser($dataMessageUser);
             $messageUserModel->save();            
-        }else 
-        {
-            $dataEviusMessage = [
-                'server_message_id' => $responseMail['messageId']
-            ];
-            $eviusMessageModel = new EviusMessage($dataEviusMessage);
-            $eviusMessageModel->save();
         }
         
                 
