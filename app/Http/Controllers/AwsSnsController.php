@@ -22,11 +22,11 @@ use App\Message as EviusMessage;
 
 class AwsSnsController extends Controller
 {
-    public function getMessage(){
-        $eviusmessage = EviusMessage::where('server_message_id', '=', '')->first();
-        var_dump($eviusmessage);
-        return json_encode($eviusmessage);
-    }
+    // public function getMessage(){
+    //     $eviusmessage = EviusMessage::where('server_message_id', '=', '')->first();
+    //     var_dump($eviusmessage);
+    //     return json_encode($eviusmessage);
+    // }
 
     public function updateSnsMessages(Request $request)
     {        
@@ -37,11 +37,7 @@ class AwsSnsController extends Controller
         
          
         $responseMail = $response['mail'];        
-        // $dataEviusMessage = [
-        //     'server_message_id' => $responseMail['messageId']
-        // ];
-        // $eviusMessageModel = new EviusMessage($dataEviusMessage);
-        // $eviusMessageModel->save();
+        
         // Log::info('$responseMail[messageId] '.$responseMail['messageId']);  
                 
         // Log::info('eventType '.json_encode($response)['eventType']);
@@ -51,7 +47,7 @@ class AwsSnsController extends Controller
         // Log::info('$response[mail][destination] '.json_encode($response['mail']['destination']));
         
         $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
-        Log::info('$eviusmessage ', json_encode($eviusmessage));
+        // Log::info('$eviusmessage ', json_encode($eviusmessage));
         $status_message = null;
 
         if(isset($response['eventType']))
@@ -71,14 +67,21 @@ class AwsSnsController extends Controller
             'notification_id' => $responseMail['messageId'],
             'timestamp_event' => $responseMail['timestamp']
         ];
-        
-        Log::info('print_r($eviusmessage, true) ',print_r($eviusmessage, true));
+                
         
         
         if (isset($eviusmessage))
         {
             $messageUserModel = new MessageUser($dataMessageUser);
             $messageUserModel->save();            
+        }
+        else
+        {
+            $dataEviusMessage = [
+                'server_message_id' => $responseMail['messageId']
+            ];
+            $eviusMessageModel = new EviusMessage($dataEviusMessage);
+            $eviusMessageModel->save();
         }
         
                 
