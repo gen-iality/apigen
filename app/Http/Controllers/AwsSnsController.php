@@ -60,6 +60,7 @@ class AwsSnsController extends Controller
             
             $dataEviusMessage = [
                 'server_message_id' => $responseMail['messageId'],
+                'number_of_recipients' => sizeof($responseMail['destination'])                
                 
             ];
             $eviusMessageModel = new EviusMessage($dataEviusMessage);
