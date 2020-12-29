@@ -59,11 +59,10 @@ class AwsSnsController extends Controller
         {
             
             $dataEviusMessage = [
-                'server_message_id' => $responseMail['messageId'],
-                
+                'server_message_id' => $responseMail['messageId'],                
             ];
-            $eviusMessageModel = new EviusMessage($dataEviusMessage);
-            $eviusMessageModel->save();
+            // $eviusMessageModel = new EviusMessage($dataEviusMessage);
+            // $eviusMessageModel->save();
         }
         
         $count = 0;        

@@ -33,7 +33,7 @@ class MessageUser extends Moloquent
         'email_destinations', 
         'status_message',
         'notification_id', 
-        'message', 
+        // 'message', 
         'timestamp_event', 
         'user_id', 
         'event_user_id'
