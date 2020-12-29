@@ -122,7 +122,15 @@ class AwsSnsController extends Controller
             {
                 Log::info('Click');
                 $count = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked++ : 1;
-                $eviusmessage->update(['total_clicked' => $count]);
+                
+                if(isset($eviusmessage))
+                {
+                    $eviusmessage->update(['total_clicked' => $count]);
+                }
+                else if(isset($eviusMessageModel))
+                {
+                    $eviusMessageModel->update(['total_clicked' => $count]);        
+                }       
                   
             }
             else if($response['notificationType'] === 'Bounce' || $response['eventType'] === 'Bounce')
@@ -143,14 +151,30 @@ class AwsSnsController extends Controller
             else if($response['notificationType'] === 'Open' || $response['eventType'] === 'Open')
             {    Log::info('Open');
                 $count = isset($eviusmessage->total_opened) ? $eviusmessage->total_opened++ : 1;
-                $eviusmessage->update(['total_opened' => $count]);
+                
+                if(isset($eviusmessage))
+                {
+                    $eviusmessage->update(['total_opened' => $count]);
+                }
+                else if(isset($eviusMessageModel))
+                {
+                    $eviusMessageModel->update(['total_opened' => $count]);        
+                }          
+                
                 Log::info('count '.$count);
                 Log::info('$eviusmessage->total_opened '.$eviusmessage->total_opened);                
             }
             else if($response['notificationType'] === 'Complaint' || $response['eventType'] === 'Complaint')
             {    Log::info('Complaint');
-                $count = isset($eviusmessage->total_complained) ? $eviusmessage->total_complained++ : 1;
-                $eviusmessage->update(['total_complained' => $count]);
+                $count = isset($eviusmessage->total_complained) ? $eviusmessage->total_complained++ : 1;                
+                if(isset($eviusmessage))
+                {
+                    $eviusmessage->update(['total_complained' => $count]);                
+                }
+                else if(isset($eviusMessageModel))
+                {
+                    $eviusMessageModel->update(['total_complained' => $count]);        
+                }
             }    
 
         }
