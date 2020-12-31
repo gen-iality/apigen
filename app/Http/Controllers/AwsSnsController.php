@@ -31,7 +31,7 @@ class AwsSnsController extends Controller
         $headers = collect($headers)->transform(function ($item) {
             return $item[0];
         });
-        Log::info('print_r($headers, true)'.print_r($headers, true));
+        Log::info('json_encode($headers)'.json_encode($headers));
         // Log::info('$response '.json_encode($response));
         $responseMail = $response['mail'];                                
         // Log::info('$responseMail[destination] '. json_encode($responseMail['destination']));
