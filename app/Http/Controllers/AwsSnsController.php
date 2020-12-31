@@ -28,7 +28,7 @@ class AwsSnsController extends Controller
         
         $response = $request->json()->all();
         Log::info('updateSnsMessages');
-        $headers = collect($headers)->transform(function ($item) {
+        $headers = collect($request->header())->transform(function ($item) {
             return $item[0];
         });
         Log::info('json_encode($headers)'.json_encode($headers));
