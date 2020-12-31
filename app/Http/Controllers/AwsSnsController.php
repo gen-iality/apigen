@@ -28,9 +28,14 @@ class AwsSnsController extends Controller
     {        
         
         $response = $request->json()->all();
-                 
+        Log::info('updateSnsMessages');
+        $headers = collect($request->header())->transform(function ($item) {
+            return $item[0];
+        });
+        Log::info('json_encode($headers)'.json_encode($headers));
+        // Log::info('$response '.json_encode($response));
         $responseMail = $response['mail'];                                
-        Log::info('$responseMail[destination] '. json_encode($responseMail['destination']));
+        // Log::info('$responseMail[destination] '. json_encode($responseMail['destination']));
         $status_message = null;
 
         if(isset($response['eventType']))
@@ -63,8 +68,7 @@ class AwsSnsController extends Controller
             
             $dataEviusMessage = [
                 'server_message_id' => $responseMail['messageId'],
-                'number_of_recipients' => sizeof($responseMail['destination'])                
-                
+                'number_of_recipients' => sizeof($responseMail['destination'])                                
             ];
             $eviusMessageModel = new MessageUser($dataEviusMessage);
             $eviusMessageModel->save();
