@@ -7,7 +7,7 @@ use App\Activities;
 use App\Attendee;
 use Mail;
 use Auth;
-use App\ActivityAssistants;
+use App\ActivityAssistant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Validator;
@@ -19,13 +19,33 @@ use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
 use App\evaLib\Services\UserEventService;
 
+
 /**
  * @resource Event
  *
  *
  */
-class ActivityAssistantsController extends Controller
+class ActivityAssistantController extends Controller
 {
+
+    public function borradorepetidos(Request $request, $activity_id ){
+
+        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->get();  
+        // var_dump($ActivityUsers);die;
+
+        $ids=[];
+        var_dump(count($ActivityUsers));
+        foreach ($ActivityUsers as $key => $activitiUser) {            
+            $ids[$activitiUser->user_id] = $activitiUser->_id; 
+        }
+        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->whereNotIn('_id', $ids)->get();
+        var_dump(count($ActivityUsers));  
+
+        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->whereNotIn('_id', $ids)->delete();  
+
+        // var_dump(count($ActivityUsers));die;
+        
+    }
 
 
     /**
@@ -36,18 +56,21 @@ class ActivityAssistantsController extends Controller
      */
     public function fillassitantsbug($id)
     {
-       // $ActivityAssistants = ActivityAssistants::all();
+       // $ActivityAssistant = ActivityAssistant::all();
        //Esta activityassistant se perdio 5dbc99bad74d5c5822693842
-       $ActivityAssistant = ActivityAssistants::find($id);
+       $ActivityAssistant = ActivityAssistant::find($id);
        if ($ActivityAssistant)
        $ActivityAssistant->save();
 
-        var_dump($ActivityAssistants->user_ids);
-        $response = new JsonResource($ActivityAssistants);
+        var_dump($ActivityAssistant->user_ids);
+        $response = new JsonResource($ActivityAssistant);
         var_dump($response);
         die;
 
     }    
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -55,16 +78,67 @@ class ActivityAssistantsController extends Controller
      */
     public function index(Request $request, $event_id)
     {
-        return JsonResource::collection(
-            ActivityAssistants::where("event_id", $event_id)->paginate(config('app.page_size'))
-        );
+        $activity_id = $request->input("activity_id");
+        $user_id = $request->input("user_id");
+
+        $query = ActivityAssistant::where("event_id", $event_id);
+
+        //Filtro por actividad
+        if ($activity_id){
+            $query->where("activity_id",$activity_id);       
+        }
+
+        //Filtro por usuario
+        if ($user_id){
+            $query->where("user_id",$user_id);       
+        }
+
+        return JsonResource::collection($query->paginate(config('app.page_size')));
     }
-    public function indexUsers(Request $request, $event_id, $activity_id)
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexForAdmin(Request $request, $event_id)
     {
-        $model = ActivityAssistants::where("activity_id",$activity_id)->first();
-        return JsonResource::collection(
-            Attendee::find($model->user_ids)->makeHidden(["rol","activities"])
-        );
+        $activity_id = $request->input("activity_id");
+        $user_id = $request->input("user_id");
+
+        $query = ActivityAssistant::where("event_id", $event_id);
+
+        //Filtro por actividad
+        if ($activity_id){
+            $query->where("activity_id",$activity_id);       
+        }
+
+        //Filtro por usuario
+        if ($user_id){
+            $query->where("user_id",$user_id);       
+        }
+
+        
+        //$usuarios_ids = $query->pluck('user_id')->toArray();
+        $activity_attendees = $query->get();
+        $usuarios_ids = $activity_attendees->pluck('user_id')->toArray();
+        
+        //extraemos los attendees relacionados
+        //->whereIn('account_id',$usuarios_ids)-
+        $event_attendees = Attendee::where("event_id", $event_id)->get()->keyBy("account_id");
+        $total = 0;
+        foreach($activity_attendees as $key=>$attendee){
+            if (isset($event_attendees[$attendee['user_id']])){
+            $activity_attendees[$key]["attendee"] = $event_attendees[$attendee['user_id']];
+            }
+        }
+        return JsonResource::collection($activity_attendees);
+    }
+    public function meIndex(Request $request, $event_id)
+    {   
+        $user = auth()->user();      
+        return JsonResource::collection(ActivityAssistant::where("user_id", $user->_id)->paginate(config('app.page_size')));
     }
     /**<
      * Store a newly created resource in storage.
@@ -73,13 +147,45 @@ class ActivityAssistantsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function activitieAssistant(Request $request, $event_id)
+    public function store(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        $activity_id =$data["activity_id"];
+        //$data["user_id"] $data["activity_id"]  $data["event_id"]
         $data["event_id"] = $event_id;
+        $rules = [
+            'user_id' => 'required',
+            'activity_id' => 'required'
+        ];
+        $validator = Validator::make($data, $rules);
+        if (!$validator->passes()) {
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
         
-        $model = ActivityAssistants::where("activity_id",$activity_id)->first();
+        //reduceAvailability   
+        $activityAssistant = new ActivityAssistant($data);   
+        $activityAssistant->save();
+       
+        
+        $user     = Account::find($data["user_id"]);
+        $activity = Activities::find($data["activity_id"]);
+        
+
+        $subject = "Confirmación de registro a ".$activity->name;
+        Mail::to($user->email)
+        ->queue(
+            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            new \App\Mail\ActivityRegistration($subject,$activityAssistant,$activity)
+        );
+
+
+
+        return $activityAssistant;
+    }
+
+    private function  reduceAvailability(){
+        $activity_id      = $data["activity_id"];
+        $model = ActivityAssistant::where("activity_id",$activity_id)->first();
+       
         if(!is_null($model)){
             
             $user_ids = $model->user_ids;
@@ -88,7 +194,7 @@ class ActivityAssistantsController extends Controller
             
             if(sizeof($user_ids) < $capacity){ 
                 
-                if(ActivityAssistants::where("user_ids",$data["user_id"])->first()){
+                if(ActivityAssistant::where("user_ids",$data["user_id"])->first()){
                     return "Usuario ya se encuentra inscrito a la actividad";
                 }
 
@@ -103,12 +209,6 @@ class ActivityAssistantsController extends Controller
             }else{
                 return "Capacidad completada, le invitamos a visitar otras actividades";
             }
-        }else{
-            // si no existe lo crea
-            $data["user_ids"] = [$data["user_id"]];   
-            $result = new ActivityAssistants($data);   
-            $result->save();
-            return $result;
         }
     }
     
@@ -142,8 +242,8 @@ class ActivityAssistantsController extends Controller
         //$users = Attendee::find();
         $data = $request->json()->all();
         
-        $models = ActivityAssistants::find("5dc60295d74d5c74ff2d4af2")->user_ids;
-        $modelreplace = ActivityAssistants::find("5dc60295d74d5c74ff2d4af2");
+        $models = ActivityAssistant::find("5dc60295d74d5c74ff2d4af2")->user_ids;
+        $modelreplace = ActivityAssistant::find("5dc60295d74d5c74ff2d4af2");
         $activitysize = Activities::find($modelreplace->activity_id)->capacity;
         
         $arrayusers = $models;
@@ -184,9 +284,9 @@ class ActivityAssistantsController extends Controller
         $data = $request->json()->all();
         $activity_id =$data["activity_id"];
         $user = $data["user_id"];
-        $model = ActivityAssistants::where("activity_id",$activity_id)->get();
-        $modelreplace = ActivityAssistants::find($model[0]["_id"]);
-        $model = ActivityAssistants::find($model[0]["_id"])->user_ids;
+        $model = ActivityAssistant::where("activity_id",$activity_id)->get();
+        $modelreplace = ActivityAssistant::find($model[0]["_id"]);
+        $model = ActivityAssistant::find($model[0]["_id"])->user_ids;
        
         $arrayUsers = $model;
         //mapea el array para detectar el usuario que se le parezca
@@ -221,8 +321,8 @@ class ActivityAssistantsController extends Controller
      */
     public function show($event_id,$id)
     {
-        $ActivityAssistants = ActivityAssistants::findOrFail($id);
-        $response = new JsonResource($ActivityAssistants);
+        $ActivityAssistant = ActivityAssistant::findOrFail($id);
+        $response = new JsonResource($ActivityAssistant);
         //if ($Inscription["event_id"] = $event_id) {
         return $response;
 
@@ -235,13 +335,28 @@ class ActivityAssistantsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $id)
-    {
+    {   
+        
         $data = $request->json()->all();
-        $ActivityAssistants = ActivityAssistants::findOrFail($id);
+        //Esto esta aca por un error en las rutas, la ruta del checkin del front dirige es aqui toca cambiarlo emergencia
+        if (isset( $data["user_id"])  && isset($data["activity_id"])  && isset($data["checkedin_at"])){
+            $activityAssistant =null;
+            $activityAssistant = ActivityAssistant::where("activity_id",$data["activity_id"])
+            ->where("user_id",$data["user_id"])->first();
+            if (!$activityAssistant){
+                $activityAssistant = new ActivityAssistant($data);  
+            }else{
+                $activityAssistant->fill($data);
+                $activityAssistant->save();
+            }
+            return $activityAssistant;
+        }else{
+        $ActivityAssistant = ActivityAssistant::findOrFail($id);
         //if($Inscription["event_id"]= $event_id){
-        $ActivityAssistants->fill($data);
-        $ActivityAssistants->save();
+        $ActivityAssistant->fill($data);
+        $ActivityAssistant->save();
         return $data;
+        }
 
     }
 
@@ -253,7 +368,41 @@ class ActivityAssistantsController extends Controller
      */
     public function destroy(Request $request, $event_id, $id)
     {
-        $ActivityAssistants = ActivityAssistants::findOrFail($id);
-        return (string) $ActivityAssistants->delete();
+        $ActivityAssistant = ActivityAssistant::findOrFail($id);
+        return (string) $ActivityAssistant->delete();
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $event_id
+     * @param [type] $id
+     * @return void
+     */
+    public function checkIn(Request $request , $event_id, $id)
+    {
+        
+        $ActivityAssistant = ActivityAssistant::findOrFail($id);
+        $date = new \DateTime();
+        $ActivityAssistant->fill(['checkedin_at' => $date]); 
+        $ActivityAssistant->save();
+
+        return $ActivityAssistant;
+    }
+
+    public function checkInWithSearch(Request $request , $event_id)
+    {
+        $data = $request->json()->all();
+        var_dump($data);die;
+        $ActivityAssistant = ActivityAssistant::findOrFail($id);
+        $date = new \DateTime();
+        $ActivityAssistant->fill(['checkedin_at' => $date]); 
+        $ActivityAssistant->save();
+
+        return $ActivityAssistant;
+    }
+
+   
+
 }

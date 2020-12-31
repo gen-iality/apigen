@@ -28,10 +28,23 @@ ha sido invitado a:
 @endcomponent
 @endif
 
+<div style="text-align: center">
+	@if($event->type_event == "physicalEvent")
+		<img  src="{{$qr}}" />
+	@else
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			Ingresar al Evento AQUÍ
+		@endcomponent
+	@endif
+</div>
 
+
+
+<div class="centered">
 @if(!empty($image))
-<img src="{{ $image }}">
+<img alt="{{$event->name}}" src="{{ $image }}">
 @endif
+</div>
 
 @if(!empty($message) && $message != '<p><br></p>')
 {!!$message!!}
@@ -39,28 +52,29 @@ ha sido invitado a:
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-Aceptar tratamiento de datos e Ingresar al Evento AQUÍ
-@endcomponent
+
+
+
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-    Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
-    algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
+	algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-    Si tiene problemas con el botón de ingreso abra el siguiente enlace
-    <a href="{{$link}}">click acá</a>
+	Si tiene problemas con el botón de ingreso abra el siguiente enlace
+	<a href="{{$link}}">Click aquí</a>
 </p>
 
 
-@if($image_footer != null)
-![Logo]({{$image_footer}})
-@elseif($organization_picture != null)
-![Logo]({{$organization_picture}})
-@else
+<div class="centered">
+@if(isset($image_footer) && !empty($image_footer))
+<!-- ![Logo]({{!empty($image_footer)}}) -->
+<img alt="{{$event->name}}" src={{$image_footer}} /> 
 @endif
+</div>
+
 
 @endcomponent

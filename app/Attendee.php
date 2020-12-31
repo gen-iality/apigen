@@ -20,7 +20,7 @@ class Attendee extends Models\Attendee
     protected $table = "event_users";
     protected $observables = ['saved', 'created', 'updated'];
     protected static $unguarded = true;
-    protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id"];
+    protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id", "registered_devices"] ;
     protected $with = ["rol", 'user', 'state', "ticket"];
 
     //Default values
@@ -60,7 +60,7 @@ class Attendee extends Models\Attendee
 
     public function rol()
     {
-        return $this->belongsTo('App\RoleAttendee');
+        return $this->belongsTo('App\RoleAttendee', 'rol_id');
     }
 
     public function confirm()

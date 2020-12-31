@@ -1,18 +1,39 @@
-@component('mail::message')
-{{\Carbon\Carbon::setLocale('es')}}
+@component('mail::message')  
 @if(!empty($event->styles["banner_image_email"]))
-![Logo]({{$event->styles["banner_image_email"]}})
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
+</div>
 @elseif(!empty($event->styles["banner_image"]))
-![Logo]({{$event->styles["banner_image"]}})
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
+</div>
 @endif
-
-
 <br />
 <br />
+**Hola {{$eventUser_name}}**, la inscripción se ha realizado con éxito al evento:
+<b>{{$event->name}}</b>
+{{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
+<!-- @component('mail::table')
+| | |
+| -------------------- |:--------------------------------------------------------------------------------------:|
+| **Fecha:** | **Hora:** |
+| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%r') }} |
 
-** Hola {{$eventUser_name}}, está inscrito en: {{$event->name}} @if ($event->registration_message )
-{!!$event->registration_message!!}
-@endif **
+
+@if (false)
+@if($event->datetime_to)
+| **Hasta:** | **Hora:** |
+| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
+@endif
+@endif
+@endcomponent -->
+
+<!-- Mensaje configurable desde el CMS en la sección configuración asistentes -->
+@if ($event->registration_message )
+
+{!!$mensajepersonalizado!!}
+
+@endif
 <!-- Por si tiene asociado un tickete con sala -->
 @if(!empty($eventUser->ticket_title))
 <strong>{!! $eventUser->ticket_title!!} </strong>
@@ -23,54 +44,57 @@
 # ** Sala: {{$eventUser->ticket->title}} **
 @endif
 -->
-{{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
-@component('mail::table')
-| | |
-| -------------------- |:--------------------------------------------------------------------------------------:|
-| **Fecha:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} |
-{{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%l:%M %p') }} |
-@if (false)
-@if($event->datetime_to)
-| **Hasta:** | **Hora:** |
-| {{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%A, %e de %B %Y') }} |
-{{ \Carbon\Carbon::parse($event->datetime_to)->formatLocalized('%l:%M %p') }} |
-@endif
-@endif
-@endcomponent
+
 
 <!--
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 Ingresar al Evento AQUÍ
 @endcomponent
 -->
+@if (!empty($image))
+<div class="centered">
+	<img alt="{{$event->name}}" src="{{ $image }}">
+</div>
 <br>
-<img src="{{ $image }}">
-<br>
-
+@endif
 <!-- ** Para ingresar al evento, asistir a las conferencias y ver más información visítanos en: ** -->
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
-@endcomponent
+<div style="text-align: center">
+	@if($event->type_event == "physicalEvent")
+		<img  src="{{$qr}}" />
+	@else
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			Ingresar al Evento AQUÍ
+		@endcomponent
+	@endif
+</div>
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-    Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
+	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
     algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
+<p style="font-size: 15px;color: gray;font-style: italic">
+Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
+</p>
+  
 
-<hr style="border-right : 0;border-left: 0;">
+<hr style="border-right : 0;border-left: 0;" />
 <p>
-    Si tiene problemas con el botón de ingreso abra el siguiente enlace
-    <a href="{{$link}}">click acá</a>
+	También puede ingresar al evento usando el siguiente enlace
+	<a href="{{$link}}">Ingresar a evento</a>
 </p>
 
-
-@if($image_footer != null)
-![Logo]({{$image_footer}})
-@elseif($organization_picture != null)
-![Logo]({{$organization_picture}})
-@else
+<div class="centered">
+@if(isset($image_footer) && !empty($image_footer))
+![Logo]({{!empty($image_footer)}})
+<img alt="{{$event->name}}" src={{$image_footer}} /> 
+@elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
+<img alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} />  
+@elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
+<img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
+@elseif(isset($organization_picture) && !empty($organization_picture))
+<img alt="{{$event->name}}" src={{$organization_picture}} />           
 @endif
 
+</div>
 @endcomponent

@@ -18,7 +18,7 @@ documentation can be generated using
 
 ```
 php artisan api:generate --routePrefix="api/*" 
-```
+``` 
 
 How this documentation is generated can be found in https://github.com/mpociot/laravel-apidoc-generator
 
@@ -29,7 +29,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- PHP 7.1 (works on Laravel) 
+- PHP 7.3 (works on Laravel) 
 - MongoDB (compass gui visual client)
 - Composer
 - Evius auth server (https://bitbucket.org/modev/eviusauth/)
@@ -45,7 +45,7 @@ installing MongoDB PHP Driver is somewhat involved:
 
 using pecl:
 
-* sudo apt-get install php7.x-dev
+* sudo apt-get install php[myversion]-dev
 * sudo apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev #this line is required if you  have authentication enabled in mongodb
 * sudo pecl install mongodb
 
@@ -53,6 +53,16 @@ using pecl:
 please be careful that mongodb version should be superior than:
 version ^1.5.0
 ```
+
+* Verifique que las Api coincidad con: phpize -v
+
+```
+En caso de que no coincidan ejecute:
+* sudo update-alternatives --set phpize /usr/bin/phpize[myversion]
+* sudo update-alternatives --set php-config /usr/bin/php-config[myversion]
+y verifique nuevamente
+```
+
 also avoid installing mongodb php driver using apt-get usually It installs the wrong version
 
 * You should add "extension=mongodb.so" to php.ini for web and cli versions
@@ -127,15 +137,6 @@ the status of the sent emails.
 ```
 Route::get('activeWebhooks', 'SendinblueController@activeWebHooks');
 ```
-
-
-## Queue for big tasks 
-
-https://github.com/laradock/laradock/issues/2254
-
-
-
-
 
 
 ## DE AQUI PARA ABAJO ES EJEMPLO NO MIRAR

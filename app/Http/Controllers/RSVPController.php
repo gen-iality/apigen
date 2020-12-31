@@ -74,7 +74,7 @@ class RSVPController extends Controller implements ShouldQueue
 
         $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
 
-        return Redirect::to("https://evius.co/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
+        return Redirect::to(config('app.front_url')."/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
     }
 
     /**
@@ -143,9 +143,17 @@ class RSVPController extends Controller implements ShouldQueue
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
+        if($data['eventUsersIds'] === 'all')
+        {               
+            $query = Attendee::where("event_id", $event->_id)->pluck('_id')->toArray();
+            $data['eventUsersIds'] = $query;
+        }
+        
         $data["message"] = $data["message"] == "" || $data["message"] == null ? "  " : $data["message"];
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
+
+        
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
         $subject = $data['subject'];
@@ -156,7 +164,7 @@ class RSVPController extends Controller implements ShouldQueue
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
 
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-
+      
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         $message->number_of_recipients = count($eventUsersIds);
@@ -170,8 +178,6 @@ class RSVPController extends Controller implements ShouldQueue
         $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
         $message->number_of_recipients = count($eventUsers);
         $message->save();
-
-        //Generar link de única autnticación
 
         //var_dump($eventUsers);
         //Send RSVP
@@ -234,22 +240,26 @@ class RSVPController extends Controller implements ShouldQueue
 
             $m = Message::find($message->id);
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
+            $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
             $include_date = false;
             if (!empty($data["include_date"])) {
                 $include_date = $data["include_date"] ? true : false;
             }
-
-            Log::info('info antes de $mail ');   
+        
+            // sino existe la propiedad names lo más posible es que el usuario tenga un error
+            if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
+                continue;
+            }
+            
+           
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date)
                 );
-
                 
-            Log::info('$mail '.$mail);    
-            
-
+            Log::info('$mail '.$email);    
+                
             //->cc('juan.lopez@mocionsoft.com');
         }
     }

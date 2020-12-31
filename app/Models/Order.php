@@ -21,6 +21,8 @@ class Order extends MyBaseModel
         'order_email'      => ['required', 'email'],
     ];
 
+    //public $with = ['orderStatus'];
+    protected $with = [ 'orderStatus'];
     /**
      * The validation error messages.
      *

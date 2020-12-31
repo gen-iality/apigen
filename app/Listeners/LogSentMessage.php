@@ -28,11 +28,29 @@ class LogSentMessage
      * @return void
      */
     public function handle($event)
-    {    
-        $recipents = $event->message->getHeaders()->get('To');
+    {   
+        
+        $headers = $event->message->getHeaders();
+        
+        $recipents = $event->message->getTo();
+        
+        $eventUser = isset($event->data->eventUser) ? $event->data->eventUser : null; 
+        $messageUser = new MessageUser([            
+            'email_destinations' => implode(',',array_keys($recipents)),             
+        ]
+        );
+
+        // var_dump(array_keys($event->data));die;
+
+        if($eventUser){
+            $messageUser->event_user_id = $eventUser->_id;
+        }
+
+        // $message->messageUsers()->save($messageUser);
+
 
         
-        $arregloRecip = explode(': ', strval($recipents));
+        // $arregloRecip = explode(': ', strval($recipents));
         // Log::info(sizeof(explode(' ', $arregloRecip[1])));
         
         $sesMessageId = $event->message
@@ -47,14 +65,15 @@ class LogSentMessage
                                ->getValue(),
             'server_message_id' => $sesMessageId, 
             'message' => $event->message->getBody(),
-            'number_of_recipients' => sizeof(explode(' ', $arregloRecip[1]))
+            'number_of_recipients' => count($recipents)
         ];
 
+        $messageUser->server_message_id = $sesMessageId;
         
-        $eviusMessage = new EviusMessage($data);
+        // $eviusMessage = new EviusMessage($data);
 
 
-        $eviusMessage->save();
+        $messageUser->save();
         
     }
 

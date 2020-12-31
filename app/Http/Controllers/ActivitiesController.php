@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Spatie\ResponseCache\Facades\ResponseCache;
+use App\evaLib\Services\FilterQuery;
 
 /**
  * @resource Event
@@ -30,19 +32,17 @@ class ActivitiesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request, $event_id)
+    public function index(Request $request, $event_id, FilterQuery $filterQuery)
     {
-        $data = $request->json()->all();
-        //esta condicion expresa si existe la variable 'locale' en una peticion por json o por url, y valida que valor existe en estas varibles
-        $res = (!empty($data['locale']) && $data['locale'] == "en" || !empty($request->input('locale')) && $request->input('locale') == "en") ? "en" : "es";
+        $input = $request->all();
+        $query  = Activities::where("event_id", $event_id);
 
-        if($res=="en"){
-            return JsonResource::collection(
-               Activities::where("event_id", $event_id)->where('locale', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
-        }else{
-            return JsonResource::collection(
-                Activities::where("event_id", $event_id)->where('locale', '!=', "en")->orderBy('datetime_start', 'asc')->paginate(config('app.page_size')));
+        //por defecto lo ordenamos por fecha de inicio descentente
+        if (!isset($input['orderBy'])){
+            $input['orderBy'] = '[{"field":"datetime_start","order":"asc"}]';
         }
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return JsonResource::collection($results);
     }   
 
     public function indexByHost(Request $request, $event_id, $host_id)
@@ -87,7 +87,9 @@ class ActivitiesController extends Controller
             $activity->access_restriction_roles()->attach($ids);
         }
         //Cargamos de nuevo para traer la info de las categorias
-        $activity = Activities::find($activity->id);        
+        $activity = Activities::find($activity->id);  
+        ResponseCache::clear();
+
         return $activity;
     }
     
@@ -274,6 +276,8 @@ class ActivitiesController extends Controller
             $Activities->access_restriction_roles()->attach($ids);       
         }
         $activity = Activities::find($Activities->id);
+        ResponseCache::clear();
+
         return $activity;
     }
 
@@ -286,6 +290,8 @@ class ActivitiesController extends Controller
     public function destroy(Request $request, $event_id, $id)
     {
         $Activities = Activities::findOrFail($id);
+        ResponseCache::clear();
+
         return (string) $Activities->delete();
     }
 }
