@@ -33,7 +33,7 @@ class SendSesEmail extends Mailable
 
         $this->withSwiftMessage(function ($message) {            
             $headers = $message->getHeaders();       
-            Log::info('$headers: '.$headers);         
+            // Log::info('$headers: '.$headers);         
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
         });
 
