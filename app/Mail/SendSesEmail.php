@@ -31,13 +31,13 @@ class SendSesEmail extends Mailable
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
 
-        $this->withSwiftMessage(function ($message) {            
+        $foo = $this->withSwiftMessage(function ($message) {            
             $headers = $message->getHeaders();       
             // Log::info('$headers: '.$headers);         
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
         });
 
-
+        Log::info('$foo '.$foo);
        
 
         return $this
