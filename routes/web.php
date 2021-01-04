@@ -19,20 +19,20 @@ Route::get('testsendemail', 'TestingController@sendemail');
 
 Route::get('test', 'EventController@index');
 
-Route::get('/rsvptemplate', function () {
+// Route::get('/rsvptemplate', function () {
 
-    $event = new App\Event();
-    $event->name="event best";
-    $event->venue    ="venue";
-    $event->location ="location";
-    $event->description ="description";
+//     $event = new App\Event();
+//     $event->name="event best";
+//     $event->venue    ="venue";
+//     $event->location ="location";
+//     $event->description ="description";
 
-    $eventUser = new App\Attendee();
-    $eventUser->name ="odiseo";
-    $eventUser->email ="odiseo@iliada.com";
+//     $eventUser = new App\Attendee();
+//     $eventUser->name ="odiseo";
+//     $eventUser->email ="odiseo@iliada.com";
 
-    return new App\Mail\RSVP("message", $event, $eventUser, null, "footer", "subject");
-});
+//     return new App\Mail\RSVP("message", $event, $eventUser, null, "footer", "subject");
+// });
 
 
 Route::post('testpush', 'SendContentController@sendPushNotification');

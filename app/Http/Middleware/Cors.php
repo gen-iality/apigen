@@ -14,7 +14,7 @@ class Cors
     }
     public function handle($request, Closure $next)
     {
-        $originURL = "https://evius.co"; //$originURL = "http://localhost";
+        $originURL = config('app.front_url').""; //$originURL = "http://localhost";
 
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             $originURL = $_SERVER['HTTP_ORIGIN'];
@@ -25,13 +25,32 @@ class Cors
         } else if (array_key_exists('REMOTE_ADDR', $_SERVER)) {
             $originURL = $_SERVER['REMOTE_ADDR'];
         }
-        return $next($request)
-            ->header('Access-Control-Allow-Origin', $originURL)
-            ->header('Vary', 'origin')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Credentials', 'true')
-            ->header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN, new_token");
-        //  ->header("Access-Control-Expose-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-TOKEN, new_token");
+        $response = $next($request);
+        $IlluminateResponse = 'Illuminate\Http\Response';
+        $SymfonyResopnse = 'Symfony\Component\HttpFoundation\Response';
+        $headers = [
+            'Access-Control-Allow-Origin' => $originURL,
+            'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
+            'Access-Control-Allow-Headers' => 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Authorization , Access-Control-Request-Headers, X-XSRF-TOKEN, new_token',
+            'Access-Control-Allow-Credentials' => 'true',
+            'Vary'=> 'origin'
+        ];
+        
+        if($response instanceof $IlluminateResponse) {
+            foreach ($headers as $key => $value) {
+                $response->header($key, $value);
+            }
+            return $response;
+        }
+        
+        if($response instanceof $SymfonyResopnse) {
+            foreach ($headers as $key => $value) {
+                $response->headers->set($key, $value);
+            }
+            return $response;
+        }
+        
+        return $response;
     }
 
 }

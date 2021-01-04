@@ -6,9 +6,10 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
 /****************
  * SPACES
  ****************/
-Route::get ('events/{event_id}/spaces', 'SpaceController@index');
+
+Route::get ('events/{event_id}/spaces', 'SpaceController@index')->middleware('cacheResponse');
 Route::post ('events/{event_id}/spaces', 'SpaceController@store');
-Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show');
+Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show')->middleware('cacheResponse');
 Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
 Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 
@@ -24,6 +25,7 @@ Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
  * EVIUS STYLES
  ****************/
 Route::apiResource('events/{event_id}/styles', 'StylesController');
+
 Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
 
 
@@ -41,19 +43,6 @@ Route::apiResource('events/{id}/surveys', 'SurveysController');
 Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequestions');
 
 
-/****************
- * ACITIVITY ASSISTANTS 
- ****************/
-
-Route::get  ('fillassitantsbug/{id}', 'ActivityAssistantsController@fillassitantsbug');
-// get users enrroled on activities
-Route::get   ('events/{event_id}/activity_users/{activity_id}',      'ActivityAssistantsController@indexUsers');
-
-Route::post  ('events/{event_id}/activity/activity_attendee', 'ActivityAssistantsController@activitieAssistant');
-Route::post('events/{event_id}/activity/activity_attendee/{id}', 'ActivityAssistantsController@deleteAssistant');
-
-Route::apiResource('events/{event_id}/activity_attendee', 'ActivityAssistantsController');
-
 /***************
  * HOST
  * rutas para guardar la agenda de los eventos
@@ -69,7 +58,7 @@ Route::apiResource('events/{event_id}/host', 'HostController');
 Route::post  ('/meetingrecording',      'ActivitiesController@storeMeetingRecording');
 Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
-Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
+Route::apiResource('events/{event_id}/activities', 'ActivitiesController')->middleware('cacheResponse');
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
 
 /***************

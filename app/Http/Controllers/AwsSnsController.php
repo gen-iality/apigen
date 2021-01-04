@@ -16,6 +16,7 @@ use Illuminate\Contracts\Mail\Mailer;
 use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 
+use App\MessageUserUpdate;
 use App\MessageUser;
 use App\Message as EviusMessage;
 
@@ -46,7 +47,9 @@ class AwsSnsController extends Controller
             $status_message = $response['notificationType']; 
         }
                                 
-        $eviusmessage = EviusMessage::where('server_message_id', '=', $responseMail['messageId'])->first();
+        $eviusmessage = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
+       
+        
 
         if (isset($eviusmessage))
         {
@@ -57,7 +60,7 @@ class AwsSnsController extends Controller
                 'notification_id' => $responseMail['messageId'],
                 'timestamp_event' => $responseMail['timestamp']
             ];
-            $messageUserModel = new MessageUser($dataMessageUser);
+            $messageUserModel = new MessageUserUpdate($dataMessageUser);
             $messageUserModel->save();            
         }
         else
@@ -67,7 +70,7 @@ class AwsSnsController extends Controller
                 'server_message_id' => $responseMail['messageId'],
                 'number_of_recipients' => sizeof($responseMail['destination'])                                
             ];
-            $eviusMessageModel = new EviusMessage($dataEviusMessage);
+            $eviusMessageModel = new MessageUser($dataEviusMessage);
             $eviusMessageModel->save();
         }
         

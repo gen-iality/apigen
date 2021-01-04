@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
 
         setlocale(LC_ALL, "es_ES.utf8");
         \Carbon\Carbon::setLocale(config('app.locale'));
-        Log::debug("Booting");
+        
         Resource::withoutWrapping();
 
         //Esta duplicando los eventos aún no entiendo porque

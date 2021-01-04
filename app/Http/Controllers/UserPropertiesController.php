@@ -27,7 +27,7 @@ class UserPropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
-    {
+    {    
         return JsonResource::collection(
            Event::find($event_id)->user_properties());
     }

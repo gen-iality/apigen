@@ -285,7 +285,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!!  Form::checkbox('terms', 'true') !!}
-                            <a href="https://evius.co/terms" target="_blank">Acepta terminos y condiciones</a>
+                            <a href=config('app.front_url')."/terms" target="_blank">Acepta terminos y condiciones</a>
                         </div>
                     </div>
                 </div>

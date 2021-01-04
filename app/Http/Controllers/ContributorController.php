@@ -27,7 +27,7 @@ class ContributorController extends Controller
     public function index(String $event_id)
     {
         $usersRolesEvent = ModelHasRole::where('event_id', $event_id)->get();
-        return ModelHasRoleResource::collection($usersRdolesEvent);
+        return ModelHasRoleResource::collection($usersRolesEvent);
     }
 
     /**

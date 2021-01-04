@@ -16,15 +16,22 @@
         margin: 0px 0px 0px 0px !important;
         padding: 0px 0px 0px 0px !important;
     }
+    
+    @font-face {
+        font-family: 'Rock Sans Bold';
+        src: url(storage_path('fonts/Rock Sans Bold.ttf'));
+        font-weight: 400; 
+        font-style: normal; 
+    }
 
     body {
 
-        background-size: cover;
+        background-size: contain;
         height: 100%;
         width: 100%;
         margin: 0;
         padding: 0;
-        font-family: "Verdana", "Geneva", "Sans serif", "Open Sans", "Titillium", "Oswald";
+        font-family: "Rock Sans Bold" , "Verdana", "Geneva", "Sans serif", "Open Sans", "Titillium", "Oswald";
         /*font-family: Arial, Helvetica, sans-serif;*/
         font-size: 100px;
         color: #666;
@@ -67,7 +74,8 @@
     </style>
 </head>
 
-<body style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;">
+<body style="background-color: #FFFFFF; font-family: Rock Sans Bold, Arial, Helvetica, sans-serif;">
+
     <img class="imagen" src="{{$image}}" />
 
     <div class="containing-table">

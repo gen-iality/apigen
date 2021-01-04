@@ -161,7 +161,7 @@ class OrdersServices
      */
     public static function createAnOrder($ticket_order, $request_data, $event, $fields)
     {
-        $user = Auth::user();
+       
         $attendee_increment = 1;
         
         try {
@@ -177,21 +177,25 @@ class OrdersServices
             $order->first_name = strip_tags($request_data['order_first_name']);
             $order->last_name = strip_tags($request_data['order_last_name']);
             $order->email = $request_data['order_email'];
+            $order->items = $ticket_order['items'];
             $order->order_status_id = config('attendize.order_awaiting_payment');
             $order->amount = $ticket_order['order_total'];
-            $order->datetime_to = $request_data['datetime_to'];
-            $order->datetime_from = $request_data['datetime_from'];
+            $order->item_type = strip_tags($request_data['item_type']);
+            $order->discount_codes = isset($request_data['discount_codes']) ? $request_data['discount_codes'] : [] ;
+
+
+
             $order->properties = $request_data['properties'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
             $order->discount = 0.00;
-            $order->account_id = isset($user->id) ? $user->id : null;
+            $order->account_id = $ticket_order ['account_id'];
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
             // $order->session_id = $ticket_order['transaction_data']['session_id'];
             // Calculating grand total including taxx   
-            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
-            $orderService->calculateFinalCosts();
-            $order->taxamt = $orderService->getTaxAmount();
+            //$orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+            //$orderService->calculateFinalCosts();
+            //$order->taxamt = $orderService->getTaxAmount();
             
             // $order->url = $transaction_data['url_redirect'];
             $order->save();
@@ -199,8 +203,8 @@ class OrdersServices
             /*
              * Update the event sales volume
              */
-            $event->increment('sales_volume', (int)$orderService->getGrandTotal());
-            $event->increment('organiser_fees_volume', (int)$order->organiser_booking_fee);
+            //$event->increment('sales_volume', (int)$orderService->getGrandTotal());
+            //$event->increment('organiser_fees_volume', (int)$order->organiser_booking_fee);
             
             /*
             * Update affiliates stats stats
@@ -215,17 +219,17 @@ class OrdersServices
             /*
             * Update the event stats
             */
-            $event_stats = EventStats::updateOrCreate([
-                'event_id' => $event->id,
-                'date'     => DB::raw('CURRENT_DATE'),
-                ]);
+            // $event_stats = EventStats::updateOrCreate([
+            //     'event_id' => $event->id,
+            //     'date'     => DB::raw('CURRENT_DATE'),
+            //     ]);
 
             // $event_stats->increment('tickets_sold', $ticket_order['total_ticket_quantity']);
 
-            if ($ticket_order['order_requires_payment']) {
-                $event_stats->increment('sales_volume', $order->amount);
-                $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
-            }
+            // if ($ticket_order['order_requires_payment']) {
+            //     $event_stats->increment('sales_volume', $order->amount);
+            //     $event_stats->increment('organiser_fees_volume', $order->organiser_booking_fee);
+            // }
 
 
         } catch (Exception $e) {
@@ -249,6 +253,7 @@ class OrdersServices
 
         event(new OrderCompletedEvent($order));
 
+        $order= Order::find($order->_id);
         return $order;
     }
 
@@ -301,6 +306,63 @@ class OrdersServices
         ];
 
     }
+
+    /**
+     * Change Order Status
+     * (Rejected, Approved, Pending, Cancelled)
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function changeStatusOrder($order_reference, $status)
+    {
+        Log::info("Change Order: " . $order_reference . ' Status: ' . $status);
+        $order = Order::where('order_reference', '=', $order_reference)->first();
+        switch ($status) {
+            case 'APPROVED':
+                //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
+                //Ademas de guardar el nuevo estado
+                if ($order->order_status_id != config('attendize.order_complete')) {
+                    $order->order_status_id = config('attendize.order_complete');
+                    Log::info("Completamos la orden");
+                    $this->completeOrder($order_reference);
+                    if (config('attendize.send_email')) {
+                        Log::info("Enviamos el correo");
+                        $this->dispatch(new SendOrderTickets($order));
+                    }
+                }
+                break;
+            case 'REJECTED':
+                $order->order_status_id = config('attendize.order_rejected');
+                break;
+            case 'PENDING':
+                $order->order_status_id = config('attendize.order_pending');
+                break;
+            case 'CANCELLED':
+                $order->order_status_id = config('attendize.order_cancelled');
+                break;
+            case 'FAILED':
+                $order->order_status_id = config('attendize.order_failed');
+                break;
+            case 'DECLINED':
+                $order->order_status_id = config('attendize.order_rejected');
+                break;
+            case 'EXPIRED':
+                $order->order_status_id = config('attendize.order_rejected');
+                break;
+
+        }
+        Log::info('Borramos el cache de la orden: ' . $status);
+        if ($status != 'PENDING') {
+            //    Log::info('Borramos el cache de la orden: '.$order_reference);
+        }
+        $order->save();
+        Log::info('Estado guardado: ' . $order_reference . " order_reference: " . $order->orderStatus['name']);
+        return $order;
+    }
+
+
+
     /**
      * 
      *  

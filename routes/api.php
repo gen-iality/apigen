@@ -32,6 +32,14 @@ Route::get('aws/sendemail', 'AwsSnsController@testEmail');
 Route::get('aws/test', 'AwsSnsController@testreqS3');
 
 
+
+
+
+Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
+Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
+Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
+Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
+
 Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');
 Route::get('test/auth', 'TestingController@auth');
@@ -53,40 +61,68 @@ Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
 
 /****************
+ * bigmaker.com conferencing integration
+ * https://docs.bigmarker.com/#entering-a-conference
+ ****************/
+Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerController@conferencesenter');
+
+/****************
  * eventUsers
  ****************/
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');
-Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+
+
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
 Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+
 
 // api para transferir eventuser
 Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
-Route::get('eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
+Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
 
 Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
 
+Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
+
 Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
-Route::post('events/{event_id}/eventusers', 'EventUserController@createUserAndAddtoEvent');
-Route::get('events/{event_id}/eventusers', 'EventUserController@index');
-Route::get('events/{event_id}/eventUsers', 'EventUserController@indexByEvent');
-Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put('events/{event_id}/eventusers/{id}', 'EventUserController@update');
+
+Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
+
+
+Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
+//CRUD
+Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
+Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
+Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
 
-Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
+
 Route::put('users/verifyAccount/{uid}', 'UserController@VerifyAccount');
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 
 //endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
 Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
+
+
+/***************
+ * activities_attendees asistentes a una actividad(charlas) dentro de un evento
+ ****************/
+//Route::get    ('events/{event_id}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
+Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantController');
+Route::get('events/{event_id}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
+Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantController@meIndex');
+Route::put    ('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
+
 
 /***************
  * USER PROPERTIES
@@ -101,9 +137,7 @@ Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController
  * organizations
  ****************/
 Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
-
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
-
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
@@ -112,6 +146,14 @@ Route::group(
         // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
     }
 );
+
+
+/****************
+ * meetings
+ ****************/
+Route::apiResource('networking', 'MeetingsController');
+Route::get('event/{event_id}/meeting/{meeting_id}/accept', 'MeetingsController@accept');
+Route::get('event/{event_id}/meeting/{meeting_id}/reject', 'MeetingsController@reject');
 
 /***************
  * SENDCONTENT  TEST CONTROLLER
@@ -133,6 +175,13 @@ Route::get("events/{event_id}/indexinvitations/{user_id}", "InvitationController
 Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}", "InvitationController@invitationsReceived");
 Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@acceptOrDeclineFriendRequest");
 Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post("events/{event_id}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
+    }
+);
+
+Route::post("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::apiResource("events/{event_id}/invitation", "InvitationController");
 
 /****************
@@ -150,6 +199,8 @@ Route::group(
  * Users
  ****************/
 
+Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
+//Se deja la ruta duplicada mientras en el front el cache se actualiza, con ruta 'users'
 Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show']]);
 
@@ -159,6 +210,7 @@ Route::group(
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
+        Route::get('organizations/{organzation_id}/users', 'UserController@userOrganization');
     }
 );
 
@@ -169,7 +221,13 @@ Route::group(
 // pero sin producir ningun tipo de errores.
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
+
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('events', 'EventController');
+    }
+);
+
 //Route::get("eventsearch",'EventController');
 //     }
 // );
@@ -191,7 +249,11 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 /***************
  * categories
  ****************/
-Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
+        Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+    }
+);
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
@@ -239,10 +301,24 @@ Route::group(
     }
 );
 
+/***************
+ * Certificate
+ ****************/
+//Route::apiResource('certificate', 'CertificateController', ['only' => ['index', 'show']]);
+Route::apiResource('certificate', 'CertificateController');
+/*Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::apiResource('certificate', 'CertificateController', ['except' => ['index', 'show']]);
+    }
+);*/
 /****************
  * eventTypes
  ****************/
+Route::group(
+    ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
+    }
+);
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
@@ -334,10 +410,9 @@ Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
  ****************/
 // Route::group(
 //     ['middleware' => 'auth:token'], function () {
-Route::apiResource('events/{event_id}/orders', 'ApiOrdersController');
-Route::get('event/{event_id}/orders/{order_id}', 'ApiOrdersController@show');
-Route::post('event/{event_id}/orders/{order_id}/addAttendees', 'ApiOrdersController@createUserAndAddtoEvent');
-Route::delete('order/{order_id}/attendee/{attendee_id}', 'ApiOrdersController@deleteAttendee');
+Route::apiResource('orders', 'ApiOrdersController');
+Route::get('orders/{order_id}', 'ApiOrdersController@show');
+Route::post("payment_webhook_response","ApiCheckoutController@paymentWebhookesponse");
 //     }
 // );
 
@@ -365,6 +440,8 @@ Route::get('pdftest', 'TestingController@pdf');
 Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
+Route::get('borradorepetidos/activity/{activity_id}', 'ActivityAssistantController@borradorepetidos');
+
 
 Route::post('order/{order_id}/resend', [
     'as' => 'resendOrder',
@@ -431,3 +508,19 @@ Route::middleware('cors')->get('rols/{id}', 'RolController@show');
 Route::post("order/paymentCompleted", "EventCheckoutController@paymentCompleted");
 Route::get("order/complete/{order_id}", "EventCheckoutController@completeOrder");
 Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets");
+Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
+Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
+Route::post("code/validatecode", "DiscountCodeController@validateCode");
+
+
+
+/****************
+ * Discount Code Group
+ ****************/
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {
+        Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
+        Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
+//     }
+// );
+;

@@ -7,30 +7,25 @@ namespace App;
 use Moloquent;
 
 /**
- * Category Model
+ * Certificate Model
  *
- */ 
+ */
 class Certificate extends Moloquent
 {
 
     //protected $with = ['event'];
 
-    //protected $table = 'category';
+    //protected $table = 'Certificate';
     /**
-     * Category is owned by an event
+     * Certificate is owned by an event
      * @return void
      */
     public function event()
     {
         return $this->belongsTo('App\Event');
     }
-    public function rol($rol_id)
-    {
-        return $this->belongsTo('App\RoleAttendee','foreign_key');
-
-    }
 
     protected $fillable = [
-        'name' , 'content' , 'background' , 'event_id' , 'rol_id'
+        'name' , 'content', 'background', 'event_id'
     ];
 }
