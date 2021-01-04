@@ -51,28 +51,28 @@ class AwsSnsController extends Controller
        
         
 
-        if (isset($eviusmessage))
-        {
-            $dataMessageUser = [
-                'response' => json_encode($response),
-                'email_destinations' => json_encode($responseMail['destination']),
-                'status_message' => isset($status_message) ? $status_message : 'queued',
-                'notification_id' => $responseMail['messageId'],
-                'timestamp_event' => $responseMail['timestamp']
-            ];
-            $messageUserModel = new MessageUserUpdate($dataMessageUser);
-            $messageUserModel->save();            
-        }
-        else
-        {
+        // if (isset($eviusmessage))
+        // {
+        //     $dataMessageUser = [
+        //         'response' => json_encode($response),
+        //         'email_destinations' => json_encode($responseMail['destination']),
+        //         'status_message' => isset($status_message) ? $status_message : 'queued',
+        //         'notification_id' => $responseMail['messageId'],
+        //         'timestamp_event' => $responseMail['timestamp']
+        //     ];
+        //     $messageUserModel = new MessageUserUpdate($dataMessageUser);
+        //     $messageUserModel->save();            
+        // }
+        // else
+        // {
             
-            $dataEviusMessage = [
-                'server_message_id' => $responseMail['messageId'],
-                'number_of_recipients' => sizeof($responseMail['destination'])                                
-            ];
-            $eviusMessageModel = new MessageUser($dataEviusMessage);
-            $eviusMessageModel->save();
-        }
+        //     $dataEviusMessage = [
+        //         'server_message_id' => $responseMail['messageId'],
+        //         'number_of_recipients' => sizeof($responseMail['destination'])                                
+        //     ];
+        //     $eviusMessageModel = new MessageUser($dataEviusMessage);
+        //     $eviusMessageModel->save();
+        // }
         
         $count = 0;        
         if (isset($response['notificationType']) || isset($response['eventType']))
