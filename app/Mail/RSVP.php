@@ -189,8 +189,7 @@ class RSVP extends Mailable implements ShouldQueue
             $headers = $message->getHeaders();                               
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');                    
         });
-        Log::info('build');
-        Log::info('print_r($foo, true) '.print_r($foo, true));
+       
 
         return $this
             ->from("alerts@evius.co", $from . " EVIUS")
