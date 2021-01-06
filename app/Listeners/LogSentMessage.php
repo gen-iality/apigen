@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\MessageUser;
-
+use App\MessageUserUpdate;
 use App\Message as EviusMessage;
 
 use Log;
@@ -40,7 +40,7 @@ class LogSentMessage
         ]
         );
 
-        // var_dump(array_keys($event->data));die;
+        
 
         if($eventUser){
             $messageUser->event_user_id = $eventUser->_id;
@@ -68,11 +68,17 @@ class LogSentMessage
             'number_of_recipients' => count($recipents)
         ];
 
+        
         $messageUser->server_message_id = $sesMessageId;
         
-        // $eviusMessage = new EviusMessage($data);
+        $eviusMessage = new EviusMessage($data);
+        $eviusMessage->save();
 
-
+        // $messageUserUpdate = MessageUserUpdate::where("server_message_id" , $messageUser->server_message_id)->first();
+        // var_dump($messageUserUpdate);die;
+        $messageUser->status_massage = $sesMessageId;
+        
+        
         $messageUser->save();
         
     }

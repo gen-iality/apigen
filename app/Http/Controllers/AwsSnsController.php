@@ -47,7 +47,7 @@ class AwsSnsController extends Controller
             $status_message = $response['notificationType']; 
         }
                                 
-        $eviusmessage = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
+       
         
         $dataMessageUser = [
             'response' => json_encode($response),
@@ -177,7 +177,9 @@ class AwsSnsController extends Controller
             }    
 
         }
-                        
+        $eviusmessage = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();     
+        Log::info("MessageUserSearch" , $eviusmessage);
+                      
         return json_encode($request);                
     }
     
