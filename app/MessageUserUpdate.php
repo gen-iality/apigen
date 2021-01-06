@@ -16,7 +16,7 @@ class MessageUserUpdate extends Moloquent
     const FAILED = 'failed';
 
     //created_at updated_at
-    protected $table = ('message_user');
+    protected $table = ('message_user_update');
 
     /**
      * Default values for attributes

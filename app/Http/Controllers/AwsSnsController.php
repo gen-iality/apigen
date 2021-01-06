@@ -58,7 +58,7 @@ class AwsSnsController extends Controller
         ];
         $messageUserModel = new MessageUserUpdate($dataMessageUser);
         $messageUserModel->save(); 
-
+        Log::info('MessageUserUpdate '. $messageUserModel);
         // if (isset($eviusmessage))
         // {
         //     $dataMessageUser = [
