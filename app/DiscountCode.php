@@ -19,8 +19,7 @@ class DiscountCode extends Moloquent
         'number_uses',
         'discount_code_template_id', 
         'event_id', 
-        'organization_id',
-        'account_id'       
+        'organization_id',             
     ];
 
     protected $with = ['discount_code_template'];

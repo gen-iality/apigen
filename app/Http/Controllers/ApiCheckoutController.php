@@ -136,8 +136,8 @@ class ApiCheckoutController extends Controller
                                 if(isset($code)){
                                     if($code->event_id == $event->_id){
                                         $code->number_uses =$code->number_uses + 1; 
-                                        $account = auth()->user();
-                                        $code->account_id = isset($account) ? auth()->user()->_id : "";                                         
+                                        // $account = auth()->user();
+                                        // $code->account_id = isset($account) ? auth()->user()->_id : "";                                         
                                         $code->save();     
                                                                            
                                     } 
