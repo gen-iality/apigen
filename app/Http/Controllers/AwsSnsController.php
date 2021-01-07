@@ -180,6 +180,7 @@ class AwsSnsController extends Controller
         if(isset($eviusmessage))
         {
             $eviusmessage->status_message = $response['notificationType'];
+            $eviusmessage->status = $response['notificationType'];
             $eviusmessage->save();         
         }
                        
