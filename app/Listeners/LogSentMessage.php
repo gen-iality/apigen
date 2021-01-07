@@ -76,7 +76,7 @@ class LogSentMessage
 
         // $messageUserUpdate = MessageUserUpdate::where("server_message_id" , $messageUser->server_message_id)->first();
         // var_dump($messageUserUpdate);die;
-        $messageUser->status_massage = $sesMessageId;
+        // $messageUser->status_message = $sesMessageId;
         
         
         $messageUser->save();

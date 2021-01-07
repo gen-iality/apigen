@@ -47,7 +47,6 @@ class AwsSnsController extends Controller
             $status_message = $response['notificationType']; 
         }
                                 
-       
         
         $dataMessageUser = [
             'response' => json_encode($response),
@@ -58,7 +57,7 @@ class AwsSnsController extends Controller
         ];
         $messageUserModel = new MessageUserUpdate($dataMessageUser);
         $messageUserModel->save(); 
-        
+
         // if (isset($eviusmessage))
         // {
         //     $dataMessageUser = [
@@ -177,9 +176,13 @@ class AwsSnsController extends Controller
             }    
 
         }
-        $eviusmessage = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();     
-        Log::info("MessageUserSearch" , $eviusmessage);
-                      
+        $eviusmessage = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
+        if(isset($eviusmessage))
+        {
+            $eviusmessage->status_message = "APROBADO";
+            $eviusmessage->save();         
+        }
+                       
         return json_encode($request);                
     }
     
