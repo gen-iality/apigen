@@ -179,7 +179,7 @@ class AwsSnsController extends Controller
         $eviusmessage = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
         if(isset($eviusmessage))
         {
-            $eviusmessage->status_message = "APROBADO";
+            $eviusmessage->status_message = $response['notificationType'];
             $eviusmessage->save();         
         }
                        
