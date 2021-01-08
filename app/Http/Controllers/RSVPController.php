@@ -184,7 +184,13 @@ class RSVPController extends Controller implements ShouldQueue
         self::_sendRSVPmail(
             $eventUsers, $message, $event, $data
         );
+
+
+        // var_dump($message->_id);
+        
+
         $mesage = $message->fresh();
+
 
         return $message;
     }
@@ -222,6 +228,8 @@ class RSVPController extends Controller implements ShouldQueue
     {
         \Log::debug("attemp to send rsvp mail" . $message->subject);
 
+        
+
         foreach ($eventUsers as &$eventUser) {
             Log::info('foreach');
             $eventUser->changeToInvite();
@@ -236,7 +244,7 @@ class RSVPController extends Controller implements ShouldQueue
             ]
             );
             
-            $message->messageUsers()->save($messageUser);
+            // $message->messageUsers()->save($messageUser);
 
             $m = Message::find($message->id);
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;

@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\MessageUser;
-use App\MessageUserUpdate;
 use App\Message as EviusMessage;
 
 use Log;
@@ -34,52 +33,39 @@ class LogSentMessage
         
         $recipents = $event->message->getTo();
         
-        $eventUser = isset($event->data->eventUser) ? $event->data->eventUser : null; 
+        $eventUser = isset($event->data["eventUser"]) ? $event->data["eventUser"] : null; 
         $messageUser = new MessageUser([            
-            'email_destinations' => implode(',',array_keys($recipents)),             
+            'email' => implode(',',array_keys($recipents)),             
         ]
         );
-
         
-
-        if($eventUser){
+        if($eventUser){            
             $messageUser->event_user_id = $eventUser->_id;
+            $messageUser->user_id = $eventUser->_id;
         }
 
-        // $message->messageUsers()->save($messageUser);
-
-
-        
-        // $arregloRecip = explode(': ', strval($recipents));
-        // Log::info(sizeof(explode(' ', $arregloRecip[1])));
         
         $sesMessageId = $event->message
                               ->getHeaders()
                               ->get('X-SES-Message-ID')
                               ->getValue();
 
-        $data = [
-            'subject' => $event->message
-                               ->getHeaders()
-                               ->get('Subject')
-                               ->getValue(),
-            'server_message_id' => $sesMessageId, 
-            'message' => $event->message->getBody(),
-            'number_of_recipients' => count($recipents)
-        ];
-
+                              
+        
+        $idEviusMessage = $event->data["event"]->messages[count($event->data["event"]->messages)-1]->_id;
+        $eviusMessage =  EviusMessage::find($idEviusMessage);
+        // $eviusMessage->save();
+        
+        $messageUser->message_id = $eviusMessage->_id;
         
         $messageUser->server_message_id = $sesMessageId;
-        
-        $eviusMessage = new EviusMessage($data);
-        $eviusMessage->save();
 
-        // $messageUserUpdate = MessageUserUpdate::where("server_message_id" , $messageUser->server_message_id)->first();
-        // var_dump($messageUserUpdate);die;
-        // $messageUser->status_message = $sesMessageId;
-        
         
         $messageUser->save();
+
+        // $total_delivered = MessageUser::where('message_id' , $eviusMessage->_id)->where("satatus_message" , "Delivery")->get();
+        // var_dump($total_delivered);die;
+        // $mesage->total_delivered = count($total_delivered);
         
     }
 

@@ -30,7 +30,7 @@ class MessageUser extends Moloquent
     protected $fillable = [
         'response',
         'status', 
-        'email_destinations', 
+        'email', 
         'status_message',
         'notification_id', 
         // 'message', 
