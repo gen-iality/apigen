@@ -52,9 +52,12 @@ class LogSentMessage
 
                               
         
-        $idEviusMessage = $event->data["event"]->messages[count($event->data["event"]->messages)-1]->_id;
+        $idEviusMessage = $event->data["messageLog"]->_id;
+
+
         $eviusMessage =  EviusMessage::find($idEviusMessage);
-        // $eviusMessage->save();
+        $eviusMessage->server_message_id = $sesMessageId;
+        $eviusMessage->save();
         
         $messageUser->message_id = $eviusMessage->_id;
         
