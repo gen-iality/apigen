@@ -30,27 +30,18 @@ class ApiCheckoutController extends Controller
 	* @param Request $request
 	* @return void
 	*/
-
-
 	public function paymentWebhookesponse(Request $request){
         Log::info('Pagando orden desde Payu');
 		//reference_sale response_message_pol
         $data = $request->input();
-        Log::info($data);
+        Log::info(json_encode($data));
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257dsaads";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
-
-        Log::info("DATA PAYU" .json_encode($data));
+        
 		$order->data = json_encode($data);
         $order->save();
-        
-        Mail::to($order->email)
-            ->queue(
-                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new \App\Mail\ConfirmationPayU($order, $data, "Prueba")
-        ); 
         
 		$this->changeStatusOrder($order_id, $order_status,$data);
 

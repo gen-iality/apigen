@@ -27,11 +27,10 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($order, $payU, $test = null)
+    public function __construct($order, $payU)
     {        
         $this->order = $order;
-        $this->payU = $payU; 
-        $this->payUData = $test;   
+        $this->payU = $payU;  
 
         $this->referencePayu = $payU['reference_pol'];
         $this->transaction_id = $payU['transaction_id'];
@@ -44,13 +43,6 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
 
     public function build()
     {
-        if($this->payUData == "Prueba")
-        {
-            return $this
-            ->from("alerts@evius.co", "Ucronio")
-            ->subject("Pago exitoso Test")
-            ->markdown('rsvp.payUTest');
-        }
         return $this
             ->from("alerts@evius.co", "Ucronio")
             ->subject("Pago exitoso")
