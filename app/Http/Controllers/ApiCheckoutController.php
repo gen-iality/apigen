@@ -33,9 +33,10 @@ class ApiCheckoutController extends Controller
 
 
 	public function paymentWebhookesponse(Request $request){
-
+        Log::info('Pagando orden desde Payu');
 		//reference_sale response_message_pol
-		$data = $request->input();
+        $data = $request->input();
+        Log::info($data);
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257dsaads";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
