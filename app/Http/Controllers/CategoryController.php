@@ -148,4 +148,18 @@ class CategoryController extends Controller
         return  (string) $category->delete();
 
     }
+
+    /**
+     * _indexByOrganization_ : list categories by organization
+     * 
+     * @urlParam organization_ids required  Example: 5f7e33ba3abc2119442e83e8
+     * 
+     */
+    public function indexByOrganization($organization_id)
+    {
+
+        $categories = Category::where("organization_ids" , $organization_id)->get();
+
+        return $categories;
+    }
 }

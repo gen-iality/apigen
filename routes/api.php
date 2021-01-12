@@ -255,6 +255,7 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 // Route::group(
 //     ['middleware' => 'cacheResponse'], function () {
         Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+        Route::get('categories/organizations/{organization_ids}' , 'CategoryController@indexByOrganization');
 //     }
 // );
 Route::group(
