@@ -7,7 +7,7 @@ use App\Event;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 use Storage;
-use Spatie\ResponseCache\Facades\ResponseCache;
+// use Spatie\ResponseCache\Facades\ResponseCache;
 use \Exception;
 
 /**
@@ -62,7 +62,7 @@ class CategoryController extends Controller
         $data = $request->json()->all();
         $result = new Category($data);
         $result->save();
-        ResponseCache::clear();
+        // ResponseCache::clear();
 
         return $result;
 
@@ -124,7 +124,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->fill($data);
         $category->save();
-        ResponseCache::clear();
+        // ResponseCache::clear();
         return $data;
     }
 

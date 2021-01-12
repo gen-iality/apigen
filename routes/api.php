@@ -227,11 +227,9 @@ Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
 // Route::group(
 //     ['middleware' => 'tokenauth:token'], function () {
 
-Route::group(
-    ['middleware' => 'cacheResponse'], function () {
+
 Route::apiResource('events', 'EventController');
-    }
-);
+
 
 //Route::get("eventsearch",'EventController');
 //     }
@@ -254,11 +252,11 @@ Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 /***************
  * categories
  ****************/
-Route::group(
-    ['middleware' => 'cacheResponse'], function () {
+// Route::group(
+//     ['middleware' => 'cacheResponse'], function () {
         Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
-    }
-);
+//     }
+// );
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
@@ -319,11 +317,8 @@ Route::apiResource('certificate', 'CertificateController');
 /****************
  * eventTypes
  ****************/
-Route::group(
-    ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('eventTypes', 'EventTypesController', ['only' => ['index', 'show']]);
-    }
-);
+
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
