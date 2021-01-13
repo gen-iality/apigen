@@ -274,9 +274,13 @@ class RSVPController extends Controller implements ShouldQueue
             foreach($messageUsers as $messageUser ){
 
                 $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->first();
-                $messageUser->status_message = $messageUserUpdate->status_message;
-                $messageUser->status = $messageUserUpdate->status;
-                $messageUser->save();
+                if(isset($messageUserUpdate))
+                {
+                    $messageUser->status_message = $messageUserUpdate->status_message;
+                    $messageUser->status = $messageUserUpdate->status;
+                    $messageUser->save();
+                }
+                
             }            
             
         }
