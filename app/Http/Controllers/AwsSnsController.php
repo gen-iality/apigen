@@ -158,8 +158,8 @@ class AwsSnsController extends Controller
         $messageUser = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
         if(isset($messageUser))
         {
-            $messageUser->status_message = $eviusmessage->status_message;
-            $messageUser->status = $eviusmessage->status_message;
+            $messageUser->status_message = $messageUserModel->status_message;
+            $messageUser->status = $messageUserModel->status_message;
             $messageUser->save();         
         }
 

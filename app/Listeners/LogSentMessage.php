@@ -29,6 +29,7 @@ class LogSentMessage
     public function handle($event)
     {   
         
+        
         $headers = $event->message->getHeaders();
         
         $recipents = $event->message->getTo();
@@ -38,7 +39,6 @@ class LogSentMessage
             'email' => implode(',',array_keys($recipents)),             
         ]
         );
-        
         if($eventUser){            
             $messageUser->event_user_id = $eventUser->_id;
             $messageUser->user_id = $eventUser->_id;
@@ -51,6 +51,7 @@ class LogSentMessage
                               ->getValue();
 
                               
+        var_dump($sesMessageId);die;
         
         if(isset($event->data["messageLog"]))
         {
