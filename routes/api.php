@@ -24,7 +24,13 @@ POST           /photos                    store      photos.store
 GET            /photos/{photo}            show       photos.show
 PUT/PATCH      /photos/{photo}            update     photos.update
 DELETE         /photos/{photo}            destroy    photos.destroy
- */
+*/
+// Route::get('s3aws/{prefix?}', 'AwsS3Controller');
+
+Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
+Route::get('aws/sendemail', 'AwsSnsController@testEmail');
+Route::get('aws/test', 'AwsSnsController@testreqS3');
+
 
 
 
@@ -39,8 +45,9 @@ Route::get('test/queue', 'TestingController@testQueue');
 Route::get('test/auth', 'TestingController@auth');
 Route::get('test/Gateway', 'TestingController@Gateway');
 Route::get('test/request/{refresh_token}', 'TestingController@request');
-Route::get('test/error', 'TestingController@error');
+// Route::get('test/error', 'TestingController@error');
 Route::get('test/users', 'TestingController@users');
+Route::get('test/awsnotification', 'TestingController@awsnotification');
 Route::get('test/permissions', 'TestingController@permissions');
 Route::get('test/orderSave/{order_id}', 'TestingController@orderSave');
 Route::get('test/ticket/{ticket_id}/order/{order_id}', 'ApiOrdersController@deleteAttendee');
@@ -477,6 +484,8 @@ Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
+Route::put('events/{event_id}/updateStatusMessageUser/{message_id}', 'RSVPController@updateStatusMessageUser');
+
 
 //Route::get('rsvp/{id}/log', 'RSVPController@log');
 

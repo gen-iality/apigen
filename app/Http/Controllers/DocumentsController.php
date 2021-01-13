@@ -49,11 +49,14 @@ class DocumentsController extends Controller
     {
         $data = $request->json()->all();
         if(!empty($data["father_id"])){
+            
             $data = $request->json()->all();
             $data["event_id"] = $event_id;
             $data["state"] = "child";     
             $result = new Documents($data);
-                $result->save();
+
+            $result->save();
+
             return $result;
         }
 

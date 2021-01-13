@@ -21,9 +21,62 @@ use Spatie\Permission\Models\Permission;
 use \App\Attendee;
 use \App\Message;
 
+use Log;
+//add to AwsNotification
+
+require '../vendor/autoload.php';
+
+use Notification;
+
+use Aws\Sns\MessageValidator;
+use Aws\Sns\Exception\InvalidSnsMessageException;
+//end of add to AwsNotification
+
+
 class TestingController extends Controller
 {
+    public function getMessage(){
 
+        $data = [
+            'template'  => $template,
+            'email'     => $email,
+            'name'      => $name,
+            'subject'   => $subject
+        ];
+        
+        try {
+          $this->dispatch(new SendNotificationEmail($this, $emailInfo, $data));
+        } catch (Exception $e) {
+          Log::error('Notification error' . $e->getMessage());
+        }
+        
+
+    }
+
+
+        
+    
+
+    public function awsnotification() {
+
+        $data = [
+            'response' => '0',
+            'email_destinations' => '0',
+            'status_message' => '0',
+            'message_id' => '0',
+            'timestamp_event' => '0'
+        ];
+
+        $messageUserModel = new MessageUser($data);
+        
+        // Log::info('$messageUserModel: '.$messageUserModel);
+
+        $messageUserModel->save();            
+        // return $messageUserModel->save();            
+        return MessageUser::count();
+
+        return $messageUserModel;                
+    }
     public function serialization()
     {
         $eventuser = Attendee::find("5ee44aae1801874b5d124a15");

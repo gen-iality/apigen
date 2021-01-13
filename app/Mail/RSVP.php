@@ -10,10 +10,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
-use App\evaLib\Services\GoogleFiles;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
-use QRCode;
-use Illuminate\Support\Facades\Log;
+use Log;
+use App\MessageUser;
 
 class RSVP extends Mailable implements ShouldQueue
 {
@@ -44,13 +43,13 @@ class RSVP extends Mailable implements ShouldQueue
     public $ical = "";
     public $date_time_from;
     public $date_time_to;
-    public $qr;
+    public $messageLog;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $messageLog )
     {
 
         $auth = resolve('Kreait\Firebase\Auth');
@@ -105,6 +104,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
+        $this->messageLog = $messageLog; 
 
         $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start) : $event->datetime_from;
         $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
@@ -120,21 +120,20 @@ class RSVP extends Mailable implements ShouldQueue
         $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
-        $this->ical = "";
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-        // $this->ical = iCalCalendar::create($event->name)
-        //     ->event(iCalEvent::create($event->name)
-        //             ->startsAt($date_time_from)
-        //             ->endsAt($date_time_to)
-        //             ->description($descripcion)
-        //             ->uniqueIdentifier($event->_id)
-        //             ->createdAt(new \DateTime())
-        //             ->address(($event->address) ? $event->address : "Virtual en web evius.co")
-        //             ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
-        //         //->coordinates(51.2343, 4.4287)
-        //             ->organizer('soporte@evius.co', $event->organizer->name)
-        //             ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
-        //     )->get();
+        $this->ical = iCalCalendar::create($event->name)
+            ->event(iCalEvent::create($event->name)
+                    ->startsAt($date_time_from)
+                    ->endsAt($date_time_to)
+                    ->description($descripcion)
+                    ->uniqueIdentifier($event->_id)
+                    ->createdAt(new \DateTime())
+                    ->address(($event->address) ? $event->address : "Virtual en web evius.co")
+                    ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                //->coordinates(51.2343, 4.4287)
+                    ->organizer('soporte@evius.co', $event->organizer->name)
+                    ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+            )->get();
 
     }
 
@@ -183,43 +182,21 @@ class RSVP extends Mailable implements ShouldQueue
      */
 
     public function build()
-    {   
+    {
+
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
-
-
-        $gfService = new GoogleFiles();
-        $event = $this->event;
-
-        try {
-
-            ob_start(); 
-            $qr = QRCode::text($this->eventUser->_id)->setSize(8)->setMargin(4)->png();
-            $page = ob_get_contents();
-            ob_end_clean();
-            $type = "png";
-            $image = $page;
-            $url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
-
-            $this->qr = (string) $url;
-            $this->logo = url($logo_evius);
-
-
-        } catch (\Exception $e) {
-            Log::debug("error: " . $e->getMessage());
-            var_dump($e->getMessage());
-        }
-
-        $this->withSwiftMessage(function ($message) {
-            $headers = $message->getHeaders();
-            $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
+        $foo = $this->withSwiftMessage(function ($message) {            
+            $headers = $message->getHeaders();                               
+            $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');                    
         });
+       
 
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@evius.co", $from . " EVIUS")
             ->subject($this->subject)
             ->markdown('rsvp.rsvpinvitation');
-
+        //return $this->view('vendor.mail.html.message');
     }
 }

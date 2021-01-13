@@ -7,7 +7,7 @@ use Moloquent;
 /**
  * Represents Messages send to each user
  */
-class MessageUser extends Moloquent
+class MessageUserUpdate extends Moloquent
 {
 
     const STATUS_QUEUED = 'queued';
@@ -16,7 +16,7 @@ class MessageUser extends Moloquent
     const FAILED = 'failed';
 
     //created_at updated_at
-    protected $table = ('message_user');
+    protected $table = ('message_user_update');
 
     /**
      * Default values for attributes
@@ -30,10 +30,10 @@ class MessageUser extends Moloquent
     protected $fillable = [
         'response',
         'status', 
-        'email', 
+        'email_destinations', 
         'status_message',
         'notification_id', 
-        // 'message', 
+        'message', 
         'timestamp_event', 
         'user_id', 
         'event_user_id'

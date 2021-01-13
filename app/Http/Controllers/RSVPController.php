@@ -10,6 +10,7 @@ use App\Mail\RSVP;
 use App\Mail\wallActivity;
 use App\Message;
 use App\MessageUser;
+use App\MessageUserUpdate;
 use App\State;
 use GuzzleHttp\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Redirect;
+use Log;
 
 /**
  * @resource RSVP Handle RSVP(invitations for events)
@@ -183,7 +185,6 @@ class RSVPController extends Controller implements ShouldQueue
         self::_sendRSVPmail(
             $eventUsers, $message, $event, $data
         );
-        $mesage = $message->fresh();
 
         return $message;
     }
@@ -221,8 +222,10 @@ class RSVPController extends Controller implements ShouldQueue
     {
         \Log::debug("attemp to send rsvp mail" . $message->subject);
 
-        foreach ($eventUsers as &$eventUser) {
+        
 
+        foreach ($eventUsers as &$eventUser) {
+            Log::info('foreach');
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
@@ -234,9 +237,10 @@ class RSVPController extends Controller implements ShouldQueue
                 'event_user_id' => $eventUser->id,
             ]
             );
-            $message->messageUsers()->save($messageUser);
+            
+            // $message->messageUsers()->save($messageUser);
 
-            $m = Message::find($message->id);
+            $messageLog = Message::find($message->id);
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
             $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
@@ -244,18 +248,20 @@ class RSVPController extends Controller implements ShouldQueue
             if (!empty($data["include_date"])) {
                 $include_date = $data["include_date"] ? true : false;
             }
-            echo "a";
+        
             // sino existe la propiedad names lo más posible es que el usuario tenga un error
             if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
                 continue;
             }
-            echo "b";
+            
+           
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date, $messageLog)
                 );
-
-            //->cc('juan.lopez@mocionsoft.com');
+                
+            Log::info('$mail '.$email);    
+ 
         }
     }
 
@@ -321,5 +327,52 @@ class RSVPController extends Controller implements ShouldQueue
         $users = array_map($usersfilter, $evtUsers->all());
 
         return $users;
+    }
+
+    /**
+     * 
+     */
+    public function updateStatusMessageUser($event_id ,$message_id)
+    {
+
+        $messageUsers = MessageUser::where('message_id', '=', $message_id)->get();
+        
+        $message = Message::find($message_id);
+
+        
+        foreach($messageUsers as $messageUser ){
+
+            $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->orderby('created_at','DESC')->first();
+            // var_dump($messageUserUpdate->_id);die;
+            $messageUser->status_message = $messageUserUpdate->status_message;
+            $messageUser->status = $messageUserUpdate->status_message;
+            $messageUser->save();
+            
+        } 
+
+        $total_delivered = MessageUser::where('status_message', '=', 'Delivery')->where('message_id', '=', $message_id)->get();
+        $total_delivered = isset($total_delivered) ? count($total_delivered) : 0;
+        $message->total_delivered = $total_delivered;
+        
+        $total_bounced = MessageUser::where('status_message', '=', 'Bounce')->where('message_id', '=', $message_id)->get();
+        $total_bounced = isset($total_bounced) ? count($total_bounced) : 0;
+        $message->total_bounced = $total_bounced;
+
+        $total_sent = MessageUser::where('status_message', '=', 'Send')->where('message_id', '=', $message_id)->get();
+        $total_sent = isset($total_sent) ? count($total_sent) : 0;
+        $message->total_sent = $total_sent;
+
+        $total_opened = MessageUser::where('status_message', '=', 'Open')->where('message_id', '=', $message_id)->get();
+        $total_opened = isset($total_opened) ? count($total_opened) : 0;
+        $message->total_opened = $total_opened;
+
+        $total_clicked = MessageUser::where('status_message', '=', 'Click')->where('message_id', '=', $message_id)->get();
+        $total_clicked = isset($total_clicked) ? count($total_clicked) : 0;
+        $message->total_clicked = $total_clicked;
+
+        $message->save();
+        return  response()->json([
+                    'message' => 'Status actualizado exitosamente'
+                ]); 
     }
 }
