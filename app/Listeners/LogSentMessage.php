@@ -51,7 +51,7 @@ class LogSentMessage
                               ->getValue();
 
                               
-        var_dump($sesMessageId);die;
+        // var_dump($sesMessageId);die;
         
         if(isset($event->data["messageLog"]))
         {
