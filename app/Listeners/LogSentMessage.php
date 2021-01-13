@@ -51,7 +51,6 @@ class LogSentMessage
                               ->getValue();
 
                               
-        // var_dump($sesMessageId);die;
         
         if(isset($event->data["messageLog"]))
         {
@@ -65,6 +64,7 @@ class LogSentMessage
             $messageUser->message_id = $eviusMessage->_id;
             
             $messageUser->server_message_id = $sesMessageId;
+
         }
         
         

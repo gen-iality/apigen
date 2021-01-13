@@ -10,6 +10,7 @@ use App\Mail\RSVP;
 use App\Mail\wallActivity;
 use App\Message;
 use App\MessageUser;
+use App\MessageUserUpdate;
 use App\State;
 use GuzzleHttp\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
@@ -191,6 +192,7 @@ class RSVPController extends Controller implements ShouldQueue
 
         $mesage = $message->fresh();
 
+       
 
         return $message;
     }
@@ -267,8 +269,16 @@ class RSVPController extends Controller implements ShouldQueue
                 );
                 
             Log::info('$mail '.$email);    
-                
-            //->cc('juan.lopez@mocionsoft.com');
+            
+            $messageUsers = MessageUser::where('message_id', '=', $messageLog->_id)->get();
+            foreach($messageUsers as $messageUser ){
+
+                $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->first();
+                $messageUser->status_message = $messageUserUpdate->status_message;
+                $messageUser->status = $messageUserUpdate->status;
+                $messageUser->save();
+            }            
+            
         }
     }
 
