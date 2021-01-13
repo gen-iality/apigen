@@ -52,6 +52,7 @@ class AwsSnsController extends Controller
             'response' => json_encode($response),
             'email_destinations' => json_encode($responseMail['destination']),
             'status_message' => isset($status_message) ? $status_message : 'queued',
+            'status' => isset($status_message) ? $status_message : 'queued',
             'notification_id' => $responseMail['messageId'],
             'timestamp_event' => $responseMail['timestamp']
         ];
