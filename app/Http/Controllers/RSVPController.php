@@ -186,26 +186,6 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUsers, $message, $event, $data
         );
 
-
-        // var_dump($message->_id);
-        
-
-        $mesage = $message->fresh();
-
-        $messageUsers = MessageUser::where('message_id', '=', $message->_id)->get();
-
-        foreach($messageUsers as $messageUser ){
-
-            $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->first();
-            // if(isset($messageUserUpdate))
-            // {
-                $messageUser->status_message = $messageUserUpdate->status_message;
-                $messageUser->status = $messageUserUpdate->status;
-                $messageUser->save();
-            // }
-            
-        } 
-
         return $message;
     }
 
@@ -347,5 +327,31 @@ class RSVPController extends Controller implements ShouldQueue
         $users = array_map($usersfilter, $evtUsers->all());
 
         return $users;
+    }
+
+    /**
+     * 
+     */
+    public function updateStatusMessageUser($event_id ,$message_id)
+    {
+
+        $messageUsers = MessageUser::where('message_id', '=', $message_id)->get();
+        
+        $message = Message::find($message_id);
+
+        
+        foreach($messageUsers as $messageUser ){
+
+            $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->first();
+
+                $messageUser->status_message = $messageUserUpdate->status_message;
+                $messageUser->status = $messageUserUpdate->status_message;
+                $messageUser->save();
+            
+        } 
+
+        return  response()->json([
+                    'message' => 'Status actualizado exitosamente'
+                ]); 
     }
 }
