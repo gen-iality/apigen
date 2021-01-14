@@ -221,7 +221,7 @@ class RSVP extends Mailable implements ShouldQueue
        
 
         return $this
-            ->from("alerts@evius.co", $from . " EVIUS")
+            ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
