@@ -221,7 +221,7 @@ class OrganizationController extends Controller
      */
     public function indexByEventUserInOrganization($organization_id)
     {
-        $events = Event::where('organizer_id',$organization_id)->get();
+        $events = Event::where('_id','5fc4e8b10fc521631f10c318')->get();
 
         foreach ($events as $event) 
         {
@@ -232,16 +232,44 @@ class OrganizationController extends Controller
 
                 $user = Account::find($eventUser->account_id);
                 $userName = isset($user->displayName) ? $user->displayName : $user->names;
-
+                
                 $order = Order::where('account_id' , $eventUser->account_id)->where('items' , $event->_id)->first();
                 $orderTotal = isset($order) ? $order->amount : '0';
                 $oderDate = isset($order) ? $order->updated_at : '';
+                $orderProperties =  (isset($order->properties)) ? $order->properties : null;
+                
+                $orderDocument ='';
+                $orderTelephone = '';
+                $orderCity = '';
+                $orderAdress = '';
+                $orderUserName = '';
+                $orderUserLastName = '';
+
+
+                if(isset($orderProperties["document_number"]))
+                {   
+                    $orderDocument = $orderProperties['document_number']; 
+                    $orderTelephone = $orderProperties['telephone'];
+                    // $orderCity = $orderProperties['city']; 
+                    $orderAdress= $orderProperties['adress']; 
+                    // $orderUserName = $orderProperties['user_first_name']; 
+                    // $orderUserLastName = $orderProperties['user_last_name']; 
+                }
+               
                 echo    $userName . ',' . 
                         $user->email . ',' . 
                         $event->name . ',' .
                         $eventPrice. ',',
                         $orderTotal . ','.
-                        $oderDate ,'<br>';
+                        $oderDate .','.
+                        $orderDocument .',' . 
+                        $orderTelephone. ','.
+                        // $orderCity . ',',
+                        $orderAdress . ','.
+                        $order->_id .
+                        // $orderUserName . ',' .
+                        // $orderUserLastName . ',' .
+                        '<br>';
                 // die;
             }
         }

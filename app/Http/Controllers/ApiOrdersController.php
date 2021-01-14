@@ -47,9 +47,9 @@ class ApiOrdersController extends Controller
      * @bodyParam telephone string contact number of the user who is going to make the payment
      * @bodyParam city string contact number of the user who is going to make the payment
      * @bodyParam address string residence address of the user who is going to make the payment
-     * @bodyParam order_first_name string
-     * @bodyParam order_last_name string
-     * @bodyParam order_email 
+     * @bodyParam user_first_name string  user name who is going to make the payment
+     * @bodyParam user_last_name  string  user last name who is going to make the payment
+     * @bodyParam properties object Example: {"document_number" : "1014305626","telephone" : "30058744512","city" : "Bogotá","adress" : "Calle falsa 123", "user_first_name" : "Pepe" ,"user_last_name" : "Lepu"} 
      * 
      * @param request $request
      * @param string $event_id
@@ -110,12 +110,10 @@ class ApiOrdersController extends Controller
             'payment_gateway' => $paymentGateway,
         ];
 
-        $request_data['order_first_name'] = isset($request_data['order_first_name']) ? $request_data['order_first_name'] :$account->names;
-        $request_data['order_last_name'] = isset($request_data['order_last_name']) ? $request_data['order_last_name'] : "";
-        $request_data['order_email'] = isset($request_data['order_email']) ? $request_data['order_email'] : $account->email;
+        $request_data['order_first_name'] = $account->names;
+        $request_data['order_last_name'] =  "";
+        $request_data['order_email'] =  $account->email;
 
-        $request_data['account_email'] = $account->email;
-        $request_data['account_first_name'] = $account->names;
 
         $request_data['properties'] =  isset($request_data['properties']) ? $request_data['properties'] : [];
 
