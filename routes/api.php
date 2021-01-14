@@ -130,6 +130,7 @@ Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController
 Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
+Route::get('organizations/{id}/eventUsers' , 'OrganizationController@indexByEventUserInOrganization');
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
