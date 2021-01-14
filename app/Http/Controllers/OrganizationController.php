@@ -225,9 +225,9 @@ class OrganizationController extends Controller
 
         foreach ($events as $event) 
         {
-            $eventUsers = Attendee::where('event_id' , $event->_id)->get();
+            $eventUsers = Attendee::where('event_id' , $event->_id)->where('name' , '!=' , 'Ucronio')->get();
             $eventPrice = isset($event->extra_config['price']) ? $event->extra_config['price'] : "0";
-
+            
             foreach ($eventUsers as  $eventUser) {
 
                 $user = Account::find($eventUser->account_id);
@@ -235,12 +235,13 @@ class OrganizationController extends Controller
 
                 $order = Order::where('account_id' , $eventUser->account_id)->where('items' , $event->_id)->first();
                 $orderTotal = isset($order) ? $order->amount : '0';
-
+                $oderDate = isset($order) ? $order->updated_at : '';
                 echo    $userName . ',' . 
                         $user->email . ',' . 
                         $event->name . ',' .
                         $eventPrice. ',',
-                        $orderTotal .'<br>';
+                        $orderTotal . ','.
+                        $$oderDate ,'<br>';
                 // die;
             }
         }
