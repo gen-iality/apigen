@@ -78,6 +78,12 @@ class Account extends User
         'stripe_publishable_key',
         'stripe_data_raw',
         'payment_gateway_id',
+        'person_type', 
+        'document_type', 
+        'document_number', 
+        'telephone', 
+        'date_birth', 
+        'adress'
     ];
 
     public function __construct($attributes = array())
