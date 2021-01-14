@@ -43,8 +43,14 @@ class ApiOrdersController extends Controller
      * @bodyParam amount integer required total order value Example: 10000
      * @bodyParam item_type string required item type discountCode or event Example: discountCode
      * @bodyParam discount_codes array disount code 
+     * @bodyParam document_number string document number of the user who is going to make the payment
+     * @bodyParam telephone string contact number of the user who is going to make the payment
+     * @bodyParam city string contact number of the user who is going to make the payment
+     * @bodyParam address string residence address of the user who is going to make the payment
+     * @bodyParam order_first_name string
+     * @bodyParam order_last_name string
+     * @bodyParam order_email 
      * 
-     *  
      * @param request $request
      * @param string $event_id
      * @param bool|true $return_json
@@ -104,10 +110,15 @@ class ApiOrdersController extends Controller
             'payment_gateway' => $paymentGateway,
         ];
 
-        $request_data['order_first_name'] = $account->names;
-        $request_data['order_last_name'] ="";
-        $request_data['order_email'] = $account->email;
-        $request_data['properties'] = [];
+        $request_data['order_first_name'] = isset($request_data['order_first_name']) ? $request_data['order_first_name'] :$account->names;
+        $request_data['order_last_name'] = isset($request_data['order_last_name']) ? $request_data['order_last_name'] : "";
+        $request_data['order_email'] = isset($request_data['order_email']) ? $request_data['order_email'] : $account->email;
+
+        $request_data['account_email'] = $account->email;
+        $request_data['account_first_name'] = $account->names;
+
+        $request_data['properties'] =  isset($request_data['properties']) ? $request_data['properties'] : [];
+
         
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
 

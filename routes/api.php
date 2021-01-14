@@ -220,7 +220,7 @@ Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
 
 
 /****************
- * events
+ * Events
  ****************/
 // Este Route::group es un expermimento para detectar a el usuario logueado
 // pero sin producir ningun tipo de errores.
@@ -248,6 +248,7 @@ Route::group(
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
+Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent');
 
 /***************
  * categories

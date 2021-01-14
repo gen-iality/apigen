@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Validator;
+use Mail;
 
 /**
  * @group Event
@@ -235,6 +236,16 @@ class EventController extends Controller
                 'name' => 'required',
             ]
         );
+
+        //Flow to validate the creation of a course depending on whether the creator is an administrator or a teacher
+        $userRol = $user->others_properties['role'];
+        
+        
+        if(isset($userRol) && ($userRol == 'admin' || $userRol == 'teacher'))
+        {
+            $data['status'] = ($userRol == 'admin') ? 'approved' : 'draft';
+        }
+        
 
         if ($validator->fails()) {
             return response(
@@ -768,4 +779,25 @@ class EventController extends Controller
 
     }
 
+
+    /**
+     * 
+     */
+    public function changeStatusEvent(Request $request , $event_id)
+    {   
+        $data = $request->json()->all();
+        
+        $event = Event::find($event_id);
+        $event->status = $data['status'];
+        $event->save();
+
+        $author = Account::find($event->author_id);
+
+        Mail::to($author->email)
+           ->queue(                
+                new \App\Mail\ConfirmationCourseEmail($event, $author)
+            );
+
+        return $event;
+    }
 }

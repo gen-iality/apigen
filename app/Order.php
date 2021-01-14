@@ -21,7 +21,7 @@ class Order extends Orders
     public $rules = [
         'order_first_name' => ['required'],
         'order_last_name' => ['required'],
-        'order_email' => ['required', 'email'],
+        'order_email' => ['required', 'email']
     ];
 
     /**

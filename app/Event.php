@@ -36,7 +36,7 @@ class Event extends ModelsEvent
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 
         'loader_page', 'data_loader_page', 
         'show_banner', 'initial_page', 'show_banner_footer',
-        'send_custom_email'
+        'send_custom_email', 'status'
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
