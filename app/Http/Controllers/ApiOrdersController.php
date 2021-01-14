@@ -49,7 +49,7 @@ class ApiOrdersController extends Controller
      * @bodyParam address string residence address of the user who is going to make the payment
      * @bodyParam user_first_name string  user name who is going to make the payment
      * @bodyParam user_last_name  string  user last name who is going to make the payment
-     * @bodyParam properties object Example: {"document_number" : "1014305626","telephone" : "30058744512","city" : "Bogotá","adress" : "Calle falsa 123", "user_first_name" : "Pepe" ,"user_last_name" : "Lepu"} 
+     * @bodyParam properties object the properties are the additional data required for billing such as: **person_type, document_type, email, document_number, telephone, date_birth, adress** Example: {"person_type" : "Natural","document_type" : "CC", "email" : "correo@correo.com" , document_number" : "1014305626","telephone" : "30058744512","date_birth" : "2021-01-13","adress" : "Calle falsa 123", "user_first_name" : "Pepe" ,"user_last_name" : "Lepu"} 
      * 
      * @param request $request
      * @param string $event_id

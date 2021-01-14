@@ -250,23 +250,24 @@ class OrganizationController extends Controller
                 {   
                     $orderDocument = $orderProperties['document_number']; 
                     $orderTelephone = $orderProperties['telephone'];
-                    // $orderCity = $orderProperties['city']; 
+                    $orderCity = $orderProperties['city']; 
                     $orderAdress= $orderProperties['adress']; 
                     // $orderUserName = $orderProperties['user_first_name']; 
                     // $orderUserLastName = $orderProperties['user_last_name']; 
                 }
                
-                echo    $userName . ',' . 
-                        $user->email . ',' . 
+                echo    $orderDocument .',' . 
+                        $userName . ',' . 
+                        $user->email . ',' .                         
+                        $orderTelephone. ','.
                         $event->name . ',' .
                         $eventPrice. ',',
                         $orderTotal . ','.
-                        $oderDate .','.
-                        $orderDocument .',' . 
-                        $orderTelephone. ','.
-                        // $orderCity . ',',
+                        $oderDate .','.                        
+                        $orderId . ','.                        
+                        $orderCity . ',',
                         $orderAdress . ','.
-                        $orderId .
+                        
                         // $orderUserName . ',' .
                         // $orderUserLastName . ',' .
                         '<br>';
