@@ -241,7 +241,7 @@ class OrganizationController extends Controller
                         $event->name . ',' .
                         $eventPrice. ',',
                         $orderTotal . ','.
-                        $$oderDate ,'<br>';
+                        $oderDate ,'<br>';
                 // die;
             }
         }
