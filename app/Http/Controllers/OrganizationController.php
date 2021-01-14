@@ -221,11 +221,11 @@ class OrganizationController extends Controller
      */
     public function indexByEventUserInOrganization($organization_id)
     {
-        $events = Event::where('_id','5fc4e8b10fc521631f10c318')->get();
+        $events = Event::where('organizer_id',$organization_id)->where('name' , '!=' , 'Ucronio')->get();
 
         foreach ($events as $event) 
         {
-            $eventUsers = Attendee::where('event_id' , $event->_id)->where('name' , '!=' , 'Ucronio')->get();
+            $eventUsers = Attendee::where('event_id' , $event->_id)->get();
             $eventPrice = isset($event->extra_config['price']) ? $event->extra_config['price'] : "0";
             
             foreach ($eventUsers as  $eventUser) {
@@ -237,7 +237,7 @@ class OrganizationController extends Controller
                 $orderTotal = isset($order) ? $order->amount : '0';
                 $oderDate = isset($order) ? $order->updated_at : '';
                 $orderProperties =  (isset($order->properties)) ? $order->properties : null;
-                
+                $orderId = isset($order) ? $order->_id : '';
                 $orderDocument ='';
                 $orderTelephone = '';
                 $orderCity = '';
@@ -266,7 +266,7 @@ class OrganizationController extends Controller
                         $orderTelephone. ','.
                         // $orderCity . ',',
                         $orderAdress . ','.
-                        $order->_id .
+                        $orderId .
                         // $orderUserName . ',' .
                         // $orderUserLastName . ',' .
                         '<br>';
