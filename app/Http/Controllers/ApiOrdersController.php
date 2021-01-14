@@ -43,12 +43,6 @@ class ApiOrdersController extends Controller
      * @bodyParam amount integer required total order value Example: 10000
      * @bodyParam item_type string required item type discountCode or event Example: discountCode
      * @bodyParam discount_codes array disount code 
-     * @bodyParam document_number string document number of the user who is going to make the payment
-     * @bodyParam telephone string contact number of the user who is going to make the payment
-     * @bodyParam city string contact number of the user who is going to make the payment
-     * @bodyParam address string residence address of the user who is going to make the payment
-     * @bodyParam user_first_name string  user name who is going to make the payment
-     * @bodyParam user_last_name  string  user last name who is going to make the payment
      * @bodyParam properties object the properties are the additional data required for billing such as: **person_type, document_type, email, document_number, telephone, date_birth, adress** Example: {"person_type" : "Natural","document_type" : "CC", "email" : "correo@correo.com" , document_number" : "1014305626","telephone" : "30058744512","date_birth" : "2021-01-13","adress" : "Calle falsa 123", "user_first_name" : "Pepe" ,"user_last_name" : "Lepu"} 
      * 
      * @param request $request

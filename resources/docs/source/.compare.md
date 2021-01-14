@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/ullam/duplicateactivitie/dicta" \
+    "http://localhost/api/events/voluptatem/duplicateactivitie/amet" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ullam/duplicateactivitie/dicta"
+    "http://localhost/api/events/voluptatem/duplicateactivitie/amet"
 );
 
 let headers = {
@@ -79,14 +79,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/doloremque/activities" \
+    -G "http://localhost/api/events/qui/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/doloremque/activities"
+    "http://localhost/api/events/qui/activities"
 );
 
 let headers = {
@@ -282,14 +282,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/blanditiis/activities/1" \
+    "http://localhost/api/events/distinctio/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/blanditiis/activities/1"
+    "http://localhost/api/events/distinctio/activities/1"
 );
 
 let headers = {
@@ -328,14 +328,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/eos/activities/1" \
+    "http://localhost/api/events/rerum/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eos/activities/1"
+    "http://localhost/api/events/rerum/activities/1"
 );
 
 let headers = {
@@ -412,16 +412,16 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/consequatur/activities_attendees" \
+    -G "http://localhost/api/events/vero/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"non","user_id":"velit"}'
+    -d '{"activity_id":"ducimus","user_id":"animi"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/consequatur/activities_attendees"
+    "http://localhost/api/events/vero/activities_attendees"
 );
 
 let headers = {
@@ -430,8 +430,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "non",
-    "user_id": "velit"
+    "activity_id": "ducimus",
+    "user_id": "animi"
 }
 
 fetch(url, {
@@ -473,7 +473,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/adipisci/activities_attendees" \
+    "http://localhost/api/events/officia/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -482,7 +482,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/adipisci/activities_attendees"
+    "http://localhost/api/events/officia/activities_attendees"
 );
 
 let headers = {
@@ -529,14 +529,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/eveniet/activities_attendees/1" \
+    -G "http://localhost/api/events/doloribus/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eveniet/activities_attendees/1"
+    "http://localhost/api/events/doloribus/activities_attendees/1"
 );
 
 let headers = {
@@ -580,14 +580,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/temporibus/activities_attendees/1" \
+    "http://localhost/api/events/quaerat/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/temporibus/activities_attendees/1"
+    "http://localhost/api/events/quaerat/activities_attendees/1"
 );
 
 let headers = {
@@ -626,14 +626,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/distinctio/activities_attendees/1" \
+    "http://localhost/api/events/animi/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/distinctio/activities_attendees/1"
+    "http://localhost/api/events/animi/activities_attendees/1"
 );
 
 let headers = {
@@ -670,14 +670,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/porro/activities_attendees" \
+    -G "http://localhost/api/me/events/sunt/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/porro/activities_attendees"
+    "http://localhost/api/me/events/sunt/activities_attendees"
 );
 
 let headers = {
@@ -720,14 +720,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/omnis/activities_attendees/aut/check_in" \
+    "http://localhost/api/events/molestiae/activities_attendees/fugit/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/omnis/activities_attendees/aut/check_in"
+    "http://localhost/api/events/molestiae/activities_attendees/fugit/check_in"
 );
 
 let headers = {
@@ -1080,7 +1080,7 @@ curl -X PUT \
     "http://localhost/api/categories/5fb6e8d76dbaeb3738258092" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"esse"}'
+    -d '{"name":"quo"}'
 
 ```
 
@@ -1095,7 +1095,7 @@ let headers = {
 };
 
 let body = {
-    "name": "esse"
+    "name": "quo"
 }
 
 fetch(url, {
@@ -1231,7 +1231,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate/1/code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"quantity":379649454.2747}'
+    -d '{"quantity":2.72000974}'
 
 ```
 
@@ -1246,7 +1246,7 @@ let headers = {
 };
 
 let body = {
-    "quantity": 379649454.2747
+    "quantity": 2.72000974
 }
 
 fetch(url, {
@@ -1442,7 +1442,7 @@ curl -X POST \
     "http://localhost/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"vel","event_id":"odit","organization_id":"labore"}'
+    -d '{"code":"ad","event_id":"qui","organization_id":"omnis"}'
 
 ```
 
@@ -1457,9 +1457,9 @@ let headers = {
 };
 
 let body = {
-    "code": "vel",
-    "event_id": "odit",
-    "organization_id": "labore"
+    "code": "ad",
+    "event_id": "qui",
+    "organization_id": "omnis"
 }
 
 fetch(url, {
@@ -14419,7 +14419,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -14571,7 +14572,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -14723,7 +14725,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -14875,7 +14878,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -15027,7 +15031,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -15179,7 +15184,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -15331,7 +15337,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -15483,7 +15490,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -15635,7 +15643,8 @@ fetch(url, {
                 "price": "322000",
                 "requirements": [
                     "Contar con computador personal.",
-                    "Contar con acceso a internet."
+                    "Contar con acceso a internet.",
+                    "Contar con cámara DSLR o mirrorless."
                 ],
                 "weeklyIntensity": null
             },
@@ -22410,7 +22419,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"aliquid"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"ut"}'
 
 ```
 
@@ -22430,7 +22439,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "aliquid"
+    "discount_type": "ut"
 }
 
 fetch(url, {
@@ -23265,7 +23274,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate/1/importCodes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"":{"json":"dicta"}}'
+    -d '{"":{"json":"aut"}}'
 
 ```
 
@@ -23281,7 +23290,7 @@ let headers = {
 
 let body = {
     "": {
-        "json": "dicta"
+        "json": "aut"
     }
 }
 
@@ -23515,7 +23524,7 @@ curl -X POST \
     "http://localhost/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"soluta","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"enim","extra_config":{}}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"occaecati","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"recusandae","extra_config":{}}'
 
 ```
 
@@ -23533,14 +23542,14 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "soluta",
+    "picture": "occaecati",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "enim",
+    "location": "recusandae",
     "extra_config": {}
 }
 
@@ -23633,7 +23642,7 @@ curl -X POST \
     "http://localhost/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"ut","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"nemo","extra_config":{}}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"ut","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"id","extra_config":{}}'
 
 ```
 
@@ -23658,7 +23667,7 @@ let body = {
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "nemo",
+    "location": "id",
     "extra_config": {}
 }
 
@@ -23746,14 +23755,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/users/in/events" \
+    -G "http://localhost/api/users/culpa/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/in/events"
+    "http://localhost/api/users/culpa/events"
 );
 
 let headers = {
@@ -23776,8 +23785,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/in\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/in\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/culpa\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/culpa\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -23785,7 +23794,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/in\/events",
+        "path": "http:\/\/localhost\/api\/users\/culpa\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -23811,14 +23820,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/organizations/sit/events" \
+    -G "http://localhost/api/organizations/non/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/organizations/sit/events"
+    "http://localhost/api/organizations/non/events"
 );
 
 let headers = {
@@ -23841,8 +23850,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/organizations\/sit\/events?page=1",
-        "last": "http:\/\/localhost\/api\/organizations\/sit\/events?page=1",
+        "first": "http:\/\/localhost\/api\/organizations\/non\/events?page=1",
+        "last": "http:\/\/localhost\/api\/organizations\/non\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -23850,7 +23859,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/organizations\/sit\/events",
+        "path": "http:\/\/localhost\/api\/organizations\/non\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -23987,7 +23996,7 @@ curl -X POST \
     "http://localhost/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"odit"}'
+    -d '{"name":"consequatur"}'
 
 ```
 
@@ -24002,7 +24011,7 @@ let headers = {
 };
 
 let body = {
-    "name": "odit"
+    "name": "consequatur"
 }
 
 fetch(url, {
@@ -24138,14 +24147,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/incidunt/eventusers/dicta" \
+    -G "http://localhost/api/events/delectus/eventusers/reiciendis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/incidunt/eventusers/dicta"
+    "http://localhost/api/events/delectus/eventusers/reiciendis"
 );
 
 let headers = {
@@ -24166,7 +24175,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Attendee] dicta"
+    "message": "No query results for model [App\\Attendee] reiciendis"
 }
 ```
 
@@ -24189,16 +24198,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/doloremque/eventusers/1" \
+    "http://localhost/api/events/autem/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"sint","name":"repellendus","other_params,":{"":{"":{"":"natus"}}}}'
+    -d '{"email":"voluptatem","name":"consequuntur","other_params,":{"":{"":{"":"est"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/doloremque/eventusers/1"
+    "http://localhost/api/events/autem/eventusers/1"
 );
 
 let headers = {
@@ -24207,12 +24216,12 @@ let headers = {
 };
 
 let body = {
-    "email": "sint",
-    "name": "repellendus",
+    "email": "voluptatem",
+    "name": "consequuntur",
     "other_params,": {
         "": {
             "": {
-                "": "natus"
+                "": "est"
             }
         }
     }
@@ -24254,16 +24263,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/blanditiis/eventusers" \
+    "http://localhost/api/events/sequi/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"account_id":"in","properties":[]}'
+    -d '{"account_id":"ea","properties":[]}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/blanditiis/eventusers"
+    "http://localhost/api/events/sequi/eventusers"
 );
 
 let headers = {
@@ -24272,7 +24281,7 @@ let headers = {
 };
 
 let body = {
-    "account_id": "in",
+    "account_id": "ea",
     "properties": []
 }
 
@@ -24310,14 +24319,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/1/eventusers/ex" \
+    "http://localhost/api/events/1/eventusers/sapiente" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/eventusers/ex"
+    "http://localhost/api/events/1/eventusers/sapiente"
 );
 
 let headers = {
@@ -24354,14 +24363,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/eventusers/event/et" \
+    -G "http://localhost/api/me/eventusers/event/deserunt" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/eventusers/event/et"
+    "http://localhost/api/me/eventusers/event/deserunt"
 );
 
 let headers = {
@@ -24384,8 +24393,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/et?page=1",
-        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/et?page=1",
+        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/deserunt?page=1",
+        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/deserunt?page=1",
         "prev": null,
         "next": null
     },
@@ -24393,7 +24402,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/et",
+        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/deserunt",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -24419,16 +24428,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/ut/changeUserPassword" \
+    "http://localhost/api/events/fuga/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quia"}'
+    -d '{"email":"delectus"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ut/changeUserPassword"
+    "http://localhost/api/events/fuga/changeUserPassword"
 );
 
 let headers = {
@@ -24437,7 +24446,7 @@ let headers = {
 };
 
 let body = {
-    "email": "quia"
+    "email": "delectus"
 }
 
 fetch(url, {
@@ -24493,7 +24502,7 @@ curl -X POST \
     "http://localhost/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"voluptatum"}'
+    -d '{"file":"beatae"}'
 
 ```
 
@@ -24508,7 +24517,7 @@ let headers = {
 };
 
 let body = {
-    "file": "voluptatum"
+    "file": "beatae"
 }
 
 fetch(url, {
@@ -24554,16 +24563,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "http://localhost/api/files/uploadbase/sequi" \
+    "http://localhost/api/files/uploadbase/est" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"sint","type":"doloremque"}'
+    -d '{"file":"ducimus","type":"sit"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/files/uploadbase/sequi"
+    "http://localhost/api/files/uploadbase/est"
 );
 
 let headers = {
@@ -24572,8 +24581,8 @@ let headers = {
 };
 
 let body = {
-    "file": "sint",
-    "type": "doloremque"
+    "file": "ducimus",
+    "type": "sit"
 }
 
 fetch(url, {
@@ -24614,14 +24623,14 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/molestias/host" \
+    -G "http://localhost/api/events/tempore/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/molestias/host"
+    "http://localhost/api/events/tempore/host"
 );
 
 let headers = {
@@ -24673,16 +24682,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/consequatur/host" \
+    "http://localhost/api/events/numquam/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"hic","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"deleniti","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/consequatur/host"
+    "http://localhost/api/events/numquam/host"
 );
 
 let headers = {
@@ -24693,7 +24702,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "hic",
+    "image": "deleniti",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -24737,14 +24746,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/odio/host/1" \
+    -G "http://localhost/api/events/consectetur/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/odio/host/1"
+    "http://localhost/api/events/consectetur/host/1"
 );
 
 let headers = {
@@ -24788,16 +24797,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/ea/host/1" \
+    "http://localhost/api/events/sit/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"voluptas","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"ea","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ea/host/1"
+    "http://localhost/api/events/sit/host/1"
 );
 
 let headers = {
@@ -24808,7 +24817,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "voluptas",
+    "image": "ea",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -24854,14 +24863,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/dolor/host/1" \
+    "http://localhost/api/events/sint/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/dolor/host/1"
+    "http://localhost/api/events/sint/host/1"
 );
 
 let headers = {
@@ -95315,7 +95324,7 @@ curl -X POST \
     "http://localhost/api/orders" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"items":"[\"5ea23acbd74d5c4b360ddde2\"]","account_id":"5f450fb3d4267837bb128102","amount":10000,"item_type":"discountCode","discount_codes":[],"document_number":"et","telephone":"dolores","city":"ea","address":"adipisci","user_first_name":"quae","user_last_name":"quibusdam","properties":"{\"person_type\" : \"Natural\",\"document_type\" : \"CC\", \"email\" : \"correo@correo.com\" , document_number\" : \"1014305626\",\"telephone\" : \"30058744512\",\"date_birth\" : \"2021-01-13\",\"adress\" : \"Calle falsa 123\", \"user_first_name\" : \"Pepe\" ,\"user_last_name\" : \"Lepu\"}"}'
+    -d '{"items":"[\"5ea23acbd74d5c4b360ddde2\"]","account_id":"5f450fb3d4267837bb128102","amount":10000,"item_type":"discountCode","discount_codes":[],"properties":"{\"person_type\" : \"Natural\",\"document_type\" : \"CC\", \"email\" : \"correo@correo.com\" , document_number\" : \"1014305626\",\"telephone\" : \"30058744512\",\"date_birth\" : \"2021-01-13\",\"adress\" : \"Calle falsa 123\", \"user_first_name\" : \"Pepe\" ,\"user_last_name\" : \"Lepu\"}"}'
 
 ```
 
@@ -95335,12 +95344,6 @@ let body = {
     "amount": 10000,
     "item_type": "discountCode",
     "discount_codes": [],
-    "document_number": "et",
-    "telephone": "dolores",
-    "city": "ea",
-    "address": "adipisci",
-    "user_first_name": "quae",
-    "user_last_name": "quibusdam",
     "properties": "{\"person_type\" : \"Natural\",\"document_type\" : \"CC\", \"email\" : \"correo@correo.com\" , document_number\" : \"1014305626\",\"telephone\" : \"30058744512\",\"date_birth\" : \"2021-01-13\",\"adress\" : \"Calle falsa 123\", \"user_first_name\" : \"Pepe\" ,\"user_last_name\" : \"Lepu\"}"
 }
 
@@ -95366,12 +95369,6 @@ Parameter | Type | Status | Description
         `amount` | integer |  required  | total order value
         `item_type` | string |  required  | item type discountCode or event
         `discount_codes` | array |  optional  | disount code
-        `document_number` | string |  optional  | document number of the user who is going to make the payment
-        `telephone` | string |  optional  | contact number of the user who is going to make the payment
-        `city` | string |  optional  | contact number of the user who is going to make the payment
-        `address` | string |  optional  | residence address of the user who is going to make the payment
-        `user_first_name` | string |  optional  | user name who is going to make the payment
-        `user_last_name` | string |  optional  | user last name who is going to make the payment
         `properties` | object |  optional  | the properties are the additional data required for billing such as: **person_type, document_type, email, document_number, telephone, date_birth, adress**
     
 <!-- END_285c87403b6cfdebe26bc357f22e870f -->
@@ -95643,7 +95640,7 @@ curl -X POST \
     "http://localhost/api/organizations/1/contactbyemail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"message":"velit","subject":"consequatur","name":"magnam","email_user":"est"}'
+    -d '{"message":"molestiae","subject":"distinctio","name":"non","email_user":"consequatur"}'
 
 ```
 
@@ -95658,10 +95655,10 @@ let headers = {
 };
 
 let body = {
-    "message": "velit",
-    "subject": "consequatur",
-    "name": "magnam",
-    "email_user": "est"
+    "message": "molestiae",
+    "subject": "distinctio",
+    "name": "non",
+    "email_user": "consequatur"
 }
 
 fetch(url, {
@@ -95698,16 +95695,16 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
-    "http://localhost/api/rsvp/sendeventrsvp/quam" \
+    "http://localhost/api/rsvp/sendeventrsvp/reprehenderit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"sed","image_header":"omnis","content_header":"Has sido invitado a el evento","message":"deleniti","image":"non","image_footer":"dolorum","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
+    -d '{"subject":"id","image_header":"et","content_header":"Has sido invitado a el evento","message":"ipsam","image":"quisquam","image_footer":"aliquid","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/sendeventrsvp/quam"
+    "http://localhost/api/rsvp/sendeventrsvp/reprehenderit"
 );
 
 let headers = {
@@ -95716,12 +95713,12 @@ let headers = {
 };
 
 let body = {
-    "subject": "sed",
-    "image_header": "omnis",
+    "subject": "id",
+    "image_header": "et",
     "content_header": "Has sido invitado a el evento",
-    "message": "deleniti",
-    "image": "non",
-    "image_footer": "dolorum",
+    "message": "ipsam",
+    "image": "quisquam",
+    "image_footer": "aliquid",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     }
@@ -96276,14 +96273,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/rolesattendees/amet" \
+    "http://localhost/api/rolesattendees/porro" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rolesattendees/amet"
+    "http://localhost/api/rolesattendees/porro"
 );
 
 let headers = {
@@ -96378,7 +96375,7 @@ curl -X POST \
     "http://localhost/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"molestias","picture":"http:\/\/www.gravatar.com\/avatar","password":"quia","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
+    -d '{"email":"evius@evius.co","names":"suscipit","picture":"http:\/\/www.gravatar.com\/avatar","password":"aperiam","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
 
 ```
 
@@ -96394,9 +96391,9 @@ let headers = {
 
 let body = {
     "email": "evius@evius.co",
-    "names": "molestias",
+    "names": "suscipit",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "password": "quia",
+    "password": "aperiam",
     "others_properties": "[]",
     "organization_ids": "[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"
 }
@@ -96816,7 +96813,7 @@ curl -X PUT \
     "http://localhost/api/users/5e9caaa1d74d5c2f6a02a3c2" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"evius lopez","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"ut","others_properties":"[]"}'
+    -d '{"email":"evius@evius.co","names":"evius lopez","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"hic","others_properties":"[]"}'
 
 ```
 
@@ -96834,7 +96831,7 @@ let body = {
     "email": "evius@evius.co",
     "names": "evius lopez",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "organization_ids": "ut",
+    "organization_ids": "hic",
     "others_properties": "[]"
 }
 
@@ -97382,14 +97379,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/orders/et/validateFreeorder" \
+    "http://localhost/api/orders/qui/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/et/validateFreeorder"
+    "http://localhost/api/orders/qui/validateFreeorder"
 );
 
 let headers = {
