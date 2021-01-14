@@ -925,4 +925,6 @@ class EventUserController extends Controller
         return "usuario no encontrado, o sin invitaciones disponibles";
     }
 
+    
+
 }

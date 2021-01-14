@@ -6,6 +6,8 @@ use App\evaLib\Services\EvaRol;
 use App\Http\Resources\OrganizationResource;
 use App\Organization;
 use App\Event;
+use App\Attendee;
+use App\Order;
 use App\Account;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
@@ -211,5 +213,36 @@ class OrganizationController extends Controller
             'message' => $data['message']
 
         ]);
+    }
+
+
+    /**
+     * 
+     */
+    public function indexByEventUserInOrganization($organization_id)
+    {
+        $events = Event::where('organizer_id',$organization_id)->get();
+
+        foreach ($events as $event) 
+        {
+            $eventUsers = Attendee::where('event_id' , $event->_id)->get();
+            $eventPrice = isset($event->extra_config['price']) ? $event->extra_config['price'] : "0";
+
+            foreach ($eventUsers as  $eventUser) {
+
+                $user = Account::find($eventUser->account_id);
+                $userName = isset($user->displayName) ? $user->displayName : $user->names;
+
+                $order = Order::where('account_id' , $eventUser->account_id)->where('items' , $event->_id)->first();
+                $orderTotal = isset($order) ? $order->amount : '0';
+
+                echo    $userName . ',' . 
+                        $user->email . ',' . 
+                        $event->name . ',' .
+                        $eventPrice. ',',
+                        $orderTotal .'<br>';
+                // die;
+            }
+        }
     }
 }
