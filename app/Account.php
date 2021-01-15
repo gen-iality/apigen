@@ -58,7 +58,6 @@ class Account extends User
         'datetime_format_id',
         'currency_id',
         'name',
-        'names',
         'last_ip',
         'last_login_date',
         'address1',
@@ -109,7 +108,7 @@ class Account extends User
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
-                            //emailVerified: false,
+                            "document_number" => $model->document_number,
                             //phoneNumber: "+11234567890",
                             "password" => $newpassword,
                             "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
@@ -156,7 +155,7 @@ class Account extends User
                 $fbuser = self::$auth->createUser(
                     [
                         "email" => $model->email,
-                        //emailVerified: false,
+                        "document_number" => $model->document_number,
                         //phoneNumber: "+11234567890",
                         "password" => $newpassword,
                         "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
