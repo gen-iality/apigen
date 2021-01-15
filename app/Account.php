@@ -51,8 +51,6 @@ class Account extends User
     protected $fillable = [
         'displayName',
         'uid',
-        'first_name',
-        'last_name',
         'email',
         'password',
         'timezone_id',
@@ -60,6 +58,7 @@ class Account extends User
         'datetime_format_id',
         'currency_id',
         'name',
+        'names',
         'last_ip',
         'last_login_date',
         'address1',

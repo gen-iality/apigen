@@ -221,58 +221,21 @@ class OrganizationController extends Controller
      */
     public function indexByEventUserInOrganization($organization_id)
     {
-        $events = Event::where('organizer_id',$organization_id)->where('name' , '!=' , 'Ucronio')->get();
+        
+        $events = Event::where('organizer_id' , $organization_id)->where('name', '!=' ,'Ucronio')->get();
+        
+        $attendees = [];
 
-        foreach ($events as $event) 
-        {
-            $eventUsers = Attendee::where('event_id' , $event->_id)->get();
-            $eventPrice = isset($event->extra_config['price']) ? $event->extra_config['price'] : "0";
-            
-            foreach ($eventUsers as  $eventUser) {
-
-                $user = Account::find($eventUser->account_id);
-                $userName = isset($user->displayName) ? $user->displayName : $user->names;
-                
-                $order = Order::where('account_id' , $eventUser->account_id)->where('items' , $event->_id)->first();
-                $orderTotal = isset($order) ? $order->amount : '0';
-                $oderDate = isset($order) ? $order->updated_at : '';
-                $orderProperties =  (isset($order->properties)) ? $order->properties : null;
-                $orderId = isset($order) ? $order->_id : '';
-                $orderDocument ='';
-                $orderTelephone = '';
-                $orderCity = '';
-                $orderAdress = '';
-                $orderUserName = '';
-                $orderUserLastName = '';
-
-
-                if(isset($orderProperties["document_number"]))
-                {   
-                    $orderDocument = $orderProperties['document_number']; 
-                    $orderTelephone = $orderProperties['telephone'];
-                    $orderCity = $orderProperties['city']; 
-                    $orderAdress= $orderProperties['adress']; 
-                    // $orderUserName = $orderProperties['user_first_name']; 
-                    // $orderUserLastName = $orderProperties['user_last_name']; 
-                }
-               
-                echo    $orderDocument .',' . 
-                        $userName . ',' . 
-                        $user->email . ',' .                         
-                        $orderTelephone. ','.
-                        $event->name . ',' .
-                        $eventPrice. ',',
-                        $orderTotal . ','.
-                        $oderDate .','.                        
-                        $orderId . ','.                        
-                        $orderCity . ',',
-                        $orderAdress . ','.
-                        
-                        // $orderUserName . ',' .
-                        // $orderUserLastName . ',' .
-                        '<br>';
-                // die;
-            }
+        foreach($events as $event)
+        {   
+            $query = $event->attendees()
+            // ->withoutCancelled()
+            ->join('orders', 'orders.account_id', '=', 'attendees.id')
+            ->first();
+            array_push($attendees, $query['first_name']);
+            // echo $query['_id'] . $query['names'] . '<br>';
         }
+
+        return $attendees;
     }
 }
