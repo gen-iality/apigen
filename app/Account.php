@@ -108,7 +108,7 @@ class Account extends User
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
-                            "document_number" => $model->document_number,
+                            // "document_number" => $model->document_number,
                             //phoneNumber: "+11234567890",
                             "password" => $newpassword,
                             "displayName" => isset($model->displayName) ? $model->displayName : $model->names,

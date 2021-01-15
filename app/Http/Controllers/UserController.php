@@ -372,50 +372,6 @@ class UserController extends UserControllerWeb
         return UsersResource::collection($results);          
 
     }
-
-    /**
-     * 
-     */
-    public function indexPurchasesByUser($organization_id)
-    {
-        
-        $events = Event::where('organizer_id' , $organization_id)->where('name', '!=' ,'Ucronio')->get();
-        
-        $attendees = [];
-
-        foreach($events as $event)
-        {   
-            
-            $querys =   $event->attendees()->get();
-
-            foreach($querys as $query){
-                
-                $account = Account::find($query->account_id);
-                $order = Order::where('account_id' , $account->_id)->where('items' , $event->_id )->first();
-               
-                $data = response()->json([
-                    'Tipo de documento' => $account->document_type,
-                    'Credit card DNI' => $account->document_number,
-                    'Nombre del usuario ' => $account->names,
-                    'Correo'=> $account->email,
-                    'Teléfono' => $account->phone,                    
-                    'Curso' => $event->name,
-                    'Valor del curso' => $event->extra_config['price'],
-                    'Total pagado' => $order->amount,
-                    'Total descuento' => $event->extra_config['price'] - $order->amount,  
-                    'Fecha y hora de la compra ' => \Carbon\Carbon::parse($order->updated_at)->format('d/m/Y H:i:s'),        
-                    'Referencia de pago' => $order->_id
-                ])->getData();
-                
-                array_push($attendees , $data);
-                
-                
-            }
-
-        }
-
-        return $attendees;
-    }
 }
 
-}
+

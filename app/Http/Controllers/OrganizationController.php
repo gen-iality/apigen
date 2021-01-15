@@ -239,10 +239,12 @@ class OrganizationController extends Controller
                 $data = response()->json([
                     'Tipo de documento' => $account->document_type,
                     'Número de documento' => $account->document_number,
-                    'Tipo de usuario' => $account->person_type,
+                    'Tipo de persona' => $account->person_type,
                     'Nombre del usuario ' => $account->names,
                     'Correo'=> $account->email,
-                    'Teléfono' => $account->telephone,                    
+                    'Teléfono' => $account->phone,
+                    'Dirección' => $account->adress,
+                    'Fecha de nacimiento' => $acount->date_birth,                    
                     'Curso' => $event->name,
                     'Valor del curso' => $event->extra_config['price'],
                     'Total pagado' => $order->amount,
@@ -251,12 +253,6 @@ class OrganizationController extends Controller
                     'Referencia de pago' => $order->_id
                 ])->getData();
                 
-                // echo $account->document_type . ',' .
-                //      $account->document_number . ','.
-                //      $account->names .','.
-                //      $account->email .','.
-                //      $account->phone.'<br><br><br>';
-                     
                 array_push($attendees , $data);
                 
                 
@@ -264,6 +260,6 @@ class OrganizationController extends Controller
 
         }
 
-        return $attendees;   
+        return $attendees;
     }
 }
