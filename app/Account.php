@@ -95,9 +95,11 @@ class Account extends User
 
         //Creamos el usuario en firebase
         self::creating(
+            
             function ($model) {
                 try {
 
+                    var_dump('Previo a usurio no existe Create');die;
                     
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
@@ -107,7 +109,7 @@ class Account extends User
                             //emailVerified: false,
                             //phoneNumber: "+11234567890",
                             "password" => $newpassword,
-                            "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                            // "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
                             //photoURL: "http://www.example.com/12345678/photo.png",
                             //disabled: false
                         ]
@@ -124,23 +126,24 @@ class Account extends User
                 }
             }
         );
-
+        
         /** Idealmente se debe usar self::updating pero por alguna razón no lo llama */
         self::saving(function ($model) {
             //aplica solo para el evento update
+
             if (!$model->exists) {return;}
+            
 
-            //Si ya tiene un UID es decir su usario en firebase no hay necesidad se volverlo a crear
-            if ($model->uid) {return;}
-
+            //Si ya tiene un UID es decir su usario en firebase no hay necesidad se volverlo a crear            
             $fbuser = null;
             try {
+
                 $fbuser = self::$auth->getUserByEmail($model->email);
                 $model->uid = $fbuser->uid;
                 return;
 
             } catch (\Exception $e) {
-                //No existe el usuario en firebase
+                //No existe el usuario en firebase                
                 $fbuser = null;
             }
 
