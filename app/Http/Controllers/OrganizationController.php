@@ -263,6 +263,6 @@ class OrganizationController extends Controller
 
         }
 
-        // return $attendees;   
+        return $attendees;   
     }
 }
