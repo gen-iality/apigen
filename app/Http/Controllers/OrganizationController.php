@@ -241,7 +241,7 @@ class OrganizationController extends Controller
                     'Credit card DNI' => $account->document_number,
                     'Nombre del usuario ' => $account->names,
                     'Correo'=> $account->email,
-                    'Teléfono' => $account->phone,                    
+                    'Teléfono' => $account->telephone,                    
                     'Curso' => $event->name,
                     'Valor del curso' => $event->extra_config['price'],
                     'Total pagado' => $order->amount,
@@ -250,6 +250,12 @@ class OrganizationController extends Controller
                     'Referencia de pago' => $order->_id
                 ])->getData();
                 
+                // echo $account->document_type . ',' .
+                //      $account->document_number . ','.
+                //      $account->names .','.
+                //      $account->email .','.
+                //      $account->phone.'<br><br><br>';
+                     
                 array_push($attendees , $data);
                 
                 
@@ -257,6 +263,6 @@ class OrganizationController extends Controller
 
         }
 
-        return $attendees;
+        // return $attendees;   
     }
 }
