@@ -238,7 +238,8 @@ class OrganizationController extends Controller
                
                 $data = response()->json([
                     'Tipo de documento' => $account->document_type,
-                    'Credit card DNI' => $account->document_number,
+                    'Número de documento' => $account->document_number,
+                    'Tipo de usuario' => $account->person_type,
                     'Nombre del usuario ' => $account->names,
                     'Correo'=> $account->email,
                     'Teléfono' => $account->telephone,                    
