@@ -105,6 +105,7 @@ return [
                     //Events
                         '*/events',
                         '*/eventTypes',
+                        '*/changeStatusEvent',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -143,7 +144,8 @@ return [
                         '*/code/*',
                     //Organizations
                         '*/contactbyemail',
-                        '*/validateFreeorder'
+                        '*/validateFreeorder',
+                        '*/organizations/{id}/eventUsers'
                 ],  
 
                 /*

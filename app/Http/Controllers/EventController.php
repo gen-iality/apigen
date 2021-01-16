@@ -221,6 +221,8 @@ class EventController extends Controller
      * @bodyParam category array App\Category
      * @bodyParam location String VIRTUAL | VENUE_NAME
      * @bodyParam extra_config object json of additional values to be stored
+     * @bodyParam status string when a teacher creates a course the automatic status is **'draft**' in case the administrator creates it automatically it will be **'approved'**
+     * 
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -781,6 +783,10 @@ class EventController extends Controller
 
 
     /**
+     * _changeStatusEvent_: approve or reject the courses **'draft'**, and send mail of the change of status of the event to the user who created it
+     * 
+     * @urlParam event_id required id of the event to be rejected or approved 
+     * @bodyParam status string required the status update allows for two possible statuses **approved** or **rejected** Example: approved
      * 
      */
     public function changeStatusEvent(Request $request , $event_id)

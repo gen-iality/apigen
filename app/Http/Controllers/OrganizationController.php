@@ -217,7 +217,41 @@ class OrganizationController extends Controller
 
 
     /**
+     * _indexByEventUserInOrganization_: list of users who have paid for events and successfully registered
      * 
+     * @urlParam id id of the organization from which you want to obtain the users registered to the events Example: 5f7e33ba3abc2119442e83e8
+     * @response [{
+     *  "Tipo de documento": null,
+     *  "Número de documento": null,
+     *  "Tipo de persona": null,
+     *  "Nombre del usuario ": "Juliana García",
+     *  "Correo": "geraldine.garcia+1@mocionsoft.com",
+     *  "Teléfono": null,
+     *  "Dirección": null,
+     *  "Fecha de nacimiento": null,
+     *  "Curso": "¿Cómo aprovechar las oportunidades de la Industria Musical?",
+     *  "Valor del curso": "58000",
+     *  "Total pagado": 1308000,
+     *  "Total descuento": -1250000,
+     *  "Fecha y hora de la compra ": "11/01/2021 19:18:02",
+     *  "Referencia de pago": "5ff8cef27ca1764a4f648984"
+     *},
+     *{
+     *  "Tipo de documento": "Cedula",
+     *  "Número de documento": "1223123",
+     *  "Tipo de persona": "persona_natural",
+     *  "Nombre del usuario ": "Pedro el escamoso",
+     *  "Correo": "pedroescamoso@gmail.com",
+     *  "Teléfono": null,
+     *  "Dirección": "Diagonal 20 b 25 A 25",
+     *  "Fecha de nacimiento": "2021-01-30",
+     *  "Curso": "¿Cómo aprovechar las oportunidades de la Industria Musical?",
+     *  "Valor del curso": "58000",
+     *  "Total pagado": 58000,
+     *  "Total descuento": 0,
+     *  "Fecha y hora de la compra ": "15/01/2021 20:45:15",
+     *  "Referencia de pago": "6001fedbd2cb5903dc60f3d8"
+     *}]
      */
     public function indexByEventUserInOrganization($organization_id)
     {
@@ -244,7 +278,7 @@ class OrganizationController extends Controller
                     'Correo'=> $account->email,
                     'Teléfono' => $account->phone,
                     'Dirección' => $account->adress,
-                    'Fecha de nacimiento' => $acount->date_birth,                    
+                    'Fecha de nacimiento' => $account->date_birth,                    
                     'Curso' => $event->name,
                     'Valor del curso' => $event->extra_config['price'],
                     'Total pagado' => $order->amount,
