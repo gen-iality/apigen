@@ -99,7 +99,7 @@ class Account extends User
             function ($model) {
                 try {
 
-                    var_dump('Previo a usurio no existe Create');die;
+                    // var_dump('Previo a usurio no existe Create');die;
                     
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
