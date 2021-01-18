@@ -785,6 +785,7 @@ class EventController extends Controller
     /**
      * _changeStatusEvent_: approve or reject the courses **'draft'**, and send mail of the change of status of the event to the user who created it
      * 
+     * @authenticated
      * @urlParam event_id required id of the event to be rejected or approved 
      * @bodyParam status string required the status update allows for two possible statuses **approved** or **rejected** Example: approved
      * 
@@ -793,17 +794,30 @@ class EventController extends Controller
     {   
         $data = $request->json()->all();
         
-        $event = Event::find($event_id);
-        $event->status = $data['status'];
-        $event->save();
+        $user = Auth::user();
 
-        $author = Account::find($event->author_id);
+        $userRol =  isset($user) ? $user->others_properties['role'] :  null;
+                    
+        
+        if(isset($userRol) && $userRol == 'admin')
+        {
+            $event = Event::find($event_id);
+            $event->status = $data['status'];
+            $event->save();
 
-        Mail::to($author->email)
-           ->queue(                
-                new \App\Mail\ConfirmationCourseEmail($event, $author)
-            );
+            $author = Account::find($event->author_id);
 
-        return $event;
+            Mail::to($author->email)
+            ->queue(                
+                    new \App\Mail\ConfirmationCourseEmail($event, $author)
+                );
+
+            return $event;
+        }
+        
+        return response()->json([
+            'Error' => 'The user does not have the permissions to execute this action'
+        ], 403);
+        
     }
 }

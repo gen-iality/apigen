@@ -243,13 +243,13 @@ Route::group(
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
+        Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent');        
     }
 );
 
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
-Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent');
 
 /***************
  * categories
