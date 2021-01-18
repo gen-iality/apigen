@@ -212,6 +212,7 @@ Route::group(
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
         Route::get('organization/{organzation_id}/users', 'UserController@userOrganization');
+        Route::put('users/{user_id}/changeStatusUser' , 'UserController@changeStatusUser'); 
     }
 );
 
