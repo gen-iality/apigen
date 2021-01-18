@@ -142,7 +142,7 @@ class UserController extends UserControllerWeb
         $Account = Account::find($id);
         
         //If the user wants to change the password this will also be modified in firebase
-        if($data['password'])
+        if(isset($data['password']))
         {           
             $auth->changeUserPassword($Account['uid'], $data['password']);
         }
