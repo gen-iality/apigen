@@ -137,8 +137,16 @@ class UserController extends UserControllerWeb
         ]);
 
         $data = $request->json()->all();
-
+        
+        $auth = resolve('Kreait\Firebase\Auth');
         $Account = Account::find($id);
+        
+        //If the user wants to change the password this will also be modified in firebase
+        if($data['password'])
+        {           
+            $auth->changeUserPassword($Account['uid'], $data['password']);
+        }
+
         $Account->fill($data);
         $Account->save();
 
