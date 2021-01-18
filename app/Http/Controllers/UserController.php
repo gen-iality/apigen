@@ -93,7 +93,7 @@ class UserController extends UserControllerWeb
 
         $data = $request->json()->all();
        
-
+        //For users registered as teachers, the status is set to 'unconfirmed' and then confirmed by the administrator
         $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
 
         $result = new Account($data);
@@ -362,7 +362,7 @@ class UserController extends UserControllerWeb
      * 
      * @autenticathed
      * 
-     * @queryParam filtered optional filter parameters Example: [{"field":"other_properties.rol","value":["admin"]}]
+     * @queryParam filtered optional filter parameters Example: [{"field":"others_properties.role","value":["admin"]}]
      * 
      * @urlParam organization_id required organization to which the users belong
      * 

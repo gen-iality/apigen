@@ -264,7 +264,7 @@ class OrganizationController extends Controller
         {   
             
             $querys =   $event->attendees()->get();
-
+            
             foreach($querys as $query){
                 
                 $account = Account::find($query->account_id);
@@ -289,11 +289,64 @@ class OrganizationController extends Controller
                 
                 array_push($attendees , $data);
                 
-                
-            }
+                // echo    $account->document_type .','.
+                // echo    $account->document_number .','.
+                //         // $account->person_type .','.
+                //         // $account->names .','.
+                //         // $account->email .','.
+                //         // $account->phone .','.
+                //         // // $account->adress .','.
+                //         // // $account->date_birth .','.
+                //         // $event->name .','.
+                //         // $event->extra_config['price'] .','.
+                //         // $order->amount .','.
+                //         // $event->extra_config['price'] - $order->amount .','.
+                //         ' ' .
+                //         \Carbon\Carbon::parse($order->updated_at)->format('d/m/Y H:i:s') .','.
+                //         $order->_id .','. '<br>';
+            }   
 
         }
 
         return $attendees;
     }
+
+    /**
+     *_ChangeUserPasswordOrganization_: change user password registered in a organization
+     * 
+     * @urlParam organization_id required string id of the organization in which the user is registered
+     * 
+     * @bodyParam email email required Email of the user who will change his password
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
+    public function changeUserPasswordOrganization(Request $request, string $organization_id)
+    {
+        $data = $request->json()->all();
+        $destination = $request->input("destination");
+        $onlylink = $request->input("onlylink");
+
+        //Validar si el usuario está registrado en el evento
+        $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
+        $organizationUser = Account::where("organization_ids", $organization_id)->where("email", $email)->first();
+
+        $organization = Organization::findOrFail($organization_id);
+        $image = null; //$organization->picture;
+
+        //En caso de que no exita el usuario se finaliza la función
+        if (empty($organizationUser)) {
+            abort(401, "El correo ingresado no se encuentra registrado en la organización");
+        }
+        
+        //Envio de correo para la contraseña
+        Mail::to($email)
+            ->queue(                
+                new \App\Mail\ChangeUserPasswordEmail($organization, $organizationUser, true, $destination, $onlylink)
+            );
+        return $organizationUser;
+
+    }
+    
 }

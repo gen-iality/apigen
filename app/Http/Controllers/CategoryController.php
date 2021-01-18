@@ -53,7 +53,8 @@ class CategoryController extends Controller
      * @authenticated
      * @bodyParam name string required name category Example: Animales
      * @bodyParam image string category image Example: https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/gato-atigrado-triste-redes.jpg?alt=media&token=2cd2161b-43f7-42a8-87e6-cf571e83e660
-     *
+     * @bodyParam organization_ids array Example: [5f7e33ba3abc2119442e83e8]
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
