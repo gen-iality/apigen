@@ -92,6 +92,10 @@ class UserController extends UserControllerWeb
         ]);
 
         $data = $request->json()->all();
+       
+
+        $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
+
         $result = new Account($data);
 
         $result->save();

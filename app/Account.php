@@ -14,6 +14,7 @@ class Account extends User
     use Notifiable;
     use HasRoles;
 
+    // const STATUS_UNCONFIRMED = 'unconfirmed';
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
@@ -81,7 +82,8 @@ class Account extends User
         'document_number', 
         'telephone', 
         'date_birth', 
-        'adress'
+        'adress',
+        'status',
     ];
 
     public function __construct($attributes = array())
