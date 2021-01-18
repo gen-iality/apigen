@@ -397,6 +397,10 @@ class UserController extends UserControllerWeb
      */
     public function changeStatusUser(Request $request , $user_id)
     {   
+        $validatedData = $request->validate([
+            'status' => 'required',
+        ]);
+
         $data = $request->json()->all();
         
         $user = Auth::user();
