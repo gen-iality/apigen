@@ -9,4 +9,5 @@ return [
     'boton_ingreso' =>  ' Entrar no evento',
     'fecha' => 'Data',
     'inscripcion_exitosa' => 'o registo foi concluído com êxito para o evento',
+    'correo_soporte' => 'Se tiver algum problema no acesso à plataforma ou durante as sessões, não hesite em escrever-nos para o seguinte endereço electrónico: soporte@evius.co  '
 ];
