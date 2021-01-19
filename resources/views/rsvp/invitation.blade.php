@@ -10,7 +10,7 @@
 @endif
 <br />
 <br />
-**Hola {{$eventUser_name}}**, la inscripción se ha realizado con éxito al evento:
+** {{ __ ('Mail.saludo')}} {{$eventUser_name}}**, {{ __ ('Mail.inscripcion_exitosa')}}:
 <b>{{$event->name}}</b>
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 <!-- @component('mail::table')
@@ -63,25 +63,24 @@ Ingresar al Evento AQUÍ
 		<img  src="{{$qr}}" />
 	@else
 		@component('mail::button', ['url' => $link , 'color' => 'evius'])
-			Ingresar al Evento AQUÍ
+			{{ __('Mail.ingresar_al_evento') }}
 		@endcomponent
 	@endif
 </div>
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
-    algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+	{{ __ ('Mail.recomendar_navegador')}}
 </p>
 <p style="font-size: 15px;color: gray;font-style: italic">
-Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
+	{{ __ ('Mail.correo_soporte')}}
 </p>
   
 
 <hr style="border-right : 0;border-left: 0;" />
 <p>
-	También puede ingresar al evento usando el siguiente enlace
-	<a href="{{$link}}">Ingresar a evento</a>
+	{{ __ ('Mail.alternativa_ingreso')}}
+	<a href="{{$link}}">{{ __('Mail.boton_ingreso') }}</a>
 </p>
 
 <div class="centered">

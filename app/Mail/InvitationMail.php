@@ -12,7 +12,7 @@ use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 use App\evaLib\Services\GoogleFiles;use QRCode;
-
+use App;
 
 class InvitationMail extends Mailable implements ShouldQueue
 {
@@ -52,10 +52,11 @@ class InvitationMail extends Mailable implements ShouldQueue
     public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false,$destination=null,$onlylink=null)
     {
 
-        $auth = resolve('Kreait\Firebase\Auth');
-        $this->auth = $auth;
+        $locale = isset($event->language) ? $event->language : 'es';
+        App::setLocale($locale);
 
-        
+        $auth = resolve('Kreait\Firebase\Auth');
+        $this->auth = $auth;        
         
 
         $destination  = ($destination)?$destination:config('app.front_url');
