@@ -14,7 +14,7 @@ use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use App\evaLib\Services\GoogleFiles;use QRCode;
 use Log;
 use App\MessageUser;
-
+use App;
 class RSVP extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
@@ -53,6 +53,10 @@ class RSVP extends Mailable implements ShouldQueue
      */
     public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $messageLog )
     {
+
+        $locale = isset($event->language) ? $event->language : 'es';
+        App::setLocale($locale);
+
 
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
