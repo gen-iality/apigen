@@ -52,15 +52,9 @@ ha sido invitado a:
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-<<<<<<< Updated upstream
-
-
-
-=======
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
 {{ __('Mail.ingresar_al_evento') }}
 @endcomponent
->>>>>>> Stashed changes
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
@@ -77,15 +71,7 @@ ha sido invitado a:
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
 <!-- ![Logo]({{!empty($image_footer)}}) -->
-<<<<<<< Updated upstream
 <img alt="{{$event->name}}" src={{$image_footer}} /> 
-=======
-<img src={{$image_footer}} /> 
-@elseif($organization_picture != null)
-![Logo]({{$organization_picture}})
-<img src={{$organization_picture}} /> 
-@else
->>>>>>> Stashed changes
 @endif
 </div>
 
