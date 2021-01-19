@@ -34,9 +34,10 @@ class ApiCheckoutController extends Controller
         Log::info('Pagando orden desde Payu');
 		//reference_sale response_message_pol
         $data = $request->input();
-        Log::info($request->input());
+        $datico = $request->json()->all();
         Log::info($request->json()->all());
-        Log::info(json_encode($data));
+        Log::info($datico['reference_sale']);
+        Log::info(json_encode($request->json()->all()));
 
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257dsaads";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
