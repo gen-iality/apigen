@@ -7,7 +7,7 @@
 @endif
 
 
-** Hola {{$eventUser_name}}, **
+** {{ __('Mail.saludo') }} {{$eventUser_name}}, **
 @if(!empty($content_header) && $content_header != '<p><br></p>')
 {!!$content_header !!}
 @endif
@@ -23,7 +23,7 @@ ha sido invitado a:
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
-| **Fecha:** | **Hora:** |
+| **{{ __('Mail.fecha') }}:** | **Hora:** |
 | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
 @endcomponent
 @endif
@@ -52,27 +52,40 @@ ha sido invitado a:
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
+<<<<<<< Updated upstream
 
 
 
+=======
+@component('mail::button', ['url' => $link , 'color' => 'evius'])
+{{ __('Mail.ingresar_al_evento') }}
+@endcomponent
+>>>>>>> Stashed changes
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
-	algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
+	{{ __('Mail.recomendar_navegador') }}
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-	Si tiene problemas con el botón de ingreso abra el siguiente enlace
-	<a href="{{$link}}">Click aquí</a>
+	{{ __('Mail.alternativa_ingreso')}}
+	<a href="{{$link}}">{{ __('Mail.boton_ingreso')}}</a>
 </p>
 
 
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
 <!-- ![Logo]({{!empty($image_footer)}}) -->
+<<<<<<< Updated upstream
 <img alt="{{$event->name}}" src={{$image_footer}} /> 
+=======
+<img src={{$image_footer}} /> 
+@elseif($organization_picture != null)
+![Logo]({{$organization_picture}})
+<img src={{$organization_picture}} /> 
+@else
+>>>>>>> Stashed changes
 @endif
 </div>
 
