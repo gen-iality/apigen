@@ -80,7 +80,7 @@ class Account extends User
         'person_type', 
         'document_type', 
         'document_number', 
-        'telephone', 
+        'phone', 
         'date_birth', 
         'adress',
         'status',
