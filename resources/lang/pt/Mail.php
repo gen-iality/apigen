@@ -8,6 +8,7 @@ return [
     'alternativa_ingreso' => 'Caso tenha problemas para entrar no evento, abra este link',
     'boton_ingreso' =>  ' Entrar no evento',
     'fecha' => 'Data',
-    'inscripcion_exitosa' => 'o registo foi concluído com êxito para o evento',
-    'correo_soporte' => 'Se tiver algum problema no acesso à plataforma ou durante as sessões, não hesite em escrever-nos para o seguinte endereço electrónico: soporte@evius.co  '
+    'hora' => 'Horário',
+    'inscripcion_exitosa' => 'sua inscrição para o evento foi realizada com sucesso',
+    'correo_soporte' => 'Caso tenha algum problema para acessar a plataforma durante o evento, envie um e-mail para soporte@evius.co',    
 ];
