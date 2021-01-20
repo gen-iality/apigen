@@ -15,7 +15,7 @@
 
 @if(is_null($include_date) || $include_date == true || $include_date != false )
 @if($ticket_title)
-ha sido invitado a:
+{{-- ha sido invitado a: --}}
 <strong>{!! $ticket_title !!}</strong>
 @endif
 
@@ -23,7 +23,7 @@ ha sido invitado a:
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
-| **{{ __('Mail.fecha') }}:** | **Hora:** |
+| **{{ __('Mail.fecha') }}:** | **{{ __('Mail.hora') }}:** |
 | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
 @endcomponent
 @endif
