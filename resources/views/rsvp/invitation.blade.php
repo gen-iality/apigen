@@ -19,7 +19,7 @@
 | **Fecha:** | **Hora:** |
 | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%A, %e de %B %Y') }} | {{ \Carbon\Carbon::parse($event->datetime_from)->formatLocalized('%r') }} |
 
-
+ 
 @if (false)
 @if($event->datetime_to)
 | **Hasta:** | **Hora:** |
