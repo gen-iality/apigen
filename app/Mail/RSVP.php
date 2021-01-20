@@ -222,7 +222,9 @@ class RSVP extends Mailable implements ShouldQueue
             $headers = $message->getHeaders();                               
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');                    
         });
-       
+        
+        $locale = isset($this->event->language) ? $this->event->language : 'es';
+        App::setLocale($locale);
 
         return $this
             ->from("alerts@evius.co", $from)
