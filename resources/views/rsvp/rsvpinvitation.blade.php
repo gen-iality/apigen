@@ -31,10 +31,10 @@
 <div style="text-align: center">
 	@if($event->type_event == "physicalEvent")
 		<img  src="{{$qr}}" />
-	@else
+	{{-- @else
 		@component('mail::button', ['url' => $link , 'color' => 'evius'])
 			Ingresar al Evento AQUÍ
-		@endcomponent
+		@endcomponent --}}
 	@endif
 </div>
 
