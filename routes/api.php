@@ -131,7 +131,7 @@ Route::apiResource('organizations', 'OrganizationController', ['only' => ['index
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
 Route::get('organizations/{id}/eventUsers' , 'OrganizationController@indexByEventUserInOrganization');
-Route::post('organizations/{organization_id}/changeUserPassword/', 'OrganizationController@changeUserPasswordOrganization');
+Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationController@changeUserPasswordOrganization');
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
