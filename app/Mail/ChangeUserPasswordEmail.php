@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Event;
+use App\Account;
 use App\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -49,6 +50,8 @@ class ChangeUserPasswordEmail extends Mailable implements ShouldQueue
         }
 
         $this->password = $password;
+        $this->organization = Account::find($organization->author);
+
     }
 
     private function encryptdata($string)
@@ -78,7 +81,6 @@ class ChangeUserPasswordEmail extends Mailable implements ShouldQueue
     private function createPass()
     {
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
         $input_length = strlen($permitted_chars);
         $random_string = '';
         for ($i = 0; $i < 10; $i++) {
@@ -95,8 +97,7 @@ class ChangeUserPasswordEmail extends Mailable implements ShouldQueue
      */
 
     public function build()
-    {
-        
+    {             
         return $this
             ->from($this->organization->email, 'noreply')
             ->subject($this->subject)

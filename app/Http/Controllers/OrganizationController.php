@@ -294,7 +294,7 @@ class OrganizationController extends Controller
                 //         // $account->person_type .','.
                 //         // $account->names .','.
                 //         // $account->email .','.
-                //         // $account->phone .','.
+                //         // $account->telephone .','.
                 //         // // $account->adress .','.
                 //         // // $account->date_birth .','.
                 //         // $event->name .','.
