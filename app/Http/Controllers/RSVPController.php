@@ -244,13 +244,14 @@ class RSVPController extends Controller implements ShouldQueue
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
             $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
-            $include_ical_calendar = !empty($data["include_ical_calendar"]) ? $data["include_ical_calendar"] : true;
 
             $include_date = false;
             if (!empty($data["include_date"])) {
                 $include_date = $data["include_date"] ? true : false;
             }
-        
+
+            $include_ical_calendar = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true;            
+
             // sino existe la propiedad names lo más posible es que el usuario tenga un error
             if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
                 continue;
