@@ -24,9 +24,10 @@ class ConfirmationStatusUserEmail extends Mailable implements ShouldQueue
      * @return void
      */
     
-    public function __construct($user)
+    public function __construct($user , $organization)
     {   
         $this->user = $user;
+        $his->organization = $organization;
     }
 
     /**
@@ -38,8 +39,8 @@ class ConfirmationStatusUserEmail extends Mailable implements ShouldQueue
     {
     
         return $this
-        ->from("ucronio@evius.co" , "Ucronio")
-        ->subject('Confirmación estatus de profesor')
+        ->from($this->organization->email , $thos->organization->displayname)
+        ->subject('Confirmación estatus de usuario')
         ->markdown('rsvp.confirmationStatusUserEmail');
     }
 }

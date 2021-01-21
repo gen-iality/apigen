@@ -81,6 +81,7 @@ class Account extends User
         'document_type', 
         'document_number', 
         'phone', 
+        'telephone', 
         'date_birth', 
         'adress',
         'status',

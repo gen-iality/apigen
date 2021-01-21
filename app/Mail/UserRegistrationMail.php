@@ -2,34 +2,33 @@
 
 namespace App\Mail;
 
-use App\Event;
-use App\DiscountCode;
-use App\Order;
+
+use App\Account;
 use App\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
-use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 
 class UserRegistrationMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     public $user;
+    public $organization;
    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user , $organization)
     {   
-        // var_dump($code);die;
-        // var_dump($code->_id);    
-
-        $this->user = $user;
+        
+        $organization = Organization::find($organization);
+        $organization = Account::find($organization->author);
+        $this->user = $user;        
+        $this->organization = $organization;
     }
 
 
@@ -41,10 +40,10 @@ class UserRegistrationMail extends Mailable implements ShouldQueue
 
     public function build()
     {
-
+        // var_dump($this->organization->email);die;
         return $this
-            ->from("alerts@evius.co", 'Ucronio')
-            ->subject('Ucronio')
+            ->from($this->organization->email, $this->organization->displayName)
+            ->subject('Registro exitoso')
             ->markdown('Mailers.UserRegistration');
         //return $this->view('vendor.mail.html.message');
     }

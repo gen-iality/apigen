@@ -18,17 +18,20 @@ class ConfirmationCourseEmail extends Mailable implements ShouldQueue
 
     public $user;
     public $event;
+    public $organization;
     /**
      * Create a new message instance.
      *
      * @return void
      */
     
-    public function __construct($event , $user)
+    public function __construct($event , $user, $organization)
     {   
     
         $this->event = $event;
         $this->user = $user;
+        $this->organization = $organization;
+
     }
 
     /**
@@ -38,9 +41,9 @@ class ConfirmationCourseEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-    
+            
         return $this
-        ->from("alerts@evius.co" , "Ucronio")
+        ->from($this->organization->email , $this->organization->displayName)
         ->subject('Confirmación de curso')
         ->markdown('rsvp.confirmationCourseEmail');
     }

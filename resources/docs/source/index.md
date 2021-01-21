@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/events/quod/duplicateactivitie/voluptas" \
+    "https://evius.co/api/events/perferendis/duplicateactivitie/mollitia" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/quod/duplicateactivitie/voluptas"
+    "https://evius.co/api/events/perferendis/duplicateactivitie/mollitia"
 );
 
 let headers = {
@@ -79,14 +79,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/events/ex/activities" \
+    -G "https://evius.co/api/events/sunt/activities" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/ex/activities"
+    "https://evius.co/api/events/sunt/activities"
 );
 
 let headers = {
@@ -282,14 +282,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/aut/activities/1" \
+    "https://evius.co/api/events/rem/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/aut/activities/1"
+    "https://evius.co/api/events/rem/activities/1"
 );
 
 let headers = {
@@ -328,14 +328,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://evius.co/api/events/placeat/activities/1" \
+    "https://evius.co/api/events/ut/activities/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/placeat/activities/1"
+    "https://evius.co/api/events/ut/activities/1"
 );
 
 let headers = {
@@ -412,16 +412,16 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/events/ipsum/activities_attendees" \
+    -G "https://evius.co/api/events/earum/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_id":"voluptatem","user_id":"soluta"}'
+    -d '{"activity_id":"quia","user_id":"unde"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/ipsum/activities_attendees"
+    "https://evius.co/api/events/earum/activities_attendees"
 );
 
 let headers = {
@@ -430,8 +430,8 @@ let headers = {
 };
 
 let body = {
-    "activity_id": "voluptatem",
-    "user_id": "soluta"
+    "activity_id": "quia",
+    "user_id": "unde"
 }
 
 fetch(url, {
@@ -473,7 +473,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/events/sapiente/activities_attendees" \
+    "https://evius.co/api/events/facilis/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -482,7 +482,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/sapiente/activities_attendees"
+    "https://evius.co/api/events/facilis/activities_attendees"
 );
 
 let headers = {
@@ -529,14 +529,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/events/laborum/activities_attendees/1" \
+    -G "https://evius.co/api/events/est/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/laborum/activities_attendees/1"
+    "https://evius.co/api/events/est/activities_attendees/1"
 );
 
 let headers = {
@@ -580,14 +580,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/sit/activities_attendees/1" \
+    "https://evius.co/api/events/numquam/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/sit/activities_attendees/1"
+    "https://evius.co/api/events/numquam/activities_attendees/1"
 );
 
 let headers = {
@@ -626,14 +626,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://evius.co/api/events/sunt/activities_attendees/1" \
+    "https://evius.co/api/events/dicta/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/sunt/activities_attendees/1"
+    "https://evius.co/api/events/dicta/activities_attendees/1"
 );
 
 let headers = {
@@ -670,14 +670,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/me/events/et/activities_attendees" \
+    -G "https://evius.co/api/me/events/non/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/me/events/et/activities_attendees"
+    "https://evius.co/api/me/events/non/activities_attendees"
 );
 
 let headers = {
@@ -720,14 +720,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/quia/activities_attendees/id/check_in" \
+    "https://evius.co/api/events/impedit/activities_attendees/ut/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/quia/activities_attendees/id/check_in"
+    "https://evius.co/api/events/impedit/activities_attendees/ut/check_in"
 );
 
 let headers = {
@@ -880,33 +880,6 @@ fetch(url, {
             "organization_ids": [
                 "5f7e33ba3abc2119442e83e8"
             ]
-        },
-        {
-            "_id": "5ffdab39f6fe6333927ed192",
-            "name": "Categoría por organización",
-            "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/gato-atigrado-triste-redes.jpg?alt=media&token=2cd2161b-43f7-42a8-87e6-cf571e83e660",
-            "organization_ids": [
-                "5f7e33ba3abc2119442e83e8"
-            ],
-            "updated_at": "2021-01-12 13:59:21",
-            "created_at": "2021-01-12 13:59:21"
-        },
-        {
-            "_id": "6005fa3a54f4dc59f9074af5",
-            "name": "Prueba",
-            "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F896689.png?alt=media&token=6756e910-f34f-4cae-8c8b-300392324830",
-            "updated_at": "2021-01-18 21:14:34",
-            "created_at": "2021-01-18 21:14:34",
-            "organization_ids": [
-                "5f7e33ba3abc2119442e83e8"
-            ]
-        },
-        {
-            "_id": "600612259bd62f16fb53e5c8",
-            "name": "Prueba2",
-            "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F896689.png?alt=media&token=743d29fb-8e5b-405e-b14a-c989b0868649",
-            "updated_at": "2021-01-18 22:56:37",
-            "created_at": "2021-01-18 22:56:37"
         }
     ],
     "links": {
@@ -921,8 +894,8 @@ fetch(url, {
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/categories",
         "per_page": 2500,
-        "to": 18,
-        "total": 18
+        "to": 15,
+        "total": 15
     }
 }
 ```
@@ -1035,26 +1008,6 @@ fetch(url, {
         "organization_ids": [
             "5f7e33ba3abc2119442e83e8"
         ]
-    },
-    {
-        "_id": "5ffdab39f6fe6333927ed192",
-        "name": "Categoría por organización",
-        "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/gato-atigrado-triste-redes.jpg?alt=media&token=2cd2161b-43f7-42a8-87e6-cf571e83e660",
-        "organization_ids": [
-            "5f7e33ba3abc2119442e83e8"
-        ],
-        "updated_at": "2021-01-12 13:59:21",
-        "created_at": "2021-01-12 13:59:21"
-    },
-    {
-        "_id": "6005fa3a54f4dc59f9074af5",
-        "name": "Prueba",
-        "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F896689.png?alt=media&token=6756e910-f34f-4cae-8c8b-300392324830",
-        "updated_at": "2021-01-18 21:14:34",
-        "created_at": "2021-01-18 21:14:34",
-        "organization_ids": [
-            "5f7e33ba3abc2119442e83e8"
-        ]
     }
 ]
 ```
@@ -1135,7 +1088,7 @@ curl -X PUT \
     "https://evius.co/api/categories/5fb6e8d76dbaeb3738258092" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"possimus"}'
+    -d '{"name":"occaecati"}'
 
 ```
 
@@ -1150,7 +1103,7 @@ let headers = {
 };
 
 let body = {
-    "name": "possimus"
+    "name": "occaecati"
 }
 
 fetch(url, {
@@ -1286,7 +1239,7 @@ curl -X POST \
     "https://evius.co/api/discountcodetemplate/1/code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"quantity":20.961338}'
+    -d '{"quantity":26.18}'
 
 ```
 
@@ -1301,7 +1254,7 @@ let headers = {
 };
 
 let body = {
-    "quantity": 20.961338
+    "quantity": 26.18
 }
 
 fetch(url, {
@@ -1497,7 +1450,7 @@ curl -X POST \
     "https://evius.co/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"quam","event_id":"sequi","organization_id":"voluptas"}'
+    -d '{"code":"dicta","event_id":"culpa","organization_id":"illum"}'
 
 ```
 
@@ -1512,9 +1465,9 @@ let headers = {
 };
 
 let body = {
-    "code": "quam",
-    "event_id": "sequi",
-    "organization_id": "voluptas"
+    "code": "dicta",
+    "event_id": "culpa",
+    "organization_id": "illum"
 }
 
 fetch(url, {
@@ -1679,7 +1632,7 @@ fetch(url, {
             "author_id": "5e9caaa1d74d5c2f6a02a3c2",
             "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2021-01-18 13:21:40",
+            "updated_at": "2021-01-19 23:59:25",
             "created_at": "2020-04-24 01:03:07",
             "category_ids": [
                 "5bf47083754e2317e4300b5f",
@@ -1695,7 +1648,7 @@ fetch(url, {
             "enable_language": false,
             "has_date": false,
             "picture": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/pwDanMn2dwa7DqqArXCjgsjo5HYM5ZJAJdzl0X0s.png",
-            "type_event": "onlineEvent",
+            "type_event": "physicalEvent",
             "styles": {
                 "buttonColor": "#FFF",
                 "banner_color": "#FFF",
@@ -1887,7 +1840,7 @@ fetch(url, {
             "is_live": 1,
             "video": "https:\/\/www.youtube.com\/watch?v=9dGChQcl_So",
             "registration_message": "<p><br><\/p>",
-            "validateEmail": true,
+            "validateEmail": false,
             "data_loader_page": null,
             "event_platform": "vimeo",
             "initial_page": null,
@@ -1898,6 +1851,7 @@ fetch(url, {
             "paid": true,
             "has_payment": true,
             "status": "approved",
+            "language": "pt",
             "author": {
                 "_id": "5e9caaa1d74d5c2f6a02a3c2",
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
@@ -1938,10 +1892,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -2325,7 +2279,7 @@ fetch(url, {
             "author_id": "5e9caaa1d74d5c2f6a02a3c2",
             "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2021-01-18 13:21:40",
+            "updated_at": "2021-01-19 23:59:25",
             "created_at": "2020-04-24 01:03:07",
             "category_ids": [
                 "5bf47083754e2317e4300b5f",
@@ -2341,7 +2295,7 @@ fetch(url, {
             "enable_language": false,
             "has_date": false,
             "picture": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/pwDanMn2dwa7DqqArXCjgsjo5HYM5ZJAJdzl0X0s.png",
-            "type_event": "onlineEvent",
+            "type_event": "physicalEvent",
             "styles": {
                 "buttonColor": "#FFF",
                 "banner_color": "#FFF",
@@ -2533,7 +2487,7 @@ fetch(url, {
             "is_live": 1,
             "video": "https:\/\/www.youtube.com\/watch?v=9dGChQcl_So",
             "registration_message": "<p><br><\/p>",
-            "validateEmail": true,
+            "validateEmail": false,
             "data_loader_page": null,
             "event_platform": "vimeo",
             "initial_page": null,
@@ -2544,6 +2498,7 @@ fetch(url, {
             "paid": true,
             "has_payment": true,
             "status": "approved",
+            "language": "pt",
             "author": {
                 "_id": "5e9caaa1d74d5c2f6a02a3c2",
                 "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
@@ -2584,10 +2539,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -2976,8 +2931,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3145,8 +3100,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3314,8 +3269,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3483,8 +3438,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -3652,8 +3607,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -4312,10 +4267,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -4756,8 +4711,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -4925,8 +4880,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5094,8 +5049,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5263,8 +5218,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5438,8 +5393,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5613,8 +5568,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -5788,8 +5743,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -6081,10 +6036,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -6528,8 +6483,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -6700,8 +6655,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -6872,8 +6827,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7044,8 +6999,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7216,8 +7171,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7388,8 +7343,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7560,8 +7515,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7732,8 +7687,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -7924,8 +7879,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8093,8 +8048,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8262,8 +8217,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8431,8 +8386,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8600,8 +8555,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8769,8 +8724,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -8938,8 +8893,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9107,8 +9062,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9282,8 +9237,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9457,8 +9412,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9632,8 +9587,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9807,8 +9762,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -9982,8 +9937,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10157,8 +10112,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10313,8 +10268,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10469,8 +10424,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10625,8 +10580,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10781,8 +10736,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -10937,8 +10892,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11093,8 +11048,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11249,8 +11204,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11405,8 +11360,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11561,8 +11516,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11733,8 +11688,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -11905,8 +11860,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12077,8 +12032,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12249,8 +12204,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12421,8 +12376,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12593,8 +12548,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12765,8 +12720,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -12937,8 +12892,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13109,8 +13064,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13278,8 +13233,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13447,8 +13402,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13616,8 +13571,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13785,8 +13740,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -13954,8 +13909,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14123,8 +14078,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14292,8 +14247,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14461,8 +14416,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14630,8 +14585,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14787,8 +14742,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -14944,8 +14899,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15101,8 +15056,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15258,8 +15213,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15415,8 +15370,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15572,8 +15527,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15729,8 +15684,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -15886,8 +15841,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16043,8 +15998,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16198,8 +16153,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16353,8 +16308,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16508,8 +16463,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16663,8 +16618,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16818,8 +16773,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -16973,8 +16928,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17128,8 +17083,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17283,8 +17238,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17438,8 +17393,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -17683,10 +17638,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -18147,10 +18102,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -19484,10 +19439,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -20074,10 +20029,10 @@ fetch(url, {
                 },
                 "confirmation_code": "Fmg1DjO8NAavTRaS",
                 "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-                "updated_at": "2021-01-18 16:19:55",
+                "updated_at": "2021-01-20 21:40:39",
                 "created_at": "2020-04-19 19:46:41",
                 "names": "evius@evius.co",
-                "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+                "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
                 "aerolineapreferida": "Avianca",
                 "genero": "Masculino",
                 "tipodecerveza": "Ale",
@@ -20518,8 +20473,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -20690,8 +20645,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -20871,7 +20826,7 @@ fetch(url, {
         "event": {
             "_id": "5fc9a435f625f665be2f0462",
             "category": [
-                "5fbee74043fe4a32e151587c"
+                "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-13 00:00:00",
             "datetime_to": "2021-02-13 00:00:00",
@@ -20881,6 +20836,7 @@ fetch(url, {
             "visibility": "PUBLIC",
             "extra_config": {
                 "duration": "3 horas",
+                "modules": [],
                 "price": "58000",
                 "requirements": [
                     "Contar con computador personal.",
@@ -20891,7 +20847,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2021-01-18 19:04:19",
+            "updated_at": "2021-01-19 21:27:40",
             "created_at": "2020-12-04 02:51:33",
             "user_properties": [
                 {
@@ -20936,7 +20892,7 @@ fetch(url, {
                 }
             ],
             "category_ids": [
-                "5fbee74043fe4a32e151587c"
+                "5fbee701a75d483665317ee3"
             ],
             "status": "approved",
             "author": {
@@ -20950,8 +20906,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -20961,11 +20917,11 @@ fetch(url, {
             },
             "categories": [
                 {
-                    "_id": "5fbee74043fe4a32e151587c",
-                    "name": "Satélites",
-                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fsatelites.jpg?alt=media&token=7f12fa5d-11a3-40a0-9461-d3debdc04b90",
-                    "updated_at": "2020-11-25 23:22:40",
-                    "created_at": "2020-11-25 23:22:40",
+                    "_id": "5fbee701a75d483665317ee3",
+                    "name": "Planeta",
+                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fplaneta.jpg?alt=media&token=54c3c6d0-de27-4298-b5a0-fda6a1409759",
+                    "updated_at": "2020-11-25 23:21:37",
+                    "created_at": "2020-11-25 23:21:37",
                     "organization_ids": [
                         "5f7e33ba3abc2119442e83e8"
                     ]
@@ -21134,8 +21090,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -21318,8 +21274,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -21502,8 +21458,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -21686,8 +21642,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -21870,8 +21826,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -22054,8 +22010,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -22238,8 +22194,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -22422,8 +22378,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -22606,8 +22562,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -22682,7 +22638,7 @@ fetch(url, {
         "event": {
             "_id": "5fc9a435f625f665be2f0462",
             "category": [
-                "5fbee74043fe4a32e151587c"
+                "5fbee701a75d483665317ee3"
             ],
             "datetime_from": "2021-02-13 00:00:00",
             "datetime_to": "2021-02-13 00:00:00",
@@ -22692,6 +22648,7 @@ fetch(url, {
             "visibility": "PUBLIC",
             "extra_config": {
                 "duration": "3 horas",
+                "modules": [],
                 "price": "58000",
                 "requirements": [
                     "Contar con computador personal.",
@@ -22702,7 +22659,7 @@ fetch(url, {
             "author_id": "5fb1f6fb7bf68702e345b5d2",
             "organizer_id": "5f7e33ba3abc2119442e83e8",
             "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2021-01-18 19:04:19",
+            "updated_at": "2021-01-19 21:27:40",
             "created_at": "2020-12-04 02:51:33",
             "user_properties": [
                 {
@@ -22747,7 +22704,7 @@ fetch(url, {
                 }
             ],
             "category_ids": [
-                "5fbee74043fe4a32e151587c"
+                "5fbee701a75d483665317ee3"
             ],
             "status": "approved",
             "author": {
@@ -22761,8 +22718,8 @@ fetch(url, {
                 "api_token": "pbdyucU3E5KN92ja7XUToXGUte4bR4TawlQ9rntHFf4XqUMSXCGlrCxhTXFK",
                 "uid": "keLMJNawwIQNeMIL6Ivc43nN8Q42",
                 "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVmOTcxMmEwODczMTcyMGQ2NmZkNGEyYTU5MmU0ZGZjMmI1ZGU1OTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGl0byBwdWxvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V2aXVzYXV0aCIsImF1ZCI6ImV2aXVzYXV0aCIsImF1dGhfdGltZSI6MTYxMDk5MTQxMCwidXNlcl9pZCI6ImtlTE1KTmF3d0lRTmVNSUw2SXZjNDNuTjhRNDIiLCJzdWIiOiJrZUxNSk5hd3dJUU5lTUlMNkl2YzQzbk44UTQyIiwiaWF0IjoxNjEwOTkxNDEwLCJleHAiOjE2MTA5OTUwMTAsImVtYWlsIjoidGl0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGl0b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.AxVbkX_nhqGpYvat4AJEhG5lqU8CvMgaz6iFUF5CwP4v4yt2UCJJpu5sDK4ctn8UeeemT2ffXOEq8ijk3-ulZjuIm_OWGyqCQkbD85aWCbePoRuRABp1Syq8evk7szGZCTYrbFOBLCCi6SUOytNUVgvQnQTyBi5-DEvS75U_jk8B7f03KP32zFs8Be9npIdYL-wtV66fBeZ3B0xa3FAdTpg3_ajXeyttAkhrNEhtL7bYVrKdoQo4fYBdWUfworvg5L__hX7v8ugdSwVNp3tBFyFyu1ZIxZpYHkmiDKJK7ZCUgIwSWi6P0dc1N51ooK88_WY7s-e6-_5NlXW0oxdc-Q",
-                "refresh_token": "AOvuKvQcMIG2WeRCvOwkKCAocCMmucEpsXG7wfTAH-a3vMj9obP88oOpSS2yhPPOvimjYIj1zzwWPQHIc5YIP_9VCoWNLA7Abve-Q0nPwEQThJOlh2062VjpCeDxZnbsqNMCY0TzD-TiT37BZL3Gm8x-1QTXnxIU43jhnHLtHR63o0pNKrLiHKhQnr1Wu_R_kVdtFhJcvjnme9NLaMZSkOGYeB6LiPXSPg",
-                "updated_at": "2021-01-18 22:30:20",
+                "refresh_token": "AOvuKvQS5LYu1C-zHlewS2wbiH2L4PTIOmTdbbo6-rAUEMll9M0S2262dtQRND7NfJo9g0gtXnj-ZxZ1eRvw6RNzQqrsuslZ9VTAbs4CwMUfX-h1wM1F_kenQZmZaVT798ch4c8Fmpm0AV3BNhYLFTKT88ZSwx5ghi0Jt8IUSwRMfZXCB3LFPPdUE-ahckwiyHyOIXl_1ab7P5x62y9Db-0ibuu2SO3IrA",
+                "updated_at": "2021-01-21 01:13:44",
                 "created_at": "2020-11-16 03:50:19",
                 "name": "tito pulo2",
                 "role": "admin",
@@ -22772,11 +22729,11 @@ fetch(url, {
             },
             "categories": [
                 {
-                    "_id": "5fbee74043fe4a32e151587c",
-                    "name": "Satélites",
-                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fsatelites.jpg?alt=media&token=7f12fa5d-11a3-40a0-9461-d3debdc04b90",
-                    "updated_at": "2020-11-25 23:22:40",
-                    "created_at": "2020-11-25 23:22:40",
+                    "_id": "5fbee701a75d483665317ee3",
+                    "name": "Planeta",
+                    "image": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2Fplaneta.jpg?alt=media&token=54c3c6d0-de27-4298-b5a0-fda6a1409759",
+                    "updated_at": "2020-11-25 23:21:37",
+                    "created_at": "2020-11-25 23:21:37",
                     "organization_ids": [
                         "5f7e33ba3abc2119442e83e8"
                     ]
@@ -22844,7 +22801,7 @@ curl -X POST \
     "https://evius.co/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"perspiciatis"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"ut"}'
 
 ```
 
@@ -22864,7 +22821,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "perspiciatis"
+    "discount_type": "ut"
 }
 
 fetch(url, {
@@ -23032,7 +22989,7 @@ fetch(url, {
         "author_id": "5e9caaa1d74d5c2f6a02a3c2",
         "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
         "event_type_id": "5bf47203754e2317e4300b68",
-        "updated_at": "2021-01-18 13:21:40",
+        "updated_at": "2021-01-19 23:59:25",
         "created_at": "2020-04-24 01:03:07",
         "category_ids": [
             "5bf47083754e2317e4300b5f",
@@ -23048,7 +23005,7 @@ fetch(url, {
         "enable_language": false,
         "has_date": false,
         "picture": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/pwDanMn2dwa7DqqArXCjgsjo5HYM5ZJAJdzl0X0s.png",
-        "type_event": "onlineEvent",
+        "type_event": "physicalEvent",
         "styles": {
             "buttonColor": "#FFF",
             "banner_color": "#FFF",
@@ -23240,7 +23197,7 @@ fetch(url, {
         "is_live": 1,
         "video": "https:\/\/www.youtube.com\/watch?v=9dGChQcl_So",
         "registration_message": "<p><br><\/p>",
-        "validateEmail": true,
+        "validateEmail": false,
         "data_loader_page": null,
         "event_platform": "vimeo",
         "initial_page": null,
@@ -23251,6 +23208,7 @@ fetch(url, {
         "paid": true,
         "has_payment": true,
         "status": "approved",
+        "language": "pt",
         "author": {
             "_id": "5e9caaa1d74d5c2f6a02a3c2",
             "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
@@ -23291,10 +23249,10 @@ fetch(url, {
             },
             "confirmation_code": "Fmg1DjO8NAavTRaS",
             "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-            "updated_at": "2021-01-18 16:19:55",
+            "updated_at": "2021-01-20 21:40:39",
             "created_at": "2020-04-19 19:46:41",
             "names": "evius@evius.co",
-            "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+            "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
             "aerolineapreferida": "Avianca",
             "genero": "Masculino",
             "tipodecerveza": "Ale",
@@ -23700,7 +23658,7 @@ curl -X POST \
     "https://evius.co/api/discountcodetemplate/1/importCodes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"":{"json":"ut"}}'
+    -d '{"":{"json":"nobis"}}'
 
 ```
 
@@ -23716,7 +23674,7 @@ let headers = {
 
 let body = {
     "": {
-        "json": "ut"
+        "json": "nobis"
     }
 }
 
@@ -23950,7 +23908,7 @@ curl -X POST \
     "https://evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"officia","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"nobis","extra_config":{},"status":"sed"}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"ut","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"quos","extra_config":{},"status":"non"}'
 
 ```
 
@@ -23968,16 +23926,16 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "officia",
+    "picture": "ut",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "nobis",
+    "location": "quos",
     "extra_config": {},
-    "status": "sed"
+    "status": "non"
 }
 
 fetch(url, {
@@ -24070,7 +24028,7 @@ curl -X POST \
     "https://evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"assumenda","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"et","extra_config":{},"status":"illo"}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"qui","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"nemo","extra_config":{},"status":"nihil"}'
 
 ```
 
@@ -24088,16 +24046,16 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "assumenda",
+    "picture": "qui",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "et",
+    "location": "nemo",
     "extra_config": {},
-    "status": "illo"
+    "status": "nihil"
 }
 
 fetch(url, {
@@ -24186,7 +24144,7 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/et/changeStatusEvent" \
+    "https://evius.co/api/events/illo/changeStatusEvent" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -24195,7 +24153,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/et/changeStatusEvent"
+    "https://evius.co/api/events/illo/changeStatusEvent"
 );
 
 let headers = {
@@ -24217,6 +24175,36 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "_id": "5fb2eef214b93f11165dd1a0",
+    "category": "d35319efaf194af191b8dc7c149a01bc",
+    "datetime_from": null,
+    "datetime_to": null,
+    "description": "dddd",
+    "name": "curso 1",
+    "picture": "https:\/\/picsum.photos\/400\/800",
+    "visibility": "PUBLIC",
+    "extra_config": {
+        "price": "0"
+    },
+    "author_id": "5fb1f6fb7bf68702e345b5d2",
+    "organizer_id": "5f7e33ba3abc2119442e83e8",
+    "event_type_id": "5bf47203754e2317e4300b68",
+    "status": "approved",
+    "updated_at": "2021-01-20 21:07:50",
+    "created_at": "2020-11-16 21:28:18"
+}
+```
+> Example response (403):
+
+```json
+{
+    "Error": "The user does not have the permissions to execute this action"
+}
+```
 
 ### HTTP Request
 `PUT api/events/{event_id}/changeStatusEvent`
@@ -24225,7 +24213,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event_id` |  required  | id of the event to be rejected or approved
+    `event_id` |  required  | id of the event to be rejected or approved Example:
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
@@ -24240,14 +24228,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/users/minima/events" \
+    -G "https://evius.co/api/users/sit/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/users/minima/events"
+    "https://evius.co/api/users/sit/events"
 );
 
 let headers = {
@@ -24270,8 +24258,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/minima\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/minima\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/sit\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/sit\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -24279,7 +24267,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/minima\/events",
+        "path": "http:\/\/localhost\/api\/users\/sit\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -24305,14 +24293,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/organizations/velit/events" \
+    -G "https://evius.co/api/organizations/esse/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/organizations/velit/events"
+    "https://evius.co/api/organizations/esse/events"
 );
 
 let headers = {
@@ -24335,8 +24323,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/organizations\/velit\/events?page=1",
-        "last": "http:\/\/localhost\/api\/organizations\/velit\/events?page=1",
+        "first": "http:\/\/localhost\/api\/organizations\/esse\/events?page=1",
+        "last": "http:\/\/localhost\/api\/organizations\/esse\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -24344,7 +24332,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/organizations\/velit\/events",
+        "path": "http:\/\/localhost\/api\/organizations\/esse\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -24481,7 +24469,7 @@ curl -X POST \
     "https://evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"tempora"}'
+    -d '{"name":"odit"}'
 
 ```
 
@@ -24496,7 +24484,7 @@ let headers = {
 };
 
 let body = {
-    "name": "tempora"
+    "name": "odit"
 }
 
 fetch(url, {
@@ -24632,14 +24620,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/events/blanditiis/eventusers/dolores" \
+    -G "https://evius.co/api/events/qui/eventusers/unde" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/blanditiis/eventusers/dolores"
+    "https://evius.co/api/events/qui/eventusers/unde"
 );
 
 let headers = {
@@ -24660,7 +24648,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Attendee] dolores"
+    "message": "No query results for model [App\\Attendee] unde"
 }
 ```
 
@@ -24683,16 +24671,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/fuga/eventusers/1" \
+    "https://evius.co/api/events/ea/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"necessitatibus","name":"voluptatem","other_params,":{"":{"":{"":"impedit"}}}}'
+    -d '{"email":"unde","name":"aut","other_params,":{"":{"":{"":"veritatis"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/fuga/eventusers/1"
+    "https://evius.co/api/events/ea/eventusers/1"
 );
 
 let headers = {
@@ -24701,12 +24689,12 @@ let headers = {
 };
 
 let body = {
-    "email": "necessitatibus",
-    "name": "voluptatem",
+    "email": "unde",
+    "name": "aut",
     "other_params,": {
         "": {
             "": {
-                "": "impedit"
+                "": "veritatis"
             }
         }
     }
@@ -24748,16 +24736,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/events/necessitatibus/eventusers" \
+    "https://evius.co/api/events/excepturi/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"account_id":"voluptates","properties":[]}'
+    -d '{"account_id":"eum","properties":[]}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/necessitatibus/eventusers"
+    "https://evius.co/api/events/excepturi/eventusers"
 );
 
 let headers = {
@@ -24766,7 +24754,7 @@ let headers = {
 };
 
 let body = {
-    "account_id": "voluptates",
+    "account_id": "eum",
     "properties": []
 }
 
@@ -24804,14 +24792,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://evius.co/api/events/1/eventusers/minima" \
+    "https://evius.co/api/events/1/eventusers/non" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/1/eventusers/minima"
+    "https://evius.co/api/events/1/eventusers/non"
 );
 
 let headers = {
@@ -24848,14 +24836,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/me/eventusers/event/autem" \
+    -G "https://evius.co/api/me/eventusers/event/eaque" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/me/eventusers/event/autem"
+    "https://evius.co/api/me/eventusers/event/eaque"
 );
 
 let headers = {
@@ -24878,8 +24866,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/autem?page=1",
-        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/autem?page=1",
+        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/eaque?page=1",
+        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/eaque?page=1",
         "prev": null,
         "next": null
     },
@@ -24887,7 +24875,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/autem",
+        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/eaque",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -24913,16 +24901,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/eaque/changeUserPassword" \
+    "https://evius.co/api/events/praesentium/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"necessitatibus"}'
+    -d '{"email":"deleniti"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/eaque/changeUserPassword"
+    "https://evius.co/api/events/praesentium/changeUserPassword"
 );
 
 let headers = {
@@ -24931,7 +24919,7 @@ let headers = {
 };
 
 let body = {
-    "email": "necessitatibus"
+    "email": "deleniti"
 }
 
 fetch(url, {
@@ -24987,7 +24975,7 @@ curl -X POST \
     "https://evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"expedita"}'
+    -d '{"file":"repellat"}'
 
 ```
 
@@ -25002,7 +24990,7 @@ let headers = {
 };
 
 let body = {
-    "file": "expedita"
+    "file": "repellat"
 }
 
 fetch(url, {
@@ -25048,16 +25036,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/files/uploadbase/eligendi" \
+    "https://evius.co/api/files/uploadbase/omnis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"et","type":"rem"}'
+    -d '{"file":"voluptas","type":"mollitia"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/files/uploadbase/eligendi"
+    "https://evius.co/api/files/uploadbase/omnis"
 );
 
 let headers = {
@@ -25066,8 +25054,8 @@ let headers = {
 };
 
 let body = {
-    "file": "et",
-    "type": "rem"
+    "file": "voluptas",
+    "type": "mollitia"
 }
 
 fetch(url, {
@@ -25108,14 +25096,14 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/events/enim/host" \
+    -G "https://evius.co/api/events/dolores/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/enim/host"
+    "https://evius.co/api/events/dolores/host"
 );
 
 let headers = {
@@ -25167,16 +25155,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/events/ipsum/host" \
+    "https://evius.co/api/events/nam/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"et","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"fugit","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/ipsum/host"
+    "https://evius.co/api/events/nam/host"
 );
 
 let headers = {
@@ -25187,7 +25175,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "et",
+    "image": "fugit",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -25231,14 +25219,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://evius.co/api/events/saepe/host/1" \
+    -G "https://evius.co/api/events/illum/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/saepe/host/1"
+    "https://evius.co/api/events/illum/host/1"
 );
 
 let headers = {
@@ -25282,16 +25270,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/events/rem/host/1" \
+    "https://evius.co/api/events/eligendi/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"nulla","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"maxime","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/rem/host/1"
+    "https://evius.co/api/events/eligendi/host/1"
 );
 
 let headers = {
@@ -25302,7 +25290,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "nulla",
+    "image": "maxime",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -25348,14 +25336,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://evius.co/api/events/velit/host/1" \
+    "https://evius.co/api/events/non/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/events/velit/host/1"
+    "https://evius.co/api/events/non/host/1"
 );
 
 let headers = {
@@ -95789,7 +95777,7 @@ fetch(url, {
         "path": "http:\/\/localhost\/api\/orders",
         "per_page": 2500,
         "to": 2500,
-        "total": 3824
+        "total": 3859
     }
 }
 ```
@@ -96111,7 +96099,7 @@ curl -X POST \
     "https://evius.co/api/organizations/1/contactbyemail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"message":"dolore","subject":"deserunt","name":"provident","email_user":"ea"}'
+    -d '{"message":"repudiandae","subject":"quia","name":"omnis","email_user":"rerum"}'
 
 ```
 
@@ -96126,10 +96114,10 @@ let headers = {
 };
 
 let body = {
-    "message": "dolore",
-    "subject": "deserunt",
-    "name": "provident",
-    "email_user": "ea"
+    "message": "repudiandae",
+    "subject": "quia",
+    "name": "omnis",
+    "email_user": "rerum"
 }
 
 fetch(url, {
@@ -96244,16 +96232,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/organizations/unde/changeUserPassword" \
+    "https://evius.co/api/organizations/ex/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"animi"}'
+    -d '{"email":"et"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/organizations/unde/changeUserPassword"
+    "https://evius.co/api/organizations/ex/changeUserPassword"
 );
 
 let headers = {
@@ -96262,7 +96250,7 @@ let headers = {
 };
 
 let body = {
-    "email": "animi"
+    "email": "et"
 }
 
 fetch(url, {
@@ -96301,16 +96289,16 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/rsvp/sendeventrsvp/molestiae" \
+    "https://evius.co/api/rsvp/sendeventrsvp/aspernatur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"et","image_header":"et","content_header":"Has sido invitado a el evento","message":"est","image":"dicta","image_footer":"molestias","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
+    -d '{"subject":"tenetur","image_header":"commodi","content_header":"Has sido invitado a el evento","message":"voluptatum","image":"corporis","image_footer":"ut","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/rsvp/sendeventrsvp/molestiae"
+    "https://evius.co/api/rsvp/sendeventrsvp/aspernatur"
 );
 
 let headers = {
@@ -96319,12 +96307,12 @@ let headers = {
 };
 
 let body = {
-    "subject": "et",
-    "image_header": "et",
+    "subject": "tenetur",
+    "image_header": "commodi",
     "content_header": "Has sido invitado a el evento",
-    "message": "est",
-    "image": "dicta",
-    "image_footer": "molestias",
+    "message": "voluptatum",
+    "image": "corporis",
+    "image_footer": "ut",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     }
@@ -96879,14 +96867,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://evius.co/api/rolesattendees/minima" \
+    "https://evius.co/api/rolesattendees/aspernatur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/rolesattendees/minima"
+    "https://evius.co/api/rolesattendees/aspernatur"
 );
 
 let headers = {
@@ -96981,7 +96969,7 @@ curl -X POST \
     "https://evius.co/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"eligendi","picture":"http:\/\/www.gravatar.com\/avatar","password":"nihil","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
+    -d '{"email":"evius@evius.co","names":"distinctio","picture":"http:\/\/www.gravatar.com\/avatar","password":"recusandae","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
 
 ```
 
@@ -96997,9 +96985,9 @@ let headers = {
 
 let body = {
     "email": "evius@evius.co",
-    "names": "eligendi",
+    "names": "distinctio",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "password": "nihil",
+    "password": "recusandae",
     "others_properties": "[]",
     "organization_ids": "[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"
 }
@@ -97104,10 +97092,10 @@ fetch(url, {
     },
     "confirmation_code": "Fmg1DjO8NAavTRaS",
     "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-    "updated_at": "2021-01-18 16:19:55",
+    "updated_at": "2021-01-20 21:40:39",
     "created_at": "2020-04-19 19:46:41",
     "names": "evius@evius.co",
-    "refresh_token": "AOvuKvQbgWvOsKDrsnVg3VVG__dW0trVMuSG3JCt4VsuogprvWjGLV39OmFGV4OamcXr82GSac60Mb1hizaGggznIUcmfAUuMI8Z0BzEO-tY6p23SsgJroIViufDckGAxkF9M_63L21i3P57brskJmzCI7WCWrbUPLSxETmUvA3JypduZBP0ygmeDTEP9WpAzeIe85zw9haExRllxt5NjkEunYp6yJKnfQ",
+    "refresh_token": "AOvuKvTLKwmcHIMFfbExCLdWX7dpftqCohP_niqkhuC3mHr0J-YawC_Fhn8XOCbMv2iONv7QpuJAYDulezvrk4GrLDSgUevk14N70bxx8FxV9o2G_-bVlf43vSGt3SHK_jAS4CmQaCu0IxdxZgAtBJhs_GFJS0Era1c5xWHbjNdf-xljoqiahsJaZdIigYdxAXsmLXlgtNLUGzhLPlzqBjgFfqxosJ87mA",
     "aerolineapreferida": "Avianca",
     "genero": "Masculino",
     "tipodecerveza": "Ale",
@@ -97419,7 +97407,7 @@ curl -X PUT \
     "https://evius.co/api/users/5e9caaa1d74d5c2f6a02a3c2" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"evius lopez","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"praesentium","others_properties":"[]"}'
+    -d '{"email":"evius@evius.co","names":"evius lopez","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"fugiat","others_properties":"[]"}'
 
 ```
 
@@ -97437,7 +97425,7 @@ let body = {
     "email": "evius@evius.co",
     "names": "evius lopez",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "organization_ids": "praesentium",
+    "organization_ids": "fugiat",
     "others_properties": "[]"
 }
 
@@ -97702,7 +97690,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://evius.co/api/users/eos/changeStatusUser" \
+    "https://evius.co/api/users/voluptas/changeStatusUser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -97711,7 +97699,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/users/eos/changeStatusUser"
+    "https://evius.co/api/users/voluptas/changeStatusUser"
 );
 
 let headers = {
@@ -98040,14 +98028,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "https://evius.co/api/orders/totam/validateFreeorder" \
+    "https://evius.co/api/orders/nulla/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://evius.co/api/orders/totam/validateFreeorder"
+    "https://evius.co/api/orders/nulla/validateFreeorder"
 );
 
 let headers = {

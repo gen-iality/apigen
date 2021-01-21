@@ -33,9 +33,8 @@ class ApiCheckoutController extends Controller
 	public function paymentWebhookesponse(Request $request){
         Log::info('Pagando orden desde Payu');
 		//reference_sale response_message_pol
-        $data = $request->input();
-        $datico = json_encode($request->json()->all());                
-        Log::info(json_decode($datico , true));
+        $data = $request->input();            
+        Log::info(json_encode($data));
 
 
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257dsaads";

@@ -16,6 +16,7 @@ use Storage;
 use App\evaLib\Services\FilterQuery;
 use App\Http\Resources\EventUserResource;
 use Auth;
+use App\OrganizationUser;
 
 /**
  * @group User
@@ -98,16 +99,25 @@ class UserController extends UserControllerWeb
         $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
 
         $result = new Account($data);
-
+        // var_dump($data['organization_ids']);die;
         $result->save();
         if(isset($data['organization_ids'])){
             $result->organizations()->attach($data['organization_ids']);
-        }               
+        
+            foreach($data['organization_ids'] as $organization)
+            {
+                $dataOganization['userid'] = $result->_id;
+                $dataOganization['organization_id'] = $organization;
+                $organizationUser = new OrganizationUser($dataOganization);
+                $organizationUser->save();
+            }                          
 
-        Mail::to($result->email)
-        ->queue(            
-            new \App\Mail\UserRegistrationMail($result)
-        );
+            Mail::to($result->email)
+            ->queue(            
+                new \App\Mail\UserRegistrationMail($result , $organization)
+            );
+
+        }                       
         
         $result = Account::find($result->_id);
         return $result;
@@ -406,18 +416,23 @@ class UserController extends UserControllerWeb
         $user = Auth::user();
 
         $userRol =  isset($user) ? $user->others_properties['role'] :  null;
-                    
+            
         
         if(isset($userRol) && $userRol == 'admin')
         {
             $user = Account::find($user_id);
             $user->status = $data['status'];
             $user->save();
-
+            
+            foreach($user->organization_ids  as $organization)
+            {
+                $organizer = Organization::find($organization);
+            }
+                              
 
             Mail::to($user->email)
             ->queue(                
-                    new \App\Mail\ConfirmationStatusUserEmail($user)
+                    new \App\Mail\ConfirmationStatusUserEmail($user , $organizer)
                 );
 
             return $user;

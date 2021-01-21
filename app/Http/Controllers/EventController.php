@@ -786,30 +786,61 @@ class EventController extends Controller
      * _changeStatusEvent_: approve or reject the courses **'draft'**, and send mail of the change of status of the event to the user who created it
      * 
      * @authenticated
-     * @urlParam event_id required id of the event to be rejected or approved 
+     * @urlParam event_id required id of the event to be rejected or approved Example: 
      * @bodyParam status string required the status update allows for two possible statuses **approved** or **rejected** Example: approved
+     * 
+     * @response {
+     *  "_id": "5fb2eef214b93f11165dd1a0",
+     *  "category": "d35319efaf194af191b8dc7c149a01bc",
+     *  "datetime_from": null,
+     *  "datetime_to": null,
+     *  "description": "dddd",
+     *  "name": "curso 1",
+     *  "picture": "https://picsum.photos/400/800",
+     *  "visibility": "PUBLIC",
+     *  "extra_config": {
+     *      "price": "0"
+     *  },
+     *  "author_id": "5fb1f6fb7bf68702e345b5d2",
+     *  "organizer_id": "5f7e33ba3abc2119442e83e8",
+     *  "event_type_id": "5bf47203754e2317e4300b68",
+     *  "status" : "approved",
+     *  "updated_at": "2021-01-20 21:07:50",
+     *  "created_at": "2020-11-16 21:28:18"
+     * }
+     * 
+     * @response  403 {
+     *  "Error": "The user does not have the permissions to execute this action"
+     * }
      * 
      */
     public function changeStatusEvent(Request $request , $event_id)
     {   
         $data = $request->json()->all();
         
+        //Get authenticated user
         $user = Auth::user();
-
         $userRol =  isset($user) ? $user->others_properties['role'] :  null;
                     
-        
+        //Validate that the authenticated user is an administrator
         if(isset($userRol) && $userRol == 'admin')
         {
+
             $event = Event::find($event_id);
             $event->status = $data['status'];
             $event->save();
 
-            $author = Account::find($event->author_id);
+            //Organization in which the event has been created
+            $organization = Organization::find($event->organizer_id);
+            $organization = Account::find($organization->author);            
 
+            //User who created the Event
+            $author = Account::find($event->author_id);
+            
+            //Mail that informs the creator of the event, about the update of the status of the event
             Mail::to($author->email)
             ->queue(                
-                    new \App\Mail\ConfirmationCourseEmail($event, $author)
+                    new \App\Mail\ConfirmationCourseEmail($event, $author, $organization)
                 );
 
             return $event;

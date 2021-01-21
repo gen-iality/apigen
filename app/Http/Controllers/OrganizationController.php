@@ -276,7 +276,7 @@ class OrganizationController extends Controller
                     'Tipo de persona' => $account->person_type,
                     'Nombre del usuario ' => $account->names,
                     'Correo'=> $account->email,
-                    'Teléfono' => $account->phone,
+                    'Teléfono' => $account->telephone,
                     'Dirección' => $account->adress,
                     'Fecha de nacimiento' => $account->date_birth,                    
                     'Curso' => $event->name,
