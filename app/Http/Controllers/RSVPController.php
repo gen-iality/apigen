@@ -244,7 +244,7 @@ class RSVPController extends Controller implements ShouldQueue
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
             $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
-            $include_ical_calendar = !empty($data["include_ical_calendar"]) ? $data["include_ical_calendar"] : null;
+            $include_ical_calendar = !empty($data["include_ical_calendar"]) ? $data["include_ical_calendar"] : true;
 
             $include_date = false;
             if (!empty($data["include_date"])) {
