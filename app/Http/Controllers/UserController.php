@@ -102,16 +102,19 @@ class UserController extends UserControllerWeb
         // var_dump($data['organization_ids']);die;
         $result->save();
         if(isset($data['organization_ids'])){
+            
             $result->organizations()->attach($data['organization_ids']);
-        
+            
             foreach($data['organization_ids'] as $organization)
-            {
+            {   
+                $result->total_number_events = 0;
                 $dataOganization['userid'] = $result->_id;
                 $dataOganization['organization_id'] = $organization;
                 $organizationUser = new OrganizationUser($dataOganization);
                 $organizationUser->save();
+                
             }                          
-
+            $result->save();
             Mail::to($result->email)
             ->queue(            
                 new \App\Mail\UserRegistrationMail($result , $organization)
@@ -391,6 +394,7 @@ class UserController extends UserControllerWeb
         $input = $request->all();
 
         $query = Account::where("organization_ids", $organization_id);
+ 
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return UsersResource::collection($results);          
 

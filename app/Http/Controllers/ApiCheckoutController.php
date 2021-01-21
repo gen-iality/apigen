@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Models\OrderItem;
 use App\Order;
+use App\Account;
 use App\Pending;
 use App\DiscountCode;
 use App\DiscountCodeTemplate;
@@ -36,12 +37,11 @@ class ApiCheckoutController extends Controller
         $data = $request->input();            
         Log::info(json_encode($data));
 
-
 		$order_id = isset($data['reference_sale'])?$data['reference_sale']:"5fd90cacae5762445257dsaads";
 		$order_status = isset($data ['response_message_pol'])?$data ['response_message_pol']:"APPROVED";
         $order = Order::find($order_id);
         // var_dump(json_encode($data));die;
-        
+
 		$order->data = json_encode($data);
         $order->save();
         
@@ -215,6 +215,7 @@ class ApiCheckoutController extends Controller
         * Create the attendees
         */
         foreach($order->items as $item) {
+                        
 
             $attendee = new Attendee();
             $attendee->properties = (object) [];
@@ -228,6 +229,10 @@ class ApiCheckoutController extends Controller
             //$attendee->ticket_id = $attendee_details['ticket']['_id'];
             $attendee->account_id = $order->account->_id;
             $attendee->save();
+
+            $user = Account::find($order->account->_id);
+            $user->total_number_events = $user->total_number_events + 1;
+            $user->save(); 
         }
     }
 

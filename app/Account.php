@@ -85,6 +85,8 @@ class Account extends User
         'date_birth', 
         'adress',
         'status',
+        'total_number_events'        
+
     ];
 
     public function __construct($attributes = array())
