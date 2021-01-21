@@ -229,6 +229,9 @@ class RSVP extends Mailable implements ShouldQueue
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)
+            ->attachData($this->ical, 'ical.ics', [
+                'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
+            ])
             ->markdown('rsvp.rsvpinvitation');
         //return $this->view('vendor.mail.html.message');
     }
