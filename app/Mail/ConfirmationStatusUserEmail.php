@@ -17,6 +17,7 @@ class ConfirmationStatusUserEmail extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $user;
+    public $organization;
 
     /**
      * Create a new message instance.
@@ -27,7 +28,9 @@ class ConfirmationStatusUserEmail extends Mailable implements ShouldQueue
     public function __construct($user , $organization)
     {   
         $this->user = $user;
-        $his->organization = $organization;
+        $organizer = Account::find($organization->author);
+        $this->organization = $organizer;        
+
     }
 
     /**
