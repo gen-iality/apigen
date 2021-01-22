@@ -81,7 +81,7 @@ class RSVP extends Mailable implements ShouldQueue
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
-        $pass = $password; //self::encryptdata($password);
+        $pass = self::encryptdata($password);
 
         $ticket_title = null;
 
