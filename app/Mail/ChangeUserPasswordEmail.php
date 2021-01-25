@@ -100,7 +100,7 @@ class ChangeUserPasswordEmail extends Mailable implements ShouldQueue
     {             
         return $this
             ->from($this->organization->email, 'noreply')
-            ->subject($this->subject)
+            ->subject('Cambio de contraseña')
             ->markdown('rsvp.changepasswordOrganization');
         //return $this->view('vendor.mail.html.message');
     }

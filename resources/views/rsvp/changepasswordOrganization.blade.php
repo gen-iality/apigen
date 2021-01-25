@@ -3,7 +3,7 @@ Su cambio de contraseña se ha realizado con éxito.
 
 Su nueva contraseña es: {{$password}}
 
-Para cambiar su contraseña nuevamente puede acceder a su perfil y modificarla.
+Para cambiar su contraseña nuevamente puede acceder a configuraciones y modificarla.
 <br />
 <br />
 
