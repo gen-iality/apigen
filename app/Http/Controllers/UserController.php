@@ -74,6 +74,8 @@ class UserController extends UserControllerWeb
      * 
      * @bodyParam email email required Example: evius@evius.co
      * @bodyParam names  string required  person name
+     * @bodyParam city  string 
+     * @bodyParam country  string 
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
      * @bodyParam password  string  optional if not provided a default evius.2040 password is assigned
      * @bodyParam others_properties array  dynamic properties of the user you want to place Example:[]
@@ -135,6 +137,8 @@ class UserController extends UserControllerWeb
      *
      * @bodyParam email email optional. Example: evius@evius.co
      * @bodyParam names  string optional. Example: evius lopez
+     * @bodyParam city  string 
+     * @bodyParam country  string 
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
      * @bodyParam organization_ids string. 
      * @bodyParam others_properties array optional dynamic properties of the user you want to place. Example: []

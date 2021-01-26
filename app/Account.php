@@ -64,6 +64,7 @@ class Account extends User
         'address1',
         'address2',
         'city',
+        'country',
         'state',
         'postal_code',
         'country_id',
