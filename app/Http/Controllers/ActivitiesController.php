@@ -153,6 +153,17 @@ class ActivitiesController extends Controller
         return $activity;
     }
 
+    /**
+     * _createMeeting_: assing meeting to activitie.
+     * 
+     * @urlParam event_id required Example: 5fa423eee086ea2d1163343e
+     * @urlParam activity_id required Example: 5fb6dd20d5c3232d90042f64
+     * 
+     * @bodyParam activity_datetime_start date required Example: 2020-10-14 14:11
+     * @bodyParam activity_name string required Example : First activity
+     * @bodyParam activity_description string required Example : First activity
+     * 
+     */
     public function createMeeting(Request $request, $event_id, $activity_id)
     {
 
@@ -275,8 +286,9 @@ class ActivitiesController extends Controller
 
     /**
      * _show_: View information on a specific activity
-     *
-     * @urlParam id required id of the activity you want to see.
+     * 
+     * @urlParam event_id required id of the event the activity. Example: 5fa423eee086ea2d1163343e
+     * @urlParam activity required id of the activity you want to see. Example: 5fa43c9538450d1f114c3952
      *
      * @param  \App\Activities  $Activities
      */
@@ -318,8 +330,55 @@ class ActivitiesController extends Controller
     /**
      * _update_:update an activity specific.
      *
-     * @urlParam event_id required id of the event to which the activities belong.
-     * @urlParam id required id of the activity you want to update.
+     * @urlParam event_id required id of the event to which the activities belong. Example: 5fa423eee086ea2d1163343e
+     * @urlParam id required id of the activity you want to update. Example: 5fa43c9538450d1f114c3952
+     * 
+     * @bodyParam name string name Example: PRIMERA ACTIVIDAD
+     * @bodyParam subtitle string optional Example: Subtitulo primera actividad
+     * @bodyParam image string Example: https://storage.googleapis.com/herba-images/evius/events/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg
+     * @bodyParam description string  Example: Primera actividad del evento
+     * @bodyParam capacity integer  number of people who can enter the activity. Example: 50
+     * @bodyParam event_id string event with which the activity is associated Example: 5fa423eee086ea2d1163343e
+     * @bodyParam datetime_end datetime Example: 2020-10-14 14:11
+     * @bodyParam datetime_start datetime  Example: 2020-10-14 14:50
+     * 
+     * @response {
+     *    "_id": "5fa43c9538450d1f114c3952",
+     *    "name": "Actividad de bienvenida",
+     *    "subtitle": null,
+     *    "bigmaker_meeting_id": null,
+     *    "datetime_start": "2020-10-14 12:42",
+     *    "datetime_end": "2020-10-14 13:00",
+     *    "space_id": null,
+     *    "image": null,
+     *    "description": "<p>La primera actividad que se realiza en el evento.</p>",
+     *    "registration_message": null,
+     *    "capacity": 0,
+     *    "activity_categories_ids": [
+     *        []
+     *    ],
+     *    "access_restriction_type": "OPEN",
+     *    "access_restriction_rol_ids": [],
+     *    "host_ids": [
+     *        []
+     *    ],
+     *    "has_date": null,
+     *    "selected_document": [],
+     *    "meeting_id": null,
+     *    "vimeo_id": null,
+     *    "event_id": "5fa423eee086ea2d1163343e",
+     *    "updated_at": "2020-11-05 17:55:33",
+     *    "created_at": "2020-11-05 17:55:33",
+     *    "role_attendee_ids": [
+     *        []
+     *    ],
+     *    "access_restriction_types_available": null,
+     *    "activity_categories": [],
+     *    "space": null,
+     *    "hosts": [],
+     *    "type": null,
+     *    "access_restriction_roles": []
+     *}
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Activities  $Activities
@@ -365,8 +424,8 @@ class ActivitiesController extends Controller
     /**
      * _destroy_: Remove the specified activity
      *
-     * @urlParam event_id required id of the event to which the activities belong 5dbc9c65d74d5c5853222222
-     * @urlParam id required id of the activity you want to destroy 5dbc99bad74d5c5822691111
+     * @urlParam event_id required id of the event to which the activities belong Example: 5dbc9c65d74d5c5853222222
+     * @urlParam id required id of the activity you want to destroy Example: 5dbc99bad74d5c5822691111
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response

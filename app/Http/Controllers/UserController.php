@@ -386,6 +386,7 @@ class UserController extends UserControllerWeb
      * @autenticathed
      * 
      * @queryParam filtered optional filter parameters Example: [{"field":"others_properties.role","value":["admin"]}]
+     * @queryParam  orderBy filter parameters Example: [{"field":"status","order":"desc"}]     
      * 
      * @urlParam organization_id required organization to which the users belong
      * 

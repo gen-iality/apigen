@@ -83,19 +83,7 @@ class ActivityAssistantController extends Controller
     /**
      * _index_: List of the activity_assitans 
      * 
-     * @urlParam event_id 
-     * 
-     * @bodyParam activity_id string required
-     * @bodyParam user_id string required
-     * 
-     * @response {{
-     *     "activity_id": "5fa44f6ba8bf7449e65dae32",
-     *     "user_id": "5e9caaa1d74d5c2f6a02a3c2",
-     *     "event_id": "5fa423eee086ea2d1163343e",
-     *     "updated_at": "2020-11-05 21:49:44",
-     *     "created_at": "2020-11-05 21:49:44",
-     *     "_id": "5fa4737865ec151b7f383442"
-     * }
+     * @urlParam event_id required Example: 5ed3ff9f6ba39d1c634fe3f2
      * 
      * @return \Illuminate\Http\Response
      */
@@ -122,6 +110,8 @@ class ActivityAssistantController extends Controller
 
     /**
      * _indexForAdmin_: list the activities and users that will attend from the administrator
+     * 
+     * @urlParam event_id required Example: 5f0622f01ce76d5550058c32
      *
      * @return \Illuminate\Http\Response
      */
@@ -162,7 +152,9 @@ class ActivityAssistantController extends Controller
     /**
      * _meIndex_: list of registered activities of the logged-in user
      * 
+     * @authenticated
      * @urlParam event_id required event to which the activity belongs
+     * 
      * 
      * @param string $event_id
      * @return void
@@ -274,12 +266,6 @@ class ActivityAssistantController extends Controller
             ->subject("Encuesta de satisfacción MEC 2019","");
         });
         
-        
-        
-        
-        
-        
-        
        // 
        /* 
         //$users = Attendee::find();
@@ -359,8 +345,9 @@ class ActivityAssistantController extends Controller
     /**
      * _show_: view the specific information of an activity_assitant record
      * 
-     * @urlParam event_id required event to which the activity belongs
-     * @urlParam id id de activity_assitant
+     * @urlParam event_id required event to which the activity belongs Example: 5ed3ff9f6ba39d1c634fe3f2
+     * @urlParam activities_attendee id de activity_assitant Example: 5ed66ce2a6929562725bd7c2
+     * 
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
      */

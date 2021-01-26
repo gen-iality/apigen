@@ -31,7 +31,7 @@ class DiscountCodeController extends Controller
      * _index_: list of discount codes by template
      * @urlParam template_id required Example: 5fc80b2a31be4a3ca2419dc4
      * 
-     * @response {
+     * @response [
      *  {
      *       "_id": "5fc81e8631be4a3ca2419dcc",
      *       "code": "puBdF3zCs",
@@ -57,9 +57,8 @@ class DiscountCodeController extends Controller
      *       "event_id": "5ea23acbd74d5c4b360ddde2",
      *       "updated_at": "2020-12-05 21:07:03",
      *       "created_at": "2020-12-05 21:07:03"
-     *   },
-     * }
-     * @return \Illuminate\Http\Response
+     *   }
+     * ]
      */
     public function index($template_id)
     {   
@@ -80,7 +79,62 @@ class DiscountCodeController extends Controller
     /**
      * _store_: ceate new discount code
      * 
-     * @bodyParam quantity number required number of codes to be generated Example : 1
+     * @urlParam template_id required Example: 5fc80b2a31be4a3ca2419dc4
+     * @bodyParam quantity number required number of codes to be generated Example: 2
+     * 
+     * @response {
+     *     "current_page": 1,
+     *     "data": [
+     *         {
+     *             "_id": "5fcbf67721bfcb1393450fc3",
+     *             "code": "Nyd0jOpQ",
+     *             "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *             "event_id": "5ea23acbd74d5c4b360ddde2",
+     *             "updated_at": "2020-12-05 21:07:03",
+     *             "created_at": "2020-12-05 21:07:03",
+     *             "discount_code_template": {
+     *                 "_id": "5fc80b2a31be4a3ca2419dc4",
+     *                 "name": "Código de regalo",
+     *                 "discount": 100,
+     *                 "event_id": "5ea23acbd74d5c4b360ddde2",
+     *                 "use_limit": 1,
+     *                 "updated_at": "2020-12-02 21:46:18",
+     *                 "created_at": "2020-12-02 21:46:18",
+     *                 "event": {
+     *                     "_id": "5ea23acbd74d5c4b360ddde2",
+     *                     "name": "Evento virtual Idartes",
+     *                     "datetime_from": "2020-10-14 12:00:00",
+     *                     "datetime_to": "2020-10-14 12:00:00",
+     *                     "venue": "Teatro Municipal Jorge Eliécer Gaitán"
+     *                 }
+     *             }
+     *         },
+     *         {
+     *             "_id": "5fcbf67721bfcb1393450fc4",
+     *             "code": "Nyd0jOpR",
+     *             "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *             "event_id": "5ea23acbd74d5c4b360ddde2",
+     *             "updated_at": "2020-12-05 21:07:03",
+     *             "created_at": "2020-12-05 21:07:03",
+     *             "discount_code_template": {
+     *                 "_id": "5fc80b2a31be4a3ca2419dc4",
+     *                 "name": "Código de regalo",
+     *                 "discount": 100,
+     *                 "event_id": "5ea23acbd74d5c4b360ddde2",
+     *                 "use_limit": 1,
+     *                 "updated_at": "2020-12-02 21:46:18",
+     *                 "created_at": "2020-12-02 21:46:18",
+     *                 "event": {
+     *                     "_id": "5ea23acbd74d5c4b360ddde2",
+     *                     "name": "Evento virtual Idartes",
+     *                     "datetime_from": "2020-10-14 12:00:00",
+     *                     "datetime_to": "2020-10-14 12:00:00",
+     *                     "venue": "Teatro Municipal Jorge Eliécer Gaitán"
+     *                 }
+     *             }
+     *         }
+     *     ]
+     * }    
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -148,7 +202,32 @@ class DiscountCodeController extends Controller
      * _show_: view information for a specific code
      * 
      * @urlParam template_id required discount code template with which the code is associated Example: 5fc80b2a31be4a3ca2419dc4
-     * @urlParam code required code to be consulted Example: 5fc81e8631be4a3ca2419dcc
+     * @urlParam code required code to be consulted Example: 5fcbf67721bfcb1393450fc3
+     * 
+     * @response {
+     *               "_id": "5fcbf67721bfcb1393450fc3",
+     *               "code": "Nyd0jOpQ",
+     *               "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *               "event_id": "5ea23acbd74d5c4b360ddde2",
+     *               "updated_at": "2020-12-05 21:07:03",
+     *               "created_at": "2020-12-05 21:07:03",
+     *               "discount_code_template": {
+     *                   "_id": "5fc80b2a31be4a3ca2419dc4",
+     *                   "name": "Código de regalo",
+     *                   "discount": 100,
+     *                   "event_id": "5ea23acbd74d5c4b360ddde2",
+     *                   "use_limit": 1,
+     *                   "updated_at": "2020-12-02 21:46:18",
+     *                   "created_at": "2020-12-02 21:46:18",
+     *                   "event": {
+     *                       "_id": "5ea23acbd74d5c4b360ddde2",
+     *                       "name": "Evento virtual Idartes",
+     *                       "datetime_from": "2020-10-14 12:00:00",
+     *                       "datetime_to": "2020-10-14 12:00:00",
+     *                       "venue": "Teatro Municipal Jorge Eliécer Gaitán"
+     *                      }
+     *               }
+     *           }
      *
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
@@ -158,6 +237,7 @@ class DiscountCodeController extends Controller
         $code = DiscountCode::find($id);
         return $code;
     }
+
     /**
      * _update_: update the specified resource in storage.
      *
@@ -177,7 +257,10 @@ class DiscountCodeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * _destroy_: Remove the specified resource from storage.
+     * 
+     * @urlParam template_id required
+     * @urlParam code required id code delete
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -185,7 +268,6 @@ class DiscountCodeController extends Controller
     public function destroy($template_id ,$id)
     {   
         $discountCode = DiscountCode::findOrFail($id);
-
         return (string) $discountCode->delete();
 
     }
@@ -207,11 +289,43 @@ class DiscountCodeController extends Controller
      * 
      * To verify the code you must send code and event_id or organization_id as the case may be
      * 
-     * @bodyParam code string required code to redeem
-     * @bodyParam event_id string event for which the code was purchased
-     * @bodyParam organization_id string organization so that the code applies to any event
+     * @bodyParam code string required code to redeem Example: Nyd0jOpQ
+     * @bodyParam event_id string event for which the code was purchased Example: 5ea23acbd74d5c4b360ddde2
+     * @bodyParam organization_id string organization so that the code applies to any event Example: 
      * 
+     * @response 403 {
+     *      "message" : "El código ya se uso"
+     * }
      * 
+     * @response 404 {
+     *      "message": "El código no existe"
+     * }
+     * 
+     * @response {
+     *   "_id": "5fcbf67721bfcb1393450fc3",
+     *   "code": "Nyd0jOpQ",
+     *   "discount_code_template_id": "5fc80b2a31be4a3ca2419dc4",
+     *   "event_id": "5ea23acbd74d5c4b360ddde2",
+     *   "updated_at": "2020-12-05 21:07:03",
+     *   "created_at": "2020-12-05 21:07:03",
+     *   "discount_code_template": {
+     *       "_id": "5fc80b2a31be4a3ca2419dc4",
+     *       "name": "Código de regalo",
+     *       "discount": 100,
+     *       "event_id": "5ea23acbd74d5c4b360ddde2",
+     *       "use_limit": 1,
+     *       "updated_at": "2020-12-02 21:46:18",
+     *       "created_at": "2020-12-02 21:46:18",
+     *       "event": {
+     *           "_id": "5ea23acbd74d5c4b360ddde2",
+     *           "name": "Evento virtual Idartes",
+     *           "datetime_from": "2020-10-14 12:00:00",
+     *           "datetime_to": "2020-10-14 12:00:00",
+     *           "venue": "Teatro Municipal Jorge Eliécer Gaitán"
+     *          }
+     *    }
+     * }
+     *
      */
     public function validateCode(Request $request)
     {   

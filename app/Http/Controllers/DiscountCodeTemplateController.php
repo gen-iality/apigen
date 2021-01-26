@@ -27,6 +27,46 @@ class DiscountCodeTemplateController extends Controller
     /**
      * _index_: list all Discount Code Templates
      *
+     * @response
+     * [
+     *     {
+     *         "_id": "5fcee46a27b131731965ba7f",
+     *         "name": "90%",
+     *         "discount": "90",
+     *         "use_limit": "1",
+     *         "event_id": "5fc9bd9a6f78fc22da463509",
+     *         "updated_at": "2021-01-11 23:01:07",
+     *         "created_at": "2020-12-08 02:26:50",
+     *         "discount_type": "percentage",
+     *         "event": {
+     *             "_id": "5fc9bd9a6f78fc22da463509",
+     *             "datetime_from": "2021-02-22 00:00:00",
+     *             "datetime_to": "2021-02-25 00:00:00",
+     *             "description": "La música y la imagen como conceptos que van de la mano.  La escritura de ideas e historia , a través de la música y la imagen. Storytelling, Transmedia y captación de audiencias para proyectos musicales y artísticos.",
+     *             "name": "Expresión Gráfica para proyectos musicales",
+     *             "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F05_ExpresionGrafica.jpg?alt=media&token=c4bfa160-01b6-442c-8c88-2cfd57ec5942",
+     *             "visibility": "PUBLIC"
+     *         }
+     *     },
+     *     {
+     *         "_id": "5fd4f51720b4fa0f2b4437d5",
+     *         "name": "Curso de regalo",
+     *         "use_limit": 1,
+     *         "discount": 100,
+     *         "event_id": "5ea6df83cf57da4a52065562",
+     *         "discount_type": "price",
+     *         "updated_at": "2020-12-12 16:51:35",
+     *         "created_at": "2020-12-12 16:51:35",
+     *         "event": {
+     *             "_id": "5ea6df83cf57da4a52065562",
+     *             "name": "Test Event",
+     *             "datetime_from": "2020-06-01 08:00:00",
+     *             "datetime_to": "2020-06-06 22:00:00",
+     *             "picture": "https:\/\/storage.googleapis.com\/herba-images\/evius\/events\/ysn7fDSU0avqNqcn2f53uoPtShKiix1tG7XkJDFw.png",
+     *             "venue": "Mocion"
+     *         }
+     *     }
+     * ]
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -56,7 +96,7 @@ class DiscountCodeTemplateController extends Controller
      * @bodyParam organization_id string  organization_id if you want the discount template to be applicable to any course Example: 5e9caaa1d74d5c2f6a02a3c3
      * @bodyParam discount_type string required  percentage or price
      * 
-     * @response {
+     * @response [
      * {
      *       "_id": "5fc80b2a31be4a3ca2419dc4",
      *       "name": "Código de regalo",
@@ -83,8 +123,8 @@ class DiscountCodeTemplateController extends Controller
      *       "event_id": "5fba0649f2d08642eb750ba0",
      *       "updated_at": "2020-12-03 23:51:52",
      *       "created_at": "2020-12-03 23:51:52"
-     *   },
-     * }
+     *   }
+     * ]
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -127,7 +167,28 @@ class DiscountCodeTemplateController extends Controller
     /**
      * _show_ : information from a specific template
      *
-     * @urlParam discountcodetemplate id Example: 5fc80b2a31be4a3ca2419dc4
+     * @urlParam discountcodetemplate id Example: 5fcee46a27b131731965ba7f
+     * 
+     * @response
+     * {
+     *     "_id": "5fcee46a27b131731965ba7f",
+     *     "name": "90%",
+     *     "discount": "90",
+     *     "use_limit": "1",
+     *     "event_id": "5fc9bd9a6f78fc22da463509",
+     *     "updated_at": "2021-01-11 23:01:07",
+     *     "created_at": "2020-12-08 02:26:50",
+     *     "discount_type": "percentage",
+     *     "event": {
+     *         "_id": "5fc9bd9a6f78fc22da463509",
+     *         "datetime_from": "2021-02-22 00:00:00",
+     *         "datetime_to": "2021-02-25 00:00:00",
+     *         "description": "La música y la imagen como conceptos que van de la mano.  La escritura de ideas e historia , a través de la música y la imagen. Storytelling, Transmedia y captación de audiencias para proyectos musicales y artísticos.",
+     *         "name": "Expresión Gráfica para proyectos musicales",
+     *         "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/ucronio-dev%2F05_ExpresionGrafica.jpg?alt=media&token=c4bfa160-01b6-442c-8c88-2cfd57ec5942",
+     *         "visibility": "PUBLIC"
+     *     }
+     * }
      *
      * @param  \App\DiscountCodeTemplate  $codegroup
      * @return \Illuminate\Http\Response
@@ -164,6 +225,12 @@ class DiscountCodeTemplateController extends Controller
      * _destroy_: delete the specified docunt code template
      *
      * @urlParam id discount template id
+     * 
+     * @response 400{
+     *  "message" : "El grupo no se puede eliminar si está asociado a un código de descuento"
+     * }
+     * 
+     * @response 1
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -185,12 +252,12 @@ class DiscountCodeTemplateController extends Controller
 
 
     /**
-     * Imports DiscountCodes in JSON format, in case this codes are generated in external platform
+     * _importCodes_ : Imports DiscountCodes in JSON format, in case this codes are generated in external platform
      * and needed to be used inside EVIUS
      *
      * @param Request $request
      * @param String  $template_id id of the codeTemplate of codes to be imported
-     * @bodyParam [json object] example: {"codes":[{"code":"160792352"},{"code":"204692331"}]}
+     * @bodyParam [json object] Example: {"codes":[{"code":"160792352"},{"code":"204692331"}]}
      * @return Array ['newCodes','oldCodes'] amount of codes created
      */
     public function importCodes(Request $request, $template_id)
