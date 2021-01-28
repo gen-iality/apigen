@@ -106,6 +106,8 @@ class Activities extends Moloquent
         "vimeo_id",
         "registration_message",
         "related_meetings",
-        "platform"
+        "platform",
+        "start_date",
+        "duration"
     ];
 }
