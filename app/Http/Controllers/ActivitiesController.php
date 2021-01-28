@@ -21,6 +21,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Spatie\ResponseCache\Facades\ResponseCache;
 use App\evaLib\Services\FilterQuery;
+use Log;
 
 /**
  * @resource Event
@@ -247,6 +248,7 @@ class ActivitiesController extends Controller
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
+
         $Activities = Activities::findOrFail($id);
         $Activities->fill($data);
         $Activities->save();     
