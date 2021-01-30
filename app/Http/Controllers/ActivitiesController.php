@@ -259,7 +259,7 @@ class ActivitiesController extends Controller
         if(isset($data["zoom_host_id"]))
         {   
                        
-            $data['date_end_zoom'] = Carbon::parse($Activities["date_start_zoom"])->addMinutes($data['duration']);        
+            $data['date_end_zoom'] = Carbon::parse($Activities["datetime_end"])->addMinutes(60);        
             $data['date_end_zoom'] = $data['date_end_zoom']->format('Y-m-d\TH:i:s');
 
         }
