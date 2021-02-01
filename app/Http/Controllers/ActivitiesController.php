@@ -313,6 +313,13 @@ class ActivitiesController extends Controller
     }
 
     /**
+     * _hostAvailability_: end point que controla las disponibilidad de los host al crear una reunión
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id required activity to which the meeting is to be created
+     * 
+     * @bodyParam date_start_zoom date required Example: 2021-01-30T11:00:00
+     * @bodyParam date_end_zoom sate required Example: 2021-01-30T13:00:00
      * 
      */
     public function hostAvailability(Request $request , $event_id , $activity_id)
@@ -346,19 +353,17 @@ class ActivitiesController extends Controller
         {
             array_push($hostAvailabilityArray , $enabledHost);
         }
-
         //Comparación para ver los array disponibles
         $hostUpdate =  array_diff($hostAvailabilityArray, $occupiedHosts);
-
-
-        if(isset($hostUpdate[1]))
-        {
-            //Obtener el primer host disponible a la actividad a la que se le está creando la sala, para que lo pueda utilizar 
-            $hostUpdate =  $hostUpdate[1];
-            $hostName =  ZoomHost::where('id' , $hostUpdate)->first();
+        
+        $index =  key($hostUpdate);
+        if(isset($index))
+        {              
+            //Obtener el primer host disponible a la actividad a la que se le está creando la sala, para que lo pueda utilizar             
+            $host =  ZoomHost::where('id' , $hostUpdate[$index])->first();
             $activity = Activities::find($activity_id);
-            $activity->zoom_host_id = $hostUpdate;
-            $activity->zoom_host_name = $hostName->first_name; 
+            $activity->zoom_host_id = $host->id;
+            $activity->zoom_host_name = $host->first_name; 
             $activity->save();
 
             return $activity;
