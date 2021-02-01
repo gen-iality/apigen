@@ -60,6 +60,8 @@ Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesContr
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
 Route::apiResource('events/{event_id}/activities', 'ActivitiesController')->middleware('cacheResponse');
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
+Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
+
 
 /***************
  * TYPE
