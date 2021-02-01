@@ -63,10 +63,17 @@ class ActivitiesController extends Controller
     {
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
+
+        $data["date_start_zoom"] =  Carbon::parse($data["datetime_start"]);            
+        $data["date_start_zoom"] = $data["date_start_zoom"]->format('Y-m-d\TH:i:s');
+        
+        $data['date_end_zoom'] = Carbon::parse($data["datetime_end"])->addMinutes(60);        
+        $data['date_end_zoom'] = $data['date_end_zoom']->format('Y-m-d\TH:i:s');
         
         $activity = new Activities($data);     
         $activity->save();
 
+        // var_dump($data);die;
         if(isset($data["activity_categories_ids"])){
             $activity_categories_ids = $data["activity_categories_ids"];
             $activity->activity_categories()->attach($activity_categories_ids);
@@ -89,7 +96,7 @@ class ActivitiesController extends Controller
         }
         //Cargamos de nuevo para traer la info de las categorias
         $activity = Activities::find($activity->id);  
-        ResponseCache::clear();
+        
 
         return $activity;
     }
@@ -250,6 +257,14 @@ class ActivitiesController extends Controller
         $data = $request->json()->all();
 
         $Activities = Activities::findOrFail($id);
+
+        // if(isset($data["zoom_host_id"]))
+        // {   
+                       
+        //     $data['date_end_zoom'] = Carbon::parse($Activities["datetime_end"])->addMinutes(60);        
+        //     $data['date_end_zoom'] = $data['date_end_zoom']->format('Y-m-d\TH:i:s');
+
+        // }
         $Activities->fill($data);
         $Activities->save();     
         if(isset($data["activity_categories_ids"])){
@@ -278,7 +293,7 @@ class ActivitiesController extends Controller
             $Activities->access_restriction_roles()->attach($ids);       
         }
         $activity = Activities::find($Activities->id);
-        ResponseCache::clear();
+       
 
         return $activity;
     }
@@ -296,4 +311,67 @@ class ActivitiesController extends Controller
 
         return (string) $Activities->delete();
     }
+
+    /**
+     * _hostAvailability_: end point que controla las disponibilidad de los host al crear una reunión
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id required activity to which the meeting is to be created
+     * 
+     * @bodyParam date_start_zoom date required Example: 2021-01-30T11:00:00
+     * @bodyParam date_end_zoom sate required Example: 2021-01-30T13:00:00
+     * 
+     */
+    public function hostAvailability(Request $request , $event_id , $activity_id)
+    {
+        $data = $request->json()->all();
+        
+        //Filtrar reuniones por fecha para ver que hosts se estan usando
+        $hostsUsed  = Activities::where('date_end_zoom' , '>', $data['date_start_zoom'])
+                            ->where('date_start_zoom' , '<' ,  $data['date_end_zoom'])
+                            ->pluck('zoom_host_id');      
+
+        //Obtener los host habilitados para la organización
+        $enabledHosts  = ZoomHost::pluck('id');        
+
+        //Se crean arrays para comparar y ver que host están disponibles
+
+            //Array de los host que están siendo usados
+            $occupiedHosts  = []; 
+
+            //Array de los host disponibles para la organización
+            $hostAvailabilityArray = [];
+
+        //Foreach que arma el array con los host que estan siendo utilizados
+        foreach($hostsUsed as $host)
+        {
+            array_push($occupiedHosts , $host);
+        }
+        
+        //Foreach que arma el array con los host que estan disponibles de la organización
+        foreach($enabledHosts as $enabledHost)
+        {
+            array_push($hostAvailabilityArray , $enabledHost);
+        }
+        //Comparación para ver los array disponibles
+        $hostUpdate =  array_diff($hostAvailabilityArray, $occupiedHosts);
+        
+        $index =  key($hostUpdate);
+        if(isset($index))
+        {              
+            //Obtener el primer host disponible a la actividad a la que se le está creando la sala, para que lo pueda utilizar             
+            $host =  ZoomHost::where('id' , $hostUpdate[$index])->first();
+            $activity = Activities::find($activity_id);
+            $activity->zoom_host_id = $host->id;
+            $activity->zoom_host_name = $host->first_name; 
+            $activity->save();
+
+            return $activity;
+        }
+        
+        return response()->json([
+            "message" => "No hay host disponible para las horas ingresadas"
+        ] , 409);
+    }
 }
+
