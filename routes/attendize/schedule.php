@@ -60,7 +60,7 @@ Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesContr
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
 Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
-Route::put('events/{event_id}/duplicateactivitie/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
+Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
 
 /***************
  * TYPE
