@@ -443,57 +443,19 @@ class ActivitiesController extends Controller
     /**
      * _registerAndCheckInActivity_: status indicating that the user entered the activity
      * 
-     * @autenticathed
+     * @authenticated
      * @urlParam event_id required event to which the activity belongs
      * @urlParam id id of activity_assitant
      * 
      * @response{
-     *    "user_id": {
-     *        "_id": "5e9caaa1d74d5c2f6a02a3c2",
-     *        "uid": "5MxmwDRVy1dULG3oSkigE1shi7z1",
-     *        "email": "evius@evius.co",
-     *        "emailVerified": false,
-     *        "displayName": "evius@evius.co",
-     *        "disabled": false,
-     *        "providerData": [
-     *            {
-     *                "uid": "evius@evius.co",
-     *                "displayName": "evius co",
-     *                "email": "evius@evius.co",
-     *                "photoUrl": null,
-     *                "providerId": "password",
-     *                "phoneNumber": null
-     *            }
-     *        ],
-     *        "passwordHash": "UkVEQUNURUQ=",
-     *        "customAttributes": [],
-     *        "tokensValidAfterTime": {
-     *            "date": "2020-04-19 19:46:40.000000",
-     *            "timezone_type": 3,
-     *            "timezone": "UTC"
-     *        },
-     *        "confirmation_code": "Fmg1DjO8NAavTRaS",
-     *        "api_token": "p7C53ZAC7Y5I6fzjaJmHgxJK4BCqixG1GeziMAkH3MG4RZxo6iyrcuPS4GBK",
-     *        "updated_at": "2021-01-26 13:50:21",
-     *        "created_at": "2020-04-19 19:46:41",
-     *        "names": "evius@evius.co",
-     *        "refresh_token": "AOvuKvTcwssIXEIn9NS8md1yHuDGRcwXGi_POUNen3ge8XPUDhoZKd66b0lsM-b1j7ott9-1LprjMqGk_KdqDoJceyaoQkwmT3ZLlsXWXZomkkEvPlqltus2vGzI7wBUtyo3bDNWKlhz5Ba2RMoiK7qfaVzOBbeE5kz3yOpxUjCvDMxFbIOmqRZGJmgSX5VWt2PyxPqKAUXqR818IoNGbGX8Wh_Ougb8OQ",
-     *        "ticket_id": "5efb3da70787930c06043c32",
-     *        "name": "Evius",
-     *        "others_properties": [],
-     *        "participacomo": "Proponente",
-     *        "password2": "fantasma2040",
-     *        "aceptaterminosycondiciones": "TRUE",
-     *        "aceptoterminosycondiciones": true,
-     *        "id": "1019140079"
-     *    },
-     *    "activity_id": "60181474e36ef049a92768ba",
-     *    "event_id": "5fa423eee086ea2d1163343e",
-     *    "checkedin_at": "2021-02-01 22:19:13",
-     *    "updated_at": "2021-02-01 22:19:13",
-     *    "created_at": "2021-02-01 22:19:13",
-     *    "_id": "60187e615603e6467b65b604"
-     *}
+     *     "user_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *     "activity_id": "60181474e36ef049a92768ba",
+     *     "event_id": "5fa423eee086ea2d1163343e",
+     *     "checkedin_at": "2021-02-01 22:48:19",
+     *     "updated_at": "2021-02-01 22:48:19",
+     *     "created_at": "2021-02-01 22:48:19",
+     *     "_id": "601885335603e6467b65b605"
+     * }
      * 
      * @param Request $request
      * @param string $event_id
@@ -503,7 +465,7 @@ class ActivitiesController extends Controller
     public function registerAndCheckInActivity(Request $request , $event_id, $id)
     {
 
-        $data['user_id'] = auth()->user();  
+        $data['user_id'] = auth()->user()->_id;  
         $data['activity_id'] = $id;
         $data['event_id'] = $event_id;
 

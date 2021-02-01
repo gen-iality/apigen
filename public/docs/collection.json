@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Evius API",
-        "_postman_id": "5ded5164-8eee-4452-93d9-789d43dfc332",
+        "_postman_id": "a9218648-0165-4a8b-ba01-7b5a1f3b1103",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -23,13 +23,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quos",
+                                    "value": "velit",
                                     "description": "id of the event to which the activities belong."
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "sed",
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -65,7 +65,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "recusandae",
+                                    "value": "porro",
                                     "description": ""
                                 }
                             ]
@@ -269,7 +269,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"sed\",\n    \"activity_description\": \"libero\"\n}"
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"eum\",\n    \"activity_description\": \"possimus\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -287,13 +287,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "corrupti",
+                                    "value": "cupiditate",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "autem",
+                                    "value": "unde",
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -371,7 +371,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "officiis",
+                                    "value": "est",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -449,7 +449,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "labore",
+                                    "value": "saepe",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -485,7 +485,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "labore",
+                                    "value": "et",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -521,7 +521,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dolorem",
+                                    "value": "inventore",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -557,13 +557,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "magni",
+                                    "value": "dolorem",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ea",
+                                    "value": "harum",
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -751,7 +751,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"fugiat\"\n}"
+                            "raw": "{\n    \"name\": \"sequi\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -953,13 +953,13 @@
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-                                    "value": "modi",
+                                    "value": "debitis",
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-                                    "value": "enim",
+                                    "value": "at",
                                     "description": "id code delete"
                                 }
                             ]
@@ -1033,7 +1033,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"qui\"\n}"
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"fuga\"\n}"
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1095,7 +1095,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"eos\"\n}"
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"voluptatem\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1320,7 +1320,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"dignissimos\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"excepturi\",\n    \"extra_config\": {},\n    \"status\": \"quia\"\n}"
+                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"eveniet\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"vel\",\n    \"extra_config\": {},\n    \"status\": \"nesciunt\"\n}"
                         },
                         "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
                         "response": []
@@ -1376,7 +1376,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"dolorum\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"eos\",\n    \"extra_config\": {},\n    \"status\": \"vitae\"\n}"
+                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"aut\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"iste\",\n    \"extra_config\": {},\n    \"status\": \"et\"\n}"
                         },
                         "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
                         "response": []
@@ -1422,7 +1422,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "id",
+                                    "value": "beatae",
                                     "description": "id of the event to be rejected or approved Example:"
                                 }
                             ]
@@ -1458,7 +1458,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "voluptas",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -1494,7 +1494,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sed",
+                                    "value": "distinctio",
                                     "description": "organizer_id"
                                 }
                             ]
@@ -1574,7 +1574,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"ab\"\n}"
+                            "raw": "{\n    \"name\": \"quia\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1633,13 +1633,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "itaque",
+                                    "value": "et",
                                     "description": "string required"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ipsum",
+                                    "value": "dolores",
                                     "description": "string required id Attendee"
                                 }
                             ]
@@ -1675,7 +1675,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "voluptates",
+                                    "value": "voluptatibus",
                                     "description": "string required"
                                 }
                             ]
@@ -1693,7 +1693,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"eveniet\",\n    \"name\": \"sint\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"saepe\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"voluptatem\",\n    \"name\": \"sunt\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"repellat\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1711,7 +1711,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ducimus",
+                                    "value": "similique",
                                     "description": ""
                                 }
                             ]
@@ -1729,7 +1729,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"account_id\": \"omnis\",\n    \"properties\": []\n}"
+                            "raw": "{\n    \"account_id\": \"dolore\",\n    \"properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -1747,7 +1747,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "veritatis",
+                                    "value": "unde",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -1783,7 +1783,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "error",
+                                    "value": "voluptatem",
                                     "description": "string required"
                                 }
                             ]
@@ -1819,7 +1819,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nisi",
+                                    "value": "sed",
                                     "description": "string id of the event in which the user is registered"
                                 }
                             ]
@@ -1837,7 +1837,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"blanditiis\"\n}"
+                            "raw": "{\n    \"email\": \"veritatis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1871,7 +1871,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"officiis\"\n}"
+                            "raw": "{\n    \"file\": \"omnis\"\n}"
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -1889,7 +1889,7 @@
                                 {
                                     "id": "name",
                                     "key": "name",
-                                    "value": "praesentium",
+                                    "value": "harum",
                                     "description": "file field by default file"
                                 }
                             ]
@@ -1907,7 +1907,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"aut\",\n    \"type\": \"perspiciatis\"\n}"
+                            "raw": "{\n    \"file\": \"est\",\n    \"type\": \"eum\"\n}"
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -1931,7 +1931,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "vero",
+                                    "value": "non",
                                     "description": ""
                                 }
                             ]
@@ -1967,7 +1967,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sed",
+                                    "value": "rerum",
                                     "description": ""
                                 }
                             ]
@@ -1985,7 +1985,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"tenetur\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"quisquam\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2003,7 +2003,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "voluptas",
+                                    "value": "perferendis",
                                     "description": ""
                                 }
                             ]
@@ -2039,7 +2039,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "atque",
+                                    "value": "vitae",
                                     "description": ""
                                 }
                             ]
@@ -2057,7 +2057,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"cum\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"enim\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2075,7 +2075,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "fugit",
+                                    "value": "qui",
                                     "description": ""
                                 }
                             ]
@@ -2345,7 +2345,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"message\": \"necessitatibus\",\n    \"subject\": \"qui\",\n    \"name\": \"quasi\",\n    \"email_user\": \"distinctio\"\n}"
+                            "raw": "{\n    \"message\": \"nemo\",\n    \"subject\": \"incidunt\",\n    \"name\": \"unde\",\n    \"email_user\": \"inventore\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2399,7 +2399,7 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "nostrum",
+                                    "value": "sint",
                                     "description": "string id of the organization in which the user is registered"
                                 }
                             ]
@@ -2417,7 +2417,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"occaecati\"\n}"
+                            "raw": "{\n    \"email\": \"consequatur\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2441,7 +2441,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "doloremque",
+                                    "value": "non",
                                     "description": ""
                                 }
                             ]
@@ -2459,7 +2459,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"subject\": \"quaerat\",\n    \"image_header\": \"expedita\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"sit\",\n    \"image\": \"aspernatur\",\n    \"image_footer\": \"doloribus\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    }\n}"
+                            "raw": "{\n    \"subject\": \"eos\",\n    \"image_header\": \"est\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"aliquid\",\n    \"image\": \"sed\",\n    \"image_footer\": \"omnis\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2801,7 +2801,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "officia",
+                                    "value": "enim",
                                     "description": "id de RoleAttendee"
                                 }
                             ]
@@ -2881,7 +2881,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"dicta\",\n    \"city\": \"aut\",\n    \"country\": \"dolor\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"password\": \"sed\",\n    \"others_properties\": \"[]\",\n    \"organization_ids\": \"[\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"][\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"]\"\n}"
+                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"et\",\n    \"city\": \"perferendis\",\n    \"country\": \"debitis\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"password\": \"praesentium\",\n    \"others_properties\": \"[]\",\n    \"organization_ids\": \"[\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"][\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"]\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2981,7 +2981,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"evius lopez\",\n    \"city\": \"et\",\n    \"country\": \"cumque\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"organization_ids\": \"animi\",\n    \"others_properties\": \"[]\"\n}"
+                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"evius lopez\",\n    \"city\": \"voluptatem\",\n    \"country\": \"fugit\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"organization_ids\": \"eum\",\n    \"others_properties\": \"[]\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3132,7 +3132,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "id",
+                                    "value": "eligendi",
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -3370,7 +3370,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "nihil",
+                                    "value": "quaerat",
                                     "description": ""
                                 }
                             ]
