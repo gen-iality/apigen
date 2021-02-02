@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Spatie\ResponseCache\Facades\ResponseCache;
 use App\evaLib\Services\FilterQuery;
 
 /**
@@ -417,7 +416,7 @@ class ActivitiesController extends Controller
             $Activities->access_restriction_roles()->attach($ids);
         }
         $activity = Activities::find($Activities->id);
-        ResponseCache::clear();
+        
 
         return $activity;
     }
@@ -434,7 +433,7 @@ class ActivitiesController extends Controller
     public function destroy($event_id, $id)
     {
         $Activities = Activities::findOrFail($id);
-        ResponseCache::clear();
+        
 
         return (string) $Activities->delete();
     }

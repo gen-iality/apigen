@@ -51,26 +51,19 @@ Ingresar al Evento AQUÍ
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
-<p>
+{{-- <p>
 	Si tiene problemas con el botón de ingreso abra el siguiente enlace
 	<a href="{{$link}}">Click aquí</a>
-</p>
+</p> --}}
 
 
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
 <!-- ![Logo]({{!empty($image_footer)}}) -->
-<<<<<<< HEAD
-<img src={{$image_footer}} /> 
-@elseif($organization_picture != null)
-![Logo]({{$organization_picture}})
-<img src={{$organization_picture}} /> 
-=======
 <img alt="{{$event->name}}" src={{$image_footer}} /> 
 @elseif($organization_picture != null)
 ![Logo]({{$organization_picture}})
 <img alt="{{$event->name}}" src={{$organization_picture}} /> 
->>>>>>> 8da708f1b48a264c9a91469b0a5045f662ab2e08
 @else
 @endif
 </div>
