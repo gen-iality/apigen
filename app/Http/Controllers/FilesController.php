@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Intervention\Image\ImageManagerStatic as Image;
 
 /**
- * @resource Files
+ * @group Files
  *
  * Files handing mostly used to upload new files
  */
@@ -18,18 +18,27 @@ class FilesController extends Controller
  * Uploads files send though HTTP multipart/form-data
  *
  * Uploads provided file though HTTPFile  multipart/form-data; and returns full file URL.
- * default field_name(key) for the file is file but it could be changed using
- * additional parameter field_name to reference file using another field_name
+ *
+ * In the request the file data came in field called file.
+ *
+ * But in case this field name should be changed, It could be done though
+ *
+ * field_name parameter
+ *
  * HTTPFile could be just one file on multiple files,
- * for one file this function returns  a string with the url
+ *
+ *  for one file this function returns  a string with the url
  * for multiple files It returns an array of URLS.
  *
- * Request example
- * POST /eviusapilaravel/public/api/files/upload/image HTTP/1.1
- * Host: localhost
- * Cache-Control: no-cache
- * Postman-Token: 2f16a68e-f8fd-4b1b-a0d6-635c5ba7e981
- * Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+ * @bodyParam  file file required file sent using multipart/form-data;
+ *
+ * Example request;
+ * using axios, varible file contains data from a input HTML file field
+ *
+ *  let data = new FormData();
+ *  data.append("file", file);
+ *  await = axios.post(url, data);
+ *  console.log(`Data: ${res.data}`);
  *
  * @param Request $request
  * @param string $field_name
@@ -82,9 +91,36 @@ class FilesController extends Controller
 
     }
     /**
-     * Funcion destinada al guardado de imagenes en base 64 al google storage, XOXO
+     * _storeBaseImg_: Uploads images send though HTTP multipart/form-data  with resizing option
+
+     * Uploads files send though HTTP multipart/form-data
+     *
+     * Uploads provided file though HTTPFile  multipart/form-data; and returns full file URL.
+     *
+     * In the request the file data came in field called file.
+     *
+     * But in case this field name should be changed, It could be done though
+     *
+     * field_name parameter
+     *
+     * HTTPFile could be just one file on multiple files,
+     *
+     *  for one file this function returns  a string with the url
+     * for multiple files It returns an array of URLS.
+     *
+     * @bodyParam  file file required file sent using multipart/form-data;
+     * @bodyParam  type string  ["icon" => 240, "wall" => 500, "default" => 600, "email" => 600]; by default 600
+     * @urlParam   name  file field by default file
+     * Example request;
+     * using axios, varible file contains data from a input HTML file field
+     *
+     *  let data = new FormData();
+     *  data.append("file", file);
+     *  await = axios.post(url, data);
+     *  console.log(`Data: ${res.data}`);
      */
-    public function storeBaseImg(Request $request, string $key = null, GoogleFiles $gfService)
+
+    public function storeBaseImg(Request $request, string $key = "file", GoogleFiles $gfService)
     {
         Image::configure(array('driver' => 'imagick'));
         $data = $request->all();

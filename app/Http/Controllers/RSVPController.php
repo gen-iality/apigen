@@ -22,6 +22,8 @@ use Redirect;
 use Log;
 
 /**
+ * @group RSVP
+ * Handle RSVP(invitations for events)
  * @resource RSVP Handle RSVP(invitations for events)
  *
  */
@@ -112,7 +114,7 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Display a listing of the resource.
+     * _index_: Display a listing of the RSVP.
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,22 +127,25 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Send RSVP to users in an event, taking usersIds[] in
-     * request to filter which users the RSVP is going to be send to
-     *
-     *      +@@post body usersIds[]
-     *      +@@post body message
-     *      +@@post body image link
-     *      +@@post body subject
-     *      +@@post body footer
-     *      +@body message asdfasdf
+     * _createAndSendRSVP_: send RSVP to users in an event, taking eventUsersIds[] in request to filter which users the RSVP is going to be send to
+     * 
+     * @autenticathed
+     * 
+     * @urlParam event required
+     * 
+     * @bodyParam subject string required mail subject Evento virtual Ucronio     
+     * @bodyParam image_header string  imagen header 
+     * @bodyParam content_header string Example: Has sido invitado a el evento
+     * @bodyParam message string message that will go in the body of the mail 
+     * @bodyParam image string image that will go in the body of the mail       
+     * @bodyParam image_footer string image footer     
+     * @bodyParam eventUsersIds[] array required id of users to whom the mail will be sent Example: "eventUsersIds": ["5f8734c81730821f216b6202"]    
      *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
      * @param Message $message auto injected
      * @return int Number of email sent
-     */
-
+    */
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
@@ -190,17 +195,15 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Store a newly created resource in storage.
+     * _store_:Store a newly created resource in RSVP.
      *
-     * saveRSVP
-     *
-     * @param [type] $message
-     * @param [type] $subject
-     * @param [type] $image
-     * @param [type] $footer
-     * @param [type] $usersCount
-     * @param [type] $eventId
-     * @return void
+     * @bodyParam $message
+     * @bodyParam $subject
+     * @bodyParam $image
+     * @bodyParam $footer
+     * @bodyParam $usersCount
+     * @bodyParam $eventId
+
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -269,7 +272,8 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * Undocumented function
+     * _confirmRSVP_: Confirmation de RSVP
+     * @urlParam eventUser required
      *
      * @Ireturn void
      */

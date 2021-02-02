@@ -8,6 +8,7 @@ use Hash;
 
 use Moloquent;
 
+
 class User extends Moloquent
 {
 

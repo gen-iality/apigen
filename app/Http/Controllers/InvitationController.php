@@ -26,11 +26,10 @@ use Redirect;
 use Storage;
 
 /**
+ * @group Invitation
  * @resource Event
  *
- *
- */
-
+*/
 class InvitationController extends Controller
 {
     public function __construct(\Kreait\Firebase\Auth $auth)
@@ -39,7 +38,17 @@ class InvitationController extends Controller
     }
 
 
-
+    /**
+     * _generateLoginLinkAndRedirect_ : generate login link and redirect
+     * 
+     * @bodyParam email email required
+     * @bodyParam password string 
+     * 
+     * @param string $email
+     * @param string $pass
+     * @param string $innerpath
+     * @return void
+     */
     public function generateLoginLinkAndRedirect($email, $pass=null, $innerpath ="",$destination=null) {
 
         try {
@@ -109,6 +118,12 @@ class InvitationController extends Controller
 
     }
 
+    /**
+     * _singIn_: singIn
+     *
+     * @param Request $request
+     * @return void
+     */
     public function singIn(Request $request)
     {
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
@@ -147,12 +162,14 @@ class InvitationController extends Controller
 
         return $decryption;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
+    /**
+     * _index_: Display a listing of the Invitation.
+     * 
+     * @urlParam event_id required
+     * 
+     * @return \Illuminate\Http\Response
+    */
     public function index(Request $request, $event_id)
     {
         return JsonResource::collection(
@@ -160,20 +177,45 @@ class InvitationController extends Controller
         );
     }
 
-    public function invitationsSent(Request $request, $event_id, $user_id)
+    /**
+     * _invitationsSent_:List of applications sent
+     *
+     * @urlParam event_id
+     * @urlParam user_id
+     * 
+     * @return void
+    */
+    public function invitationsSent($event_id, $user_id)
     {
         return JsonResource::collection(
             Invitation::where("id_user_requested", $user_id)->where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
-    public function invitationsReceived(Request $request, $event_id, $user_id)
+    /**
+     * _invitationsReceived_: List of applications recived
+     *
+     * @urlParam event_id
+     * @urlParam user_id
+     * 
+     * @param Request $request
+     * @return void
+     */
+    public function invitationsReceived($event_id, $user_id)
     {
         return JsonResource::collection(
             Invitation::where("id_user_requesting", $user_id)->where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
+    /**
+     * _indexcontacts_: List of current contacts
+     *
+     * @urlParam event_id
+     * @urlParam user_id
+     * 
+     * @return void
+     */
     public function indexcontacts($event_id, $user_id)
     {
 
@@ -190,8 +232,14 @@ class InvitationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * _store_: Send request with redirection to evius
+     * 
+     * Enviar solicitud con redirección a evius
+     * 
+     * @urlParam event_id required
+     * 
+     * @bodyParam id_user_requested string required
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -249,6 +297,20 @@ class InvitationController extends Controller
         return $result;
     }
 
+    /**
+     * _acceptOrDeclineFriendRequest_: Accept Or Decline Friend Request
+     *
+     * @urlParam event_id required
+     * @urlParam id required user who accepts or rejects the application
+     * 
+     * @bodyParam response string required
+     * 
+     * @param Request $request
+     * @param String $event_id
+     * @param String $id
+     * @param string $response_alt
+     * @return void
+     */
     public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = "accepted")
     {
 
@@ -319,6 +381,15 @@ class InvitationController extends Controller
 
     }
 
+    /**
+     * _buildMeetingRequestMessage_: Build Meeting Request Message
+     *
+     * @urlParam event_id required
+     * 
+     * @bodyParam $data required
+     * 
+     * @return void
+     */
     public function buildMeetingRequestMessage($data, String $event_id)
     {
         $event = Event::find($event_id);
@@ -414,10 +485,10 @@ EOT;
     }
 
     /**
-     * Undocumented function
+     * _buildMessage_: Build contact request message 
      *
-     * @param Arrat [request_id,id_user_requesting, id_user_requested ]
-     * @param String $event_id
+     * @bodyParam $data
+     * 
      * @return void
      */
     public function buildMessage($data, String $event_id)
@@ -492,6 +563,16 @@ EOT;
         return "Request / response send";
     }
 
+    /**
+     * _sendEmail_: Send Email
+     *
+     * @bodyParam $mail array required
+     * @bodyParam $event_id string required
+     * @bodyParam $receiver string required
+     * @bodyParam $sender_user string required
+     * @bodyParam $request_type string required
+     * @return void
+     */
     public function sendEmail($mail, $event_id, $receiver, $sender_user, $request_type)
     {
 

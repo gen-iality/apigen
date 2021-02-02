@@ -11,10 +11,9 @@ use PDF;
 use Storage;
 
 /**
- * @resource Event
- *
- *
- */
+ * @group Certificate
+ * En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.
+*/
 class CertificateController extends Controller
 {
 
@@ -25,7 +24,7 @@ class CertificateController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * _index_: Lista de certificados generados.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,8 +37,12 @@ class CertificateController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * _store_:Creación de certificados.
      *
+     * @bodyParam name string required nombre del certificado
+     * @bodyParam content string required contenido del certificado
+     * @bodyParam background string required imagen de fondo. 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -53,27 +56,28 @@ class CertificateController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Display the specified resource.
+     * _show_: Ver la información de un certificado específico.
+     * 
+     * @urlParam id required id del certificado a mostrar
      *
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function show(string $event_id, string $id)
+    public function show(string $id)
     {
         $Certificate = Certificate::find($id);
         $response = new JsonResource($Certificate);
         return $response;
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: Actualizar información de un certificado específico. 
      *
+     * @urlParam id required id del certificado a actualizar
+     * 
+     * @bodyParam name string required nombre del certificado
+     * @bodyParam content string required contenido del certificado
+     * @bodyParam background string required imagen de fondo 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
@@ -88,25 +92,45 @@ class CertificateController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * _destroy_: Eliminar registro de un certificado.
+     * 
+     * @urlParam id required id del certificado a actualizar
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, string $id)
+    public function destroy(string $id)
     {
         $Certificate = Certificate::find($id);
         return (string) $Certificate->delete();
 
     }
 
-    public function indexByEvent(Request $request, String $event_id)
+    /**
+     *  _indexByEvent_: Listar los certificados por evento.
+     * 
+     * @urlParam event_id required
+     * 
+     * @param String $event_id
+     * @return void
+     */
+    public function indexByEvent(String $event_id)
     {
         return JsonResource::collection(
             Certificate::where("event_id", $event_id)->paginate(config('app.page_size'))
         );
     }
 
+    /**
+     * _certificatePdf_: Construcción de certificado PDF
+     * 
+     * @bodyParam name string required nombre del certificado
+     * @bodyParam content string required contenido del certificado
+     * @bodyParam background string required imagen de fondo 
+     * 
+     * @param Request $request
+     * @return void
+     */
     public function certificatePdf(Request $request)
     {
         $contentqry = Attendee::findOrFail("event_id", "5d2de182d74d5c28047d1f85")->get();
@@ -175,6 +199,16 @@ class CertificateController extends Controller
     }
     //return view('Public.ViewEvent.Partials.PDFTicket', $data);
 
+    /**
+     * _generateCertificate_: Generar certificado
+     * 
+     * @bodyParam name string required nombre del certificado
+     * @bodyParam content string required contenido del certificado
+     * @bodyParam background string required imagen de fondo
+     * 
+     * @param Request $request
+     * @return void
+     */
     public function generateCertificate(Request $request)
     {
         $data = $request->json()->all();

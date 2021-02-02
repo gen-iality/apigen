@@ -9,16 +9,14 @@ use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use App\Attendee;
 
+/**
+ * @group Synchronization
+ */
 class synchronizationController extends Controller
 {
     /**
-     * Event Users
-     * 
-     * Este controlador fue diseñado para exportar todos los event_users que se encuentran en mongo
-     * Realizando una migración completa,
-     *
-     * para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
-     * https://firebase-php.readthedocs.io/en/4.44.0/
+     * _EventUsers_: este controlador fue diseñado para exportar todos los event_users que se encuentran en mongo
+     * Realizando una migración completa, para mas información acerca del funcionamiento de firestore con php sigue el siguiente link https://firebase-php.readthedocs.io/en/4.44.0/
      * 
      * El controlador sigue los siguientes pasos:
      *      1. Se abre el servicio de firestore
@@ -31,8 +29,9 @@ class synchronizationController extends Controller
      *          4.4. Dentro del documento guardamos los datos del usuario.
      *      5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
      * 
-     * Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogando un
-     * error por limite de tiempo.
+     * Inconvenientes: La cantidad de usuarios, hace que la página no responda arrogando un error por limite de tiempo.
+     * 
+     * @urlParam event_id required
      * 
      * @return \Illuminate\Http\Response
      */
@@ -67,9 +66,9 @@ class synchronizationController extends Controller
      * Event Account
      * 
      * Este controlador fue diseñado para exportar un event_user que se encuentran en mongo
-     * Realizando una migración por medio del id,
+     * Realizando una migración por medio del id.
      *
-     * para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
+     * Para mas información acerca del funcionamiento de firestore con php sigue el siguiente link
      * https://github.com/morrislaptop/firestore-php
      * 
      * El controlador sigue los siguientes pasos:
@@ -82,6 +81,8 @@ class synchronizationController extends Controller
      *          4.3. Convertimos los datos del usuario en un array para poder guardarlo. 
      *          4.4. Dentro del documento guardamos los datos del usuario.
      *      5. Al finalizar retornamos un mensaje sobre la culminación del trabajo
+     * 
+     * @urlParam event_id required
      * 
      * @return \Illuminate\Http\Response
      */

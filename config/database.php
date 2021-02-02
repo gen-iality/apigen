@@ -38,6 +38,15 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
+        
+        // 'mongodb-job' => [    
+        //     'driver'   => 'mongodb',   
+        //     'dsn'=> env('DB_DSN', 'mongodb+srv://root:amazonas.2040@cluster0-gp9gs.mongodb.net/test?retryWrites=true&w=majority'),
+        //     'database' => env('DB_DATABASE', 'evius'),
+        //     'options'  => [
+        //         'database' => env('DB_DATABASE', 'main') // sets the authentication database required by mongo 3
+        //     ]
+        // ],
         'mongodb' => [    
             'driver'   => 'mongodb',   
             'dsn'=> env('DB_DSN', 'mongodb+srv://root:amazonas.2040@cluster0-gp9gs.mongodb.net/test?retryWrites=true&w=majority'),

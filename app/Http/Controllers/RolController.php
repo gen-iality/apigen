@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Rol;
 use Illuminate\Http\Request;
 
+/**
+ * @group Rol
+ */
 class RolController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * _index_: list Roles.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,8 +31,11 @@ class RolController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * _store_: create a new rol
+     * 
+     * @bodyParam name string required
+     * @bodyParam event_id string required 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,7 +48,7 @@ class RolController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * _show_: information from a specific role 
      *
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
@@ -65,8 +71,13 @@ class RolController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_: update the specified resource in storage.
+     * 
+     * @urlParam id id rol
+     * 
+     * @bodyParam name string required
+     * @bodyParam event_id string required 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
@@ -81,8 +92,10 @@ class RolController extends Controller
     }
     
     /**
-     * Remove the specified resource from storage.
-     *
+     * _destroy_:Remove the specified resource from storage.
+     * 
+     * @urlParam id id rol
+     * 
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */

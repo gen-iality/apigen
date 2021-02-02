@@ -1,15 +1,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js" integrity="sha512-Hmp6qDy9imQmd15Ds1WQJ3uoyGCUz5myyr5ijainC1z+tP7wuXcze5ZZR3dF7+rkRALfNy7jcfgS5hH8wJ/2dQ==" crossorigin="anonymous"></script>
 
-
-<form method="post" onSubmit="calculateSignature" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu" accept-charset="UTF-8">
+<!-- http://developers.payulatam.com/en/web_checkout/sandbox.html-->
+<!-- 	 * para exponer temporalmente mi localhost usar la app ngrok para que servicios
+	 * o personas externas puedan acceder a los servidores en mi computador-->
+<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
   <input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
   <input name="buttonId" type="hidden" value="UcNSM97VChAMi5VY45VLRstImRc6P7o3Fks7YPf2QjBEMbYKaT2MIA=="/>
   <input name="merchantId" type="hidden" value="508029"/>
-  <input name="buyerEmail" type="hidden" value="apps@mocionsoft.com"/>
+  <input name="buyerEmail" type="hidden" value="geraldine.garcia@mocionsoft.com"/>
   <input name="ApiKey" type="hidden" value="4Vj8eK4rloUd272L48hsrarnUA"/>
   <input name="accountId" type="hidden" value="512321"/>
   <input name="description" type="hidden" value="asdfsadf"/>
-  <input name="referenceCode" type="hidden" value="123123"/>
+  <input name="referenceCode" type="hidden" value="5fd90cacae5762445257daad"/>
   <input name="amount" type="hidden" value="10000.00"/>
   <input name="tax" type="hidden" value="0.00"/>
   <input name="taxReturnBase" type="hidden" value="0.00"/>
@@ -17,11 +19,11 @@
   <input name="currency" type="hidden" value="COP"/>
   <input name="lng" type="hidden" value="es"/>
   <input name="test" type="hidden" value="1"/>
-  <input name="approvedResponseUrl" type="hidden" value="https://611a03767dba.ngrok.io/api/payment_webhook_response"/>
-  <input name="declinedResponseUrl" type="hidden" value="https://611a03767dba.ngrok.io/api/payment_webhook_response"/>
-  <input name="pendingResponseUrl" type="hidden" value="https://611a03767dba.ngrok.io/api/payment_webhook_response"/>
-  <input name="responseUrl"        type="hidden" value="https://611a03767dba.ngrok.io/api/payment_webhook_response"/>
-  <input name="confirmationUrl" type="hidden" value="https://611a03767dba.ngrok.io/api/payment_webhook_response"/>
+  <input name="approvedResponseUrl" type="hidden" value="https://f2f1b9ddb480.ngrok.io/api/payment_webhook_response"/>
+  <input name="declinedResponseUrl" type="hidden" value="https://f2f1b9ddb480.ngrok.io/api/payment_webhook_response"/>
+  <input name="pendingResponseUrl" type="hidden" value="https://f2f1b9ddb480.ngrok.io/api/payment_webhook_response"/>
+  <input name="responseUrl"        type="hidden" value="https://f2f1b9ddb480.ngrok.io/api/payment_webhook_response"/>
+  <input name="confirmationUrl" type="hidden" value="https://f2f1b9ddb480.ngrok.io/api/payment_webhook_response"/>
 
 
 

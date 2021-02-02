@@ -20,10 +20,26 @@
 @endif --}}
 <br />
 <br />
-¡FELICITACIONES! tu compra del código de regalo para el curso  <b>{{$event->name}}</b> ha sido exitosa.
-<br />
-Tu código de regalo es: <b>{{$code->code}}</b>
-
+<div>
+    <p style="text-align:left; width: 100%;">
+        @if(isset($event->name))
+            ¡FELICITACIONES! tu compra del código  para el curso  <b>{{$event->name}}</b> ha sido exitosa.
+        @else
+            ¡FELICITACIONES! tu compra del código para redimidir en cualquier curso de nuestra plataforma ha sido exitosa.    
+        @endif
+        <br />
+        Tu código de regalo es: <b>{{$code->code}}</b><br>
+        Límite de usos : <b>{{$codeTemplate->use_limit}}</b>
+        <br />
+        Descuento:
+        @if($codeTemplate->discount_type == "percentage")
+            <b>{{$codeTemplate->discount}}%</b>
+        @else
+            <b>${{$codeTemplate->discount}}</b>    
+        @endif
+        <br />
+    </p>
+</div>
 
 <hr style="border-right : 0;border-left: 0;" />
 

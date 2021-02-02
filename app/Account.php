@@ -14,6 +14,7 @@ class Account extends User
     use Notifiable;
     use HasRoles;
 
+    // const STATUS_UNCONFIRMED = 'unconfirmed';
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
@@ -51,8 +52,6 @@ class Account extends User
     protected $fillable = [
         'displayName',
         'uid',
-        'first_name',
-        'last_name',
         'email',
         'password',
         'timezone_id',
@@ -78,6 +77,16 @@ class Account extends User
         'stripe_publishable_key',
         'stripe_data_raw',
         'payment_gateway_id',
+        'person_type', 
+        'document_type', 
+        'document_number', 
+        'phone', 
+        'telephone', 
+        'date_birth', 
+        'adress',
+        'status',
+        'total_number_events'        
+
     ];
 
     public function __construct($attributes = array())
@@ -106,7 +115,7 @@ class Account extends User
                     $fbuser = self::$auth->createUser(
                         [
                             "email" => $model->email,
-                            //emailVerified: false,
+                            // "document_number" => $model->document_number,
                             //phoneNumber: "+11234567890",
                             "password" => $newpassword,
                             // "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
@@ -154,7 +163,7 @@ class Account extends User
                 $fbuser = self::$auth->createUser(
                     [
                         "email" => $model->email,
-                        //emailVerified: false,
+                        "document_number" => $model->document_number,
                         //phoneNumber: "+11234567890",
                         "password" => $newpassword,
                         "displayName" => isset($model->displayName) ? $model->displayName : $model->names,

@@ -21,6 +21,8 @@ class Event extends ModelsEvent
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
 
+    protected $hidden = array('activity_categories');
+
     protected $with = ['author', 'categories', 'eventType', 'organiser', 'organizer', 'currency', 'tickets'];
 
     protected $fillable = [
@@ -29,9 +31,12 @@ class Event extends ModelsEvent
         'visibility', 'picture', 'organization_id', 'category', 'extra_config',
         'user_properties', 'properties_group', 'styles', 'has_date', 'app_configuration',
         'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
-        'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
-        'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
-        'send_custom_email' , 'language'
+        'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 
+        'meetinghostname', 'meetinghostemail', 'dates',
+        'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 
+        'loader_page', 'data_loader_page', 
+        'show_banner', 'initial_page', 'show_banner_footer',
+        'send_custom_email', 'status'
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
