@@ -101,11 +101,15 @@ class Activities extends Moloquent
         "has_date",
         "zoom_meeting_video",
         "zoom_host_id",
+        "zoom_host_name",
         "video",
         "bigmaker_meeting_id",
         "vimeo_id",
         "registration_message",
         "related_meetings",
-        "platform"
+        "platform",
+        "date_start_zoom",
+        "duration",
+        "date_end_zoom"
     ];
 }
