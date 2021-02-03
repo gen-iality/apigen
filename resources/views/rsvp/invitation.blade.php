@@ -10,7 +10,7 @@
 @endif
 <br />
 <br />
-** {{ __ ('Mail.saludo')}} {{$eventUser_name}}**, {{ __ ('Mail.inscripcion_exitosa')}}:
+** {{ __ ('Mail.greeting')}} {{$eventUser_name}}**, {{ __ ('Mail.successful_enrollment')}}:
 <b>{{$event->name}}</b>
 {{-- //Formato para la fecha se encuentra en: https://www.php.net/manual/es/function.strftime.php --}}
 <!-- @component('mail::table')
@@ -63,24 +63,24 @@ Ingresar al Evento AQUÍ
 		<img  src="{{$qr}}" />
 	@else
 		@component('mail::button', ['url' => $link , 'color' => 'evius'])
-			{{ __('Mail.ingresar_al_evento') }}
+			{{ __ ('Mail.enter_event')}}
 		@endcomponent
 	@endif
 </div>
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-	{{ __ ('Mail.recomendar_navegador')}}
+	{{ __ ('Mail.recommend_browser')}}
 </p>
 <p style="font-size: 15px;color: gray;font-style: italic">
-	{{ __ ('Mail.correo_soporte')}}
+	{{ __ ('Mail.support_mail')}}
 </p>
   
 
 <hr style="border-right : 0;border-left: 0;" />
 <p>
-	{{ __ ('Mail.alternativa_ingreso')}}
-	<a href="{{$link}}">{{ __('Mail.boton_ingreso') }}</a>
+	{{ __ ('Mail.alternative_entry')}}
+	<a href="{{$link}}">{{ __('Mail.enter_button') }}</a>
 </p>
 
 <div class="centered">

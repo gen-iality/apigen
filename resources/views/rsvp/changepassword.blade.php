@@ -1,14 +1,14 @@
 @component('mail::message')  
-**Hola {{$eventUser_name}} **, su cambio de contraseña se ha realizado con éxito.
+** {{ __('Mail.greeting') }} {{$eventUser_name}} **, {{ __('Mail.password_change_successful')}}
 
-Su nueva contraseña es: {{$password}}
+{{ __('Mail.new_password')}}: {{$password}}
 
-Inicie sesión haciendo click en la siguiente enlace:
-	<a href="{{$link}}">click acá</a>
+{{ __('Mail.login') }}
+	<a href="{{$link}}">{{ __('Mail.enter_button') }}</a>
 </p>
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
+	{{ __ ('Mail.support_mail')}} 
 </p>
   
 </div>
