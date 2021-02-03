@@ -7,7 +7,7 @@
 @endif
 
 
-** {{ __('Mail.saludo') }} {{$eventUser_name}}, **
+** {{ __('Mail.greeting') }} {{$eventUser_name}}, **
 @if(!empty($content_header) && $content_header != '<p><br></p>')
 {!!$content_header !!}
 @endif
@@ -23,7 +23,7 @@
 @component('mail::table')
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
-| **{{ __('Mail.fecha') }}:** | **{{ __('Mail.hora') }}:** |
+| **{{ __('Mail.date') }}:** | **{{ __('Mail.hora') }}:** |
 | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
 @endcomponent
 @endif
@@ -53,18 +53,18 @@
 {!!$event->registration_message!!}
 @endif
 @component('mail::button', ['url' => $link , 'color' => 'evius'])
-{{ __('Mail.ingresar_al_evento') }}
+{{ __ ('Mail.enter_event')}}
 @endcomponent
 
 
 <p style="font-size: 15px;color: gray;font-style: italic">
-	{{ __('Mail.recomendar_navegador') }}
+	{{ __('Mail.recommend_browser') }}
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
 <p>
-	{{ __('Mail.alternativa_ingreso')}}
-	<a href="{{$link}}">{{ __('Mail.boton_ingreso')}}</a>
+	{{ __('Mail.alternative_entry')}}
+	<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
 </p>
 
 
