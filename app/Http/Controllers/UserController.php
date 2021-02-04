@@ -304,4 +304,51 @@ class UserController extends UserControllerWeb
 
     }
 
+    /**
+     * _changeStatusUser_: approve or reject the rol the users teacher ,and send mail of the change of status of the user to the user who created it
+     * 
+     * @authenticated
+     * @urlParam user_id required id of the user to be rejected or approved 
+     * @bodyParam status string required the status update allows for two possible statuses **approved** or **rejected** Example: approved
+     * 
+     */
+    public function changeStatusUser(Request $request , $user_id)
+    {   
+        $validatedData = $request->validate([
+            'status' => 'required',
+        ]);
+
+        $data = $request->json()->all();
+        
+        $user = Auth::user();
+
+        $userRol =  isset($user) ? $user->others_properties['role'] :  null;
+            
+        
+        if(isset($userRol) && $userRol == 'admin')
+        {
+            $user = Account::find($user_id);
+            $user->status = $data['status'];
+            $user->save();
+            
+            foreach($user->organization_ids  as $organization)
+            {
+                $organizer = Organization::find($organization);
+            }
+                              
+
+            Mail::to($user->email)
+            ->queue(                
+                    new \App\Mail\ConfirmationStatusUserEmail($user , $organizer)
+                );
+
+            return $user;
+        }
+        
+        return response()->json([
+            'Error' => 'The user does not have the permissions to execute this action'
+        ], 403);
+        
+    }
+
 }
