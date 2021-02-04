@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Storage;
 use App\evaLib\Services\FilterQuery;
 use App\Http\Resources\EventUserResource;
+use Auth;
 
 class UserController extends UserControllerWeb
 {
