@@ -6,9 +6,19 @@ Hola {{$user->displayName}}!
 <div style="text-align: center">
 	<span>
         @if($event->status == 'approved')
-            <p>Felicitaciones tu curso {{$event->name}} ha sido aprobado para ser publicado</p>
+            <p>
+                Querido docente, el curso que has creado ha sido aprobado por el equipo académico de {{$organization->displayName}}. 
+                A partir de este momento esta publicado y ya puedes empezar la promoción. 
+                Te recomendamos ser muy estratégico y dedicado en la comunicación, 
+                ya que de esto depende el resultado del curso.
+                <br>
+                Bienvenido a la comunidad de Docentes de {{$organization->displayName}}!
+            </p>
         @else
-        <p>Lo sentimos tu curso <strong>{{$event->name}}</strong> ha sido rechazado para ser publicado</p>
+        <p>
+            Querido docente, el curso que has creado ha sido rechazado por el equipo académico de {{$organization->displayName}}. 
+            Sigue trabajando en tu curso y vuelve a presentarte con ideas nuevas para publicar tu curso en {{$organization->displayName}}. 
+        </p>
         @endif
     </span>
     <hr style="border-right : 0;border-left: 0;" />
