@@ -432,6 +432,8 @@ class ActivityAssistantController extends Controller
         return $ActivityAssistant;
     }
 
+    
+
     public function checkInWithSearch(Request $request , $event_id)
     {
         $data = $request->json()->all();

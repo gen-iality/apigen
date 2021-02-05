@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Activities;
+use App\ActivityAssistant;
 use App\Event;
 use App\ZoomHost;
 use Aws\Credentials\Credentials;
@@ -155,7 +156,7 @@ class ActivitiesController extends Controller
             $activity->access_restriction_roles()->attach($ids);
         }
         //Cargamos de nuevo para traer la info de las categorias
-        $activity = Activities::find($activity->id);  
+        $activity = Activities::find($activity->id);
         
 
         return $activity;
@@ -515,6 +516,43 @@ class ActivitiesController extends Controller
         return response()->json([
             "message" => "No hay host disponible para las horas ingresadas"
         ] , 409);
+    }
+
+    /**
+     * _registerAndCheckInActivity_: status indicating that the user entered the activity
+     * 
+     * @authenticated
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id of activity_assitant
+     * 
+     * @response{
+     *     "user_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *     "activity_id": "60181474e36ef049a92768ba",
+     *     "event_id": "5fa423eee086ea2d1163343e",
+     *     "checkedin_at": "2021-02-01 22:48:19",
+     *     "updated_at": "2021-02-01 22:48:19",
+     *     "created_at": "2021-02-01 22:48:19",
+     *     "_id": "601885335603e6467b65b605"
+     * }
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @param string $id
+     * @return void
+     */
+    public function registerAndCheckInActivity(Request $request , $event_id, $id)
+    {
+
+        $data['user_id'] = auth()->user()->_id;  
+        $data['activity_id'] = $id;
+        $data['event_id'] = $event_id;
+
+        $date = new \DateTime();
+        $data['checkedin_at'] = $date;
+        $ActivityAssistant = new ActivityAssistant($data);        
+        $ActivityAssistant->save();
+
+        return $ActivityAssistant;
     }
 }
 

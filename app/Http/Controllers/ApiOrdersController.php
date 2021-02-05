@@ -25,6 +25,67 @@ class ApiOrdersController extends Controller
 {
     /**
      * _index_: list of all orders  
+     * 
+     * @response{
+     *  "data": [
+     *      {
+     *          "_id": "5c5209c9f33bd41d17312774",
+     *          "_token": "Iac0K5a4SOBSZGSZfQUFH3kAJhZGMpC8eeT7mAok",
+     *          "payment_gateway_id": "3",
+     *          "first_name": "Larissa",
+     *          "last_name": "Wiley",
+     *          "email": "felipe.martinez+100@mocionsoft.com",
+     *          "order_status_id": "5c4a291e5c93dc0eb1992149",
+     *          "amount": 100000,
+     *          "booking_fee": 0,
+     *          "organiser_booking_fee": 0,
+     *          "discount": 0,
+     *          "account_id": "5c51df3f342254001128a122",
+     *          "event_id": "5c51e165342254001a3b1982",
+     *          "is_payment_received": 1,
+     *          "session_id": 171953,
+     *          "order_reference": "ticket_order_1548880329",
+     *          "taxamt": "0.00",
+     *          "url": "https:\/\/test.placetopay.com\/redirection\/session\/171953\/918bed652065302921a260c87320b2b3",
+     *          "updated_at": "2019-02-21 00:33:59",
+     *          "created_at": "2019-01-30 20:32:09",
+     *          "tickets": [],
+     *          "order_status": {
+     *              "_id": "5c4a291e5c93dc0eb1992149",
+     *              "id": "6",
+     *              "name": "Rechazado"
+     *          }
+     *      },
+     *      {
+     *          "_id": "5c52104df33bd41d187dc7a3",
+     *          "_token": "Iac0K5a4SOBSZGSZfQUFH3kAJhZGMpC8eeT7mAok",
+     *          "payment_gateway_id": "3",
+     *          "first_name": "Larissa",
+     *          "last_name": "Wiley",
+     *          "email": "felipe.martinez+100@mocionsoft.com",
+     *          "order_status_id": "5c4a291e5c93dc0eb1992149",
+     *          "amount": 100000,
+     *          "booking_fee": 0,
+     *          "organiser_booking_fee": 0,
+     *          "discount": 0,
+     *          "account_id": "5c51df3f342254001128a122",
+     *          "event_id": "5c51e165342254001a3b1982",
+     *          "is_payment_received": 1,
+     *          "session_id": 171957,
+     *          "order_reference": "ticket_order_1548881997",
+     *          "taxamt": "0.00",
+     *          "url": "https:\/\/test.placetopay.com\/redirection\/session\/171957\/8081ccf8aa0bb8d0eadb223854bdae8e",
+     *          "updated_at": "2019-02-21 00:34:02",
+     *          "created_at": "2019-01-30 20:59:57",
+     *          "tickets": [],
+     *          "order_status": {
+     *              "_id": "5c4a291e5c93dc0eb1992149",
+     *              "id": "6",
+     *              "name": "Rechazado"
+     *          }
+     *    
+     *      }
+     * ]}
      *
      * @return \Illuminate\Http\Response
      */

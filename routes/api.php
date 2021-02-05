@@ -122,6 +122,7 @@ Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantC
 Route::put    ('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
 
 
+
 /***************
  * USER PROPERTIES
  ****************/
