@@ -469,16 +469,9 @@ class ActivitiesController extends Controller
         $data['activity_id'] = $id;
         $data['event_id'] = $event_id;
 
-        $ActivityAssistant = ActivityAssistant::where('activity_id' , $data['activity_id'])
-                            ->where('user_id', $data['user_id'] )->first();
-        
-        if(!isset($ActivityAssistant))
-        {
-            $date = new \DateTime();
-            $data['checkedin_at'] = $date;
-            $ActivityAssistant = new ActivityAssistant($data);        
-            $ActivityAssistant->save();
-        }        
+        $ActivityAssistant = ActivityAssistant::updateOrCreate(
+            ['activity_id' => $data['activity_id'] ,'user_id'=> $data['user_id'] ]
+        );      
 
         return $ActivityAssistant;
     }
