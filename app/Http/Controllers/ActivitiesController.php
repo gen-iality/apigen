@@ -444,7 +444,7 @@ class ActivitiesController extends Controller
      * 
      * @authenticated
      * @urlParam event_id required event to which the activity belongs
-     * @urlParam id id of activity_assitant
+     * @urlParam id id of activity
      * 
      * @response{
      *     "user_id": "5e9caaa1d74d5c2f6a02a3c2",
@@ -465,13 +465,20 @@ class ActivitiesController extends Controller
     {
 
         $data['user_id'] = auth()->user()->_id;  
+
         $data['activity_id'] = $id;
         $data['event_id'] = $event_id;
 
-        $date = new \DateTime();
-        $data['checkedin_at'] = $date;
-        $ActivityAssistant = new ActivityAssistant($data);        
-        $ActivityAssistant->save();
+        $ActivityAssistant = ActivityAssistant::where('activity_id' , $data['activity_id'])
+                            ->where('user_id', $data['user_id'] )->first();
+        
+        if(!isset($ActivityAssistant))
+        {
+            $date = new \DateTime();
+            $data['checkedin_at'] = $date;
+            $ActivityAssistant = new ActivityAssistant($data);        
+            $ActivityAssistant->save();
+        }        
 
         return $ActivityAssistant;
     }
