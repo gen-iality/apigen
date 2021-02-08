@@ -122,7 +122,13 @@ class ActivitiesController extends Controller
     {
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
-
+        
+        $data["date_start_zoom"] =  Carbon::parse($data["datetime_start"]);            
+        $data["date_start_zoom"] = $data["date_start_zoom"]->format('Y-m-d\TH:i:s');
+        
+        $data['date_end_zoom'] = Carbon::parse($data["datetime_end"])->addMinutes(60);        
+        $data['date_end_zoom'] = $data['date_end_zoom']->format('Y-m-d\TH:i:s');
+        
         $activity = new Activities($data);
         $activity->save();
 
