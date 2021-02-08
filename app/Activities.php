@@ -107,6 +107,8 @@ class Activities extends Moloquent
         "registration_message",
         "related_meetings",
         "platform",
-        "start_date"
+        "date_start_zoom",
+        "duration",
+        "date_end_zoom"
     ];
 }
