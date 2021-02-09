@@ -343,8 +343,8 @@ class ActivitiesController extends Controller
         ]);
         
         //Filtrar reuniones por fecha para ver que hosts se estan usando
-        $hostsUsed  = Activities::where('date_end_zoom' , '>', $activity->date_start_zoom)
-                                ->where('date_start_zoom' , '<' ,  $activity->date_end_zoom);      
+        $hostsUsed  = Activities::where('date_end_zoom' , '>', $data['date_start_zoom'])
+                                ->where('date_start_zoom' , '<' ,  $data['date_end_zoom']);      
 
         if(isset($data['host_ids']))
         {                               
@@ -381,10 +381,14 @@ class ActivitiesController extends Controller
             ] , 409);
         }
 
+        Log::info('sdasd');                                
+
+        Log::info($hostsUsed->get());                                
         $hostsUsed  = $hostsUsed->where('zoom_host_id' , $data['host_id'])->first();  
-                                
+
         if(!isset($hostsUsed))
-        {              
+        {   
+
             //Obtener el primer host disponible a la actividad a la que se le está creando la sala, para que lo pueda utilizar             
             $host =  ZoomHost::where('id' , $data['host_id'])->first();
             $activity = Activities::find($activity_id);
@@ -394,11 +398,31 @@ class ActivitiesController extends Controller
 
             return $activity;
         }
-        
+               
+
         return response()->json([
             "message" => "El host no está disponible para las horas ingresadas"
-        ] , 409);                       
+        ] , 409);   
         
+    }
+
+    /**
+     * _deleteVirtualSpaceZoom_:
+     */
+    public function deleteVirtualSpaceZoom($event_id , $room_id)
+    {   
+        $activity = Activities::where('meeting_id', intval($room_id))->first();
+
+        $activity->zoom_host_id = '';
+        $activity->zoom_host_name = '';
+        $activity->duration = 0;
+        $activity->join_url = '';
+        $activity->meeting_id = 0;
+        $activity->start_url = '';
+        $activity->save();  
+
+        return $activity;
+
     }
 }
 
