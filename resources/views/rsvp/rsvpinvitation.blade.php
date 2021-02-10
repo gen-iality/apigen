@@ -7,7 +7,7 @@
 @endif
 
 
-** Hola {{$eventUser_name}}, **
+Hola {{$eventUser_name}},
 @if(!empty($content_header) && $content_header != '<p><br></p>')
 {!!$content_header !!}
 @endif
@@ -40,17 +40,19 @@ ha sido invitado a:
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-Ingresar al Evento AQUÍ
-@endcomponent
 
+@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
+	@component('mail::button', ['url' => $link , 'color' => 'evius'])
+		Ingresar al Evento AQUÍ
+	@endcomponent
+@endif
 
+<hr style="border-right : 0;border-left: 0;">
 <p style="font-size: 15px;color: gray;font-style: italic">
 	Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar,
 	algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
 
-<hr style="border-right : 0;border-left: 0;">
 {{-- <p>
 	Si tiene problemas con el botón de ingreso abra el siguiente enlace
 	<a href="{{$link}}">Click aquí</a>
@@ -61,8 +63,7 @@ Ingresar al Evento AQUÍ
 @if(isset($image_footer) && !empty($image_footer))
 <!-- ![Logo]({{!empty($image_footer)}}) -->
 <img alt="{{$event->name}}" src={{$image_footer}} /> 
-@elseif($organization_picture != null)
-![Logo]({{$organization_picture}})
+@elseif($organization_picture != null)s
 <img alt="{{$event->name}}" src={{$organization_picture}} /> 
 @else
 @endif

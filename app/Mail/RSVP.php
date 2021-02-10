@@ -41,12 +41,15 @@ class RSVP extends Mailable implements ShouldQueue
     public $ical = "";
     public $date_time_from;
     public $date_time_to;
+    public $include_ical_calendar;
+    public $include_login_button;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $data)
     {
 
         $auth = resolve('Kreait\Firebase\Auth');
@@ -90,6 +93,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->content_header = $content_header;
         $this->image_footer = $image_footer;
         $this->include_date = $include_date;
+        $this->include_date = $include_date;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
@@ -101,6 +105,10 @@ class RSVP extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
+        $this->include_ical_calendar = $data['include_ical_calendar'];
+        $this->include_login_button = $data['include_login_button'];
+
+
 
         $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start) : $event->datetime_from;
         $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
@@ -189,6 +197,18 @@ class RSVP extends Mailable implements ShouldQueue
             $headers->addTextHeader('X-SES-CONFIGURATION-SET', 'ConfigurationSetSendEmail');
         });
 
+        if ($this->include_ical_calendar)
+        {
+            return $this
+            ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->attachData($this->ical, 'ical.ics', [
+                'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
+            ])
+            ->markdown('rsvp.rsvpinvitation');
+            //return $this->view('vendor.mail.html.message');
+        }
+        
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)

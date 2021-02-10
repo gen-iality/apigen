@@ -137,7 +137,9 @@ class RSVPController extends Controller implements ShouldQueue
      * @bodyParam message string message that will go in the body of the mail 
      * @bodyParam image string image that will go in the body of the mail       
      * @bodyParam image_footer string image footer     
-     * @bodyParam eventUsersIds[] array required id of users to whom the mail will be sent Example: "eventUsersIds": ["5f8734c81730821f216b6202"]    
+     * @bodyParam eventUsersIds[] array required id of users to whom the mail will be sent Example: "eventUsersIds": ["5f8734c81730821f216b6202"]
+     * @bodyParam include_ical_calendar boolean field used to show(true) or not(false) the top calendar in the mailing Example: false
+     * @bodyParam include_login_button boolean field used to show (true) or not (false) the event entry button Example : false
      *
      * @param request Laravel request object
      * @param Event $event  Event to which users are suscribed
@@ -246,6 +248,10 @@ class RSVPController extends Controller implements ShouldQueue
             if (!empty($data["include_date"])) {
                 $include_date = $data["include_date"] ? true : false;
             }
+
+            $data["include_ical_calendar"] = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true; 
+            $data["include_login_button"] = isset($data["include_login_button"]) ? $data["include_login_button"]  : true;            
+
             echo "a";
             // sino existe la propiedad names lo más posible es que el usuario tenga un error
             if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
@@ -254,7 +260,7 @@ class RSVPController extends Controller implements ShouldQueue
             echo "b";
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $data["image_footer"], $include_date, $data)
                 );
 
             //->cc('juan.lopez@mocionsoft.com');
