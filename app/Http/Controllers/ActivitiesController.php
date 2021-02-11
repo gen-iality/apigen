@@ -262,7 +262,7 @@ class ActivitiesController extends Controller
 
         if(isset($data["datetime_start"]))
         {
-            $data["date_start_zoom"] =  Carbon::parse($data["datetime_start"]);            
+            $data["date_start_zoom"] =  Carbon::parse($data["datetime_start"])->subHours(1);            
             $data["date_start_zoom"] = $data["date_start_zoom"]->format('Y-m-d\TH:i:s');                
         }
 
