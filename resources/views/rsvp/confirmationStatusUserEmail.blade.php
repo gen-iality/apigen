@@ -6,9 +6,19 @@ Hola {{$user->displayName}}!
 <div style="text-align: center">
 	<span>
         @if($user->status == 'approved')
-            <p>Felicitaciones has sido aprobado para ser profesor de nuestra plataforma</p>
+            <p>
+                Bienvenido al equipo de {{$organization->displayName}}. Tu perfil ha sido aceptado como docente. 
+                A partir de ahora podrás empezar a crear clases.
+                Es importante que el contenido que crees venga desde tu experiencia, 
+                ya que esto es lo que buscan las personas de la comunidad {{$organization->displayName}}.
+                <br>
+                Bienvenido a {{$organization->displayName}}!
+            </p>
         @else
-        <p>Lo sentimos no te han aprobado para ser profesor de nuestra plataforma</p>
+        <p>
+            Tu perfil ha sido rechazado por el equipo académico de {{$organization->displayName}}. 
+            Sigue trabajando en tu perfil y vuelve a presentarte con ideas nuevas para ser parte del equipo de {{$organization->displayName}}. 
+        </p>
         @endif
     </span>
     <hr style="border-right : 0;border-left: 0;" />

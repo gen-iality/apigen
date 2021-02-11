@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Spatie\ResponseCache\Facades\ResponseCache;
 use App\evaLib\Services\FilterQuery;
 use Log;
 
@@ -440,7 +439,7 @@ class ActivitiesController extends Controller
             $Activities->access_restriction_roles()->attach($ids);
         }
         $activity = Activities::find($Activities->id);
-       
+        
 
         return $activity;
     }
@@ -457,7 +456,7 @@ class ActivitiesController extends Controller
     public function destroy($event_id, $id)
     {
         $Activities = Activities::findOrFail($id);
-        ResponseCache::clear();
+        
 
         return (string) $Activities->delete();
     }
@@ -574,7 +573,7 @@ class ActivitiesController extends Controller
      * 
      * @authenticated
      * @urlParam event_id required event to which the activity belongs
-     * @urlParam id id of activity_assitant
+     * @urlParam id id of activity
      * 
      * @response{
      *     "user_id": "5e9caaa1d74d5c2f6a02a3c2",
@@ -595,13 +594,17 @@ class ActivitiesController extends Controller
     {
 
         $data['user_id'] = auth()->user()->_id;  
+
         $data['activity_id'] = $id;
         $data['event_id'] = $event_id;
 
-        $date = new \DateTime();
-        $data['checkedin_at'] = $date;
-        $ActivityAssistant = new ActivityAssistant($data);        
-        $ActivityAssistant->save();
+        $ActivityAssistant = ActivityAssistant::updateOrCreate(
+            [   
+                'activity_id' => $data['activity_id'] ,
+                'user_id'=> $data['user_id'],
+                'event_id' => $data['event_id']
+            ]
+        );      
 
         return $ActivityAssistant;
     }
