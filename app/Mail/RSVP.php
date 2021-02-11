@@ -47,7 +47,6 @@ class RSVP extends Mailable implements ShouldQueue
     public $date_time_to;
     public $messageLog;
     public $qr;
-    public $include_ical_calendar;
     public $include_login_button;
 
     /**
