@@ -262,6 +262,9 @@ class InvitationMail extends Mailable implements ShouldQueue
             ->markdown('rsvp.onetimelogin');
         }
         
+        $locale = isset($this->event->language) ? $this->event->language : 'es';
+        App::setLocale($locale);
+
         if($this->changePassword){
             return $this
             ->from("alerts@evius.co", $from)
@@ -286,9 +289,6 @@ class InvitationMail extends Mailable implements ShouldQueue
             ->markdown('rsvp.invitationcustom');
         //return $this->view('vendor.mail.html.message');
         }
-
-        $locale = isset($this->event->language) ? $this->event->language : 'es';
-        App::setLocale($locale);
         
         return $this
             ->from("alerts@evius.co", $from)

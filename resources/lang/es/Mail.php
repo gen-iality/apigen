@@ -2,13 +2,19 @@
 
 
 return [
-    'saludo' => 'Hola',
-    'ingresar_al_evento' => 'Ingresar al Evento AQUÍ',
-    'recomendar_navegador' =>  'Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, algunas características pueden no estar disponibles en navegadores no soportados',    
-    'alternativa_ingreso' => 'Si tiene problemas con el botón de ingreso abra el siguiente enlace',
-    'boton_ingreso' =>  'Click aquí',
-    'fecha' => 'Fecha',
+    //==================================== Translations Email Invitation====================================//
+    'greeting' => 'Hola',
+    'enter_event' => 'Ingresar al Evento AQUÍ',
+    'recommend_browser' =>  'Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, algunas características pueden no estar disponibles en navegadores no soportados',    
+    'alternative_entry' => 'Si tiene problemas con el botón de ingreso abra el siguiente enlace',
+    'enter_button' =>  'Clik aquí',
+    'date' => 'Fecha',
     'hora' => 'Hora',
-    'inscripcion_exitosa' => 'la inscripción ha sido exitosa al evento',
-    'correo_soporte' => 'Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  '
+    'successful_enrollment' => 'la inscripción ha sido exitosa al evento',
+    'support_mail' => 'Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  ',
+    //==================================== Translations Email Change Password====================================//
+    'password_change_successful' => 'su cambio de contraseña se ha realizado con éxito',
+    'new_password' => 'Su nueva contraseña es',
+    'login' => 'Inicie sesión haciendo click en la siguiente enlace'
+
 ];

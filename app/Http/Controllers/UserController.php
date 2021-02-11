@@ -406,8 +406,7 @@ class UserController extends UserControllerWeb
 
     }
 
-
-     /**
+    /**
      * _changeStatusUser_: approve or reject the rol the users teacher ,and send mail of the change of status of the user to the user who created it
      * 
      * @authenticated
@@ -453,6 +452,5 @@ class UserController extends UserControllerWeb
         ], 403);
         
     }
+
 }
-
-

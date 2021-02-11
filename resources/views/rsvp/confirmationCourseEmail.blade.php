@@ -6,7 +6,14 @@ Hola {{$user->displayName}}!
 <div style="text-align: center">
 	<span>
         @if($event->status == 'approved')
-            <p>Felicitaciones tu curso {{$event->name}} ha sido aprobado para ser publicado</p>
+            <p>
+                Querido docente, el curso que has creado ha sido aprobado por el equipo académico de Ucronio. 
+                A partir de este momento esta publicado y ya puedes empezar la promoción. 
+                Te recomendamos ser muy estratégico y dedicado en la comunicación, 
+                ya que de esto depende el resultado del curso.
+                <br>
+                Bienvenido a la comunidad de Docentes de {{$organization->displayName}}!
+            </p>
         @else
         <p>Lo sentimos tu curso <strong>{{$event->name}}</strong> ha sido rechazado para ser publicado</p>
         @endif

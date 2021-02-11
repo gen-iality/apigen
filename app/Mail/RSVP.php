@@ -230,7 +230,7 @@ class RSVP extends Mailable implements ShouldQueue
         
         $locale = isset($this->event->language) ? $this->event->language : 'es';
         App::setLocale($locale);
-
+        
         if ($this->include_ical_calendar)
         {
             return $this

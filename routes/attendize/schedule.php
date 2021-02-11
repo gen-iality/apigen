@@ -62,6 +62,7 @@ Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
 Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
 Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
+Route::put('events/{event_id}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
 
 
 /***************
