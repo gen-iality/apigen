@@ -98,7 +98,7 @@ class UserController extends UserControllerWeb
         $data = $request->json()->all();
        
         //For users registered as teachers, the status is set to 'unconfirmed' and then confirmed by the administrator
-        $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
+        $data['status'] = (isset($data['others_properties']['role']) == 'teacher') ? 'unconfirmed' : 'confirmed';        
 
         $result = new Account($data);
         // var_dump($data['organization_ids']);die;
