@@ -40,7 +40,7 @@ class UserRegistrationMail extends Mailable implements ShouldQueue
 
     public function build()
     {
-        var_dump($this->organization);die;
+        
         return $this
             ->from($this->organization->email, $this->organization->displayName)
             ->subject('Registro exitoso')
