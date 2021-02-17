@@ -17,6 +17,7 @@ use App\evaLib\Services\FilterQuery;
 use App\Http\Resources\EventUserResource;
 use Auth;
 use App\OrganizationUser;
+use Log;
 
 /**
  * @group User
@@ -400,7 +401,7 @@ class UserController extends UserControllerWeb
         $input = $request->all();
 
         $query = Account::where("organization_ids", $organization_id);
- 
+        Log::info('entrada');
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return UsersResource::collection($results);          
 
