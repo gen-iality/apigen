@@ -522,12 +522,11 @@ class ActivitiesController extends Controller
             return response()->json([
                 "message" => "No hay host disponible para las horas ingresadas"
             ] , 409);
-        }
+        }                                      
 
-        Log::info('sdasd');                                
-
-        Log::info($hostsUsed->get());                                
         $hostsUsed  = $hostsUsed->where('zoom_host_id' , $data['host_id'])->first();  
+        // Log::info('message');
+        // Log::info($hostsUsed);                                
 
         if(!isset($hostsUsed))
         {   

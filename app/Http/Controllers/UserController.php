@@ -87,7 +87,8 @@ class UserController extends UserControllerWeb
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {           
+    {   
+          
         $validatedData = $request->validate([
             'email' => 'required|unique:users|email',
             'names' => 'required',
@@ -97,9 +98,13 @@ class UserController extends UserControllerWeb
         ]);
 
         $data = $request->json()->all();
+        $data['email'] = strtolower($data['email']);
        
         //For users registered as teachers, the status is set to 'unconfirmed' and then confirmed by the administrator
-        $data['status'] = (isset($data['others_properties']['role']) == 'teacher') ? 'unconfirmed' : 'confirmed';        
+        if($data['others_properties']['role'])
+        {
+            $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
+        }
 
         $result = new Account($data);
         // var_dump($data['organization_ids']);die;
