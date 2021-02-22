@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><?php echo e($page['title']); ?></title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="docs/css/style.css" />
     <script src="js/all.js"></script>
 
 

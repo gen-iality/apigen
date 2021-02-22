@@ -10,8 +10,8 @@ use Illuminate\Validation\Rule;
 use Validator;
 
 /**
- * Controla la dinámica de puntajes para una experiencia de un cliente (disney)
- * pra un juego de lanzamiento que se realizo en agosto del 2020
+ * @group Duncan
+ * Controla la dinámica de puntajes para una experiencia de un cliente (disney) pra un juego de lanzamiento que se realizo en agosto del 2020
  */
 class DuncanGameController extends Controller
 {
@@ -25,8 +25,8 @@ class DuncanGameController extends Controller
     const AVALIABLE_GAMES = ["darts", "spaceinvaders", "annie", "rullettee"];
 
     /**
-     * duncan juego guardamos el puntaje con el timestamp para después poder
-     * limitar la cantiadad de veces jugadas por tiempo
+     * Duncan juego. Guardamos el puntaje con el timestamp para después poder limitar la cantiadad de veces jugadas por tiempo
+     * @param Request $request
      * @return \App\Attendee
      */
     public function guardarpuntaje(Request $request)
@@ -73,11 +73,12 @@ class DuncanGameController extends Controller
     }
 
     /**
-     *  numero de segundos desde que jugue,
-     *
+     * 
+     * _minutosparajugar_:Duncan juego. Número de segundos desde que jugue.
+     * Número de segundos desde que jugue menos una hora que es límite de tiempo para volver a jugar, si el número es positivo no puedo jugar, si es negativo significa que ya paso más de una hora.
      * @param Request $request
-     * @return int numero de segundos desde que jugue, menos una hora que es limite de tiempo para volver a jugar
-     * si el número es positivo no puedo jugar, si es negativo significa que ya paso más de una hora
+     * @return int
+     * 
      */
     public function minutosparajugar(Request $request)
     {
@@ -108,7 +109,7 @@ class DuncanGameController extends Controller
     }
 
     /**
-     *  Mensaje que se enviará mediante SMS al usuario invitado
+     * _invitaramigos_:Mensaje que se enviará mediante SMS al usuario invitado
      *
      * @param Request $request
      * @return string confirmación de que el mensaje fue enviado

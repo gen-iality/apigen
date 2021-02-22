@@ -1,21 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
 /**
- * @resource AuthUser
+ * @group User
  * This class is in charge of managing auth stuff which is implemented using firebase
  */
 class FireBaseAuthController extends Controller
 {
     /**
      * 
-     * getCurrentUser
+     * getCurrentUser: returns current user information using valid token send with the request.
      * 
      * returns current user information using valid token send with the request.
-     * Token is prosseced by middleware
+     * Token is processed  by middleware
+     * @authenticated
      *
      * @param Request $request
      * @return Account user information using valid token send with the request.

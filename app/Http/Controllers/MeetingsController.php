@@ -143,8 +143,40 @@ class MeetingsController extends Controller
 
         return "Request / response send";
     }
-    public function index(Request $request)
+
+    public function index(Request $request, $event_id)
     {
+        $path = "event_agendas/{$event_id}/agendas";
+        $documents = $this->database->collection($path)->documents();
+
+        $count = 0;
+        $attendees = [];
+        foreach($documents as $document){
+            $count++;
+            if ($document->exists()) {
+                $data = $document->data();
+                
+                // foreach($data['attendees'] as $attendee){
+                //     $a = Attendee::find($attendee);
+                //     $attendees[] = isset($a)?$a->_id:"-".",".isset($a)?$a['properties']['email']: "--";
+                //    //var_dump($a->_id);
+                  
+                // }
+                array_push($attendees ,$data['attendees']);
+                $time = new Carbon($data['timestamp_start']);
+                $time->setTimezone('America/Bogota');
+                // $attendees=implode(",", $attendees);
+
+                echo "{$document->id()}" . ', <br/>';
+                //printf('Document data for document %s:' . PHP_EOL, $document->id());
+                //print_r($document->data());
+                //printf(PHP_EOL);
+            } else {
+                printf('Document %s does not exist!' . PHP_EOL, $snapshot->id());
+            }
+        }
+        var_dump($attendees);
+        return "total: {$count}";
 
 
     }

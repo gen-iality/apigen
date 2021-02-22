@@ -62,12 +62,11 @@ class OrganizationUserController extends Controller
     public function store(Request $request,String $organization_id)
     {
         $data = $request->json()->all();
-
         /* Se valida que venga el name y el email */
 
         $validator = Validator::make(
             $data, [
-                'name' => 'required',
+                'names' => 'required',
                 'email' => 'required',
             ]
         );
@@ -86,14 +85,11 @@ class OrganizationUserController extends Controller
         }
         
         $user = Account::where('email', $data['email'])->first();        
-if (!$user){
+        if (!$user){
         //Buscamos el usuario por email para saber si ya existe o crearlo
         $user = Account::updateOrCreate(['email'=>$data['email']],$data);
         }
-
-    
-
-
+ 
         //Esto como que no se usa de afan no pudimos probar lo dejamos
         if (isset($data['properties'])) {
             $tmp = $data['properties'];

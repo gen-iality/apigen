@@ -47,12 +47,14 @@ class RSVP extends Mailable implements ShouldQueue
     public $date_time_to;
     public $messageLog;
     public $qr;
+    public $include_login_button;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $include_ical_calendar=null, $messageLog )
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $data ,$messageLog)
     {
 
         $locale = isset($event->language) ? $event->language : 'es';
@@ -100,6 +102,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->content_header = $content_header;
         $this->image_footer = $image_footer;
         $this->include_date = $include_date;
+        $this->include_date = $include_date;
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;
@@ -111,15 +114,15 @@ class RSVP extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
+        $this->include_ical_calendar = $data['include_ical_calendar'];
+        $this->include_login_button = $data['include_login_button'];
         $this->messageLog = $messageLog; 
-        $this->include_ical_calendar = $include_ical_calendar;
 
-        //Definición de horario de inicio y fin del evento.Se le agrega -05:00 para que quede hora Colombia
-        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start."-05:00") : \Carbon\Carbon::parse($event->datetime_from ."-05:00");
-        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end."-05:00") : \Carbon\Carbon::parse($event->datetime_to."-05:00");        
-        $date_time_from = $date_time_from->setTimezone("UTC");
-        $date_time_to = $date_time_to->setTimezone("UTC");
-        
+
+
+        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start) : $event->datetime_from;
+        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end) : $event->datetime_to;
+
         $this->date_time_from = $date_time_from;
         $this->date_time_to = $date_time_to;
 
@@ -242,6 +245,7 @@ class RSVP extends Mailable implements ShouldQueue
             ->markdown('rsvp.rsvpinvitation');
             //return $this->view('vendor.mail.html.message');
         }
+        
         return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)

@@ -35,10 +35,12 @@ return [
         ],
 
         'database' => [
-            'driver' => 'database',
+            'driver' => 'mongodb',
+            // You can also specify your jobs specific database created on config/database.php
+            'connection' => 'mongodb',
             'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90,
+            'expire' => 60,
         ],
 
         'beanstalkd' => [
@@ -79,7 +81,9 @@ return [
      */
 
     'failed' => [
-        'database' => env('DB_CONNECTION', 'mongodb'),
+        'driver' => 'mongodb',
+        // You can also specify your jobs specific database created on config/database.php
+        'database' => 'mongodb',
         'table' => 'failed_jobs',
     ],
 

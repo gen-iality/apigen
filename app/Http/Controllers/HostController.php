@@ -8,15 +8,29 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @resource Event
- *
- *
+ * @group Host(Speakers)
+ * 
+ * The host or conferences are in charge of carrying out the activities
  */
 class HostController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * _index_: list all host
+     * 
+     * @urlParam event_id required
+     * 
+     * @response{
+     *     "created_at": "2020-11-05 20:23:33",
+     *     "description": "<p>Es todo un profesional</p>",
+     *     "description_activity": "true",
+     *     "event_id": "5fa423eee086ea2d1163343e",
+     *     "image": null,
+     *     "name": "Primer conferencista",
+     *     "order": 1,
+     *     "profession": "Ingeniero",
+     *     "updated_at": "2020-11-05 20:23:33",
+     *     "_id": "5fa45f453766a90b471a0f22"
+     * }
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
@@ -42,8 +56,17 @@ class HostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * _store_: create new host
      *
+     * @urlParam event_id required
+     * 
+     * @bodyParam description string Example: <p>Es todo un profesional</p>
+     * @bodyParam description_activity string Example: true
+     * @bodyParam image string
+     * @bodyParam name string Example: Primer conferencista
+     * @bodyParam order number Example: 1
+     * @bodyParam profession string Example: Ingeniero
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -57,8 +80,11 @@ class HostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * _show_: view information for a specific host
      *
+     * @urlParam event_id required
+     * @urlParam id required host id to be removed
+     * 
      * @param  \App\Host  $Host
      * @return \Illuminate\Http\Response
      */
@@ -70,8 +96,17 @@ class HostController extends Controller
 
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: update the specified host.
      *
+     * @urlParam event_id required
+     * 
+     * @bodyParam description string Example: <p>Es todo un profesional</p>
+     * @bodyParam description_activity string Example: true
+     * @bodyParam image string
+     * @bodyParam name string Example: Primer conferencista
+     * @bodyParam order number Example: 1
+     * @bodyParam profession string Example: Ingeniero
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Host  $Host
      * @return \Illuminate\Http\Response
@@ -87,8 +122,11 @@ class HostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * _destroy_ : Remove the specified speaker.
      *
+     * @urlParam event_id required
+     * @urlParam id required host id to be removed
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */

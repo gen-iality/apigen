@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 use Storage;
 
 /**
- * @resource Event
- *
- *
+ * @group RoleAttendee
  */
 class RoleAttendeeController extends Controller
 {
@@ -23,11 +21,13 @@ class RoleAttendeeController extends Controller
      */
 
     /**
-     * Display a listing of the resource.
+     * _index_: list of the roles of the attendees of an event
+     * 
+     * @urlParam event_id required event id Example: 5ea23acbd74d5c4b360ddde2
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request,String $event_id)
+    */
+    public function index(String $event_id)
     {
 
         $results = RoleAttendee::where("event_id", $event_id)->get();
@@ -38,8 +38,15 @@ class RoleAttendeeController extends Controller
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-
-    public function indexByEvent(Request $request, String $event_id)
+    /**
+     * _indexByEvent_: search roles by event
+     * 
+     * @urlParam event_id required Example: 5fa423eee086ea2d1163343e
+     * 
+     * @param String $event_id
+     * @return void
+     */
+    public function indexByEvent(String $event_id)
     {
         $results = RoleAttendee::where("event_id", $event_id)->get();
 
@@ -47,32 +54,31 @@ class RoleAttendeeController extends Controller
         return JsonResource::collection($results);
     }
 
-   /**
-     * Store a newly created resource in storage.
+    /**
+     * _store_:create a new assistant role for an event
+     * 
+     * @urlParam event_id required Example: 5fa423eee086ea2d1163343e
+     * 
+     * @bodyParam name string required rol name Example: Profesor
+     * @bodyParam event_id string required event id  Example: 5fa423eee086ea2d1163343e     
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, String $event_id)
+    */
+    public function store(Request $request)
     {
         $data = $request->json()->all();
         $result = new RoleAttendee($data);
         $result->save();
         return $result;   
-    }
-    
-
+    }    
 
     /**
-     * Store a newly created resource in storage.
+     * _show_: view information for a specific assistant role
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Display the specified resource.
-     *
+     * @urlParam event_id required Example: 5ea23acbd74d5c4b360ddde2
+     * @urlParam rolesattendee required RoleAttendee id Example: 5faefba6b68d6316213f7cc2
+     * 
      * @param  \App\RoleAttendee  $RoleAttendee
      * @return \Illuminate\Http\Response
      */
@@ -83,13 +89,15 @@ class RoleAttendeeController extends Controller
         return $response;
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: update role event
      *
+     * @urlParam id required id de RoleAttendee Example: 5faefba6b68d6316213f7cc2
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Role  $RoleAttendee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, String $event_id, String $id)
+    public function update(Request $request, String $id)
     {
         $data = $request->json()->all();
         $RoleAttendee = RoleAttendee::find($id);
@@ -99,11 +107,15 @@ class RoleAttendeeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
+     * _destroy_: delete rol.
+     * 
+     * @urlParam id required id de RoleAttendee
+     * 
      * @param  \App\Event $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,String $event_id, String $id)
+    public function destroy(Request $request, String $id)
     {  
         $RoleAttendee = RoleAttendee::findOrFail($id);
         return (string)$RoleAttendee->delete();

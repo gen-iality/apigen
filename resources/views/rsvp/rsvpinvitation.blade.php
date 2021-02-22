@@ -52,20 +52,30 @@
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-{{ __ ('Mail.enter_event')}}
-@endcomponent
 
+<div>
+	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			{{ __ ('Mail.enter_event')}}
+		@endcomponent
+	@endif
+</div>
+
+<hr style="border-right : 0;border-left: 0;">
 
 <p style="font-size: 15px;color: gray;font-style: italic">
 	{{ __('Mail.recommend_browser') }}
 </p>
 
 <hr style="border-right : 0;border-left: 0;">
-<p>
-	{{ __('Mail.alternative_entry')}}
-	<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
-</p>
+<div>
+	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
+		<p>
+			{{ __('Mail.alternative_entry')}}
+			<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
+		</p>
+	@endif
+</div>
 
 
 <div class="centered">

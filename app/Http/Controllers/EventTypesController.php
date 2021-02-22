@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\EventType;
 use App\Event;
 use Storage;
-use Spatie\ResponseCache\Facades\ResponseCache;
+// use Spatie\ResponseCache\Facades\ResponseCache;
 
+
+/**
+ * @group EventTypes
+ * The type of event provides information about the scope of the event, for example, events can be of type, **educational, sports, international, etc..**
+ */
 class EventTypesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * _index_ : list of event types
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +38,8 @@ class EventTypesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
+     * @bodyParam name required name event types
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,7 +48,7 @@ class EventTypesController extends Controller
         $data = $request->json()->all();
         $result = new EventType($data);
         $result->save();
-        ResponseCache::clear();
+        // ResponseCache::clear();
 
 
 
@@ -97,7 +103,7 @@ class EventTypesController extends Controller
         $EventType = EventType::find($id);
         $EventType->fill($data);
         $EventType->save();
-        ResponseCache::clear();
+        // ResponseCache::clear();
 
         return $data;
     }
@@ -112,7 +118,7 @@ class EventTypesController extends Controller
     {
         $eventType = EventType::find($id);
         $res = $eventType->delete();
-        ResponseCache::clear();
+        // ResponseCache::clear();
         
         if ($res == true) {
             return 'True';
