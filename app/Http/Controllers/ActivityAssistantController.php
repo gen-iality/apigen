@@ -21,13 +21,22 @@ use App\evaLib\Services\UserEventService;
 
 
 /**
- * @resource Event
+ * @group  ActivityAssistant
  *
  *
  */
 class ActivityAssistantController extends Controller
 {
 
+    /**
+     * _borradorepetidos_: Eliminate duplicate user records in activities
+     *
+     * @urlParam activity_id
+     * 
+     * @param Request $request
+     * @param [type] $activity_id
+     * @return void
+     */
     public function borradorepetidos(Request $request, $activity_id ){
 
         $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->get();  
@@ -49,7 +58,7 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * _fillassitantsbug_:sisplay the specified resource.
      *
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
@@ -72,8 +81,10 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display a listing of the resource.
-     *
+     * _index_: List of the activity_assitans 
+     * 
+     * @urlParam event_id required Example: 5ed3ff9f6ba39d1c634fe3f2
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $event_id)
@@ -98,7 +109,9 @@ class ActivityAssistantController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * _indexForAdmin_: list the activities and users that will attend from the administrator
+     * 
+     * @urlParam event_id required Example: 5f0622f01ce76d5550058c32
      *
      * @return \Illuminate\Http\Response
      */
@@ -135,14 +148,30 @@ class ActivityAssistantController extends Controller
         }
         return JsonResource::collection($activity_attendees);
     }
-    public function meIndex(Request $request, $event_id)
+
+    /**
+     * _meIndex_: list of registered activities of the logged-in user
+     * 
+     * @authenticated
+     * @urlParam event_id required event to which the activity belongs
+     * 
+     * 
+     * @param string $event_id
+     * @return void
+     */
+    public function meIndex($event_id)
     {   
         $user = auth()->user();      
         return JsonResource::collection(ActivityAssistant::where("user_id", $user->_id)->paginate(config('app.page_size')));
     }
-    /**<
-     * Store a newly created resource in storage.
+    /**
+     * _store_: create new record activity_assitant
      *
+     * @urlParam event_id required event to which the activity belongs
+     * 
+     * @bodyParam user_id required id of the user who signs up for the activity Example: 5e9caaa1d74d5c2f6a02a3c2
+     * @bodyParam activity_id id of the activity to which the user subscribes Example: 5fa44f6ba8bf7449e65dae32
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -182,6 +211,11 @@ class ActivityAssistantController extends Controller
         return $activityAssistant;
     }
 
+    /**
+     * _reduceAvailability_:this endpoint allows you to discount the availability of each activity for each user who signs up.
+     *
+     * @return void
+     */
     private function  reduceAvailability(){
         $activity_id      = $data["activity_id"];
         $model = ActivityAssistant::where("activity_id",$activity_id)->first();
@@ -212,6 +246,7 @@ class ActivityAssistantController extends Controller
         }
     }
     
+
     public function deleteAssistant(Request $request, $event_id,$activity_id)
     {
         $data = $request->json()->all();
@@ -230,12 +265,6 @@ class ActivityAssistantController extends Controller
             $message->to($useremail,"Asistente")
             ->subject("Encuesta de satisfacción MEC 2019","");
         });
-        
-        
-        
-        
-        
-        
         
        // 
        /* 
@@ -311,11 +340,14 @@ class ActivityAssistantController extends Controller
             $remainingCapacity->save(); //guarda el resultado   
 
         return $modelreplace;*/
-     }
+    }
 
     /**
-     * Display the specified resource.
-     *
+     * _show_: view the specific information of an activity_assitant record
+     * 
+     * @urlParam event_id required event to which the activity belongs Example: 5ed3ff9f6ba39d1c634fe3f2
+     * @urlParam activities_attendee id de activity_assitant Example: 5ed66ce2a6929562725bd7c2
+     * 
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
      */
@@ -328,8 +360,11 @@ class ActivityAssistantController extends Controller
 
     }
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_:Update the specific information of an activity_assitant record
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id de activity_assitant
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
@@ -361,8 +396,11 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * _destroy_:Remove the specific register of an activity_assitant record
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id of activity_assitant to remove
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
@@ -373,11 +411,14 @@ class ActivityAssistantController extends Controller
     }
 
     /**
-     * Undocumented function
-     *
+     * _checkIn_: status indicating that the user entered the activity
+     * 
+     * @urlParam event_id required event to which the activity belongs
+     * @urlParam id id of activity_assitant
+     * 
      * @param Request $request
-     * @param [type] $event_id
-     * @param [type] $id
+     * @param string $event_id
+     * @param string $id
      * @return void
      */
     public function checkIn(Request $request , $event_id, $id)
@@ -390,6 +431,8 @@ class ActivityAssistantController extends Controller
 
         return $ActivityAssistant;
     }
+
+    
 
     public function checkInWithSearch(Request $request , $event_id)
     {

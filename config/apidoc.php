@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 return [
     /*
@@ -97,9 +97,59 @@ return [
                  * Match only routes whose paths match this pattern (use * as a wildcard to match any characters).
                  */
                 'prefixes' => [
-                    '*',
-                    // 'users/*',
-                ],
+                    // '*',
+                        'files/*',
+                    //ActivityAssistant
+                        '*/activities_attendees',  
+                        '*/activities_attendees/*',
+                    //Events
+                        '*/events',
+                        '*/events/{id}/',
+                        '*/events/{event_id}',
+                        '*/events/{id}',
+                        '*/eventTypes',
+                        '*/changeStatusEvent',
+                    // Activities
+                        '*/activities',
+                        '*/activities/*',    
+                        '*/duplicateactivitie/*', 
+                        '*/createmeeting/*',   
+                    // EventUser  
+                        '*/eventusers',
+                        '*/eventusers/*',
+                    //Users
+                        '*/users',
+                        '*/users/*',
+                        '*/auth',
+                        '*/auth/*',  
+                        '*/changeUserPassword',        
+                              
+                    //Host
+                        '*/host/*',    
+                        '*/host',
+                    //files
+                        '*/files/*',
+                    //Rols
+                        '*/rolesattendees',
+                        '*/rolesattendees/*',
+                    //Categories
+                        '*/categories',
+                        '*/categories/*', 
+                    //Orders
+                        '*/orders',
+                        '*/orders/*',
+                        'orders/*',
+                    //RSVP
+                        '*/sendeventrsvp/*',
+                    //Discount code
+                        '*/discountcodetemplate/*',
+                        '*/discountcodetemplate',
+                        '*/code/*',
+                    //Organizations
+                        '*/contactbyemail',
+                        '*/validateFreeorder',
+                        '*/organizations/{id}/eventUsers'
+                ],  
 
                 /*
                  * Match only routes registered under this version. This option is ignored for Laravel router.

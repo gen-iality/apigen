@@ -10,7 +10,8 @@ use App\Mail\reminder;
 use App\Mail\friendRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 /**
  * @resource Event
  */
@@ -133,5 +134,34 @@ class MailController extends Controller
     {
         $Mail = Mailing::findOrFail($id);
         return (string) $Mail->delete();
+    }
+
+    /**
+     * 
+     */
+    public function updateSengrid(Request $request){
+
+        $data = $request->json()->all();
+
+        $client = new Client();
+
+        $headers =  [ 'Authorization' => 'Bearer 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' ];
+        $url = 'https://api.sendgrid.com/v3/marketing/contacts';
+
+       
+        $request = $client->put($url,         
+            ['json' => [
+                    // "list_ids" => $data["list_ids"],
+                    "contacts" => $data["contacts"],                    
+     
+               
+                ],
+                'headers' => $headers,
+                'debbug' => false
+            ],
+            
+        ); 
+        return  $request;
+
     }
 }

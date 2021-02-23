@@ -18,30 +18,84 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Validator;
+use Mail;
 
 /**
- * @resource Event
+ * @group Event
  *
  */
 
 class EventController extends Controller
-{
+{   
+    // @apiResourceCollection App\Http\Resources\EventResource
+    // * @apiResourceModel App\Event
     /**
      *
+     *  _index:_ Listing of all events
+     *
+     * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["SUBASTA DE ARTE"]}]
+     * 
+     * 
+     * @response{
+     *     "_id": "5fa423eee086ea2d1163343e",
+     *     "name": "Evento de bienvenida",
+     *     "datetime_from": "2020-10-14T07:00:00.000-05:00",
+     *     "datetime_to": "2020-10-14T07:00:00.000-05:00",
+     *     "author_id": "5e9caaa1d74d5c2f6a02a3c2",
+     *     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
+     *     "event_type_id": "5bf47203754e2317e4300b68",
+     *     "updated_at": "2020-11-05T11:45:01.000-05:00",
+     *     "created_at": "2020-11-05T11:10:22.189-05:00",
+     *     "category_ids": [
+     *         "5bf470c9754e2317e4300b62"
+     *     ],
+     *     "user_properties": [
+     *         {
+     *             "name": "email",
+     *             "label": "Correo",
+     *             "unique": false,
+     *             "mandatory": false,
+     *             "type": "email",
+     *             "updated_at": "2020-11-05T11:10:23.360-05:00",
+     *             "created_at": "2020-11-05T11:10:23.360-05:00",
+     *             "_id": "5fa423efe086ea2d11633440"
+     *         },
+     *         {
+     *             "name": "names",
+     *             "label": "Nombres Y Apellidos",
+     *             "unique": false,
+     *             "mandatory": false,
+     *             "type": "text",
+     *             "updated_at": "2020-11-05T11:10:24.442-05:00",
+     *             "created_at": "2020-11-05T11:10:24.442-05:00",
+     *             "_id": "5fa423f0e086ea2d11633441"
+     *         }
+     *     ],
+     *     "description": "<p>Evento de prueba en testeo de plataforma evius</p>",
+     *     "location": [],
+     *     "venue": "Mocion",
+     *     "visibility": "PUBLIC",
+     *     "itemsMenu": {
+     *         "Home": {
+     *             "name": "Homa",
+     *             "position": null,
+     *             "section": "home",
+     *             "icon": "CalendarOutlined",
+     *             "checked": true,
+     *             "permissions": "public"
+     *         }
+     *     }
+     * }
+     *
+     * 
+     * 
+     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
      * @param Illuminate\Http\Request $request [injected]
      * @param App\evaLib\Services\FilterQuery $filterQuery [injected]
-     * all params are injected
-     *
-     *  __index:__ Display all the events
-     *
-     * this methods allows dynamic quering by any property via URL using the services FilterQuery.
-     * Exmaple:
-     *  - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
-     *
      * @return \Illuminate\Http\Response EventResource collection
      */
-
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
@@ -58,6 +112,16 @@ class EventController extends Controller
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
+
+    /**
+     * _beforeToday_: list of upcoming events
+     *
+     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     * @param Request $request
+     * @param FilterQuery $filterQuery
+     * @return void
+     */
     public function beforeToday(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
@@ -74,7 +138,7 @@ class EventController extends Controller
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
     /**
-     * Display a listing of the resource.
+     * _currentUserindex_: list of events of the organizer
      *
      * @return \Illuminate\Http\Response
      */
@@ -88,6 +152,14 @@ class EventController extends Controller
 
     }
 
+    /**
+     * _EventbyUsers_: search of events by user organizer.
+     * 
+     * @urlParam id required  organiser_id
+     *
+     * @param string $id
+     * @return void
+     */
     public function EventbyUsers(string $id)
     {
         return EventResource::collection(
@@ -97,6 +169,14 @@ class EventController extends Controller
 
     }
 
+    /**
+     * _EventbyOrganizations_: search of events by user organizer.
+     * 
+     * @urlParam id required  organizer_id
+     *
+     * @param string $id
+     * @return void
+     */
     public function EventbyOrganizations(string $id)
     {
         return EventResource::collection(
@@ -106,6 +186,14 @@ class EventController extends Controller
 
     }
 
+    /**
+     * _delete_: delete event.
+     * 
+     * @urlParam id required id del evento a eliminar.
+     *
+     * @param string $id
+     * @return void
+     */
     public function delete(string $id)
     {
         $res = $id->delete();
@@ -117,12 +205,25 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created event resource in storage.
+     * _store_: Create new event of the organizer.
      *
-     * there is a special event relation called organizer Its polymorphic relationship.
-     * related to user and organization
-     * organizer: It could be "me"(current user) or an organization Id
-     *
+     * There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
+     * 
+     * @bodyParam name string required name to event Example: Programming course 
+     * @bodyParam datetime_from datetime required date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to datetime  date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture string image of the event
+     * @bodyParam visibility string required restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam user_properties array user registration properties
+     * @bodyParam author_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam event_type_id string required Example: 5bf47226754e2317e4300b6a
+     * @bodyParam organizer_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam category array App\Category
+     * @bodyParam location String VIRTUAL | VENUE_NAME
+     * @bodyParam extra_config object json of additional values to be stored
+     * @bodyParam status string when a teacher creates a course the automatic status is **'draft**' in case the administrator creates it automatically it will be **'approved'**
+     * 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -137,6 +238,16 @@ class EventController extends Controller
                 'name' => 'required',
             ]
         );
+
+        //Flow to validate the creation of a course depending on whether the creator is an administrator or a teacher
+        $userRol = $user->others_properties['role'];
+        
+        
+        if(isset($userRol) && ($userRol == 'admin' || $userRol == 'teacher'))
+        {
+            $data['status'] = ($userRol == 'admin') ? 'approved' : 'draft';
+        }
+        
 
         if ($validator->fails()) {
             return response(
@@ -192,6 +303,14 @@ class EventController extends Controller
         return $result;
     }
 
+    /**
+     * _createDefaultUserProperties_: create default properties (name and email) for the user
+     * 
+     * @urlParam event_id required
+     *
+     * @param string $event_id
+     * @return void
+     */
     private static function createDefaultUserProperties($event_id)
     {
         /*Crear propierdades names y email*/
@@ -230,7 +349,9 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * _show_: display information about a specific event.
+     * 
+     * @urlParam id required id of the event you want to consult
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
@@ -251,7 +372,7 @@ class EventController extends Controller
     }
 
     /**
-     * Simply testing service providers
+     * _test_:simply testing service providers
      *
      * @param GoogleFiles $gfService
      * @return void
@@ -261,16 +382,26 @@ class EventController extends Controller
         echo $gfService->doSomethingUseful();
     }
     /**
-     * Update the specified resource in storage.
+     * _update_: update information on a specific event.
+     * 
+     * @urlParam event required id of the event to be updated
+     * 
+     * @bodyParam name          string name to event Example: "Programming course" 
+     * @bodyParam description   string description of teh event Example : "Event to study"
+     * @bodyParam datetime_from datetime date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to   datetime date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture       string image of the event
+     * @bodyParam visibility    string restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam organizer_id string Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c2
+     * @bodyParam event_type_id string Example: 5bf47203754e2317e4300b68
+     * 
+     * @debug post $entityBody = file_get_contents('php://input');
+     * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
-     *
-     * How was images upload before
-     *
-     * @debug post $entityBody = file_get_contents('php://input');
-     * $data['picture'] =  $gfService->storeFile($request->file('picture'));
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
@@ -329,9 +460,10 @@ class EventController extends Controller
     }
 
     /**
-     * Organizer:
-     * It could be "me"(current user) or a organization Id
-     * the relationship is polymorpic.
+     * _assingOrganizer_: associate organizer to an event.
+     * It could be "me"(current user) or a organization Id the relationship is polymorpic.
+     * 
+     * @bodyParam data array required organizer_id Exmaple : ['organizer_id']
      **/
     private static function assingOrganizer($data, $event)
     {
@@ -349,8 +481,10 @@ class EventController extends Controller
 
     }
     /**
-     * Remove the specified resource from storage.
+     * _destroy_: delete event.
      *
+     * @urlParam event required id of the event to be eliminated
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
@@ -367,16 +501,23 @@ class EventController extends Controller
     }
 
     /**
-     * AddUserProperty: Add dynamic user property to the event
+     * _addUserProperty_: adding dynamic user property to the event
+     * 
      *
-     * each dynamic property must be composed of following parameters:
-     *
-     * * name     text
-     * * required boolean - this field is not yet used  for anything
-     * * type     text    - this field is not yet used for anything
-     *
-     * Once created user dynamic event properties could be get directly from $event->userProperties.
-     * Dynamic properties are returned inside each UserEvent like regular properties
+     * Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.
+     * The dynamic properties are returned within each UserEvent as the normal properties.
+     * 
+     * @urlParam id required id del evento
+     * 
+     * @bodyParam name string required field name in database 
+     * @bodyParam label string required 
+     * @bodyParam mandatory boolean required indicates if the field is mandatory or optional
+     * @bodyPram type string required indicates the data type of the field 
+     * @bodyParam visibleByAdmin boolean required
+     * @bodyParam visibleByContacts boolean required
+     * @bodyParm order_weight string order of the fields in the form
+     * @bodyParam description string 
+     * 
      * @param Event $event
      * @param array $properties
      * @return void
@@ -394,8 +535,11 @@ class EventController extends Controller
     }
 
     /**
-     * Show the 'Create Event' Modal
-     *
+     * _showCreateEvent_ : show the 'Create Event' Modal
+     * 
+     * @bodyParam modal_id strng required
+     * @bodyParam organiser_id strng required
+     * 
      * @param Request $request
      * @return \Illuminate\View\View
      */
@@ -411,8 +555,17 @@ class EventController extends Controller
     }
 
     /**
-     * Create an event
+     * _postCreateEvent_: Create a new event.
      *
+     * @bodyParam name string name to event Example: "Programming course" 
+     * @bodyParam datetime_from datetime date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to datetime date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam picture string image of the event
+     * @bodyParam visibility string restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam user_properties array user registration properties
+     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam event_type_id string Example: 5bf47226754e2317e4300b6a  
+     * 
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -584,7 +737,9 @@ class EventController extends Controller
     // FUNCTIONS SPECIFICS
 
     /**
-     * Put status of stage depend day
+     * _stagesStatusActive_: put the state of the stage depends on the day
+     * 
+     * @urlParam id required event_Id
      * @param $id  event Id
      * @return  $stages
      *
@@ -626,4 +781,74 @@ class EventController extends Controller
 
     }
 
+
+    /**
+     * _changeStatusEvent_: approve or reject the courses **'draft'**, and send mail of the change of status of the event to the user who created it
+     * 
+     * @authenticated
+     * @urlParam event_id required id of the event to be rejected or approved Example: 
+     * @bodyParam status string required the status update allows for two possible statuses **approved** or **rejected** Example: approved
+     * 
+     * @response {
+     *  "_id": "5fb2eef214b93f11165dd1a0",
+     *  "category": "d35319efaf194af191b8dc7c149a01bc",
+     *  "datetime_from": null,
+     *  "datetime_to": null,
+     *  "description": "dddd",
+     *  "name": "curso 1",
+     *  "picture": "https://picsum.photos/400/800",
+     *  "visibility": "PUBLIC",
+     *  "extra_config": {
+     *      "price": "0"
+     *  },
+     *  "author_id": "5fb1f6fb7bf68702e345b5d2",
+     *  "organizer_id": "5f7e33ba3abc2119442e83e8",
+     *  "event_type_id": "5bf47203754e2317e4300b68",
+     *  "status" : "approved",
+     *  "updated_at": "2021-01-20 21:07:50",
+     *  "created_at": "2020-11-16 21:28:18"
+     * }
+     * 
+     * @response  403 {
+     *  "Error": "The user does not have the permissions to execute this action"
+     * }
+     * 
+     */
+    public function changeStatusEvent(Request $request , $event_id)
+    {   
+        $data = $request->json()->all();
+        
+        //Get authenticated user
+        $user = Auth::user();
+        $userRol =  isset($user) ? $user->others_properties['role'] :  null;
+                    
+        //Validate that the authenticated user is an administrator
+        if(isset($userRol) && $userRol == 'admin')
+        {
+
+            $event = Event::find($event_id);
+            $event->status = $data['status'];
+            $event->save();
+
+            //Organization in which the event has been created
+            $organization = Organization::find($event->organizer_id);
+            $organization = Account::find($organization->author);            
+
+            //User who created the Event
+            $author = Account::find($event->author_id);
+            
+            //Mail that informs the creator of the event, about the update of the status of the event
+            Mail::to($author->email)
+            ->queue(                
+                    new \App\Mail\ConfirmationCourseEmail($event, $author, $organization)
+                );
+
+            return $event;
+        }
+        
+        return response()->json([
+            'Error' => 'The user does not have the permissions to execute this action'
+        ], 403);
+        
+    }
 }

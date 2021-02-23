@@ -24,7 +24,12 @@ class Category extends Moloquent
         return $this->belongsToMany('App\Event');
     }
 
+    public function organization()
+    {
+        return $this->belongsToMany('App\Organization');
+    }
+
     protected $fillable = [
-        'name', 'image','event_ids','created_at'
+        'name', 'image','event_ids', 'organization_ids', 'created_at'
     ];
 }

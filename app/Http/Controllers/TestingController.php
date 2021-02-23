@@ -24,7 +24,7 @@ use \App\Message;
 use Log;
 //add to AwsNotification
 
-require '../vendor/autoload.php';
+// require '../vendor/autoload.php';
 
 use Notification;
 

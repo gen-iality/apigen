@@ -16,11 +16,76 @@ use Carbon\Carbon;
 use App\Models\Ticket;
 use Auth;
 use Validator;
-
+/**
+ * @group Orders
+ * 
+ * The purpose of this end point is to store all the information of a user's payment orders 
+ */
 class ApiOrdersController extends Controller
 {
     /**
-     * Display all the Orders.
+     * _index_: list of all orders  
+     * 
+     * @response{
+     *  "data": [
+     *      {
+     *          "_id": "5c5209c9f33bd41d17312774",
+     *          "_token": "Iac0K5a4SOBSZGSZfQUFH3kAJhZGMpC8eeT7mAok",
+     *          "payment_gateway_id": "3",
+     *          "first_name": "Larissa",
+     *          "last_name": "Wiley",
+     *          "email": "felipe.martinez+100@mocionsoft.com",
+     *          "order_status_id": "5c4a291e5c93dc0eb1992149",
+     *          "amount": 100000,
+     *          "booking_fee": 0,
+     *          "organiser_booking_fee": 0,
+     *          "discount": 0,
+     *          "account_id": "5c51df3f342254001128a122",
+     *          "event_id": "5c51e165342254001a3b1982",
+     *          "is_payment_received": 1,
+     *          "session_id": 171953,
+     *          "order_reference": "ticket_order_1548880329",
+     *          "taxamt": "0.00",
+     *          "url": "https:\/\/test.placetopay.com\/redirection\/session\/171953\/918bed652065302921a260c87320b2b3",
+     *          "updated_at": "2019-02-21 00:33:59",
+     *          "created_at": "2019-01-30 20:32:09",
+     *          "tickets": [],
+     *          "order_status": {
+     *              "_id": "5c4a291e5c93dc0eb1992149",
+     *              "id": "6",
+     *              "name": "Rechazado"
+     *          }
+     *      },
+     *      {
+     *          "_id": "5c52104df33bd41d187dc7a3",
+     *          "_token": "Iac0K5a4SOBSZGSZfQUFH3kAJhZGMpC8eeT7mAok",
+     *          "payment_gateway_id": "3",
+     *          "first_name": "Larissa",
+     *          "last_name": "Wiley",
+     *          "email": "felipe.martinez+100@mocionsoft.com",
+     *          "order_status_id": "5c4a291e5c93dc0eb1992149",
+     *          "amount": 100000,
+     *          "booking_fee": 0,
+     *          "organiser_booking_fee": 0,
+     *          "discount": 0,
+     *          "account_id": "5c51df3f342254001128a122",
+     *          "event_id": "5c51e165342254001a3b1982",
+     *          "is_payment_received": 1,
+     *          "session_id": 171957,
+     *          "order_reference": "ticket_order_1548881997",
+     *          "taxamt": "0.00",
+     *          "url": "https:\/\/test.placetopay.com\/redirection\/session\/171957\/8081ccf8aa0bb8d0eadb223854bdae8e",
+     *          "updated_at": "2019-02-21 00:34:02",
+     *          "created_at": "2019-01-30 20:59:57",
+     *          "tickets": [],
+     *          "order_status": {
+     *              "_id": "5c4a291e5c93dc0eb1992149",
+     *              "id": "6",
+     *              "name": "Rechazado"
+     *          }
+     *    
+     *      }
+     * ]}
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +97,14 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Store a newly created Order in storage.
+     * _store_: create new order
+     *
+     * @bodyParam items array required the items are the id of the event in case of buying a course or the id of the discount code template in case of buying a code Example:  ["5ea23acbd74d5c4b360ddde2"]
+     * @bodyParam account_id string required id of the user making the purchase Example: 5f450fb3d4267837bb128102
+     * @bodyParam amount integer required total order value Example: 10000
+     * @bodyParam item_type string required item type discountCode or event Example: discountCode
+     * @bodyParam discount_codes array disount code 
+     * @bodyParam properties object the properties are the additional data required for billing such as: **person_type, document_type, email, document_number, telephone, date_birth, adress** Example: {"person_type" : "Natural","document_type" : "CC", "email" : "correo@correo.com" , document_number" : "1014305626","telephone" : "30058744512","date_birth" : "2021-01-13","adress" : "Calle falsa 123", "user_first_name" : "Pepe" ,"user_last_name" : "Lepu"} 
      * 
      * @param request $request
      * @param string $event_id
@@ -50,17 +122,19 @@ class ApiOrdersController extends Controller
         if( $request_data['item_type'] == 'discountCode')
         {
             $codeTemplate = DiscountCodeTemplate::findOrFail($ids[0]);
-            // var_dump($codeTemplate);die;
-            $event = Event::findOrFail($codeTemplate->event_id);
-        }else{
 
+            //Since the purchase of the codes will be taken into account in the orders. 
+            //These will not always be for an event but also for an organization so the event_id may or may not come
+            if(isset($codeTemplate->event_id)){
+                $event = Event::findOrFail($codeTemplate->event_id);            
+            }
+
+        }else{
             $event = Event::findOrFail($ids[0]);
         }
-        
 
-        
         $account = Account::findOrFail($request_data['account_id']);
-        $fields = $event->user_properties;
+        $fields = isset($event->user_properties) ? $event->user_properties : '';
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $activeAccountPaymentGateway = 3;
@@ -73,7 +147,7 @@ class ApiOrdersController extends Controller
         $ticket_order = [
             // 'validation_rules' => $validation_rules,
             // 'validation_messages' => $validation_messages,
-            'event_id' => $event->id,
+            'event_id' => isset($event->id) ? $event->id : '' ,
             'tickets' => $tickets,
             'items' => $ids,
             'total_ticket_quantity' => $total_ticket_quantity,
@@ -92,10 +166,13 @@ class ApiOrdersController extends Controller
         ];
 
         $request_data['order_first_name'] = $account->names;
-        $request_data['order_last_name'] ="";
-        $request_data['order_email'] = $account->email;
-        $request_data['properties'] = [];
+        $request_data['order_last_name'] =  "";
+        $request_data['order_email'] =  $account->email;
 
+
+        $request_data['properties'] =  isset($request_data['properties']) ? $request_data['properties'] : [];
+
+        
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
 
         return $result;
@@ -103,7 +180,7 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * _destroy_: remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -114,20 +191,24 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
+     * _show_: view order-specific information
+     * 
+     * @urlParam order required order id Example: 5fbd84e345611e292f04ab92
+     * 
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(String $event_id, String $orders_id)
+    public function show(String $orders_id)
     {    
         $order = Order::findOrFail($orders_id);
         return new OrderResource($order);
     }
 
-        /**
-     * __index:__ Display all the Orders of an event
+    /**
+     * _index_: display all the Orders of an event
      *
+     * @urlParam event_id required Example: 5ea23acbd74d5c4b360ddde2
+     * 
      * @return \Illuminate\Http\Response
      */
     public function indexByEvent(Request $request, String $event_id)
@@ -140,8 +221,10 @@ class ApiOrdersController extends Controller
 
     }
     /**
-     * __index:__ Display all the Orders of an user
-     *
+     * _index_: display all the Orders of an user 
+     * 
+     * @urlParam user_id required Example: 5f450fb3d4267837bb128102
+     * 
      * @return \Illuminate\Http\Response
      */
     public function ordersByUsers(Request $request, String $user_id)
@@ -155,9 +238,11 @@ class ApiOrdersController extends Controller
         );
     }
 
-       /**
-     * __index:__ Display all the Orders of an user
-     *
+    /**
+     * _index:_ display all the Orders of an user logueado
+     * 
+     * @authenticated
+     * 
      * @return \Illuminate\Http\Response
      */
     public function meOrders(Request $request)
@@ -171,8 +256,10 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Cancels an order
-     *
+     * _cancelOrder_: cancels an order
+     * 
+     * @urlParam order_id required 5fbd84e345611e292f04ab92
+     * 
      * @param Request $request
      * @param $order_id
      * @return mixed
@@ -211,8 +298,12 @@ class ApiOrdersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * _update_: update the specified resource in storage.
      *
+     * @bodyParam items array  id of the event from which the purchase is made Example:  ["5ea23acbd74d5c4b360ddde2"]
+     * @bodyParam account_id string  id of the user making the purchase Example: 5f450fb3d4267837bb128102
+     * @bodyParam amount integer  total order value Example: 10000
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response

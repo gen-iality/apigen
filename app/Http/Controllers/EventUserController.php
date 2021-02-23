@@ -17,41 +17,71 @@ use Mail;
 use Validator;
 
 /**
- * @resource Attendee (Attendee)
+ * @group EventUser
+ * 
  *
  * Handles the relation bewteeen user and event.  It handles user booking into an event
  * Account relation to an event is one of the fundamental aspects of this platform
- * most of the user functionality is executed under "Attendee" model and not directly
- * under Account, because is an events platform.
- * @see App\Http\Requests\EventUserRequest for parameters validation
- *
- * @see App\Http\Requests\EventUserRequest for parameters validation
+ * Most of the user functionality is executed under "Attendee" model and not directly under Account, because is an events platform.
+ * 
  *
  * <p style="border: 1px solid #DDD">
  * Attendee has one user though user_id
  * <br> and one event though event_id
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
+ * 
  */
 class EventUserController extends Controller
 {
 
     /**
-     * __index:__ Display all the EventUsers of an event
+     * _index_ display all the EventUsers of an event
      *
-     * this methods allows dynamic quering by any property via URL using the services FilterQuery.
-     * Exmaple:
-     *  - ?filteredBy=[{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
-     *
-     *
-     * PROBLEMA ORDENAMIENTO CON mayusculas
-     * Se tiene que crear las colecciones con collation por defecto insensitiva a mayusculas
-     * EJemplo: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
+     * ORDERING PROBLEM WITH CAPITAL LETTERS
+     * Collections must be created with case-insensitive default collation
+     * 
+     * Example: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
      * https://docs.mongodb.com/manual/core/index-case-insensitive/
      * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
+     * 
+     * @queryParam filtered optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     * @response {
+     *     "_id": "5f9055454e6953792a54fd43",
+     *     "state_id": "5b0efc411d18160bce9bc706",
+     *     "checked_in": false,
+     *     "rol_id": "5afaf644500a7104f77189cd",
+     *     "properties": {
+     *         "names": "Burke Maldonado",
+     *         "email": "vygufiqe@mailinator.com",
+     *         "password": null,
+     *         "displayName": "Burke Maldonado"
+     *     },
+     *     "event_id": "5e9cae6bd74d5c2f5f0c61f2",
+     *     "account_id": "5f9055454e6953792a54fd42",
+     *     "updated_at": "2020-10-21 15:35:33",
+     *     "created_at": "2020-10-21 15:35:33",
+     *     "rol": null,
+     *     "user": {
+     *         "_id": "5f9055454e6953792a54fd42",
+     *         "email": "vygufiqe@mailinator.com",
+     *         "names": "Burke Maldonado",
+     *         "displayName": "Burke Maldonado",
+     *         "confirmation_code": "mSCaqtrRujVotLrG",
+     *         "api_token": "gEXBxQHw5NW1BOjrC97If7stp9jODtpuLiW6MCeaZ45mUOMcfu20dJMwJedQ",
+     *         "uid": "UOlROJM9hASVfUsbZofEubXrM5j2",
+     *         "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlM2FlZWUyYjVjMDhjMGMyODFhNGZmN2..",
+     *         "refresh_token": "AG8BCndDGp2u4dbDaA0Q0QvfUfFCJd55iJoOrgJDr84lhXXpd4B34a2Bk8Y8UWl..",
+     *         "updated_at": "2020-10-21 15:35:34",
+     *         "created_at": "2020-10-21 15:35:33"
+     *     },
+     *     "ticket": null
+     * }
      *
-     *  @return \Illuminate\Http\Response EventUserResource collection
+     * @return \Illuminate\Http\Response EventUserResource collection
+     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
+     * 
      */
 
     public function index(Request $request, String $event_id, FilterQuery $filterQuery)
@@ -66,7 +96,16 @@ class EventUserController extends Controller
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventUserResource::collection($results);
     }
-    public function meInEvent(Request $request, $event_id)
+    
+    /**
+     * _meInEvent_: user information logged into the event
+     * 
+     * @urlParam event_id 
+     * 
+     * @param string $event_id
+     * @return void
+     */
+    public function meInEvent($event_id)
     {
         $query = Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->first();
 
@@ -74,6 +113,14 @@ class EventUserController extends Controller
         return new EventUserResource($results);
     }
 
+    /**
+     * _meEvents:_ list of registered events of the logged in user.
+     * 
+     * 
+     * @param \Illuminate\Http\Request  $request
+     * @param  $event_id
+     * @return EventUserResource
+     */
     public function meEvents(Request $request)
     {
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
@@ -81,6 +128,13 @@ class EventUserController extends Controller
         return EventUserResource::collection($results);
     }
 
+    /**
+     * _bookEventUsers_: book Event Users
+     *
+     * @param Request $request
+     * @param Event $event
+     * @return void
+     */
     public function bookEventUsers(Request $request, Event $event)
     {
         try {
@@ -101,6 +155,15 @@ class EventUserController extends Controller
         return $response;
     }
 
+    /**
+     * _notifications_ : notifications
+     * 
+     * @urlParam evenUserId
+     * 
+     * @param Request $request
+     * @param [type] $evenUserId
+     * @return void
+     */
     public function notifications(Request $request, $evenUserId)
     {
 
@@ -116,20 +179,20 @@ class EventUserController extends Controller
     }
 
     /**
-     * __CreateUserAndAddtoEvent:__ Tries to create a new user from provided data and then add that user to specified event
-     *
-     * | Body Params   |
-     * | ------------- |
-     * | @body $_POST[email] required field |
-     * | @body $_POST[name]     |
-     * | @body $_POST[other_params],... any other params  will be saved in user and eventUser
+     * _createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event
+     *  
+     * 
+     * @urlParam event_id string required
+     * 
+     * @bodyParam email email required 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
      *
      * @param Request $request HTTP request
      * @param String  $event_id to add the user to.
      *
      * @return EventUserResource
-     */
-
+    */
     public function createUserViaUrl(Request $request, string $event_id)
     {
         //  data-route="https://api.evius.co/es/event/order/5d712f33d74d5c2aef354aa6/resend"
@@ -255,6 +318,15 @@ class EventUserController extends Controller
         return "ok"; //$response;
     }
 
+    /**
+     * _sendQrToUsers_: send Qr To Users.
+     * 
+     * @urlParam event_id string required
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function sendQrToUsers(Request $request, string $event_id)
     {
         $eventUserData = $request->json()->all();
@@ -277,7 +349,22 @@ class EventUserController extends Controller
         return $emailsent;
     }
 
-    //Registro y envio de confirmación de correo
+    /**
+     * _SubscribeUserToEventAndSendEmail_: register user to an event and send confirmation email
+     * 
+     * @urlParam event_id string required
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam password  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @param Message $message
+     * @param string $eventuser_id
+     * @return void
+     */
     public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id, Message $message, string $eventuser_id = null)
     {
         $eventUserData = $request->json()->all();
@@ -332,7 +419,17 @@ class EventUserController extends Controller
 
     }
 
-    //FUnción para cambio de contraseña
+    /**
+     * _changeUserPassword_: change user password
+     * 
+     * @urlParam event_id required string id of the event in which the user is registered
+     * 
+     * @bodyParam email email required Email of the user who will change his password
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function ChangeUserPassword(Request $request, string $event_id)
     {
         $data = $request->json()->all();
@@ -361,6 +458,22 @@ class EventUserController extends Controller
 
     }
 
+    /**
+     * _createUserAndAddtoEvent_:create user and add it to an event
+     * 
+     * @urlParam event_id string required
+     * @urlParam eventuser_id  string      
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam password string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @param string $eventuser_id
+     * @return void
+     */
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
         try {
@@ -497,6 +610,15 @@ class EventUserController extends Controller
         return $response;
     }
 
+    /**
+     * _testCreateUserAndAddtoEvent_: test Create User And Add to Event
+     * 
+     * @urlParam event_id string required
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function testCreateUserAndAddtoEvent(Request $request, string $event_id)
     {
         try {
@@ -558,6 +680,12 @@ class EventUserController extends Controller
         //return $response;
     }
 
+    /**
+     * _indexByEventUser_: list of events by logged in user
+     *
+     * @param Request $request
+     * @return void
+     */
     public function indexByEventUser(Request $request)
     {
         $events = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
@@ -568,13 +696,30 @@ class EventUserController extends Controller
         return Event::find($events_id);
     }
 
+    /**
+     * _ByUserInEvent_ : list of users by events
+     * 
+     * @urlParam event_id string required
+     *
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function ByUserInEvent(Request $request, $event_id)
     {
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
     }
-
+    /**
+     * _indexByUserInEvent_: list of users by events
+     * 
+     * @urlParam event_id string required
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function indexByUserInEvent(Request $request, $event_id)
     {
         $user = auth()->user();
@@ -587,6 +732,16 @@ class EventUserController extends Controller
             Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
         );
     }
+
+    /**
+     * _searchInEvent_: search user within the event to verify if you are registered
+     *
+     * @urlParam event_id string required
+     * 
+     * @param Request $request
+     * @param string $event_id
+     * @return void
+     */
     public function searchInEvent(Request $request, $event_id)
     {
         $auth = resolve('Kreait\Firebase\Auth');
@@ -612,7 +767,12 @@ class EventUserController extends Controller
     }
 
     /**
-     * __Store:__ Store a newly Attendee  in storage.
+     * _store:_ Store a newly Attendee  in storage.
+     * 
+     * @urlParam event_id required
+     * 
+     * @bodyParam account_id string required user id      
+     * @bodyParam properties array other params  will be saved in user and eventUser each event can require aditional properties for registration
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -624,12 +784,14 @@ class EventUserController extends Controller
     }
 
     /**
-     * __Show:__ Display an Attendee by id
-     *
+     * _show:_ consult an EventUser by assistant id
+     * 
+     * @urlParam event_id string required
+     * @urlParam id string required id Attendee
+     * 
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
-     */
-
+    */
     public function show(Request $request, $event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);
@@ -637,8 +799,15 @@ class EventUserController extends Controller
     }
 
     /**
-     * __Update:__ Update the specified resource in storage.
+     * _update_:update a specific assistant
      *
+     * @urlParam event_id string required
+     * @urlParam evenUserId string required id de Attendee
+     * 
+     * @bodyParam email email required field 
+     * @bodyParam name  string required
+     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
@@ -652,6 +821,15 @@ class EventUserController extends Controller
         return $eventUser;
     }
 
+    /**
+     * _updateWithStatus_: update With Status
+     * 
+     * @urlParam event_id string required
+     *
+     * @param Request $request
+     * @param [type] $evenUserId
+     * @return void
+     */
     public function updateWithStatus(Request $request, $evenUserId)
     {
         $data = $request->json()->all();
@@ -674,8 +852,10 @@ class EventUserController extends Controller
     }
 
     /**
-     * __CheckIn:__ Checks In an existent Attendee to the related event
-     *
+     * __CheckIn:__ checks In an existent Attendee to the related event
+     *  
+     * @urlParam id string required id Attendee to checkin into the event
+     * 
      * @param  string $id Attendee to checkin into the event
      * @return void
      */
@@ -686,8 +866,11 @@ class EventUserController extends Controller
     }
 
     /**
-     * __delete:__ Remove the specified resource from storage.
-     *
+     * __delete:__ remove a specific attendee from an event.
+     * 
+     * @urlParam eventId string required
+     * @urlParam id string required id Attendee to checkin into the event
+     * 
      * @param  \App\Attendee  $eventUser
      * @return \Illuminate\Http\Response
      */
@@ -712,6 +895,16 @@ class EventUserController extends Controller
         }
 
     }
+
+    /**
+     * _transferEventuserAndEnrollToActivity_ : transfer Eventuser And Enroll To Activity
+     *
+     * @param Request $request
+     * @param string $event_id
+     * @param string $eventuser_id
+     * @param Message $message
+     * @return void
+     */
     public function transferEventuserAndEnrollToActivity(Request $request, $event_id, $eventuser_id, Message $message)
     {
         //$event_user = Attendee::find($eventuser_id);
@@ -731,5 +924,6 @@ class EventUserController extends Controller
 
         return "usuario no encontrado, o sin invitaciones disponibles";
     }
+    
 
 }

@@ -21,7 +21,7 @@ class Order extends Orders
     public $rules = [
         'order_first_name' => ['required'],
         'order_last_name' => ['required'],
-        'order_email' => ['required', 'email'],
+        'order_email' => ['required', 'email']
     ];
 
     /**
@@ -203,7 +203,7 @@ class Order extends Orders
     {
 
         $event = Event::find($this->event_id);
-        $event_properties = $event->user_properties;
+        $event_properties = isset($event->user_properties) ? $event->user_properties : '' ;
         $attendees_order = $this->attendees;
         $amount = 0;
         $total = 0;

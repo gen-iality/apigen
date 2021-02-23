@@ -15,7 +15,7 @@ use Spatie\ResponseCache\Facades\ResponseCache;
  */
 class SpaceController extends Controller
 {
-    use ClearsResponseCache;
+    
     /* por defecto el modelo es en singular y el nombre de la tabla en prural
     //protected $table = 'categories';
     $a = new Space();
@@ -45,8 +45,7 @@ class SpaceController extends Controller
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Space($data);
-        $result->save();
-        ResponseCache::clear();
+        $result->save();    
         return $result;
     }
 
@@ -78,7 +77,6 @@ class SpaceController extends Controller
         //if($Space["event_id"]= $event_id){
         $space->fill($data);
         $space->save();
-        ResponseCache::clear();
         return $data;
 
     }
@@ -92,7 +90,6 @@ class SpaceController extends Controller
     public function destroy(Request $request, $event_id, $id)
     {
         $Space = Space::findOrFail($id);
-        ResponseCache::clear();
         return (string) $Space->delete();
     }
     

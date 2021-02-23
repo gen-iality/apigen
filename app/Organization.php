@@ -12,6 +12,8 @@ class Organization extends Organiser
     protected $fillable = [ 'name', 'country', 'city', 'picture','location',
      'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties','properties'];
 
+    protected $hidden = ['account_ids'];
+
    /*  public function events()
     {
         // return $this->morphMany('App\Event', 'organizer');
@@ -22,4 +24,9 @@ class Organization extends Organiser
     {
         return $this->belongsToMany('App\Category');
     }  
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Account');
+    } 
 }

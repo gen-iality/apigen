@@ -20,20 +20,23 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
     public $code;
     public $order;
     public $event;
+    public $eventName;
+    public $codeTemplate;
+
    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($code , $order)
+    public function __construct($code , $order , $codeTemplate)
     {   
-        // var_dump($code);die;
-        $event = Event::findOrFail($code->event_id);
-
+        $event = isset($code->event_id) ? Event::findOrFail($code->event_id) : "";
+        
         $this->code = $code;
         $this->order = $order;
         $this->event = $event;
+        $this->codeTemplate = $codeTemplate;
     }
 
 
@@ -45,11 +48,22 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
 
     public function build()
     {
-
-        return $this
+        
+        if(isset($this->event->name))
+        {   
+            return $this
             ->from("alerts@evius.co", 'Ucronio')
             ->subject($this->event->name)
             ->markdown('Mailers.DiscountCode');
-        //return $this->view('vendor.mail.html.message');
+            //return $this->view('vendor.mail.html.message');
+        }
+
+        return $this
+            ->from("alerts@evius.co", 'Ucronio Código de descuento')
+            ->subject('Codigo de descuento')
+            ->markdown('Mailers.DiscountCode');
+            //return $this->view('vendor.mail.html.message');
+
+        
     }
 }
