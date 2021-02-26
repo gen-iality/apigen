@@ -478,7 +478,13 @@ class ActivitiesController extends Controller
         $data = $request->json()->all();
 
         $activity = Activities::find($activity_id);
-
+        
+        if(isset($activity->meeting_id) && isset($activity->zoom_host_id))
+        {
+            return response()->json([
+                "message" => "La actividad ya tiene una sala asignada"
+            ] , 409);
+        }
 
         $validatedData = $request->validate([
             'host_ids' => 'required_without:host_id',
