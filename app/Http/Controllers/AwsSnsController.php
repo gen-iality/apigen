@@ -56,15 +56,14 @@ class AwsSnsController extends Controller
             'notification_id' => $responseMail['messageId'],
             'timestamp_event' => $responseMail['timestamp']
         ];
-        $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);
-        // $messageUserModel->save(); 
+        $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
         
         $eviusmessage = EviusMessage::where("server_message_id" , $responseMail['messageId'] )->first();
         
         $count = 0;        
-        if (isset($response['notificationType']) || isset($response['eventType']))
+        if (isset($response['eventType']))
         {
-            if($response['notificationType'] === 'Delivery' || $response['eventType'] === 'Delivery')
+            if($response['eventType'] === 'Delivery')
             {
                 Log::info('Delivery');
                 $count = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered++ : 1; 
@@ -77,7 +76,7 @@ class AwsSnsController extends Controller
                     $eviusMessageModel->update(['total_delivered' => $count]);        
                 }                                                            
             } 
-            else if($response['notificationType'] === 'Send' || $response['eventType'] === 'Send')
+            else if($response['eventType'] === 'Send')
             {
                 Log::info('Send');
                 $count = isset($eviusmessage->total_sent) ? $eviusmessage->total_sent++ : 1;
@@ -96,7 +95,7 @@ class AwsSnsController extends Controller
                 Log::info('$eviusmessage->total_sent '.$eviusmessage->total_sent);
             }
 
-            else if ($response['notificationType'] === 'Click' || $response['eventType'] === 'Click')
+            else if ($response['eventType'] === 'Click')
             {
                 Log::info('Click');
                 $count = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked++ : 1;
@@ -111,7 +110,7 @@ class AwsSnsController extends Controller
                 }       
                   
             }
-            else if($response['notificationType'] === 'Bounce' || $response['eventType'] === 'Bounce')
+            else if($response['eventType'] === 'Bounce')
             {
                 Log::info('Bounce');
                 $count = isset($eviusmessage->total_bounced) ? $eviusmessage->total_bounced++ : 1;
@@ -126,7 +125,7 @@ class AwsSnsController extends Controller
                 }                       
                 
             }
-            else if($response['notificationType'] === 'Open' || $response['eventType'] === 'Open')
+            else if($response['eventType'] === 'Open')
             {    Log::info('Open');
                 $count = isset($eviusmessage->total_opened) ? $eviusmessage->total_opened++ : 1;
                 
@@ -142,7 +141,7 @@ class AwsSnsController extends Controller
                 Log::info('count '.$count);
                 Log::info('$eviusmessage->total_opened '.$eviusmessage->total_opened);                
             }
-            else if($response['notificationType'] === 'Complaint' || $response['eventType'] === 'Complaint')
+            else if($response['eventType'] === 'Complaint')
             {    Log::info('Complaint');
                 $count = isset($eviusmessage->total_complained) ? $eviusmessage->total_complained++ : 1;                
                 if(isset($eviusmessage))
