@@ -17,6 +17,7 @@ use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 
 use App\MessageUserUpdate;
+use App\Attendee;
 use App\MessageUser;
 use App\Message as EviusMessage;
 
@@ -57,8 +58,10 @@ class AwsSnsController extends Controller
             'timestamp_event' => $responseMail['timestamp']
         ];
         $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
+        $messageUser = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
+        $eventUser = Attendee::find('event_user_id' , $messageUser);
         
-        $eviusmessage = EviusMessage::where("server_message_id" , $responseMail['messageId'] )->first();
+        $eviusmessage = EviusMessage::where("event_id" ,$eventUser->event_id)->first();
         
         $count = 0;        
         if (isset($response['eventType']))
@@ -155,7 +158,8 @@ class AwsSnsController extends Controller
             }    
 
         }
-        $messageUser = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
+        Log::info('Id del mensaje que se está actualizando');
+        Log::info($eviusmessage->_id);
         if(isset($messageUser))
         {
             $messageUser->status_message = $messageUserModel->status_message;
