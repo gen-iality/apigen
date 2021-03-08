@@ -3,10 +3,10 @@
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
 </div>
-@elseif(!empty($event->styles["banner_image"]))
+{{-- @elseif(!empty($event->styles["banner_image"]))
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
-</div>
+</div> --}}
 @endif
 <br />
 <br />
@@ -85,14 +85,15 @@ Ingresar al Evento AQUÍ
 
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
-![Logo]({{!empty($image_footer)}})
-<img alt="{{$event->name}}" src={{$image_footer}} /> 
-@elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
+	<!-- ![Logo]({{!empty($image_footer)}}) -->
+	<img alt="{{$event->name}}" src={{$image_footer}} /> 
+	
+{{-- @elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
 <img alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} />  
 @elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
 <img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
 @elseif(isset($organization_picture) && !empty($organization_picture))
-<img alt="{{$event->name}}" src={{$organization_picture}} />           
+<img alt="{{$event->name}}" src={{$organization_picture}} />            --}}
 @endif
 
 </div>

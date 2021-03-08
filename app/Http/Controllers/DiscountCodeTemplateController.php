@@ -275,11 +275,21 @@ class DiscountCodeTemplateController extends Controller
         $oldCodes = 0;
         $codes = $data['codes'];
         foreach ($codes as $codedata) {
-            $code = array_merge($codedata, [
-                'number_uses' => 0,
-                'discount_code_template_id' => $template_id,
-                'event_id' => $codeTemplate->event_id,
-            ]);
+            if(isset($codeTemplate->event_id))
+            {
+                $code = array_merge($codedata, [
+                    'number_uses' => 0,
+                    'discount_code_template_id' => $template_id,
+                    'event_id' => $codeTemplate->event_id,
+                ]);
+            }else{
+                $code = array_merge($codedata, [
+                    'number_uses' => 0,
+                    'discount_code_template_id' => $template_id,
+                    'organization_id' => $codeTemplate->organization_id,
+                ]);
+            }
+            
 
             $storedCode = DiscountCode::where('code', '=', $codedata['code'])->first();
 
