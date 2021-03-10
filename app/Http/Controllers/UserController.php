@@ -101,7 +101,7 @@ class UserController extends UserControllerWeb
         $data['email'] = strtolower($data['email']);
        
         //For users registered as teachers, the status is set to 'unconfirmed' and then confirmed by the administrator
-        if($data['others_properties']['role'])
+        if(isset($data['others_properties']['role']))
         {
             $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
         }
