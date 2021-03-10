@@ -240,7 +240,7 @@ class EventController extends Controller
         );
 
         //Flow to validate the creation of a course depending on whether the creator is an administrator or a teacher
-        $userRol = $user->others_properties['role'];
+        $userRol = isset($user->others_properties['role']) ? $user->others_properties['role'] : null;
         
         
         if(isset($userRol) && ($userRol == 'admin' || $userRol == 'teacher'))
