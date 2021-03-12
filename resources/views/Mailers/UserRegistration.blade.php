@@ -3,6 +3,7 @@
 
 ¡Bienvenid@! tu registro en {{$organization->displayName}} ha sido exitoso.
 
+@if(isset($user->others_properties['role']))
 <div style="text-align: center">
 	<span>
         @if($user->others_properties['role'] == 'teacher')
@@ -22,6 +23,7 @@
     Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
     </p>
 </div>
+@endif
 
 
 

@@ -381,4 +381,22 @@ class ApiCheckoutController extends Controller
         ]);        
     }
 
+    /**
+     * _validatePointOrder_
+     */
+    public function validatePointOrder($order_id)
+    {   
+        $order = Order::find($order_id);
+        $user = Auth::user();
+
+        //Verificar que el usuario tenga puntos suficientes para más seguridad
+        if($order->amount <= $user->points)
+        {
+            $order->order_status_id = config('attendize.order_complete');
+            $order->save();
+
+            $user->points = $user->points - $order->amount;
+            
+        }
+    }
 }

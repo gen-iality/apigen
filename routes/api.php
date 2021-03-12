@@ -532,7 +532,9 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
 
 
 
-
+/****************
+ * DiscountCodes
+ ****************/
 Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
 Route::post("discountcodetemplate/{id}/importCodes", "DiscountCodeTemplateController@importCodes");
 Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
@@ -544,4 +546,4 @@ Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCo
 Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
-
+Route::put("code/redeem_point_code" ,  "DiscountCodeController@redeemPointCode");

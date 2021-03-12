@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
+use Auth;
 use App\evaLib\Services\CodeServices;
 
 
@@ -350,4 +351,30 @@ class DiscountCodeController extends Controller
         
         return abort(404 , 'El código no existe');
     }
+
+    /**
+     * 
+     */
+    public function redeemPointCode(Request $request){
+
+        $data = $request->json()->all();
+        $code = DiscountCode::where('code', $data['code'])->first();
+        
+        $user = Auth::user();     
+        $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
+            
+            
+        if($code->number_uses < $group->use_limit  ){
+            $code->account_id = $user->_id; 
+            $code->number_uses = $code->number_uses + 1;
+            $code->save();
+            
+            $user->points = $user->points+$group->discount;
+            $user->save();
+
+            return $user;
+        }
+                        
+        return abort(403 , 'El código ya se uso');    
+    }    
 }
