@@ -56,8 +56,7 @@ class AwsSnsController extends Controller
             'notification_id' => $responseMail['messageId'],
             'timestamp_event' => $responseMail['timestamp']
         ];
-        $messageUserModel = new MessageUserUpdate($dataMessageUser);
-        $messageUserModel->save(); 
+        $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
         
         $eviusmessage = EviusMessage::where("server_message_id" , $responseMail['messageId'] )->first();
         
