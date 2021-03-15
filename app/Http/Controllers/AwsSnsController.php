@@ -70,17 +70,17 @@ class AwsSnsController extends Controller
 
         switch ($messageUser->status) {
             case 'Delivery':
-                $eviusmessage->total_delivered = $eviusmessage->total_delivered-1;                
+                $eviusmessage->total_delivered = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered-1 : 0;                
             break;
             case 'Send':
-                $eviusmessage->total_sent = $eviusmessage->total_sent-1;
+                $eviusmessage->total_sent = isset($eviusmessage->total_sent) ?$eviusmessage->total_sent-1 : 0;
             break;
             case 'Click':
-                $eviusmessage->total_clicked = $eviusmessage->total_clicked-1;
+                $eviusmessage->total_clicked = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked-1 : 0;
             break;
         }
         $eviusmessage->save();
-        
+
 
         switch ($response['eventType']) {
             case 'Delivery':
