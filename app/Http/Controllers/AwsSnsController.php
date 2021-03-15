@@ -66,21 +66,7 @@ class AwsSnsController extends Controller
 
         $eventUser = Attendee::find($messageUser->event_user_id);      
         
-        $eviusmessage = EviusMessage::find($messageUser->message_id);
-
-        switch ($messageUser->status) {
-            case 'Delivery':
-                $eviusmessage->total_delivered = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered-1 : 0;                
-            break;
-            case 'Send':
-                $eviusmessage->total_sent = isset($eviusmessage->total_sent) ?$eviusmessage->total_sent-1 : 0;
-            break;
-            case 'Click':
-                $eviusmessage->total_clicked = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked-1 : 0;
-            break;
-        }
-        $eviusmessage->save();
-
+        $eviusmessage = EviusMessage::find($messageUser->message_id);    
 
         switch ($response['eventType']) {
             case 'Delivery':
@@ -92,12 +78,27 @@ class AwsSnsController extends Controller
             case 'Click':
                 $eviusmessage->total_clicked = $eviusmessage->total_clicked+1;                
             break;
+            case 'Open':
+                $eviusmessage->total_clicked = $eviusmessage->total_clicked+1;                
+            break;
         }
         $eviusmessage->save(); 
+        
+        switch ($messageUser->status) {
+            case 'Delivery':
+                $eviusmessage->total_delivered = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered-1 : 0;                
+            break;
+            case 'Send':
+                $eviusmessage->total_sent = isset($eviusmessage->total_sent) ?$eviusmessage->total_sent-1 : 0;
+            break;
+            case 'Open':
+                $eviusmessage->total_clicked = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked-1 : 0;
+            break;
+        }
+        $eviusmessage->save();
 
         
 
-         
 
         //
             // if (isset($response['eventType']))
