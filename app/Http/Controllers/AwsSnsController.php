@@ -60,8 +60,8 @@ class AwsSnsController extends Controller
 
 
         $messageUser = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
-        $messageUser->status = $response['notificationType'];  
-        $messageUser->status_message = $response['notificationType'];        
+        $messageUser->status = $response['eventType'];  
+        $messageUser->status_message = $response['eventType'];        
         $messageUser->save();
 
         $eventUser = Attendee::find('event_user_id' , $messageUser->event_user_id);      
@@ -81,7 +81,7 @@ class AwsSnsController extends Controller
         }
         $eviusmessage->save();
 
-        switch ($response['notificationType']) {
+        switch ($response['eventType']) {
             case 'Delivery':
                 $eviusmessage->total_delivered = $eviusmessage->total_delivered+1;                
             break;
