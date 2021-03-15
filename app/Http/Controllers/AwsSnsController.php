@@ -68,6 +68,20 @@ class AwsSnsController extends Controller
         
         $eviusmessage = EviusMessage::find($messageUser->message_id);
 
+        switch ($messageUser->status) {
+            case 'Delivery':
+                $eviusmessage->total_delivered = $eviusmessage->total_delivered-1;                
+            break;
+            case 'Send':
+                $eviusmessage->total_sent = $eviusmessage->total_sent-1;
+            break;
+            case 'Click':
+                $eviusmessage->total_clicked = $eviusmessage->total_clicked-1;
+            break;
+        }
+        $eviusmessage->save();
+        
+
         switch ($response['eventType']) {
             case 'Delivery':
                 $eviusmessage->total_delivered = $eviusmessage->total_delivered+1;                
@@ -81,18 +95,7 @@ class AwsSnsController extends Controller
         }
         $eviusmessage->save(); 
 
-        switch ($messageUser->status) {
-            case 'Delivery':
-                $eviusmessage->total_delivered = $eviusmessage->total_delivered-1;                
-            break;
-            case 'Send':
-                $eviusmessage->total_sent = $eviusmessage->total_sent-1;
-            break;
-            case 'Click':
-                $eviusmessage->total_clicked = $eviusmessage->total_clicked-1;
-            break;
-        }
-        $eviusmessage->save();
+        
 
          
 
