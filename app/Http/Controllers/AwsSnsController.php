@@ -15,7 +15,7 @@ use Illuminate\Contracts\Mail\Mailer;
 
 use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
-use App\Attendee;
+
 use App\MessageUserUpdate;
 use App\MessageUser;
 use App\Message as EviusMessage;
@@ -44,7 +44,7 @@ class AwsSnsController extends Controller
         }
         else if (isset($response['notificationType']))
         {
-            $status_message = cc; 
+            $status_message = $response['notificationType']; 
         }
                                 
         
@@ -56,152 +56,10 @@ class AwsSnsController extends Controller
             'notification_id' => $responseMail['messageId'],
             'timestamp_event' => $responseMail['timestamp']
         ];
-        $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);  
-
-
-        $messageUser = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
-        $messageUser->status = $response['eventType'];  
-        $messageUser->status_message = $response['eventType'];        
-        $messageUser->save();
-
-        $eventUser = Attendee::find($messageUser->event_user_id);      
+        $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
+                
         
-        $eviusmessage = EviusMessage::find($messageUser->message_id);    
-
-        switch ($response['eventType']) {
-            case 'Delivery':
-                $eviusmessage->total_delivered = $eviusmessage->total_delivered+1;                
-            break;
-            case 'Send':
-                $eviusmessage->total_sent = $eviusmessage->total_sent+1;  
-            break;              
-            case 'Click':
-                $eviusmessage->total_clicked = $eviusmessage->total_clicked+1;                
-            break;
-            case 'Open':
-                $eviusmessage->total_clicked = $eviusmessage->total_clicked+1;                
-            break;
-        }
-        $eviusmessage->save(); 
-        
-        switch ($messageUser->status) {
-            case 'Delivery':
-                $eviusmessage->total_delivered = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered-1 : 0;                
-            break;
-            case 'Send':
-                $eviusmessage->total_sent = isset($eviusmessage->total_sent) ?$eviusmessage->total_sent-1 : 0;
-            break;
-            case 'Open':
-                $eviusmessage->total_clicked = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked-1 : 0;
-            break;
-        }
-        $eviusmessage->save();
-
-        
-
-
-        //
-            // if (isset($response['eventType']))
-            // {
-            //     if($response['notificationType'] === 'Delivery' || $response['eventType'] === 'Delivery')
-            //     {
-            //         Log::info('Delivery');
-            //         $count = isset($eviusmessage->total_delivered) ? $eviusmessage->total_delivered++ : 1; 
-            //         if(isset($eviusmessage))
-            //         {
-            //             $eviusmessage->update(['total_delivered' => $count]);                
-            //         }
-            //         else if(isset($eviusMessageModel))
-            //         {
-            //             $eviusMessageModel->update(['total_delivered' => $count]);        
-            //         }                                                            
-            //     } 
-            //     else if($response['notificationType'] === 'Send' || $response['eventType'] === 'Send')
-            //     {
-            //         Log::info('Send');
-            //         $count = isset($eviusmessage->total_sent) ? $eviusmessage->total_sent++ : 1;
-                    
-            //         if(isset($eviusmessage))
-            //         {
-            //             $eviusmessage->update(['total_sent' => $count]);
-            //         }
-            //         else if(isset($eviusMessageModel))
-            //         {
-            //             $eviusMessageModel->update(['total_sent' => $count]);        
-            //         }                                                            
-                    
-                    
-            //         Log::info('count '.$count);
-            //         Log::info('$eviusmessage->total_sent '.$eviusmessage->total_sent);
-            //     }
-
-            //     else if ($response['notificationType'] === 'Click' || $response['eventType'] === 'Click')
-            //     {
-            //         Log::info('Click');
-            //         $count = isset($eviusmessage->total_clicked) ? $eviusmessage->total_clicked++ : 1;
-                    
-            //         if(isset($eviusmessage))
-            //         {
-            //             $eviusmessage->update(['total_clicked' => $count]);
-            //         }
-            //         else if(isset($eviusMessageModel))
-            //         {
-            //             $eviusMessageModel->update(['total_clicked' => $count]);        
-            //         }       
-                    
-            //     }
-            //     else if($response['notificationType'] === 'Bounce' || $response['eventType'] === 'Bounce')
-            //     {
-            //         Log::info('Bounce');
-            //         $count = isset($eviusmessage->total_bounced) ? $eviusmessage->total_bounced++ : 1;
-                    
-            //         if(isset($eviusmessage))
-            //         {
-            //             $eviusmessage->update(['total_bounced' => $count]);
-            //         }
-            //         else if(isset($eviusMessageModel))
-            //         {
-            //             $eviusMessageModel->update(['total_bounced' => $count]);        
-            //         }                       
-                    
-            //     }
-            //     else if($response['notificationType'] === 'Open' || $response['eventType'] === 'Open')
-            //     {    Log::info('Open');
-            //         $count = isset($eviusmessage->total_opened) ? $eviusmessage->total_opened++ : 1;
-                    
-            //         if(isset($eviusmessage))
-            //         {
-            //             $eviusmessage->update(['total_opened' => $count]);
-            //         }
-            //         else if(isset($eviusMessageModel))
-            //         {
-            //             $eviusMessageModel->update(['total_opened' => $count]);        
-            //         }          
-                    
-            //         Log::info('count '.$count);
-            //         Log::info('$eviusmessage->total_opened '.$eviusmessage->total_opened);                
-            //     }
-            //     else if($response['notificationType'] === 'Complaint' || $response['eventType'] === 'Complaint')
-            //     {    Log::info('Complaint');
-            //         $count = isset($eviusmessage->total_complained) ? $eviusmessage->total_complained++ : 1;                
-            //         if(isset($eviusmessage))
-            //         {
-            //             $eviusmessage->update(['total_complained' => $count]);                
-            //         }
-            //         else if(isset($eviusMessageModel))
-            //         {
-            //             $eviusMessageModel->update(['total_complained' => $count]);        
-            //         }
-            //     }    
-
-            // }
-            // $messageUser = MessageUser::where('server_message_id', '=', $responseMail['messageId'])->first();
-            // if(isset($messageUser))
-            // {
-            //     $messageUser->status_message = $messageUserModel->status_message;
-            //     $messageUser->status = $messageUserModel->status_message;
-            //     $messageUser->save();         
-            // }
+        $count = 0;               
 
                        
         return json_encode($request);                
