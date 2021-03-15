@@ -64,7 +64,7 @@ class AwsSnsController extends Controller
         $messageUser->status_message = $response['eventType'];        
         $messageUser->save();
 
-        $eventUser = Attendee::find('event_user_id' , $messageUser->event_user_id);      
+        $eventUser = Attendee::find($messageUser->event_user_id);      
         
         $eviusmessage = EviusMessage::find($messageUser->message_id);
 
@@ -80,7 +80,7 @@ class AwsSnsController extends Controller
             break;
         }
         $eviusmessage->save(); 
-        
+
         switch ($messageUser->status) {
             case 'Delivery':
                 $eviusmessage->total_delivered = $eviusmessage->total_delivered-1;                
