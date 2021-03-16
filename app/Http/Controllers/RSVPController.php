@@ -346,20 +346,32 @@ class RSVPController extends Controller implements ShouldQueue
     public function updateStatusMessageUser($event_id ,$message_id)
     {
 
-        $messageUsers = MessageUser::where('message_id', '=', $message_id)->get();
-        
+        //consulta del registro de mensaje por usuario
+        $messageUsers = MessageUser::where('message_id', '=', $message_id);
+        $messageUsersPluck =  $messageUsers->pluck('server_message_id');
+
+        $messageUserUpdate = MessageUserUpdate::whereIn('notification_id', $messageUsersPluck);
+        $messageUserUpdatePluck = $messageUserUpdate->pluck('email_destinations');
+
+        var_dump($messageUsersPluck);
+        var_dump($messageUserUpdatePluck);
+
+        return $messageUserUpdate;
+        //
         $message = Message::find($message_id);
 
-        
+
+        //Se recorre messageUser para buscar el ultimo estado en MessageUserUpdate y actualizarlo
         foreach($messageUsers as $messageUser ){
 
-            $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->orderby('created_at','DESC')->first();
-            // var_dump($messageUserUpdate->_id);die;
+            $messageUserUpdate = MessageUserUpdate::where('notification_id', '=', $messageUser->server_message_id)->orderby('created_at','DESC')->first();            
             $messageUser->status_message = $messageUserUpdate->status_message;
             $messageUser->status = $messageUserUpdate->status_message;
-            $messageUser->save();
+            // $messageUser->save();
             
         } 
+        return $message;
+
 
         $total_delivered = MessageUser::where('status_message', '=', 'Delivery')->where('message_id', '=', $message_id)->get();
         $total_delivered = isset($total_delivered) ? count($total_delivered) : 0;

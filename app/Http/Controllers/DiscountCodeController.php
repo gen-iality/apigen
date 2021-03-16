@@ -353,6 +353,10 @@ class DiscountCodeController extends Controller
     }
 
     /**
+     * _redeemPointCode_: end point that redeems the points code and adds them to the user who redeemed it.
+     * 
+     * @autenticathed
+     * @bodyParam code string required code that the user is redeeming
      * 
      */
     public function redeemPointCode(Request $request){
@@ -360,15 +364,19 @@ class DiscountCodeController extends Controller
         $data = $request->json()->all();
         $code = DiscountCode::where('code', $data['code'])->first();
         
+        //authenticated user
         $user = Auth::user();     
         $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
-            
-        if($code->number_uses < $group->use_limit  ){
+        //Se valida si el código ya se uso     
+        if($code->number_uses <= $group->use_limit  ){
+
+            //Si el código es valido se suma un uso
             $code->account_id = $user->_id; 
             $code->number_uses = $code->number_uses + 1;
             $code->save();
             
+            //Se suman los puntos canjeados al usuario
             $user->points = $user->points+$group->discount;
             $user->save();
 
