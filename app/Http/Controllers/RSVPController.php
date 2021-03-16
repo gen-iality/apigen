@@ -348,15 +348,15 @@ class RSVPController extends Controller implements ShouldQueue
 
         //consulta del registro de mensaje por usuario
         $messageUsers = MessageUser::where('message_id', '=', $message_id);
-        $messageUsersPluck =  $messageUsers->pluck('server_message_id');
+        $messageUsersPluck =  $messageUsers->pluck('email');
 
-        $messageUserUpdate = MessageUserUpdate::whereIn('notification_id', $messageUsersPluck);
-        $messageUserUpdatePluck = $messageUserUpdate->pluck('email_destinations');
+        $messageUserUpdate = MessageUserUpdate::whereIn('notification_id', $messageUsersPluck)->orderby('created_at','DESC')->get;
+        // $messageUserUpdatePluck = $messageUserUpdate->pluck('email_destinations');
 
-        var_dump($messageUsersPluck);
-        var_dump($messageUserUpdatePluck);
+        // var_dump($messageUsersPluck);
+        // var_dump($messageUserUpdatePluck);die;
 
-        return $messageUserUpdate;
+        // return $messageUserUpdate;
         //
         $message = Message::find($message_id);
 
@@ -370,7 +370,7 @@ class RSVPController extends Controller implements ShouldQueue
             // $messageUser->save();
             
         } 
-        return $message;
+        // return $message;
 
 
         $total_delivered = MessageUser::where('status_message', '=', 'Delivery')->where('message_id', '=', $message_id)->get();
