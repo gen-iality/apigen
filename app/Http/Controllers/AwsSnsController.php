@@ -58,16 +58,16 @@ class AwsSnsController extends Controller
         ];
         $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
         
-        foreach($responseMail['destination'] as $email)
-        {
-            $messageUser = MessageUser::updateOrCreate(
-                ['email' => $email],  
-                [
-                    'status' => $status_message , 
-                    'status_message' => $status_message,
-                ]                                  
-            );
-        }                       
+        
+        $messageUser = MessageUser::updateOrCreate(
+            ['server_message_id' => $responseMail['messageId']],  
+            [
+                'status' => $status_message , 
+                'status_message' => $status_message
+            ]                                  
+        );
+        
+        $count = 0;               
 
                        
         return json_encode($request);                
