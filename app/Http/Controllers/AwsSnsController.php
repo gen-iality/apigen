@@ -38,6 +38,7 @@ class AwsSnsController extends Controller
         // Log::info('$responseMail[destination] '. json_encode($responseMail['destination']));
         $status_message = null;
 
+        //Se toma el satstus del mensaje (Send, Open,Click Delivery, Bounce)
         if(isset($response['eventType']))
         {
             $status_message = $response['eventType']; 
@@ -47,49 +48,33 @@ class AwsSnsController extends Controller
             $status_message = $response['notificationType']; 
         }
                                 
-        
+        //Se organiza la información para el historial.
         $dataMessageUser = [
-            'response' => json_encode($response),
-            'email_destinations' => json_encode($responseMail['destination']),
+            'response' => json_encode($response),            
             'status_message' => isset($status_message) ? $status_message : 'queued',
             'status' => isset($status_message) ? $status_message : 'queued',
-            'notification_id' => $responseMail['messageId'],
-            'timestamp_event' => $responseMail['timestamp']
+            // 'notification_id' => $responseMail['messageId'],
+            'timestamp_event' => $responseMail['timestamp'],
+            'from' => $responseMail['source']
         ];
 
+        //Se busca el mensaje del usuario por el id único generado por AWS
         $messageUser = MessageUser::where('server_message_id' , $responseMail['messageId'])->first();
         
-
+        //Si existe quiere decir que el correo contiene métricas, esto minimiza registros innecesarios.
         if(isset($messageUser))
         {      
                         
-            //
-                // if(isset($messageUser->status) && $messageUser->status !== 'queued')
-                // {
-                //     $message = EviusMessage::find($messageUser->message_id);
-                //     switch ($messageUser->status) 
-                //     {
-                //         case 'Send':
-                //             $message->total_sent = isset($message->total_sent) ? $message->total_sent - 1 : 1;
-                //             $message->save();
-                //         break;
-                //         case 'Delivery':
-                //             $message->total_delivered = isset($message->total_delivered) ? $message->total_delivered - 1 : 0;
-                //             $message->save();
-                //         break;
-                //         case 'Open':
-                //             $message->total_opened = isset($message->total_opened) ? $message->total_opened - 1 : 0;
-                //             $message->save();
-                //         break;
-                //     }
-
-                // }            
-            //$messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);                        
+            //Se actualiza el estado del mensaje por usuario.                    
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
+            $messageUser->history = [$dataMessageUser];
             $messageUser->save();
 
+            //Se busca el mansaje al caul se le actualizaran las métricas.
             $message = EviusMessage::find($messageUser->message_id);    
+
+            //Dependiendo del estatus se hace la consulta correspondiente para tener el total de mensajes con el status que se está actualizando.
             $total= MessageUser::where('status', '=', $status_message)->where('message_id', '=', $messageUser->message_id)->get();
             switch ($status_message) 
             {
@@ -119,9 +104,6 @@ class AwsSnsController extends Controller
                     $message->save();
                 break;
             }
-
-            // app('App\Http\Controllers\RSVPController')->updateStatusMessageUser($status_message , $messageUser->message_id);
-            //
                 
                         
         }                       
