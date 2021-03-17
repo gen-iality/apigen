@@ -58,34 +58,35 @@ class AwsSnsController extends Controller
         ];
 
         $messageUser = MessageUser::where('server_message_id' , $responseMail['messageId'])->first();
-
-        switch ($status_message) 
-        {
-            case 'Send':
-                $message->total_sent = isset($message->total_sent) ? $message->total_sent +1 : 1;
-                $message->save();
-            break;
-            case 'Delivery':
-                $message->total_delivered = isset($message->total_delivered) ? $message->total_delivered +1 : 1;
-                $message->save();
-            break;
-            case 'Open':
-                $message->total_opened = isset($message->total_opened) ? $message->total_opened +1 : 1;
-                $message->save();
-            break;
-            case 'Click':
-                $message->total_clicked = isset($message->total_clicked) ? $message->total_clicked +1 : 1;
-                $message->save();
-            break;
-            case 'Bounce':
-                $message->total_bounced = isset($message->total_bounced) ? $message->total_bounced +1 : 1;
-                $message->save();
-            break;
-        }
+        
 
         if(isset($messageUser))
         {      
             $message = EviusMessage::find($messageUser->message_id);
+
+            switch ($status_message) 
+            {
+                case 'Send':
+                    $message->total_sent = isset($message->total_sent) ? $message->total_sent +1 : 1;
+                    $message->save();
+                break;
+                case 'Delivery':
+                    $message->total_delivered = isset($message->total_delivered) ? $message->total_delivered +1 : 1;
+                    $message->save();
+                break;
+                case 'Open':
+                    $message->total_opened = isset($message->total_opened) ? $message->total_opened +1 : 1;
+                    $message->save();
+                break;
+                case 'Click':
+                    $message->total_clicked = isset($message->total_clicked) ? $message->total_clicked +1 : 1;
+                    $message->save();
+                break;
+                case 'Bounce':
+                    $message->total_bounced = isset($message->total_bounced) ? $message->total_bounced +1 : 1;
+                    $message->save();
+                break;
+            }
 
             if(isset($messageUser->status) && $messageUser->status !== 'queued')
             {
