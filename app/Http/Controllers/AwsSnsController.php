@@ -88,9 +88,9 @@ class AwsSnsController extends Controller
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
             $messageUser->save();
-            
-            $message = Message::find($message_id);    
-            $total= MessageUser::where('status', '=', $status_message)->where('message_id', '=', $message_id)->get();
+
+            $message = Message::find($messageUser->message_id);    
+            $total= MessageUser::where('status', '=', $status_message)->where('message_id', '=', $messageUser->message_id)->get();
             switch ($status_message) 
             {
                 case 'Send':
