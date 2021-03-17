@@ -73,16 +73,17 @@ class AwsSnsController extends Controller
                         $message->save();
                     break;
                     case 'Delivery':
-                        $message->total_delivered = isset($message->total_sent) ? $message->total_delivered - 1 : 0;
+                        $message->total_delivered = isset($message->total_delivered) ? $message->total_delivered - 1 : 0;
                         $message->save();
                     break;
                     case 'Open':
-                        $message->total_opened = isset($message->total_sent) ? $message->total_opened - 1 : 0;
+                        $message->total_opened = isset($message->total_opened) ? $message->total_opened - 1 : 0;
                         $message->save();
                     break;
                 }
 
             }
+            Log::info('Status');
             //$messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);                        
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
