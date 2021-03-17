@@ -69,7 +69,15 @@ class AwsSnsController extends Controller
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
             $messageUser->save();
-            $messageUser->history = isset($messageUser->history) ? Arr::collapse($messageUser->history , $dataMessageUser)  : $dataMessageUser ;
+
+            if(is_null($message_user->history)){
+                $message_user->history = array($dataMessageUser);
+            }else{
+                $array = $message_user->history;
+                array_push($array, $dataMessageUser);    
+                $message_user->history = $array;
+            }
+            
             $messageUser->save();
 
             //Se busca el mansaje al caul se le actualizaran las métricas.
