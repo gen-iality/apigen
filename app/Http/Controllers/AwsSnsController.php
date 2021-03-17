@@ -56,21 +56,18 @@ class AwsSnsController extends Controller
             'notification_id' => $responseMail['messageId'],
             'timestamp_event' => $responseMail['timestamp']
         ];
-        $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
-        
-        
-        // $messageUser = MessageUser::updateOrCreate(
-        //     ['server_message_id' => $responseMail['messageId']],  
-        //     [
-        //         'status' => $status_message , 
-        //         'status_message' => $status_message
-        //     ]                                  
-        // );
-        
-        $count = 0;               
 
+        $messageUser = MessageUser::where('server_message_id' , $responseMail['messageId'])->first();
+
+        if(isset($messageUser))
+        {
+            //$messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);                        
+            $messageUser->status = $status_message;
+            $messageUser->save();        
+        }                       
                        
-        return json_encode($request);                
+        return json_encode($request);                     
+              
     }
     
     public function testEmail(Mailer $mailer)
