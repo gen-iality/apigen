@@ -68,7 +68,7 @@ class AwsSnsController extends Controller
             //Se actualiza el estado del mensaje por usuario.                    
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
-            $messageUser->history = [$dataMessageUser];
+            $messageUser->history = isset($messageUser->history) ? $dataMessageUser : Arr::collapse($messageUser->history , $dataMessageUser);
             $messageUser->save();
 
             //Se busca el mansaje al caul se le actualizaran las métricas.
