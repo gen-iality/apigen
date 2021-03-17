@@ -82,14 +82,13 @@ class AwsSnsController extends Controller
                     break;
                 }
 
-            }
-            Log::info('Status');
+            }            
             //$messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);                        
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
-            $messageUser->save();                 
+            $messageUserStatus = $messageUser->save();                 
             
-            switch ($status_message) 
+            switch ($messageUserStatus->status) 
             {
                 case 'Send':
                     $message->total_sent = isset($message->total_sent) ? $message->total_sent +1 : 1;
