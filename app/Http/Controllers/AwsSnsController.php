@@ -59,13 +59,13 @@ class AwsSnsController extends Controller
         $messageUserModel = MessageUserUpdate::updateOrCreate($dataMessageUser);        
         
         
-        $messageUser = MessageUser::updateOrCreate(
-            ['server_message_id' => $responseMail['messageId']],  
-            [
-                'status' => $status_message , 
-                'status_message' => $status_message
-            ]                                  
-        );
+        // $messageUser = MessageUser::updateOrCreate(
+        //     ['server_message_id' => $responseMail['messageId']],  
+        //     [
+        //         'status' => $status_message , 
+        //         'status_message' => $status_message
+        //     ]                                  
+        // );
         
         $count = 0;               
 
