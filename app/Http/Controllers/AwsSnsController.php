@@ -68,14 +68,14 @@ class AwsSnsController extends Controller
             //Se actualiza el estado del mensaje por usuario.                    
             $messageUser->status = $status_message;
             $messageUser->status_message = $status_message;
-            $messageUser->save();
+            // $messageUser->save();
 
-            if(is_null($message_user->history)){
-                $message_user->history = array($dataMessageUser);
+            if(is_null($messageUser->history)){
+                $messageUser->history = array($dataMessageUser);
             }else{
-                $array = $message_user->history;
+                $array = $messageUser->history;
                 array_push($array, $dataMessageUser);    
-                $message_user->history = $array;
+                $messageUser->history = $array;
             }
             
             $messageUser->save();
