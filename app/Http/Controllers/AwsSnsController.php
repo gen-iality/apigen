@@ -61,7 +61,7 @@ class AwsSnsController extends Controller
 
         if(isset($messageUser))
         {      
-            $message = Message::find($messageUser->$message_id);
+            $message = Message::find($messageUser->message_id);
 
             if(isset($messageUser->status) && $messageUser->status !== 'queued')
             {
