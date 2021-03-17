@@ -89,7 +89,7 @@ class AwsSnsController extends Controller
             $messageUser->status_message = $status_message;
             $messageUser->save();
             
-            app('App\Http\Controllers\RSVPController')->updateStatusMessageUser($messageUser->message_id);
+            app('App\Http\Controllers\RSVPController')->updateStatusMessageUser($messageUser->message_id , $messageUser->message_id  );
             //
                 // switch ($status_message) 
                 // {
