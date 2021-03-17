@@ -343,31 +343,41 @@ class RSVPController extends Controller implements ShouldQueue
     /**
      * 
      */
-    public function updateStatusMessageUser($event_id ,$message_id)
-    {
+    public function updateStatusMessageUser($typeStatus ,$message_id)
+    {   
         $message = Message::find($message_id);
+        $total= MessageUser::where('status', '=', $typeStatus)->where('message_id', '=', $message_id)->get();
 
-        $total_delivered = MessageUser::where('status', '=', 'Delivery')->where('message_id', '=', $message_id)->get();
-        $total_delivered = isset($total_delivered) ? count($total_delivered) : 0;
-        $message->total_delivered = $total_delivered;
+        switch ($typeStatus) 
+        {
+            case 'Send':
+                $total_sent = isset($total_sent) ? count($total) : 0;
+                $message->total_sent = $total_sent;
+                $message->save();
+            break;
+            case 'Delivery':               
+                $total_delivered = isset($total_delivered) ? count($total) : 0;
+                $message->total_delivered = $total_delivered;
+                $message->save();
+            break;
+            case 'Open':
+                $total_opened = isset($total_opened) ? count($total) : 0;
+                $message->total_opened = $total_opened;
+                $message->save();
+            break;
+            case 'Click':
+                $total_clicked = isset($total_clicked) ? count($total) : 0;
+                $message->total_clicked = $total_clicked;
+                $message->save();
+            break;
+            case 'Bounce':
+                $total_bounced = isset($total_bounced) ? count($total) : 0;
+                $message->total_bounced = $total_bounced;
+                $message->save();
+            break;
+        }
         
-        $total_bounced = MessageUser::where('status', '=', 'Bounce')->where('message_id', '=', $message_id)->get();
-        $total_bounced = isset($total_bounced) ? count($total_bounced) : 0;
-        $message->total_bounced = $total_bounced;
-
-        $total_sent = MessageUser::where('status', '=', 'Send')->where('message_id', '=', $message_id)->get();
-        $total_sent = isset($total_sent) ? count($total_sent) : 0;
-        $message->total_sent = $total_sent;
-
-        $total_opened = MessageUser::where('status', '=', 'Open')->where('message_id', '=', $message_id)->get();
-        $total_opened = isset($total_opened) ? count($total_opened) : 0;
-        $message->total_opened = $total_opened;
-
-        $total_clicked = MessageUser::where('status', '=', 'Click')->where('message_id', '=', $message_id)->get();
-        $total_clicked = isset($total_clicked) ? count($total_clicked) : 0;
-        $message->total_clicked = $total_clicked;
-
-        $message->save();
+        
         return  response()->json([
                     'message' => 'Status actualizado exitosamente'
                 ]); 
