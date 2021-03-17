@@ -89,7 +89,7 @@ class AwsSnsController extends Controller
             $messageUser->status_message = $status_message;
             $messageUser->save();
 
-            $message = Message::find($messageUser->message_id);    
+            $message = EviusMessage::find($messageUser->message_id);    
             $total= MessageUser::where('status', '=', $status_message)->where('message_id', '=', $messageUser->message_id)->get();
             switch ($status_message) 
             {
