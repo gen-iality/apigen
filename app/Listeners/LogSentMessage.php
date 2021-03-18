@@ -62,15 +62,13 @@ class LogSentMessage
             $eviusMessage->save();
             
             $messageUser->message_id = $eviusMessage->_id;
-            
-            $messageUser->server_message_id = $sesMessageId;
 
         }else{
             $messageUser->event_id = $event->data["event"]["_id"];
-            $messageUser->server_message_id = $sesMessageId;
+            
         }
         
-        
+        $messageUser->server_message_id = $sesMessageId;
         $messageUser->save();
 
         // $total_delivered = MessageUser::where('message_id' , $eviusMessage->_id)->where("satatus_message" , "Delivery")->get();
