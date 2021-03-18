@@ -33,7 +33,7 @@ class LogSentMessage
         $headers = $event->message->getHeaders();
         
         $recipents = $event->message->getTo();
-        
+       
         $eventUser = isset($event->data["eventUser"]) ? $event->data["eventUser"] : null; 
         $messageUser = new MessageUser([            
             'email' => implode(',',array_keys($recipents)),             
@@ -65,6 +65,8 @@ class LogSentMessage
             
             $messageUser->server_message_id = $sesMessageId;
 
+        }else{
+            $messageUser->event_id = $event->data["event"]["_id"];
         }
         
         
