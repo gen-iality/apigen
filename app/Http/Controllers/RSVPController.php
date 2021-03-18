@@ -241,8 +241,7 @@ class RSVPController extends Controller implements ShouldQueue
                 'user_id' => $eventUser->id,
                 'event_user_id' => $eventUser->id,
             ]
-            );
-            var_dump($event);die;
+            );            
             // $message->messageUsers()->save($messageUser);
 
             $messageLog = Message::find($message->id);
