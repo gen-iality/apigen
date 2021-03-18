@@ -28,14 +28,8 @@ class AwsSnsController extends Controller
     {        
         
         $response = $request->json()->all();
-        // Log::info('updateSnsMessages');
-        // $headers = collect($request->header())->transform(function ($item) {
-        //     return $item[0];
-        // });
-        // Log::info('json_encode($headers)'.json_encode($headers));
-        // Log::info('$response '.json_encode($response));
         $responseMail = $response['mail'];                                
-        // Log::info('$responseMail[destination] '. json_encode($responseMail['destination']));
+        
         $status_message = null;
 
         //Se toma el satstus del mensaje (Send, Open,Click Delivery, Bounce)
@@ -61,24 +55,14 @@ class AwsSnsController extends Controller
         //Se busca el mensaje del usuario por el id único generado por AWS
         $messageUser = MessageUser::where('server_message_id' , $responseMail['messageId'])->first();
         
-        //Si existe quiere decir que el correo contiene métricas, esto minimiza registros innecesarios.
-        if(isset($messageUser))
-        {      
-                        
-            //Se actualiza el estado del mensaje por usuario.                    
-            $messageUser->status = $status_message;
-            $messageUser->status_message = $status_message;
-            // $messageUser->save();
+        //Se actualiza el estado del mensaje por usuario.                    
+        $messageUser->status = $status_message;
+        $messageUser->status_message = $status_message;
+        $messageUser->save();
 
-            if(is_null($messageUser->history)){
-                $messageUser->history = array($dataMessageUser);
-            }else{
-                $array = $messageUser->history;
-                array_push($array, $dataMessageUser);    
-                $messageUser->history = $array;
-            }
-            
-            $messageUser->save();
+        //Si existe quiere decir que el correo contiene métricas, esto minimiza registros innecesarios.
+        if(isset($messageUser->message_id))
+        {                                                                                          
 
             //Se busca el mansaje al caul se le actualizaran las métricas.
             $message = EviusMessage::find($messageUser->message_id);    
@@ -115,7 +99,17 @@ class AwsSnsController extends Controller
             }
                 
                         
-        }                       
+        }        
+        
+        if(is_null($messageUser->history)){
+            $messageUser->history = array($dataMessageUser);
+        }else{
+            $array = $messageUser->history;
+            array_push($array, $dataMessageUser);    
+            $messageUser->history = $array;
+        }
+        $messageUser->save();
+
                        
         return json_encode($request);                     
               

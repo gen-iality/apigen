@@ -67,6 +67,7 @@ class LogSentMessage
 
         }else{
             $messageUser->event_id = $event->data["event"]["_id"];
+            $messageUser->server_message_id = $sesMessageId;
         }
         
         
