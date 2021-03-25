@@ -479,7 +479,7 @@ class ActivitiesController extends Controller
 
         $activity = Activities::find($activity_id);
         
-        if($activity->meeting_id === 0  && isset($activity->zoom_host_id))
+        if($activity->meeting_id === 0  && $activity->zoom_host_id !== '')
         {
             return response()->json([
                 "message" => "La actividad ya tiene una sala asignada"
