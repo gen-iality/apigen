@@ -130,6 +130,7 @@ Route::get('events/{event_id}/userproperties', 'UserPropertiesController@index')
 Route::post('events/{event_id}/userproperties', 'UserPropertiesController@store');
 Route::get('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
 Route::put('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
+Route::put('events/{event_id}/userproperties/{id}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
 Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
 
 /****************

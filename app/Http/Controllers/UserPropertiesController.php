@@ -6,7 +6,7 @@ use App\Event;
 use App\UserProperties;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use DB;
 /**
  * @group UserProperties
  * @resource Event
@@ -76,7 +76,23 @@ class UserPropertiesController extends Controller
 
     }
 
-    
+    /**
+     * bloquea un elemento que un asistente ya escogio de un campo tipo lista de elementos con inventario
+     * cuando se registra a un evento, toca hacerlo asi
+     * porque con la concurrencia se nos estaban cruzando dos peticiones simultaneas
+     * y solo quedaba con los valores de la última
+     * 
+     *
+     * @param Request $request
+     * @param [type] $event_id
+     * @param [type] $id
+     * @return void
+     */
+    public function RegisterListFieldOptionTaken(Request $request, $event_id, $id){
+
+        $data = $request->json()->all();
+        return (string) Event::find($event_id)->push('takenoptions_'.$id,$data,true);
+    }
     /**
      * Update the specified resource in UserProperties.
      * 
@@ -93,11 +109,18 @@ class UserPropertiesController extends Controller
     {
         
         $data = $request->json()->all();
+        
         $userProperty = Event::find($event_id)->user_properties()->find($id);
         if (!$userProperty){
             return abort(404);
         }
-        
+
+        $userProperty->push('optionstaken',(object) ['foo'=>'bla', 'bar'=>2]);
+        Event::find($event_id)->push('optionstaken',(object) ['foo'=>'bla', 'bar'=>2]);
+
+        DB::collection('events')->where('_id', '6052724b864e3e901a70b3cf')->push('messages', array('from' => 'Jane Doe', 'message' => 'Hi John'),true);
+
+        var_dump($userProperty->_id);die;
         $userProperty->fill($data);
      
         $userProperty->save();
