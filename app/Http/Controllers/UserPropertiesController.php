@@ -114,13 +114,6 @@ class UserPropertiesController extends Controller
         if (!$userProperty){
             return abort(404);
         }
-
-        $userProperty->push('optionstaken',(object) ['foo'=>'bla', 'bar'=>2]);
-        Event::find($event_id)->push('optionstaken',(object) ['foo'=>'bla', 'bar'=>2]);
-
-        DB::collection('events')->where('_id', '6052724b864e3e901a70b3cf')->push('messages', array('from' => 'Jane Doe', 'message' => 'Hi John'),true);
-
-        var_dump($userProperty->_id);die;
         $userProperty->fill($data);
      
         $userProperty->save();
