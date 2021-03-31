@@ -456,23 +456,29 @@ class InvitationController extends Controller
         $cuantos = count($event->user_properties);        
         
         $rejected_message = " Lo sentimos " . $receiver->properties["names"] . " ha declinado tu solicitud de reunión para el evento " . $event->name;
-        $accepted_message = <<<EOT
+//         $accepted_message = <<<EOT
 
-        {$receiver->properties["names"]} ha aceptado tu solicitud de reunión para el evento {$event->name} <br/>
-        Cuando {$formated_meeting_time}
+//         {$receiver->properties["names"]} ha aceptado tu solicitud de reunión para el evento {$event->name} <br/>
+//         Cuando {$formated_meeting_time}
 
-        <br />
-        {$datos_usuario}
-        <br/>
-        Mostrando {$i} datos de {$cuantos}
-        <br />
-        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
-        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
-<br/>
-        No olvides disfrutar el resto de experiencias del evento.
-EOT;  
+//         <br />
+//         {$datos_usuario}
+//         <br/>
+//         Mostrando {$i} datos de {$cuantos}
+//         <br />
+//         Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
+//         y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
+// <br/>
+//         No olvides disfrutar el resto de experiencias del evento.
+// EOT;  
 
 
+        $accepted_message = "<br/><br/>".$receiver->properties["names"] . " ha aceptado tu solicitud de reunión para el evento {$event->name} <br/><br/>" .
+                            "Cuando " . $formated_meeting_time . "<br/><br/>" .
+                            $datos_usuario . "<br/>" .                            
+                            "Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networkingy
+                            visita Mis Contactos, alli encontraras toda la nueva información<br/><br/>".
+                            "No olvides disfrutar el resto de experiencias del evento.";
 
         $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
         $mail["title"] = $data["response"] == "accepted" ? $receiver->properties["names"] . " ha aceptado tu solicitud" : $receiver->properties["names"] . " Ha declinado tu solicitud de reunión";
