@@ -1,16 +1,11 @@
 @component('mail::message')
 
-
-{{ $title }}
 <div style="text-align: center">
-    <span>
-    {!!$desc  !!}
-
-    </span>
-    
+    {{ $title }}
 </div>
-
-<br />
+<div style="text-align: center">
+    {!!$desc  !!}   
+</div>
 
 
 
