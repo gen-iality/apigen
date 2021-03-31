@@ -1,7 +1,7 @@
 @component('mail::message')
 
 <div style="text-align: center">
-    {{ $title }} Aquí está la solicitud
+    {{ $title }} 
 </div>
 <div style="text-align: center">
     {!!$desc  !!}   
