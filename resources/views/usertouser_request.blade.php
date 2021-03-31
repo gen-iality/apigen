@@ -1,22 +1,21 @@
 @component('mail::message')
 
-
-{{ $title }}
 <div style="text-align: center">
-	<span>
-		{!!$desc !!}
-
-	</span>
-
+	{{ $title }}
+</div>
+<div style="text-align: center">	
+	{!!$desc !!}
 </div>
 @if ($request_type == 'friendship' && $response)
-@component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
-Aceptar solicitud
-@endcomponent
+	<div style="text-align: center">
+		@component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
+		Aceptar solicitud
+		@endcomponent
 
-@component('mail::button', ['url' => $link . "&response=rejected" , 'color' => 'evius'])
-Rechazar solicitud
-@endcomponent
+		@component('mail::button', ['url' => $link . "&response=rejected" , 'color' => 'evius'])
+		Rechazar solicitud
+		@endcomponent
+	</div>
 @endif
 
 @if ($request_type == 'meeting' && $response && $status != "accepted" && $status != "rejected")
@@ -51,12 +50,6 @@ Confirmar Cuenta
 		evento gestionado a través de Evius.co o te has
 		registrado en el portal de Evius.co
 	</span>
-</div>
-<div style="text-align: center">
-	<span>
-
-	</span>
-	<span></span>
 </div>
 @slot('footer')
 @component('mail::footer')

@@ -31,12 +31,7 @@ Confirmar Cuenta
         registrado en el portal de Evius.co
     </span>
 </div>
-<div style="text-align: center">
-    <span>
 
-    </span>
-    <span></span>
-</div>
 @slot('footer')
 @component('mail::footer')
         © 2001-2018. All Rights Reserved - Evius.co
