@@ -148,7 +148,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $desc = $this->desc;
         $subject = $this->subject;
         $img = $this->img;
-
+        // var_dump($desc);die;
         return $this
         // ->attach($attachPath,[
         //     'as' => 'checkin',

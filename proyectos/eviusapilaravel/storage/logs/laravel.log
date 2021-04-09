@@ -1,0 +1,4 @@
+[2021-04-09 15:35:07] local.DEBUG: recibiendo event_user  
+[2021-04-09 15:35:08] local.DEBUG: cargando datos event_user al correo  
+[2021-04-09 15:35:08] local.DEBUG: pasando a crear correo  
+[2021-04-09 15:35:10] local.DEBUG: Construyendo el correo de ticket  

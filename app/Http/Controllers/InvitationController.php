@@ -517,15 +517,13 @@ class InvitationController extends Controller
         $request_type = "friendship";
         $mail["subject"] = $sender->properties["names"] . " te ha enviado una solicitud de contacto";
         $mail["title"] = $sender->properties["names"] . " te ha enviado una solicitud de contacto";
-        $mail["desc"] = <<<EOT
-        Hola  {$receiver->properties["names"]} , quiero contactarte por medio del evento  {$event->name}. <br/><br/>
+        $mail["desc"] = 
+        "Hola " .  $receiver->properties["names"] . " quiero contactarte por medio del evento ".  $event->name . "<br/><br/>
 
-        Las personas que no son contactos tuyos solamente tienen visible una parte de tu información, 
-        por lo cual pueden buscarte en el evento pero no contactarte. <br/><br/>
+        Las personas que no son contactos tuyos solamente tienen visible una parte de tu información,por lo cual pueden buscarte en el evento pero no contactarte. 
 
-        Una vez aceptes la solicitud de contacto {$receiver->properties["names"]} podrá ver tu información completa en el evento en la sección Networking / Agéndate
-        de esta forma podrá contactarte.
-EOT;
+        Una vez aceptes la solicitud de contacto " . $receiver->properties["names"] ." podrá ver tu información completa en el evento en la sección Networking / Agéndate
+        de esta forma podrá contactarte.";
         $rejected_message = " Lo sentimos " . $receiver->properties["names"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
         $datos_usuario = "";
@@ -542,20 +540,13 @@ EOT;
 
         $cuantos = count($event->user_properties);
 
-        $accepted_message = <<<EOT
+        $accepted_message = $receiver->properties["names"] . " ha aceptado tu solicitud de contacto para el evento " .$event->name . "<br>" .
+         $datos_usuario .
+        
+        "Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
+        y visita Mis Contactos, alli encontraras toda la nueva información.
 
-        {$receiver->properties["names"]} ha aceptado tu solicitud de contacto para el evento {$event->name} <br/>
-
-        <br />
-        {$datos_usuario}
-        <br/>
-        Mostrando {$i} datos de {$cuantos}
-        <br />
-        Para ver toda la información del nuevo contacto dirigete al evento con el botón inferior ve a la sección contecta/networking
-        y visita Mis Contactos, alli encontraras toda la nueva información.<br/>
-<br/>
-        No olvides disfrutar el resto de experiencias del evento.
-EOT;
+        No olvides disfrutar el resto de experiencias del evento.";
 
         if (!empty($data["response"])) {
             $mail["mails"] = $sender->email ? [$sender->email] : [$sender->properties["email"]];
