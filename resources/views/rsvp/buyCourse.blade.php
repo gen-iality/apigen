@@ -2,7 +2,7 @@
 
 <br />
 <br />
-¡FELICITACIONES! tu compra del curso  <b>{{$event->name}}</b> ha sido exitosa.
+¡FELICITACIONES! tu compra de <b>{{$event->name}}</b> ha sido exitosa.
 <br />
 
 

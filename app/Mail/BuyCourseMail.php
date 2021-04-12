@@ -17,6 +17,7 @@ class BuyCourseMail extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $event;
+    public $organization;
     public $message;
 
     /**
@@ -24,10 +25,10 @@ class BuyCourseMail extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($event)
+    public function __construct($event , $organization)
     {        
         $this->event = $event;
-
+        $this->organization = $organization;
     }
     /**
      * Build the message.
@@ -39,7 +40,7 @@ class BuyCourseMail extends Mailable implements ShouldQueue
     {
         
         return $this
-            ->from("alerts@evius.co", "Ucronio")
+            ->from("alerts@evius.co", $this->organization)
             ->subject("Bienvenido a " . $this->event->name)
             ->markdown('rsvp.buyCourse');
 

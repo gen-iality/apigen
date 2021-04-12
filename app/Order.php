@@ -203,7 +203,7 @@ class Order extends Orders
     {
 
         $event = Event::find($this->event_id);
-        $event_properties = isset($event->user_properties) ? $event->user_properties : '' ;
+        $event_properties = isset($event->user_properties) ? $event->user_properties : null ;
         $attendees_order = $this->attendees;
         $amount = 0;
         $total = 0;
@@ -221,24 +221,27 @@ class Order extends Orders
             //Recorremos las propiedades del asistente 
             foreach($properties as $key_attendize=>$attendize){
                 //Recorremos los campos definidos en el evento para encontrar cual tiene monto
-                foreach($event_properties as $key_event_property => $event_property){
-                    //Si el valor del campo es igual al que se configuro en el evento entramos
-                    if($event_property['name'] == $key_attendize){
-                        //Si dentro de campo existe las opciones significa que es un dropdown y entramos
-                        if(isset($event_property['options'])){
-                            //Recorremos las opciones del dropdown
-                            foreach($event_property['options'] as $key_property=>$property){
-                                //Si el input tiene definido un monto entramos
-                                if(isset($property['amount'])){
-                                    //Si el valor del attendize es igual al campo de la propiedad entra
-                                    if($key_property == $attendize){
-                                        $amount += $property['amount'];
+                if(isset($event_properties))
+                {
+                    foreach($event_properties as $key_event_property => $event_property){
+                        //Si el valor del campo es igual al que se configuro en el evento entramos
+                        if($event_property['name'] == $key_attendize){
+                            //Si dentro de campo existe las opciones significa que es un dropdown y entramos
+                            if(isset($event_property['options'])){
+                                //Recorremos las opciones del dropdown
+                                foreach($event_property['options'] as $key_property=>$property){
+                                    //Si el input tiene definido un monto entramos
+                                    if(isset($property['amount'])){
+                                        //Si el valor del attendize es igual al campo de la propiedad entra
+                                        if($key_property == $attendize){
+                                            $amount += $property['amount'];
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
+                }                
             }
             
         }

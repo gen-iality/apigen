@@ -28,53 +28,51 @@ class LogSentMessage
      */
     public function handle($event)
     {   
-        
-        
-        $headers = $event->message->getHeaders();
-        
-        $recipents = $event->message->getTo();
        
-        $eventUser = isset($event->data["eventUser"]) ? $event->data["eventUser"] : null; 
-        $messageUser = new MessageUser([            
-            'email' => implode(',',array_keys($recipents)),             
-        ]
-        );
-        if($eventUser){            
-            $messageUser->event_user_id = $eventUser->_id;
-            $messageUser->user_id = $eventUser->_id;
-        }
-
-        
-        $sesMessageId = $event->message
-                              ->getHeaders()
-                              ->get('X-SES-Message-ID')
-                              ->getValue();
-
-                              
-        
-        if(isset($event->data["messageLog"]))
-        {
-            $idEviusMessage = $event->data["messageLog"]->_id;
-
-
-            $eviusMessage =  EviusMessage::find($idEviusMessage);
-            $eviusMessage->server_message_id = $sesMessageId;
-            $eviusMessage->save();
+        if(isset($event->data["event"]) &&  $event->data["event"] !== "")
+        {   
+            $headers = $event->message->getHeaders();
             
-            $messageUser->message_id = $eviusMessage->_id;
+            $recipents = $event->message->getTo();
+        
+            $eventUser = isset($event->data["eventUser"]) ? $event->data["eventUser"] : null; 
+            $messageUser = new MessageUser([            
+                'email' => implode(',',array_keys($recipents)),             
+            ]
+            );
+            if($eventUser){            
+                $messageUser->event_user_id = $eventUser->_id;
+                $messageUser->user_id = $eventUser->_id;
+            }
 
-        }else{
-            $messageUser->event_id = $event->data["event"]["_id"];
             
-        }
-        
-        $messageUser->server_message_id = $sesMessageId;
-        $messageUser->save();
+            $sesMessageId = $event->message
+                                ->getHeaders()
+                                ->get('X-SES-Message-ID')
+                                ->getValue();
 
-        // $total_delivered = MessageUser::where('message_id' , $eviusMessage->_id)->where("satatus_message" , "Delivery")->get();
-        // var_dump($total_delivered);die;
-        // $mesage->total_delivered = count($total_delivered);
-        
+                                
+            
+            if(isset($event->data["messageLog"]))
+            {
+                $idEviusMessage = $event->data["messageLog"]->_id;
+
+
+                $eviusMessage =  EviusMessage::find($idEviusMessage);
+                $eviusMessage->server_message_id = $sesMessageId;
+                $eviusMessage->save();
+                
+                $messageUser->message_id = $eviusMessage->_id;
+
+            }else{
+                
+                $messageUser->event_id = $event->data["event"]["_id"];                             
+            }
+            
+            $messageUser->server_message_id = $sesMessageId;
+            $messageUser->save();
+        }
+                       
     }
 
 }

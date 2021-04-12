@@ -6,6 +6,7 @@ use App\Event;
 use App\Models\OrderItem;
 use App\Order;
 use App\Account;
+use App\Organization;
 use App\Pending;
 use App\DiscountCode;
 use App\DiscountCodeTemplate;
@@ -71,14 +72,9 @@ class ApiCheckoutController extends Controller
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
                     $order->order_status_id = config('attendize.order_complete');
-                    $order->save();
-                    Mail::to($order->email)
-                    ->queue(
-                        //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                        new \App\Mail\ConfirmationPayU($order, $data)
-                    );                                       
+                    $order->save();                                                         
                     Log::info("Completamos la orden");
-                    $this->completeOrder($order_id);
+                    $this->completeOrder($order_id , $data);
                     
                     if (config('attendize.send_email')) {
                         Log::info("Enviamos el correo");
@@ -123,7 +119,7 @@ class ApiCheckoutController extends Controller
      * @param bool|true $return_json
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function completeOrder($order_reference, $return_json = true)
+    public function completeOrder($order_reference, $dataPayu, $return_json = true)
     {
         //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no
         //vamos a crear la orden a partir del cache.
@@ -154,8 +150,12 @@ class ApiCheckoutController extends Controller
                     switch($order->item_type){
                         case 'discountCode' : 
                             //Logica para agregar codigos
-                            $this->generateCodes($order);
+                            $this->generateCodes($order , $dataPayu);
                             
+                        break;
+                        case 'points' : 
+                            //Logica para completar una orden de tipo points
+                            $this->validatePointOrder($order);                            
                         break;
                         case 'event' :
                         default:
@@ -192,9 +192,11 @@ class ApiCheckoutController extends Controller
                                 $orderItem->unit_price = (isset($event->extra_config) && isset($event->extra_config["price"]))?$event->extra_config['price']:0;
                                 $orderItem->unit_booking_fee = 0;
                                 $orderItem->save();
+                                $organization  = Organization::find($event->organizer_id);
+                                
                                 Mail::to($order->email)
                                 ->queue(                                   
-                                    new \App\Mail\BuyCourseMail($event)
+                                    new \App\Mail\BuyCourseMail($event , $organization->name)
                                 ); 
                             }
                             //Lógica para agregar event_user
@@ -255,7 +257,10 @@ class ApiCheckoutController extends Controller
     /**
      * _generateCodes_: generates the discount codes when making the purchase
      */
-    public function generateCodes($order){
+    public function generateCodes($order, $dataPayu){
+
+        $organization = '';
+
         $x=0;
         // Cycle while for each item of discount code template purchased
         while($x < count($order->items)) {           
@@ -290,13 +295,27 @@ class ApiCheckoutController extends Controller
                 $x++;                                    
             }   
             $codes = DiscountCode::where('discount_code_template_id' , $codeTemplate->_id)->first();
-            
+            $organization = $data;
             Mail::to($order->email)
             ->queue(
                 new \App\Mail\DiscountCodeMail($resultCode , $order , $codeTemplate)
             );          
                     
         }
+        
+        if(isset($organization['organization_id']))
+        {
+            $organization = $organization['organization_id'];
+        }else{
+            $organization = Event::find($data['event_id']);
+            $organization = $organization->organizer_id;
+        }
+        $organization = Organization::find($organization);
+        //Este Correo muestra el detalle de payu y la orden
+        Mail::to($order->email)
+        ->queue(                                
+            new \App\Mail\ConfirmationPayU($order, $dataPayu , $organization->name)
+        );
     }
 
 
@@ -382,13 +401,16 @@ class ApiCheckoutController extends Controller
     }
 
     /**
-     * _validatePointOrder_
+     * _validatePointOrder_ :validate orders of type points
+     * @autenticathed
+     * 
+     * @urlParam order_id
      */
     public function validatePointOrder($order_id)
     {   
         $order = Order::find($order_id);
         $user = Auth::user();
-
+        
         //Verificar que el usuario tenga puntos suficientes para más seguridad
         if($order->amount <= $user->points)
         {
@@ -396,6 +418,15 @@ class ApiCheckoutController extends Controller
             $order->save();
 
             $user->points = $user->points - $order->amount;
+
+            $x=0;
+        // Cycle while for each item of discount code template purchased
+        while($x < count($order->items)) {  
+            Mail::to($order->email)
+            ->queue(
+                new \App\Mail\DiscountCodeMail($resultCode , $order , $codeTemplate)
+            );   
+        }
             
         }
     }

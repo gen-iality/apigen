@@ -22,6 +22,7 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
     public $event;
     public $eventName;
     public $codeTemplate;
+    public $organization;
 
    
     /**
@@ -31,12 +32,18 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
      */
     public function __construct($code , $order , $codeTemplate)
     {   
+        
+
         $event = isset($code->event_id) ? Event::findOrFail($code->event_id) : "";
+        $organization = isset($event->organizer_id) ? 
+                                Organization::findOrFail($event->organizer_id) : 
+                                Organization::findOrFail($code->organization_id);
         
         $this->code = $code;
         $this->order = $order;
         $this->event = $event;
         $this->codeTemplate = $codeTemplate;
+        $this->organization = $organization;
     }
 
 
@@ -47,23 +54,21 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
      */
 
     public function build()
-    {
+    {   
+        $organization = $this->organization;        
         
         if(isset($this->event->name))
         {   
             return $this
-            ->from("alerts@evius.co", 'Ucronio')
+            ->from("alerts@evius.co", $organization->name)
             ->subject($this->event->name)
             ->markdown('Mailers.DiscountCode');
-            //return $this->view('vendor.mail.html.message');
         }
 
         return $this
-            ->from("alerts@evius.co", 'Ucronio Código de descuento')
-            ->subject('Codigo de descuento')
+            ->from("alerts@evius.co", $organization->name)
+            ->subject('Código de descuento')
             ->markdown('Mailers.DiscountCode');
-            //return $this->view('vendor.mail.html.message');
-
         
     }
 }

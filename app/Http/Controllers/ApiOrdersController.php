@@ -164,13 +164,14 @@ class ApiOrdersController extends Controller
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway' => $paymentGateway,
         ];
-
+        // var_dump($account->others_properties);die;
         $request_data['order_first_name'] = $account->names;
         $request_data['order_last_name'] =  "";
         $request_data['order_email'] =  $account->email;
 
 
         $request_data['properties'] =  isset($request_data['properties']) ? $request_data['properties'] : [];
+        $request_data['properties'] = isset($account->others_properties) ? $account->others_properties : [];
 
         
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
