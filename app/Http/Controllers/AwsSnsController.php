@@ -84,15 +84,17 @@ class AwsSnsController extends Controller
                 case 'Open':
                     $total_opened =count($total);
                     $message->total_opened = $total_opened;
+                    $message->total_sent = $message->total_sent - 1;
                     $message->save();
                 break;
                 case 'Click':
                     $total_clicked =count($total);
                     $message->total_clicked = $total_clicked;
+                    $message->total_opened = $message->total_opened - 1;
                     $message->save();
                 break;
                 case 'Bounce':
-                    $total_bounced = count($total);
+                    $total_bounced = count($total); 
                     $message->total_bounced = $total_bounced;
                     $message->save();
                 break;
