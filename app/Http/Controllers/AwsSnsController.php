@@ -79,18 +79,22 @@ class AwsSnsController extends Controller
                 case 'Delivery':               
                     $total_delivered =count($total);
                     $message->total_delivered = $total_delivered;
+                    $totalSent= MessageUser::where('status', '=', 'Send')->where('message_id', '=', $messageUser->message_id)->get();
+                    $message->total_sent = count($totalSent);
                     $message->save();
                 break;
                 case 'Open':
                     $total_opened =count($total);
                     $message->total_opened = $total_opened;
-                    $message->total_sent = $message->total_sent - 1;
+                    $totalDelivery= MessageUser::where('status', '=', 'Delivery')->where('message_id', '=', $messageUser->message_id)->get();
+                    $message->total_delivered = count($totalDelivery);
                     $message->save();
                 break;
                 case 'Click':
                     $total_clicked =count($total);
                     $message->total_clicked = $total_clicked;
-                    $message->total_opened = $message->total_opened - 1;
+                    $totalOpen= MessageUser::where('status', '=', 'Open')->where('message_id', '=', $messageUser->message_id)->get();
+                    $message->total_opened = count($totalOpen);
                     $message->save();
                 break;
                 case 'Bounce':
