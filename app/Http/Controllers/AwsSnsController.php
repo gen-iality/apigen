@@ -72,29 +72,29 @@ class AwsSnsController extends Controller
             switch ($status_message) 
             {
                 case 'Send':
-                    $total_sent = count($total);
-                    $message->total_sent = $total_sent;
+                    // $total_sent = count($total);
+                    $message->total_sent = $message->total_sent+1;
                     $message->save();
                 break;
                 case 'Delivery':               
-                    $total_delivered =count($total);
-                    $message->total_delivered = $total_delivered;                   
+                    // $total_delivered =count($total);
+                    $message->total_delivered = $message->total_delivered + 1;                   
                     $message->save();
                 break;
                 case 'Open':
-                    $total_opened =count($total);
-                    $message->total_opened = $total_opened;
+                    // $total_opened =count($total);
+                    $message->total_opened = $total_opened + 1;
                     $message->save();
                 break;
                 case 'Click':
-                    $total_clicked =count($total);
-                    $message->total_clicked = $total_clicked;
+                    // $total_clicked =count($total);
+                    $message->total_clicked = $total_clicked + 1;
                     $message->save();
                 break;
                 case 'Bounce':
-                    $total_bounced = count($total); 
-                    $message->total_bounced = $total_bounced;
-                    $message->save();
+                    // $total_bounced = count($total); 
+                    $message->total_bounced = $total_bounced + 1;
+                    $message->save(); 
                 break;
             }
                 
