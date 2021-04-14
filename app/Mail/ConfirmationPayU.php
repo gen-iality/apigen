@@ -45,7 +45,7 @@ class ConfirmationPayU extends Mailable implements ShouldQueue
      */
 
     public function build()
-    {
+    {   
         return $this
             ->from("alerts@evius.co", $this->organization)
             ->subject("Pago exitoso")

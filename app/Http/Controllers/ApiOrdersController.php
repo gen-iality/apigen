@@ -119,20 +119,22 @@ class ApiOrdersController extends Controller
 
         $event = '';
 
-        if( $request_data['item_type'] == 'discountCode')
+        switch ($request_data['item_type']) 
         {
-            $codeTemplate = DiscountCodeTemplate::findOrFail($ids[0]);
+            case 'discountCode':
+                $codeTemplate = DiscountCodeTemplate::findOrFail($ids[0]);
 
-            //Since the purchase of the codes will be taken into account in the orders. 
-            //These will not always be for an event but also for an organization so the event_id may or may not come
-            if(isset($codeTemplate->event_id)){
-                $event = Event::findOrFail($codeTemplate->event_id);            
-            }
-
-        }else{
-            $event = Event::findOrFail($ids[0]);
+                //Since the purchase of the codes will be taken into account in the orders. 
+                //These will not always be for an event but also for an organization so the event_id may or may not come
+                if(isset($codeTemplate->event_id)){
+                    $event = Event::findOrFail($codeTemplate->event_id);            
+                }
+            break;
+            case 'event':
+                $event = Event::findOrFail($ids[0]);
+            break;
         }
-
+        
         $account = Account::findOrFail($request_data['account_id']);
         $fields = isset($event->user_properties) ? $event->user_properties : '';
         $booking_fee = 0;

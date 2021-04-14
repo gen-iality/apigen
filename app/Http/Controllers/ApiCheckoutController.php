@@ -119,7 +119,7 @@ class ApiCheckoutController extends Controller
      * @param bool|true $return_json
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function completeOrder($order_reference, $dataPayu, $return_json = true)
+    public function completeOrder($order_reference, $dataPayu = null, $return_json = true)
     {
         //Si la orden ya fue creada entonces redirigimos al recibo con los ticketes, si no
         //vamos a crear la orden a partir del cache.
