@@ -153,10 +153,10 @@ class ApiCheckoutController extends Controller
                             $this->generateCodes($order , $dataPayu);
                             
                         break;
-                        case 'points' : 
-                            //Logica para completar una orden de tipo points
-                            $this->validatePointOrder($order);                            
-                        break;
+                        // case 'points' : 
+                        //     //Logica para completar una orden de tipo points
+                        //     $this->validatePointOrder($order);                            
+                        // break;
                         case 'event' :
                         default:
 
@@ -409,25 +409,34 @@ class ApiCheckoutController extends Controller
     public function validatePointOrder($order_id)
     {   
         $order = Order::find($order_id);
+
+        //Obtenemos el usuario el cual está canjando sus puntos
         $user = Auth::user();
         
         //Verificar que el usuario tenga puntos suficientes para más seguridad
         if($order->amount <= $user->points)
-        {
+        {   
+            //Actualizamos el estado de la orden a completado
             $order->order_status_id = config('attendize.order_complete');
             $order->save();
 
+            //Se descuentan los puntos a el usuario que ha utilizado
             $user->points = $user->points - $order->amount;
 
-            $x=0;
-        // Cycle while for each item of discount code template purchased
-        while($x < count($order->items)) {  
-            Mail::to($order->email)
-            ->queue(
-                new \App\Mail\DiscountCodeMail($resultCode , $order , $codeTemplate)
-            );   
-        }
             
+            //Se envia la información completa de la orden.           
+            foreach($order->items as $item)
+            {  
+                Mail::to($order->email)
+                ->queue(
+                    new \App\Mail\PointsMail($order , $user, $item)
+                );   
+            }
+            return $order;
         }
+
+         return response()->json([
+            'error' => 'El usuario no tiene puntos suficientes',
+         ],403);
     }
 }

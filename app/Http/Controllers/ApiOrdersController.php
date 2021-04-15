@@ -173,8 +173,8 @@ class ApiOrdersController extends Controller
 
 
         $request_data['properties'] =  isset($request_data['properties']) ? $request_data['properties'] : [];
-        $request_data['properties'] = isset($account->others_properties) ? $account->others_properties : [];
-
+        // $request_data['properties'] = isset($account->others_properties) ? $account->others_properties : [];
+        $request_data['oganization_id'] = isset($request_data['oganization_id']) ? $request_data['oganization_id'] : "";
         
         $result = OrdersServices::createAnOrder($ticket_order, $request_data, $event, $fields);
 

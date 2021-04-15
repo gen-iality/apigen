@@ -36,6 +36,7 @@ class Order extends MyBaseModel
 
     protected $fillable = [
         '_token',
+        'organization_id'
     ];
 
     protected $dates = ['datetime_to', 'datetime_from'];

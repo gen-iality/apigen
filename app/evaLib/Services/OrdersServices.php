@@ -182,6 +182,7 @@ class OrdersServices
             $order->amount = $ticket_order['order_total'];
             $order->item_type = strip_tags($request_data['item_type']);
             $order->discount_codes = isset($request_data['discount_codes']) ? $request_data['discount_codes'] : [] ;
+            $order->oganization_id = $request_data['oganization_id'];
 
 
             $order->properties = $request_data['properties'];

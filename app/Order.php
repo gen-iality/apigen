@@ -69,6 +69,16 @@ class Order extends Orders
     }
 
     /**
+     * The account associated with the order.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function organization()
+    {
+        return $this->belongsTo('App\Organization');
+    }
+
+    /**
      * The event associated with the order.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
