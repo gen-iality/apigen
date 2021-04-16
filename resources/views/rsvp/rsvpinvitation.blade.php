@@ -76,7 +76,11 @@
 		</p>
 	@endif
 </div>
-
+<div>	
+	<p>
+		<a href="{{$linkUnsubscribe}}">{{ __('Mail.unsubscribe')}}</a>
+	</p>	
+</div>
 
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))

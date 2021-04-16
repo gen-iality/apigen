@@ -15,6 +15,6 @@ return [
     //==================================== Translations Email Change Password====================================//
     'password_change_successful' => 'su cambio de contraseña se ha realizado con éxito',
     'new_password' => 'Su nueva contraseña es',
-    'login' => 'Inicie sesión haciendo clic en la siguiente enlace'
-
+    'login' => 'Inicie sesión haciendo clic en la siguiente enlace',
+    'unsubscribe' => 'Eliminar suscripción al evento'
 ];

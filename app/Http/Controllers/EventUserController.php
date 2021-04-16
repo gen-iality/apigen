@@ -926,4 +926,12 @@ class EventUserController extends Controller
     }
     
 
+    /**
+     * 
+     */
+    Public function unsubscribe($event_id , $event_user_id)
+    {
+        $eventUser = Attendee::find($event_user_id)->delete();
+        return redirect(config('app.front_url'));
+    }
 }

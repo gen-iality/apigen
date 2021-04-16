@@ -73,6 +73,7 @@ Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
 Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
 Route::post( 'events/{event_id}/eventusers',     'EventUserController@store');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
+Route::get('events/{event_id}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
 Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');

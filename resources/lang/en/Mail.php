@@ -15,6 +15,7 @@ return [
      //==================================== Translations Email Change Password====================================//
     'password_change_successful' => 'your password change was successful',
     'new_password' => 'Your new password is',
-    'login' => 'Login here'
+    'login' => 'Login here',
+    'unsubscribe' => 'Unsubscribe from the event' 
 
 ];
