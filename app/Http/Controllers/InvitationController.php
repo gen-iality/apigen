@@ -522,7 +522,7 @@ class InvitationController extends Controller
 
         Las personas que no son contactos tuyos solamente tienen visible una parte de tu información,por lo cual pueden buscarte en el evento pero no contactarte. 
 
-        Una vez aceptes la solicitud de contacto " . $receiver->properties["names"] ." podrá ver tu información completa en el evento en la sección Networking / Agéndate
+        Una vez aceptes la solicitud de contacto " . $sender->properties["names"] ." podrá ver tu información completa en el evento en la sección Networking / Agéndate
         de esta forma podrá contactarte.";
         $rejected_message = " Lo sentimos " . $receiver->properties["names"] . " ha declinado tu solicitud de amistad para el evento " . $event->name;
 
