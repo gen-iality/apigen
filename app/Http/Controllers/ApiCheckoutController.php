@@ -422,7 +422,7 @@ class ApiCheckoutController extends Controller
 
             //Se descuentan los puntos a el usuario que ha utilizado
             $user->points = $user->points - $order->amount;
-
+            $user->save();
             
             //Se envia la información completa de la orden.           
             foreach($order->items as $item)
