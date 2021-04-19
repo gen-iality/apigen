@@ -273,7 +273,7 @@ class InvitationController extends Controller
         $result->save();
         $data["request_id"] = $result->_id;
         self::buildMessage($data, $event_id);
-        return "invitacion enviada";
+        return $result;
     }
 
     public function sendPushNotification($push_notification)
