@@ -90,7 +90,7 @@ class AwsSnsController extends Controller
                 break;
                 case 'Click':
                     // $total_clicked =count($total);
-                    $message->total_clicked = $message->total_clickedvv + 1;
+                    $message->total_clicked = $message->total_clicked + 1;
                     $message->save();
                 break;
                 case 'Bounce':
