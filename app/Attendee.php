@@ -22,7 +22,7 @@ class Attendee extends Models\Attendee
     protected static $unguarded = true;
     protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id", "registered_devices" ] ;
     protected $with = ["user:uid,email,displayName,names","rol", 'state', "ticket"];
-   protected $visible = ['_id','state_id','checked_in','rol_id','names','email','properties','updated_at','created_at','user','account_id'];
+   protected $visible = ['_id','names','email','properties','user','account_id','score'];
     //protected $with = ["user","rol", 'state', "ticket"];
 
     //Default values
