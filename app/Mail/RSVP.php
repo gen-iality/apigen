@@ -98,12 +98,7 @@ class RSVP extends Mailable implements ShouldQueue
         $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
-        $linkUnsubscribe ='http://localhost:8000/api'. '/events/' .$event->_id . '/eventusers/' . $eventUser["_id"] .'/unsubscribe';
-        // $client = new Client();
-        // $response = $client->request('POST', $url, [
-        //     'body' => json_encode($data),
-        //     'headers' => ['Content-Type' => 'application/json'],
-        // ]);
+        $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $eventUser["_id"] .'/unsubscribe';
 
         
         $this->organization_picture = $organization_picture;
