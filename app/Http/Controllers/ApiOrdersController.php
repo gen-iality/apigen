@@ -405,4 +405,17 @@ class ApiOrdersController extends Controller
         }
         return $response;
     }
+
+    /**
+     * _indexByOrganization_: display all the Orders of an organization
+     *
+     * @urlParam organization_id required 
+     */
+    public function indexByOrganization(String $organization_id)
+    {
+        $query = Order::where("organization_id", $organization_id)->get();
+
+        return OrderResource::collection($query);
+
+    }
 }

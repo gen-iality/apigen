@@ -172,6 +172,15 @@ class ActivityAssistantController extends Controller
      * @bodyParam user_id required id of the user who signs up for the activity Example: 5e9caaa1d74d5c2f6a02a3c2
      * @bodyParam activity_id id of the activity to which the user subscribes Example: 5fa44f6ba8bf7449e65dae32
      * 
+     * @response {
+     *    "user_id": "6026b57a11dbd7582d770e5a",
+     *    "activity_id": "60804c6e6b7150714f20d122",
+     *    "event_id": "5fa423eee086ea2d1163343e",
+     *    "updated_at": "2021-04-21 16:48:14",
+     *    "created_at": "2021-04-21 16:48:14",
+     *    "_id": "6080574edccc122ed71f7b24"
+     * }
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */

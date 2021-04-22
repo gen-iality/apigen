@@ -30,46 +30,9 @@ class ActivitiesController extends Controller
 {
     /**
      *
-     *  _index:_ Listing of all activities
+     * _index:_ Listing of all activities
+     * @urlParam event_id require Example: 605241e68b276356801236e4
      *
-     *
-     * @urlParam event_id required
-     *
-     *
-     * @response{
-     *  "access_restriction_rol_ids": [],
-     *  "access_restriction_roles": [],
-     *  "access_restriction_type": "OPEN",
-     *  "access_restriction_types_available": null,
-     *  "activity_categories": [],
-     *  "activity_categories_ids": [[]],
-     *  "bigmaker_meeting_id": null,
-     *  "capacity": 30,
-     *  "created_at": "2020-11-05 19:15:55",
-     *  "datetime_end": "2020-10-14 14:11",
-     *  "datetime_start": "2020-10-14 14:11",
-     *  "description": "<p>Descripción de la actividad</p>",
-     *  "event_id": "5fa423eee086ea2d1163343e",
-     *  "has_date": null,
-     *  "host_ids": [[]],
-     *  "hosts": [],
-     *  "image": "https://storage.googleapis.com/herba-images/evius/events/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg",
-     *  "meeting_id": null,
-     *  "name": "Segunda actividad del evento",
-     *  "registration_message": "<p>Su registro a la segunda actividad ha sido exitoso</p>",
-     *  "role_attendee_ids": [[]],
-     *  "0": [],
-     *  "selected_document": [],
-     *  "space": null,
-     *  "space_id": null,
-     *  "subtitle": "Subtitulo de la segunda actividad",
-     *  "type_id": "5dbb3211d74d5c542150ccc3",
-     *  "updated_at": "2020-11-05 19:15:55",
-     *  "vimeo_id": null,
-     *  "_id": "5fa44f6ba8bf7449e65dae32"
-     * }
-     *
-     * 
      * 
     */
     public function index(Request $request, $event_id , FilterQuery $filterQuery)
@@ -115,7 +78,28 @@ class ActivitiesController extends Controller
      * @bodyParam event_id string required event with which the activity is associated Example: 5fa423eee086ea2d1163343e
      * @bodyParam datetime_end datetime required Example: 2020-10-14 14:11
      * @bodyParam datetime_start datetime required  Example: 2020-10-14 14:50
-     *
+     * 
+     * @response {
+     *    "_id": "60804c6e6b7150714f20d122",
+     *    "name": "PRIMERA ACTIVIDAD",
+     *    "subtitle": "Subtitulo primera actividad",
+     *    "image": "https://storage.googleapis.com/herba-images/evius/events/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg",
+     *    "description": "Primera actividad del evento",
+     *    "capacity": 50,
+     *    "event_id": "5fa423eee086ea2d1163343e",
+     *    "datetime_end": "2020-10-14 14:11",
+     *    "datetime_start": "2020-10-14 14:50",
+     *    "date_start_zoom": "2020-10-14T13:50:00",
+     *    "date_end_zoom": "2020-10-14T15:11:00",
+     *    "updated_at": "2021-04-21 16:01:50",
+     *    "created_at": "2021-04-21 16:01:50",
+     *    "access_restriction_types_available": null,
+     *    "activity_categories": [],
+     *    "space": null,
+     *    "hosts": [],
+     *    "type": null,
+     *    "access_restriction_roles": []
+     * }
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -298,7 +282,7 @@ class ActivitiesController extends Controller
      * _show_: View information on a specific activity
      * 
      * @urlParam event_id required id of the event the activity. Example: 5fa423eee086ea2d1163343e
-     * @urlParam activity required id of the activity you want to see. Example: 5fa43c9538450d1f114c3952
+     * @urlParam activity required id of the activity you want to see. Example: 60804c6e6b7150714f20d122
      *
      * @param  \App\Activities  $Activities
      */
@@ -353,42 +337,26 @@ class ActivitiesController extends Controller
      * @bodyParam datetime_start datetime  Example: 2020-10-14 14:50
      * 
      * @response {
-     *    "_id": "5fa43c9538450d1f114c3952",
-     *    "name": "Actividad de bienvenida",
-     *    "subtitle": null,
-     *    "bigmaker_meeting_id": null,
-     *    "datetime_start": "2020-10-14 12:42",
-     *    "datetime_end": "2020-10-14 13:00",
-     *    "space_id": null,
-     *    "image": null,
-     *    "description": "<p>La primera actividad que se realiza en el evento.</p>",
-     *    "registration_message": null,
-     *    "capacity": 0,
-     *    "activity_categories_ids": [
-     *        []
-     *    ],
-     *    "access_restriction_type": "OPEN",
-     *    "access_restriction_rol_ids": [],
-     *    "host_ids": [
-     *        []
-     *    ],
-     *    "has_date": null,
-     *    "selected_document": [],
-     *    "meeting_id": null,
-     *    "vimeo_id": null,
-     *    "event_id": "5fa423eee086ea2d1163343e",
-     *    "updated_at": "2020-11-05 17:55:33",
-     *    "created_at": "2020-11-05 17:55:33",
-     *    "role_attendee_ids": [
-     *        []
-     *    ],
-     *    "access_restriction_types_available": null,
-     *    "activity_categories": [],
-     *    "space": null,
-     *    "hosts": [],
-     *    "type": null,
-     *    "access_restriction_roles": []
-     *}
+     *     "_id": "60804c6e6b7150714f20d122",
+     *     "name": "PRIMERA ACTIVIDAD",
+     *     "subtitle": "Subtitulo primera actividad",
+     *     "image": "https://storage.googleapis.com/herba-images/evius/events/6pJmozfel7e1gr4ra4vnsvrY03VHHEBpRAhhqKWB.jpeg",
+     *     "description": "Primera actividad del evento",
+     *     "capacity": 50,
+     *     "event_id": "5fa423eee086ea2d1163343e",
+     *     "datetime_end": "2020-10-14 14:11",
+     *     "datetime_start": "2020-10-14 14:50",
+     *     "date_start_zoom": "2020-10-14T13:50:00",
+     *     "date_end_zoom": "2020-10-14T15:11:00",
+     *     "updated_at": "2021-04-21 16:01:50",
+     *     "created_at": "2021-04-21 16:01:50",
+     *     "access_restriction_types_available": null,
+     *     "activity_categories": [],
+     *     "space": null,
+     *     "hosts": [],
+     *     "type": null,
+     *     "access_restriction_roles": []
+     * }
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Activities  $Activities

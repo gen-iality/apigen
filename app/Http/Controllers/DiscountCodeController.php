@@ -274,14 +274,14 @@ class DiscountCodeController extends Controller
     }
 
 
-    /**
-     *  _changeCode_ :  redeem the discount code
-     */
-    public function exchangeCode(Request $request)
-    {   
-        $data = $request->json()->all();
-        $result = CodeServices::exchangeCode($data);
-    }
+    // /**
+    //  *  _changeCode_ :  redeem the discount code
+    //  */
+    // public function exchangeCode(Request $request)
+    // {   
+    //     $data = $request->json()->all();
+    //     $result = CodeServices::exchangeCode($data);
+    // }
 
 
     /**
