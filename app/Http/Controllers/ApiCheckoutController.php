@@ -417,7 +417,7 @@ class ApiCheckoutController extends Controller
         if($order->amount <= $user->points)
         {   
             //Actualizamos el estado de la orden a completado
-            $order->order_status_id = config('attendize.order_complete');
+            $order->order_status_id = config('attendize.order_pending');
             $order->save();
 
             //Se descuentan los puntos a el usuario que ha utilizado
