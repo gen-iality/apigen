@@ -311,14 +311,16 @@ class ApiOrdersController extends Controller
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, String $event_id, String $order_reference)
+    public function update(Request $request, String $order_reference)
     {
         $status = $request['status'];
-        $order = Order::where('order_reference', '=', $order_reference)->first();
+        $order = Order::where('_id', '=', $order_reference)->first();
 
-        $result = OrdersServices::updateAnOrder($order_reference, $status);
+        $result = OrdersServices::updateAnOrder($order, $status);
 
         $response = (['status' => $result->status, 'message' => $result->message]);
+        
+        return $response;
 
     }
 

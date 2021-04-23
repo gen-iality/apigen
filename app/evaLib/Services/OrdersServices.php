@@ -269,20 +269,14 @@ class OrdersServices
      * @param $order
      * @return void
      */
-    public static function updateAnOrder($order_reference, $status)
+    public static function updateAnOrder($order, $status)
     {
         switch ($status) {
             case 'APPROVED':
                 //Enviamos un mensaje al usuario si este estaba en otro estado y va  a pasar a estado completado.
                 //Ademas de guardar el nuevo estado
                 if($order->order_status_id != config('attendize.order_complete')){
-                    $order->order_status_id= config('attendize.order_complete');
-                    Log::info("Completamos la orden");
-                    $this->completeOrder($order_reference);
-                    if(config('attendize.send_email')){
-                        Log::info("Enviamos el correo");
-                        $this->dispatch(new \App\Jobs\SendOrderTickets($order));
-                    }
+                    $order->order_status_id= config('attendize.order_complete');                
                 }
                 break;
             case 'REJECTED':
