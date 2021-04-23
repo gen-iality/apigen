@@ -94,8 +94,8 @@ class AwsSnsController extends Controller
                     $message->save();
                 break;
                 case 'Bounce':
-                    // $total_bounced = count($total); 
-                    $message->total_bounced = $message->total_bounced + 1;
+                    $total_bounced = count($total); 
+                    $message->total_bounced = $total_bounced;
                     $message->save(); 
                 break;
             }
