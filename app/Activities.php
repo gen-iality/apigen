@@ -111,6 +111,7 @@ class Activities extends Moloquent
         "date_start_zoom",
         "duration",
         "date_end_zoom",
-        "start_date"
+        "start_date",
+        "requires_registration"
     ];
 }
