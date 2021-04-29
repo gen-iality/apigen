@@ -424,13 +424,22 @@ class ApiCheckoutController extends Controller
             $user->points = $user->points - $order->amount;
             $user->save();
             
+            $emailsAdmin =  Account::where("others_properties.role" , "admin")
+            ->where("organization_ids" , $order->organization_id)
+            ->get();
             //Se envia la información completa de la orden.           
             foreach($order->items as $item)
             {  
                 Mail::to($order->email)
                 ->queue(
                     new \App\Mail\PointsMail($order , $user, $item)
-                );   
+                ); 
+
+
+                Mail::to($emailsAdmin->email)
+                ->queue(
+                    new \App\Mail\PointsMail($order , $user, $item)
+                );     
             }
             return $order;
         }
