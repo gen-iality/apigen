@@ -427,6 +427,7 @@ class ApiCheckoutController extends Controller
             $emailsAdmin =  Account::where("others_properties.role" , "admin")
             ->where("organization_ids" , $order->organization_id)
             ->get();
+            
             //Se envia la información completa de la orden.           
             foreach($order->items as $item)
             {  
@@ -436,10 +437,14 @@ class ApiCheckoutController extends Controller
                 ); 
 
 
-                Mail::to($emailsAdmin->email)
-                ->queue(
-                    new \App\Mail\PointsMail($order , $user, $item)
-                );     
+                foreach($emailsAdmin as $emailAdmin)
+                {
+                    Mail::to($emailAdmin->email)
+                    ->queue(
+                        new \App\Mail\PointsMail($order , $user, $item)
+                    );
+                }
+                     
             }
             return $order;
         }
