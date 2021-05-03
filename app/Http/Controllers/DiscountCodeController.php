@@ -369,7 +369,7 @@ class DiscountCodeController extends Controller
         $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
         //Se valida si el código ya se uso     
-        if($code->number_uses <= $group->use_limit  ){
+        if($code->number_uses < $group->use_limit  ){
 
             //Si el código es valido se suma un uso
             $code->account_id = $user->_id; 
