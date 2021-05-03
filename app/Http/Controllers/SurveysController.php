@@ -10,13 +10,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @resource Event
- *
+ * @group Surveys
  *
  */
 class surveysController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * _index_: list of surveys of an event
+     * 
+     * @urlParam id string  required event id Example: 605241e68b276356801236e4
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,8 +38,47 @@ class surveysController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * _store_: create a new survey
+     * 
+     * @urlParam    id                          string  required event id           Example: 605241e68b276356801236e4
+     * 
+     * @bodyParam   survey                      string  required name of survey     Example: Nombre de encuesta
+     * @bodyParam   show_horizontal_bar         boolean                             Example: false
+     * @bodyParam   allow_vote_value_per_user   boolean                             Example: false
+     * @bodyParam   activity_id                 string                      
+     * @bodyParam   points                      number                              Example: 1
+     * @bodyParam   initialMessage              string                        
+     * @bodyParam   time_limit                  number                              Example: 0
+     * @bodyParam   allow_anonymous_answers     boolean                             Example: false
+     * @bodyParam   allow_gradable_survey       boolean                             Example: false
+     * @bodyParam   hasMinimumScore             boolean                             Example: false
+     * @bodyParam   isGlobal                    boolean                             Example: false
+     * @bodyParam   freezeGame                  boolean                             Example: false
+     * @bodyParam   open                        boolean                             Example: false
+     * @bodyParam   publish                     boolean                             Example: false
+     * @bodyParam   minimumScore                number                              Exmaple: 0                       
+     * 
+     * @response{
+     *     "survey": "Encuesta 1",
+     *     "show_horizontal_bar": false,
+     *     "allow_vote_value_per_user": "false",
+     *     "event_id": "605241e68b276356801236e4",
+     *     "activity_id": "",
+     *     "points": 1,
+     *     "initialMessage": null,
+     *     "time_limit": 0,
+     *     "win_Message": null,
+     *     "neutral_Message": null,
+     *     "lose_Message": null,
+     *     "allow_anonymous_answers": "false",
+     *     "allow_gradable_survey": "false",
+     *     "hasMinimumScore": false,
+     *     "isGlobal": false,
+     *     "freezeGame": false,
+     *     "open": "false",
+     *     "publish": "false",
+     *     "minimumScore": 0
+     * }
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -64,8 +105,12 @@ class surveysController extends Controller
         $result->save();
         return $result; 
     }
+
     /**
-     * Display the specified resource.
+     * _show_ : view the information of a specific survey
+     * 
+     * @urlParam id string      required event id  Example: 605241e68b276356801236e4
+     * @urlParam survey string  required survey id  Example: 608c5f5f63201e0f5147a086
      *
      * @param  \App\survey  $survey
      * @return \Illuminate\Http\Response
@@ -78,8 +123,26 @@ class surveysController extends Controller
         return $response;
     }
     /**
-     * Update the specified resource in storage.
-     *
+     * _update_: update a specific survey
+     * @urlParam id string      required event id  Example: 605241e68b276356801236e4
+     * @urlParam survey string  required survey id  Example: 608c5f5f63201e0f5147a086
+     * 
+     * @bodyParam   survey                      string  name of survey     
+     * @bodyParam   show_horizontal_bar         boolean                   
+     * @bodyParam   allow_vote_value_per_user   boolean                    
+     * @bodyParam   activity_id                 string                      
+     * @bodyParam   points                      number                     
+     * @bodyParam   initialMessage              string                        
+     * @bodyParam   time_limit                  number                    
+     * @bodyParam   allow_anonymous_answers     boolean                    
+     * @bodyParam   allow_gradable_survey       boolean                    
+     * @bodyParam   hasMinimumScore             boolean                    
+     * @bodyParam   isGlobal                    boolean                    
+     * @bodyParam   freezeGame                  boolean                   
+     * @bodyParam   open                        boolean              
+     * @bodyParam   publish                     boolean                   
+     * @bodyParam   minimumScore                number                     
+     * 
      * @param  \Illuminate\Http\Request $request
      * @param  \App\survey  $survey
      * @return \Illuminate\Http\Response
@@ -131,8 +194,11 @@ class surveysController extends Controller
     return "no question id sent or invalid format";
     }
     /** 
-     * Remove the specified resource from storage.
+     * _destroy_: delete a specific survey
      *
+     * @urlParam id string      required event id  Example: 605241e68b276356801236e4
+     * @urlParam survey string  required survey id  Example: 608c5f5f63201e0f5147a086
+     * 
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */

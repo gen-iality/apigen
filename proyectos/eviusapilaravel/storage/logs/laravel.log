@@ -17,3 +17,85 @@
 [2021-04-09 22:29:11] local.INFO: Change Order: 6070c4e15610ef79a84ab1d3 Status: APPROVED  
 [2021-04-09 23:00:03] local.INFO: new cron  
 [2021-04-10 00:00:02] local.INFO: new cron  
+[2021-05-03 14:00:02] local.INFO: new cron  
+[2021-05-03 14:00:08] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:08] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:08] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:08] local.INFO: FAILED  
+[2021-05-03 14:00:10] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:10] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:11] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:11] local.INFO: FAILED  
+[2021-05-03 14:00:12] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:12] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:13] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:13] local.INFO: FAILED  
+[2021-05-03 14:00:14] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:14] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:15] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:15] local.INFO: FAILED  
+[2021-05-03 14:00:17] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:17] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:17] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:17] local.INFO: FAILED  
+[2021-05-03 14:00:19] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:19] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:20] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:20] local.INFO: FAILED  
+[2021-05-03 14:00:21] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:21] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:22] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:22] local.INFO: FAILED  
+[2021-05-03 14:00:23] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:23] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:24] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:24] local.INFO: FAILED  
+[2021-05-03 14:00:25] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:26] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:26] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:26] local.INFO: FAILED  
+[2021-05-03 14:00:27] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 14:00:28] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 14:00:28] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 14:00:28] local.INFO: FAILED  
+[2021-05-03 15:00:03] local.INFO: new cron  
+[2021-05-03 15:00:09] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:10] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:10] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:10] local.INFO: FAILED  
+[2021-05-03 15:00:12] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:12] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:13] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:13] local.INFO: FAILED  
+[2021-05-03 15:00:14] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:15] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:15] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:15] local.INFO: FAILED  
+[2021-05-03 15:00:17] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:17] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:17] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:17] local.INFO: FAILED  
+[2021-05-03 15:00:18] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:18] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:19] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:19] local.INFO: FAILED  
+[2021-05-03 15:00:20] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:20] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:21] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:21] local.INFO: FAILED  
+[2021-05-03 15:00:22] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:23] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:23] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:23] local.INFO: FAILED  
+[2021-05-03 15:00:25] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:25] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:26] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:26] local.INFO: FAILED  
+[2021-05-03 15:00:27] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:28] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:28] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:28] local.INFO: FAILED  
+[2021-05-03 15:00:30] local.INFO: Change Order:  Status: FAILED  
+[2021-05-03 15:00:30] local.INFO: Borramos el cache de la orden: FAILED  
+[2021-05-03 15:00:31] local.INFO: Estado guardado:  order_reference: Fallido  
+[2021-05-03 15:00:31] local.INFO: FAILED  
