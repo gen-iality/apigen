@@ -166,7 +166,7 @@ class RegistrationMetricsController extends Controller
      * _createByDay_ : create metrics 
      * 
      */
-    public function createByDay($event_id , $date)
+    public function createByDay($date, $event_id)
     {           
         $metrics = RegistrationMetrics::where("date" , $date)->first();
         if(isset($metrics))
