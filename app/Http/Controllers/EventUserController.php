@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Attendee;
 use App\evaLib\Services\FilterQuery;
+use Illuminate\Http\Resources\Json\JsonResource;
 use App\evaLib\Services\UserEventService;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
@@ -381,13 +382,19 @@ class EventUserController extends Controller
             return abort(400, "Email is required");
         }
 
+        //Se buscan usuarios existentes con el correo que se está ingresando
         $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
 
-        //if (!empty($userexists)) {
-        //    return "El correo ingresado ya se encuentra registrado en el evento";
-        //}
+        //Se valida si ya hay un usuario con el correo que se está ingresando
+        if (empty($userexists)) {
+           //Si es el primer registro de usuario al evento se toma la fecha del registro con formato 2021-01-01  
+           $date = \Carbon\Carbon::now()->format('Y-m-d');   
 
-        $event = Event::findOrFail($event_id);
+           //Se llama al método que registra la cantidad de registros a un evento por día
+           app('App\Http\Controllers\RegistrationMetricsController')->createByDay($date, $event_id);
+        }
+
+        $event = Event::findOrFail($event_id) ;
         $image = null; //$event->picture;
 
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
@@ -552,6 +559,7 @@ class EventUserController extends Controller
 
             $event = Event::find($event_id);
             if ($eventuser_id) {
+               
                 $eventUserData["eventuser_id"] = $eventuser_id;
             }
 
@@ -579,8 +587,9 @@ class EventUserController extends Controller
 
             if (!$signInResult) {
                 $pass = (isset($userData["password"])) ? $userData["password"] : "evius.2040";
-
+                
                 if (isset($eventUser->user->uid)) {
+                    
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
 
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
@@ -589,14 +598,13 @@ class EventUserController extends Controller
                     $eventUser->user->save();
                 }
             }
-
+            
             if ($signInResult && $signInResult->accessToken()) {
                 //throw new Exception($outter_message . ' and new token could not be generated');
                 $eventUser->user->initial_token = $signInResult->accessToken();
             }
 
             $response = new EventUserResource($eventUser);
-
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
 

@@ -151,7 +151,11 @@ return [
                         '*/organizations/{id}/eventUsers',
                     //Surveys
                         '*/surveys',
-                        '*/surveys/*'
+                        '*/surveys/*',
+                    //Metrics
+                        '*/registrationmetrics/*',
+                        '*/registrationmetrics'
+
                 ],  
 
                 /*

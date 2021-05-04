@@ -67,50 +67,38 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
  * eventUsers
  ****************/
 //CRUD
-Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
-Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
-Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
-Route::post( 'events/{event_id}/eventusers',     'EventUserController@store');
-Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
-Route::get('events/{event_id}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
-Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
-Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
-Route::get('events/myevents', 'EventUserController@indexByEventUser');
-
-
-Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
-
-Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::get  ( 'events/{event_id}/eventusers',                   'EventUserController@index');
+Route::get  ( 'events/{event_id}/eventUsers',                   'EventUserController@index');
+Route::post ( 'events/{event_id}/eventusers',                   'EventUserController@store');
+Route::get  ( 'events/{event_id}/eventusers/{id}',              'EventUserController@show');
+Route::put  ( 'events/{event_id}/eventusers/{id}',              'EventUserController@update');
+Route::delete('events/{event_id}/eventusers/{id}',              'EventUserController@destroy');
+//Consultas GET
+Route::get('events/myevents',                                   'EventUserController@indexByEventUser');
+Route::get('me/eventusers/event/{event_id}',                    'EventUserController@indexByUserInEvent');
+Route::get('me/events/{event_id}/eventusers',                   'EventUserController@meInEvent');
+Route::get('events/{event_id}/searchinevent/',                  'EventUserController@searchInEvent');
+Route::get('/eventusers/event/{event_id}/user/{user_id}',       'EventUserController@ByUserInEvent');
+Route::get('events/{event_id}/eventusers/{id}/unsubscribe',     'EventUserController@unsubscribe');
+//Consultas POST
+Route::post('events/{event_id}/eventusers',                         'EventUserController@createUserAndAddtoEvent');
+Route::post('events/{event_id}/testeventusers',                     'EventUserController@testCreateUserAndAddtoEvent');
+Route::post('eventUsers/bookEventUsers/{event}',                    'EventUserController@bookEventUsers');
+Route::post('events/{event_id}/eventusersbyurl',                    'EventUserController@createUserViaUrl');
+Route::post('events/{event_id}/sendemailtoallusers',                'EventUserController@sendQrToUsers');
+Route::post('events/{event_id}/adduserwithemailvalidation/',        'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::post('eventUsers/createUserAndAddtoEvent/{event_id}',        'EventUserController@createUserAndAddtoEvent');
+// api para transferir eventuser
+Route::post('eventusers/{event_id}/tranfereventuser/{event_user}',  'EventUserController@transferEventuserAndEnrollToActivity');
+//Consultas PUT
+Route::put('events/withstatus/{id}',                'EventUserController@updateWithStatus');
+Route::put('eventUsers/{id}/checkin',               'EventUserController@checkIn');
+Route::put('eventUsers/{id}/withStatus',            'EventUserController@updateWithStatus');
 Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
 
-
-// // api para transferir eventuser
-Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
-Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
-
-Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
-
-Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
-Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
-
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
-Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-
-Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
-
-Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
-
-
-
-Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
-
-
-Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
-
 //endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
-Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
+Route::get('events/{event_id}/users/{user_id}/asignticketstouser',      'EventUserManagementController@asignTicketsToUser');
+Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}',  'EventUserManagementController@makeTicketIdaProperty');
 
 
 /***************
@@ -543,12 +531,17 @@ Route::post("postValidateTickets", "EventCheckoutController@postValidateTickets"
 Route::apiResource("discountcodetemplate", "DiscountCodeTemplateController");
 Route::post("discountcodetemplate/{id}/importCodes", "DiscountCodeTemplateController@importCodes");
 Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
-
-
-
-
 //y esto que fue? ese api más sospechozso
 Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
 Route::put("code/redeem_point_code" ,  "DiscountCodeController@redeemPointCode");
+
+/****************
+ * Metrics
+ ****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+      Route::apiResource('events/{event_id}/registrationmetrics', 'RegistrationMetricsController');  
+    }
+);
