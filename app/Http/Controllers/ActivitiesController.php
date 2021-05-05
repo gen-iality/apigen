@@ -574,12 +574,14 @@ class ActivitiesController extends Controller
 
         $data['activity_id'] = $id;
         $data['event_id'] = $event_id;
+        $date = new \DateTime();
 
         $ActivityAssistant = ActivityAssistant::updateOrCreate(
             [   
                 'activity_id' => $data['activity_id'] ,
                 'user_id'=> $data['user_id'],
-                'event_id' => $data['event_id']
+                'event_id' => $data['event_id'],
+                'checkedin_at' => $date
             ]
         );      
 
