@@ -435,9 +435,16 @@ class ActivityAssistantController extends Controller
         
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
         $date = new \DateTime();
-        $ActivityAssistant->fill(['checkedin_at' => $date]); 
-        $ActivityAssistant->save();
 
+        /*Se realiza validación para que la fecha y hora del checkIn sea siempre el primero 
+        y no se actualice en caso de que el usuario vuelva a ingresar a la actividad*/
+        if(!isset($ActivityAssistant->checkedin_at))
+        {
+            $ActivityAssistant->fill(['checkedin_at' => $date]); 
+            
+        }       
+        $ActivityAssistant->printouts  =$ActivityAssistant->printouts + 1 ; 
+        $ActivityAssistant->save();
         return $ActivityAssistant;
     }
 
