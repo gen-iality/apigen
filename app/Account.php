@@ -13,8 +13,7 @@ class Account extends User
     use SoftDeletes;
     use Notifiable;
     use HasRoles;
-
-    // const STATUS_UNCONFIRMED = 'unconfirmed';
+    
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
@@ -86,8 +85,8 @@ class Account extends User
         'date_birth', 
         'adress',
         'status',
-        'total_number_events'        
-
+        'total_number_events',
+        'qualification' => 0           
     ];
 
     public function __construct($attributes = array())
