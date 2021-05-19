@@ -154,7 +154,10 @@ return [
                         '*/surveys/*',
                     //Metrics
                         '*/registrationmetrics/*',
-                        '*/registrationmetrics'
+                        '*/registrationmetrics',
+                    //Rols
+                        '*/rols/*',
+                        '*/rols'
 
                 ],  
 
