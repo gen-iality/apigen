@@ -84,30 +84,30 @@ class DuncanGameController extends Controller
     {
         $data = $request->input();
 
-        if(isset($data['user_id']))
-        {
-            $rules = [
-                'user_id' => 'required', //Must be a number and length of value is 8
-                'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
-            ];
-            $messages = ['in' => "Game should be one of: " . implode(", ", DuncanGameController::AVALIABLE_GAMES)];
-            $validator = Validator::make($data, $rules, $messages);
-            if (!$validator->passes()) {
-                return response()->json(['errors' => $validator->errors()->all()], 400);
-            }
+        // if(isset($data['user_id']))
+        // {
+        //     $rules = [
+        //         'user_id' => 'required', //Must be a number and length of value is 8
+        //         'game' => ["required", Rule::in(DuncanGameController::AVALIABLE_GAMES)],
+        //     ];
+        //     $messages = ['in' => "Game should be one of: " . implode(", ", DuncanGameController::AVALIABLE_GAMES)];
+        //     $validator = Validator::make($data, $rules, $messages);
+        //     if (!$validator->passes()) {
+        //         return response()->json(['errors' => $validator->errors()->all()], 400);
+        //     }
     
-            $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
-            $nombre_campo_juego = $data['game'] . "_timestamp";
+        //     $attendee = Attendee::where('account_id', $data['user_id'])->where('event_id', DuncanGameController::DUNCAN_EVENT_ID)->first();
+        //     $nombre_campo_juego = $data['game'] . "_timestamp";
     
-            $timestampultimojuego = isset($attendee->properties[$nombre_campo_juego]) ? $attendee->properties[$nombre_campo_juego] : null;
-            $timestampahora = time();
+        //     $timestampultimojuego = isset($attendee->properties[$nombre_campo_juego]) ? $attendee->properties[$nombre_campo_juego] : null;
+        //     $timestampahora = time();
     
-            //Condición si núnca  ha jugado retornamos un número negativo para indicar que puede jugar
-            if (!$timestampultimojuego) {
-                return -1;
-            }
-            return DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
-        }
+        //     //Condición si núnca  ha jugado retornamos un número negativo para indicar que puede jugar
+        //     if (!$timestampultimojuego) {
+        //         return -1;
+        //     }
+        //     return DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
+        // }
         $timestampultimojuego = null;
         $timestampahora = time();
         
