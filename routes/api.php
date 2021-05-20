@@ -105,62 +105,61 @@ Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}',  'EventUs
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento
  ****************/
 //Route::get    ('events/{event_id}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
-Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantController');
-Route::get('events/{event_id}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
-Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantController@meIndex');
-Route::put    ('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
+Route::apiResource  ('events/{event_id}/activities_attendees',                  'ActivityAssistantController');
+Route::get          ('me/events/{event_id}/activities_attendees',               'ActivityAssistantController@meIndex');
+Route::get          ('events/{event_id}/activities_attendeesAdmin',             'ActivityAssistantController@indexForAdmin');
+Route::put          ('events/{event_id}/activities_attendees/{id}/check_in',    'ActivityAssistantController@checkIn');
 
 
 
 /***************
  * USER PROPERTIES
  ****************/
-Route::get('events/{event_id}/userproperties', 'UserPropertiesController@index');
-Route::post('events/{event_id}/userproperties', 'UserPropertiesController@store');
-Route::get('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
-Route::put('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
-Route::put('events/{event_id}/userproperties/{id}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
-Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
+Route::get      ('events/{event_id}/userproperties',        'UserPropertiesController@index');
+Route::post     ('events/{event_id}/userproperties',        'UserPropertiesController@store');
+Route::get      ('events/{event_id}/userproperties/{id}',   'UserPropertiesController@show');
+Route::put      ('events/{event_id}/userproperties/{id}',   'UserPropertiesController@update');
+Route::delete   ('events/{event_id}/userproperties/{id}',   'UserPropertiesController@destroy');
+Route::put      ('events/{event_id}/userproperties/{id}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
+
+
 
 /****************
  * organizations
  ****************/
-Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
-Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
-Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
-Route::get('organizations/{id}/eventUsers' , 'OrganizationController@indexByEventUserInOrganization');
-Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationController@changeUserPasswordOrganization');
+Route::apiResource  ('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+Route::get          ('organizations/{id}/eventUsers' ,                      'OrganizationController@indexByEventUserInOrganization');
+Route::post         ('organizations/{id}/contactbyemail',                   'OrganizationController@contactbyemail');
+Route::post         ('organizations/{id}/addUserProperty',                  'OrganizationController@addUserProperty');
+Route::put          ('organizations/{organization_id}/changeUserPassword/', 'OrganizationController@changeUserPasswordOrganization');
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
-        Route::get('me/organizations', 'OrganizationController@meOrganizations');
-        // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
-        // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
+        Route::apiResource  ('organizations',       'OrganizationController', ['except' => ['index', 'show']]);
+        Route::get          ('me/organizations',    'OrganizationController@meOrganizations');
     }
 );
+
 
 
 /****************
  * meetings
  ****************/
-Route::apiResource('networking', 'MeetingsController');
-Route::get('event/{event_id}/meeting/{meeting_id}/accept', 'MeetingsController@accept');
-Route::get('event/{event_id}/meeting/{meeting_id}/reject', 'MeetingsController@reject');
+Route::apiResource  ('networking',                                      'MeetingsController');
+Route::get          ('event/{event_id}/meeting',                        'MeetingsController@index');
+Route::get          ('event/{event_id}/meeting/{meeting_id}/accept',    'MeetingsController@accept');
+Route::get          ('event/{event_id}/meeting/{meeting_id}/reject',    'MeetingsController@reject');
 
-Route::get('event/{event_id}/meeting', 'MeetingsController@index');
 
 
 /***************
  * SENDCONTENT  TEST CONTROLLER
  ****************/
-
+Route::apiResource('events/{event_id}/sendcontent', 'SendContentController@index');
 Route::post('events/sendMecPerfil', 'SendContentController@sendContentGenerated');
 Route::post('events/sendMecPerfilMec', 'SendContentController@sendContentMec');
 Route::post('events/{event_id}/sendMecPerfilMectoall', 'SendContentController@sendContentToAll');
 Route::post('events/sendnotificationemail', 'SendContentController@sendNotificationEmail');
-
-Route::apiResource('events/{event_id}/sendcontent', 'SendContentController@index');
 
 /***************
  * INVITATION

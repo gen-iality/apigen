@@ -157,7 +157,10 @@ return [
                         '*/registrationmetrics',
                     //Rols
                         '*/rols/*',
-                        '*/rols'
+                        '*/rols',
+                    //UserProperties
+                        '*/userproperties',
+                        '*/userproperties/*'
 
                 ],  
 
