@@ -49,16 +49,16 @@ class DuncanGameController extends Controller
         $properties = $attendee->properties;
 
         //Vamos a limitar la guardada de puntaje para que guarde si la condición de tiempo se cumple, sino error.
-        // if (isset($attendee->properties[$nombre_campo_juego])) {
-        //     DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE;
-        //     $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
-        //     if ($timestampultimojuego) {
-        //         $timestampahora = time();
-        //         if (DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego) > 0) {
-        //             return response()->json(['errors' => "No se ha cumplido el tiempo para jugar, el puntaje no se suma, se necesitan " . DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE . " segundos entre juego y juego"], 400);
-        //         }
-        //     }
-        // }
+        if (isset($attendee->properties[$nombre_campo_juego])) {
+            DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE;
+            $timestampultimojuego = $attendee->properties[$nombre_campo_juego];
+            if ($timestampultimojuego) {
+                $timestampahora = time();
+                if (DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego) > 0) {
+                    return response()->json(['errors' => "No se ha cumplido el tiempo para jugar, el puntaje no se suma, se necesitan " . DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE . " segundos entre juego y juego"], 400);
+                }
+            }
+        }
 
         //actualizamos el tiempo de la última jugada
         $properties[$nombre_campo_juego] = time();
