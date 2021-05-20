@@ -108,8 +108,10 @@ class DuncanGameController extends Controller
             }
             return DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
         }
+        $timestampultimojuego = null;
+        $timestampahora = time();
         
-        return 'ok';
+        return DuncanGameController::LIMITESEGUNDOSPARAJUGARNUEVAMENTE - ($timestampahora - $timestampultimojuego);
     }
 
     /**
