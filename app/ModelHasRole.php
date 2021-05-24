@@ -4,10 +4,11 @@ namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
 use Moloquent;
-
+use Spatie\Permission\Traits\HasRoles;
 class ModelHasRole extends Moloquent
 {
     //
+    use HasRoles;
     protected $table = ('model_has_roles');
     protected $fillable = ['role_id','event_id','model_id', 'model_type', 'space_id'];
     protected $with = ['role','space','user']; 

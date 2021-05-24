@@ -18,7 +18,8 @@ use App\Http\Resources\EventUserResource;
 use Auth;
 use App\OrganizationUser;
 use Log;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 /**
  * @group User
  * 
@@ -90,7 +91,7 @@ class UserController extends UserControllerWeb
     {   
           
         $validatedData = $request->validate([
-            'email' => 'required|unique:users|email',
+            'email' => 'required|unique:users|email',           
             'names' => 'required',
             'picture' => 'string',
             'password' => 'string|min:6',
@@ -107,8 +108,15 @@ class UserController extends UserControllerWeb
         }
 
         $result = new Account($data);
-        // var_dump($data['organization_ids']);die;
-        $result->save();
+        // $result->save();
+        var_dump($result);die;
+
+        $result->assignRole('Administrator');
+        var_dump($result);die;
+        $role = Role::findByName('Administrator');
+        // return $role;
+        
+        
         if(isset($data['organization_ids'])){
             
             $result->organizations()->attach($data['organization_ids']);
