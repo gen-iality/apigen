@@ -17,7 +17,7 @@ class Account extends User
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
-
+    protected $guard_name = 'web';
     /**
      * The validation rules
      *

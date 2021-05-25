@@ -5,13 +5,18 @@ namespace App;
 //use Illuminate\Database\Eloquent\Model;
 use Moloquent;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class ModelHasRole extends Moloquent
 {
     //
     use HasRoles;
     protected $table = ('model_has_roles');
+    protected $guard_name = 'web';
     protected $fillable = ['role_id','event_id','model_id', 'model_type', 'space_id'];
     protected $with = ['role','space','user']; 
+    protected $times = ['created_at', 'updated_at'];
+
     public function user()
     {
         return $this->belongsTo('App\Account', 'model_id');

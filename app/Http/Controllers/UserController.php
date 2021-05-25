@@ -91,7 +91,7 @@ class UserController extends UserControllerWeb
     {   
           
         $validatedData = $request->validate([
-            'email' => 'required|unique:users|email',           
+            // 'email' => 'required|unique:users|email',           
             'names' => 'required',
             'picture' => 'string',
             'password' => 'string|min:6',
@@ -108,13 +108,11 @@ class UserController extends UserControllerWeb
         }
 
         $result = new Account($data);
-        // $result->save();
-        var_dump($result);die;
-
-        $result->assignRole('Administrator');
-        var_dump($result);die;
-        $role = Role::findByName('Administrator');
-        // return $role;
+        $result->save();        
+        
+        $result->assignRole('Prueba1');
+        
+        return $result;
         
         
         if(isset($data['organization_ids'])){
