@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Mail;
 use Validator;
+use Log;
 
 /**
  * @group EventUser
@@ -885,6 +886,7 @@ class EventUserController extends Controller
     public function destroy(Request $request, $eventId, $eventUserId)
     {
         $attendee = Attendee::findOrFail($eventUserId);
+        Log::info("Anulando suscrpción del usuario  " . $attendee->account_id . " del evento " . $eventId);
         return (string) $attendee->delete();
     }
 
@@ -939,7 +941,9 @@ class EventUserController extends Controller
      */
     Public function unsubscribe($event_id , $event_user_id)
     {
-        $eventUser = Attendee::find($event_user_id)->delete();
+        $eventUser = Attendee::find($event_user_id);
+        Log::info("Anulando suscrpción del usuario  " . $eventUser->account_id . " del evento " . $event_id);
+        $eventUser->delete();
         return view('ManageUser.unsubscribe');
     }
 }
