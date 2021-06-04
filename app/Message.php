@@ -13,7 +13,7 @@ class Message extends Moloquent
     const FAILED = 'failed';
 
     protected $table = ('messages');
-    protected $with = ['messageUsers'];
+    // protected $with = ['messageUsers'];
     protected $fillable = [
         'subject', 
         'server_message_id', 

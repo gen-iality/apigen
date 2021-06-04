@@ -46,7 +46,7 @@ class MessageUser extends Moloquent
      */
     public function user()
     {
-        return $this->belongsTo('App\Account');
+        return $this->belongsTo('App\Account')->select(['names', 'email','displayName']);
     }
 
     /**
