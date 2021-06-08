@@ -871,7 +871,15 @@ class EventUserController extends Controller
     public function checkIn($id)
     {
         $eventUser = Attendee::findOrFail($id);
-        return $eventUser->checkIn();
+        if(!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false))
+        {
+            $eventUser->checkIn();            
+        }         
+
+        $eventUser->printouts  =$eventUser->printouts + 1 ; 
+        $eventUser->save();
+
+        return $eventUser;
     }
 
     /**
@@ -946,4 +954,38 @@ class EventUserController extends Controller
         $eventUser->delete();
         return view('ManageUser.unsubscribe');
     }
+
+    /**
+     * _totalMetricsByEvent_
+     * @autenticathed
+     * 
+     * @urlParam event_id
+     * 
+     */
+    public function totalMetricsByEvent($event_id)
+    {
+
+        //1.Total de registros en el evento
+        $attendes = Attendee::where('event_id' ,$event_id)->count();
+
+        //3.Visitias únicas totales
+        $checkIn = Attendee::where('event_id' ,$event_id)->where('checked_in', '!=', false)->count();
+
+        //2.Impresiones por evento
+        $totalPrintouts = 0;
+        $printouts = Attendee::where('event_id' ,$event_id)->where('printouts', '>', 0)->pluck('printouts');
+        foreach($printouts as $printout)
+        {
+            $totalPrintouts = $totalPrintouts +  $printout;
+        }
+        
+        return response()->json([
+            'total_users' => $attendes,
+            'total_checkIn' => $checkIn,
+            'total_printouts' => $totalPrintouts
+        ]);
+
+    } 
+
+
 }

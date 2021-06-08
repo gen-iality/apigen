@@ -86,6 +86,7 @@ Route::get('events/myevents',                                   'EventUserContro
 Route::get('me/eventusers/event/{event_id}',                    'EventUserController@indexByUserInEvent');
 Route::get('me/events/{event_id}/eventusers',                   'EventUserController@meInEvent');
 Route::get('events/{event_id}/searchinevent/',                  'EventUserController@searchInEvent');
+Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserController@totalMetricsByEvent');
 Route::get('/eventusers/event/{event_id}/user/{user_id}',       'EventUserController@ByUserInEvent');
 Route::get('events/{event_id}/eventusers/{id}/unsubscribe',     'EventUserController@unsubscribe');
 //Consultas POST
@@ -114,6 +115,7 @@ Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}',  'EventUs
  ****************/
 //Route::get    ('events/{event_id}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
 Route::apiResource  ('events/{event_id}/activities_attendees',                  'ActivityAssistantController');
+Route::get          ('events/{event_id}/totalmetricsbyactivity',                'ActivityAssistantController@totalMetricsByActivity');
 Route::get          ('me/events/{event_id}/activities_attendees',               'ActivityAssistantController@meIndex');
 Route::get          ('events/{event_id}/activities_attendeesAdmin',             'ActivityAssistantController@indexForAdmin');
 Route::put          ('events/{event_id}/activities_attendees/{id}/check_in',    'ActivityAssistantController@checkIn');
