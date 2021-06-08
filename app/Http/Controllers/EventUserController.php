@@ -962,25 +962,38 @@ class EventUserController extends Controller
      * @urlParam event_id
      * 
      */
-    public function totalMetricsByEvent($event_id)
+    public function totalMetricsByEvent(request $request, $event_id)
     {
+        $data = $request->input();
 
+        $attendes = Attendee::where('event_id' ,$event_id);
+        
+        if(isset($data['datetime_from']) && isset($data['datetime_to']))
+        {
+            $attendes = $attendes->whereBetween(
+                'created_at',
+                array(
+                    \Carbon\Carbon::parse($data['datetime_from']),
+                    \Carbon\Carbon::parse($data['datetime_to'])
+                )
+            );
+        }
         //1.Total de registros en el evento
-        $attendes = Attendee::where('event_id' ,$event_id)->count();
+        $attendesTotal = $attendes->count();
 
         //3.Visitias únicas totales
-        $checkIn = Attendee::where('event_id' ,$event_id)->where('checked_in', '!=', false)->count();
+        $checkIn = $attendes->where('checked_in', '!=', false)->count();
 
         //2.Impresiones por evento
         $totalPrintouts = 0;
-        $printouts = Attendee::where('event_id' ,$event_id)->where('printouts', '>', 0)->pluck('printouts');
+        $printouts = $attendes->where('printouts', '>', 0)->pluck('printouts');
         foreach($printouts as $printout)
         {
             $totalPrintouts = $totalPrintouts +  $printout;
         }
         
         return response()->json([
-            'total_users' => $attendes,
+            'total_users' => $attendesTotal,
             'total_checkIn' => $checkIn,
             'total_printouts' => $totalPrintouts
         ]);
