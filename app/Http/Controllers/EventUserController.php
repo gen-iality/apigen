@@ -1000,5 +1000,49 @@ class EventUserController extends Controller
 
     } 
 
+    /**
+     * _metricsEventByDate_: number of registered users per day according to event start and end dates
+     */
+    public function metricsEventByDate(Request $request, $event_id)
+    {
+
+        $data = $request->input();
+        $event = Event::findOrFail($event_id);
+        
+        $dateFrom = \Carbon\Carbon::parse($event->datetime_from)->format('Y-m-d');
+        $dateTo = \Carbon\Carbon::parse($event->datetime_to)->format('Y-m-d');
+
+        $attendees = Attendee::where('event_id' , $event_id)
+        ->whereBetween(
+            'created_at',
+            array(
+                \Carbon\Carbon::parse($dateFrom),
+                \Carbon\Carbon::parse($dateTo)
+                
+            )
+        )
+        ->get(["created_at"])
+        ->groupBy(function($date) {
+            return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d'); 
+        });
+
+       
+        $totalForDate = [];
+        foreach($attendees as $key => $attendee)
+        {   
+            
+            $count = count($attendee);
+            $response = response()->json([
+                'date' => $key,
+                'quantity' => $count
+            ]);
+
+            array_push($totalForDate , $response->original);
+        }
+
+        return $totalForDate;
+
+    }    
+
 
 }

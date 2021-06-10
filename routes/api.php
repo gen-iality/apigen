@@ -74,14 +74,9 @@ Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword
 /****************
  * eventUsers
  ****************/
-//CRUD
-Route::get  ( 'events/{event_id}/eventusers',                   'EventUserController@index');
-Route::get  ( 'events/{event_id}/eventUsers',                   'EventUserController@index');
-Route::post ( 'events/{event_id}/eventusers',                   'EventUserController@store');
-Route::get  ( 'events/{event_id}/eventusers/{id}',              'EventUserController@show');
-Route::put  ( 'events/{event_id}/eventusers/{id}',              'EventUserController@update');
-Route::delete('events/{event_id}/eventusers/{id}',              'EventUserController@destroy');
+
 //Consultas GET
+Route::post('events/{event_id}/eventusers',                         'EventUserController@createUserAndAddtoEvent');
 Route::get('events/myevents',                                   'EventUserController@indexByEventUser');
 Route::get('me/eventusers/event/{event_id}',                    'EventUserController@indexByUserInEvent');
 Route::get('me/events/{event_id}/eventusers',                   'EventUserController@meInEvent');
@@ -89,8 +84,8 @@ Route::get('events/{event_id}/searchinevent/',                  'EventUserContro
 Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserController@totalMetricsByEvent');
 Route::get('/eventusers/event/{event_id}/user/{user_id}',       'EventUserController@ByUserInEvent');
 Route::get('events/{event_id}/eventusers/{id}/unsubscribe',     'EventUserController@unsubscribe');
+Route::get('events/{event_id}/metricsbydate/eventusers',        'EventUserController@metricsEventByDate');
 //Consultas POST
-Route::post('events/{event_id}/eventusers',                         'EventUserController@createUserAndAddtoEvent');
 Route::post('events/{event_id}/testeventusers',                     'EventUserController@testCreateUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}',                    'EventUserController@bookEventUsers');
 Route::post('events/{event_id}/eventusersbyurl',                    'EventUserController@createUserViaUrl');
@@ -109,6 +104,13 @@ Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeU
 Route::get('events/{event_id}/users/{user_id}/asignticketstouser',      'EventUserManagementController@asignTicketsToUser');
 Route::get( 'eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}',  'EventUserManagementController@makeTicketIdaProperty');
 
+//CRUD
+Route::get  ( 'events/{event_id}/eventusers',                   'EventUserController@index');
+Route::get  ( 'events/{event_id}/eventUsers',                   'EventUserController@index');
+Route::post ( 'events/{event_id}/eventusers',                   'EventUserController@store');
+Route::get  ( 'events/{event_id}/eventusers/{id}',              'EventUserController@show');
+Route::put  ( 'events/{event_id}/eventusers/{id}',              'EventUserController@update');
+Route::delete('events/{event_id}/eventusers/{id}',              'EventUserController@destroy');
 
 /***************
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento
