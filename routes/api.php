@@ -112,7 +112,10 @@ Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUser
 //endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
 Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
 Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserController@totalMetricsByEvent');
+//Metrics
 Route::get('events/{event_id}/metricsbydate/eventusers',        'EventUserController@metricsEventByDate');
+
+
 
 /***************
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento

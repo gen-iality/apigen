@@ -1012,19 +1012,32 @@ class EventUserController extends Controller
         $dateFrom = \Carbon\Carbon::parse($event->datetime_from)->format('Y-m-d');
         $dateTo = \Carbon\Carbon::parse($event->datetime_to)->format('Y-m-d');
 
+
+
         $attendees = Attendee::where('event_id' , $event_id)
         ->whereBetween(
-            'created_at',
+            $data['metrics_type'],
             array(
                 \Carbon\Carbon::parse($dateFrom),
                 \Carbon\Carbon::parse($dateTo)
                 
             )
         )
-        ->get(["created_at"])
-        ->groupBy(function($date) {
-            return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d'); 
-        });
+        ->get([$data['metrics_type']]);
+        
+        switch($data['metrics_type']){
+            case "created_at";
+                $attendees = $attendees->groupBy(function($date) {            
+                    return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d');             
+                });
+            break;
+            case "checkedin_at";
+                $attendees = $attendees->groupBy(function($date) {            
+                    return \Carbon\Carbon::parse($date->checkedin_at)->format('Y-m-d');             
+                });
+            break;
+        }
+        
 
        
         $totalForDate = [];
@@ -1043,6 +1056,4 @@ class EventUserController extends Controller
         return $totalForDate;
 
     }    
-
-
 }
