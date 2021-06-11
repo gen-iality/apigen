@@ -38,7 +38,7 @@ class Attendee extends MyBaseModel
         'test',
     ];
 
-    protected $dates = ['checkedin_at', 'created_at', 'updated_at', 'test'];
+    protected $dates = ['checkedin_at', 'created_at', 'updated_at', 'test', 'printouts_at'];
 
     /*
 

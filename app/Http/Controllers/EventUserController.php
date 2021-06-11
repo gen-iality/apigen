@@ -876,7 +876,24 @@ class EventUserController extends Controller
             $eventUser->checkIn();            
         }         
 
-        $eventUser->printouts  =$eventUser->printouts + 1 ; 
+        $printoutsHistory = [];
+        $eventUser->printouts  =$eventUser->printouts + 1 ;
+        $eventUser->printouts_at = \Carbon\Carbon::now();
+
+        $dataCheckIn = [
+            'printouts' => $eventUser->printouts,
+            'printouts_at' => $eventUser->printouts_at->format('Y-m-d H:i:s')
+        ]; 
+
+        if(is_null($eventUser->printouts_history)){
+            
+            $eventUser->printouts_history = array($dataCheckIn);
+        }else{
+            $array = $eventUser->printouts_history;
+            array_push($array, $dataCheckIn);    
+            $eventUser->printouts_history = $array;
+        }
+
         $eventUser->save();
 
         return $eventUser;
