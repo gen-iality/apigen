@@ -1072,10 +1072,6 @@ class EventUserController extends Controller
                 array(
                     'property' => 'city',
                     'value' => $eventUserData['properties']['ciudad']
-                ),
-                array(
-                    'property' => '¿Participas cómo?',
-                    'value' => $eventUserData['properties']['participascomo']
                 )
             )
         );
