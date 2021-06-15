@@ -408,7 +408,7 @@ class EventUserController extends Controller
 
         if($event_id == '60c8affc0b4f4b417d252b29')
         {
-            return $hubspot = self::hubspotRegister($request, $event_id);
+            $hubspot = self::hubspotRegister($request, $event_id);
         }
 
         // para probar rápido el correo lo renderiza como HTML más bien
