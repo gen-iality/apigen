@@ -114,6 +114,8 @@ Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQr
 Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserController@totalMetricsByEvent');
 //Metrics
 Route::get('events/{event_id}/metricsbydate/eventusers',        'EventUserController@metricsEventByDate');
+Route::get('events/{event_id}/hubspotRegister/eventusers',        'EventUserController@hubspotRegister');
+
 
 
 

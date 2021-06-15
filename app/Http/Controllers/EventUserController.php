@@ -17,6 +17,7 @@ use Illuminate\Http\Response;
 use Mail;
 use Validator;
 use Log;
+use GuzzleHttp\Client;
 
 /**
  * @group EventUser
@@ -404,6 +405,8 @@ class EventUserController extends Controller
         if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
         }
+
+        // $hubspot = self::hubspotRegister($request, $evet_id);
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
@@ -1072,5 +1075,40 @@ class EventUserController extends Controller
 
         return $totalForDate;
 
-    }    
+    }  
+    
+    
+    /**
+     * 
+     */
+    public function hubspotRegister(Request $request , $event_id)
+    {
+        $client = new Client();
+        $url = "https://api.hubapi.com/contacts/v1/contact/?hapikey=e4f2017c-357e-4f2f-99d1-0dd3929f61e0";
+
+        $arr = array(
+            'properties' => array(
+                array(
+                    'property' => 'email',
+                    'value' => 'jeisson.salamanca@mocionsoft.com'
+                ),
+                array(
+                    'property' => 'firstname',
+                    'value' => 'Test'
+                ),
+                array(
+                    'property' => 'lastname',
+                    'value' => 'user'
+                )
+            )
+        );
+        
+
+        $response = $client->request('POST', $url, [
+            'body' => json_encode($arr),
+            'headers' => ['Content-Type' => 'application/json'],
+        ]);
+
+        return $response;
+    }
 }
