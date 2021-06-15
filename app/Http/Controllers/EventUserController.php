@@ -406,7 +406,10 @@ class EventUserController extends Controller
             return $eventUser;
         }
 
-        // $hubspot = self::hubspotRegister($request, $evet_id);
+        if($event_id == '60c8affc0b4f4b417d252b29')
+        {
+            return $hubspot = self::hubspotRegister($request, $event_id);
+        }
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
@@ -1044,23 +1047,35 @@ class EventUserController extends Controller
      * 
      */
     public function hubspotRegister(Request $request , $event_id)
-    {
+    {   
+        $eventUserData = $request->json()->all();
+        
+
         $client = new Client();
         $url = "https://api.hubapi.com/contacts/v1/contact/?hapikey=e4f2017c-357e-4f2f-99d1-0dd3929f61e0";
+        
 
         $arr = array(
             'properties' => array(
                 array(
-                    'property' => 'email',
-                    'value' => 'jeisson.salamanca@mocionsoft.com'
+                    'property' => 'firstname',
+                    'value' =>  $eventUserData['properties']['names']
                 ),
                 array(
-                    'property' => 'firstname',
-                    'value' => 'Test'
-                ),
+                    'property' => 'email',
+                    'value' => $eventUserData['properties']['email']
+                ),                
                 array(
                     'property' => 'lastname',
-                    'value' => 'user'
+                    'value' => $eventUserData['properties']['apellidos']
+                ),
+                array(
+                    'property' => 'city',
+                    'value' => $eventUserData['properties']['ciudad']
+                ),
+                array(
+                    'property' => '¿Participas cómo?',
+                    'value' => $eventUserData['properties']['participascomo']
                 )
             )
         );
@@ -1072,5 +1087,6 @@ class EventUserController extends Controller
         ]);
 
         return $response;
+        // return 'ok';
     }
 }
