@@ -13,6 +13,7 @@ use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 use App\evaLib\Services\GoogleFiles;use QRCode;
 use App;
+use GuzzleHttp\Client;
 
 class InvitationMail extends Mailable implements ShouldQueue
 {
@@ -44,12 +45,14 @@ class InvitationMail extends Mailable implements ShouldQueue
     public $onetimelogin;
     public $mensajepersonalizado;
     public $qr;
+    public $firebasePasswordChange;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false,$destination=null,$onlylink=null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false,$destination=null,$onlylink=null,  $firebasePasswordChange = null)
     {
 
         $locale = isset($event->language) ? $event->language : 'es';
@@ -82,8 +85,8 @@ class InvitationMail extends Mailable implements ShouldQueue
         
         
 
-        if($changePassword){
-            
+        if($changePassword)
+        {
             $password =  self::createPass();
             try {
                 $updatedUser = $this->auth->changeUserPassword($eventUser['user']['uid'], $password);
@@ -139,6 +142,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->changePassword = $changePassword;
         $this->onlylink = $onlylink;
         $this->mensajepersonalizado = $mensajepersonalizado;
+        $this->firebasePasswordChange = $firebasePasswordChange;
         
         
 
@@ -265,7 +269,8 @@ class InvitationMail extends Mailable implements ShouldQueue
         $locale = isset($this->event->language) ? $this->event->language : 'es';
         App::setLocale($locale);
 
-        if($this->changePassword){
+        if($this->changePassword)
+        {
             return $this
             ->from("alerts@evius.co", $from)
             ->subject($this->subject)

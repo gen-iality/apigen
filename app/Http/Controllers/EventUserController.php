@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Mail;
 use Validator;
+use Log;
+use GuzzleHttp\Client;
 
 /**
  * @group EventUser
@@ -404,6 +406,11 @@ class EventUserController extends Controller
             return $eventUser;
         }
 
+        if($event_id == '60c8affc0b4f4b417d252b29')
+        {
+            $hubspot = self::hubspotRegister($request, $event_id);
+        }
+
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
         if ($noSendMail === 'true') {
@@ -442,6 +449,8 @@ class EventUserController extends Controller
         $data = $request->json()->all();
         $destination = $request->input("destination");
         $onlylink = $request->input("onlylink");
+        $firebasePasswordChange = $request->input("firebase_password_change");
+
 
         //Validar si el usuario está registrado en el evento
         $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
@@ -454,13 +463,29 @@ class EventUserController extends Controller
         if (empty($eventUser)) {
             abort(401, "El correo ingresado no se encuentra registrado en el evento");
         }
+        if($firebasePasswordChange)
+        {
+            $client = new Client();
+            $url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
+            $headers = ['Content-Type' => 'application/json'];
 
-        //Envio de correo para la contraseña
-        Mail::to($email)
+            $request = $client->post($url,
+                [
+                    'json' => [
+                        "requestType" => "PASSWORD_RESET",
+                        "email" => $email
+                    ],
+                ],
+                ['headers' => $headers]
+            );
+        }else{
+             //Envio de correo para la contraseña
+            Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null, null, null, true, $destination, $onlylink)
+                new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null, null, null, true, $destination, $onlylink, $firebasePasswordChange)
             );
+        }       
         return $eventUser;
 
     }
@@ -870,7 +895,32 @@ class EventUserController extends Controller
     public function checkIn($id)
     {
         $eventUser = Attendee::findOrFail($id);
-        return $eventUser->checkIn();
+        if(!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false))
+        {
+            $eventUser->checkIn();            
+        }         
+
+        $printoutsHistory = [];
+        $eventUser->printouts  =$eventUser->printouts + 1 ;
+        $eventUser->printouts_at = \Carbon\Carbon::now();
+
+        $dataCheckIn = [
+            'printouts' => $eventUser->printouts,
+            'printouts_at' => $eventUser->printouts_at->format('Y-m-d H:i:s')
+        ]; 
+
+        if(is_null($eventUser->printouts_history)){
+            
+            $eventUser->printouts_history = array($dataCheckIn);
+        }else{
+            $array = $eventUser->printouts_history;
+            array_push($array, $dataCheckIn);    
+            $eventUser->printouts_history = $array;
+        }
+
+        $eventUser->save();
+
+        return $eventUser;
     }
 
     /**
@@ -885,6 +935,7 @@ class EventUserController extends Controller
     public function destroy(Request $request, $eventId, $eventUserId)
     {
         $attendee = Attendee::findOrFail($eventUserId);
+        Log::info("Anulando suscrpción del usuario  " . $attendee->account_id . " del evento " . $eventId);
         return (string) $attendee->delete();
     }
 
@@ -939,7 +990,99 @@ class EventUserController extends Controller
      */
     Public function unsubscribe($event_id , $event_user_id)
     {
-        $eventUser = Attendee::find($event_user_id)->delete();
+        $eventUser = Attendee::find($event_user_id);
+        Log::info("Anulando suscrpción del usuario  " . $eventUser->account_id . " del evento " . $event_id);
+        $eventUser->delete();
         return view('ManageUser.unsubscribe');
+    }
+
+    /**
+     * _totalMetricsByEvent_
+     * @autenticathed
+     * 
+     * @urlParam event_id
+     * 
+     */
+    public function totalMetricsByEvent(request $request, $event_id)
+    {
+        $data = $request->input();
+
+        $attendes = Attendee::where('event_id' ,$event_id);
+        
+        if(isset($data['datetime_from']) && isset($data['datetime_to']))
+        {
+            $attendes = $attendes->whereBetween(
+                'created_at',
+                array(
+                    \Carbon\Carbon::parse($data['datetime_from']),
+                    \Carbon\Carbon::parse($data['datetime_to'])
+                )
+            );
+        }
+        //1.Total de registros en el evento
+        $attendesTotal = $attendes->count();
+
+        //3.Visitias únicas totales
+        $checkIn = $attendes->where('checked_in', '!=', false)->count();
+
+        //2.Impresiones por evento
+        $totalPrintouts = 0;
+        $printouts = $attendes->where('printouts', '>', 0)->pluck('printouts');
+        foreach($printouts as $printout)
+        {
+            $totalPrintouts = $totalPrintouts +  $printout;
+        }
+        
+        return response()->json([
+            'total_users' => $attendesTotal,
+            'total_checkIn' => $checkIn,
+            'total_printouts' => $totalPrintouts
+        ]);
+
+    } 
+
+    
+    
+    /**
+     * 
+     */
+    public function hubspotRegister(Request $request , $event_id)
+    {   
+        $eventUserData = $request->json()->all();
+        
+
+        $client = new Client();
+        $url = "https://api.hubapi.com/contacts/v1/contact/?hapikey=e4f2017c-357e-4f2f-99d1-0dd3929f61e0";
+        
+
+        $arr = array(
+            'properties' => array(
+                array(
+                    'property' => 'firstname',
+                    'value' =>  $eventUserData['properties']['names']
+                ),
+                array(
+                    'property' => 'email',
+                    'value' => $eventUserData['properties']['email']
+                ),                
+                array(
+                    'property' => 'lastname',
+                    'value' => $eventUserData['properties']['apellidos']
+                ),
+                array(
+                    'property' => 'city',
+                    'value' => $eventUserData['properties']['ciudad']
+                )
+            )
+        );
+        
+
+        $response = $client->request('POST', $url, [
+            'body' => json_encode($arr),
+            'headers' => ['Content-Type' => 'application/json'],
+        ]);
+
+        return $response;
+        // return 'ok';
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\DiscountCode;
+use App\DiscountCodeMarinela;
 use App\DiscountCodeTemplate;
 use App\Mail\DiscountCodeMail;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -12,6 +13,7 @@ use Storage;
 use Validator;
 use Auth;
 use App\evaLib\Services\CodeServices;
+use Log;
 
 
 /**
@@ -332,12 +334,21 @@ class DiscountCodeController extends Controller
     {   
 
         $data = $request->json()->all();
-
+        $code = "";
         // The entered code is searched for to validate if it exists 
-            $code = isset($data['event_id']) ? 
-                DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
-                DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+            
         
+        if(isset($data['organization_id']) && $data['organization_id'] = '60467fbd9caef512a5626fc9')
+        {
+            $code = DiscountCodeMarinela::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+            // Log::info("Ingreso correcto de Marinela");
+
+        }else{
+            $code = isset($data['event_id']) ? 
+            DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
+            DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+        }
+
         if($code){
             $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
@@ -362,7 +373,16 @@ class DiscountCodeController extends Controller
     public function redeemPointCode(Request $request){
 
         $data = $request->json()->all();
-        $code = DiscountCode::where('code', $data['code'])->first();
+        $organization = $request->input('organization_id');
+
+        $code = "";
+        if(isset($organization) &&  $organization = '60467fbd9caef512a5626fc9')
+        {
+            $code = DiscountCodeMarinela::where('code', $data['code'])->first();
+            // Log::info("Ingreso correcto de Marinela");
+        }else{
+            $code = DiscountCode::where('code', $data['code'])->first();
+        }
         
         //authenticated user
         $user = Auth::user();     
@@ -384,5 +404,15 @@ class DiscountCodeController extends Controller
         }
                         
         return abort(403 , 'El código ya se uso');    
-    }    
+    }   
+    
+    /**
+     * 
+     */
+    public function deleteCodesByTemplate(Request $request)
+    {
+        $discountTemplate = '604683bb8992c135e86dca04';
+        $code = DiscountCode::where('discount_code_template_id' ,$discountTemplate)->paginate(100000);
+        return $code;
+    }
 }

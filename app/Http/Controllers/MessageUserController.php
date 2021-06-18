@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\MessageUserResource;
 use App\MessageUser;
+use App\Event;
 use Illuminate\Http\Request;
+use App\evaLib\Services\FilterQuery;
 
 /**
  * Verb          Path                              Action  Route Name
@@ -91,5 +93,20 @@ class MessageUserController extends Controller
     {
         $book->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     */
+    public function indexMessage(Request $request, $event_id, $message_id)
+    {
+       $event = Event::findOrfail($event_id);
+
+       //páginacion pordefecto
+       $pageSize = (int) $request->input('pageSize');
+       $pageSize = ($pageSize) ? $pageSize : config('app.page_size');
+       $messageUser = MessageUser::where('message_id' , $message_id)->orderBy('created_at','desc')->paginate($pageSize, ['id' , 'email', 'status']);
+       return MessageUserResource::collection($messageUser);
     }
 }

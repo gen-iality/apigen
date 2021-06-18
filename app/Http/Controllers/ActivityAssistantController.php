@@ -462,6 +462,47 @@ class ActivityAssistantController extends Controller
         return $ActivityAssistant;
     }
 
+     /**
+     * _totalMetricsByActivity_
+     * @autenticathed
+     * 
+     * @urlParam event_id
+     * 
+     */
+    public function totalMetricsByActivity($event_id)
+    {
+
+        $activities = Activities::where('event_id' ,$event_id)->get();
+
+        $activityMetrics = [];
+       
+        foreach($activities as $activity)
+        {   
+           
+            $checkIn = ActivityAssistant::where('activity_id' ,$activity->_id)->where('checked_in', '!=', false)->count();
+            
+            $printouts = ActivityAssistant::where('activity_id' ,$activity->_id)->where('printouts', '>', 0)->pluck('printouts');
+            $totalPrintouts = 0;
+            foreach($printouts as $printout)
+            {
+                $totalPrintouts = $totalPrintouts +  $printout;
+            }
+
+            $activityAssistant = response()->json([
+                '_id' => $activity->_id,
+                'name' => $activity->name,
+                'total_checkIn' => $checkIn,
+                'total_printouts' => $totalPrintouts
+            ]);
+
+            array_push($activityMetrics , $activityAssistant->original );
+        }
+        
+        return $activityMetrics;
+
+    } 
+
+
    
 
 }
