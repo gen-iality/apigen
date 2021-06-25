@@ -256,12 +256,12 @@ Route::apiResource('events', 'EventController');
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events', 'EventController', ['except' => ['index', 'show']])->middleware('permission:Tiquetes');
+        Route::apiResource('events', 'EventController', ['except' => ['index', 'show']])->middleware('permission:create_event|update_event|destroy_event');
         Route::get('me/events', 'EventController@currentUserindex');
-        //this routes should be erased after front migration
-        Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
-        Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
-        Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent');        
+        //this routes should be erased after front migration        
+        Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex')->middleware('permission:list_event');
+        Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent')->middleware('permission:update_event');
+        Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);        
     }
 );
 

@@ -13,7 +13,7 @@ class PermissionMiddleware
 {
     public function handle($request, Closure $next, $permission)
     {   
-
+        
         $user = Auth::user();
 
         if ($user  === null) {
@@ -23,25 +23,31 @@ class PermissionMiddleware
         $permissions = is_array($permission)
         ? $permission
         : explode('|', $permission);
-
-        $userRol = ModelHasRole::where('model_id' , $user->_id)->first(['rol_id']);
-        
-        $permissionsUser = Permission::where('role_ids', $userRol->rol_id)->get();
-        
-
-        
-        foreach ($permissions as $permission) 
-        {
-            foreach ($permissionsUser as $permissionUser) 
-            {
                 
-                if($permissionUser->name === $permission)
+        $userRol = ModelHasRole::where('model_id' , $user->_id)
+                    ->where('event_id' , $request->route()->parameter('event'))
+                    ->first(['rol_id']);
+
+
+        if($userRol !== null)
+        {    
+            $permissionsUser = Permission::where('role_ids', $userRol->rol_id)->get();   
+                            
+            
+            foreach ($permissions as $permission) 
+            {   
+                foreach ($permissionsUser as $permissionUser) 
                 {   
-                    return $next($request);
-                }    
+                    $permissionAccepted = $permissionUser::where('name' ,$permission)->first();    
+                               
+                    if($permissionAccepted !== null)
+                    {   
+                        return $next($request);
+                    }  
+                } 
             }
         }
-
-        throw UnauthorizedException::forPermissions($permissions);   
+        throw UnauthorizedException::forPermissions($permissions);  
+         
     }
 }
