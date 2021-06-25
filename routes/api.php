@@ -32,10 +32,10 @@ Route::get('aws/sendemail', 'AwsSnsController@testEmail');
 Route::get('aws/test', 'AwsSnsController@testreqS3');
 
 
-// Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
-// Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
-// // Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
-// Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
+Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
+Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
+// Route::post('duncan/invitaramigos', 'DuncanGameController@invitaramigos');
+Route::get('duncan/setphoneaspassword', 'DuncanGameController@setphoneaspassword');
 
 Route::get('test/serialization', 'TestingController@serialization');
 Route::get('test/queue', 'TestingController@testQueue');

@@ -1085,4 +1085,62 @@ class EventUserController extends Controller
         return $response;
         // return 'ok';
     }
+
+
+        /**
+     * _metricsEventByDate_: number of registered users per day according to event start and end dates
+     */
+    public function metricsEventByDate(Request $request, $event_id)
+    {
+
+        $data = $request->input();
+        $event = Event::findOrFail($event_id);
+        
+        $dateFrom = \Carbon\Carbon::parse($event->datetime_from)->format('Y-m-d');
+        $dateTo = \Carbon\Carbon::parse($event->datetime_to)->format('Y-m-d');
+
+
+
+        $attendees = Attendee::where('event_id' , $event_id)
+        ->whereBetween(
+            $data['metrics_type'],
+            array(
+                \Carbon\Carbon::parse($dateFrom),
+                \Carbon\Carbon::parse($dateTo)
+                
+            )
+        )
+        ->get([$data['metrics_type']]);
+        
+        switch($data['metrics_type']){
+            case "created_at";
+                $attendees = $attendees->groupBy(function($date) {            
+                    return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d');             
+                });
+            break;
+            case "checkedin_at";
+                $attendees = $attendees->groupBy(function($date) {            
+                    return \Carbon\Carbon::parse($date->checkedin_at)->format('Y-m-d');             
+                });
+            break;
+        }
+        
+
+       
+        $totalForDate = [];
+        foreach($attendees as $key => $attendee)
+        {   
+            
+            $count = count($attendee);
+            $response = response()->json([
+                'date' => $key,
+                'quantity' => $count
+            ]);
+
+            array_push($totalForDate , $response->original);
+        }
+
+        return $totalForDate;
+
+    }    
 }
