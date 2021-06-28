@@ -5,6 +5,7 @@
 namespace App\evaLib\Services;
 
 use App\Attendee;
+use App\ModelHasRole;
 use App\OrganizationUser;
 use App\Account;
 use App\Rol;
@@ -50,17 +51,30 @@ class EvaRol
 
     public function createAuthorAsOrganizationAdmin($authorId, $organizationId)
     {
-        if (!$authorId) {
-            return '';
-        }
-        $rol = Rol::where('level', -1)->first();
-        $userOrg = [
-            'account_id' => $authorId,
+        // if (!$authorId) {
+        //     return '';
+        // }
+        // $rol = Rol::where('level', -1)->first();
+        // $userOrg = [
+        //     'account_id' => $authorId,
+        //     'organization_id' => $organizationId,
+        //     'rol_id' => $rol->_id,
+        // ];
+        // $userToOrg = new OrganizationUser($userOrg);
+        // $userToOrg->save();
+
+        //Create user rol admin
+        $rolAdmin = Rol::where('name', 'Administrador')->first();
+              
+
+        $userAdmin = [
+            'model_id' => $authorId,
+            'role_id' => $rolAdmin->_id,
             'organization_id' => $organizationId,
-            'rol_id' => $rol->_id,
-        ];
-        $userToOrg = new OrganizationUser($userOrg);
-        $userToOrg->save();
-        return true;
+            'model_type' => "App\Account"
+        ];        
+        $userToAdmin = new ModelHasRole($userAdmin);
+        $userToAdmin->save();
+        return true;        
     }
 }

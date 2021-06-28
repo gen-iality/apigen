@@ -13,7 +13,7 @@ class PermissionMiddleware
 {
     public function handle($request, Closure $next, $permission)
     {   
-        
+        dd($request->route());
         $user = Auth::user();
 
         if ($user  === null) {
