@@ -338,7 +338,7 @@ class UserController extends UserControllerWeb
             $url_final_params["error"] = $e->getMessage();
 
         } finally {
-            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url');
+            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url') . '/events';
             return redirect()->away($destination . "?" . http_build_query($url_final_params));
         }
 
