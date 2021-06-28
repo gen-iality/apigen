@@ -68,7 +68,7 @@ class ActivitiesController extends Controller
     /**
      * _store_: create a new activity
      *
-     * @urlParam event_id id of the event in which a new activity is to be created Example: 5fa423eee086ea2d1163343e
+     * @urlParam event id of the event in which a new activity is to be created Example: 5fa423eee086ea2d1163343e
      *
      * @bodyParam name string required name Example: PRIMERA ACTIVIDAD
      * @bodyParam subtitle string optional Example: Subtitulo primera actividad

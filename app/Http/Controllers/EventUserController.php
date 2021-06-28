@@ -1059,20 +1059,48 @@ class EventUserController extends Controller
             'properties' => array(
                 array(
                     'property' => 'firstname',
-                    'value' =>  $eventUserData['properties']['names']
+                    'value' =>  'Prueba'
                 ),
                 array(
                     'property' => 'email',
-                    'value' => $eventUserData['properties']['email']
+                    'value' => 'geraldine.garcia+3@mocionsoft.com'
                 ),                
                 array(
                     'property' => 'lastname',
-                    'value' => $eventUserData['properties']['apellidos']
+                    'value' => 'Test'
                 ),
                 array(
                     'property' => 'city',
-                    'value' => $eventUserData['properties']['ciudad']
-                )
+                    'value' => 'Dato de prueba'
+                ),
+                // array(
+                //     'property' => 'sectorempresa',
+                //     'value' => 'Dato de prueba'
+                // ),
+                // array(
+                //     'property' => 'objeto-negocio',
+                //     'value' => 'ambos'
+                // ),
+                // array(
+                //     'property' => 'tipo-objeto-negocio',
+                //     'value' => 'Dato de prueba'
+                // ),
+                // array(
+                //     'property' => 'Nombre de la empresa',
+                //     'value' => 'Dato de prueba'
+                // ),
+                array(
+                    'property' => 'cedula',
+                    'value' =>  '123456'
+                ),
+                // array(
+                //     'property' => 'Nit',
+                //     'value' =>  123456-8
+                // ),
+                // array(
+                //     'property' => 'origen-Lead',
+                //     'value' => 'MeetUps'
+                // ),
             )
         );
         

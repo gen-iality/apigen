@@ -67,6 +67,9 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
  * eventUsers
  ****************/
 //CRUD
+Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::put('events/{event}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+
 Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
 Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
 Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
@@ -81,8 +84,7 @@ Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
-Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
-Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+
 
 
 // // api para transferir eventuser
@@ -151,7 +153,8 @@ Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationC
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
+        Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show', 'store']])->middleware('permission:update_organization');
+        Route::post('organizations' , 'OrganizationController@store');
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
         // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
@@ -259,7 +262,7 @@ Route::group(
         Route::apiResource('events', 'EventController', ['except' => ['index', 'show']])->middleware('permission:create_event|update_event|destroy_event');
         Route::get('me/events', 'EventController@currentUserindex');
         //this routes should be erased after front migration        
-        Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex')->middleware('permission:list_event');
+        Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
         Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent')->middleware('permission:update_event');
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);        
     }
@@ -325,6 +328,7 @@ Route::group(
     }
 );
 
+Route::post('crearPermisosRol' , 'RolController@crearPermisosRol');
 /***************
  * Certificate
  ****************/
@@ -508,7 +512,7 @@ Route::get('states', 'StateController@index');
 //RSVP
 Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
-Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
+Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP')->middleware('permission:send_email_event');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');

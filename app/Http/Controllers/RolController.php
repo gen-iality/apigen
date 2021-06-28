@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rol;
 use Illuminate\Http\Request;
+use App\Permission;
 
 /**
  * @group Rol
@@ -102,5 +103,25 @@ class RolController extends Controller
     public function destroy(Rol $rol)
     {
         //
+    }
+
+    /**
+     * 
+     */
+    public function crearPermisosRol(Request $request)
+    {
+        $data = $request->json()->all();
+        $rolAdmin = Rol::where('name' , 'Administrador')->first();
+        
+        $permission = new Permission($data);
+        $permission->save();
+        $permission->role_ids = [$rolAdmin->_id];
+        $permission->save();
+
+
+        $rolInPermission = $rolAdmin->permission_ids;
+        array_push($rolInPermission , $permission->_id );
+        $rolAdmin->permission_ids = $rolInPermission;
+        $rolAdmin->save();
     }
 }

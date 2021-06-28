@@ -7,11 +7,11 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
  * SPACES
  ****************/
 
-Route::get ('events/{event_id}/spaces', 'SpaceController@index')->middleware('cacheResponse');
-Route::post ('events/{event_id}/spaces', 'SpaceController@store');
-Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show')->middleware('cacheResponse');
-Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
-Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
+Route::get ('events/{event}/spaces', 'SpaceController@index')->middleware('cacheResponse');
+Route::post ('events/{event}/spaces', 'SpaceController@store')->middleware('permission:create_space');
+Route::get ('events/{event}/spaces/{id}', 'SpaceController@show')->middleware('cacheResponse');
+Route::put ('events/{event}/spaces/{id}', 'SpaceController@update')->middleware('permission:update_space');
+Route::delete('events/{event}/spaces/{id}', 'SpaceController@destroy')->middleware('permission:destroy_space');
 
 
 /****************
@@ -49,7 +49,9 @@ Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequest
  ****************/
 
 Route::post  ('events/{event_id}/duplicatehost/{id}','HostController@duplicate');
-Route::apiResource('events/{event_id}/host', 'HostController');
+Route::apiResource('events/{event_id}/host', 'HostController', ['except' => ['index', 'show']])->middleware('permission:create_host|update_host|destroy_host');
+Route::apiResource('events/{event_id}/host', 'HostController', ['only' => ['index', 'show']]);
+
 
 /***************
  * ACTIVITIES
@@ -58,7 +60,8 @@ Route::apiResource('events/{event_id}/host', 'HostController');
 Route::post  ('/meetingrecording',      'ActivitiesController@storeMeetingRecording');
 Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
-Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
+Route::apiResource('events/{event}/activities', 'ActivitiesController' , ['except' => ['index', 'show']])->middleware('permission:create_activity|update_activity|destroy_activity');
+Route::apiResource('events/{event}/activities', 'ActivitiesController' , ['only' => ['index', 'show']]);
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
 Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
 Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');

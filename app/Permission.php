@@ -7,5 +7,5 @@ use Moloquent;
 class Permission extends Moloquent
 {
     //
-    protected $fillable = [ 'event_id', 'user_id', 'rol_id'];
+    protected $fillable = [ 'event_id', 'user_id', 'rol_id', 'name', 'guard_name'];
 }
