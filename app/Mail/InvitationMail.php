@@ -133,7 +133,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         $this->image = ($image) ? $image : null;
         $this->activity = $activity;
         $this->message = $message;
-        $this->image_footer = $image_footer;
+        $this->image_footer = isset($image_footer) ? $image_footer : $event->styles['banner_footer_email'];
         $this->image_footer_default = (isset($event->styles) && isset($event->styles['banner_footer']) && $event->styles['banner_footer']) ? $event->styles['banner_footer'] : null;
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
