@@ -15,7 +15,7 @@ use App\evaLib\Services\GoogleFiles;use QRCode;
 use App;
 use GuzzleHttp\Client;
 
-class InvitationMail extends Mailable implements ShouldQueue
+class InvitationMailSimple extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
