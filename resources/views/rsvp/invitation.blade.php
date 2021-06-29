@@ -88,12 +88,12 @@ Ingresar al Evento AQUÍ
 	<!-- ![Logo]({{!empty($image_footer)}}) -->
 	<img alt="{{$event->name}}" src={{$image_footer}} /> 
 	
-@elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
+{{-- @elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
 <img alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} />  
 @elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
 <img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
 @elseif(isset($organization_picture) && !empty($organization_picture))
-<img alt="{{$event->name}}" src={{$organization_picture}} />           
+<img alt="{{$event->name}}" src={{$organization_picture}} />            --}}
 @endif
 
 </div>
