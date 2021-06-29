@@ -1,31 +1,67 @@
-@component('mail::message')  
-**Hola {{$eventUser_name}} **, su inscripción se ha realizado con éxito al evento:
+@component('mail::message')    
+@if(!empty($event->styles["banner_image_email"]))
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
+</div>
+{{-- @elseif(!empty($event->styles["banner_image"]))
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
+</div> --}}
+@endif
+<br />
+<br />
+** {{ __ ('Mail.greeting')}} {{$eventUser_name}}**, {{ __ ('Mail.successful_enrollment')}}:
+<b>{{$event->name}}</b>
 
+{{-- Mensaje configurable desde el CMS en la sección configuración asistentes --}}
+@if($event->registration_message )
 
-<!-- Mensaje configurable desde el CMS en la sección configuración asistentes -->
-<!-- @if ($event->registration_message )
-<a href="{{$link}}" target="_blank">
 {!!$event->registration_message!!}
-</a>
-@endif -->
 
-<a href="{{$link}}"><img src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/MckinseyRegistroImagen.jpeg?alt=media&token=8b5ff869-8215-47af-9098-770d3131ead6"/> </a>
+@endif
 
-
-<!-- Por si tiene asociado un tickete con sala -->
+ {{-- Por si tiene asociado un tickete con sala  --}}
 @if(!empty($eventUser->ticket_title))
 <strong>{!! $eventUser->ticket_title!!} </strong>
 @endif
 
+@if(!empty($event->styles["event_image"]))
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["event_image"]}} /> 
+</div>
+@endif
+
+<div style="text-align: center">
+@component('mail::button', ['url' => $link , 'color' => 'evius'])
+{{ __ ('Mail.enter_event')}}
+@endcomponent
+</div>
+
+<hr style="border-right : 0;border-left: 0;" />
+<div style="text-align: center">
+<p style="font-size: 15px;color: gray;font-style: italic">
+Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, algunas características pueden no estar disponibles en navegadores no soportados
+</p>
+<p style="font-size: 15px;color: gray;font-style: italic">
+Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co
+</p>
+</div>
+
 <p>
-	Si tiene problemas con el ingreso abra el siguiente enlace
-	<a href="{{$link}}">click acá</a>
+	Si tiene problemas con el botón de ingreso abra el siguiente enlace
+	<a href="{{$link}}">Clic aquí</a>
 </p>
 
-<p style="font-size: 15px;color: gray;font-style: italic">
-Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
-</p>
-  
+<div class="centered">
+@if(isset($image_footer) && !empty($image_footer))
+	<img alt="{{$event->name}}" src={{$image_footer}} /> 	
+	@elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
+	<img alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} />  
+	@elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
+	<img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
+	@elseif(isset($organization_picture) && !empty($organization_picture))
+	<img alt="{{$event->name}}" src={{$organization_picture}} /> 
+@endif
 
 </div>
 @endcomponent

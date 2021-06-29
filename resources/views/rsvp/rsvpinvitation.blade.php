@@ -39,7 +39,13 @@
 </div>
 
 
-
+<div>
+	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			{{ __ ('Mail.enter_event')}}
+		@endcomponent
+	@endif
+</div>
 <div class="centered">
 @if(!empty($image))
 <img alt="{{$event->name}}" src="{{ $image }}">
@@ -53,13 +59,7 @@
 {!!$event->registration_message!!}
 @endif
 
-<div>
-	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
-		@component('mail::button', ['url' => $link , 'color' => 'evius'])
-			{{ __ ('Mail.enter_event')}}
-		@endcomponent
-	@endif
-</div>
+
 
 <hr style="border-right : 0;border-left: 0;">
 
