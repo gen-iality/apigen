@@ -41,8 +41,11 @@ Route::get('events/{event}/newsfeed/{new}', 'NewsfeedController@show');
 /****************
  * SURVEYS
  ****************/
-
-Route::apiResource('events/{id}/surveys', 'SurveysController');
+Route::get('events/{event}/surveys', 'SurveysController@index');
+Route::put('events/{event}/surveys', 'SurveysController@update')->middleware('permission:update_survey');
+Route::post('events/{event}/surveys', 'SurveysController@store')->middleware('permission:create_survey');
+Route::delete('events/{event}/surveys/{survey}', 'SurveysController@destroy')->middleware('permission:destroy_survey');
+Route::get('events/{event}/surveys/{survey}', 'SurveysController@show');
 Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequestions');
 
 
