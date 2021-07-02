@@ -147,6 +147,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -231,8 +232,7 @@ return [
     |
      */
 
-    'aliases' => [
-
+    'aliases' => [        
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -290,7 +290,7 @@ return [
         //Not support by this version 'PDF' => Nitmedia\Wkhtml2pdf\Facades\Wkhtml2pdf::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
-
+        'AnalyticsIpunkt' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
     ],
 
 ];

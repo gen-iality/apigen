@@ -8,6 +8,8 @@ use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Kreait\Firebase\Factory;
+use App\Services\SocialUserResolver;
+use Coderello\SocialGrant\Resolvers\SocialUserResolverInterface;
 
 //use Kreait\Firebase\Auth;
 
@@ -18,6 +20,10 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      *
      * @return void
      */
+    public $bindings = [
+        SocialUserResolverInterface::class => SocialUserResolver::class,
+    ];
+    
     public function boot()
     {
 

@@ -27,10 +27,15 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 */
 // Route::get('s3aws/{prefix?}', 'AwsS3Controller');
 
+
+Route::get('googleanalitycs', 'GoogleAnalitycsController');
+Route::get('oauth2callback', 'Oath2Callback');
+// ->middleware('auth.googleA');
+
+
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
 Route::get('aws/sendemail', 'AwsSnsController@testEmail');
 Route::get('aws/test', 'AwsSnsController@testreqS3');
-
 
 Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
 Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
