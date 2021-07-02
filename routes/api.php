@@ -199,11 +199,15 @@ Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@inde
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post("events/{event_id}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
+        Route::get('events/{event}/invitation', 'InvitationController@index')->middleware('permission:index_invitation');
+        Route::put('events/{event}/invitation/{invitation}', 'InvitationController@update')->middleware('permission:update_invitation');
+        Route::post('events/{event}/invitation', 'InvitationController@store');
+        Route::delete('events/{event}/invitation/{invitation}', 'InvitationController@destroy');
+        Route::get('events/{event}/invitation/{invitation}', 'InvitationController@show');
     }
 );
 
 Route::post("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
-Route::apiResource("events/{event_id}/invitation", "InvitationController");
 
 /****************
  * Users Organization
