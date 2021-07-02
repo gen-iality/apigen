@@ -10,7 +10,7 @@ Route::get ('events/{event}/spaces', 'SpaceController@index')->middleware('cache
 Route::post ('events/{event}/spaces', 'SpaceController@store')->middleware('permission:create_space');
 Route::get ('events/{event}/spaces/{id}', 'SpaceController@show')->middleware('cacheResponse');
 Route::put ('events/{event}/spaces/{id}', 'SpaceController@update')->middleware('permission:update_space');
-Route::delete('events/{event}/spaces/{id}', 'SpaceController@delete')->middleware('permission:delete_space');
+Route::delete('events/{event}/spaces/{id}', 'SpaceController@destroy')->middleware('permission:destroy_space');
 
 
 /****************
