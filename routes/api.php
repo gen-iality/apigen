@@ -300,9 +300,7 @@ Route::apiResource('events/{event_id}/mailing', 'MailController');
 /***************
  * CERTIFICATES
  ****************/
-
 Route::post('generatecertificate', 'CertificateController@generateCertificate');
-
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::get('events/{event}/certficates', 'CertificateController@index');
@@ -311,13 +309,6 @@ Route::group(
         Route::delete('events/{event}/certficates/{certificate}', 'CertificateController@destroy')->middleware('permission:destroy_certificates');
         Route::get('events/{event}/certficates/{certificate}', 'CertificateController@show');
         Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
-    }
-);
-
-Route::group(
-    ['middleware' => 'auth:token'], function () {
-        Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
-        Route::delete('certificates/{id}', 'CertificateController@destroy');
     }
 );
 
