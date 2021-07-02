@@ -32,7 +32,7 @@ Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
  * NEWSFEED
  ****************/
 Route::get('events/{event}/newsfeed', 'NewsfeedController@index');
-Route::put('events/{event}/newsfeed', 'NewsfeedController@update')->middleware('permission:update_news');
+Route::put('events/{event}/newsfeed/{new}', 'NewsfeedController@update')->middleware('permission:update_news');
 Route::post('events/{event}/newsfeed', 'NewsfeedController@store')->middleware('permission:create_news');
 Route::delete('events/{event}/newsfeed/{new}', 'NewsfeedController@destroy')->middleware('permission:destroy_news');
 Route::get('events/{event}/newsfeed/{new}', 'NewsfeedController@show');
@@ -42,7 +42,7 @@ Route::get('events/{event}/newsfeed/{new}', 'NewsfeedController@show');
  * SURVEYS
  ****************/
 Route::get('events/{event}/surveys', 'SurveysController@index');
-Route::put('events/{event}/surveys', 'SurveysController@update')->middleware('permission:update_survey');
+Route::put('events/{event}/surveys/{survey}', 'SurveysController@update')->middleware('permission:update_survey');
 Route::post('events/{event}/surveys', 'SurveysController@store')->middleware('permission:create_survey');
 Route::delete('events/{event}/surveys/{survey}', 'SurveysController@destroy')->middleware('permission:destroy_survey');
 Route::get('events/{event}/surveys/{survey}', 'SurveysController@show');
