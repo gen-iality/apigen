@@ -122,8 +122,8 @@ Route::get('event/{event_id}/notifications/{id}', 'PushNotificationsController@i
 Route::get('events/{event}/documents', 'DocumentsController@index');
 Route::put('events/{event}/documents', 'DocumentsController@update')->middleware('permission:update_documents');
 Route::post('events/{event}/documents', 'DocumentsController@store')->middleware('permission:create_documents');
-Route::delete('events/{event}/documents/{new}', 'DocumentsController@delete')->middleware('permission:delete_documents');
-Route::get('events/{event}/documents/{new}', 'DocumentsController@show');
+Route::delete('events/{event}/documents/{document}', 'DocumentsController@destroy')->middleware('permission:destroy_documents');
+Route::get('events/{event}/documents/{document}', 'DocumentsController@show');
 Route::get('events/{event_id}/getallfiles/', 'DocumentsController@indexFiles');
  
 
@@ -140,8 +140,8 @@ Route::apiResource('events/{event_id}/wall', 'WallController');
 Route::get('events/{event}/faqs', 'FaqController@index');
 Route::put('events/{event}/faqs', 'FaqController@update')->middleware('permission:update_faqs');
 Route::post('events/{event}/faqs', 'FaqController@store')->middleware('permission:create_faqs');
-Route::delete('events/{event}/faqs/{new}', 'FaqController@delete')->middleware('permission:delete_faqs');
-Route::get('events/{event}/faqs/{new}', 'FaqController@show');
+Route::delete('events/{event}/faqs/{faqs}', 'FaqController@delete')->middleware('permission:delete_faqs');
+Route::get('events/{event}/faqs/{faqs}', 'FaqController@show');
 
 Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
 
