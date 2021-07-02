@@ -53,7 +53,7 @@ Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequest
 Route::get('events/{event}/host', 'HostController@index');
 Route::put('events/{event}/host', 'HostController@update')->middleware('permission:update_host');
 Route::post('events/{event}/host', 'HostController@store')->middleware('permission:create_host');
-Route::delete('events/{event}/host/{host}', 'HostController@delete')->middleware('permission:delete_host');
+Route::delete('events/{event}/host/{host}', 'HostController@delete')->middleware('permission:destroy_host');
 Route::get('events/{event}/host/{host}', 'HostController@show');
 Route::post  ('events/{event_id}/duplicatehost/{id}','HostController@duplicate');
 
