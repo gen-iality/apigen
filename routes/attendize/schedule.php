@@ -138,7 +138,7 @@ Route::apiResource('events/{event_id}/wall', 'WallController');
  * FAQ'S
  ******************/
 Route::get('events/{event}/faqs', 'FaqController@index');
-Route::put('events/{event}/faqs', 'FaqController@update')->middleware('permission:update_faqs');
+Route::put('events/{event}/faqs/{faqs}', 'FaqController@update')->middleware('permission:update_faqs');
 Route::post('events/{event}/faqs', 'FaqController@store')->middleware('permission:create_faqs');
 Route::delete('events/{event}/faqs/{faqs}', 'FaqController@delete')->middleware('permission:delete_faqs');
 Route::get('events/{event}/faqs/{faqs}', 'FaqController@show');
