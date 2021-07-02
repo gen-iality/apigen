@@ -50,10 +50,13 @@ Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequest
  * HOST
  * rutas para guardar la agenda de los eventos
  ****************/
-
+Route::get('events/{event}/host', 'HostController@index');
+Route::put('events/{event}/host', 'HostController@update')->middleware('permission:update_host');
+Route::post('events/{event}/host', 'HostController@store')->middleware('permission:create_host');
+Route::delete('events/{event}/host/{host}', 'HostController@delete')->middleware('permission:delete_host');
+Route::get('events/{event}/host/{host}', 'HostController@show');
 Route::post  ('events/{event_id}/duplicatehost/{id}','HostController@duplicate');
-Route::apiResource('events/{event_id}/host', 'HostController', ['except' => ['index', 'show']])->middleware('permission:create_host|update_host|delete_host');
-Route::apiResource('events/{event_id}/host', 'HostController', ['only' => ['index', 'show']]);
+
 
 
 /***************
