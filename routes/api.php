@@ -70,15 +70,15 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
 Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 Route::put('events/{event}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
 
-Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
-Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
-Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
-Route::post( 'events/{event_id}/eventusers',     'EventUserController@store');
-Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
-Route::get('events/{event_id}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
-Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
-Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
+Route::get( 'events/{event}/eventusers',      'EventUserController@index');
+Route::get( 'events/{event}/eventUsers',      'EventUserController@index');
+Route::get( 'events/{event}/eventusers/{id}', 'EventUserController@show');
+Route::put( 'events/{event}/eventusers/{id}', 'EventUserController@update')->middleware('permission:update_eventusers');
+Route::post( 'events/{event}/eventusers',     'EventUserController@store')->middleware('permission:create_eventusers');
+Route::delete('events/{event}/eventusers/{id}', 'EventUserController@destroy')->middleware('permission:destroy_eventusers');
+Route::get('events/{event}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
+Route::get('me/eventusers/event/{event}', 'EventUserController@indexByUserInEvent');
+Route::get('events/{event}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
 
@@ -125,22 +125,26 @@ Route::get('events/{event_id}/hubspotRegister/eventusers',        'EventUserCont
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento
  ****************/
 //Route::get    ('events/{event_id}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
-Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantController');
-Route::get('events/{event_id}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
-Route::get    ('me/events/{event_id}/activities_attendees',  'ActivityAssistantController@meIndex');
-Route::put    ('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
-Route::get    ('events/{event_id}/totalmetricsbyactivity',                'ActivityAssistantController@totalMetricsByActivity');
+Route::get( 'events/{event}/activities_attendees',      'ActivityAssistantController@index');
+Route::get( 'events/{event}/activities_attendees/{id}', 'ActivityAssistantController@show');
+Route::put( 'events/{event}/activities_attendees/{id}', 'ActivityAssistantController@update')->middleware('permission:update_activities_attendees');
+Route::post( 'events/{event}/activities_attendees',     'ActivityAssistantController@store')->middleware('permission:create_activities_attendees');
+Route::delete('events/{event}/activities_attendees/{id}', 'ActivityAssistantController@destroy')->middleware('permission:destroy_activities_attendees');
+Route::get('events/{event}/activities_attendees', 'ActivityAssistantController@indexForAdmin');
+Route::get('me/events/{event}/activities_attendees',  'ActivityAssistantController@meIndex');
+Route::put('events/{event}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
+Route::get('events/{event}/totalmetricsbyactivity',                'ActivityAssistantController@totalMetricsByActivity');
 
 
 /***************
  * USER PROPERTIES
  ****************/
-Route::get('events/{event_id}/userproperties', 'UserPropertiesController@index');
-Route::post('events/{event_id}/userproperties', 'UserPropertiesController@store');
-Route::get('events/{event_id}/userproperties/{id}', 'UserPropertiesController@show');
-Route::put('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
-Route::put('events/{event_id}/userproperties/{id}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
-Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
+Route::get('events/{event}/userproperties', 'UserPropertiesController@index');
+Route::post('events/{event}/userproperties', 'UserPropertiesController@store')->middleware('permission:create_userproperties');
+Route::get('events/{event}/userproperties/{id}', 'UserPropertiesController@show');
+Route::put('events/{event}/userproperties/{id}', 'UserPropertiesController@update')->middleware('permission:update_userproperties');
+Route::put('events/{event}/userproperties/{id}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
+Route::delete('events/{event}/userproperties/{id}', 'UserPropertiesController@destroy')->middleware('permission:destroy_userproperties');
 
 /****************
  * organizations
@@ -244,26 +248,18 @@ Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
 /****************
  * Events
  ****************/
-// Este Route::group es un expermimento para detectar a el usuario logueado
-// pero sin producir ningun tipo de errores.
-// Route::group(
-//     ['middleware' => 'tokenauth:token'], function () {
-
-
 Route::apiResource('events', 'EventController');
-
-
-//Route::get("eventsearch",'EventController');
-//     }
-// );
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events', 'EventController', ['except' => ['index', 'show']])->middleware('permission:create_event|update_event|destroy_event');
-        Route::get('me/events', 'EventController@currentUserindex');
-        //this routes should be erased after front migration        
+        Route::apiResource('events', 'EventController', ['except' => ['index', 'show']]);
+        Route::post('events', 'EventController@store')->middleware('permission:create_event');
+        Route::put('events/{event}', 'EventController@update')->middleware('permission:update_event');
+        Route::delete('events/{event}' , 'EventController@destroy')->middleware('permission:destroy_event');
+        Route::put('events/{event}/changeStatusEvent' , 'EventController@changeStatusEvent')->middleware('permission:update_event');
+
+        Route::get('me/events', 'EventController@currentUserindex');  
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
-        Route::put('events/{event_id}/changeStatusEvent' , 'EventController@changeStatusEvent')->middleware('permission:update_event');
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);        
     }
 );
@@ -329,6 +325,8 @@ Route::group(
 );
 
 Route::post('crearPermisosRol' , 'RolController@crearPermisosRol');
+Route::post('assignPermisosRol' , 'RolController@assignPermisosRol');
+
 /***************
  * Certificate
  ****************/
@@ -381,11 +379,11 @@ Route::group(
 
         //no sabemos como anteponerle el evento al apiresource lo deshabilitamos
         //Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
-        Route::get('events/{event_id}/contributors', 'ContributorController@index');
-        Route::post('events/{event_id}/contributors', 'ContributorController@store');
-        Route::get('events/{event_id}/contributors/{id}', 'ContributorController@show');
-        Route::put('events/{event_id}/contributors/{id}', 'ContributorController@update');
-        Route::delete('events/{event_id}/contributors/{id}', 'ContributorController@destroy');
+        Route::get('events/{event}/contributors', 'ContributorController@index');
+        Route::post('events/{event}/contributors', 'ContributorController@store')->middleware('permission:create_contributor');
+        Route::get('events/{event}/contributors/{id}', 'ContributorController@show');
+        Route::put('events/{event}/contributors/{id}', 'ContributorController@update')->middleware('permission:update_contributor');
+        Route::delete('events/{event}/contributors/{id}', 'ContributorController@destroy')->middleware('permission:destroy_contributor');
 
         //Carga los roles
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
@@ -515,7 +513,7 @@ Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP')->middleware('permission:send_email_event');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
-Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
+Route::get('events/{event}/messages', 'MessageController@indexEvent')->middleware('permission:list_messages');
 Route::put('events/{event_id}/updateStatusMessageUser/{message_id}', 'RSVPController@updateStatusMessageUser');
 
 
