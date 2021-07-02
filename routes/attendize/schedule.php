@@ -34,7 +34,7 @@ Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
 Route::get('events/{event}/newsfeed', 'NewsfeedController@index');
 Route::put('events/{event}/newsfeed', 'NewsfeedController@update')->middleware('permission:update_news');
 Route::post('events/{event}/newsfeed', 'NewsfeedController@store')->middleware('permission:create_news');
-Route::delete('events/{event}/newsfeed/{new}', 'NewsfeedController@delete')->middleware('permission:delete_news');
+Route::delete('events/{event}/newsfeed/{new}', 'NewsfeedController@destroy')->middleware('permission:destroy_news');
 Route::get('events/{event}/newsfeed/{new}', 'NewsfeedController@show');
 
 

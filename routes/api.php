@@ -301,7 +301,11 @@ Route::post('generatecertificate', 'CertificateController@generateCertificate');
 
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('events/{event_id}/certificates', 'CertificateController', ['except' => []]);
+        Route::get('events/{event}/certficates', 'CertificateController@index');
+        Route::put('events/{event}/certficates', 'CertificateController@update')->middleware('permission:update_certificates');
+        Route::post('events/{event}/certficates', 'CertificateController@store')->middleware('permission:create_certificates');
+        Route::delete('events/{event}/certficates/{certificate}', 'CertificateController@destroy')->middleware('permission:destroy_certificates');
+        Route::get('events/{event}/certficates/{certificate}', 'CertificateController@show');
         Route::get('events/{event_id}/certificates', 'CertificateController@indexByEvent');
     }
 );
