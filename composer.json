@@ -56,6 +56,7 @@
     "romm1/omnipay-payu": "^3.0",
     "seatsio/seatsio-php": "^43.0",
     "spatie/icalendar-generator": "^1.0",
+    "spatie/laravel-analytics": "^3.11",
     "spatie/laravel-permission": "3.16.0",
     "spatie/laravel-responsecache": "6.3.0",
     "spatie/laravel-tail": "^3.2",

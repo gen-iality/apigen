@@ -12,13 +12,13 @@ return [
      * to learn how to get this file. You can also pass the credentials as an array
      * instead of a file path.
      */
-    'service_account_credentials_json' => storage_path('app/analytics/client_secret_460431972981-del1i2qlsi0bpoa6mae6m8gh95dh2hmi.apps.googleusercontent.com.json'),
+    'service_account_credentials_json' => storage_path('app/analytics/ordinal-rig-317121-89297d169045.json'),
 
     /*
      * The amount of minutes the Google API responses will be cached.
      * If you set this to zero, the responses won't be cached at all.
      */
-    'cache_lifetime_in_minutes' => 60 * 24,
+    'cache_lifetime_in_minutes' => 60 * 0,
 
     /*
      * Here you may configure the "store" that the underlying Google_Client will
@@ -27,7 +27,7 @@ return [
      *
      * Optional parameters: "lifetime", "prefix"
      */
-    'cache' => [
-        'store' => 'file',
-    ],
+    // 'cache' => [
+    //     'store' => 'file',
+    // ],
 ];
