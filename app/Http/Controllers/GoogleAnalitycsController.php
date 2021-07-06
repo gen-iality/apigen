@@ -26,15 +26,15 @@ class GoogleAnalitycsController extends Controller
         $startMonth = explode('-', $json['startDate'])[1];
         $startDay = explode('-', $json['startDate'])[2];
 
-        $start = Carbon::create($startYear, $startMonth, $startDay);
+        $startDate = Carbon::create($startYear, $startMonth, $startDay);
         
         $endYear = explode('-', $json['endDate'])[0];                             
         $endMonth = explode('-', $json['endDate'])[1];  
         $endDay = explode('-', $json['startDate'])[2];                            
 
-        $end = Carbon::create($endYear, $endMonth, $endDay);  
+        $endDate = Carbon::create($endYear, $endMonth, $endDay);  
                       
-        $period = Period::create($start, $end);
+        $period = Period::create($startDate, $endDate);
 
         //retrieve sessions and pageviews with yearMonth dimension since 1 year ago
         $analyticsData = Analytics::performQuery(
