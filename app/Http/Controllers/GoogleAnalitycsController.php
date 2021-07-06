@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Analytics;
 use Spatie\Analytics\Period;
 use Carbon\Carbon;
-use DateTime;
-
 
 
 class GoogleAnalitycsController extends Controller
