@@ -1,8 +1,8 @@
 {
     "variables": [],
     "info": {
-        "name": "Evius API",
-        "_postman_id": "7dff561c-5834-4213-a207-ddc0eb2b2528",
+        "name": "Laravel API",
+        "_postman_id": "312544a7-fa22-4837-8262-461c4058db6c",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -15,21 +15,21 @@
                     "name": "_duplicate_: endpoint destined to the duplication of an activity to english language",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/duplicateactivitie\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "minus",
+                                    "value": "iure",
                                     "description": "id of the event to which the activities belong."
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "omnis",
+                                    "value": "doloremque",
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -57,8 +57,8 @@
                     "name": "_index:_ Listing of all activities",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities",
                             "query": [],
                             "variable": [
@@ -93,8 +93,8 @@
                     "name": "_store_: create a new activity",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities",
                             "query": [],
                             "variable": [
@@ -129,8 +129,8 @@
                     "name": "_show_: View information on a specific activity",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities\/:activity",
                             "query": [],
                             "variable": [
@@ -171,8 +171,8 @@
                     "name": "_update_:update an activity specific.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities\/:activity",
                             "query": [],
                             "variable": [
@@ -207,8 +207,8 @@
                     "name": "_destroy_: Remove the specified activity",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities\/:activity",
                             "query": [],
                             "variable": [
@@ -243,8 +243,8 @@
                     "name": "_createMeeting_: assing meeting to activitie.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/createmeeting\/:id",
                             "query": [],
                             "variable": [
@@ -269,7 +269,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"molestias\",\n    \"activity_description\": \"aut\"\n}"
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"qui\",\n    \"activity_description\": \"laborum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -279,21 +279,21 @@
                     "name": "_hostAvailability_: end point que controla las disponibilidad de los host al crear una reuni\u00f3n",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities\/:id\/hostAvailability",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sit",
+                                    "value": "veritatis",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "error",
+                                    "value": "et",
                                     "description": "activity to which the meeting is to be created"
                                 }
                             ]
@@ -321,21 +321,21 @@
                     "name": "_registerAndCheckInActivity_: status indicating that the user entered the activity",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities\/:id\/register_and_checkin_to_activity",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "cum",
+                                    "value": "velit",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "est",
+                                    "value": "a",
                                     "description": "id of activity"
                                 }
                             ]
@@ -363,8 +363,8 @@
                     "name": "_deleteVirtualSpaceZoom_:",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities\/mettings_zoom\/:meeting_id",
                             "query": []
                         },
@@ -397,8 +397,8 @@
                     "name": "_index_: List of the activity_assitans",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities_attendees",
                             "query": [],
                             "variable": [
@@ -433,15 +433,15 @@
                     "name": "_store_: create new record activity_assitant",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities_attendees",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sed",
+                                    "value": "quis",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -469,8 +469,8 @@
                     "name": "_show_: view the specific information of an activity_assitant record",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
                             "query": [],
                             "variable": [
@@ -511,15 +511,15 @@
                     "name": "_update_:Update the specific information of an activity_assitant record",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "adipisci",
+                                    "value": "delectus",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -547,15 +547,15 @@
                     "name": "_destroy_:Remove the specific register of an activity_assitant record",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "est",
+                                    "value": "dolorem",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -583,15 +583,15 @@
                     "name": "_meIndex_: list of registered activities of the logged-in user",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/me\/events\/:event_id\/activities_attendees",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "eius",
+                                    "value": "necessitatibus",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -619,21 +619,21 @@
                     "name": "_checkIn_: status indicating that the user entered the activity",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/activities_attendees\/:id\/check_in",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "laboriosam",
+                                    "value": "quae",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "repudiandae",
+                                    "value": "aut",
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -667,8 +667,8 @@
                     "name": "_index_: List of categories",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/categories",
                             "query": []
                         },
@@ -695,8 +695,8 @@
                     "name": "_show_: consult information on a specific category",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/categories\/:category",
                             "query": [],
                             "variable": [
@@ -731,8 +731,8 @@
                     "name": "_indexByOrganization_ : list categories by organization",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/categories\/organizations\/:organization_ids",
                             "query": [],
                             "variable": [
@@ -767,8 +767,8 @@
                     "name": "_store_: create new category",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/categories",
                             "query": []
                         },
@@ -795,8 +795,8 @@
                     "name": "_update_: update a specific category",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/categories\/:category",
                             "query": [],
                             "variable": [
@@ -821,7 +821,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"assumenda\"\n}"
+                            "raw": "{\n    \"name\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -831,8 +831,8 @@
                     "name": "_destroy_: Remove the specified resource from storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/categories\/:category",
                             "query": [],
                             "variable": [
@@ -873,8 +873,8 @@
                     "name": "_index_: list of discount codes by template",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:template_id\/code",
                             "query": [],
                             "variable": [
@@ -909,8 +909,8 @@
                     "name": "_store_: ceate new discount code",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:template_id\/code",
                             "query": [],
                             "variable": [
@@ -945,8 +945,8 @@
                     "name": "_show_: view information for a specific code",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:template_id\/code\/:code",
                             "query": [],
                             "variable": [
@@ -987,8 +987,8 @@
                     "name": "_update_: update the specified resource in storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:template_id\/code\/:code",
                             "query": []
                         },
@@ -1015,21 +1015,21 @@
                     "name": "_destroy_: Remove the specified resource from storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:template_id\/code\/:code",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-                                    "value": "consequatur",
+                                    "value": "maxime",
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-                                    "value": "est",
+                                    "value": "quasi",
                                     "description": "id code delete"
                                 }
                             ]
@@ -1057,8 +1057,8 @@
                     "name": "_validateCode_ : valid if the code is redeemed, exists or is valid.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/code\/validatecode",
                             "query": []
                         },
@@ -1075,7 +1075,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"aut\"\n}"
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"cumque\"\n}"
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1085,8 +1085,8 @@
                     "name": "_redeemPointCode_: end point that redeems the points code and adds them to the user who redeemed it.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/code\/redeem_point_code",
                             "query": []
                         },
@@ -1103,7 +1103,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"occaecati\"\n}"
+                            "raw": "{\n    \"code\": \"ullam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1119,8 +1119,8 @@
                     "name": "_index_: list all Discount Code Templates",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate",
                             "query": []
                         },
@@ -1147,8 +1147,8 @@
                     "name": "_store_:create new discount code template",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate",
                             "query": []
                         },
@@ -1165,7 +1165,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"in\"\n}"
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"itaque\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1175,8 +1175,8 @@
                     "name": "_show_ : information from a specific template",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:discountcodetemplate",
                             "query": [],
                             "variable": [
@@ -1211,8 +1211,8 @@
                     "name": "_update_: update information from a specific template",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:discountcodetemplate",
                             "query": []
                         },
@@ -1239,8 +1239,8 @@
                     "name": "_destroy_: delete the specified docunt code template",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:discountcodetemplate",
                             "query": []
                         },
@@ -1267,8 +1267,8 @@
                     "name": "_importCodes_ : Imports DiscountCodes in JSON format, in case this codes are generated in external platform\nand needed to be used inside EVIUS",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/:id\/importCodes",
                             "query": []
                         },
@@ -1295,8 +1295,8 @@
                     "name": "_findByOrganization_: find disount code template by organization",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/discountcodetemplate\/findByOrganization\/:organization",
                             "query": [],
                             "variable": [
@@ -1337,8 +1337,8 @@
                     "name": "_index:_ Listing of all events",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events",
                             "query": [
                                 {
@@ -1372,8 +1372,8 @@
                     "name": "_store_: Create new event of the organizer.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events",
                             "query": []
                         },
@@ -1390,9 +1390,109 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"aperiam\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"explicabo\",\n    \"extra_config\": {},\n    \"status\": \"officiis\"\n}"
+                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"sequi\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"voluptatem\",\n    \"extra_config\": {},\n    \"status\": \"ipsa\"\n}"
                         },
                         "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: display information about a specific event.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update information on a specific event.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "eum",
+                                    "description": "id of the event to be updated"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"description\": \"a\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"voluptate\",\n    \"visibility\": \"PUBLIC\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c2\",\n    \"event_type_id\": \"5bf47203754e2317e4300b68\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: delete event.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "cumque",
+                                    "description": "id of the event to be eliminated"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
                         "response": []
                     }
                 },
@@ -1400,8 +1500,8 @@
                     "name": "_currentUserindex_: list of events of the organizer",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/me\/events",
                             "query": []
                         },
@@ -1428,8 +1528,8 @@
                     "name": "_store_: Create new event of the organizer.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/user\/events",
                             "query": []
                         },
@@ -1446,9 +1546,81 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"fugiat\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"eveniet\",\n    \"extra_config\": {},\n    \"status\": \"qui\"\n}"
+                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"perferendis\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"nulla\",\n    \"extra_config\": {},\n    \"status\": \"officia\"\n}"
                         },
                         "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update information on a specific event.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/user\/events\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "sint",
+                                    "description": "id of the event to be updated"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"description\": \"error\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"magnam\",\n    \"visibility\": \"PUBLIC\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c2\",\n    \"event_type_id\": \"5bf47203754e2317e4300b68\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: delete event.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/user\/events\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "quo",
+                                    "description": "id of the event to be eliminated"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
                         "response": []
                     }
                 },
@@ -1456,8 +1628,8 @@
                     "name": "_currentUserindex_: list of events of the organizer",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/user\/events",
                             "query": []
                         },
@@ -1484,15 +1656,15 @@
                     "name": "_changeStatusEvent_: approve or reject the courses **'draft'**, and send mail of the change of status of the event to the user who created it",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/changeStatusEvent",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "aliquam",
+                                    "value": "quae",
                                     "description": "id of the event to be rejected or approved Example:"
                                 }
                             ]
@@ -1520,15 +1692,15 @@
                     "name": "_EventbyUsers_: search of events by user organizer.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/:id\/events",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "expedita",
+                                    "value": "ex",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -1556,15 +1728,15 @@
                     "name": "_EventbyOrganizations_: search of events by user organizer.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:id\/events",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "enim",
+                                    "value": "qui",
                                     "description": "organizer_id"
                                 }
                             ]
@@ -1598,8 +1770,8 @@
                     "name": "_index_ : list of event types",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/eventTypes",
                             "query": []
                         },
@@ -1626,8 +1798,8 @@
                     "name": "Store a newly created resource in storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/eventTypes",
                             "query": []
                         },
@@ -1644,7 +1816,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"qui\"\n}"
+                            "raw": "{\n    \"name\": \"animi\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1660,8 +1832,8 @@
                     "name": "_index_ display all the EventUsers of an event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers",
                             "query": [
                                 {
@@ -1695,21 +1867,21 @@
                     "name": "_show:_ consult an EventUser by assistant id",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "laboriosam",
+                                    "value": "atque",
                                     "description": "string required"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "corporis",
+                                    "value": "rerum",
                                     "description": "string required id Attendee"
                                 }
                             ]
@@ -1737,15 +1909,15 @@
                     "name": "_update_:update a specific assistant",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "et",
+                                    "value": "reiciendis",
                                     "description": "string required"
                                 }
                             ]
@@ -1763,7 +1935,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"neque\",\n    \"name\": \"exercitationem\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"assumenda\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"numquam\",\n    \"name\": \"libero\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"dolorum\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1773,15 +1945,15 @@
                     "name": "_createUserAndAddtoEvent_:create user and add it to an event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sed",
+                                    "value": "voluptas",
                                     "description": "string required"
                                 }
                             ]
@@ -1799,7 +1971,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"adipisci\",\n    \"name\": \"alias\",\n    \"password\": \"accusamus\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"in\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"ex\",\n    \"name\": \"reprehenderit\",\n    \"password\": \"dolores\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"doloremque\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -1809,15 +1981,15 @@
                     "name": "__delete:__ remove a specific attendee from an event.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "laboriosam",
+                                    "value": "ut",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -1845,8 +2017,8 @@
                     "name": "api\/events\/{event_id}\/eventusers\/{id}\/unsubscribe",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/eventusers\/:id\/unsubscribe",
                             "query": []
                         },
@@ -1873,15 +2045,15 @@
                     "name": "_indexByUserInEvent_: list of users by events",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/me\/eventusers\/event\/:event_id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "veritatis",
+                                    "value": "asperiores",
                                     "description": "string required"
                                 }
                             ]
@@ -1909,15 +2081,15 @@
                     "name": "_ByUserInEvent_ : list of users by events",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/eventusers\/event\/:event_id\/user\/:user_id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "optio",
+                                    "value": "architecto",
                                     "description": "string required"
                                 }
                             ]
@@ -1945,15 +2117,15 @@
                     "name": "_changeUserPassword_: change user password",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/changeUserPassword",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nobis",
+                                    "value": "iusto",
                                     "description": "string id of the event in which the user is registered"
                                 }
                             ]
@@ -1971,7 +2143,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"nihil\"\n}"
+                            "raw": "{\n    \"email\": \"quis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1981,8 +2153,8 @@
                     "name": "_transferEventuserAndEnrollToActivity_ : transfer Eventuser And Enroll To Activity",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/eventusers\/:event_id\/tranfereventuser\/:event_user",
                             "query": []
                         },
@@ -2009,15 +2181,15 @@
                     "name": "_meInEvent_: user information logged into the event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/me\/events\/:event_id\/eventusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "et",
+                                    "value": "rerum",
                                     "description": ""
                                 }
                             ]
@@ -2045,9 +2217,37 @@
                     "name": "_metricsEventByDate_: number of registered users per day according to event start and end dates",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/metricsbydate\/eventusers",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event_id}\/hubspotRegister\/eventusers",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/hubspotRegister\/eventusers",
                             "query": []
                         },
                         "method": "GET",
@@ -2079,8 +2279,8 @@
                     "name": "Uploads files send though HTTP multipart\/form-data",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/files\/upload\/:field_name",
                             "query": []
                         },
@@ -2097,7 +2297,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"sapiente\"\n}"
+                            "raw": "{\n    \"file\": \"harum\"\n}"
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -2107,15 +2307,15 @@
                     "name": "_storeBaseImg_: Uploads images send though HTTP multipart\/form-data  with resizing option",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/files\/uploadbase\/:name",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "name",
                                     "key": "name",
-                                    "value": "quia",
+                                    "value": "distinctio",
                                     "description": "file field by default file"
                                 }
                             ]
@@ -2133,9 +2333,43 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"vero\",\n    \"type\": \"velit\"\n}"
+                            "raw": "{\n    \"file\": \"veritatis\",\n    \"type\": \"dignissimos\"\n}"
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Google Analitycs",
+            "description": "\nAPIs for Google Analitycs Stats",
+            "item": [
+                {
+                    "name": "Consulting Query for Google Analitycs Stats:\nRecieve a body json to give all the stats related about pageviews, users and sessions\nfiltered by a pagePath consulted.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/googleanalitycs",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"startDate\": \"2021-06-30\",\n    \"endDate\": \"2021-07-6\",\n    \"filtersExpression\": \"ga:pagePath=@\\\/landing\\\/5ea23acbd74d5c4b360ddde2;ga:pagePath!@token\",\n    \"metrics\": \"ga:pageviews, ga:users, ga:sessions\",\n    \"dimensions\": \"ga:pagePath\",\n    \"fieldName\": \"ga:pagePath\",\n    \"sortOrder\": \"DESCENDING\"\n}"
+                        },
+                        "description": "",
                         "response": []
                     }
                 }
@@ -2149,15 +2383,15 @@
                     "name": "_index_: list all host",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/host",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dolor",
+                                    "value": "quisquam",
                                     "description": ""
                                 }
                             ]
@@ -2185,15 +2419,15 @@
                     "name": "_store_: create new host",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/host",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nihil",
+                                    "value": "ut",
                                     "description": ""
                                 }
                             ]
@@ -2211,7 +2445,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"expedita\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"distinctio\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2221,15 +2455,15 @@
                     "name": "_show_: view information for a specific host",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/host\/:host",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "voluptatem",
+                                    "value": "repellendus",
                                     "description": ""
                                 }
                             ]
@@ -2257,15 +2491,15 @@
                     "name": "_update_: update the specified host.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/host\/:host",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "sapiente",
+                                    "value": "ut",
                                     "description": ""
                                 }
                             ]
@@ -2283,7 +2517,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"libero\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"nulla\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2293,15 +2527,15 @@
                     "name": "_destroy_ : Remove the specified speaker.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/host\/:host",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "ut",
+                                    "value": "vel",
                                     "description": ""
                                 }
                             ]
@@ -2335,8 +2569,8 @@
                     "name": "_index_: list of all orders",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders",
                             "query": []
                         },
@@ -2363,8 +2597,8 @@
                     "name": "_store_: create new order",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders",
                             "query": []
                         },
@@ -2391,8 +2625,8 @@
                     "name": "_show_: view order-specific information",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders\/:order",
                             "query": [],
                             "variable": [
@@ -2427,8 +2661,8 @@
                     "name": "_update_: update the specified resource in storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders\/:order",
                             "query": []
                         },
@@ -2455,8 +2689,8 @@
                     "name": "_destroy_: remove the specified resource from storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders\/:order",
                             "query": []
                         },
@@ -2483,8 +2717,8 @@
                     "name": "_index_: display all the Orders of an user",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/:user_id\/orders",
                             "query": [],
                             "variable": [
@@ -2519,8 +2753,8 @@
                     "name": "_index:_ display all the Orders of an user logueado",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/me\/orders",
                             "query": []
                         },
@@ -2547,15 +2781,15 @@
                     "name": "_indexByOrganization_: display all the Orders of an organization",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders\/:organization_id\/orderOrganization",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "dignissimos",
+                                    "value": "rerum",
                                     "description": ""
                                 }
                             ]
@@ -2589,8 +2823,8 @@
                     "name": "_contactbyemail_: send email to the admin users of an organization",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:id\/contactbyemail",
                             "query": []
                         },
@@ -2607,7 +2841,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"message\": \"et\",\n    \"subject\": \"aut\",\n    \"name\": \"voluptatem\",\n    \"email_user\": \"nesciunt\"\n}"
+                            "raw": "{\n    \"message\": \"id\",\n    \"subject\": \"veritatis\",\n    \"name\": \"laborum\",\n    \"email_user\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2617,8 +2851,8 @@
                     "name": "_indexByEventUserInOrganization_: list of users who have paid for events and successfully registered",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:id\/eventUsers",
                             "query": [],
                             "variable": [
@@ -2653,15 +2887,15 @@
                     "name": "_ChangeUserPasswordOrganization_: change user password registered in a organization",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:organization_id\/changeUserPassword",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "voluptate",
+                                    "value": "eum",
                                     "description": "string id of the organization in which the user is registered"
                                 }
                             ]
@@ -2679,7 +2913,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"illum\"\n}"
+                            "raw": "{\n    \"email\": \"laudantium\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2695,15 +2929,15 @@
                     "name": "_createAndSendRSVP_: send RSVP to users in an event, taking eventUsersIds[] in request to filter which users the RSVP is going to be send to",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rsvp\/sendeventrsvp\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "eveniet",
+                                    "value": "numquam",
                                     "description": ""
                                 }
                             ]
@@ -2721,7 +2955,133 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"subject\": \"et\",\n    \"image_header\": \"maxime\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"qui\",\n    \"image\": \"voluptatem\",\n    \"image_footer\": \"quaerat\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
+                            "raw": "{\n    \"subject\": \"dolorem\",\n    \"image_header\": \"numquam\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"ad\",\n    \"image\": \"voluptatem\",\n    \"image_footer\": \"aliquam\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Rol",
+            "description": "",
+            "item": [
+                {
+                    "name": "_index_: list Roles.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/rols",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: create a new rol",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/rols",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"reprehenderit\",\n    \"event_id\": \"omnis\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/rols\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "aut",
+                                    "description": "id rol"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"dolor\",\n    \"event_id\": \"et\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: information from a specific role",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/rols\/:id",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
                         },
                         "description": "",
                         "response": []
@@ -2737,8 +3097,8 @@
                     "name": "_index_: list of the roles of the attendees of an event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/rolesattendees",
                             "query": [],
                             "variable": [
@@ -2773,8 +3133,8 @@
                     "name": "_store_:create a new assistant role for an event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/rolesattendees",
                             "query": [],
                             "variable": [
@@ -2809,8 +3169,8 @@
                     "name": "_show_: view information for a specific assistant role",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/rolesattendees\/:rolesattendee",
                             "query": [],
                             "variable": [
@@ -2851,8 +3211,8 @@
                     "name": "_update_: update role event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/rolesattendees\/:rolesattendee",
                             "query": []
                         },
@@ -2879,8 +3239,8 @@
                     "name": "_destroy_: delete rol.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/rolesattendees\/:rolesattendee",
                             "query": []
                         },
@@ -2907,8 +3267,8 @@
                     "name": "_index_: list of the roles of the attendees of an event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rolesattendees",
                             "query": []
                         },
@@ -2935,8 +3295,8 @@
                     "name": "_show_: view information for a specific assistant role",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rolesattendees\/:rolesattendee",
                             "query": [],
                             "variable": [
@@ -2971,8 +3331,8 @@
                     "name": "_store_:create a new assistant role for an event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rolesattendees",
                             "query": []
                         },
@@ -2999,8 +3359,8 @@
                     "name": "_update_: update role event",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rolesattendees\/:rolesattendee",
                             "query": []
                         },
@@ -3027,8 +3387,8 @@
                     "name": "_destroy_: delete rol.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rolesattendees\/:rolesattendee",
                             "query": []
                         },
@@ -3055,16 +3415,220 @@
                     "name": "_destroy_: delete rol.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/rolesattendees\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eos",
+                                    "value": "quia",
                                     "description": "id de RoleAttendee"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Surveys",
+            "description": "",
+            "item": [
+                {
+                    "name": "_index_: list of surveys of an event",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:id\/surveys",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "605241e68b276356801236e4",
+                                    "description": "string  required event id"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: create a new survey",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:id\/surveys",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "605241e68b276356801236e4",
+                                    "description": "string  required event id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"commodi\",\n    \"points\": 1,\n    \"initialMessage\": \"dolor\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 318.28890232\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_ : view the information of a specific survey",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:id\/surveys\/:survey",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "605241e68b276356801236e4",
+                                    "description": "string      required event id"
+                                },
+                                {
+                                    "id": "survey",
+                                    "key": "survey",
+                                    "value": "608c5f5f63201e0f5147a086",
+                                    "description": "string  required survey id"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update a specific survey",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:id\/surveys\/:survey",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "605241e68b276356801236e4",
+                                    "description": "string      required event id"
+                                },
+                                {
+                                    "id": "survey",
+                                    "key": "survey",
+                                    "value": "608c5f5f63201e0f5147a086",
+                                    "description": "string  required survey id"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"survey\": \"deleniti\",\n    \"show_horizontal_bar\": \"et\",\n    \"allow_vote_value_per_user\": \"laboriosam\",\n    \"activity_id\": \"explicabo\",\n    \"points\": \"sed\",\n    \"initialMessage\": \"perspiciatis\",\n    \"time_limit\": \"magnam\",\n    \"allow_anonymous_answers\": \"expedita\",\n    \"allow_gradable_survey\": \"dolore\",\n    \"hasMinimumScore\": \"eveniet\",\n    \"isGlobal\": \"voluptas\",\n    \"freezeGame\": \"quia\",\n    \"open\": \"aut\",\n    \"publish\": \"error\",\n    \"minimumScore\": \"aut\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: delete a specific survey",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:id\/surveys\/:survey",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "605241e68b276356801236e4",
+                                    "description": "string      required event id"
+                                },
+                                {
+                                    "id": "survey",
+                                    "key": "survey",
+                                    "value": "608c5f5f63201e0f5147a086",
+                                    "description": "string  required survey id"
                                 }
                             ]
                         },
@@ -3097,8 +3661,8 @@
                     "name": "_index_: It's not posible to query all users in the platform.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users",
                             "query": []
                         },
@@ -3125,8 +3689,8 @@
                     "name": "_store_: create new user SignUp",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users",
                             "query": []
                         },
@@ -3143,7 +3707,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"et\",\n    \"city\": \"eius\",\n    \"country\": \"ipsa\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"password\": \"omnis\",\n    \"others_properties\": \"[]\",\n    \"organization_ids\": \"[\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"][\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"]\"\n}"
+                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"optio\",\n    \"city\": \"tenetur\",\n    \"country\": \"placeat\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"password\": \"ad\",\n    \"others_properties\": \"[]\",\n    \"organization_ids\": \"[\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"][\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"]\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3153,8 +3717,8 @@
                     "name": "_show_: registered User",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/:user",
                             "query": [],
                             "variable": [
@@ -3189,8 +3753,8 @@
                     "name": "loginorcreatefromtoken: create a user from auth data.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/loginorcreatefromtoken",
                             "query": []
                         },
@@ -3217,8 +3781,8 @@
                     "name": "_update_: update registered user",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/:user",
                             "query": [],
                             "variable": [
@@ -3243,7 +3807,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"evius lopez\",\n    \"city\": \"dolorem\",\n    \"country\": \"et\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"organization_ids\": \"adipisci\",\n    \"others_properties\": \"[]\"\n}"
+                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"evius lopez\",\n    \"city\": \"aliquam\",\n    \"country\": \"rem\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"organization_ids\": \"cumque\",\n    \"others_properties\": \"[]\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3253,8 +3817,8 @@
                     "name": "_delete_: dele a registered user",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/:user",
                             "query": []
                         },
@@ -3281,8 +3845,8 @@
                     "name": "getCurrentUser: returns current user information using valid token send with the request.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/currentUser",
                             "query": []
                         },
@@ -3309,8 +3873,8 @@
                     "name": "_findByEmail_: search for specific user by mail",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/findByEmail\/:email",
                             "query": [],
                             "variable": [
@@ -3345,8 +3909,8 @@
                     "name": "_userOrganization_: user lists all the users that belong to an organization, besides this you can filter all the users by **any of the properties** that have",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organization\/:organzation_id\/users",
                             "query": [
                                 {
@@ -3386,15 +3950,15 @@
                     "name": "_changeStatusUser_: approve or reject the rol the users teacher ,and send mail of the change of status of the user to the user who created it",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/:user_id\/changeStatusUser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "hic",
+                                    "value": "id",
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -3422,8 +3986,8 @@
                     "name": "_signInWithEmailAndPassword_: login a user",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/users\/signInWithEmailAndPassword",
                             "query": []
                         },
@@ -3449,6 +4013,238 @@
             ]
         },
         {
+            "name": "User Properties",
+            "description": "",
+            "item": [
+                {
+                    "name": "_index_: list of user properties of a specific event.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/userproperties",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "5fadbc9c8bc34c4c890c5ee4",
+                                    "description": "required."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: a newly created resource in UserProperties.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/userproperties",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "ut",
+                                    "description": "required."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"celular\",\n    \"mandatory\": true,\n    \"visibleByContacts\": true,\n    \"visibleByAdmin\": true,\n    \"label\": \"Celular\",\n    \"description\": \"N\\u00famero de contacto\",\n    \"type\": \"number\",\n    \"justonebyattendee\": true,\n    \"order_weight\": 1\n}"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: view the specific user propertie.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/userproperties\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "eaque",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "tenetur",
+                                    "description": "id UserProperties"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update the specified resource in UserProperties.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/userproperties\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "dolorem",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "dolorem",
+                                    "description": "id UserProperties"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"celular\",\n    \"mandatory\": true,\n    \"visibleByContacts\": true,\n    \"visibleByAdmin\": true,\n    \"label\": \"Celular\",\n    \"description\": \"N\\u00famero de contacto\",\n    \"type\": \"number\",\n    \"justonebyattendee\": true,\n    \"order_weight\": 1\n}"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_RegisterListFieldOptionTaken_: bloquea un elemento que un asistente ya escogio de un campo tipo lista de elementos con inventario cuando se registra a un evento.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/userproperties\/:id\/RegisterListFieldOptionTaken",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "Toca hacerlo asi porque con la concurrencia se nos estaban cruzando dos peticiones simultaneas y solo quedaba con los valores de la \u00faltima",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: remove the specified resource from UserProperties.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/events\/:event_id\/userproperties\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event_id",
+                                    "key": "event_id",
+                                    "value": "exercitationem",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "corrupti",
+                                    "description": "id UserProperties"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
             "name": "general",
             "description": "",
             "item": [
@@ -3456,8 +4252,8 @@
                     "name": "Show the form for creating a new resource.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/test\/auth",
                             "query": []
                         },
@@ -3484,8 +4280,8 @@
                     "name": "api\/eventusers\/{event_id}\/makeTicketIdaProperty\/{ticket_id}",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/eventusers\/:event_id\/makeTicketIdaProperty\/:ticket_id",
                             "query": []
                         },
@@ -3512,8 +4308,8 @@
                     "name": "api\/events\/{event_id}\/users\/{user_id}\/asignticketstouser",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/events\/:event_id\/users\/:user_id\/asignticketstouser",
                             "query": []
                         },
@@ -3540,8 +4336,8 @@
                     "name": "Display a listing of the resource.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:organization_id\/users",
                             "query": []
                         },
@@ -3568,8 +4364,8 @@
                     "name": "Store a newly created resource in storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:organization_id\/users",
                             "query": []
                         },
@@ -3596,8 +4392,8 @@
                     "name": "Remove the specified resource from storage.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/organizations\/:organization_id\/users\/:user",
                             "query": []
                         },
@@ -3621,207 +4417,11 @@
                     }
                 },
                 {
-                    "name": "Display a listing of the contributors of an event resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/events\/:event_id\/contributors",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/events\/:event_id\/contributors",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "| Body Params   |\n| ------------- |\n| @body $_POST[role_id] required field       |\n| @body $_POST[event_id]  required field     |\n| @body $_POST[model_id] required field      |",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/events\/:event_id\/contributors\/:id",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/events\/:event_id\/contributors\/:id",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "| Body Params   |\n| ------------- |\n| @body $_POST[role_id] required field       |\n| @body $_POST[event_id]  required field     |\n| @body $_POST[model_id] required field      |",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/events\/:event_id\/contributors\/:id",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Metadata Controller",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/contributors\/metadata\/roles",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
                     "name": "Create model_has_role\nrole_id\nmodel_id (user_id)\nevent_id",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/contributors\/events\/:event_id\/me",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Create model_has_role\nrole_id\nmodel_id (user_id)\nevent_id",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/me\/contributors\/events",
                             "query": []
                         },
@@ -3848,8 +4448,8 @@
                     "name": "Display a listing of the contributors of an event resource.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/contributors\/events\/:event_id",
                             "query": []
                         },
@@ -3876,15 +4476,15 @@
                     "name": "_validateFreeorder_: validates the order in case the purchase value is 0",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders\/:order_id\/validateFreeorder",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "dolores",
+                                    "value": "ex",
                                     "description": ""
                                 }
                             ]
@@ -3912,15 +4512,15 @@
                     "name": "_validatePointOrder_ :validate orders of type points",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "api\/orders\/:order_id\/validatePointOrder",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "fugit",
+                                    "value": "et",
                                     "description": ""
                                 }
                             ]
@@ -3948,8 +4548,8 @@
                     "name": "Authenticate the request for channel access.",
                     "request": {
                         "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
+                            "protocol": "http",
+                            "host": "localhost",
                             "path": "broadcasting\/auth",
                             "query": []
                         },

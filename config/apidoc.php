@@ -159,7 +159,9 @@ return [
                         '*/rols',
                     //UserProperties
                         '*/userproperties',
-                        '*/userproperties/*'
+                        '*/userproperties/*',
+                    //Google Analitycs
+                        '*/googleanalitycs',
 
                 ],  
 
