@@ -28,6 +28,10 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 // Route::get('s3aws/{prefix?}', 'AwsS3Controller');
 
 
+Route::get('testconffile', function(){
+    dd(file_exists(storage_path('app/analytics/ordinal-rig-317121-89297d169045.json')));
+});
+
 Route::post('googleanalytics', 'GoogleAnalyticsController');
 
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
