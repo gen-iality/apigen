@@ -17,7 +17,8 @@ class GoogleAnalitycsController extends Controller
 {
 
   /**
-   * Consulting Query for Google Analitycs Stats: 
+   * Query for Google Analytics Stats
+   * 
    * Recieve a body json to give all the stats related about pageviews, users and sessions
    * filtered by a pagePath consulted.
    * 

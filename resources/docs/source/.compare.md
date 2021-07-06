@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/iure/duplicateactivitie/doloremque" \
+    "http://localhost/api/events/quis/duplicateactivitie/tempora" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/iure/duplicateactivitie/doloremque"
+    "http://localhost/api/events/quis/duplicateactivitie/tempora"
 );
 
 let headers = {
@@ -519,7 +519,7 @@ curl -X POST \
     "http://localhost/api/events/5fa423eee086ea2d1163343e/createmeeting/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"qui","activity_description":"laborum"}'
+    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"et","activity_description":"ex"}'
 
 ```
 
@@ -535,8 +535,8 @@ let headers = {
 
 let body = {
     "activity_datetime_start": "2020-10-14 14:11",
-    "activity_name": "qui",
-    "activity_description": "laborum"
+    "activity_name": "et",
+    "activity_description": "ex"
 }
 
 fetch(url, {
@@ -575,7 +575,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/veritatis/activities/et/hostAvailability" \
+    "http://localhost/api/events/sunt/activities/vitae/hostAvailability" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"host_ids":"[\"KthHMroFQK24I97YoqxBZw\" , \"FIRVnSoZR7WMDajgtzf5Uw\" , \"15DKHS_6TqWIFpwShasM4w\" , \"2m-YaXq_TW2f791cVpP8og\", \"mSkbi8PmSSqQEWsm6FQiAA\"]","host_id":"KthHMroFQK24I97YoqxBZw","date_start_zoom":"2021-02-08T07:30:00","date_end_zoom":"2021-02-08T09:30:00"}'
@@ -584,7 +584,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/veritatis/activities/et/hostAvailability"
+    "http://localhost/api/events/sunt/activities/vitae/hostAvailability"
 );
 
 let headers = {
@@ -637,14 +637,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/velit/activities/a/register_and_checkin_to_activity" \
+    "http://localhost/api/events/ut/activities/nulla/register_and_checkin_to_activity" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/velit/activities/a/register_and_checkin_to_activity"
+    "http://localhost/api/events/ut/activities/nulla/register_and_checkin_to_activity"
 );
 
 let headers = {
@@ -813,7 +813,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/quis/activities_attendees" \
+    "http://localhost/api/events/laboriosam/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -822,7 +822,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quis/activities_attendees"
+    "http://localhost/api/events/laboriosam/activities_attendees"
 );
 
 let headers = {
@@ -941,14 +941,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/delectus/activities_attendees/1" \
+    "http://localhost/api/events/rerum/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/delectus/activities_attendees/1"
+    "http://localhost/api/events/rerum/activities_attendees/1"
 );
 
 let headers = {
@@ -987,14 +987,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/dolorem/activities_attendees/1" \
+    "http://localhost/api/events/iste/activities_attendees/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/dolorem/activities_attendees/1"
+    "http://localhost/api/events/iste/activities_attendees/1"
 );
 
 let headers = {
@@ -1032,14 +1032,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/necessitatibus/activities_attendees" \
+    -G "http://localhost/api/me/events/harum/activities_attendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/necessitatibus/activities_attendees"
+    "http://localhost/api/me/events/harum/activities_attendees"
 );
 
 let headers = {
@@ -1082,14 +1082,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/quae/activities_attendees/aut/check_in" \
+    "http://localhost/api/events/impedit/activities_attendees/omnis/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quae/activities_attendees/aut/check_in"
+    "http://localhost/api/events/impedit/activities_attendees/omnis/check_in"
 );
 
 let headers = {
@@ -1391,7 +1391,7 @@ curl -X PUT \
     "http://localhost/api/categories/5bb25243b6312771e92c8693" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"et"}'
+    -d '{"name":"ipsa"}'
 
 ```
 
@@ -1406,7 +1406,7 @@ let headers = {
 };
 
 let body = {
-    "name": "et"
+    "name": "ipsa"
 }
 
 fetch(url, {
@@ -1789,14 +1789,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/discountcodetemplate/maxime/code/quasi" \
+    "http://localhost/api/discountcodetemplate/quos/code/at" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/discountcodetemplate/maxime/code/quasi"
+    "http://localhost/api/discountcodetemplate/quos/code/at"
 );
 
 let headers = {
@@ -1838,7 +1838,7 @@ curl -X POST \
     "http://localhost/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"cumque"}'
+    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"quidem"}'
 
 ```
 
@@ -1855,7 +1855,7 @@ let headers = {
 let body = {
     "code": "Nyd0jOpQ",
     "event_id": "5ea23acbd74d5c4b360ddde2",
-    "organization_id": "cumque"
+    "organization_id": "quidem"
 }
 
 fetch(url, {
@@ -1933,7 +1933,7 @@ curl -X PUT \
     "http://localhost/api/code/redeem_point_code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"ullam"}'
+    -d '{"code":"sed"}'
 
 ```
 
@@ -1948,7 +1948,7 @@ let headers = {
 };
 
 let body = {
-    "code": "ullam"
+    "code": "sed"
 }
 
 fetch(url, {
@@ -2067,7 +2067,7 @@ curl -X POST \
     "http://localhost/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"itaque"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"nostrum"}'
 
 ```
 
@@ -2087,7 +2087,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "itaque"
+    "discount_type": "nostrum"
 }
 
 fetch(url, {
@@ -2588,7 +2588,7 @@ curl -X POST \
     "http://localhost/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"sequi","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"voluptatem","extra_config":{},"status":"ipsa"}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"ut","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"ex","extra_config":{},"status":"qui"}'
 
 ```
 
@@ -2606,16 +2606,16 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "sequi",
+    "picture": "ut",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "voluptatem",
+    "location": "ex",
     "extra_config": {},
-    "status": "ipsa"
+    "status": "qui"
 }
 
 fetch(url, {
@@ -2708,16 +2708,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/eum" \
+    "http://localhost/api/events/error" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"\"Programming course\"","description":"a","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"voluptate","visibility":"PUBLIC","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","author_id":"5e9caaa1d74d5c2f6a02a3c2","event_type_id":"5bf47203754e2317e4300b68"}'
+    -d '{"name":"\"Programming course\"","description":"autem","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"tempore","visibility":"PUBLIC","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","author_id":"5e9caaa1d74d5c2f6a02a3c2","event_type_id":"5bf47203754e2317e4300b68"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eum"
+    "http://localhost/api/events/error"
 );
 
 let headers = {
@@ -2727,10 +2727,10 @@ let headers = {
 
 let body = {
     "name": "\"Programming course\"",
-    "description": "a",
+    "description": "autem",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "voluptate",
+    "picture": "tempore",
     "visibility": "PUBLIC",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "author_id": "5e9caaa1d74d5c2f6a02a3c2",
@@ -2780,14 +2780,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/cumque" \
+    "http://localhost/api/events/sed" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/cumque"
+    "http://localhost/api/events/sed"
 );
 
 let headers = {
@@ -2873,7 +2873,7 @@ curl -X POST \
     "http://localhost/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"perferendis","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"nulla","extra_config":{},"status":"officia"}'
+    -d '{"name":"Programming course","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"porro","visibility":"PUBLIC","user_properties":[],"author_id":"5e9caaa1d74d5c2f6a02a3c3","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category":[],"location":"ut","extra_config":{},"status":"delectus"}'
 
 ```
 
@@ -2891,16 +2891,16 @@ let body = {
     "name": "Programming course",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "perferendis",
+    "picture": "porro",
     "visibility": "PUBLIC",
     "user_properties": [],
     "author_id": "5e9caaa1d74d5c2f6a02a3c3",
     "event_type_id": "5bf47226754e2317e4300b6a",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "category": [],
-    "location": "nulla",
+    "location": "ut",
     "extra_config": {},
-    "status": "officia"
+    "status": "delectus"
 }
 
 fetch(url, {
@@ -2943,16 +2943,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/user/events/sint" \
+    "http://localhost/api/user/events/ut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"\"Programming course\"","description":"error","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"magnam","visibility":"PUBLIC","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","author_id":"5e9caaa1d74d5c2f6a02a3c2","event_type_id":"5bf47203754e2317e4300b68"}'
+    -d '{"name":"\"Programming course\"","description":"earum","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","picture":"a","visibility":"PUBLIC","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","author_id":"5e9caaa1d74d5c2f6a02a3c2","event_type_id":"5bf47203754e2317e4300b68"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/user/events/sint"
+    "http://localhost/api/user/events/ut"
 );
 
 let headers = {
@@ -2962,10 +2962,10 @@ let headers = {
 
 let body = {
     "name": "\"Programming course\"",
-    "description": "error",
+    "description": "earum",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "picture": "magnam",
+    "picture": "a",
     "visibility": "PUBLIC",
     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
     "author_id": "5e9caaa1d74d5c2f6a02a3c2",
@@ -3015,14 +3015,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/user/events/quo" \
+    "http://localhost/api/user/events/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/user/events/quo"
+    "http://localhost/api/user/events/et"
 );
 
 let headers = {
@@ -3104,7 +3104,7 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/quae/changeStatusEvent" \
+    "http://localhost/api/events/accusantium/changeStatusEvent" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -3113,7 +3113,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quae/changeStatusEvent"
+    "http://localhost/api/events/accusantium/changeStatusEvent"
 );
 
 let headers = {
@@ -3188,14 +3188,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/users/ex/events" \
+    -G "http://localhost/api/users/itaque/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/ex/events"
+    "http://localhost/api/users/itaque/events"
 );
 
 let headers = {
@@ -3218,8 +3218,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/ex\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/ex\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/itaque\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/itaque\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -3227,7 +3227,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/ex\/events",
+        "path": "http:\/\/localhost\/api\/users\/itaque\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -3253,14 +3253,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/organizations/qui/events" \
+    -G "http://localhost/api/organizations/nemo/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/organizations/qui/events"
+    "http://localhost/api/organizations/nemo/events"
 );
 
 let headers = {
@@ -3283,8 +3283,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/organizations\/qui\/events?page=1",
-        "last": "http:\/\/localhost\/api\/organizations\/qui\/events?page=1",
+        "first": "http:\/\/localhost\/api\/organizations\/nemo\/events?page=1",
+        "last": "http:\/\/localhost\/api\/organizations\/nemo\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -3292,7 +3292,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/organizations\/qui\/events",
+        "path": "http:\/\/localhost\/api\/organizations\/nemo\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -3429,7 +3429,7 @@ curl -X POST \
     "http://localhost/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"animi"}'
+    -d '{"name":"amet"}'
 
 ```
 
@@ -3444,7 +3444,7 @@ let headers = {
 };
 
 let body = {
-    "name": "animi"
+    "name": "amet"
 }
 
 fetch(url, {
@@ -3580,14 +3580,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/atque/eventusers/rerum" \
+    -G "http://localhost/api/events/eum/eventusers/tempore" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/atque/eventusers/rerum"
+    "http://localhost/api/events/eum/eventusers/tempore"
 );
 
 let headers = {
@@ -3608,7 +3608,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Attendee] rerum"
+    "message": "No query results for model [App\\Attendee] tempore"
 }
 ```
 
@@ -3631,16 +3631,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/reiciendis/eventusers/1" \
+    "http://localhost/api/events/aut/eventusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"numquam","name":"libero","other_params,":{"":{"":{"":"dolorum"}}}}'
+    -d '{"email":"quia","name":"occaecati","other_params,":{"":{"":{"":"ipsam"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/reiciendis/eventusers/1"
+    "http://localhost/api/events/aut/eventusers/1"
 );
 
 let headers = {
@@ -3649,12 +3649,12 @@ let headers = {
 };
 
 let body = {
-    "email": "numquam",
-    "name": "libero",
+    "email": "quia",
+    "name": "occaecati",
     "other_params,": {
         "": {
             "": {
-                "": "dolorum"
+                "": "ipsam"
             }
         }
     }
@@ -3696,16 +3696,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/voluptas/eventusers" \
+    "http://localhost/api/events/at/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"ex","name":"reprehenderit","password":"dolores","other_params,":{"":{"":{"":"doloremque"}}}}'
+    -d '{"email":"voluptatum","name":"consequatur","password":"eius","other_params,":{"":{"":{"":"consectetur"}}}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/voluptas/eventusers"
+    "http://localhost/api/events/at/eventusers"
 );
 
 let headers = {
@@ -3714,13 +3714,13 @@ let headers = {
 };
 
 let body = {
-    "email": "ex",
-    "name": "reprehenderit",
-    "password": "dolores",
+    "email": "voluptatum",
+    "name": "consequatur",
+    "password": "eius",
     "other_params,": {
         "": {
             "": {
-                "": "doloremque"
+                "": "consectetur"
             }
         }
     }
@@ -3763,14 +3763,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/1/eventusers/ut" \
+    "http://localhost/api/events/1/eventusers/cum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/1/eventusers/ut"
+    "http://localhost/api/events/1/eventusers/cum"
 );
 
 let headers = {
@@ -3851,14 +3851,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/eventusers/event/asperiores" \
+    -G "http://localhost/api/me/eventusers/event/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/eventusers/event/asperiores"
+    "http://localhost/api/me/eventusers/event/et"
 );
 
 let headers = {
@@ -3881,8 +3881,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/asperiores?page=1",
-        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/asperiores?page=1",
+        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/et?page=1",
+        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/et?page=1",
         "prev": null,
         "next": null
     },
@@ -3890,7 +3890,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/asperiores",
+        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/et",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -3916,14 +3916,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/eventusers/event/architecto/user/1" \
+    -G "http://localhost/api/eventusers/event/non/user/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/eventusers/event/architecto/user/1"
+    "http://localhost/api/eventusers/event/non/user/1"
 );
 
 let headers = {
@@ -3966,16 +3966,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/iusto/changeUserPassword" \
+    "http://localhost/api/events/totam/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quis"}'
+    -d '{"email":"molestiae"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/iusto/changeUserPassword"
+    "http://localhost/api/events/totam/changeUserPassword"
 );
 
 let headers = {
@@ -3984,7 +3984,7 @@ let headers = {
 };
 
 let body = {
-    "email": "quis"
+    "email": "molestiae"
 }
 
 fetch(url, {
@@ -4058,14 +4058,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/me/events/rerum/eventusers" \
+    -G "http://localhost/api/me/events/harum/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/me/events/rerum/eventusers"
+    "http://localhost/api/me/events/harum/eventusers"
 );
 
 let headers = {
@@ -4217,7 +4217,7 @@ curl -X POST \
     "http://localhost/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"harum"}'
+    -d '{"file":"ullam"}'
 
 ```
 
@@ -4232,7 +4232,7 @@ let headers = {
 };
 
 let body = {
-    "file": "harum"
+    "file": "ullam"
 }
 
 fetch(url, {
@@ -4278,16 +4278,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "http://localhost/api/files/uploadbase/distinctio" \
+    "http://localhost/api/files/uploadbase/voluptas" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"veritatis","type":"dignissimos"}'
+    -d '{"file":"quisquam","type":"neque"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/files/uploadbase/distinctio"
+    "http://localhost/api/files/uploadbase/voluptas"
 );
 
 let headers = {
@@ -4296,8 +4296,8 @@ let headers = {
 };
 
 let body = {
-    "file": "veritatis",
-    "type": "dignissimos"
+    "file": "quisquam",
+    "type": "neque"
 }
 
 fetch(url, {
@@ -4332,7 +4332,8 @@ Parameter | Type | Status | Description
 
 APIs for Google Analitycs Stats
 <!-- START_8eff85d72c7dd1a965e3957aff777574 -->
-## Consulting Query for Google Analitycs Stats:
+## Query for Google Analytics Stats
+
 Recieve a body json to give all the stats related about pageviews, users and sessions
 filtered by a pagePath consulted.
 
@@ -4490,14 +4491,14 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/quisquam/host" \
+    -G "http://localhost/api/events/esse/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/quisquam/host"
+    "http://localhost/api/events/esse/host"
 );
 
 let headers = {
@@ -4549,16 +4550,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/ut/host" \
+    "http://localhost/api/events/inventore/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"distinctio","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"non","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ut/host"
+    "http://localhost/api/events/inventore/host"
 );
 
 let headers = {
@@ -4569,7 +4570,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "distinctio",
+    "image": "non",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -4613,14 +4614,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/repellendus/host/1" \
+    -G "http://localhost/api/events/vero/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/repellendus/host/1"
+    "http://localhost/api/events/vero/host/1"
 );
 
 let headers = {
@@ -4664,16 +4665,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/ut/host/1" \
+    "http://localhost/api/events/quasi/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"nulla","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"et","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ut/host/1"
+    "http://localhost/api/events/quasi/host/1"
 );
 
 let headers = {
@@ -4684,7 +4685,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "nulla",
+    "image": "et",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -4730,14 +4731,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/vel/host/1" \
+    "http://localhost/api/events/reiciendis/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/vel/host/1"
+    "http://localhost/api/events/reiciendis/host/1"
 );
 
 let headers = {
@@ -5178,14 +5179,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/orders/rerum/orderOrganization" \
+    -G "http://localhost/api/orders/sapiente/orderOrganization" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/rerum/orderOrganization"
+    "http://localhost/api/orders/sapiente/orderOrganization"
 );
 
 let headers = {
@@ -5232,7 +5233,7 @@ curl -X POST \
     "http://localhost/api/organizations/1/contactbyemail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"message":"id","subject":"veritatis","name":"laborum","email_user":"et"}'
+    -d '{"message":"dolore","subject":"deserunt","name":"ad","email_user":"nam"}'
 
 ```
 
@@ -5247,10 +5248,10 @@ let headers = {
 };
 
 let body = {
-    "message": "id",
-    "subject": "veritatis",
-    "name": "laborum",
-    "email_user": "et"
+    "message": "dolore",
+    "subject": "deserunt",
+    "name": "ad",
+    "email_user": "nam"
 }
 
 fetch(url, {
@@ -5365,16 +5366,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/organizations/eum/changeUserPassword" \
+    "http://localhost/api/organizations/saepe/changeUserPassword" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"laudantium"}'
+    -d '{"email":"iste"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/organizations/eum/changeUserPassword"
+    "http://localhost/api/organizations/saepe/changeUserPassword"
 );
 
 let headers = {
@@ -5383,7 +5384,7 @@ let headers = {
 };
 
 let body = {
-    "email": "laudantium"
+    "email": "iste"
 }
 
 fetch(url, {
@@ -5422,16 +5423,16 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
-    "http://localhost/api/rsvp/sendeventrsvp/numquam" \
+    "http://localhost/api/rsvp/sendeventrsvp/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"dolorem","image_header":"numquam","content_header":"Has sido invitado a el evento","message":"ad","image":"voluptatem","image_footer":"aliquam","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
+    -d '{"subject":"qui","image_header":"nihil","content_header":"Has sido invitado a el evento","message":"repellendus","image":"esse","image_footer":"voluptas","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":true}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rsvp/sendeventrsvp/numquam"
+    "http://localhost/api/rsvp/sendeventrsvp/aut"
 );
 
 let headers = {
@@ -5440,17 +5441,17 @@ let headers = {
 };
 
 let body = {
-    "subject": "dolorem",
-    "image_header": "numquam",
+    "subject": "qui",
+    "image_header": "nihil",
     "content_header": "Has sido invitado a el evento",
-    "message": "ad",
-    "image": "voluptatem",
-    "image_footer": "aliquam",
+    "message": "repellendus",
+    "image": "esse",
+    "image_footer": "voluptas",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     },
     "include_ical_calendar": false,
-    "include_login_button": false
+    "include_login_button": true
 }
 
 fetch(url, {
@@ -5566,7 +5567,7 @@ curl -X POST \
     "http://localhost/api/rols" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"reprehenderit","event_id":"omnis"}'
+    -d '{"name":"fugiat","event_id":"enim"}'
 
 ```
 
@@ -5581,8 +5582,8 @@ let headers = {
 };
 
 let body = {
-    "name": "reprehenderit",
-    "event_id": "omnis"
+    "name": "fugiat",
+    "event_id": "enim"
 }
 
 fetch(url, {
@@ -5614,16 +5615,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/rols/aut" \
+    "http://localhost/api/rols/sed" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"dolor","event_id":"et"}'
+    -d '{"name":"laboriosam","event_id":"labore"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rols/aut"
+    "http://localhost/api/rols/sed"
 );
 
 let headers = {
@@ -5632,8 +5633,8 @@ let headers = {
 };
 
 let body = {
-    "name": "dolor",
-    "event_id": "et"
+    "name": "laboriosam",
+    "event_id": "labore"
 }
 
 fetch(url, {
@@ -6225,14 +6226,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/rolesattendees/quia" \
+    "http://localhost/api/rolesattendees/quo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/rolesattendees/quia"
+    "http://localhost/api/rolesattendees/quo"
 );
 
 let headers = {
@@ -6364,7 +6365,7 @@ curl -X POST \
     "http://localhost/api/events/605241e68b276356801236e4/surveys" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"commodi","points":1,"initialMessage":"dolor","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":318.28890232}'
+    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"sit","points":1,"initialMessage":"quia","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":27785.59}'
 
 ```
 
@@ -6382,9 +6383,9 @@ let body = {
     "survey": "Nombre de encuesta",
     "show_horizontal_bar": false,
     "allow_vote_value_per_user": false,
-    "activity_id": "commodi",
+    "activity_id": "sit",
     "points": 1,
-    "initialMessage": "dolor",
+    "initialMessage": "quia",
     "time_limit": 0,
     "allow_anonymous_answers": false,
     "allow_gradable_survey": false,
@@ -6393,7 +6394,7 @@ let body = {
     "freezeGame": false,
     "open": false,
     "publish": false,
-    "minimumScore": 318.28890232
+    "minimumScore": 27785.59
 }
 
 fetch(url, {
@@ -6543,7 +6544,7 @@ curl -X PUT \
     "http://localhost/api/events/605241e68b276356801236e4/surveys/608c5f5f63201e0f5147a086" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"deleniti","show_horizontal_bar":"et","allow_vote_value_per_user":"laboriosam","activity_id":"explicabo","points":"sed","initialMessage":"perspiciatis","time_limit":"magnam","allow_anonymous_answers":"expedita","allow_gradable_survey":"dolore","hasMinimumScore":"eveniet","isGlobal":"voluptas","freezeGame":"quia","open":"aut","publish":"error","minimumScore":"aut"}'
+    -d '{"survey":"dolorum","show_horizontal_bar":"eos","allow_vote_value_per_user":"quia","activity_id":"ea","points":"minima","initialMessage":"repellat","time_limit":"quia","allow_anonymous_answers":"velit","allow_gradable_survey":"facilis","hasMinimumScore":"id","isGlobal":"enim","freezeGame":"fugiat","open":"voluptas","publish":"quisquam","minimumScore":"vitae"}'
 
 ```
 
@@ -6558,21 +6559,21 @@ let headers = {
 };
 
 let body = {
-    "survey": "deleniti",
-    "show_horizontal_bar": "et",
-    "allow_vote_value_per_user": "laboriosam",
-    "activity_id": "explicabo",
-    "points": "sed",
-    "initialMessage": "perspiciatis",
-    "time_limit": "magnam",
-    "allow_anonymous_answers": "expedita",
-    "allow_gradable_survey": "dolore",
-    "hasMinimumScore": "eveniet",
-    "isGlobal": "voluptas",
-    "freezeGame": "quia",
-    "open": "aut",
-    "publish": "error",
-    "minimumScore": "aut"
+    "survey": "dolorum",
+    "show_horizontal_bar": "eos",
+    "allow_vote_value_per_user": "quia",
+    "activity_id": "ea",
+    "points": "minima",
+    "initialMessage": "repellat",
+    "time_limit": "quia",
+    "allow_anonymous_answers": "velit",
+    "allow_gradable_survey": "facilis",
+    "hasMinimumScore": "id",
+    "isGlobal": "enim",
+    "freezeGame": "fugiat",
+    "open": "voluptas",
+    "publish": "quisquam",
+    "minimumScore": "vitae"
 }
 
 fetch(url, {
@@ -6728,7 +6729,7 @@ curl -X POST \
     "http://localhost/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"optio","city":"tenetur","country":"placeat","picture":"http:\/\/www.gravatar.com\/avatar","password":"ad","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
+    -d '{"email":"evius@evius.co","names":"optio","city":"reiciendis","country":"ut","picture":"http:\/\/www.gravatar.com\/avatar","password":"odit","others_properties":"[]","organization_ids":"[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"}'
 
 ```
 
@@ -6745,10 +6746,10 @@ let headers = {
 let body = {
     "email": "evius@evius.co",
     "names": "optio",
-    "city": "tenetur",
-    "country": "placeat",
+    "city": "reiciendis",
+    "country": "ut",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "password": "ad",
+    "password": "odit",
     "others_properties": "[]",
     "organization_ids": "[\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"][\"5f7e33ba3abc2119442e83e8\" , \"5e9caaa1d74d5c2f6a02a3c3\"]"
 }
@@ -6970,7 +6971,7 @@ curl -X PUT \
     "http://localhost/api/users/5e9caaa1d74d5c2f6a02a3c2" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"evius@evius.co","names":"evius lopez","city":"aliquam","country":"rem","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"cumque","others_properties":"[]"}'
+    -d '{"email":"evius@evius.co","names":"evius lopez","city":"quos","country":"illum","picture":"http:\/\/www.gravatar.com\/avatar","organization_ids":"rem","others_properties":"[]"}'
 
 ```
 
@@ -6987,10 +6988,10 @@ let headers = {
 let body = {
     "email": "evius@evius.co",
     "names": "evius lopez",
-    "city": "aliquam",
-    "country": "rem",
+    "city": "quos",
+    "country": "illum",
     "picture": "http:\/\/www.gravatar.com\/avatar",
-    "organization_ids": "cumque",
+    "organization_ids": "rem",
     "others_properties": "[]"
 }
 
@@ -7249,7 +7250,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/users/id/changeStatusUser" \
+    "http://localhost/api/users/quod/changeStatusUser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -7258,7 +7259,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/id/changeStatusUser"
+    "http://localhost/api/users/quod/changeStatusUser"
 );
 
 let headers = {
@@ -7546,7 +7547,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/ut/userproperties" \
+    "http://localhost/api/events/id/userproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -7555,7 +7556,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ut/userproperties"
+    "http://localhost/api/events/id/userproperties"
 );
 
 let headers = {
@@ -7619,14 +7620,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/eaque/userproperties/tenetur" \
+    -G "http://localhost/api/events/qui/userproperties/explicabo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eaque/userproperties/tenetur"
+    "http://localhost/api/events/qui/userproperties/explicabo"
 );
 
 let headers = {
@@ -7673,7 +7674,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/dolorem/userproperties/dolorem" \
+    "http://localhost/api/events/quidem/userproperties/voluptatibus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -7682,7 +7683,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/dolorem/userproperties/dolorem"
+    "http://localhost/api/events/quidem/userproperties/voluptatibus"
 );
 
 let headers = {
@@ -7787,14 +7788,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/exercitationem/userproperties/corrupti" \
+    "http://localhost/api/events/debitis/userproperties/sunt" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/exercitationem/userproperties/corrupti"
+    "http://localhost/api/events/debitis/userproperties/sunt"
 );
 
 let headers = {
@@ -8195,14 +8196,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/orders/ex/validateFreeorder" \
+    "http://localhost/api/orders/et/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/ex/validateFreeorder"
+    "http://localhost/api/orders/et/validateFreeorder"
 );
 
 let headers = {
@@ -8238,14 +8239,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "http://localhost/api/orders/et/validatePointOrder" \
+    "http://localhost/api/orders/itaque/validatePointOrder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/et/validatePointOrder"
+    "http://localhost/api/orders/itaque/validatePointOrder"
 );
 
 let headers = {
