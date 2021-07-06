@@ -28,9 +28,9 @@ class OrganizationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function meOrganizations(Request $request)
-    {
+    {   
         return OrganizationResource::collection(
-            Organization::where('author', Auth::user()->id)
+            Organization::where('author', Auth::user()->_id)
                 ->paginate(config('app.page_size'))
         );
     }
