@@ -8,12 +8,12 @@ use Spatie\Analytics\Period;
 use Carbon\Carbon;
 
 /**
-* @group Google Analitycs
+* @group Google Analytics
 *
 * APIs for Google Analitycs Stats
 *
 */
-class GoogleAnalitycsController extends Controller
+class GoogleAnalyticsController extends Controller
 {
 
   /**
