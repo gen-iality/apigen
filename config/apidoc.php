@@ -160,8 +160,8 @@ return [
                     //UserProperties
                         '*/userproperties',
                         '*/userproperties/*',
-                    //Google Analitycs
-                        '*/googleanalitycs',
+                    //Google Analytics
+                        '*/googleanalytics',
 
                 ],  
 

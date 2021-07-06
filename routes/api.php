@@ -28,7 +28,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 // Route::get('s3aws/{prefix?}', 'AwsS3Controller');
 
 
-Route::post('googleanalitycs', 'GoogleAnalitycsController');
+Route::post('googleanalytics', 'GoogleAnalitycsController');
 
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
 Route::get('aws/sendemail', 'AwsSnsController@testEmail');
