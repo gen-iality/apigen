@@ -553,10 +553,24 @@ Route::post("discountcodetemplate/{id}/importCodes", "DiscountCodeTemplateContro
 Route::get("discountcodetemplate/findByOrganization/{organization}", "DiscountCodeTemplateController@findByOrganization");
 
 
-
-
 //y esto que fue? ese api más sospechozso
 Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeController");
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
 Route::put("code/redeem_point_code" ,  "DiscountCodeController@redeemPointCode");
+
+/****************
+ * Gallery
+ ****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/galleries', 'GalleryController@store');
+        Route::put('events/{event}/galleries/{gallery}', 'GalleryController@update');
+        Route::delete('events/{event}/galleries/{gallery}', 'GalleryController@destroy');
+    }
+);
+
+Route::get('events/{event}/galleries', 'GalleryController@index');
+Route::get('events/{event}/galleries/{gallery}', 'GalleryController@show');
+
+

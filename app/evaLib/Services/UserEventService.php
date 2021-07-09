@@ -114,7 +114,7 @@ class UserEventService
                 $eventUserFields["rol_id"] = $rol->_id;
             } else {
                 //Se supone este es un rol por defecto (asistente) si todo el resto falla
-                $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
+                $eventUserFields["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
             }
 
         }
@@ -290,7 +290,7 @@ string(10) "1030522402"
 
             $rol = Rol::where('level', 0)->first();
             $eventUser->rol_id = $rol->_id;
-            $eventUser->rol_id = "5afaf644500a7104f77189cd";
+            $eventUser->rol_id = "60e8a7e74f9fb74ccd00dc22";
 
             $temp = State::first();
             $eventUser->state_id = $temp->_id;

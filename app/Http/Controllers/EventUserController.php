@@ -54,7 +54,7 @@ class EventUserController extends Controller
      *     "_id": "5f9055454e6953792a54fd43",
      *     "state_id": "5b0efc411d18160bce9bc706",
      *     "checked_in": false,
-     *     "rol_id": "5afaf644500a7104f77189cd",
+     *     "rol_id": "60e8a7e74f9fb74ccd00dc22",
      *     "properties": {
      *         "names": "Burke Maldonado",
      *         "email": "vygufiqe@mailinator.com",

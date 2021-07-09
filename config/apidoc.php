@@ -159,7 +159,10 @@ return [
                         '*/rols',
                     //UserProperties
                         '*/userproperties',
-                        '*/userproperties/*'
+                        '*/userproperties/*',
+                    //Gallery    
+                        '*/galleries',
+                        '*/galleries/*',              
 
                 ],  
 
