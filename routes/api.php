@@ -567,6 +567,7 @@ Route::group(
         Route::post('events/{event}/galleries', 'GalleryController@store');
         Route::put('events/{event}/galleries/{gallery}', 'GalleryController@update');
         Route::delete('events/{event}/galleries/{gallery}', 'GalleryController@destroy');
+        Route::post('events/{event}/galleries/{gallery}/silentauctionmail', 'GalleryController@createSilentAuction');
     }
 );
 
