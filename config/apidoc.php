@@ -162,7 +162,10 @@ return [
                         '*/userproperties/*',
                     //Gallery    
                         '*/galleries',
-                        '*/galleries/*',              
+                        '*/galleries/*',    
+                    //Comment
+                        '*/comments',
+                        '*/comments/*',           
 
                 ],  
 
