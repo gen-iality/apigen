@@ -39,9 +39,9 @@ class CommentController extends Controller
      * _store_: create new coment
      * @autenticathed
      * 
-     * @bodyParam organization_id 
-     * @bodyParam comment
-     * @bodyParam image
+     * @bodyParam organization_id string
+     * @bodyParam comment string
+     * @bodyParam image string
      */
     public function store(Request $request)
     {   
