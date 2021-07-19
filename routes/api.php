@@ -575,3 +575,17 @@ Route::get('events/{event}/galleries', 'GalleryController@index');
 Route::get('events/{event}/galleries/{gallery}', 'GalleryController@show');
 
 
+/****************
+ * Comment
+ ****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('comments', 'CommentController@store');
+        Route::put('comments/{comment}', 'CommentController@update');
+        Route::delete('comments/{comment}', 'CommentController@destroy');
+        Route::get('comments', 'CommentController@index');
+
+    }
+);
+Route::get('comments/organizations/{organization}' , 'CommentController@indexByOrganization');
+
