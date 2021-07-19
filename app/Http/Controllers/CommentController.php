@@ -7,6 +7,10 @@ use App\Comment;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Auth;
 
+
+/**
+ * @group Comment 
+* */
 class CommentController extends Controller
 {
     /**
