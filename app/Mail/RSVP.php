@@ -133,7 +133,7 @@ class RSVP extends Mailable implements ShouldQueue
         $date_time_from = $date_time_from->setTimezone("UTC");
         $date_time_to = $date_time_to->setTimezone("UTC");
 
-        $this->date_time_from = $date_time_from;
+        $this->date_time_from = \Carbon\Carbon::parse($event->datetime_from ."-05:00");
         $this->date_time_to = $date_time_to;
         
 
