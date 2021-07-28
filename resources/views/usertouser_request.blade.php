@@ -41,7 +41,11 @@
 @component('mail::button', ['url' => $link_authenticatedalevento, 'color' => 'evius'])
 Ver Solicitudes en el Evento
 @endcomponent
-
+<div>	
+	<p>
+		<a href="{{$linkUnsubscribe}}">{{ __('Mail.unsubscribe')}}</a>
+	</p>	
+</div>
 
 
 

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-
+use App;
 class UserToUserRequest extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels; //, Dispatchable, InteractsWithQueue;
@@ -34,6 +34,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public $link_authenticatedalevento;
     public $request_type;
     public $status;
+    public $linkUnsubscribe;
     /**
      * Create a new message instance.
      *
@@ -77,6 +78,8 @@ class UserToUserRequest extends Mailable implements ShouldQueue
 
         $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
         $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
+        $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $event_id .'/unsubscribe';
+
 
         $this->response = $response;
         $this->email = $email;
@@ -96,7 +99,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $this->sender = $sender;
         $this->request_type = $request_type;
         $this->status = $status;
-
+        $this->linkUnsubscribe = $linkUnsubscribe;
         $this->subject = $subject;
         $gfService = new GoogleFiles();
 
@@ -148,6 +151,9 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $desc = $this->desc;
         $subject = $this->subject;
         $img = $this->img;
+
+        $locale = isset($event->language) ? $event->language : 'es';
+        App::setLocale($locale);
         // var_dump($desc);die;
         return $this
         // ->attach($attachPath,[
@@ -155,7 +161,6 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         //     'mime' => 'image/png',
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
-        ->from("alerts@evius.co", $sender)
             ->subject($subject)
             ->markdown('usertouser_request');
 
