@@ -12,7 +12,8 @@ class Gallery extends Moloquent
         'description', 
         'image', 
         'event_id',
-        'price'
+        'price',
+        'artist'
     ];
 
     public function event()

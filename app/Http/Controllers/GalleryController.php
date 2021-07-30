@@ -120,17 +120,25 @@ class GalleryController extends Controller
         //Se obtienen los colaboradores o admins para enviar el correo de subasta silenciosa
         $contributors = ModelHasRole::where('event_id' , $event_id)->pluck('model_id');
         $admins = Account::whereIn('_id' , $contributors)->get(['email']);
-
+        
         $gallery = Gallery::find($gallery_id);
 
-
+        //Este Email informa a los administadores que usuarios han subastado
         foreach($admins as $admin)
-        {
+        {   
+            
             Mail::to($admin->email)
             ->queue(
-                new \App\Mail\SilentAuctionMail($data, $event_id, $user, $gallery)
+                new \App\Mail\SilentAuctionMail($data, $event_id, $user, $gallery , true)
             );
         }  
+
+        //Este es el correo de copnmfirmación para el usuario que realiza la puja
+        
+        Mail::to($user->email)
+        ->queue(
+            new \App\Mail\SilentAuctionMail($data, $event_id, $user, $gallery, false)
+        );
         return 'Silent Auction';
 
     }

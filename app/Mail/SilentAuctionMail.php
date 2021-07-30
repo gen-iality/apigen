@@ -18,18 +18,27 @@ class SilentAuctionMail extends Mailable
     public $user;
     public $dataAuction;
     public $gallery;
+    public $userAdmin;
+    public $organization;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($dataAuction, $event, $user, $gallery)
+    public function __construct($dataAuction, $event_id, $user, $gallery, $userAdmin)
     {   
-        
+
+        $event =  Event::find($event_id);
+
+        $organization = Organization::find($event->organizer_id);
+
         $this->dataAuction = $dataAuction;
-        $this->event =  Event::find($event);
+        $this->event = $event;
         $this->user = $user;
         $this->gallery = $gallery;
+        $this->userAdmin = $userAdmin;               
+        $this->organization = $organization;
     }
 
     /**
@@ -40,10 +49,18 @@ class SilentAuctionMail extends Mailable
     public function build()
     {   
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
-
-        $this
+        if($this->userAdmin)
+        {   
+            $this
             ->from("alerts@evius.co", $from)
             ->subject($this->event->name)
             ->markdown('Mailers.silentAuction');
+        }else{
+            $this
+            ->from("alerts@evius.co", $from)
+            ->subject($this->event->name)
+            ->markdown('Mailers.silentAuctionUser');
+        }
+        
     }
 }
