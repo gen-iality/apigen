@@ -8,19 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @resource Event
- *
+ * @group News Feed 
  *
  */
 class NewsfeedController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * _index_: list of news of the event.
+     * 
+     * @urlParam event required id event Example: 605241e68b276356801236e4 
      */
-    public function index(Request $request, $event_id)
+    public function index($event_id)
     {
         return JsonResource::collection(
             Newsfeed::where("event_id", $event_id)->paginate(config('app.page_size'))
@@ -28,10 +27,17 @@ class NewsfeedController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * _store_: create news in an event
+     * @authenticated
+     * 
+     * @urlParam event required id event. Example: 605241e68b276356801236e4
+     * 
+     * @bodyParam title string required news title. Example: Los mejores eventos están en Evius
+     * @bodyParam description_complete news complete   string. Example: Los eventos en evius son interactivos porque tiene multiples opciones...         
+     * @bodyParam description_short string news description short Example: Los eventos en Evius son los más interactivos y los mejores.
+     * @bodyParam linkYoutube string news video Example: https://www.youtube.com/watch?v=m1YUmZRfgqU&ab_channel=MG1010
+     * @bodyParam image string news image. Example: https://storage.googleapis.com/eviusauth.appspot.com/evius/events/IdKxqboMxU0pvgY3AbRkig4ZptQcUNE4CUvysJIn.png
+     * @bodyParam time  string news date. Example: 2021-08-02
      */
     public function store(Request $request, $event_id)
     {
@@ -43,25 +49,31 @@ class NewsfeedController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * _show_:  view information for a specific news
      *
-     * @param  \App\Newsfeed  $Newsfeed
-     * @return \Illuminate\Http\Response
+     * @urlParam event required id event. Example: 605241e68b276356801236e4
+     * @urlParam newsfeed required id news. Example: 6107fe65ff324f482d1c7569
+     * 
      */
     public function show($event_id,$id)
     {
         $Newsfeed = Newsfeed::findOrFail($id);
         $response = new JsonResource($Newsfeed);
-        //if ($Newsfeed["event_id"] = $event_id) {
         return $response;
 
     }
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Newsfeed  $Newsfeed
-     * @return \Illuminate\Http\Response
+     * _update_: create news in an event
+     * @authenticated
+     * 
+     * @urlParam event required id event. Example: 605241e68b276356801236e4
+     * 
+     * @bodyParam title string news title. Example: Los mejores eventos están en Evius
+     * @bodyParam description_complete news complete   string. Example: Los eventos en evius son interactivos porque tiene multiples opciones...         
+     * @bodyParam description_short string news description short Example: Los eventos en Evius son los más interactivos y los mejores.
+     * @bodyParam linkYoutube string news video Example: https://www.youtube.com/watch?v=m1YUmZRfgqU&ab_channel=MG1010
+     * @bodyParam image string news image. Example: https://storage.googleapis.com/eviusauth.appspot.com/evius/events/IdKxqboMxU0pvgY3AbRkig4ZptQcUNE4CUvysJIn.png
+     * @bodyParam time  string news date. Example: 2021-08-02
      */
     public function update(Request $request, $event_id, $id)
     {
@@ -75,10 +87,10 @@ class NewsfeedController extends Controller
     }
 
     /** 
-     * Remove the specified resource from storage.
+     * _destroy_:  delete a specific news
      *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
+     * @urlParam event required id event. Example: 605241e68b276356801236e4
+     * @urlParam newsfeed required id news. Example: 6107fe65ff324f482d1c7569
      */
     public function destroy(Request $request, $event_id, $id)
     {

@@ -165,7 +165,10 @@ return [
                         '*/galleries/*',    
                     //Comment
                         '*/comments',
-                        '*/comments/*',           
+                        '*/comments/*',       
+                    //News
+                        '*/newsfeed',
+                        '*/newsfeed/*',    
 
                 ],  
 

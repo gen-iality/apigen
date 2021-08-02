@@ -33,7 +33,7 @@ Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
  * NEWSFEED
  ****************/
 
-Route::apiResource('events/{id}/newsfeed', 'NewsfeedController');
+Route::apiResource('events/{event}/newsfeed', 'NewsfeedController');
 
 /****************
  * SURVEYS
