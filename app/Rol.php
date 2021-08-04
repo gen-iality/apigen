@@ -8,6 +8,8 @@ use Moloquent;
 class Rol extends Moloquent
 {
     //
+    protected $table = 'roles';
+
     public function event()
     {
         return $this->belongsTo('App\Event');

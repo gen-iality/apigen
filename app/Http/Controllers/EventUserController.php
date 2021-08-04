@@ -7,6 +7,7 @@ use App\Attendee;
 use App\evaLib\Services\FilterQuery;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\evaLib\Services\UserEventService;
+use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\Event;
 use App\Http\Requests\EventUserRequest;
 use App\Http\Resources\EventUserResource;
@@ -1135,5 +1136,14 @@ class EventUserController extends Controller
 
         return $totalForDate;
 
-    }    
+    } 
+    
+    
+    /**
+     * 
+     */
+    public function updateRolAndSendEmail(Request $request, $event_id, $eventUser_id)
+    {
+        return UpdateRolEventUserAndSendEmail::UpdateRolEventUserAndSendEmail($request, $event_id, $eventUser_id);
+    }
 }

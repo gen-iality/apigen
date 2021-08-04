@@ -115,7 +115,7 @@ Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserContro
 //Metrics
 Route::get('events/{event_id}/metricsbydate/eventusers',        'EventUserController@metricsEventByDate');
 Route::get('events/{event_id}/hubspotRegister/eventusers',        'EventUserController@hubspotRegister');
-
+Route::put('events/{event}/eventusers/{eventuser}/updaterol', 'EventUserController@updateRolAndSendEmail');
 
 
 
