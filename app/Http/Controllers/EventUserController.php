@@ -1081,7 +1081,7 @@ class EventUserController extends Controller
     }
 
 
-        /**
+    /**
      * _metricsEventByDate_: number of registered users per day according to event start and end dates
      */
     public function metricsEventByDate(Request $request, $event_id)
@@ -1140,7 +1140,7 @@ class EventUserController extends Controller
     
     
     /**
-     * 
+     * _updateRolAndSendEmail_:     /*
      */
     public function updateRolAndSendEmail(Request $request, $event_id, $eventUser_id)
     {

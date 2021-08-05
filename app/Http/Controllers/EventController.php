@@ -230,8 +230,9 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $user = Auth::user();
-        $data = $request->json()->all();
-
+        $data = $request->except(['user_properties','token']);
+        $dataUserProperties = $request->only('user_properties');
+        
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data, [
@@ -262,8 +263,15 @@ class EventController extends Controller
         if (!empty($data['styles'])) {
             $data['styles'] = self::AddDefaultStyles($data['styles']);
         }
+
+        
+       
         $Properties = new UserProperties();
         $result = new Event($data);
+        
+        
+
+
 
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
@@ -296,9 +304,20 @@ class EventController extends Controller
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
+         
+        if(isset($dataUserProperties))
+        { 
+            $event = Event::find($result->_id);
+            for($i=0; $i < count($dataUserProperties) ; $i++)
+            {                                               
+                $model = new UserProperties($dataUserProperties['user_properties'][$i]);
+                $event->user_properties()->save($model);
+            }            
+        }
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
         self::createDefaultUserProperties($result->id);
+
 
         return $result;
     }
