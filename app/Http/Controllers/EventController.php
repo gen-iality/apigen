@@ -308,8 +308,9 @@ class EventController extends Controller
         if(isset($dataUserProperties))
         { 
             $event = Event::find($result->_id);
-            for($i=0; $i < count($dataUserProperties) ; $i++)
-            {                                               
+            for($i=0; $i < count($dataUserProperties['user_properties']) ; $i++)
+            {    
+                                                         
                 $model = new UserProperties($dataUserProperties['user_properties'][$i]);
                 $event->user_properties()->save($model);
             }            
