@@ -114,7 +114,6 @@ class GalleryController extends Controller
     {
         
         $user = Auth::user();
-
         $data = $request->json()->all();
         
         //Se obtienen los colaboradores o admins para enviar el correo de subasta silenciosa
@@ -134,7 +133,6 @@ class GalleryController extends Controller
         }  
 
         //Este es el correo de copnmfirmación para el usuario que realiza la puja
-        
         Mail::to($user->email)
         ->queue(
             new \App\Mail\SilentAuctionMail($data, $event_id, $user, $gallery, false)

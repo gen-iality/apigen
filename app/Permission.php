@@ -7,5 +7,17 @@ use Moloquent;
 class Permission extends Moloquent
 {
     //
-    protected $fillable = [ 'event_id', 'user_id', 'rol_id'];
+    protected $fillable = [
+        'name', 
+        'guard_name', 
+        'module'        
+    ];
+
+    /**
+     * The roles associated with the permission.    
+     */
+    public function roles()
+    {
+        return $this->hasMany(\App\Models\RolesPermissions::class);
+    }
 }

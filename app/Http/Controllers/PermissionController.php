@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\AttendeTicket;
 use App\Event;
-use App\Rol;
+use App\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -18,7 +18,9 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         //
-        return $request->get('user')->id;
+        return JsonResource::collection(
+            Permission::paginate(config('app.page_size'))
+        );
     }
 
     /**
@@ -40,6 +42,10 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         //
+        $result = new Permission($request->json()->all());
+        $result->guard_name = 'web';
+        $result->save();
+        return $result;
     }
 
     /**
@@ -50,7 +56,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        //
+        return new JsonResource($permission);
     }
 
     /**
@@ -73,7 +79,11 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $data = $request->json()->all();
+        $permissions = $permission;
+        $permissions->fill($data);
+        $permissions->save();
+        return $permissions;
     }
 
     /**

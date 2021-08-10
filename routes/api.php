@@ -529,6 +529,7 @@ Route::get('rols', 'RolController@index');
 Route::post('rols', 'RolController@store');
 Route::put('rols/{id}', 'RolController@update');
 Route::get('rols/{id}', 'RolController@show');
+Route::post('roles/{role}/addpermissions', 'RolesPermissionsController@addPermissionToRol');
 /*
 Route::middleware('cors')->get('rols', 'RolController@index');
 Route::middleware('cors')->post('rols', 'RolController@store');
@@ -567,7 +568,7 @@ Route::group(
         Route::post('events/{event}/galleries', 'GalleryController@store');
         Route::put('events/{event}/galleries/{gallery}', 'GalleryController@update');
         Route::delete('events/{event}/galleries/{gallery}', 'GalleryController@destroy');
-        Route::post('events/{event}/galleries/{gallery}/silentauctionmail', 'GalleryController@createSilentAuction');
+        Route::post('events/{event}/galleries/{gallery}/silentauctionmail', 'GalleryController@createSilentAuction')->middleware('permission:send_galleries_silentauctiomail');
     }
 );
 

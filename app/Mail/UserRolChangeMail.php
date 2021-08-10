@@ -27,7 +27,7 @@ class UserRolChangeMail extends Mailable
     public function __construct($event_id, $eventUser, $rol_id)
     {
         $event = Event::find($event_id);
-        $rol = Rol::find($rol_id);        
+        $rol = Rol::find($rol_id); 
         $organization = Organization::find($event->organizer_id);
 
         $this->eventUser = $eventUser;
