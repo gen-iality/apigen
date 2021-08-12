@@ -47,23 +47,21 @@
                                     Nombre de la obra
                                 </th>
                                 <td style="padding:5px 0">
-                                    {{$gallery->name}}
+                                    {{$product->name}}
                                 </td>
                             </tr>
                             <tr>
                                 <th style="font-weight:600;width:40%;line-height:14px;text-align:right;padding-right:10px">
-                                    Nombre de la obra
+                                   Obra
                                 </th>
-                                <td style="padding:5px 0">
-                                    <img style="width:100%;max-width:600px;border-radius:20px   "  alt="{{$event->name}}" src={{$gallery->image}} /> 
-                                </td>
+                                {!!$obra!!} 
                             </tr>
                             <tr>
                                 <th style="font-weight:600;width:40%;line-height:14px;text-align:right;padding-right:10px">
                                     Artista
                                 </th>
                                 <td style="padding:5px 0">
-                                    {{$gallery->artist}}
+                                    {{$product->artist}}
                                 </td>
                             </tr>
                         </tbody>

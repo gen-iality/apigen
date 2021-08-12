@@ -51,7 +51,7 @@
                                 Nombre del árticulo
                             </th>
                             <td style="padding:5px 0">
-                                {{$gallery->name}}
+                                {{$product->name}}
                             </td>
                         </tr>
                         <tr>
@@ -59,7 +59,7 @@
                                 Imagen del árticulo
                             </th>
                             <td style="padding:5px 0">
-                                <img style="width:100%;max-width:600px;border-radius:20px   "  alt="{{$event->name}}" src={{$gallery->image}} /> 
+                                <img style="width:100%;max-width:600px;border-radius:20px   "  alt="{{$event->name}}" src={{$product->image}} /> 
                             </td>
                         </tr>
                         </tbody>

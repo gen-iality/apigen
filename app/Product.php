@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Moloquent;
-class Gallery extends Moloquent
+class Product extends Moloquent
 {
     //
     protected $fillable = [

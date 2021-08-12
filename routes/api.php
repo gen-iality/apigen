@@ -561,19 +561,19 @@ Route::post("code/validatecode", "DiscountCodeController@validateCode");
 Route::put("code/redeem_point_code" ,  "DiscountCodeController@redeemPointCode");
 
 /****************
- * Gallery
+ * Product
  ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::post('events/{event}/galleries', 'GalleryController@store');
-        Route::put('events/{event}/galleries/{gallery}', 'GalleryController@update');
-        Route::delete('events/{event}/galleries/{gallery}', 'GalleryController@destroy');
-        Route::post('events/{event}/galleries/{gallery}/silentauctionmail', 'GalleryController@createSilentAuction')->middleware('permission:send_galleries_silentauctiomail');
+        Route::post('events/{event}/products', 'ProductController@store');
+        Route::put('events/{event}/products/{product}', 'ProductController@update');
+        Route::delete('events/{event}/products/{product}', 'ProductController@destroy');
+        Route::post('events/{event}/products/{product}/silentauctionmail', 'ProductController@createSilentAuction')->middleware('permission:send_products_silentauctiomail');
     }
 );
 
-Route::get('events/{event}/galleries', 'GalleryController@index');
-Route::get('events/{event}/galleries/{gallery}', 'GalleryController@show');
+Route::get('events/{event}/products', 'ProductController@index');
+Route::get('events/{event}/products/{product}', 'ProductController@show');
 
 
 /****************

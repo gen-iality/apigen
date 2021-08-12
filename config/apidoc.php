@@ -160,9 +160,9 @@ return [
                     //UserProperties
                         '*/userproperties',
                         '*/userproperties/*',
-                    //Gallery    
-                        '*/galleries',
-                        '*/galleries/*',    
+                    //Product    
+                        '*/products',
+                        '*/products/*',    
                     //Comment
                         '*/comments',
                         '*/comments/*',       

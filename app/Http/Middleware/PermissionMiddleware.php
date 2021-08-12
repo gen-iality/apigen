@@ -77,7 +77,7 @@ class PermissionMiddleware
                 foreach ($permissionsRolUser as $permissionUser) 
                 {   
                     
-                    //send_galleries_silentauctiomail                    
+                    //send_products_silentauctiomail                    
                     //return $permissionUser->permission->name;
                     if($permissionUser->permission->name === $permission )
                     {   

@@ -1140,7 +1140,14 @@ class EventUserController extends Controller
     
     
     /**
-     * _updateRolAndSendEmail_:     /*
+     * _updateRolAndSendEmail_: change the rol of an user in a event especific.
+     * This end point sends an email to the user to inform them of the change.
+     * @authenticated
+     * 
+     * @urlParam event required
+     * @urlParam eventuser required
+     * 
+     * @bodyParam rol_id string required      
      */
     public function updateRolAndSendEmail(Request $request, $event_id, $eventUser_id)
     {

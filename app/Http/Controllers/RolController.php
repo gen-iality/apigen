@@ -14,7 +14,6 @@ class RolController extends Controller
     /**
      * _index_: list Roles.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
