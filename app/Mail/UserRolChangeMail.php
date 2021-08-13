@@ -19,12 +19,14 @@ class UserRolChangeMail extends Mailable
     public $event;
     public $eventUser;
     public $rol;
+    public $message;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($event_id, $eventUser, $rol_id)
+    public function __construct($event_id, $eventUser, $rol_id, $message)
     {
         $event = Event::find($event_id);
         $rol = Rol::find($rol_id); 
@@ -34,6 +36,7 @@ class UserRolChangeMail extends Mailable
         $this->event = $event;
         $this->rol = $rol;
         $this->organization = $organization;
+        $this->message = $message;
     }
 
     /**

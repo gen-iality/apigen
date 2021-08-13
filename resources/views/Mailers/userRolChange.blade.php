@@ -13,8 +13,11 @@
 
 {{ __ ('Mail.greeting')}} {{$eventUser['properties']['names']}}
 <br/>
-Tu estado de usuario ha sido cambiado a {{$rol->name}}
+Tu estado de usuario ha sido cambiado a <strong>{{$rol->name}}</strong>
 <br/>
+@if(isset($message))
+	{{$message}}
+@endif
 <hr style="border-right : 0;border-left: 0;" />
 <div style="text-align: center">
 <p style="font-size: 15px;color: gray;font-style: italic">
