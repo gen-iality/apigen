@@ -37,6 +37,8 @@ class ProductController extends Controller
      * @bodyParam description string  description of image. Example: Esta pintura es de un arbol.
      * @bodyParam image string required route of image. Example: https://storage.googleapis.com/eviusauth.appspot.com/evius/events/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg
      * @bodyParam price number Example: 10000   
+     * @bodyParam by string author or brands of the product. Example: Evius    
+     * @bodyParam short_description string Example: Pintura de arbol 1x2m 
      *  
      */
     public function store(Request $request, $event_id)
@@ -77,6 +79,8 @@ class ProductController extends Controller
      * @bodyParam description string  description of image. Example: Esta pintura es de un arbol.
      * @bodyParam image string route of image. Example: https://storage.googleapis.com/eviusauth.appspot.com/evius/events/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg
      * @bodyParam price number Example: 10000  
+     * @bodyParam by string author or brands of the product. Example: Evius    
+     * @bodyParam short_description string Example: Pintura de arbol 1x2m 
      */
     public function update(Request $request, $event_id, $product_id)
     {

@@ -13,7 +13,8 @@ class Product extends Moloquent
         'image', 
         'event_id',
         'price',
-        'artist'
+        'by',
+        'short_description'
     ];
 
     public function event()
