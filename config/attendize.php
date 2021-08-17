@@ -91,4 +91,7 @@ return [
     'currency_cop'          => 'COP',
     'currency_usd'          => 'USD',
     'trm'                   => 3124.09,
+
+    //Attendee Rol
+    'payment_assistant'     => '60e8a8b7f6817c280300dc23',
 ];

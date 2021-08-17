@@ -71,8 +71,8 @@ class ApiCheckoutController extends Controller
                 
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
-                    $order->order_status_id = config('attendize.order_complete');
-                    $order->save();                                                         
+                    // $order->order_status_id = config('attendize.order_complete');
+                    // $order->save();                                                         
                     Log::info("Completamos la orden");
                     $this->completeOrder($order_id , $data);
                     
@@ -233,20 +233,28 @@ class ApiCheckoutController extends Controller
         * Create the attendees
         */
         foreach($order->items as $item) {
-                        
+                         
 
-            $attendee = new Attendee();
-            $attendee->properties = (object) [];
+            $attendee = Attendee::updateOrCreate(
+                ["account_id" => $order->account_id , "event_id" => $item],  
+                [
+                    "properties.names" => $order->account->names ,
+                    "properties.email" => $order->account->email, 
+                    "order_id" => $order->_id,
+                    "rol_id" => config('attendize.payment_assistant')
 
+                ]              
+            );
+            
+            // $attendee->properties->names = $order->account->names;
+            // $attendee->properties->email = $order->account->email;	
 
-            $attendee->properties->names = $order->account->names;
-            $attendee->properties->email = $order->account->email;	
-
-            $attendee->event_id = $item;
-            $attendee->order_id = $order->id;
-            //$attendee->ticket_id = $attendee_details['ticket']['_id'];
-            $attendee->account_id = $order->account->_id;
-            $attendee->save();
+            // $attendee->event_id = $item;
+            
+            // $attendee->order_id = $order->id;
+            // //$attendee->ticket_id = $attendee_details['ticket']['_id'];
+            // $attendee->account_id = $order->account->_id;
+            // $attendee->save();
 
             $user = Account::find($order->account->_id);
             $user->total_number_events = $user->total_number_events + 1;
