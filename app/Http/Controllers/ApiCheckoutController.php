@@ -71,8 +71,8 @@ class ApiCheckoutController extends Controller
                 
                 if ($order->order_status_id != config('attendize.order_complete')) {
                    
-                    // $order->order_status_id = config('attendize.order_complete');
-                    // $order->save();                                                         
+                    $order->order_status_id = config('attendize.order_complete');
+                    $order->save();                                                         
                     Log::info("Completamos la orden");
                     $this->completeOrder($order_id , $data);
                     
