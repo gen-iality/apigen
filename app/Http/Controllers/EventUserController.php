@@ -514,10 +514,11 @@ class EventUserController extends Controller
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
-            $userData = $request->json()->all();
+            $userData = $request->json()->all();                    
 
             if (isset($eventUserData['properties'])) {
                 $userData = $eventUserData['properties'];
+                
                 if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
                     return "minimun password length is 6 characters";
                 }
@@ -934,18 +935,15 @@ class EventUserController extends Controller
     }
 
     //nunca usar usar otras alternativas si es posible
-    public function destroyAll($eventUser)
-    {
-        $attende = Account::where("email", 'like', '%@coomeva%')->forceDelete();
-        die;
-        $attende = json_decode(json_encode($attende), true);
+    public function destroyAll($eventUser , Request $request)
+    {   
+        $email  = $request->json('emails');
+        $attendes = Attendee::whereIn('properties.email',$email)->where('event_id' , $eventUser)
+        ->delete();
 
-        foreach ($attende as $att) {
-
-            $attende = Attendee::find($att["_id"]);
-
-            echo $attende->forceDelete();
-        }
+        $account =  Account::whereIn('email',$email)->delete();
+        return $account;      
+       
 
     }
 
@@ -1066,6 +1064,38 @@ class EventUserController extends Controller
                 array(
                     'property' => 'city',
                     'value' => $eventUserData['properties']['ciudad']
+                ),
+                array(
+                    'property' => 'mobilephone',
+                    'value' => $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa']
+                ),
+                array(
+                    'property' => 'sector_empresa',
+                    'value' => $eventUserData['properties']['celular']
+                ),
+                array(
+                    'property' => 'objeto_negocio',
+                    'value' => $eventUserData['properties']['ofreceproductosserviciosoambos']
+                ),
+                array(
+                    'property' => 'tipo_objeto_negocio',
+                    'value' => $eventUserData['properties']['selecciondetipodeobjeto']
+                ),
+                array(
+                    'property' => 'company',
+                    'value' => $eventUserData['properties']['empresa']
+                ),
+                array(
+                    'property' => 'cedula_de_ciudadania_nit',
+                    'value' => $eventUserData['properties']['numerodecedula']
+                ),
+                array(
+                    'property' => 'nit',
+                    'value' => $eventUserData['properties']['nit']
+                ),
+                array(
+                    'property' => 'origen_lead',
+                    'value' => 'MeetUps'
                 )
             )
         );
