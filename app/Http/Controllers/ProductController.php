@@ -125,7 +125,7 @@ class ProductController extends Controller
         $admins = Account::whereIn('_id' , $contributors)->get(['email']);
         
         $product = Product::find($product_id);
-
+        $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
         //Este Email informa a los administadores que usuarios han subastado
         foreach($admins as $admin)
         {   

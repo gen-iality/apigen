@@ -17,14 +17,14 @@ class UpdateRolEventUserAndSendEmail
     {       
         $data = $request->json()->all();
         $eventUser = Attendee::find($eventUser_id);
-        
+        $message = isset($data['message']) ? $data['message'] :'';
 
         $eventUser->fill($data);
         $eventUser->save();
         
         Mail::to($eventUser['properties']['email'])
             ->queue(
-                new UserRolChangeMail($event_id, $eventUser , $data['rol_id'], $data['message'])
+                new UserRolChangeMail($event_id, $eventUser , $message )
             );
         
         return $eventUser;
