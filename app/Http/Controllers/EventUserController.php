@@ -983,8 +983,11 @@ class EventUserController extends Controller
     Public function unsubscribe($event_id , $event_user_id)
     {
         $eventUser = Attendee::find($event_user_id);
-        Log::info("Anulando suscrpción del usuario  " . $eventUser->account_id . " del evento " . $event_id);
-        $eventUser->delete();
+        if(isset($eventUser))
+        {
+            Log::info("Anulando suscrpción del usuario  " . $eventUser->account_id . " del evento " . $event_id);
+            $eventUser->delete();
+        }        
         return view('ManageUser.unsubscribe');
     }
 
