@@ -24,7 +24,7 @@ class UpdateRolEventUserAndSendEmail
         
         Mail::to($eventUser['properties']['email'])
             ->queue(
-                new UserRolChangeMail($event_id, $eventUser , $message )
+                new UserRolChangeMail($event_id, $eventUser , $data['rol_id'], $message )
             );
         
         return $eventUser;
