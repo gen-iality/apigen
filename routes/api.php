@@ -109,7 +109,7 @@ Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
 
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 
-//endpoint para eliminar todos los usuarios Route::get ('events/{event_id}/asdasddelete',      'EventUserController@destroyAll');
+// Route::delete ('events/{event_id}/deletewarning',      'EventUserController@destroyAll');
 Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
 Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserController@totalMetricsByEvent');
 //Metrics

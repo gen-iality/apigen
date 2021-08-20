@@ -20,7 +20,7 @@ class SilentAuctionMail extends Mailable
     public $product;
     public $userAdmin;
     public $organization;
-    public $obra;
+    public $prodcutImages;
 
     /**
      * Create a new message instance.
@@ -34,15 +34,15 @@ class SilentAuctionMail extends Mailable
 
         $organization = Organization::find($event->organizer_id);
 
-        foreach($product as $products)
+
+        if(is_array($product->image))
         {
-            $this->obra = '
-            <td style="padding:5px 0">
-                <img style="width:100%;max-width:600px;border-radius:20px"  alt="'.$this->event->name.'" src='.$this->product->image.' />
-            <td style="padding:5px 0">';
+            $this->prodcutImages = $product->image[0];
+        }else{
+            $this->prodcutImages = $product->image;
         }
         
-
+           
         $this->dataAuction = $dataAuction;
         $this->event = $event;
         $this->user = $user;

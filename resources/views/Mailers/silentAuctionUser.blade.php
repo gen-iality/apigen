@@ -52,16 +52,18 @@
                             </tr>
                             <tr>
                                 <th style="font-weight:600;width:40%;line-height:14px;text-align:right;padding-right:10px">
-                                   Obra
+                                    Artículo
                                 </th>
-                                {!!$obra!!} 
+                                <td style="font-weight:600;width:30%;line-height:14px;text-align:right;padding-right:10px">
+                                    <img style="width:100%;max-width:600px;"  alt="{{$event->name}}" src={{$prodcutImages}} />                                        
+                                </td> 
                             </tr>
                             <tr>
                                 <th style="font-weight:600;width:40%;line-height:14px;text-align:right;padding-right:10px">
                                     Artista
                                 </th>
                                 <td style="padding:5px 0">
-                                    {{$product->artist}}
+                                    {{$product->by}}
                                 </td>
                             </tr>
                         </tbody>
@@ -74,7 +76,7 @@
         </tr>
         <tr>
             <td style="font-size:15px;text-align:left;padding:10px  10px ;display:block"> 
-                Otros participantes se encuentran mirando las obras y dispuestos a ofertar, te estaremos informando cualquier novedad.                 
+                <strong>Otros participantes se encuentran mirando las obras y dispuestos a ofertar, te estaremos informando cualquier novedad.</strong>                 
            </td>
         </tr>
         <tr>
