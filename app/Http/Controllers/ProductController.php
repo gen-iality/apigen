@@ -39,13 +39,14 @@ class ProductController extends Controller
      * @bodyParam price number Example: 10000   
      * @bodyParam by string author or brands of the product. Example: Evius    
      * @bodyParam short_description string Example: Pintura de arbol 1x2m 
+     * @bodyParam position number position of the product to order them. Example: 11111  
      *  
      */
     public function store(Request $request, $event_id)
     {
         $validated = $request->validate([
             'name' => 'required',
-            'image' => 'required',            
+            'image' => 'required'                    
         ]);
 
         $data = $request->json()->all();
