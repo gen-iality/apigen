@@ -176,7 +176,7 @@ class ProductController extends Controller
         $minValueAuction =  Order::where('event_id' , $event_id)->where('item' , $product_id )->max('amount');  
         $product = $product = Product::find($product_id);    
         //Este cambio es temporar porque lo registros se crearon con precio tipo string              
-        $minValue = isset($minValueAuction) ? $minValueAuction : $productPrice;
+        $minValue = isset($minValueAuction) ? $minValueAuction : $product->price;
         return $minValue;
     }
 
