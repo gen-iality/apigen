@@ -569,6 +569,7 @@ Route::group(
         Route::put('events/{event}/products/{product}', 'ProductController@update');
         Route::delete('events/{event}/products/{product}', 'ProductController@destroy');
         Route::post('events/{event}/products/{product}/silentauctionmail', 'ProductController@createSilentAuction')->middleware('permission:send_products_silentauctiomail');
+        Route::get('events/{event}/products/{product}/minimumauctionvalue' , 'ProductController@minimumAuctionValue');
     }
 );
 

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Product;
 use App\ModelHasRole;
+use App\evaLib\Services\OrdersServices;
 use App\Account;
+use App\Order;
 use Auth;
 use Mail;
 /**
@@ -124,7 +126,22 @@ class ProductController extends Controller
         //Se obtienen los colaboradores o admins para enviar el correo de subasta silenciosa
         $contributors = ModelHasRole::where('event_id' , $event_id)->pluck('model_id');
         $admins = Account::whereIn('_id' , $contributors)->get(['email']);
+            
+        self::minimumAuctionValue($event_id, $product_id);
+        //Crear la orde de cada puja, esto ayuda a llevar el control de en cuanto va la puja.
+        $order = new Order();
+        $order->first_name = strip_tags($user->names);
+        $order->last_name = "";
+        $order->email = $user->email;
+        $order->items = [$product_id];
+        $order->order_status_id = config('attendize.order_awaiting_payment');
+        $order->amount = $data['valueOffered'];
+        $order->item_type = 'auction';
+        $order->account_id =  $user->_id;
+        $order->event_id = $event_id;
+        $order->save();
         
+
         $product = Product::find($product_id);
         $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
         //Este Email informa a los administadores que usuarios han subastado
@@ -145,5 +162,23 @@ class ProductController extends Controller
         return 'Silent Auction';
 
     }
+
+
+    /**
+     * _minimumAuctionValue_: valor minimun for auction
+     * @authenticated
+     * 
+     * @urlParam event required event id Example: 5ea23acbd74d5c4b360ddde2
+     * @urlParam product required product id Example: 60e8cd558c421b004f2ff082
+     */
+    public function minimumAuctionValue($event_id , $product_id)
+    {   
+        $minValueAuction =  Order::where('event_id' , $event_id)->where('item' , $product_id )->max('amount');  
+        $product = $product = Product::find($product_id);    
+        //Este cambio es temporar porque lo registros se crearon con precio tipo string              
+        $minValue = isset($minValueAuction) ? $minValueAuction : $productPrice;
+        return $minValue;
+    }
+
 
 }
