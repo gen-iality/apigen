@@ -152,14 +152,18 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         $typePrice = explode(' $ ' , $product->price);
 
-        $product->start_price = isset($typePrice) ? $typePrice[0] . ' $ ' .$product->price : $product->price;
-        $product->save();
+        if(!isset($product->start_price))
+        {
+            $product->start_price = isset($typePrice) ? $typePrice[0] . ' $ ' .$product->price : $product->price;
+            $product->save();
+        }
+        
 
         $product->price = isset($typePrice) ? $typePrice[0] . ' $ ' . $order->amount :  $order->amount;
         $product->save();
 
         $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
-        
+
         //Este Email informa a los administadores que usuarios han subastado
         foreach($admins as $admin)
         {   
