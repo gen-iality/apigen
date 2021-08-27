@@ -129,7 +129,14 @@ class ProductController extends Controller
             
         self::minimumAuctionValue($event_id, $product_id);
         //Crear la orde de cada puja, esto ayuda a llevar el control de en cuanto va la puja.
-        $order = new Order();
+        $order = Order::updateOrCreate(
+            [
+                "account_id" => $user->_id,
+                "items" => [$product_id]
+            ]                
+
+        );
+        //Se grega de esta forma porque solo el updateOrCreate por alguna exatraña razon solo crea el registro con fecha de creación
         $order->first_name = strip_tags($user->names);
         $order->last_name = "";
         $order->email = $user->email;
@@ -140,10 +147,19 @@ class ProductController extends Controller
         $order->account_id =  $user->_id;
         $order->event_id = $event_id;
         $order->save();
-        
 
+        //Se actualiza el valor minimo del producto
         $product = Product::find($product_id);
+        $typePrice = explode(' $ ' , $product->price);
+
+        $product->start_price = isset($typePrice) ? $typePrice[0] . ' $ ' .$product->price : $product->price;
+        $product->save();
+
+        $product->price = isset($typePrice) ? $typePrice[0] . ' $ ' . $order->amount :  $order->amount;
+        $product->save();
+
         $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
+        
         //Este Email informa a los administadores que usuarios han subastado
         foreach($admins as $admin)
         {   

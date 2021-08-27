@@ -15,7 +15,8 @@ class Product extends Moloquent
         'price',
         'by',
         'short_description',
-        'position'
+        'position',
+        'start_price'
     ];
 
     public function event()
