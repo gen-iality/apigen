@@ -434,6 +434,8 @@ Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
 Route::apiResource('orders', 'ApiOrdersController');
 Route::post('orders/{order_id}/validateFreeorder', 'ApiCheckoutController@validateFreeOrder');
 Route::post('orders/{order_id}/validatePointOrder', 'ApiCheckoutController@validatePointOrder');
+Route::get('events/{event}/orders/ordersevent', 'ApiOrdersController@indexByEvent');
+
 // Route::get('orders/{order_id}', 'ApiOrdersController@show');
 Route::post("payment_webhook_response","ApiCheckoutController@paymentWebhookesponse");
 //     }

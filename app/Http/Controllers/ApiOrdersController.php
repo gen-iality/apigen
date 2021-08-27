@@ -16,6 +16,8 @@ use Carbon\Carbon;
 use App\Models\Ticket;
 use Auth;
 use Validator;
+use App\evaLib\Services\FilterQuery;
+
 /**
  * @group Orders
  * 
@@ -206,23 +208,7 @@ class ApiOrdersController extends Controller
         $order = Order::findOrFail($orders_id);
         return new OrderResource($order);
     }
-
-    /**
-     * _index_: display all the Orders of an event
-     *
-     * @urlParam event_id required Example: 5ea23acbd74d5c4b360ddde2
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function indexByEvent(Request $request, String $event_id)
-    {
-        $query = Order::where("event_id", $event_id)->get();
-
-        // $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $request);
-
-        return OrderResource::collection($query);
-
-    }
+    
     /**
      * _index_: display all the Orders of an user 
      * 
@@ -418,6 +404,22 @@ class ApiOrdersController extends Controller
         $query = Order::where("organization_id", $organization_id)->get();
 
         return OrderResource::collection($query);
+
+    }
+
+    /**
+     * _indexByEvent_: display all the orders of an event
+     * 
+     * @urlParam event event_id required Example: 5ea23acbd74d5c4b360ddde2
+     * @queryParam filtered optional filter parameters Example: [{"field":"items","value":"6116b372396b8f5e864f033a"}]
+     * 
+     */
+    public function indexByEvent(Request $request,$event_id, FilterQuery $filterQuery)
+    {
+        $query = Order::where("event_id", $event_id);
+        $input = $request->all();
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return OrderResource::collection($results);
 
     }
 }
