@@ -82,7 +82,7 @@ class RSVP extends Mailable implements ShouldQueue
 
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
 
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : "mocion.2040";
+        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : $email;
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
