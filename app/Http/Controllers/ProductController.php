@@ -154,7 +154,7 @@ class ProductController extends Controller
 
         if(!isset($product->start_price))
         {
-            $product->start_price = isset($typePrice) ? $typePrice[0] . ' $ ' .$product->price : $product->price;
+            $product->start_price = $product->price;
             $product->save();
         }
         
