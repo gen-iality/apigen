@@ -606,7 +606,7 @@ class EventUserController extends Controller
             // }
 
             if (!$signInResult) {
-                $pass = (isset($userData["password"])) ? $userData["password"] : "evius.2040";
+                $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"];
                 
                 if (isset($eventUser->user->uid)) {
                     
