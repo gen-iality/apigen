@@ -593,18 +593,18 @@ class EventUserController extends Controller
             $signInResult = null;
 
             //Si el usuario ya se ha logueado generamos un token a partir de su refresh_token
-            try {
-                if (isset($eventUser->user->refresh_token)) {
-                    $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
-                }
+            // try {
+            //     if (isset($eventUser->user->refresh_token)) {
+            //         $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
+            //     }
 
-            } catch (\Exception $e) {
+            // } catch (\Exception $e) {
 
-                if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
-                } else {
-                    //return response()->json((object) ["message" => $e->getMessage()], 400);
-                }
-            }
+            //     if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
+            //     } else {
+            //         //return response()->json((object) ["message" => $e->getMessage()], 400);
+            //     }
+            // }
 
             if (!$signInResult) {
                 $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"];
