@@ -231,8 +231,7 @@ return [
     |
      */
 
-    'aliases' => [
-
+    'aliases' => [        
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -290,7 +289,6 @@ return [
         //Not support by this version 'PDF' => Nitmedia\Wkhtml2pdf\Facades\Wkhtml2pdf::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
-
     ],
 
 ];
