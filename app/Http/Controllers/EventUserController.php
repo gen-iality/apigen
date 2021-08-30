@@ -1068,11 +1068,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'mobilephone',
-                    'value' => $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'],
+                    'value' => $eventUserData['properties']['celular'],
                 ),
                 array(
                     'property' => 'sector_empresa',
-                    'value' => $eventUserData['properties']['celular'],
+                    'value' => $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'],
                 ),
                 array(
                     'property' => 'objeto_negocio',
