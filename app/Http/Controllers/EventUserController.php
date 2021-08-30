@@ -629,6 +629,16 @@ class EventUserController extends Controller
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
 
+            if($event->sendregistrationnotification)
+            {
+                
+                Mail::to($userData["email"])
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image = null, "", $event->name)
+                );
+            }
+            
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);
 
