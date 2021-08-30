@@ -17,7 +17,7 @@ use Illuminate\Http\Response;
 use Log;
 use Mail;
 use Validator;
-
+use Carbon\Carbon;
 /**
  * @group EventUser
  *
@@ -1101,7 +1101,13 @@ class EventUserController extends Controller
     }
 
     /**
-     * _metricsEventByDate_: number of registered users per day according to event start and end dates
+     * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates 
+     * or according specific dates.
+     * 
+     * @urlParam event required event_id
+     * @queryParam metrics_type required string With this parameter you can defined the type of metrics that you want to see, you can select created_at for see the registered users  or checkedin_at for see checked users. Example: created_at
+     * @queryParam datetime_from date
+     * @queryParam datetime_from date
      */
     public function metricsEventByDate(Request $request, $event_id)
     {
@@ -1109,20 +1115,25 @@ class EventUserController extends Controller
         $data = $request->input();
         $event = Event::findOrFail($event_id);
 
-        $dateFrom = \Carbon\Carbon::parse($event->datetime_from)->format('Y-m-d');
-        $dateTo = \Carbon\Carbon::parse($event->datetime_to)->format('Y-m-d');
+        $dateFrom = isset($data['datetime_from']) ? $data['datetime_from'] : $event->datetime_from;
+        $dateTo = isset($data['datetime_to'])? $data['datetime_to'] : $event->datetime_to;
+
+        //Se realiza esta conversión a fecha: 2021-08-30 00:00
+        $dateFrom = Carbon::parse($dateFrom)->format('Y-m-d H:i');
+        $dateTo = Carbon::parse($dateTo)->format('Y-m-d H:i');
 
         $attendees = Attendee::where('event_id', $event_id)
             ->whereBetween(
                 $data['metrics_type'],
                 array(
-                    \Carbon\Carbon::parse($dateFrom),
-                    \Carbon\Carbon::parse($dateTo),
-
+                    //Aquí también se hace la conversión o no funciona
+                    Carbon::parse($dateFrom),
+                    Carbon::parse($dateTo),
                 )
             )
             ->get([$data['metrics_type']]);
-
+       
+        // Se pueden consultar los registros y el checkIn, ambos aquí porque tienen la misam estructura de la consulta
         switch ($data['metrics_type']) {
             case "created_at";
                 $attendees = $attendees->groupBy(function ($date) {
@@ -1136,6 +1147,7 @@ class EventUserController extends Controller
                 break;
         }
 
+        //Este array forma un json con la fecha y la cantidad de registro o checkIn
         $totalForDate = [];
         foreach ($attendees as $key => $attendee) {
 
