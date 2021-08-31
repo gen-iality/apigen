@@ -92,6 +92,13 @@
             </td>
         </tr>
         <tr>
+            <td>
+                @component('mail::button', ['url' => $link , 'color' => 'evius'])
+                    {{ __ ('Mail.enter_event')}}
+                @endcomponent
+            </td>
+        </tr>
+        <tr>
             <td style="font-size:13px;text-align:left;padding:10px 0 8px 0;display:block"> 
                 Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, algunas características pueden no estar disponibles en navegadores no soportados
            </td>

@@ -72,6 +72,11 @@
                     <hr style="width:90%;">
                 </td>
             </tr>
+            <tr>
+                @component('mail::button', ['url' => $link , 'color' => 'evius'])
+                    {{ __ ('Mail.enter_event')}}
+                @endcomponent
+            </tr>
             <tr>            
                 <td style="font-size:13px;text-align:center;padding:10px 0 8px 0;display:block"> 
                     Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co
