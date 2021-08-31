@@ -39,7 +39,7 @@
                                     Monto
                                 </th>
                                 <td style="padding:5px 0">
-                                    COP ${{$dataAuction['valueOffered']}}
+                                    {{$product->price}}
                                 </td>                                            
                             </tr>
                             <tr>
@@ -76,7 +76,7 @@
         </tr>
         <tr>
             <td style="font-size:15px;text-align:left;padding:10px  10px ;display:block"> 
-                <strong>Otros participantes se encuentran mirando las obras y dispuestos a ofertar, te estaremos informando cualquier novedad.</strong>                 
+                <strong>Otros participantes se encuentran mirando las obras y dispuestos a ofertar, para no perder esta oportunidad te sugerimos estar pendiente de las ofertas que hagan sobre la obra de tu interés.</strong>                 
            </td>
         </tr>
         <tr>
