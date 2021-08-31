@@ -110,6 +110,7 @@ class AwsSnsController extends Controller
             array_push($array, $dataMessageUser);    
             $messageUser->history = $array;
         }
+        $message->number_of_recipients = $message->total_sent;
         $messageUser->save();
 
                        
