@@ -174,7 +174,7 @@ class RSVPController extends Controller implements ShouldQueue
       
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
-        $message->number_of_recipients = count($eventUsersIds);
+        // $message->number_of_recipients = count($eventUsersIds);
         $message->save();
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
