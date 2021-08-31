@@ -78,7 +78,7 @@ class AwsSnsController extends Controller
                 break;
                 case 'Delivery':               
                     // $total_delivered =count($total);
-                    if(isset($responseMail['headers'])){
+                    if(!isset($responseMail['headers'])){
                         $message->total_delivered = $message->total_delivered + 1;                   
                         $message->save();
                     }
