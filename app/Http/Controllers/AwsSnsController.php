@@ -77,7 +77,7 @@ class AwsSnsController extends Controller
                     $message->save();
                 break;
                 case 'Delivery':
-                    $message->total_delivered = $message->total_delivered + 1;                   
+                    $message->total_delivered = $message->$total;                   
                     $message->save();                    
                 break;
                 case 'Open':
