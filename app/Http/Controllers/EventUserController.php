@@ -1072,7 +1072,7 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'sector_empresa',
-                    'value' => $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'],
+                    'value' => isset($eventUserData['properties']['sectoreconomicoalquepertenecelaempresa']) ? $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'] : "",
                 ),
                 array(
                     'property' => 'objeto_negocio',
