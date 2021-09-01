@@ -470,7 +470,7 @@ class ApiCheckoutController extends Controller
         $order = Order::find($order_id);
 
         //Obtenemos el usuario el cual está canjando sus puntos
-        $user = Auth::user();
+        $user = Account::where('email' , $order->email)->first();
         
         //Verificar que el usuario tenga puntos suficientes para más seguridad
         // if($order->amount <= $user->points)

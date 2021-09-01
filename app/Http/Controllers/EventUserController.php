@@ -405,9 +405,7 @@ class EventUserController extends Controller
             return $eventUser;
         }
 
-        if ($event_id == '60c8affc0b4f4b417d252b29') {
-            $hubspot = self::hubspotRegister($request, $event_id);
-        }
+        
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
@@ -415,15 +413,17 @@ class EventUserController extends Controller
             return $eventUser;
         }
 
-        try {
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-                );
-        } catch (\Exception $e) {
+     
+        Mail::to($email)
+        ->queue(
+            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+        );
 
+        if ($event_id == '60c8affc0b4f4b417d252b29') {
+            $hubspot = self::hubspotRegister($request, $event_id);
         }
+        
         return $eventUser;
 
     }
@@ -1099,15 +1099,19 @@ class EventUserController extends Controller
                     'value' => 'MeetUps',
                 ),
             ),
-        );
+        );        
 
-        $response = $client->request('POST', $url, [
-            'body' => json_encode($arr),
-            'headers' => ['Content-Type' => 'application/json'],
-        ]);
+        $response = null;
+        try{
+            $response = $client->request('POST', $url, [
+                'body' => json_encode($arr),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]);
+        }
+        catch(\Exception $e){
 
+        }
         return $response;
-        // return 'ok';
     }
 
     /**
