@@ -1084,15 +1084,15 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'company',
-                    'value' => $eventUserData['properties']['empresa'],
+                    'value' => isset($eventUserData['properties']['empresa']) ? $eventUserData['properties']['empresa'] : "",
                 ),
                 array(
                     'property' => 'cedula_de_ciudadania_nit',
-                    'value' => $eventUserData['properties']['numerodecedula'],
+                    'value' => isset($eventUserData['properties']['numerodecedula']) ?$eventUserData['properties']['numerodecedula'] : "" ,
                 ),
                 array(
                     'property' => 'nit',
-                    'value' => $eventUserData['properties']['nit'],
+                    'value' => isset($eventUserData['properties']['nit']) ? $eventUserData['properties']['nit'] : "",
                 ),
                 array(
                     'property' => 'origen_lead',
