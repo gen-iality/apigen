@@ -435,7 +435,7 @@ class ApiCheckoutController extends Controller
             $emailsAdmin =  Account::where("others_properties.role" , "admin")
             ->where("organization_ids" , $order->organization_id)
             ->get();
-            
+            return $emailsAdmin;
             //Se envia la información completa de la orden.           
             foreach($order->items as $item)
             {  
@@ -456,6 +456,57 @@ class ApiCheckoutController extends Controller
             }
             return $order;
         }
+
+         return response()->json([
+            'error' => 'El usuario no tiene puntos suficientes',
+         ],403);
+    }
+
+
+     /**
+     */
+    public function validatePointOrderTest($order_id)
+    {   
+        $order = Order::find($order_id);
+
+        //Obtenemos el usuario el cual está canjando sus puntos
+        $user = Auth::user();
+        
+        //Verificar que el usuario tenga puntos suficientes para más seguridad
+        // if($order->amount <= $user->points)
+        // {   
+            //Actualizamos el estado de la orden a completado 
+            $order->order_status_id = config('attendize.order_pending');
+            $order->save();
+
+            //Se descuentan los puntos a el usuario que ha utilizado
+            // $user->points = $user->points - $order->amount;
+            // $user->save();
+            
+            $emailsAdmin =  Account::where("others_properties.role" , "admin")
+            ->where("organization_ids" , $order->organization_id)
+            ->get();
+            
+            //Se envia la información completa de la orden.           
+            foreach($order->items as $item)
+            {  
+                Mail::to($order->email)
+                ->queue(
+                    new \App\Mail\PointsMail($order , $user, $item)
+                ); 
+
+
+                foreach($emailsAdmin as $emailAdmin)
+                {
+                    Mail::to($emailAdmin->email)
+                    ->queue(
+                        new \App\Mail\PointsMail($order , $user, $item)
+                    );
+                }
+                     
+            }
+            return $order;
+        // }
 
          return response()->json([
             'error' => 'El usuario no tiene puntos suficientes',
