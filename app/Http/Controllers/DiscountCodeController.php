@@ -389,7 +389,13 @@ class DiscountCodeController extends Controller
         //authenticated user
         $user = Auth::user();     
         $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
-            
+        if(!isset($group))   
+        {
+            $discount= "discount_code_template_id ";
+            $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
+        }
+        
+        
         //Se valida si el código ya se uso     
         if($code->number_uses < $group->use_limit  ){
 
