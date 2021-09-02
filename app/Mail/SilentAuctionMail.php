@@ -78,7 +78,7 @@ class SilentAuctionMail extends Mailable
             $this
             ->from("alerts@evius.co", $from)
             ->subject($this->event->name)
-            ->markdown('Mailers.silentAuctionUser');
+            ->markdown('Mailers.silentAuctionUserA');
         }
         
     }
