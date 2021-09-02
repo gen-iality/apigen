@@ -14,6 +14,8 @@ use Validator;
 use Auth;
 use App\evaLib\Services\CodeServices;
 use Log;
+use App\Account;
+use App\Order;
 
 
 /**
@@ -414,5 +416,43 @@ class DiscountCodeController extends Controller
         $discountTemplate = '604683bb8992c135e86dca04';
         $code = DiscountCode::where('discount_code_template_id' ,$discountTemplate)->paginate(100000);
         return $code;
+    }
+
+
+    /**
+     * 
+     */
+    public function codesTest(Request $request)
+    {   
+        $data = $request->json()->all();
+
+        $orders = Order::whereIn('_id' , $data["array"])->pluck('email');
+        
+        $users = Account::whereIn('email' , ["mary2014dylan@gmail.com"])->paginate(10 , ['_id' , 'email' , 'points']);
+
+        foreach ($users as $user) {
+            $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $user->_id)->get(['discount_code_template_id']);
+            $total = 0;
+            $ordersUser = Order::where('account_id' , $user->_id)->get(['amount']);
+
+            foreach($codes as $code)
+            {   
+                $template = DiscountCodeTemplate::find($code->discount_code_template_id, ['discount']);
+
+                echo $user->email . ',' . $code->_id . ',' . $template->discount . '</br>';
+                $total = $total +  $template->discount;
+            }
+
+            $totalOrder = 0;
+            foreach($ordersUser as $orderUser)
+            {
+                $totalOrder = $totalOrder +  $orderUser->amount;
+            }
+
+            echo 'TotalUser:'.$total.'</br>'; 
+            echo 'TotalOrder:'.$totalOrder.'</br>'; 
+            echo ($totalOrder <= $total) ? "<strong>APROBADO</strong></br></br>" : "Rechazado</br></br>";
+        }
+
     }
 }

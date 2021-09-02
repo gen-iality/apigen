@@ -456,6 +456,9 @@ class ApiCheckoutController extends Controller
             }
             return $order;
         }
+        //Actualizamos el estado de la orden a rechazado
+        $order->order_status_id = config('attendize.order_failed');
+        $order->save();
 
          return response()->json([
             'error' => 'El usuario no tiene puntos suficientes',

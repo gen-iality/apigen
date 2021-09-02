@@ -598,3 +598,5 @@ Route::group(
 );
 Route::get('comments/organizations/{organization}' , 'CommentController@indexByOrganization');
 
+// ------------------------------------------------------TEST
+Route::put('codestest', 'DiscountCodeController@codesTest');
