@@ -435,7 +435,7 @@ class ApiCheckoutController extends Controller
             $emailsAdmin =  Account::where("others_properties.role" , "admin")
             ->where("organization_ids" , $order->organization_id)
             ->get();
-            return $emailsAdmin;
+            
             //Se envia la información completa de la orden.           
             foreach($order->items as $item)
             {  
