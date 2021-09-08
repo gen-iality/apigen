@@ -72,7 +72,7 @@ class MeetingsController extends Controller
             "timestamp_start" => $meeting["timestamp_start"],
 
         ];
-        app('App\Http\Controllers\InvitationController')->buildMeetingResponseMessage($data, $event_id);
+        app('App\Http\Controllers\InvitationController')->buildMeetingResponseMessage($data, $event_id, $innetpath="");
     }
 
     private function changestatus($event_id, $meeting_id, $status)
@@ -139,7 +139,7 @@ class MeetingsController extends Controller
 
         $mail["desc"] .= "<br><br><p>Puedes ingresar al evento a la sección Networking / Agéndate para revisar las solicitudes, para aceptarlas ó rechazarlas.</p>";
         
-        app('App\Http\Controllers\InvitationController')->sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+        app('App\Http\Controllers\InvitationController')->sendEmail($mail, $event_id, $innetpath="", $receiver, $sender, $request_type);
 
         return "Request / response send";
     }
