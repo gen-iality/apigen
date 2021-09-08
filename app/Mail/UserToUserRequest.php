@@ -40,12 +40,13 @@ class UserToUserRequest extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user,$status=null)
+    public function __construct($event_id, $innerpath, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user,$status=null)
     {
         //$response es el request_id
         Log::debug("recibiendo event_user");
         $request_type = ($request_type) ? $request_type : "friendship";
         $event = Event::find($event_id);
+        
         $event_address = isset($event["location"]["FormattedAddress"]) ? ($event["location"]["FormattedAddress"]) : " ";
         $event_city = isset($event["location"]["City"]) ? ($event["location"]["City"]) : " ";
         $event_state = isset($event["location"]["state"]) ? ($event["location"]["state"]) : " ";
@@ -67,18 +68,18 @@ class UserToUserRequest extends Mailable implements ShouldQueue
                 break;
                 case "friendship":
                 default:
-                   $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
+                   $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
             break;
             }       
        
         }else{
-            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
-            $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
+            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&pass=" . $pass;
+            $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&pass=" . $pass;
         }
-        $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
-        $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "/networking&pass=" . $pass;
+        $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&event_id=' . $event_id . "&pass=" . $pass;
+        $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" .  urlencode($email) . '&event_id=' . $event->_id . "&innerpath=". $innerpath . "&pass=" . $pass;
         $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $event_id .'/unsubscribe';
-       
+        
 
 
         $this->response = $response;

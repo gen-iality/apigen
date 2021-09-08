@@ -49,7 +49,7 @@ class InvitationController extends Controller
      * @param string $innerpath
      * @return void
      */
-    public function generateLoginLinkAndRedirect($email, $pass=null, $innerpath ="",$destination=null) {
+    public function generateLoginLinkAndRedirect($email, $pass=null, $eventId , $innerpath ="",$destination=null) {
 
         try {
 
@@ -83,7 +83,7 @@ class InvitationController extends Controller
                 //intentamos buscar por correo cómo segunda opción
                 $user = Account::where("email", $email)->first();
                 if (!$user) {
-                    return Redirect::to($destination."/" . "landing/" . $innerpath);
+                    return Redirect::to($destination."/" . "landing/" . $eventId .'/'. $innerpath);
                 }
                 $user->uid = $userinfo->uid;
             }
@@ -94,25 +94,25 @@ class InvitationController extends Controller
 
             
 
-            return Redirect::to($destination."/" . "landing/" . $innerpath . "?token=" . $singin->idToken());
+            return Redirect::to($destination."/" . "landing/" . $eventId .'/'. $innerpath . "?token=" . $singin->idToken());
 
         } catch (EmailNotFound $e) {
 
             Log::error("email no encontrado. " . $e->getMessage());
-            return Redirect::to($destination."/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $eventId);
 
         } catch (UserNotFound $e) {
             Log::error("usuario no encontrado. " . $e->getMessage());
-            return Redirect::to($destination."/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $eventId);
 
         } catch (InvalidPassword $e) {
             Log::error("contrasena invalida. " . $e->getMessage());
-            return Redirect::to($destination."/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $eventId);
 
         } catch (Exception $e) {
 
             Log::error("Error message. " . $e->getMessage());
-            return Redirect::to($destination."/" . "landing/" . $innerpath);
+            return Redirect::to($destination."/" . "landing/" . $eventId);
 
         }
 
@@ -127,12 +127,13 @@ class InvitationController extends Controller
     public function singIn(Request $request)
     {
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
+        $eventId = ($request->has("event_id")) ? $request->input("event_id") : "";
         $destination = ($request->has("destination")) ? $request->input("destination") : null;
 
 
         if ($request->input("request")) {
             try {
-                self::acceptOrDeclineFriendRequest($request, $innerpath, $request->input("request"), $request->input("response"));
+                self::acceptOrDeclineFriendRequest($request, $eventId, $innerpath, $request->input("request"), $request->input("response"));
             } catch (Exception $e) {
 
             }
@@ -141,7 +142,7 @@ class InvitationController extends Controller
         $pass  = $request->input("pass");
         $email = $request->input("email");
 
-        return self::generateLoginLinkAndRedirect( $email, $pass,  $innerpath, $destination);
+        return self::generateLoginLinkAndRedirect( $email, $pass, $eventId,  $innerpath, $destination);
 
     }
 
@@ -252,7 +253,8 @@ class InvitationController extends Controller
         // verifica si ya son contactos
         $id_user_requesting = $data["id_user_requesting"];
 
-        $model = NetworkingContacts::where("user_account", $data["id_user_requested"])->first();
+        $model = NetworkingContacts::where("user_account", $data["id_user_requested"])->first();        
+        $innerpath = (isset($data["innerpath"])) ? $data["innerpath"] : "networking";
         /*
         if ($model) {
         if (is_int(array_search($data["id_user_requesting"], $model->contacts_id))) {
@@ -272,7 +274,7 @@ class InvitationController extends Controller
         $result = new Invitation($data);
         $result->save();
         $data["request_id"] = $result->_id;
-        self::buildMessage($data, $event_id);
+        self::buildMessage($data, $event_id, $innerpath);
         return $result;
     }
 
@@ -311,7 +313,7 @@ class InvitationController extends Controller
      * @param string $response_alt
      * @return void
      */
-    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = "accepted")
+    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $innerpath, String $id, $response_alt = "accepted")
     {
 
         $data = $request->json()->all();
@@ -324,7 +326,7 @@ class InvitationController extends Controller
         $Invitation->save();
         $resp["id_user_requested"] = $Invitation->id_user_requested;
         $resp["id_user_requesting"] = $Invitation->id_user_requesting;
-        return self::buildMessage($resp, $event_id);
+        return self::buildMessage($resp, $event_id,  $innerpath);
     }
 
     public function verifyAndAddContact($Invitation, $data)
@@ -497,7 +499,7 @@ class InvitationController extends Controller
      * 
      * @return void
      */
-    public function buildMessage($data, String $event_id)
+    public function buildMessage($data, String $event_id, $innerpath)
     {
 
         $event = Event::find($event_id);
@@ -556,7 +558,7 @@ class InvitationController extends Controller
         }
 
         //echo self::sendPushNotification($push_notification);
-        self::sendEmail($mail, $event_id, $receiver, $sender, $request_type);
+        self::sendEmail($mail, $event_id, $innerpath, $receiver, $sender, $request_type);
         return "Request / response send";
     }
 
@@ -570,7 +572,7 @@ class InvitationController extends Controller
      * @bodyParam $request_type string required
      * @return void
      */
-    public function sendEmail($mail, $event_id, $receiver, $sender_user, $request_type)
+    public function sendEmail($mail, $event_id, $innerpath, $receiver, $sender_user, $request_type)
     {
 
         $mail["event_id"] = $event_id;
@@ -587,13 +589,13 @@ class InvitationController extends Controller
 
         foreach ($mail["mails"] as $key => $email) {
             Mail::to($email)->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $status)
+                new UserToUserRequest($event_id, $innerpath, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $status)
             );
         }
 
         foreach ($mail["mails"] as $key => $email) {
             Mail::to("juan.lopez@mocionsoft.com")->send(
-                new UserToUserRequest($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $status)
+                new UserToUserRequest($event_id, $innerpath, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user, $status)
             );
         }
 
