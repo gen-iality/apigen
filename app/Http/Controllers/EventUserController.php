@@ -611,7 +611,7 @@ class EventUserController extends Controller
 
                 //No conocemos otra forma de generar el token de login sino forzando un signin
                 if (isset($eventUser->user->uid)) {
-                    
+
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
                     $eventUser->user->refresh_token = $signInResult->refreshToken();
@@ -621,7 +621,7 @@ class EventUserController extends Controller
 
             if ($signInResult && $signInResult->accessToken()) {
                 $eventUser->user->initial_token = $signInResult->accessToken();
-            }else if($signInResult && $signInResult->idToken()){
+            } else if ($signInResult && $signInResult->idToken()) {
                 $eventUser->user->initial_token = $signInResult->idToken();
             }
 
@@ -830,8 +830,8 @@ class EventUserController extends Controller
      * @urlParam event_id string required
      * @urlParam evenUserId string required id de Attendee
      *
-     * @bodyParam email email required field
-     * @bodyParam name  string required
+     * @bodyParam email email  field
+     * @bodyParam name  string field
      * @bodyParam other_params,... any other params  will be saved in user and eventUser
      *
      * @param  \Illuminate\Http\Request  $request
@@ -842,6 +842,14 @@ class EventUserController extends Controller
     {
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);
+
+        $new_properties = isset($data['properties']) ? $data['properties'] : [];
+        $old_properties = isset($eventUser->properties) ? $eventUser->properties : [];
+
+        $properties_merge = array_merge($old_properties, $new_properties);
+
+        $data['properties'] = $properties_merge;
+
         $eventUser->fill($data);
         $eventUser->save();
         return $eventUser;
