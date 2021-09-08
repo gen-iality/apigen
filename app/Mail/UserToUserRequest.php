@@ -78,8 +78,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
         $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "/networking&pass=" . $pass;
         $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $event_id .'/unsubscribe';
-        var_dump($link);
-        var_dump($link_authenticatedalevento);die;
+       
 
 
         $this->response = $response;
