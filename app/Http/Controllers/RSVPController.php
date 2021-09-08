@@ -174,7 +174,7 @@ class RSVPController extends Controller implements ShouldQueue
       
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
-        $message->number_of_recipients = count($eventUsersIds);
+        // $message->number_of_recipients = count($eventUsersIds);
         $message->save();
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
@@ -183,7 +183,7 @@ class RSVPController extends Controller implements ShouldQueue
         //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
 
         $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
-        $message->number_of_recipients = count($eventUsers);
+        // $message->number_of_recipients = count($eventUsers);     
         $message->save();
 
         //var_dump($eventUsers);

@@ -27,10 +27,13 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 */
 // Route::get('s3aws/{prefix?}', 'AwsS3Controller');
 
+
+
+Route::post('googleanalytics', 'GoogleAnalyticsController');
+
 Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
 Route::get('aws/sendemail', 'AwsSnsController@testEmail');
 Route::get('aws/test', 'AwsSnsController@testreqS3');
-
 
 Route::get('duncan/minutosparajugar', 'DuncanGameController@minutosparajugar');
 Route::put('duncan/guardarpuntaje', 'DuncanGameController@guardarpuntaje');
@@ -434,6 +437,8 @@ Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
 Route::apiResource('orders', 'ApiOrdersController');
 Route::post('orders/{order_id}/validateFreeorder', 'ApiCheckoutController@validateFreeOrder');
 Route::post('orders/{order_id}/validatePointOrder', 'ApiCheckoutController@validatePointOrder');
+Route::post('orders/{order_id}/validatePointOrderTest', 'ApiCheckoutController@validatePointOrderTest');
+
 Route::get('events/{event}/orders/ordersevent', 'ApiOrdersController@indexByEvent');
 
 // Route::get('orders/{order_id}', 'ApiOrdersController@show');
@@ -593,3 +598,5 @@ Route::group(
 );
 Route::get('comments/organizations/{organization}' , 'CommentController@indexByOrganization');
 
+// ------------------------------------------------------TEST
+Route::put('codestest', 'DiscountCodeController@codesTest');

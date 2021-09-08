@@ -21,6 +21,7 @@ class SilentAuctionMail extends Mailable
     public $userAdmin;
     public $organization;
     public $prodcutImages;
+    public $link;
 
     /**
      * Create a new message instance.
@@ -34,6 +35,10 @@ class SilentAuctionMail extends Mailable
 
         $organization = Organization::find($event->organizer_id);
 
+        
+        $pass = isset($user->password) ? $user->password : $user->email;
+
+        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($user->email) . '&innerpath=' . $event_id . "&pass=" . urlencode($pass);
 
         if(is_array($product->image))
         {
@@ -49,6 +54,7 @@ class SilentAuctionMail extends Mailable
         $this->product = $product;
         $this->userAdmin = $userAdmin;               
         $this->organization = $organization;
+        $this->link = $link;
     }
 
     /**
@@ -72,7 +78,7 @@ class SilentAuctionMail extends Mailable
             $this
             ->from("alerts@evius.co", $from)
             ->subject($this->event->name)
-            ->markdown('Mailers.silentAuctionUser');
+            ->markdown('Mailers.silentAuctionUserA');
         }
         
     }

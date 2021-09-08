@@ -19,7 +19,7 @@
         <tbody>
             <tr>
                 <td style="font-size:20px;text-align:center;padding:10px 0 8px 0;display:block"> 
-                   Usuario: {{$user->name}}
+                   Usuario: {{$user->names}}
                </td>
             </tr>
             <tr>
@@ -39,7 +39,7 @@
                                     Valor ofertado
                                 </th>
                                 <td style="padding:5px 0">
-                                    COP ${{$dataAuction['valueOffered']}}
+                                    {{$product->price}}
                                 </td>
                             </tr>
                             <tr>

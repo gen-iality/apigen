@@ -169,6 +169,8 @@ return [
                     //News
                         '*/newsfeed',
                         '*/newsfeed/*',    
+                    //Google Analytics
+                        '*/googleanalytics',
 
                 ],  
 

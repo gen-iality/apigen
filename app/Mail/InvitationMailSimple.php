@@ -80,8 +80,8 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
         
-        $userPassword = $eventUser["properties"]["password"];
-        $password = isset($userPassword) ? $userPassword : "mocion.2040";
+        $userPassword = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : null;
+        $password = isset($userPassword) ? $userPassword : $email;
         
         
 

@@ -17,7 +17,7 @@ use Illuminate\Http\Response;
 use Log;
 use Mail;
 use Validator;
-
+use Carbon\Carbon;
 /**
  * @group EventUser
  *
@@ -405,9 +405,7 @@ class EventUserController extends Controller
             return $eventUser;
         }
 
-        if ($event_id == '60c8affc0b4f4b417d252b29') {
-            $hubspot = self::hubspotRegister($request, $event_id);
-        }
+        
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
@@ -415,15 +413,17 @@ class EventUserController extends Controller
             return $eventUser;
         }
 
-        try {
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-                );
-        } catch (\Exception $e) {
+     
+        Mail::to($email)
+        ->queue(
+            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+        );
 
+        if ($event_id == '60c8affc0b4f4b417d252b29') {
+            $hubspot = self::hubspotRegister($request, $event_id);
         }
+        
         return $eventUser;
 
     }
@@ -629,6 +629,16 @@ class EventUserController extends Controller
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
 
+            if($event->sendregistrationnotification)
+            {
+                
+                Mail::to($userData["email"])
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image = null, "", $event->name)
+                );
+            }
+            
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);
 
@@ -1066,11 +1076,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'mobilephone',
-                    'value' => $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'],
+                    'value' => $eventUserData['properties']['celular'],
                 ),
                 array(
                     'property' => 'sector_empresa',
-                    'value' => $eventUserData['properties']['celular'],
+                    'value' => isset($eventUserData['properties']['sectoreconomicoalquepertenecelaempresa']) ? $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'] : "",
                 ),
                 array(
                     'property' => 'objeto_negocio',
@@ -1082,34 +1092,44 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'company',
-                    'value' => $eventUserData['properties']['empresa'],
+                    'value' => isset($eventUserData['properties']['empresa']) ? $eventUserData['properties']['empresa'] : "",
                 ),
                 array(
                     'property' => 'cedula_de_ciudadania_nit',
-                    'value' => $eventUserData['properties']['numerodecedula'],
+                    'value' => isset($eventUserData['properties']['numerodecedula']) ?$eventUserData['properties']['numerodecedula'] : "" ,
                 ),
                 array(
                     'property' => 'nit',
-                    'value' => $eventUserData['properties']['nit'],
+                    'value' => isset($eventUserData['properties']['nit']) ? $eventUserData['properties']['nit'] : "",
                 ),
                 array(
                     'property' => 'origen_lead',
                     'value' => 'MeetUps',
                 ),
             ),
-        );
+        );        
 
-        $response = $client->request('POST', $url, [
-            'body' => json_encode($arr),
-            'headers' => ['Content-Type' => 'application/json'],
-        ]);
+        $response = null;
+        try{
+            $response = $client->request('POST', $url, [
+                'body' => json_encode($arr),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]);
+        }
+        catch(\Exception $e){
 
+        }
         return $response;
-        // return 'ok';
     }
 
     /**
-     * _metricsEventByDate_: number of registered users per day according to event start and end dates
+     * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates 
+     * or according specific dates.
+     * 
+     * @urlParam event required event_id
+     * @queryParam metrics_type required string With this parameter you can defined the type of metrics that you want to see, you can select created_at for see the registered users  or checkedin_at for see checked users. Example: created_at
+     * @queryParam datetime_from date
+     * @queryParam datetime_from date
      */
     public function metricsEventByDate(Request $request, $event_id)
     {
@@ -1117,20 +1137,25 @@ class EventUserController extends Controller
         $data = $request->input();
         $event = Event::findOrFail($event_id);
 
-        $dateFrom = \Carbon\Carbon::parse($event->datetime_from)->format('Y-m-d');
-        $dateTo = \Carbon\Carbon::parse($event->datetime_to)->format('Y-m-d');
+        $dateFrom = isset($data['datetime_from']) ? $data['datetime_from'] : $event->datetime_from;
+        $dateTo = isset($data['datetime_to'])? $data['datetime_to'] : $event->datetime_to;
+
+        //Se realiza esta conversión a fecha: 2021-08-30 00:00
+        $dateFrom = Carbon::parse($dateFrom)->format('Y-m-d H:i');
+        $dateTo = Carbon::parse($dateTo)->format('Y-m-d H:i');
 
         $attendees = Attendee::where('event_id', $event_id)
             ->whereBetween(
                 $data['metrics_type'],
                 array(
-                    \Carbon\Carbon::parse($dateFrom),
-                    \Carbon\Carbon::parse($dateTo),
-
+                    //Aquí también se hace la conversión o no funciona
+                    Carbon::parse($dateFrom),
+                    Carbon::parse($dateTo),
                 )
             )
             ->get([$data['metrics_type']]);
-
+       
+        // Se pueden consultar los registros y el checkIn, ambos aquí porque tienen la misam estructura de la consulta
         switch ($data['metrics_type']) {
             case "created_at";
                 $attendees = $attendees->groupBy(function ($date) {
@@ -1144,6 +1169,7 @@ class EventUserController extends Controller
                 break;
         }
 
+        //Este array forma un json con la fecha y la cantidad de registro o checkIn
         $totalForDate = [];
         foreach ($attendees as $key => $attendee) {
 
