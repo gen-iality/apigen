@@ -77,13 +77,14 @@ class InvitationController extends Controller
            
 
             $singin = $this->auth->signInWithEmailAndPassword($email, $passdecrypt );
-            
+            $innerpathString = isset($innerpath) ? '/'. $innerpath : "";
+
             $user = Account::where("uid", $userinfo->uid)->first();
             if (!$user) {
                 //intentamos buscar por correo cómo segunda opción
                 $user = Account::where("email", $email)->first();
                 if (!$user) {
-                    return Redirect::to($destination."/" . "landing/" . $eventId .'/'. $innerpath);
+                    return Redirect::to($destination."/" . "landing/" . $eventId . $innerpath);
                 }
                 $user->uid = $userinfo->uid;
             }
@@ -94,7 +95,7 @@ class InvitationController extends Controller
 
             
 
-            return Redirect::to($destination."/" . "landing/" . $eventId .'/'. $innerpath . "?token=" . $singin->idToken());
+            return Redirect::to($destination."/" . "landing/" . $eventId . $innerpath . "?token=" . $singin->idToken());
 
         } catch (EmailNotFound $e) {
 
