@@ -255,7 +255,7 @@ class InvitationController extends Controller
         $id_user_requesting = $data["id_user_requesting"];
 
         $model = NetworkingContacts::where("user_account", $data["id_user_requested"])->first();        
-        $innerpath = (isset($data["innerpath"])) ? $data["innerpath"] : "networking";
+        $innerpath = (isset($data["innerpath"])) ? $data["innerpath"] : "/networking";
         /*
         if ($model) {
         if (is_int(array_search($data["id_user_requesting"], $model->contacts_id))) {
