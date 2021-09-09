@@ -432,33 +432,126 @@ class DiscountCodeController extends Controller
     {   
         $data = $request->json()->all();
 
-        $orders = Order::whereIn('_id' , $data["array"])->pluck('email');
+        $filters = $request->input();
+        $templates = DiscountCodeTemplate::where('organization_id', '60467fbd9caef512a5626fc9')->get()->keyBy('_id')->toArray();
         
-        $users = Account::whereIn('email' , ["mary2014dylan@gmail.com"])->paginate(10 , ['_id' , 'email' , 'points']);
+        $status = isset($filters["status"]) ? $filters["status"] : "pendiente";
 
-        foreach ($users as $user) {
-            $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $user->_id)->get(['discount_code_template_id']);
-            $total = 0;
-            $ordersUser = Order::where('account_id' , $user->_id)->get(['amount']);
-
-            foreach($codes as $code)
-            {   
-                $template = DiscountCodeTemplate::find($code->discount_code_template_id, ['discount']);
-
-                echo $user->email . ',' . $code->_id . ',' . $template->discount . '</br>';
-                $total = $total +  $template->discount;
-            }
-
-            $totalOrder = 0;
-            foreach($ordersUser as $orderUser)
-            {
-                $totalOrder = $totalOrder +  $orderUser->amount;
-            }
-
-            echo 'TotalUser:'.$total.'</br>'; 
-            echo 'TotalOrder:'.$totalOrder.'</br>'; 
-            echo ($totalOrder <= $total) ? "<strong>APROBADO</strong></br></br>" : "Rechazado</br></br>";
+        $status_id = "";
+        switch ($status)
+        {
+            case 'pendiente':
+                $status = "5c4a299c5c93dc0eb199214a";
+            break;
+            case 'despachado':
+                $status = "5c423232c9a4c86123236dcd";
+            break;
         }
+
+        $ordersEmail = Order::where('order_status_id' , $status)->where('organization_id' , '60467fbd9caef512a5626fc9')->pluck('email');
+    
+       
+        $users = Account::whereIn('email' , $ordersEmail)->get(['_id' , 'email' , 'points', 'document_number','names']);
+        
+        $orders = Order::where('order_status_id' , $status)->where('organization_id' , '60467fbd9caef512a5626fc9');
+        $ordesTotales = isset($filters["date_from"]) ? 
+                        $orders->whereBetween(
+                            'created_at',
+                            array(
+                                \Carbon\Carbon::parse($filters['date_from']),
+                                \Carbon\Carbon::parse($filters['date_to']),
+                            )
+                        )->get() :
+                        $orders->get();
+        
+                        
+        
+        foreach ($ordesTotales as $order) {
+            $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $order->account_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
+            $totalOrders = 0;
+            $fechaOrders = '';
+            $productos = '';
+            $totalProductos = null;
+
+            $total = 0;
+            $fechaOrders = $fechaOrders.' | '.$order->created_at;
+            $totalOrders = $totalOrders + $order->amount;
+            $productos = $productos.','.$order->items[0];
+            $totalProductos =  $totalProductos +1;
+            
+            
+           
+            if(isset($ordesTotales))
+            {
+                foreach($codes as $code)
+                {   
+
+                    $template_id = $code->discount_code_template_id;
+
+                    if(!$template_id)   
+                    {
+                        $discount= "discount_code_template_id ";
+                        $template_id = $code->$discount;
+                    }
+                    $template = $templates[$template_id];
+                    
+                    
+                    $total = $total +  $template['discount'];
+
+                    
+                    
+                }
+
+                foreach($users as $user)
+            {   
+                if($order->email === $user->email)
+                {
+                    
+                    $estado = ($totalOrders <= $total) ? "CORRECTO" : "Problema";
+                    echo $user->document_number .','. $user->names .','. $user->email .','. $total. ','. $totalOrders . ',' .$estado. ',' .$fechaOrders.','. $totalProductos.','. $productos. '</br>';
+                }
+            }
+            
+                
+            }else{
+                echo $user->email . ', NO TIENE ORDER</br>';
+            }
+            
+        }
+
+        // foreach ($users as $user) {
+        //     $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $user->_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
+        //     $total = 0;
+        //     $ordersUser = Order::where('account_id' , $user->_id)->where('order_status_id' ,'!=' ,'5c4f37a17aa633237e241643')->get(['amount']);
+        //     if(isset($ordersUser))
+        //     {
+        //         foreach($codes as $code)
+        //         {   
+        //             $template = DiscountCodeTemplate::find($code->discount_code_template_id, ['discount']);
+        //             if(!isset($template))   
+        //             {
+        //                 $discount= "discount_code_template_id ";
+        //                 $template = DiscountCodeTemplate::where('_id',$code->$discount)->first();                         
+
+        //             }
+        //             echo $user->email . ',' . $code->_id . ',' . $template->discount . '</br>';
+        //             $total = $total +  $template->discount;
+        //         }
+    
+        //         $totalOrder = 0;
+        //         foreach($ordersUser as $orderUser)
+        //         {
+        //             $totalOrder = $totalOrder +  $orderUser->amount;
+        //         }
+    
+        //         echo 'TotalUser:'.$total.'</br>'; 
+        //         echo 'TotalOrder:'.$totalOrder.'</br>'; 
+        //         echo ($totalOrder <= $total) ? "<strong>APROBADO</strong></br></br>" : "Rechazado</br></br>";
+        //     }else{
+        //         echo $user->email . ', NO TIENE ORDER</br>';
+        //     }
+            
+        // }
 
     }
 }
