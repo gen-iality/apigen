@@ -40,11 +40,12 @@ class MeetingsController extends Controller
 
         $status = SELF::ACEPTED_STATUS;
         $meeting = $this->changestatus($event_id, $meeting_id, $status);
-        $this->sendResponseMessage($meeting, $meeting_id, $event_id, $status);
+        $innerpath = "/networking";
+        $this->sendResponseMessage($meeting, $meeting_id, $event_id, $innerpath, $status);
 
         $attendee = Attendee::find(last($meeting["attendees"]));
         $pass = isset($attendee->properties['password']) ? $attendee->properties['password'] : null;
-        return app('App\Http\Controllers\InvitationController')->generateLoginLinkAndRedirect($attendee->properties["email"], $pass, $event_id);
+        return app('App\Http\Controllers\InvitationController')->generateLoginLinkAndRedirect($attendee->properties["email"], $pass, $event_id, $innerpath);
     }
 
     /**
@@ -56,14 +57,17 @@ class MeetingsController extends Controller
 
         $status = SELF::REJECTED_STATUS;
         $meeting = $this->changestatus($event_id, $meeting_id, $status);
-        $this->sendResponseMessage($meeting, $meeting_id, $event_id, $status);
+        $innerpath = "/networking";
+
+        $this->sendResponseMessage($meeting, $meeting_id, $event_id,  $innerpath, $status);
+
 
         $attendee = Attendee::find(last($meeting["attendees"]));
         $pass = isset($attendee->properties['password']) ? $attendee->properties['password'] : null;
-        return app('App\Http\Controllers\InvitationController')->generateLoginLinkAndRedirect($attendee->properties["email"], $pass, $event_id);
+        return app('App\Http\Controllers\InvitationController')->generateLoginLinkAndRedirect($attendee->properties["email"], $pass, $event_id, $innerpath);
     }
 
-    private function sendResponseMessage($meeting, $meeting_id, $event_id, $status){
+    private function sendResponseMessage($meeting, $meeting_id, $event_id, $innerpath, $status){
         $data = [
             "id_user_requesting" => $meeting["owner_id"],
             "id_user_requested" => last($meeting["attendees"]),
@@ -72,7 +76,7 @@ class MeetingsController extends Controller
             "timestamp_start" => $meeting["timestamp_start"],
 
         ];
-        app('App\Http\Controllers\InvitationController')->buildMeetingResponseMessage($data, $event_id, $innetpath="");
+        app('App\Http\Controllers\InvitationController')->buildMeetingResponseMessage($data, $event_id, $innerpath);
     }
 
     private function changestatus($event_id, $meeting_id, $status)
@@ -131,7 +135,7 @@ class MeetingsController extends Controller
 
         $meetingStartDate = date_format(Carbon::parse($meetingStartDate),'Y-m-d');
         
-
+        $innetpath = "/networking";
         $request_type = "meeting";
         $mail["subject"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión el: " . $meetingStartDate." - " . $meetingStartTime;
         $mail["title"] = $sender->properties["names"] . " te ha enviado una solicitud de reunión" . ".";
@@ -139,7 +143,7 @@ class MeetingsController extends Controller
 
         $mail["desc"] .= "<br><br><p>Puedes ingresar al evento a la sección Networking / Agéndate para revisar las solicitudes, para aceptarlas ó rechazarlas.</p>";
         
-        app('App\Http\Controllers\InvitationController')->sendEmail($mail, $event_id, $innetpath="", $receiver, $sender, $request_type);
+        app('App\Http\Controllers\InvitationController')->sendEmail($mail, $event_id, $innetpath, $receiver, $sender, $request_type);
 
         return "Request / response send";
     }
