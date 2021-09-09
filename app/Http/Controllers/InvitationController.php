@@ -488,7 +488,8 @@ class InvitationController extends Controller
         $mail["desc"] = $data["response"] == "accepted" ? $accepted_message : $rejected_message;
         $mail["subject"] = "Respuesta a solicitud de reunión ".$formated_meeting_time;
 
-        self::sendEmail($mail, $event_id, $innertpath="", $receiver, $sender, $request_type);
+        $innertpath ="/networking";
+        self::sendEmail($mail, $event_id, $innertpath, $receiver, $sender, $request_type);
         return "Request / response send";        
 
     }
