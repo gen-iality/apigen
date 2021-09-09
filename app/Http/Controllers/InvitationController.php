@@ -126,7 +126,7 @@ class InvitationController extends Controller
      * @return void
      */
     public function singIn(Request $request)
-    {
+    {   
         $innerpath = ($request->has("innerpath")) ? $request->input("innerpath") : "";
         $eventId = ($request->has("event_id")) ? $request->input("event_id") : "";
         $destination = ($request->has("destination")) ? $request->input("destination") : null;
@@ -134,7 +134,7 @@ class InvitationController extends Controller
 
         if ($request->input("request")) {
             try {
-                self::acceptOrDeclineFriendRequest($request, $eventId, $innerpath, $request->input("request"), $request->input("response"));
+                self::acceptOrDeclineFriendRequest($request, $eventId, $request->input("request"), $request->input("response"));
             } catch (Exception $e) {
 
             }
@@ -314,9 +314,9 @@ class InvitationController extends Controller
      * @param string $response_alt
      * @return void
      */
-    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $innerpath, String $id, $response_alt = "accepted")
+    public function acceptOrDeclineFriendRequest(Request $request, String $event_id, String $id, $response_alt = "accepted")
     {
-
+        $innerpath = '/networking';
         $data = $request->json()->all();
         $Invitation = Invitation::find($id);
         $data["response"] = ($data && isset($data["response"])) ? $data["response"] : $response_alt;
