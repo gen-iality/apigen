@@ -446,16 +446,18 @@ class InvitationController extends Controller
         
         $datos_usuario = "";
         $i = 0;
+        
+
         foreach ($event->user_properties as $property) {
             if ($i <= 3) {
 
-                if (isset($receiver->properties[$property->name]) && $receiver->properties[$property->name]) {
+                if (isset($receiver->properties[$property->name]) && $receiver->properties[$property->name] && $property->type !== "avatar") {
                     $i++;
                     $datos_usuario .= "<p>{$property->label}: {$receiver->properties[$property->name]}</p>";
                 }
             }
         }
-
+        
         $cuantos = count($event->user_properties);        
         
         $rejected_message = " Lo sentimos " . $receiver->properties["names"] . " ha declinado tu solicitud de reunión para el evento " . $event->name;
@@ -474,7 +476,6 @@ class InvitationController extends Controller
 // <br/>
 //         No olvides disfrutar el resto de experiencias del evento.
 // EOT;  
-
 
         $accepted_message = "<br/><br/>".$receiver->properties["names"] . " ha aceptado tu solicitud de reunión para el evento {$event->name} <br/><br/>" .
                             "Cuando " . $formated_meeting_time . "<br/><br/>" .
