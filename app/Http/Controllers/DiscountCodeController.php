@@ -508,21 +508,22 @@ class DiscountCodeController extends Controller
                         $orders->orderBy('email', 'asc')->paginate(4);         
         
         $userFor = "";    
-        echo 'N° de documento, 
-                    Nombres, 
-                    Correo,
-                    Puntos al momento de la redención ,
-                    Puntos de la prenda, 
-                    Total de puntos redimidos, 
-                    Total de tolas las prendas canjeadas,
-                    Estado,
-                    Fecha de redención,
-                    Prenda canjeada. </br>';     
+        // echo 'N° de documento, 
+        //             Nombres, 
+        //             Correo,
+        //             Puntos al momento de la redención ,
+        //             Puntos de la prenda, 
+        //             Total de puntos redimidos, 
+        //             Total de tolas las prendas canjeadas,
+        //             Estado,
+        //             Fecha de redención,
+        //             Prenda canjeada. </br>';     
         
         
         
         $arrayUsers = [];
         
+        $dataComplete = [];
 
         foreach ($orderActual as $order) {
             $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $order->account_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
@@ -532,7 +533,7 @@ class DiscountCodeController extends Controller
             $totalProductos = null;
 
             $totalCodigosRedimidos = 0;
-            $fechaOrders = $fechaOrders.' | '.$order->created_at;
+            $fechaOrders = $order->created_at;
             $totalOrders = $totalOrders + $order->amount;
             $productos = $order->items[0];
             $totalProductos =  $totalProductos +1;
@@ -588,17 +589,31 @@ class DiscountCodeController extends Controller
                         
                         $estado = ($totalOrdersUser <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
                                             
-                        echo $user->document_number .','. 
-                            $user->names .','. 
-                            $user->email .','. 
-                            $order->account_points . ',' .
-                            $order->amount .','.
-                            $totalCodigosRedimidos. ',' . 
-                            $totalOrdersUser .','.
-                            . ',' .
-                            // $estado. ',' .
-                            $fechaOrders.','. 
-                            $productos. '</br>';
+                        // echo $user->document_number .','. 
+                        //     $user->names .','. 
+                        //     $user->email .','. 
+                        //     $order->account_points . ',' .
+                        //     $order->amount .','.
+                        //     $totalCodigosRedimidos. ',' . 
+                        //     $totalOrdersUser .','.
+                        //     . ',' .
+                        //     // $estado. ',' .
+                        //     $fechaOrders.','. 
+                        //     $productos. '</br>';
+                        
+                            
+
+                            $dataByUserjson= response()->json([
+                                "document_cumber" => $user->document_number,
+                                "names" => $user->names,
+                                'email' => $user->email,
+                                "codes_before" => $order->account_points,
+                                "product_points" => $order->amount,
+                                "total_codes" => $totalCodigosRedimidos,
+                                "date_order" => $fechaOrders,
+                                "product" => $productos 
+                            ])->original;
+                            array_push($dataComplete , $dataByUserjson);
                     }
                     
                 }
@@ -609,6 +624,7 @@ class DiscountCodeController extends Controller
             }
             
         }
+        return $dataComplete;
 
     }
 
