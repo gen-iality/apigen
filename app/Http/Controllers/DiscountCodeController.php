@@ -589,7 +589,7 @@ class DiscountCodeController extends Controller
                             "status" => $estado,
                             "date_order" => $fechaOrders,
                             "product" => $productos,
-                            "talla" => $order->properties->talla
+                            "talla" => $order->properties['talla']
                         ])->original;
                         array_push($dataComplete , $dataByUserjson);                    
                     
