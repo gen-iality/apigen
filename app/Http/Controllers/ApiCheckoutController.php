@@ -101,7 +101,7 @@ class ApiCheckoutController extends Controller
             case 'EXPIRED':
                 $order->order_status_id = config('attendize.order_rejected');
                 break;
-
+            
         }
         Log::info('Borramos el cache de la orden: ' . $status);
         if ($status != 'PENDING') {
@@ -414,10 +414,11 @@ class ApiCheckoutController extends Controller
      * 
      * @urlParam order_id
      */
-    public function validatePointOrder($order_id)
+    public function validatePointOrder(Request $request, $order_id)
     {   
         $order = Order::find($order_id);
 
+        $data = $request->input();
         //Obtenemos el usuario el cual está canjando sus puntos
         $user = Auth::user();
         
@@ -433,29 +434,8 @@ class ApiCheckoutController extends Controller
             //Se descuentan los puntos a el usuario que ha utilizado
             $user->points = $user->points - $order->amount;
             $user->save();
+                        
             
-            $emailsAdmin =  Account::where("others_properties.role" , "admin")
-            ->where("organization_ids" , $order->organization_id)
-            ->get();
-            
-            //Se envia la información completa de la orden.           
-            foreach($order->items as $item)
-            {  
-                Mail::to($order->email)
-                ->queue(
-                    new \App\Mail\PointsMail($order , $user, $item)
-                ); 
-
-
-                foreach($emailsAdmin as $emailAdmin)
-                {
-                    Mail::to($emailAdmin->email)
-                    ->queue(
-                        new \App\Mail\PointsMail($order , $user, $item)
-                    );
-                }
-                     
-            }
             return $order;
         }
         //Actualizamos el estado de la orden a rechazado
