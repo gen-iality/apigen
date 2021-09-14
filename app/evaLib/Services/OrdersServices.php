@@ -285,11 +285,14 @@ class OrdersServices
                 $user = Account::find($order->account_id);                
 
                 if($order->item_type == 'points')
-                {
-                    Mail::to($order->email)
-                    ->queue(
-                        new \App\Mail\PointsMail($order , $user, $item , $status)
-                    );                    
+                {   
+                    foreach($order->items as $item)
+                    { 
+                        Mail::to($order->email)
+                        ->queue(
+                            new \App\Mail\PointsMail($order , $user, $item , $status)
+                        );  
+                    }                  
                 }                     
                 break;
             case 'PENDING':
