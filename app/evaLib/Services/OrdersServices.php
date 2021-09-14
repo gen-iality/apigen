@@ -282,11 +282,7 @@ class OrdersServices
                 break;
             case 'REJECTED':
                 $order->order_status_id= config('attendize.order_rejected');
-                $user = Account::find($order->account_id);
-
-                $emailsAdmin =  Account::where("others_properties.role" , "admin")
-                ->where("organization_ids" , $order->organization_id)
-                ->get();
+                $user = Account::find($order->account_id);                
 
                 if($order->item_type == 'points')
                 {
@@ -309,6 +305,9 @@ class OrdersServices
                 $user = Account::find($order->account_id);
                 $order->order_status_id = config('attendize.order_valid');
                 
+                $emailsAdmin =  Account::where("others_properties.role" , "admin")
+                ->where("organization_ids" , $order->organization_id)
+                ->get();
 
                 if($order->item_type == 'points')
                 {
