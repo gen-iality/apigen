@@ -33,6 +33,7 @@ class Host extends Moloquent
         'profession', 
         'description_activity', 
         'order',
-        'category_id'
+        'category_id',
+        'publicado'
     ];
 }
