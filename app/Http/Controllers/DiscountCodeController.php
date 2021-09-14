@@ -579,6 +579,7 @@ class DiscountCodeController extends Controller
 
 
                         $dataByUserjson= response()->json([
+                            "_id" => $order->_id,
                             "document_cumber" => $user->document_number,
                             "names" => $user->names,
                             'email' => $user->email,
