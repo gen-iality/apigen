@@ -5,11 +5,19 @@
         <img alt="{{$organizer->name}}" src={{$organizer->banner_image_email}} /> 
     </div>
 @endif
+@if($status == 'VALID')
 <div class="centered">
     <p style="font-size: 20px;color: gray;font-style: italic">
         ¡Felicitaciones! tu redención de puntos ha sido exitosa                       
     </p>
 </div>
+@else
+<div class="centered">
+    <p style="font-size: 20px;color: gray;font-style: italic">
+       Lo sentimos tu redención de puntos ha sido rechazada                 
+    </p>
+</div>
+@endif
 <div>
     <p style="font-size: 17px;color: gray;">
         Datos  del usuario
