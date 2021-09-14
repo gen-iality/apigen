@@ -566,16 +566,16 @@ class DiscountCodeController extends Controller
                 }
                 
                 $estado = ($totalOrdersUser <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
-                echo $user->document_number .','. 
-                        $user->names .','. 
-                        $user->email .','. 
-                        $order->account_points . ',' .
-                        $order->amount .','.
-                        $totalCodigosRedimidos. ',' . 
-                        $totalOrdersUser .','.
-                        $estado. ',' .
-                        $fechaOrders.','. 
-                        $productos. '</br>';
+                // echo $user->document_number .','. 
+                //         $user->names .','. 
+                //         $user->email .','. 
+                //         $order->account_points . ',' .
+                //         $order->amount .','.
+                //         $totalCodigosRedimidos. ',' . 
+                //         $totalOrdersUser .','.
+                //         $estado. ',' .
+                //         $fechaOrders.','. 
+                //         $productos. '</br>';
 
 
                         $dataByUserjson= response()->json([
@@ -588,7 +588,8 @@ class DiscountCodeController extends Controller
                             "total_orders" => $totalOrdersUser,
                             "status" => $estado,
                             "date_order" => $fechaOrders,
-                            "product" => $productos 
+                            "product" => $productos,
+                            "talla" => $order->properties->talla
                         ])->original;
                         array_push($dataComplete , $dataByUserjson);                    
                     
