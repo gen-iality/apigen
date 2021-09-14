@@ -93,9 +93,10 @@ class ApiOrdersController extends Controller
      */
     public function index(Request $request)
     {
-        return OrderResource::collection(
-            Order::paginate(config('app.page_size'))
-        );
+        return json_encode(["Error" => "Can't query all order of the platform maximun scope is by event"]);
+        // return OrderResource::collection(
+        //     Order::paginate(config('app.page_size'))
+        // );
     }
 
     /**
