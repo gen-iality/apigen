@@ -287,22 +287,13 @@ class OrdersServices
                 $emailsAdmin =  Account::where("others_properties.role" , "admin")
                 ->where("organization_ids" , $order->organization_id)
                 ->get();
-                
+
                 if($order->item_type == 'points')
                 {
                     Mail::to($order->email)
                     ->queue(
                         new \App\Mail\PointsMail($order , $user, $item , $status)
-                    );
-
-
-                    foreach($emailsAdmin as $emailAdmin)
-                    {
-                        Mail::to($emailAdmin->email)
-                        ->queue(
-                            new \App\Mail\PointsMail($order , $user, $item , $status)
-                        );
-                    }
+                    );                    
                 }                     
                 break;
             case 'PENDING':
@@ -326,7 +317,15 @@ class OrdersServices
                         Mail::to($order->email)
                         ->queue(
                             new \App\Mail\PointsMail($order , $user, $item , $status)
-                        );                         
+                        );    
+                        
+                        foreach($emailsAdmin as $emailAdmin)
+                        {
+                            Mail::to($emailAdmin->email)
+                            ->queue(
+                                new \App\Mail\PointsMail($order , $user, $item , $status)
+                            );
+                        }
                     }
                 }
 
