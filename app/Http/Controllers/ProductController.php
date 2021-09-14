@@ -159,7 +159,7 @@ class ProductController extends Controller
         }
         
 
-        $product->price = isset($typePrice) ? $typePrice[0] . ' $ ' . $order->amount :  $order->amount;
+        $product->price = isset($typePrice) ? $order->amount :  $order->amount;
         $product->save();
 
         $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
@@ -197,7 +197,7 @@ class ProductController extends Controller
         $product = $product = Product::find($product_id);    
         $typePrice = explode(' $ ' , $product->price);
         //Este cambio es temporar porque lo registros se crearon con precio tipo string              
-        $minValue = isset($minValueAuction) ? $typePrice[0] . ' $ ' . $minValueAuction : $product->price;
+        $minValue = isset($minValueAuction) ? $minValueAuction : $product->price;
         return $minValue;
     }
 
