@@ -505,7 +505,7 @@ class DiscountCodeController extends Controller
                             )
                         )->orderBy('email', 'asc')->get() :
 
-                        $orders->orderBy('email', 'asc')->paginate(4);         
+                        $orders->orderBy('email', 'asc')->get();         
         
         $userFor = "";    
         // echo 'N° de documento, 
