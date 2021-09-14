@@ -557,7 +557,10 @@ class DiscountCodeController extends Controller
                 $totalOrdersUser=0;
 
                 $user = $users[$order->email];
-                $ordersByUser = Order::where('email', $user->email)->where('order_status_id' ,'!=', '5c4f37a17aa633237e241643')->get(['amount']); 
+                $ordersByUser = Order::where('email', $user->email)
+                ->where('order_status_id' ,'!=', '5c4f37a17aa633237e241643')
+                ->where('order_status_id' ,'!=', '5c4232c1477041612349941e')
+                ->get(['amount']); 
 
                 foreach($ordersByUser as $orderByUser)
                 {
