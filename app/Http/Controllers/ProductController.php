@@ -159,7 +159,7 @@ class ProductController extends Controller
         }
         
 
-        $product->price = isset($typePrice) ? $order->amount :  $order->amount;
+        $product->price = $order->amount;
         $product->save();
 
         $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
