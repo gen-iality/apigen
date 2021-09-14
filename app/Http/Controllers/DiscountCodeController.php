@@ -508,7 +508,7 @@ class DiscountCodeController extends Controller
                         $orders->orderBy('email', 'asc')->get();         
         
         $userFor = "";    
-        echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. </br>';     
+        // echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. </br>';     
         
         
         
