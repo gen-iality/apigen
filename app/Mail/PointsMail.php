@@ -62,7 +62,7 @@ class PointsMail extends Mailable implements ShouldQueue
         return $this
         ->from("alerts@evius.co", $organizer->name)
         ->subject($organizer->name)
-        ->markdown('Mailers.Points');
+        ->markdown('Mailers.ordersPoints');
         
     }
 }
