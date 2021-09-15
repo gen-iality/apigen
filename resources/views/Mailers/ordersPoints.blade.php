@@ -14,7 +14,7 @@
 @else
 <div class="centered">
     <p style="font-size: 20px;color: gray;font-style: italic">
-       Lo sentimos tu redención de puntos ha sido rechazada                 
+       Lo sentimos tu redención del producto ha sido rechazada                 
     </p>
 </div>
 @endif
@@ -38,7 +38,7 @@
         -<strong>Fecha y hora:</strong>{!!$order->created_at!!}
     </p>
 </div>  
-@if(!empty($organizer->footer_image_email))
+@if(!empty($organizer->footer_image_email) && $status == 'VALID')
     <div class="centered">
         <img alt="{{$organizer->name}}" src={{$organizer->footer_image_email}} /> 
     </div>
