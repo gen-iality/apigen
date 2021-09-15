@@ -69,32 +69,32 @@ class AwsSnsController extends Controller
 
             //Dependiendo del estatus se hace la consulta correspondiente para tener el total de mensajes con el status que se está actualizando.
             $total= MessageUser::where('status', '=', $status_message)->where('message_id', '=', $messageUser->message_id)->get();
-            // switch ($status_message) 
-            // {
-            //     case 'Send':
+            switch ($status_message) 
+            {
+                case 'Send':
                     
-            //         $message->total_sent = $message->total_sent+1;
-            //         $message->save();
-            //     break;
-            //     case 'Delivery':
-            //         $message->total_delivered = count($total);                   
-            //         $message->save();                    
-            //     break;
-            //     case 'Open':
-            //         // $total_opened =count($total);
-            //         $message->total_opened = $message->total_opened + 1;
-            //         $message->save();
-            //     break;
-            //     case 'Click':
-            //         // $total_clicked =count($total);
-            //         $message->total_clicked = $message->total_clicked + 1;
-            //         $message->save();
-            //     break;
-            //     case 'Bounce':                    
-            //         $message->total_bounced = $message->total_bounced + 1;
-            //         $message->save(); 
-            //     break;
-            // }
+                    $message->total_sent++;
+                    $message->save();
+                break;
+                case 'Delivery':
+                    $message->total_delivered++;                   
+                    $message->save();                    
+                break;
+                case 'Open':
+                    // $total_opened =count($total);
+                    $message->total_opened++;
+                    $message->save();
+                break;
+                case 'Click':
+                    // $total_clicked =count($total);
+                    $message->total_clicked++;
+                    $message->save();
+                break;
+                case 'Bounce':                    
+                    $message->total_bounced++;
+                    $message->save(); 
+                break;
+            }
                 
                         
         }        
