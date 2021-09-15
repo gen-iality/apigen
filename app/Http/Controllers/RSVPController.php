@@ -228,7 +228,8 @@ class RSVPController extends Controller implements ShouldQueue
 
         
 
-        foreach ($eventUsers as &$eventUser) {
+        foreach ($eventUsers as &$eventUser) 
+        {
             Log::info('foreach');
             $eventUser->changeToInvite();
 
@@ -265,10 +266,39 @@ class RSVPController extends Controller implements ShouldQueue
             Mail::to($email)
                 ->queue(
                     new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
-                );
-                
-            Log::info('$mail '.$email);    
+                );                           
  
+        }
+        
+        $messageUsers = MessageUser::where('message_id', '=', $message->id)->get();
+        foreach($messageUsers as $messageUser)
+        {
+            switch ($messageUser->status) 
+            {
+                case 'Send':
+                    
+                    $message->total_sent = $message->total_sent+1;
+                    $message->save();
+                break;
+                case 'Delivery':
+                    $message->total_delivered = $message->total_delivered + 1;                   
+                    $message->save();                    
+                break;
+                case 'Open':
+                    // $total_opened =count($total);
+                    $message->total_opened = $message->total_opened + 1;
+                    $message->save();
+                break;
+                case 'Click':
+                    // $total_clicked =count($total);
+                    $message->total_clicked = $message->total_clicked + 1;
+                    $message->save();
+                break;
+                case 'Bounce':                    
+                    $message->total_bounced = $message->total_bounced + 1;
+                    $message->save(); 
+                break;
+            }
         }
     }
 
