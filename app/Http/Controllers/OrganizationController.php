@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use Validator;
+use App\DiscountCodeMarinela;
+use App\DiscountCodeTemplate;
 
 /**
  * @group Organization
