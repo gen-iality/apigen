@@ -148,6 +148,7 @@ return [
                         '*/contactbyemail',
                         '*/validateFreeorder',
                         '*/organizations/{id}/eventUsers',
+                        '*/ordersUsersPoints',
                     //Surveys
                         '*/surveys',
                         '*/surveys/*',

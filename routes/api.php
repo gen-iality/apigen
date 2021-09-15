@@ -566,8 +566,9 @@ Route::apiResource("discountcodetemplate/{template_id}/code", "DiscountCodeContr
 Route::put("code/exchangeCode", "DiscountCodeController@exchangeCode");
 Route::post("code/validatecode", "DiscountCodeController@validateCode");
 Route::put("code/redeem_point_code" ,  "DiscountCodeController@redeemPointCode");
-Route::get("code/ordersUsersPoints" ,  "DiscountCodeController@ordersUsersPoints");
-Route::get("organization/{organization}/ordersUsersPoints" ,  "DiscountCodeController@ordersUsersPoints");
+Route::get("code/codesByUser" ,  "DiscountCodeController@codesByUser");
+
+Route::get("organization/{organization}/ordersUsersPoints" ,  "OrganizationController@ordersUsersPoints");
 
 
 

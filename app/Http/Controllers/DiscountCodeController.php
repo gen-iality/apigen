@@ -425,16 +425,19 @@ class DiscountCodeController extends Controller
     }
 
     /**
-     * 
+     * _codesByUser_: list all codes by user
+     *
+     * @queryParam organization required organization_id 
+     * @queryParam email required user email
      */
     public function codesByUser(Request $request)
     {   
         $data = $request->input();
 
-        $templates = DiscountCodeTemplate::where('organization_id', '60467fbd9caef512a5626fc9')->get()->keyBy('_id')->toArray();
+        $templates = DiscountCodeTemplate::where('organization_id', $data['organization'])->get()->keyBy('_id')->toArray();
 
-        $user = Account::where('document_number',$data['document_number'])->first();
-
+        $user = Account::where('email',$data['email'])->first();
+        
         $codes = DiscountCodeMarinela::where('number_uses' , 1)
                 ->where('account_id' , $user->_id)
                 ->get();
@@ -454,160 +457,10 @@ class DiscountCodeController extends Controller
             }
             $template = $templates[$template_id];
             
-            echo  $user->email .','.  $user->document_number .','.$code->code .','. $code->updated_at .','. $template['discount'].'</br>';
-
-                            
+            echo  $user->email .','.  $user->document_number .','.$code->code .','. $code->updated_at .','. $template['discount'].'</br>';                            
         }
 
-
-
-    }
-
-    /**
-     * 
-     */
-    public function ordersUsersPoints(Request $request)
-    {   
-        $data = $request->json()->all();
-
-        $filters = $request->input();
-        $templates = DiscountCodeTemplate::where('organization_id', '60467fbd9caef512a5626fc9')->get()->keyBy('_id')->toArray();
-        
-        $status = isset($filters["status"]) ? $filters["status"] : "pendiente";
-
-        $status_id = "";
-        switch ($status)
-        {
-            case 'pendiente':
-                $status = "5c4a299c5c93dc0eb199214a";
-            break;
-            case 'despachado':
-                $status = "5c423232c9a4c86123236dcd";
-            break;
-        }
-
-        $ordersEmail = Order::where('order_status_id' , $status)->where('organization_id' , '60467fbd9caef512a5626fc9')->pluck('email');
-        
-        $orderByUser = 
-
-        //Usuarios por cada orden
-        $usersTotal = Account::whereIn('email' , $ordersEmail);
-        $users = $usersTotal->get(['_id' , 'email' , 'points', 'document_number','names'])->keyBy('email');
-
-        
-        $orders = Order::where('order_status_id' , $status)->where('organization_id' , '60467fbd9caef512a5626fc9');
-        $orderActual = isset($filters["date_from"]) ? 
-                        $orders->whereBetween(
-                            'created_at',
-                            array(
-                                \Carbon\Carbon::parse($filters['date_from']),
-                                \Carbon\Carbon::parse($filters['date_to']),
-                            )
-                        )->orderBy('email', 'asc')->get() :
-
-                        $orders->orderBy('email', 'asc')->get();         
-        
-        $userFor = "";    
-        // echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. </br>';     
-        
-        
-        
-        $arrayUsers = [];
-        
-        $dataComplete = [];        
-
-        $ordersByUser = DiscountCodeTemplate::where('organization_id', '60467fbd9caef512a5626fc9')->get()->keyBy('_id')->toArray();
-
-        foreach ($orderActual as $order) 
-        {
-            $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $order->account_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
-            // $totalOrders = 0;
-            $fechaOrders = '';
-            $productos = '';
-            $totalProductos = null;
-
-            $totalCodigosRedimidos = 0;
-            $fechaOrders = $order->created_at;
-            // $totalOrders = $totalOrders + $order->amount;
-            $productos = $order->items[0];
-            $totalProductos =  $totalProductos +1;
-            
-            
-           
-            if(isset($orderActual))
-            {
-                foreach($codes as $code)
-                {   
-
-                    $template_id = $code->discount_code_template_id;
-
-                    if(!$template_id)   
-                    {
-                        $discount= "discount_code_template_id ";
-                        $template_id = $code->$discount;
-                    }
-                    $template = $templates[$template_id];
-                    
-                    
-                    $totalCodigosRedimidos = $totalCodigosRedimidos +  $template['discount'];
-
-                                    
-                }
-
-                $totalOrdersUser=0;
-
-                $user = $users[$order->email];
-                $ordersByUser = Order::where('email', $user->email)
-                ->where('order_status_id' ,'!=', '5c4f37a17aa633237e241643')
-                ->where('order_status_id' ,'!=', '5c4232c1477041612349941e')
-                ->get(['amount']); 
-
-                foreach($ordersByUser as $orderByUser)
-                {
-                    $totalOrdersUser = $totalOrdersUser + $orderByUser->amount;
-                    // echo $orderByUser->amount. '</br>';
-                }
-                
-                $estado = ($totalOrdersUser <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
-                // echo $user->document_number .','. 
-                //         $user->names .','. 
-                //         $user->email .','. 
-                //         $order->account_points . ',' .
-                //         $order->amount .','.
-                //         $totalCodigosRedimidos. ',' . 
-                //         $totalOrdersUser .','.
-                //         $estado. ',' .
-                //         $fechaOrders.','. 
-                //         $productos. '</br>';
-
-
-                        $dataByUserjson= response()->json([
-                            "_id" => $order->_id,
-                            "document_cumber" => $user->document_number,
-                            "names" => $user->names,
-                            'email' => $user->email,
-                            "codes_before" => $order->account_points,
-                            "product_points" => $order->amount,
-                            "total_codes" => $totalCodigosRedimidos,
-                            "total_orders" => $totalOrdersUser,
-                            "status" => $estado,
-                            "date_order" => $fechaOrders,
-                            "product" => $productos,
-                            "talla" => $order->properties['talla']
-                        ])->original;
-                        array_push($dataComplete , $dataByUserjson);                    
-                    
-
-            
-                
-            }else{
-                echo $user->email . ', NO TIENE ORDER</br>';
-            }
-            
-        }
-        return $dataComplete;
-
-    }
+    }    
 
 
 
