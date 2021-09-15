@@ -421,7 +421,7 @@ class ApiCheckoutController extends Controller
         $data = $request->input();
         //Obtenemos el usuario el cual está canjando sus puntos
         $user = Auth::user();
-        
+                  
         //Verificar que el usuario tenga puntos suficientes para más seguridad
         if($order->amount <= $user->points)
         {   
@@ -434,7 +434,14 @@ class ApiCheckoutController extends Controller
             //Se descuentan los puntos a el usuario que ha utilizado
             $user->points = $user->points - $order->amount;
             $user->save();
-                        
+            $status = 'pending_confirm'; 
+            foreach($order->items as $item)
+            {
+                Mail::to($order->email)
+                ->queue(
+                    new \App\Mail\PointsMail($order , $user, $item , $status)
+                ); 
+            }           
             
             return $order;
         }

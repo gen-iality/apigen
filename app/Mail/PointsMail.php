@@ -58,7 +58,14 @@ class PointsMail extends Mailable implements ShouldQueue
     public function build()
     {   
         $organizer = $this->organizer;        
-    
+        
+        if($this->status == 'pending_confirm')
+        {
+            return $this
+            ->from("alerts@evius.co", $organizer->name)
+            ->subject($organizer->name)
+            ->markdown('Mailers.pendingOrdersPoints');
+        }
         return $this
         ->from("alerts@evius.co", $organizer->name)
         ->subject($organizer->name)

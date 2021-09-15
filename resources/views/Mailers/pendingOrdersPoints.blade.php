@@ -5,19 +5,14 @@
         <img alt="{{$organizer->name}}" src={{$organizer->banner_image_email}} /> 
     </div>
 @endif
-@if($status == 'VALID')
 <div class="centered">
     <p style="font-size: 20px;color: gray;font-style: italic">
-        ¡Felicitaciones! tu redención de puntos ha sido exitosa                       
+        ¡Felicitaciones! tu redención de puntos ha pasado a estado: <strong>Pendiente</strong>                       
+    </p>
+    <p style="font-size: 15px;color: gray;">
+        En los próximos días te llegará la confirmación de la <strong>aprobación o rechazo</strong> para la entrga de tu prenda.                      
     </p>
 </div>
-@else
-<div class="centered">
-    <p style="font-size: 20px;color: gray;font-style: italic">
-       Lo sentimos tu redención del producto ha sido <strong>rechazada</strong>
-    </p>
-</div>
-@endif
 <div>
     <p style="font-size: 17px;color: gray;">
         Datos  del usuario
