@@ -34,6 +34,7 @@ class Host extends Moloquent
         'description_activity', 
         'order',
         'category_id',
-        'published'
+        'published',
+        'index'
     ];
 }
