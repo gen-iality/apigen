@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class AutoGenerateRoles extends Command
 {
@@ -11,7 +12,7 @@ class AutoGenerateRoles extends Command
      *
      * @var string
      */
-    protected $signature = 'route:resourceRol {moduleplural} {model}';
+    protected $signature = 'route:resourceRol {model}';
 
     /**
      * The console command description.
@@ -38,5 +39,19 @@ class AutoGenerateRoles extends Command
     public function handle()
     {
         //
+        $modelPlural = $this->argument('model');
+        
+        $file = fopen('', 'a+');
+        $routesPermissions =`/****************\n* {$model}\n****************/
+        Route::group(
+            ['middleware' => 'auth:token'], function () {
+                Route::post('{$modelPlural}', 'CommentController@store');
+                Route::put('comments/{comment}', 'CommentController@update');
+                Route::delete('comments/{comment}', 'CommentController@destroy');
+                Route::get('comments', 'CommentController@index');
+        
+            }
+        );`;
+        $routeCreate = fwrite($file , $routesPermissions);
     }
 }
