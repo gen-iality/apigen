@@ -39,19 +39,22 @@ class AutoGenerateRoles extends Command
     public function handle()
     {
         //
-        $modelPlural = $this->argument('model');
-        
-        $file = fopen('', 'a+');
-        $routesPermissions =`/****************\n* {$model}\n****************/
+
+        $model = $this->argument('model');
+        $modelPlural = strtolower(str_plural($model));
+        $modelLower = strtolower($model);
+
+        $file = fopen(base_path('/routes/api.php'), 'a+');
+        $routesPermissions ="\n/****************\n* {$model}\n****************/
         Route::group(
             ['middleware' => 'auth:token'], function () {
-                Route::post('{$modelPlural}', 'CommentController@store');
-                Route::put('comments/{comment}', 'CommentController@update');
-                Route::delete('comments/{comment}', 'CommentController@destroy');
-                Route::get('comments', 'CommentController@index');
-        
+                Route::get('$modelPlural', '$model"."Controller@index')->middleware('permission:list_$modelPlural');
+                Route::post('$modelPlural', '$model"."Controller@store')->middleware('permission:create_$modelPlural');
+                Route::get('$modelPlural/{"."$modelLower}', '$model"."Controller@show')->middleware('permission:show_$modelPlural');                
+                Route::put('$modelPlural/{"."$modelLower}', '$model"."Controller@update')->middleware('permission:update_$modelPlural');
+                Route::delete('$modelPlural/{"."$modelLower}', '$model"."Controller@destroy')->middleware('permission:delete_$modelPlural');
             }
-        );`;
+        );";
         $routeCreate = fwrite($file , $routesPermissions);
     }
 }
