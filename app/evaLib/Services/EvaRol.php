@@ -57,7 +57,7 @@ class EvaRol
         $userOrg = [
             'account_id' => $authorId,
             'organization_id' => $organizationId,
-            'rol_id' => $rol->_id,
+            'rol_id' => '5c1a59b2f33bd40bb67f2322',
         ];
         $userToOrg = new OrganizationUser($userOrg);
         $userToOrg->save();
