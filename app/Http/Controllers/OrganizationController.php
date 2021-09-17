@@ -380,6 +380,9 @@ class OrganizationController extends Controller
             case 'despachado':
                 $status = "5c423232c9a4c86123236dcd";
             break;
+            case 'valida':
+                $status = "613ff0c1f1c6df84356b30c2";
+            break;
         }
 
         $ordersEmail = Order::where('order_status_id' , $status)->where('organization_id' , $organization)->pluck('email');
