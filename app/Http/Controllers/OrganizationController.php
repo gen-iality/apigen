@@ -77,11 +77,11 @@ class OrganizationController extends Controller
 
         $model = new Organization($data);
         // return response($model);
-        $model->author = Auth::user()->id;
+        $model->author = Auth::user()->_id;
 
         $user = Auth::user();
 
-        $RolService->createAuthorAsOrganizationAdmin(Auth::user()->id, $model->_id);
+        $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
         
         $model->save();
         
