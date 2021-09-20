@@ -9,7 +9,7 @@ class Rol extends Moloquent
 {
     //
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
-    const ID_ROL_MOREDATOR = '60dca467b38c630f83537e62';
+    const ID_ROL_MODERATOR = '60dca467b38c630f83537e62';
 
     protected $fillable = [ 
         'account_id', 

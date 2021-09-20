@@ -57,6 +57,7 @@ class AutoGenerateRoles extends Command
         $delete = "delete_$modelPlural";
 
         $permissionsCrud = [$list, $create, $show, $update, $delete];
+
         $routesPermissions ="\n/****************\n* {$model}\n****************/
         Route::group(
             ['middleware' => 'auth:token'], function () {
@@ -71,7 +72,7 @@ class AutoGenerateRoles extends Command
 
         //Roles por defecto
         $idRolAdmin = Rol::ID_ROL_ADMINISTRATOR;
-        $idRolMoredator = Rol::ID_ROL_MOREDATOR;
+        $idRolModerator = Rol::ID_ROL_MODERATOR;
 
         //Se agregan los permisos a los roles por defecto según corresponda.
         for ($i=0; $i < count($permissionsCrud); $i++) 
@@ -97,7 +98,7 @@ class AutoGenerateRoles extends Command
             {
                 RolesPermissions::updateOrCreate(
                     [
-                        "rol_id" => $idRolMoredator,
+                        "rol_id" => $idRolModerator,
                         "permission_id" => $permission->_id
                     ]
                 );
