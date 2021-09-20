@@ -410,7 +410,7 @@ class OrganizationController extends Controller
         $userFor = "";  
         if(isset($filters['type_report']))
         {
-            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. </br>';     
+            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. <br>';     
         }               
         
         $arrayUsers = [];
@@ -461,7 +461,7 @@ class OrganizationController extends Controller
                 foreach($ordersByUser as $orderByUser)
                 {
                     $totalOrdersUser = $totalOrdersUser + $orderByUser->amount;
-                    // echo $orderByUser->amount. '</br>';
+                    // echo $orderByUser->amount. '<br>';
                 }
                 
                 $estado = ($totalOrdersUser <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
@@ -476,7 +476,7 @@ class OrganizationController extends Controller
                             $totalOrdersUser .','.
                             $estado. ',' .
                             $fechaOrders.','. 
-                            $productos. '</br>';
+                            $productos. '<br>';
                 }else{
                     $dataByUserjson= response()->json([
                         "_id" => $order->_id,
@@ -495,7 +495,7 @@ class OrganizationController extends Controller
                     array_push($dataComplete , $dataByUserjson);                                        
                 } 
             }else{
-                echo $user->email . ', NO TIENE ORDER</br>';
+                echo $user->email . ', NO TIENE ORDER<br>';
             }
             
         }
