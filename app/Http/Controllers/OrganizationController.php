@@ -410,7 +410,7 @@ class OrganizationController extends Controller
         $userFor = "";  
         if(isset($filters['type_report']))
         {
-            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. <br>';     
+            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. <br/>';     
         }               
         
         $arrayUsers = [];
@@ -499,7 +499,10 @@ class OrganizationController extends Controller
             }
             
         }
-        return $dataComplete;
+        if(!isset($filters['type_report']))
+        {
+            return $dataComplete;
+        }
 
     }
     
