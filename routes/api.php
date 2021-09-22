@@ -605,3 +605,14 @@ Route::get('comments/organizations/{organization}' , 'CommentController@indexByO
 
 // ------------------------------------------------------TEST
 Route::put('codestest', 'DiscountCodeController@codesTest');
+
+/****************
+ * TemplateProperties
+ ****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::get('templateproperties', 'TemplatePropertiesController@index'); 
+        Route::post('templateproperties', 'TemplatePropertiesController@store'); 
+        Route::put('events/{event}/templateproperties/{templateproperties}', 'TemplatePropertiesController@addTemplateEvent');
+    }
+);
