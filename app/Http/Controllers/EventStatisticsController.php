@@ -124,7 +124,7 @@ class EventStatisticsController extends Controller
         }    
         //$array = json_decode(json_encode($totals->toArray()), true);
 
-        return JsonResource::collection($output);
+        return JsonResource::collection(['data'=>$output]);
 
         // foreach ($output as $result) {
         //     echo "<p>{$result['name']} {$result['_id']} {$result['count']} pending: {$result['course_status_pending']}  approved: {$result['course_status_approved']} failed: {$result['course_status_reproved']}</p>";
