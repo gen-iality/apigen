@@ -420,7 +420,7 @@ class EventUserController extends Controller
             new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
         );
 
-        if ($event_id == '60c8affc0b4f4b417d252b29') {
+        if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
             $hubspot = self::hubspotRegister($request, $event_id);
         }
         
@@ -1104,7 +1104,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'origen_lead',
-                    'value' => 'MeetUps',
+                    'value' => isset($eventUserData['properties']['origen_lead']) ? $eventUserData['properties']['origen_lead'] : "MeetUps",
+                ),
+                array(
+                    'property' => 'rol_cargo',
+                    'value' => isset($eventUserData['properties']['rol_cargo']) ? $eventUserData['properties']['rol_cargo'] : "",
                 ),
             ),
         );        
