@@ -420,8 +420,8 @@ class EventUserController extends Controller
             new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
         );
 
-        if ($event_id == '60c8affc0b4f4b417d252b29') {
-            $hubspot = self::hubspotRegister($request, $event_id);
+        if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
+            $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
         
         return $eventUser;
@@ -1049,7 +1049,7 @@ class EventUserController extends Controller
     /**
      *
      */
-    public function hubspotRegister(Request $request, $event_id)
+    public function hubspotRegister(Request $request, $event_id, $event)
     {
         $eventUserData = $request->json()->all();
 
@@ -1072,7 +1072,7 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'city',
-                    'value' => $eventUserData['properties']['ciudad'],
+                    'value' => isset($eventUserData['properties']['ciudad']) ? $eventUserData['properties']['ciudad'] :  "",
                 ),
                 array(
                     'property' => 'mobilephone',
@@ -1084,11 +1084,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'objeto_negocio',
-                    'value' => $eventUserData['properties']['ofreceproductosserviciosoambos'],
+                    'value' => isset($eventUserData['properties']['ofreceproductosserviciosoambos'])?$eventUserData['properties']['ofreceproductosserviciosoambos'] : "",
                 ),
                 array(
                     'property' => 'tipo_objeto_negocio',
-                    'value' => $eventUserData['properties']['selecciondetipodeobjeto'],
+                    'value' => isset($eventUserData['properties']['selecciondetipodeobjeto'])?$eventUserData['properties']['selecciondetipodeobjeto']: "",
                 ),
                 array(
                     'property' => 'company',
@@ -1104,7 +1104,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'origen_lead',
-                    'value' => 'MeetUps',
+                    'value' => isset($event->name) ? $event->name : "MeetUps",
+                ),
+                array(
+                    'property' => 'rol_cargo',
+                    'value' => isset($eventUserData['properties']['rolenlaempresa']) ? $eventUserData['properties']['rolenlaempresa'] : "",
                 ),
             ),
         );        
