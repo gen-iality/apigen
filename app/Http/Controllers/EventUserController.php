@@ -1104,7 +1104,7 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'origen_lead',
-                    'value' => isset($eventUserData['properties']['origen_lead']) ? $eventUserData['properties']['origen_lead'] : "MeetUps",
+                    'value' => isset($event->name) ? $event->name : "MeetUps",
                 ),
                 array(
                     'property' => 'rol_cargo',
