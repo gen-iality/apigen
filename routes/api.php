@@ -271,6 +271,11 @@ Route::group(
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
+Route::get('organizations/{id}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
+
+Route::post('events/{event_id}/surveys/{id}/coursefinished', 'EventStatisticsController@courseFinished');
+
+
 
 /***************
  * categories

@@ -161,9 +161,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $dataUser['updated_at'] = date_create();
             $dataUser['updated_at'] = date_create();
 
-            $dataUser['created_at'] = ($dataUser['created_at']) ? date_create($dataUser['created_at']) : date_create();
+            $dataUser['created_at'] = (isset($dataUser['created_at'])) ? date_create($dataUser['created_at']) : date_create();
             if (isset($dataUser['checkedin_at'])) {
-                $dataUser['checkedin_at'] = ($dataUser['checkedin_at']) ? date_create($dataUser['checkedin_at']) : null;
+                $dataUser['checkedin_at'] = (isset($dataUser['checkedin_at'])) ? date_create($dataUser['checkedin_at']) : null;
             }
 
             // var_dump($dataUser);
