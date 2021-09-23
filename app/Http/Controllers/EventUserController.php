@@ -1108,7 +1108,7 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'rol_cargo',
-                    'value' => isset($eventUserData['properties']['rol_cargo']) ? $eventUserData['properties']['rol_cargo'] : "",
+                    'value' => isset($eventUserData['properties']['rolenlaempresa']) ? $eventUserData['properties']['rolenlaempresa'] : "",
                 ),
             ),
         );        
