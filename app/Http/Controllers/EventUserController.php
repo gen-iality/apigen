@@ -1072,7 +1072,7 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'city',
-                    'value' => $eventUserData['properties']['ciudad'],
+                    'value' => isset($eventUserData['properties']['ciudad']) ? $eventUserData['properties']['ciudad'] :  "",
                 ),
                 array(
                     'property' => 'mobilephone',
@@ -1084,11 +1084,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'objeto_negocio',
-                    'value' => $eventUserData['properties']['ofreceproductosserviciosoambos'],
+                    'value' => isset($eventUserData['properties']['ofreceproductosserviciosoambos'])?$eventUserData['properties']['ofreceproductosserviciosoambos'] : "",
                 ),
                 array(
                     'property' => 'tipo_objeto_negocio',
-                    'value' => $eventUserData['properties']['selecciondetipodeobjeto'],
+                    'value' => isset($eventUserData['properties']['selecciondetipodeobjeto'])?$eventUserData['properties']['selecciondetipodeobjeto']: "",
                 ),
                 array(
                     'property' => 'company',
