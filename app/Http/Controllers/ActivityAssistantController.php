@@ -203,9 +203,9 @@ class ActivityAssistantController extends Controller
             'user_id' => $data["user_id"],
             'activity_id' => $data["activity_id"]
         ];
-        
+
         //reduceAvailability   
-        $activityAssistant = ActivityAssistant::updateOrCreate($data);
+        $activityAssistant = ActivityAssistant::updateOrCreate($query,$data);
         $activityAssistant->save();
 
 
