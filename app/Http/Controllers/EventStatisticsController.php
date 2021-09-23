@@ -120,7 +120,7 @@ class EventStatisticsController extends Controller
         foreach($totals as $total) {
             $event_totals = (iterator_to_array($total));
             $event_totals['name'] = $events[$event_totals['_id']]->name;
-            $output[$event_totals['_id']] = $event_totals;
+            $output[] = $event_totals;
         }    
         //$array = json_decode(json_encode($totals->toArray()), true);
 
