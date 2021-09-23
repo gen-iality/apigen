@@ -52,9 +52,10 @@ class TemplatePropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showTemplateEvent($template_id)
     {
-        //
+        $template_id = TemplateProperties::findOrFail($template_id->id);
+        return $template_id;
     }
 
     /**
@@ -75,9 +76,15 @@ class TemplatePropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$template_id)
     {
-        //
+        $data = $request->json()->all;
+        $template = TemplateProperties::findOrFail($template_id);
+        $template->fill($data);
+               
+        $template->save();
+
+        return $template;
     }
 
     /**

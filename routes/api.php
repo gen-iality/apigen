@@ -614,5 +614,7 @@ Route::group(
         Route::get('templateproperties', 'TemplatePropertiesController@index'); 
         Route::post('templateproperties', 'TemplatePropertiesController@store'); 
         Route::put('events/{event}/templateproperties/{templateproperties}', 'TemplatePropertiesController@addTemplateEvent');
+        Route::put('templateproperties/{templateproperties}', 'TemplatePropertiesController@update');
+        Route::get('events/{event}/templateproperties/{templateproperties}', 'TemplatePropertiesController@showTemplateEvent');
     }
 );
