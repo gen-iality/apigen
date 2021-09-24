@@ -1,5 +1,10 @@
 @component('mail::message')
-
+<div>
+@if(isset($image_banner) && !empty($image_banner))
+<!-- ![Logo]({{!empty($image_banner)}}) -->
+<img alt="{{$event->name}}" src={{$image_banner}} /> 
+@endif
+</div>
 {{-- <div style="text-align: center">
 	<span>
 		{{ $title }} 
@@ -64,9 +69,9 @@ Confirmar Cuenta
 		registrado en el portal de Evius.co
 	</span>
 </div>
-@slot('footer')
-@component('mail::footer')
-© 2001-2020. All Rights Reserved - Evius.co
-@endcomponent
-@endslot
+@if(isset($image_footer) && !empty($image_footer))
+<!-- ![Logo]({{!empty($image_footer)}}) -->
+<img alt="{{$event->name}}" src={{$image_footer}} /> 
+@endif
+</div>
 @endcomponent
