@@ -1,7 +1,6 @@
 @component('mail::message')
 <div>
 @if(isset($image_banner) && !empty($image_banner))
-<!-- ![Logo]({{!empty($image_banner)}}) -->
 <img alt="{{$event->name}}" src={{$image_banner}} /> 
 @endif
 </div>
@@ -70,7 +69,6 @@ Confirmar Cuenta
 	</span>
 </div>
 @if(isset($image_footer) && !empty($image_footer))
-<!-- ![Logo]({{!empty($image_footer)}}) -->
 <img alt="{{$event->name}}" src={{$image_footer}} /> 
 @endif
 </div>
