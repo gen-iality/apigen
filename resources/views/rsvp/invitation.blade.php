@@ -10,9 +10,10 @@
 @endif
 <br />
 <br />
+<div class="centered"  style="font-size: 18px;color">
 ** {{ __ ('Mail.greeting')}} {{$eventUser_name}}**, {{ __ ('Mail.successful_enrollment')}}:
 <b>{{$event->name}}</b>
-
+</div>
 {{-- Mensaje configurable desde el CMS en la sección configuración asistentes --}}
 @if($event->registration_message )
 

@@ -35,6 +35,8 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public $request_type;
     public $status;
     public $linkUnsubscribe;
+    public $image_footer;
+    public $image_banner;
     /**
      * Create a new message instance.
      *
@@ -42,10 +44,15 @@ class UserToUserRequest extends Mailable implements ShouldQueue
      */
     public function __construct($event_id, $innerpath, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user,$status=null)
     {
-        //$response es el request_id
-        Log::debug("recibiendo event_user");
+        //$response es el request_id        
         $request_type = ($request_type) ? $request_type : "friendship";
         $event = Event::find($event_id);
+
+
+        //Obteniendo imágenes del banner y el footer del correo
+        $image_banner = isset($event->styles['banner_image_email']) ? $event->styles['banner_image_email'] : $event->styles['banner_image'];
+        $image_footer = isset($event->styles['banner_footer_email']) ? $event->styles['banner_footer_email'] : $event->styles['banner_footer'];
+        
         
         $event_address = isset($event["location"]["FormattedAddress"]) ? ($event["location"]["FormattedAddress"]) : " ";
         $event_city = isset($event["location"]["City"]) ? ($event["location"]["City"]) : " ";
@@ -102,6 +109,8 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $this->status = $status;
         $this->linkUnsubscribe = $linkUnsubscribe;
         $this->subject = $subject;
+        $this->image_banner = $image_banner;
+        $this->image_footer = $image_footer;
         $gfService = new GoogleFiles();
 
         Log::debug("pasando a crear correo");
