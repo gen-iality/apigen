@@ -10,7 +10,7 @@ class Organization extends Organiser
 {
     //
     protected $fillable = [ 'name', 'country', 'city', 'picture','location', 'banner_image_email', 'footer_image_email',
-     'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties','properties'];
+     'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties','properties','styles'];
 
     protected $hidden = ['account_ids'];
 

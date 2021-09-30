@@ -52,10 +52,10 @@ class TemplatePropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showTemplateEvent($template_id)
+    public function show($template_id)
     {
-        $template_id = TemplateProperties::findOrFail($template_id->id);
-        return $template_id;
+        $template_id = TemplateProperties::findOrFail($template_id);
+       
     }
 
     /**
