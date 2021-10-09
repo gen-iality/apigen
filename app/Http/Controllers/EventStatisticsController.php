@@ -124,6 +124,7 @@ class EventStatisticsController extends Controller
             $event_totals = (iterator_to_array($total));
             $output[$event_totals['_id']] = array_merge($output[$event_totals['_id']],$event_totals );
         }    
+        $output = array_values($output);
         //$array = json_decode(json_encode($totals->toArray()), true);
 
         return JsonResource::collection(['data'=>$output]);
