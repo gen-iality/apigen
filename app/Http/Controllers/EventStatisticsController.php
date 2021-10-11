@@ -116,12 +116,15 @@ class EventStatisticsController extends Controller
 
         $output = [];
 
+        foreach ($events as $event){
+            $output[$event->_id] = $event->toArray();
+        }
         //Agregamos el nombre a cada evento
         foreach($totals as $total) {
             $event_totals = (iterator_to_array($total));
-            $event_totals['name'] = $events[$event_totals['_id']]->name;
-            $output[] = $event_totals;
+            $output[$event_totals['_id']] = array_merge($output[$event_totals['_id']],$event_totals );
         }    
+        $output = array_values($output);
         //$array = json_decode(json_encode($totals->toArray()), true);
 
         return JsonResource::collection(['data'=>$output]);
