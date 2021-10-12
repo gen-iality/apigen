@@ -50,9 +50,9 @@ class OrganizationUserPropertiesController extends Controller
     public function store(Request $request, $organization_id)
     {        
         $data = $request->json()->all();
-        $event = Organization::find($organization_id)->user_properties();
+        $organization = Organization::find($organization_id)->user_properties();
         $model = new UserProperties($data);
-        $event->save($model);
+        $organization->save($model);
         return $model; 
     }
 
