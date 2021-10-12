@@ -137,6 +137,29 @@ class EventController extends Controller
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
+
+        /**
+     * _afterToday_: list of upcoming events
+     *
+     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     */
+    public function afterToday(Request $request, FilterQuery $filterQuery)
+    {
+        $currentDate = new \Carbon\Carbon();
+        //$currentDate = $currentDate->subWeek(2);
+
+        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+            ->whereNotNull('visibility') //not null
+            ->Where('datetime_to', '>', $currentDate)
+            ->orderBy('datetime_from', 'ASC');
+
+        $input = $request->all();
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return EventResource::collection($results);
+
+    }
+    
     /**
      * _currentUserindex_: list of events of the organizer
      *

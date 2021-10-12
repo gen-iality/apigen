@@ -278,6 +278,7 @@ Route::group(
 );
 
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
+Route::get('eventsaftertoday', 'EventController@afterToday');
 Route::get('users/{id}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
 Route::get('organizations/{id}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
