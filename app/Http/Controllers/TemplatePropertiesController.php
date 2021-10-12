@@ -24,7 +24,7 @@ class TemplatePropertiesController extends Controller
      */
     public function index($organization)
     {
-     $query = TemplateProperties::paginate(config("app.page_size"));
+     $query = Organization::findOrFail($organization)->template_properties()->get(); 
      return JsonResource::collection($query);
         //
     }
