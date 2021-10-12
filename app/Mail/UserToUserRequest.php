@@ -147,7 +147,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public function build()
     {   
 
-        Log::debug("Construyendo el correo de ticket");
+        
         $gfService = new GoogleFiles();
         $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
@@ -172,6 +172,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         //     'mime' => 'image/png',
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
+            ->from("alerts@evius.co", $from)
             ->subject($subject)
             ->markdown('usertouser_request');
 
