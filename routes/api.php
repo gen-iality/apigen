@@ -620,3 +620,16 @@ Route::get('comments/organizations/{organization}' , 'CommentController@indexByO
 
 // ------------------------------------------------------TEST
 Route::put('codestest', 'DiscountCodeController@codesTest');
+
+/****************
+ * TemplateProperties
+ ****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::get('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@index'); 
+        Route::post('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@store'); 
+        Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@addTemplateEvent');
+        Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@update');
+        Route::put('events/{event}/templateproperties/{templatepropertie}/addtemplateporperties', 'TemplatePropertiesController@addTemplateEvent');
+    }
+);

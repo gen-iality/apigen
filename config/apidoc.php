@@ -150,7 +150,9 @@ return [
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
                         '*/organizations*/',
-                        
+                    //TemplateProperties
+                        '*/templateproperties/*',
+                        '*/templateproperties',
                     //Surveys
                         '*/surveys',
                         '*/surveys/*',

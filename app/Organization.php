@@ -51,4 +51,9 @@ class Organization extends Organiser
     {
         return $this->embedsMany('App\UserProperties');
     }
+
+    public function template_properties()
+    {
+        return $this->embedsMany('App\TemplateProperties');
+    }
 }
