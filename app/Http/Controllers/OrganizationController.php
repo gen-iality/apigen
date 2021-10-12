@@ -127,6 +127,14 @@ class OrganizationController extends Controller
         if (isset($data['category_ids'])) {
             $organization->categories()->sync($data['category_ids']);
         }
+
+        //Convertir el id de string a ObjectId al hacer cambio con drag and drop
+        if (isset($data["user_properties"])) {
+            foreach ($data['user_properties'] as $key => $value) {
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();
+            }
+        }
+        
         return new OrganizationResource($organization);
     }
 
