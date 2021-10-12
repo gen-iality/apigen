@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\TemplateProperties;
 use App\Organization;
+use App\Event;
 use App\UserProperties;
 use App\TamplateProeprties;
-
+/**
+ * @group Template Properties Organization
+ */
 class TemplatePropertiesController extends Controller
 {
     /**
@@ -42,16 +45,25 @@ class TemplatePropertiesController extends Controller
      * @authenticated
      * @urlParam organization required organization_id
      * 
+     * @bodyParam name strign required name temlate. Example: Template 1
+     * @bodyParam user_properties array, if you want to make this structure, see User Properties and User Properties Organization    
      * 
      */
     public function store(Request $request, $organization_id)
-    {
-        $data = $request->json()->all();
+    {   
+        
+        $dataUserProperties = $request->only('template_properties');
 
-        $organization = Organization::find($organization_id)->template_properties();
-        $template = new TemplateProperties($data);
-        $organization->save($template);
+        $organization = Organization::findOrFail($organization_id);
+        
+        for ($i = 0; $i < count($dataUserProperties['template_properties']); $i++) {
 
+            $model = new TemplateProperties($dataUserProperties['template_properties'][$i]);
+            
+            $organization->template_properties()->save($model);
+        }
+        
+        
         return new JsonResource($organization);        
     }
 
@@ -79,11 +91,12 @@ class TemplatePropertiesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * _update_: update the specified template propertie.
+     * 
+     * @authenticated
+     * @urlParam organization required organization_id
+     * @urlParam templatepropertie required template id     
+     * 
      */
     public function update(Request $request,$template_id)
     {
@@ -108,12 +121,20 @@ class TemplatePropertiesController extends Controller
     }
     
     /**
-     * Este Metodo va permitir agregar un Template a un Evento
+     * _addtemplateevent_: this metho allow add template to an event.
+     * 
+     * @authenticated
+     * @urlParam event required event_id
+     * @urlParan templatepropertie required template_id
      */
-    public function addTemplateEvent($event_id,$template_id)
-    {
-        $template=TemplateProperties::find($template_id);
-        $event=Event::find($event_id);
+    public function addtemplateevent(Request $request, $event_id,$template_id)
+    {   
+        $data = $request->json()->all();
+
+        $event=Event::findOrFail($event_id);
+
+        $template= Organization::findOrFail($event->organizer_id)->template_properties()->find($template_id);  
+
         foreach ($template->user_properties as $propertie)
         {                                            
             $model = new UserProperties($propertie);
