@@ -149,6 +149,8 @@ return [
                         '*/validateFreeorder',
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
+                        '*/organizations*/',
+                        
                     //Surveys
                         '*/surveys',
                         '*/surveys/*',

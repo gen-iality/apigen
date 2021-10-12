@@ -46,4 +46,9 @@ class Organization extends Organiser
     {
         return $this->belongsToMany('App\Account');
     } 
+
+    public function user_properties()
+    {
+        return $this->embedsMany('App\UserProperties');
+    }
 }

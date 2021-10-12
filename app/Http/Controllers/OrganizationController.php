@@ -16,6 +16,7 @@ use Mail;
 use Validator;
 use App\DiscountCodeMarinela;
 use App\DiscountCodeTemplate;
+use App\evaLib\Services\OrganizationServices;
 
 /**
  * @group Organization
@@ -60,20 +61,7 @@ class OrganizationController extends Controller
     public function store(Request $request, EvaRol $RolService)
     {
         $data = $request->json()->all();
-
-        /* Se le agregan campos obligatorios a la organizaci�n*/
-
-            if(isset($data['properties'])){ 
-                $data['properties'] += [
-                    ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
-                    ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
-                ];
-            }else{
-                $data['properties'] = [
-                    ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
-                    ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
-                ];
-            } 
+        $dataUserProperties = $request->only('user_properties');        
 
         $model = new Organization($data);
         // return response($model);
@@ -82,15 +70,26 @@ class OrganizationController extends Controller
         $user = Auth::user();
 
         $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
-        
         $model->save();
+
+        
+        if (isset($dataUserProperties)) {
+            $organization = Organization::find($model->_id);
+            for ($i = 0; $i < count($dataUserProperties['user_properties']); $i++) {
+
+                $model = new UserProperties($dataUserProperties['user_properties'][$i]);
+                $organization->user_properties()->save($model);
+            }
+        }
+        OrganizationServices::createDefaultUserProperties($model->_id);
+
         
         if (isset($data['category_ids'])) {
             $model->categories()->sync($data['category_ids']);
         }
         
         
-        return new OrganizationResource($model);
+        return $model;
     }
 
 
