@@ -31,7 +31,7 @@ DELETE         /photos/{photo}            destroy    photos.destroy
 
 Route::post('googleanalytics', 'GoogleAnalyticsController');
 
-Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
+Route::get('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
 Route::get('aws/sendemail', 'AwsSnsController@testEmail');
 Route::get('aws/test', 'AwsSnsController@testreqS3');
 
@@ -134,7 +134,7 @@ Route::get    ('events/{event_id}/totalmetricsbyactivity',                'Activ
 
 
 /***************
- * USER PROPERTIES
+ * USER PROPERTIES EVENTS
  ****************/
 Route::get('events/{event_id}/userproperties', 'UserPropertiesController@index');
 Route::post('events/{event_id}/userproperties', 'UserPropertiesController@store');
@@ -142,6 +142,15 @@ Route::get('events/{event_id}/userproperties/{id}', 'UserPropertiesController@sh
 Route::put('events/{event_id}/userproperties/{id}', 'UserPropertiesController@update');
 Route::put('events/{event_id}/userproperties/{id}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
 Route::delete('events/{event_id}/userproperties/{id}', 'UserPropertiesController@destroy');
+
+/***************
+ * USER PROPERTIES ORGANIZATION
+ ****************/
+Route::get('organizations/{organization}/userproperties', 'OrganizationUserPropertiesController@index');
+Route::post('organizations/{organization}/userproperties', 'OrganizationUserPropertiesController@store');
+Route::get('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@show');
+Route::put('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@update');
+Route::delete('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@destroy');
 
 /****************
  * organizations

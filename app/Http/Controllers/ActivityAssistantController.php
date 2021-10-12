@@ -37,23 +37,24 @@ class ActivityAssistantController extends Controller
      * @param [type] $activity_id
      * @return void
      */
-    public function borradorepetidos(Request $request, $activity_id ){
+    public function borradorepetidos(Request $request, $activity_id)
+    {
 
-        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->get();  
+        $ActivityUsers = ActivityAssistant::where('activity_id', "=", $activity_id)->get();
         // var_dump($ActivityUsers);die;
 
-        $ids=[];
+        $ids = [];
         var_dump(count($ActivityUsers));
-        foreach ($ActivityUsers as $key => $activitiUser) {            
-            $ids[$activitiUser->user_id] = $activitiUser->_id; 
+        foreach ($ActivityUsers as $key => $activitiUser) {
+            $ids[$activitiUser->user_id] = $activitiUser->_id;
         }
-        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->whereNotIn('_id', $ids)->get();
-        var_dump(count($ActivityUsers));  
+        $ActivityUsers = ActivityAssistant::where('activity_id', "=", $activity_id)->whereNotIn('_id', $ids)->get();
+        var_dump(count($ActivityUsers));
 
-        $ActivityUsers = ActivityAssistant::where('activity_id',"=",$activity_id)->whereNotIn('_id', $ids)->delete();  
+        $ActivityUsers = ActivityAssistant::where('activity_id', "=", $activity_id)->whereNotIn('_id', $ids)->delete();
 
         // var_dump(count($ActivityUsers));die;
-        
+
     }
 
 
@@ -65,18 +66,17 @@ class ActivityAssistantController extends Controller
      */
     public function fillassitantsbug($id)
     {
-       // $ActivityAssistant = ActivityAssistant::all();
-       //Esta activityassistant se perdio 5dbc99bad74d5c5822693842
-       $ActivityAssistant = ActivityAssistant::find($id);
-       if ($ActivityAssistant)
-       $ActivityAssistant->save();
+        // $ActivityAssistant = ActivityAssistant::all();
+        //Esta activityassistant se perdio 5dbc99bad74d5c5822693842
+        $ActivityAssistant = ActivityAssistant::find($id);
+        if ($ActivityAssistant)
+            $ActivityAssistant->save();
 
         var_dump($ActivityAssistant->user_ids);
         $response = new JsonResource($ActivityAssistant);
         var_dump($response);
         die;
-
-    }    
+    }
 
 
 
@@ -95,13 +95,13 @@ class ActivityAssistantController extends Controller
         $query = ActivityAssistant::where("event_id", $event_id);
 
         //Filtro por actividad
-        if ($activity_id){
-            $query->where("activity_id",$activity_id);       
+        if ($activity_id) {
+            $query->where("activity_id", $activity_id);
         }
 
         //Filtro por usuario
-        if ($user_id){
-            $query->where("user_id",$user_id);       
+        if ($user_id) {
+            $query->where("user_id", $user_id);
         }
 
         return JsonResource::collection($query->paginate(config('app.page_size')));
@@ -123,27 +123,27 @@ class ActivityAssistantController extends Controller
         $query = ActivityAssistant::where("event_id", $event_id);
 
         //Filtro por actividad
-        if ($activity_id){
-            $query->where("activity_id",$activity_id);       
+        if ($activity_id) {
+            $query->where("activity_id", $activity_id);
         }
 
         //Filtro por usuario
-        if ($user_id){
-            $query->where("user_id",$user_id);       
+        if ($user_id) {
+            $query->where("user_id", $user_id);
         }
 
-        
+
         //$usuarios_ids = $query->pluck('user_id')->toArray();
         $activity_attendees = $query->get();
         $usuarios_ids = $activity_attendees->pluck('user_id')->toArray();
-        
+
         //extraemos los attendees relacionados
         //->whereIn('account_id',$usuarios_ids)-
         $event_attendees = Attendee::where("event_id", $event_id)->get()->keyBy("account_id");
         $total = 0;
-        foreach($activity_attendees as $key=>$attendee){
-            if (isset($event_attendees[$attendee['user_id']])){
-            $activity_attendees[$key]["attendee"] = $event_attendees[$attendee['user_id']];
+        foreach ($activity_attendees as $key => $attendee) {
+            if (isset($event_attendees[$attendee['user_id']])) {
+                $activity_attendees[$key]["attendee"] = $event_attendees[$attendee['user_id']];
             }
         }
         return JsonResource::collection($activity_attendees);
@@ -160,8 +160,8 @@ class ActivityAssistantController extends Controller
      * @return void
      */
     public function meIndex($event_id)
-    {   
-        $user = auth()->user();      
+    {
+        $user = auth()->user();
         return JsonResource::collection(ActivityAssistant::where("user_id", $user->_id)->paginate(config('app.page_size')));
     }
     /**
@@ -198,22 +198,27 @@ class ActivityAssistantController extends Controller
         if (!$validator->passes()) {
             return response()->json(['errors' => $validator->errors()->all()], 400);
         }
-        
-        //reduceAvailability   
-        $activityAssistant = new ActivityAssistant($data);   
-        $activityAssistant->save();
-       
-        
-        $user     = Account::find($data["user_id"]);
-        $activity = Activities::find($data["activity_id"]);
-        
 
-        $subject = "Confirmación de registro a ".$activity->name;
-        Mail::to($user->email)
-        ->queue(
-            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-            new \App\Mail\ActivityRegistration($subject,$activityAssistant,$activity)
-        );
+        $query = [
+            'user_id' => $data["user_id"],
+            'activity_id' => $data["activity_id"]
+        ];
+
+        //reduceAvailability   
+        $activityAssistant = ActivityAssistant::updateOrCreate($query,$data);
+        $activityAssistant->save();
+
+
+        // $user     = Account::find($data["user_id"]);
+        // $activity = Activities::find($data["activity_id"]);
+
+
+        // $subject = "Confirmación de registro a ".$activity->name;
+        // Mail::to($user->email)
+        // ->queue(
+        //     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+        //     new \App\Mail\ActivityRegistration($subject,$activityAssistant,$activity)
+        // );
 
 
 
@@ -225,38 +230,39 @@ class ActivityAssistantController extends Controller
      *
      * @return void
      */
-    private function  reduceAvailability(){
+    private function  reduceAvailability()
+    {
         $activity_id      = $data["activity_id"];
-        $model = ActivityAssistant::where("activity_id",$activity_id)->first();
-       
-        if(!is_null($model)){
-            
+        $model = ActivityAssistant::where("activity_id", $activity_id)->first();
+
+        if (!is_null($model)) {
+
             $user_ids = $model->user_ids;
-            $activity = Activities::find($activity_id);        
-            $capacity = $activity->capacity; 
-            
-            if(sizeof($user_ids) < $capacity){ 
-                
-                if(ActivityAssistant::where("user_ids",$data["user_id"])->first()){
+            $activity = Activities::find($activity_id);
+            $capacity = $activity->capacity;
+
+            if (sizeof($user_ids) < $capacity) {
+
+                if (ActivityAssistant::where("user_ids", $data["user_id"])->first()) {
                     return "Usuario ya se encuentra inscrito a la actividad";
                 }
 
                 $new_user = [$data["user_id"]];
-                $users_merge["user_ids"] = array_merge($new_user,$user_ids);
+                $users_merge["user_ids"] = array_merge($new_user, $user_ids);
                 $model->fill($users_merge);
                 $model->save();
 
                 $activity->remaining_capacity = $capacity - sizeof($users_merge["user_ids"]);
                 $activity->save(); //guarda el resultado            
                 return $model;
-            }else{
+            } else {
                 return "Capacidad completada, le invitamos a visitar otras actividades";
             }
         }
     }
-    
 
-    public function deleteAssistant(Request $request, $event_id,$activity_id)
+
+    public function deleteAssistant(Request $request, $event_id, $activity_id)
     {
         $data = $request->json()->all();
         //$activitysize = $data["acitivity_id"];
@@ -267,16 +273,16 @@ class ActivityAssistantController extends Controller
         $useremail = $data["user_email"];
 
         $activityname = str_replace(" ", "%20", $activityname);
-        $data["url"] = "https://docs.google.com/forms/d/e/1FAIpQLSeKIA54wmkCOL38EZ8rUpEJWN86xqqQuHDDsYfW1_WoHwWtLg/viewform?usp=pp_url&entry.230442346=".$activityname;
+        $data["url"] = "https://docs.google.com/forms/d/e/1FAIpQLSeKIA54wmkCOL38EZ8rUpEJWN86xqqQuHDDsYfW1_WoHwWtLg/viewform?usp=pp_url&entry.230442346=" . $activityname;
         echo $data["url"];
         $data["activity_name"] = $activityname;
-        Mail::send("Public.ViewEvent.Partials.SuggestedSchedule",$data , function ($message) use ($useremail,$activityname){    
-            $message->to($useremail,"Asistente")
-            ->subject("Encuesta de satisfacción MEC 2019","");
+        Mail::send("Public.ViewEvent.Partials.SuggestedSchedule", $data, function ($message) use ($useremail, $activityname) {
+            $message->to($useremail, "Asistente")
+                ->subject("Encuesta de satisfacción MEC 2019", "");
         });
-        
-       // 
-       /* 
+
+        // 
+        /* 
         //$users = Attendee::find();
         $data = $request->json()->all();
         
@@ -302,9 +308,9 @@ class ActivityAssistantController extends Controller
                         ->subject("Aforo completado, te invitamos a estas actividades","");
                     }); */
 
-                    //unset($arrayusers[$x]);
-            //$x++;
-        
+        //unset($arrayusers[$x]);
+        //$x++;
+
 
         /*
         $modelreplace->user_ids = $arrayusers;
@@ -336,10 +342,10 @@ class ActivityAssistantController extends Controller
         }
         $modelreplace->user_ids = $arrayUsers;
         $modelreplace->push();*/
-         /*
+        /*
             * calcular cupos restantes
             */
-         /*
+        /*
             $actualUsers = $modelreplace["user_ids"]; //extrae los usuarios
             $actualUsers = sizeof($actualUsers); //mide el array de usuarios 
             $totalCapacity = Activities::find($activity_id)->capacity; // capacidad actual de la actividad 
@@ -360,13 +366,12 @@ class ActivityAssistantController extends Controller
      * @param  \App\Inscription  $Inscription
      * @return \Illuminate\Http\Response
      */
-    public function show($event_id,$id)
+    public function show($event_id, $id)
     {
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
         $response = new JsonResource($ActivityAssistant);
         //if ($Inscription["event_id"] = $event_id) {
         return $response;
-
     }
     /**
      * _update_:Update the specific information of an activity_assitant record
@@ -379,29 +384,28 @@ class ActivityAssistantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $id)
-    {   
-        
+    {
+
         $data = $request->json()->all();
         //Esto esta aca por un error en las rutas, la ruta del checkin del front dirige es aqui toca cambiarlo emergencia
-        if (isset( $data["user_id"])  && isset($data["activity_id"])  && isset($data["checkedin_at"])){
-            $activityAssistant =null;
-            $activityAssistant = ActivityAssistant::where("activity_id",$data["activity_id"])
-            ->where("user_id",$data["user_id"])->first();
-            if (!$activityAssistant){
-                $activityAssistant = new ActivityAssistant($data);  
-            }else{
+        if (isset($data["user_id"])  && isset($data["activity_id"])  && isset($data["checkedin_at"])) {
+            $activityAssistant = null;
+            $activityAssistant = ActivityAssistant::where("activity_id", $data["activity_id"])
+                ->where("user_id", $data["user_id"])->first();
+            if (!$activityAssistant) {
+                $activityAssistant = new ActivityAssistant($data);
+            } else {
                 $activityAssistant->fill($data);
                 $activityAssistant->save();
             }
             return $activityAssistant;
-        }else{
-        $ActivityAssistant = ActivityAssistant::findOrFail($id);
-        //if($Inscription["event_id"]= $event_id){
-        $ActivityAssistant->fill($data);
-        $ActivityAssistant->save();
-        return $data;
-        }
+        } else {
+            $ActivityAssistant = ActivityAssistant::findOrFail($id);
 
+            $ActivityAssistant->fill($data);
+            $ActivityAssistant->save();
+            return $data;
+        }
     }
 
     /**
@@ -430,39 +434,38 @@ class ActivityAssistantController extends Controller
      * @param string $id
      * @return void
      */
-    public function checkIn(Request $request , $event_id, $id)
+    public function checkIn(Request $request, $event_id, $id)
     {
-        
+
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
         $date = new \DateTime();
 
         /*Se realiza validación para que la fecha y hora del checkIn sea siempre el primero 
         y no se actualice en caso de que el usuario vuelva a ingresar a la actividad*/
-        if(!isset($ActivityAssistant->checkedin_at))
-        {
-            $ActivityAssistant->fill(['checkedin_at' => $date]); 
-            
-        }       
-        $ActivityAssistant->printouts  =$ActivityAssistant->printouts + 1 ; 
+        if (!isset($ActivityAssistant->checkedin_at)) {
+            $ActivityAssistant->fill(['checkedin_at' => $date]);
+        }
+        $ActivityAssistant->printouts  = $ActivityAssistant->printouts + 1;
         $ActivityAssistant->save();
         return $ActivityAssistant;
     }
 
-    
 
-    public function checkInWithSearch(Request $request , $event_id)
+
+    public function checkInWithSearch(Request $request, $event_id)
     {
         $data = $request->json()->all();
-        var_dump($data);die;
+        var_dump($data);
+        die;
         $ActivityAssistant = ActivityAssistant::findOrFail($id);
         $date = new \DateTime();
-        $ActivityAssistant->fill(['checkedin_at' => $date]); 
+        $ActivityAssistant->fill(['checkedin_at' => $date]);
         $ActivityAssistant->save();
 
         return $ActivityAssistant;
     }
 
-     /**
+    /**
      * _totalMetricsByActivity_
      * @autenticathed
      * 
@@ -472,19 +475,17 @@ class ActivityAssistantController extends Controller
     public function totalMetricsByActivity($event_id)
     {
 
-        $activities = Activities::where('event_id' ,$event_id)->get();
+        $activities = Activities::where('event_id', $event_id)->get();
 
         $activityMetrics = [];
-       
-        foreach($activities as $activity)
-        {   
-           
-            $checkIn = ActivityAssistant::where('activity_id' ,$activity->_id)->where('checked_in', '!=', false)->count();
-            
-            $printouts = ActivityAssistant::where('activity_id' ,$activity->_id)->where('printouts', '>', 0)->pluck('printouts');
+
+        foreach ($activities as $activity) {
+
+            $checkIn = ActivityAssistant::where('activity_id', $activity->_id)->where('checked_in', '!=', false)->count();
+
+            $printouts = ActivityAssistant::where('activity_id', $activity->_id)->where('printouts', '>', 0)->pluck('printouts');
             $totalPrintouts = 0;
-            foreach($printouts as $printout)
-            {
+            foreach ($printouts as $printout) {
                 $totalPrintouts = $totalPrintouts +  $printout;
             }
 
@@ -495,14 +496,9 @@ class ActivityAssistantController extends Controller
                 'total_printouts' => $totalPrintouts
             ]);
 
-            array_push($activityMetrics , $activityAssistant->original );
+            array_push($activityMetrics, $activityAssistant->original);
         }
-        
+
         return $activityMetrics;
-
-    } 
-
-
-   
-
+    }
 }

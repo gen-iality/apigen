@@ -26,6 +26,10 @@ class Certificate extends Moloquent
     }
 
     protected $fillable = [
-        'name' , 'content', 'background', 'event_id'
+        'name' , 
+        'content', 
+        'background', 
+        'event_id',
+        'rol'
     ];
 }

@@ -44,6 +44,8 @@ class TokenToUserProvider implements UserProvider
                 $verifiedIdToken = $this->auth->verifyIdToken($token);
 
                 $user = $this->findUserByUID($verifiedIdToken);
+                if (!$user)
+                throw new AuthenticationException("Issues with this user please contact admin");
 
                 Log::debug("finish auth: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . " ");
 

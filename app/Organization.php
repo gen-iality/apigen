@@ -9,8 +9,25 @@ use App\Models\Organiser;
 class Organization extends Organiser
 {
     //
-    protected $fillable = [ 'name', 'country', 'city', 'picture','location', 'banner_image_email', 'footer_image_email',
-     'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties','properties'];
+    protected $fillable = [ 
+        'name', 
+        'country', 
+        'city', 
+        'picture',
+        'location', 
+        'banner_image_email', 
+        'footer_image_email',
+        'nit', 
+        'phone', 
+        'doc', 
+        'description', 
+        'author',
+        'email',
+        'network',
+        'user_properties',
+        'properties',
+        'styles'
+    ];
 
     protected $hidden = ['account_ids'];
 
@@ -29,4 +46,9 @@ class Organization extends Organiser
     {
         return $this->belongsToMany('App\Account');
     } 
+
+    public function user_properties()
+    {
+        return $this->embedsMany('App\UserProperties');
+    }
 }
