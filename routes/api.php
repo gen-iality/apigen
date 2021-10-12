@@ -625,10 +625,9 @@ Route::put('codestest', 'DiscountCodeController@codesTest');
  ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::get('templateproperties', 'TemplatePropertiesController@index'); 
-        Route::post('templateproperties', 'TemplatePropertiesController@store'); 
-        Route::put('events/{event}/templateproperties/{templateproperties}', 'TemplatePropertiesController@addTemplateEvent');
-        Route::put('templateproperties/{templateproperties}', 'TemplatePropertiesController@update');
-        Route::get('events/{event}/templateproperties/{templateproperties}', 'TemplatePropertiesController@showTemplateEvent');
+        Route::get('organization/{organizaton}/templateproperties', 'TemplatePropertiesController@index'); 
+        Route::post('organization/{organizaton}/templateproperties', 'TemplatePropertiesController@store'); 
+        Route::put('organization/{organizaton}//templateproperties/{templatepropertie}', 'TemplatePropertiesController@addTemplateEvent');
+        Route::put('organization/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@update');
     }
 );

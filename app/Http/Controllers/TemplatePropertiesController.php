@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\TemplateProperties;
-use App\Event;
+use App\Organization;
 use App\UserProperties;
+use App\TamplateProeprties;
 
 class TemplatePropertiesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * _index_:list all templates by organization
      *
-     * @return \Illuminate\Http\Response
+     * @authenticated
+     * 
+     * @urlParam organization required organization_id
+     * 
      */
-    public function index()
+    public function index($organization)
     {
      $query = TemplateProperties::paginate(config("app.page_size"));
      return JsonResource::collection($query);
@@ -33,17 +37,22 @@ class TemplatePropertiesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * _store_: create a new template for organization
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @authenticated
+     * @urlParam organization required organization_id
+     * 
+     * 
      */
-    public function store(Request $request)
+    public function store(Request $request, $organization_id)
     {
         $data = $request->json()->all();
-            $template = new TemplateProperties($data);
-            $template->save();
-            return new JsonResource($template);        
+
+        $organization = Organization::find($organization_id)->template_properties();
+        $template = new TemplateProperties($data);
+        $organization->save($template);
+
+        return new JsonResource($organization);        
     }
 
     /**

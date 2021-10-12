@@ -72,12 +72,7 @@ class FilterQuery
 
                         
             if (!is_array($condition->value)) {
-
-                if (strpos($condition->field, 'date') === 0) {                    
-                    $query->where($condition->field, $comparator, \Carbon\Carbon::parse($condition->value));
-                }else{
-                    $query->where($condition->field, $comparator, $condition->value);
-                }
+                $query->where($condition->field, $comparator, $condition->value);                
             } else {
                 $query->whereIn($condition->field, $condition->value);
             }
