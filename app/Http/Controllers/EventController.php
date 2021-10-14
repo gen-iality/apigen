@@ -280,7 +280,7 @@ class EventController extends Controller
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
         
-        $data['styles'] = EventService::AddDefaultStyles($data['styles']);
+        $data['styles'] = EventService::AddDefaultStyles($data['styles'], $event);
         
 
         $Properties = new UserProperties();
@@ -458,7 +458,7 @@ class EventController extends Controller
         }
 
         if (!empty($data['styles'])) {
-            $data['styles'] = self::AddDefaultStyles($data['styles'], $event);
+            $data['styles'] = EventService::AddDefaultStyles($data['styles'], $event);
         }
 
         if (!isset($data['app_configuration']) && !empty($event->app_configuration)) {
