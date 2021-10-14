@@ -35,7 +35,7 @@ class EventService
     /**
      * 
      */
-    private static function AddDefaultStyles($styles , $event)
+    public static function AddDefaultStyles($styles , $event)
     {
         $default_event_styles = config('app.default_event_styles');
 
