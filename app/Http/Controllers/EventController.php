@@ -280,7 +280,6 @@ class EventController extends Controller
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
         
-        $data['styles'] = EventService::AddDefaultStyles($data['styles'], $event);
         
 
         $Properties = new UserProperties();
@@ -296,6 +295,7 @@ class EventController extends Controller
         } catch (Exception $e) {
             echo 'autor no se pudo asociar al evento, contacte el administrador, error: ', $e->getMessage(), "\n";
         }
+
 
         /* Organizer:
         It could be "me"(current user) or a organization Id
@@ -314,7 +314,8 @@ class EventController extends Controller
                 }
             }
         }
-    
+        $data['styles'] = EventService::AddDefaultStyles($data['styles'], $result);
+        
         //Persist the model to database
         $result->save();
         
