@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\evaLib\Services\EvaRol;
+use App\evaLib\Services\EventService;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
@@ -278,9 +279,9 @@ class EventController extends Controller
         $data['organizer_type'] = "App\user";
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
-        if (!empty($data['styles'])) {
-            $data['styles'] = self::AddDefaultStyles($data['styles']);
-        }
+        
+        $data['styles'] = EventService::AddDefaultStyles($data['styles']);
+        
 
         $Properties = new UserProperties();
         $result = new Event($data);
@@ -331,6 +332,8 @@ class EventController extends Controller
             }
         }
         
+        //Add menuItems
+        EventService::addEventMenu($result);
 
         self::addOwnerAsAdminColaborator($user->id, $result->id);
         self::createDefaultUserProperties($result->id);
@@ -364,12 +367,7 @@ class EventController extends Controller
         $model->user_properties()->save($user_properties);
     }
 
-    private static function AddDefaultStyles($styles)
-    {
-        $default_event_styles = config('app.default_event_styles');
-        $stlyes_validation = array_merge($default_event_styles, $styles);
-        return $stlyes_validation;
-    }
+    
     private static function AddAppConfiguration($styles)
     {
         $default_event_styles = config('app.app_configuration');
