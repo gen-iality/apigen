@@ -314,7 +314,8 @@ class EventController extends Controller
                 }
             }
         }
-        $data['styles'] = EventService::AddDefaultStyles($result);
+        $styles = $data['styles'];
+        $data['styles'] = EventService::AddDefaultStyles($styles,$result);
         
         //Persist the model to database
         $result->save();
@@ -459,7 +460,7 @@ class EventController extends Controller
         }
 
         if (!empty($data['styles'])) {
-            $data['styles'] = EventService::AddDefaultStyles($event);
+            $data['styles'] = EventService::AddDefaultStyles($data['styles'], $event);
         }
 
         if (!isset($data['app_configuration']) && !empty($event->app_configuration)) {

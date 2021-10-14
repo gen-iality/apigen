@@ -35,22 +35,23 @@ class EventService
     /**
      * 
      */
-    public static function AddDefaultStyles($event)
+    public static function AddDefaultStyles($styles, $event)
     {
         $default_event_styles = config('app.default_event_styles');
 
         $organization = Organization::findOrFail($event->organizer_id);
-
-        $stlyes_validation=[];
+        
         if(isset($organization->styles))
         {
             $event->styles = $organization->styles; 
             $event->save();
-             $stlyes_validation = array_merge($default_event_styles, $organization->styles);
+            $stlyes_validation = array_merge($default_event_styles, $organization->styles);
             
         }else{
             $event->styles =  $default_event_styles;
             $event->save();
+            $stlyes_validation = array_merge($default_event_styles,$styles);
+
         }
         return $stlyes_validation;
     }
