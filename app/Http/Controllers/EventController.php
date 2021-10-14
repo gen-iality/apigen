@@ -370,13 +370,7 @@ class EventController extends Controller
     }
 
     
-    private static function AddAppConfiguration($styles)
-    {
-        $default_event_styles = config('app.app_configuration');
-        $stlyes_validation = array_merge($default_event_styles, $styles);
-        return $stlyes_validation;
-    }
-
+    
     public function addOwnerAsAdminColaborator($user_id, $event_id)
     {
         $DataUserRolAdminister = [
@@ -460,7 +454,7 @@ class EventController extends Controller
         }
 
         if (!empty($data['styles'])) {
-            $data['styles'] = EventService::AddDefaultStyles($data['styles'], $event);
+            $data['styles'] = EventService::AddAppConfiguration($data['styles']);
         }
 
         if (!isset($data['app_configuration']) && !empty($event->app_configuration)) {
