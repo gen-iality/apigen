@@ -98,10 +98,10 @@ class TemplatePropertiesController extends Controller
      * @urlParam templatepropertie required template id     
      * 
      */
-    public function update(Request $request,$template_id)
+    public function update(Request $request,$organization_id,$template_id)
     {
-        $data = $request->json()->all;
-        $template = TemplateProperties::findOrFail($template_id);
+        $data = $request->json()->all();
+        $template= Organization::findOrFail($organization_id)->template_properties()->find($template_id);          
         $template->fill($data);
                
         $template->save();
