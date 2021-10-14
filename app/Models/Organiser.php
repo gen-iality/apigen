@@ -22,22 +22,22 @@ class Organiser extends MyBaseModel implements AuthenticatableContract
         'organiser_logo' => ['mimes:jpeg,jpg,png', 'max:10000'],
     ];
 
-    protected $extra_rules = [
-        'tax_name'        => ['required','max:15'],
-        'tax_value'       => ['required','numeric'],
-        'tax_id'          => ['required','max:100'],
-    ];
+    // protected $extra_rules = [
+    //     'tax_name'        => ['required','max:15'],
+    //     'tax_value'       => ['required','numeric'],
+    //     'tax_id'          => ['required','max:100'],
+    // ];
 
     /**
      * The validation rules for the model.
      *
      * @var array $attributes
      */
-    protected $attributes = [
-        'tax_name'        => 'Tax Name',
-        'tax_value'       => 'Tax Rate',
-        'tax_id'          => 'Tax ID',
-    ];
+    // protected $attributes = [
+    //     'tax_name'        => 'Tax Name',
+    //     'tax_value'       => 'Tax Rate',
+    //     'tax_id'          => 'Tax ID',
+    // ];
 
     /**
      * The validation error messages for the model.
