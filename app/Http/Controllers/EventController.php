@@ -458,7 +458,7 @@ class EventController extends Controller
         }
 
         if (!empty($data['styles'])) {
-            $data['styles'] = self::AddDefaultStyles($data['styles']);
+            $data['styles'] = self::AddDefaultStyles($data['styles'], $event);
         }
 
         if (!isset($data['app_configuration']) && !empty($event->app_configuration)) {
