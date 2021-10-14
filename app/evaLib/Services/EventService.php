@@ -55,6 +55,15 @@ class EventService
         }
         return $stlyes_validation;
     }
+
+
+    public static function AddAppConfiguration($styles)
+    {
+        $default_event_styles = config('app.app_configuration');
+        $stlyes_validation = array_merge($default_event_styles, $styles);
+        return $stlyes_validation;
+    }
+
     
 
 }
