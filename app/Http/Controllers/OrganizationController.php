@@ -119,10 +119,8 @@ class OrganizationController extends Controller
         $organization = Organization::findOrFail($organization_id);
         $data = $request->json()->all();
        
-        $organization->fill($data);
 
         
-        $organization->save();
 
         if (isset($data['category_ids'])) {
             $organization->categories()->sync($data['category_ids']);
@@ -131,9 +129,13 @@ class OrganizationController extends Controller
         //Convertir el id de string a ObjectId al hacer cambio con drag and drop
         if (isset($data["user_properties"])) {
             foreach ($data['user_properties'] as $key => $value) {
-                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();            
+
             }
         }
+        
+        $organization->fill($data);
+        $organization->save();
         
         return new OrganizationResource($organization);
     }
