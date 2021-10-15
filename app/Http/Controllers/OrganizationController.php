@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\EvaRol;
 use App\Http\Resources\OrganizationResource;
 use App\Organization;
+use App\UserProperties;
 use App\Event;
 use App\Attendee;
 use App\Order;
@@ -111,20 +112,30 @@ class OrganizationController extends Controller
 
     /**
      * _update_: Update the specified resource in organization.
-     *
-     * @urlParam organization_id required
+     * @authenticated
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Organization  $organization
-     * @return \Illuminate\Http\Response
+     * @urlParam organization_id required
+     * @urlParam update_events_itemsMenu if you want to update the items menu of all events of the organization, send this parameter equal true
+     * @urlParam update_events_user_properties if you want to update the user_properties of all events of the organization, send this parameter equal true
+     * 
+     * 
      */
     public function update(Request $request, $organization_id)
     {
         $organization = Organization::findOrFail($organization_id);
         $data = $request->json()->all();
+        $dataQuery = $request->input();
        
+        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu']))
+        {
+            $events = Event::where('organizer_id' , $organization->_id)->get();
 
-        
+            foreach($events as $event)
+            {
+                $event->itemsMenu = $organization->itemsMenu;
+                $event->save();
+            }
+        }   
 
         if (isset($data['category_ids'])) {
             $organization->categories()->sync($data['category_ids']);
@@ -135,6 +146,20 @@ class OrganizationController extends Controller
             foreach ($data['user_properties'] as $key => $value) {
                 $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();            
 
+            }
+
+            if(isset($dataQuery['update_events_user_properties']))
+            {
+                $events = Event::where('organizer_id' , $organization->_id)->get();
+                foreach($events as $event)
+                {
+                    $event->user_properties()->delete();
+
+                    for ($i = 0; $i < count($data['user_properties']); $i++) {
+                        $model = new UserProperties($data['user_properties'][$i]);
+                        $event->user_properties()->save($model);
+                    }
+                }
             }
         }
         

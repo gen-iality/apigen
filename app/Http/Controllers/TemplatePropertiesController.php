@@ -125,20 +125,32 @@ class TemplatePropertiesController extends Controller
      * @urlParam event required event_id
      * @urlParan templatepropertie required template_id
      */
-    public function addtemplateevent(Request $request, $event_id,$template_id)
+    public function addTemplateEvent(Request $request, $event_id,$template_id)
     {   
         $data = $request->json()->all();
 
         $event=Event::findOrFail($event_id);
 
-        $template= Organization::findOrFail($event->organizer_id)->template_properties()->find($template_id);  
+        $template= Organization::findOrFail($event->organizer_id)->template_properties()->find($template_id);                  
 
+        // return $event->user_properties()->where('template_id', '!=' , null);
+        $proeprties = $event->user_properties()->get();
+        foreach($proeprties as $propertie)
+        {
+            if($propertie->template_id)
+            {
+                $propertie->delete();
+            }
+        }
+        
         foreach ($template->user_properties as $propertie)
-        {                                            
-            $model = new UserProperties($propertie);
-            $event->user_properties()->save($model);
+        {                                           
+            $propertie['template_id'] = $template_id; 
+            $model = new UserProperties($propertie);            
+            $event->user_properties()->save($model);            
         }
 
         return $event->user_properties;
     }
+
 }
