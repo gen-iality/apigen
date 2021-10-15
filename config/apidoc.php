@@ -149,7 +149,7 @@ return [
                         '*/validateFreeorder',
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
-                        '*/organizations*/',
+                        '*/organizations/*',
                     //TemplateProperties
                         '*/templateproperties/*',
                         '*/templateproperties',
