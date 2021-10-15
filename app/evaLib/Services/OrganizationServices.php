@@ -26,4 +26,19 @@ class OrganizationServices
         $model->user_properties()->save($user_properties);        
 
     }
+
+    public static function createDefaultStyles($styles, $organization)
+    {
+
+        $default_event_styles = config('app.default_event_styles');
+        $stlyes_validation = $default_event_styles;
+        if(isset($styles))
+        {   
+
+            $stlyes_validation = array_merge($default_event_styles, $styles);
+        }
+        $organization->styles = $stlyes_validation;
+        $organization->save();
+        return $stlyes_validation;
+    }
 }
