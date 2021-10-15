@@ -630,6 +630,7 @@ Route::group(
         Route::post('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@store'); 
         Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@addTemplateEvent');
         Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@update');
+        Route::delete('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@destroy');
         Route::put('events/{event}/templateproperties/{templatepropertie}/addtemplateporperties', 'TemplatePropertiesController@addTemplateEvent');
     }
 );
