@@ -110,14 +110,12 @@ class TemplatePropertiesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * _destry_: delete a template specific
      */
-    public function destroy($id)
+    public function destroy($organization_id, $template_id)
     {
-        //
+        $template= Organization::findOrFail($organization_id)->template_properties()->find($template_id);                  
+        return (string) $template->delete();                      
     }
     
     /**
