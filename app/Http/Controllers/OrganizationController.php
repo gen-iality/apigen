@@ -69,11 +69,14 @@ class OrganizationController extends Controller
 
         $user = Auth::user();
 
+        $styles = isset($data['styles']) ? $data['styles'] : null ;
         $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
+        $data['styles'] = OrganizationServices::createDefaultStyles($styles,$model);
+
         $model->save();
 
         
-        if (isset($dataUserProperties)) {
+        if (isset($dataUserProperties['user_properties'])) {
             $organization = Organization::find($model->_id);
             for ($i = 0; $i < count($dataUserProperties['user_properties']); $i++) {
 
@@ -82,12 +85,13 @@ class OrganizationController extends Controller
             }
         }
         OrganizationServices::createDefaultUserProperties($model->_id);
+        
+
 
         
         if (isset($data['category_ids'])) {
             $model->categories()->sync($data['category_ids']);
-        }
-        
+        }              
         
         return $model;
     }
