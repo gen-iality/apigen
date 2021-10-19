@@ -8,7 +8,7 @@ use Moloquent;
 class OrganizationUser extends Moloquent
 {
     protected $fillable = [
-        'userid', 'organization_id', 'user_properties', 'properties', 'account_id'
+        'userid', 'organization_id', 'user_properties', 'properties', 'account_id', 'rol_id'
     ];
     protected $with = ['user', 'organization'];
 

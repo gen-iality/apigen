@@ -220,6 +220,8 @@ Route::group(
         Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
     }
 );
+Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@createUserAndAddtoOrganization');
+
  //Route::get('me/eventUsers', 'EventUserController@meEvents');
 /****************
  * Users
