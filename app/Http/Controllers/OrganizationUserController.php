@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Rol;
+use App\Organization;
 use App\Http\Resources\OrganizationUserResource;
 use App\OrganizationUser;
 use Illuminate\Http\Request;
@@ -163,6 +165,107 @@ class OrganizationUserController extends Controller
                 ->paginate(config('app.page_size'))
         );
         return $OrganizationsUser;
+    }
+
+    /**
+     * 
+     */
+    public function createUserAndAddtoOrganization(Request $request, $organization_id)
+    {
+        $data = $request->json()->all();
+
+        $validations = [
+            'properties.email' => 'required|email',
+        ];
+
+        $validator = Validator::make(
+            $data,
+            $validations
+        );
+
+        $organization = Organization::find($organization_id);
+        $user_properties = $organization->user_properties;
+
+
+        if (isset($data['properties'])) {
+            $userData = $data['properties'];
+
+            if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
+                return "minimun password length is 6 characters";
+            }
+        }
+        
+        //Se validan los campos que no aceptan datos, si no informativos
+        foreach ($user_properties as $user_property) 
+        {
+            if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
+                continue;
+            }
+            $organization = $user_property['name'];
+        }
+
+        if ($validator->fails()) {
+            return response(
+                $validator->errors(),
+                422
+            );
+        }
+        $user = Account::updateOrCreate(['email'=> $data['properties']['email']], $data);
+         /* ya con el usuario actualizamos o creamos el organizationUser */         
+        $matchAttributes = ["organization_id" => $organization_id, "account_id" => $user->_id];
+        $data += $matchAttributes;                          
+        $model = OrganizationUser::where($matchAttributes)->first();
+
+        //Account rol assigned by default
+        if (!isset($data["rol_id"])) {
+            $rol = Rol::where('level', 0)->first();
+            if ($rol) {
+                $data["rol_id"] = $rol->_id;
+            } else {
+                //Se supone este es un rol por defecto (asistente) si todo el resto falla
+                $data["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
+            }
+
+        }
+
+        if ($model) {
+            //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
+            $data["properties"] = array_merge($model->properties, $data["properties"]);
+            $model->update($data);        
+        } else {
+            $model = OrganizationUser::create($data);
+        }
+
+
+        //Creamos un token para que se pueda autologuear el usuario
+        $auth = resolve('Kreait\Firebase\Auth');
+        $signInResult = null;
+        
+        if (!$signInResult) 
+        {
+            $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"];
+
+            //No conocemos otra forma de generar el token de login sino forzando un signin
+            if (isset($organizationUser->user->uid)) 
+            {
+
+                $updatedUser = $auth->changeUserPassword($organizationUser->user->uid, $pass);
+                $signInResult = $auth->signInWithEmailAndPassword($organizationUser->user->email, $pass);
+                $organizationUser->user->refresh_token = $signInResult->refreshToken();
+                $organizationUser->user->save();
+            }
+        }
+
+        if ($signInResult && $signInResult->accessToken()) {
+            $organizationUser->user->initial_token = $signInResult->accessToken();
+        } else if ($signInResult && $signInResult->idToken()) {
+            $organizationUser->user->initial_token = $signInResult->idToken();
+        }
+
+        // $response = new OrganizationUserResource($organizationUser);
+        return $model;
+
+
     }
 
 }
