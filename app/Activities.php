@@ -113,6 +113,8 @@ class Activities extends Moloquent
         "date_end_zoom",
         "start_date",
         "requires_registration",
-        "password_meeting"       
+        "password_meeting",     
+        "latitude",
+        "length"  
     ];
 }
