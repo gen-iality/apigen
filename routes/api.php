@@ -215,12 +215,13 @@ Route::apiResource("events/{event_id}/invitation", "InvitationController");
  ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::apiResource('organizations/{organization_id}/users', 'OrganizationUserController', ['except' => ['update']]);
-        Route::middleware('auth:token')->get('user/organizationUser/{organization_id}', 'OrganizationUserController@currentUserindex');
-        Route::put('organizations/{organization_id}/user/{organization_user_id}', 'OrganizationUserController@update');
+        Route::get ('organizations/{organization}/organizationusers', 'OrganizationUserController@index');
+        Route::get ('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@show');
+        Route::put ('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@update');
+        Route::delete('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@destroy');
     }
 );
-Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@createUserAndAddtoOrganization');
+Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');
 
  //Route::get('me/eventUsers', 'EventUserController@meEvents');
 /****************
