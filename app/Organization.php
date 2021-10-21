@@ -27,7 +27,8 @@ class Organization extends Organiser
         'user_properties',
         'properties',
         'styles',
-        'itemsMenu'
+        'itemsMenu',
+        'type_event'
     ];
 
     protected $hidden = ['account_ids'];
