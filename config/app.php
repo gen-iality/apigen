@@ -31,7 +31,7 @@ return [
     'front_url' => env('FRONT_URL', 'https://evius.co'),
     'page_size' => 2500,
     'sendinblue_page' => 'https://api.sendinblue.com/v2.0',
-    'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF"],
+    'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF", 'banner_image_email' => "" , 'footer_image_email' => ""],
     'app_configuration' => [],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     'pushdirection' => env('PUSH_URL', 'production'),
