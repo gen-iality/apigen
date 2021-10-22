@@ -238,7 +238,6 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
         $gfService = new GoogleFiles();
         $event = $this->event;
-
         try {
 
             ob_start(); 
@@ -257,6 +256,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
+        
 
         if($this->onlylink){
            
