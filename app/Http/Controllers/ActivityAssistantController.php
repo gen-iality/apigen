@@ -501,4 +501,6 @@ class ActivityAssistantController extends Controller
 
         return $activityMetrics;
     }
+
+    
 }

@@ -9,6 +9,7 @@ use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\EventType;
+use App\Attendee;
 use App\Http\Resources\EventResource;
 use App\ModelHasRole;
 use App\Organization;
@@ -337,7 +338,7 @@ class EventController extends Controller
         //Add menuItems
         EventService::addEventMenu($result);
 
-        self::addOwnerAsAdminColaborator($user->id, $result->id);
+        self::addOwnerAsAdminColaborator($user, $result->id);
         self::createDefaultUserProperties($result->id);
 
 
@@ -371,15 +372,28 @@ class EventController extends Controller
 
     
     
-    public function addOwnerAsAdminColaborator($user_id, $event_id)
+    public function addOwnerAsAdminColaborator($user, $event_id)
     {
         $DataUserRolAdminister = [
             "role_id" => Event::ID_ROL_ADMINISTRATOR,
-            "model_id" => $user_id,
+            "model_id" => $user->_id,
             "event_id" => $event_id,
             "model_type" => "App\Account",
         ];
+
+        $dataEventUserRolAdminister = [
+            "role_id" => Event::ID_ROL_ADMINISTRATOR,
+            "rol_id" => Event::ID_ROL_ADMINISTRATOR,
+            "account_id" => $user->_id,
+            "event_id" => $event_id,
+            "model_type" => "App\Account",
+            "properities" => [
+                "name" => $user->names,
+                "email" => $user->email,
+            ]
+        ];
         $DataUserRolAdminister = ModelHasRole::create($DataUserRolAdminister);
+        Attendee::create($dataEventUserRolAdminister);
         return $DataUserRolAdminister;
     }
 

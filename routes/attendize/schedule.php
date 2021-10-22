@@ -64,6 +64,11 @@ Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesCo
 Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
 Route::put('events/{event_id}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
 
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/activities/{activity}/checkinbyadmin',  'ActivitiesController@checkinbyadmin')->middleware('permission:create_checkinbyadmin');
+    }
+);
 
 /***************
  * TYPE
