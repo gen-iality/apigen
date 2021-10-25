@@ -15,18 +15,24 @@ class UpdateRolEventUserAndSendEmail
      */
     public static function UpdateRolEventUserAndSendEmail($request, $event_id, $eventUser_id)
     {       
-        $data = $request->json()->all();
-        $eventUser = Attendee::find($eventUser_id);
-        $message = isset($data['message']) ? $data['message'] :'';
+        $data = $request->json()->all();        
+        if(isset($data['rol_id']))
+        {
+            $eventUser = Attendee::find($eventUser_id);
+            $message = isset($data['message']) ? $data['message'] :'';
 
-        $eventUser->fill($data);
-        $eventUser->save();
+            $eventUser->fill($data);
+            $eventUser->save();
+            
+            Mail::to($eventUser['properties']['email'])
+                ->queue(
+                    new UserRolChangeMail($event_id, $eventUser , $data['rol_id'], $message )
+                );
+            
+            return $eventUser;
+        }
+
+        abort(400, 'rol_id is required');
         
-        Mail::to($eventUser['properties']['email'])
-            ->queue(
-                new UserRolChangeMail($event_id, $eventUser , $data['rol_id'], $message )
-            );
-        
-        return $eventUser;
     }
 }

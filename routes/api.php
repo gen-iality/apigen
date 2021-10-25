@@ -73,7 +73,7 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
 Route::get( 'events/{event_id}/eventusers',      'EventUserController@index');
 Route::get( 'events/{event_id}/eventUsers',      'EventUserController@index');
 Route::get( 'events/{event_id}/eventusers/{id}', 'EventUserController@show');
-Route::put( 'events/{event_id}/eventusers/{id}', 'EventUserController@update');
+Route::put( 'events/{event}/eventusers/{eventuser}', 'EventUserController@update');
 Route::post( 'events/{event_id}/eventusers',     'EventUserController@store');
 Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
 Route::get('events/{event_id}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
