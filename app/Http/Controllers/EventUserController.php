@@ -837,16 +837,14 @@ class EventUserController extends Controller
     /**
      * _update_:update a specific assistant
      *
-     * @urlParam event_id string required
-     * @urlParam evenUserId string required id de Attendee
+     * @urlParam event string required
+     * @urlParam eventusers string required id de Attendee
      *
      * @bodyParam email email  field
      * @bodyParam name  string field
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * @bodyParam rol_id string rol id this is the role user into event 
+     * @bodyParam properties. any other params  will be saved in user and eventUser.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Attendee  $eventUser
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $evenUserId)
     {
