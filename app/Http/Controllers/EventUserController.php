@@ -522,7 +522,7 @@ class EventUserController extends Controller
                     return "minimun password length is 6 characters";
                 }
             }
-            $userData["password"] =self::encryptdata($userData["password"]);
+            // $userData["password"] =self::encryptdata($userData["password"]);
             
             $validations = [
                 'email' => 'required|email',
