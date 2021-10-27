@@ -522,6 +522,8 @@ class EventUserController extends Controller
                     return "minimun password length is 6 characters";
                 }
             }
+            $userData["password"] =self::encryptdata($userData["password"]);
+            
             $validations = [
                 'email' => 'required|email',
                 //'other_fields' => 'sometimes',
@@ -645,6 +647,32 @@ class EventUserController extends Controller
         }
         return $response;
     }
+
+
+    private function encryptdata($string)
+    {
+
+        // Store the cipher method
+        $ciphering = "AES-128-CTR"; //config(app.chiper);
+
+        // Use OpenSSl Encryption method
+        $iv_length = openssl_cipher_iv_length($ciphering);
+        $options = 0;
+
+        // Non-NULL Initialization Vector for encryption
+        $encryption_iv = config('app.encryption_iv');
+
+        // Store the encryption key
+        $encryption_key = config('app.encryption_key');
+
+        // Use openssl_encrypt() function to encrypt the data
+        $encryption = openssl_encrypt($string, $ciphering,
+            $encryption_key, $options, $encryption_iv);
+
+        // Display the encrypted string
+        return $encryption;
+    }
+
 
     /**
      * _testCreateUserAndAddtoEvent_: test Create User And Add to Event
