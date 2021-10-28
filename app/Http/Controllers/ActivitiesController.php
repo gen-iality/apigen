@@ -616,7 +616,7 @@ class ActivitiesController extends Controller
                 'activity_id' => $activity_id ,
                 'user_id'=> $data['user_id'],
                 'checked_in' => true,
-                'event_id' => $data['event_id'],
+                'event_id' =>  $event_id,
 
             ],
             [
