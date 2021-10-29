@@ -88,7 +88,9 @@ class UserEventService
         $userData['displayName'] = $userData['names'];
 
         /* Buscamos primero el usuario por email y sino existe lo creamos */
+        $userData['email'] = strtolower($userData['email']);
         $email = $userData['email'];
+
         $matchAttributes = ['email' => $email];
 
         
