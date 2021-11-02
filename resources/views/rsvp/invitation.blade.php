@@ -26,11 +26,11 @@
 <strong>{!! $eventUser->ticket_title!!} </strong>
 @endif
 
-@if(!empty($event->styles["event_image"]))
+{{-- @if(!empty($event->styles["event_image"]))
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["event_image"]}} /> 
 </div>
-@endif
+@endif --}}
 
 <div style="text-align: center">
 	<div style="text-align: center">
