@@ -87,8 +87,7 @@ class UserEventService
         }
         $userData['displayName'] = $userData['names'];
 
-        /* Buscamos primero el usuario por email y sino existe lo creamos */
-        $userData['email'] = strtolower($userData['email']);
+        /* Buscamos primero el usuario por email y sino existe lo creamos */        
         $email = $userData['email'];
 
         $matchAttributes = ['email' => $email];
@@ -97,7 +96,7 @@ class UserEventService
         $user = Account::updateOrCreate($matchAttributes, $userData);
 
         /* ya con el usuario actualizamos o creamos el eventUser */
-        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->_id];
+        $matchAttributes = ["event_id" => $event->id, "account_id" => $user->_id, "properties.email" => $user->email];
         
         /**** HACEMOS ALGUNOS AJUSTES A LOS CAMPOS antes de importar el eventUser */
         $eventUserFields += $matchAttributes;

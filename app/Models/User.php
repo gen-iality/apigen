@@ -155,6 +155,7 @@ class User extends MyBaseModel implements AuthenticatableContract, CanResetPassw
         static::creating(function ($user) {
             $user->confirmation_code = str_random();
             $user->api_token = str_random(60);
+            $user->email = strtolower($user->email);
         });
     }
 
