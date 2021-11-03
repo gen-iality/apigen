@@ -377,7 +377,7 @@ class EventUserController extends Controller
         if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
             $email = $eventUserData["properties"]["email"];
         }
-        $email = strtolower($email);
+        
         //El correo es super obligatorio para el registro
         if (!$email) {
             return abort(400, "Email is required");
