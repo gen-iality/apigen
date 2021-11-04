@@ -14,6 +14,7 @@ use App\Rol;
 use App\State;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Kreait\Firebase\Auth;
 
 /**
  * Undocumented class
@@ -363,4 +364,34 @@ string(10) "1030522402"
         $response = new ModelHasRoleResource($model);
         return $response;
     }
+
+    /**
+     * _SignInWithEmailLink_: this method allows to login with a link sent to the mail.
+     *   
+     */
+    public static function sendSignInWithEmailLink($event, $email)
+    {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $email = "gerladine.garcia+2@mocionsoft.com";
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => "http://localhost:8000/api/categories?&event=prueba",
+            ],
+            // ["event" => "prueba"]
+
+        );
+
+         
+        dd($link);
+
+        // $auth = resolve('Kreait\Firebase\Auth');
+
+        // $oobCode = $request->all();
+        // $singIn = $auth->signInWithEmailAndOobCode("geraldine.garcia+2@mocionsoft.com",$oobCode["oobCode"]);
+        // dd($singIn);
+        // return $singIn;
+    }
+
+    
 }

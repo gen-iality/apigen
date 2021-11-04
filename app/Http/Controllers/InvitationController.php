@@ -118,6 +118,7 @@ class InvitationController extends Controller
         }
 
     }
+    
 
     /**
      * _singIn_: singIn
@@ -146,6 +147,39 @@ class InvitationController extends Controller
         return self::generateLoginLinkAndRedirect( $email, $pass, $eventId,  $innerpath, $destination);
 
     }
+
+    /**
+     * 
+     */
+    public function sendSignInWithEmailLink($email, $event_id)
+    {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => "http://localhost:8000/api" . "/events/$event_id/singinwithemaillink?email=". urlencode($email),
+            ]    
+        );
+            
+        return $link;
+    }
+
+    /**
+     * 
+     */
+    public function signInWithEmailLink($event_id, Request $request)
+    {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $data = $request->all();
+        
+
+        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
+        
+        return Redirect::to(config('app.front_url') ."/"."landing/ $event_id/event"."?token=" . $singin->idToken());
+    }
+
+
+
 
     private function decryptdata($string)
     {
