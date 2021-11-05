@@ -97,7 +97,7 @@ class RoleAttendeeController extends Controller
      * @param  \App\Role  $RoleAttendee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, String $id)
+    public function update(Request $request, $event_id, String $id)
     {
         $data = $request->json()->all();
         $RoleAttendee = RoleAttendee::find($id);
@@ -115,7 +115,7 @@ class RoleAttendeeController extends Controller
      * @param  \App\Event $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, String $id)
+    public function destroy(Request $request, $event_id, String $id)
     {  
         $RoleAttendee = RoleAttendee::findOrFail($id);
         return (string)$RoleAttendee->delete();

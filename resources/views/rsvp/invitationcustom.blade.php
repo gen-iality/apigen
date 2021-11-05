@@ -36,10 +36,9 @@
 	@if($event->type_event == "physicalEvent")
 		<img  src="{{$qr}}" />
 	 @else
-		<p>
-			{{ __('Mail.alternative_entry')}}
-			<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
-		</p>
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			{{ __ ('Mail.enter_event')}}
+		@endcomponent
 	@endif
 </div>
 
