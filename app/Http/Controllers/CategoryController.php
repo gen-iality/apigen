@@ -57,7 +57,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        // var_dump($request->json()->all());
         return CategoryResource::collection(
             Category::paginate(config('app.page_size'))
         );
