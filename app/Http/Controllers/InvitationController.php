@@ -149,7 +149,7 @@ class InvitationController extends Controller
     }
 
     /**
-     * 
+     * _sendSignInWithEmailLink_:
      */
     public function sendSignInWithEmailLink($email, $event_id)
     {
@@ -157,7 +157,7 @@ class InvitationController extends Controller
         $link = $auth->getSignInWithEmailLink(
             $email,
             [
-                "url" => "http://localhost:8000/api" . "/events/$event_id/singinwithemaillink?email=". urlencode($email),
+                "url" => config('api_evius') . "/events/$event_id/singinwithemaillink?email=". urlencode($email),
             ]    
         );
             
@@ -174,8 +174,9 @@ class InvitationController extends Controller
         
 
         $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
+        $redirtect = config('app.front_url') ."/"."landing/$event_id/event"."?token=" . $singin->idToken();
         
-        return Redirect::to(config('app.front_url') ."/"."landing/ $event_id/event"."?token=" . $singin->idToken());
+        return Redirect::to($redirtect);
     }
 
 
