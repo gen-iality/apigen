@@ -368,6 +368,10 @@ class EventController extends Controller
         $picture = array("name" => "picture", "label" => "Avatar", "unique" => false, "mandatory" => false, "type" => "avatar");
         $user_properties = new UserProperties($picture);
         $model->user_properties()->save($user_properties);
+
+        $password = array("name" => "password", "label" => "Password", "unique" => false, "mandatory" => false, "type" => "password");
+        $user_properties = new UserProperties($password);
+        $model->user_properties()->save($user_properties);
     }
 
     
