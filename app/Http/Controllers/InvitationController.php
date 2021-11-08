@@ -27,7 +27,6 @@ use Storage;
 
 /**
  * @group Invitation
- * @resource Event
  *
 */
 class InvitationController extends Controller
@@ -149,15 +148,31 @@ class InvitationController extends Controller
     }
 
     /**
-     * _sendSignInWithEmailLink_:
+     * _sendSignInWithEmailLink_: this end point send authentication link firebase.
+     * 
+     * @urlParam email email required user email
+     * @urlParam event_id event id to redirect user
+     * 
      */
-    public function sendSignInWithEmailLink($email, $event_id)
+    public function sendSignInWithEmailLink(Request $request = null, $email, $event_id)
     {
         $auth = resolve('Kreait\Firebase\Auth');
+
+        $data = "";
+        if(isset($request))
+        {
+            $data = $request->all();
+        }else{
+            $data = [
+                "email" => $email,
+                "event_id" => $event_id
+            ];
+        }    
+
         $link = $auth->getSignInWithEmailLink(
             $email,
             [
-                "url" => config('api_evius') . "/events/$event_id/singinwithemaillink?email=". urlencode($email),
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data["event_id"],
             ]    
         );
             
@@ -165,18 +180,30 @@ class InvitationController extends Controller
     }
 
     /**
-     * 
+     * _signInWithEmailLink_: this end point start the login when the user does click in the link
+     *  
+     * @urlParam email email required user email
+     * @urlParam event_id event id to redirect user
      */
-    public function signInWithEmailLink($event_id, Request $request)
+    public function signInWithEmailLink(Request $request)
     {
         $auth = resolve('Kreait\Firebase\Auth');
         $data = $request->all();
         
 
         $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
-        $redirtect = config('app.front_url') ."/"."landing/$event_id/event"."?token=" . $singin->idToken();
+        $redirect='';
+        if(isset($data['event_id']))
+        {   
+            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
+
+        }else{
+
+            $redirect = config('app.front_url') . "?token=" . $singin->idToken();
+
+        }   
         
-        return Redirect::to($redirtect);
+        return Redirect::to($redirect);
     }
 
 

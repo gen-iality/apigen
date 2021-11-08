@@ -200,7 +200,6 @@ Route::get('singinwithemail', 'InvitationController@singIn');
 Route::get("events/{event_id}/indexinvitations/{user_id}", "InvitationController@invitationsSent");
 Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}", "InvitationController@invitationsReceived");
 Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@acceptOrDeclineFriendRequest");
-Route::get("events/{event}/singinwithemaillink", "InvitationController@signInWithEmailLink");
 Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::group(
     ['middleware' => 'auth:token'], function () {
@@ -252,6 +251,8 @@ Route::group(
 Route::post("users/signInWithEmailAndPassword" , "UserController@signInWithEmailAndPassword");
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
+Route::get('getloginlink', 'UserController@getAccessLink');
+Route::get('singinwithemaillink', 'UserController@signInWithEmailLink');
 
 
 /****************

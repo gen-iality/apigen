@@ -464,29 +464,58 @@ class UserController extends UserControllerWeb
      */
     public function getAccessLink(Request $request)
     {
-        $data = $request->input();
-        if(isset($data["user_id"]))
-        {
-            if(is_array($data["user_id"]))
-            {
-                for($i = 0; $i < count($data["user_id"]); $i++)
-                {
-                    $user = Account::find($data["user_id"][$i]);
-                    $password = "evius.2040";
-                    $pass = self::encryptdata($password);
-                    echo  config("app.api_evius") . "/singinwithemail?email=" . $user->email . "&innerpath=" . $data["event_id"]  . "&pass=" . $pass;
-                }
-            }else{
+        $auth = resolve('Kreait\Firebase\Auth');
 
-                $user = Account::find($data["user_id"]);
-                $password = "evius.2040";
-                $pass = self::encryptdata($password);
-                echo  config("app.api_evius") . "/singinwithemail?email=" . $user->email . "&innerpath=" . $data["event_id"]  . "&pass=" . $pass;
+        $data = $request->all();
+          
+        $link = $auth->getSignInWithEmailLink(
+            $data["email"],
+            [
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data["event_id"],
+            ]    
+        );
+           
+        Mail::to($data["email"])
+        ->queue(
+            new \App\Mail\LoginMail($link , $data["event_id"], $data["email"])
+        );
+        
+        return $link;
+    }
 
-            }
-
+    /**
+     * _signInWithEmailLink_: this end point start the login when the user does click in the link
+     *  
+     * @urlParam email email required user email
+     * @urlParam event_id event id to redirect user
+     */
+    public function signInWithEmailLink(Request $request)
+    {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $data = $request->all();
+        
+        try {
+        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
+        }catch(\Exception $e){
+            var_dump($e);
+        
         }
-        return true;
+
+        if (!$$singin   ) {
+            throw new Exception('Error: No token provided');
+        }
+        $redirect='';
+        if(isset($data['event_id']))
+        {   
+            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
+
+        }else{
+
+            $redirect = config('app.front_url') . "?token=" . $singin->idToken();
+
+        }   
+        
+        return Redirect::to($redirect);
     }
 
 }

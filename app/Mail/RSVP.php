@@ -98,7 +98,8 @@ class RSVP extends Mailable implements ShouldQueue
         }
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
+        $link = config("app.api_evius") . "/getloginlink/?email=". urlencode($email) . "&event_id=" . $event->_id;        
+
 
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";

@@ -111,9 +111,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
-        // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass)."&destination=".$destination;
-        // $link = UserEventService::sendSignInWithEmailLink($email, $event);
-        $link = app('App\Http\Controllers\InvitationController')->sendSignInWithEmailLink($email, $event->_id);
+        $link = config("app.api_evius") . "/getloginlink/?email=". urlencode($email) . "&event_id=" . $event->_id;
         
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
