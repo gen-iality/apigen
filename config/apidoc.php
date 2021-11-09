@@ -121,7 +121,9 @@ return [
                         '*/users/*',
                         '*/auth',
                         '*/auth/*',  
-                        '*/changeUserPassword',        
+                        '*/changeUserPassword',      
+                        '*/getloginlink',
+                        '*/singinwithemaillink'  ,
                               
                     //Host
                         '*/host/*',    

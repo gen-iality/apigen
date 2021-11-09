@@ -147,67 +147,6 @@ class InvitationController extends Controller
 
     }
 
-    /**
-     * _sendSignInWithEmailLink_: this end point send authentication link firebase.
-     * 
-     * @urlParam email email required user email
-     * @urlParam event_id event id to redirect user
-     * 
-     */
-    public function sendSignInWithEmailLink(Request $request = null, $email, $event_id)
-    {
-        $auth = resolve('Kreait\Firebase\Auth');
-
-        $data = "";
-        if(isset($request))
-        {
-            $data = $request->all();
-        }else{
-            $data = [
-                "email" => $email,
-                "event_id" => $event_id
-            ];
-        }    
-
-        $link = $auth->getSignInWithEmailLink(
-            $email,
-            [
-                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data["event_id"],
-            ]    
-        );
-            
-        return $link;
-    }
-
-    /**
-     * _signInWithEmailLink_: this end point start the login when the user does click in the link
-     *  
-     * @urlParam email email required user email
-     * @urlParam event_id event id to redirect user
-     */
-    public function signInWithEmailLink(Request $request)
-    {
-        $auth = resolve('Kreait\Firebase\Auth');
-        $data = $request->all();
-        
-
-        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
-        $redirect='';
-        if(isset($data['event_id']))
-        {   
-            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
-
-        }else{
-
-            $redirect = config('app.front_url') . "?token=" . $singin->idToken();
-
-        }   
-        
-        return Redirect::to($redirect);
-    }
-
-
-
 
     private function decryptdata($string)
     {

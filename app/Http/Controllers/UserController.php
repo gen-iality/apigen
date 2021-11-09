@@ -18,6 +18,10 @@ use App\Http\Resources\EventUserResource;
 use Auth;
 use App\OrganizationUser;
 use Log;
+use RealRashid\SweetAlert\Facades\Alert;
+use Redirect;
+
+
 
 /**
  * @group User
@@ -460,24 +464,32 @@ class UserController extends UserControllerWeb
     }
 
     /**
+     * _getAccessLink_; get and sent link acces to email to user.
      * 
+     * @urlParam email email required user email
+     * @urlParam event_id event id to redirect user
      */
-    public function getAccessLink(Request $request)
+    public function getAccessLink(Request $request=null, $email=null, $event_id) 
     {
         $auth = resolve('Kreait\Firebase\Auth');
 
-        $data = $request->all();
-          
+        if(isset($request))
+        {
+            $data = $request->all();
+        }
+        
+        $email = isset($data["email"]) ?  $data["email"] : $email;
+        $event_id = isset($data["event_id"]) ? $data["event_id"] : $event_id;
         $link = $auth->getSignInWithEmailLink(
-            $data["email"],
+            $email,
             [
-                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data["event_id"],
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event_id,
             ]    
         );
            
-        Mail::to($data["email"])
+        Mail::to($email)
         ->queue(
-            new \App\Mail\LoginMail($link , $data["event_id"], $data["email"])
+            new \App\Mail\LoginMail($link , $event_id, $email)
         );
         
         return $link;
@@ -494,17 +506,11 @@ class UserController extends UserControllerWeb
         $auth = resolve('Kreait\Firebase\Auth');
         $data = $request->all();
         
+        $singin = '';
+        $redirect='';
+
         try {
         $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
-        }catch(\Exception $e){
-            var_dump($e);
-        
-        }
-
-        if (!$$singin   ) {
-            throw new Exception('Error: No token provided');
-        }
-        $redirect='';
         if(isset($data['event_id']))
         {   
             $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
@@ -513,9 +519,16 @@ class UserController extends UserControllerWeb
 
             $redirect = config('app.front_url') . "?token=" . $singin->idToken();
 
-        }   
-        
+        } 
         return Redirect::to($redirect);
+
+        }catch(\Exception $e){
+            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event";
+
+            Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
+            return view('Public.Errors.loginLink');         
+        }
+        
     }
 
 }
