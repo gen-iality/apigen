@@ -507,6 +507,10 @@ class EventUserController extends Controller
 
             $eventUserData = $request->json()->all();
 
+            // Encriptacion de password
+            if(!empty($eventUserData['properties']['password'])) {
+                $eventUserData['properties']['password'] = bcrypt($request['properties']['password']);
+            }
             //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
             //$eventUserData = $request->json()->all();
 
