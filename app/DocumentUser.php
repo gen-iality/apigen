@@ -8,7 +8,7 @@ class DocumentUser extends MyBaseModel
 {
     protected $fillable = [
         'name',
-        'image',
+        'url',
         'event_id',
         'eventuser_id',
         'assign'

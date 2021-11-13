@@ -661,13 +661,22 @@ Route::group(
 //}
 //);
 
-// DocumenUser CRUD by Event
+/****************
+ * DocumenUser
+ ****************/
 Route::get('events/{event}/documentusers', 'DocumentUserController@index');
-Route::get('events/{event}/documentusers/{document_user}', 'DocumentUserController@show');
-Route::post('events/{event}/documentusers', 'DocumentUserController@store');
-Route::put('events/{event}/documentusers/{document_user}', 'DocumentUserController@update');
-Route::delete('events/{event}/documentusers/{document_user}', 'DocumentUserController@destroy');
-// retorna todos los documentos de un usuario de un evento
-Route::get('documentusers/{event}/{event_user}', 'DocumentUserController@documentsUserByEvent');
+Route::get('events/{event}/documentusers/{documentuser}', 'DocumentUserController@show');
+Route::group(
+    ['middleware' => 'auth:token'],
+    function () {
+        Route::post('events/{event}/documentusers', 'DocumentUserController@store');
+        Route::put('events/{event}/documentusers/{documentuser}', 'DocumentUserController@update');
+        Route::delete('events/{event}/documentusers/{documentuser}', 'DocumentUserController@destroy');
+        // retorna todos los documentos de un usuario de un evento
+        Route::get('events/{event}/me/documentusers', 'DocumentUserController@documentsUserByEvent');
+    }
+);
+
+
 // addDocumentUserToEventUserByEvent
 Route::post('events/{event}/documentusers/user/{event_user}', 'DocumentUserController@addDocumentUserToEventUserByEvent');

@@ -9,6 +9,7 @@ use App\DocumentUser;
 use App\Models\Event;
 use App\Attendee;
 
+use Auth; 
 /**
  * @group Document User
  * 
@@ -19,7 +20,6 @@ class DocumentUserController extends Controller
     /**
      * _index_: list all documents to user by event.
      * 
-     * @autheticathed
      * @urlParam event required event_id
      * 
      */
@@ -31,13 +31,24 @@ class DocumentUserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * _store_: create a new document for user in a event
+     * 
+     * @autheticathed
+     * 
+     * @urlParam event required event id
+     * @bodyParam name string required Document name.
+     * @bodyParam url string required Document url.
+     * @bodyParam assign boolean required This indicate if the document is assigned to a user.
+     * 
      */
     public function store(Request $request)
-    {
+    {   
+        $required->validate([
+            'name' => 'required',
+            'url' => 'required',
+            'assign' => 'boolean',
+        ]);
+
         $data = $request->json()->all();
         $created_document_user = new DocumentUser($data);
         $created_document_user->save();
@@ -99,9 +110,11 @@ class DocumentUserController extends Controller
     }
 
     // retorna todos los documentos de un usuario de un evento
-    public function documentsUserByEvent($event, $event_user)
-    {
-        $documents_user = DocumentUser::where('event_id', $event)->where('eventuser_id', $event_user)->latest()->paginate(config('app.page_size'));
+    public function documentsUserByEvent($event)
+    {    
+        $user = Auth::user()->_id;
+        $event_user = Attendee::where('event_id', $event)->where('account_id' , $user)->first();
+        $documents_user = DocumentUser::where('event_id', $event)->where('eventuser_id', $event_user->_id)->latest()->paginate(config('app.page_size'));        
 
         return response()->json([$documents_user], 200);
     }
