@@ -109,7 +109,12 @@ class DocumentUserController extends Controller
         return response()->json([], 204);
     }
 
-    // retorna todos los documentos de un usuario de un evento
+    /**
+     * _documentsUserByEvent_: list the documents of a logged in user.
+     * 
+     * @autheticated
+     * 
+     */
     public function documentsUserByEvent($event)
     {    
         $user = Auth::user()->_id;
@@ -118,17 +123,7 @@ class DocumentUserController extends Controller
 
         return response()->json([$documents_user], 200);
     }
-
-    // esto deberia ir mejor en el controlador de evento
-    public function addDocumentUserToEvent(Request $request, $event_id)
-    {
-        $data = $request->json()->all();
-        $event = Event::findOrFail($event_id);
-        $event->extra_config->document_user = $data;
-        $event->save();
-
-        return $event;
-    }
+    
 
     // SERVICIO
     public function addDocumentUserToEventUserByEvent($event_id, $event_user_id)
