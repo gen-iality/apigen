@@ -64,6 +64,19 @@ class EventService
         return $stlyes_validation;
     }
 
+   /**
+    * This end point is call when add document user in the event.
+    */
+    public function addDocumentUserToEvent(Request $request, $event_id)
+    {
+        $data = $request->json()->all();
+        $event = Event::findOrFail($event_id);
+        $event->extra_config->document_user = $data;
+        $event->save();
+
+        return $event;
+    }
+
     
     
 

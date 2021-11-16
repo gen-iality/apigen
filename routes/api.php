@@ -674,9 +674,11 @@ Route::group(
         Route::delete('events/{event}/documentusers/{documentuser}', 'DocumentUserController@destroy');
         // retorna todos los documentos de un usuario de un evento
         Route::get('events/{event}/me/documentusers', 'DocumentUserController@documentsUserByEvent');
+        Route::put('events/{event}/adddocumentuser', 'EventController@addDocumentUserToEvent');        
     }
 );
 
 
 // addDocumentUserToEventUserByEvent
 Route::post('events/{event}/documentusers/user/{event_user}', 'DocumentUserController@addDocumentUserToEventUserByEvent');
+
