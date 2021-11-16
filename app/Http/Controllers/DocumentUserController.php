@@ -41,15 +41,16 @@ class DocumentUserController extends Controller
      * @bodyParam assign boolean required This indicate if the document is assigned to a user.
      * 
      */
-    public function store(Request $request)
+    public function store($event, Request $request)
     {   
-        $required->validate([
+        $request->validate([
             'name' => 'required',
             'url' => 'required',
-            'assign' => 'boolean',
+            'assign' => 'required|boolean',
         ]);
 
         $data = $request->json()->all();
+        $data['event_id'] = $event;
         $created_document_user = new DocumentUser($data);
         $created_document_user->save();
 
