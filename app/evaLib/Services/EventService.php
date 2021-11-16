@@ -41,18 +41,16 @@ class EventService
 
         $organization = Organization::findOrFail($event->organizer_id);
         
-        if(isset($organization->styles))
-        {
-            $event->styles = $organization->styles; 
-            $event->save();
+        if(isset($styles))
+        {                       
+            $stlyes_validation = array_merge($default_event_styles,$styles);            
+        }else{         
             $stlyes_validation = array_merge($default_event_styles, $organization->styles);
-            
-        }else{
-            $event->styles =  $default_event_styles;
-            $event->save();
-            $stlyes_validation = array_merge($default_event_styles,$styles);
-
         }
+
+        $event->styles =  $stlyes_validation;
+        $event->save();
+
         return $stlyes_validation;
     }
 

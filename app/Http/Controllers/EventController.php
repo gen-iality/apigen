@@ -316,7 +316,7 @@ class EventController extends Controller
             }
         }
         $styles = $data['styles'];
-        $data['styles'] = EventService::AddDefaultStyles($styles,$result);
+        EventService::AddDefaultStyles($styles,$result);
         
         //Persist the model to database
         $result->save();
