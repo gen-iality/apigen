@@ -27,7 +27,7 @@ class DocumentUserController extends Controller
     {
         $documents_user = DocumentUser::where('event_id', $event)->latest()->paginate(config('app.page_size'));
 
-        return response()->json([$documents_user], 200);
+        return response()->json([$documents_user]);
     }
 
     /**
@@ -69,7 +69,7 @@ class DocumentUserController extends Controller
             return response()->json(['msg' => 'Documento no pertenece al evento'], 400);
         }
 
-        return response()->json($document_user, 200);
+        return response()->json($document_user);
     }
 
     /**
@@ -89,7 +89,7 @@ class DocumentUserController extends Controller
         $document_user->fill($data);
         $document_user->save();
 
-        return response()->json($document_user, 200);
+        return response()->json($document_user);
     }
 
     /**
@@ -110,13 +110,13 @@ class DocumentUserController extends Controller
     }
 
     // retorna todos los documentos de un usuario de un evento
-    public function documentsUserByEvent($event)
+    public function documentsUserByUser($event)
     {    
         $user = Auth::user()->_id;
         $event_user = Attendee::where('event_id', $event)->where('account_id' , $user)->first();
         $documents_user = DocumentUser::where('event_id', $event)->where('eventuser_id', $event_user->_id)->latest()->paginate(config('app.page_size'));        
 
-        return response()->json([$documents_user], 200);
+        return response()->json([$documents_user]);
     }
 
     // esto deberia ir mejor en el controlador de evento
@@ -128,29 +128,5 @@ class DocumentUserController extends Controller
         $event->save();
 
         return $event;
-    }
-
-    // SERVICIO
-    public function addDocumentUserToEventUserByEvent($event_id, $event_user_id)
-    {
-        $event = Event::findOrFail($event_id);
-        $event_user = Attendee::findOrFail($event_user_id);
-        if (empty($event->document_user)) { // validar la configuracion de ese evento
-            return response()->json(['msg' => 'Evento no valido']);
-        }
-        $documents_user = DocumentUser::where('assign', false)
-            ->where('event_id', $event_id)
-            ->where('eventuser_id', $event_user_id)
-            ->get();
-        $properties = $event_user['properties'];
-        $documents_user_id = [];
-        foreach ($documents_user as $doc) {
-            array_push($documents_user_id, $doc['image']);
-        }
-        $properties_merge = array_merge($properties, ['documents_user' => $documents_user_id]);
-        $event_user['properties'] = $properties_merge;
-        $event_user->save();
-
-        return $event_user;
     }
 }

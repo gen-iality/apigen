@@ -401,6 +401,11 @@ class EventUserController extends Controller
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
+        // En caso de que el event posea document user
+        if (!empty($event->document_user)) {
+            $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event_id, $eventUser);
+        }
+
         if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
         }
@@ -414,16 +419,22 @@ class EventUserController extends Controller
         }
 
      
-        Mail::to($email)
-        ->queue(
-            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-            new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-        );
+        //Mail::to($email)
+        //->queue(
+            ////string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            //new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+        //);
 
         if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
-        
+
+        // Si existe password la elimina de $result
+        //$password = $eventUser['properties']['password'];
+        //if (!empty($password)) {
+            //unset($eventUser['properties']['password']);
+        //}
+
         return $eventUser;
 
     }
