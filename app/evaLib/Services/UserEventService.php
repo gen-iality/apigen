@@ -363,4 +363,30 @@ string(10) "1030522402"
         $response = new ModelHasRoleResource($model);
         return $response;
     }
+
+    /**
+     * _addDocumentUserToEventUserByEvent_ : this endpoint validates if a document needs to be added to the user when they register for an event.
+     */
+    public function addDocumentUserToEventUserByEvent($event_id, $event_user_id)
+    {
+        $event = Event::findOrFail($event_id);
+        $event_user = Attendee::findOrFail($event_user_id);
+        if (empty($event->extra_config->document_user)) { // validar la configuracion de ese evento
+            return response()->json(['msg' => 'Evento no valido']);
+        }
+        $documents_user = DocumentUser::where('assign', false)
+            ->where('event_id', $event_id)
+            ->get();
+        $properties = $event_user['properties'];
+        $documents_user_id = [];
+        
+        foreach ($documents_user as $doc) {
+            array_push($documents_user_id, $doc['url']);
+        }
+        $properties_merge = array_merge($properties, ['documents_user' => $documents_user_id]);
+        $event_user['properties'] = $properties_merge;
+        $event_user->save();
+
+        return $event_user;
+    }
 }
