@@ -368,21 +368,11 @@ string(10) "1030522402"
     public static function addDocumentUserToEventUserByEvent($event_id, $eventUser, $limit)
     {
         // traer document user sin asignar
-        $get_documets_user = DocumentUser::where('assign', false)->get();
+        $get_documets_user = DocumentUser::where('assign', false)->where('event_id', $event_id)->paginate($limit);
 
-        // refactorizar: esta horrible pero funciona, no funciona con un segundo where()
-        $documents_user_unassign = [];
-        foreach ($get_documets_user as $doc) {
-            if ($doc['assign'] == false) {
-                array_push($documents_user_unassign, $doc);
-            }
-        }
-
-        // guardar eventuser_id al document user
         $documents_user = [];
-        // refactorizar: con foreach no funciona
-        for ($i = 0; $i < $limit; $i++) {
-            $doc = $documents_user_unassign[$i];
+        // asignar datos del event user a cada doc
+        foreach ($get_documets_user as $doc) {
             $doc['eventuser_id'] = $eventUser['_id'];
             $doc['assign'] = true; // necesario cambiar de estado
             $doc->save();
