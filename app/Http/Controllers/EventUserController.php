@@ -401,12 +401,7 @@ class EventUserController extends Controller
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
-        // En caso de que el event posea document user
-        $document_user = $event->extra_config['document_user'];
-        if (!empty($document_user)) {
-            $limit = $document_user['quantity'];
-            $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event_id, $eventUser, $limit);
-        }
+        
 
         if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
