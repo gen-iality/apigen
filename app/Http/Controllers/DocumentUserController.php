@@ -44,7 +44,7 @@ class DocumentUserController extends Controller
     /**
      * _store_: create a new document user in event
      * 
-     * @autheticathed
+     * @authenticated
      * 
      * @urlParam event required event id
      * @bodyParam name string required Document name.
@@ -109,7 +109,8 @@ class DocumentUserController extends Controller
     /**
      * _update_: Update a document user by id
      * Update the specified resource in storage.
-     *
+     * 
+     * @authenticated
      * @urlParam event required event id
      * @urlParam documentuser required document user id
      *
@@ -142,7 +143,8 @@ class DocumentUserController extends Controller
     /**
      * _destroy_: Delete a document user by id
      * Remove the specified resource from storage.
-     *
+     * 
+     * @authenticated
      * @urlParam event required event id
      * @urlParam documentuser required document user id
      *
@@ -165,7 +167,7 @@ class DocumentUserController extends Controller
     /**
      * _documentsUserByEvent_: list the documents of a logged in user.
      * 
-     * @autheticated
+     * @authenticated
      * @urlParam event required event id
      *
      * @response "data": [
