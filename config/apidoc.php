@@ -108,6 +108,7 @@ return [
                         '*/events/{event_id}',
                         '*/eventTypes',
                         '*/changeStatusEvent',
+                        '*/adddocumentuser',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -176,6 +177,9 @@ return [
                         '*/newsfeed/*',    
                     //Google Analytics
                         '*/googleanalytics',
+                    //DocumentUser
+                        '*/documentusers',
+                        '*/documentusers/*', 
 
                 ],  
 

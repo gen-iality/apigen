@@ -12,6 +12,7 @@ use App\Models\Ticket;
 use App\Order;
 use App\Rol;
 use App\State;
+use App\DocumentUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -362,5 +363,32 @@ string(10) "1030522402"
         $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);
         return $response;
+    }
+
+    public static function addDocumentUserToEventUserByEvent($event_id, $eventUser, $limit)
+    {
+        // traer document user sin asignar
+        $get_documets_user = DocumentUser::where('assign', false)->where('event_id', $event_id)->paginate($limit);
+
+        $documents_user = [];
+        // asignar datos del event user a cada doc
+        foreach ($get_documets_user as $doc) {
+            $doc['eventuser_id'] = $eventUser['_id'];
+            $doc['assign'] = true; // necesario cambiar de estado
+            $doc->save();
+            array_push($documents_user, $doc);
+        }
+
+        // asignar documents user a event user en properties
+        $properties = $eventUser['properties'];
+        $documents_user_url = [];
+        foreach ($documents_user as $doc) {
+            array_push($documents_user_url, $doc['url']);
+        }
+        $properties_merge = array_merge($properties, ['documents_user' => $documents_user_url]);
+        $eventUser['properties'] = $properties_merge;
+        $eventUser->save();
+
+        return $eventUser;
     }
 }

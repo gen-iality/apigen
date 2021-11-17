@@ -899,4 +899,40 @@ class EventController extends Controller
             'Error' => 'The user does not have the permissions to execute this action'
         ], 403);
     }
+
+    /**
+     * _addDocumentUserToEvent_: adds the default settings to events that have user documents.
+     * @authenticated
+     * 
+     * @urlParam event required event id
+     * @bodyParam quantity number required Indicates how many documents will assigned to a user.
+     * @bodyParam auto_assign boolean required This parameter indicates if the document are assigned to the user automatically or if the user selects them when registering. 
+     * @response {
+     *  all data event...,
+     *  "extra_config": {
+     *      "document_user": {
+     *          "quantity": 2,
+     *          "auto_assign": true
+     *      }
+     *  }
+     * }
+     */
+    public function addDocumentUserToEvent(Request $request, $event_id)
+    {      
+        $data = $request->json()->all();
+
+        $request->validate([
+            'quantity' => 'required|integer',
+            'auto_assign' => 'required|boolean'
+        ]);
+
+        $event = Event::findOrFail($event_id);
+        $documetUser = ["document_user" => $data];
+        $event->extra_config = $documetUser;
+        $event->save();
+
+        return $event;
+    }
 }
+
+
