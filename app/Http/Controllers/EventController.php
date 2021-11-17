@@ -918,11 +918,7 @@ class EventController extends Controller
         ]);
 
         $event = Event::findOrFail($event_id);
-        $documetUser = [
-                "document_user"=>[
-                    $data,
-                ]
-            ];
+        $documetUser = ["document_user" => $data];
         $event->extra_config = $documetUser;
         $event->save();
 

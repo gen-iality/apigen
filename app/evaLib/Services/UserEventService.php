@@ -365,17 +365,24 @@ string(10) "1030522402"
         return $response;
     }
 
-    public static function addDocumentUserToEventUserByEvent($event_id, $eventUser)
+    public static function addDocumentUserToEventUserByEvent($event_id, $eventUser, $limit)
     {
         // traer document user sin asignar
         $get_documets_user = DocumentUser::where('assign', false)->get();
 
-        // guardar event_id & eventuser_id al document user
+        // refactorizar: esta horrible pero funciona, no funciona con un segundo where()
+        $documents_user_unassign = [];
+        foreach ($get_documets_user as $doc) {
+            if ($doc['assign'] == false) {
+                array_push($documents_user_unassign, $doc);
+            }
+        }
+
+        // guardar eventuser_id al document user
         $documents_user = [];
-        // especificar cantidad de documents para asignar con la iteracion del ciclo
-        for ($i = 0; $i <= 1; $i++) {
-            $doc = $get_documets_user[$i];
-            $doc['event_id'] = $event_id;
+        // refactorizar: con foreach no funciona
+        for ($i = 0; $i < $limit; $i++) {
+            $doc = $documents_user_unassign[$i];
             $doc['eventuser_id'] = $eventUser['_id'];
             $doc['assign'] = true; // necesario cambiar de estado
             $doc->save();
