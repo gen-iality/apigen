@@ -421,11 +421,11 @@ class EventUserController extends Controller
         }
 
      
-        //Mail::to($email)
-        //->queue(
-            ////string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-            //new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-        //);
+        Mail::to($email)
+        ->queue(
+            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+        );
 
         if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
