@@ -21,7 +21,18 @@ class DocumentUserController extends Controller
      * _index_: list all documents to user by event.
      * 
      * @urlParam event required event_id
-     * 
+     *
+     * @response "data": [
+     *  {
+     *      "_id": "6192aeb6c179667f40763g29",
+     *      "name": "document name",
+     *      "url": "https://document/img.png",
+     *      "assign": false,
+     *      "updated_at": "2021-11-17 02:57:54",
+     *      "created_at": "2021-11-15 19:02:14",
+     *      "event_id": "602ecc7d52fc536415397962"
+     *  }
+     * ]
      */
     public function index($event)
     {
@@ -31,7 +42,7 @@ class DocumentUserController extends Controller
     }
 
     /**
-     * _store_: create a new document for user in a event
+     * _store_: create a new document user in event
      * 
      * @autheticathed
      * 
@@ -40,6 +51,15 @@ class DocumentUserController extends Controller
      * @bodyParam url string required Document url.
      * @bodyParam assign boolean required This indicate if the document is assigned to a user.
      * 
+     * @response 201 {
+     *   "name": "document name",
+     *   "url": "https://document/img.png",
+     *   "assign": false,
+     *   "event_id": "602ecc7d52fc536415397962",
+     *   "updated_at": "2021-11-16 18:29:47",
+     *   "created_at": "2021-11-16 18:29:47",
+     *   "_id": "6193f89bb558ed609e6f85c0"
+     * }
      */
     public function store($event, Request $request)
     {   
@@ -50,7 +70,7 @@ class DocumentUserController extends Controller
         ]);
 
         $data = $request->json()->all();
-        $data['event_id'] = $event;
+        $data['event_id'] = $event; // asignacion de evento
         $created_document_user = new DocumentUser($data);
         $created_document_user->save();
 
@@ -58,10 +78,23 @@ class DocumentUserController extends Controller
     }
 
     /**
+     *
+     * _show_: Get a document user by id
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @urlParam event required event id
+     * @urlParam documentuser required document user id
      * @return \Illuminate\Http\Response
+     *
+     * @response {
+     *   "name": "document name",
+     *   "url": "https://document/img.png",
+     *   "assign": false,
+     *   "event_id": "602ecc7d52fc536415397962",
+     *   "updated_at": "2021-11-16 18:29:47",
+     *   "created_at": "2021-11-16 18:29:47",
+     *   "_id": "6193f89bb558ed609e6f85c0"
+     * }
      */
     public function show($event, $document_user)
     {
@@ -74,8 +107,21 @@ class DocumentUserController extends Controller
     }
 
     /**
+     * _update_: Update a document user by id
      * Update the specified resource in storage.
      *
+     * @urlParam event required event id
+     * @urlParam documentuser required document user id
+     *
+     * @response {
+     *   "name": "updated document name",
+     *   "url": "https://document/img.png",
+     *   "assign": false,
+     *   "event_id": "602ecc7d52fc536415397962",
+     *   "updated_at": "2021-11-16 18:29:47",
+     *   "created_at": "2021-11-16 18:29:47",
+     *   "_id": "6193f89bb558ed609e6f85c0"
+     * }
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -94,10 +140,16 @@ class DocumentUserController extends Controller
     }
 
     /**
+     * _destroy_: Delete a document user by id
      * Remove the specified resource from storage.
+     *
+     * @urlParam event required event id
+     * @urlParam documentuser required document user id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     *
+     * @response 204
      */
     public function destroy($event, $document_user)
     {
@@ -114,7 +166,20 @@ class DocumentUserController extends Controller
      * _documentsUserByEvent_: list the documents of a logged in user.
      * 
      * @autheticated
-     * 
+     * @urlParam event required event id
+     *
+     * @response "data": [
+     *  {
+     *      "_id": "6192aeb6c179667f40763g29",
+     *      "name": "document name",
+     *      "url": "https://document/img.png",
+     *      "assign": false,
+     *      "updated_at": "2021-11-17 02:57:54",
+     *      "created_at": "2021-11-15 19:02:14",
+     *      "event_id": "602ecc7d52fc536415397962"
+     *      "eventuser_id": "618a87be02824e0b750869a2"
+     *  }
+     * ]
      */
     public function documentsUserByUser($event)
     {    

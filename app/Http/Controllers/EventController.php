@@ -907,6 +907,15 @@ class EventController extends Controller
      * @urlParam event required event id
      * @bodyParam quantity number required Indicates how many documents will assigned to a user.
      * @bodyParam auto_assign boolean required This parameter indicates if the document are assigned to the user automatically or if the user selects them when registering. 
+     * @response {
+     *  all data event...,
+     *  "extra_config": {
+     *      "document_user": {
+     *          "quantity": 2,
+     *          "auto_assign": true
+     *      }
+     *  }
+     * }
      */
     public function addDocumentUserToEvent(Request $request, $event_id)
     {      
