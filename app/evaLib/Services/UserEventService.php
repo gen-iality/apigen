@@ -161,7 +161,7 @@ class UserEventService
         } else {
             $eventUser = Attendee::create($eventUserFields);
             // En caso de que el event posea document user
-            $document_user = $event->extra_config['document_user'];
+            $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
             if (!empty($document_user)) {
                 $limit = $document_user['quantity'];
                 $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event->id, $eventUser, $limit);
