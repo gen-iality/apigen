@@ -401,6 +401,8 @@ class EventUserController extends Controller
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
+        
+
         if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
         }
@@ -423,7 +425,7 @@ class EventUserController extends Controller
         if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
-        
+
         return $eventUser;
 
     }

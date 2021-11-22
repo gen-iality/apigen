@@ -310,13 +310,21 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             ->subject($this->subject)
             ->markdown('rsvp.invitation');
         }
-        return $this
-            ->from("alerts@evius.co", $from)
+        
+        $icalCalendar = isset($event->extra_config['include_ical_calendar']) ? $event->extra_config['include_ical_calendar'] : true;
+
+        if(!$icalCalendar)
+        {
+            return $this ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.invitation');
+        }
+        return $this ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
             ])
             ->markdown('rsvp.invitation');
-        //return $this->view('vendor.mail.html.message');
+        
     }
 }

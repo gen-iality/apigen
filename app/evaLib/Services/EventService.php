@@ -41,18 +41,16 @@ class EventService
 
         $organization = Organization::findOrFail($event->organizer_id);
         
-        if(isset($organization->styles))
-        {
-            $event->styles = $organization->styles; 
-            $event->save();
+        if(isset($styles))
+        {                       
+            $stlyes_validation = array_merge($default_event_styles,$styles);            
+        }else{         
             $stlyes_validation = array_merge($default_event_styles, $organization->styles);
-            
-        }else{
-            $event->styles =  $default_event_styles;
-            $event->save();
-            $stlyes_validation = array_merge($default_event_styles,$styles);
-
         }
+
+        $event->styles =  $stlyes_validation;
+        $event->save();
+
         return $stlyes_validation;
     }
 
@@ -62,6 +60,19 @@ class EventService
         $default_event_styles = config('app.default_event_styles');
         $stlyes_validation = array_merge($default_event_styles, $styles);
         return $stlyes_validation;
+    }
+
+   /**
+    * This end point is call when add document user in the event.
+    */
+    public function addDocumentUserToEvent(Request $request, $event_id)
+    {
+        $data = $request->json()->all();
+        $event = Event::findOrFail($event_id);
+        $event->extra_config->document_user = $data;
+        $event->save();
+
+        return $event;
     }
 
     
