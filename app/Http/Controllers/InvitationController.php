@@ -27,7 +27,6 @@ use Storage;
 
 /**
  * @group Invitation
- * @resource Event
  *
 */
 class InvitationController extends Controller
@@ -118,6 +117,7 @@ class InvitationController extends Controller
         }
 
     }
+    
 
     /**
      * _singIn_: singIn
@@ -146,6 +146,7 @@ class InvitationController extends Controller
         return self::generateLoginLinkAndRedirect( $email, $pass, $eventId,  $innerpath, $destination);
 
     }
+
 
     private function decryptdata($string)
     {

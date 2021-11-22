@@ -15,6 +15,7 @@ use App\State;
 use App\DocumentUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Kreait\Firebase\Auth;
 
 /**
  * Undocumented class

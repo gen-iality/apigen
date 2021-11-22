@@ -18,6 +18,10 @@ use App\Http\Resources\EventUserResource;
 use Auth;
 use App\OrganizationUser;
 use Log;
+use RealRashid\SweetAlert\Facades\Alert;
+use Redirect;
+
+
 
 /**
  * @group User
@@ -460,33 +464,71 @@ class UserController extends UserControllerWeb
     }
 
     /**
+     * _getAccessLink_; get and sent link acces to email to user.
      * 
+     * @urlParam email email required user email
+     * @urlParam event_id event id to redirect user
      */
-    public function getAccessLink(Request $request)
+    public function getAccessLink(Request $request=null, $email=null, $event_id) 
     {
-        $data = $request->input();
-        if(isset($data["user_id"]))
+        $auth = resolve('Kreait\Firebase\Auth');
+
+        if(isset($request))
         {
-            if(is_array($data["user_id"]))
-            {
-                for($i = 0; $i < count($data["user_id"]); $i++)
-                {
-                    $user = Account::find($data["user_id"][$i]);
-                    $password = "evius.2040";
-                    $pass = self::encryptdata($password);
-                    echo  config("app.api_evius") . "/singinwithemail?email=" . $user->email . "&innerpath=" . $data["event_id"]  . "&pass=" . $pass;
-                }
-            }else{
-
-                $user = Account::find($data["user_id"]);
-                $password = "evius.2040";
-                $pass = self::encryptdata($password);
-                echo  config("app.api_evius") . "/singinwithemail?email=" . $user->email . "&innerpath=" . $data["event_id"]  . "&pass=" . $pass;
-
-            }
-
+            $data = $request->all();
         }
-        return true;
+        
+        $email = isset($data["email"]) ?  $data["email"] : $email;
+        $event_id = isset($data["event_id"]) ? $data["event_id"] : $event_id;
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event_id,
+            ]    
+        );
+           
+        Mail::to($email)
+        ->queue(
+            new \App\Mail\LoginMail($link , $event_id, $email)
+        );
+        
+        return $link;
+    }
+
+    /**
+     * _signInWithEmailLink_: this end point start the login when the user does click in the link
+     *  
+     * @urlParam email email required user email
+     * @urlParam event_id event id to redirect user
+     */
+    public function signInWithEmailLink(Request $request)
+    {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $data = $request->all();
+        
+        $singin = '';
+        $redirect='';
+
+        try {
+        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
+        if(isset($data['event_id']))
+        {   
+            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
+
+        }else{
+
+            $redirect = config('app.front_url') . "?token=" . $singin->idToken();
+
+        } 
+        return Redirect::to($redirect);
+
+        }catch(\Exception $e){
+            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event";
+
+            Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
+            return view('Public.Errors.loginLink');         
+        }
+        
     }
 
 }

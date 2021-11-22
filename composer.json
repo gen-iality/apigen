@@ -52,6 +52,7 @@
     "phpoffice/phpspreadsheet": "^1.14.1",
     "platformsh/config-reader": "^1.0",
     "predis/predis": "^1.0",
+    "realrashid/sweet-alert": "^4.1",
     "romm1/omnipay-payu": "^3.0",
     "seatsio/seatsio-php": "^43.0",
     "spatie/icalendar-generator": "^1.0",

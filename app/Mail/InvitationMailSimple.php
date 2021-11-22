@@ -8,12 +8,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\evaLib\Services\UserEventService;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 use App\evaLib\Services\GoogleFiles;use QRCode;
 use App;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
+
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
 {
@@ -110,7 +113,12 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass)."&destination=".$destination;
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]    
+        );
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
 
