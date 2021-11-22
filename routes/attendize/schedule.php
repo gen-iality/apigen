@@ -32,7 +32,7 @@ Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
 /****************
  * NEWSFEED
  ****************/
-Route::apiResource('events/{event}/newsfeed', 'NewsfeedController');
+// Route::apiResource('events/{event}/newsfeed', 'NewsfeedController');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
