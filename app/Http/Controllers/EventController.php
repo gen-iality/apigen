@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\evaLib\Services\EvaRol;
+use App\evaLib\Services\EventService;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\EventType;
+use App\Attendee;
 use App\Http\Resources\EventResource;
 use App\ModelHasRole;
 use App\Organization;
@@ -26,7 +28,7 @@ use Mail;
  */
 
 class EventController extends Controller
-{   
+{
     // @apiResourceCollection App\Http\Resources\EventResource
     // * @apiResourceModel App\Event
     /**
@@ -103,7 +105,7 @@ class EventController extends Controller
 
         $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
             ->whereNotNull('visibility') //not null
-            ->Where('datetime_to', '>', $currentDate)
+            //->Where('datetime_to', '>', $currentDate)
             ->orderBy('datetime_from', 'ASC');
 
         $input = $request->all();
@@ -130,13 +132,36 @@ class EventController extends Controller
             ->whereNotNull('visibility') //not null
             ->Where('datetime_to', '<', $currentDate)
             ->orderBy('datetime_from', 'DESC');
-            
+
         $input = $request->all();
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
 
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
+
+        /**
+     * _afterToday_: list of upcoming events
+     *
+     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * 
+     */
+    public function afterToday(Request $request, FilterQuery $filterQuery)
+    {
+        $currentDate = new \Carbon\Carbon();
+        //$currentDate = $currentDate->subWeek(2);
+
+        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+            ->whereNotNull('visibility') //not null
+            ->Where('datetime_to', '>', $currentDate)
+            ->orderBy('datetime_from', 'ASC');
+
+        $input = $request->all();
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return EventResource::collection($results);
+
+    }
+    
     /**
      * _currentUserindex_: list of events of the organizer
      *
@@ -149,7 +174,6 @@ class EventController extends Controller
             Event::where('author_id', $user->id)
                 ->paginate(config('app.page_size'))
         );
-
     }
 
     /**
@@ -166,7 +190,6 @@ class EventController extends Controller
             Event::where('organiser_id', $id)
                 ->paginate(config('app.page_size'))
         );
-
     }
 
     /**
@@ -183,7 +206,6 @@ class EventController extends Controller
             Event::where('organizer_id', $id)
                 ->paginate(config('app.page_size'))
         );
-
     }
 
     /**
@@ -230,25 +252,23 @@ class EventController extends Controller
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
         $user = Auth::user();
-        $data = $request->except(['user_properties','token']);
+        $data = $request->except(['user_properties', 'token']);
         $dataUserProperties = $request->only('user_properties');
-        
+
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
-            $data, [
+            $data,
+            [
                 'name' => 'required',
             ]
         );
 
         //Flow to validate the creation of a course depending on whether the creator is an administrator or a teacher
         $userRol = isset($user->others_properties['role']) ? $user->others_properties['role'] : null;
-        
-        
-        if(isset($userRol) && ($userRol == 'admin' || $userRol == 'teacher'))
-        {
+        if (isset($userRol) && ($userRol == 'admin' || $userRol == 'teacher')) {
             $data['status'] = ($userRol == 'admin') ? 'approved' : 'draft';
         }
-        
+
 
         if ($validator->fails()) {
             return response(
@@ -260,18 +280,12 @@ class EventController extends Controller
         $data['organizer_type'] = "App\user";
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
-        if (!empty($data['styles'])) {
-            $data['styles'] = self::AddDefaultStyles($data['styles']);
-        }
-
         
-       
+        
+
         $Properties = new UserProperties();
         $result = new Event($data);
         
-        
-
-
 
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
@@ -283,95 +297,55 @@ class EventController extends Controller
             echo 'autor no se pudo asociar al evento, contacte el administrador, error: ', $e->getMessage(), "\n";
         }
 
+
         /* Organizer:
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        self::assingOrganizer($data, $result);
+        EventService::assingOrganizer($data, $result);
 
         /*Events Type*/
 
         if (isset($data['event_type_id'])) {
-            $event_type = EventType::findOrFail($data['event_type_id']);
-            $result->eventType()->associate($event_type);
-            if (!is_string($result->author_id)) {
-                $result->author_id = [];
+            $event_type = EventType::find($data['event_type_id']);
+            if ($event_type) {
+                $result->eventType()->associate($event_type);
+                if (!is_string($result->author_id)) {
+                    $result->author_id = [];
+                }
             }
-            $result->save();
         }
-
+        $styles = $data['styles'];
+        EventService::AddDefaultStyles($styles,$result);
+        
+        //Persist the model to database
+        $result->save();
+        
         /*categories*/
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
         }
-         
-        if(isset($dataUserProperties))
-        { 
+
+        if (isset($dataUserProperties)) {
             $event = Event::find($result->_id);
-            for($i=0; $i < count($dataUserProperties['user_properties']) ; $i++)
-            {    
-                                                         
+            for ($i = 0; $i < count($dataUserProperties['user_properties']); $i++) {
+
                 $model = new UserProperties($dataUserProperties['user_properties'][$i]);
                 $event->user_properties()->save($model);
-            }            
+            }
         }
-
-        self::addOwnerAsAdminColaborator($user->id, $result->id);
-        self::createDefaultUserProperties($result->id);
+        
+        //Configuracione spor defecto de todos los eventos
+        EventService::addEventMenu($result);
+        EventService::addOwnerAsAdminColaborator($user, $result);
+        EventService::createDefaultUserProperties($result->id);
 
 
         return $result;
     }
 
-    /**
-     * _createDefaultUserProperties_: create default properties (name and email) for the user
-     * 
-     * @urlParam event_id required
-     *
-     * @param string $event_id
-     * @return void
-     */
-    private static function createDefaultUserProperties($event_id)
-    {
-        /*Crear propierdades names, email, picture*/
-        $model = Event::find($event_id);
-        $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
 
-        $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
-        $user_properties = new UserProperties($email);
-        $model->user_properties()->save($user_properties);
-
-        $picture = array("name" => "picture", "label" => "Avatar", "unique" => false, "mandatory" => false, "type" => "avatar");
-        $user_properties = new UserProperties($picture);
-        $model->user_properties()->save($user_properties);
-    }
-
-    private static function AddDefaultStyles($styles)
-    {
-        $default_event_styles = config('app.default_event_styles');
-        $stlyes_validation = array_merge($default_event_styles, $styles);
-        return $stlyes_validation;
-    }
-    private static function AddAppConfiguration($styles)
-    {
-        $default_event_styles = config('app.app_configuration');
-        $stlyes_validation = array_merge($default_event_styles, $styles);
-        return $stlyes_validation;
-    }
-
-    public function addOwnerAsAdminColaborator($user_id, $event_id)
-    {
-        $DataUserRolAdminister = [
-            "role_id" => Event::ID_ROL_ADMINISTRATOR,
-            "model_id" => $user_id,
-            "event_id" => $event_id,
-            "model_type" => "App\Account",
-        ];
-        $DataUserRolAdminister = ModelHasRole::create($DataUserRolAdminister);
-        return $DataUserRolAdminister;
-    }
+        
 
     /**
      * _show_: display information about a specific event.
@@ -383,17 +357,8 @@ class EventController extends Controller
      */
     public function show(String $id)
     {
-        //Esto es para medir el tiempo de ejecución se pone al inicio y el final
-        //$i = round(microtime(true) * 1000);
-        //$i = round(microtime(true) * 1000); $f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         $event = Event::findOrFail($id);
-        /* @TODO porque los stages se cargan aqui en el evento
-        $stages = $this->stagesStatusActive($id);
-        $event->event_stages = $stages;
-         */
-
-        //$f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
-        return new EventResource($event);
+        return $event;
     }
 
     /**
@@ -444,7 +409,7 @@ class EventController extends Controller
         }
 
         if (!empty($data['styles'])) {
-            $data['styles'] = self::AddDefaultStyles($data['styles']);
+            $data['styles'] = EventService::AddAppConfiguration($data['styles']);
         }
 
         if (!isset($data['app_configuration']) && !empty($event->app_configuration)) {
@@ -466,17 +431,16 @@ class EventController extends Controller
         if (!isset($data["organizer_id"]) && !empty($event->organizer_id)) {
             $data["organizer_id"] = $event->organizer_id;
         } elseif (empty($event->organizer_id) || !empty($event->organizer_id) && !empty($data['organizer_id'])) {
-            self::assingOrganizer($data, $event);
+            EventService::assingOrganizer($data, $event);
         }
-        
+
         //Convertir el id de string a ObjectId al hacer cambio con drag and drop
-        if (isset($data["user_properties"]))
-        {
-            foreach($data['user_properties'] as $key => $value){
-                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();           
+        if (isset($data["user_properties"])) {
+            foreach ($data['user_properties'] as $key => $value) {
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();
             }
         }
-        
+
 
         $event->fill($data);
         $event->save();
@@ -484,27 +448,7 @@ class EventController extends Controller
         return new EventResource($event);
     }
 
-    /**
-     * _assingOrganizer_: associate organizer to an event.
-     * It could be "me"(current user) or a organization Id the relationship is polymorpic.
-     * 
-     * @bodyParam data array required organizer_id Exmaple : ['organizer_id']
-     **/
-    private static function assingOrganizer($data, $event)
-    {
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
-            if ($data['organizer_id'] == "me") {
-                $organizer = $user;
-            } else {
-                $organizer = Account::findOrFail($data['organizer_id']);
-            }
-        } else {
-            //organizer is an organization entity
-            $organizer = Organization::findOrFail($data['organizer_id']);
-        }
-        return $event->organizer()->associate($organizer);
-
-    }
+    
     /**
      * _destroy_: delete event.
      *
@@ -803,7 +747,6 @@ class EventController extends Controller
             }
         }
         return $stages;
-
     }
 
 
@@ -839,17 +782,16 @@ class EventController extends Controller
      * }
      * 
      */
-    public function changeStatusEvent(Request $request , $event_id)
-    {   
+    public function changeStatusEvent(Request $request, $event_id)
+    {
         $data = $request->json()->all();
-        
+
         //Get authenticated user
         $user = Auth::user();
         $userRol =  isset($user) ? $user->others_properties['role'] :  null;
-                    
+
         //Validate that the authenticated user is an administrator
-        if(isset($userRol) && $userRol == 'admin')
-        {
+        if (isset($userRol) && $userRol == 'admin') {
 
             $event = Event::find($event_id);
             $event->status = $data['status'];
@@ -857,23 +799,58 @@ class EventController extends Controller
 
             //Organization in which the event has been created
             $organization = Organization::find($event->organizer_id);
-            $organization = Account::find($organization->author);            
+            $organization = Account::find($organization->author);
 
             //User who created the Event
             $author = Account::find($event->author_id);
-            
+
             //Mail that informs the creator of the event, about the update of the status of the event
             Mail::to($author->email)
-            ->queue(                
+                ->queue(
                     new \App\Mail\ConfirmationCourseEmail($event, $author, $organization)
                 );
 
             return $event;
         }
-        
+
         return response()->json([
             'Error' => 'The user does not have the permissions to execute this action'
         ], 403);
-        
+    }
+
+    /**
+     * _addDocumentUserToEvent_: adds the default settings to events that have user documents.
+     * @authenticated
+     * 
+     * @urlParam event required event id
+     * @bodyParam quantity number required Indicates how many documents will assigned to a user.
+     * @bodyParam auto_assign boolean required This parameter indicates if the document are assigned to the user automatically or if the user selects them when registering. 
+     * @response {
+     *  all data event...,
+     *  "extra_config": {
+     *      "document_user": {
+     *          "quantity": 2,
+     *          "auto_assign": true
+     *      }
+     *  }
+     * }
+     */
+    public function addDocumentUserToEvent(Request $request, $event_id)
+    {      
+        $data = $request->json()->all();
+
+        $request->validate([
+            'quantity' => 'required|integer',
+            'auto_assign' => 'required|boolean'
+        ]);
+
+        $event = Event::findOrFail($event_id);
+        $documetUser = ["document_user" => $data];
+        $event->extra_config = $documetUser;
+        $event->save();
+
+        return $event;
     }
 }
+
+

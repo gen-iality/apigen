@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\evaLib\Services\EvaRol;
 use App\Http\Resources\OrganizationResource;
 use App\Organization;
+use App\UserProperties;
 use App\Event;
 use App\Attendee;
 use App\Order;
@@ -16,6 +17,7 @@ use Mail;
 use Validator;
 use App\DiscountCodeMarinela;
 use App\DiscountCodeTemplate;
+use App\evaLib\Services\OrganizationServices;
 
 /**
  * @group Organization
@@ -60,37 +62,39 @@ class OrganizationController extends Controller
     public function store(Request $request, EvaRol $RolService)
     {
         $data = $request->json()->all();
-
-        /* Se le agregan campos obligatorios a la organizaci�n*/
-
-            if(isset($data['properties'])){ 
-                $data['properties'] += [
-                    ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
-                    ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
-                ];
-            }else{
-                $data['properties'] = [
-                    ["name" => "email", "unique" => false, "mandatory" => false,"type" => "email"],
-                    ["name" => "names", "unique" => false, "mandatory" => false,"type" => "text"]
-                ];
-            } 
+        $dataUserProperties = $request->only('user_properties');        
 
         $model = new Organization($data);
         // return response($model);
-        $model->author = Auth::user()->id;
+        $model->author = Auth::user()->_id;
 
         $user = Auth::user();
 
-        $RolService->createAuthorAsOrganizationAdmin(Auth::user()->id, $model->_id);
-        
+        $styles = isset($data['styles']) ? $data['styles'] : null ;
+        $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
+        $data['styles'] = OrganizationServices::createDefaultStyles($styles,$model);
+
         $model->save();
+
+        
+        if (isset($dataUserProperties['user_properties'])) {
+            $organization = Organization::find($model->_id);
+            for ($i = 0; $i < count($dataUserProperties['user_properties']); $i++) {
+
+                $model = new UserProperties($dataUserProperties['user_properties'][$i]);
+                $organization->user_properties()->save($model);
+            }
+        }
+        OrganizationServices::createDefaultUserProperties($model->_id);
+        
+
+
         
         if (isset($data['category_ids'])) {
             $model->categories()->sync($data['category_ids']);
-        }
+        }              
         
-        
-        return new OrganizationResource($model);
+        return $model;
     }
 
 
@@ -108,26 +112,60 @@ class OrganizationController extends Controller
 
     /**
      * _update_: Update the specified resource in organization.
-     *
-     * @urlParam organization_id required
+     * @authenticated
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Organization  $organization
-     * @return \Illuminate\Http\Response
+     * @urlParam organization_id required
+     * @urlParam update_events_itemsMenu if you want to update the items menu of all events of the organization, send this parameter equal true
+     * @urlParam update_events_user_properties if you want to update the user_properties of all events of the organization, send this parameter equal true
+     * 
+     * 
      */
     public function update(Request $request, $organization_id)
     {
         $organization = Organization::findOrFail($organization_id);
         $data = $request->json()->all();
+        $dataQuery = $request->input();
        
-        $organization->fill($data);
+        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu']))
+        {
+            $events = Event::where('organizer_id' , $organization->_id)->get();
 
-        
-        $organization->save();
+            foreach($events as $event)
+            {
+                $event->itemsMenu = $organization->itemsMenu;
+                $event->save();
+            }
+        }   
 
         if (isset($data['category_ids'])) {
             $organization->categories()->sync($data['category_ids']);
         }
+
+        //Convertir el id de string a ObjectId al hacer cambio con drag and drop
+        if (isset($data["user_properties"])) {
+            foreach ($data['user_properties'] as $key => $value) {
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();            
+
+            }
+
+            if(isset($dataQuery['update_events_user_properties']))
+            {
+                $events = Event::where('organizer_id' , $organization->_id)->get();
+                foreach($events as $event)
+                {
+                    $event->user_properties()->delete();
+
+                    for ($i = 0; $i < count($data['user_properties']); $i++) {
+                        $model = new UserProperties($data['user_properties'][$i]);
+                        $event->user_properties()->save($model);
+                    }
+                }
+            }
+        }
+        
+        $organization->fill($data);
+        $organization->save();
+        
         return new OrganizationResource($organization);
     }
 
@@ -380,6 +418,9 @@ class OrganizationController extends Controller
             case 'despachado':
                 $status = "5c423232c9a4c86123236dcd";
             break;
+            case 'valida':
+                $status = "613ff0c1f1c6df84356b30c2";
+            break;
         }
 
         $ordersEmail = Order::where('order_status_id' , $status)->where('organization_id' , $organization)->pluck('email');
@@ -407,7 +448,7 @@ class OrganizationController extends Controller
         $userFor = "";  
         if(isset($filters['type_report']))
         {
-            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. </br>';     
+            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. <br/>';     
         }               
         
         $arrayUsers = [];
@@ -458,7 +499,7 @@ class OrganizationController extends Controller
                 foreach($ordersByUser as $orderByUser)
                 {
                     $totalOrdersUser = $totalOrdersUser + $orderByUser->amount;
-                    // echo $orderByUser->amount. '</br>';
+                    // echo $orderByUser->amount. '<br>';
                 }
                 
                 $estado = ($totalOrdersUser <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
@@ -473,7 +514,7 @@ class OrganizationController extends Controller
                             $totalOrdersUser .','.
                             $estado. ',' .
                             $fechaOrders.','. 
-                            $productos. '</br>';
+                            $productos. '<br>';
                 }else{
                     $dataByUserjson= response()->json([
                         "_id" => $order->_id,
@@ -492,11 +533,14 @@ class OrganizationController extends Controller
                     array_push($dataComplete , $dataByUserjson);                                        
                 } 
             }else{
-                echo $user->email . ', NO TIENE ORDER</br>';
+                echo $user->email . ', NO TIENE ORDER<br>';
             }
             
         }
-        return $dataComplete;
+        if(!isset($filters['type_report']))
+        {
+            return $dataComplete;
+        }
 
     }
     

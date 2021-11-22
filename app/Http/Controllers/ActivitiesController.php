@@ -580,12 +580,56 @@ class ActivitiesController extends Controller
             [   
                 'activity_id' => $data['activity_id'] ,
                 'user_id'=> $data['user_id'],
-                'event_id' => $data['event_id'],
-                'checkedin_at' => $date
+                'checked_in' => true
             ]
         );      
 
+        
+        /*Se realiza validación para que la fecha y hora del checkIn sea siempre el primero 
+        y no se actualice en caso de que el usuario vuelva a ingresar a la actividad*/
+        if (!isset($ActivityAssistant->checkedin_at)) {
+            $ActivityAssistant->fill(['checkedin_at' => $date]);
+        }
+        $ActivityAssistant->printouts  = $ActivityAssistant->printouts + 1;
+        $ActivityAssistant->save();
+
+        return $ActivityAssistant;
+
+    }
+
+    /**
+     * _checkInByAdmin_: admin can check-in a specific user on a specific activity
+     * @authenticated 
+     * 
+     * @urlParam event required event to which the activity belongs
+     * @urlParam activity required activity id
+     * 
+     * @bodyParam user_id string required user id
+     */
+    public function checkInByAdmin(Request $request, $event_id, $activity_id)
+    {
+        $data = $request->json()->all();
+        $date = new \DateTime();
+
+        $ActivityAssistant = ActivityAssistant::updateOrCreate(
+            [   
+                'activity_id' => $activity_id ,
+                'user_id'=> $data['user_id'],
+                'checked_in' => true,
+                'event_id' =>  $event_id,
+
+            ],
+            [
+                'checkedin_at' => $date,
+            ]
+        );      
+
+        
         return $ActivityAssistant;
     }
+
+
+    
+
 }
 

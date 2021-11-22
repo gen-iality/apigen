@@ -35,6 +35,7 @@ class Host extends Moloquent
         'order',
         'category_id',
         'published',
-        'index'
+        'index',
+        'phone'
     ];
 }

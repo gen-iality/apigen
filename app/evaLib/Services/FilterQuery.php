@@ -54,6 +54,7 @@ class FilterQuery
         $orderedBy = is_array($orderedBy) ? $orderedBy : [$orderedBy];
 
         foreach ((array) $filteredBy as $condition) {
+            
             if (!$condition || !isset($condition->field) || !isset($condition->value)) {
                 continue;
             }
@@ -67,9 +68,11 @@ class FilterQuery
             $comparator = (isset($condition->comparator)) ? $condition->comparator : "=";
             if (strtolower($comparator) == "like") {
                 $condition->value = "%" . $condition->value . "%";
-            }
+            }  
 
+                        
             if (!is_array($condition->value)) {
+
                 $query->where($condition->field, $comparator, $condition->value);
             } else {
                 $query->whereIn($condition->field, $condition->value);

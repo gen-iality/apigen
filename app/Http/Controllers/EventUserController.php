@@ -377,7 +377,7 @@ class EventUserController extends Controller
         if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
             $email = $eventUserData["properties"]["email"];
         }
-
+        
         //El correo es super obligatorio para el registro
         if (!$email) {
             return abort(400, "Email is required");
@@ -401,6 +401,8 @@ class EventUserController extends Controller
         $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
 
+        
+
         if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
         }
@@ -420,10 +422,10 @@ class EventUserController extends Controller
             new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
         );
 
-        if ($event_id == '60c8affc0b4f4b417d252b29') {
-            $hubspot = self::hubspotRegister($request, $event_id);
+        if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
+            $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
-        
+
         return $eventUser;
 
     }
@@ -522,6 +524,8 @@ class EventUserController extends Controller
                     return "minimun password length is 6 characters";
                 }
             }
+            // $userData["password"] =self::encryptdata($userData["password"]);
+            
             $validations = [
                 'email' => 'required|email',
                 //'other_fields' => 'sometimes',
@@ -645,6 +649,32 @@ class EventUserController extends Controller
         }
         return $response;
     }
+
+
+    private function encryptdata($string)
+    {
+
+        // Store the cipher method
+        $ciphering = "AES-128-CTR"; //config(app.chiper);
+
+        // Use OpenSSl Encryption method
+        $iv_length = openssl_cipher_iv_length($ciphering);
+        $options = 0;
+
+        // Non-NULL Initialization Vector for encryption
+        $encryption_iv = config('app.encryption_iv');
+
+        // Store the encryption key
+        $encryption_key = config('app.encryption_key');
+
+        // Use openssl_encrypt() function to encrypt the data
+        $encryption = openssl_encrypt($string, $ciphering,
+            $encryption_key, $options, $encryption_iv);
+
+        // Display the encrypted string
+        return $encryption;
+    }
+
 
     /**
      * _testCreateUserAndAddtoEvent_: test Create User And Add to Event
@@ -837,16 +867,14 @@ class EventUserController extends Controller
     /**
      * _update_:update a specific assistant
      *
-     * @urlParam event_id string required
-     * @urlParam evenUserId string required id de Attendee
+     * @urlParam event string required
+     * @urlParam eventusers string required id de Attendee
      *
      * @bodyParam email email  field
      * @bodyParam name  string field
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * @bodyParam rol_id string rol id this is the role user into event 
+     * @bodyParam properties. any other params  will be saved in user and eventUser.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Attendee  $eventUser
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $event_id, $evenUserId)
     {
@@ -1049,7 +1077,7 @@ class EventUserController extends Controller
     /**
      *
      */
-    public function hubspotRegister(Request $request, $event_id)
+    public function hubspotRegister(Request $request, $event_id, $event)
     {
         $eventUserData = $request->json()->all();
 
@@ -1072,7 +1100,7 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'city',
-                    'value' => $eventUserData['properties']['ciudad'],
+                    'value' => isset($eventUserData['properties']['ciudad']) ? $eventUserData['properties']['ciudad'] :  "",
                 ),
                 array(
                     'property' => 'mobilephone',
@@ -1084,11 +1112,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'objeto_negocio',
-                    'value' => $eventUserData['properties']['ofreceproductosserviciosoambos'],
+                    'value' => isset($eventUserData['properties']['ofreceproductosserviciosoambos'])?$eventUserData['properties']['ofreceproductosserviciosoambos'] : "",
                 ),
                 array(
                     'property' => 'tipo_objeto_negocio',
-                    'value' => $eventUserData['properties']['selecciondetipodeobjeto'],
+                    'value' => isset($eventUserData['properties']['selecciondetipodeobjeto'])?$eventUserData['properties']['selecciondetipodeobjeto']: "",
                 ),
                 array(
                     'property' => 'company',
@@ -1104,7 +1132,11 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'origen_lead',
-                    'value' => 'MeetUps',
+                    'value' => isset($event->name) ? $event->name : "MeetUps",
+                ),
+                array(
+                    'property' => 'rol_cargo',
+                    'value' => isset($eventUserData['properties']['rolenlaempresa']) ? $eventUserData['properties']['rolenlaempresa'] : "",
                 ),
             ),
         );        

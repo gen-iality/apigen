@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Event;
+use App\Account;
 use App\Models\Ticket;
 use App\Organization;
 use Illuminate\Bus\Queueable;
@@ -82,7 +83,9 @@ class RSVP extends Mailable implements ShouldQueue
 
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
 
-        $password = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : $email;
+        $accountPassword = Account::find($eventUser->account_id);
+        $password = isset( $accountPassword->password) ?  $accountPassword->password : $email;
+        
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
 
         // lets encrypt !
@@ -95,8 +98,12 @@ class RSVP extends Mailable implements ShouldQueue
         }
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
-
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]    
+        );
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
         $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $eventUser["_id"] .'/unsubscribe';

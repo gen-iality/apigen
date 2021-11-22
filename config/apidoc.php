@@ -108,6 +108,7 @@ return [
                         '*/events/{event_id}',
                         '*/eventTypes',
                         '*/changeStatusEvent',
+                        '*/adddocumentuser',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -121,7 +122,9 @@ return [
                         '*/users/*',
                         '*/auth',
                         '*/auth/*',  
-                        '*/changeUserPassword',        
+                        '*/changeUserPassword',      
+                        '*/getloginlink',
+                        '*/singinwithemaillink'  ,
                               
                     //Host
                         '*/host/*',    
@@ -149,6 +152,10 @@ return [
                         '*/validateFreeorder',
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
+                        '*/organizations/*',
+                    //TemplateProperties
+                        '*/templateproperties/*',
+                        '*/templateproperties',
                     //Surveys
                         '*/surveys',
                         '*/surveys/*',
@@ -172,6 +179,9 @@ return [
                         '*/newsfeed/*',    
                     //Google Analytics
                         '*/googleanalytics',
+                    //DocumentUser
+                        '*/documentusers',
+                        '*/documentusers/*', 
 
                 ],  
 

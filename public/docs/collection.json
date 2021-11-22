@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Evius API",
-        "_postman_id": "1490a286-0cdb-41ea-b3c1-1eedcf6caf81",
+        "_postman_id": "d2b60916-4388-46c1-a504-c674c081c497",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -23,13 +23,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "et",
+                                    "value": "non",
                                     "description": "id of the event to which the activities belong."
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "minima",
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -269,7 +269,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"neque\",\n    \"activity_description\": \"aut\"\n}"
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"inventore\",\n    \"activity_description\": \"quia\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -287,13 +287,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "occaecati",
+                                    "value": "corporis",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "harum",
                                     "description": "activity to which the meeting is to be created"
                                 }
                             ]
@@ -329,13 +329,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "modi",
+                                    "value": "officiis",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "est",
+                                    "value": "qui",
                                     "description": "id of activity"
                                 }
                             ]
@@ -382,6 +382,48 @@
                         "body": {
                             "mode": "raw",
                             "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_checkInByAdmin_: admin can check-in a specific user on a specific activity",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/activities\/:activity\/checkinbyadmin",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "sit",
+                                    "description": "event to which the activity belongs"
+                                },
+                                {
+                                    "id": "activity",
+                                    "key": "activity",
+                                    "value": "quaerat",
+                                    "description": "activity id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"user_id\": \"consequatur\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -441,7 +483,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "maiores",
+                                    "value": "incidunt",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -519,7 +561,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "autem",
+                                    "value": "nulla",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -555,7 +597,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "enim",
+                                    "value": "quis",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -591,7 +633,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nemo",
+                                    "value": "provident",
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -627,13 +669,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "reiciendis",
+                                    "value": "dolorem",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sed",
+                                    "value": "voluptates",
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -821,7 +863,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"rem\"\n}"
+                            "raw": "{\n    \"name\": \"odit\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -891,7 +933,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"organization_id\": \"blanditiis\",\n    \"comment\": \"ex\",\n    \"image\": \"dolores\"\n}"
+                            "raw": "{\n    \"organization_id\": \"ad\",\n    \"comment\": \"natus\",\n    \"image\": \"distinctio\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -993,7 +1035,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "corrupti",
+                                    "value": "sed",
                                     "description": ""
                                 }
                             ]
@@ -1177,13 +1219,13 @@
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-                                    "value": "voluptas",
+                                    "value": "est",
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-                                    "value": "est",
+                                    "value": "sit",
                                     "description": "id code delete"
                                 }
                             ]
@@ -1229,7 +1271,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"facilis\"\n}"
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"ratione\"\n}"
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1257,7 +1299,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"omnis\"\n}"
+                            "raw": "{\n    \"code\": \"ad\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1273,13 +1315,13 @@
                             "query": [
                                 {
                                     "key": "organization",
-                                    "value": "sit",
+                                    "value": "dignissimos",
                                     "description": "organization_id",
                                     "disabled": false
                                 },
                                 {
                                     "key": "email",
-                                    "value": "est",
+                                    "value": "laborum",
                                     "description": "user email",
                                     "disabled": false
                                 }
@@ -1360,7 +1402,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"dolores\"\n}"
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"qui\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1525,6 +1567,246 @@
             ]
         },
         {
+            "name": "Document User",
+            "description": "\nThis model works to manage the documents to assign to the attendees.",
+            "item": [
+                {
+                    "name": "_index_: list all documents to user by event.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/documentusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "omnis",
+                                    "description": "event_id"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: Get a document user by id\nDisplay the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/documentusers\/:documentuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "vero",
+                                    "description": "event id"
+                                },
+                                {
+                                    "id": "documentuser",
+                                    "key": "documentuser",
+                                    "value": "dolorum",
+                                    "description": "document user id"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: create a new document user in event",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/documentusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "voluptate",
+                                    "description": "event id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"ipsa\",\n    \"url\": \"error\",\n    \"assign\": false\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: Update a document user by id\nUpdate the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/documentusers\/:documentuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "consectetur",
+                                    "description": "event id"
+                                },
+                                {
+                                    "id": "documentuser",
+                                    "key": "documentuser",
+                                    "value": "laudantium",
+                                    "description": "document user id"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: Delete a document user by id\nRemove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/documentusers\/:documentuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "aspernatur",
+                                    "description": "event id"
+                                },
+                                {
+                                    "id": "documentuser",
+                                    "key": "documentuser",
+                                    "value": "accusantium",
+                                    "description": "document user id"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_documentsUserByEvent_: list the documents of a logged in user.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/me\/documentusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "amet",
+                                    "description": "event id"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
             "name": "Event",
             "description": "",
             "item": [
@@ -1585,7 +1867,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"ut\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"reiciendis\",\n    \"extra_config\": {},\n    \"status\": \"aut\"\n}"
+                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"aut\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"reiciendis\",\n    \"extra_config\": {},\n    \"status\": \"eum\"\n}"
                         },
                         "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
                         "response": []
@@ -1631,7 +1913,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "voluptatem",
+                                    "value": "hic",
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -1649,7 +1931,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"description\": \"omnis\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"temporibus\",\n    \"visibility\": \"PUBLIC\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c2\",\n    \"event_type_id\": \"5bf47203754e2317e4300b68\"\n}"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"description\": \"numquam\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"fuga\",\n    \"visibility\": \"PUBLIC\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c2\",\n    \"event_type_id\": \"5bf47203754e2317e4300b68\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1667,7 +1949,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "fugiat",
+                                    "value": "veniam",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -1741,7 +2023,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"suscipit\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"quam\",\n    \"extra_config\": {},\n    \"status\": \"quisquam\"\n}"
+                            "raw": "{\n    \"name\": \"Programming course\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"dolore\",\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category\": [],\n    \"location\": \"fugit\",\n    \"extra_config\": {},\n    \"status\": \"necessitatibus\"\n}"
                         },
                         "description": "There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be \"me\" (current user) or an organization Id.",
                         "response": []
@@ -1759,7 +2041,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "aut",
+                                    "value": "delectus",
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -1777,7 +2059,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"description\": \"iure\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"esse\",\n    \"visibility\": \"PUBLIC\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c2\",\n    \"event_type_id\": \"5bf47203754e2317e4300b68\"\n}"
+                            "raw": "{\n    \"name\": \"\\\"Programming course\\\"\",\n    \"description\": \"dicta\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"picture\": \"ea\",\n    \"visibility\": \"PUBLIC\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"author_id\": \"5e9caaa1d74d5c2f6a02a3c2\",\n    \"event_type_id\": \"5bf47203754e2317e4300b68\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1795,7 +2077,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "ut",
+                                    "value": "deleniti",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -1859,7 +2141,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "molestias",
+                                    "value": "quia",
                                     "description": "id of the event to be rejected or approved Example:"
                                 }
                             ]
@@ -1895,7 +2177,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "nihil",
+                                    "value": "sed",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -1931,7 +2213,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "est",
+                                    "value": "quia",
                                     "description": "organizer_id"
                                 }
                             ]
@@ -1950,6 +2232,98 @@
                         "body": {
                             "mode": "raw",
                             "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/organizations\/{id}\/eventsstadistics",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:id\/eventsstadistics",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event_id}\/surveys\/{id}\/coursefinished",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event_id\/surveys\/:id\/coursefinished",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_addDocumentUserToEvent_: adds the default settings to events that have user documents.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/adddocumentuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "ex",
+                                    "description": "event id"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"quantity\": 832,\n    \"auto_assign\": false\n}"
                         },
                         "description": "",
                         "response": []
@@ -2011,7 +2385,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"consequatur\"\n}"
+                            "raw": "{\n    \"name\": \"totam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2070,13 +2444,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dicta",
+                                    "value": "repudiandae",
                                     "description": "string required"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aut",
+                                    "value": "voluptas",
                                     "description": "string required id Attendee"
                                 }
                             ]
@@ -2106,13 +2480,13 @@
                         "url": {
                             "protocol": "https",
                             "host": "api.evius.co",
-                            "path": "api\/events\/:event_id\/eventusers\/:id",
+                            "path": "api\/events\/:event\/eventusers\/:eventuser",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "occaecati",
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "voluptatem",
                                     "description": "string required"
                                 }
                             ]
@@ -2130,7 +2504,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"rerum\",\n    \"name\": \"neque\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"qui\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"placeat\",\n    \"name\": \"et\",\n    \"rol_id\": \"sint\",\n    \"properties\": {\n        \"\": \"sunt\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2148,7 +2522,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "aut",
+                                    "value": "adipisci",
                                     "description": "string required"
                                 }
                             ]
@@ -2166,7 +2540,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"ea\",\n    \"name\": \"expedita\",\n    \"password\": \"mollitia\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"facere\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"ea\",\n    \"name\": \"deserunt\",\n    \"password\": \"atque\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"consequatur\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2184,7 +2558,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "inventore",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -2248,7 +2622,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quia",
+                                    "value": "quaerat",
                                     "description": "string required"
                                 }
                             ]
@@ -2284,7 +2658,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "tenetur",
+                                    "value": "dignissimos",
                                     "description": "string required"
                                 }
                             ]
@@ -2320,7 +2694,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "et",
+                                    "value": "earum",
                                     "description": "string id of the event in which the user is registered"
                                 }
                             ]
@@ -2338,7 +2712,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"illum\"\n}"
+                            "raw": "{\n    \"email\": \"enim\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2384,7 +2758,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "qui",
+                                    "value": "eveniet",
                                     "description": ""
                                 }
                             ]
@@ -2424,7 +2798,7 @@
                                 },
                                 {
                                     "key": "datetime_from",
-                                    "value": "id",
+                                    "value": "officia",
                                     "description": "date",
                                     "disabled": false
                                 }
@@ -2489,13 +2863,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "illum",
+                                    "value": "sit",
                                     "description": ""
                                 },
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "autem",
+                                    "value": "consectetur",
                                     "description": ""
                                 }
                             ]
@@ -2513,7 +2887,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"repellendus\"\n}"
+                            "raw": "{\n    \"rol_id\": \"corrupti\"\n}"
                         },
                         "description": "This end point sends an email to the user to inform them of the change.",
                         "response": []
@@ -2547,7 +2921,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"accusantium\"\n}"
+                            "raw": "{\n    \"file\": \"delectus\"\n}"
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -2565,7 +2939,7 @@
                                 {
                                     "id": "name",
                                     "key": "name",
-                                    "value": "in",
+                                    "value": "non",
                                     "description": "file field by default file"
                                 }
                             ]
@@ -2583,7 +2957,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"id\",\n    \"type\": \"qui\"\n}"
+                            "raw": "{\n    \"file\": \"quia\",\n    \"type\": \"aut\"\n}"
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -2641,7 +3015,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "similique",
+                                    "value": "sunt",
                                     "description": ""
                                 }
                             ]
@@ -2677,7 +3051,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quam",
+                                    "value": "rerum",
                                     "description": ""
                                 }
                             ]
@@ -2695,7 +3069,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"cum\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"quibusdam\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2713,7 +3087,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "adipisci",
+                                    "value": "voluptatem",
                                     "description": ""
                                 }
                             ]
@@ -2749,7 +3123,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "nihil",
+                                    "value": "reiciendis",
                                     "description": ""
                                 }
                             ]
@@ -2767,7 +3141,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"et\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"reprehenderit\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2785,7 +3159,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "consequuntur",
+                                    "value": "nostrum",
                                     "description": ""
                                 }
                             ]
@@ -3280,7 +3654,7 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "consectetur",
+                                    "value": "molestiae",
                                     "description": ""
                                 }
                             ]
@@ -3311,6 +3685,34 @@
             "description": "",
             "item": [
                 {
+                    "name": "_show_: Display the specified organization.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_contactbyemail_: send email to the admin users of an organization",
                     "request": {
                         "url": {
@@ -3332,7 +3734,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"message\": \"consequatur\",\n    \"subject\": \"vel\",\n    \"name\": \"nulla\",\n    \"email_user\": \"neque\"\n}"
+                            "raw": "{\n    \"message\": \"autem\",\n    \"subject\": \"repellat\",\n    \"name\": \"repudiandae\",\n    \"email_user\": \"voluptatem\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3386,7 +3788,7 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "sed",
+                                    "value": "neque",
                                     "description": "string id of the organization in which the user is registered"
                                 }
                             ]
@@ -3404,7 +3806,63 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"et\"\n}"
+                            "raw": "{\n    \"email\": \"mollitia\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: Update the specified resource in organization.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: Remove the specified organization from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
                         },
                         "description": "",
                         "response": []
@@ -3426,13 +3884,13 @@
                                 },
                                 {
                                     "key": "date_from",
-                                    "value": "ut",
+                                    "value": "qui",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the initial date.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "date_to",
-                                    "value": "consequatur",
+                                    "value": "sapiente",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the finish date.",
                                     "disabled": false
                                 },
@@ -3447,7 +3905,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "velit",
+                                    "value": "est",
                                     "description": "organization_id"
                                 }
                             ]
@@ -3474,6 +3932,324 @@
             ]
         },
         {
+            "name": "Organization User",
+            "description": "This model is the",
+            "item": [
+                {
+                    "name": "_index_: List all user of a organization",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/organizationusers",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update a register user in organization.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/organizationusers\/:organizationuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "id",
+                                    "description": "organization id"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: delete a sapcific user in the organization",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/organizationusers\/:organizationuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "recusandae",
+                                    "description": "organization id"
+                                },
+                                {
+                                    "id": "organizationuser",
+                                    "key": "organizationuser",
+                                    "value": "commodi",
+                                    "description": "organization user id"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: create a new user in a organization",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/addorganizationuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "autem",
+                                    "description": "organization_id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"test+11@mocionsoft.com\",\n    \"names\": \"test\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Organization User Properties",
+            "description": "",
+            "item": [
+                {
+                    "name": "_index_: list of user properties of a specific event.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/userproperties",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: a newly created resource in UserProperties.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/userproperties",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"celular\",\n    \"mandatory\": true,\n    \"visibleByContacts\": true,\n    \"visibleByAdmin\": true,\n    \"label\": \"Celular\",\n    \"description\": \"N\\u00famero de contacto\",\n    \"type\": \"number\",\n    \"justonebyattendee\": true,\n    \"order_weight\": 1\n}"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: view the specific user propertie.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/userproperties\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "dolores",
+                                    "description": "id UserProperties"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update the specified resource in UserProperties.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/userproperties\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "quo",
+                                    "description": "id UserProperties"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"celular\",\n    \"mandatory\": true,\n    \"visibleByContacts\": true,\n    \"visibleByAdmin\": true,\n    \"label\": \"Celular\",\n    \"description\": \"N\\u00famero de contacto\",\n    \"type\": \"number\",\n    \"justonebyattendee\": true,\n    \"order_weight\": 1\n}"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: remove the specified resource from UserProperties.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/userproperties\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "fugiat",
+                                    "description": "id UserProperties"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Url Params   |\n| -------------|",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
             "name": "Product",
             "description": "Endpoint that manages event products.",
             "item": [
@@ -3489,7 +4265,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "ea",
+                                    "value": "consequatur",
                                     "description": ""
                                 }
                             ]
@@ -3525,7 +4301,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "molestiae",
+                                    "value": "commodi",
                                     "description": ""
                                 }
                             ]
@@ -3567,7 +4343,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "illo",
+                                    "value": "est",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -3687,7 +4463,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "numquam",
+                                    "value": "rerum",
                                     "description": ""
                                 }
                             ]
@@ -3729,7 +4505,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "ut",
+                                    "value": "est",
                                     "description": "product"
                                 }
                             ]
@@ -3771,7 +4547,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "in",
+                                    "value": "debitis",
                                     "description": ""
                                 }
                             ]
@@ -3789,7 +4565,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"subject\": \"facilis\",\n    \"image_header\": \"omnis\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"nesciunt\",\n    \"image\": \"blanditiis\",\n    \"image_footer\": \"sequi\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
+                            "raw": "{\n    \"subject\": \"quia\",\n    \"image_header\": \"provident\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"laboriosam\",\n    \"image\": \"aliquid\",\n    \"image_footer\": \"omnis\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -3851,7 +4627,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"doloribus\"\n}"
+                            "raw": "{\n    \"name\": \"qui\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3869,7 +4645,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "repellendus",
+                                    "value": "est",
                                     "description": "id rol"
                                 }
                             ]
@@ -3887,7 +4663,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"veniam\",\n    \"event_id\": \"laboriosam\"\n}"
+                            "raw": "{\n    \"name\": \"fugiat\",\n    \"event_id\": \"praesentium\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4257,7 +5033,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "consectetur",
+                                    "value": "tenetur",
                                     "description": "id de RoleAttendee"
                                 }
                             ]
@@ -4353,7 +5129,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"animi\",\n    \"points\": 1,\n    \"initialMessage\": \"in\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 1265.52970723\n}"
+                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"autem\",\n    \"points\": 1,\n    \"initialMessage\": \"neque\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 541839.988611\n}"
                         },
                         "description": "",
                         "response": []
@@ -4437,7 +5213,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"maiores\",\n    \"show_horizontal_bar\": \"et\",\n    \"allow_vote_value_per_user\": \"voluptatem\",\n    \"activity_id\": \"dolore\",\n    \"points\": \"adipisci\",\n    \"initialMessage\": \"voluptates\",\n    \"time_limit\": \"eos\",\n    \"allow_anonymous_answers\": \"ex\",\n    \"allow_gradable_survey\": \"veritatis\",\n    \"hasMinimumScore\": \"quidem\",\n    \"isGlobal\": \"asperiores\",\n    \"freezeGame\": \"vel\",\n    \"open\": \"temporibus\",\n    \"publish\": \"et\",\n    \"minimumScore\": \"aliquam\"\n}"
+                            "raw": "{\n    \"survey\": \"commodi\",\n    \"show_horizontal_bar\": \"beatae\",\n    \"allow_vote_value_per_user\": \"odit\",\n    \"activity_id\": \"qui\",\n    \"points\": \"voluptatem\",\n    \"initialMessage\": \"qui\",\n    \"time_limit\": \"consequatur\",\n    \"allow_anonymous_answers\": \"mollitia\",\n    \"allow_gradable_survey\": \"est\",\n    \"hasMinimumScore\": \"nihil\",\n    \"isGlobal\": \"hic\",\n    \"freezeGame\": \"iure\",\n    \"open\": \"aliquam\",\n    \"publish\": \"rerum\",\n    \"minimumScore\": \"eius\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4467,6 +5243,168 @@
                             ]
                         },
                         "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Template Properties Organization",
+            "description": "",
+            "item": [
+                {
+                    "name": "_index_:list all templates by organization",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organizaton\/templateproperties",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: create a new template for organization",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organizaton\/templateproperties",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"eos\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: update the specified template propertie.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organizaton\/templateproperties\/:templatepropertie",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "templatepropertie",
+                                    "key": "templatepropertie",
+                                    "value": "harum",
+                                    "description": "template id"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destry_: delete a template specific",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organizaton\/templateproperties\/:templatepropertie",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_addtemplateevent_: this metho allow add template to an event.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/events\/:event\/templateproperties\/:templatepropertie\/addtemplateporperties",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "inventore",
+                                    "description": "event_id"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -4541,7 +5479,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"est\",\n    \"city\": \"quia\",\n    \"country\": \"id\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"password\": \"sit\",\n    \"others_properties\": \"[]\",\n    \"organization_ids\": \"[\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"][\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"]\"\n}"
+                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"quia\",\n    \"city\": \"necessitatibus\",\n    \"country\": \"nam\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"password\": \"et\",\n    \"others_properties\": \"[]\",\n    \"organization_ids\": \"[\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"][\\\"5f7e33ba3abc2119442e83e8\\\" , \\\"5e9caaa1d74d5c2f6a02a3c3\\\"]\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4641,7 +5579,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"evius lopez\",\n    \"city\": \"odit\",\n    \"country\": \"dignissimos\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"organization_ids\": \"quo\",\n    \"others_properties\": \"[]\"\n}"
+                            "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"names\": \"evius lopez\",\n    \"city\": \"est\",\n    \"country\": \"consequatur\",\n    \"picture\": \"http:\\\/\\\/www.gravatar.com\\\/avatar\",\n    \"organization_ids\": \"ut\",\n    \"others_properties\": \"[]\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4792,7 +5730,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "labore",
+                                    "value": "reprehenderit",
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -4839,6 +5777,62 @@
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"email\": \"evius@evius.co\",\n    \"password\": \"evius.2040\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_getAccessLink_; get and sent link acces to email to user.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/getloginlink",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_signInWithEmailLink_: this end point start the login when the user does click in the link",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/singinwithemaillink",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
                         },
                         "description": "",
                         "response": []
@@ -4898,7 +5892,7 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "minus",
+                                    "value": "sint",
                                     "description": "required."
                                 }
                             ]
@@ -4934,13 +5928,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "dolor",
+                                    "value": "corporis",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "tenetur",
+                                    "value": "temporibus",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4976,13 +5970,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "voluptatum",
+                                    "value": "accusamus",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "neque",
+                                    "value": "maiores",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -5046,13 +6040,13 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
-                                    "value": "quis",
+                                    "value": "architecto",
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "natus",
+                                    "value": "blanditiis",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -5167,90 +6161,6 @@
                     }
                 },
                 {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/organizations\/:organization_id\/users",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "muestra los usuarios de una organizaci\u00f3n",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/organizations\/:organization_id\/users",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "En el request llega el email del usuario\nBuscamos la informaci\u00f3n del usuario por el correo\nGuarda un usuario de una origanizaci\u00f3n\n{\n\"email\" : \"test+11@mocionsoft.com\",\n\"names\": \"test11\",\n\"organization_id\" : \"5bbfce07c065863da36b821e\"\n}",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/organizations\/:organization_id\/users\/:user",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
                     "name": "Create model_has_role\nrole_id\nmodel_id (user_id)\nevent_id",
                     "request": {
                         "url": {
@@ -5318,7 +6228,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "odio",
+                                    "value": "voluptates",
                                     "description": ""
                                 }
                             ]
@@ -5354,7 +6264,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "quas",
+                                    "value": "mollitia",
                                     "description": ""
                                 }
                             ]

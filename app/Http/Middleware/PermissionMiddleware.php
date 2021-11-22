@@ -39,7 +39,8 @@ class PermissionMiddleware
         }else{
             $userRol = ModelHasRole::where('model_id' , $user->_id);
         }
-        
+
+
         switch ($urlParameter->parameterNames()[0]) {
             case 'event':
                 $userRol = $userRol->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'role_id', 'properties']);
@@ -48,7 +49,6 @@ class PermissionMiddleware
                 $userRol = $userRol->where('organization_id' ,$urlParameter->parameter('organization'))->first(['rol_id', 'role_id']);              
                 break;
         }        
-        
         if($userRol !== null)
         {    
             //Como el usuario existe se busca los permisos que tiene el rol del usuario.

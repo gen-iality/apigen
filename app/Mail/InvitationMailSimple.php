@@ -8,12 +8,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\evaLib\Services\UserEventService;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 use App\evaLib\Services\GoogleFiles;use QRCode;
 use App;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
+
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
 {
@@ -110,7 +113,12 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass)."&destination=".$destination;
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]    
+        );
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
 
@@ -238,7 +246,6 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
         $gfService = new GoogleFiles();
         $event = $this->event;
-
         try {
 
             ob_start(); 
@@ -257,6 +264,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
+        
 
         if($this->onlylink){
            
@@ -302,13 +310,21 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             ->subject($this->subject)
             ->markdown('rsvp.invitation');
         }
-        return $this
-            ->from("alerts@evius.co", $from)
+        
+        $icalCalendar = isset($event->extra_config['include_ical_calendar']) ? $event->extra_config['include_ical_calendar'] : true;
+
+        if(!$icalCalendar)
+        {
+            return $this ->from("alerts@evius.co", $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.invitation');
+        }
+        return $this ->from("alerts@evius.co", $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
             ])
             ->markdown('rsvp.invitation');
-        //return $this->view('vendor.mail.html.message');
+        
     }
 }
