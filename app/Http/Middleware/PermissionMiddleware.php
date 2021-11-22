@@ -51,7 +51,7 @@ class PermissionMiddleware
         }        
         if($userRol !== null)
         {    
-            //Cono el usuario existe se busca los permisos que tiene el rol del usuario.
+            //Como el usuario existe se busca los permisos que tiene el rol del usuario.
             $permissionsUser = Permission::where('role_ids', $userRol->rol_id)->get();                               
             
             foreach ($permissions as $permission) 
@@ -69,16 +69,12 @@ class PermissionMiddleware
             }
 
             //Esta segunda validación se hace para organizar mejor el código, ya que se separa  en roles_has_permissions la relación entre ambos
-            // $permissionsUser = Permission::where('name', $permission)->first();    
             $permissionsRolUser = RolesPermissions::where('rol_id', $userRol->rol_id)->get();                                       
             
             foreach ($permissions as $permission) 
             {   
                 foreach ($permissionsRolUser as $permissionUser) 
-                {   
-                    
-                    //send_products_silentauctiomail                    
-                    //return $permissionUser->permission->name;
+                {                       
                     if($permissionUser->permission->name === $permission )
                     {   
                         return $next($request);
@@ -86,7 +82,7 @@ class PermissionMiddleware
                 } 
             }
         }
-        throw abort(401 , 'UnauthorizedException');  
+        throw abort(401 , "You don't have permission for do this action.");  
          
     }
 }

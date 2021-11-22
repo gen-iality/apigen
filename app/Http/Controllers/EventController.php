@@ -302,7 +302,7 @@ class EventController extends Controller
         It could be "me"(current user) or a organization Id
         the relationship is polymorpic.
          */
-        self::assingOrganizer($data, $result);
+        EventService::assingOrganizer($data, $result);
 
         /*Events Type*/
 
@@ -335,71 +335,17 @@ class EventController extends Controller
             }
         }
         
-        //Add menuItems
+        //Configuracione spor defecto de todos los eventos
         EventService::addEventMenu($result);
-
-        self::addOwnerAsAdminColaborator($user, $result->id);
-        self::createDefaultUserProperties($result->id);
+        EventService::addOwnerAsAdminColaborator($user, $result);
+        EventService::createDefaultUserProperties($result->id);
 
 
         return $result;
     }
 
-    /**
-     * _createDefaultUserProperties_: create default properties (name and email) for the user
-     * 
-     * @urlParam event_id required
-     *
-     * @param string $event_id
-     * @return void
-     */
-    private static function createDefaultUserProperties($event_id)
-    {
-        /*Crear propierdades names, email, picture*/
-        $model = Event::find($event_id);
-        $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
 
-        $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
-        $user_properties = new UserProperties($email);
-        $model->user_properties()->save($user_properties);
-
-        $picture = array("name" => "picture", "label" => "Avatar", "unique" => false, "mandatory" => false, "type" => "avatar");
-        $user_properties = new UserProperties($picture);
-        $model->user_properties()->save($user_properties);
-
-        $password = array("name" => "password", "label" => "Password", "unique" => false, "mandatory" => false, "type" => "password");
-        $user_properties = new UserProperties($password);
-        $model->user_properties()->save($user_properties);
-    }
-
-    
-    
-    public function addOwnerAsAdminColaborator($user, $event_id)
-    {
-        $DataUserRolAdminister = [
-            "role_id" => Event::ID_ROL_ADMINISTRATOR,
-            "model_id" => $user->_id,
-            "event_id" => $event_id,
-            "model_type" => "App\Account",
-        ];
-
-        $dataEventUserRolAdminister = [
-            "role_id" => Event::ID_ROL_ADMINISTRATOR,
-            "rol_id" => Event::ID_ROL_ADMINISTRATOR,
-            "account_id" => $user->_id,
-            "event_id" => $event_id,
-            "model_type" => "App\Account",
-            "properities" => [
-                "name" => $user->names,
-                "email" => $user->email,
-            ]
-        ];
-        $DataUserRolAdminister = ModelHasRole::create($DataUserRolAdminister);
-        Attendee::create($dataEventUserRolAdminister);
-        return $DataUserRolAdminister;
-    }
+        
 
     /**
      * _show_: display information about a specific event.
@@ -411,17 +357,8 @@ class EventController extends Controller
      */
     public function show(String $id)
     {
-        //Esto es para medir el tiempo de ejecución se pone al inicio y el final
-        //$i = round(microtime(true) * 1000);
-        //$i = round(microtime(true) * 1000); $f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
         $event = Event::findOrFail($id);
-        /* @TODO porque los stages se cargan aqui en el evento
-        $stages = $this->stagesStatusActive($id);
-        $event->event_stages = $stages;
-         */
-
-        //$f = round(microtime(true) * 1000); die($f-$i." Miliseconds");
-        return new EventResource($event);
+        return $event;
     }
 
     /**
@@ -494,7 +431,7 @@ class EventController extends Controller
         if (!isset($data["organizer_id"]) && !empty($event->organizer_id)) {
             $data["organizer_id"] = $event->organizer_id;
         } elseif (empty($event->organizer_id) || !empty($event->organizer_id) && !empty($data['organizer_id'])) {
-            self::assingOrganizer($data, $event);
+            EventService::assingOrganizer($data, $event);
         }
 
         //Convertir el id de string a ObjectId al hacer cambio con drag and drop
@@ -511,26 +448,7 @@ class EventController extends Controller
         return new EventResource($event);
     }
 
-    /**
-     * _assingOrganizer_: associate organizer to an event.
-     * It could be "me"(current user) or a organization Id the relationship is polymorpic.
-     * 
-     * @bodyParam data array required organizer_id Exmaple : ['organizer_id']
-     **/
-    private static function assingOrganizer($data, $event)
-    {
-        if (!isset($data['organizer_id']) || $data['organizer_id'] == "me" || (isset($data['organizer_type']) && $data['organizer_type'] == "App\\Account")) {
-            if ($data['organizer_id'] == "me") {
-                $organizer = $user;
-            } else {
-                $organizer = Account::findOrFail($data['organizer_id']);
-            }
-        } else {
-            //organizer is an organization entity
-            $organizer = Organization::findOrFail($data['organizer_id']);
-        }
-        return $event->organizer()->associate($organizer);
-    }
+    
     /**
      * _destroy_: delete event.
      *
