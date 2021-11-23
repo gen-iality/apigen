@@ -9,7 +9,7 @@ class ModelHasRole extends Moloquent
 {
     //
     protected $table = ('model_has_roles');
-    protected $fillable = ['role_id','event_id','model_id', 'model_type', 'space_id'];
+    protected $fillable = ['rol_id','event_id','model_id', 'model_type', 'space_id'];
     protected $with = ['role','space','user']; 
     public function user()
     {
@@ -18,7 +18,7 @@ class ModelHasRole extends Moloquent
 
     public function role()
     {
-        return $this->belongsTo('Spatie\Permission\Models\Role', 'role_id');
+        return $this->belongsTo('Spatie\Permission\Models\Role', 'rol_id');
     }
 
     public function event()
