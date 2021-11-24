@@ -523,10 +523,17 @@ class UserController extends UserControllerWeb
         return Redirect::to($redirect);
 
         }catch(\Exception $e){
-            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event";
+            $link = $auth->getSignInWithEmailLink(
+                $data["email"],
+                [
+                    "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data['event_id'],
+                ]    
+            );
 
-            Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
-            return view('Public.Errors.loginLink');         
+            return Redirect::to($link);
+
+            // Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
+            // return view('Public.Errors.loginLink');         
         }
         
     }
