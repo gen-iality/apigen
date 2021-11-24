@@ -8,7 +8,7 @@ use App\Models\Organiser;
 
 class Organization extends Organiser
 {
-    //
+    const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
     protected $fillable = [ 
         'name', 
         'country', 
