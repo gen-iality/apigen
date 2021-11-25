@@ -85,7 +85,7 @@ Route::get('events/myevents', 'EventUserController@indexByEventUser');
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
 Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
-Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+
 
 
 // // api para transferir eventuser
@@ -159,7 +159,7 @@ Route::apiResource('organizations', 'OrganizationController', ['only' => ['index
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
 Route::get('organizations/{id}/eventUsers', 'OrganizationController@indexByEventUserInOrganization');
-Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationController@changeUserPasswordOrganization');
+
 
 Route::group(
     ['middleware' => 'auth:token'],
@@ -250,13 +250,13 @@ Route::group(
         Route::put('users/{user_id}/changeStatusUser', 'UserController@changeStatusUser');
     }
 );
-
-
 Route::post("users/signInWithEmailAndPassword", "UserController@signInWithEmailAndPassword");
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
 Route::get('getloginlink', 'UserController@getAccessLink');
 Route::get('singinwithemaillink', 'UserController@signInWithEmailLink');
+Route::put("changeuserpassword", "UserController@changeUserPassword");
+
 
 
 /****************

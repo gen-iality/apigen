@@ -18,7 +18,7 @@
 		<tbody>
 			<tr>
 				<td style="font-size:20px;text-align:center;padding:10px;display:block"> 
-					Hola {{$user->name}}
+					Hola {{$user->names}}
 				</td>
 			 </tr>
 			 <tr>

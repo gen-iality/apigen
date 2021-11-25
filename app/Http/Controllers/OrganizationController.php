@@ -351,43 +351,6 @@ class OrganizationController extends Controller
         return $attendees;
     }
 
-    /**
-     *_ChangeUserPasswordOrganization_: change user password registered in a organization
-     * 
-     * @urlParam organization_id required string id of the organization in which the user is registered
-     * 
-     * @bodyParam email email required Email of the user who will change his password
-     * 
-     * @param Request $request
-     * @param string $event_id
-     * @return void
-     */
-    public function changeUserPasswordOrganization(Request $request, string $organization_id)
-    {
-        $data = $request->json()->all();
-        $destination = $request->input("destination");
-        $onlylink = $request->input("onlylink");
-
-        //Validar si el usuario está registrado en el evento
-        $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
-        $organizationUser = Account::where("organization_ids", $organization_id)->where("email", $email)->first();
-
-        $organization = Organization::findOrFail($organization_id);
-        $image = null; //$organization->picture;
-
-        //En caso de que no exita el usuario se finaliza la función
-        if (empty($organizationUser)) {
-            abort(401, "El correo ingresado no se encuentra registrado en la organización");
-        }
-        
-        //Envio de correo para la contraseña
-        Mail::to($email)
-            ->queue(                
-                new \App\Mail\ChangeUserPasswordEmail($organization, $organizationUser, true, $destination, $onlylink)
-            );
-        return $organizationUser;
-
-    }
 
     /**
      * _ordersUsersPoints_: list all information about all orders pending with the information complete about codes and total products

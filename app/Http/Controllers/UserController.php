@@ -538,4 +538,56 @@ class UserController extends UserControllerWeb
         
     }
 
+
+    /**
+     * _changeUserPassword_: send to email to user whit  link to change user password.
+     * 
+     * @bodyParam email email required
+     * @bodyParam event string
+     * 
+     */
+    public function changeUserPassword(Request $request)
+    {   
+        $auth = resolve('Kreait\Firebase\Auth');
+
+        $request->validate([
+            "email" => "required|email:rfc,dns",            
+        ]);
+
+        $data = $request->json()->all();
+        $email = $data['email'];
+        $user = Account::where('email' , $email)->first();
+
+        if(!isset($user))
+        {
+            return response()->json([
+                "message" => "El usuario no está registrado en el sistema"
+            ] , 404);        
+        }
+        //Algunos clientes prefieren que su marca este en todos los correos por eso se coloca la opción de evento     
+        $event = null;
+        $url = "";
+        if(isset($data['event_id']))
+        {
+            $event = Event::find($data['event_id']);
+            $url = config('app.front_url') . "/landing/". $event->_id ."/event";
+        }else{
+            $url = config('app.front_url');
+        }
+        dd($url);
+        
+        $link = $auth->getPasswordResetLink($email, 
+            [
+                "url" => $url,
+            ]
+        );        
+        
+        Mail::to($email)
+        ->queue(            
+            new \App\Mail\ChangeUserPasswordEmail($user , $link, $event)
+        ); 
+        return 'El correo ha sido enviado con exito';
+
+    }
+
 }

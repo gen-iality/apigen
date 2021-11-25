@@ -431,61 +431,6 @@ class EventUserController extends Controller
     }
 
     /**
-     * _changeUserPassword_: change user password
-     *
-     * @urlParam event_id required string id of the event in which the user is registered
-     *
-     * @bodyParam email email required Email of the user who will change his password
-     *
-     * @param Request $request
-     * @param string $event_id
-     * @return void
-     */
-    public function ChangeUserPassword(Request $request, string $event_id)
-    {
-        $data = $request->json()->all();
-        $destination = $request->input("destination");
-        $onlylink = $request->input("onlylink");
-        $firebasePasswordChange = $request->input("firebase_password_change");
-
-        //Validar si el usuario está registrado en el evento
-        $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
-        $eventUser = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
-
-        $event = Event::findOrFail($event_id);
-        $image = null; //$event->picture;
-
-        //En caso de que no exita el usuario se finaliza la función
-        if (empty($eventUser)) {
-            abort(401, "El correo ingresado no se encuentra registrado en el evento");
-        }
-        if ($firebasePasswordChange) {
-            $client = new Client();
-            $url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
-            $headers = ['Content-Type' => 'application/json'];
-
-            $request = $client->post($url,
-                [
-                    'json' => [
-                        "requestType" => "PASSWORD_RESET",
-                        "email" => $email,
-                    ],
-                ],
-                ['headers' => $headers]
-            );
-        } else {
-            //Envio de correo para la contraseña
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null, null, null, true, $destination, $onlylink, $firebasePasswordChange)
-                );
-        }
-        return $eventUser;
-
-    }
-
-    /**
      * _createUserAndAddtoEvent_:create user and add it to an event
      *
      * @urlParam event_id string required

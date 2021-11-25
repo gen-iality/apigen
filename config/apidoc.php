@@ -122,7 +122,7 @@ return [
                         '*/users/*',
                         '*/auth',
                         '*/auth/*',  
-                        '*/changeUserPassword',      
+                        '*/changeuserpassword',      
                         '*/getloginlink',
                         '*/singinwithemaillink'  ,
                               
