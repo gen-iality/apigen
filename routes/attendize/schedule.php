@@ -7,11 +7,11 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
  * SPACES
  ****************/
 
-Route::get ('events/{event_id}/spaces', 'SpaceController@index')->middleware('cacheResponse');
-Route::post ('events/{event_id}/spaces', 'SpaceController@store');
-Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show')->middleware('cacheResponse');
-Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
-Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
+Route::get ('events/{event}/spaces', 'SpaceController@index');
+Route::post ('events/{event}/spaces', 'SpaceController@store')->middleware('permission:create');
+Route::get ('events/{event}/spaces/{space}', 'SpaceController@show');
+Route::put ('events/{event}/spaces/{space}', 'SpaceController@update')->middleware('permission:update');
+Route::delete('events/{event}/spaces/{space}', 'SpaceController@destroy')->middleware('permission:destroy');
 
 
 /****************
@@ -32,7 +32,6 @@ Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
 /****************
  * NEWSFEED
  ****************/
-// Route::apiResource('events/{event}/newsfeed', 'NewsfeedController');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
@@ -67,7 +66,6 @@ Route::apiResource('events/{event_id}/host', 'HostController');
 Route::post  ('/meetingrecording',      'ActivitiesController@storeMeetingRecording');
 Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
 Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
-Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
 Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
 Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
 Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
@@ -76,8 +74,15 @@ Route::put('events/{event_id}/activities/mettings_zoom/{meeting_id}' ,  'Activit
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/activities/{activity}/checkinbyadmin',  'ActivitiesController@checkinbyadmin')->middleware('permission:create_checkinbyadmin');
+        //CRUD
+        Route::get('events/{event}/activities','ActivitiesController@index');
+        Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
+        Route::post('events/{event}/activities','ActivitiesController@store')->middleware('permission:create');
+        Route::put('events/{event}/activities/{activitie}','ActivitiesController@update')->middleware('permission:update');
+        Route::delete('events/{event}/activities/{activitie}','ActivitiesController@destroy')->middleware('permission:destroy');
     }
 );
+
 
 /***************
  * TYPE
