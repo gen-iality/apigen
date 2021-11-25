@@ -851,6 +851,29 @@ class EventController extends Controller
 
         return $event;
     }
+
+    // Hooks Wowza
+    public function saveRecordingToEvent(Request $request)
+    {
+        $data = $request->json()->all();
+        $recording = $data['object_data']; // datos de la grabacion
+        $event = Event::where('streaming_id', $recording['transcoder_id'])->first();
+        $download_urls =  $event['download_url'];
+
+        if (empty($download_urls)) {
+            $event['download_url'] = [$recording['download_url']];
+            $event->save();
+
+            return $event;
+        }
+
+        // se existe ya una url
+        $download_urls_merge = array_merge($download_urls, [ $recording['download_url'] ]);
+        $event->download_url = $download_urls_merge;
+        $event->save();
+
+        return $event;
+    }
 }
 
 
