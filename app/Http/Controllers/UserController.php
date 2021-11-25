@@ -464,12 +464,12 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _getAccessLink_; get and sent link acces to email to user.
+     * _getAccessLink_: get and sent link acces to email to user.
      * 
-     * @urlParam email email required user email
-     * @urlParam event_id event id to redirect user
+     * @queryParam email required  user email
+     * @queryParam event_id required event id to redirect user
      */
-    public function getAccessLink(Request $request=null, $email=null, $event_id) 
+    public function getAccessLink(Request $request) 
     {
         $auth = resolve('Kreait\Firebase\Auth');
 
@@ -479,6 +479,7 @@ class UserController extends UserControllerWeb
         }
         
         $email = isset($data["email"]) ?  $data["email"] : $email;
+        
         $event_id = isset($data["event_id"]) ? $data["event_id"] : $event_id;
         $link = $auth->getSignInWithEmailLink(
             $email,
@@ -498,8 +499,8 @@ class UserController extends UserControllerWeb
     /**
      * _signInWithEmailLink_: this end point start the login when the user does click in the link
      *  
-     * @urlParam email email required user email
-     * @urlParam event_id event id to redirect user
+     * @queryParam email required  user email
+     * @queryParam event_id event id to redirect user
      */
     public function signInWithEmailLink(Request $request)
     {
@@ -542,7 +543,7 @@ class UserController extends UserControllerWeb
     /**
      * _changeUserPassword_: send to email to user whit  link to change user password.
      * 
-     * @bodyParam email email required
+     * @bodyParam email email required 
      * @bodyParam event string
      * 
      */
