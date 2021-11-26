@@ -92,37 +92,25 @@ class EventController extends Controller
      * }
      *
      * 
-     * 
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
-     * @param Illuminate\Http\Request $request [injected]
-     * @param App\evaLib\Services\FilterQuery $filterQuery [injected]
-     * @return \Illuminate\Http\Response EventResource collection
      */
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
-        //$currentDate = $currentDate->subWeek(2);
 
         $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-            ->whereNotNull('visibility') //not null
-            //->Where('datetime_to', '>', $currentDate)
+            ->whereNotNull('visibility') 
             ->orderBy('datetime_from', 'ASC');
 
         $input = $request->all();
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
-
-        //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
     /**
-     * _beforeToday_: list of upcoming events
+     * _beforeToday:_ list finished events
      *
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["SUBASTA DE ARTE"]}]
      * 
-     * @param Request $request
-     * @param FilterQuery $filterQuery
-     * @return void
      */
     public function beforeToday(Request $request, FilterQuery $filterQuery)
     {
@@ -136,14 +124,12 @@ class EventController extends Controller
         $input = $request->all();
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
-
-        //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-        /**
-     * _afterToday_: list of upcoming events
+    /**
+     * _afterToday:_ list upcoming events
      *
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["SUBASTA DE ARTE"]}]
      * 
      */
     public function afterToday(Request $request, FilterQuery $filterQuery)
