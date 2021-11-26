@@ -109,6 +109,8 @@ return [
                         '*/eventTypes',
                         '*/changeStatusEvent',
                         '*/adddocumentuser',
+                        '*/eventsbeforetoday',
+                        '*/eventsaftertoday',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
