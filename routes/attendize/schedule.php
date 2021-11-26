@@ -40,7 +40,7 @@ Route::group(
         Route::get('events/{event}/newsfeed/{newsfeed}','NewsfeedController@show');
         Route::post('events/{event}/newsfeed','NewsfeedController@store')->middleware('permission:create');
         Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update')->middleware('permission:update');
-        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy')->middleware('permission:destroy');
+        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy')->middleware('permission:delete');
     }
 );
 
