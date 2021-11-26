@@ -82,6 +82,8 @@ class UserEventService
         if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
         }
+        $userData["password"] = bcrypt($userData["password"]);
+
 
         //LLenamos dos campos importantes con valores por defecto por si no vienen
         if (!isset($userData['names'])) {

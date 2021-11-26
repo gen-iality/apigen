@@ -111,6 +111,7 @@ return [
                         '*/adddocumentuser',
                         '*/eventsbeforetoday',
                         '*/eventsaftertoday',
+                        '*/adduserwithemailvalidation',
                     // Activities
                         '*/activities',
                         '*/activities/*',    

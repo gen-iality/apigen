@@ -129,7 +129,7 @@ class Account extends User
                     $model->uid = $fbuser->uid;
                     $model->initial_token = $singed->idToken();
                     $model->refresh_token = $singed->refreshToken();
-
+                    $model->password = bcrypt($model->password);
                 } catch (\Exception $e) {
                     var_dump($e->getMessage());
                 }

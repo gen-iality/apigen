@@ -359,7 +359,7 @@ class EventUserController extends Controller
      * @bodyParam email email required field
      * @bodyParam name  string required
      * @bodyParam password  string required
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * @bodyParam proeprties.password any other params  will be saved in user and eventUser
      *
      * @param Request $request
      * @param string $event_id
@@ -524,7 +524,7 @@ class EventUserController extends Controller
                     return "minimun password length is 6 characters";
                 }
             }
-            // $userData["password"] =self::encryptdata($userData["password"]);
+            
             
             $validations = [
                 'email' => 'required|email',
@@ -611,11 +611,11 @@ class EventUserController extends Controller
             // }
 
             if (!$signInResult) {
-                $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"];
+                $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"]; 
 
-                //No conocemos otra forma de generar el token de login sino forzando un signin
+                $eventUser->user->password = bcrypt($pass);
                 if (isset($eventUser->user->uid)) {
-
+                    
                     $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
                     $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
                     $eventUser->user->refresh_token = $signInResult->refreshToken();
@@ -873,20 +873,41 @@ class EventUserController extends Controller
      * @bodyParam email email  field
      * @bodyParam name  string field
      * @bodyParam rol_id string rol id this is the role user into event 
-     * @bodyParam properties. any other params  will be saved in user and eventUser.
+     * @bodyParam properties.password  any other params  will be saved in user and eventUser
+     * @bodyParam properties.other_properties  any other params  will be saved in user and eventUser
      *
      */
     public function update(Request $request, $event_id, $evenUserId)
-    {
+    {   
+        $auth = resolve('Kreait\Firebase\Auth');
+        
         $data = $request->json()->all();
-        $eventUser = Attendee::findOrFail($evenUserId);
+        $eventUser = Attendee::findOrFail($evenUserId);        
 
+
+        $pass = $data['properties']['password'];
+        if($pass)
+        {
+            $user = Account::find($eventUser->account_id);
+            $user->password = bcrypt($pass);
+            $user->save();
+            $data['properties']['password'] = $user->password;
+            
+            if (isset($user->uid)) 
+            {
+                $updatedUser = $auth->changeUserPassword($user->uid, $pass);
+                $signInResult = $auth->signInWithEmailAndPassword($user->email, $pass);
+                $user->refresh_token = $signInResult->refreshToken();
+                $user->save();                
+            }
+
+        }
         $new_properties = isset($data['properties']) ? $data['properties'] : [];
         $old_properties = isset($eventUser->properties) ? $eventUser->properties : [];
 
         $properties_merge = array_merge($old_properties, $new_properties);
-
         $data['properties'] = $properties_merge;
+
 
         $eventUser->fill($data);
         $eventUser->save();
