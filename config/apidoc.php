@@ -155,6 +155,8 @@ return [
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
                         '*/organizations/*',
+                        'organizations/*',
+                        '*/organizations',
                     //TemplateProperties
                         '*/templateproperties/*',
                         '*/templateproperties',
