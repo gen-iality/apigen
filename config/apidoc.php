@@ -109,6 +109,8 @@ return [
                         '*/eventTypes',
                         '*/changeStatusEvent',
                         '*/adddocumentuser',
+                        '*/eventsbeforetoday',
+                        '*/eventsaftertoday',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -153,6 +155,8 @@ return [
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
                         '*/organizations/*',
+                        'organizations/*',
+                        '*/organizations',
                     //TemplateProperties
                         '*/templateproperties/*',
                         '*/templateproperties',

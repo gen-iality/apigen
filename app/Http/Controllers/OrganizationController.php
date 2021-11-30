@@ -40,8 +40,17 @@ class OrganizationController extends Controller
     }
 
     /**
-     *  _index_:Display a listing of the organizations.
-     *
+     * _index_:Display a listing of the organizations.
+     * 
+     * @response{
+     *       "_id": "5bb53ffac06586065d58cf7c",
+     *       "name": "empresa",
+     *       "nit": "123213213",
+     *       "phone": "123123213",
+     *       "author": "5ba434b0c065861ef00d1d0d",
+     *       "updated_at": "2018-10-03 22:17:30",
+     *       "created_at": "2018-10-03 22:17:30"
+     *   }
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -53,11 +62,14 @@ class OrganizationController extends Controller
 
     /**
      * _store_:Store a newly created resource in organizations.
+     * @authenticated
      * 
-     * @bodyParam properties[name,email] array 
+     * @urlParam organization required organization id
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @bodyParam name required 
+     * @bodyParam styles array required
+     * @bodyParam user_properties array required
+     * 
      */
     public function store(Request $request, EvaRol $RolService)
     {
@@ -114,9 +126,11 @@ class OrganizationController extends Controller
      * _update_: Update the specified resource in organization.
      * @authenticated
      * 
-     * @urlParam organization_id required
-     * @urlParam update_events_itemsMenu if you want to update the items menu of all events of the organization, send this parameter equal true
-     * @urlParam update_events_user_properties if you want to update the user_properties of all events of the organization, send this parameter equal true
+     * @urlParam organization required organization id
+     * 
+     * @bodyParam name required 
+     * @bodyParam styles array required
+     * @bodyParam user_properties array required
      * 
      * 
      */

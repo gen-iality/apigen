@@ -78,17 +78,10 @@ class UserController extends UserControllerWeb
      * 
      * 
      * @bodyParam email email required Example: evius@evius.co
-     * @bodyParam names  string required  person name
-     * @bodyParam city  string 
-     * @bodyParam country  string 
-     * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
-     * @bodyParam password  string  optional if not provided a default evius.2040 password is assigned
-     * @bodyParam others_properties array  dynamic properties of the user you want to place Example:[]
-     * @bodyParam organization_ids array organizations to which the user belongs, in order to access their events Example: ["5f7e33ba3abc2119442e83e8" , "5e9caaa1d74d5c2f6a02a3c3"]["5f7e33ba3abc2119442e83e8" , "5e9caaa1d74d5c2f6a02a3c3"]
+     * @bodyParam names  string required  person name     
+     * @bodyParam picture  string  Example: http://www.gravatar.com/avatar
+     * @bodyParam password  string  required 
      * 
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {   
@@ -97,42 +90,14 @@ class UserController extends UserControllerWeb
             'email' => 'required|unique:users|email',
             'names' => 'required',
             'picture' => 'string',
-            'password' => 'string|min:6',
-            'others_properties' => 'array',
+            'password' => 'string|min:6'
         ]);
 
         $data = $request->json()->all();
-        $data['email'] = strtolower($data['email']);
-       
-        //For users registered as teachers, the status is set to 'unconfirmed' and then confirmed by the administrator
-        if(isset($data['others_properties']['role']))
-        {
-            $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
-        }
+        $data['email'] = strtolower($data['email']);            
 
         $result = new Account($data);
-        // var_dump($data['organization_ids']);die;
-        $result->save();
-        if(isset($data['organization_ids'])){
-            
-            $result->organizations()->attach($data['organization_ids']);
-            
-            foreach($data['organization_ids'] as $organization)
-            {   
-                $result->total_number_events = 0;
-                $dataOganization['userid'] = $result->_id;
-                $dataOganization['organization_id'] = $organization;
-                $organizationUser = new OrganizationUser($dataOganization);
-                $organizationUser->save();
-                
-            }                          
-            $result->save();
-            Mail::to($result->email)
-            ->queue(            
-                new \App\Mail\UserRegistrationMail($result , $organization)
-            );
-
-        }                       
+        $result->save();                            
         
         $result = Account::find($result->_id);
         return $result;
@@ -342,7 +307,7 @@ class UserController extends UserControllerWeb
             $url_final_params["error"] = $e->getMessage();
 
         } finally {
-            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url') . '/events';
+            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url');
             return redirect()->away($destination . "?" . http_build_query($url_final_params));
         }
 
