@@ -71,12 +71,13 @@ Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesCo
 Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
 Route::put('events/{event_id}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
 
+Route::get('events/{event}/activities','ActivitiesController@index');
+        Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/activities/{activity}/checkinbyadmin',  'ActivitiesController@checkinbyadmin')->middleware('permission:create_checkinbyadmin');
         //CRUD
-        Route::get('events/{event}/activities','ActivitiesController@index');
-        Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
+        
         Route::post('events/{event}/activities','ActivitiesController@store')->middleware('permission:create');
         Route::put('events/{event}/activities/{activitie}','ActivitiesController@update')->middleware('permission:update');
         Route::delete('events/{event}/activities/{activitie}','ActivitiesController@destroy')->middleware('permission:destroy');
