@@ -217,23 +217,30 @@ class EventController extends Controller
      *
      * There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
      * 
-     * @bodyParam name string required name to event Example: Programming course 
+     * @bodyParam name string required name to event Example: Demo 
+     * @bodyParam adress string adress when is the event. Example: Avenida siempre viva
      * @bodyParam datetime_from datetime required date and time of start of the event Example: 2020-10-16 18:00:00
      * @bodyParam datetime_to datetime  date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam type_event string required This parameter has two options: onlineEvent or PhysicalEvent, when onlineEvent the event emails will have the link to log in to the event page and physialEvent will send a QR code to enter the event at the physical point.     
      * @bodyParam picture string image of the event
+     * @bodyParam venue string Event venue. Example: Venue B
+     * @bodyParam location object This parameter specific all information of event location.
+     * @bodyParam location.Latitude float Latitude coordinates Example: 4.668184
+     * @bodyParam location.Longitude float Longitude coordinates Example: -74.051968
+     * @bodyParam location.number string Number build Example: #123
+     * @bodyParam location.street string Event street Example: Avenida siempre viva
+     * @bodyParam location.city string Event city Example: Bogotá
+     * @bodyParam location.state string Event state Example: Bogotá D.C
+     * @bodyParam location.FormattedAddress string Epecific complete adress Example: Av. Siempre viva #123, Bogotá, Colombia     
      * @bodyParam visibility string required restricts access for registered users or any unregistered user Example: PUBLIC
-     * @bodyParam user_properties array user registration properties
-     * @bodyParam author_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam user_properties array user registration properties. Example: names    
+     * @bodyParam description string Explanation about  event. Example: Evento para mostrel funcionamiento de la plataforma.
      * @bodyParam event_type_id string required Example: 5bf47226754e2317e4300b6a
      * @bodyParam organizer_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
      * @bodyParam category array App\Category
-     * @bodyParam location String VIRTUAL | VENUE_NAME
      * @bodyParam extra_config object json of additional values to be stored
      * @bodyParam status string when a teacher creates a course the automatic status is **'draft**' in case the administrator creates it automatically it will be **'approved'**
      * 
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
