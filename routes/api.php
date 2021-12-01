@@ -171,7 +171,8 @@ Route::group(
 /****************
  * organizations
  ****************/
-Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+Route::get('organizations' , 'OrganizationController@index');
+Route::get('organizations/{organization}' , 'OrganizationController@show');
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
 Route::get('organizations/{id}/eventUsers', 'OrganizationController@indexByEventUserInOrganization');
@@ -179,8 +180,10 @@ Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationC
 
 Route::group(
     ['middleware' => 'auth:token'],
-    function () {
-        Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
+    function () {                
+        Route::post('organizations' , 'OrganizationController@store')->middleware('permission:create');
+        Route::put('organizations/{organization}' , 'OrganizationController@update')->middleware('permission:update');
+        Route::delete('organizations/{organization}' , 'OrganizationController@destroy')->middleware('permission:destroy');
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
         // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
