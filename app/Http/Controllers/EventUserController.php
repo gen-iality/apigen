@@ -796,7 +796,12 @@ class EventUserController extends Controller
         }
 
         return EventUserResource::collection(
-            Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
+            Attendee::where("event_id", $event_id)->
+            where(function ($query) {
+                $query->where("account_id", auth()->user()->_id)
+                //Temporal fix for users that got different case in their email and thus firebase created different user
+                      ->orWhere('email', '=', strtolower(auth()->user()->email));
+            })->paginate(config("app.page_size"))
         );
     }
 
