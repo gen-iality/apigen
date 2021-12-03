@@ -511,7 +511,7 @@ class EventUserController extends Controller
 
             //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
             //$eventUserData = $request->json()->all();
-
+            $eventUserData['properties']['email'] = strtolower($eventUserData['properties']['email']);
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
@@ -628,7 +628,8 @@ class EventUserController extends Controller
             } else if ($signInResult && $signInResult->idToken()) {
                 $eventUser->user->initial_token = $signInResult->idToken();
             }
-
+            $eventUser->email = strtolower($eventUser->email);
+            $eventUser->save();
             $response = new EventUserResource($eventUser);
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
