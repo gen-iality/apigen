@@ -511,7 +511,7 @@ class EventUserController extends Controller
 
             //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
             //$eventUserData = $request->json()->all();
-            $eventUserData['properties']['email'] = strtolower($eventUserData['properties']['email']);
+            
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
