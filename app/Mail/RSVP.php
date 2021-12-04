@@ -260,7 +260,7 @@ class RSVP extends Mailable implements ShouldQueue
         if ($this->include_ical_calendar)
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
@@ -270,7 +270,7 @@ class RSVP extends Mailable implements ShouldQueue
         }
         
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.rsvpinvitation');
         
