@@ -8,10 +8,14 @@ Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
  ****************/
 
 Route::get ('events/{event}/spaces', 'SpaceController@index');
-Route::post ('events/{event}/spaces', 'SpaceController@store')->middleware('permission:create');
 Route::get ('events/{event}/spaces/{space}', 'SpaceController@show');
-Route::put ('events/{event}/spaces/{space}', 'SpaceController@update')->middleware('permission:update');
-Route::delete('events/{event}/spaces/{space}', 'SpaceController@destroy')->middleware('permission:destroy');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post ('events/{event}/spaces', 'SpaceController@store')->middleware('permission:create');
+        Route::put ('events/{event}/spaces/{space}', 'SpaceController@update')->middleware('permission:update');
+        Route::delete('events/{event}/spaces/{space}', 'SpaceController@destroy')->middleware('permission:destroy');
+    }
+);
 
 
 /****************
@@ -50,14 +54,22 @@ Route::group(
 Route::apiResource('events/{id}/surveys', 'SurveysController');
 Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequestions');
 
-
 /***************
  * HOST
  * rutas para guardar la agenda de los eventos
  ****************/
 
 Route::post  ('events/{event_id}/duplicatehost/{id}','HostController@duplicate');
-Route::apiResource('events/{event_id}/host', 'HostController');
+
+Route::get('events/{event_id}/host' , 'HostController@index');
+Route::get('events/{event_id}/host/{host}' , 'HostController@show');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event_id}/host' , 'HostController@store')->middleware('permission:create');
+        Route::put('events/{event_id}/host/{host}' , 'HostController@update')->middleware('permission:update');
+        Route::delete('events/{event_id}/host/{host}' , 'HostController@delete')->middleware('permission:destroy');
+    }
+);
 
 /***************
  * ACTIVITIES
@@ -136,7 +148,18 @@ Route::apiResource('events/{event_id}/wall', 'WallController');
 /*******************
  * FAQ'S
  ******************/
-Route::apiResource('events/{id}/faqs', 'FaqController');
+
+Route::get('events/{event}/faqs' , 'FaqController@index');
+Route::get('events/{event}/faqs/{faqs}' , 'FaqController@show');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::store('events/{event}/faqs' , 'FaqController@store')->middleware('permission:create');
+        Route::put('events/{event}/faqs/{faqs}' , 'FaqController@update')->middleware('permission:update');
+        Route::delete('events/{event}/faqs/{faqs}' , 'FaqController@delete')->middleware('permission:destroy');
+    }
+);
+
+
 Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
 
 //TEST 

@@ -73,8 +73,7 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-            Route::get('events/{event}/eventusers',      'EventUserController@index');  
-            Route::get('events/{event}/eventUsers',      'EventUserController@index');  
+            Route::get('events/{event}/eventusers',      'EventUserController@index');                
             Route::get('events/{event}/eventusers/{id}', 'EventUserController@show');
             Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update');
             Route::post('events/{event}/eventusers',     'EventUserController@store');
@@ -632,6 +631,16 @@ Route::group(
         Route::get('events/{event}/products/{product}/minimumauctionvalue', 'ProductController@minimumAuctionValue');
     }
 );
+/****************
+* Product
+****************/
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/products', 'ProductController@store')->middleware('permission:create');
+        Route::put('events/{event}/products/{product}', 'ProductController@update')->middleware('permission:update');
+        Route::delete('events/{event}/products/{product}', 'ProductController@destroy')->middleware('permission:delete');
+    }
+);
 
 Route::get('events/{event}/products', 'ProductController@index');
 Route::get('events/{event}/products/{product}', 'ProductController@show');
@@ -698,4 +707,5 @@ Route::group(
 
 // addDocumentUserToEventUserByEvent
 // Route::post('events/{event}/documentusers/user/{event_user}', 'DocumentUserController@addDocumentUserToEventUserByEvent');
+
 

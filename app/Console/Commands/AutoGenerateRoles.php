@@ -50,11 +50,11 @@ class AutoGenerateRoles extends Command
         //Por defecto en este será el archivo donde se van a crear las rutas con los permisos
         $file = fopen(base_path('/routes/api.php'), 'a+');
 
-        $list = "list_$modelPlural";
-        $create = "create_$modelPlural";
-        $show = "show_$modelPlural";
-        $update = "update_$modelPlural";
-        $delete = "delete_$modelPlural";
+        $list = "list";
+        $create = "create";
+        $show = "show";
+        $update = "update";
+        $delete = "delete";
 
         $permissionsCrud = [$list, $create, $show, $update, $delete];
 
