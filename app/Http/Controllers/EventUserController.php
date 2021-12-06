@@ -422,7 +422,7 @@ class EventUserController extends Controller
             new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
         );
 
-        if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
+        if ($event_id == '61a8443fa3023d1c117f9e13') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
 
@@ -1105,44 +1105,20 @@ class EventUserController extends Controller
                     'value' => $eventUserData['properties']['apellidos'],
                 ),
                 array(
-                    'property' => 'city',
-                    'value' => isset($eventUserData['properties']['ciudad']) ? $eventUserData['properties']['ciudad'] :  "",
-                ),
-                array(
                     'property' => 'mobilephone',
-                    'value' => $eventUserData['properties']['celular'],
-                ),
-                array(
-                    'property' => 'sector_empresa',
-                    'value' => isset($eventUserData['properties']['sectoreconomicoalquepertenecelaempresa']) ? $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'] : "",
-                ),
-                array(
-                    'property' => 'objeto_negocio',
-                    'value' => isset($eventUserData['properties']['ofreceproductosserviciosoambos'])?$eventUserData['properties']['ofreceproductosserviciosoambos'] : "",
-                ),
-                array(
-                    'property' => 'tipo_objeto_negocio',
-                    'value' => isset($eventUserData['properties']['selecciondetipodeobjeto'])?$eventUserData['properties']['selecciondetipodeobjeto']: "",
+                    'value' => $eventUserData['properties']['numerodetelefonomovil'],
                 ),
                 array(
                     'property' => 'company',
-                    'value' => isset($eventUserData['properties']['empresa']) ? $eventUserData['properties']['empresa'] : "",
+                    'value' => isset($eventUserData['properties']['nombredelaempresa']) ? $eventUserData['properties']['nombredelaempresa'] : "",
                 ),
                 array(
                     'property' => 'cedula_de_ciudadania_nit',
-                    'value' => isset($eventUserData['properties']['numerodecedula']) ?$eventUserData['properties']['numerodecedula'] : "" ,
-                ),
-                array(
-                    'property' => 'nit',
-                    'value' => isset($eventUserData['properties']['nit']) ? $eventUserData['properties']['nit'] : "",
-                ),
-                array(
-                    'property' => 'origen_lead',
-                    'value' => isset($event->name) ? $event->name : "MeetUps",
+                    'value' => isset($eventUserData['properties']['nodecedula']) ?$eventUserData['properties']['nodecedula'] : "" ,
                 ),
                 array(
                     'property' => 'rol_cargo',
-                    'value' => isset($eventUserData['properties']['rolenlaempresa']) ? $eventUserData['properties']['rolenlaempresa'] : "",
+                    'value' => isset($eventUserData['properties']['rolcargo']) ? $eventUserData['properties']['rolcargo'] : "",
                 ),
             ),
         );        
