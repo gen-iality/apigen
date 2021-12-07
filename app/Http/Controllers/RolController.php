@@ -23,9 +23,9 @@ class RolController extends Controller
      * @urlParam event required event id 
      *
      */
-    public function index($event_id)
+    public function index()
     {
-        $roles = Rol::where('event_id' , $event_id)->get();
+        $roles = Rol::all();
         return JsonResource::collection($roles);
     }
 
