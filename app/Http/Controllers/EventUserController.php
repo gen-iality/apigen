@@ -527,7 +527,7 @@ class EventUserController extends Controller
             // $userData["password"] =self::encryptdata($userData["password"]);
             
             $validations = [
-                'email' => 'required|email',
+                'email' => 'required|email:rfc,dns',
                 //'other_fields' => 'sometimes',
             ];
 
@@ -585,7 +585,7 @@ class EventUserController extends Controller
 
                 $eventUserData["eventuser_id"] = $eventuser_id;
             }
-
+            
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
             $eventUser = $result->data;
 
