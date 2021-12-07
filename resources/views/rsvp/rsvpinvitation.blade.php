@@ -95,9 +95,8 @@
 		<img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
 		@elseif(isset($organization_picture) && !empty($organization_picture))
 		<img alt="{{$event->name}}" src={{$organization_picture}} /> 
-	@endif
-	
-	</div>
+	@endif	
+</div>
 
 
 @endcomponent
