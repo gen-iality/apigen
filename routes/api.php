@@ -568,11 +568,11 @@ Route::post("files/upload/{field_name?}", "FilesController@upload");
 Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
-Route::get('events/{event}/rols', 'RolController@index');
-// Route::post('rols', 'RolController@store');
-// Route::put('rols/{id}', 'RolController@update');
-// Route::get('rols/{id}', 'RolController@show');
-// Route::post('roles/{role}/addpermissions', 'RolesPermissionsController@addPermissionToRol');
+// Route::get('events/{event}/rols', 'RolController@index');
+Route::post('rols', 'RolController@store');
+Route::put('rols/{id}', 'RolController@update');
+Route::get('rols/{id}', 'RolController@show');
+Route::post('roles/{role}/addpermissions', 'RolesPermissionsController@addPermissionToRol');
 
 /**
  * REQUEST OF PLACETOPAY
