@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Organization;
+use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
+
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
@@ -124,10 +126,14 @@ class EventUserController extends Controller
      * @return EventUserResource
      */
     public function meEvents(Request $request)
-    {
-        $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
-        $results = $query->makeHidden(['activities', 'event']);
-        return EventUserResource::collection($results);
+    {   
+        //$query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
+        //$results = $query->makeHidden(['activities', 'event']);
+        //return EventUserResource::collection($results);
+        $id = "616045724b799b2adb5aa523";
+        return EventResource::collection(
+            Event::where('organizer_id', $id));
+        //$query = Organization::with("event")->where("account_id", auth()->user()->_id)->get();
     }
 
     /**
