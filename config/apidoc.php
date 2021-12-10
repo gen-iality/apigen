@@ -186,6 +186,9 @@ return [
                     //DocumentUser
                         '*/documentusers',
                         '*/documentusers/*', 
+                    //Document
+                        '*/documents',
+                        '*/documents/*', 
 
                 ],  
 
