@@ -5,40 +5,64 @@ namespace App\Http\Controllers;
 use App\Rol;
 use Illuminate\Http\Request;
 use App\Permission;
-
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Validation\Rule;
+use Validator;
 /**
  * @group Rol
  */
 class RolController extends Controller
-{
+{   
+    const AVALIABLE_TYPES = 'attendee , administrator';
+    const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
+
     /**
-     * _index_: list Roles.
+     * _index_: list roles by event.
+     * @authenticated
+     * 
+     * @urlParam event required event id 
      *
      */
     public function index()
     {
-        return Rol::all();
+        $roles = Rol::all();
+        return JsonResource::collection($roles);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * _store_: create a new rol
+     * @authenticated
+     * 
+     * @urlParam event required event id
      * 
      * @bodyParam name string required
+     * @bodyParam name string required
+     * 
      * 
      */
-    public function store(Request $request)
+    public function store(Request $request, $event_id)
     {
         //
+        $rules = $request->validate([
+            'name' => 'required',
+            'module' => 'required',
+            'type' => ['required', Rule::in(RolController::AVALIABLE_TYPES)],
+            'permission' => ['required']
+        ]);
+
+        $messages = ['in' => "The type should be one of: " . implode(", ", RolController::AVALIABLE_TYPES)];
+
+        $data = $request->json()->all();
+
+
+        $validator = Validator::make($data, $rules, $messages);
+        if (!$validator->passes()) {
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
+
+        $permission = Permission::where('name', $data['module'] .'_'. $data['permission'])->first();
+        
         $result = new Rol($request->json()->all());
         $result->save();
         return $result;

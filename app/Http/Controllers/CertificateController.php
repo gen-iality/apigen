@@ -116,17 +116,18 @@ class CertificateController extends Controller
      * @return void
      */
     public function indexByEvent(String $event_id)
-    {   
-                
-        $certificatesByRol = Certificate::where("event_id", $event_id)->where("rol_id", '!==', null)->paginate(config('app.page_size'));
+    {  
+        $auth = Auth::user();
 
-        if(isset($certificatesByRol))
-        {   
-            $eventUser = Attendee::where('account_id' , Auth::user()->_id)->first();
-            $queryByRol =  Certificate::where("event_id", $event_id)->where("rol_id", $eventUser->rol_id)->paginate(config('app.page_size'));                                                            
-            return JsonResource::collection($queryByRol);    
+        $eventUser = Attendee::where("event_id", $event_id)->where('account_id' , $auth->_id)->first();
+
+
+        $certificates = Certificate::where("event_id", $event_id)->where('rol_id' , $eventUser->rol_id )->first();
+        
+        if(isset($certificates) && !empty($certificates))
+        {
+            return $certificates; 
         }
-
         return JsonResource::collection(
             Certificate::where("event_id", $event_id)->paginate(config('app.page_size'))
         );

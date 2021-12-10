@@ -165,7 +165,7 @@ class UserEventService
             $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
             if (!empty($document_user)) {
                 $limit = $document_user['quantity'];
-                $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event->id, $eventUser, $limit);
+                $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
             }
         }
        
@@ -372,29 +372,52 @@ string(10) "1030522402"
         return $response;
     }
 
-    public static function addDocumentUserToEventUserByEvent($event_id, $eventUser, $limit)
+    public static function addDocumentUserToEventUserByEvent($event, $eventUser, $limit)
     {
-        // traer document user sin asignar
-        $get_documets_user = DocumentUser::where('assign', false)->where('event_id', $event_id)->paginate($limit);
-
-        $documents_user = [];
-        // asignar datos del event user a cada doc
-        foreach ($get_documets_user as $doc) {
-            $doc['eventuser_id'] = $eventUser['_id'];
-            $doc['assign'] = true; // necesario cambiar de estado
-            $doc->save();
-            array_push($documents_user, $doc);
-        }
-
+        
         // asignar documents user a event user en properties
         $properties = $eventUser['properties'];
-        $documents_user_url = [];
-        foreach ($documents_user as $doc) {
-            array_push($documents_user_url, $doc['url']);
+        
+
+        if(isset($eventUser['properties']['documents_user']))
+        {   
+            $newDocument = DocumentUser::create([
+                "name" => $event->name,
+                "url" => $eventUser['properties']['documents_user'],
+                "event_id" => $event->_id,
+                "assign" => true
+            ]);
+            $newDocument->save();
+            $properties_merge = array_merge($properties, ['documents_user' => ["url" => $newDocument->url, "name" => $newDocument->name]]);
+            $eventUser['properties'] = $properties_merge;
+            $eventUser->save();
+        }else{
+            // traer document user sin asignar
+            $get_documets_user = DocumentUser::where('assign', false)->where('event_id', $event->_id)->paginate($limit);
+
+            $documents_user = [];
+            // asignar datos del event user a cada doc
+            foreach ($get_documets_user as $doc) {
+                $doc['eventuser_id'] = $eventUser['_id'];
+                $doc['assign'] = true; // necesario cambiar de estado
+                $doc->save();
+                array_push($documents_user, $doc);
+            }
+
+            // asignar documents user a event user en properties
+            $properties = $eventUser['properties'];
+            $documents_user_url = [];
+            foreach ($documents_user as $doc) {
+
+                array_push($documents_user_url, ["name" => $doc['name'] , "url" =>  $doc['url']]);
+            }
+            $properties_merge = array_merge($properties, ['documents_user' => $documents_user_url]);
+            $eventUser['properties'] = $properties_merge;
+            $eventUser->save();
+            
+
         }
-        $properties_merge = array_merge($properties, ['documents_user' => $documents_user_url]);
-        $eventUser['properties'] = $properties_merge;
-        $eventUser->save();
+        
 
         return $eventUser;
     }

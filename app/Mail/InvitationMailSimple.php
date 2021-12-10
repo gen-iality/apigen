@@ -243,8 +243,10 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
 
+        $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
+        $from = !empty($organization) ? $organization->name : "Evius Event ";        
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
         $gfService = new GoogleFiles();
         $event = $this->event;
         try {
@@ -270,7 +272,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         if($this->onlylink){
            
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.onetimelogin');
         }
@@ -281,13 +283,13 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         if($this->changePassword)
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.changepassword');
         }
         if($this->onetimelogin){
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.onetimelogin');
         }
@@ -295,7 +297,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         {   
             
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             // ->attachData($this->ical, 'ical.ics', [
             //     'mime' => 'text/calendar',
@@ -307,7 +309,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         if($this->event->_id === '60c93174a85d8f027013691f' || $this->event->_id === "609ea39ca79e084e7602214c" || $this->event->_id === "60c9313f3e6e7a525514c3c7")
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.invitation');
         }
@@ -316,11 +318,11 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
         if(!$icalCalendar)
         {
-            return $this ->from("alerts@evius.co", $from)
+            return $this ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.invitation');
         }
-        return $this ->from("alerts@evius.co", $from)
+        return $this ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',

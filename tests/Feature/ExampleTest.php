@@ -14,7 +14,7 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('api/events');
+        $response = $this->put('changeuserpassword' , ['email' => 'geraldine.garcia+1@mocionsoft.com']);
 
         $response->assertStatus(200);
     }
