@@ -540,7 +540,7 @@ class UserController extends UserControllerWeb
         }else{
             $url = config('app.front_url');
         }
-        dd($url);
+        
         
         $link = $auth->getPasswordResetLink($email, 
             [
