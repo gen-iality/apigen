@@ -432,7 +432,7 @@ class UserController extends UserControllerWeb
      * _getAccessLink_: get and sent link acces to email to user.
      * 
      * @queryParam event_id required event id to redirect user
-     * @bodyParam email required  user email
+     * @bodyParam email email required  user email
      * 
      */
     public function getAccessLink(Request $request) 
