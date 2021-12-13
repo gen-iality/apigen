@@ -438,20 +438,39 @@ class UserController extends UserControllerWeb
     {
         $auth = resolve('Kreait\Firebase\Auth');
 
-        if(isset($request))
-        {
-            $data = $request->all();
-        }
+        $request->validate([
+            "email" => "required|email:rfc,dns",            
+        ]);
+        $data = $request->all();
         
-        $email = isset($data["email"]) ?  $data["email"] : $email;
+        $email = $data["email"];
         
-        $event_id = isset($data["event_id"]) ? $data["event_id"] : $event_id;
-        $link = $auth->getSignInWithEmailLink(
-            $email,
-            [
-                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event_id,
-            ]    
-        );
+
+        $link = '';
+        $event_id = null;
+        if(isset($data['event_id']))
+        {   
+            
+
+            $event_id = $data['event_id'];
+
+            $link = $auth->getSignInWithEmailLink(
+                $email,
+                [
+                    "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event_id,
+                ]    
+            );
+
+        }else{  
+            
+            $link = $auth->getSignInWithEmailLink(
+                $email,
+                [
+                    "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email),
+                ]    
+            );
+
+        } 
            
         Mail::to($email)
         ->queue(

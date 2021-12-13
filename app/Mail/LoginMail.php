@@ -49,7 +49,7 @@ class LoginMail extends Mailable
      */
     public function build()
     {   
-        $from = Organization::find($this->event->organizer_id);
+        $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
         $from = isset($from) ? $from : 'Evius';
 
 

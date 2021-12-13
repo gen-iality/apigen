@@ -257,7 +257,7 @@ Route::group(
 Route::post("users/signInWithEmailAndPassword", "UserController@signInWithEmailAndPassword");
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
-Route::get('getloginlink', 'UserController@getAccessLink');
+Route::post('getloginlink', 'UserController@getAccessLink');
 Route::get('singinwithemaillink', 'UserController@signInWithEmailLink');
 Route::put("changeuserpassword", "UserController@changeUserPassword");
 

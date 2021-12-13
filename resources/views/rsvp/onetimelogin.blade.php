@@ -21,11 +21,18 @@
 					Hola {{$user->names}}
 				</td>
 			 </tr>
-			 <tr>
-				<td style="font-size:14px;text-align:left;padding:10px;display:block">
-					Recibimos una solicitud para acceder a {{$event->name}} con esta dirección de correo electrónico. <br/>
-					Si quieres acceder con tu cuenta de {{$user->email}}, haz clic en el siguiente vínculo:					
-				</td>
+			 <tr>				
+				@if(!empty($event->name))
+					<td style="font-size:14px;text-align:left;padding:10px;display:block">
+						Recibimos una solicitud para acceder a {{$event->name}} con esta dirección de correo electrónico. <br/>
+						Si quieres acceder con tu cuenta de {{$user->email}}, haz clic en el siguiente vínculo:					
+					</td>
+				@else
+					<td style="font-size:14px;text-align:left;padding:10px;display:block">
+						Recibimos una solicitud para acceder a Evius con esta dirección de correo electrónico. <br/>
+						Si quieres acceder con tu cuenta de {{$user->email}}, haz clic en el siguiente vínculo:					
+					</td>
+				@endif
 			 </tr>
 			 <tr>
 				<td style="font-size:17px;text-align:center;padding:10px;display:block">

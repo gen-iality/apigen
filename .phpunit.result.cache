@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Tests\\Feature\\ExampleTest::testBasicTest":3,"Warning":6},"times":{"Tests\\Feature\\ExampleTest::testBasicTest":16.374,"Tests\\Unit\\AcronymTest::testExample":0.063,"Warning":0.001}}
+{"version":1,"defects":{"Tests\\Feature\\ExampleTest::testBasicTest":5,"Warning":6,"Tests\\Feature\\UserTest::testGetLoginLink":3},"times":{"Tests\\Feature\\ExampleTest::testBasicTest":0.192,"Tests\\Unit\\AcronymTest::testExample":0.054,"Warning":0.001,"Tests\\Feature\\UserTest::testGetLoginLink":2.003,"Tests\\Feature\\UserTest::testChangeUserPassword":7.818}}
