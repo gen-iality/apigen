@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Organization;
+use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
+
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
@@ -124,10 +126,14 @@ class EventUserController extends Controller
      * @return EventUserResource
      */
     public function meEvents(Request $request)
-    {
-        $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
-        $results = $query->makeHidden(['activities', 'event']);
-        return EventUserResource::collection($results);
+    {   
+        //$query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
+        //$results = $query->makeHidden(['activities', 'event']);
+        //return EventUserResource::collection($results);
+        $id = "616045724b799b2adb5aa523";
+        return EventResource::collection(
+            Event::where('organizer_id', $id));
+        //$query = Organization::with("event")->where("account_id", auth()->user()->_id)->get();
     }
 
     /**
@@ -422,7 +428,7 @@ class EventUserController extends Controller
             new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
         );
 
-        if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
+        if ($event_id == '61a8443fa3023d1c117f9e13') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
 
@@ -511,7 +517,7 @@ class EventUserController extends Controller
 
             //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
             //$eventUserData = $request->json()->all();
-
+            
             $field = Event::find($event_id);
             $user_properties = $field->user_properties;
 
@@ -527,7 +533,7 @@ class EventUserController extends Controller
             
             
             $validations = [
-                'email' => 'required|email',
+                'email' => 'required|email:rfc,dns',
                 //'other_fields' => 'sometimes',
             ];
 
@@ -585,7 +591,7 @@ class EventUserController extends Controller
 
                 $eventUserData["eventuser_id"] = $eventuser_id;
             }
-
+            
             $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
             $eventUser = $result->data;
 
@@ -628,7 +634,8 @@ class EventUserController extends Controller
             } else if ($signInResult && $signInResult->idToken()) {
                 $eventUser->user->initial_token = $signInResult->idToken();
             }
-
+            $eventUser->email = strtolower($eventUser->email);
+            $eventUser->save();
             $response = new EventUserResource($eventUser);
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
@@ -795,7 +802,12 @@ class EventUserController extends Controller
         }
 
         return EventUserResource::collection(
-            Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
+            Attendee::where("event_id", $event_id)->
+            where(function ($query) {
+                $query->where("account_id", auth()->user()->_id)
+                //Temporal fix for users that got different case in their email and thus firebase created different user
+                      ->orWhere('email', '=', strtolower(auth()->user()->email));
+            })->paginate(config("app.page_size"))
         );
     }
 
@@ -1120,44 +1132,20 @@ class EventUserController extends Controller
                     'value' => $eventUserData['properties']['apellidos'],
                 ),
                 array(
-                    'property' => 'city',
-                    'value' => isset($eventUserData['properties']['ciudad']) ? $eventUserData['properties']['ciudad'] :  "",
-                ),
-                array(
                     'property' => 'mobilephone',
-                    'value' => $eventUserData['properties']['celular'],
-                ),
-                array(
-                    'property' => 'sector_empresa',
-                    'value' => isset($eventUserData['properties']['sectoreconomicoalquepertenecelaempresa']) ? $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'] : "",
-                ),
-                array(
-                    'property' => 'objeto_negocio',
-                    'value' => isset($eventUserData['properties']['ofreceproductosserviciosoambos'])?$eventUserData['properties']['ofreceproductosserviciosoambos'] : "",
-                ),
-                array(
-                    'property' => 'tipo_objeto_negocio',
-                    'value' => isset($eventUserData['properties']['selecciondetipodeobjeto'])?$eventUserData['properties']['selecciondetipodeobjeto']: "",
+                    'value' => $eventUserData['properties']['numerodetelefonomovil'],
                 ),
                 array(
                     'property' => 'company',
-                    'value' => isset($eventUserData['properties']['empresa']) ? $eventUserData['properties']['empresa'] : "",
+                    'value' => isset($eventUserData['properties']['nombredelaempresa']) ? $eventUserData['properties']['nombredelaempresa'] : "",
                 ),
                 array(
                     'property' => 'cedula_de_ciudadania_nit',
-                    'value' => isset($eventUserData['properties']['numerodecedula']) ?$eventUserData['properties']['numerodecedula'] : "" ,
-                ),
-                array(
-                    'property' => 'nit',
-                    'value' => isset($eventUserData['properties']['nit']) ? $eventUserData['properties']['nit'] : "",
-                ),
-                array(
-                    'property' => 'origen_lead',
-                    'value' => isset($event->name) ? $event->name : "MeetUps",
+                    'value' => isset($eventUserData['properties']['nodecedula']) ?$eventUserData['properties']['nodecedula'] : "" ,
                 ),
                 array(
                     'property' => 'rol_cargo',
-                    'value' => isset($eventUserData['properties']['rolenlaempresa']) ? $eventUserData['properties']['rolenlaempresa'] : "",
+                    'value' => isset($eventUserData['properties']['rolcargo']) ? $eventUserData['properties']['rolcargo'] : "",
                 ),
             ),
         );        

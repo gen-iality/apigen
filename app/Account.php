@@ -123,7 +123,7 @@ class Account extends User
                             //disabled: false
                         ]
                     );
-
+                    $model->email = strtolower($model->email);
                     $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
 
                     $model->uid = $fbuser->uid;

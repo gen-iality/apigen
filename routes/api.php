@@ -155,7 +155,8 @@ Route::delete('organizations/{organization}/userproperties/{id}', 'OrganizationU
 /****************
  * organizations
  ****************/
-Route::apiResource('organizations', 'OrganizationController', ['only' => ['index', 'show']]);
+Route::get('organizations', 'OrganizationController@index');
+Route::get('organizations/{organization}', 'OrganizationController@show');
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
 Route::get('organizations/{id}/eventUsers', 'OrganizationController@indexByEventUserInOrganization');
@@ -164,7 +165,10 @@ Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationC
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-        Route::apiResource('organizations', 'OrganizationController', ['except' => ['index', 'show']]);
+        Route::post('organizations', 'OrganizationController@store');        
+        Route::put('organizations/{organization}', 'OrganizationController@update');
+        Route::delete('organizations/{organization}', 'OrganizationController@destroy');
+
         Route::get('me/organizations', 'OrganizationController@meOrganizations');
         // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
         // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
@@ -289,9 +293,9 @@ Route::group(
 
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('eventsaftertoday', 'EventController@afterToday');
-Route::get('users/{id}/events', 'EventController@EventbyUsers');
-Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
-Route::get('organizations/{id}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
+Route::get('users/{user}/events', 'EventController@EventbyUsers');
+Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
+Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
 
 Route::post('events/{event_id}/surveys/{id}/coursefinished', 'EventStatisticsController@courseFinished');
 
@@ -564,17 +568,12 @@ Route::post("files/upload/{field_name?}", "FilesController@upload");
 Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
-Route::get('rols', 'RolController@index');
+// Route::get('events/{event}/rols', 'RolController@index');
 Route::post('rols', 'RolController@store');
 Route::put('rols/{id}', 'RolController@update');
 Route::get('rols/{id}', 'RolController@show');
 Route::post('roles/{role}/addpermissions', 'RolesPermissionsController@addPermissionToRol');
-/*
-Route::middleware('cors')->get('rols', 'RolController@index');
-Route::middleware('cors')->post('rols', 'RolController@store');
-Route::middleware('cors')->put('rols/{id}', 'RolController@update');
-Route::middleware('cors')->get('rols/{id}', 'RolController@show');
- */
+
 /**
  * REQUEST OF PLACETOPAY
  * https://api.evius.co/api/order/paymentCompleted
