@@ -458,7 +458,7 @@ class UserController extends UserControllerWeb
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event_id,
+                    "url" => config('app.front_url') . "loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
                 ]    
             );
 
@@ -467,7 +467,7 @@ class UserController extends UserControllerWeb
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email),
+                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email),
                 ]    
             );
 
@@ -495,32 +495,34 @@ class UserController extends UserControllerWeb
         $singin = '';
         $redirect='';
 
-        try {
-        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
-        if(isset($data['event_id']))
-        {   
-            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
+        // try {
+            $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
+            dd($singin);
+            if(isset($data['event_id']))
+            {   
+                $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event";
 
-        }else{
+            }else{
 
-            $redirect = config('app.front_url') . "?token=" . $singin->idToken();
+                $redirect = config('app.front_url');
+            } 
 
-        } 
-        return Redirect::to($redirect);
+            return Redirect::to($redirect)->with($auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]));
+            
 
-        }catch(\Exception $e){
-            $link = $auth->getSignInWithEmailLink(
-                $data["email"],
-                [
-                    "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data['event_id'],
-                ]    
-            );
+        // }catch(\Exception $e){
+        //     $link = $auth->getSignInWithEmailLink(
+        //         $data["email"],
+        //         [
+        //             "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data['event_id'],
+        //         ]    
+        //     );
 
-            return Redirect::to($link);
+        //     return Redirect::to($link);
 
-            // Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
-            // return view('Public.Errors.loginLink');         
-        }
+        //     // Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
+        //     // return view('Public.Errors.loginLink');         
+        // }
         
     }
 
