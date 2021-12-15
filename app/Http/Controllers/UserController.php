@@ -458,7 +458,7 @@ class UserController extends UserControllerWeb
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => config('app.front_url') . "loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
+                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
                 ]    
             );
 
