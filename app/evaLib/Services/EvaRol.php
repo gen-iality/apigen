@@ -54,10 +54,15 @@ class EvaRol
             return '';
         }
         $rol = Rol::where('level', -1)->first();
+        $user = Account::find($authorId);
         $userOrg = [
             'account_id' => $authorId,
             'organization_id' => $organizationId,
             'rol_id' => '5c1a59b2f33bd40bb67f2322',
+            'properties' => [
+                'names' => $user->names,
+                'email' => $user->email
+            ]
         ];
         $userToOrg = new OrganizationUser($userOrg);
         $userToOrg->save();
