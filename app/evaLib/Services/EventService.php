@@ -97,8 +97,8 @@ class EventService
             "account_id" => $user->_id,
             "event_id" => $event->_id,
             "model_type" => "App\Account",
-            "properities" => [
-                "name" => $user->names,
+            "properties" => [
+                "names" => $user->names,
                 "email" => $user->email,
             ]
         ];

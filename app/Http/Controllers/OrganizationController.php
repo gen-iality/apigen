@@ -81,12 +81,12 @@ class OrganizationController extends Controller
         $model->author = Auth::user()->_id;
 
         $user = Auth::user();
+        $model->save();
 
         $styles = isset($data['styles']) ? $data['styles'] : null ;
         $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
         $data['styles'] = OrganizationServices::createDefaultStyles($styles,$model);
 
-        $model->save();
 
         
         if (isset($dataUserProperties['user_properties'])) {
