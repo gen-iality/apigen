@@ -478,7 +478,7 @@ class UserController extends UserControllerWeb
         $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
         if(isset($data['event_id']))
         {   
-            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/event"."?token=" . $singin->idToken();
+            $redirect = config('app.front_url') ."/"."landing/".$data['event_id']."/"."?token=" . $singin->idToken();
 
         }else{
 
