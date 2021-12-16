@@ -190,4 +190,19 @@ class OrganizationUserController extends Controller
         return $OrganizationsUser;
     }
 
+    /**
+     * _meOrganizations_: list user's organizations.
+     * These organizations
+     * @authenticated
+     * 
+     */
+    public function meOrganizations(Request $request)
+    {   
+        $user = Auth::user();
+        $query =  OrganizationUser::where('account_id' , $user->_id)->paginate(config('app.page_size'));
+
+        return OrganizationResource::collection($query);
+    }
+
+
 }
