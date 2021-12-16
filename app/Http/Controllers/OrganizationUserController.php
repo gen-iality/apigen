@@ -201,7 +201,7 @@ class OrganizationUserController extends Controller
         $user = Auth::user();
         $query =  OrganizationUser::where('account_id' , $user->_id)->paginate(config('app.page_size'));
 
-        return OrganizationResource::collection($query);
+        return OrganizationUserResource::collection($query);
     }
 
 
