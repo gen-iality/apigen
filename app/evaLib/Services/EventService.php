@@ -143,14 +143,6 @@ class EventService
         $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
         $user_properties = new UserProperties($email);
         $model->user_properties()->save($user_properties);
-
-        $picture = array("name" => "picture", "label" => "Avatar", "unique" => false, "mandatory" => false, "type" => "avatar");
-        $user_properties = new UserProperties($picture);
-        $model->user_properties()->save($user_properties);
-
-        $password = array("name" => "password", "label" => "Password", "unique" => false, "mandatory" => false, "type" => "password");
-        $user_properties = new UserProperties($password);
-        $model->user_properties()->save($user_properties);
     }
 
     /**

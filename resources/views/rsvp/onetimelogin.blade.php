@@ -18,26 +18,19 @@
 		<tbody>
 			<tr>
 				<td style="font-size:20px;text-align:center;padding:10px;display:block"> 
-					Hola {{$user->names}}
+					Hola {{$user->name}}
 				</td>
-			 </tr>
-			 <tr>				
-				@if(!empty($event->name))
-					<td style="font-size:14px;text-align:left;padding:10px;display:block">
-						Recibimos una solicitud para acceder a {{$event->name}} con esta dirección de correo electrónico. <br/>
-						Si quieres acceder con tu cuenta de {{$user->email}}, haz clic en el siguiente vínculo:					
-					</td>
-				@else
-					<td style="font-size:14px;text-align:left;padding:10px;display:block">
-						Recibimos una solicitud para acceder a Evius con esta dirección de correo electrónico. <br/>
-						Si quieres acceder con tu cuenta de {{$user->email}}, haz clic en el siguiente vínculo:					
-					</td>
-				@endif
 			 </tr>
 			 <tr>
-				<td style="font-size:17px;text-align:center;padding:10px;display:block">
-					<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>			
+				<td style="font-size:14px;text-align:left;padding:10px;display:block">
+					Recibimos una solicitud para acceder a {{$event->name}} con esta dirección de correo electrónico. <br/>
+					Si quieres acceder con tu cuenta de {{$user->email}}, haz clic en el siguiente enlace:					
 				</td>
+			 </tr>
+			 <tr>
+				@component('mail::button', ['url' => $link , 'color' => 'evius'])
+					Ingresar con mi usuario
+				@endcomponent
 			 </tr>
 			 <tr>
 				<td style="font-size:14px;text-align:left;padding:10px;display:block">

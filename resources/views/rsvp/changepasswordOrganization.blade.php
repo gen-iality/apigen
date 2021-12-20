@@ -25,13 +25,13 @@
 				<td style="font-size:14px;text-align:left;padding:10px;display:block">
 					Estás recibiendo este correo por que tu (o alguien más) ha solicitado reestablecer la contraseña de tu cuenta {{$user->email}}.
                     <br/> 
-                    Si es así, por favor, has click en el siguiente link o copialo en tu navegador:				
+                    Si es así, por favor, has clic en el siguiente enlace:				
 				</td>
 			 </tr>
-			 <tr>
-				<td style="font-size:17px;text-align:center;padding:10px;display:block">
-					<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>			
-				</td>
+			 <tr>	
+				@component('mail::button', ['url' => $link , 'color' => 'evius'])
+					Cambiar contraseña
+				@endcomponent
 			 </tr>
 			 <tr>
 				<td style="font-size:14px;text-align:left;padding:10px;display:block">
