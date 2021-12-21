@@ -173,7 +173,7 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _signInWithEmailAndPassword_: login a user
+     * _signInWithEmailAndPassword_: login a user, you can see this [diagram](https://app.diagrams.net/#G1qSNi58JI6usiyqU7n7SsmyTrJW5oITAZ)
      *
      * @bodyParam email email required Example: evius@evius.co
      * @bodyParam password string required Example: evius.2040

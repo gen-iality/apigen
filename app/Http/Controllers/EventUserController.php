@@ -373,21 +373,22 @@ class EventUserController extends Controller
      * @param string $eventuser_id
      * @return void
      */
-    public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id, Message $message, string $eventuser_id = null)
+    public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id)
     {
         $eventUserData = $request->json()->all();
+	$event_user_properties_data = $eventUserData['properties'];
 
         $noSendMail = $request->query('no_send_mail');
 
-        $email = (isset($eventUserData["email"]) && $eventUserData["email"]) ? $eventUserData["email"] : null;
-        if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
-            $email = $eventUserData["properties"]["email"];
-        }
-        
+        $email = $eventUserData["properties"]["email"];
+        //$email = (isset($eventUserData["email"]) && $eventUserData["email"]) ? $eventUserData["email"] : null;
+        //if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
+            //$email = $eventUserData["properties"]["email"];
+        //}
         //El correo es super obligatorio para el registro
-        if (!$email) {
-            return abort(400, "Email is required");
-        }
+        //if (!$email) {
+            //return abort(400, "Email is required");
+        //}
 
         //Se buscan usuarios existentes con el correo que se está ingresando
         $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
@@ -404,16 +405,14 @@ class EventUserController extends Controller
         $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
 
-        $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
+	//$eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
+        $result = UserEventService::importUserEvent($event, $eventUserData, $event_user_properties_data);
+	$eventUser = $result->data;
         //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
-
-        
 
         if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
             return $eventUser;
         }
-
-        
 
         // para probar rápido el correo lo renderiza como HTML más bien
         //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
@@ -422,11 +421,11 @@ class EventUserController extends Controller
         }
 
      
-        Mail::to($email)
-        ->queue(
-            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-            new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-        );
+	Mail::to($email)
+	->queue(
+	    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+	    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+	);
 
         if ($event_id == '61a8443fa3023d1c117f9e13') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
