@@ -10,6 +10,7 @@ use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
 use App\Event;
+use App\Rol;
 use App\Http\Resources\EventUserResource;
 use App\Message;
 use App\State;
@@ -38,6 +39,10 @@ use Carbon\Carbon;
  */
 class EventUserController extends Controller
 {
+
+    const CREATED = 'CREATED';
+    const UPDATED = 'UPDATED';
+    const MESSAGE = 'OK';
 
     /**
      * _index_ display all the EventUsers of an event
@@ -370,58 +375,73 @@ class EventUserController extends Controller
      * @return void
      */
     public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id)
-    {
-        $eventUserData = $request->json()->all();
-	$event_user_properties_data = $eventUserData['properties'];
+    {   
+        $request->validate([
+            'properties.email' => 'required|email:rfc,dns',
+            'properties.names' => 'required|string|max:250'
+        ]);
+
+        $eventUserData = $request->json()->all();	    
 
         $noSendMail = $request->query('no_send_mail');
 
         $email = $eventUserData["properties"]["email"];
-        //$email = (isset($eventUserData["email"]) && $eventUserData["email"]) ? $eventUserData["email"] : null;
-        //if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
-            //$email = $eventUserData["properties"]["email"];
-        //}
-        //El correo es super obligatorio para el registro
-        //if (!$email) {
-            //return abort(400, "Email is required");
-        //}
-
+        $eventUserData['event_id'] = $event_id;
         //Se buscan usuarios existentes con el correo que se está ingresando
         $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
 
-        //Se valida si ya hay un usuario con el correo que se está ingresando
+        //Se valida si ya hay un eventuser con el correo que se está ingresando
         if (empty($userexists)) {
             //Si es el primer registro de usuario al evento se toma la fecha del registro con formato 2021-01-01
             $date = \Carbon\Carbon::now()->format('Y-m-d');
 
             //Se llama al método que registra la cantidad de registros a un evento por día
             app('App\Http\Controllers\RegistrationMetricsController')->createByDay($date, $event_id);
+
+            $user = Account::where("email" , $email)->first();      
+            $eventUserData['account_id'] = $user->_id;            
+
+        }else{
+            return response()->json([
+                "message" => "The user is already registered in the event"
+            ],409);     
         }
+
 
         $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
 
-	//$eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
-        $result = UserEventService::importUserEvent($event, $eventUserData, $event_user_properties_data);
-	$eventUser = $result->data;
-        //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
+	    //Account rol assigned by default
+        if (!isset($eventUserData["rol_id"])) {
+            $rol = Rol::where('level', 0)->first();
+            if ($rol) {
+                $eventUserData["rol_id"] = $rol->_id;
+            } else {
+                //Se supone este es un rol por defecto (asistente) si todo el resto falla
+                $eventUserData["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
+            }
 
-        if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
-            return $eventUser;
+        } 
+        
+
+        $eventUser = Attendee::create($eventUserData);
+        // En caso de que el event posea document user
+        $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
+        if (!empty($document_user)) {
+            $limit = $document_user['quantity'];
+            $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
         }
+        
 
-        // para probar rápido el correo lo renderiza como HTML más bien
-        //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-        if ($noSendMail === 'true') {
-            return $eventUser;
+        if(empty($noSendMail))
+        {
+            Mail::to($email)
+            ->queue(
+                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+            );
         }
-
-     
-	Mail::to($email)
-	->queue(
-	    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-	    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-	);
+            
 
         if ($event_id == '61a8443fa3023d1c117f9e13') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
@@ -450,145 +470,57 @@ class EventUserController extends Controller
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
         try {
-            //las propiedades dinámicas del usuario se estan migrando de una propiedad directa
-            //a estar dentro de un hijo llamado properties
-
-            $eventUserData = $request->json()->all();
-
-            //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
-            //$eventUserData = $request->json()->all();
-            
-            $field = Event::find($event_id);
-            $user_properties = $field->user_properties;
-
-            $userData = $request->json()->all();
-
-            if (isset($eventUserData['properties'])) {
-                $userData = $eventUserData['properties'];
-
-                if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
-                    return "minimun password length is 6 characters";
-                }
-            }
-            
-            
-            $validations = [
+            $request->validate([
                 'email' => 'required|email:rfc,dns',
-                //'other_fields' => 'sometimes',
-            ];
+                'names' => 'required|string|max:250'
+            ]);
+    
+            $eventUserData = $request->json()->all();	    
+    
+            $noSendMail = $request->query('no_send_mail');
+    
+            $email = $eventUserData["email"];
+            $event = Event::findOrFail($event_id);
 
-            if (!empty($eventUserData["ticketid"])) {
-                //$eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $eventUserData["ticket_id"] = $eventUserData["ticketid"];
-                $userData["ticket_id"] = $eventUserData["ticketid"];
-                //$userData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                //$userData["ticket_id"]["properties"] = $eventUserData["properties"]["ticketid"];
-                //var_dump($userData);die;\
-
-            }
-
-            if (!empty($eventUserData["ticketid"])) {
-
-                $eventUserData["ticket_id"] = $eventUserData["ticketid"];
-                $userData["ticket_id"] = $eventUserData["ticketid"];
-                unset($eventUserData["ticketid"]);
-                unset($userData["ticketid"]);
-
-            } elseif (!empty($eventUserData["properties"]["ticketid"])) {
-
-                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                unset($eventUserData["properties"]["ticketid"]);
-                unset($userData["properties"]["ticketid"]);
+            $eventUserData["event_id"]= $event_id;
+            if(!isset($eventUserData["rol_id"]))
+            {
+                $eventUserData["rol_id"] = isset($eventUserData["rol_id"]) ? $eventUserData["rol_id"] : "60e8a7e74f9fb74ccd00dc22";
 
             }
-
-            foreach ($user_properties as $user_property) {
-
-                if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
-                    continue;
-                }
-
-                $field = $user_property['name'];
-                //$validations[$field] = 'required';
+            
+            $user = Account::where("email" , $email)->first();   
+            if(!isset($user))
+            {      
+               
+                
+                $user = Account::create([
+                    "email" => $email,
+                    "names" => $eventUserData["names"],
+                    "password" => $email
+                ]); 
             }
-
-            //este validador pronto se va a su clase de validacion
-            $validator = Validator::make(
-                $userData,
-                $validations
+            
+            
+            //Se buscan usuarios existentes con el correo que se está ingresando
+            $eventUser = Attendee::updateOrCreate(
+                ['email' => $eventUserData['email']],
+                $eventUserData,
             );
 
-            if ($validator->fails()) {
-                return response(
-                    $validator->errors(),
-                    422
-                );
-            }
+            $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
-            $event = Event::find($event_id);
-            if ($eventuser_id) {
+            $result = (object) [
+                "status" => $result_status,
+                "data" => $eventUser,                
+            ];
 
-                $eventUserData["eventuser_id"] = $eventuser_id;
-            }
-            
-            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            $eventUser = $result->data;
-
-            /**
-             *
-             *Creamos un token para que se pueda autologuear el usuario
-             **/
-            $auth = resolve('Kreait\Firebase\Auth');
-            $signInResult = null;
-
-            //Si el usuario ya se ha logueado generamos un token a partir de su refresh_token
-            // try {
-            //     if (isset($eventUser->user->refresh_token)) {
-            //         $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
-            //     }
-
-            // } catch (\Exception $e) {
-
-            //     if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
-            //     } else {
-            //         //return response()->json((object) ["message" => $e->getMessage()], 400);
-            //     }
-            // }
-
-            if (!$signInResult) {
-                $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"]; 
-
-                $eventUser->user->password = bcrypt($pass);
-                if (isset($eventUser->user->uid)) {
-                    
-                    $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
-                    $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
-                    $eventUser->user->refresh_token = $signInResult->refreshToken();
-                    $eventUser->user->save();
-                }
-            }
-
-            if ($signInResult && $signInResult->accessToken()) {
-                $eventUser->user->initial_token = $signInResult->accessToken();
-            } else if ($signInResult && $signInResult->idToken()) {
-                $eventUser->user->initial_token = $signInResult->idToken();
-            }
-            $eventUser->email = strtolower($eventUser->email);
-            $eventUser->save();
             $response = new EventUserResource($eventUser);
-            $additional = ['status' => $result->status, 'message' => $result->message];
-            $response->additional($additional);
+            
+            $additional = ['status' => $result->status];
+            $response->additional($additional); 
 
-            if($event->sendregistrationnotification)
-            {
-                
-                Mail::to($userData["email"])
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image = null, "", $event->name)
-                );
-            }
+
             
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);

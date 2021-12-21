@@ -140,7 +140,7 @@ class OrganizationController extends Controller
         $data = $request->json()->all();
         $dataQuery = $request->input();
        
-        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu']))
+        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu'] == 'true'))
         {
             $events = Event::where('organizer_id' , $organization->_id)->get();
 
