@@ -127,13 +127,9 @@ class EventUserController extends Controller
      */
     public function meEvents(Request $request)
     {   
-        //$query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
-        //$results = $query->makeHidden(['activities', 'event']);
-        //return EventUserResource::collection($results);
-        $id = "616045724b799b2adb5aa523";
-        return EventResource::collection(
-            Event::where('organizer_id', $id));
-        //$query = Organization::with("event")->where("account_id", auth()->user()->_id)->get();
+        $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
+        $results = $query->makeHidden(['activities', 'event']);
+        return EventUserResource::collection($results);
     }
 
     /**
