@@ -24,21 +24,7 @@ use App\evaLib\Services\OrganizationServices;
  */
 class OrganizationController extends Controller
 {
-    /**
-     * _meOrganizations_: Listar las organizaciones del usuario logueado
-     * 
-     *
-     * @param  \App\Organization  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function meOrganizations(Request $request)
-    {   
-        return OrganizationResource::collection(
-            Organization::where('author', Auth::user()->_id)
-                ->paginate(config('app.page_size'))
-        );
-    }
-
+   
     /**
      * _index_:Display a listing of the organizations.
      * 
