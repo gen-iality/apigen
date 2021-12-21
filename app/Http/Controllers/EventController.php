@@ -353,7 +353,7 @@ class EventController extends Controller
         }
         
         //Configuracione spor defecto de todos los eventos
-        EventService::addEventMenu($result);
+        // EventService::addEventMenu($result);
         EventService::addOwnerAsAdminColaborator($user, $result);
         EventService::createDefaultUserProperties($result->id);
 
