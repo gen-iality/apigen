@@ -518,7 +518,8 @@ class EventUserController extends Controller
 
             $result = (object) [
                 "status" => $result_status,
-                "data" => $eventUser,                
+                "data" => $eventUser,  
+                "message" => "OK"              
             ];
 
             $response = new EventUserResource($eventUser);
