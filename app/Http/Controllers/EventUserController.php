@@ -481,7 +481,8 @@ class EventUserController extends Controller
         try {
             $request->validate([
                 'email' => 'required|email:rfc,dns',
-                'names' => 'required|string|max:250'
+                'names' => 'required|string|max:250',
+                'password' => 'required|string'
             ]);
     
             $eventUserData = $request->json()->all();	    
@@ -495,21 +496,27 @@ class EventUserController extends Controller
             if(!isset($eventUserData["rol_id"]))
             {
                 $rol_id = isset($eventUserData["rol_id"]) ? $eventUserData["rol_id"] : "60e8a7e74f9fb74ccd00dc22";
-
             }
-            
+             
             $user = Account::where("email" , $email)->first();   
             if(!isset($user))
-            {      
-               
-                
+            {   
+                $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
-                    "password" => $email
+                    "password" => $pass
                 ]); 
             }
-            
+            // else if(isset($eventUserData["password"])){
+
+            //     $user->password = $eventUserData["password"];
+            //     $user->save();
+            //     dd($user->password);
+
+            // }
+                        
+            unset($eventUserData["password"]);
             
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
@@ -519,7 +526,7 @@ class EventUserController extends Controller
                 ],
                 [ 
                     'rol_id' => $rol_id,
-                    "properties" => $eventUserData                    
+                    "properties" => $eventUserData
                 ]
             );
 
