@@ -482,10 +482,10 @@ class EventUserController extends Controller
             $email = $eventUserData["email"];
             $event = Event::findOrFail($event_id);
 
-            $eventUserData["event_id"]= $event_id;
+            $rol_id = "";
             if(!isset($eventUserData["rol_id"]))
             {
-                $eventUserData["rol_id"] = isset($eventUserData["rol_id"]) ? $eventUserData["rol_id"] : "60e8a7e74f9fb74ccd00dc22";
+                $rol_id = isset($eventUserData["rol_id"]) ? $eventUserData["rol_id"] : "60e8a7e74f9fb74ccd00dc22";
 
             }
             
@@ -504,8 +504,15 @@ class EventUserController extends Controller
             
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
-                ['email' => $eventUserData['email']],
-                $eventUserData,
+                [
+                    'email' => $eventUserData['email'],
+                    "event_id" =>$event_id
+                ],
+                [ 
+                    'rol_id' => $rol_id,
+                    "porperties" => $eventUserData
+                    
+                ]
             );
 
             $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
