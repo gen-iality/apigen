@@ -524,7 +524,7 @@ class EventUserController extends Controller
 
             $response = new EventUserResource($eventUser);
             
-            $additional = ['status' => $result->status];
+            $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional); 
 
 
