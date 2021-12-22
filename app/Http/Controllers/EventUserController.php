@@ -785,7 +785,7 @@ class EventUserController extends Controller
         $eventUser = Attendee::findOrFail($evenUserId);        
 
 
-        $pass = $data['properties']['password'];
+        $pass = isset($data['properties']['password']) ? $data['properties']['password'] : null ;
         if($pass)
         {
             $user = Account::find($eventUser->account_id);
