@@ -785,23 +785,6 @@ class EventUserController extends Controller
         $eventUser = Attendee::findOrFail($evenUserId);        
 
 
-        $pass = isset($data['properties']['password']) ? $data['properties']['password'] : null ;
-        if($pass)
-        {
-            $user = Account::find($eventUser->account_id);
-            $user->password = bcrypt($pass);
-            $user->save();
-            $data['properties']['password'] = $user->password;
-            
-            if (isset($user->uid)) 
-            {
-                $updatedUser = $auth->changeUserPassword($user->uid, $pass);
-                $signInResult = $auth->signInWithEmailAndPassword($user->email, $pass);
-                $user->refresh_token = $signInResult->refreshToken();
-                $user->save();                
-            }
-
-        }
         $new_properties = isset($data['properties']) ? $data['properties'] : [];
         $old_properties = isset($eventUser->properties) ? $eventUser->properties : [];
 
