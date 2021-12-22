@@ -398,8 +398,17 @@ class EventUserController extends Controller
             //Se llama al método que registra la cantidad de registros a un evento por día
             app('App\Http\Controllers\RegistrationMetricsController')->createByDay($date, $event_id);
 
-            $user = Account::where("email" , $email)->first();      
-            $eventUserData['account_id'] = $user->_id;            
+            $user = Account::where("email" , $email)->first();    
+            if(empty($user))
+            {   
+                $user = Account::create([
+                    "email" => $email,
+                    "names" => $eventUserData["properties"]["names"],
+                    "password" => $email
+                ]); 
+            }  
+            $eventUserData['account_id'] = $user->_id;                            
+
 
         }else{
             return response()->json([
