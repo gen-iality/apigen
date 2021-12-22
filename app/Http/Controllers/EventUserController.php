@@ -510,7 +510,7 @@ class EventUserController extends Controller
                 ],
                 [ 
                     'rol_id' => $rol_id,
-                    "porperties" => $eventUserData                    
+                    "properties" => $eventUserData                    
                 ]
             );
 
