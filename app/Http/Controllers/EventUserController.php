@@ -505,13 +505,12 @@ class EventUserController extends Controller
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
                 [
-                    'email' => $eventUserData['email'],
+                    'account_id' => $user->_id,
                     "event_id" =>$event_id
                 ],
                 [ 
                     'rol_id' => $rol_id,
-                    "porperties" => $eventUserData
-                    
+                    "porperties" => $eventUserData                    
                 ]
             );
 
