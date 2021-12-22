@@ -137,7 +137,7 @@ class EventService
         /*Crear propierdades names, email, picture*/
         $model = Event::find($event_id);
         $organization = Organization::find($model->organizer_id);
-        if(empty($organization->template_properties))
+        if(empty($organization->template_properties[0]))
         {
             $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
             $user_properties = new UserProperties($name);
