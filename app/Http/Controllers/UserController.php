@@ -100,6 +100,10 @@ class UserController extends UserControllerWeb
         $result->save();                            
         
         $result = Account::find($result->_id);
+        Mail::to($result)
+            ->queue(
+                new  \App\Mail\UserRegistrationMail($result)
+            );
         return $result;
     }
 
@@ -125,8 +129,7 @@ class UserController extends UserControllerWeb
             'email' => 'email',
             'names' => 'string',
             'picture' => 'string',
-            'password' => 'string',
-            'others_properties' => 'array',
+            'password' => 'string'
         ]);
 
         $data = $request->json()->all();
@@ -136,17 +139,14 @@ class UserController extends UserControllerWeb
         $Account = Account::find($id);
         
         //If the user wants to change the password this will also be modified in firebase
-        if(isset($data['properties']['password']))
+        if(isset($data['password']))
         {               
-            $this->auth->changeUserPassword($Account['uid'], $data['properties']['password']);
+            $this->auth->changeUserPassword($Account['uid'], $data['password']);
         }
         // var_dump($auth);die;
         $Account->fill($data);
         $Account->save();
 
-        if(isset($data['organization_ids'])){
-            $Account->organizations()->sync($data['organization_ids']);
-        }     
 
         $Account = Account::find($Account->_id);
 
