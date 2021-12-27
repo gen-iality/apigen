@@ -482,7 +482,7 @@ class EventUserController extends Controller
             $request->validate([
                 'email' => 'required|email:rfc,dns',
                 'names' => 'required|string|max:250',
-                'password' => 'required|string'
+                'password' => 'string'
             ]);
     
             $eventUserData = $request->json()->all();	    
