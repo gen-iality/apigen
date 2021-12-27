@@ -3,15 +3,9 @@
 		<thead>
 			<tr>
 			  <td>
-				@if(!empty($event->styles["banner_image_email"]))
-					<div>
-						<img style="width:100%;max-width:600px;border-radius:20px 20px 0 0"  alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
-					</div>
-				@elseif(!empty($event->styles["banner_image"]))
 					<div class="centered">
-						<img style="width:100%;max-width:600px;border-radius:20px 20px 0 0" alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
+						<img style="width:100%;max-width:600px;border-radius:20px 20px 0 0" alt="Evius" src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2FViews%2FHeader%20Animado.gif?alt=media&token=f4f341e9-64e9-4c92-9b9b-a81d4d023698" />  
 					</div>
-				@endif
 			  </td>
 		  </tr>
 		</thead>
@@ -23,7 +17,7 @@
 			 </tr>
              <tr>
 				<td style="font-size:14px;text-align:left;padding:10px;display:block"> 
-					Gracias por registrarte en Evius; estamos encantados de que te hayas unido a nosotros.<br/>
+					Gracias por registrarte en Evius, estamos encantados de que te hayas unido a nosotros.<br/>
                     Ingresa <a href="https://app.evius.co">aquí</a> para disfrutar de tus eventos.
 				</td>
 			 </tr>		
@@ -42,15 +36,9 @@
 			</tr>	 				 
 			 <tr>
 				<td>
-					@if(!empty($event->styles["banner_footer_email"]))
-						<div class="centered">
-							<img style="width:100%;max-width:600px;border-radius:0 0 20px 20px" alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} /> 
-						</div>
-					@elseif(!empty($event->styles["banner_footer"]))
-						<div class="centered">
-							<img style="width:100%;max-width:600px;border-radius:0 0 20px 20px" alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />  
-						</div>
-					@endif
+					<div class="centered">
+						<img style="width:100%;max-width:600px;border-radius:0 0 20px 20px" alt="Evius" src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2FViews%2Ffooter.png?alt=media&token=0aada277-fdec-458f-9016-b66ab2282a9e"/>  
+					</div>	
 				</td>
 			</tr>
 		</tbody>
