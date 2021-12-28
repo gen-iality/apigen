@@ -461,20 +461,16 @@ class EventUserController extends Controller
     }
 
     /**
-     * _createUserAndAddtoEvent_:create user and add it to an event
+     * _createUserAndAddtoEvent_: import  user and add it to an event
+     * @authenticated
      *
-     * @urlParam event_id string required
-     * @urlParam eventuser_id  string
+     * @urlParam event string required
      *
      * @bodyParam email email required field
      * @bodyParam name  string required
-     * @bodyParam password string required
+     * @bodyParam password string 
      * @bodyParam other_params,... any other params  will be saved in user and eventUser
      *
-     * @param Request $request
-     * @param string $event_id
-     * @param string $eventuser_id
-     * @return void
      */
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
@@ -1042,13 +1038,13 @@ class EventUserController extends Controller
     }
 
     /**
-     * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates 
-     * or according specific dates.
+     * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates  * or according specific dates.
+     * @authenticated
      * 
      * @urlParam event required event_id
      * @queryParam metrics_type required string With this parameter you can defined the type of metrics that you want to see, you can select created_at for see the registered users  or checkedin_at for see checked users. Example: created_at
-     * @queryParam datetime_from date
-     * @queryParam datetime_from date
+     * @queryParam datetime_from date format dd-mm-yyyy
+     * @queryParam datetime_to date format dd-mm-yyyy
      */
     public function metricsEventByDate(Request $request, $event_id)
     {
