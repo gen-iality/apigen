@@ -138,11 +138,10 @@ class EventUserController extends Controller
     }
 
     /**
-     * _bookEventUsers_: book Event Users
-     *
-     * @param Request $request
-     * @param Event $event
-     * @return void
+     * _bookEventUsers_: when an event is pay the attendees can do book without having to pay.
+     * @urlParam event required event id
+     * 
+     * @bodyParam eventUsersIds array required Attendees list who book in an event
      */
     public function bookEventUsers(Request $request, Event $event)
     {
@@ -831,12 +830,10 @@ class EventUserController extends Controller
     }
 
     /**
-     * __CheckIn:__ checks In an existent Attendee to the related event
+     * _checkIn_: checks In an existent Attendee to the related event
      *
-     * @urlParam id string required id Attendee to checkin into the event
+     * @urlParam eventuser string required id Attendee to checkin into the event
      *
-     * @param  string $id Attendee to checkin into the event
-     * @return void
      */
     public function checkIn($id)
     {

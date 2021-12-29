@@ -120,6 +120,8 @@ return [
                     // EventUser  
                         '*/eventusers',
                         '*/eventusers/*',
+                        '*/eventUsers',
+                        '*/eventUsers/*',
                     //Users
                         '*/users',
                         '*/users/*',

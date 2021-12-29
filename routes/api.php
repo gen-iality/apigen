@@ -97,7 +97,7 @@ Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserMan
 Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
+Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
