@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Organization;
+use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
+
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
 use App\Event;
+use App\Rol;
 use App\Http\Resources\EventUserResource;
 use App\Message;
 use App\State;
@@ -37,75 +40,32 @@ use Carbon\Carbon;
 class EventUserController extends Controller
 {
 
+    const CREATED = 'CREATED';
+    const UPDATED = 'UPDATED';
+    const MESSAGE = 'OK';
+
     /**
      * _index_ display all the EventUsers of an event
-     *
-     * ORDERING PROBLEM WITH CAPITAL LETTERS
-     * Collections must be created with case-insensitive default collation
-     *
-     * Example: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
-     * https://docs.mongodb.com/manual/core/index-case-insensitive/
-     * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
-     *
-     * @queryParam filtered optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-     *
-     * @response {
-     *     "_id": "5f9055454e6953792a54fd43",
-     *     "state_id": "5b0efc411d18160bce9bc706",
-     *     "checked_in": false,
-     *     "rol_id": "60e8a7e74f9fb74ccd00dc22",
-     *     "properties": {
-     *         "names": "Burke Maldonado",
-     *         "email": "vygufiqe@mailinator.com",
-     *         "password": null,
-     *         "displayName": "Burke Maldonado"
-     *     },
-     *     "event_id": "5e9cae6bd74d5c2f5f0c61f2",
-     *     "account_id": "5f9055454e6953792a54fd42",
-     *     "updated_at": "2020-10-21 15:35:33",
-     *     "created_at": "2020-10-21 15:35:33",
-     *     "rol": null,
-     *     "user": {
-     *         "_id": "5f9055454e6953792a54fd42",
-     *         "email": "vygufiqe@mailinator.com",
-     *         "names": "Burke Maldonado",
-     *         "displayName": "Burke Maldonado",
-     *         "confirmation_code": "mSCaqtrRujVotLrG",
-     *         "api_token": "gEXBxQHw5NW1BOjrC97If7stp9jODtpuLiW6MCeaZ45mUOMcfu20dJMwJedQ",
-     *         "uid": "UOlROJM9hASVfUsbZofEubXrM5j2",
-     *         "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlM2FlZWUyYjVjMDhjMGMyODFhNGZmN2..",
-     *         "refresh_token": "AG8BCndDGp2u4dbDaA0Q0QvfUfFCJd55iJoOrgJDr84lhXXpd4B34a2Bk8Y8UWl..",
-     *         "updated_at": "2020-10-21 15:35:34",
-     *         "created_at": "2020-10-21 15:35:33"
-     *     },
-     *     "ticket": null
-     * }
-     *
-     * @return \Illuminate\Http\Response EventUserResource collection
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
+     * @authenticated
+     *  
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      */
-
     public function index(Request $request, String $event_id, FilterQuery $filterQuery)
     {
 
         $input = $request->all();
-        //arreglo temporal para Yanbal/landing/5f99a20378f48e50a571e3b6
-        if ($event_id == "5f99a20378f48e50a571e3b6") {
-            $input["pageSize"] = 2;
-        }
-        $query = Attendee::where("event_id", $event_id);
+                $query = Attendee::where("event_id", $event_id);
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventUserResource::collection($results);
     }
 
     /**
      * _meInEvent_: user information logged into the event
+     * @authenticated
+     * 
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
-     * @urlParam event_id
-     *
-     * @param string $event_id
-     * @return void
      */
     public function meInEvent($event_id)
     {
@@ -117,25 +77,21 @@ class EventUserController extends Controller
 
     /**
      * _meEvents:_ list of registered events of the logged in user.
+     * @authenticated
      *
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @param  $event_id
-     * @return EventUserResource
      */
-    public function meEvents(Request $request)
-    {
+    public function meEvents()
+    {   
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
         $results = $query->makeHidden(['activities', 'event']);
         return EventUserResource::collection($results);
     }
 
     /**
-     * _bookEventUsers_: book Event Users
-     *
-     * @param Request $request
-     * @param Event $event
-     * @return void
+     * _bookEventUsers_: when an event is pay the attendees can do book without having to pay.
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
+     * 
+     * @bodyParam eventUsersIds array required Attendees list who book in an event
      */
     public function bookEventUsers(Request $request, Event $event)
     {
@@ -184,7 +140,7 @@ class EventUserController extends Controller
      * _createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event
      *
      *
-     * @urlParam event_id string required
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      * @bodyParam email email required
      * @bodyParam name  string required
@@ -323,11 +279,7 @@ class EventUserController extends Controller
     /**
      * _sendQrToUsers_: send Qr To Users.
      *
-     * @urlParam event_id string required
-     *
-     * @param Request $request
-     * @param string $event_id
-     * @return void
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      */
     public function sendQrToUsers(Request $request, string $event_id)
     {
@@ -354,75 +306,91 @@ class EventUserController extends Controller
     /**
      * _SubscribeUserToEventAndSendEmail_: register user to an event and send confirmation email
      *
-     * @urlParam event_id string required
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
-     * @bodyParam email email required field
-     * @bodyParam name  string required
-     * @bodyParam password  string required
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
-     *
-     * @param Request $request
-     * @param string $event_id
-     * @param Message $message
-     * @param string $eventuser_id
-     * @return void
+     * @bodyParam properties.email email required email event user Example: evius@evius.co
+     * @bodyParam properties.name  string required Example: Evius
+     * @bodyParam properties.password  string  Example: *******
      */
-    public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id, Message $message, string $eventuser_id = null)
-    {
-        $eventUserData = $request->json()->all();
+    public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id)
+    {   
+        $request->validate([
+            'properties.email' => 'required|email:rfc,dns',
+            'properties.names' => 'required|string|max:250'
+        ]);
+
+        $eventUserData = $request->json()->all();	    
 
         $noSendMail = $request->query('no_send_mail');
 
-        $email = (isset($eventUserData["email"]) && $eventUserData["email"]) ? $eventUserData["email"] : null;
-        if (!$email && isset($eventUserData["properties"]) && isset($eventUserData["properties"]["email"])) {
-            $email = $eventUserData["properties"]["email"];
-        }
-        
-        //El correo es super obligatorio para el registro
-        if (!$email) {
-            return abort(400, "Email is required");
-        }
-
+        $email = $eventUserData["properties"]["email"];
+        $eventUserData['event_id'] = $event_id;
         //Se buscan usuarios existentes con el correo que se está ingresando
         $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
 
-        //Se valida si ya hay un usuario con el correo que se está ingresando
+        //Se valida si ya hay un eventuser con el correo que se está ingresando
         if (empty($userexists)) {
             //Si es el primer registro de usuario al evento se toma la fecha del registro con formato 2021-01-01
             $date = \Carbon\Carbon::now()->format('Y-m-d');
 
             //Se llama al método que registra la cantidad de registros a un evento por día
             app('App\Http\Controllers\RegistrationMetricsController')->createByDay($date, $event_id);
+
+            $user = Account::where("email" , $email)->first();    
+            if(empty($user))
+            {   
+                $user = Account::create([
+                    "email" => $email,
+                    "names" => $eventUserData["properties"]["names"],
+                    "password" => $email
+                ]); 
+            }  
+            $eventUserData['account_id'] = $user->_id;                            
+
+
+        }else{
+            return response()->json([
+                "message" => "The user is already registered in the event"
+            ],409);     
         }
+
 
         $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
 
-        $eventUser = self::createUserAndAddtoEvent($request, $event_id, $eventuser_id);
-        //Esto queda raro porque la respuetas o es un usuario o es una respuesta HTTP
+	    //Account rol assigned by default
+        if (!isset($eventUserData["rol_id"])) {
+            $rol = Rol::where('level', 0)->first();
+            if ($rol) {
+                $eventUserData["rol_id"] = $rol->_id;
+            } else {
+                //Se supone este es un rol por defecto (asistente) si todo el resto falla
+                $eventUserData["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
+            }
 
+        } 
         
 
-        if (get_class($eventUser) == "Illuminate\Http\Response" || get_class($eventUser) == "Illuminate\Http\JsonResponse") {
-            return $eventUser;
+        $eventUser = Attendee::create($eventUserData);
+        // En caso de que el event posea document user
+        $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
+        if (!empty($document_user)) {
+            $limit = $document_user['quantity'];
+            $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
         }
-
         
 
-        // para probar rápido el correo lo renderiza como HTML más bien
-        //return  (new RSVP("", $event, $response, $image, "", $event->name))->render();
-        if ($noSendMail === 'true') {
-            return $eventUser;
+        if(empty($noSendMail))
+        {
+            Mail::to($email)
+            ->queue(
+                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+            );
         }
+            
 
-     
-        Mail::to($email)
-        ->queue(
-            //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-            new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
-        );
-
-        if ($event_id == '60c8affc0b4f4b417d252b29' || $event_id == '6144ff5a9f5c525850186e30') {
+        if ($event_id == '61a8443fa3023d1c117f9e13') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
 
@@ -431,217 +399,82 @@ class EventUserController extends Controller
     }
 
     /**
-     * _changeUserPassword_: change user password
+     * _createUserAndAddtoEvent_: import  user and add it to an event.
+     * When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and
+     * if the user exists, the user will not be updated, it will only create the record in the event.
+     * 
+     * @authenticated
      *
-     * @urlParam event_id required string id of the event in which the user is registered
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
-     * @bodyParam email email required Email of the user who will change his password
+     * @bodyParam email email required email event user Example: example@evius.co
+     * @bodyParam name  string required Example: Evius
+     * @bodyParam password  string if the password is not added, the password will be the user's email. Example: *******
+     * @bodyParam other_params.city any other params  will be saved in eventUser
      *
-     * @param Request $request
-     * @param string $event_id
-     * @return void
-     */
-    public function ChangeUserPassword(Request $request, string $event_id)
-    {
-        $data = $request->json()->all();
-        $destination = $request->input("destination");
-        $onlylink = $request->input("onlylink");
-        $firebasePasswordChange = $request->input("firebase_password_change");
-
-        //Validar si el usuario está registrado en el evento
-        $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
-        $eventUser = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
-
-        $event = Event::findOrFail($event_id);
-        $image = null; //$event->picture;
-
-        //En caso de que no exita el usuario se finaliza la función
-        if (empty($eventUser)) {
-            abort(401, "El correo ingresado no se encuentra registrado en el evento");
-        }
-        if ($firebasePasswordChange) {
-            $client = new Client();
-            $url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyATmdx489awEXPhT8dhTv4eQzX3JW308vc";
-            $headers = ['Content-Type' => 'application/json'];
-
-            $request = $client->post($url,
-                [
-                    'json' => [
-                        "requestType" => "PASSWORD_RESET",
-                        "email" => $email,
-                    ],
-                ],
-                ['headers' => $headers]
-            );
-        } else {
-            //Envio de correo para la contraseña
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMail("", $event, $eventUser, $image, "", $event->name, null, null, null, true, $destination, $onlylink, $firebasePasswordChange)
-                );
-        }
-        return $eventUser;
-
-    }
-
-    /**
-     * _createUserAndAddtoEvent_:create user and add it to an event
-     *
-     * @urlParam event_id string required
-     * @urlParam eventuser_id  string
-     *
-     * @bodyParam email email required field
-     * @bodyParam name  string required
-     * @bodyParam password string required
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
-     *
-     * @param Request $request
-     * @param string $event_id
-     * @param string $eventuser_id
-     * @return void
      */
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
         try {
-            //las propiedades dinámicas del usuario se estan migrando de una propiedad directa
-            //a estar dentro de un hijo llamado properties
+            $request->validate([
+                'email' => 'required|email:rfc,dns',
+                'names' => 'required|string|max:250',
+                'password' => 'string'
+            ]);
+    
+            $eventUserData = $request->json()->all();	    
+            $eventUserData["email"] = strtolower($eventUserData["email"]); 
+            $noSendMail = $request->query('no_send_mail');
+    
+            $email = $eventUserData["email"];
+            $event = Event::findOrFail($event_id);
 
-            $eventUserData = $request->json()->all();
-
-            //$request->request->add(["ticket_id" => $eventUserData["properties"]["ticketid"]]);
-            //$eventUserData = $request->json()->all();
-
-            $field = Event::find($event_id);
-            $user_properties = $field->user_properties;
-
-            $userData = $request->json()->all();
-
-            if (isset($eventUserData['properties'])) {
-                $userData = $eventUserData['properties'];
-
-                if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
-                    return "minimun password length is 6 characters";
-                }
+            $rol_id = "";
+            if(!isset($eventUserData["rol_id"]))
+            {
+                $rol_id = isset($eventUserData["rol_id"]) ? $eventUserData["rol_id"] : "60e8a7e74f9fb74ccd00dc22";
             }
-            // $userData["password"] =self::encryptdata($userData["password"]);
+             
+            $user = Account::where("email" , $email)->first();   
+            if(!isset($user))
+            {   
+                $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
+                $user = Account::create([
+                    "email" => $email,
+                    "names" => $eventUserData["names"],
+                    "password" => $pass
+                ]); 
+            }
             
-            $validations = [
-                'email' => 'required|email',
-                //'other_fields' => 'sometimes',
-            ];
-
-            if (!empty($eventUserData["ticketid"])) {
-                //$eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $eventUserData["ticket_id"] = $eventUserData["ticketid"];
-                $userData["ticket_id"] = $eventUserData["ticketid"];
-                //$userData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                //$userData["ticket_id"]["properties"] = $eventUserData["properties"]["ticketid"];
-                //var_dump($userData);die;\
-
-            }
-
-            if (!empty($eventUserData["ticketid"])) {
-
-                $eventUserData["ticket_id"] = $eventUserData["ticketid"];
-                $userData["ticket_id"] = $eventUserData["ticketid"];
-                unset($eventUserData["ticketid"]);
-                unset($userData["ticketid"]);
-
-            } elseif (!empty($eventUserData["properties"]["ticketid"])) {
-
-                $eventUserData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                $userData["ticket_id"] = $eventUserData["properties"]["ticketid"];
-                unset($eventUserData["properties"]["ticketid"]);
-                unset($userData["properties"]["ticketid"]);
-
-            }
-
-            foreach ($user_properties as $user_property) {
-
-                if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
-                    continue;
-                }
-
-                $field = $user_property['name'];
-                //$validations[$field] = 'required';
-            }
-
-            //este validador pronto se va a su clase de validacion
-            $validator = Validator::make(
-                $userData,
-                $validations
+                        
+            unset($eventUserData["password"]);
+            
+            //Se buscan usuarios existentes con el correo que se está ingresando
+            $eventUser = Attendee::updateOrCreate(
+                [
+                    'account_id' => $user->_id,
+                    "event_id" =>$event_id
+                ],
+                [ 
+                    'rol_id' => $rol_id,
+                    "properties" => $eventUserData
+                ]
             );
 
-            if ($validator->fails()) {
-                return response(
-                    $validator->errors(),
-                    422
-                );
-            }
+            $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
-            $event = Event::find($event_id);
-            if ($eventuser_id) {
-
-                $eventUserData["eventuser_id"] = $eventuser_id;
-            }
-
-            $result = UserEventService::importUserEvent($event, $eventUserData, $userData);
-            $eventUser = $result->data;
-
-            /**
-             *
-             *Creamos un token para que se pueda autologuear el usuario
-             **/
-            $auth = resolve('Kreait\Firebase\Auth');
-            $signInResult = null;
-
-            //Si el usuario ya se ha logueado generamos un token a partir de su refresh_token
-            // try {
-            //     if (isset($eventUser->user->refresh_token)) {
-            //         $signInResult = $auth->signInWithRefreshToken($eventUser->user->refresh_token);
-            //     }
-
-            // } catch (\Exception $e) {
-
-            //     if (get_class($e) == "Kreait\Firebase\Auth\SignIn\FailedToSignIn") {
-            //     } else {
-            //         //return response()->json((object) ["message" => $e->getMessage()], 400);
-            //     }
-            // }
-
-            if (!$signInResult) {
-                $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"];
-
-                //No conocemos otra forma de generar el token de login sino forzando un signin
-                if (isset($eventUser->user->uid)) {
-
-                    $updatedUser = $auth->changeUserPassword($eventUser->user->uid, $pass);
-                    $signInResult = $auth->signInWithEmailAndPassword($eventUser->user->email, $pass);
-                    $eventUser->user->refresh_token = $signInResult->refreshToken();
-                    $eventUser->user->save();
-                }
-            }
-
-            if ($signInResult && $signInResult->accessToken()) {
-                $eventUser->user->initial_token = $signInResult->accessToken();
-            } else if ($signInResult && $signInResult->idToken()) {
-                $eventUser->user->initial_token = $signInResult->idToken();
-            }
+            $result = (object) [
+                "status" => $result_status,
+                "data" => $eventUser,  
+                "message" => "OK"              
+            ];
 
             $response = new EventUserResource($eventUser);
+            
             $additional = ['status' => $result->status, 'message' => $result->message];
-            $response->additional($additional);
+            $response->additional($additional); 
 
-            if($event->sendregistrationnotification)
-            {
-                
-                Mail::to($userData["email"])
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image = null, "", $event->name)
-                );
-            }
+
             
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);
@@ -795,7 +628,12 @@ class EventUserController extends Controller
         }
 
         return EventUserResource::collection(
-            Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->paginate(config("app.page_size"))
+            Attendee::where("event_id", $event_id)->
+            where(function ($query) {
+                $query->where("account_id", auth()->user()->_id)
+                //Temporal fix for users that got different case in their email and thus firebase created different user
+                      ->orWhere('email', '=', strtolower(auth()->user()->email));
+            })->paginate(config("app.page_size"))
         );
     }
 
@@ -851,14 +689,12 @@ class EventUserController extends Controller
 
     /**
      * _show:_ consult an EventUser by assistant id
+     * @authenticated
+     * @urlParam event string required Example: 61ccd3551c821b765a312864
+     * @urlParam eventuser string required id Attendee Example: 61ccd3551c821b765a312866
      *
-     * @urlParam event_id string required
-     * @urlParam id string required id Attendee
-     *
-     * @param  \App\Attendee  $eventUser
-     * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $event_id, $id)
+    public function show($event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
@@ -867,26 +703,27 @@ class EventUserController extends Controller
     /**
      * _update_:update a specific assistant
      *
-     * @urlParam event string required
-     * @urlParam eventusers string required id de Attendee
+     * @urlParam event string required Example: 61ccd3551c821b765a312864
+     * @urlParam eventuser string required id Attendee Example: 61ccd3551c821b765a312866
      *
-     * @bodyParam email email  field
-     * @bodyParam name  string field
-     * @bodyParam rol_id string rol id this is the role user into event 
-     * @bodyParam properties. any other params  will be saved in user and eventUser.
+     * @bodyParam rol_id string rol id this is the role user into event
+     * @bodyParam properties.other_properties  any other params  will be saved in user and eventUser
      *
      */
     public function update(Request $request, $event_id, $evenUserId)
-    {
+    {   
+        $auth = resolve('Kreait\Firebase\Auth');
+        
         $data = $request->json()->all();
-        $eventUser = Attendee::findOrFail($evenUserId);
+        $eventUser = Attendee::findOrFail($evenUserId);        
+
 
         $new_properties = isset($data['properties']) ? $data['properties'] : [];
         $old_properties = isset($eventUser->properties) ? $eventUser->properties : [];
 
         $properties_merge = array_merge($old_properties, $new_properties);
-
         $data['properties'] = $properties_merge;
+
 
         $eventUser->fill($data);
         $eventUser->save();
@@ -924,12 +761,10 @@ class EventUserController extends Controller
     }
 
     /**
-     * __CheckIn:__ checks In an existent Attendee to the related event
+     * _checkIn_: checks In an existent Attendee to the related event
      *
-     * @urlParam id string required id Attendee to checkin into the event
+     * @urlParam eventuser string required id Attendee to checkin into the event
      *
-     * @param  string $id Attendee to checkin into the event
-     * @return void
      */
     public function checkIn($id)
     {
@@ -963,12 +798,10 @@ class EventUserController extends Controller
 
     /**
      * __delete:__ remove a specific attendee from an event.
-     *
-     * @urlParam eventId string required
-     * @urlParam id string required id Attendee to checkin into the event
-     *
-     * @param  \App\Attendee  $eventUser
-     * @return \Illuminate\Http\Response
+     * @authenticated
+     * @urlParam event string required Example: 61ccd3551c821b765a312864
+     * @urlParam eventuser string required id Attendee Example: 61ccd3333821b765a312866
+
      */
     public function destroy(Request $request, $eventId, $eventUserId)
     {
@@ -1099,44 +932,20 @@ class EventUserController extends Controller
                     'value' => $eventUserData['properties']['apellidos'],
                 ),
                 array(
-                    'property' => 'city',
-                    'value' => isset($eventUserData['properties']['ciudad']) ? $eventUserData['properties']['ciudad'] :  "",
-                ),
-                array(
                     'property' => 'mobilephone',
-                    'value' => $eventUserData['properties']['celular'],
-                ),
-                array(
-                    'property' => 'sector_empresa',
-                    'value' => isset($eventUserData['properties']['sectoreconomicoalquepertenecelaempresa']) ? $eventUserData['properties']['sectoreconomicoalquepertenecelaempresa'] : "",
-                ),
-                array(
-                    'property' => 'objeto_negocio',
-                    'value' => isset($eventUserData['properties']['ofreceproductosserviciosoambos'])?$eventUserData['properties']['ofreceproductosserviciosoambos'] : "",
-                ),
-                array(
-                    'property' => 'tipo_objeto_negocio',
-                    'value' => isset($eventUserData['properties']['selecciondetipodeobjeto'])?$eventUserData['properties']['selecciondetipodeobjeto']: "",
+                    'value' => $eventUserData['properties']['numerodetelefonomovil'],
                 ),
                 array(
                     'property' => 'company',
-                    'value' => isset($eventUserData['properties']['empresa']) ? $eventUserData['properties']['empresa'] : "",
+                    'value' => isset($eventUserData['properties']['nombredelaempresa']) ? $eventUserData['properties']['nombredelaempresa'] : "",
                 ),
                 array(
                     'property' => 'cedula_de_ciudadania_nit',
-                    'value' => isset($eventUserData['properties']['numerodecedula']) ?$eventUserData['properties']['numerodecedula'] : "" ,
-                ),
-                array(
-                    'property' => 'nit',
-                    'value' => isset($eventUserData['properties']['nit']) ? $eventUserData['properties']['nit'] : "",
-                ),
-                array(
-                    'property' => 'origen_lead',
-                    'value' => isset($event->name) ? $event->name : "MeetUps",
+                    'value' => isset($eventUserData['properties']['nodecedula']) ?$eventUserData['properties']['nodecedula'] : "" ,
                 ),
                 array(
                     'property' => 'rol_cargo',
-                    'value' => isset($eventUserData['properties']['rolenlaempresa']) ? $eventUserData['properties']['rolenlaempresa'] : "",
+                    'value' => isset($eventUserData['properties']['rolcargo']) ? $eventUserData['properties']['rolcargo'] : "",
                 ),
             ),
         );        
@@ -1155,13 +964,13 @@ class EventUserController extends Controller
     }
 
     /**
-     * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates 
-     * or according specific dates.
+     * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates  * or according specific dates.
+     * @authenticated
      * 
      * @urlParam event required event_id
      * @queryParam metrics_type required string With this parameter you can defined the type of metrics that you want to see, you can select created_at for see the registered users  or checkedin_at for see checked users. Example: created_at
-     * @queryParam datetime_from date
-     * @queryParam datetime_from date
+     * @queryParam datetime_from date format dd-mm-yyyy
+     * @queryParam datetime_to date format dd-mm-yyyy
      */
     public function metricsEventByDate(Request $request, $event_id)
     {

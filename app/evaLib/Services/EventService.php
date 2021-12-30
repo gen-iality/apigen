@@ -97,8 +97,8 @@ class EventService
             "account_id" => $user->_id,
             "event_id" => $event->_id,
             "model_type" => "App\Account",
-            "properities" => [
-                "name" => $user->names,
+            "properties" => [
+                "names" => $user->names,
                 "email" => $user->email,
             ]
         ];
@@ -136,21 +136,17 @@ class EventService
     {
         /*Crear propierdades names, email, picture*/
         $model = Event::find($event_id);
-        $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
-        $user_properties = new UserProperties($name);
-        $model->user_properties()->save($user_properties);
+        $organization = Organization::find($model->organizer_id);
+        if(empty($organization->template_properties[0]))
+        {
+            $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
+            $user_properties = new UserProperties($name);
+            $model->user_properties()->save($user_properties);
 
-        $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
-        $user_properties = new UserProperties($email);
-        $model->user_properties()->save($user_properties);
-
-        $picture = array("name" => "picture", "label" => "Avatar", "unique" => false, "mandatory" => false, "type" => "avatar");
-        $user_properties = new UserProperties($picture);
-        $model->user_properties()->save($user_properties);
-
-        $password = array("name" => "password", "label" => "Password", "unique" => false, "mandatory" => false, "type" => "password");
-        $user_properties = new UserProperties($password);
-        $model->user_properties()->save($user_properties);
+            $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
+            $user_properties = new UserProperties($email);
+            $model->user_properties()->save($user_properties);
+        }        
     }
 
     /**

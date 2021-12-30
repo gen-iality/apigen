@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Feature\\ExampleTest::testBasicTest":5,"Warning":6,"Tests\\Feature\\UserTest::testGetLoginLink":3},"times":{"Tests\\Feature\\ExampleTest::testBasicTest":0.192,"Tests\\Unit\\AcronymTest::testExample":0.097,"Warning":0.001,"Tests\\Feature\\UserTest::testGetLoginLink":23.175,"Tests\\Feature\\UserTest::testChangeUserPassword":7.818}}

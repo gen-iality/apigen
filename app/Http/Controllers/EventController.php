@@ -29,100 +29,103 @@ use Mail;
 
 class EventController extends Controller
 {
-    // @apiResourceCollection App\Http\Resources\EventResource
-    // * @apiResourceModel App\Event
+    
     /**
      *
      *  _index:_ Listing of all events
      *
      * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
-     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["SUBASTA DE ARTE"]}]
-     * 
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["Demo"]}]
      * 
      * @response{
-     *     "_id": "5fa423eee086ea2d1163343e",
-     *     "name": "Evento de bienvenida",
-     *     "datetime_from": "2020-10-14T07:00:00.000-05:00",
-     *     "datetime_to": "2020-10-14T07:00:00.000-05:00",
-     *     "author_id": "5e9caaa1d74d5c2f6a02a3c2",
-     *     "organizer_id": "5e9caaa1d74d5c2f6a02a3c3",
-     *     "event_type_id": "5bf47203754e2317e4300b68",
-     *     "updated_at": "2020-11-05T11:45:01.000-05:00",
-     *     "created_at": "2020-11-05T11:10:22.189-05:00",
-     *     "category_ids": [
-     *         "5bf470c9754e2317e4300b62"
-     *     ],
-     *     "user_properties": [
-     *         {
-     *             "name": "email",
-     *             "label": "Correo",
-     *             "unique": false,
-     *             "mandatory": false,
-     *             "type": "email",
-     *             "updated_at": "2020-11-05T11:10:23.360-05:00",
-     *             "created_at": "2020-11-05T11:10:23.360-05:00",
-     *             "_id": "5fa423efe086ea2d11633440"
-     *         },
-     *         {
-     *             "name": "names",
-     *             "label": "Nombres Y Apellidos",
-     *             "unique": false,
-     *             "mandatory": false,
-     *             "type": "text",
-     *             "updated_at": "2020-11-05T11:10:24.442-05:00",
-     *             "created_at": "2020-11-05T11:10:24.442-05:00",
-     *             "_id": "5fa423f0e086ea2d11633441"
-     *         }
-     *     ],
-     *     "description": "<p>Evento de prueba en testeo de plataforma evius</p>",
-     *     "location": [],
-     *     "venue": "Mocion",
-     *     "visibility": "PUBLIC",
-     *     "itemsMenu": {
-     *         "Home": {
-     *             "name": "Homa",
-     *             "position": null,
-     *             "section": "home",
-     *             "icon": "CalendarOutlined",
-     *             "checked": true,
-     *             "permissions": "public"
-     *         }
+     *   "_id": "61a687713bbf847b3f59d117",
+     *   "name": "Demo",
+     *   "address": null,
+     *   "type_event": "onlineEvent",
+     *   "datetime_from": "2021-11-30 15:18:00",
+     *   "datetime_to": "2021-11-30 16:18:00",
+     *   "picture": null,
+     *   "venue": null,
+     *   "location": null,
+     *   "visibility": "PUBLIC",
+     *   "description": null,
+     *   "allow_register": true,
+     *   "styles": {
+     *    "buttonColor": "#FFF",
+     *    "banner_color": "#FFF",
+     *    "menu_color": "#FFF",
+     *    "event_image": null,
+     *    "banner_image": null,
+     *    "menu_image": null,
+     *    "banner_image_email": null,
+     *    "footer_image_email": "",
+     *    "brandPrimary": "#FFFFFF",
+     *    "brandSuccess": "#FFFFFF",
+     *    "brandInfo": "#FFFFFF",
+     *    "brandDanger": "#FFFFFF",
+     *    "containerBgColor": "#ffffff",
+     *    "brandWarning": "#FFFFFF",
+     *    "toolbarDefaultBg": "#FFFFFF",
+     *    "brandDark": "#FFFFFF",
+     *    "brandLight": "#FFFFFF",
+     *    "textMenu": "#555352",
+     *    "activeText": "#FFFFFF",
+     *    "bgButtonsEvent": "#FFFFFF",
+     *    "BackgroundImage": null,
+     *    "FooterImage": null,
+     *    "banner_footer": null,
+     *    "mobile_banner": null,
+     *    "banner_footer_email": null,
+     *    "show_banner": "true",
+     *    "show_card_banner": false,
+     *    "show_inscription": false,
+     *    "hideDatesAgenda": true,
+     *    "hideDatesAgendaItem": false,
+     *    "hideHoursAgenda": false,
+     *    "hideBtnDetailAgenda": true,
+     *    "loader_page": "no",
+     *    "data_loader_page": null
+     *   },
+     *    "author_id": "61a685292e66fd61921378f2",
+     *    "organizer_id": "61a687203bbf847b3f59d113",
+     *    "event_type_id": "5bf47203754e2317e4300b68",
+     *    "updated_at": "2021-11-30 20:20:03",
+     *    "created_at": "2021-11-30 20:20:01",
+     *    "user_properties": [
+     *     {
+     *      "name": "email",
+     *      "label": "Correo",
+     *      "unique": false,
+     *      "mandatory": false,
+     *      "type": "email",
+     *      "updated_at": {
+     *       "$date": {
+     *        "$numberLong": "1638303602342"
+     *       }
+     *      }
      *     }
+     *    ]
      * }
-     *
-     * 
-     * 
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
-     * @param Illuminate\Http\Request $request [injected]
-     * @param App\evaLib\Services\FilterQuery $filterQuery [injected]
-     * @return \Illuminate\Http\Response EventResource collection
      */
     public function index(Request $request, FilterQuery $filterQuery)
     {
         $currentDate = new \Carbon\Carbon();
-        //$currentDate = $currentDate->subWeek(2);
 
         $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-            ->whereNotNull('visibility') //not null
-            //->Where('datetime_to', '>', $currentDate)
+            ->whereNotNull('visibility') 
             ->orderBy('datetime_from', 'ASC');
 
         $input = $request->all();
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
-
-        //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
     /**
-     * _beforeToday_: list of upcoming events
-     *
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * _beforeToday:_ list finished events
+     * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["Demo"]}]
      * 
-     * @param Request $request
-     * @param FilterQuery $filterQuery
-     * @return void
      */
     public function beforeToday(Request $request, FilterQuery $filterQuery)
     {
@@ -136,15 +139,13 @@ class EventController extends Controller
         $input = $request->all();
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
-
-        //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
-        /**
-     * _afterToday_: list of upcoming events
-     *
-     * @queryParam filteredBy optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
+    /**
+     * _afterToday:_ list upcoming events
+     * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
      * 
+     * @queryParam filtered optional filter parameters Example: [{"field":"name","value":["Demo"]}]
      */
     public function afterToday(Request $request, FilterQuery $filterQuery)
     {
@@ -163,9 +164,8 @@ class EventController extends Controller
     }
     
     /**
-     * _currentUserindex_: list of events of the organizer
-     *
-     * @return \Illuminate\Http\Response
+     * _currentUserindex_: list of events of the organizer who is logged in 
+     * @authenticated
      */
     public function currentUserindex(Request $request)
     {
@@ -179,10 +179,8 @@ class EventController extends Controller
     /**
      * _EventbyUsers_: search of events by user organizer.
      * 
-     * @urlParam id required  organiser_id
+     * @urlParam user required  organiser_id
      *
-     * @param string $id
-     * @return void
      */
     public function EventbyUsers(string $id)
     {
@@ -228,26 +226,45 @@ class EventController extends Controller
 
     /**
      * _store_: Create new event of the organizer.
-     *
-     * There is a special event relationship called organizer, it is a polymorphic relationship. Related to the user and the organization organizer: It could be "me" (current user) or an organization Id.
+     * @authenticated 
      * 
-     * @bodyParam name string required name to event Example: Programming course 
+     * @bodyParam name string required name to event Example: Demo 
+     * @bodyParam adress string adress when is the event. Example: Avenida siempre viva
      * @bodyParam datetime_from datetime required date and time of start of the event Example: 2020-10-16 18:00:00
      * @bodyParam datetime_to datetime  date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam type_event string required This parameter has two options: onlineEvent or PhysicalEvent, when onlineEvent the event emails will have the link to log in to the event page and physialEvent will send a QR code to enter the event at the physical point.     
      * @bodyParam picture string image of the event
+     * @bodyParam venue string Event venue. Example: Venue B
+     * @bodyParam location object This parameter specific all information of event location.
+     * @bodyParam location.Latitude float Latitude coordinates Example: 4.668184
+     * @bodyParam location.Longitude float Longitude coordinates Example: -74.051968
+     * @bodyParam location.number string Number build Example: #123
+     * @bodyParam location.street string Event street Example: Avenida siempre viva
+     * @bodyParam location.city string Event city Example: Bogotá
+     * @bodyParam location.state string Event state Example: Bogotá D.C
+     * @bodyParam location.FormattedAddress string Epecific complete adress Example: Av. Siempre viva #123, Bogotá, Colombia     
      * @bodyParam visibility string required restricts access for registered users or any unregistered user Example: PUBLIC
-     * @bodyParam user_properties array user registration properties
-     * @bodyParam author_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
-     * @bodyParam event_type_id string required Example: 5bf47226754e2317e4300b6a
-     * @bodyParam organizer_id string required Example: 5e9caaa1d74d5c2f6a02a3c3
-     * @bodyParam category array App\Category
-     * @bodyParam location String VIRTUAL | VENUE_NAME
-     * @bodyParam extra_config object json of additional values to be stored
-     * @bodyParam status string when a teacher creates a course the automatic status is **'draft**' in case the administrator creates it automatically it will be **'approved'**
-     * 
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @bodyParam user_properties array user registration properties.    
+     * @bodyParam description string Explanation about  event. Example: Evento para mostrel funcionamiento de la plataforma.
+     * @bodyParam event_type_id string required App\EventType This a event Example: 5bf47226754e2317e4300b6a
+     * @bodyParam organizer_id string required Id Event's organization Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam category_ids array App\Category
+     * @bodyParam styles object required This is the event's appearance
+     * @bodyParam styles.buttonColor string required Example: #FFF 
+     * @bodyParam styles.banner_color string required Example: #FFF
+     * @bodyParam styles.menu_color string required Example: #FFF 
+     * @bodyParam styles.brandPrimary string required Example: #FFFFFF
+     * @bodyParam styles.brandSuccess string required Example: #FFFFFF 
+     * @bodyParam styles.brandInfo string required Example: #FFFFFF
+     * @bodyParam styles.brandDanger string required Example: #FFFFFF 
+     * @bodyParam styles.containerBgColor string required Example: #FFFFFF 
+     * @bodyParam styles.brandWarning string required Example: #FFFFFF
+     * @bodyParam styles.brandDark string required Example: #FFFFFF 
+     * @bodyParam styles.brandLight string required Example: #FFFFFF 
+     * @bodyParam styles.textMenu string required Example: #555352
+     * @bodyParam styles.activeText string required Example: #FFFFFF
+     * @bodyParam styles.bgButtonsEvent string required Example: #FFFFFF 
+     *  
      */
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
@@ -336,7 +353,7 @@ class EventController extends Controller
         }
         
         //Configuracione spor defecto de todos los eventos
-        EventService::addEventMenu($result);
+        // EventService::addEventMenu($result);
         EventService::addOwnerAsAdminColaborator($user, $result);
         EventService::createDefaultUserProperties($result->id);
 
@@ -350,10 +367,77 @@ class EventController extends Controller
     /**
      * _show_: display information about a specific event.
      * 
-     * @urlParam id required id of the event you want to consult
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
+     * @authenticated
+     * @urlParam event required id of the event you want to consult. Example: 61a687713bbf847b3f59d117
+     * @response{
+     *   "_id": "61a687713bbf847b3f59d117",
+     *   "name": "Demo",
+     *   "address": null,
+     *   "type_event": "onlineEvent",
+     *   "datetime_from": "2021-11-30 15:18:00",
+     *   "datetime_to": "2021-11-30 16:18:00",
+     *   "picture": null,
+     *   "venue": null,
+     *   "location": null,
+     *   "visibility": "PUBLIC",
+     *   "description": null,
+     *   "allow_register": true,
+     *   "styles": {
+     *    "buttonColor": "#FFF",
+     *    "banner_color": "#FFF",
+     *    "menu_color": "#FFF",
+     *    "event_image": null,
+     *    "banner_image": null,
+     *    "menu_image": null,
+     *    "banner_image_email": null,
+     *    "footer_image_email": "",
+     *    "brandPrimary": "#FFFFFF",
+     *    "brandSuccess": "#FFFFFF",
+     *    "brandInfo": "#FFFFFF",
+     *    "brandDanger": "#FFFFFF",
+     *    "containerBgColor": "#ffffff",
+     *    "brandWarning": "#FFFFFF",
+     *    "toolbarDefaultBg": "#FFFFFF",
+     *    "brandDark": "#FFFFFF",
+     *    "brandLight": "#FFFFFF",
+     *    "textMenu": "#555352",
+     *    "activeText": "#FFFFFF",
+     *    "bgButtonsEvent": "#FFFFFF",
+     *    "BackgroundImage": null,
+     *    "FooterImage": null,
+     *    "banner_footer": null,
+     *    "mobile_banner": null,
+     *    "banner_footer_email": null,
+     *    "show_banner": "true",
+     *    "show_card_banner": false,
+     *    "show_inscription": false,
+     *    "hideDatesAgenda": true,
+     *    "hideDatesAgendaItem": false,
+     *    "hideHoursAgenda": false,
+     *    "hideBtnDetailAgenda": true,
+     *    "loader_page": "no",
+     *    "data_loader_page": null
+     *   },
+     *    "author_id": "61a685292e66fd61921378f2",
+     *    "organizer_id": "61a687203bbf847b3f59d113",
+     *    "event_type_id": "5bf47203754e2317e4300b68",
+     *    "updated_at": "2021-11-30 20:20:03",
+     *    "created_at": "2021-11-30 20:20:01",
+     *    "user_properties": [
+     *     {
+     *      "name": "email",
+     *      "label": "Correo",
+     *      "unique": false,
+     *      "mandatory": false,
+     *      "type": "email",
+     *      "updated_at": {
+     *       "$date": {
+     *        "$numberLong": "1638303602342"
+     *       }
+     *      }
+     *     }
+     *    ]
+     * }
      */
     public function show(String $id)
     {
@@ -374,24 +458,25 @@ class EventController extends Controller
     /**
      * _update_: update information on a specific event.
      * 
+     * @authenticated
      * @urlParam event required id of the event to be updated
      * 
-     * @bodyParam name          string name to event Example: "Programming course" 
-     * @bodyParam description   string description of teh event Example : "Event to study"
-     * @bodyParam datetime_from datetime date and time of start of the event Example: 2020-10-16 18:00:00
-     * @bodyParam datetime_to   datetime date and time of the end of the event Example: 2020-10-16 21:00:00
-     * @bodyParam picture       string image of the event
-     * @bodyParam visibility    string restricts access for registered users or any unregistered user Example: PUBLIC
-     * @bodyParam organizer_id string Example: 5e9caaa1d74d5c2f6a02a3c3
-     * @bodyParam author_id string Example: 5e9caaa1d74d5c2f6a02a3c2
-     * @bodyParam event_type_id string Example: 5bf47203754e2317e4300b68
+     * @bodyParam name string required name to event Example: Demo 
+     * @bodyParam adress string adress when is the event. Example: Avenida siempre viva
+     * @bodyParam datetime_from datetime required date and time of start of the event Example: 2020-10-16 18:00:00
+     * @bodyParam datetime_to datetime  date and time of the end of the event Example: 2020-10-16 21:00:00
+     * @bodyParam type_event string required This parameter has two options: onlineEvent or PhysicalEvent, when onlineEvent the event emails will have the link to log in to the event page and physialEvent will send a QR code to enter the event at the physical point.     
+     * @bodyParam picture string image of the event
+     * @bodyParam venue string Event venue. Example: Venue B
+     * @bodyParam location object This parameter specific all information of event location.
+     * @bodyParam visibility string required restricts access for registered users or any unregistered user Example: PUBLIC
+     * @bodyParam user_properties array user registration properties.    
+     * @bodyParam description string Explanation about  event. Example: Evento para mostrel funcionamiento de la plataforma.
+     * @bodyParam event_type_id string required App\EventType This a event Example: 5bf47226754e2317e4300b6a
+     * @bodyParam organizer_id string required Id Event's organization Example: 5e9caaa1d74d5c2f6a02a3c3
+     * @bodyParam category_ids array App\Category
+     * @bodyParam styles object required This is the event's appearance
      * 
-     * @debug post $entityBody = file_get_contents('php://input');
-     * $data['picture'] =  $gfService->storeFile($request->file('picture'));
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, string $id, GoogleFiles $gfService)
     {
@@ -451,11 +536,9 @@ class EventController extends Controller
     
     /**
      * _destroy_: delete event.
-     *
-     * @urlParam event required id of the event to be eliminated
+     * @authenticated
+     * @urlParam event required id of the event to be eliminated permanetly
      * 
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
      */
     public function destroy(String $id)
     {
@@ -751,7 +834,7 @@ class EventController extends Controller
 
 
     /**
-     * _changeStatusEvent_: approve or reject the courses **'draft'**, and send mail of the change of status of the event to the user who created it
+     * _changeStatusEvent_: approve or reject the events **'draft'**, and send mail of the change of status of the event to the user who created it
      * 
      * @authenticated
      * @urlParam event_id required id of the event to be rejected or approved Example: 
@@ -847,6 +930,29 @@ class EventController extends Controller
         $event = Event::findOrFail($event_id);
         $documetUser = ["document_user" => $data];
         $event->extra_config = $documetUser;
+        $event->save();
+
+        return $event;
+    }
+
+    // Hooks Wowza
+    public function saveRecordingToEvent(Request $request)
+    {
+        $data = $request->json()->all();
+        $recording = $data['object_data']; // datos de la grabacion
+        $event = Event::where('streaming_id', $recording['transcoder_id'])->first();
+        $download_urls =  $event['download_url'];
+
+        if (empty($download_urls)) {
+            $event['download_url'] = [$recording['download_url']];
+            $event->save();
+
+            return $event;
+        }
+
+        // se existe ya una url
+        $download_urls_merge = array_merge($download_urls, [ $recording['download_url'] ]);
+        $event->download_url = $download_urls_merge;
         $event->save();
 
         return $event;

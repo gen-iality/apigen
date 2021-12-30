@@ -109,6 +109,9 @@ return [
                         '*/eventTypes',
                         '*/changeStatusEvent',
                         '*/adddocumentuser',
+                        '*/eventsbeforetoday',
+                        '*/eventsaftertoday',
+                        '*/adduserwithemailvalidation',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -117,12 +120,14 @@ return [
                     // EventUser  
                         '*/eventusers',
                         '*/eventusers/*',
+                        '*/eventUsers',
+                        '*/eventUsers/*',
                     //Users
                         '*/users',
                         '*/users/*',
                         '*/auth',
                         '*/auth/*',  
-                        '*/changeUserPassword',      
+                        '*/changeuserpassword',      
                         '*/getloginlink',
                         '*/singinwithemaillink'  ,
                               
@@ -153,6 +158,8 @@ return [
                         '*/organizations/{id}/eventUsers',
                         '*/ordersUsersPoints',
                         '*/organizations/*',
+                        'organizations/*',
+                        '*/organizations',
                     //TemplateProperties
                         '*/templateproperties/*',
                         '*/templateproperties',
@@ -182,6 +189,9 @@ return [
                     //DocumentUser
                         '*/documentusers',
                         '*/documentusers/*', 
+                    //Document
+                        '*/documents',
+                        '*/documents/*', 
 
                 ],  
 

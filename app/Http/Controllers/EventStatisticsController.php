@@ -65,6 +65,12 @@ class EventStatisticsController extends Controller
 
     }
 
+    /**
+     * _eventsstadistics_:
+     * 
+     * @urlParam organization organization id 
+     * 
+     */
     public function eventsstadistics(string $id)
     {
 

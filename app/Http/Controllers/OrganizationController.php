@@ -24,24 +24,19 @@ use App\evaLib\Services\OrganizationServices;
  */
 class OrganizationController extends Controller
 {
+   
     /**
-     * _meOrganizations_: Listar las organizaciones del usuario logueado
+     * _index_:Display a listing of the organizations.
      * 
-     *
-     * @param  \App\Organization  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function meOrganizations(Request $request)
-    {   
-        return OrganizationResource::collection(
-            Organization::where('author', Auth::user()->_id)
-                ->paginate(config('app.page_size'))
-        );
-    }
-
-    /**
-     *  _index_:Display a listing of the organizations.
-     *
+     * @response{
+     *       "_id": "5bb53ffac06586065d58cf7c",
+     *       "name": "empresa",
+     *       "nit": "123213213",
+     *       "phone": "123123213",
+     *       "author": "5ba434b0c065861ef00d1d0d",
+     *       "updated_at": "2018-10-03 22:17:30",
+     *       "created_at": "2018-10-03 22:17:30"
+     *   }
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -53,11 +48,14 @@ class OrganizationController extends Controller
 
     /**
      * _store_:Store a newly created resource in organizations.
+     * @authenticated
      * 
-     * @bodyParam properties[name,email] array 
+     * @urlParam organization required organization id
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @bodyParam name required 
+     * @bodyParam styles array required
+     * @bodyParam user_properties array required
+     * 
      */
     public function store(Request $request, EvaRol $RolService)
     {
@@ -69,12 +67,12 @@ class OrganizationController extends Controller
         $model->author = Auth::user()->_id;
 
         $user = Auth::user();
+        $model->save();
 
         $styles = isset($data['styles']) ? $data['styles'] : null ;
         $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
         $data['styles'] = OrganizationServices::createDefaultStyles($styles,$model);
 
-        $model->save();
 
         
         if (isset($dataUserProperties['user_properties'])) {
@@ -114,9 +112,11 @@ class OrganizationController extends Controller
      * _update_: Update the specified resource in organization.
      * @authenticated
      * 
-     * @urlParam organization_id required
-     * @urlParam update_events_itemsMenu if you want to update the items menu of all events of the organization, send this parameter equal true
-     * @urlParam update_events_user_properties if you want to update the user_properties of all events of the organization, send this parameter equal true
+     * @urlParam organization required organization id
+     * 
+     * @bodyParam name required 
+     * @bodyParam styles array required
+     * @bodyParam user_properties array required
      * 
      * 
      */
@@ -126,7 +126,7 @@ class OrganizationController extends Controller
         $data = $request->json()->all();
         $dataQuery = $request->input();
        
-        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu']))
+        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu'] == 'true'))
         {
             $events = Event::where('organizer_id' , $organization->_id)->get();
 
@@ -351,43 +351,6 @@ class OrganizationController extends Controller
         return $attendees;
     }
 
-    /**
-     *_ChangeUserPasswordOrganization_: change user password registered in a organization
-     * 
-     * @urlParam organization_id required string id of the organization in which the user is registered
-     * 
-     * @bodyParam email email required Email of the user who will change his password
-     * 
-     * @param Request $request
-     * @param string $event_id
-     * @return void
-     */
-    public function changeUserPasswordOrganization(Request $request, string $organization_id)
-    {
-        $data = $request->json()->all();
-        $destination = $request->input("destination");
-        $onlylink = $request->input("onlylink");
-
-        //Validar si el usuario está registrado en el evento
-        $email = (isset($data["email"]) && $data["email"]) ? $data["email"] : null;
-        $organizationUser = Account::where("organization_ids", $organization_id)->where("email", $email)->first();
-
-        $organization = Organization::findOrFail($organization_id);
-        $image = null; //$organization->picture;
-
-        //En caso de que no exita el usuario se finaliza la función
-        if (empty($organizationUser)) {
-            abort(401, "El correo ingresado no se encuentra registrado en la organización");
-        }
-        
-        //Envio de correo para la contraseña
-        Mail::to($email)
-            ->queue(                
-                new \App\Mail\ChangeUserPasswordEmail($organization, $organizationUser, true, $destination, $onlylink)
-            );
-        return $organizationUser;
-
-    }
 
     /**
      * _ordersUsersPoints_: list all information about all orders pending with the information complete about codes and total products

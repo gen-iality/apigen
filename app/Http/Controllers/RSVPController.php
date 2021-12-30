@@ -233,7 +233,7 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
+            $email = (isset($eventUser->properties["email"])) ? $eventUser->properties["email"] : $eventUser->email ;
 
             $messageUser = new MessageUser([
                 'email' => $eventUser->email,
@@ -261,13 +261,12 @@ class RSVPController extends Controller implements ShouldQueue
                 continue;
             }
             
-           
+            
             Mail::to($email)
                 ->queue(
                     new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
                 );
                 
-            Log::info('$mail '.$email);    
  
         }
     }

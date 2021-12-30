@@ -1,8 +1,5 @@
 <?php
 
-Route::get ('events/{event_id}/eventusers',      'EventUserController@indexar');
-Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
-
 /****************
  * SPACES
  ****************/
@@ -41,9 +38,9 @@ Route::group(
     function () {
         Route::get('events/{event}/newsfeed','NewsfeedController@index');
         Route::get('events/{event}/newsfeed/{newsfeed}','NewsfeedController@show');
-        Route::post('events/{event}/newsfeed','NewsfeedController@store')->middleware('permission:create');
-        Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update')->middleware('permission:update');
-        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy')->middleware('permission:destroy');
+        Route::post('events/{event}/newsfeed','NewsfeedController@store');
+        Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update');
+        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy');
     }
 );
 

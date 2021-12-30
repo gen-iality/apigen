@@ -87,8 +87,8 @@ Route::group(
 
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
-Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
-Route::put('events/{event_id}/changeUserPassword/', 'EventUserController@ChangeUserPassword');
+Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+
 
 
 // // api para transferir eventuser
@@ -100,8 +100,8 @@ Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserMan
 Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 
-Route::put('eventUsers/{id}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event_id}', 'EventUserController@createUserAndAddtoEvent');
+Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
+Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 
 Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
@@ -110,7 +110,7 @@ Route::post('events/{event_id}/eventusers',     'EventUserController@createUserA
 
 
 
-Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
+Route::get('me/events/{event}/eventusers',  'EventUserController@meInEvent');
 
 
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
@@ -170,12 +170,12 @@ Route::group(
 /****************
  * organizations
  ****************/
-Route::get('organizations' , 'OrganizationController@index');
-Route::get('organizations/{organization}' , 'OrganizationController@show');
+Route::get('organizations', 'OrganizationController@index');
+Route::get('organizations/{organization}', 'OrganizationController@show');
 Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
 Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
 Route::get('organizations/{id}/eventUsers', 'OrganizationController@indexByEventUserInOrganization');
-Route::put('organizations/{organization_id}/changeUserPassword/', 'OrganizationController@changeUserPasswordOrganization');
+
 
 Route::group(
     ['middleware' => 'auth:token'],
@@ -258,23 +258,22 @@ Route::get('user/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-        Route::put("me/storeRefreshToken", "UserController@storeRefreshToken");
         Route::apiResource('users', 'UserController', ['except' => ['index', 'show', 'store']]);
         Route::get('users/currentUser', 'FireBaseAuthController@getCurrentUser');
         // Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         Route::get('me/eventUsers', 'EventUserController@meEvents');
-        Route::get('organization/{organzation_id}/users', 'UserController@userOrganization');
+        Route::get('organization/{organization}/users', 'UserController@userOrganization');
         Route::put('users/{user_id}/changeStatusUser', 'UserController@changeStatusUser');
     }
 );
-
-
 Route::post("users/signInWithEmailAndPassword", "UserController@signInWithEmailAndPassword");
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
-Route::get('getloginlink', 'UserController@getAccessLink');
+Route::post('getloginlink', 'UserController@getAccessLink');
 Route::get('singinwithemaillink', 'UserController@signInWithEmailLink');
+Route::put("changeuserpassword", "UserController@changeUserPassword");
+
 
 
 /****************
@@ -287,6 +286,8 @@ Route::get('singinwithemaillink', 'UserController@signInWithEmailLink');
 
 
 Route::apiResource('events', 'EventController');
+// hooks Wowza
+Route::post('hooks/recording', 'EventController@saveRecordingToEvent');
 
 
 //Route::get("eventsearch",'EventController');
@@ -309,9 +310,9 @@ Route::group(
 
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('eventsaftertoday', 'EventController@afterToday');
-Route::get('users/{id}/events', 'EventController@EventbyUsers');
-Route::get('organizations/{id}/events', 'EventController@EventbyOrganizations');
-Route::get('organizations/{id}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
+Route::get('users/{user}/events', 'EventController@EventbyUsers');
+Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
+Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
 
 Route::post('events/{event_id}/surveys/{id}/coursefinished', 'EventStatisticsController@courseFinished');
 
@@ -578,17 +579,12 @@ Route::post("files/upload/{field_name?}", "FilesController@upload");
 Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
-Route::get('rols', 'RolController@index');
+// Route::get('events/{event}/rols', 'RolController@index');
 Route::post('rols', 'RolController@store');
 Route::put('rols/{id}', 'RolController@update');
 Route::get('rols/{id}', 'RolController@show');
 Route::post('roles/{role}/addpermissions', 'RolesPermissionsController@addPermissionToRol');
-/*
-Route::middleware('cors')->get('rols', 'RolController@index');
-Route::middleware('cors')->post('rols', 'RolController@store');
-Route::middleware('cors')->put('rols/{id}', 'RolController@update');
-Route::middleware('cors')->get('rols/{id}', 'RolController@show');
- */
+
 /**
  * REQUEST OF PLACETOPAY
  * https://api.evius.co/api/order/paymentCompleted
