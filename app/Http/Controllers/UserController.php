@@ -163,14 +163,11 @@ class UserController extends UserControllerWeb
 
     /**
      * _signInWithEmailAndPassword_: login a user, you can see this [diagram](https://app.diagrams.net/#G1qSNi58JI6usiyqU7n7SsmyTrJW5oITAZ)
-     *
-     * @bodyParam email email required Example: evius@evius.co
-     * @bodyParam password string required Example: evius.2040
+     * 
+     * @bodyParam email email required Example: correo@evius.co
+     * @bodyParam password string required Example: *********
      * It returns the userdata and inside that data
      * the initial_token to be stored in front and be used in following api request
-     *
-     * @param Request $request
-     * @return void
      */
     public function signInWithEmailAndPassword(Request $request)
     {
@@ -199,10 +196,7 @@ class UserController extends UserControllerWeb
     /**
      * _findByEmail_: search for specific user by mail
      *
-     * @urlParam email required email del usuario buscado. Example: evius@evius.co
-     *
-     * @param  email  $email
-     * @return \Illuminate\Http\Response
+     * @urlParam email required email del usuario buscado. Example: correo@evius.co
      */
     public function findByEmail($email)
     {
@@ -349,14 +343,12 @@ class UserController extends UserControllerWeb
 
     /**
      * _userOrganization_: user lists all the users that belong to an organization, besides this you can filter all the users by **any of the properties** that have
+ 
+     * @authenticated
      * 
-     * 
-     * @autenticathed
-     * 
-     * @queryParam filtered optional filter parameters Example: [{"field":"others_properties.role","value":["admin"]}]
-     * @queryParam  orderBy filter parameters Example: [{"field":"status","order":"desc"}]     
-     * 
-     * @urlParam organization_id required organization to which the users belong
+     * @urlParam organization required organization to which the users belong. Example: 61ccd2cc81e73549a63dd5ce
+     * @queryParam filtered optional filter parameters Example: [{"field":names","Evius"}]
+     * @queryParam  orderBy filter parameters Example: [{"field":"_id","order":"desc"}]    
      * 
      */
     public function userOrganization(Request $request, String $organization_id, FilterQuery $filterQuery){
@@ -420,8 +412,8 @@ class UserController extends UserControllerWeb
     /**
      * _getAccessLink_: get and sent link acces to email to user.
      * 
-     * @bodyParam event_id string event id to redirect user
-     * @bodyParam email email required  user email
+     * @bodyParam event_id string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
+     * @bodyParam email email required  user email Example: correo@evius.co
      * 
      */
     public function getAccessLink(Request $request) 
@@ -473,8 +465,8 @@ class UserController extends UserControllerWeb
     /**
      * _signInWithEmailLink_: this end point start the login when the user does click in the link
      *  
-     * @queryParam email required  user email
-     * @queryParam event_id event id to redirect user
+     * @bodyParam event_id string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
+     * @bodyParam email email required  user email Example: correo@evius.co
      */
     public function signInWithEmailLink(Request $request)
     {
@@ -518,8 +510,8 @@ class UserController extends UserControllerWeb
     /**
      * _changeUserPassword_: send to email to user whit  link to change user password.
      * 
-     * @bodyParam email email required 
-     * @bodyParam event_id string
+     * @bodyParam event_id string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
+     * @bodyParam email email required  user email Example: correo@evius.co
      * 
      */
     public function changeUserPassword(Request $request)
