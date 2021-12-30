@@ -59,11 +59,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _show_: registered User
+     * _show_: view a specific registered user
      *
-     * @urlParam user required  id of user. Example: 5e9caaa1d74d5c2f6a02a3c2
-     *
-     *
+     * @urlParam user required  id of user. Example: 603d6af041e6f468091c95d5
      */
     public function show(String $id)
     {
@@ -74,13 +72,13 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _store_: create new user SignUp
+     * _store_: create new user and send confirmation email
      * 
      * 
-     * @bodyParam email email required Example: evius@evius.co
-     * @bodyParam names  string required  person name     
+     * @bodyParam email email required Example: example@evius.co
+     * @bodyParam names  string required  person name  Example: Evius   
      * @bodyParam picture  string  Example: http://www.gravatar.com/avatar
-     * @bodyParam password  string  required 
+     * @bodyParam password  string  required  Example: *******
      * 
      */
     public function store(Request $request)
@@ -112,21 +110,15 @@ class UserController extends UserControllerWeb
     /**
      * _update_: update registered user
      * @authenticated
-     * @urlParam user required id user. Example: 5e9caaa1d74d5c2f6a02a3c2
+     * @urlParam user required id user. Example: 603d6af041e6f468091c95d5
      *
-     * @bodyParam email email optional. Example: evius@evius.co
-     * @bodyParam names  string optional. Example: evius lopez
-     * @bodyParam city  string 
-     * @bodyParam country  string 
+     * @bodyParam names  string optional. Example: Evius Demo
+     * @bodyParam password string. Example: ******
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
-     * @bodyParam organization_ids string. 
-     * @bodyParam others_properties array optional dynamic properties of the user you want to place. Example: []
-     * @return App\Http\Resources\UsersResource
      */
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'email' => 'email',
             'names' => 'string',
             'picture' => 'string',
             'password' => 'string'
@@ -154,12 +146,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _delete_: dele a registered user
+     * _delete_: delete a registered user
      * @authenticated
-     * @urlParam id required id user
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @urlParam user required id user Example: 603d6af041e6f555591c95d5
      */
     public function destroy($id)
     {
