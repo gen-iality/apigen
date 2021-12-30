@@ -46,73 +46,26 @@ class EventUserController extends Controller
 
     /**
      * _index_ display all the EventUsers of an event
-     *
-     * ORDERING PROBLEM WITH CAPITAL LETTERS
-     * Collections must be created with case-insensitive default collation
-     *
-     * Example: db.createCollection("names", { collation: { locale: 'en_US', strength: 1 } } )
-     * https://docs.mongodb.com/manual/core/index-case-insensitive/
-     * https://stackoverflow.com/questions/44682160/add-default-collation-to-existing-mongodb-collection
-     *
-     * @queryParam filtered optional filter parameters Example: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
-     *
-     * @response {
-     *     "_id": "5f9055454e6953792a54fd43",
-     *     "state_id": "5b0efc411d18160bce9bc706",
-     *     "checked_in": false,
-     *     "rol_id": "60e8a7e74f9fb74ccd00dc22",
-     *     "properties": {
-     *         "names": "Burke Maldonado",
-     *         "email": "vygufiqe@mailinator.com",
-     *         "password": null,
-     *         "displayName": "Burke Maldonado"
-     *     },
-     *     "event_id": "5e9cae6bd74d5c2f5f0c61f2",
-     *     "account_id": "5f9055454e6953792a54fd42",
-     *     "updated_at": "2020-10-21 15:35:33",
-     *     "created_at": "2020-10-21 15:35:33",
-     *     "rol": null,
-     *     "user": {
-     *         "_id": "5f9055454e6953792a54fd42",
-     *         "email": "vygufiqe@mailinator.com",
-     *         "names": "Burke Maldonado",
-     *         "displayName": "Burke Maldonado",
-     *         "confirmation_code": "mSCaqtrRujVotLrG",
-     *         "api_token": "gEXBxQHw5NW1BOjrC97If7stp9jODtpuLiW6MCeaZ45mUOMcfu20dJMwJedQ",
-     *         "uid": "UOlROJM9hASVfUsbZofEubXrM5j2",
-     *         "initial_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlM2FlZWUyYjVjMDhjMGMyODFhNGZmN2..",
-     *         "refresh_token": "AG8BCndDGp2u4dbDaA0Q0QvfUfFCJd55iJoOrgJDr84lhXXpd4B34a2Bk8Y8UWl..",
-     *         "updated_at": "2020-10-21 15:35:34",
-     *         "created_at": "2020-10-21 15:35:33"
-     *     },
-     *     "ticket": null
-     * }
-     *
-     * @return \Illuminate\Http\Response EventUserResource collection
-     * @see App\evaLib\Services\FilterQuery::addDynamicQueryFiltersFromUrl() include dynamic conditions in the URl into the model query
+     * @authenticated
+     *  
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      */
-
     public function index(Request $request, String $event_id, FilterQuery $filterQuery)
     {
 
         $input = $request->all();
-        //arreglo temporal para Yanbal/landing/5f99a20378f48e50a571e3b6
-        if ($event_id == "5f99a20378f48e50a571e3b6") {
-            $input["pageSize"] = 2;
-        }
-        $query = Attendee::where("event_id", $event_id);
+                $query = Attendee::where("event_id", $event_id);
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventUserResource::collection($results);
     }
 
     /**
      * _meInEvent_: user information logged into the event
+     * @authenticated
+     * 
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
-     * @urlParam event_id
-     *
-     * @param string $event_id
-     * @return void
      */
     public function meInEvent($event_id)
     {
@@ -124,13 +77,10 @@ class EventUserController extends Controller
 
     /**
      * _meEvents:_ list of registered events of the logged in user.
+     * @authenticated
      *
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @param  $event_id
-     * @return EventUserResource
      */
-    public function meEvents(Request $request)
+    public function meEvents()
     {   
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
         $results = $query->makeHidden(['activities', 'event']);
@@ -139,7 +89,7 @@ class EventUserController extends Controller
 
     /**
      * _bookEventUsers_: when an event is pay the attendees can do book without having to pay.
-     * @urlParam event required event id
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      * 
      * @bodyParam eventUsersIds array required Attendees list who book in an event
      */
@@ -190,7 +140,7 @@ class EventUserController extends Controller
      * _createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event
      *
      *
-     * @urlParam event_id string required
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      * @bodyParam email email required
      * @bodyParam name  string required
@@ -329,11 +279,7 @@ class EventUserController extends Controller
     /**
      * _sendQrToUsers_: send Qr To Users.
      *
-     * @urlParam event_id string required
-     *
-     * @param Request $request
-     * @param string $event_id
-     * @return void
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      */
     public function sendQrToUsers(Request $request, string $event_id)
     {
@@ -360,18 +306,11 @@ class EventUserController extends Controller
     /**
      * _SubscribeUserToEventAndSendEmail_: register user to an event and send confirmation email
      *
-     * @urlParam event_id string required
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
-     * @bodyParam email email required field
-     * @bodyParam name  string required
-     * @bodyParam password  string required
-     * @bodyParam proeprties.password any other params  will be saved in user and eventUser
-     *
-     * @param Request $request
-     * @param string $event_id
-     * @param Message $message
-     * @param string $eventuser_id
-     * @return void
+     * @bodyParam properties.email email required email event user Example: evius@evius.co
+     * @bodyParam properties.name  string required Example: Evius
+     * @bodyParam properties.password  string  Example: *******
      */
     public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id)
     {   
@@ -460,15 +399,18 @@ class EventUserController extends Controller
     }
 
     /**
-     * _createUserAndAddtoEvent_: import  user and add it to an event
+     * _createUserAndAddtoEvent_: import  user and add it to an event.
+     * When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and
+     * if the user exists, the user will not be updated, it will only create the record in the event.
+     * 
      * @authenticated
      *
-     * @urlParam event string required
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
-     * @bodyParam email email required field
-     * @bodyParam name  string required
-     * @bodyParam password string 
-     * @bodyParam other_params,... any other params  will be saved in user and eventUser
+     * @bodyParam email email required email event user Example: example@evius.co
+     * @bodyParam name  string required Example: Evius
+     * @bodyParam password  string if the password is not added, the password will be the user's email. Example: *******
+     * @bodyParam other_params.city any other params  will be saved in eventUser
      *
      */
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
@@ -503,13 +445,7 @@ class EventUserController extends Controller
                     "password" => $pass
                 ]); 
             }
-            // else if(isset($eventUserData["password"])){
-
-            //     $user->password = $eventUserData["password"];
-            //     $user->save();
-            //     dd($user->password);
-
-            // }
+            
                         
             unset($eventUserData["password"]);
             
@@ -753,14 +689,12 @@ class EventUserController extends Controller
 
     /**
      * _show:_ consult an EventUser by assistant id
+     * @authenticated
+     * @urlParam event string required Example: 61ccd3551c821b765a312864
+     * @urlParam eventuser string required id Attendee Example: 61ccd3551c821b765a312866
      *
-     * @urlParam event_id string required
-     * @urlParam id string required id Attendee
-     *
-     * @param  \App\Attendee  $eventUser
-     * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $event_id, $id)
+    public function show($event_id, $id)
     {
         $eventUser = Attendee::findOrFail($id);
         return new EventUserResource($eventUser);
@@ -769,13 +703,10 @@ class EventUserController extends Controller
     /**
      * _update_:update a specific assistant
      *
-     * @urlParam event string required
-     * @urlParam eventusers string required id de Attendee
+     * @urlParam event string required Example: 61ccd3551c821b765a312864
+     * @urlParam eventuser string required id Attendee Example: 61ccd3551c821b765a312866
      *
-     * @bodyParam email email  field
-     * @bodyParam name  string field
-     * @bodyParam rol_id string rol id this is the role user into event 
-     * @bodyParam properties.password  any other params  will be saved in user and eventUser
+     * @bodyParam rol_id string rol id this is the role user into event
      * @bodyParam properties.other_properties  any other params  will be saved in user and eventUser
      *
      */
@@ -867,12 +798,10 @@ class EventUserController extends Controller
 
     /**
      * __delete:__ remove a specific attendee from an event.
-     *
-     * @urlParam eventId string required
-     * @urlParam id string required id Attendee to checkin into the event
-     *
-     * @param  \App\Attendee  $eventUser
-     * @return \Illuminate\Http\Response
+     * @authenticated
+     * @urlParam event string required Example: 61ccd3551c821b765a312864
+     * @urlParam eventuser string required id Attendee Example: 61ccd3333821b765a312866
+
      */
     public function destroy(Request $request, $eventId, $eventUserId)
     {

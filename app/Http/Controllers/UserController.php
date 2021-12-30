@@ -530,7 +530,7 @@ class UserController extends UserControllerWeb
      * _changeUserPassword_: send to email to user whit  link to change user password.
      * 
      * @bodyParam email email required 
-     * @bodyParam event string
+     * @bodyParam event_id string
      * 
      */
     public function changeUserPassword(Request $request)

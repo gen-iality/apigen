@@ -70,13 +70,13 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
  * eventUsers
  ****************/
 //CRUD
-Route::get('events/{event_id}/eventusers',      'EventUserController@index');
-Route::get('events/{event_id}/eventUsers',      'EventUserController@index');
-Route::get('events/{event_id}/eventusers/{id}', 'EventUserController@show');
+Route::get('events/{event}/eventusers',      'EventUserController@index');
+Route::get('events/{event}/eventUsers',      'EventUserController@index');
+Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');
 Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update');
 Route::post('events/{event_id}/eventusers',     'EventUserController@store');
-Route::delete('events/{event_id}/eventusers/{id}', 'EventUserController@destroy');
-Route::get('events/{event_id}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
+Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy');
+Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
 Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
 Route::get('events/myevents', 'EventUserController@indexByEventUser');
@@ -84,7 +84,7 @@ Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
-Route::post('events/{event_id}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 
 
 
@@ -107,7 +107,7 @@ Route::post('events/{event_id}/eventusers',     'EventUserController@createUserA
 
 
 
-Route::get('me/events/{event_id}/eventusers',  'EventUserController@meInEvent');
+Route::get('me/events/{event}/eventusers',  'EventUserController@meInEvent');
 
 
 Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');

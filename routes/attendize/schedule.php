@@ -1,8 +1,5 @@
 <?php
 
-Route::get ('events/{event_id}/eventusers',      'EventUserController@indexar');
-Route::get ('events/{event_id}/eventusers/{id}', 'EventUserController@mostrar');
-
 /****************
  * SPACES
  ****************/

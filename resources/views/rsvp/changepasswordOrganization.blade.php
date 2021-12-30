@@ -11,6 +11,10 @@
 					<div class="centered">
 						<img style="width:100%;max-width:600px;border-radius:20px 20px 0 0" alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
 					</div>
+				@else
+					<div class="centered">
+						<img style="width:100%;max-width:600px;border-radius:20px 20px 0 0" alt="Evius" src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2FViews%2FHeader_Evius_1920x540px%20(1).png?alt=media&token=521a9303-f274-437e-90d6-bb887761e13f" />  
+					</div>
 				@endif
 			  </td>
 		  </tr>
@@ -60,6 +64,10 @@
 					@elseif(!empty($event->styles["banner_footer"]))
 						<div class="centered">
 							<img style="width:100%;max-width:600px;border-radius:0 0 20px 20px" alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />  
+						</div>
+					@else
+						<div class="centered">
+							<img style="width:100%;max-width:600px;border-radius:0 0 20px 20px" alt="Evius" src="https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2FViews%2FFooter_Evius_1920x200px%20(1).png?alt=media&token=5216761a-b9b2-41e5-8552-5dcbc2a61c7a" />  
 						</div>
 					@endif
 				</td>
