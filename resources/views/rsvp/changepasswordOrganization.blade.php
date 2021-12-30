@@ -1,5 +1,5 @@
 @component('mail::message')
-<table style="font-family:arial;border:1px solid #e8e6e6;border-top:none;border-bottom:none;border-spacing:0;max-width:1000px;color:#707173;border-radius:40px" align="center">
+<table style="font-family:arial;border:1px solid #e8e6e6;border-top:none;border-bottom:none;border-spacing:0;max-width:1000px;color:#000000;border-radius:40px" align="center">
 		<thead>
 			<tr>
 			  <td>
