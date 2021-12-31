@@ -705,3 +705,16 @@ Route::group(
 // Route::post('events/{event}/documentusers/user/{event_user}', 'DocumentUserController@addDocumentUserToEventUserByEvent');
 
 
+
+/****************
+* Activity
+****************/
+        Route::group(
+            ['middleware' => 'auth:token'], function () {
+                Route::get('activities', 'ActivityController@index');
+                Route::post('activities', 'ActivityController@store')->middleware('permission:create');
+                Route::get('activities/{activity}', 'ActivityController@show');
+                Route::put('activities/{activity}', 'ActivityController@update')->middleware('permission:update');
+                Route::delete('activities/{activity}', 'ActivityController@destroy')->middleware('permission:delete');
+            }
+        );

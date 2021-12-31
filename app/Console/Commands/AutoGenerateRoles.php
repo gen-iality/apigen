@@ -50,20 +50,20 @@ class AutoGenerateRoles extends Command
         //Por defecto en este será el archivo donde se van a crear las rutas con los permisos
         $file = fopen(base_path('/routes/api.php'), 'a+');
 
-        $list = "list";
+        // $list = "list";
         $create = "create";
-        $show = "show";
+        // $show = "show";
         $update = "update";
         $delete = "delete";
 
-        $permissionsCrud = [$list, $create, $show, $update, $delete];
+        $permissionsCrud = [ $create,  $update, $delete];
 
         $routesPermissions ="\n/****************\n* {$model}\n****************/
         Route::group(
             ['middleware' => 'auth:token'], function () {
-                Route::get('$modelPlural', '$model"."Controller@index')->middleware('permission:$list');
+                Route::get('$modelPlural', '$model"."Controller@index');
                 Route::post('$modelPlural', '$model"."Controller@store')->middleware('permission:$create');
-                Route::get('$modelPlural/{"."$modelLower}', '$model"."Controller@show')->middleware('permission:$show');                
+                Route::get('$modelPlural/{"."$modelLower}', '$model"."Controller@show');              
                 Route::put('$modelPlural/{"."$modelLower}', '$model"."Controller@update')->middleware('permission:$update');
                 Route::delete('$modelPlural/{"."$modelLower}', '$model"."Controller@destroy')->middleware('permission:$delete');
             }
@@ -86,7 +86,7 @@ class AutoGenerateRoles extends Command
                     "guard_name" => "web"                    
                 ]
             );
-
+            //Siempre que se cree un nuevo permiso se va agregar al administrador
             RolesPermissions::updateOrCreate(
                 [
                     "rol_id" => $idRolAdmin,
