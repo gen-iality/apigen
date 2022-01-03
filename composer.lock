@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e1fe210f8fb4e60d32806e5afd4194b",
+    "content-hash": "62c89795930062187affa5218d070a2b",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -892,11 +892,6 @@
                 "spdx",
                 "validator"
             ],
-            "support": {
-                "irc": "irc://irc.freenode.org/composer",
-                "issues": "https://github.com/composer/spdx-licenses/issues",
-                "source": "https://github.com/composer/spdx-licenses/tree/1.5.5"
-            },
             "time": "2020-12-03T16:04:16+00:00"
         },
         {
@@ -942,11 +937,6 @@
                 "Xdebug",
                 "performance"
             ],
-            "support": {
-                "irc": "irc://irc.freenode.org/composer",
-                "issues": "https://github.com/composer/xdebug-handler/issues",
-                "source": "https://github.com/composer/xdebug-handler/tree/2.0.2"
-            },
             "time": "2021-07-31T17:03:58+00:00"
         },
         {
@@ -1771,10 +1761,6 @@
             "keywords": [
                 "html"
             ],
-            "support": {
-                "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/master"
-            },
             "time": "2020-06-29T00:56:53+00:00"
         },
         {
@@ -2070,10 +2056,6 @@
             "keywords": [
                 "google"
             ],
-            "support": {
-                "issues": "https://github.com/googleapis/google-api-php-client/issues",
-                "source": "https://github.com/googleapis/google-api-php-client/tree/v2.11.0"
-            },
             "time": "2021-09-20T21:15:55+00:00"
         },
         {
@@ -2480,10 +2462,6 @@
             "keywords": [
                 "google"
             ],
-            "support": {
-                "issues": "https://github.com/googleapis/common-protos-php/issues",
-                "source": "https://github.com/googleapis/common-protos-php/tree/1.3.1"
-            },
             "time": "2021-06-29T15:42:12+00:00"
         },
         {
@@ -2702,9 +2680,6 @@
             "keywords": [
                 "rpc"
             ],
-            "support": {
-                "source": "https://github.com/grpc/grpc-php/tree/v1.39.0"
-            },
             "time": "2021-07-23T23:04:53+00:00"
         },
         {
@@ -3741,6 +3716,69 @@
             "time": "2020-10-21T12:45:02+00:00"
         },
         {
+            "name": "laravel/telescope",
+            "version": "v3.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "a8d2e1106ba655006fde47a0b7ed53851c6398f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/a8d2e1106ba655006fde47a0b7ed53851c6398f5",
+                "reference": "a8d2e1106ba655006fde47a0b7ed53851c6398f5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^6.0|^7.0",
+                "moontoast/math": "^1.1",
+                "php": "^7.2",
+                "symfony/var-dumper": "^4.4|^5.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "orchestra/testbench": "^4.0|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "time": "2020-07-28T19:12:33+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v2.6.2",
             "source": {
@@ -4096,10 +4134,6 @@
                 "sftp",
                 "storage"
             ],
-            "support": {
-                "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/1.1.5"
-            },
             "time": "2021-08-17T13:49:42+00:00"
         },
         {
@@ -4384,10 +4418,6 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "support": {
-                "issues": "https://github.com/Maatwebsite/Laravel-Excel/issues",
-                "source": "https://github.com/Maatwebsite/Laravel-Excel/tree/3.1.33"
-            },
             "time": "2021-08-12T15:52:25+00:00"
         },
         {
@@ -5004,6 +5034,57 @@
                 "psr-3"
             ],
             "time": "2021-10-01T21:08:31+00:00"
+        },
+        {
+            "name": "moontoast/math",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/moontoast-math.git",
+                "reference": "5f47d34c87767dbcc08b30377a9827df71de91fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/moontoast-math/zipball/5f47d34c87767dbcc08b30377a9827df71de91fa",
+                "reference": "5f47d34c87767dbcc08b30377a9827df71de91fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "phpseclib/bcmath_compat": ">=1.0.3"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^0.9.0",
+                "phpunit/phpunit": "^4.8 || ^5.5 || ^6.5 || ^7.0",
+                "satooshi/php-coveralls": "^0.6.1",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Moontoast\\Math\\": "src/Moontoast/Math",
+                    "Moontoast\\Math\\Exception\\": "src/Moontoast/Math/Exception"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                }
+            ],
+            "description": "A mathematics library, providing functionality for large numbers",
+            "homepage": "https://github.com/ramsey/moontoast-math",
+            "keywords": [
+                "bcmath",
+                "math"
+            ],
+            "abandoned": "brick/math",
+            "time": "2020-01-05T04:49:34+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -5840,10 +5921,6 @@
             ],
             "description": "A library to read, parse, export and make subsets of different types of font files.",
             "homepage": "https://github.com/PhenX/php-font-lib",
-            "support": {
-                "issues": "https://github.com/PhenX/php-font-lib/issues",
-                "source": "https://github.com/PhenX/php-font-lib/tree/0.5.2"
-            },
             "time": "2020-03-08T15:31:32+00:00"
         },
         {
@@ -6579,11 +6656,64 @@
                 "php",
                 "type"
             ],
-            "support": {
-                "issues": "https://github.com/schmittjoh/php-option/issues",
-                "source": "https://github.com/schmittjoh/php-option/tree/1.8.0"
-            },
             "time": "2021-08-28T21:27:29+00:00"
+        },
+        {
+            "name": "phpseclib/bcmath_compat",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/bcmath_compat.git",
+                "reference": "2ffea8bfe1702b4535a7b3c2649c4301968e9a3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/bcmath_compat/zipball/2ffea8bfe1702b4535a7b3c2649c4301968e9a3c",
+                "reference": "2ffea8bfe1702b4535a7b3c2649c4301968e9a3c",
+                "shasum": ""
+            },
+            "require": {
+                "phpseclib/phpseclib": "^3.0"
+            },
+            "provide": {
+                "ext-bcmath": "8.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^9.4",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "suggest": {
+                "ext-gmp": "Will enable faster math operations"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/bcmath.php"
+                ],
+                "psr-4": {
+                    "bcmath_compat\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "homepage": "http://phpseclib.sourceforge.net"
+                }
+            ],
+            "description": "PHP 5.x-8.x polyfill for bcmath extension",
+            "keywords": [
+                "BigInteger",
+                "bcmath",
+                "bigdecimal",
+                "math",
+                "polyfill"
+            ],
+            "time": "2021-12-16T02:35:52+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -7649,10 +7779,6 @@
                 "parser",
                 "stylesheet"
             ],
-            "support": {
-                "issues": "https://github.com/sabberworm/PHP-CSS-Parser/issues",
-                "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.3.1"
-            },
             "time": "2020-06-01T09:10:00+00:00"
         },
         {
@@ -7790,10 +7916,6 @@
             "keywords": [
                 "phar"
             ],
-            "support": {
-                "issues": "https://github.com/Seldaek/phar-utils/issues",
-                "source": "https://github.com/Seldaek/phar-utils/tree/1.1.2"
-            },
             "time": "2021-08-19T21:01:38+00:00"
         },
         {
@@ -8421,6 +8543,7 @@
                 "mail",
                 "mailer"
             ],
+            "abandoned": "symfony/mailer",
             "time": "2021-10-18T15:26:12+00:00"
         },
         {
@@ -8563,9 +8686,6 @@
                 "interoperability",
                 "standards"
             ],
-            "support": {
-                "source": "https://github.com/symfony/cache-contracts/tree/v2.4.0"
-            },
             "time": "2021-03-23T23:28:01+00:00"
         },
         {
@@ -8688,9 +8808,6 @@
             ],
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v5.3.4"
-            },
             "time": "2021-07-21T12:38:00+00:00"
         },
         {
@@ -8792,9 +8909,6 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.4.0"
-            },
             "time": "2021-03-23T23:28:01+00:00"
         },
         {
@@ -8846,9 +8960,6 @@
             ],
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v4.4.30"
-            },
             "time": "2021-08-27T17:42:48+00:00"
         },
         {
@@ -8916,9 +9027,6 @@
             ],
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/event-dispatcher/tree/v4.4.30"
-            },
             "time": "2021-08-04T20:31:23+00:00"
         },
         {
@@ -8981,9 +9089,6 @@
                 "interoperability",
                 "standards"
             ],
-            "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v1.1.9"
-            },
             "time": "2020-07-06T13:19:58+00:00"
         },
         {
@@ -9030,9 +9135,6 @@
             ],
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v5.3.4"
-            },
             "time": "2021-07-21T12:40:44+00:00"
         },
         {
@@ -9078,9 +9180,6 @@
             ],
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/finder/tree/v4.4.30"
-            },
             "time": "2021-08-04T20:31:23+00:00"
         },
         {
@@ -9142,9 +9241,6 @@
                 "interoperability",
                 "standards"
             ],
-            "support": {
-                "source": "https://github.com/symfony/http-client-contracts/tree/v2.4.0"
-            },
             "time": "2021-04-11T23:07:08+00:00"
         },
         {
@@ -9930,9 +10026,6 @@
             ],
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/process/tree/v4.4.30"
-            },
             "time": "2021-08-04T20:31:23+00:00"
         },
         {
@@ -10075,9 +10168,6 @@
                 "uri",
                 "url"
             ],
-            "support": {
-                "source": "https://github.com/symfony/routing/tree/v4.4.30"
-            },
             "time": "2021-08-04T21:41:01+00:00"
         },
         {
@@ -10140,9 +10230,6 @@
                 "interoperability",
                 "standards"
             ],
-            "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v2.4.0"
-            },
             "time": "2021-04-01T10:43:52+00:00"
         },
         {
@@ -10276,9 +10363,6 @@
                 "interoperability",
                 "standards"
             ],
-            "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v2.4.0"
-            },
             "time": "2021-03-23T23:28:01+00:00"
         },
         {
@@ -10456,10 +10540,6 @@
             ],
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
-            "support": {
-                "issues": "https://github.com/tijsverkoyen/CssToInlineStyles/issues",
-                "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.3"
-            },
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
@@ -10685,10 +10765,6 @@
                 "sendinblue",
                 "stmp"
             ],
-            "support": {
-                "issues": "https://github.com/agence-webup/laravel-sendinblue/issues",
-                "source": "https://github.com/agence-webup/laravel-sendinblue/tree/v2.1.0"
-            },
             "time": "2021-08-28T08:21:58+00:00"
         },
         {
@@ -11221,10 +11297,6 @@
                 "micro-framework",
                 "silly"
             ],
-            "support": {
-                "issues": "https://github.com/mnapoli/silly/issues",
-                "source": "https://github.com/mnapoli/silly/tree/1.7.2"
-            },
             "time": "2019-11-26T20:07:27+00:00"
         },
         {
@@ -11754,10 +11826,6 @@
                 "invoke",
                 "invoker"
             ],
-            "support": {
-                "issues": "https://github.com/PHP-DI/Invoker/issues",
-                "source": "https://github.com/PHP-DI/Invoker/tree/2.3.2"
-            },
             "time": "2021-07-30T15:05:32+00:00"
         },
         {
@@ -11976,10 +12044,6 @@
                 "spy",
                 "stub"
             ],
-            "support": {
-                "issues": "https://github.com/phpspec/prophecy/issues",
-                "source": "https://github.com/phpspec/prophecy/tree/1.14.0"
-            },
             "time": "2021-09-10T09:02:12+00:00"
         },
         {
@@ -12097,10 +12161,6 @@
                 "filesystem",
                 "iterator"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/2.0.4"
-            },
             "time": "2021-07-19T06:46:01+00:00"
         },
         {
@@ -12705,10 +12765,6 @@
                 "export",
                 "exporter"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/exporter/issues",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/3.1.3"
-            },
             "time": "2020-11-30T07:47:53+00:00"
         },
         {
@@ -13125,9 +13181,6 @@
             ],
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/yaml/tree/v5.3.6"
-            },
             "time": "2021-07-29T06:20:01+00:00"
         },
         {

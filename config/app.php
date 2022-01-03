@@ -182,6 +182,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         App\Providers\HelpersServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EvaFilesServiceProvider::class,
@@ -190,6 +191,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
 
         /*
          * Third Party Service Providers attendize platform
