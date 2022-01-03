@@ -74,8 +74,9 @@ Route::get('events/{event}/eventusers',      'EventUserController@index');
 Route::get('events/{event}/eventUsers',      'EventUserController@index');
 Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');
 Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update');
-Route::post('events/{event_id}/eventusers',     'EventUserController@store');
+Route::post('events/{event}/eventusers',     'EventUserController@store');
 Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy');
+//Otros endpoints de eventUser
 Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
 Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
 Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');

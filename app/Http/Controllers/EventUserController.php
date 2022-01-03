@@ -31,7 +31,7 @@ use Carbon\Carbon;
  *
  *
  * <p style="border: 1px solid #DDD">
- * Attendee has one user though user_id
+ * Attendee has one user though account_id
  * <br> and one event though event_id
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
@@ -400,10 +400,12 @@ class EventUserController extends Controller
 
     /**
      * _createUserAndAddtoEvent_: import  user and add it to an event.
+     * @authenticated
+     * 
+     * 
      * When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and
      * if the user exists, the user will not be updated, it will only create the record in the event.
      * 
-     * @authenticated
      *
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
