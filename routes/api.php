@@ -273,9 +273,7 @@ Route::put("changeuserpassword", "UserController@changeUserPassword");
 
 
 Route::apiResource('events', 'EventController');
-// hooks Wowza
-Route::post('hooks/recording', 'EventController@saveRecordingToEvent');
-
+Route::post('events/{event_id}/restore', 'EventController@restore');
 
 //Route::get("eventsearch",'EventController');
 //     }

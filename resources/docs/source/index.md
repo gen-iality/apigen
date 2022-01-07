@@ -35,14 +35,22 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/consequuntur/duplicateactivitie/est" \
+=======
+    "https://apidev.evius.co/api/events/iure/duplicateactivitie/sed" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/consequuntur/duplicateactivitie/est"
+=======
+    "https://apidev.evius.co/api/events/iure/duplicateactivitie/sed"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -605,7 +613,11 @@ curl -X POST \
     "https://apidev.evius.co/api/events/5fa423eee086ea2d1163343e/createmeeting/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"illo","activity_description":"aspernatur"}'
+=======
+    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"illo","activity_description":"soluta"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -622,7 +634,11 @@ let headers = {
 let body = {
     "activity_datetime_start": "2020-10-14 14:11",
     "activity_name": "illo",
+<<<<<<< Updated upstream
     "activity_description": "aspernatur"
+=======
+    "activity_description": "soluta"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -661,7 +677,11 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sapiente/activities/dolore/hostAvailability" \
+=======
+    "https://apidev.evius.co/api/events/enim/activities/enim/hostAvailability" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"host_ids":"[\"KthHMroFQK24I97YoqxBZw\" , \"FIRVnSoZR7WMDajgtzf5Uw\" , \"15DKHS_6TqWIFpwShasM4w\" , \"2m-YaXq_TW2f791cVpP8og\", \"mSkbi8PmSSqQEWsm6FQiAA\"]","host_id":"KthHMroFQK24I97YoqxBZw","date_start_zoom":"2021-02-08T07:30:00","date_end_zoom":"2021-02-08T09:30:00"}'
@@ -670,7 +690,11 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sapiente/activities/dolore/hostAvailability"
+=======
+    "https://apidev.evius.co/api/events/enim/activities/enim/hostAvailability"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -723,14 +747,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/incidunt/activities/corporis/register_and_checkin_to_activity" \
+=======
+    "https://apidev.evius.co/api/events/ipsum/activities/qui/register_and_checkin_to_activity" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/incidunt/activities/corporis/register_and_checkin_to_activity"
+=======
+    "https://apidev.evius.co/api/events/ipsum/activities/qui/register_and_checkin_to_activity"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -819,16 +851,27 @@ fetch(url, {
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/dignissimos/activities/sunt/checkinbyadmin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"earum"}'
+=======
+    "https://apidev.evius.co/api/events/dignissimos/activities/incidunt/checkinbyadmin" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"user_id":"vitae"}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/dignissimos/activities/sunt/checkinbyadmin"
+=======
+    "https://apidev.evius.co/api/events/dignissimos/activities/incidunt/checkinbyadmin"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -837,7 +880,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "user_id": "earum"
+=======
+    "user_id": "vitae"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -955,7 +1002,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/odio/activities_attendees" \
+=======
+    "https://apidev.evius.co/api/events/rerum/activities_attendees" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"user_id":"5e9caaa1d74d5c2f6a02a3c2","activity_id":"5fa44f6ba8bf7449e65dae32"}'
@@ -964,7 +1015,11 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/odio/activities_attendees"
+=======
+    "https://apidev.evius.co/api/events/rerum/activities_attendees"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -1083,14 +1138,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/et/activities_attendees/1" \
+=======
+    "https://apidev.evius.co/api/events/nulla/activities_attendees/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/et/activities_attendees/1"
+=======
+    "https://apidev.evius.co/api/events/nulla/activities_attendees/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -1129,14 +1192,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quia/activities_attendees/1" \
+=======
+    "https://apidev.evius.co/api/events/sunt/activities_attendees/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quia/activities_attendees/1"
+=======
+    "https://apidev.evius.co/api/events/sunt/activities_attendees/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -1174,14 +1245,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/me/events/cum/activities_attendees" \
+=======
+    -G "https://apidev.evius.co/api/me/events/doloremque/activities_attendees" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/me/events/cum/activities_attendees"
+=======
+    "https://apidev.evius.co/api/me/events/doloremque/activities_attendees"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -1224,14 +1303,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/tempora/activities_attendees/commodi/check_in" \
+=======
+    "https://apidev.evius.co/api/events/quia/activities_attendees/officia/check_in" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/tempora/activities_attendees/commodi/check_in"
+=======
+    "https://apidev.evius.co/api/events/quia/activities_attendees/officia/check_in"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -1533,7 +1620,11 @@ curl -X PUT \
     "https://apidev.evius.co/api/categories/5bb25243b6312771e92c8693" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"dolor"}'
+=======
+    -d '{"name":"ipsa"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -1548,7 +1639,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "dolor"
+=======
+    "name": "ipsa"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -1636,7 +1731,11 @@ curl -X POST \
     "https://apidev.evius.co/api/comments" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"organization_id":"cupiditate","comment":"accusantium","image":"aut"}'
+=======
+    -d '{"organization_id":"dolor","comment":"eaque","image":"vel"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -1651,9 +1750,15 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "organization_id": "cupiditate",
     "comment": "accusantium",
     "image": "aut"
+=======
+    "organization_id": "dolor",
+    "comment": "eaque",
+    "image": "vel"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -1807,14 +1912,22 @@ fetch(url, {
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/comments/organizations/sunt" \
+=======
+    -G "https://apidev.evius.co/api/comments/organizations/officiis" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/comments/organizations/sunt"
+=======
+    "https://apidev.evius.co/api/comments/organizations/officiis"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -2158,14 +2271,22 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/discountcodetemplate/iure/code/accusamus" \
+=======
+    "https://apidev.evius.co/api/discountcodetemplate/repellendus/code/nemo" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/discountcodetemplate/iure/code/accusamus"
+=======
+    "https://apidev.evius.co/api/discountcodetemplate/repellendus/code/nemo"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -2207,7 +2328,11 @@ curl -X POST \
     "https://apidev.evius.co/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"aut"}'
+=======
+    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"minima"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -2224,7 +2349,11 @@ let headers = {
 let body = {
     "code": "Nyd0jOpQ",
     "event_id": "5ea23acbd74d5c4b360ddde2",
+<<<<<<< Updated upstream
     "organization_id": "aut"
+=======
+    "organization_id": "minima"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -2302,7 +2431,11 @@ curl -X PUT \
     "https://apidev.evius.co/api/code/redeem_point_code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"code":"aspernatur"}'
+=======
+    -d '{"code":"sed"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -2317,7 +2450,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "code": "aspernatur"
+=======
+    "code": "sed"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -2348,7 +2485,11 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/code/codesByUser?organization=aut&email=rem" \
+=======
+    -G "https://apidev.evius.co/api/code/codesByUser?organization=harum&email=earum" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -2359,8 +2500,13 @@ const url = new URL(
 );
 
 let params = {
+<<<<<<< Updated upstream
     "organization": "aut",
     "email": "rem",
+=======
+    "organization": "harum",
+    "email": "earum",
+>>>>>>> Stashed changes
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -2494,7 +2640,11 @@ curl -X POST \
     "https://apidev.evius.co/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"qui"}'
+=======
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"optio"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -2514,7 +2664,11 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
+<<<<<<< Updated upstream
     "discount_type": "qui"
+=======
+    "discount_type": "optio"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -3950,14 +4104,22 @@ This model works to manage the documents to assign to the attendees.
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/incidunt/documentusers" \
+=======
+    -G "https://apidev.evius.co/api/events/et/documentusers" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/incidunt/documentusers"
+=======
+    "https://apidev.evius.co/api/events/et/documentusers"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -3999,14 +4161,22 @@ Display the specified resource.
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/qui/documentusers/maxime" \
+=======
+    -G "https://apidev.evius.co/api/events/quia/documentusers/laborum" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/qui/documentusers/maxime"
+=======
+    "https://apidev.evius.co/api/events/quia/documentusers/laborum"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4057,16 +4227,27 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sint/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"numquam","url":"asperiores","assign":false}'
+=======
+    "https://apidev.evius.co/api/events/iure/documentusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"ad","url":"repellendus","assign":false}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sint/documentusers"
+=======
+    "https://apidev.evius.co/api/events/iure/documentusers"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4075,8 +4256,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "numquam",
     "url": "asperiores",
+=======
+    "name": "ad",
+    "url": "repellendus",
+>>>>>>> Stashed changes
     "assign": false
 }
 
@@ -4130,14 +4316,22 @@ Update the specified resource in storage.
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/natus/documentusers/fugiat" \
+=======
+    "https://apidev.evius.co/api/events/soluta/documentusers/odio" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/natus/documentusers/fugiat"
+=======
+    "https://apidev.evius.co/api/events/soluta/documentusers/odio"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4189,14 +4383,22 @@ Remove the specified resource from storage.
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/dolorum/documentusers/molestiae" \
+=======
+    "https://apidev.evius.co/api/events/qui/documentusers/minus" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/dolorum/documentusers/molestiae"
+=======
+    "https://apidev.evius.co/api/events/qui/documentusers/minus"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4239,14 +4441,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/quasi/me/documentusers" \
+=======
+    -G "https://apidev.evius.co/api/events/vel/me/documentusers" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quasi/me/documentusers"
+=======
+    "https://apidev.evius.co/api/events/vel/me/documentusers"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4430,14 +4640,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/1/documents/aut" \
+=======
+    -G "https://apidev.evius.co/api/events/1/documents/porro" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/1/documents/aut"
+=======
+    "https://apidev.evius.co/api/events/1/documents/porro"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4458,7 +4676,11 @@ fetch(url, {
 
 ```json
 {
+<<<<<<< Updated upstream
     "message": "No query results for model [App\\Documents] aut"
+=======
+    "message": "No query results for model [App\\Documents] porro"
+>>>>>>> Stashed changes
 }
 ```
 
@@ -4545,14 +4767,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/1/documents/perferendis" \
+=======
+    "https://apidev.evius.co/api/events/1/documents/aut" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/1/documents/perferendis"
+=======
+    "https://apidev.evius.co/api/events/1/documents/aut"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4720,7 +4950,11 @@ curl -X POST \
     "https://apidev.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"culpa","picture":"veritatis","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+=======
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"nihil","picture":"ullam","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -4739,8 +4973,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< Updated upstream
     "type_event": "culpa",
     "picture": "veritatis",
+=======
+    "type_event": "nihil",
+    "picture": "ullam",
+>>>>>>> Stashed changes
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -4956,16 +5195,27 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/vitae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"corporis","picture":"id","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+=======
+    "https://apidev.evius.co/api/events/sunt" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"tenetur","picture":"ex","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/vitae"
+=======
+    "https://apidev.evius.co/api/events/sunt"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -4978,8 +5228,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< Updated upstream
     "type_event": "corporis",
     "picture": "id",
+=======
+    "type_event": "tenetur",
+    "picture": "ex",
+>>>>>>> Stashed changes
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -5034,21 +5289,29 @@ Parameter | Type | Status | Description
 <!-- END_d16967fd1d3d935666f7e8112a1a4451 -->
 
 <!-- START_379a30feb2949828b5f95efbfd7649c3 -->
-## _destroy_: delete event.
+## _destroy_: delete event and related data.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/vitae" \
+=======
+    "https://apidev.evius.co/api/events/perferendis" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/vitae"
+=======
+    "https://apidev.evius.co/api/events/perferendis"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -5073,7 +5336,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event` |  required  | id of the event to be eliminated permanetly
+    `event` |  required  | id of the event to be eliminated
 
 <!-- END_379a30feb2949828b5f95efbfd7649c3 -->
 
@@ -5134,7 +5397,11 @@ curl -X POST \
     "https://apidev.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"quas","picture":"accusantium","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+=======
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"dolorem","picture":"est","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -5153,8 +5420,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< Updated upstream
     "type_event": "quas",
     "picture": "accusantium",
+=======
+    "type_event": "dolorem",
+    "picture": "est",
+>>>>>>> Stashed changes
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -5253,16 +5525,27 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/user/events/aperiam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"consectetur","picture":"nobis","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+=======
+    "https://apidev.evius.co/api/user/events/sequi" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"iste","picture":"est","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/user/events/aperiam"
+=======
+    "https://apidev.evius.co/api/user/events/sequi"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -5275,8 +5558,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< Updated upstream
     "type_event": "consectetur",
     "picture": "nobis",
+=======
+    "type_event": "iste",
+    "picture": "est",
+>>>>>>> Stashed changes
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -5331,21 +5619,21 @@ Parameter | Type | Status | Description
 <!-- END_26fd0ed6db820ca28bb674ba1d761a2e -->
 
 <!-- START_ed1c02a70ed814c85d464077d0854e00 -->
-## _destroy_: delete event.
+## _destroy_: delete event and related data.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
 curl -X DELETE \
-    "https://apidev.evius.co/api/user/events/ratione" \
+    "https://apidev.evius.co/api/user/events/explicabo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://apidev.evius.co/api/user/events/ratione"
+    "https://apidev.evius.co/api/user/events/explicabo"
 );
 
 let headers = {
@@ -5370,7 +5658,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `event` |  required  | id of the event to be eliminated permanetly
+    `event` |  required  | id of the event to be eliminated
 
 <!-- END_ed1c02a70ed814c85d464077d0854e00 -->
 
@@ -5428,7 +5716,11 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sit/changeStatusEvent" \
+=======
+    "https://apidev.evius.co/api/events/itaque/changeStatusEvent" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -5437,7 +5729,11 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sit/changeStatusEvent"
+=======
+    "https://apidev.evius.co/api/events/itaque/changeStatusEvent"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -6005,14 +6301,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/users/eos/events" \
+=======
+    -G "https://apidev.evius.co/api/users/veritatis/events" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/users/eos/events"
+=======
+    "https://apidev.evius.co/api/users/veritatis/events"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -6035,8 +6339,13 @@ fetch(url, {
 {
     "data": [],
     "links": {
+<<<<<<< Updated upstream
         "first": "http:\/\/localhost\/api\/users\/eos\/events?page=1",
         "last": "http:\/\/localhost\/api\/users\/eos\/events?page=1",
+=======
+        "first": "http:\/\/localhost\/api\/users\/veritatis\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/veritatis\/events?page=1",
+>>>>>>> Stashed changes
         "prev": null,
         "next": null
     },
@@ -6044,7 +6353,11 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
+<<<<<<< Updated upstream
         "path": "http:\/\/localhost\/api\/users\/eos\/events",
+=======
+        "path": "http:\/\/localhost\/api\/users\/veritatis\/events",
+>>>>>>> Stashed changes
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -6135,14 +6448,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/organizations/quia/eventsstadistics" \
+=======
+    -G "https://apidev.evius.co/api/organizations/asperiores/eventsstadistics" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/quia/eventsstadistics"
+=======
+    "https://apidev.evius.co/api/organizations/asperiores/eventsstadistics"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -6223,16 +6544,27 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/veniam/adddocumentuser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"quantity":2514.248,"auto_assign":true}'
+=======
+    "https://apidev.evius.co/api/events/dolores/adddocumentuser" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"quantity":59.69,"auto_assign":false}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/veniam/adddocumentuser"
+=======
+    "https://apidev.evius.co/api/events/dolores/adddocumentuser"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -6241,8 +6573,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "quantity": 2514.248,
     "auto_assign": true
+=======
+    "quantity": 59.69,
+    "auto_assign": false
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -6399,7 +6736,11 @@ curl -X POST \
     "https://apidev.evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"sint"}'
+=======
+    -d '{"name":"non"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -6414,7 +6755,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "sint"
+=======
+    "name": "non"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -6950,7 +7295,11 @@ curl -X PUT \
     "https://apidev.evius.co/api/events/61ccd3551c821b765a312864/eventusers/61ccd3551c821b765a312866" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"rol_id":"neque","properties":{"other_properties":"ullam"}}'
+=======
+    -d '{"rol_id":"iusto","properties":{"other_properties":"provident"}}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -6965,9 +7314,15 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "rol_id": "neque",
     "properties": {
         "other_properties": "ullam"
+=======
+    "rol_id": "iusto",
+    "properties": {
+        "other_properties": "provident"
+>>>>>>> Stashed changes
     }
 }
 
@@ -7010,7 +7365,11 @@ if the user exists, the user will not be updated, it will only create the record
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/1/eventusers" \
+=======
+    "https://apidev.evius.co/api/events/est/eventusers" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"earum"}}'
@@ -7019,7 +7378,11 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/1/eventusers"
+=======
+    "https://apidev.evius.co/api/events/est/eventusers"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -7159,14 +7522,22 @@ null
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/me/eventusers/event/tempore" \
+=======
+    -G "https://apidev.evius.co/api/me/eventusers/event/perferendis" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/me/eventusers/event/tempore"
+=======
+    "https://apidev.evius.co/api/me/eventusers/event/perferendis"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -7189,8 +7560,13 @@ fetch(url, {
 {
     "data": [],
     "links": {
+<<<<<<< Updated upstream
         "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/tempore?page=1",
         "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/tempore?page=1",
+=======
+        "first": "http:\/\/localhost\/api\/me\/eventusers\/event\/perferendis?page=1",
+        "last": "http:\/\/localhost\/api\/me\/eventusers\/event\/perferendis?page=1",
+>>>>>>> Stashed changes
         "prev": null,
         "next": null
     },
@@ -7198,7 +7574,11 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
+<<<<<<< Updated upstream
         "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/tempore",
+=======
+        "path": "http:\/\/localhost\/api\/me\/eventusers\/event\/perferendis",
+>>>>>>> Stashed changes
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -7224,14 +7604,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/eventusers/event/ex/user/1" \
+=======
+    -G "https://apidev.evius.co/api/eventusers/event/impedit/user/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/eventusers/event/ex/user/1"
+=======
+    "https://apidev.evius.co/api/eventusers/event/impedit/user/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -7415,14 +7803,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/eventUsers/veritatis/checkin" \
+=======
+    "https://apidev.evius.co/api/eventUsers/dolores/checkin" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/eventUsers/veritatis/checkin"
+=======
+    "https://apidev.evius.co/api/eventUsers/dolores/checkin"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -7465,7 +7861,11 @@ curl -X POST \
     "https://apidev.evius.co/api/eventUsers/createUserAndAddtoEvent/61ccd3551c821b765a312864" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"dolores"}}'
+=======
+    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"ad"}}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -7484,7 +7884,11 @@ let body = {
     "name": "Evius",
     "password": "*******",
     "other_params": {
+<<<<<<< Updated upstream
         "city": "dolores"
+=======
+        "city": "ad"
+>>>>>>> Stashed changes
     }
 }
 
@@ -7630,7 +8034,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/1/metricsbydate/eventusers?metrics_type=created_at&datetime_from=tempora&datetime_to=et" \
+=======
+    -G "https://apidev.evius.co/api/events/1/metricsbydate/eventusers?metrics_type=created_at&datetime_from=quis&datetime_to=officiis" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -7642,8 +8050,13 @@ const url = new URL(
 
 let params = {
     "metrics_type": "created_at",
+<<<<<<< Updated upstream
     "datetime_from": "tempora",
     "datetime_to": "et",
+=======
+    "datetime_from": "quis",
+    "datetime_to": "officiis",
+>>>>>>> Stashed changes
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -7742,16 +8155,27 @@ This end point sends an email to the user to inform them of the change.
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/distinctio/eventusers/rerum/updaterol" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"rol_id":"omnis"}'
+=======
+    "https://apidev.evius.co/api/events/quis/eventusers/sed/updaterol" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"rol_id":"in"}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/distinctio/eventusers/rerum/updaterol"
+=======
+    "https://apidev.evius.co/api/events/quis/eventusers/sed/updaterol"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -7760,7 +8184,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "rol_id": "omnis"
+=======
+    "rol_id": "in"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -7863,7 +8291,11 @@ curl -X POST \
     "https://apidev.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"file":"quia"}'
+=======
+    -d '{"file":"et"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -7878,7 +8310,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "file": "quia"
+=======
+    "file": "et"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -7924,16 +8360,27 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/files/uploadbase/libero" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"file":"earum","type":"ex"}'
+=======
+    "https://apidev.evius.co/api/files/uploadbase/neque" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"soluta","type":"inventore"}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/files/uploadbase/libero"
+=======
+    "https://apidev.evius.co/api/files/uploadbase/neque"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -7942,8 +8389,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "file": "earum",
     "type": "ex"
+=======
+    "file": "soluta",
+    "type": "inventore"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -8137,14 +8589,22 @@ The host or conferences are in charge of carrying out the activities
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/enim/host" \
+=======
+    -G "https://apidev.evius.co/api/events/error/host" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/enim/host"
+=======
+    "https://apidev.evius.co/api/events/error/host"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -8196,16 +8656,27 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/aut/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"labore","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+=======
+    "https://apidev.evius.co/api/events/alias/host" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"ad","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/aut/host"
+=======
+    "https://apidev.evius.co/api/events/alias/host"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -8216,7 +8687,11 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
+<<<<<<< Updated upstream
     "image": "labore",
+=======
+    "image": "ad",
+>>>>>>> Stashed changes
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -8260,14 +8735,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/omnis/host/1" \
+=======
+    -G "https://apidev.evius.co/api/events/quia/host/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/omnis/host/1"
+=======
+    "https://apidev.evius.co/api/events/quia/host/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -8311,16 +8794,27 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/est/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"atque","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+=======
+    "https://apidev.evius.co/api/events/commodi/host/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"excepturi","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/est/host/1"
+=======
+    "https://apidev.evius.co/api/events/commodi/host/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -8331,7 +8825,11 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
+<<<<<<< Updated upstream
     "image": "atque",
+=======
+    "image": "excepturi",
+>>>>>>> Stashed changes
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -8377,14 +8875,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quia/host/1" \
+=======
+    "https://apidev.evius.co/api/events/odio/host/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quia/host/1"
+=======
+    "https://apidev.evius.co/api/events/odio/host/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -9224,14 +9730,22 @@ fetch(url, {
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/orders/in/orderOrganization" \
+=======
+    -G "https://apidev.evius.co/api/orders/omnis/orderOrganization" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/orders/in/orderOrganization"
+=======
+    "https://apidev.evius.co/api/orders/omnis/orderOrganization"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -9374,7 +9888,11 @@ curl -X POST \
     "https://apidev.evius.co/api/organizations/1/contactbyemail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"message":"vitae","subject":"non","name":"incidunt","email_user":"qui"}'
+=======
+    -d '{"message":"ipsum","subject":"ut","name":"quisquam","email_user":"et"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -9389,10 +9907,17 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "message": "vitae",
     "subject": "non",
     "name": "incidunt",
     "email_user": "qui"
+=======
+    "message": "ipsum",
+    "subject": "ut",
+    "name": "quisquam",
+    "email_user": "et"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -9511,7 +10036,11 @@ curl -X POST \
     "https://apidev.evius.co/api/organizations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"minus","styles":[],"user_properties":[]}'
+=======
+    -d '{"name":"recusandae","styles":[],"user_properties":[]}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -9526,7 +10055,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "minus",
+=======
+    "name": "recusandae",
+>>>>>>> Stashed changes
     "styles": [],
     "user_properties": []
 }
@@ -9567,16 +10100,27 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/delectus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"pariatur","styles":[],"user_properties":[]}'
+=======
+    "https://apidev.evius.co/api/organizations/accusamus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"dicta","styles":[],"user_properties":[]}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/delectus"
+=======
+    "https://apidev.evius.co/api/organizations/accusamus"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -9585,7 +10129,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "pariatur",
+=======
+    "name": "dicta",
+>>>>>>> Stashed changes
     "styles": [],
     "user_properties": []
 }
@@ -9668,20 +10216,33 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/organization/dolorum/ordersUsersPoints?status=pendiente&date_from=illo&date_to=enim&type_report=csv" \
+=======
+    -G "https://apidev.evius.co/api/organization/dolorem/ordersUsersPoints?status=pendiente&date_from=alias&date_to=ipsam&type_report=csv" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organization/dolorum/ordersUsersPoints"
+=======
+    "https://apidev.evius.co/api/organization/dolorem/ordersUsersPoints"
+>>>>>>> Stashed changes
 );
 
 let params = {
     "status": "pendiente",
+<<<<<<< Updated upstream
     "date_from": "illo",
     "date_to": "enim",
+=======
+    "date_from": "alias",
+    "date_to": "ipsam",
+>>>>>>> Stashed changes
     "type_report": "csv",
 };
 Object.keys(params)
@@ -9831,14 +10392,22 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/debitis/organizationusers/1" \
+=======
+    "https://apidev.evius.co/api/organizations/est/organizationusers/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/debitis/organizationusers/1"
+=======
+    "https://apidev.evius.co/api/organizations/est/organizationusers/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -9875,14 +10444,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/ratione/organizationusers/id" \
+=======
+    "https://apidev.evius.co/api/organizations/quos/organizationusers/vel" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/ratione/organizationusers/id"
+=======
+    "https://apidev.evius.co/api/organizations/quos/organizationusers/vel"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -9919,7 +10496,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/quia/addorganizationuser" \
+=======
+    "https://apidev.evius.co/api/organizations/consequatur/addorganizationuser" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"test+11@mocionsoft.com","names":"test"}'
@@ -9928,7 +10509,11 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/quia/addorganizationuser"
+=======
+    "https://apidev.evius.co/api/organizations/consequatur/addorganizationuser"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10107,14 +10692,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://apidev.evius.co/api/organizations/1/userproperties/sit" \
+    -G "https://apidev.evius.co/api/organizations/1/userproperties/non" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://apidev.evius.co/api/organizations/1/userproperties/sit"
+    "https://apidev.evius.co/api/organizations/1/userproperties/non"
 );
 
 let headers = {
@@ -10161,7 +10746,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/1/userproperties/necessitatibus" \
+=======
+    "https://apidev.evius.co/api/organizations/1/userproperties/laboriosam" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -10170,7 +10759,11 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/1/userproperties/necessitatibus"
+=======
+    "https://apidev.evius.co/api/organizations/1/userproperties/laboriosam"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10235,14 +10828,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/1/userproperties/tempore" \
+=======
+    "https://apidev.evius.co/api/organizations/1/userproperties/est" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/1/userproperties/tempore"
+=======
+    "https://apidev.evius.co/api/organizations/1/userproperties/est"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10283,7 +10884,11 @@ Endpoint that manages event products.
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/ex/products" \
+=======
+    "https://apidev.evius.co/api/events/repellendus/products" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m","position":11111}'
@@ -10292,7 +10897,11 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/ex/products"
+=======
+    "https://apidev.evius.co/api/events/repellendus/products"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10350,7 +10959,11 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/aut/products/1" \
+=======
+    "https://apidev.evius.co/api/events/corporis/products/1" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m"}'
@@ -10359,7 +10972,11 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/aut/products/1"
+=======
+    "https://apidev.evius.co/api/events/corporis/products/1"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10414,14 +11031,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/ullam" \
+=======
+    "https://apidev.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/dolorem" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/ullam"
+=======
+    "https://apidev.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/dolorem"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10566,14 +11191,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/sequi/products" \
+=======
+    -G "https://apidev.evius.co/api/events/velit/products" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/sequi/products"
+=======
+    "https://apidev.evius.co/api/events/velit/products"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10596,8 +11229,13 @@ fetch(url, {
 {
     "data": [],
     "links": {
+<<<<<<< Updated upstream
         "first": "http:\/\/localhost\/api\/events\/sequi\/products?page=1",
         "last": "http:\/\/localhost\/api\/events\/sequi\/products?page=1",
+=======
+        "first": "http:\/\/localhost\/api\/events\/velit\/products?page=1",
+        "last": "http:\/\/localhost\/api\/events\/velit\/products?page=1",
+>>>>>>> Stashed changes
         "prev": null,
         "next": null
     },
@@ -10605,7 +11243,11 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
+<<<<<<< Updated upstream
         "path": "http:\/\/localhost\/api\/events\/sequi\/products",
+=======
+        "path": "http:\/\/localhost\/api\/events\/velit\/products",
+>>>>>>> Stashed changes
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -10631,14 +11273,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/5bb25243b6312771e92c8693/products/consequatur" \
+=======
+    -G "https://apidev.evius.co/api/events/5bb25243b6312771e92c8693/products/magnam" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/5bb25243b6312771e92c8693/products/consequatur"
+=======
+    "https://apidev.evius.co/api/events/5bb25243b6312771e92c8693/products/magnam"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10683,16 +11333,27 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/rsvp/sendeventrsvp/alias" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"subject":"impedit","image_header":"et","content_header":"Has sido invitado a el evento","message":"dolor","image":"in","image_footer":"officiis","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
+=======
+    "https://apidev.evius.co/api/rsvp/sendeventrsvp/deserunt" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"subject":"ea","image_header":"perferendis","content_header":"Has sido invitado a el evento","message":"illum","image":"a","image_footer":"et","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/rsvp/sendeventrsvp/alias"
+=======
+    "https://apidev.evius.co/api/rsvp/sendeventrsvp/deserunt"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10701,12 +11362,21 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "subject": "impedit",
     "image_header": "et",
     "content_header": "Has sido invitado a el evento",
     "message": "dolor",
     "image": "in",
     "image_footer": "officiis",
+=======
+    "subject": "ea",
+    "image_header": "perferendis",
+    "content_header": "Has sido invitado a el evento",
+    "message": "illum",
+    "image": "a",
+    "image_footer": "et",
+>>>>>>> Stashed changes
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     },
@@ -10813,7 +11483,11 @@ curl -X POST \
     "https://apidev.evius.co/api/rols" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"autem"}'
+=======
+    -d '{"name":"nisi"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -10828,7 +11502,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "autem"
+=======
+    "name": "nisi"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -10864,16 +11542,27 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/rols/eum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"autem","event_id":"optio"}'
+=======
+    "https://apidev.evius.co/api/rols/asperiores" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"sequi","event_id":"quibusdam"}'
+>>>>>>> Stashed changes
 
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/rols/eum"
+=======
+    "https://apidev.evius.co/api/rols/asperiores"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -10882,8 +11571,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "name": "autem",
     "event_id": "optio"
+=======
+    "name": "sequi",
+    "event_id": "quibusdam"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -11475,14 +12169,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/rolesattendees/voluptates" \
+=======
+    "https://apidev.evius.co/api/rolesattendees/dolorem" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/rolesattendees/voluptates"
+=======
+    "https://apidev.evius.co/api/rolesattendees/dolorem"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -11634,7 +12336,11 @@ curl -X POST \
     "https://apidev.evius.co/api/events/605241e68b276356801236e4/surveys" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"cum","points":1,"initialMessage":"velit","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":987311.116594322}'
+=======
+    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"culpa","points":1,"initialMessage":"ducimus","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":75045.98}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -11652,9 +12358,15 @@ let body = {
     "survey": "Nombre de encuesta",
     "show_horizontal_bar": false,
     "allow_vote_value_per_user": false,
+<<<<<<< Updated upstream
     "activity_id": "cum",
     "points": 1,
     "initialMessage": "velit",
+=======
+    "activity_id": "culpa",
+    "points": 1,
+    "initialMessage": "ducimus",
+>>>>>>> Stashed changes
     "time_limit": 0,
     "allow_anonymous_answers": false,
     "allow_gradable_survey": false,
@@ -11663,7 +12375,11 @@ let body = {
     "freezeGame": false,
     "open": false,
     "publish": false,
+<<<<<<< Updated upstream
     "minimumScore": 987311.116594322
+=======
+    "minimumScore": 75045.98
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -11813,7 +12529,11 @@ curl -X PUT \
     "https://apidev.evius.co/api/events/605241e68b276356801236e4/surveys/608c5f5f63201e0f5147a086" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"survey":"cumque","show_horizontal_bar":"eius","allow_vote_value_per_user":"hic","activity_id":"laudantium","points":"et","initialMessage":"accusantium","time_limit":"rerum","allow_anonymous_answers":"tempora","allow_gradable_survey":"et","hasMinimumScore":"et","isGlobal":"enim","freezeGame":"sunt","open":"vel","publish":"sint","minimumScore":"similique"}'
+=======
+    -d '{"survey":"molestiae","show_horizontal_bar":"deserunt","allow_vote_value_per_user":"saepe","activity_id":"quam","points":"rem","initialMessage":"sequi","time_limit":"molestias","allow_anonymous_answers":"praesentium","allow_gradable_survey":"debitis","hasMinimumScore":"et","isGlobal":"cum","freezeGame":"voluptatem","open":"voluptatem","publish":"nisi","minimumScore":"sit"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -11828,6 +12548,7 @@ let headers = {
 };
 
 let body = {
+<<<<<<< Updated upstream
     "survey": "cumque",
     "show_horizontal_bar": "eius",
     "allow_vote_value_per_user": "hic",
@@ -11843,6 +12564,23 @@ let body = {
     "open": "vel",
     "publish": "sint",
     "minimumScore": "similique"
+=======
+    "survey": "molestiae",
+    "show_horizontal_bar": "deserunt",
+    "allow_vote_value_per_user": "saepe",
+    "activity_id": "quam",
+    "points": "rem",
+    "initialMessage": "sequi",
+    "time_limit": "molestias",
+    "allow_anonymous_answers": "praesentium",
+    "allow_gradable_survey": "debitis",
+    "hasMinimumScore": "et",
+    "isGlobal": "cum",
+    "freezeGame": "voluptatem",
+    "open": "voluptatem",
+    "publish": "nisi",
+    "minimumScore": "sit"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -11997,7 +12735,11 @@ curl -X POST \
     "https://apidev.evius.co/api/organizations/1/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< Updated upstream
     -d '{"name":"Template 1","user_properties":"enim"}'
+=======
+    -d '{"name":"Template 1","user_properties":"tempora"}'
+>>>>>>> Stashed changes
 
 ```
 
@@ -12013,7 +12755,11 @@ let headers = {
 
 let body = {
     "name": "Template 1",
+<<<<<<< Updated upstream
     "user_properties": "enim"
+=======
+    "user_properties": "tempora"
+>>>>>>> Stashed changes
 }
 
 fetch(url, {
@@ -12051,14 +12797,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/1/templateproperties/dolores" \
+=======
+    "https://apidev.evius.co/api/organizations/1/templateproperties/aliquam" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/organizations/1/templateproperties/dolores"
+=======
+    "https://apidev.evius.co/api/organizations/1/templateproperties/aliquam"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -12134,14 +12888,22 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quod/templateproperties/1/addtemplateporperties" \
+=======
+    "https://apidev.evius.co/api/events/odit/templateproperties/1/addtemplateporperties" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quod/templateproperties/1/addtemplateporperties"
+=======
+    "https://apidev.evius.co/api/events/odit/templateproperties/1/addtemplateporperties"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -12685,7 +13447,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/users/quos/changeStatusUser" \
+=======
+    "https://apidev.evius.co/api/users/necessitatibus/changeStatusUser" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -12694,7 +13460,11 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/users/quos/changeStatusUser"
+=======
+    "https://apidev.evius.co/api/users/necessitatibus/changeStatusUser"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -13176,7 +13946,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quisquam/userproperties" \
+=======
+    "https://apidev.evius.co/api/events/officia/userproperties" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -13185,7 +13959,11 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/quisquam/userproperties"
+=======
+    "https://apidev.evius.co/api/events/officia/userproperties"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -13249,14 +14027,22 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
+<<<<<<< Updated upstream
     -G "https://apidev.evius.co/api/events/aperiam/userproperties/amet" \
+=======
+    -G "https://apidev.evius.co/api/events/excepturi/userproperties/ut" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/aperiam/userproperties/amet"
+=======
+    "https://apidev.evius.co/api/events/excepturi/userproperties/ut"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -13303,7 +14089,11 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/in/userproperties/commodi" \
+=======
+    "https://apidev.evius.co/api/events/alias/userproperties/eum" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -13312,7 +14102,11 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/in/userproperties/commodi"
+=======
+    "https://apidev.evius.co/api/events/alias/userproperties/eum"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -13417,14 +14211,22 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/accusamus/userproperties/quo" \
+=======
+    "https://apidev.evius.co/api/events/officiis/userproperties/dignissimos" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/events/accusamus/userproperties/quo"
+=======
+    "https://apidev.evius.co/api/events/officiis/userproperties/dignissimos"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -13693,14 +14495,22 @@ fetch(url, {
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/orders/pariatur/validateFreeorder" \
+=======
+    "https://apidev.evius.co/api/orders/architecto/validateFreeorder" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/orders/pariatur/validateFreeorder"
+=======
+    "https://apidev.evius.co/api/orders/architecto/validateFreeorder"
+>>>>>>> Stashed changes
 );
 
 let headers = {
@@ -13736,14 +14546,22 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/orders/cupiditate/validatePointOrder" \
+=======
+    "https://apidev.evius.co/api/orders/in/validatePointOrder" \
+>>>>>>> Stashed changes
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< Updated upstream
     "https://apidev.evius.co/api/orders/cupiditate/validatePointOrder"
+=======
+    "https://apidev.evius.co/api/orders/in/validatePointOrder"
+>>>>>>> Stashed changes
 );
 
 let headers = {

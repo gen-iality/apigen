@@ -1,8 +1,13 @@
 {
     "variables": [],
     "info": {
+<<<<<<< Updated upstream
         "name": "Evius API",
         "_postman_id": "a1303c42-244c-41d6-a144-66f78b3074ef",
+=======
+        "name": "Laravel API",
+        "_postman_id": "b512f2ad-52fe-44cf-a0bd-bf2cb433ba31",
+>>>>>>> Stashed changes
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -23,13 +28,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "consequuntur",
+=======
+                                    "value": "iure",
+>>>>>>> Stashed changes
                                     "description": "id of the event to which the activities belong."
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "est",
+=======
+                                    "value": "sed",
+>>>>>>> Stashed changes
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -269,7 +282,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"illo\",\n    \"activity_description\": \"aspernatur\"\n}"
+=======
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"illo\",\n    \"activity_description\": \"soluta\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -287,13 +304,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "sapiente",
+=======
+                                    "value": "enim",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "dolore",
+=======
+                                    "value": "enim",
+>>>>>>> Stashed changes
                                     "description": "activity to which the meeting is to be created"
                                 }
                             ]
@@ -329,13 +354,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "incidunt",
+=======
+                                    "value": "ipsum",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "corporis",
+=======
+                                    "value": "qui",
+>>>>>>> Stashed changes
                                     "description": "id of activity"
                                 }
                             ]
@@ -405,7 +438,11 @@
                                 {
                                     "id": "activity",
                                     "key": "activity",
+<<<<<<< Updated upstream
                                     "value": "sunt",
+=======
+                                    "value": "incidunt",
+>>>>>>> Stashed changes
                                     "description": "activity id"
                                 }
                             ]
@@ -423,7 +460,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"user_id\": \"earum\"\n}"
+=======
+                            "raw": "{\n    \"user_id\": \"vitae\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -483,7 +524,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "odio",
+=======
+                                    "value": "rerum",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -561,7 +606,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "et",
+=======
+                                    "value": "nulla",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -597,7 +646,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "quia",
+=======
+                                    "value": "sunt",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -633,7 +686,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "cum",
+=======
+                                    "value": "doloremque",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 }
                             ]
@@ -669,13 +726,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "tempora",
+=======
+                                    "value": "quia",
+>>>>>>> Stashed changes
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "commodi",
+=======
+                                    "value": "officia",
+>>>>>>> Stashed changes
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -863,7 +928,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"dolor\"\n}"
+=======
+                            "raw": "{\n    \"name\": \"ipsa\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -933,7 +1002,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"organization_id\": \"cupiditate\",\n    \"comment\": \"accusantium\",\n    \"image\": \"aut\"\n}"
+=======
+                            "raw": "{\n    \"organization_id\": \"dolor\",\n    \"comment\": \"eaque\",\n    \"image\": \"vel\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -1035,7 +1108,11 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "sunt",
+=======
+                                    "value": "officiis",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -1219,13 +1296,21 @@
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
+<<<<<<< Updated upstream
                                     "value": "iure",
+=======
+                                    "value": "repellendus",
+>>>>>>> Stashed changes
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
+<<<<<<< Updated upstream
                                     "value": "accusamus",
+=======
+                                    "value": "nemo",
+>>>>>>> Stashed changes
                                     "description": "id code delete"
                                 }
                             ]
@@ -1271,7 +1356,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"aut\"\n}"
+=======
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"minima\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1299,7 +1388,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"code\": \"aspernatur\"\n}"
+=======
+                            "raw": "{\n    \"code\": \"sed\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -1315,13 +1408,21 @@
                             "query": [
                                 {
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "aut",
+=======
+                                    "value": "harum",
+>>>>>>> Stashed changes
                                     "description": "organization_id",
                                     "disabled": false
                                 },
                                 {
                                     "key": "email",
+<<<<<<< Updated upstream
                                     "value": "rem",
+=======
+                                    "value": "earum",
+>>>>>>> Stashed changes
                                     "description": "user email",
                                     "disabled": false
                                 }
@@ -1402,7 +1503,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"qui\"\n}"
+=======
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"optio\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -1582,7 +1687,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "incidunt",
+=======
+                                    "value": "et",
+>>>>>>> Stashed changes
                                     "description": "event_id"
                                 }
                             ]
@@ -1618,13 +1727,21 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "qui",
+=======
+                                    "value": "quia",
+>>>>>>> Stashed changes
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
+<<<<<<< Updated upstream
                                     "value": "maxime",
+=======
+                                    "value": "laborum",
+>>>>>>> Stashed changes
                                     "description": "document user id"
                                 }
                             ]
@@ -1660,7 +1777,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "sint",
+=======
+                                    "value": "iure",
+>>>>>>> Stashed changes
                                     "description": "event id"
                                 }
                             ]
@@ -1678,7 +1799,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"numquam\",\n    \"url\": \"asperiores\",\n    \"assign\": false\n}"
+=======
+                            "raw": "{\n    \"name\": \"ad\",\n    \"url\": \"repellendus\",\n    \"assign\": false\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -1696,13 +1821,21 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "natus",
+=======
+                                    "value": "soluta",
+>>>>>>> Stashed changes
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
+<<<<<<< Updated upstream
                                     "value": "fugiat",
+=======
+                                    "value": "odio",
+>>>>>>> Stashed changes
                                     "description": "document user id"
                                 }
                             ]
@@ -1738,13 +1871,21 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "dolorum",
+=======
+                                    "value": "qui",
+>>>>>>> Stashed changes
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
+<<<<<<< Updated upstream
                                     "value": "molestiae",
+=======
+                                    "value": "minus",
+>>>>>>> Stashed changes
                                     "description": "document user id"
                                 }
                             ]
@@ -1780,7 +1921,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "quasi",
+=======
+                                    "value": "vel",
+>>>>>>> Stashed changes
                                     "description": "event id"
                                 }
                             ]
@@ -1878,7 +2023,11 @@
                                 {
                                     "id": "document",
                                     "key": "document",
+<<<<<<< Updated upstream
                                     "value": "aut",
+=======
+                                    "value": "porro",
+>>>>>>> Stashed changes
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -1942,7 +2091,11 @@
                                 {
                                     "id": "document",
                                     "key": "document",
+<<<<<<< Updated upstream
                                     "value": "perferendis",
+=======
+                                    "value": "aut",
+>>>>>>> Stashed changes
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -2029,7 +2182,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"culpa\",\n    \"picture\": \"veritatis\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+=======
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"nihil\",\n    \"picture\": \"ullam\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -2083,7 +2240,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "vitae",
+=======
+                                    "value": "sunt",
+>>>>>>> Stashed changes
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2101,14 +2262,18 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"corporis\",\n    \"picture\": \"id\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+=======
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"tenetur\",\n    \"picture\": \"ex\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_destroy_: delete event.",
+                    "name": "_destroy_: delete event and related data.",
                     "request": {
                         "url": {
                             "protocol": "https",
@@ -2119,8 +2284,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "vitae",
                                     "description": "id of the event to be eliminated permanetly"
+=======
+                                    "value": "perferendis",
+                                    "description": "id of the event to be eliminated"
+>>>>>>> Stashed changes
                                 }
                             ]
                         },
@@ -2193,7 +2363,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"quas\",\n    \"picture\": \"accusantium\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+=======
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"dolorem\",\n    \"picture\": \"est\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -2211,7 +2385,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "aperiam",
+=======
+                                    "value": "sequi",
+>>>>>>> Stashed changes
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2229,14 +2407,18 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"consectetur\",\n    \"picture\": \"nobis\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+=======
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"iste\",\n    \"picture\": \"est\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "_destroy_: delete event.",
+                    "name": "_destroy_: delete event and related data.",
                     "request": {
                         "url": {
                             "protocol": "https",
@@ -2247,8 +2429,8 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "ratione",
-                                    "description": "id of the event to be eliminated permanetly"
+                                    "value": "explicabo",
+                                    "description": "id of the event to be eliminated"
                                 }
                             ]
                         },
@@ -2311,7 +2493,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "sit",
+=======
+                                    "value": "itaque",
+>>>>>>> Stashed changes
                                     "description": "id of the event to be rejected or approved Example:"
                                 }
                             ]
@@ -2417,7 +2603,11 @@
                                 {
                                     "id": "user",
                                     "key": "user",
+<<<<<<< Updated upstream
                                     "value": "eos",
+=======
+                                    "value": "veritatis",
+>>>>>>> Stashed changes
                                     "description": "organiser_id"
                                 }
                             ]
@@ -2481,7 +2671,11 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "quia",
+=======
+                                    "value": "asperiores",
+>>>>>>> Stashed changes
                                     "description": "organization id"
                                 }
                             ]
@@ -2545,7 +2739,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "veniam",
+=======
+                                    "value": "dolores",
+>>>>>>> Stashed changes
                                     "description": "event id"
                                 }
                             ]
@@ -2563,7 +2761,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"quantity\": 2514.248,\n    \"auto_assign\": true\n}"
+=======
+                            "raw": "{\n    \"quantity\": 59.69,\n    \"auto_assign\": false\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -2625,7 +2827,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"sint\"\n}"
+=======
+                            "raw": "{\n    \"name\": \"non\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -2787,7 +2993,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"rol_id\": \"neque\",\n    \"properties\": {\n        \"other_properties\": \"ullam\"\n    }\n}"
+=======
+                            "raw": "{\n    \"rol_id\": \"iusto\",\n    \"properties\": {\n        \"other_properties\": \"provident\"\n    }\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -2799,8 +3009,21 @@
                         "url": {
                             "protocol": "https",
                             "host": "apidev.evius.co\/",
+<<<<<<< Updated upstream
                             "path": "api\/events\/:event_id\/eventusers",
                             "query": []
+=======
+                            "path": "api\/events\/:event\/eventusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "est",
+                                    "description": "event id"
+                                }
+                            ]
+>>>>>>> Stashed changes
                         },
                         "method": "POST",
                         "header": [
@@ -2903,7 +3126,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "tempore",
+=======
+                                    "value": "perferendis",
+>>>>>>> Stashed changes
                                     "description": "string required"
                                 }
                             ]
@@ -2939,7 +3166,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "ex",
+=======
+                                    "value": "impedit",
+>>>>>>> Stashed changes
                                     "description": "string required"
                                 }
                             ]
@@ -3067,7 +3298,11 @@
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
+<<<<<<< Updated upstream
                                     "value": "veritatis",
+=======
+                                    "value": "dolores",
+>>>>>>> Stashed changes
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -3121,7 +3356,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"dolores\"\n    }\n}"
+=======
+                            "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"ad\"\n    }\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and\nif the user exists, the user will not be updated, it will only create the record in the event.",
                         "response": []
@@ -3215,13 +3454,21 @@
                                 },
                                 {
                                     "key": "datetime_from",
+<<<<<<< Updated upstream
                                     "value": "tempora",
+=======
+                                    "value": "quis",
+>>>>>>> Stashed changes
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 },
                                 {
                                     "key": "datetime_to",
+<<<<<<< Updated upstream
                                     "value": "et",
+=======
+                                    "value": "officiis",
+>>>>>>> Stashed changes
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 }
@@ -3286,13 +3533,21 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "distinctio",
+=======
+                                    "value": "quis",
+>>>>>>> Stashed changes
                                     "description": ""
                                 },
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
+<<<<<<< Updated upstream
                                     "value": "rerum",
+=======
+                                    "value": "sed",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -3310,7 +3565,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"rol_id\": \"omnis\"\n}"
+=======
+                            "raw": "{\n    \"rol_id\": \"in\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "This end point sends an email to the user to inform them of the change.",
                         "response": []
@@ -3372,7 +3631,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"file\": \"quia\"\n}"
+=======
+                            "raw": "{\n    \"file\": \"et\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -3390,7 +3653,11 @@
                                 {
                                     "id": "name",
                                     "key": "name",
+<<<<<<< Updated upstream
                                     "value": "libero",
+=======
+                                    "value": "neque",
+>>>>>>> Stashed changes
                                     "description": "file field by default file"
                                 }
                             ]
@@ -3408,7 +3675,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"file\": \"earum\",\n    \"type\": \"ex\"\n}"
+=======
+                            "raw": "{\n    \"file\": \"soluta\",\n    \"type\": \"inventore\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -3466,7 +3737,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "enim",
+=======
+                                    "value": "error",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -3502,7 +3777,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "aut",
+=======
+                                    "value": "alias",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -3520,7 +3799,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"labore\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+=======
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"ad\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -3538,7 +3821,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "omnis",
+=======
+                                    "value": "quia",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -3574,7 +3861,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "est",
+=======
+                                    "value": "commodi",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -3592,7 +3883,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"atque\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+=======
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"excepturi\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -3610,7 +3905,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "quia",
+=======
+                                    "value": "odio",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -4105,7 +4404,11 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
+<<<<<<< Updated upstream
                                     "value": "in",
+=======
+                                    "value": "omnis",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -4213,7 +4516,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"message\": \"vitae\",\n    \"subject\": \"non\",\n    \"name\": \"incidunt\",\n    \"email_user\": \"qui\"\n}"
+=======
+                            "raw": "{\n    \"message\": \"ipsum\",\n    \"subject\": \"ut\",\n    \"name\": \"quisquam\",\n    \"email_user\": \"et\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -4277,7 +4584,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"minus\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+=======
+                            "raw": "{\n    \"name\": \"recusandae\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -4295,7 +4606,11 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "delectus",
+=======
+                                    "value": "accusamus",
+>>>>>>> Stashed changes
                                     "description": "organization id"
                                 }
                             ]
@@ -4313,7 +4628,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"pariatur\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+=======
+                            "raw": "{\n    \"name\": \"dicta\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -4363,13 +4682,21 @@
                                 },
                                 {
                                     "key": "date_from",
+<<<<<<< Updated upstream
                                     "value": "illo",
+=======
+                                    "value": "alias",
+>>>>>>> Stashed changes
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the initial date.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "date_to",
+<<<<<<< Updated upstream
                                     "value": "enim",
+=======
+                                    "value": "ipsam",
+>>>>>>> Stashed changes
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the finish date.",
                                     "disabled": false
                                 },
@@ -4384,7 +4711,11 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "dolorum",
+=======
+                                    "value": "dolorem",
+>>>>>>> Stashed changes
                                     "description": "organization_id"
                                 }
                             ]
@@ -4482,7 +4813,11 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "debitis",
+=======
+                                    "value": "est",
+>>>>>>> Stashed changes
                                     "description": "organization id"
                                 }
                             ]
@@ -4518,13 +4853,21 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "ratione",
+=======
+                                    "value": "quos",
+>>>>>>> Stashed changes
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
+<<<<<<< Updated upstream
                                     "value": "id",
+=======
+                                    "value": "vel",
+>>>>>>> Stashed changes
                                     "description": "organization user id"
                                 }
                             ]
@@ -4560,7 +4903,11 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
+<<<<<<< Updated upstream
                                     "value": "quia",
+=======
+                                    "value": "consequatur",
+>>>>>>> Stashed changes
                                     "description": "organization_id"
                                 }
                             ]
@@ -4658,7 +5005,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sit",
+                                    "value": "non",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4694,7 +5041,11 @@
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "necessitatibus",
+=======
+                                    "value": "laboriosam",
+>>>>>>> Stashed changes
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4730,7 +5081,11 @@
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "tempore",
+=======
+                                    "value": "est",
+>>>>>>> Stashed changes
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -4772,7 +5127,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "ex",
+=======
+                                    "value": "repellendus",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -4808,7 +5167,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "aut",
+=======
+                                    "value": "corporis",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -4850,7 +5213,11 @@
                                 {
                                     "id": "product",
                                     "key": "product",
+<<<<<<< Updated upstream
                                     "value": "ullam",
+=======
+                                    "value": "dolorem",
+>>>>>>> Stashed changes
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -4970,7 +5337,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "sequi",
+=======
+                                    "value": "velit",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -5012,7 +5383,11 @@
                                 {
                                     "id": "product",
                                     "key": "product",
+<<<<<<< Updated upstream
                                     "value": "consequatur",
+=======
+                                    "value": "magnam",
+>>>>>>> Stashed changes
                                     "description": "product"
                                 }
                             ]
@@ -5054,7 +5429,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "alias",
+=======
+                                    "value": "deserunt",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -5072,7 +5451,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"subject\": \"impedit\",\n    \"image_header\": \"et\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"dolor\",\n    \"image\": \"in\",\n    \"image_footer\": \"officiis\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
+=======
+                            "raw": "{\n    \"subject\": \"ea\",\n    \"image_header\": \"perferendis\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"illum\",\n    \"image\": \"a\",\n    \"image_footer\": \"et\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -5134,7 +5517,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"autem\"\n}"
+=======
+                            "raw": "{\n    \"name\": \"nisi\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -5152,7 +5539,11 @@
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "eum",
+=======
+                                    "value": "asperiores",
+>>>>>>> Stashed changes
                                     "description": "id rol"
                                 }
                             ]
@@ -5170,7 +5561,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"autem\",\n    \"event_id\": \"optio\"\n}"
+=======
+                            "raw": "{\n    \"name\": \"sequi\",\n    \"event_id\": \"quibusdam\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -5540,7 +5935,11 @@
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "voluptates",
+=======
+                                    "value": "dolorem",
+>>>>>>> Stashed changes
                                     "description": "id de RoleAttendee"
                                 }
                             ]
@@ -5636,7 +6035,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"cum\",\n    \"points\": 1,\n    \"initialMessage\": \"velit\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 987311.116594322\n}"
+=======
+                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"culpa\",\n    \"points\": 1,\n    \"initialMessage\": \"ducimus\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 75045.98\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -5720,7 +6123,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"survey\": \"cumque\",\n    \"show_horizontal_bar\": \"eius\",\n    \"allow_vote_value_per_user\": \"hic\",\n    \"activity_id\": \"laudantium\",\n    \"points\": \"et\",\n    \"initialMessage\": \"accusantium\",\n    \"time_limit\": \"rerum\",\n    \"allow_anonymous_answers\": \"tempora\",\n    \"allow_gradable_survey\": \"et\",\n    \"hasMinimumScore\": \"et\",\n    \"isGlobal\": \"enim\",\n    \"freezeGame\": \"sunt\",\n    \"open\": \"vel\",\n    \"publish\": \"sint\",\n    \"minimumScore\": \"similique\"\n}"
+=======
+                            "raw": "{\n    \"survey\": \"molestiae\",\n    \"show_horizontal_bar\": \"deserunt\",\n    \"allow_vote_value_per_user\": \"saepe\",\n    \"activity_id\": \"quam\",\n    \"points\": \"rem\",\n    \"initialMessage\": \"sequi\",\n    \"time_limit\": \"molestias\",\n    \"allow_anonymous_answers\": \"praesentium\",\n    \"allow_gradable_survey\": \"debitis\",\n    \"hasMinimumScore\": \"et\",\n    \"isGlobal\": \"cum\",\n    \"freezeGame\": \"voluptatem\",\n    \"open\": \"voluptatem\",\n    \"publish\": \"nisi\",\n    \"minimumScore\": \"sit\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -5824,7 +6231,11 @@
                         ],
                         "body": {
                             "mode": "raw",
+<<<<<<< Updated upstream
                             "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"enim\"\n}"
+=======
+                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"tempora\"\n}"
+>>>>>>> Stashed changes
                         },
                         "description": "",
                         "response": []
@@ -5842,7 +6253,11 @@
                                 {
                                     "id": "templatepropertie",
                                     "key": "templatepropertie",
+<<<<<<< Updated upstream
                                     "value": "dolores",
+=======
+                                    "value": "aliquam",
+>>>>>>> Stashed changes
                                     "description": "template id"
                                 }
                             ]
@@ -5906,7 +6321,11 @@
                                 {
                                     "id": "event",
                                     "key": "event",
+<<<<<<< Updated upstream
                                     "value": "quod",
+=======
+                                    "value": "odit",
+>>>>>>> Stashed changes
                                     "description": "event_id"
                                 }
                             ]
@@ -6253,7 +6672,11 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
+<<<<<<< Updated upstream
                                     "value": "quos",
+=======
+                                    "value": "necessitatibus",
+>>>>>>> Stashed changes
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -6443,7 +6866,11 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "quisquam",
+=======
+                                    "value": "officia",
+>>>>>>> Stashed changes
                                     "description": "required."
                                 }
                             ]
@@ -6479,13 +6906,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "aperiam",
+=======
+                                    "value": "excepturi",
+>>>>>>> Stashed changes
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "amet",
+=======
+                                    "value": "ut",
+>>>>>>> Stashed changes
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6521,13 +6956,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "in",
+=======
+                                    "value": "alias",
+>>>>>>> Stashed changes
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "commodi",
+=======
+                                    "value": "eum",
+>>>>>>> Stashed changes
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6591,13 +7034,21 @@
                                 {
                                     "id": "event_id",
                                     "key": "event_id",
+<<<<<<< Updated upstream
                                     "value": "accusamus",
+=======
+                                    "value": "officiis",
+>>>>>>> Stashed changes
                                     "description": ""
                                 },
                                 {
                                     "id": "id",
                                     "key": "id",
+<<<<<<< Updated upstream
                                     "value": "quo",
+=======
+                                    "value": "dignissimos",
+>>>>>>> Stashed changes
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6779,7 +7230,11 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
+<<<<<<< Updated upstream
                                     "value": "pariatur",
+=======
+                                    "value": "architecto",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
@@ -6815,7 +7270,11 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
+<<<<<<< Updated upstream
                                     "value": "cupiditate",
+=======
+                                    "value": "in",
+>>>>>>> Stashed changes
                                     "description": ""
                                 }
                             ]
