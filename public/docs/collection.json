@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Evius API",
-        "_postman_id": "d6565ccd-7cfc-4475-bd89-1b1ed1616be9",
+        "_postman_id": "e41b9600-91b4-46aa-b955-66bdc885d62b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -16,21 +16,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/duplicateactivitie\/:id",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/duplicateactivitie\/:id",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "sequi",
-                                    "description": "id of the event to which the activities belong."
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "itaque",
+                                    "value": "quibusdam",
                                     "description": "id of the activity you want to see."
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -58,15 +58,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "605241e68b276356801236e4",
-                                    "description": "require"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -94,15 +94,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5fa423eee086ea2d1163343e",
-                                    "description": "id of the event in which a new activity is to be created"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -130,21 +130,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities\/:activity",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities\/:activity",
                             "query": [],
                             "variable": [
-                                {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5fa423eee086ea2d1163343e",
-                                    "description": "id of the event the activity."
-                                },
                                 {
                                     "id": "activity",
                                     "key": "activity",
                                     "value": "60804c6e6b7150714f20d122",
                                     "description": "id of the activity you want to see."
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -172,15 +172,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities\/:activity",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities\/:activity",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5fa423eee086ea2d1163343e",
-                                    "description": "id of the event to which the activities belong."
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -208,15 +208,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities\/:activity",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities\/:activity",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5dbc9c65d74d5c5853222222",
-                                    "description": "id of the event to which the activities belong"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -244,15 +244,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/createmeeting\/:id",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/createmeeting\/:id",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5fa423eee086ea2d1163343e",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -269,7 +269,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"sed\",\n    \"activity_description\": \"voluptatibus\"\n}"
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"voluptatem\",\n    \"activity_description\": \"molestiae\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -280,21 +280,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities\/:id\/hostAvailability",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities\/:id\/hostAvailability",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "totam",
-                                    "description": "event to which the activity belongs"
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "magni",
+                                    "value": "quo",
                                     "description": "activity to which the meeting is to be created"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -322,21 +322,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities\/:id\/register_and_checkin_to_activity",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities\/:id\/register_and_checkin_to_activity",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "aut",
-                                    "description": "event to which the activity belongs"
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "consequuntur",
+                                    "value": "atque",
                                     "description": "id of activity"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -364,9 +364,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities\/mettings_zoom\/:meeting_id",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities\/mettings_zoom\/:meeting_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "PUT",
                         "header": [
@@ -392,20 +400,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/activities\/:activity\/checkinbyadmin",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "porro",
-                                    "description": "event to which the activity belongs"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "activity",
                                     "key": "activity",
-                                    "value": "non",
+                                    "value": "minima",
                                     "description": "activity id"
                                 }
                             ]
@@ -423,7 +431,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"user_id\": \"et\"\n}"
+                            "raw": "{\n    \"user_id\": \"iste\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -440,15 +448,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities_attendees",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendees",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5ed3ff9f6ba39d1c634fe3f2",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -476,15 +484,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities_attendees",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendees",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "unde",
-                                    "description": "event to which the activity belongs"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -512,21 +520,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendees\/:activities_attendee",
                             "query": [],
                             "variable": [
-                                {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5ed3ff9f6ba39d1c634fe3f2",
-                                    "description": "event to which the activity belongs"
-                                },
                                 {
                                     "id": "activities_attendee",
                                     "key": "activities_attendee",
                                     "value": "5ed66ce2a6929562725bd7c2",
                                     "description": "id de activity_assitant"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -554,15 +562,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendees\/:activities_attendee",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "quidem",
-                                    "description": "event to which the activity belongs"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -590,15 +598,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:activities_attendee",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendees\/:activities_attendee",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "qui",
-                                    "description": "event to which the activity belongs"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -626,15 +634,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/me\/events\/:event_id\/activities_attendees",
+                            "host": "devapi.evius.co",
+                            "path": "api\/me\/events\/:event\/activities_attendees",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "quia",
-                                    "description": "event to which the activity belongs"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -662,21 +670,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/activities_attendees\/:id\/check_in",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendees\/:id\/check_in",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "dolorum",
-                                    "description": "event to which the activity belongs"
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eligendi",
+                                    "value": "aut",
                                     "description": "id of activity_assitant"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -710,7 +718,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/categories",
                             "query": []
                         },
@@ -738,7 +746,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/categories\/:category",
                             "query": [],
                             "variable": [
@@ -774,7 +782,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/categories\/organizations\/:organization_ids",
                             "query": [],
                             "variable": [
@@ -810,7 +818,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/categories",
                             "query": []
                         },
@@ -838,7 +846,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/categories\/:category",
                             "query": [],
                             "variable": [
@@ -863,7 +871,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quaerat\"\n}"
+                            "raw": "{\n    \"name\": \"voluptas\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -874,7 +882,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/categories\/:category",
                             "query": [],
                             "variable": [
@@ -916,7 +924,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/comments",
                             "query": []
                         },
@@ -933,7 +941,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"organization_id\": \"et\",\n    \"comment\": \"exercitationem\",\n    \"image\": \"aut\"\n}"
+                            "raw": "{\n    \"organization_id\": \"harum\",\n    \"comment\": \"ut\",\n    \"image\": \"inventore\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -944,7 +952,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/comments\/:comment",
                             "query": []
                         },
@@ -972,7 +980,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/comments\/:comment",
                             "query": []
                         },
@@ -1000,7 +1008,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/comments",
                             "query": []
                         },
@@ -1028,15 +1036,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/comments\/organizations\/:organization",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "possimus",
-                                    "description": ""
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -1070,7 +1078,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:template_id\/code",
                             "query": [],
                             "variable": [
@@ -1106,7 +1114,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:template_id\/code",
                             "query": [],
                             "variable": [
@@ -1142,7 +1150,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:template_id\/code\/:code",
                             "query": [],
                             "variable": [
@@ -1184,7 +1192,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:template_id\/code\/:code",
                             "query": []
                         },
@@ -1212,20 +1220,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:template_id\/code\/:code",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-                                    "value": "ut",
+                                    "value": "sit",
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-                                    "value": "dolorem",
+                                    "value": "ut",
                                     "description": "id code delete"
                                 }
                             ]
@@ -1254,7 +1262,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/code\/validatecode",
                             "query": []
                         },
@@ -1271,7 +1279,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"voluptas\"\n}"
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"repudiandae\"\n}"
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1282,7 +1290,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/code\/redeem_point_code",
                             "query": []
                         },
@@ -1299,7 +1307,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"dolorem\"\n}"
+                            "raw": "{\n    \"code\": \"aut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1310,18 +1318,18 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/code\/codesByUser",
                             "query": [
                                 {
                                     "key": "organization",
-                                    "value": "deserunt",
+                                    "value": "voluptatibus",
                                     "description": "organization_id",
                                     "disabled": false
                                 },
                                 {
                                     "key": "email",
-                                    "value": "possimus",
+                                    "value": "ex",
                                     "description": "user email",
                                     "disabled": false
                                 }
@@ -1357,7 +1365,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate",
                             "query": []
                         },
@@ -1385,7 +1393,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate",
                             "query": []
                         },
@@ -1402,7 +1410,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"sapiente\"\n}"
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"occaecati\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1413,7 +1421,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:discountcodetemplate",
                             "query": [],
                             "variable": [
@@ -1449,7 +1457,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:discountcodetemplate",
                             "query": []
                         },
@@ -1477,7 +1485,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:discountcodetemplate",
                             "query": []
                         },
@@ -1505,7 +1513,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/:id\/importCodes",
                             "query": []
                         },
@@ -1533,15 +1541,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/discountcodetemplate\/findByOrganization\/:organization",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "5e9caaa1d74d5c2f6a02a3c3",
-                                    "description": "organization id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -1575,15 +1583,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/documentusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "laborum",
-                                    "description": "event_id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -1611,20 +1619,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/documentusers\/:documentuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "consequatur",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "dolorem",
+                                    "value": "saepe",
                                     "description": "document user id"
                                 }
                             ]
@@ -1653,15 +1661,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/documentusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "unde",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -1678,7 +1686,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"vitae\",\n    \"url\": \"repellat\",\n    \"assign\": true\n}"
+                            "raw": "{\n    \"name\": \"eligendi\",\n    \"url\": \"ipsum\",\n    \"assign\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -1689,20 +1697,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/documentusers\/:documentuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "atque",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "in",
+                                    "value": "omnis",
                                     "description": "document user id"
                                 }
                             ]
@@ -1731,20 +1739,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/documentusers\/:documentuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "molestiae",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "dolorem",
+                                    "value": "mollitia",
                                     "description": "document user id"
                                 }
                             ]
@@ -1773,15 +1781,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/me\/documentusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "est",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -1815,9 +1823,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/documents",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/documents",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -1843,9 +1859,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/documents",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/documents",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -1871,14 +1895,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/documents\/:document",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/documents\/:document",
                             "query": [],
                             "variable": [
                                 {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                },
+                                {
                                     "id": "document",
                                     "key": "document",
-                                    "value": "omnis",
+                                    "value": "dolores",
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -1907,9 +1937,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/documents\/:document",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/documents\/:document",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "PUT",
                         "header": [
@@ -1935,14 +1973,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/documents\/:document",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/documents\/:document",
                             "query": [],
                             "variable": [
                                 {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                },
+                                {
                                     "id": "document",
                                     "key": "document",
-                                    "value": "dignissimos",
+                                    "value": "aliquam",
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -1977,7 +2021,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events",
                             "query": [
                                 {
@@ -2012,7 +2056,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events",
                             "query": []
                         },
@@ -2029,7 +2073,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"est\",\n    \"picture\": \"ipsum\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"eos\",\n    \"picture\": \"eos\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2040,7 +2084,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event",
                             "query": [],
                             "variable": [
@@ -2048,7 +2092,7 @@
                                     "id": "event",
                                     "key": "event",
                                     "value": "61a687713bbf847b3f59d117",
-                                    "description": "id of the event you want to consult."
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2076,15 +2120,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "nihil",
-                                    "description": "id of the event to be updated"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2101,7 +2145,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"nulla\",\n    \"picture\": \"quis\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"officia\",\n    \"picture\": \"voluptatem\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2112,15 +2156,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "autem",
-                                    "description": "id of the event to be eliminated"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2148,7 +2192,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/me\/events",
                             "query": []
                         },
@@ -2176,7 +2220,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/user\/events",
                             "query": []
                         },
@@ -2193,7 +2237,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"dolorum\",\n    \"picture\": \"illo\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"a\",\n    \"picture\": \"velit\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2204,15 +2248,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/user\/events\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "reiciendis",
-                                    "description": "id of the event to be updated"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2229,7 +2273,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"eaque\",\n    \"picture\": \"corporis\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"ea\",\n    \"picture\": \"cupiditate\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2240,15 +2284,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/user\/events\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "numquam",
-                                    "description": "id of the event to be eliminated"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2276,7 +2320,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/user\/events",
                             "query": []
                         },
@@ -2304,15 +2348,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/changeStatusEvent",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/changeStatusEvent",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "neque",
-                                    "description": "id of the event to be rejected or approved Example:"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2340,7 +2384,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/eventsbeforetoday",
                             "query": [
                                 {
@@ -2375,7 +2419,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/eventsaftertoday",
                             "query": [
                                 {
@@ -2410,14 +2454,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/:user\/events",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "user",
                                     "key": "user",
-                                    "value": "voluptas",
+                                    "value": "et",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -2446,9 +2490,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/events",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -2474,15 +2526,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/eventsstadistics",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "est",
-                                    "description": "organization id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -2506,13 +2558,21 @@
                     }
                 },
                 {
-                    "name": "api\/events\/{event_id}\/surveys\/{id}\/coursefinished",
+                    "name": "api\/events\/{event}\/surveys\/{id}\/coursefinished",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/surveys\/:id\/coursefinished",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/surveys\/:id\/coursefinished",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -2538,15 +2598,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/adddocumentuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "aliquam",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2563,7 +2623,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"quantity\": 414669.774,\n    \"auto_assign\": true\n}"
+                            "raw": "{\n    \"quantity\": 3.5878,\n    \"auto_assign\": false\n}"
                         },
                         "description": "",
                         "response": []
@@ -2580,7 +2640,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/eventTypes",
                             "query": []
                         },
@@ -2608,7 +2668,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/eventTypes",
                             "query": []
                         },
@@ -2625,7 +2685,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quis\"\n}"
+                            "raw": "{\n    \"name\": \"similique\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2642,15 +2702,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/eventusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2678,15 +2738,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/eventUsers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2714,15 +2774,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/eventusers\/:eventuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "eventuser",
@@ -2756,15 +2816,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/eventusers\/:eventuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "eventuser",
@@ -2787,7 +2847,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"tempore\",\n    \"properties\": {\n        \"other_properties\": \"atque\"\n    }\n}"
+                            "raw": "{\n    \"rol_id\": \"magni\",\n    \"properties\": {\n        \"other_properties\": \"autem\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2798,15 +2858,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/eventusers",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "nihil",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2834,15 +2894,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/eventusers\/:eventuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "eventuser",
@@ -2872,19 +2932,19 @@
                     }
                 },
                 {
-                    "name": "_indexByUserInEvent_: list of users by events",
+                    "name": "api\/events\/{event}\/eventusers\/{eventuser}\/unsubscribe",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/me\/eventusers\/event\/:event_id",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/eventusers\/:eventuser\/unsubscribe",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "earum",
-                                    "description": "string required"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2908,13 +2968,57 @@
                     }
                 },
                 {
-                    "name": "api\/events\/{event}\/eventusers\/{eventuser}\/unsubscribe",
+                    "name": "_indexByUserInEvent_: list of users by events",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event\/eventusers\/:eventuser\/unsubscribe",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/me\/eventusers\/event\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_ByUserInEvent_ : list of users by events",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/eventusers\/event\/:event\/user\/:user_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -2940,15 +3044,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/adduserwithemailvalidation",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -2976,9 +3080,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/eventusers\/:event\/tranfereventuser\/:eventuser",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/eventusers\/:event\/tranfereventuser\/:event_user",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -3000,23 +3112,15 @@
                     }
                 },
                 {
-                    "name": "_createUserAndAddtoEvent_: import  user and add it to an event.",
+                    "name": "_updateWithStatus_: update With Status",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/eventUsers\/createUserAndAddtoEvent\/:event",
-                            "query": [],
-                            "variable": [
-                                {
-                                    "id": "event",
-                                    "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required event id"
-                                }
-                            ]
+                            "host": "devapi.evius.co",
+                            "path": "api\/eventUsers\/:id\/withStatus",
+                            "query": []
                         },
-                        "method": "POST",
+                        "method": "PUT",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -3029,43 +3133,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"sint\"\n    }\n}"
-                        },
-                        "description": "When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and\nif the user exists, the user will not be updated, it will only create the record in the event.\n\n![Screenshot](https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "_bookEventUsers_: when an event is pay the attendees can do book without having to pay.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/eventUsers\/bookEventUsers\/:event",
-                            "query": [],
-                            "variable": [
-                                {
-                                    "id": "event",
-                                    "key": "event",
-                                    "value": "61ccd3551c821b765a312864",
-                                    "description": "string required event id"
-                                }
-                            ]
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"eventUsersIds\": []\n}"
+                            "raw": "[]"
                         },
                         "description": "",
                         "response": []
@@ -3076,14 +3144,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/eventUsers\/:eventuser\/checkin",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "voluptas",
+                                    "value": "aut",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -3108,29 +3176,23 @@
                     }
                 },
                 {
-                    "name": "_updateRolAndSendEmail_: change the rol of an user in a event especific.",
+                    "name": "_createUserAndAddtoEvent_: import  user and add it to an event.",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event\/eventusers\/:eventuser\/updaterol",
+                            "host": "devapi.evius.co",
+                            "path": "api\/eventUsers\/createUserAndAddtoEvent\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "rerum",
-                                    "description": ""
-                                },
-                                {
-                                    "id": "eventuser",
-                                    "key": "eventuser",
-                                    "value": "quas",
-                                    "description": ""
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
-                        "method": "PUT",
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -3143,20 +3205,64 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"magnam\"\n}"
+                            "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"commodi\"\n    }\n}"
                         },
-                        "description": "This end point sends an email to the user to inform them of the change.",
+                        "description": "When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and\nif the user exists, the user will not be updated, it will only create the record in the event.\n\n![Screenshot](https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)",
                         "response": []
                     }
                 },
                 {
-                    "name": "_meEvents:_ list of registered events of the logged in user.",
+                    "name": "_bookEventUsers_: when an event is pay the attendees can do book without having to pay.",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/me\/eventUsers",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/eventUsers\/bookEventUsers\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"eventUsersIds\": []\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_meInEvent_: user information logged into the event",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/me\/events\/:event\/eventusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -3182,7 +3288,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/metricsbydate\/eventusers",
                             "query": [
                                 {
@@ -3193,13 +3299,13 @@
                                 },
                                 {
                                     "key": "datetime_from",
-                                    "value": "blanditiis",
+                                    "value": "soluta",
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 },
                                 {
                                     "key": "datetime_to",
-                                    "value": "doloremque",
+                                    "value": "minima",
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 }
@@ -3208,10 +3314,116 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "aut",
-                                    "description": "event_id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event}\/hubspotRegister\/eventusers",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/hubspotRegister\/eventusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_updateRolAndSendEmail_: change the rol of an user in a event especific.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/eventusers\/:eventuser\/updaterol",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                },
+                                {
+                                    "id": "eventuser",
+                                    "key": "eventuser",
+                                    "value": "sunt",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"rol_id\": \"dolorum\"\n}"
+                        },
+                        "description": "This end point sends an email to the user to inform them of the change.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_meEvents:_ list of registered events of the logged in user.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/me\/eventUsers",
+                            "query": []
                         },
                         "method": "GET",
                         "header": [
@@ -3243,7 +3455,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/files\/upload\/:field_name",
                             "query": []
                         },
@@ -3260,7 +3472,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"et\"\n}"
+                            "raw": "{\n    \"file\": \"veritatis\"\n}"
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -3271,14 +3483,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/files\/uploadbase\/:name",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "name",
                                     "key": "name",
-                                    "value": "eum",
+                                    "value": "esse",
                                     "description": "file field by default file"
                                 }
                             ]
@@ -3296,7 +3508,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"aut\",\n    \"type\": \"possimus\"\n}"
+                            "raw": "{\n    \"file\": \"culpa\",\n    \"type\": \"illum\"\n}"
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -3313,7 +3525,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/googleanalytics",
                             "query": []
                         },
@@ -3347,15 +3559,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/host",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/host",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "ut",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3383,15 +3595,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/host",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/host",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "velit",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3408,7 +3620,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"accusamus\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"iure\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3419,15 +3631,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/host\/:host",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/host\/:host",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "praesentium",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3455,15 +3667,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/host\/:host",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/host\/:host",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "occaecati",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3480,7 +3692,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"ipsam\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"rerum\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3491,15 +3703,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/host\/:host",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/host\/:host",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "doloribus",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3533,15 +3745,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/newsfeed",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "605241e68b276356801236e4",
-                                    "description": "id event"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3569,15 +3781,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/newsfeed\/:newsfeed",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "605241e68b276356801236e4",
-                                    "description": "id event."
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "newsfeed",
@@ -3611,15 +3823,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/newsfeed",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "605241e68b276356801236e4",
-                                    "description": "id event."
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3647,15 +3859,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/newsfeed\/:newsfeed",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "605241e68b276356801236e4",
-                                    "description": "id event."
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3683,15 +3895,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/newsfeed\/:newsfeed",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "605241e68b276356801236e4",
-                                    "description": "id event."
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "newsfeed",
@@ -3731,7 +3943,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders",
                             "query": []
                         },
@@ -3759,7 +3971,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders",
                             "query": []
                         },
@@ -3787,7 +3999,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:order",
                             "query": [],
                             "variable": [
@@ -3823,7 +4035,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:order",
                             "query": []
                         },
@@ -3851,7 +4063,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:order",
                             "query": []
                         },
@@ -3879,7 +4091,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/orders\/ordersevent",
                             "query": [
                                 {
@@ -3893,8 +4105,8 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "5ea23acbd74d5c4b360ddde2",
-                                    "description": "event_id required"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -3922,7 +4134,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/:user_id\/orders",
                             "query": [],
                             "variable": [
@@ -3958,7 +4170,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/me\/orders",
                             "query": []
                         },
@@ -3986,14 +4198,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:organization_id\/orderOrganization",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "quia",
+                                    "value": "officiis",
                                     "description": ""
                                 }
                             ]
@@ -4028,7 +4240,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations",
                             "query": []
                         },
@@ -4056,9 +4268,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -4084,7 +4304,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:id\/contactbyemail",
                             "query": []
                         },
@@ -4101,7 +4321,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"message\": \"distinctio\",\n    \"subject\": \"dignissimos\",\n    \"name\": \"ut\",\n    \"email_user\": \"ut\"\n}"
+                            "raw": "{\n    \"message\": \"repellendus\",\n    \"subject\": \"velit\",\n    \"name\": \"deserunt\",\n    \"email_user\": \"iste\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4112,7 +4332,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:id\/eventUsers",
                             "query": [],
                             "variable": [
@@ -4148,7 +4368,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations",
                             "query": []
                         },
@@ -4165,7 +4385,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"corporis\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+                            "raw": "{\n    \"name\": \"et\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -4176,15 +4396,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "et",
-                                    "description": "organization id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4201,7 +4421,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"necessitatibus\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+                            "raw": "{\n    \"name\": \"ab\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -4212,9 +4432,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "DELETE",
                         "header": [
@@ -4240,7 +4468,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organization\/:organization\/ordersUsersPoints",
                             "query": [
                                 {
@@ -4251,13 +4479,13 @@
                                 },
                                 {
                                     "key": "date_from",
-                                    "value": "dolor",
+                                    "value": "quasi",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the initial date.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "date_to",
-                                    "value": "laudantium",
+                                    "value": "ipsa",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the finish date.",
                                     "disabled": false
                                 },
@@ -4272,8 +4500,8 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "ducimus",
-                                    "description": "organization_id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4307,7 +4535,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/me\/organizations",
                             "query": []
                         },
@@ -4335,9 +4563,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/organizationusers",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -4363,15 +4599,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/organizationusers\/:organizationuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "dolor",
-                                    "description": "organization id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4399,20 +4635,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/organizationusers\/:organizationuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "rerum",
-                                    "description": "organization id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 },
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
-                                    "value": "aut",
+                                    "value": "atque",
                                     "description": "organization user id"
                                 }
                             ]
@@ -4441,15 +4677,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/addorganizationuser",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "sapiente",
-                                    "description": "organization_id"
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4483,9 +4719,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/userproperties",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -4511,9 +4755,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/userproperties",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -4539,15 +4791,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/userproperties\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "dolore",
+                                    "value": "soluta",
                                     "description": "id UserProperties"
+                                },
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4575,15 +4833,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/userproperties\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sit",
+                                    "value": "et",
                                     "description": "id UserProperties"
+                                },
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4611,15 +4875,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organization\/userproperties\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "porro",
+                                    "value": "nostrum",
                                     "description": "id UserProperties"
+                                },
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -4653,15 +4923,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "qui",
-                                    "description": ""
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -4689,15 +4959,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products\/:product",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "voluptatem",
-                                    "description": ""
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -4725,20 +4995,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products\/:product",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "5ea23acbd74d5c4b360ddde2",
-                                    "description": ""
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "harum",
+                                    "value": "ipsam",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -4767,15 +5037,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products\/:product\/silentauctionmail",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "5ea23acbd74d5c4b360ddde2",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "product",
@@ -4809,15 +5079,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products\/:product\/minimumauctionvalue",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "5ea23acbd74d5c4b360ddde2",
-                                    "description": "event id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "product",
@@ -4851,15 +5121,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "repudiandae",
-                                    "description": ""
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -4887,20 +5157,20 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/products\/:product",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "5bb25243b6312771e92c8693",
-                                    "description": "event"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 },
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "voluptate",
+                                    "value": "tempore",
                                     "description": "product"
                                 }
                             ]
@@ -4935,15 +5205,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rsvp\/sendeventrsvp\/:event",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "error",
-                                    "description": ""
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -4960,7 +5230,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"subject\": \"repudiandae\",\n    \"image_header\": \"quas\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"rerum\",\n    \"image\": \"aut\",\n    \"image_footer\": \"ut\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": true\n}"
+                            "raw": "{\n    \"subject\": \"nam\",\n    \"image_header\": \"accusantium\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"iusto\",\n    \"image\": \"qui\",\n    \"image_footer\": \"minus\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
                         },
                         "description": "",
                         "response": []
@@ -4977,7 +5247,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rols",
                             "query": []
                         },
@@ -5005,7 +5275,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rols",
                             "query": []
                         },
@@ -5022,7 +5292,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"nemo\"\n}"
+                            "raw": "{\n    \"name\": \"veritatis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5033,14 +5303,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rols\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "provident",
+                                    "value": "non",
                                     "description": "id rol"
                                 }
                             ]
@@ -5058,7 +5328,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"et\",\n    \"event_id\": \"fuga\"\n}"
+                            "raw": "{\n    \"name\": \"nemo\",\n    \"event_id\": \"ratione\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5069,7 +5339,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rols\/:id",
                             "query": []
                         },
@@ -5103,15 +5373,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/rolesattendees",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/rolesattendees",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5ea23acbd74d5c4b360ddde2",
-                                    "description": "event id"
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -5139,15 +5409,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/rolesattendees",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/rolesattendees",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5fa423eee086ea2d1163343e",
-                                    "description": ""
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -5175,21 +5445,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/rolesattendees\/:rolesattendee",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/rolesattendees\/:rolesattendee",
                             "query": [],
                             "variable": [
-                                {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5ea23acbd74d5c4b360ddde2",
-                                    "description": ""
-                                },
                                 {
                                     "id": "rolesattendee",
                                     "key": "rolesattendee",
                                     "value": "5faefba6b68d6316213f7cc2",
                                     "description": "RoleAttendee id"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -5217,9 +5487,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/rolesattendees\/:rolesattendee",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/rolesattendees\/:rolesattendee",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "PUT",
                         "header": [
@@ -5245,9 +5523,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/rolesattendees\/:rolesattendee",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/rolesattendees\/:rolesattendee",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "DELETE",
                         "header": [
@@ -5273,7 +5559,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rolesattendees",
                             "query": []
                         },
@@ -5301,7 +5587,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rolesattendees\/:rolesattendee",
                             "query": [],
                             "variable": [
@@ -5337,7 +5623,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rolesattendees",
                             "query": []
                         },
@@ -5365,7 +5651,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rolesattendees\/:rolesattendee",
                             "query": []
                         },
@@ -5393,7 +5679,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rolesattendees\/:rolesattendee",
                             "query": []
                         },
@@ -5421,14 +5707,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/rolesattendees\/:id",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "mollitia",
+                                    "value": "consequuntur",
                                     "description": "id de RoleAttendee"
                                 }
                             ]
@@ -5463,7 +5749,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:id\/surveys",
                             "query": [],
                             "variable": [
@@ -5499,7 +5785,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:id\/surveys",
                             "query": [],
                             "variable": [
@@ -5524,7 +5810,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"architecto\",\n    \"points\": 1,\n    \"initialMessage\": \"non\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 0.799255\n}"
+                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"aut\",\n    \"points\": 1,\n    \"initialMessage\": \"sed\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 329458.159\n}"
                         },
                         "description": "",
                         "response": []
@@ -5535,7 +5821,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:id\/surveys\/:survey",
                             "query": [],
                             "variable": [
@@ -5577,7 +5863,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:id\/surveys\/:survey",
                             "query": [],
                             "variable": [
@@ -5608,7 +5894,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"voluptatem\",\n    \"show_horizontal_bar\": \"ducimus\",\n    \"allow_vote_value_per_user\": \"cum\",\n    \"activity_id\": \"odit\",\n    \"points\": \"consequuntur\",\n    \"initialMessage\": \"magnam\",\n    \"time_limit\": \"rem\",\n    \"allow_anonymous_answers\": \"harum\",\n    \"allow_gradable_survey\": \"asperiores\",\n    \"hasMinimumScore\": \"ex\",\n    \"isGlobal\": \"voluptate\",\n    \"freezeGame\": \"omnis\",\n    \"open\": \"non\",\n    \"publish\": \"eius\",\n    \"minimumScore\": \"maxime\"\n}"
+                            "raw": "{\n    \"survey\": \"quod\",\n    \"show_horizontal_bar\": \"et\",\n    \"allow_vote_value_per_user\": \"quia\",\n    \"activity_id\": \"quasi\",\n    \"points\": \"sit\",\n    \"initialMessage\": \"vel\",\n    \"time_limit\": \"quisquam\",\n    \"allow_anonymous_answers\": \"expedita\",\n    \"allow_gradable_survey\": \"laboriosam\",\n    \"hasMinimumScore\": \"aut\",\n    \"isGlobal\": \"pariatur\",\n    \"freezeGame\": \"dolores\",\n    \"open\": \"iusto\",\n    \"publish\": \"animi\",\n    \"minimumScore\": \"ut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5619,7 +5905,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:id\/surveys\/:survey",
                             "query": [],
                             "variable": [
@@ -5667,7 +5953,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organizaton\/templateproperties",
                             "query": []
                         },
@@ -5695,7 +5981,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organizaton\/templateproperties",
                             "query": []
                         },
@@ -5712,7 +5998,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"aspernatur\"\n}"
+                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"laborum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5723,14 +6009,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organizaton\/templateproperties\/:templatepropertie",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "templatepropertie",
                                     "key": "templatepropertie",
-                                    "value": "et",
+                                    "value": "expedita",
                                     "description": "template id"
                                 }
                             ]
@@ -5759,7 +6045,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organizations\/:organizaton\/templateproperties\/:templatepropertie",
                             "query": []
                         },
@@ -5787,15 +6073,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/templateproperties\/:templatepropertie\/addtemplateporperties",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "mollitia",
-                                    "description": "event_id"
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -5829,7 +6115,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users",
                             "query": []
                         },
@@ -5857,7 +6143,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users",
                             "query": []
                         },
@@ -5885,7 +6171,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/:user",
                             "query": [],
                             "variable": [
@@ -5917,11 +6203,39 @@
                     }
                 },
                 {
+                    "name": "loginorcreatefromtoken: create a user from auth data.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/users\/loginorcreatefromtoken",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "If a userauth is created  in frontend using firebaseatuh javascript JDK\nthis method can be called to create respective user in the backend\ndata is extracted from the token.\n\nauthuser in firebaseauth and user are related by the field uid created by firebase",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_update_: update registered user",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/:user",
                             "query": [],
                             "variable": [
@@ -5957,7 +6271,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/:user",
                             "query": [],
                             "variable": [
@@ -5989,11 +6303,39 @@
                     }
                 },
                 {
+                    "name": "getCurrentUser: returns current user information using valid token send with the request.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/users\/currentUser",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "returns current user information using valid token send with the request.\nToken is processed  by middleware",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_findByEmail_: search for specific user by mail",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/findByEmail\/:email",
                             "query": [],
                             "variable": [
@@ -6029,7 +6371,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/organization\/:organization\/users",
                             "query": [
                                 {
@@ -6049,8 +6391,8 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "61ccd2cc81e73549a63dd5ce",
-                                    "description": "organization to which the users belong."
+                                    "value": "61a687203bbf847b3f59d113",
+                                    "description": "The ID of the organization"
                                 }
                             ]
                         },
@@ -6074,11 +6416,47 @@
                     }
                 },
                 {
+                    "name": "_changeStatusUser_: approve or reject the rol the users teacher ,and send mail of the change of status of the user to the user who created it",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/users\/:user_id\/changeStatusUser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "sint",
+                                    "description": "id of the user to be rejected or approved"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"approved\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_signInWithEmailAndPassword_: login a user, you can see this [diagram](https:\/\/app.diagrams.net\/#G1qSNi58JI6usiyqU7n7SsmyTrJW5oITAZ)",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/users\/signInWithEmailAndPassword",
                             "query": []
                         },
@@ -6102,39 +6480,11 @@
                     }
                 },
                 {
-                    "name": "loginorcreatefromtoken: create a user from auth data.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/users\/loginorcreatefromtoken",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "If a userauth is created  in frontend using firebaseatuh javascript JDK\nthis method can be called to create respective user in the backend\ndata is extracted from the token.\n\nauthuser in firebaseauth and user are related by the field uid created by firebase",
-                        "response": []
-                    }
-                },
-                {
                     "name": "_getAccessLink_: get and sent link acces to email to user.",
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/getloginlink",
                             "query": []
                         },
@@ -6162,7 +6512,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/singinwithemaillink",
                             "query": []
                         },
@@ -6190,7 +6540,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/changeuserpassword",
                             "query": []
                         },
@@ -6224,15 +6574,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/userproperties",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/userproperties",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "5fadbc9c8bc34c4c890c5ee4",
-                                    "description": "required."
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -6260,15 +6610,15 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/userproperties",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/userproperties",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "aliquam",
-                                    "description": "required."
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -6296,21 +6646,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/userproperties\/:id",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/userproperties\/:id",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "inventore",
-                                    "description": ""
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "magni",
+                                    "value": "delectus",
                                     "description": "id UserProperties"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -6338,21 +6688,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/userproperties\/:id",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/userproperties\/:id",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "expedita",
-                                    "description": ""
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "praesentium",
+                                    "value": "sed",
                                     "description": "id UserProperties"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -6380,9 +6730,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/userproperties\/:id\/RegisterListFieldOptionTaken",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/userproperties\/:id\/RegisterListFieldOptionTaken",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "PUT",
                         "header": [
@@ -6408,21 +6766,21 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/events\/:event_id\/userproperties\/:id",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/userproperties\/:id",
                             "query": [],
                             "variable": [
                                 {
-                                    "id": "event_id",
-                                    "key": "event_id",
-                                    "value": "earum",
-                                    "description": ""
-                                },
-                                {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "id",
+                                    "value": "non",
                                     "description": "id UserProperties"
+                                },
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
                                 }
                             ]
                         },
@@ -6456,9 +6814,81 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/test\/auth",
                             "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/eventusers\/{event}\/makeTicketIdaProperty\/{ticket_id}",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/eventusers\/:event\/makeTicketIdaProperty\/:ticket_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event}\/users\/{user_id}\/asignticketstouser",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/users\/:user_id\/asignticketstouser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -6484,7 +6914,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/me\/contributors\/events",
                             "query": []
                         },
@@ -6512,9 +6942,17 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
-                            "path": "api\/contributors\/events\/:event_id",
-                            "query": []
+                            "host": "devapi.evius.co",
+                            "path": "api\/contributors\/events\/:event",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61a687713bbf847b3f59d117",
+                                    "description": "The ID of the event"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -6540,14 +6978,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:order_id\/validateFreeorder",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "corrupti",
+                                    "value": "qui",
                                     "description": ""
                                 }
                             ]
@@ -6576,14 +7014,14 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:order_id\/validatePointOrder",
                             "query": [],
                             "variable": [
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "voluptas",
+                                    "value": "dolor",
                                     "description": ""
                                 }
                             ]
@@ -6612,7 +7050,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "api\/orders\/:order_id\/validatePointOrderTest",
                             "query": []
                         },
@@ -6640,7 +7078,7 @@
                     "request": {
                         "url": {
                             "protocol": "https",
-                            "host": "devapi.evius.co\/",
+                            "host": "devapi.evius.co",
                             "path": "broadcasting\/auth",
                             "query": []
                         },

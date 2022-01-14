@@ -291,6 +291,7 @@ return [
         ],
         'urlParameters' => [
             \Mpociot\ApiDoc\Extracting\Strategies\UrlParameters\GetFromUrlParamTag::class,
+            \App\ApiDoc\AddEventOrganizationIdUrlParams::class,
         ],
         'queryParameters' => [
             \Mpociot\ApiDoc\Extracting\Strategies\QueryParameters\GetFromQueryParamTag::class,
@@ -372,4 +373,13 @@ return [
      *
      */
     'routeMatcher' => \Mpociot\ApiDoc\Matching\RouteMatcher::class,
-];
+
+
+    /*
+     *There are the variables that will have default value to exmaples in the diferrents endpoints
+     */
+    'event' => env('DOC_EVENT_ID', '61a687713bbf847b3f59d117'),
+    'organization' => env('DOC_ORGANIZATION_ID', '61a687203bbf847b3f59d113'),
+
+
+];  
