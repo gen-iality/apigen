@@ -70,20 +70,18 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
  * eventUsers
  ****************/
 //CRUD
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-            Route::get('events/{event}/eventusers',      'EventUserController@index');                
-            Route::get('events/{event}/eventusers/{id}', 'EventUserController@show');
-            Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update');
-            Route::post('events/{event}/eventusers',     'EventUserController@store');
-            Route::delete('events/{event}/eventusers/{id}', 'EventUserController@destroy');
-            Route::get('events/{event}/eventusers/{id}/unsubscribe', 'EventUserController@unsubscribe');
-            Route::get('me/eventusers/event/{event}', 'EventUserController@indexByUserInEvent');
-            Route::get('events/{event}/searchinevent/', 'EventUserController@searchInEvent');
-            Route::get('events/myevents', 'EventUserController@indexByEventUser');
-    }
-);
+Route::get('events/{event}/eventusers',      'EventUserController@index');
+Route::get('events/{event}/eventUsers',      'EventUserController@index');
+Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');
+Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update');
+Route::post('events/{event}/eventusers',     'EventUserController@store');
+Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy');
+//Otros endpoints de eventUser
+Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
+Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
+Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
+Route::get('events/myevents', 'EventUserController@indexByEventUser');
+
 
 Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
 
@@ -103,10 +101,8 @@ Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus')
 Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
+Route::post('events/{event_id}/eventusersanonymous',     'EventUserController@store');
 
-Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
-
-Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
 
 
 

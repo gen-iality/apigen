@@ -31,7 +31,7 @@ use Carbon\Carbon;
  *
  *
  * <p style="border: 1px solid #DDD">
- * Attendee has one user though user_id
+ * Attendee has one user though account_id
  * <br> and one event though event_id
  * <br> This relation has states that represent the booking status of the user into the event
  * </p>
@@ -400,18 +400,20 @@ class EventUserController extends Controller
 
     /**
      * _createUserAndAddtoEvent_: import  user and add it to an event.
+     * 
+     * 
      * When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and
      * if the user exists, the user will not be updated, it will only create the record in the event.
      * 
+     * ![Screenshot](https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)  
+     * 
      * @authenticated
-     *
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      * @bodyParam email email required email event user Example: example@evius.co
      * @bodyParam name  string required Example: Evius
      * @bodyParam password  string if the password is not added, the password will be the user's email. Example: *******
      * @bodyParam other_params.city any other params  will be saved in eventUser
-     *
      */
     public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
     {
@@ -672,14 +674,12 @@ class EventUserController extends Controller
 
     /**
      * _store:_ Store a newly Attendee  in storage.
+     * 
+     * @urlParam event required event id
+     * @bodyParam properties.email object other params  will be saved in user and eventUser each event can require aditional properties for registration.
+     * @bodyParam properties.names object other params  will be saved in user and eventUser each event can require aditional properties for registration.
+     * @bodyParam properties.others_properties object other params  will be saved in user and eventUser each event can require aditional properties for registration.
      *
-     * @urlParam event_id required
-     *
-     * @bodyParam account_id string required user id
-     * @bodyParam properties array other params  will be saved in user and eventUser each event can require aditional properties for registration
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {

@@ -150,7 +150,7 @@ Route::get('events/{event}/faqs' , 'FaqController@index');
 Route::get('events/{event}/faqs/{faqs}' , 'FaqController@show');
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::store('events/{event}/faqs' , 'FaqController@store')->middleware('permission:create');
+        Route::post('events/{event}/faqs' , 'FaqController@store')->middleware('permission:create');
         Route::put('events/{event}/faqs/{faqs}' , 'FaqController@update')->middleware('permission:update');
         Route::delete('events/{event}/faqs/{faqs}' , 'FaqController@delete')->middleware('permission:destroy');
     }
