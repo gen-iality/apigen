@@ -179,7 +179,7 @@ Route::group(
         Route::post('organizations' , 'OrganizationController@store')->middleware('permission:create');
         Route::put('organizations/{organization}' , 'OrganizationController@update')->middleware('permission:update');
         Route::delete('organizations/{organization}' , 'OrganizationController@destroy')->middleware('permission:destroy');
-        Route::get('me/organizations', 'OrganizationController@meOrganizations');
+        Route::get('me/organizations', 'OrganizationUserController@meOrganizations');
         // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
         // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
     }
