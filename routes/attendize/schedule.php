@@ -64,7 +64,7 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event_id}/host' , 'HostController@store')->middleware('permission:create');
         Route::put('events/{event_id}/host/{host}' , 'HostController@update')->middleware('permission:update');
-        Route::delete('events/{event_id}/host/{host}' , 'HostController@delete')->middleware('permission:destroy');
+        Route::delete('events/{event_id}/host/{host}' , 'HostController@destroy')->middleware('permission:destroy');
     }
 );
 
@@ -152,7 +152,7 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/faqs' , 'FaqController@store')->middleware('permission:create');
         Route::put('events/{event}/faqs/{faqs}' , 'FaqController@update')->middleware('permission:update');
-        Route::delete('events/{event}/faqs/{faqs}' , 'FaqController@delete')->middleware('permission:destroy');
+        Route::delete('events/{event}/faqs/{faqs}' , 'FaqController@destroy')->middleware('permission:destroy');
     }
 );
 
