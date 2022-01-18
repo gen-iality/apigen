@@ -37,7 +37,9 @@ Route::get('test', 'EventController@index');
 
 Route::post('testpush', 'SendContentController@sendPushNotification');
 
-Route::get('routes', function() { // OBTENER TODAS LAS RUTAS DISPONIBLES Y MODIFICARLAS
+// Ver rutas que tienen documetación
+Route::get('routes', function() { 
+  // OBTENER TODAS LAS RUTAS DISPONIBLES Y MODIFICARLAS
   $routeCollection = Route::getRoutes();
   $allRoutes = [];
   foreach ($routeCollection as $value) {
@@ -66,6 +68,6 @@ Route::get('routes', function() { // OBTENER TODAS LAS RUTAS DISPONIBLES Y MODIF
   foreach ($routesMod2 as $route) {
     !in_array($route, $routeDocs) ? array_push($routeWithoutDocs, $route) : null ;
   }
-  //return ['No documentadas' => $routeWithoutDocs, 'Documentadas' => $routeDocs];
-  return view('routes')->with(['withoutDocs' => $routeWithoutDocs, 'withDocs' => $routeDocs]);
+
+  return view('routes')->with(['withoutDocs' => $routeWithoutDocs, 'withDocs' => $routeDocs, 'allRoutes' => $routesMod2]);
 });

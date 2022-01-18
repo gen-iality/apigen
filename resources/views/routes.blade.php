@@ -11,6 +11,7 @@
 
       <div class="center">
 	<h1 class="white-text">Sin documentación</h1>
+	  <p class="white-text">{{ count($withoutDocs) }} urls sin documentación de {{ count($allRoutes) }} urls totales</p>
       </div>
 
 	<table class="highlight z-depth-2 card-panel blue-grey darken-2">
@@ -35,6 +36,7 @@
 
 	<div class="center">
 	  <h1 class="white-text">Con documentación</h1>
+	  <p class="white-text">{{ count($withDocs) }} urls con documentación de {{ count($allRoutes) }} urls totales</p>
 	</div>
 	<table class="highlight z-depth-2 card-panel blue-grey darken-2">
 
