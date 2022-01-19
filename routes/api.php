@@ -610,20 +610,6 @@ Route::get("code/codesByUser",  "DiscountCodeController@codesByUser");
 Route::get("organization/{organization}/ordersUsersPoints",  "OrganizationController@ordersUsersPoints");
 
 
-
-/****************
- * Product
- ****************/
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::post('events/{event}/products', 'ProductController@store');
-        Route::put('events/{event}/products/{product}', 'ProductController@update');
-        Route::delete('events/{event}/products/{product}', 'ProductController@destroy');
-        Route::post('events/{event}/products/{product}/silentauctionmail', 'ProductController@createSilentAuction')->middleware('permission:send_products_silentauctiomail');
-        Route::get('events/{event}/products/{product}/minimumauctionvalue', 'ProductController@minimumAuctionValue');
-    }
-);
 /****************
 * Product
 ****************/
@@ -631,7 +617,8 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/products', 'ProductController@store')->middleware('permission:create');
         Route::put('events/{event}/products/{product}', 'ProductController@update')->middleware('permission:update');
-        Route::delete('events/{event}/products/{product}', 'ProductController@destroy')->middleware('permission:delete');
+        Route::delete('events/{event}/products/{product}', 'ProductController@destroy')->middleware('permission:destroy');
+        Route::post('events/{event}/products/{product}/silentauctionmail', 'ProductController@createSilentAuction')->middleware('permission:send_products_silentauctiomail');
     }
 );
 
@@ -701,17 +688,3 @@ Route::group(
 // addDocumentUserToEventUserByEvent
 // Route::post('events/{event}/documentusers/user/{event_user}', 'DocumentUserController@addDocumentUserToEventUserByEvent');
 
-
-
-/****************
-* Activity
-****************/
-        Route::group(
-            ['middleware' => 'auth:token'], function () {
-                Route::get('activities', 'ActivityController@index');
-                Route::post('activities', 'ActivityController@store')->middleware('permission:create');
-                Route::get('activities/{activity}', 'ActivityController@show');
-                Route::put('activities/{activity}', 'ActivityController@update')->middleware('permission:update');
-                Route::delete('activities/{activity}', 'ActivityController@destroy')->middleware('permission:delete');
-            }
-        );
