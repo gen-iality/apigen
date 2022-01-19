@@ -157,9 +157,9 @@ Route::get('organizations/{organization}/userproperties/{id}', 'OrganizationUser
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-        Route::post('organizations/{organization}/userproperties', 'OrganizationUserPropertiesController@store')->middleware('permission:create');
-        Route::put('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@update')->middleware('permission:update');
-        Route::delete('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@destroy')->middleware('permission:destroy');
+        Route::post('organizations/{organization}/userproperties', 'OrganizationUserPropertiesController@store');
+        Route::put('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@update');
+        Route::delete('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@destroy');
     }
 );
 
@@ -558,7 +558,7 @@ Route::get('states', 'StateController@index');
 //RSVP
 Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
-Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP')->middleware('permission:create');
+Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
