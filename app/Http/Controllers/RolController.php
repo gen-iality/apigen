@@ -13,7 +13,7 @@ use Validator;
  */
 class RolController extends Controller
 {   
-    const AVALIABLE_TYPES = 'attendee , administrator';
+    const AVALIABLE_TYPES = 'attendee,administrator';
     const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
 
     /**
@@ -41,27 +41,25 @@ class RolController extends Controller
      * 
      * 
      */
-    public function store(Request $request, $event_id)
+    public function store(Request $request)
     {
         //
         $rules = $request->validate([
             'name' => 'required',
-            'module' => 'required',
-            'type' => ['required', Rule::in(RolController::AVALIABLE_TYPES)],
-            'permission' => ['required']
+            'type' => 'required'
         ]);
 
-        $messages = ['in' => "The type should be one of: " . implode(", ", RolController::AVALIABLE_TYPES)];
+        // $messages = ['in' => "The type should be one of: " . implode(", ", RolController::AVALIABLE_TYPES)];
 
         $data = $request->json()->all();
 
 
-        $validator = Validator::make($data, $rules, $messages);
-        if (!$validator->passes()) {
-            return response()->json(['errors' => $validator->errors()->all()], 400);
-        }
+        // $validator = Validator::make($data, $rules, $messages);
+        // if (!$validator->passes()) {
+        //     return response()->json(['errors' => $validator->errors()->all()], 400);
+        // }
 
-        $permission = Permission::where('name', $data['module'] .'_'. $data['permission'])->first();
+        // $permission = Permission::where('name', $data['module'] .'_'. $data['permission'])->first();
         
         $result = new Rol($request->json()->all());
         $result->save();

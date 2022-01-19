@@ -12,11 +12,8 @@ class Rol extends Moloquent
     const ID_ROL_MODERATOR = '60dca467b38c630f83537e62';
 
     protected $fillable = [ 
-        'account_id', 
-        'event_id', 
-        'organization_id', 
         'name', 
-        'level'
+        'type'
     ];
 
     protected $table = ('roles');
@@ -27,6 +24,29 @@ class Rol extends Moloquent
     public function organization()
     {
         return $this->belongsTo('App\Organization');
+    }
+
+    public static function boot()
+    {
+
+        parent::boot();
+        self::saving(function ($model) {
+                
+            if(($model->_id === self::ID_ROL_ADMINISTRATOR) ||  ($model->_id === self::ID_ROL_MODERATOR))
+            {
+                abort(401 , "You don't have permission for do this action.");
+            }
+
+        });
+
+        self::deleting(function ($model) {
+                
+            if(($model->_id === self::ID_ROL_ADMINISTRATOR) ||  ($model->_id === self::ID_ROL_MODERATOR))
+            {
+                abort(401 , "You don't have permission for do this action.");
+            }
+
+        });
     }
     
 }

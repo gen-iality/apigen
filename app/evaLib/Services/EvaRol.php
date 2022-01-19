@@ -68,4 +68,10 @@ class EvaRol
         $userToOrg->save();
         return true;
     }
+
+
+    public function createDefaultRolEventUser()
+    {
+        
+    }
 }

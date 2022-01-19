@@ -176,7 +176,7 @@ Route::get('organizations/{id}/eventUsers', 'OrganizationController@indexByEvent
 Route::group(
     ['middleware' => 'auth:token'],
     function () {                
-        Route::post('organizations' , 'OrganizationController@store')->middleware('permission:create');
+        Route::post('organizations' , 'OrganizationController@store');
         Route::put('organizations/{organization}' , 'OrganizationController@update')->middleware('permission:update');
         Route::delete('organizations/{organization}' , 'OrganizationController@destroy')->middleware('permission:destroy');
         Route::get('me/organizations', 'OrganizationUserController@meOrganizations');
@@ -549,7 +549,7 @@ Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty
 //Route::middleware('auth:token')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
 //Route::middleware('auth:token')->post('user/event_users/create', 'EventUserController@store');
 
-Route::middleware('auth:token')->get('rols', 'RolController@index');
+
 Route::get('states', 'StateController@index');
 
 // Route::get('event/messages', 'MessageController@message');
@@ -576,6 +576,7 @@ Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
 // Route::get('events/{event}/rols', 'RolController@index');
+Route::middleware('auth:token')->get('rols', 'RolController@index');
 Route::post('rols', 'RolController@store');
 Route::put('rols/{id}', 'RolController@update');
 Route::get('rols/{id}', 'RolController@show');
