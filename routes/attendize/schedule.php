@@ -159,13 +159,13 @@ Route::get('events/zoomhost', 'ZoomHostController@index');
 * Surveys
 ****************/
 Route::put('events/{event}/questionedit/{id}', 'SurveysController@updatequestions');
-Route::get('surveys/{surveys}', 'SurveysController@show');    
-Route::get('surveys', 'SurveysController@index');
+Route::get('events/surveys/{surveys}', 'SurveysController@show');    
+Route::get('events/surveys', 'SurveysController@index');
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::post('surveys', 'SurveysController@store')->middleware('permission:create');                  
-        Route::put('surveys/{surveys}', 'SurveysController@update')->middleware('permission:update');
-        Route::delete('surveys/{surveys}', 'SurveysController@destroy')->middleware('permission:destroy');
+        Route::post('events/surveys', 'SurveysController@store')->middleware('permission:create');                  
+        Route::put('events/surveys/{surveys}', 'SurveysController@update')->middleware('permission:update');
+        Route::delete('events/surveys/{surveys}', 'SurveysController@destroy')->middleware('permission:destroy');
     }
 );
 
