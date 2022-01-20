@@ -102,7 +102,7 @@ class RSVP extends Mailable implements ShouldQueue
         $link = $auth->getSignInWithEmailLink(
             $email,
             [
-                "url" => config('app.api_evius') . "/singinwithemaillink?email=". urlencode($email) . "&event_id=" . $event->_id,
+                "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
             ]    
         );
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);

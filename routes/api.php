@@ -101,10 +101,8 @@ Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus')
 Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
+Route::post('events/{event_id}/eventusersanonymous',     'EventUserController@store');
 
-Route::post('events/{event_id}/testeventusers', 'EventUserController@testCreateUserAndAddtoEvent');
-
-Route::post('events/{event_id}/eventusers',     'EventUserController@createUserAndAddtoEvent');
 
 
 
