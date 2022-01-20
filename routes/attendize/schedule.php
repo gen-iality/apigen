@@ -21,15 +21,6 @@ Route::group(
 Route::apiResource('event/{id}/configuration', 'AppConfigurationController');
 Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
 
-
-/****************
- * EVIUS STYLES
- ****************/
-Route::apiResource('events/{event}/styles', 'StylesController');
-
-Route::get('events/{event}/stylestemp', 'StylesController@indexTemp');
-
-
 /****************
  * NEWSFEED
  ****************/
@@ -38,18 +29,11 @@ Route::group(
     function () {
         Route::get('events/{event}/newsfeed','NewsfeedController@index');
         Route::get('events/{event}/newsfeed/{newsfeed}','NewsfeedController@show');
-        Route::post('events/{event}/newsfeed','NewsfeedController@store');
-        Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update');
-        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy');
+        Route::post('events/{event}/newsfeed','NewsfeedController@store')->middleware('permission:create');
+        Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update')->middleware('permission:update');
+        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy')->middleware('permission:destroy');
     }
 );
-
-/****************
- * SURVEYS
- ****************/
-
-Route::apiResource('events/{id}/surveys', 'SurveysController');
-Route::put('events/{event}/questionedit/{id}', 'SurveysController@updatequestions');
 
 /***************
  * HOST
@@ -167,6 +151,35 @@ Route::get('events/zoomhost', 'ZoomHostController@index');
 /*******
  * RSVP
  ******/
- Route::post("events/{event}/wallnotifications", "RSVPController@wallActivity")
+ Route::post("events/{event}/wallnotifications", "RSVPController@wallActivity");
 
-?>
+
+
+/****************
+* Surveys
+****************/
+Route::put('events/{event}/questionedit/{id}', 'SurveysController@updatequestions');
+Route::get('surveys/{surveys}', 'SurveysController@show');    
+Route::get('surveys', 'SurveysController@index');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('surveys', 'SurveysController@store')->middleware('permission:create');                  
+        Route::put('surveys/{surveys}', 'SurveysController@update')->middleware('permission:update');
+        Route::delete('surveys/{surveys}', 'SurveysController@destroy')->middleware('permission:destroy');
+    }
+);
+
+
+/****************
+* Style
+****************/
+Route::get('events/{event}/stylestemp', 'StylesController@indexTemp');
+Route::get('styles/{style}', 'StyleController@show');
+Route::get('styles', 'StyleController@index');
+Route::group(
+    ['middleware' => 'auth:token'], function () {        
+        Route::post('styles', 'StyleController@store')->middleware('permission:create');                      
+        Route::put('styles/{style}', 'StyleController@update')->middleware('permission:update');
+        Route::delete('styles/{style}', 'StyleController@destroy')->middleware('permission:destroy');
+    }
+);
