@@ -24,11 +24,11 @@ Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventU
 Route::post('events/{event}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 Route::post('events/{event}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
 Route::post('events/{event}/eventusersanonymous',     'EventUserController@store');
-
+Route::get('events/{event}/eventusers', 'EventUserController@index');
+Route::get('events/{event}/eventUsers',      'EventUserController@index');
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::get('events/{event}/eventusers', 'EventUserController@index');
-        Route::get('events/{event}/eventUsers',      'EventUserController@index');
+        
         Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');              
         Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update')->middleware('permissionUser:update');
         Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy')->middleware('permissionUser:destroy');
