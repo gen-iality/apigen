@@ -5,7 +5,7 @@ use App\Organization;
 use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
-
+use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
@@ -358,17 +358,15 @@ class EventUserController extends Controller
         $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
 
-	    //Account rol assigned by default
-        if (!isset($eventUserData["rol_id"])) {
-            $rol = Rol::where('level', 0)->first();
-            if ($rol) {
-                $eventUserData["rol_id"] = $rol->_id;
-            } else {
-                //Se supone este es un rol por defecto (asistente) si todo el resto falla
-                $eventUserData["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
-            }
+	    //Account rol assigned by default, this valor is constant because any user don't select their rol_id 
+        if(isset($eventUserData["rol_id"]))
+        {
+            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
+        }
 
-        } 
+
+             
+        
         
 
         $eventUser = Attendee::create($eventUserData);
@@ -713,7 +711,12 @@ class EventUserController extends Controller
     public function update(Request $request, $event_id, $evenUserId)
     {   
         $auth = resolve('Kreait\Firebase\Auth');
-        
+
+        if(isset($data["rol_id"]))
+        {
+            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
+        }
+
         $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($evenUserId);        
 

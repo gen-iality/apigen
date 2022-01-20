@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Permissions;
 
 use Closure;
 use Auth;
@@ -39,7 +39,7 @@ class PermissionMiddleware
 
         switch ($urlParameter->parameterNames()[0]) {
             case 'event':
-                $userRol = Attendee::where('account_id' , $user->_id)->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'role_id', 'properties']);
+                $userRol = Attendee::where('account_id' , $user->_id)->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'properties']);
                 break;
             case 'organization':
                 $userRol = OrganizationUser::where('account_id' , $user->_id)->where('organization_id' ,$urlParameter->parameter('organization'))->first(['rol_id', 'role_id']);            

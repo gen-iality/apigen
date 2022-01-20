@@ -1,6 +1,9 @@
 <?php
 
 include "attendize/schedule.php";
+include "user.php";
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -66,58 +69,7 @@ Route::put('events/{id}/updatestyles', 'EventController@updateStyles');
  ****************/
 Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerController@conferencesenter');
 
-/****************
- * eventUsers
- ****************/
-//CRUD
-Route::get('events/{event}/eventusers',      'EventUserController@index');
-Route::get('events/{event}/eventUsers',      'EventUserController@index');
-Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');
-Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update');
-Route::post('events/{event}/eventusers',     'EventUserController@store');
-Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy');
-//Otros endpoints de eventUser
-Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
-Route::get('me/eventusers/event/{event_id}', 'EventUserController@indexByUserInEvent');
-Route::get('events/{event_id}/searchinevent/', 'EventUserController@searchInEvent');
-Route::get('events/myevents', 'EventUserController@indexByEventUser');
 
-
-Route::get('/eventusers/event/{event_id}/user/{user_id}', 'EventUserController@ByUserInEvent');
-
-Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
-
-
-
-// // api para transferir eventuser
-Route::post('eventusers/{event_id}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
-Route::get('eventusers/{event_id}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
-
-Route::get('events/{event_id}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
-
-Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
-Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
-
-Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
-Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
-Route::post('events/{event_id}/eventusersanonymous',     'EventUserController@store');
-
-
-
-
-Route::get('me/events/{event}/eventusers',  'EventUserController@meInEvent');
-
-
-Route::post('events/{event_id}/eventusersbyurl', 'EventUserController@createUserViaUrl');
-
-// Route::delete ('events/{event_id}/deletewarning',      'EventUserController@destroyAll');
-Route::post('events/{event_id}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
-Route::get('events/{event_id}/totalmetricsbyevent/',            'EventUserController@totalMetricsByEvent');
-//Metrics
-Route::get('events/{event_id}/metricsbydate/eventusers',        'EventUserController@metricsEventByDate');
-Route::get('events/{event_id}/hubspotRegister/eventusers',        'EventUserController@hubspotRegister');
-Route::put('events/{event}/eventusers/{eventuser}/updaterol', 'EventUserController@updateRolAndSendEmail');
 
 
 
@@ -258,7 +210,7 @@ Route::group(
         Route::get('users/currentUser', 'FireBaseAuthController@getCurrentUser');
         // Route::apiResource('users', 'UserController', ['except' => ['index', 'show']]);
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
-        Route::get('me/eventUsers', 'EventUserController@meEvents');
+        
         Route::get('organization/{organization}/users', 'UserController@userOrganization');
         Route::put('users/{user_id}/changeStatusUser', 'UserController@changeStatusUser');
     }
@@ -515,7 +467,6 @@ Route::get('events/{event_id}/message/{message_id}/messageUser', 'MessageUserCon
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
 Route::get('pdftest', 'TestingController@pdf');
-Route::middleware('auth:token')->get('test', 'EventUserController@test');
 Route::get('confirmationEmail/{id}', 'TestingController@sendConfirmationEmail');
 Route::get('confirmEmail/{id}', 'UserController@confirmEmail');
 Route::get('borradorepetidos/activity/{activity_id}', 'ActivityAssistantController@borradorepetidos');
@@ -546,14 +497,11 @@ Route::middleware('auth:token')->get('permissions/{id}', 'PermissionController@g
 //Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
 
-//Route::middleware('auth:token')->post('user/event_users/create/{id}', 'EventUserController@verifyandcreate');
-//Route::middleware('auth:token')->post('user/event_users/create', 'EventUserController@store');
 
 
 Route::get('states', 'StateController@index');
 
-// Route::get('event/messages', 'MessageController@message');
-//Route::post('/import/users/events/{id}', 'EventUserController@createImportedUser');
+
 
 //RSVP
 Route::get('rsvp/test', 'RSVPController@test');
@@ -565,10 +513,6 @@ Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
 Route::put('events/{event_id}/updateStatusMessageUser/{message_id}', 'RSVPController@updateStatusMessageUser');
 
 
-//Route::get('rsvp/{id}/log', 'RSVPController@log');
-
-//middleware('auth:token')->
-//Route::get("/testroute/{user}", "EventUserController@testing");
 
 //MISC Controllers
 Route::post("files/upload/{field_name?}", "FilesController@upload");

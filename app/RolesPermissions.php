@@ -4,7 +4,7 @@ namespace App;
 
 use Moloquent;
 use Spatie\Permission\Traits\HasRoles;
-use App\Permission;
+use App\Rol;
 
 class RolesPermissions extends Moloquent
 {
@@ -40,7 +40,7 @@ class RolesPermissions extends Moloquent
         parent::boot();
         self::saving(function ($model) {
                 
-            if(($model->r_id === Permission::ID_ROL_ADMINISTRATOR) ||  ($model->_id === Permission::ID_ROL_MODERATOR))
+            if(($model->r_id === Rol::ID_ROL_ADMINISTRATOR) ||  ($model->_id === Rol::ID_ROL_ATTENDEE))
             {
                 abort(401 , "You don't have permission for do this action.");
             }
@@ -49,7 +49,7 @@ class RolesPermissions extends Moloquent
 
         self::deleting(function ($model) {
                 
-            if(($model->_id === Permission::ID_ROL_ADMINISTRATOR) ||  ($model->_id === Permission::ID_ROL_MODERATOR))
+            if(($model->_id === Rol::ID_ROL_ADMINISTRATOR) ||  ($model->_id === Rol::ID_ROL_ATTENDEE))
             {
                 abort(401 , "You don't have permission for do this action.");
             }

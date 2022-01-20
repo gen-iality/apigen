@@ -9,7 +9,7 @@ class Rol extends Moloquent
 {
     //
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
-    const ID_ROL_MODERATOR = '60dca467b38c630f83537e62';
+    const ID_ROL_ATTENDEE = '60e8a7e74f9fb74ccd00dc22';
 
     protected $fillable = [ 
         'name', 
@@ -32,7 +32,7 @@ class Rol extends Moloquent
         parent::boot();
         self::saving(function ($model) {
                 
-            if(($model->_id === self::ID_ROL_ADMINISTRATOR) ||  ($model->_id === self::ID_ROL_MODERATOR))
+            if(($model->_id === self::ID_ROL_ADMINISTRATOR) ||  ($model->_id === self::ID_ROL_ATTENDEE))
             {
                 abort(401 , "You don't have permission for do this action.");
             }
@@ -41,7 +41,7 @@ class Rol extends Moloquent
 
         self::deleting(function ($model) {
                 
-            if(($model->_id === self::ID_ROL_ADMINISTRATOR) ||  ($model->_id === self::ID_ROL_MODERATOR))
+            if(($model->_id === self::ID_ROL_ADMINISTRATOR) ||  ($model->_id === self::ID_ROL_ATTENDEE))
             {
                 abort(401 , "You don't have permission for do this action.");
             }

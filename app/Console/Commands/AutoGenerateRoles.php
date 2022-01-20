@@ -62,10 +62,10 @@ class AutoGenerateRoles extends Command
         Route::group(
             ['middleware' => 'auth:token'], function () {
                 Route::get('$modelPlural', '$model"."Controller@index');
-                Route::post('$modelPlural', '$model"."Controller@store')->middleware('permission:$create');
+                Route::post('$modelPlural', '$model"."Controller@store')->middleware('permissionUser:$create');
                 Route::get('$modelPlural/{"."$modelLower}', '$model"."Controller@show');              
-                Route::put('$modelPlural/{"."$modelLower}', '$model"."Controller@update')->middleware('permission:$update');
-                Route::delete('$modelPlural/{"."$modelLower}', '$model"."Controller@destroy')->middleware('permission:$delete');
+                Route::put('$modelPlural/{"."$modelLower}', '$model"."Controller@update')->middleware('permissionUser:$update');
+                Route::delete('$modelPlural/{"."$modelLower}', '$model"."Controller@destroy')->middleware('permissionUser:$delete');
             }
         );";
         $routeCreate = fwrite($file , $routesPermissions);
