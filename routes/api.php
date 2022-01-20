@@ -519,11 +519,11 @@ Route::post("files/upload/{field_name?}", "FilesController@upload");
 Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
-// Route::get('events/{event}/rols', 'RolEventCntroller@index');
-Route::middleware('auth:token')->get('rols', 'RolEventCntroller@index');
-Route::post('rols', 'RolEventCntroller@store');
-Route::put('rols/{id}', 'RolEventCntroller@update');
-Route::get('rols/{id}', 'RolEventCntroller@show');
+// Route::get('events/{event}/rols', 'RolEventController@index');
+Route::middleware('auth:token')->get('rols', 'RolEventController@index');
+Route::post('rols', 'RolEventController@store');
+Route::put('rols/{id}', 'RolEventController@update');
+Route::get('rols/{id}', 'RolEventController@show');
 Route::post('roles/{role}/addpermissions', 'RolesPermissionsEventController@addPermissionToRol');
 
 Route::get('rolespermissionsevents/findbyrol/{rol}', 'RolesPermissionsEventController@indexByRol');
