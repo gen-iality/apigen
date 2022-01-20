@@ -10,7 +10,7 @@ use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
 use App\Event;
-use App\Rol;
+// use App\RolEvent;
 use App\Http\Resources\EventUserResource;
 use App\Message;
 use App\State;
@@ -361,7 +361,7 @@ class EventUserController extends Controller
 	    //Account rol assigned by default, this valor is constant because any user don't select their rol_id 
         if(isset($eventUserData["rol_id"]))
         {
-            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
+            EvaRolEvent::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
         }
 
 
@@ -714,7 +714,7 @@ class EventUserController extends Controller
 
         if(isset($data["rol_id"]))
         {
-            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
+            EvaRolEvent::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
         }
 
         $data = $request->json()->all();

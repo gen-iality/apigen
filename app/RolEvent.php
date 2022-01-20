@@ -5,7 +5,7 @@ namespace App;
 //use Illuminate\Database\Eloquent\Model;
 use Moloquent;
 
-class Rol extends Moloquent
+class RolEvent extends Moloquent
 {
     //
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
@@ -16,7 +16,7 @@ class Rol extends Moloquent
         'type'
     ];
 
-    protected $table = ('roles');
+    protected $table = ('roles_events');
     public function event()
     {
         return $this->belongsTo('App\Event');

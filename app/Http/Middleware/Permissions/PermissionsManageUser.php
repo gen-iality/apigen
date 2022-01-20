@@ -4,8 +4,8 @@ namespace App\Http\Middleware\Permissions;
 use Closure;
 use Auth;
 use App\Attendee;
-use App\Rol;
-use App\RolesPermissions;
+use App\RolEvent;
+use App\RolesPermissionsEvent;
 
 /**
  * Este moddleware realiza la administracion que tiene que ver con los usuario en eventUser, 
@@ -48,8 +48,8 @@ class PermissionsManageUser
                 break;
         }
 
-        $rol = ($editingUser !== null) ? Rol::find($editingUser->rol_id) : null;
-        // $request->json(['rol_id']) = Rol::ID_ROL_ATTENDEE;
+        $rol = ($editingUser !== null) ? RolEvent::find($editingUser->rol_id) : null;
+        // $request->json(['rol_id']) = RolEvent::ID_ROL_ATTENDEE;
         
         
         
@@ -61,7 +61,7 @@ class PermissionsManageUser
                 return $next($request);
             }
         }else if(($rol) && $rol->type === 'admin'){
-            $permissionsRolUser = RolesPermissions::whereHas('permission', function($query) use ($permissions)
+            $permissionsRolUser = RolesPermissionsEvent::whereHas('permission', function($query) use ($permissions)
             {
                 $query->whereIn('name', $permissions);
             

@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use App\Rol;
+use App\RolEvent;
 use App\Permission;
 use App\RolesPermissions;
 
@@ -71,8 +71,8 @@ class AutoGenerateRoles extends Command
         $routeCreate = fwrite($file , $routesPermissions);
 
         //Roles por defecto
-        $idRolAdmin = Rol::ID_ROL_ADMINISTRATOR;
-        $idRolModerator = Rol::ID_ROL_MODERATOR;
+        $idRolAdmin = RolEvent::ID_ROL_ADMINISTRATOR;
+        $idRolModerator = RolEvent::ID_ROL_MODERATOR;
 
         //Se agregan los permisos a los roles por defecto según corresponda.
         for ($i=0; $i < count($permissionsCrud); $i++) 

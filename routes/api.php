@@ -492,7 +492,7 @@ Route::get('UpdateStatusMessageManually', 'SendinBlueController@UpdateManuallySt
 
 //Events
 
-Route::middleware('auth:token')->get('permissions/{id}', 'PermissionController@getUserPermissionByEvent');
+Route::middleware('auth:token')->get('permissions/{id}', 'PermissionEventController@getUserPermissionByEvent');
 
 //Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
@@ -519,13 +519,14 @@ Route::post("files/upload/{field_name?}", "FilesController@upload");
 Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
-// Route::get('events/{event}/rols', 'RolController@index');
-Route::middleware('auth:token')->get('rols', 'RolController@index');
-Route::post('rols', 'RolController@store');
-Route::put('rols/{id}', 'RolController@update');
-Route::get('rols/{id}', 'RolController@show');
-Route::post('roles/{role}/addpermissions', 'RolesPermissionsController@addPermissionToRol');
+// Route::get('events/{event}/rols', 'RolEventCntroller@index');
+Route::middleware('auth:token')->get('rols', 'RolEventCntroller@index');
+Route::post('rols', 'RolEventCntroller@store');
+Route::put('rols/{id}', 'RolEventCntroller@update');
+Route::get('rols/{id}', 'RolEventCntroller@show');
+Route::post('roles/{role}/addpermissions', 'RolesPermissionsEventController@addPermissionToRol');
 
+Route::get('rolespermissionsevents/findbyrol/{rol}', 'RolesPermissionsEventController@indexByRol');
 /**
  * REQUEST OF PLACETOPAY
  * https://api.evius.co/api/order/paymentCompleted

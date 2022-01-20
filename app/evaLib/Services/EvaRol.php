@@ -7,7 +7,7 @@ namespace App\evaLib\Services;
 use App\Attendee;
 use App\OrganizationUser;
 use App\Account;
-use App\Rol;
+use App\RolEvent;
 use App\State;
 use Storage;
 use Auth;
@@ -31,7 +31,7 @@ class EvaRol
         if (!$authorId) {
             return '';
         }
-        $rol = Rol::where('level', -1)->first();
+        $rol = RolEvent::where('level', -1)->first();
         $state = State::first();
         $userEvt = [
             'account_id' => $authorId,
@@ -54,7 +54,7 @@ class EvaRol
         if (!$authorId) {
             return '';
         }
-        $rol = Rol::where('level', -1)->first();
+        $rol = RolEvent::where('level', -1)->first();
         $user = Account::find($authorId);
         $userOrg = [
             'account_id' => $authorId,
@@ -92,6 +92,6 @@ class EvaRol
         }
         //Si no es un administrador le deja el rol por defecto,
         // así se evita que cualquier persona se peuda colocar el rol de admin cuando se regista en un evento.
-        return Rol::ID_ROL_ATTENDEE;
+        return RolEvent::ID_ROL_ATTENDEE;
     }
 }

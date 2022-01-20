@@ -4,9 +4,9 @@ namespace App;
 
 use Moloquent;
 use Spatie\Permission\Traits\HasRoles;
-use App\Rol;
+use App\RolEvent;
 
-class RolesPermissions extends Moloquent
+class RolesPermissionsEvent extends Moloquent
 {
     use HasRoles;
 
@@ -16,7 +16,7 @@ class RolesPermissions extends Moloquent
 
     //
     protected $with = ['rol' , 'permission'];
-    protected $table = "roles_has_permissions";
+    protected $table = "roles_permissions_events";
     protected $fillable = [
         'rol_id' , 
         'permission_id'
@@ -25,12 +25,12 @@ class RolesPermissions extends Moloquent
     
     public function permission()
     {
-        return $this->belongsTo('App\Permission', 'permission_id');
+        return $this->belongsTo('App\PermissionEvent', 'permission_id');
     }
 
     public function rol()
     {
-        return $this->belongsTo('App\Rol', 'rol_id');
+        return $this->belongsTo('App\RolEvent', 'rol_id');
     }
 
 
@@ -40,7 +40,7 @@ class RolesPermissions extends Moloquent
         parent::boot();
         self::saving(function ($model) {
                 
-            if(($model->r_id === Rol::ID_ROL_ADMINISTRATOR) ||  ($model->_id === Rol::ID_ROL_ATTENDEE))
+            if(($model->r_id === RolEvent::ID_ROL_ADMINISTRATOR) ||  ($model->_id === RolEvent::ID_ROL_ATTENDEE))
             {
                 abort(401 , "You don't have permission for do this action.");
             }
@@ -49,7 +49,7 @@ class RolesPermissions extends Moloquent
 
         self::deleting(function ($model) {
                 
-            if(($model->_id === Rol::ID_ROL_ADMINISTRATOR) ||  ($model->_id === Rol::ID_ROL_ATTENDEE))
+            if(($model->_id === RolEvent::ID_ROL_ADMINISTRATOR) ||  ($model->_id === RolEvent::ID_ROL_ATTENDEE))
             {
                 abort(401 , "You don't have permission for do this action.");
             }

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Rol;
+use App\RolEventEvent;
 use Illuminate\Http\Request;
 use App\Permission;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\Rule;
 use Validator;
 /**
- * @group Rol
+ * @group RolEvent
  */
-class RolController extends Controller
+class RolEventController extends Controller
 {   
     const AVALIABLE_TYPES = 'attendee,administrator';
     const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
@@ -25,7 +25,7 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = Rol::all();
+        $roles = RolEvent::all();
         return JsonResource::collection($roles);
     }
 
@@ -49,7 +49,7 @@ class RolController extends Controller
             'type' => 'required'
         ]);
 
-        // $messages = ['in' => "The type should be one of: " . implode(", ", RolController::AVALIABLE_TYPES)];
+        // $messages = ['in' => "The type should be one of: " . implode(", ", RolEventController::AVALIABLE_TYPES)];
 
         $data = $request->json()->all();
 
@@ -60,8 +60,9 @@ class RolController extends Controller
         // }
 
         // $permission = Permission::where('name', $data['module'] .'_'. $data['permission'])->first();
+
         
-        $result = new Rol($request->json()->all());
+        $result = new RolEvent($request->json()->all());
         $result->save();
         return $result;
     }
@@ -69,10 +70,10 @@ class RolController extends Controller
     /**
      * _show_: information from a specific role 
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
-    public function show(Rol $id)
+    public function show(RolEvent $id)
     {
         //
         return $id;
@@ -81,10 +82,10 @@ class RolController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rol $rol)
+    public function edit(RolEvent $rol)
     {
         //
     }
@@ -98,10 +99,10 @@ class RolController extends Controller
      * @bodyParam event_id string required 
      * 
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $id)
+    public function update(Request $request, RolEvent $id)
     {
         //
         $data = $request->json()->all();
@@ -115,10 +116,10 @@ class RolController extends Controller
      * 
      * @urlParam id id rol
      * 
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rol $rol)
+    public function destroy(RolEvent $rol)
     {
         //
     }
@@ -126,10 +127,10 @@ class RolController extends Controller
     /**
      * 
      */
-    public function crearPermisosRol(Request $request)
+    public function crearPermisosRolEvent(Request $request)
     {
         $data = $request->json()->all();
-        $rolAdmin = Rol::where('name' , 'Administrador')->first();
+        $rolAdmin = RolEvent::where('name' , 'Administrador')->first();
         
         $permission = new Permission($data);
         $permission->save();
@@ -146,20 +147,20 @@ class RolController extends Controller
     /**
      * 
      */
-    public function assignPermisosRol(Request $request)
+    public function assignPermisosRolEvent(Request $request)
     {
         $data = $request->json()->all();
 
         $permissions = Permission::where('name', 'like', '%'.$data['type_permission'].'%')->get();        
-        $rol = Rol::where('name' , $data['rol_name'])->first();
+        $rol = RolEvent::where('name' , $data['rol_name'])->first();
         
         if(!isset($rol))
         {   
-            $dataRol = [
+            $dataRolEvent = [
                 'name' => $data['rol_name'],
                 'guard_name' => 'web'
             ];
-            $rol = new Rol($dataRol);
+            $rol = new RolEvent($dataRolEvent);
             $rol->save();
         }        
 
@@ -167,13 +168,13 @@ class RolController extends Controller
 
         foreach($permissions as $permission)
         {  
-            $permissonInRol = $permission->role_ids;    
+            $permissonInRolEvent = $permission->role_ids;    
             
-            if(array_search($rol->_id, $permissonInRol) === false)
+            if(array_search($rol->_id, $permissonInRolEvent) === false)
             {
                 var_dump('Entrada');
-                array_push($permissonInRol , $rol->_id );
-                $permission->role_ids = $permissonInRol;
+                array_push($permissonInRolEvent , $rol->_id );
+                $permission->role_ids = $permissonInRolEvent;
                 $permission->save(); 
             }
 

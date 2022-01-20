@@ -2,7 +2,7 @@
 
 namespace App\evaLib\Services;
 use App\Attendee;
-use App\Rol;
+use App\RolEvent;
 use App\Mail\UserRolChangeMail;
 use Mail;
 
