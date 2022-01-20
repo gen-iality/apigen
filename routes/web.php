@@ -64,10 +64,10 @@ Route::get('routes', function() {
       }
   }
   // Ver rutas sin docs
-  $routeWithoutDocs = [];
-  foreach ($routesMod2 as $route) {
-    !in_array($route, $routeDocs) ? array_push($routeWithoutDocs, $route) : null ;
-  }
+  //$routeWithoutDocs = [];
+  //foreach ($routesMod2 as $route) {
+    //!in_array($route, $routeDocs) ? array_push($routeWithoutDocs, $route) : null ;
+  //}
 
-  return view('routes')->with(['withoutDocs' => $routeWithoutDocs, 'withDocs' => $routeDocs, 'allRoutes' => $routesMod2]);
+  return view('routes')->with(['withDocs' => $routeDocs, 'allRoutes' => $routesMod2]);
 });
