@@ -2,13 +2,14 @@
 
 namespace App\Exports;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
-use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class RoutesExport implements FromArray
+class RoutesExport implements FromView
 {
-    public function array(): array
-    {
+  public function view(): View
+  {
       // OBTENER TODAS LAS RUTAS DISPONIBLES Y MODIFICARLAS
       $routeCollection = Route::getRoutes();
       $allRoutes = [];
@@ -33,14 +34,7 @@ class RoutesExport implements FromArray
             array_push($routeDocs, [ 'url' => $request['request']['url']['path'], 'method' => $request['request']['method'] ]);
           }
       }
-      // GENERAR EXCEL
-      $routesToDownload = [];
-      foreach ($routesMod2 as $route) {
-	$doc = in_array($route, $routeDocs) ? '' : '';
-	array_push($routesToDownload, ['url' => $route['url'], 'method' => $route['method'], 'doc' => $doc]);
-      }
 
-      return $routesToDownload;
-    }
-
+      return view('routesExport', ['withDocs' => $routeDocs, 'allRoutes' => $routesMod2]);
+  }
 }
