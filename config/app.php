@@ -220,6 +220,7 @@ return [
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+	Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -293,6 +294,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+	'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
     ],

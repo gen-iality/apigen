@@ -10,9 +10,11 @@
 
       <div class="container ">
 
-      <div class="center">
+      <div class="center row">
 	<h1 class="white-text">Endpoints con Documentación</h1>
 	  <p class="white-text">{{ count($withDocs) }} urls con documentación de {{ count($allRoutes) }} urls totales</p>
+	  <a class="btn-floating cyan" href="{{ route('routes.excel') }}"><i class="material-icons">file_download</i></a>
+	  <p class="grey-text">Descargar Excel</p>
       </div>
 
 	<table class="highlight z-depth-2 card-panel blue-grey darken-2">
