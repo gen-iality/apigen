@@ -4,9 +4,11 @@ namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
 use Moloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ModelHasRole extends Moloquent
 {
+    use SoftDeletes;
     //
     protected $table = ('model_has_roles');
     protected $fillable = ['rol_id','event_id','model_id', 'model_type', 'space_id'];

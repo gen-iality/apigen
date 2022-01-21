@@ -6,8 +6,9 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use App\Models\Event as ModelsEvent;
 use Carbon\Carbon;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+//use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+//use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Event Model

@@ -57,7 +57,7 @@ Route::get('test/ticket/{ticket_id}/order/{order_id}', 'ApiOrdersController@dele
 // Route::get('test/roles/', 'ContributorController@index');
 
 Route::get('generatorQr/{id}', 'GenerateQr@index');
-Route::get('sync/firestore/{event_id}', 'synchronizationController@EventUsers');
+Route::get('sync/firestore/{event}', 'synchronizationController@EventUsers');
 Route::get('sync/firestore/{id}', 'synchronizationController@Attendee');
 Route::get('sync/firebase/{id}', 'synchronizationController@EventUserRDT');
 
@@ -72,16 +72,15 @@ Route::post('integration/bigmaker/conferences/enter', 'IntegrationBigmarkerContr
 
 
 
-
 /***************
  * activities_attendees asistentes a una actividad(charlas) dentro de un evento
  ****************/
-//Route::get    ('events/{event_id}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
-Route::apiResource('events/{event_id}/activities_attendees', 'ActivityAssistantController');
-Route::get('events/{event_id}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
-Route::get('me/events/{event_id}/activities_attendees',  'ActivityAssistantController@meIndex');
-Route::put('events/{event_id}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
-Route::get('events/{event_id}/totalmetricsbyactivity',                'ActivityAssistantController@totalMetricsByActivity');
+//Route::get    ('events/{event}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
+Route::apiResource('events/{event}/activities_attendees', 'ActivityAssistantController');
+Route::get('events/{event}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
+Route::get('me/events/{event}/activities_attendees',  'ActivityAssistantController@meIndex');
+Route::put('events/{event}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
+Route::get('events/{event}/totalmetricsbyactivity',                'ActivityAssistantController@totalMetricsByActivity');
 
 
 /***************
@@ -142,10 +141,10 @@ Route::group(
  * meetings
  ****************/
 Route::apiResource('networking', 'MeetingsController');
-Route::get('event/{event_id}/meeting/{meeting_id}/accept', 'MeetingsController@accept');
-Route::get('event/{event_id}/meeting/{meeting_id}/reject', 'MeetingsController@reject');
+Route::get('event/{event}/meeting/{meeting_id}/accept', 'MeetingsController@accept');
+Route::get('event/{event}/meeting/{meeting_id}/reject', 'MeetingsController@reject');
 
-Route::get('event/{event_id}/meeting', 'MeetingsController@index');
+Route::get('event/{event}/meeting', 'MeetingsController@index');
 
 
 /***************
@@ -154,29 +153,29 @@ Route::get('event/{event_id}/meeting', 'MeetingsController@index');
 
 Route::post('events/sendMecPerfil', 'SendContentController@sendContentGenerated');
 Route::post('events/sendMecPerfilMec', 'SendContentController@sendContentMec');
-Route::post('events/{event_id}/sendMecPerfilMectoall', 'SendContentController@sendContentToAll');
+Route::post('events/{event}/sendMecPerfilMectoall', 'SendContentController@sendContentToAll');
 Route::post('events/sendnotificationemail', 'SendContentController@sendNotificationEmail');
 
-Route::apiResource('events/{event_id}/sendcontent', 'SendContentController@index');
+Route::apiResource('events/{event}/sendcontent', 'SendContentController@index');
 
 /***************
  * INVITATION
  ****************/
-//Route::post("events/{event_id}/sendinvitation" , "InvitationController@SendInvitation");
+//Route::post("events/{event}/sendinvitation" , "InvitationController@SendInvitation");
 Route::get('singinwithemail', 'InvitationController@singIn');
-Route::get("events/{event_id}/indexinvitations/{user_id}", "InvitationController@invitationsSent");
-Route::get("events/{event_id}/indexinvitationsrecieved/{user_id}", "InvitationController@invitationsReceived");
-Route::put("events/{event_id}/acceptordecline/{id}", "InvitationController@acceptOrDeclineFriendRequest");
-Route::get("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
+Route::get("events/{event}/indexinvitations/{user_id}", "InvitationController@invitationsSent");
+Route::get("events/{event}/indexinvitationsrecieved/{user_id}", "InvitationController@invitationsReceived");
+Route::put("events/{event}/acceptordecline/{id}", "InvitationController@acceptOrDeclineFriendRequest");
+Route::get("events/{event}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-        Route::post("events/{event_id}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
+        Route::post("events/{event}/meetingrequest/notify", "MeetingsController@meetingrequestnotify");
     }
 );
 
-Route::post("events/{event_id}/contactlist/{user_id}", "InvitationController@indexcontacts");
-Route::apiResource("events/{event_id}/invitation", "InvitationController");
+Route::post("events/{event}/contactlist/{user_id}", "InvitationController@indexcontacts");
+Route::apiResource("events/{event}/invitation", "InvitationController");
 
 /****************
  * Users Organization
@@ -234,9 +233,7 @@ Route::put("changeuserpassword", "UserController@changeUserPassword");
 
 
 Route::apiResource('events', 'EventController');
-// hooks Wowza
-Route::post('hooks/recording', 'EventController@saveRecordingToEvent');
-
+Route::post('events/{event}/restore', 'EventController@restore');
 
 //Route::get("eventsearch",'EventController');
 //     }
@@ -252,7 +249,7 @@ Route::group(
         //this routes should be erased after front migration
         Route::apiResource('user/events', 'EventController', ['except' => ['index', 'show']]);
         Route::middleware('auth:token')->get('user/events', 'EventController@currentUserindex');
-        Route::put('events/{event_id}/changeStatusEvent', 'EventController@changeStatusEvent');
+        Route::put('events/{event}/changeStatusEvent', 'EventController@changeStatusEvent');
     }
 );
 
@@ -262,7 +259,7 @@ Route::get('users/{user}/events', 'EventController@EventbyUsers');
 Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
 Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
 
-Route::post('events/{event_id}/surveys/{id}/coursefinished', 'EventStatisticsController@courseFinished');
+Route::post('events/{event}/surveys/{id}/coursefinished', 'EventStatisticsController@courseFinished');
 
 
 
@@ -285,12 +282,12 @@ Route::group(
 /***************
  * RolesAttendees
  ****************/
-Route::apiResource('events/{event_id}/rolesattendees', 'RoleAttendeeController');
+Route::apiResource('events/{event}/rolesattendees', 'RoleAttendeeController');
 
 /***************
  * Mail
  ****************/
-Route::apiResource('events/{event_id}/mailing', 'MailController');
+Route::apiResource('events/{event}/mailing', 'MailController');
 
 /***************
  * CERTIFICATES
@@ -310,7 +307,7 @@ Route::group(
 
 //Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
 Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
-//Route::get('events/{event_id}/rolesattendees', 'RoleAttendeeController@indexByEvent');
+//Route::get('events/{event}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
 Route::group(
     ['middleware' => 'auth:token'],
@@ -375,21 +372,21 @@ Route::group(
 
         //no sabemos como anteponerle el evento al apiresource lo deshabilitamos
         //Route::apiResource('contributors', 'ContributorController', ['except' => ['index']]);
-        Route::get('events/{event_id}/contributors', 'ContributorController@index');
-        Route::post('events/{event_id}/contributors', 'ContributorController@store');
-        Route::get('events/{event_id}/contributors/{id}', 'ContributorController@show');
-        Route::put('events/{event_id}/contributors/{id}', 'ContributorController@update');
-        Route::delete('events/{event_id}/contributors/{id}', 'ContributorController@destroy');
+        Route::get('events/{event}/contributors', 'ContributorController@index');
+        Route::post('events/{event}/contributors', 'ContributorController@store');
+        Route::get('events/{event}/contributors/{id}', 'ContributorController@show');
+        Route::put('events/{event}/contributors/{id}', 'ContributorController@update');
+        Route::delete('events/{event}/contributors/{id}', 'ContributorController@destroy');
 
         //Carga los roles
         Route::get('contributors/metadata/roles', 'ContributorController@metadata_roles');
 
         //Para cargar informaci�n de contributor del usuario actual
-        Route::get('contributors/events/{event_id}/me', 'ContributorController@meAsContributor');
+        Route::get('contributors/events/{event}/me', 'ContributorController@meAsContributor');
         Route::get('me/contributors/events', 'ContributorController@myEvents');
 
         //esto hace lo mismo que una ruta de arriba cual dejamos?
-        Route::get('contributors/events/{event_id}', 'ContributorController@index');
+        Route::get('contributors/events/{event}', 'ContributorController@index');
     }
 );
 
@@ -399,8 +396,8 @@ Route::group(
 //Route::group(
 //['middleware' => 'auth:token'], function () {
 
-Route::apiResource('events/{event_id}/tickets', 'TicketController');
-Route::get('ticket/event/{event_id}', 'TicketController@index');
+Route::apiResource('events/{event}/tickets', 'TicketController');
+Route::get('ticket/event/{event}', 'TicketController@index');
 
 //Route::get('ajustarticketid', 'API\EventTicketsAPIController@ajustarticketid');
 // }
@@ -411,7 +408,7 @@ Route::get('ticket/event/{event_id}', 'TicketController@index');
  ****************/
 // Route::group(
 // ['middleware' => 'auth:token'], function () {
-Route::apiResource('events/{event_id}/speakers', 'SpeakerController');
+Route::apiResource('events/{event}/speakers', 'SpeakerController');
 // }
 // );
 
@@ -420,7 +417,7 @@ Route::apiResource('events/{event_id}/speakers', 'SpeakerController');
  ****************/
 // Route::group(
 // ['middleware' => 'auth:token'], function () {
-Route::apiResource('events/{event_id}/sessions', 'EventSessionController');
+Route::apiResource('events/{event}/sessions', 'EventSessionController');
 // }
 // );
 
@@ -462,7 +459,7 @@ Route::get('orders/{organization_id}/orderOrganization', 'ApiOrdersController@in
 return $request->user();
 }); */
 Route::resource('messageUser', 'MessageUserController');
-Route::get('events/{event_id}/message/{message_id}/messageUser', 'MessageUserController@indexMessage');
+Route::get('events/{event}/message/{message_id}/messageUser', 'MessageUserController@indexMessage');
 
 Route::get('testsendemail/{id}', 'TestingController@sendemail');
 Route::get('testqr', 'TestingController@qrTesting');
@@ -509,8 +506,8 @@ Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
-Route::get('events/{event_id}/messages', 'MessageController@indexEvent');
-Route::put('events/{event_id}/updateStatusMessageUser/{message_id}', 'RSVPController@updateStatusMessageUser');
+Route::get('events/{event}/messages', 'MessageController@indexEvent');
+Route::put('events/{event}/updateStatusMessageUser/{message_id}', 'RSVPController@updateStatusMessageUser');
 
 
 
