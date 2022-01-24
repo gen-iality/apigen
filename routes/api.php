@@ -521,6 +521,7 @@ Route::middleware('auth:token')->get('rols', 'RolEventController@index');
 Route::post('rols', 'RolEventController@store');
 Route::put('rols/{id}', 'RolEventController@update');
 Route::get('rols/{id}', 'RolEventController@show');
+Route::get('rols/{id}/rolpublic', 'RolEventController@showRolPublic');
 Route::post('roles/{role}/addpermissions', 'RolesPermissionsEventController@addPermissionToRol');
 
 Route::get('rolespermissionsevents/findbyrol/{rol}', 'RolesPermissionsEventController@indexByRol');

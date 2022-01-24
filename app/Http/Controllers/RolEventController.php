@@ -80,6 +80,18 @@ class RolEventController extends Controller
     }
 
     /**
+     * _show_: information from a specific role 
+     *
+     * @param  \App\RolEvent  $rol
+     * @return \Illuminate\Http\Response
+     */
+    public function showRolPublic(RolEvent $id)
+    {
+        //
+        return $id;
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\RolEvent  $rol
