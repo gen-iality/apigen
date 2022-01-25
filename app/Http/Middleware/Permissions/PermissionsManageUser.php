@@ -24,6 +24,7 @@ class PermissionsManageUser
             throw new AuthenticationException("No token provided. Unauthenticated");
         } 
 
+        $rolAdministrator = RolEvent::ID_ROL_ADMINISTRATOR;
         //Separar los permisos para el endpoint
         $permissions = is_array($permission)
         ? $permission
@@ -57,6 +58,17 @@ class PermissionsManageUser
         {   
             if($data['rol_id'])
             {                  
+                if(($rolAdministrator === $editingUser->_id))
+                {
+                    $adminsEvent = Attendee::where('event_id', $route->parameter('event')->where('rol_id' , $rolAdministrator))->get();
+                    if(count($adminsEvent) >= 2 )
+                    {
+                       return $next($request);                        
+                    }else{
+                        throw abort(409 , "There must be at least one administrator in the event.");
+                    }
+
+                }
                 $request->merge(['rol_id' => $userToEdit->rol_id]);
                 return $next($request);
             }
