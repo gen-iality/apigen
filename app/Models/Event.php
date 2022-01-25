@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
 use URL;
 use App\Models\User;
 
 class Event extends MyBaseModel
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     protected $dates = ['start_date', 'end_date', 'on_sale_date'];
 
