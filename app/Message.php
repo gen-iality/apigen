@@ -3,11 +3,11 @@
 namespace App;
 
 use Moloquent;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Moloquent
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     const STATUS_QUEUED = 'queued';
     const SENT = 'sent';

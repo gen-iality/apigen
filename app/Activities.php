@@ -4,7 +4,7 @@ namespace App;
 
 ////Importante usar moloquent!!!!!!
 use Moloquent;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Category Model
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Activities extends Moloquent
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     protected $with = ['activity_categories', 'space', 'hosts', 'type', 'access_restriction_roles'];
     protected $appends = ['access_restriction_types_available'];
