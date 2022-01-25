@@ -56,11 +56,13 @@ class PermissionsManageUser
         
         if($userToEdit->_id === $editingUser->_id) 
         {   
+
             if(isset($data['rol_id']))
-            {                  
-                if(($rolAdministrator === $editingUser->_id))
-                {
-                    $adminsEvent = Attendee::where('event_id', $route->parameter('event')->where('rol_id' , $rolAdministrator))->get();
+            {                   
+                if(($rolAdministrator === $editingUser->rol_id) && ($data['rol_id'] !== $rolAdministrator))
+                {   
+
+                    $adminsEvent = Attendee::where('event_id', $route->parameter('event'))->where('rol_id' , $rolAdministrator)->get();
                     if(count($adminsEvent) >= 2 )
                     {
                        return $next($request);                        
@@ -70,8 +72,8 @@ class PermissionsManageUser
 
                 }
                 $request->merge(['rol_id' => $userToEdit->rol_id]);
-                return $next($request);
             }
+            return $next($request);
         }else if(($rol) && $rol->type === 'admin'){
             $permissionsRolUser = RolesPermissionsEvent::whereHas('permission', function($query) use ($permissions)
             {
