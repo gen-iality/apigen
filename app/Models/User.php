@@ -34,7 +34,7 @@ class User extends MyBaseModel implements AuthenticatableContract, CanResetPassw
      *
      * @var array
      */
-    protected $hidden = ['password'];
+    protected $hidden = ['api_token' , 'initial_token', 'refresh_token', 'password'];
 
     /**
      * The attributes that are mass assignable.

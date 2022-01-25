@@ -2,15 +2,10 @@
 
 namespace App;
 
-//use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-//Importante usar moloquent!!!!!!
+//use Illuminate\Database\Eloquent\Model;
 use Moloquent;
 
-/**
- * Category Model
- *
- */
-class RoleAttendee extends Moloquent
+class RolEvent extends Moloquent
 {
     //
     const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
@@ -20,7 +15,8 @@ class RoleAttendee extends Moloquent
         'name', 
         'type'
     ];
-    
+
+    protected $table = ('roles_events');
     public function event()
     {
         return $this->belongsTo('App\Event');
@@ -52,4 +48,5 @@ class RoleAttendee extends Moloquent
 
         });
     }
+    
 }

@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-
+//use Illuminate\Database\Eloquent\SoftDeletes;
 //use Illuminate\Database\Eloquent\Model;
 
 class Attendee extends Models\Attendee
 {
 
     use Notifiable;
+    //use SoftDeletes;
 
     const STATE_DRAFT = "5b0efc411d18160bce9bc706"; //"DRAFT";
     const STATE_INVITED = "5ba8d213aac5b12a5a8ce749"; //"INVITED";
@@ -63,7 +64,7 @@ class Attendee extends Models\Attendee
 
     public function rol()
     {
-        return $this->belongsTo('App\RoleAttendee', 'rol_id');
+        return $this->belongsTo('App\RolEvent', 'rol_id');
     }
 
     public function confirm()

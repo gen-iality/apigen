@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Event;
-use App\Rol;
+use App\RolEvent;
 use App\Organization;
 use App;
 
@@ -29,7 +29,7 @@ class UserRolChangeMail extends Mailable
     public function __construct($event_id, $eventUser, $rol_id, $message)
     {
         $event = Event::find($event_id);
-        $rol = Rol::find($rol_id); 
+        $rol = RolEvent::find($rol_id); 
         $organization = Organization::find($event->organizer_id);
 
         $this->eventUser = $eventUser;
