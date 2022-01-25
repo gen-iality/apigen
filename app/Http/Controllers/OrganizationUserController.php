@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-use App\Rol;
+use App\RolEvent;
 use App\Organization;
 use App\Http\Resources\OrganizationUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;

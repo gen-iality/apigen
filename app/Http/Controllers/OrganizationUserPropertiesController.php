@@ -121,12 +121,8 @@ class OrganizationUserPropertiesController extends Controller
         $userProperty->fill($data);
      
         $userProperty->save();
-         /* echo "hiee";
         
-        }catch(Exception $e){
-            
-       
-        }*/
+        return  $userProperty;
     }
 
     /**

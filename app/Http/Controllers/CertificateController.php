@@ -30,10 +30,9 @@ class CertificateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, string $event_id)
-    {
-        return JsonResource::collection(
-            Certificate::paginate(config('app.page_size'))
-        );
+    {   
+        $query = Certificate::where('event_id' , $event_id)->paginate(config('app.page_size'));
+        return JsonResource::collection($query);
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
