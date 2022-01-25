@@ -10,7 +10,7 @@
 /****************
 * EventUsers
 ****************/
-Route::post('eventusers', 'EventUserController@store')->middleware('permissionUser:create');
+Route::post('events/{event}/eventusers', 'EventUserController@store')->middleware('permissionUser:create');
 Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
 Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
 Route::post('eventusers/{event}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
