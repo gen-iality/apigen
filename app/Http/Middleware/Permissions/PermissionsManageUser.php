@@ -56,7 +56,7 @@ class PermissionsManageUser
         
         if($userToEdit->_id === $editingUser->_id) 
         {   
-            if($data['rol_id'])
+            if(isset($data['rol_id']))
             {                  
                 if(($rolAdministrator === $editingUser->_id))
                 {
