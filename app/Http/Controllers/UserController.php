@@ -412,6 +412,7 @@ class UserController extends UserControllerWeb
     /**
      * _getAccessLink_: get and sent link acces to email to user.
      * 
+     * @queryParamam refreshlink This parameter return the login link but not send email.
      * @bodyParam event_id string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
      * @bodyParam email email required  user email Example: correo@evius.co
      * 
@@ -453,11 +454,14 @@ class UserController extends UserControllerWeb
             );
 
         } 
-           
-        Mail::to($email)
-        ->queue(
-            new \App\Mail\LoginMail($link , $event_id, $email)
-        );
+        if(!isset($data['refreshlink']))    
+        {
+            Mail::to($email)
+            ->queue(
+                new \App\Mail\LoginMail($link , $event_id, $email)
+            );
+        }
+        
         
         return $link;
     }
