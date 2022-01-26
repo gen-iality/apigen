@@ -134,7 +134,7 @@ class Account extends User
                         $model->email = strtolower($model->email);
                         $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
 
-                        $model->uid = $$userEfbuserxist->uid;
+                        $model->uid = $fbuser->uid;
                         $model->initial_token = $singed->idToken();
                         $model->refresh_token = $singed->refreshToken();
                         $model->password = bcrypt($model->password);   
