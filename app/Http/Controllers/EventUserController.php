@@ -711,15 +711,14 @@ class EventUserController extends Controller
     public function update(Request $request, $event_id, $evenUserId)
     {   
         $auth = resolve('Kreait\Firebase\Auth');
+        
 
-        // $rol = isset($data["rol_id"]) ? isset($data["rol_id"]) : $data["properties"]["rol_id"];
-
-        // if(isset($rol))
-        // {
-        //     EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData[$rol]);
-        // }
-
+        
         $data = $request->json()->all();
+        $rol = isset($data["rol_id"]) ? $data["rol_id"] : $data["properties"]["rol_id"];
+
+        $data['rol_id'] = $rol;
+        unset($data['properties']['rol_id']);
         $eventUser = Attendee::findOrFail($evenUserId);        
 
 
