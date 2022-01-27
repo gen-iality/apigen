@@ -52,12 +52,12 @@ class PermissionsManageUser
         $rol = ($editingUser !== null) ? RolEvent::find($editingUser->rol_id) : null;
         // $request->json(['rol_id']) = RolEvent::ID_ROL_ATTENDEE;
         
-        $dataRol='';
+        
         
         if($userToEdit->_id === $editingUser->_id) 
         {   
 
-           
+            $dataRol = isset($data["rol_id"]) ? isset($data["rol_id"]) : $data["properties"]["rol_id"];
             
             if(isset($dataRol))
             {                   
