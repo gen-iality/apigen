@@ -57,15 +57,17 @@ class PermissionsManageUser
         if($userToEdit->_id === $editingUser->_id) 
         {   
 
-            if(isset($data['rol_id']))
+            $dataRol = isset($data["rol_id"]) ? isset($data["rol_id"]) : $data["properties"]["rol_id"];
+            
+            if(isset($dataRol))
             {                   
-                if(($rolAdministrator === $editingUser->rol_id) && ($data['rol_id'] !== $rolAdministrator))
+                if(($rolAdministrator === $editingUser->rol_id) && ($dataRol !== $rolAdministrator))
                 {   
 
                     $adminsEvent = Attendee::where('event_id', $route->parameter('event'))->where('rol_id' , $rolAdministrator)->get();
                     if(count($adminsEvent) >= 2 )
-                    {
-                       return $next($request);                        
+                    {                        
+                        return $next($request);                        
                     }else{
                         throw abort(409 , "There must be at least one administrator in the event.");
                     }
@@ -82,7 +84,8 @@ class PermissionsManageUser
             })->where('rol_id' , $editingUser->rol_id)->first();
 
             if($permissionsRolUser ==! null)
-            {
+            {   
+                
                 return $next($request);
             }
         }

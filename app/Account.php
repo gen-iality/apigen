@@ -108,7 +108,7 @@ class Account extends User
             function ($model) {
                 try {
 
-                    // var_dump('Previo a usurio no existe Create');die;
+                                        // var_dump('Previo a usurio no existe Create');die;
                     
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
@@ -116,7 +116,11 @@ class Account extends User
 
                     try{
                         $userExist =  self::$auth->getUserByEmail($model->email);
-                        
+                        $model->email = strtolower($model->email);                  
+                        $model->uid = $userExist->uid;
+                        // $model->initial_token = $singed->idToken();
+                        // $model->refresh_token = $singed->refreshToken();
+                        $model->password = bcrypt($model->password);   
                     }catch(\Exception $e)
                     {
                         $fbuser = self::$auth->createUser(
@@ -132,23 +136,17 @@ class Account extends User
                         );
 
                         $model->email = strtolower($model->email);
-                        $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
-
+                        $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);                        
                         $model->uid = $fbuser->uid;
                         $model->initial_token = $singed->idToken();
                         $model->refresh_token = $singed->refreshToken();
                         $model->password = bcrypt($model->password);   
                     } 
-                    
-                    $model->email = strtolower($model->email);                  
-                    $model->uid = $userExist->uid;
-                    // $model->initial_token = $singed->idToken();
-                    // $model->refresh_token = $singed->refreshToken();
-                    $model->password = bcrypt($model->password);   
+                                        
                             
                     
                 } catch (\Exception $e) {
-                    var_dump($e->getMessage());
+                    var_dump($e->getMessage());die;
                 }
             }
         );
