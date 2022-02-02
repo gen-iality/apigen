@@ -112,24 +112,41 @@ class Account extends User
                     
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
-                    $fbuser = self::$auth->createUser(
-                        [
-                            "email" => $model->email,
-                            // "document_number" => $model->document_number,
-                            //phoneNumber: "+11234567890",
-                            "password" => $newpassword,
-                            // "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
-                            //photoURL: "http://www.example.com/12345678/photo.png",
-                            //disabled: false
-                        ]
-                    );
-                    $model->email = strtolower($model->email);
-                    $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+                    $userExist = '';
 
-                    $model->uid = $fbuser->uid;
-                    $model->initial_token = $singed->idToken();
-                    $model->refresh_token = $singed->refreshToken();
-                    $model->password = bcrypt($model->password);
+                    try{
+                        $userExist =  self::$auth->getUserByEmail($model->email);
+                        
+                    }catch(\Exception $e)
+                    {
+                        $fbuser = self::$auth->createUser(
+                            [
+                                "email" => $model->email,
+                                // "document_number" => $model->document_number,
+                                //phoneNumber: "+11234567890",
+                                "password" => $newpassword,
+                                // "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                                //photoURL: "http://www.example.com/12345678/photo.png",
+                                //disabled: false
+                            ]   
+                        );
+
+                        $model->email = strtolower($model->email);
+                        $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+
+                        $model->uid = $fbuser->uid;
+                        $model->initial_token = $singed->idToken();
+                        $model->refresh_token = $singed->refreshToken();
+                        $model->password = bcrypt($model->password);   
+                    } 
+                    
+                    $model->email = strtolower($model->email);                  
+                    $model->uid = $userExist->uid;
+                    // $model->initial_token = $singed->idToken();
+                    // $model->refresh_token = $singed->refreshToken();
+                    $model->password = bcrypt($model->password);   
+                            
+                    
                 } catch (\Exception $e) {
                     var_dump($e->getMessage());
                 }

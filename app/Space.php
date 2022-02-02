@@ -5,6 +5,7 @@ namespace App;
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //Importante usar moloquent!!!!!!
 use Moloquent;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Category Model
@@ -12,6 +13,7 @@ use Moloquent;
  */ 
 class Space extends Moloquent
 {
+    //use SoftDeletes;
 
     //protected $with = ['staff'];
 

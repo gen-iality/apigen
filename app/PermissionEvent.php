@@ -4,7 +4,7 @@ namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
 use Moloquent;
-class Permission extends Moloquent
+class PermissionEvent extends Moloquent
 {
     //
     protected $fillable = [
@@ -12,12 +12,12 @@ class Permission extends Moloquent
         'guard_name', 
         'module'        
     ];
-
+    protected $table = "permissions_events";
     /**
      * The roles associated with the permission.    
      */
     public function roles()
     {
-        return $this->hasMany(\App\Models\RolesPermissions::class);
+        return $this->hasMany(\App\Models\RolesPermissionsEvent::class);
     }
 }

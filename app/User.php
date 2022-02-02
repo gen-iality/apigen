@@ -21,6 +21,7 @@ class User extends Moloquent
     protected $fillable = ['displayName','name', 'email', 'uid'];
 
     protected static $auth;
+    protected $hidden = ['api_token' , 'initial_token', 'refresh_token'];
 
     public function __construct($attributes = array())
     {

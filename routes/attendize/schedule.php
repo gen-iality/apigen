@@ -4,11 +4,15 @@
  * SPACES
  ****************/
 
-Route::get ('events/{event_id}/spaces', 'SpaceController@index')->middleware('cacheResponse');
-Route::post ('events/{event_id}/spaces', 'SpaceController@store');
-Route::get ('events/{event_id}/spaces/{id}', 'SpaceController@show')->middleware('cacheResponse');
-Route::put ('events/{event_id}/spaces/{id}', 'SpaceController@update');
-Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
+Route::get ('events/{event}/spaces', 'SpaceController@index');
+Route::get ('events/{event}/spaces/{space}', 'SpaceController@show');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post ('events/{event}/spaces', 'SpaceController@store')->middleware('permission:create');
+        Route::put ('events/{event}/spaces/{space}', 'SpaceController@update')->middleware('permission:update');
+        Route::delete('events/{event}/spaces/{space}', 'SpaceController@destroy')->middleware('permission:destroy');
+    }
+);
 
 
 /****************
@@ -17,74 +21,72 @@ Route::delete('events/{event_id}/spaces/{id}', 'SpaceController@destroy');
 Route::apiResource('event/{id}/configuration', 'AppConfigurationController');
 Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
 
-
-/****************
- * EVIUS STYLES
- ****************/
-Route::apiResource('events/{event_id}/styles', 'StylesController');
-
-Route::get('events/{event_id}/stylestemp', 'StylesController@indexTemp');
-
-
 /****************
  * NEWSFEED
  ****************/
-// Route::apiResource('events/{event}/newsfeed', 'NewsfeedController');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
         Route::get('events/{event}/newsfeed','NewsfeedController@index');
         Route::get('events/{event}/newsfeed/{newsfeed}','NewsfeedController@show');
-        Route::post('events/{event}/newsfeed','NewsfeedController@store');
-        Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update');
-        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy');
+        Route::post('events/{event}/newsfeed','NewsfeedController@store')->middleware('permission:create');
+        Route::put('events/{event}/newsfeed/{newsfeed}','NewsfeedController@update')->middleware('permission:update');
+        Route::delete('events/{event}/newsfeed/{newsfeed}','NewsfeedController@destroy')->middleware('permission:destroy');
     }
 );
-
-/****************
- * SURVEYS
- ****************/
-
-Route::apiResource('events/{id}/surveys', 'SurveysController');
-Route::put('events/{event_id}/questionedit/{id}', 'SurveysController@updatequestions');
-
 
 /***************
  * HOST
  * rutas para guardar la agenda de los eventos
  ****************/
 
-Route::post  ('events/{event_id}/duplicatehost/{id}','HostController@duplicate');
-Route::apiResource('events/{event_id}/host', 'HostController');
+Route::post  ('events/{event}/duplicatehost/{id}','HostController@duplicate');
+
+Route::get('events/{event}/host' , 'HostController@index');
+Route::get('events/{event}/host/{host}' , 'HostController@show');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/host' , 'HostController@store')->middleware('permission:create');
+        Route::put('events/{event}/host/{host}' , 'HostController@update')->middleware('permission:update');
+        Route::delete('events/{event}/host/{host}' , 'HostController@destroy')->middleware('permission:destroy');
+    }
+);
 
 /***************
  * ACTIVITIES
  ****************/
 
 Route::post  ('/meetingrecording',      'ActivitiesController@storeMeetingRecording');
-Route::post  ('events/{event_id}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
-Route::get  ('events/{event_id}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
-Route::apiResource('events/{event_id}/activities', 'ActivitiesController');
-Route::post  ('events/{event_id}/createmeeting/{id}', 'ActivitiesController@createMeeting');
-Route::put('events/{event_id}/activities/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
-Route::post   ('events/{event_id}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
-Route::put('events/{event_id}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
+Route::post  ('events/{event}/duplicateactivitie/{id}',      'ActivitiesController@duplicate');
+Route::get  ('events/{event}/activitiesbyhost/{host_id}',      'ActivitiesController@indexByHost');
+Route::post  ('events/{event}/createmeeting/{id}', 'ActivitiesController@createMeeting');
+Route::put('events/{event}/activities/{id}/hostAvailability' ,  'ActivitiesController@hostAvailability');
+Route::post   ('events/{event}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
+Route::put('events/{event}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
 
+Route::get('events/{event}/activities','ActivitiesController@index');
+        Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/activities/{activity}/checkinbyadmin',  'ActivitiesController@checkinbyadmin')->middleware('permission:create_checkinbyadmin');
+        //CRUD
+        
+        Route::post('events/{event}/activities','ActivitiesController@store')->middleware('permission:create');
+        Route::put('events/{event}/activities/{activitie}','ActivitiesController@update')->middleware('permission:update');
+        Route::delete('events/{event}/activities/{activitie}','ActivitiesController@destroy')->middleware('permission:destroy');
     }
 );
+
 
 /***************
  * TYPE
  ****************/
-Route::apiResource('events/{event_id}/type','TypeController');
+Route::apiResource('events/{event}/type','TypeController');
 
 /***************
  * ACTIVITYCATEGORIES (las categorias para las actividades de la agenda)
  ****************/
-Route::apiResource('events/{event_id}/categoryactivities',      'ActivityCategoriesController');
+Route::apiResource('events/{event}/categoryactivities',      'ActivityCategoriesController');
 
 /***************
  * TEST API'S
@@ -98,37 +100,48 @@ Route::post('saveImagesInStorage' , "SendContentController@saveImagesInStorage")
 /*******************
  * RECOVERY PASSWORD
  ******************/
-Route::post('events/{event_id}/recoverypassword', 'SendContentController@PasswordRecovery');
+Route::post('events/{event}/recoverypassword', 'SendContentController@PasswordRecovery');
 
 
 /********************
  * PUSH NOTIFICATIONS
  ********************/
-Route::apiResource('events/{event_id}/sendpush', 'PushNotificationsController');
-//Route::post('event/{event_id}/sendpush', 'SendContentController@sendPushNotification');
-Route::get('event/{event_id}/notifications/{id}', 'PushNotificationsController@indexByUser');
+Route::apiResource('events/{event}/sendpush', 'PushNotificationsController');
+//Route::post('event/{event}/sendpush', 'SendContentController@sendPushNotification');
+Route::get('event/{event}/notifications/{id}', 'PushNotificationsController@indexByUser');
 
 
 
 /*******************
  * DOCUMENTS UPLOAD
  ******************/
-Route::apiResource('events/{event_id}/documents', 'DocumentsController');
-Route::get('events/{event_id}/getallfiles/', 'DocumentsController@indexFiles');
+Route::apiResource('events/{event}/documents', 'DocumentsController');
+Route::get('events/{event}/getallfiles/', 'DocumentsController@indexFiles');
  
 
 /*******
  * WALL
  ******/
-Route::apiResource('events/{event_id}/wall', 'WallController');
+Route::apiResource('events/{event}/wall', 'WallController');
  
  
 
 /*******************
  * FAQ'S
  ******************/
-Route::apiResource('events/{id}/faqs', 'FaqController');
-Route::post ('events/{event_id}/duplicatefaqs/{id}','FaqController@duplicate');
+
+Route::get('events/{event}/faqs' , 'FaqController@index');
+Route::get('events/{event}/faqs/{faqs}' , 'FaqController@show');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/faqs' , 'FaqController@store')->middleware('permission:create');
+        Route::put('events/{event}/faqs/{faqs}' , 'FaqController@update')->middleware('permission:update');
+        Route::delete('events/{event}/faqs/{faqs}' , 'FaqController@destroy')->middleware('permission:destroy');
+    }
+);
+
+
+Route::post ('events/{event}/duplicatefaqs/{id}','FaqController@duplicate');
 
 //TEST 
 Route::put('events/{id}/zoomhost', 'ZoomHostController@update');
@@ -138,6 +151,35 @@ Route::get('events/zoomhost', 'ZoomHostController@index');
 /*******
  * RSVP
  ******/
- Route::post("events/{event_id}/wallnotifications", "RSVPController@wallActivity")
+ Route::post("events/{event}/wallnotifications", "RSVPController@wallActivity");
 
-?>
+
+
+/****************
+* Surveys
+****************/
+Route::put('events/{event}/questionedit/{id}', 'SurveysController@updatequestions');
+Route::get('events/{event}/surveys/{surveys}', 'SurveysController@show');    
+Route::get('events/{event}/surveys', 'SurveysController@index');
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/surveys', 'SurveysController@store')->middleware('permission:create');                  
+        Route::put('events/{event}/surveys/{surveys}', 'SurveysController@update')->middleware('permission:update');
+        Route::delete('events/{event}/surveys/{surveys}', 'SurveysController@destroy')->middleware('permission:destroy');
+    }
+);
+
+
+/****************
+* Style
+****************/
+Route::get('events/{event}/stylestemp', 'StylesController@indexTemp');
+Route::get('styles/{style}', 'StyleController@show');
+Route::get('styles', 'StyleController@index');
+Route::group(
+    ['middleware' => 'auth:token'], function () {        
+        Route::post('styles', 'StyleController@store')->middleware('permission:create');                      
+        Route::put('styles/{style}', 'StyleController@update')->middleware('permission:update');
+        Route::delete('styles/{style}', 'StyleController@destroy')->middleware('permission:destroy');
+    }
+);

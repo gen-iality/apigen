@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapauthRoutes();
 
+
         //
     }
 

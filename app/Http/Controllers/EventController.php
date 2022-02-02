@@ -535,15 +535,42 @@ class EventController extends Controller
 
     
     /**
-     * _destroy_: delete event.
+     * _destroy_: delete event and related data.
      * @authenticated
-     * @urlParam event required id of the event to be eliminated permanetly
+     * @urlParam event required id of the event to be eliminated
      * 
      */
     public function destroy(String $id)
     {
-        $Event = Event::findOrFail($id);
-        return (string) $Event->delete();
+	// borrar evento
+	Event::findOrFail($id)->delete();
+
+	// borrar documentos que posean referencia al evento
+	$models = ["App\Attendee", "App\Activities", "App\Host", "App\Space", "App\Message", "App\ModelHasRole", "App\Order"];
+	foreach ($models as $model) {
+	  $model::where('event_id', $id)->delete();
+	}
+
+	return response()->json([], 204);
+    }
+
+    /**
+     * _restore_: restore event and related data.
+     * @authenticated
+     * @urlParam event required id of the event to be restore
+     * 
+     */
+    public function restore(String $event_id)
+    {
+	Event::withTrashed()->findOrFail($event_id)->restore();
+
+	// restaurar documentos que posean referencia al evento
+	$models = ["App\Attendee", "App\Activities", "App\Host", "App\Space", "App\Message", "App\ModelHasRole", "App\Order"];
+	foreach ($models as $model) {
+	  $model::withTrashed()->where('event_id', $event_id)->restore();
+	}
+
+	return response()->json(['msg' => 'restored'], 200);
     }
 
     public function showUserProperties(String $id)
@@ -930,29 +957,6 @@ class EventController extends Controller
         $event = Event::findOrFail($event_id);
         $documetUser = ["document_user" => $data];
         $event->extra_config = $documetUser;
-        $event->save();
-
-        return $event;
-    }
-
-    // Hooks Wowza
-    public function saveRecordingToEvent(Request $request)
-    {
-        $data = $request->json()->all();
-        $recording = $data['object_data']; // datos de la grabacion
-        $event = Event::where('streaming_id', $recording['transcoder_id'])->first();
-        $download_urls =  $event['download_url'];
-
-        if (empty($download_urls)) {
-            $event['download_url'] = [$recording['download_url']];
-            $event->save();
-
-            return $event;
-        }
-
-        // se existe ya una url
-        $download_urls_merge = array_merge($download_urls, [ $recording['download_url'] ]);
-        $event->download_url = $download_urls_merge;
         $event->save();
 
         return $event;

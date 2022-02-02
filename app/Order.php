@@ -9,9 +9,11 @@ use PDF;
 use Moloquent;
 use App\Models\Order as Orders;
 use App\Event;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Orders
 {
+    //use SoftDeletes;
 
     /**
      * The validation rules of the model.

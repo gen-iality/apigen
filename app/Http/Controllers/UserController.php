@@ -480,11 +480,11 @@ class UserController extends UserControllerWeb
         $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
         if(isset($data['event_id']))
         {   
-            $redirect =  "https://rappievents.netlify.app" ."/"."landing/".$data['event_id']."/"."?token=" . $singin->idToken();
+            $redirect =  config('app.front_url') . "/loginWithCode?email=". urlencode($data['event_id']) . "&event_id=" . $data['event_id'];
 
             }else{
 
-                $redirect =  "https://rappievents.netlify.app";
+                $redirect =  config('app.front_url');
             } 
 
             return Redirect::to($redirect)->with($auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]));
@@ -494,7 +494,7 @@ class UserController extends UserControllerWeb
             $link = $auth->getSignInWithEmailLink(
                 $data["email"],
                 [
-                    "url" => "https://apidev.evius.co/api". "/singinwithemaillink?email=". urlencode($data["email"]) . "&event_id=" . $data['event_id'],
+                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($data['event_id']) . "&event_id=" . $data['event_id'],
                 ]    
             );
 
