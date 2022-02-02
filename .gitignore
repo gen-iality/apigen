@@ -30,3 +30,4 @@ _docs/build
 public/assets/*
 public/vendor/*
 resources/docs/source/_tmp/*
+composer.lock
