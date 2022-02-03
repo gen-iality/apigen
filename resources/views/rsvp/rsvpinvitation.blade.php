@@ -69,6 +69,8 @@
 	@endif
 </div>
 
+Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
+
 
 
 <hr style="border-right : 0;border-left: 0;">
