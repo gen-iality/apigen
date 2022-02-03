@@ -48,7 +48,7 @@ class AutoGenerateRoles extends Command
         $modelLower = strtolower($model);
 
         //Por defecto en este será el archivo donde se van a crear las rutas con los permisos
-        $file = fopen(base_path('/routes/attendize/schedule.php'), 'a+');
+        $file = fopen(base_path('/routes/roles/rolesOrganization.php'), 'a+');
 
         // $list = "list";
         $create = "create";

@@ -4,19 +4,15 @@ namespace App;
 
 use Moloquent;
 use Spatie\Permission\Traits\HasRoles;
-use App\RolEvent;
+use App\Rol;
 
-class RolesPermissionsEvent extends Moloquent
+class RolesPermissions extends Moloquent
 {
     use HasRoles;
 
-    const NAME_ROL_ADMINISTRATOR = 'Administrator';
-    const NAME_ROL_COLABORATOR = 'Colaborator';
-    const NAME_ROL_ATTENDEE = 'Attendee';
-
     //
     protected $with = ['rol' , 'permission'];
-    protected $table = "roles_permissions_events";
+    protected $table = "roles_permissions";
     protected $fillable = [
         'rol_id' , 
         'permission_id'
@@ -25,22 +21,28 @@ class RolesPermissionsEvent extends Moloquent
     
     public function permission()
     {
-        return $this->belongsTo('App\PermissionEvent', 'permission_id');
+        return $this->belongsTo('App\Permission', 'permission_id');
     }
 
     public function rol()
     {
-        return $this->belongsTo('App\RolEvent', 'rol_id');
+        return $this->belongsTo('App\Rol', 'rol_id');
     }
 
 
     public static function boot()
     {
 
+        $nonChangeableRoles = [
+            Rol::ID_ROL_ADMINISTRATOR_EVENT ,
+            Rol::ID_ROL_ATTENDEE
+        ];
+
+
         parent::boot();
         self::saving(function ($model) {
                 
-            if(($model->r_id === RolEvent::ID_ROL_ADMINISTRATOR) ||  ($model->_id === RolEvent::ID_ROL_ATTENDEE))
+            if(in_array($model->_id, $nonChangeableRoles))
             {
                 abort(401 , "You don't have permission for do this action.");
             }
@@ -49,7 +51,7 @@ class RolesPermissionsEvent extends Moloquent
 
         self::deleting(function ($model) {
                 
-            if(($model->_id === RolEvent::ID_ROL_ADMINISTRATOR) ||  ($model->_id === RolEvent::ID_ROL_ATTENDEE))
+            if(in_array($model->_id, $nonChangeableRoles))
             {
                 abort(401 , "You don't have permission for do this action.");
             }

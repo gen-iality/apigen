@@ -8,7 +8,7 @@ use App\Attendee;
 use App\ModelHasRole;
 use App\OrganizationUser;
 use App\Account;
-use App\RolEvent;
+use App\Rol;
 use App\State;
 use Storage;
 use Auth;
@@ -32,7 +32,7 @@ class EvaRol
         if (!$authorId) {
             return '';
         }
-        $rol = RolEvent::where('level', -1)->first();
+        $rol = Rol::where('level', -1)->first();
         $state = State::first();
         $userEvt = [
             'account_id' => $authorId,
@@ -55,12 +55,12 @@ class EvaRol
         if (!$authorId) {
             return '';
         }
-        $rol = RolEvent::where('level', -1)->first();
+        
         $user = Account::find($authorId);
         $userOrg = [
             'account_id' => $authorId,
             'organization_id' => $organizationId,
-            'rol_id' => '5c1a59b2f33bd40bb67f2322',
+            'rol_id' => Rol::ID_ROL_ADMINISTRATOR,
             'properties' => [
                 'names' => $user->names,
                 'email' => $user->email

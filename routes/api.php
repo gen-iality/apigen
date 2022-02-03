@@ -1,6 +1,7 @@
 <?php
 
 include "attendize/schedule.php";
+include "roles/rolesOrganization.php";
 include "user.php";
 
 

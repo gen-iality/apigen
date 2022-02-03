@@ -70,7 +70,7 @@ class OrganizationController extends Controller
         $model->save();
 
         $styles = isset($data['styles']) ? $data['styles'] : null ;
-        $RolService->createAuthorAsOrganizationAdmin(Auth::user()->_id, $model->_id);
+        $RolService->createAuthorAsOrganizationAdmin($user->id, $model->_id);
         $data['styles'] = OrganizationServices::createDefaultStyles($styles,$model);
 
 
@@ -84,11 +84,6 @@ class OrganizationController extends Controller
             }
         }
         OrganizationServices::createDefaultUserProperties($model->_id);
-        
-
-
-        
-        $asingRolAuthorOrganization = $RolService->createAuthorAsOrganizationAdmin($user->id, $model->_id);
         
         
         if (isset($data['category_ids'])) {
