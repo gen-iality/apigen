@@ -8,6 +8,8 @@ use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Kreait\Firebase\Factory;
+use App\Services\SocialUserResolver;
+use Coderello\SocialGrant\Resolvers\SocialUserResolverInterface;
 
 //use Kreait\Firebase\Auth;
 
@@ -18,6 +20,10 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
      *
      * @return void
      */
+    public $bindings = [
+        SocialUserResolverInterface::class => SocialUserResolver::class,
+    ];
+    
     public function boot()
     {
 
@@ -155,9 +161,9 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
             $dataUser['updated_at'] = date_create();
             $dataUser['updated_at'] = date_create();
 
-            $dataUser['created_at'] = ($dataUser['created_at']) ? date_create($dataUser['created_at']) : date_create();
+            $dataUser['created_at'] = (isset($dataUser['created_at'])) ? date_create($dataUser['created_at']) : date_create();
             if (isset($dataUser['checkedin_at'])) {
-                $dataUser['checkedin_at'] = ($dataUser['checkedin_at']) ? date_create($dataUser['checkedin_at']) : null;
+                $dataUser['checkedin_at'] = (isset($dataUser['checkedin_at'])) ? date_create($dataUser['checkedin_at']) : null;
             }
 
             // var_dump($dataUser);

@@ -101,7 +101,7 @@ class ApiCheckoutController extends Controller
             case 'EXPIRED':
                 $order->order_status_id = config('attendize.order_rejected');
                 break;
-
+            
         }
         Log::info('Borramos el cache de la orden: ' . $status);
         if ($status != 'PENDING') {
@@ -233,20 +233,28 @@ class ApiCheckoutController extends Controller
         * Create the attendees
         */
         foreach($order->items as $item) {
-                        
+                         
 
-            $attendee = new Attendee();
-            $attendee->properties = (object) [];
+            $attendee = Attendee::updateOrCreate(
+                ["account_id" => $order->account_id , "event_id" => $item],  
+                [
+                    "properties.names" => $order->account->names ,
+                    "properties.email" => $order->account->email, 
+                    "order_id" => $order->_id,
+                    "rol_id" => config('attendize.payment_assistant')
 
+                ]              
+            );
+            
+            // $attendee->properties->names = $order->account->names;
+            // $attendee->properties->email = $order->account->email;	
 
-            $attendee->properties->names = $order->account->names;
-            $attendee->properties->email = $order->account->email;	
-
-            $attendee->event_id = $item;
-            $attendee->order_id = $order->id;
-            //$attendee->ticket_id = $attendee_details['ticket']['_id'];
-            $attendee->account_id = $order->account->_id;
-            $attendee->save();
+            // $attendee->event_id = $item;
+            
+            // $attendee->order_id = $order->id;
+            // //$attendee->ticket_id = $attendee_details['ticket']['_id'];
+            // $attendee->account_id = $order->account->_id;
+            // $attendee->save();
 
             $user = Account::find($order->account->_id);
             $user->total_number_events = $user->total_number_events + 1;
@@ -406,23 +414,66 @@ class ApiCheckoutController extends Controller
      * 
      * @urlParam order_id
      */
-    public function validatePointOrder($order_id)
+    public function validatePointOrder(Request $request, $order_id)
     {   
         $order = Order::find($order_id);
 
+        $data = $request->input();
         //Obtenemos el usuario el cual está canjando sus puntos
         $user = Auth::user();
-        
+                  
         //Verificar que el usuario tenga puntos suficientes para más seguridad
         if($order->amount <= $user->points)
         {   
             //Actualizamos el estado de la orden a completado
             $order->order_status_id = config('attendize.order_pending');
+            //Puntaje que tiene el usuario al momento de realizar la orden
+            $order->account_points = isset($user->points) ? $user->points : "";
             $order->save();
 
             //Se descuentan los puntos a el usuario que ha utilizado
             $user->points = $user->points - $order->amount;
             $user->save();
+            $status = 'pending_confirm'; 
+            foreach($order->items as $item)
+            {
+                Mail::to($order->email)
+                ->queue(
+                    new \App\Mail\PointsMail($order , $user, $item , $status)
+                ); 
+            }           
+            
+            return $order;
+        }
+        //Actualizamos el estado de la orden a rechazado
+        $order->order_status_id = config('attendize.order_failed');
+        $order->save();
+
+         return response()->json([
+            'error' => 'El usuario no tiene puntos suficientes',
+         ],403);
+    }
+
+
+     /**
+     */
+    public function validatePointOrderTest($order_id)
+    {   
+        $order = Order::find($order_id);
+
+        //Obtenemos el usuario el cual está canjando sus puntos
+        $user = Account::where('email' , $order->email)->first();
+        
+        //Verificar que el usuario tenga puntos suficientes para más seguridad
+        // if($order->amount <= $user->points)
+        // {   
+            //Actualizamos el estado de la orden a completado 
+            $order->order_status_id = config('attendize.order_pending');
+            $order->save();
+
+            //Se descuentan los puntos a el usuario que ha utilizado
+            // $user->points = $user->points - $order->amount;
+            // $user->save();
             
             $emailsAdmin =  Account::where("others_properties.role" , "admin")
             ->where("organization_ids" , $order->organization_id)
@@ -447,7 +498,7 @@ class ApiCheckoutController extends Controller
                      
             }
             return $order;
-        }
+        // }
 
          return response()->json([
             'error' => 'El usuario no tiene puntos suficientes',

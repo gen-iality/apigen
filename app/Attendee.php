@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-
+//use Illuminate\Database\Eloquent\SoftDeletes;
 //use Illuminate\Database\Eloquent\Model;
 
 class Attendee extends Models\Attendee
 {
 
     use Notifiable;
+    //use SoftDeletes;
 
     const STATE_DRAFT = "5b0efc411d18160bce9bc706"; //"DRAFT";
     const STATE_INVITED = "5ba8d213aac5b12a5a8ce749"; //"INVITED";
@@ -21,7 +22,7 @@ class Attendee extends Models\Attendee
     protected $observables = ['saved', 'created', 'updated' , 'deleted'];
     protected static $unguarded = true;
     protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id", "registered_devices","printouts"] ;
-    protected $with = ["user","rol", 'state', "ticket"];
+    protected $with = ["user","rol"];
     //protected $with = ["user:uid,email,displayName,names","rol", 'state', "ticket"];
    //protected $visible = ['_id','names','email','properties','user','account_id','score'];
     //protected $with = ["user","rol", 'state', "ticket"];
@@ -63,7 +64,7 @@ class Attendee extends Models\Attendee
 
     public function rol()
     {
-        return $this->belongsTo('App\RoleAttendee', 'rol_id');
+        return $this->belongsTo('App\RolEvent', 'rol_id');
     }
 
     public function confirm()

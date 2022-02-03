@@ -90,7 +90,8 @@ class Kernel extends HttpKernel
         'installed' => \App\Http\Middleware\CheckInstalled::class,
         'doNotCacheResponse' => \Spatie\ResponseCache\Middlewares\DoNotCacheResponse::class,
         'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
-        'role' => \App\Http\Middleware\RoleMiddleware::class,
-        'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+        'permission' => \App\Http\Middleware\Permissions\PermissionMiddleware::class,
+        'permissionUser' => \App\Http\Middleware\Permissions\PermissionsManageUser::class,
+
     ];
 }

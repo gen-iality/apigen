@@ -8,12 +8,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\evaLib\Services\UserEventService;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 use App\evaLib\Services\GoogleFiles;use QRCode;
 use App;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
+
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
 {
@@ -80,8 +83,8 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
         
-        $userPassword = $eventUser["properties"]["password"];
-        $password = isset($userPassword) ? $userPassword : "mocion.2040";
+        $userPassword = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : null;
+        $password = isset($userPassword) ? $userPassword : $email;
         
         
 
@@ -110,7 +113,13 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $pass = self::encryptdata($password);
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass)."&destination=".$destination;
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [   
+                "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]    
+        );
+        // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
 
@@ -234,11 +243,12 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
     {
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
 
+        $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
+        $from = !empty($organization) ? $organization->name : "Evius Event ";        
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
         $gfService = new GoogleFiles();
         $event = $this->event;
-
         try {
 
             ob_start(); 
@@ -257,11 +267,12 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
+        
 
         if($this->onlylink){
            
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.onetimelogin');
         }
@@ -272,13 +283,13 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         if($this->changePassword)
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.changepassword');
         }
         if($this->onetimelogin){
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.onetimelogin');
         }
@@ -286,7 +297,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         {   
             
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             // ->attachData($this->ical, 'ical.ics', [
             //     'mime' => 'text/calendar',
@@ -298,17 +309,25 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         if($this->event->_id === '60c93174a85d8f027013691f' || $this->event->_id === "609ea39ca79e084e7602214c" || $this->event->_id === "60c9313f3e6e7a525514c3c7")
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.invitation');
         }
-        return $this
-            ->from("alerts@evius.co", $from)
+        
+        $icalCalendar = isset($event->extra_config['include_ical_calendar']) ? $event->extra_config['include_ical_calendar'] : true;
+
+        if(!$icalCalendar)
+        {
+            return $this ->from($emailOrganization, $from)
+            ->subject($this->subject)
+            ->markdown('rsvp.invitation');
+        }
+        return $this ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
             ])
             ->markdown('rsvp.invitation');
-        //return $this->view('vendor.mail.html.message');
+        
     }
 }

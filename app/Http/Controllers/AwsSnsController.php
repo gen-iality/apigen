@@ -72,30 +72,26 @@ class AwsSnsController extends Controller
             switch ($status_message) 
             {
                 case 'Send':
-                    // $total_sent = count($total);
-                    $message->total_sent = $message->total_sent+1;
+                    
+                    $message->total_sent++;
                     $message->save();
                 break;
-                case 'Delivery':               
-                    // $total_delivered =count($total);
-                    if(isset($responseMail['headers'])){
-                        $message->total_delivered = $message->total_delivered + 1;                   
-                        $message->save();
-                    }
+                case 'Delivery':
+                    $message->total_delivered++;                   
+                    $message->save();                    
                 break;
                 case 'Open':
                     // $total_opened =count($total);
-                    $message->total_opened = $message->total_opened + 1;
+                    $message->total_opened++;
                     $message->save();
                 break;
                 case 'Click':
                     // $total_clicked =count($total);
-                    $message->total_clicked = $message->total_clicked + 1;
+                    $message->total_clicked++;
                     $message->save();
                 break;
-                case 'Bounce':
-                    $total_bounced = count($total); 
-                    $message->total_bounced = $total_bounced;
+                case 'Bounce':                    
+                    $message->total_bounced++;
                     $message->save(); 
                 break;
             }
@@ -110,6 +106,8 @@ class AwsSnsController extends Controller
             array_push($array, $dataMessageUser);    
             $messageUser->history = $array;
         }
+        $message->number_of_recipients = $message->total_sent;
+        $message->save(); 
         $messageUser->save();
 
                        

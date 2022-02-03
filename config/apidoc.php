@@ -108,6 +108,10 @@ return [
                         '*/events/{event_id}',
                         '*/eventTypes',
                         '*/changeStatusEvent',
+                        '*/adddocumentuser',
+                        '*/eventsbeforetoday',
+                        '*/eventsaftertoday',
+                        '*/adduserwithemailvalidation',
                     // Activities
                         '*/activities',
                         '*/activities/*',    
@@ -116,12 +120,16 @@ return [
                     // EventUser  
                         '*/eventusers',
                         '*/eventusers/*',
+                        '*/eventUsers',
+                        '*/eventUsers/*',
                     //Users
                         '*/users',
                         '*/users/*',
                         '*/auth',
                         '*/auth/*',  
-                        '*/changeUserPassword',        
+                        '*/changeuserpassword',      
+                        '*/getloginlink',
+                        '*/singinwithemaillink'  ,
                               
                     //Host
                         '*/host/*',    
@@ -148,6 +156,13 @@ return [
                         '*/contactbyemail',
                         '*/validateFreeorder',
                         '*/organizations/{id}/eventUsers',
+                        '*/ordersUsersPoints',
+                        '*/organizations/*',
+                        'organizations/*',
+                        '*/organizations',
+                    //TemplateProperties
+                        '*/templateproperties/*',
+                        '*/templateproperties',
                     //Surveys
                         '*/surveys',
                         '*/surveys/*',
@@ -159,7 +174,24 @@ return [
                         '*/rols',
                     //UserProperties
                         '*/userproperties',
-                        '*/userproperties/*'
+                        '*/userproperties/*',
+                    //Product    
+                        '*/products',
+                        '*/products/*',    
+                    //Comment
+                        '*/comments',
+                        '*/comments/*',       
+                    //News
+                        '*/newsfeed',
+                        '*/newsfeed/*',    
+                    //Google Analytics
+                        '*/googleanalytics',
+                    //DocumentUser
+                        '*/documentusers',
+                        '*/documentusers/*', 
+                    //Document
+                        '*/documents',
+                        '*/documents/*', 
 
                 ],  
 
@@ -259,6 +291,7 @@ return [
         ],
         'urlParameters' => [
             \Mpociot\ApiDoc\Extracting\Strategies\UrlParameters\GetFromUrlParamTag::class,
+            \App\ApiDoc\AddEventOrganizationIdUrlParams::class,
         ],
         'queryParameters' => [
             \Mpociot\ApiDoc\Extracting\Strategies\QueryParameters\GetFromQueryParamTag::class,
@@ -340,4 +373,13 @@ return [
      *
      */
     'routeMatcher' => \Mpociot\ApiDoc\Matching\RouteMatcher::class,
-];
+
+
+    /*
+     *There are the variables that will have default value to exmaples in the diferrents endpoints
+     */
+    'event' => env('DOC_EVENT_ID', '61a687713bbf847b3f59d117'),
+    'organization' => env('DOC_ORGANIZATION_ID', '61a687203bbf847b3f59d113'),
+
+
+];  

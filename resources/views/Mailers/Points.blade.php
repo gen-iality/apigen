@@ -5,7 +5,6 @@
         <img alt="{{$organizer->name}}" src={{$organizer->banner_image_email}} /> 
     </div>
 @endif
-
 <div class="centered">
     <p style="font-size: 20px;color: gray;font-style: italic">
         ¡Felicitaciones! tu redención de puntos ha sido exitosa                       

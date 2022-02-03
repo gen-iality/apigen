@@ -8,9 +8,10 @@ use App\Attendee;
 use App\ModelHasRole;
 use App\OrganizationUser;
 use App\Account;
-use App\Rol;
+use App\RolEvent;
 use App\State;
 use Storage;
+use Auth;
 
 class EvaRol
 {
@@ -31,7 +32,7 @@ class EvaRol
         if (!$authorId) {
             return '';
         }
-        $rol = Rol::where('level', -1)->first();
+        $rol = RolEvent::where('level', -1)->first();
         $state = State::first();
         $userEvt = [
             'account_id' => $authorId,
@@ -51,30 +52,47 @@ class EvaRol
 
     public function createAuthorAsOrganizationAdmin($authorId, $organizationId)
     {
-        // if (!$authorId) {
-        //     return '';
-        // }
-        // $rol = Rol::where('level', -1)->first();
-        // $userOrg = [
-        //     'account_id' => $authorId,
-        //     'organization_id' => $organizationId,
-        //     'rol_id' => $rol->_id,
-        // ];
-        // $userToOrg = new OrganizationUser($userOrg);
-        // $userToOrg->save();
-
-        //Create user rol admin
-        $rolAdmin = Rol::where('name', 'Administrador')->first();
-              
-
-        $userAdmin = [
-            'model_id' => $authorId,
-            'role_id' => $rolAdmin->_id,
+        if (!$authorId) {
+            return '';
+        }
+        $rol = RolEvent::where('level', -1)->first();
+        $user = Account::find($authorId);
+        $userOrg = [
+            'account_id' => $authorId,
             'organization_id' => $organizationId,
-            'model_type' => "App\Account"
-        ];        
-        $userToAdmin = new ModelHasRole($userAdmin);
-        $userToAdmin->save();
-        return true;        
+            'rol_id' => '5c1a59b2f33bd40bb67f2322',
+            'properties' => [
+                'names' => $user->names,
+                'email' => $user->email
+            ]
+        ];
+        $userToOrg = new OrganizationUser($userOrg);
+        $userToOrg->save();
+        return true;
+    }
+
+
+    public static function createOrUpdateDefaultRolEventUser($event_id, $rol_id)
+    {
+        $user = Auth::user();
+        //Esta validación verifica que un admin pueda cambiar el rol        
+        if($user)
+        {
+            $eventUserAdmin = Attendee::where('account_id', $user->_id)
+                                ->where('event_id' , $event_id)
+                                ->whereHas('rol', function($query)
+                                {
+                                    $query->where('type', 'admin');
+                                
+                                })
+                                ->first();
+            if($eventUserAdmin)
+            {
+                return $rol_id;
+            }
+        }
+        //Si no es un administrador le deja el rol por defecto,
+        // así se evita que cualquier persona se peuda colocar el rol de admin cuando se regista en un evento.
+        return RolEvent::ID_ROL_ATTENDEE;
     }
 }

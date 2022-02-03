@@ -22,13 +22,15 @@ class PointsMail extends Mailable implements ShouldQueue
     public $item; 
     public $organizer;   
     public $orderSpecification;
+    public $status;
+
    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order , $user , $organization)
+    public function __construct($order , $user , $organization, $status)
     {   
         $organization =  Organization::findOrFail($order->organization_id);              
         $this->user = $user;
@@ -42,7 +44,8 @@ class PointsMail extends Mailable implements ShouldQueue
             array_push($orderSpecification , $mykey);
         }
         
-        $this->orderSpecification = implode("-",$orderSpecification);       
+        $this->orderSpecification = implode("-",$orderSpecification);    
+        $this->status = $status;   
     }
 
 
@@ -55,11 +58,18 @@ class PointsMail extends Mailable implements ShouldQueue
     public function build()
     {   
         $organizer = $this->organizer;        
-    
+        
+        if($this->status == 'pending_confirm')
+        {
+            return $this
+            ->from("alerts@evius.co", $organizer->name)
+            ->subject($organizer->name)
+            ->markdown('Mailers.pendingOrdersPoints');
+        }
         return $this
         ->from("alerts@evius.co", $organizer->name)
         ->subject($organizer->name)
-        ->markdown('Mailers.Points');
+        ->markdown('Mailers.ordersPoints');
         
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-
+use App;
 class UserToUserRequest extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels; //, Dispatchable, InteractsWithQueue;
@@ -34,17 +34,26 @@ class UserToUserRequest extends Mailable implements ShouldQueue
     public $link_authenticatedalevento;
     public $request_type;
     public $status;
+    public $linkUnsubscribe;
+    public $image_footer;
+    public $image_banner;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($event_id, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user,$status=null)
+    public function __construct($event_id, $innerpath, $request_type, $title, $desc, $subject, $img, $sender, $response, $email, $receiver, $sender_user,$status=null)
     {
-        //$response es el request_id
-        Log::debug("recibiendo event_user");
+        //$response es el request_id        
         $request_type = ($request_type) ? $request_type : "friendship";
         $event = Event::find($event_id);
+
+
+        //Obteniendo imágenes del banner y el footer del correo
+        $image_banner = isset($event->styles['banner_image_email']) ? $event->styles['banner_image_email'] : $event->styles['banner_image'];
+        $image_footer = isset($event->styles['banner_footer_email']) ? $event->styles['banner_footer_email'] : $event->styles['banner_footer'];
+        
+        
         $event_address = isset($event["location"]["FormattedAddress"]) ? ($event["location"]["FormattedAddress"]) : " ";
         $event_city = isset($event["location"]["City"]) ? ($event["location"]["City"]) : " ";
         $event_state = isset($event["location"]["state"]) ? ($event["location"]["state"]) : " ";
@@ -66,17 +75,19 @@ class UserToUserRequest extends Mailable implements ShouldQueue
                 break;
                 case "friendship":
                 default:
-                   $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
+                   $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&request_type=" . $request_type . "&request=" . $response . "&pass=" . $pass;
             break;
             }       
        
         }else{
-            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
-            $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
+            $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&pass=" . $pass;
+            $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&pass=" . $pass;
         }
+        $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&event_id=' . $event_id . "&pass=" . $pass;
+        $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" .  urlencode($email) . '&event_id=' . $event->_id . "&innerpath=". $innerpath . "&pass=" . $pass;
+        $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $event_id .'/unsubscribe';
+        
 
-        $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&innerpath=' . $event_id . "&pass=" . $pass;
-        $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event_id . "&pass=" . $pass;
 
         $this->response = $response;
         $this->email = $email;
@@ -96,8 +107,10 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $this->sender = $sender;
         $this->request_type = $request_type;
         $this->status = $status;
-
+        $this->linkUnsubscribe = $linkUnsubscribe;
         $this->subject = $subject;
+        $this->image_banner = $image_banner;
+        $this->image_footer = $image_footer;
         $gfService = new GoogleFiles();
 
         Log::debug("pasando a crear correo");
@@ -132,8 +145,9 @@ class UserToUserRequest extends Mailable implements ShouldQueue
      * @return $this
      */
     public function build()
-    {          
-        Log::debug("Construyendo el correo de ticket");
+    {   
+
+        
         $gfService = new GoogleFiles();
         $from = $this->event->organizer->name;
         $logo_evius = 'images/logo.png';
@@ -148,6 +162,9 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         $desc = $this->desc;
         $subject = $this->subject;
         $img = $this->img;
+
+        $locale = isset($event->language) ? $event->language : 'es';
+        App::setLocale($locale);
         // var_dump($desc);die;
         return $this
         // ->attach($attachPath,[
@@ -155,7 +172,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         //     'mime' => 'image/png',
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
-        ->from("alerts@evius.co", $sender)
+            ->from("alerts@evius.co", $from)
             ->subject($subject)
             ->markdown('usertouser_request');
 

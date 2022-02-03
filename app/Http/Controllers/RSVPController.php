@@ -37,7 +37,6 @@ class RSVPController extends Controller implements ShouldQueue
 
     public function test()
     {
-        echo Config::get('app.front_url', 'aaa');
         $actionCodeSettings = ['url' => 'http://localhost:3000/linklogin?email=esteban.sanchez@mocionsoft.com',
             'handleCodeInApp' => false,
             //'dynamicLinkDomain' => 'evius.co'
@@ -175,7 +174,7 @@ class RSVPController extends Controller implements ShouldQueue
       
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
-        $message->number_of_recipients = count($eventUsersIds);
+        // $message->number_of_recipients = count($eventUsersIds);
         $message->save();
         //~~~~~~~~~~~~~~~~~~~~~~
         //addUsers - recipients of message
@@ -184,7 +183,7 @@ class RSVPController extends Controller implements ShouldQueue
         //$eventUsers = UserEventService::addEventUsersToEvent($event, $eventUsersIds);
 
         $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
-        $message->number_of_recipients = count($eventUsers);
+        // $message->number_of_recipients = count($eventUsers);     
         $message->save();
 
         //var_dump($eventUsers);
@@ -234,7 +233,7 @@ class RSVPController extends Controller implements ShouldQueue
             $eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->email)) ? $eventUser->email : $eventUser->properties["email"];
+            $email = (isset($eventUser->properties["email"])) ? $eventUser->properties["email"] : $eventUser->email ;
 
             $messageUser = new MessageUser([
                 'email' => $eventUser->email,
@@ -257,19 +256,17 @@ class RSVPController extends Controller implements ShouldQueue
             $data["include_ical_calendar"] = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true; 
             $data["include_login_button"] = isset($data["include_login_button"]) ? $data["include_login_button"]  : true;            
 
-            echo "a";
             // sino existe la propiedad names lo más posible es que el usuario tenga un error
             if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
                 continue;
             }
             
-           
+            
             Mail::to($email)
                 ->queue(
                     new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
                 );
                 
-            Log::info('$mail '.$email);    
  
         }
     }

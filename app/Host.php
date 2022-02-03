@@ -5,6 +5,7 @@ namespace App;
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //Importante usar moloquent!!!!!!
 use Moloquent;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Category Model
@@ -12,6 +13,7 @@ use Moloquent;
  */
 class Host extends Moloquent
 {
+    //use SoftDeletes;
 
     public function event()
     {
@@ -33,6 +35,9 @@ class Host extends Moloquent
         'profession', 
         'description_activity', 
         'order',
-        'category_id'
+        'category_id',
+        'published',
+        'index',
+        'phone'
     ];
 }

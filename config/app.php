@@ -28,10 +28,10 @@ return [
     'name' => env('APP_NAME', 'Evius'),
     'aws_key' => env('AWS_KEY', 'production'),
     'aws_secret' => env('AWS_SECRET', 'production'),
-    'front_url' => env('FRONT_URL', 'https://evius.co'),
+    'front_url' => env('FRONT_URL', 'https://app.evius.co'),
     'page_size' => 2500,
     'sendinblue_page' => 'https://api.sendinblue.com/v2.0',
-    'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF"],
+    'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF", 'banner_image_email' => "" , 'footer_image_email' => ""],
     'app_configuration' => [],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     'pushdirection' => env('PUSH_URL', 'production'),
@@ -169,6 +169,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -181,6 +182,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         App\Providers\HelpersServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EvaFilesServiceProvider::class,
@@ -189,6 +191,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
 
         /*
          * Third Party Service Providers attendize platform
@@ -217,6 +220,7 @@ return [
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+	Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -231,8 +235,7 @@ return [
     |
      */
 
-    'aliases' => [
-
+    'aliases' => [        
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -290,6 +293,9 @@ return [
         //Not support by this version 'PDF' => Nitmedia\Wkhtml2pdf\Facades\Wkhtml2pdf::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+	'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
 
     ],
 

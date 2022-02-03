@@ -99,3 +99,8 @@
 [2021-05-03 15:00:30] local.INFO: Borramos el cache de la orden: FAILED  
 [2021-05-03 15:00:31] local.INFO: Estado guardado:  order_reference: Fallido  
 [2021-05-03 15:00:31] local.INFO: FAILED  
+[2021-08-10 15:34:52] local.DEBUG: \App\Attendee::saved boot  
+[2021-08-10 15:34:52] local.DEBUG: \App\Attendee::saved boot  
+[2021-08-10 16:00:03] local.INFO: new cron  
+[2021-08-10 16:22:53] local.DEBUG: \App\Attendee::saved boot  
+[2021-08-10 16:27:06] local.DEBUG: \App\Attendee::saved boot  

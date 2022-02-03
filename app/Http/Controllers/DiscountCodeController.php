@@ -14,6 +14,8 @@ use Validator;
 use Auth;
 use App\evaLib\Services\CodeServices;
 use Log;
+use App\Account;
+use App\Order;
 
 
 /**
@@ -387,7 +389,13 @@ class DiscountCodeController extends Controller
         //authenticated user
         $user = Auth::user();     
         $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
-            
+        if(!isset($group))   
+        {
+            $discount= "discount_code_template_id ";
+            $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
+        }
+        
+        
         //Se valida si el código ya se uso     
         if($code->number_uses < $group->use_limit  ){
 
@@ -414,5 +422,145 @@ class DiscountCodeController extends Controller
         $discountTemplate = '604683bb8992c135e86dca04';
         $code = DiscountCode::where('discount_code_template_id' ,$discountTemplate)->paginate(100000);
         return $code;
+    }
+
+    /**
+     * _codesByUser_: list all codes by user
+     *
+     * @queryParam organization required organization_id 
+     * @queryParam email required user email
+     */
+    public function codesByUser(Request $request)
+    {   
+        $data = $request->input();
+
+        $templates = DiscountCodeTemplate::where('organization_id', $data['organization'])->get()->keyBy('_id')->toArray();
+
+        $user = Account::where('email',$data['email'])->first();
+        
+        $codes = DiscountCodeMarinela::where('number_uses' , 1)
+                ->where('account_id' , $user->_id)
+                ->get();
+                
+
+        echo 'Usuario, Documento,Código redimido, Fecha de ingreso del código ,Puntos </br>';
+            
+        foreach($codes as $code)
+        {   
+            
+            $template_id = $code->discount_code_template_id;
+
+            if(!$template_id)   
+            {
+                $discount= "discount_code_template_id ";
+                $template_id = $code->$discount;
+            }
+            $template = $templates[$template_id];
+            
+            echo  $user->email .','.  $user->document_number .','.$code->code .','. $code->updated_at .','. $template['discount'].'</br>';                            
+        }
+
+    }    
+
+
+
+    /**
+     * 
+     */
+    public function orderByUser(Request $request)
+    {   
+        $data = $request->json()->all();
+
+        $filters = $request->input();
+        $templates = DiscountCodeTemplate::where('organization_id', '60467fbd9caef512a5626fc9')->get()->keyBy('_id')->toArray();
+                
+
+        $status = isset($filters["status"]) ? $filters["status"] : "pendiente";
+
+        $status_id = "";
+        switch ($status)
+        {
+            case 'pendiente':
+                $status = "5c4a299c5c93dc0eb199214a";
+            break;
+            case 'despachado':
+                $status = "5c423232c9a4c86123236dcd";
+            break;
+        }
+
+        $ordersEmail = Order::where('order_status_id' , $status)->where('organization_id' , '60467fbd9caef512a5626fc9')->pluck('email');
+    
+        //Usuarios por cada orden
+        $users = Account::whereIn('email' , $ordersEmail)->get(['_id' , 'email' , 'points', 'document_number','names']);     
+
+        
+        $orders = Order::where('order_status_id' , $status)->where('organization_id' , '60467fbd9caef512a5626fc9');
+        $orderActual = isset($filters["date_from"]) ? 
+                        $orders->whereBetween(
+                            'created_at',
+                            array(
+                                \Carbon\Carbon::parse($filters['date_from']),
+                                \Carbon\Carbon::parse($filters['date_to']),
+                            )
+                        )->get() :
+                        $orders->get();
+        
+                        
+        foreach ($orderActual as $order) {
+            $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $order->account_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
+            $totalOrders = 0;
+            $fechaOrders = '';
+            $productos = '';
+            $totalProductos = null;
+
+            $totalCodigosRedimidos = 0;
+            $fechaOrders = $fechaOrders.' | '.$order->created_at;
+            $totalOrders = $totalOrders + $order->amount;
+            $productos = $productos.','.$order->items[0];
+            $totalProductos =  $totalProductos +1;
+            
+            
+           
+            if(isset($orderActual))
+            {
+                foreach($codes as $code)
+                {   
+
+                    $template_id = $code->discount_code_template_id;
+
+                    if(!$template_id)   
+                    {
+                        $discount= "discount_code_template_id ";
+                        $template_id = $code->$discount;
+                    }
+                    $template = $templates[$template_id];
+                    $totalCodigosRedimidos = $totalCodigosRedimidos +  $template['discount'];
+                }
+
+                foreach($users as $user)
+                {  
+                    $ordersUser= Order::where('email' , $user)
+                                ->where('organization_id' , '60467fbd9caef512a5626fc9')
+                                ->first(['amount']);
+                    $totalOrdersUser =  $totalOrdersUser + $ordersUser->amount;
+
+                    if($order->email === $user->email)
+                    {
+                        
+                        $estado = ($totalOrders <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
+                        //Columnas
+                        // echo 'N° de documento, Nombres, Correo, Total de puntos redimidos, Puntos al momento de la redención ,Puntos de la prenda, Cantidad de canjeos, Total de tolas las prendas canjeadas'; 
+
+                        echo $user->document_number .','. $user->names .','. $user->email .','. $totalOrdersUser .','. $totalCodigosRedimidos. ',' . $order->account_points . ','. $totalOrders . ',' .$estado. ',' .$fechaOrders.','. $totalProductos.','. $productos. '</br>';
+                    }
+                }
+            
+                
+            }else{
+                echo $user->email . ', NO TIENE ORDER</br>';
+            }
+            
+        }
+
     }
 }

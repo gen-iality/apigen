@@ -10,10 +10,12 @@ use App\Event;
 use App\Models\OrderItem;
 use App\Models\Ticket;
 use App\Order;
-use App\Rol;
+use App\RolEvent;
 use App\State;
+use App\DocumentUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Kreait\Firebase\Auth;
 
 /**
  * Undocumented class
@@ -72,14 +74,13 @@ class UserEventService
             $orderItem->save();
         }
 
-        /* Si no existe el correo le creamos uno, anteriormente se mostraba un error */
-        // if (!isset($userData['email'])) {
-        //     $userData['email'] = 'event_'.$date.'@evius.co';
-        // }
+        
         /* Si no existe el correo le mostramos el error */
         if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
         }
+        $userData["password"] = bcrypt($userData["password"]);
+
 
         //LLenamos dos campos importantes con valores por defecto por si no vienen
         if (!isset($userData['names'])) {
@@ -88,7 +89,9 @@ class UserEventService
         $userData['displayName'] = $userData['names'];
 
         /* Buscamos primero el usuario por email y sino existe lo creamos */
+        $userData['email'] = strtolower($userData['email']);
         $email = $userData['email'];
+
         $matchAttributes = ['email' => $email];
 
         
@@ -109,12 +112,12 @@ class UserEventService
 
         //Account rol assigned by default
         if (!isset($eventUserFields["rol_id"])) {
-            $rol = Rol::where('level', 0)->first();
+            $rol = RolEvent::where('level', 0)->first();
             if ($rol) {
                 $eventUserFields["rol_id"] = $rol->_id;
             } else {
                 //Se supone este es un rol por defecto (asistente) si todo el resto falla
-                $eventUserFields["rol_id"] = "5afaf644500a7104f77189cd";
+                $eventUserFields["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
             }
 
         }
@@ -157,6 +160,12 @@ class UserEventService
             $eventUser = $model;
         } else {
             $eventUser = Attendee::create($eventUserFields);
+            // En caso de que el event posea document user
+            $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
+            if (!empty($document_user)) {
+                $limit = $document_user['quantity'];
+                $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
+            }
         }
        
 
@@ -288,9 +297,9 @@ string(10) "1030522402"
             $eventUser->account_id = $userId;
             $eventUser->properties = ["email" => $user->email, "name" => $user->name];
 
-            $rol = Rol::where('level', 0)->first();
+            $rol = RolEvent::where('level', 0)->first();
             $eventUser->rol_id = $rol->_id;
-            $eventUser->rol_id = "5afaf644500a7104f77189cd";
+            $eventUser->rol_id = "60e8a7e74f9fb74ccd00dc22";
 
             $temp = State::first();
             $eventUser->state_id = $temp->_id;
@@ -360,5 +369,55 @@ string(10) "1030522402"
         $model = ModelHasRole::updateOrCreate($matchAttributesRol, $rol);
         $response = new ModelHasRoleResource($model);
         return $response;
+    }
+
+    public static function addDocumentUserToEventUserByEvent($event, $eventUser, $limit)
+    {
+        
+        // asignar documents user a event user en properties
+        $properties = $eventUser['properties'];
+        
+
+        if(isset($eventUser['properties']['documents_user']))
+        {   
+            $newDocument = DocumentUser::create([
+                "name" => $event->name,
+                "url" => $eventUser['properties']['documents_user'],
+                "event_id" => $event->_id,
+                "assign" => true
+            ]);
+            $newDocument->save();
+            $properties_merge = array_merge($properties, ['documents_user' => ["url" => $newDocument->url, "name" => $newDocument->name]]);
+            $eventUser['properties'] = $properties_merge;
+            $eventUser->save();
+        }else{
+            // traer document user sin asignar
+            $get_documets_user = DocumentUser::where('assign', false)->where('event_id', $event->_id)->paginate($limit);
+
+            $documents_user = [];
+            // asignar datos del event user a cada doc
+            foreach ($get_documets_user as $doc) {
+                $doc['eventuser_id'] = $eventUser['_id'];
+                $doc['assign'] = true; // necesario cambiar de estado
+                $doc->save();
+                array_push($documents_user, $doc);
+            }
+
+            // asignar documents user a event user en properties
+            $properties = $eventUser['properties'];
+            $documents_user_url = [];
+            foreach ($documents_user as $doc) {
+
+                array_push($documents_user_url, ["name" => $doc['name'] , "url" =>  $doc['url']]);
+            }
+            $properties_merge = array_merge($properties, ['documents_user' => $documents_user_url]);
+            $eventUser['properties'] = $properties_merge;
+            $eventUser->save();
+            
+
+        }
+        
+
+        return $eventUser;
     }
 }

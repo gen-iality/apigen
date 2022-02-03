@@ -8,9 +8,28 @@ use App\Models\Organiser;
 
 class Organization extends Organiser
 {
-    //
-    protected $fillable = [ 'name', 'country', 'city', 'picture','location', 'banner_image_email', 'footer_image_email',
-     'nit', 'phone', 'doc', 'description', 'author','email','network','user_properties','properties'];
+    const ID_ROL_ADMINISTRATOR = '5c1a59b2f33bd40bb67f2322';
+    protected $fillable = [ 
+        'name', 
+        'country', 
+        'city', 
+        'picture',
+        'location', 
+        'banner_image_email', 
+        'footer_image_email',
+        'nit', 
+        'phone', 
+        'doc', 
+        'description', 
+        'author',
+        'email',
+        'network',
+        'user_properties',
+        'properties',
+        'styles',
+        'itemsMenu',
+        'type_event'
+    ];
 
     protected $hidden = ['account_ids'];
 
@@ -29,4 +48,14 @@ class Organization extends Organiser
     {
         return $this->belongsToMany('App\Account');
     } 
+
+    public function user_properties()
+    {
+        return $this->embedsMany('App\UserProperties');
+    }
+
+    public function template_properties()
+    {
+        return $this->embedsMany('App\TemplateProperties');
+    }
 }

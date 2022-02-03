@@ -27,6 +27,7 @@
       background: #fafafa;
     }
   </style>
+  {!! Analytics::render() !!}
 </head>
 
 <body>

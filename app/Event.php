@@ -6,8 +6,9 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use App\Models\Event as ModelsEvent;
 use Carbon\Carbon;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+//use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+//use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Event Model
@@ -15,7 +16,7 @@ use Jenssegers\Mongodb\Eloquent\SoftDeletes;
  */
 class Event extends ModelsEvent
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     const VISIBILITY_PUBLIC = 'PUBLIC';
     const VISIBILITY_ORGANIZATION = "ORGANIZATION";
@@ -33,7 +34,9 @@ class Event extends ModelsEvent
         'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
         'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
-        'send_custom_email' , 'language', 'googleanlyticsid','status'
+        'send_custom_email' , 'language', 'googleanlyticsid','status','googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
+        'video_position'
+
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];

@@ -19,6 +19,7 @@ use App\Services\Order as OrderService;
 use Omnipay;
 use Log;
 use Auth;
+use Mail;
 
 /**
  * This class contains methods of the Orders model
@@ -281,6 +282,18 @@ class OrdersServices
                 break;
             case 'REJECTED':
                 $order->order_status_id= config('attendize.order_rejected');
+                $user = Account::find($order->account_id);                
+
+                if($order->item_type == 'points')
+                {   
+                    foreach($order->items as $item)
+                    { 
+                        Mail::to($order->email)
+                        ->queue(
+                            new \App\Mail\PointsMail($order , $user, $item , $status)
+                        );  
+                    }                  
+                }                     
                 break;
             case 'PENDING':
                 $order->order_status_id= config('attendize.order_pending');
@@ -290,6 +303,34 @@ class OrdersServices
                 break;
             case 'FAILED':
                 $order->order_status_id= config('attendize.order_failed');
+                break;
+            case 'VALID':
+                $user = Account::find($order->account_id);
+                $order->order_status_id = config('attendize.order_valid');
+                
+                $emailsAdmin =  Account::where("others_properties.role" , "admin")
+                ->where("organization_ids" , $order->organization_id)
+                ->get();
+
+                if($order->item_type == 'points')
+                {
+                    foreach($order->items as $item)
+                    {  
+                        Mail::to($order->email)
+                        ->queue(
+                            new \App\Mail\PointsMail($order , $user, $item , $status)
+                        );    
+                        
+                        foreach($emailsAdmin as $emailAdmin)
+                        {
+                            Mail::to($emailAdmin->email)
+                            ->queue(
+                                new \App\Mail\PointsMail($order , $user, $item , $status)
+                            );
+                        }
+                    }
+                }
+
                 break;
         }
         $order->save();

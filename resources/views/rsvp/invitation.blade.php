@@ -10,9 +10,10 @@
 @endif
 <br />
 <br />
-** {{ __ ('Mail.greeting')}} {{$eventUser_name}}**, {{ __ ('Mail.successful_enrollment')}}:
+<div class="centered"  style="font-size: 18px;color">
+{{ __ ('Mail.greeting')}} {{$eventUser_name}}, {{ __ ('Mail.successful_enrollment')}}:
 <b>{{$event->name}}</b>
-
+</div>
 {{-- Mensaje configurable desde el CMS en la sección configuración asistentes --}}
 @if($event->registration_message )
 
@@ -25,31 +26,38 @@
 <strong>{!! $eventUser->ticket_title!!} </strong>
 @endif
 
-@if(!empty($event->styles["event_image"]))
+{{-- @if(!empty($event->styles["event_image"]))
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["event_image"]}} /> 
 </div>
-@endif
+@endif --}}
 
 <div style="text-align: center">
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-{{ __ ('Mail.enter_event')}}
-@endcomponent
+	<div style="text-align: center">
+		@if($event->type_event == "physicalEvent")
+			<img  src="{{$qr}}" />
+		@else
+			@component('mail::button', ['url' => $link , 'color' => 'evius'])
+				{{ __ ('Mail.enter_event')}}
+			@endcomponent
+		@endif
+	</div>
+	
 </div>
 
 <hr style="border-right : 0;border-left: 0;" />
 <div style="text-align: center">
 <p style="font-size: 15px;color: gray;font-style: italic">
-Se recomienda usar los navegadores Google Chrome, Mozilla Firefox para ingresar, algunas características pueden no estar disponibles en navegadores no soportados
+	{{ __('Mail.recommend_browser') }}
 </p>
 <p style="font-size: 15px;color: gray;font-style: italic">
-Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co
+	{{ __('Mail.support_mail') }}
 </p>
 </div>
 
 <p>
-	Si tiene problemas con el botón de ingreso abra el siguiente enlace
-	<a href="{{$link}}">Clic aquí</a>
+	{{ __('Mail.alternative_entry')}}
+	<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
 </p>
 
 <div class="centered">

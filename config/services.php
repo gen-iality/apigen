@@ -13,6 +13,11 @@ return [
     | to have a conventional place to find your various credentials.
     |
     */
+    'google' => [
+        'client_id' => '460431972981-r4uke7pnlhvd16dvv91k63rav7bii9do.apps.googleusercontent.com',    
+        'client_secret' => 'ZxPdxAgtzb98LpB0yqGdqJIr',
+        'redirect' => '',
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
@@ -39,6 +44,7 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
     'firebase' => [
         'api_key' => 'AIzaSyDDnc9WHXf4CWwXCVggeiarYGu_xBgibJY', // Only used for JS integration
         'auth_domain' => 'eviusauth.firebaseapp.com', // Only used for JS integration

@@ -57,6 +57,7 @@ return [
     'order_rejected'                => '5c4a291e5c93dc0eb1992149',
     'order_pending'                 => '5c4a299c5c93dc0eb199214a',
     'order_failed'                  => '5c4f37a17aa633237e241643',
+    'order_valid'                   => '613ff0c1f1c6df84356b30c2',
 
     /*Message */
 
@@ -91,4 +92,7 @@ return [
     'currency_cop'          => 'COP',
     'currency_usd'          => 'USD',
     'trm'                   => 3124.09,
+
+    //Attendee Rol
+    'payment_assistant'     => '60e8a8b7f6817c280300dc23',
 ];
