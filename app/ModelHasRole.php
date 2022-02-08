@@ -10,7 +10,7 @@ class ModelHasRole extends Moloquent
 {
     //use SoftDeletes;
     //
-    use HasRoles;
+    // use HasRoles;
     protected $table = ('model_has_roles');
     protected $fillable = ['rol_id','event_id','model_id', 'model_type', 'space_id'];
     protected $with = ['role','space','user']; 
