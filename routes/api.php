@@ -2,6 +2,7 @@
 
 include "attendize/schedule.php";
 include "roles/rolesOrganization.php";
+include "organization/organization.php";
 include "user.php";
 
 
@@ -100,42 +101,7 @@ Route::get('events/{event}/userproperties', 'UserPropertiesController@index');
 Route::get('events/{event}/userproperties/{userpropertie}', 'UserPropertiesController@show');
 Route::put('events/{event}/userproperties/{userpropertie}/RegisterListFieldOptionTaken', 'UserPropertiesController@RegisterListFieldOptionTaken');
 
-/***************
- * USER PROPERTIES ORGANIZATION
- ****************/
-Route::get('organizations/{organization}/userproperties', 'OrganizationUserPropertiesController@index');
-Route::get('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@show');
 
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::post('organizations/{organization}/userproperties', 'OrganizationUserPropertiesController@store')->middleware('permission:create');
-        Route::put('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@update')->middleware('permission:update');
-        Route::delete('organizations/{organization}/userproperties/{id}', 'OrganizationUserPropertiesController@destroy')->middleware('permission:destroy');
-    }
-);
-
-/****************
- * organizations
- ****************/
-Route::get('organizations', 'OrganizationController@index');
-Route::get('organizations/{organization}', 'OrganizationController@show');
-Route::post('organizations/{id}/addUserProperty', 'OrganizationController@addUserProperty');
-Route::post('organizations/{id}/contactbyemail', 'OrganizationController@contactbyemail');
-Route::get('organizations/{id}/eventUsers', 'OrganizationController@indexByEventUserInOrganization');
-
-
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {                
-        Route::post('organizations' , 'OrganizationController@store');
-        Route::put('organizations/{organization}' , 'OrganizationController@update')->middleware('permission:update');
-        Route::delete('organizations/{organization}' , 'OrganizationController@destroy')->middleware('permission:destroy');
-        Route::get('me/organizations', 'OrganizationUserController@meOrganizations');
-        // Route::get('organizations/{id}/users', 'OrganizationUserController@store');
-        // Route::post('organization_users/{id}', 'OrganizationUserController@verifyandcreate');
-    }
-);
 
 
 /****************
@@ -177,20 +143,6 @@ Route::group(
 
 Route::post("events/{event}/contactlist/{user_id}", "InvitationController@indexcontacts");
 Route::apiResource("events/{event}/invitation", "InvitationController");
-
-/****************
- * Users Organization
- ****************/
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::get('organizations/{organization}/organizationusers', 'OrganizationUserController@index');
-        Route::get('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@show');
-        Route::put('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@update');
-        Route::delete('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@destroy');
-    }
-);
-Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');
 
 //Route::get('me/eventUsers', 'EventUserController@meEvents');
 /****************
@@ -251,8 +203,7 @@ Route::group(
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('eventsaftertoday', 'EventController@afterToday');
 Route::get('users/{user}/events', 'EventController@EventbyUsers');
-Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
-Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
+
 
 Route::post('events/{event}/surveys/{id}/coursefinished', 'EventStatisticsController@courseFinished');
 
@@ -264,7 +215,7 @@ Route::post('events/{event}/surveys/{id}/coursefinished', 'EventStatisticsContro
 // Route::group(
 //     ['middleware' => 'cacheResponse'], function () {
 Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
-Route::get('categories/organizations/{organization_ids}', 'CategoryController@indexByOrganization');
+
 //     }
 // );
 Route::group(
@@ -579,25 +530,12 @@ Route::group(
         Route::get('comments', 'CommentController@index');
     }
 );
-Route::get('comments/organizations/{organization}', 'CommentController@indexByOrganization');
+
 
 // ------------------------------------------------------TEST
 Route::put('codestest', 'DiscountCodeController@codesTest');
 
-/****************
- * TemplateProperties
- ****************/
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::get('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@index');
-        Route::post('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@store');
-        // Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@addTemplateEvent');
-        Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@update');
-        Route::delete('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@destroy');
-        Route::put('events/{event}/templateproperties/{templatepropertie}/addtemplateporperties', 'TemplatePropertiesController@addTemplateEvent');
-    }
-);
+
 
 /****************
  * DocumenUser
@@ -625,7 +563,4 @@ Route::group(
     }
 );
 
-
-// addDocumentUserToEventUserByEvent
-// Route::post('events/{event}/documentusers/user/{event_user}', 'DocumentUserController@addDocumentUserToEventUserByEvent');
 

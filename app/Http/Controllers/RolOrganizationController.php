@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rol;
+use App\OrganizationUser;
 use Illuminate\Http\Request;
 use App\Permission;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -17,15 +18,19 @@ class RolOrganizationController extends Controller
     const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
 
     /**
-     * _index_: list roles by event.
+     * _index_: list all roles by event and the system default roles that can use in every events.
      * @authenticated
      * 
-     * @urlParam event required event id 
-     *
+     * @urlParam organizaton required organization id 
+     * 
      */
-    public function index()
+    public function index($organization_id)
     {
-        $roles = RolEvent::all();
+        $rolOrganization = Rol::where('organization_id' , $organization_id)->get();
+        
+        // This query return the default roles in the systme, this roles are going to in every events.
+        $rolesSystem = Rol::where('module' , Rol::MODULE_SYSTEM)->get();
+        $roles = $rolOrganization->concat($rolesSystem);
         return JsonResource::collection($roles);
     }
 
@@ -48,6 +53,15 @@ class RolOrganizationController extends Controller
             'name' => 'required'
         ]);
         $data = $request->json()->all();
+        
+        $repeatRol = Rol::where('name' , $data['name'])->fisrt();
+        if(isset($repeatRol))
+        {
+            response()->json([
+                "You can't create more than one role with the same name"
+            ],409);
+        }
+        
         $data['module'] = 'organization';
         $data['organization_id'] = $organization_id;
               
@@ -57,72 +71,69 @@ class RolOrganizationController extends Controller
     }
 
     /**
-     * _show_: information from a specific role 
-     *
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
+     * _show_: information from a specific role in an event
+     * @authenticated
+     * 
+     * @urlParam organization required organization id
+     * @urlParam rol required organization rol
      */
-    public function show(RolEvent $id)
+    public function show($organization_id, $rol_id)
     {
-        //
-        return $id;
-    }
-
-    /**
-     * _show_: information from a specific role 
-     *
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
-     */
-    public function showRolPublic(RolEvent $id)
-    {
-        //
-        return $id;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RolEvent $rol)
-    {
-        //
+        $rol = Rol::where('rol_id' , $rol_id)
+                ->where('organization_id' , $organization_id )
+                ->first();
+        return $rol;
     }
 
     /**
      * _update_: update the specified resource in storage.
+     * @authenticated
      * 
-     * @urlParam id id rol
+     * @urlParam organization required organization id
+     * @urlParam rol required organization rol
      * 
      * @bodyParam name string required
-     * @bodyParam event_id string required 
+     * @bodyParam model string required 
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RolEvent $id)
+    public function update(Request $request, $organization_id, $rol_id)
     {
         //
         $data = $request->json()->all();
-        $id->fill($data);
-        $id->save();
-        return $id;
+        $data['organization_id'] = $organization_id;
+
+        $rol = Rol::where('_id' , $rol_id)
+                ->where('organization_id' , $organization_id )
+                ->first();
+        
+        $rol->fill($data);
+        $rol->save();
+        return $rol;
     }
     
     /**
      * _destroy_:Remove the specified resource from storage.
+     * @authenticated
      * 
-     * @urlParam id id rol
-     * 
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
+     * @urlParam organization required organization id
+     * @urlParam rol required organization rol
      */
-    public function destroy(RolEvent $rol)
+    public function destroy($organization_id, $rol_id)
     {
-        //
+        $rol = Rol::where('rol_id' , $rol_id)
+            ->where('organization_id' , $organization_id )
+            ->first();
+        
+        $organizationUsersRol =  OrganizationUser::where('rol_id' , $rol->_id)->get();
+
+        if(isset($organizationUsersRol))
+        {
+            response()->json([
+                "You can't do this action because there are still users with this role"
+            ],409);
+        }
+
+        return (string) $rol->delete();
     }
 
     /**

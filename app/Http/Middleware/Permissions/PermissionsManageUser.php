@@ -4,8 +4,9 @@ namespace App\Http\Middleware\Permissions;
 use Closure;
 use Auth;
 use App\Attendee;
-use App\RolEvent;
-use App\RolesPermissionsEvent;
+use App\OrganizationUser;
+use App\Rol;
+use App\RolesPermissions;
 
 /**
  * Este moddleware realiza la administracion que tiene que ver con los usuario en eventUser, 
@@ -23,8 +24,10 @@ class PermissionsManageUser
         if ($user  === null) {
             throw new AuthenticationException("No token provided. Unauthenticated");
         } 
+        
 
-        $rolAdministrator = RolEvent::ID_ROL_ADMINISTRATOR;
+        $rolAdministrator = Rol::ID_ROL_ADMINISTRATOR;
+
         //Separar los permisos para el endpoint
         $permissions = is_array($permission)
         ? $permission
@@ -36,48 +39,64 @@ class PermissionsManageUser
 
         //Validate EventUser
 
-        //EventUser que se va a editar
+        //User que se va a editar
         $userToEdit = '';
 
         //Rol del usuario que edita
         $editingUser = '';
 
+        $adminsavailable = null;
         switch ($route->parameterNames()[0]) {
             case 'event':
+
                 $userToEdit = Attendee::find($route->parameter("eventuser"));
-                $editingUser = Attendee::where('account_id' , $user->_id)->where('event_id' ,$route->parameter('event'))->first(['rol_id', 'properties']);
+
+                $editingUser = Attendee::where('account_id' , $user->_id)
+                                ->where('event_id' ,$route->parameter('event'))
+                                ->first(['rol_id', 'properties']);
+
+                $adminsavailable = Attendee::where('event_id', $route->parameter('event'))
+                                    ->where('rol_id' , $rolAdministrator)
+                                    ->get();
+
+                break;
+
+            case 'organization':
+                $userToEdit = OrganizationUser::find($route->parameter("organizationuser"));
+
+                $editingUser = OrganizationUser::where('account_id' , $user->_id)
+                                ->where('organization_id' ,$route->parameter('organization'))->first(['rol_id', 'properties']);
+
+                $adminsavailable = OrganizationUser::where('organization_id', $route->parameter('organization'))
+                                    ->where('rol_id' , $rolAdministrator)
+                                    ->get();
                 break;
         }
 
-        $rol = ($editingUser !== null) ? RolEvent::find($editingUser->rol_id) : null;
-        // $request->json(['rol_id']) = RolEvent::ID_ROL_ATTENDEE;
-        
+        $rol = ($editingUser !== null) ? Rol::find($editingUser->rol_id) : null;        
         
         
         if($userToEdit->_id === $editingUser->_id) 
         {   
-
-            $dataRol = isset($data["rol_id"]) ? isset($data["rol_id"]) : $data["properties"]["rol_id"];
+            $dataRol = isset($data["rol_id"]) ? $data["rol_id"] : $data["properties"]["rol_id"];
             
-            if(isset($dataRol))
+                  
+            if(isset($dataRol) && ($rolAdministrator === $editingUser->rol_id) && ($dataRol !== $rolAdministrator))
             {                   
-                if(($rolAdministrator === $editingUser->rol_id) && ($dataRol !== $rolAdministrator))
-                {   
-
-                    $adminsEvent = Attendee::where('event_id', $route->parameter('event'))->where('rol_id' , $rolAdministrator)->get();
-                    if(count($adminsEvent) >= 2 )
-                    {                        
-                        return $next($request);                        
-                    }else{
-                        throw abort(409 , "There must be at least one administrator in the event.");
-                    }
-
+                
+                if(count($adminsavailable) >= 2 )
+                {                       
+                    return $next($request);                        
+                }else{
+                    throw abort(409 , "There must be at least one administrator in the event.");
                 }
-                $request->merge(['rol_id' => $userToEdit->rol_id]);
+
             }
+            $request->merge(['rol_id' => $userToEdit->rol_id]);
+          
             return $next($request);
         }else if(($rol) && $rol->type === 'admin'){
-            $permissionsRolUser = RolesPermissionsEvent::whereHas('permission', function($query) use ($permissions)
+            $permissionsRolUser = RolesPermissions::whereHas('permission', function($query) use ($permissions)
             {
                 $query->whereIn('name', $permissions);
             
