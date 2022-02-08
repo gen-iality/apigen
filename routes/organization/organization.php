@@ -63,10 +63,10 @@ Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsCont
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-        Route::get('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@index');
-        Route::post('organizations/{organizaton}/templateproperties', 'TemplatePropertiesController@store')->middleware('permission:create');    
-        Route::put('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@update')->middleware('permission:update');
-        Route::delete('organizations/{organizaton}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@destroy')->middleware('permission:destroy');
+        Route::get('organizations/{organization}/templateproperties', 'TemplatePropertiesController@index');
+        Route::post('organizations/{organization}/templateproperties', 'TemplatePropertiesController@store')->middleware('permission:create');    
+        Route::put('organizations/{organization}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@update')->middleware('permission:update');
+        Route::delete('organizations/{organization}/templateproperties/{templatepropertie}', 'TemplatePropertiesController@destroy')->middleware('permission:destroy');
         Route::put('events/{event}/templateproperties/{templatepropertie}/addtemplateporperties', 'TemplatePropertiesController@addTemplateEvent');
     }
 );
