@@ -34,7 +34,7 @@ class RolesPermissions extends Moloquent
     {
 
         $nonChangeableRoles = [
-            Rol::ID_ROL_ADMINISTRATOR_EVENT ,
+            Rol::ID_ROL_ADMINISTRATOR ,
             Rol::ID_ROL_ATTENDEE
         ];
 
