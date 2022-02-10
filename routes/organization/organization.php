@@ -50,6 +50,8 @@ Route::group(
         Route::put('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@update')->middleware('permissionUser:update');;
         Route::delete('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@destroy')->middleware('permission:destroy');
         Route::get('me/organizations', 'OrganizationUserController@meOrganizations');
+        Route::get('me/organizations/{organization}', 'OrganizationUserController@meInOrganization');
+
     }
 );
 Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');

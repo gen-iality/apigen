@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Evius API",
-        "_postman_id": "a70d498f-5b7b-4cd6-816a-49856b9207b7",
+        "_postman_id": "efd917f5-70f6-48e9-b112-3f277f13e996",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -23,7 +23,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eum",
+                                    "value": "voluptatibus",
                                     "description": "id of the activity you want to see."
                                 },
                                 {
@@ -83,7 +83,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"temporibus\",\n    \"activity_description\": \"assumenda\"\n}"
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"sit\",\n    \"activity_description\": \"nihil\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -101,7 +101,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "saepe",
+                                    "value": "accusamus",
                                     "description": "activity to which the meeting is to be created"
                                 },
                                 {
@@ -143,7 +143,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quaerat",
+                                    "value": "earum",
                                     "description": "id of activity"
                                 },
                                 {
@@ -299,7 +299,7 @@
                                 {
                                     "id": "activity",
                                     "key": "activity",
-                                    "value": "velit",
+                                    "value": "id",
                                     "description": "activity id"
                                 }
                             ]
@@ -317,7 +317,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"user_id\": \"error\"\n}"
+                            "raw": "{\n    \"user_id\": \"tenetur\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -671,7 +671,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quae",
+                                    "value": "aut",
                                     "description": "id of activity_assitant"
                                 },
                                 {
@@ -865,7 +865,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"doloribus\"\n}"
+                            "raw": "{\n    \"name\": \"illo\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -971,7 +971,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"organization_id\": \"dolor\",\n    \"comment\": \"quia\",\n    \"image\": \"incidunt\"\n}"
+                            "raw": "{\n    \"organization_id\": \"eos\",\n    \"comment\": \"et\",\n    \"image\": \"consequatur\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1221,13 +1221,13 @@
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-                                    "value": "ducimus",
+                                    "value": "consequatur",
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-                                    "value": "et",
+                                    "value": "sed",
                                     "description": "id code delete"
                                 }
                             ]
@@ -1273,7 +1273,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"eaque\"\n}"
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"ea\"\n}"
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1301,7 +1301,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"labore\"\n}"
+                            "raw": "{\n    \"code\": \"amet\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1317,13 +1317,13 @@
                             "query": [
                                 {
                                     "key": "organization",
-                                    "value": "rerum",
+                                    "value": "perspiciatis",
                                     "description": "organization_id",
                                     "disabled": false
                                 },
                                 {
                                     "key": "email",
-                                    "value": "dolor",
+                                    "value": "dolorem",
                                     "description": "user email",
                                     "disabled": false
                                 }
@@ -1404,7 +1404,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"atque\"\n}"
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"cum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1626,7 +1626,7 @@
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "eaque",
+                                    "value": "ea",
                                     "description": "document user id"
                                 }
                             ]
@@ -1680,7 +1680,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quos\",\n    \"url\": \"architecto\",\n    \"assign\": true\n}"
+                            "raw": "{\n    \"name\": \"voluptatem\",\n    \"url\": \"ad\",\n    \"assign\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -1704,7 +1704,7 @@
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "laudantium",
+                                    "value": "officia",
                                     "description": "document user id"
                                 }
                             ]
@@ -1746,7 +1746,7 @@
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "quae",
+                                    "value": "temporibus",
                                     "description": "document user id"
                                 }
                             ]
@@ -1902,7 +1902,7 @@
                                 {
                                     "id": "document",
                                     "key": "document",
-                                    "value": "repudiandae",
+                                    "value": "maiores",
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -1980,7 +1980,7 @@
                                 {
                                     "id": "document",
                                     "key": "document",
-                                    "value": "dolores",
+                                    "value": "atque",
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -2139,7 +2139,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"officia\",\n    \"picture\": \"aliquid\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"architecto\",\n    \"picture\": \"nulla\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2211,7 +2211,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"qui\",\n    \"picture\": \"mollitia\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"velit\",\n    \"picture\": \"temporibus\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2283,7 +2283,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"voluptates\",\n    \"picture\": \"et\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"voluptatem\",\n    \"picture\": \"ipsa\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2319,7 +2319,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"incidunt\",\n    \"picture\": \"nostrum\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"fugiat\",\n    \"picture\": \"sed\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2375,7 +2375,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"dolores\",\n    \"picture\": \"quod\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"et\",\n    \"picture\": \"et\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2411,7 +2411,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"rerum\",\n    \"picture\": \"rerum\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"voluptatibus\",\n    \"picture\": \"et\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2689,7 +2689,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"quantity\": 6818,\n    \"auto_assign\": true\n}"
+                            "raw": "{\n    \"quantity\": 3395.255,\n    \"auto_assign\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -2751,7 +2751,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quibusdam\"\n}"
+                            "raw": "{\n    \"name\": \"aut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2947,7 +2947,7 @@
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "est",
+                                    "value": "deserunt",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -3001,7 +3001,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"corrupti\"\n    }\n}"
+                            "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"dolores\"\n    }\n}"
                         },
                         "description": "When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and\nif the user exists, the user will not be updated, it will only create the record in the event.\n\n![Screenshot](https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)",
                         "response": []
@@ -3193,7 +3193,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"eos\",\n    \"properties\": {\n        \"other_properties\": \"et\"\n    }\n}"
+                            "raw": "{\n    \"rol_id\": \"eaque\",\n    \"properties\": {\n        \"other_properties\": \"maiores\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -3365,13 +3365,13 @@
                                 },
                                 {
                                     "key": "datetime_from",
-                                    "value": "et",
+                                    "value": "possimus",
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 },
                                 {
                                     "key": "datetime_to",
-                                    "value": "deserunt",
+                                    "value": "sequi",
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 }
@@ -3422,7 +3422,7 @@
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "repudiandae",
+                                    "value": "et",
                                     "description": ""
                                 }
                             ]
@@ -3440,7 +3440,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"temporibus\"\n}"
+                            "raw": "{\n    \"rol_id\": \"recusandae\"\n}"
                         },
                         "description": "This end point sends an email to the user to inform them of the change.",
                         "response": []
@@ -3502,7 +3502,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"minima\"\n}"
+                            "raw": "{\n    \"file\": \"voluptatem\"\n}"
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -3520,7 +3520,7 @@
                                 {
                                     "id": "name",
                                     "key": "name",
-                                    "value": "ut",
+                                    "value": "a",
                                     "description": "file field by default file"
                                 }
                             ]
@@ -3538,7 +3538,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"adipisci\",\n    \"type\": \"ea\"\n}"
+                            "raw": "{\n    \"file\": \"in\",\n    \"type\": \"qui\"\n}"
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -3686,7 +3686,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"nisi\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"dolorem\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -3722,7 +3722,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"quia\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"quam\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4235,7 +4235,7 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "minus",
+                                    "value": "quas",
                                     "description": ""
                                 }
                             ]
@@ -4351,7 +4351,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"est\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+                            "raw": "{\n    \"name\": \"illum\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -4387,7 +4387,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"aperiam\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+                            "raw": "{\n    \"name\": \"quia\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -4445,13 +4445,13 @@
                                 },
                                 {
                                     "key": "date_from",
-                                    "value": "et",
+                                    "value": "molestiae",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the initial date.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "date_to",
-                                    "value": "rerum",
+                                    "value": "aut",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the finish date.",
                                     "disabled": false
                                 },
@@ -4533,6 +4533,48 @@
                     }
                 },
                 {
+                    "name": "_show_: view a specific organization user",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/organizations\/:organization\/organizationusers\/:organizationuser",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61fc3d08cc30801701328123",
+                                    "description": "The ID of the organization"
+                                },
+                                {
+                                    "id": "organizationuser",
+                                    "key": "organizationuser",
+                                    "value": "quia",
+                                    "description": "The id of the organization"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_update_: update a register user in organization.",
                     "request": {
                         "url": {
@@ -4586,7 +4628,7 @@
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
-                                    "value": "voluptas",
+                                    "value": "dolores",
                                     "description": "organization user id"
                                 }
                             ]
@@ -4635,6 +4677,42 @@
                             "raw": "[]"
                         },
                         "description": "These organizations",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_meInOrganization_: view the information an user specific into an organization",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "api.evius.co",
+                            "path": "api\/me\/organizations\/:organization",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61fc3d08cc30801701328123",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
                         "response": []
                     }
                 },
@@ -4728,7 +4806,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "rem",
+                                    "value": "recusandae",
                                     "description": "id UserProperties"
                                 },
                                 {
@@ -4806,7 +4884,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "adipisci",
+                                    "value": "et",
                                     "description": "id UserProperties"
                                 },
                                 {
@@ -4848,7 +4926,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "veritatis",
                                     "description": "id UserProperties"
                                 },
                                 {
@@ -4974,7 +5052,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "voluptas",
+                                    "value": "explicabo",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -5094,7 +5172,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "nihil",
+                                    "value": "voluptas",
                                     "description": "product"
                                 }
                             ]
@@ -5154,7 +5232,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"subject\": \"aspernatur\",\n    \"image_header\": \"quibusdam\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"placeat\",\n    \"image\": \"soluta\",\n    \"image_footer\": \"officiis\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": true\n}"
+                            "raw": "{\n    \"subject\": \"aut\",\n    \"image_header\": \"officia\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"nam\",\n    \"image\": \"ut\",\n    \"image_footer\": \"quia\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
                         },
                         "description": "",
                         "response": []
@@ -5232,7 +5310,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quo\",\n    \"type\": \"omnis\",\n    \"module\": \"ratione\"\n}"
+                            "raw": "{\n    \"name\": \"iusto\",\n    \"type\": \"dignissimos\",\n    \"module\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5256,7 +5334,7 @@
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "ut",
+                                    "value": "nihil",
                                     "description": "organization rol"
                                 }
                             ]
@@ -5298,7 +5376,7 @@
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "cum",
+                                    "value": "iusto",
                                     "description": "organization rol"
                                 }
                             ]
@@ -5316,7 +5394,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"aut\",\n    \"model\": \"nesciunt\"\n}"
+                            "raw": "{\n    \"name\": \"qui\",\n    \"model\": \"nihil\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5340,7 +5418,7 @@
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "illo",
+                                    "value": "ad",
                                     "description": "organization rol"
                                 }
                             ]
@@ -5772,7 +5850,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quidem",
+                                    "value": "beatae",
                                     "description": "id de RoleAttendee"
                                 }
                             ]
@@ -5904,7 +5982,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"ipsam\",\n    \"points\": 1,\n    \"initialMessage\": \"nobis\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 0.081233542\n}"
+                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"voluptas\",\n    \"points\": 1,\n    \"initialMessage\": \"tenetur\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 7930566.7934946\n}"
                         },
                         "description": "",
                         "response": []
@@ -5940,7 +6018,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"sequi\",\n    \"show_horizontal_bar\": \"earum\",\n    \"allow_vote_value_per_user\": \"velit\",\n    \"activity_id\": \"molestiae\",\n    \"points\": \"deserunt\",\n    \"initialMessage\": \"omnis\",\n    \"time_limit\": \"accusantium\",\n    \"allow_anonymous_answers\": \"sed\",\n    \"allow_gradable_survey\": \"aut\",\n    \"hasMinimumScore\": \"consequatur\",\n    \"isGlobal\": \"sed\",\n    \"freezeGame\": \"exercitationem\",\n    \"open\": \"atque\",\n    \"publish\": \"nihil\",\n    \"minimumScore\": \"omnis\"\n}"
+                            "raw": "{\n    \"survey\": \"facilis\",\n    \"show_horizontal_bar\": \"quia\",\n    \"allow_vote_value_per_user\": \"ullam\",\n    \"activity_id\": \"occaecati\",\n    \"points\": \"a\",\n    \"initialMessage\": \"nulla\",\n    \"time_limit\": \"labore\",\n    \"allow_anonymous_answers\": \"qui\",\n    \"allow_gradable_survey\": \"consequuntur\",\n    \"hasMinimumScore\": \"dolores\",\n    \"isGlobal\": \"eveniet\",\n    \"freezeGame\": \"sed\",\n    \"open\": \"autem\",\n    \"publish\": \"aut\",\n    \"minimumScore\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -5994,8 +6072,16 @@
                         "url": {
                             "protocol": "https",
                             "host": "api.evius.co",
-                            "path": "api\/organizations\/:organizaton\/templateproperties",
-                            "query": []
+                            "path": "api\/organizations\/:organization\/templateproperties",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61fc3d08cc30801701328123",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -6022,8 +6108,16 @@
                         "url": {
                             "protocol": "https",
                             "host": "api.evius.co",
-                            "path": "api\/organizations\/:organizaton\/templateproperties",
-                            "query": []
+                            "path": "api\/organizations\/:organization\/templateproperties",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61fc3d08cc30801701328123",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "POST",
                         "header": [
@@ -6038,7 +6132,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"eaque\"\n}"
+                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"repellat\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6050,13 +6144,19 @@
                         "url": {
                             "protocol": "https",
                             "host": "api.evius.co",
-                            "path": "api\/organizations\/:organizaton\/templateproperties\/:templatepropertie",
+                            "path": "api\/organizations\/:organization\/templateproperties\/:templatepropertie",
                             "query": [],
                             "variable": [
                                 {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61fc3d08cc30801701328123",
+                                    "description": "The ID of the organization"
+                                },
+                                {
                                     "id": "templatepropertie",
                                     "key": "templatepropertie",
-                                    "value": "sed",
+                                    "value": "suscipit",
                                     "description": "template id"
                                 }
                             ]
@@ -6086,8 +6186,16 @@
                         "url": {
                             "protocol": "https",
                             "host": "api.evius.co",
-                            "path": "api\/organizations\/:organizaton\/templateproperties\/:templatepropertie",
-                            "query": []
+                            "path": "api\/organizations\/:organization\/templateproperties\/:templatepropertie",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "61fc3d08cc30801701328123",
+                                    "description": "The ID of the organization"
+                                }
+                            ]
                         },
                         "method": "DELETE",
                         "header": [
@@ -6467,7 +6575,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "ea",
+                                    "value": "autem",
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -6541,7 +6649,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"refreshlink\": \"nobis\",\n    \"event\": \"61ccd3551c821b765a312864\",\n    \"email\": \"correo@evius.co\"\n}"
+                            "raw": "{\n    \"refreshlink\": \"dicta\",\n    \"event\": \"61ccd3551c821b765a312864\",\n    \"email\": \"correo@evius.co\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6904,34 +7012,6 @@
                     }
                 },
                 {
-                    "name": "Show the form for creating a new resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "api.evius.co",
-                            "path": "api\/test\/auth",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
                     "name": "Create model_has_role\nrole_id\nmodel_id (user_id)\nevent_id",
                     "request": {
                         "url": {
@@ -7007,7 +7087,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "molestiae",
+                                    "value": "libero",
                                     "description": ""
                                 }
                             ]
@@ -7043,7 +7123,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "corrupti",
+                                    "value": "fugit",
                                     "description": ""
                                 }
                             ]
