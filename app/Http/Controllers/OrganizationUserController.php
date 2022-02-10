@@ -205,5 +205,17 @@ class OrganizationUserController extends Controller
         return OrganizationUserResource::collection($query);
     }
 
+    /**
+     * _show_: view a specific organization user
+     * @authenticated
+     * 
+     * @urlParam organization The id of the organization
+     * @urlParam organizationuser The id of the organization
+     */
+    public function show($organizaton_id, $orgUser)
+    {   
+        $query = OrganizationUser::findOrFail($orgUser);
+        return $query;
+    }
 
 }
