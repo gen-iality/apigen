@@ -78,7 +78,7 @@ class PermissionsManageUser
         
         if($userToEdit->_id === $editingUser->_id) 
         {   
-            $dataRol = isset($data["rol_id"]) ? $data["rol_id"] : $data["properties"]["rol_id"];
+            $dataRol = isset($data["rol_id"]) ? $data["rol_id"] : isset($data["properties"]["rol_id"]) ? $data["properties"]["rol_id"] : null;
             
                   
             if(isset($dataRol) && ($rolAdministrator === $editingUser->rol_id) && ($dataRol !== $rolAdministrator))
