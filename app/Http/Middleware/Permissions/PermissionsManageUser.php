@@ -49,7 +49,7 @@ class PermissionsManageUser
         switch ($route->parameterNames()[0]) {
             case 'event':
 
-                $userToEdit = Attendee::find($route->parameter("eventuser"));
+                $userToEdit = Attendee::findOrFail($route->parameter("eventuser"));
 
                 $editingUser = Attendee::where('account_id' , $user->_id)
                                 ->where('event_id' ,$route->parameter('event'))
@@ -62,7 +62,7 @@ class PermissionsManageUser
                 break;
 
             case 'organization':
-                $userToEdit = OrganizationUser::find($route->parameter("organizationuser"));
+                $userToEdit = OrganizationUser::findOrFail($route->parameter("organizationuser"));
 
                 $editingUser = OrganizationUser::where('account_id' , $user->_id)
                                 ->where('organization_id' ,$route->parameter('organization'))->first(['rol_id', 'properties']);
@@ -75,15 +75,16 @@ class PermissionsManageUser
 
         $rol = ($editingUser !== null) ? Rol::find($editingUser->rol_id) : null;        
         
-        
+        //Un usuario puede editar su propia información
         if($userToEdit->_id === $editingUser->_id) 
         {   
             $dataRol = isset($data["rol_id"]) ? $data["rol_id"] : isset($data["properties"]["rol_id"]) ? $data["properties"]["rol_id"] : null;
             
-                  
+            //Un usuario no puede editar su propio rol, debe de ser un administrador para hacerlo     
             if(isset($dataRol) && ($rolAdministrator === $editingUser->rol_id) && ($dataRol !== $rolAdministrator))
             {                   
                 
+                //Esto valida que un evento u organizacioón SIEMPRE tenga un administrador
                 if(count($adminsavailable) >= 2 )
                 {                       
                     return $next($request);                        
@@ -95,6 +96,7 @@ class PermissionsManageUser
             $request->merge(['rol_id' => $userToEdit->rol_id]);
           
             return $next($request);
+
         }else if(($rol) && $rol->type === 'admin'){
             $permissionsRolUser = RolesPermissions::whereHas('permission', function($query) use ($permissions)
             {
