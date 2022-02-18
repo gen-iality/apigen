@@ -33,14 +33,17 @@ class RolesPermissions extends Moloquent
     public static function boot()
     {
 
-        $nonChangeableRoles = [
-            Rol::ID_ROL_ADMINISTRATOR ,
-            Rol::ID_ROL_ATTENDEE
-        ];
-
+        
 
         parent::boot();
+        
         self::saving(function ($model) {
+
+            $nonChangeableRoles = [
+                Rol::ID_ROL_ADMINISTRATOR ,
+                Rol::ID_ROL_ATTENDEE
+            ];
+    
                 
             if(in_array($model->_id, $nonChangeableRoles))
             {
@@ -50,6 +53,12 @@ class RolesPermissions extends Moloquent
         });
 
         self::deleting(function ($model) {
+
+            $nonChangeableRoles = [
+                Rol::ID_ROL_ADMINISTRATOR ,
+                Rol::ID_ROL_ATTENDEE
+            ];
+    
                 
             if(in_array($model->_id, $nonChangeableRoles))
             {
