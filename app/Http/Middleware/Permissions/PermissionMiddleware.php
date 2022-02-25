@@ -6,10 +6,10 @@ use Closure;
 use Auth;
 use App\OrganizationUser;
 use App\ModelHasRole;
-use App\RolesPermissionsEvent;
+use App\RolesPermissions;
 use App\Permission;
 use App\Attendee;
-use App\RolEvent;
+use App\Rol;
 use Spatie\Permissionn\Exceptions\UnauthorizedException;
 use Illuminate\Auth\AuthenticationException;
 
@@ -46,11 +46,12 @@ class PermissionMiddleware
                 break;
         }        
 
-        $rol = ($userRol !== null) ? RolEvent::find($userRol->rol_id) : null;
+        
+        $rol = isset($userRol) ? Rol::find($userRol->rol_id) : null;
 
         if(($rol) && $rol->type === 'admin')
         {    
-            $permissionsRolUser = RolesPermissionsEvent::whereHas('permission', function($query) use ($permissions)
+            $permissionsRolUser = RolesPermissions::whereHas('permission', function($query) use ($permissions)
             {
                 $query->whereIn('name', $permissions);
             

@@ -177,10 +177,8 @@ class OrganizationUserController extends Controller
 
     /**
      * Get user organizations
-     *This controller get the organizations of user.
-
-     * @param [type] $user_id
-     * @return OrganizationsUser
+     * This controller get the organizations of user.
+     *
      */
     public function userOrganizations($user_id)
     {
@@ -205,5 +203,32 @@ class OrganizationUserController extends Controller
         return OrganizationUserResource::collection($query);
     }
 
+    /**
+     * _show_: view a specific organization user
+     * @authenticated
+     * 
+     * @urlParam organization The id of the organization
+     * @urlParam organizationuser The id of the organization
+     */
+    public function show($organizaton_id, $orgUser)
+    {   
+        $query = OrganizationUser::findOrFail($orgUser);
+        return $query;
+    }
 
+    /**
+     * _meInOrganization_: view the information an user specific into an organization
+     * @authenticated
+     * 
+     * @urlParam organization The id of the organization
+     */
+    public function meInOrganization($organizaton_id)
+    {
+        $user = Auth::user();
+        $query =  OrganizationUser::where('account_id' , $user->_id)
+                    ->where('organization_id' , $organizaton_id)
+                    ->paginate(config('app.page_size'));
+
+        return $query;
+    }
 }

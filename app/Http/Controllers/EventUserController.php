@@ -718,7 +718,8 @@ class EventUserController extends Controller
         $rol = isset($data["rol_id"]) ? $data["rol_id"] : $data["properties"]["rol_id"];
 
         $data['rol_id'] = $rol;
-        unset($data['properties']['rol_id']);
+        $data['properties']['rol_id'] = $rol; 
+        // unset($data['properties']['rol_id']);
         $eventUser = Attendee::findOrFail($evenUserId);        
 
 
