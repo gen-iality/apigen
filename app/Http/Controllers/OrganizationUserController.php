@@ -109,7 +109,7 @@ class OrganizationUserController extends Controller
 
         //Account rol assigned by default
         if (!isset($data["rol_id"])) {
-            $data["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
+            $data["rol_id"] = Rol::ID_ROL_ATTENDEE;
         }
 
         if ($model) {

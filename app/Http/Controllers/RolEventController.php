@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\RolEvent;
+use App\Rol;
+use App\Event;
 use Illuminate\Http\Request;
 use App\Permission;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\Rule;
 use Validator;
+
 /**
  * @group RolEvent
  */
 class RolEventController extends Controller
 {   
-    const AVALIABLE_TYPES = 'attendee,administrator';
+    const AVALIABLE_TYPES = ['attendee', 'admin'];
     const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
 
     /**
@@ -23,9 +25,13 @@ class RolEventController extends Controller
      * @urlParam event required event id 
      *
      */
-    public function index()
+    public function index($event_id)
     {
-        $roles = RolEvent::all();
+        $rolEvent = Rol::where('event_id' , $event_id)->get();
+
+        // This query return the default roles in the systme, this roles are going to in every events.
+        $rolesSystem = Rol::where('module' , Rol::MODULE_SYSTEM)->get();
+        $roles = $rolEvent->concat($rolesSystem);
         return JsonResource::collection($roles);
     }
 
@@ -36,46 +42,47 @@ class RolEventController extends Controller
      * 
      * @urlParam event required event id
      * 
-     * @bodyParam name string required
-     * @bodyParam name string required
-     * 
+     * @bodyParam name string required Rol name
+     * @bodyParam type string required The type can be attendee or admin 
      * 
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request, $event_id)
+    {   
         //
-        $rules = $request->validate([
-            'name' => 'required',
-            'type' => 'required'
-        ]);
+        $data = $request->json()->all(); 
+        $rules = [
+            'name' => 'required|unique:roles,name,NULL,id,modeltable_id,' . $event_id,
+            'type' => ["required", Rule::in(RolEventController::AVALIABLE_TYPES)]
+        ];
+        //Standardize role names
+        $data['name'] =  ucfirst(strtolower($data['name']));   
 
-        // $messages = ['in' => "The type should be one of: " . implode(", ", RolEventController::AVALIABLE_TYPES)];
+        $messages = [
+            'in' => "Type should be one of: " . implode(", ", RolEventController::AVALIABLE_TYPES),           
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+        if (!$validator->passes()) {
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
+   
+        $event = Event::find($event_id);
+        $data['event_id'] = $event_id;
 
-        $data = $request->json()->all();
-
-
-        // $validator = Validator::make($data, $rules, $messages);
-        // if (!$validator->passes()) {
-        //     return response()->json(['errors' => $validator->errors()->all()], 400);
-        // }
-
-        // $permission = Permission::where('name', $data['module'] .'_'. $data['permission'])->first();
-
-        
-        $result = new RolEvent($request->json()->all());
-        $result->save();
+        $result = $event->rols()->create($data);
+            
+        // $result->save();
         return $result;
     }
 
     /**
      * _show_: information from a specific role 
-     *
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
+     * @authenticated
+     * 
+     * @urlParam event required event id
+     * @urlParam rolevent required rol id
      */
-    public function show(RolEvent $id)
-    {
-        //
+    public function show($event_id , Rol $id)
+    {   
         return $id;
     }
 
@@ -91,49 +98,62 @@ class RolEventController extends Controller
         return $id;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RolEvent $rol)
-    {
-        //
-    }
 
     /**
      * _update_: update the specified resource in storage.
+     * @authenticated
      * 
-     * @urlParam id id rol
+     * @urlParam event required event id
+     * @urlParam rolevent required rol id
      * 
-     * @bodyParam name string required
-     * @bodyParam event_id string required 
+     * @bodyParam name string Rol name
+     * @bodyParam type string The type can be attendee or admin 
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RolEvent $id)
+    public function update(Request $request, $event_id, $rol_id)
     {
         //
-        $data = $request->json()->all();
-        $id->fill($data);
-        $id->save();
-        return $id;
+        $data = $request->json()->all(); 
+        $rules = [
+            'name' => 'unique:roles,name,NULL,id,modeltable_id,' . $event_id,
+            'type' => [Rule::in(RolEventController::AVALIABLE_TYPES)]
+        ];
+        //Standardize role names
+        $data['name'] =  ucfirst(strtolower($data['name']));   
+
+        $messages = [
+            'in' => "Type should be one of: " . implode(", ", RolEventController::AVALIABLE_TYPES),           
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+        if (!$validator->passes()) {
+            return response()->json(['errors' => $validator->errors()->all()], 400);
+        }
+        
+        $rol = Rol::find($rol_id);
+        $rol->fill($data);
+        $rol->save();
+        return $rol;
     }
     
     /**
-     * _destroy_:Remove the specified resource from storage.
+     * _destroy_: if the roll is not used for none user you can remove them.
      * 
-     * @urlParam id id rol
-     * 
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
+     * @urlParam event required event id
+     * @urlParam rolevent required rol id
      */
-    public function destroy(RolEvent $rol)
+    public function destroy(Request $request, $event_id, $rol_id)
     {
-        //
+        $eventUser = EventUser::where('rol_id' , $rol_id)->where('event_id' , $event_id)->first();
+        
+        if(!isset($eventUser)){            
+            RolPermissions::where("rol_id", $rol_id)->delete();
+            $rol = Rol::find($rol_id);
+            return (string )$rol->delete();
+        }else{
+            return response()->json([
+                "message" => "You can't delete this role because there are users using it"
+            ], 403);
+        }
     }
 
     /**
