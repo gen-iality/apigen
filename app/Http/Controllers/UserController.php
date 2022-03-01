@@ -523,7 +523,8 @@ class UserController extends UserControllerWeb
         $auth = resolve('Kreait\Firebase\Auth');
 
         $request->validate([
-            "email" => "required|email:rfc,dns",            
+            "email" => "required|email:rfc,dns",
+            "hostName" => "required|string"                     
         ]);
 
         $data = $request->json()->all();
@@ -534,7 +535,7 @@ class UserController extends UserControllerWeb
         {
             return response()->json([
                 "message" => "El usuario no está registrado en el sistema"
-            ] , 404);        
+            ] , 404);
         }
         //Algunos clientes prefieren que su marca este en todos los correos por eso se coloca la opción de evento     
         $event = null;
@@ -544,7 +545,8 @@ class UserController extends UserControllerWeb
             $event = Event::find($data['event_id']);
             $url = config('app.front_url') . "/landing/". $event->_id ."/event";
         }else{
-            $url = config('app.front_url');
+            // $url = config('app.front_url');
+            $url = $data['hostName'];
         }
         
         
