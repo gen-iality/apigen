@@ -19,7 +19,7 @@ Route::group(
  * APP CONFIGURATION
  ****************/
 Route::apiResource('event/{id}/configuration', 'AppConfigurationController');
-Route::delete('event/{id}/configuration', 'AppConfigurationController@destroy');
+Route::delete('event/{id}/configuration', 'AppConfigurationController@delete');
 
 /****************
  * NEWSFEED

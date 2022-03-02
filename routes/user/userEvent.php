@@ -1,9 +1,10 @@
 <?php
+
 /*
 |--------------------------------------------------------------------------
-| USER Routes
+| USER EVENT Routes
 |--------------------------------------------------------------------------
-| This is where you can register API routes to manage users in the different modules.
+| This is where you can register API routes to manage users in the events and the their submodules
 | 
 */
 
@@ -43,3 +44,15 @@ Route::group(
         Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
+
+
+/***************
+ * ActivityAssistant asistentes a una actividad(charlas) dentro de un evento
+ ****************/
+//Route::get    ('events/{event}/activities_attendees/{activity_id}',  'ActivityAssistantController@index');
+Route::apiResource('events/{event}/activities_attendees', 'ActivityAssistantController');
+Route::get('events/{event}/activities_attendeesAdmin', 'ActivityAssistantController@indexForAdmin');
+Route::get('me/events/{event}/activities_attendees',  'ActivityAssistantController@meIndex');
+Route::put('events/{event}/activities_attendees/{id}/check_in',  'ActivityAssistantController@checkIn');
+Route::get('events/{event}/totalmetricsbyactivity',                'ActivityAssistantController@totalMetricsByActivity');
+

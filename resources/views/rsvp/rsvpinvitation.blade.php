@@ -1,7 +1,9 @@
 @component('mail::message')
 
 @if(isset($image_header) && !empty($image_header))
-<img alt="{{$event->name}}" src={{$image_header}} /> 
+<div class="centered">
+  <img alt="{{$event->name}}" src={{$image_header}} /> 
+</div>
 @elseif(!empty($event->styles["banner_image_email"]))
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
@@ -66,6 +68,8 @@
 		@endcomponent
 	@endif
 </div>
+
+Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
 
 
 
