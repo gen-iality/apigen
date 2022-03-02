@@ -413,47 +413,47 @@ class EventUserController extends Controller
      * @bodyParam password  string if the password is not added, the password will be the user's email. Example: *******
      * @bodyParam other_params.city any other params  will be saved in eventUser
      */
-    public function createUserAndAddtoEvent(Request $request, string $event_id, string $eventuser_id = null)
+    public function createUserAndAddtoEvent(Request $request, string $event_id)
     {
-        try {
-            $request->validate([
-                'email' => 'required|email:rfc,dns',
-                'names' => 'required|string|max:250',
-                'password' => 'string'
-            ]);
-    
-            $eventUserData = $request->json()->all();	    
-            $eventUserData["email"] = strtolower($eventUserData["email"]); 
-            $noSendMail = $request->query('no_send_mail');
-    
-            $email = $eventUserData["email"];
-            $event = Event::findOrFail($event_id);
+        $request->validate([
+            'email' => 'required|email:rfc,dns',
+            'names' => 'required|string|max:250',
+            'password' => 'string|min:6',
+            'rol_name' => 'exists:roles,name|string' // por default se asigna rol asistente
+        ]);
 
-            $rol_id = "";
-            if(!isset($eventUserData["rol_id"]))
-            {
-                $rol_id = isset($eventUserData["rol_id"]) ? $eventUserData["rol_id"] : "60e8a7e74f9fb74ccd00dc22";
-            }
-             
-            $user = Account::where("email" , $email)->first();   
+        $eventUserData = $request->json()->all();
+        $eventUserData["email"] = strtolower($eventUserData["email"]);
+        // $noSendMail = $request->query('no_send_mail');
+
+        $email = $eventUserData["email"];
+
+        try {
+
+            $user = Account::where("email" , $email)->first();
+
+            // crear cuenta de usuario si no existe 
             if(!isset($user))
             {   
+                // Si no tiene password, se le asigna el email como password
                 $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
                     "password" => $pass
-                ]); 
+                ]);
             }
-            
-                        
+
+            $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
+            $rol_id = UserEventService::asignRolToEventUser($rol_name);
+            unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
-            
+
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
                 [
                     'account_id' => $user->_id,
-                    "event_id" =>$event_id
+                    "event_id" => $event_id
                 ],
                 [ 
                     'rol_id' => $rol_id,
@@ -466,15 +466,13 @@ class EventUserController extends Controller
             $result = (object) [
                 "status" => $result_status,
                 "data" => $eventUser,  
-                "message" => "OK"              
+                "message" => "OK"
             ];
 
             $response = new EventUserResource($eventUser);
             
             $additional = ['status' => $result->status, 'message' => $result->message];
-            $response->additional($additional); 
-
-
+            $response->additional($additional);
             
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);

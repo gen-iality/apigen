@@ -5,6 +5,7 @@
 namespace App\evaLib\Services;
 
 use App\Account;
+use App\Rol;
 use App\Attendee;
 use App\Event;
 use App\Models\OrderItem;
@@ -419,5 +420,18 @@ string(10) "1030522402"
         
 
         return $eventUser;
+    }
+
+    public static function asignRolToEventUser($rol_name)
+    {
+        if ($rol_name) {
+            $rol = Rol::where('name', $rol_name)->first();
+            $rol_id = $rol['_id'];
+        } else {
+            // asignar rol de asistente por defecto
+            $rol_id = '60e8a7e74f9fb74ccd00dc22';
+        }
+        
+        return $rol_id;
     }
 }
