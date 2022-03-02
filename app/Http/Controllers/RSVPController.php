@@ -337,43 +337,42 @@ class RSVPController extends Controller implements ShouldQueue
     }
 
     /**
-     * 
+     * updateStatusMessageUser_: update the stadistics about the emails send
      */
-    public function updateStatusMessageUser($typeStatus ,$message_id)
+    public function updateStatusMessageUser($event_id ,$message_id)
     {   
         $message = Message::find($message_id);
-        $total= MessageUser::where('status', '=', $typeStatus)->where('message_id', '=', $message_id)->get();
+       
+        $total = MessageUser::where('message_id', '=', $message_id)->get(['history']);    
 
-        switch ($typeStatus) 
-        {
-            case 'Send':
-                $total_sent = isset($total_sent) ? count($total) : 0;
-                $message->total_sent = $total_sent;
-                $message->save();
-            break;
-            case 'Delivery':               
-                $total_delivered = isset($total_delivered) ? count($total) : 0;
-                $message->total_delivered = $total_delivered;
-                $message->save();
-            break;
-            case 'Open':
-                $total_opened = isset($total_opened) ? count($total) : 0;
-                $message->total_opened = $total_opened;
-                $message->save();
-            break;
-            case 'Click':
-                $total_clicked = isset($total_clicked) ? count($total) : 0;
-                $message->total_clicked = $total_clicked;
-                $message->save();
-            break;
-            case 'Bounce':
-                $total_bounced = isset($total_bounced) ? count($total) : 0;
-                $message->total_bounced = $total_bounced;
-                $message->save();
-            break;
+        
+        $status = ["Send" => 0, "Delivery" => 0, "Open" => 0, "Click" => 0, "Bounce" => 0];
+        $statusCount = [];
+        $totalSend = count($total);
+
+        foreach($total as $history)
+        {   
+            if(isset($history->history) && $history->history !== "")
+            {   
+                
+                for($i = 0; $i < count($history->history); $i++)
+                {
+                    array_push($statusCount, $history->history[$i]['status']);                    
+                }
+            }
         }
-        
-        
+
+        $statusCount = array_count_values($statusCount);
+        $totales = array_merge($status , $statusCount);
+
+        $message->number_of_recipients =  $totalSend;      
+        $message->total_sent = $totales['Send'];   
+        $message->total_delivered = $totales['Delivery'];                
+        $message->total_opened = $totales['Open'];         
+        $message->total_clicked = $totales['Click']; 
+        $message->total_bounced = $totales['Bounce'];
+        $message->save();
+              
         return  response()->json([
                     'message' => 'Status actualizado exitosamente'
                 ]); 
