@@ -64,8 +64,9 @@ Route::put('events/{event}/activities/{id}/hostAvailability' ,  'ActivitiesContr
 Route::post   ('events/{event}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
 Route::put('events/{event}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
 
-Route::get('events/{event}/activities','ActivitiesController@index');
-        Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
+Route::get('events/{event}/activities','ActivitiesController@index')->middleware('permissionAttendee:list_activities');
+
+Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/activities/{activity}/checkinbyadmin',  'ActivitiesController@checkinbyadmin')->middleware('permission:create_checkinbyadmin');

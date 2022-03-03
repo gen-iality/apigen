@@ -154,11 +154,6 @@ Route::group(
 );
 
 /***************
- * RolesAttendees
- ****************/
-Route::apiResource('events/{event}/rolesattendees', 'RoleAttendeeController');
-
-/***************
  * Mail
  ****************/
 Route::apiResource('events/{event}/mailing', 'MailController');
@@ -179,20 +174,7 @@ Route::group(
     }
 );
 
-//Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
-Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
-//Route::get('events/{event}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::apiResource('rolesattendees', 'RoleAttendeeController', ['except' => ['index', 'show']]);
-        Route::delete('rolesattendees/{id}', 'RoleAttendeeController@destroy');
-    }
-);
-
-Route::post('crearPermisosRol' , 'RolController@crearPermisosRol');
-Route::post('assignPermisosRol' , 'RolController@assignPermisosRol');
 
 /***************
  * Certificate
