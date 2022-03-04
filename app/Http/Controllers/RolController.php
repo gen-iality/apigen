@@ -25,7 +25,7 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = RolEvent::all();
+        $roles = Rol::all();
         return JsonResource::collection($roles);
     }
 
