@@ -26,7 +26,7 @@ class RolEventController extends Controller
      * @urlParam event required event id 
      *
      */
-    public function index($event_id)
+    public function index(FilterQuery $filterQuery)
     {   
         $input = $request->all();
         $rolEvent = Rol::where('event_id' , $event_id)->get();
