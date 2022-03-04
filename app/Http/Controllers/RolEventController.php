@@ -28,13 +28,13 @@ class RolEventController extends Controller
      */
     public function index(FilterQuery $filterQuery)
     {   
-        $input = $request->all();
+        // $input = $request->all();
         $rolEvent = Rol::where('event_id' , $event_id)->get();
 
         // This query return the default roles in the systme, this roles are going to in every events.
         $query = Rol::where('module' , Rol::MODULE_SYSTEM)->get();
         $roles = $rolEvent->concat($rolesSystem);
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        // $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return JsonResource::collection($results);
     }
 
