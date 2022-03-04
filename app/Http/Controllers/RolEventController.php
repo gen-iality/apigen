@@ -96,7 +96,7 @@ class RolEventController extends Controller
      * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
-    public function showRolPublic(RolEvent $id)
+    public function showRolPublic(Rol $id)
     {
         //
         return $id;
