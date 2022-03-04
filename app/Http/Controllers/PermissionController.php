@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\PermissionEvenent;
+use App\Permission;
 use App\AttendeTicket;
 use App\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class PermissionEventController extends Controller
 {
@@ -17,9 +18,10 @@ class PermissionEventController extends Controller
     public function index(Request $request)
     {
         //
-        return JsonResource::collection(
-            PermissionEvent::paginate(config('app.page_size'))
-        );
+        $input = $request->all();
+        $query = Permission::paginate(config('app.page_size'));
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return JsonResource::collection($results);
     }
 
     /**
@@ -33,14 +35,28 @@ class PermissionEventController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * _store_: Store a newly created resource in storage.     
      */
     public function store(Request $request)
     {
         //
+        $routeCollection = Route::getRoutes();
+        $allRoutes = [];
+        foreach ($routeCollection as $value) {
+
+            $controller = explode('@',$value->action['controller']);
+            
+            if($value->methods[0] === "GET" && $controller[1] === 'index')
+            {   
+                $module = explode('/',$value->uri);
+                // echo $value->uri .'<br>';
+                echo  'list_' . end($module) . ',' . end($module) .'<br>';
+            }
+            
+
+        }
+        dd($allRoutes);
+
         $result = new PermissionEvent($request->json()->all());
         $result->guard_name = 'web';
         $result->save();
@@ -91,7 +107,7 @@ class PermissionEventController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PermissionEvent $permission)
+    public function destroy(PermissionEvent  $permission)
     {
         //
     }

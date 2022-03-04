@@ -9,6 +9,7 @@ use App\Permission;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\Rule;
 use Validator;
+use App\evaLib\Services\FilterQuery;
 
 /**
  * @group RolEvent
@@ -25,14 +26,16 @@ class RolEventController extends Controller
      * @urlParam event required event id 
      *
      */
-    public function index($event_id)
-    {
+    public function index($event_id, FilterQuery $filterQuery)
+    {   
+        $input = $request->all();
         $rolEvent = Rol::where('event_id' , $event_id)->get();
 
         // This query return the default roles in the systme, this roles are going to in every events.
-        $rolesSystem = Rol::where('module' , Rol::MODULE_SYSTEM)->get();
+        $query = Rol::where('module' , Rol::MODULE_SYSTEM)->get();
         $roles = $rolEvent->concat($rolesSystem);
-        return JsonResource::collection($roles);
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return JsonResource::collection($results);
     }
 
     
@@ -44,6 +47,7 @@ class RolEventController extends Controller
      * 
      * @bodyParam name string required Rol name
      * @bodyParam type string required The type can be attendee or admin 
+     * 
      * 
      */
     public function store(Request $request, $event_id)

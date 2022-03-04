@@ -22,3 +22,5 @@ Route::group(
     }
 );
 
+Route::post('permissions', 'PermissionEventController@store');
+

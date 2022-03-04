@@ -64,7 +64,7 @@ Route::put('events/{event}/activities/{id}/hostAvailability' ,  'ActivitiesContr
 Route::post   ('events/{event}/activities/{id}/register_and_checkin_to_activity',  'ActivitiesController@registerAndCheckInActivity');
 Route::put('events/{event}/activities/mettings_zoom/{meeting_id}' ,  'ActivitiesController@deleteVirtualSpaceZoom');
 
-Route::get('events/{event}/activities','ActivitiesController@index')->middleware('permissionAttendee:list_activities');
+Route::get('events/{event}/activities','ActivitiesController@index')->middleware('permissionAttendee:list_activities|read');
 
 Route::get('events/{event}/activities/{activitie}','ActivitiesController@show');
 Route::group(
@@ -171,16 +171,16 @@ Route::group(
 );
 
 
-/****************
-* Style
-****************/
-Route::get('events/{event}/stylestemp', 'StylesController@indexTemp');
-Route::get('styles/{style}', 'StyleController@show');
-Route::get('styles', 'StyleController@index');
-Route::group(
-    ['middleware' => 'auth:token'], function () {        
-        Route::post('styles', 'StyleController@store')->middleware('permission:create');                      
-        Route::put('styles/{style}', 'StyleController@update')->middleware('permission:update');
-        Route::delete('styles/{style}', 'StyleController@destroy')->middleware('permission:destroy');
-    }
-);
+// /****************
+// * Style
+// ****************/
+// Route::get('events/{event}/stylestemp', 'StylesController@indexTemp');
+// Route::get('styles/{style}', 'StyleController@show');
+// Route::get('styles', 'StyleController@index');
+// Route::group(
+//     ['middleware' => 'auth:token'], function () {        
+//         Route::post('styles', 'StyleController@store')->middleware('permission:create');                      
+//         Route::put('styles/{style}', 'StyleController@update')->middleware('permission:update');
+//         Route::delete('styles/{style}', 'StyleController@destroy')->middleware('permission:destroy');
+//     }
+// );
