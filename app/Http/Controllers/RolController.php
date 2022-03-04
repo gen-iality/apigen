@@ -11,7 +11,7 @@ use Validator;
 /**
  * @group RolEvent
  */
-class RolEventController extends Controller
+class RolController extends Controller
 {   
     const AVALIABLE_TYPES = 'attendee,administrator';
     const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
