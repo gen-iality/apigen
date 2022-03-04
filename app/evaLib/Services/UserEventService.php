@@ -11,7 +11,6 @@ use App\Event;
 use App\Models\OrderItem;
 use App\Models\Ticket;
 use App\Order;
-use App\RolEvent;
 use App\State;
 use App\DocumentUser;
 use Carbon\Carbon;
@@ -113,7 +112,7 @@ class UserEventService
 
         //Account rol assigned by default
         if (!isset($eventUserFields["rol_id"])) {
-            $rol = RolEvent::where('level', 0)->first();
+            $rol = Rol::where('level', 0)->first();
             if ($rol) {
                 $eventUserFields["rol_id"] = $rol->_id;
             } else {
@@ -298,7 +297,7 @@ string(10) "1030522402"
             $eventUser->account_id = $userId;
             $eventUser->properties = ["email" => $user->email, "name" => $user->name];
 
-            $rol = RolEvent::where('level', 0)->first();
+            $rol = Rol::where('level', 0)->first();
             $eventUser->rol_id = $rol->_id;
             $eventUser->rol_id = "60e8a7e74f9fb74ccd00dc22";
 

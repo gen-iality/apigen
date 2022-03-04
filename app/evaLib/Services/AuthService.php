@@ -60,7 +60,7 @@ class AuthService
             $userEvent->event_id = $id;
 
             if (!isset($userEvent->rol_id)) {
-                $rol = RolEvent::where('level', 0)->first();
+                $rol = Rol::where('level', 0)->first();
                 $userEvent->rol_id = $rol->_id;
             }
 

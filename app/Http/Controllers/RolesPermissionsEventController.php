@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\RolEvent;
+use App\Rol;
 use App\PermissionEvent;
 use Illuminate\Http\Request;
 use App\RolesPermissionsEvent;
@@ -131,7 +131,7 @@ class RolesPermissionsEventController extends Controller
         //El rol de administador tendras todos los nuevo permisos que se creen
         //El rol de colaborador tendrá todos los permisos de update, list, show y create.
         $rolesdefault = ['Administrator' , 'Colaborator'];
-        $roles = RolEvent::whereIn('name' , $rolesdefault)->get();
+        $roles = Rol::whereIn('name' , $rolesdefault)->get();
         
 
         foreach($roles as $role)
@@ -142,7 +142,7 @@ class RolesPermissionsEventController extends Controller
         }
         
         
-        $roleUpdate = RolEvent::find($rol_id);
+        $roleUpdate = Rol::find($rol_id);
         
         return RolesPermissionsEvent::updateOrCreate(
             ["rol_id" => $roleUpdate->_id,"permission_id" => $permission->_id],

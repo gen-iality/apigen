@@ -115,7 +115,7 @@ class PermissionEventController extends Controller
     public function getUserPermissionByEvent(Request $request,$id){
         $rol = AttendeTicket::where('event_id', $id)
                                     ->where('user_id', $request->get('user')->id)->firstOrFail();
-        $permissions = RolEvent::find($rol->rol_id);
+        $permissions = Rol::find($rol->rol_id);
         return $permissions;
     }
 }
