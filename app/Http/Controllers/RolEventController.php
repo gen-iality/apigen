@@ -166,7 +166,7 @@ class RolEventController extends Controller
     public function crearPermisosRolEvent(Request $request)
     {
         $data = $request->json()->all();
-        $rolAdmin = RolEvent::where('name' , 'Administrador')->first();
+        $rolAdmin = Rol::where('name' , 'Administrador')->first();
         
         $permission = new Permission($data);
         $permission->save();
@@ -188,7 +188,7 @@ class RolEventController extends Controller
         $data = $request->json()->all();
 
         $permissions = Permission::where('name', 'like', '%'.$data['type_permission'].'%')->get();        
-        $rol = RolEvent::where('name' , $data['rol_name'])->first();
+        $rol = Rol::where('name' , $data['rol_name'])->first();
         
         if(!isset($rol))
         {   
