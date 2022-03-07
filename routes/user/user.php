@@ -29,6 +29,7 @@ Route::group(
         Route::put('users/{user_id}/changeStatusUser', 'UserController@changeStatusUser');
     }
 );
+Route::post('validateEmail', 'UserController@validateEmail');
 Route::post("users/signInWithEmailAndPassword", "UserController@signInWithEmailAndPassword");
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 Route::get('users/findByEmail/{email}', 'UserController@findByEmail');

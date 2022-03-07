@@ -211,6 +211,15 @@ class UserController extends UserControllerWeb
         return $Account;
     }
 
+    public function validateEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|unique:users,email|email:rfc,dns'
+        ]);
+        
+        return response()->json(['message' => 'Email valid'], 200);
+    }
+
     /**
      * loginorcreatefromtoken: create a user from auth data.
      * 
