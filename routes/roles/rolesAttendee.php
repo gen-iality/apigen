@@ -22,5 +22,11 @@ Route::group(
     }
 );
 
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/rolespermissions', 'RolesPermissionsEventController@store');        
+    }
+);
+
 Route::post('permissions', 'PermissionEventController@store');
 
