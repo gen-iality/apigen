@@ -45,7 +45,7 @@ class RolesPermissions extends Moloquent
             ];
     
                 
-            if(in_array($model->_id, $nonChangeableRoles))
+            if(in_array($model->rol_id, $nonChangeableRoles))
             {
                 abort(401 , "You don't have permission for do this action.");
             }
@@ -60,7 +60,7 @@ class RolesPermissions extends Moloquent
             ];
     
                 
-            if(in_array($model->_id, $nonChangeableRoles))
+            if(in_array($model->rol_id, $nonChangeableRoles))
             {
                 abort(401 , "You don't have permission for do this action.");
             }

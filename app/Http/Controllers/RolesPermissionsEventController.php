@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Rol;
+use App\Attendee;
 use App\PermissionEvent;
 use Illuminate\Http\Request;
-use App\RolesPermissionsEvent;
+use App\RolesPermissions;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RolesPermissionsEventController extends Controller
@@ -50,7 +51,8 @@ class RolesPermissionsEventController extends Controller
      */
     public function store(Request $request)
     {
-        $eventUser = Attendee::create($request->json()->all());
+        $eventUser = RolesPermissions::updateOrCreate($request->json()->all());
+
         return new JsonResource($eventUser);
     }
 
@@ -77,11 +79,11 @@ class RolesPermissionsEventController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
+     * _update_: create new rolespermissions
+     * @authenticated
+     * 
+     * @bodyParam rol_id string required
+     * @bodyParam permission_id string required
      */
     public function update(Request $request, RolesPermissionsEventEventController $rolesPermissionsController)
     {

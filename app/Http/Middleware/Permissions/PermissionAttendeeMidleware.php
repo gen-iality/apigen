@@ -36,7 +36,9 @@ class PermissionAttendeeMidleware
         $user = Auth::user();
         
         if ($user  === null) {
-            throw new AuthenticationException("No token provided. Unauthenticated");
+            // throw new AuthenticationException("No token provided. Unauthenticated");
+            //Por ahora no se valida autenticación mientras se definnen que módulos pueden ser publicos
+            return $next($request);
         } 
 
         
