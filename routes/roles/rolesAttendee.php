@@ -25,7 +25,7 @@ Route::group(
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::get('events/{event}/rolespermissions', 'RolesPermissionsEventController@index')->middleware('permission:read'); 
-        Route::get('events/{event}/rolespermissions/{rolpermission}', 'RolesPermissionsEventController@index')->middleware('permission:read'); 
+        Route::get('events/{event}/rolespermissions/{rolpermission}', 'RolesPermissionsEventController@show')->middleware('permission:read'); 
         Route::post('events/{event}/rolespermissions', 'RolesPermissionsEventController@store')->middleware('permission:create'); 
         Route::put('events/{event}/rolespermissions/{rolpermission}', 'RolesPermissionsEventController@update')->middleware('permission:update');        
         Route::delete('events/{event}/rolespermissions/{rolpermission}', 'RolesPermissionsEventController@update')->middleware('permission:destroy');                

@@ -15,7 +15,7 @@ class RolesPermissionsEventController extends Controller
      * _index_: list all rolespermissions
      * @authenticated
      */
-    public function index()
+    public function index($event_id)
     {        
         return JsonResource::collection(
             RolesPermissionsEventEventController::paginate(config('app.page_size'))
@@ -30,16 +30,6 @@ class RolesPermissionsEventController extends Controller
     {   
         $query = RolesPermissionsEvent::where('rol_id' , $rol_id);
         return JsonResource::collection($query->paginate(config('app.page_size')));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -66,18 +56,7 @@ class RolesPermissionsEventController extends Controller
     {        
         return new JsonResource($rolesPermissionsController);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RolesPermissionsEventEventController $rolesPermissionsController)
-    {
-        //
-    }
-
+    
     /**
      * _update_: create new rolespermissions
      * @authenticated
