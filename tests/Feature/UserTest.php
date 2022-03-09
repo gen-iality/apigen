@@ -93,7 +93,7 @@ class UserTest extends TestCase
 
 
     /**
-     * https://api.evius.co/docs/#getcurrentuser-returns-current-user-information-using-valid-token-send-with-the-request
+     * @group currentUser
      */
     public function testGetCurrentUser()
     {
