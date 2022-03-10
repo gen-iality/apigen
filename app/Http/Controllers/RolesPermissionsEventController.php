@@ -8,28 +8,84 @@ use App\PermissionEvent;
 use Illuminate\Http\Request;
 use App\RolesPermissions;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use App\evaLib\Services\FilterQuery;
+/**
+ * @group Roles Permissions
+ * These endpoint allow you manage the relationship between roles and permissions.
+ * Here you can see the which permissions have the roles and also you can add permissions
+ * to the roles.
+ */
 class RolesPermissionsEventController extends Controller
 {
     /**
-     * _index_: list all rolespermissions
+     * _index_: list all roles and their permissions
      * @authenticated
+     * 
+     * @urlParam event requires event id.
+     * 
+     * @response [
+     *  	{
+	 *      	"_id": "62265556a2634aabe418619e",
+	 *      	"rol_id": "60e8a7e74f9fb74ccd00dc22",
+	 *      	"permission_id": "6220f361b472fe2eb78b6d7b",
+	 *      	"updated_at": "2021-08-06 19:48:01",
+	 *      	"created_at": "2021-08-06 19:48:01",
+	 *      	"rol": {
+	 *      		"_id": "60e8a7e74f9fb74ccd00dc22",
+	 *      		"name": "Attendee",
+	 *      		"guard_name": "web",
+	 *      		"updated_at": "2021-08-06 19:04:06",
+	 *      		"created_at": "2021-07-09 19:47:51",
+	 *      		"type": "attendee",
+	 *      		"module": "system"
+	 *      	},
+	 *      	"permission": {
+	 *      		"_id": "6220f361b472fe2eb78b6d7b",
+	 *      		"name": "list_activities"
+	 *      	}
+	 *      }
+     * ]
      */
-    public function index($event_id)
-    {        
-        return JsonResource::collection(
-            RolesPermissionsEventEventController::paginate(config('app.page_size'))
-        );
+    public function index($event_id, FilterQuery $filterQuery = null)
+    {   
+        $rolesSystem = RolesPermissions::
+            whereHas('rol', function($query) use ($event_id)
+            {
+                $query->where('module' , Rol::MODULE_SYSTEM);
+            
+            })->get(); 
+
+        $rolesEvent =  RolesPermissions::
+            whereHas('rol', function($query) use ($event_id)
+            {
+                $query->where('modeltable_id', $event_id);
+            
+            })->paginate(config('app.page_size'));     
+        
+        $roles = $rolesEvent->concat($rolesSystem);
+
+        return JsonResource::collection($roles);
     }
 
     /**
-     * _indexByRoles: list all permisos by rol
+     * _indexByRoles_: list all permisos by rol
      * @authenticated
+     * 
+     * @urlParam event requires event id.
+     * @urlParam rol requires event rol id.
+     * 
      */
-    public function indexByRol($rol_id)
+    public function indexByRol($event_id, $rol_id, FilterQuery $filterQuery = null)
     {   
-        $query = RolesPermissionsEvent::where('rol_id' , $rol_id);
-        return JsonResource::collection($query->paginate(config('app.page_size')));
+
+        $query = RolesPermissions::where('rol_id' , $rol_id)
+        ->whereHas('rol', function($query) use ($event_id)
+        {
+            $query->where('modeltable_id', $event_id);
+        
+        })->first();
+        
+        return $query;
     }
 
     /**
@@ -47,10 +103,10 @@ class RolesPermissionsEventController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
+     * _show_: information from a specific relationship between role and permiision 
+     * @authenticated
+     * 
+     * @urlParam rolpermission required rolpermission_id
      */
     public function show(RolesPermissionsEventEventController $rolesPermissionsController)
     {        
@@ -58,7 +114,7 @@ class RolesPermissionsEventController extends Controller
     }
     
     /**
-     * _update_: create new rolespermissions
+     * _update_: update a specific rolepermission
      * @authenticated
      * 
      * @bodyParam rol_id string required
@@ -75,10 +131,8 @@ class RolesPermissionsEventController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
+     * _delete_: remove the specified resource from storage.
+     * @authenticated
      */
     public function destroy(RolesPermissionsEventEventController $rolesPermissionsController)
     {

@@ -7,31 +7,26 @@ use App\AttendeTicket;
 use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\evaLib\Services\FilterQuery;
 
-class PermissionEventController extends Controller
+/**
+ * @group Permissions
+ * 
+ * These endpoints allow you to view all permissions enabled by the system.
+ */
+class PermissionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * _index_: list all permissions that you can add to the roles.
+     * @authenticated
      */
-    public function index(Request $request)
+    public function index(Request $request, FilterQuery $filterQuery)
     {
         //
         $input = $request->all();
         $query = Permission::paginate(config('app.page_size'));
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return JsonResource::collection($results);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**

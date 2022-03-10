@@ -12,7 +12,14 @@ use Validator;
 use App\evaLib\Services\FilterQuery;
 
 /**
- * @group RolEvent
+ * @group Rol Events
+ * 
+ * These enpoints help you to manage the roles of attendes 
+ * and aministrators in a event.
+ * 
+ * You can create all roles that yo want. 
+ * 
+ * For view and manage this endpoints you have to be administrator in the event.
  */
 class RolEventController extends Controller
 {   
@@ -21,20 +28,48 @@ class RolEventController extends Controller
 
     /**
      * _index_: list roles by event.
+     * 
+     * In this list you can see the two roles default of the system: Attendee and Administrator. 
+     * Also you can see all roles created for you.
+     * When you create an event, you are assigned the admin role.
+     * 
      * @authenticated
      * 
-     * @urlParam event required event id 
-     *
+     * @urlParam event required The ID of the event
+     * @queryParam filtered optional filter parameters Example: [{"field":"type","value":"attendee"}] 
+     * 
+     * @response [
+     * 	{
+     * 		"_id": "60e8a7e74f9fb74ccd00dc22",
+     * 		"name": "Attendee",
+     * 		"guard_name": "web",
+     * 		"updated_at": "2021-08-06 19:04:06",
+     * 		"created_at": "2021-07-09 19:47:51",
+     * 		"type": "attendee",
+     * 		"module": "system"
+     * 	},
+     * 	{
+     * 		"_id": "5c1a59b2f33bd40bb67f2322",
+     * 		"name": "Administrator",
+     * 		"guard_name": "web",
+     * 		"updated_at": "2021-07-02 20:58:53",
+     * 		"created_at": "2018-12-19 14:46:10",
+     * 		"type": "admin",
+     * 		"module": "system"
+     * 	}
+     * ]
      */
-    public function index($event_id , FilterQuery $filterQuery)
+    public function index($event_id , Request $request, FilterQuery $filterQuery)
     {   
-        // $input = $request->all();
-        $rolEvent = Rol::where('event_id' , $event_id)->get();
+        $input = $request->all();
+        $rolEvent = Rol::where('event_id' , $event_id);
 
         // This query return the default roles in the systme, this roles are going to in every events.
         $query = Rol::where('module' , Rol::MODULE_SYSTEM)->get();
-        $roles = $rolEvent->concat($query);
-        // $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($rolEvent, $input);
+        $roles = $results->concat($query);
+
         return JsonResource::collection($roles);
     }
 
@@ -43,11 +78,10 @@ class RolEventController extends Controller
      * _store_: create a new rol
      * @authenticated
      * 
-     * @urlParam event required event id
+     * @urlParam event required The ID of the event
      * 
-     * @bodyParam name string required Rol name
-     * @bodyParam type string required The type can be attendee or admin 
-     * 
+     * @bodyParam name string required Rol name Example: RolName
+     * @bodyParam type string required The type can be attendee or admin Example: attendee  
      * 
      */
     public function store(Request $request, $event_id)
@@ -82,7 +116,7 @@ class RolEventController extends Controller
      * _show_: information from a specific role 
      * @authenticated
      * 
-     * @urlParam event required event id
+     * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      */
     public function show($event_id , Rol $id)
@@ -92,9 +126,7 @@ class RolEventController extends Controller
 
     /**
      * _show_: information from a specific role 
-     *
-     * @param  \App\RolEvent  $rol
-     * @return \Illuminate\Http\Response
+     * @authenticated
      */
     public function showRolPublic(Rol $id)
     {
@@ -104,10 +136,10 @@ class RolEventController extends Controller
 
 
     /**
-     * _update_: update the specified resource in storage.
+     * _update_: update the specified rol in the event.
      * @authenticated
      * 
-     * @urlParam event required event id
+     * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      * 
      * @bodyParam name string Rol name
@@ -142,7 +174,7 @@ class RolEventController extends Controller
     /**
      * _destroy_: if the roll is not used for none user you can remove them.
      * 
-     * @urlParam event required event id
+     * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      */
     public function destroy(Request $request, $event_id, $rol_id)
