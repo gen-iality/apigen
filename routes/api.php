@@ -364,7 +364,7 @@ Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
 // Route::get('events/{event}/rols', 'RolEventController@index');
-// Route::middleware('auth:token')->get('rols', 'RolController@index');
+Route::middleware('auth:token')->get('rols', 'RolController@index');
 // Route::post('rols', 'RolEventController@store');
 // Route::put('rols/{id}', 'RolEventController@update');
 // Route::get('rols/{id}', 'RolEventController@show');
