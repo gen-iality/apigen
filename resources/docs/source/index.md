@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/duplicateactivitie/voluptatibus" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/duplicateactivitie/accusamus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/duplicateactivitie/voluptatibus"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/duplicateactivitie/accusamus"
 );
 
 let headers = {
@@ -84,7 +84,7 @@ curl -X POST \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/createmeeting/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"sit","activity_description":"nihil"}'
+    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"quo","activity_description":"in"}'
 
 ```
 
@@ -100,8 +100,8 @@ let headers = {
 
 let body = {
     "activity_datetime_start": "2020-10-14 14:11",
-    "activity_name": "sit",
-    "activity_description": "nihil"
+    "activity_name": "quo",
+    "activity_description": "in"
 }
 
 fetch(url, {
@@ -142,7 +142,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/accusamus/hostAvailability" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/aut/hostAvailability" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"host_ids":"[\"KthHMroFQK24I97YoqxBZw\" , \"FIRVnSoZR7WMDajgtzf5Uw\" , \"15DKHS_6TqWIFpwShasM4w\" , \"2m-YaXq_TW2f791cVpP8og\", \"mSkbi8PmSSqQEWsm6FQiAA\"]","host_id":"KthHMroFQK24I97YoqxBZw","date_start_zoom":"2021-02-08T07:30:00","date_end_zoom":"2021-02-08T09:30:00"}'
@@ -151,7 +151,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/accusamus/hostAvailability"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/aut/hostAvailability"
 );
 
 let headers = {
@@ -206,14 +206,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/earum/register_and_checkin_to_activity" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/eveniet/register_and_checkin_to_activity" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/earum/register_and_checkin_to_activity"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/eveniet/register_and_checkin_to_activity"
 );
 
 let headers = {
@@ -337,7 +337,29 @@ fetch(url, {
 
 ```json
 {
-    "data": [],
+    "data": [
+        {
+            "_id": "61a687746b180e0f0c1fa2d2",
+            "name": "Demo",
+            "subtitle": null,
+            "image": null,
+            "description": null,
+            "capacity": 100,
+            "event_id": "61a687713bbf847b3f59d117",
+            "datetime_end": "2021-11-30 16:18:00",
+            "datetime_start": "2021-11-30 15:18:00",
+            "date_start_zoom": "2021-11-30T14:18:00",
+            "date_end_zoom": "2021-11-30T17:18:00",
+            "updated_at": "2021-11-30 20:20:04",
+            "created_at": "2021-11-30 20:20:04",
+            "access_restriction_types_available": null,
+            "activity_categories": [],
+            "space": null,
+            "hosts": [],
+            "type": null,
+            "access_restriction_roles": []
+        }
+    ],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/activities?page=1",
         "last": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/activities?page=1",
@@ -346,12 +368,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": null,
+        "from": 1,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/activities",
         "per_page": 2500,
-        "to": null,
-        "total": 0
+        "to": 1,
+        "total": 1
     }
 }
 ```
@@ -430,16 +452,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/id/checkinbyadmin" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/cumque/checkinbyadmin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":"tenetur"}'
+    -d '{"user_id":"quisquam"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/id/checkinbyadmin"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities/cumque/checkinbyadmin"
 );
 
 let headers = {
@@ -448,7 +470,7 @@ let headers = {
 };
 
 let body = {
-    "user_id": "tenetur"
+    "user_id": "quisquam"
 }
 
 fetch(url, {
@@ -886,11 +908,20 @@ fetch(url, {
 ```
 
 
-> Example response (404):
+> Example response (200):
 
 ```json
 {
-    "message": "No query results for model [App\\ActivityAssistant] 5ed66ce2a6929562725bd7c2"
+    "_id": "5ed66ce2a6929562725bd7c2",
+    "activity_id": "5ed4081416197f2b711c5ed5",
+    "user_id": "5ed667edd3093a019f783d58",
+    "event_id": "5ed3ff9f6ba39d1c634fe3f2",
+    "user_ids": [
+        "5ed667edd3093a019f783d58"
+    ],
+    "updated_at": "2020-06-02 15:14:42",
+    "created_at": "2020-06-02 15:14:42",
+    "user": null
 }
 ```
 
@@ -1062,14 +1093,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities_attendees/aut/check_in" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities_attendees/ut/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities_attendees/aut/check_in"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/activities_attendees/ut/check_in"
 );
 
 let headers = {
@@ -1284,7 +1315,14 @@ fetch(url, {
 > Example response (200):
 
 ```json
-[]
+{
+    "_id": "5bb25243b6312771e92c8693",
+    "name": "Evento Deportivo",
+    "organization_ids": [
+        "5bb63842c06586040e58aa35",
+        "5bb63861c065863d470263a3"
+    ]
+}
 ```
 
 ### HTTP Request
@@ -1382,7 +1420,7 @@ curl -X PUT \
     "https://api.evius.co/api/categories/5bb25243b6312771e92c8693" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"illo"}'
+    -d '{"name":"nihil"}'
 
 ```
 
@@ -1397,7 +1435,7 @@ let headers = {
 };
 
 let body = {
-    "name": "illo"
+    "name": "nihil"
 }
 
 fetch(url, {
@@ -1540,7 +1578,7 @@ curl -X POST \
     "https://api.evius.co/api/comments" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"organization_id":"eos","comment":"et","image":"consequatur"}'
+    -d '{"organization_id":"et","comment":"explicabo","image":"repellat"}'
 
 ```
 
@@ -1555,9 +1593,9 @@ let headers = {
 };
 
 let body = {
-    "organization_id": "eos",
-    "comment": "et",
-    "image": "consequatur"
+    "organization_id": "et",
+    "comment": "explicabo",
+    "image": "repellat"
 }
 
 fetch(url, {
@@ -2048,14 +2086,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/discountcodetemplate/consequatur/code/sed" \
+    "https://api.evius.co/api/discountcodetemplate/aperiam/code/vel" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/discountcodetemplate/consequatur/code/sed"
+    "https://api.evius.co/api/discountcodetemplate/aperiam/code/vel"
 );
 
 let headers = {
@@ -2099,7 +2137,7 @@ curl -X POST \
     "https://api.evius.co/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"ea"}'
+    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"corrupti"}'
 
 ```
 
@@ -2116,7 +2154,7 @@ let headers = {
 let body = {
     "code": "Nyd0jOpQ",
     "event_id": "5ea23acbd74d5c4b360ddde2",
-    "organization_id": "ea"
+    "organization_id": "corrupti"
 }
 
 fetch(url, {
@@ -2200,7 +2238,7 @@ curl -X PUT \
     "https://api.evius.co/api/code/redeem_point_code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"amet"}'
+    -d '{"code":"voluptas"}'
 
 ```
 
@@ -2215,7 +2253,7 @@ let headers = {
 };
 
 let body = {
-    "code": "amet"
+    "code": "voluptas"
 }
 
 fetch(url, {
@@ -2252,7 +2290,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/code/codesByUser?organization=perspiciatis&email=dolorem" \
+    -G "https://api.evius.co/api/code/codesByUser?organization=mollitia&email=ut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -2263,8 +2301,8 @@ const url = new URL(
 );
 
 let params = {
-    "organization": "perspiciatis",
-    "email": "dolorem",
+    "organization": "mollitia",
+    "email": "ut",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -2410,7 +2448,7 @@ curl -X POST \
     "https://api.evius.co/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"cum"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"quidem"}'
 
 ```
 
@@ -2430,7 +2468,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "cum"
+    "discount_type": "quidem"
 }
 
 fetch(url, {
@@ -2852,14 +2890,14 @@ Display the specified resource.
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/ea" \
+    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/tempora" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/ea"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/tempora"
 );
 
 let headers = {
@@ -2914,7 +2952,7 @@ curl -X POST \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatem","url":"ad","assign":true}'
+    -d '{"name":"eum","url":"perferendis","assign":false}'
 
 ```
 
@@ -2929,9 +2967,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatem",
-    "url": "ad",
-    "assign": true
+    "name": "eum",
+    "url": "perferendis",
+    "assign": false
 }
 
 fetch(url, {
@@ -2985,14 +3023,14 @@ Update the specified resource in storage.
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/officia" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/sapiente" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/officia"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/sapiente"
 );
 
 let headers = {
@@ -3045,14 +3083,14 @@ Remove the specified resource from storage.
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/temporibus" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/voluptatum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/temporibus"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documentusers/voluptatum"
 );
 
 let headers = {
@@ -3277,14 +3315,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/maiores" \
+    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/debitis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/maiores"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/debitis"
 );
 
 let headers = {
@@ -3305,7 +3343,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Documents] maiores"
+    "message": "No query results for model [App\\Documents] debitis"
 }
 ```
 
@@ -3394,14 +3432,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/atque" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/eligendi" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/atque"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/documents/eligendi"
 );
 
 let headers = {
@@ -3470,806 +3508,7 @@ fetch(url, {
 
 ```json
 {
-    "data": [
-        {
-            "_id": "6202d96003e38a2b8a637621",
-            "name": "Test Rol Event Create",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2022-02-08 15:57:00",
-            "datetime_to": "2022-02-08 16:57:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61f43900438bcd77434db317",
-            "organizer_id": "61fc3d08cc30801701328123",
-            "updated_at": "2022-02-08 20:58:08",
-            "created_at": "2022-02-08 20:58:08",
-            "author": {
-                "_id": "61f43900438bcd77434db317",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1643395428882.png?alt=media&token=1fe6b375-eda1-495e-b05c-b72f00a7209f",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "jrxu9QXZN9nynxUn",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-01-28 18:43:52",
-                "created_at": "2022-01-28 18:42:08"
-            },
-            "categories": [],
-            "event_type": null,
-            "organiser": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        {
-            "_id": "6202d9cecb2d1472fc2ba70f",
-            "name": "Test Rol Event Create",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2022-02-08 15:57:00",
-            "datetime_to": "2022-02-08 16:57:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61f43900438bcd77434db317",
-            "organizer_id": "61fc3d08cc30801701328123",
-            "updated_at": "2022-02-08 20:59:58",
-            "created_at": "2022-02-08 20:59:58",
-            "author": {
-                "_id": "61f43900438bcd77434db317",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1643395428882.png?alt=media&token=1fe6b375-eda1-495e-b05c-b72f00a7209f",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "jrxu9QXZN9nynxUn",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-01-28 18:43:52",
-                "created_at": "2022-01-28 18:42:08"
-            },
-            "categories": [],
-            "event_type": null,
-            "organiser": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        {
-            "_id": "6202da25e760bd1cee26dbc1",
-            "name": "Test Rol Event Create",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2022-02-08 15:57:00",
-            "datetime_to": "2022-02-08 16:57:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61f43900438bcd77434db317",
-            "organizer_id": "61fc3d08cc30801701328123",
-            "updated_at": "2022-02-08 21:01:25",
-            "created_at": "2022-02-08 21:01:25",
-            "user_properties": [
-                {
-                    "name": "email",
-                    "label": "Correo",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "email",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1644354095267"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1644354095267"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "6202da2fe760bd1cee26dbc4"
-                    }
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres Y Apellidos",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "text",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1644354095932"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1644354095932"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "6202da2fe760bd1cee26dbc5"
-                    }
-                }
-            ],
-            "author": {
-                "_id": "61f43900438bcd77434db317",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1643395428882.png?alt=media&token=1fe6b375-eda1-495e-b05c-b72f00a7209f",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "jrxu9QXZN9nynxUn",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-01-28 18:43:52",
-                "created_at": "2022-01-28 18:42:08"
-            },
-            "categories": [],
-            "event_type": null,
-            "organiser": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/organizations\/61fc3d08cc30801701328123\/events?page=1",
         "last": "http:\/\/localhost\/api\/organizations\/61fc3d08cc30801701328123\/events?page=1",
@@ -4278,12 +3517,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/organizations\/61fc3d08cc30801701328123\/events",
         "per_page": 2500,
-        "to": 3,
-        "total": 3
+        "to": null,
+        "total": 0
     }
 }
 ```
@@ -4336,811 +3575,7 @@ fetch(url, {
 
 ```json
 {
-    "data": [
-        {
-            "_id": "6202d96003e38a2b8a637621",
-            "name": "Test Rol Event Create",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2022-02-08 15:57:00",
-            "datetime_to": "2022-02-08 16:57:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61f43900438bcd77434db317",
-            "organizer_id": "61fc3d08cc30801701328123",
-            "updated_at": "2022-02-08 20:58:08",
-            "created_at": "2022-02-08 20:58:08",
-            "author": {
-                "_id": "61f43900438bcd77434db317",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1643395428882.png?alt=media&token=1fe6b375-eda1-495e-b05c-b72f00a7209f",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "jrxu9QXZN9nynxUn",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-01-28 18:43:52",
-                "created_at": "2022-01-28 18:42:08"
-            },
-            "categories": [],
-            "event_type": null,
-            "organiser": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        {
-            "_id": "6202d9cecb2d1472fc2ba70f",
-            "name": "Test Rol Event Create",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2022-02-08 15:57:00",
-            "datetime_to": "2022-02-08 16:57:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61f43900438bcd77434db317",
-            "organizer_id": "61fc3d08cc30801701328123",
-            "updated_at": "2022-02-08 20:59:58",
-            "created_at": "2022-02-08 20:59:58",
-            "author": {
-                "_id": "61f43900438bcd77434db317",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1643395428882.png?alt=media&token=1fe6b375-eda1-495e-b05c-b72f00a7209f",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "jrxu9QXZN9nynxUn",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-01-28 18:43:52",
-                "created_at": "2022-01-28 18:42:08"
-            },
-            "categories": [],
-            "event_type": null,
-            "organiser": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": []
-        },
-        {
-            "_id": "6202da25e760bd1cee26dbc1",
-            "name": "Test Rol Event Create",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2022-02-08 15:57:00",
-            "datetime_to": "2022-02-08 16:57:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61f43900438bcd77434db317",
-            "organizer_id": "61fc3d08cc30801701328123",
-            "updated_at": "2022-02-08 21:01:25",
-            "created_at": "2022-02-08 21:01:25",
-            "user_properties": [
-                {
-                    "name": "email",
-                    "label": "Correo",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "email",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1644354095267"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1644354095267"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "6202da2fe760bd1cee26dbc4"
-                    }
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres Y Apellidos",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "text",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1644354095932"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1644354095932"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "6202da2fe760bd1cee26dbc5"
-                    }
-                }
-            ],
-            "author": {
-                "_id": "61f43900438bcd77434db317",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1643395428882.png?alt=media&token=1fe6b375-eda1-495e-b05c-b72f00a7209f",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "jrxu9QXZN9nynxUn",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-01-28 18:43:52",
-                "created_at": "2022-01-28 18:42:08"
-            },
-            "categories": [],
-            "event_type": null,
-            "organiser": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61fc3d08cc30801701328123",
-                "name": "Testo Rol Org",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": null,
-                    "banner_image": null,
-                    "menu_image": null,
-                    "banner_image_email": null,
-                    "footer_image_email": "",
-                    "brandPrimary": "#FFFFFF",
-                    "brandSuccess": "#FFFFFF",
-                    "brandInfo": "#FFFFFF",
-                    "brandDanger": "#FFFFFF",
-                    "containerBgColor": "#ffffff",
-                    "brandWarning": "#FFFFFF",
-                    "toolbarDefaultBg": "#FFFFFF",
-                    "brandDark": "#FFFFFF",
-                    "brandLight": "#FFFFFF",
-                    "textMenu": "#555352",
-                    "activeText": "#FFFFFF",
-                    "bgButtonsEvent": "#FFFFFF",
-                    "BackgroundImage": null,
-                    "FooterImage": null,
-                    "banner_footer": null,
-                    "mobile_banner": null,
-                    "banner_footer_email": null,
-                    "show_banner": "true",
-                    "show_card_banner": false,
-                    "show_inscription": false,
-                    "hideDatesAgenda": true,
-                    "hideDatesAgendaItem": false,
-                    "hideHoursAgenda": false,
-                    "hideBtnDetailAgenda": true,
-                    "loader_page": "no",
-                    "data_loader_page": null
-                },
-                "author": "61f43900438bcd77434db317",
-                "updated_at": "2022-02-03 20:37:28",
-                "created_at": "2022-02-03 20:37:28",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648502"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328125"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1643920648514"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61fc3d08cc30801701328126"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=>51=>38",
-                "updated_at": "2013-11-29 19=>51=>38"
-            },
-            "tickets": [],
-            "count": 1,
-            "checked_in_not": 1,
-            "checked_in": 0,
-            "course_status_approved": 0,
-            "course_status_pending": 1
-        }
-    ]
+    "data": []
 }
 ```
 
@@ -5297,7 +3732,7 @@ curl -X POST \
     "https://api.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"architecto","picture":"nulla","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"illo","picture":"culpa","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -5316,8 +3751,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "architecto",
-    "picture": "nulla",
+    "type_event": "illo",
+    "picture": "culpa",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -5543,7 +3978,7 @@ curl -X PUT \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"velit","picture":"temporibus","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"totam","picture":"natus","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
@@ -5562,8 +3997,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "velit",
-    "picture": "temporibus",
+    "type_event": "totam",
+    "picture": "natus",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -5674,7 +4109,7 @@ curl -X POST \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"voluptatem","picture":"ipsa","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"et","picture":"sed","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -5693,8 +4128,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "voluptatem",
-    "picture": "ipsa",
+    "type_event": "et",
+    "picture": "sed",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -5802,7 +4237,7 @@ curl -X PUT \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"fugiat","picture":"sed","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"laboriosam","picture":"cupiditate","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
@@ -5821,8 +4256,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "fugiat",
-    "picture": "sed",
+    "type_event": "laboriosam",
+    "picture": "cupiditate",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -5938,7 +4373,7 @@ curl -X POST \
     "https://api.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"et","picture":"et","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"in","picture":"sequi","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -5957,8 +4392,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "et",
-    "picture": "et",
+    "type_event": "in",
+    "picture": "sequi",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -6066,7 +4501,7 @@ curl -X PUT \
     "https://api.evius.co/api/user/events/61a687713bbf847b3f59d117" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"voluptatibus","picture":"et","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"laborum","picture":"exercitationem","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
@@ -6085,8 +4520,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "voluptatibus",
-    "picture": "et",
+    "type_event": "laborum",
+    "picture": "exercitationem",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -6367,7 +4802,353 @@ fetch(url, {
 
 ```json
 {
-    "data": [],
+    "data": [
+        {
+            "_id": "61a687713bbf847b3f59d117",
+            "name": "Demo",
+            "address": null,
+            "type_event": "onlineEvent",
+            "datetime_from": "2021-11-30 15:18:00",
+            "datetime_to": "2021-11-30 16:18:00",
+            "picture": null,
+            "venue": null,
+            "location": null,
+            "visibility": "PUBLIC",
+            "description": null,
+            "allow_register": true,
+            "styles": {
+                "buttonColor": "#FFF",
+                "banner_color": "#FFF",
+                "menu_color": "#FFF",
+                "event_image": null,
+                "banner_image": null,
+                "menu_image": null,
+                "banner_image_email": null,
+                "footer_image_email": "",
+                "brandPrimary": "#FFFFFF",
+                "brandSuccess": "#FFFFFF",
+                "brandInfo": "#FFFFFF",
+                "brandDanger": "#FFFFFF",
+                "containerBgColor": "#ffffff",
+                "brandWarning": "#FFFFFF",
+                "toolbarDefaultBg": "#FFFFFF",
+                "brandDark": "#FFFFFF",
+                "brandLight": "#FFFFFF",
+                "textMenu": "#555352",
+                "activeText": "#FFFFFF",
+                "bgButtonsEvent": "#FFFFFF",
+                "BackgroundImage": null,
+                "FooterImage": null,
+                "banner_footer": null,
+                "mobile_banner": null,
+                "banner_footer_email": null,
+                "show_banner": "true",
+                "show_card_banner": false,
+                "show_inscription": false,
+                "hideDatesAgenda": true,
+                "hideDatesAgendaItem": false,
+                "hideHoursAgenda": false,
+                "hideBtnDetailAgenda": true,
+                "loader_page": "no",
+                "data_loader_page": null
+            },
+            "author_id": "61a685292e66fd61921378f2",
+            "organizer_id": "61a687203bbf847b3f59d113",
+            "event_type_id": "5bf47203754e2317e4300b68",
+            "updated_at": "2021-11-30 20:20:03",
+            "created_at": "2021-11-30 20:20:01",
+            "user_properties": [
+                {
+                    "name": "email",
+                    "label": "Correo",
+                    "unique": false,
+                    "mandatory": false,
+                    "type": "email",
+                    "updated_at": {
+                        "$date": {
+                            "$numberLong": "1638303602342"
+                        }
+                    },
+                    "created_at": {
+                        "$date": {
+                            "$numberLong": "1638303602342"
+                        }
+                    },
+                    "_id": {
+                        "$oid": "61a687723bbf847b3f59d11b"
+                    }
+                },
+                {
+                    "name": "names",
+                    "label": "Nombres Y Apellidos",
+                    "unique": false,
+                    "mandatory": false,
+                    "type": "text",
+                    "updated_at": {
+                        "$date": {
+                            "$numberLong": "1638303602410"
+                        }
+                    },
+                    "created_at": {
+                        "$date": {
+                            "$numberLong": "1638303602410"
+                        }
+                    },
+                    "_id": {
+                        "$oid": "61a687723bbf847b3f59d11c"
+                    }
+                },
+                {
+                    "name": "picture",
+                    "label": "Avatar",
+                    "unique": false,
+                    "mandatory": false,
+                    "type": "avatar",
+                    "updated_at": {
+                        "$date": {
+                            "$numberLong": "1638303602534"
+                        }
+                    },
+                    "created_at": {
+                        "$date": {
+                            "$numberLong": "1638303602534"
+                        }
+                    },
+                    "_id": {
+                        "$oid": "61a687723bbf847b3f59d11d"
+                    }
+                },
+                {
+                    "name": "password",
+                    "label": "Password",
+                    "unique": false,
+                    "mandatory": false,
+                    "type": "password",
+                    "updated_at": {
+                        "$date": {
+                            "$numberLong": "1638303602664"
+                        }
+                    },
+                    "created_at": {
+                        "$date": {
+                            "$numberLong": "1638303602664"
+                        }
+                    },
+                    "_id": {
+                        "$oid": "61a687723bbf847b3f59d11e"
+                    }
+                }
+            ],
+            "itemsMenu": {
+                "evento": {
+                    "name": "evento",
+                    "position": 1,
+                    "section": "evento",
+                    "icon": "CalendarOutlined",
+                    "checked": true,
+                    "permissions": "public"
+                },
+                "agenda": {
+                    "name": "Mi agenda",
+                    "position": null,
+                    "section": "agenda",
+                    "icon": "ReadOutlined",
+                    "checked": true,
+                    "permissions": "public"
+                }
+            },
+            "author": {
+                "_id": "61a685292e66fd61921378f2",
+                "email": "geraldine.garcia+doc@mocionsoft.com",
+                "name": "Documentación",
+                "names": "Documentación",
+                "displayName": "Documentación",
+                "confirmation_code": "y3o1RLkmDc3ck0CN",
+                "uid": "SgfrWl1w6oOii5VVIPx0C4r6w5n1",
+                "updated_at": "2021-12-02 15:27:12",
+                "created_at": "2021-11-30 20:10:17"
+            },
+            "categories": [],
+            "event_type": {
+                "_id": "5bf47203754e2317e4300b68",
+                "name": "Educación"
+            },
+            "organiser": {
+                "_id": "61a687203bbf847b3f59d113",
+                "name": "Documentación",
+                "author": "61a685292e66fd61921378f2",
+                "styles": {
+                    "buttonColor": "#FFF",
+                    "banner_color": "#FFF",
+                    "menu_color": "#FFF",
+                    "event_image": "#FFF",
+                    "banner_image": "#FFF",
+                    "menu_image": "#FFF",
+                    "banner_image_email": "",
+                    "footer_image_email": ""
+                },
+                "updated_at": "2021-11-30 20:18:40",
+                "created_at": "2021-11-30 20:18:40",
+                "user_properties": [
+                    {
+                        "name": "email",
+                        "label": "Correo",
+                        "unique": false,
+                        "mandatory": false,
+                        "type": "email",
+                        "updated_at": {
+                            "$date": {
+                                "$numberLong": "1638303520095"
+                            }
+                        },
+                        "created_at": {
+                            "$date": {
+                                "$numberLong": "1638303520095"
+                            }
+                        },
+                        "_id": {
+                            "$oid": "61a687203bbf847b3f59d114"
+                        }
+                    },
+                    {
+                        "name": "names",
+                        "label": "Nombres Y Apellidos",
+                        "unique": false,
+                        "mandatory": false,
+                        "type": "text",
+                        "updated_at": {
+                            "$date": {
+                                "$numberLong": "1638303520107"
+                            }
+                        },
+                        "created_at": {
+                            "$date": {
+                                "$numberLong": "1638303520107"
+                            }
+                        },
+                        "_id": {
+                            "$oid": "61a687203bbf847b3f59d115"
+                        }
+                    },
+                    {
+                        "name": "picture",
+                        "label": "Avatar",
+                        "unique": false,
+                        "mandatory": false,
+                        "type": "avatar",
+                        "updated_at": {
+                            "$date": {
+                                "$numberLong": "1638303520118"
+                            }
+                        },
+                        "created_at": {
+                            "$date": {
+                                "$numberLong": "1638303520118"
+                            }
+                        },
+                        "_id": {
+                            "$oid": "61a687203bbf847b3f59d116"
+                        }
+                    }
+                ]
+            },
+            "organizer": {
+                "_id": "61a687203bbf847b3f59d113",
+                "name": "Documentación",
+                "author": "61a685292e66fd61921378f2",
+                "styles": {
+                    "buttonColor": "#FFF",
+                    "banner_color": "#FFF",
+                    "menu_color": "#FFF",
+                    "event_image": "#FFF",
+                    "banner_image": "#FFF",
+                    "menu_image": "#FFF",
+                    "banner_image_email": "",
+                    "footer_image_email": ""
+                },
+                "updated_at": "2021-11-30 20:18:40",
+                "created_at": "2021-11-30 20:18:40",
+                "user_properties": [
+                    {
+                        "name": "email",
+                        "label": "Correo",
+                        "unique": false,
+                        "mandatory": false,
+                        "type": "email",
+                        "updated_at": {
+                            "$date": {
+                                "$numberLong": "1638303520095"
+                            }
+                        },
+                        "created_at": {
+                            "$date": {
+                                "$numberLong": "1638303520095"
+                            }
+                        },
+                        "_id": {
+                            "$oid": "61a687203bbf847b3f59d114"
+                        }
+                    },
+                    {
+                        "name": "names",
+                        "label": "Nombres Y Apellidos",
+                        "unique": false,
+                        "mandatory": false,
+                        "type": "text",
+                        "updated_at": {
+                            "$date": {
+                                "$numberLong": "1638303520107"
+                            }
+                        },
+                        "created_at": {
+                            "$date": {
+                                "$numberLong": "1638303520107"
+                            }
+                        },
+                        "_id": {
+                            "$oid": "61a687203bbf847b3f59d115"
+                        }
+                    },
+                    {
+                        "name": "picture",
+                        "label": "Avatar",
+                        "unique": false,
+                        "mandatory": false,
+                        "type": "avatar",
+                        "updated_at": {
+                            "$date": {
+                                "$numberLong": "1638303520118"
+                            }
+                        },
+                        "created_at": {
+                            "$date": {
+                                "$numberLong": "1638303520118"
+                            }
+                        },
+                        "_id": {
+                            "$oid": "61a687203bbf847b3f59d116"
+                        }
+                    }
+                ]
+            },
+            "currency": {
+                "_id": "5c23936fe37db02c715b2a02",
+                "id": 1,
+                "title": "U.S. Dollar",
+                "symbol_left": "$",
+                "symbol_right": "",
+                "code": "USD",
+                "decimal_place": 2,
+                "value": 1,
+                "decimal_point": ".",
+                "thousand_point": ",",
+                "status": 1,
+                "created_at": "2013-11-29 19=>51=>38",
+                "updated_at": "2013-11-29 19=>51=>38"
+            },
+            "tickets": []
+        }
+    ],
     "links": {
         "first": "http:\/\/localhost\/api\/eventsbeforetoday?page=1",
         "last": "http:\/\/localhost\/api\/eventsbeforetoday?page=1",
@@ -6376,12 +5157,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": null,
+        "from": 1,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/eventsbeforetoday",
         "per_page": 2500,
-        "to": null,
-        "total": 0
+        "to": 1,
+        "total": 1
     }
 }
 ```
@@ -6488,14 +5269,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/users/sed/events" \
+    -G "https://api.evius.co/api/users/iusto/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/users/sed/events"
+    "https://api.evius.co/api/users/iusto/events"
 );
 
 let headers = {
@@ -6518,8 +5299,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/sed\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/sed\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/iusto\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/iusto\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -6527,7 +5308,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/sed\/events",
+        "path": "http:\/\/localhost\/api\/users\/iusto\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -6602,7 +5383,7 @@ curl -X PUT \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/adddocumentuser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"quantity":3395.255,"auto_assign":true}'
+    -d '{"quantity":25324674.791084684,"auto_assign":true}'
 
 ```
 
@@ -6617,7 +5398,7 @@ let headers = {
 };
 
 let body = {
-    "quantity": 3395.255,
+    "quantity": 25324674.791084684,
     "auto_assign": true
 }
 
@@ -6692,7 +5473,56 @@ fetch(url, {
 
 ```json
 {
-    "data": [],
+    "data": [
+        {
+            "_id": "5bf471e3754e2317e4300b66",
+            "name": "Entidades Estatales"
+        },
+        {
+            "_id": "5bf471f9754e2317e4300b67",
+            "name": "Salud"
+        },
+        {
+            "_id": "5bf47203754e2317e4300b68",
+            "name": "Educación"
+        },
+        {
+            "_id": "5bf47215754e2317e4300b69",
+            "name": "Telcos"
+        },
+        {
+            "_id": "5bf47226754e2317e4300b6a",
+            "name": "Corporativo"
+        },
+        {
+            "_id": "5bf47230754e2317e4300b6b",
+            "name": "Automotor"
+        },
+        {
+            "_id": "5bf4724a754e2317e4300b6c",
+            "name": "Banca"
+        },
+        {
+            "_id": "5bf47252754e2317e4300b6d",
+            "name": "Pyme"
+        },
+        {
+            "_id": "5bf4725e754e2317e4300b6e",
+            "name": "Internacional"
+        },
+        {
+            "_id": "5bf47267754e2317e4300b6f",
+            "name": "Festivales"
+        },
+        {
+            "_id": "5bf47271754e2317e4300b70",
+            "name": "Deportes"
+        },
+        {
+            "_id": "617822f0c8a3d6cb5059e75b",
+            "name": "Misiones"
+        }
+    ],
     "links": {
         "first": "http:\/\/localhost\/api\/eventTypes?page=1",
         "last": "http:\/\/localhost\/api\/eventTypes?page=1",
@@ -6701,12 +5531,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": null,
+        "from": 1,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/eventTypes",
         "per_page": 2500,
-        "to": null,
-        "total": 0
+        "to": 12,
+        "total": 12
     }
 }
 ```
@@ -6733,7 +5563,7 @@ curl -X POST \
     "https://api.evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"aut"}'
+    -d '{"name":"aspernatur"}'
 
 ```
 
@@ -6748,7 +5578,7 @@ let headers = {
 };
 
 let body = {
-    "name": "aut"
+    "name": "aspernatur"
 }
 
 fetch(url, {
@@ -7058,14 +5888,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/eventUsers/deserunt/checkin" \
+    "https://api.evius.co/api/eventUsers/officiis/checkin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/eventUsers/deserunt/checkin"
+    "https://api.evius.co/api/eventUsers/officiis/checkin"
 );
 
 let headers = {
@@ -7112,7 +5942,7 @@ curl -X POST \
     "https://api.evius.co/api/eventUsers/createUserAndAddtoEvent/61a687713bbf847b3f59d117" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"dolores"}}'
+    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"est"}}'
 
 ```
 
@@ -7131,7 +5961,7 @@ let body = {
     "name": "Evius",
     "password": "*******",
     "other_params": {
-        "city": "dolores"
+        "city": "est"
     }
 }
 
@@ -7256,7 +6086,43 @@ fetch(url, {
 
 ```json
 {
-    "data": [],
+    "data": [
+        {
+            "_id": "61a687713bbf847b3f59d119",
+            "state_id": "5b0efc411d18160bce9bc706",
+            "checked_in": false,
+            "rol_id": "5c1a59b2f33bd40bb67f2322",
+            "account_id": "61a685292e66fd61921378f2",
+            "event_id": "61a687713bbf847b3f59d117",
+            "model_type": "App\\Account",
+            "properities": {
+                "name": "Documentación",
+                "email": "geraldine.garcia+doc@mocionsoft.com"
+            },
+            "private_reference_number": "947010789",
+            "updated_at": "2021-11-30 20:20:01",
+            "created_at": "2021-11-30 20:20:01",
+            "user": {
+                "_id": "61a685292e66fd61921378f2",
+                "email": "geraldine.garcia+doc@mocionsoft.com",
+                "name": "Documentación",
+                "names": "Documentación",
+                "displayName": "Documentación",
+                "confirmation_code": "y3o1RLkmDc3ck0CN",
+                "uid": "SgfrWl1w6oOii5VVIPx0C4r6w5n1",
+                "updated_at": "2021-12-02 15:27:12",
+                "created_at": "2021-11-30 20:10:17"
+            },
+            "rol": {
+                "_id": "5c1a59b2f33bd40bb67f2322",
+                "name": "Administrator",
+                "guard_name": "web",
+                "updated_at": "2021-07-02 20:58:53",
+                "created_at": "2018-12-19 14:46:10",
+                "type": "admin"
+            }
+        }
+    ],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/eventusers?page=1",
         "last": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/eventusers?page=1",
@@ -7265,12 +6131,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": null,
+        "from": 1,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/eventusers",
         "per_page": 2500,
-        "to": null,
-        "total": 0
+        "to": 1,
+        "total": 1
     }
 }
 ```
@@ -7323,7 +6189,43 @@ fetch(url, {
 
 ```json
 {
-    "data": [],
+    "data": [
+        {
+            "_id": "61a687713bbf847b3f59d119",
+            "state_id": "5b0efc411d18160bce9bc706",
+            "checked_in": false,
+            "rol_id": "5c1a59b2f33bd40bb67f2322",
+            "account_id": "61a685292e66fd61921378f2",
+            "event_id": "61a687713bbf847b3f59d117",
+            "model_type": "App\\Account",
+            "properities": {
+                "name": "Documentación",
+                "email": "geraldine.garcia+doc@mocionsoft.com"
+            },
+            "private_reference_number": "947010789",
+            "updated_at": "2021-11-30 20:20:01",
+            "created_at": "2021-11-30 20:20:01",
+            "user": {
+                "_id": "61a685292e66fd61921378f2",
+                "email": "geraldine.garcia+doc@mocionsoft.com",
+                "name": "Documentación",
+                "names": "Documentación",
+                "displayName": "Documentación",
+                "confirmation_code": "y3o1RLkmDc3ck0CN",
+                "uid": "SgfrWl1w6oOii5VVIPx0C4r6w5n1",
+                "updated_at": "2021-12-02 15:27:12",
+                "created_at": "2021-11-30 20:10:17"
+            },
+            "rol": {
+                "_id": "5c1a59b2f33bd40bb67f2322",
+                "name": "Administrator",
+                "guard_name": "web",
+                "updated_at": "2021-07-02 20:58:53",
+                "created_at": "2018-12-19 14:46:10",
+                "type": "admin"
+            }
+        }
+    ],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/eventUsers?page=1",
         "last": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/eventUsers?page=1",
@@ -7332,12 +6234,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": null,
+        "from": 1,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/eventUsers",
         "per_page": 2500,
-        "to": null,
-        "total": 0
+        "to": 1,
+        "total": 1
     }
 }
 ```
@@ -7417,7 +6319,7 @@ curl -X PUT \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/eventusers/61ccd3551c821b765a312866" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"eaque","properties":{"other_properties":"maiores"}}'
+    -d '{"rol_id":"quia","properties":{"other_properties":"fugit"}}'
 
 ```
 
@@ -7432,9 +6334,9 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "eaque",
+    "rol_id": "quia",
     "properties": {
-        "other_properties": "maiores"
+        "other_properties": "fugit"
     }
 }
 
@@ -7677,7 +6579,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/metricsbydate/eventusers?metrics_type=created_at&datetime_from=possimus&datetime_to=sequi" \
+    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/metricsbydate/eventusers?metrics_type=created_at&datetime_from=minima&datetime_to=voluptatibus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -7689,8 +6591,8 @@ const url = new URL(
 
 let params = {
     "metrics_type": "created_at",
-    "datetime_from": "possimus",
-    "datetime_to": "sequi",
+    "datetime_from": "minima",
+    "datetime_to": "voluptatibus",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -7746,16 +6648,16 @@ This end point sends an email to the user to inform them of the change.
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/eventusers/et/updaterol" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/eventusers/animi/updaterol" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"recusandae"}'
+    -d '{"rol_id":"dicta"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/eventusers/et/updaterol"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/eventusers/animi/updaterol"
 );
 
 let headers = {
@@ -7764,7 +6666,7 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "recusandae"
+    "rol_id": "dicta"
 }
 
 fetch(url, {
@@ -7874,7 +6776,7 @@ curl -X POST \
     "https://api.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"voluptatem"}'
+    -d '{"file":"qui"}'
 
 ```
 
@@ -7889,7 +6791,7 @@ let headers = {
 };
 
 let body = {
-    "file": "voluptatem"
+    "file": "qui"
 }
 
 fetch(url, {
@@ -7941,16 +6843,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/files/uploadbase/a" \
+    "https://api.evius.co/api/files/uploadbase/nostrum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"in","type":"qui"}'
+    -d '{"file":"voluptatem","type":"quis"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/files/uploadbase/a"
+    "https://api.evius.co/api/files/uploadbase/nostrum"
 );
 
 let headers = {
@@ -7959,8 +6861,8 @@ let headers = {
 };
 
 let body = {
-    "file": "in",
-    "type": "qui"
+    "file": "voluptatem",
+    "type": "quis"
 }
 
 fetch(url, {
@@ -8279,7 +7181,7 @@ curl -X POST \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"dolorem","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"incidunt","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
@@ -8296,7 +7198,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "dolorem",
+    "image": "incidunt",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -8345,7 +7247,7 @@ curl -X PUT \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"quam","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"voluptates","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
@@ -8362,7 +7264,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "quam",
+    "image": "voluptates",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -8449,109 +7351,6 @@ Parameter | Status | Description
 
 #News Feed
 
-
-<!-- START_70a22f864b8b2e72e32ac85821bf707e -->
-## _index_: list of news of the event.
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/events/{event}/newsfeed`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `event` |  required  | The ID of the event
-    `organization` |  required  | The ID of the organization
-
-<!-- END_70a22f864b8b2e72e32ac85821bf707e -->
-
-<!-- START_1acb96ce1b68eb8a3c8a1a08a36a1020 -->
-## _show_:  view information for a specific news
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed/6107fe65ff324f482d1c7569" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed/6107fe65ff324f482d1c7569"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/events/{event}/newsfeed/{newsfeed}`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `event` |  required  | The ID of the event
-    `newsfeed` |  required  | id news.
-    `organization` |  required  | The ID of the organization
-
-<!-- END_1acb96ce1b68eb8a3c8a1a08a36a1020 -->
 
 <!-- START_2b5183f2566ebb92311d3d276dbfa1f2 -->
 ## _store_: create news in an event
@@ -8729,6 +7528,128 @@ Parameter | Status | Description
     `organization` |  required  | The ID of the organization
 
 <!-- END_322b2e85d6ca0584c316bb1b662b654a -->
+
+<!-- START_70a22f864b8b2e72e32ac85821bf707e -->
+## _index_: list of news of the event.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/newsfeed?page=1",
+        "last": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/newsfeed?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/61a687713bbf847b3f59d117\/newsfeed",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/newsfeed`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | The ID of the event
+    `organization` |  required  | The ID of the organization
+
+<!-- END_70a22f864b8b2e72e32ac85821bf707e -->
+
+<!-- START_1acb96ce1b68eb8a3c8a1a08a36a1020 -->
+## _show_:  view information for a specific news
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed/6107fe65ff324f482d1c7569" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/newsfeed/6107fe65ff324f482d1c7569"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "_id": "6107fe65ff324f482d1c7569",
+    "title": "Nueva noticia",
+    "event_id": "605241e68b276356801236e4",
+    "updated_at": "2021-08-02 14:17:09",
+    "created_at": "2021-08-02 14:17:09"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/newsfeed/{newsfeed}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | The ID of the event
+    `newsfeed` |  required  | id news.
+    `organization` |  required  | The ID of the organization
+
+<!-- END_1acb96ce1b68eb8a3c8a1a08a36a1020 -->
 
 #Orders
 
@@ -9252,14 +8173,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/orders/quas/orderOrganization" \
+    -G "https://api.evius.co/api/orders/ad/orderOrganization" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/orders/quas/orderOrganization"
+    "https://api.evius.co/api/orders/ad/orderOrganization"
 );
 
 let headers = {
@@ -9386,93 +8307,11 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (404):
 
 ```json
 {
-    "_id": "61fc3d08cc30801701328123",
-    "name": "Testo Rol Org",
-    "styles": {
-        "buttonColor": "#FFF",
-        "banner_color": "#FFF",
-        "menu_color": "#FFF",
-        "event_image": null,
-        "banner_image": null,
-        "menu_image": null,
-        "banner_image_email": null,
-        "footer_image_email": "",
-        "brandPrimary": "#FFFFFF",
-        "brandSuccess": "#FFFFFF",
-        "brandInfo": "#FFFFFF",
-        "brandDanger": "#FFFFFF",
-        "containerBgColor": "#ffffff",
-        "brandWarning": "#FFFFFF",
-        "toolbarDefaultBg": "#FFFFFF",
-        "brandDark": "#FFFFFF",
-        "brandLight": "#FFFFFF",
-        "textMenu": "#555352",
-        "activeText": "#FFFFFF",
-        "bgButtonsEvent": "#FFFFFF",
-        "BackgroundImage": null,
-        "FooterImage": null,
-        "banner_footer": null,
-        "mobile_banner": null,
-        "banner_footer_email": null,
-        "show_banner": "true",
-        "show_card_banner": false,
-        "show_inscription": false,
-        "hideDatesAgenda": true,
-        "hideDatesAgendaItem": false,
-        "hideHoursAgenda": false,
-        "hideBtnDetailAgenda": true,
-        "loader_page": "no",
-        "data_loader_page": null
-    },
-    "author": "61f43900438bcd77434db317",
-    "updated_at": "2022-02-03 20:37:28",
-    "created_at": "2022-02-03 20:37:28",
-    "user_properties": [
-        {
-            "name": "email",
-            "label": "Correo",
-            "unique": false,
-            "mandatory": false,
-            "type": "email",
-            "updated_at": {
-                "$date": {
-                    "$numberLong": "1643920648502"
-                }
-            },
-            "created_at": {
-                "$date": {
-                    "$numberLong": "1643920648502"
-                }
-            },
-            "_id": {
-                "$oid": "61fc3d08cc30801701328125"
-            }
-        },
-        {
-            "name": "names",
-            "label": "Nombres Y Apellidos",
-            "unique": false,
-            "mandatory": false,
-            "type": "text",
-            "updated_at": {
-                "$date": {
-                    "$numberLong": "1643920648514"
-                }
-            },
-            "created_at": {
-                "$date": {
-                    "$numberLong": "1643920648514"
-                }
-            },
-            "_id": {
-                "$oid": "61fc3d08cc30801701328126"
-            }
-        }
-    ]
+    "message": "No query results for model [App\\Organization] 61fc3d08cc30801701328123"
 }
 ```
 
@@ -9499,7 +8338,7 @@ curl -X POST \
     "https://api.evius.co/api/organizations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"illum","styles":[],"user_properties":[]}'
+    -d '{"name":"sit","styles":[],"user_properties":[]}'
 
 ```
 
@@ -9514,7 +8353,7 @@ let headers = {
 };
 
 let body = {
-    "name": "illum",
+    "name": "sit",
     "styles": [],
     "user_properties": []
 }
@@ -9559,7 +8398,7 @@ curl -X PUT \
     "https://api.evius.co/api/organizations/61fc3d08cc30801701328123" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"quia","styles":[],"user_properties":[]}'
+    -d '{"name":"facilis","styles":[],"user_properties":[]}'
 
 ```
 
@@ -9574,7 +8413,7 @@ let headers = {
 };
 
 let body = {
-    "name": "quia",
+    "name": "facilis",
     "styles": [],
     "user_properties": []
 }
@@ -9660,7 +8499,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/organization/61fc3d08cc30801701328123/ordersUsersPoints?status=pendiente&date_from=molestiae&date_to=aut&type_report=csv" \
+    -G "https://api.evius.co/api/organization/61fc3d08cc30801701328123/ordersUsersPoints?status=pendiente&date_from=dolor&date_to=perspiciatis&type_report=csv" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -9672,8 +8511,8 @@ const url = new URL(
 
 let params = {
     "status": "pendiente",
-    "date_from": "molestiae",
-    "date_to": "aut",
+    "date_from": "dolor",
+    "date_to": "perspiciatis",
     "type_report": "csv",
 };
 Object.keys(params)
@@ -9783,14 +8622,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/quia" \
+    -G "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/maiores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/quia"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/maiores"
 );
 
 let headers = {
@@ -9880,14 +8719,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/dolores" \
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/recusandae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/dolores"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/organizationusers/recusandae"
 );
 
 let headers = {
@@ -10118,31 +8957,12 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (500):
 
 ```json
-[
-    {
-        "name": "email",
-        "label": "Correo",
-        "unique": false,
-        "mandatory": false,
-        "type": "email",
-        "updated_at": "2022-02-03 20:37:28",
-        "created_at": "2022-02-03 20:37:28",
-        "_id": "61fc3d08cc30801701328125"
-    },
-    {
-        "name": "names",
-        "label": "Nombres Y Apellidos",
-        "unique": false,
-        "mandatory": false,
-        "type": "text",
-        "updated_at": "2022-02-03 20:37:28",
-        "created_at": "2022-02-03 20:37:28",
-        "_id": "61fc3d08cc30801701328126"
-    }
-]
+{
+    "message": "Server Error"
+}
 ```
 
 ### HTTP Request
@@ -10168,14 +8988,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/recusandae" \
+    -G "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/laboriosam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/recusandae"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/laboriosam"
 );
 
 let headers = {
@@ -10192,10 +9012,12 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (500):
 
 ```json
-[]
+{
+    "message": "Server Error"
+}
 ```
 
 ### HTTP Request
@@ -10297,7 +9119,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/et" \
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/laudantium" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -10306,7 +9128,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/et"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/laudantium"
 );
 
 let headers = {
@@ -10373,14 +9195,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/veritatis" \
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/repudiandae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/veritatis"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/userproperties/repudiandae"
 );
 
 let headers = {
@@ -10556,14 +9378,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/explicabo" \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/sed" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/explicabo"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/sed"
 );
 
 let headers = {
@@ -10724,14 +9546,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/voluptas" \
+    -G "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/cum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/voluptas"
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/products/cum"
 );
 
 let headers = {
@@ -10780,7 +9602,7 @@ curl -X POST \
     "https://api.evius.co/api/rsvp/sendeventrsvp/61a687713bbf847b3f59d117" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"aut","image_header":"officia","content_header":"Has sido invitado a el evento","message":"nam","image":"ut","image_footer":"quia","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
+    -d '{"subject":"minima","image_header":"porro","content_header":"Has sido invitado a el evento","message":"aut","image":"laboriosam","image_footer":"sed","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
 
 ```
 
@@ -10795,12 +9617,12 @@ let headers = {
 };
 
 let body = {
-    "subject": "aut",
-    "image_header": "officia",
+    "subject": "minima",
+    "image_header": "porro",
     "content_header": "Has sido invitado a el evento",
-    "message": "nam",
-    "image": "ut",
-    "image_footer": "quia",
+    "message": "aut",
+    "image": "laboriosam",
+    "image_footer": "sed",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     },
@@ -10843,6 +9665,51 @@ Parameter | Type | Status | Description
     
 <!-- END_6b8165cc7da505120fbe6aa7aba5356e -->
 
+<!-- START_2b2c42e811c82fe1668961513937f683 -->
+## updateStatusMessageUser_: update the stadistics about the emails send
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/updateStatusMessageUser/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://api.evius.co/api/events/61a687713bbf847b3f59d117/updateStatusMessageUser/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/updateStatusMessageUser/{message_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | The ID of the event
+    `message` |  optional  | The ID of the message
+    `organization` |  required  | The ID of the organization
+
+<!-- END_2b2c42e811c82fe1668961513937f683 -->
+
 #RolEvent
 
 
@@ -10881,26 +9748,7 @@ fetch(url, {
 > Example response (200):
 
 ```json
-[
-    {
-        "_id": "60e8a7e74f9fb74ccd00dc22",
-        "name": "Attendee",
-        "guard_name": "web",
-        "updated_at": "2021-08-06 19:04:06",
-        "created_at": "2021-07-09 19:47:51",
-        "type": "attendee",
-        "module": "system"
-    },
-    {
-        "_id": "5c1a59b2f33bd40bb67f2322",
-        "name": "Administrator",
-        "guard_name": "web",
-        "updated_at": "2021-07-02 20:58:53",
-        "created_at": "2018-12-19 14:46:10",
-        "type": "admin",
-        "module": "system"
-    }
-]
+[]
 ```
 
 ### HTTP Request
@@ -10927,7 +9775,7 @@ curl -X POST \
     "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"iusto","type":"dignissimos","module":"et"}'
+    -d '{"name":"placeat","type":"asperiores","module":"aut"}'
 
 ```
 
@@ -10942,9 +9790,9 @@ let headers = {
 };
 
 let body = {
-    "name": "iusto",
-    "type": "dignissimos",
-    "module": "et"
+    "name": "placeat",
+    "type": "asperiores",
+    "module": "aut"
 }
 
 fetch(url, {
@@ -10984,14 +9832,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/nihil" \
+    -G "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/aperiam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/nihil"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/aperiam"
 );
 
 let headers = {
@@ -11030,16 +9878,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/iusto" \
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/ex" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"qui","model":"nihil"}'
+    -d '{"name":"unde","model":"exercitationem"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/iusto"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/ex"
 );
 
 let headers = {
@@ -11048,8 +9896,8 @@ let headers = {
 };
 
 let body = {
-    "name": "qui",
-    "model": "nihil"
+    "name": "unde",
+    "model": "exercitationem"
 }
 
 fetch(url, {
@@ -11089,14 +9937,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/ad" \
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/error" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/ad"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/roles/error"
 );
 
 let headers = {
@@ -11375,7 +10223,13 @@ fetch(url, {
 > Example response (200):
 
 ```json
-[]
+{
+    "_id": "5faefba6b68d6316213f7cc2",
+    "name": "Asistente",
+    "event_id": "5ea23acbd74d5c4b360ddde2",
+    "updated_at": "2020-11-13 21:33:26",
+    "created_at": "2020-11-13 21:33:26"
+}
 ```
 
 ### HTTP Request
@@ -11746,14 +10600,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://api.evius.co/api/rolesattendees/beatae" \
+    "https://api.evius.co/api/rolesattendees/autem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/rolesattendees/beatae"
+    "https://api.evius.co/api/rolesattendees/autem"
 );
 
 let headers = {
@@ -11917,7 +10771,7 @@ curl -X POST \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/surveys" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"voluptas","points":1,"initialMessage":"tenetur","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":7930566.7934946}'
+    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"ipsa","points":1,"initialMessage":"soluta","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":40017353.835514}'
 
 ```
 
@@ -11935,9 +10789,9 @@ let body = {
     "survey": "Nombre de encuesta",
     "show_horizontal_bar": false,
     "allow_vote_value_per_user": false,
-    "activity_id": "voluptas",
+    "activity_id": "ipsa",
     "points": 1,
-    "initialMessage": "tenetur",
+    "initialMessage": "soluta",
     "time_limit": 0,
     "allow_anonymous_answers": false,
     "allow_gradable_survey": false,
@@ -11946,7 +10800,7 @@ let body = {
     "freezeGame": false,
     "open": false,
     "publish": false,
-    "minimumScore": 7930566.7934946
+    "minimumScore": 40017353.835514
 }
 
 fetch(url, {
@@ -12026,7 +10880,7 @@ curl -X PUT \
     "https://api.evius.co/api/events/61a687713bbf847b3f59d117/surveys/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"facilis","show_horizontal_bar":"quia","allow_vote_value_per_user":"ullam","activity_id":"occaecati","points":"a","initialMessage":"nulla","time_limit":"labore","allow_anonymous_answers":"qui","allow_gradable_survey":"consequuntur","hasMinimumScore":"dolores","isGlobal":"eveniet","freezeGame":"sed","open":"autem","publish":"aut","minimumScore":"et"}'
+    -d '{"survey":"qui","show_horizontal_bar":"sed","allow_vote_value_per_user":"sequi","activity_id":"sint","points":"repellendus","initialMessage":"alias","time_limit":"autem","allow_anonymous_answers":"eos","allow_gradable_survey":"ut","hasMinimumScore":"omnis","isGlobal":"sit","freezeGame":"officia","open":"dicta","publish":"omnis","minimumScore":"aut"}'
 
 ```
 
@@ -12041,21 +10895,21 @@ let headers = {
 };
 
 let body = {
-    "survey": "facilis",
-    "show_horizontal_bar": "quia",
-    "allow_vote_value_per_user": "ullam",
-    "activity_id": "occaecati",
-    "points": "a",
-    "initialMessage": "nulla",
-    "time_limit": "labore",
-    "allow_anonymous_answers": "qui",
-    "allow_gradable_survey": "consequuntur",
-    "hasMinimumScore": "dolores",
-    "isGlobal": "eveniet",
-    "freezeGame": "sed",
-    "open": "autem",
-    "publish": "aut",
-    "minimumScore": "et"
+    "survey": "qui",
+    "show_horizontal_bar": "sed",
+    "allow_vote_value_per_user": "sequi",
+    "activity_id": "sint",
+    "points": "repellendus",
+    "initialMessage": "alias",
+    "time_limit": "autem",
+    "allow_anonymous_answers": "eos",
+    "allow_gradable_survey": "ut",
+    "hasMinimumScore": "omnis",
+    "isGlobal": "sit",
+    "freezeGame": "officia",
+    "open": "dicta",
+    "publish": "omnis",
+    "minimumScore": "aut"
 }
 
 fetch(url, {
@@ -12213,7 +11067,7 @@ curl -X POST \
     "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Template 1","user_properties":"repellat"}'
+    -d '{"name":"Template 1","user_properties":"sequi"}'
 
 ```
 
@@ -12229,7 +11083,7 @@ let headers = {
 
 let body = {
     "name": "Template 1",
-    "user_properties": "repellat"
+    "user_properties": "sequi"
 }
 
 fetch(url, {
@@ -12268,14 +11122,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/templateproperties/suscipit" \
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/templateproperties/placeat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/templateproperties/suscipit"
+    "https://api.evius.co/api/organizations/61fc3d08cc30801701328123/templateproperties/placeat"
 );
 
 let headers = {
@@ -12549,11 +11403,19 @@ fetch(url, {
 ```
 
 
-> Example response (404):
+> Example response (200):
 
 ```json
 {
-    "message": "No query results for model [App\\Account] 603d6af041e6f468091c95d5"
+    "_id": "603d6af041e6f468091c95d5",
+    "email": "correo@evius.co",
+    "names": "User Name",
+    "displayName": "Test",
+    "confirmation_code": "f5wu2dN4wxuD6oEz",
+    "updated_at": "2021-04-13 18:14:42",
+    "created_at": "2021-03-01 22:30:08",
+    "uid": "Rn7otxyh7uUNMpeErysaNnC44sy2",
+    "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/evius%2FViews%2Flogo-E.jpg?alt=media&token=cdf0098c-63d3-450b-a0f0-5be5e9d9ef9d"
 }
 ```
 
@@ -12827,7 +11689,20 @@ fetch(url, {
 > Example response (200):
 
 ```json
-[]
+[
+    {
+        "_id": "5ec0607e86cd0905540e96e2",
+        "email": "correo@evius.co",
+        "names": "Mario Perez",
+        "displayName": "Mario Perez"
+    },
+    {
+        "_id": "603d6af041e6f468091c95d5",
+        "email": "correo@evius.co",
+        "names": "User Name",
+        "displayName": "Test"
+    }
+]
 ```
 
 ### HTTP Request
@@ -12916,7 +11791,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://api.evius.co/api/users/autem/changeStatusUser" \
+    "https://api.evius.co/api/users/voluptatum/changeStatusUser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -12925,7 +11800,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/users/autem/changeStatusUser"
+    "https://api.evius.co/api/users/voluptatum/changeStatusUser"
 );
 
 let headers = {
@@ -13032,7 +11907,7 @@ curl -X POST \
     "https://api.evius.co/api/getloginlink" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"refreshlink":"dicta","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
+    -d '{"refreshlink":"ut","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
 
 ```
 
@@ -13047,7 +11922,7 @@ let headers = {
 };
 
 let body = {
-    "refreshlink": "dicta",
+    "refreshlink": "ut",
     "event": "61ccd3551c821b765a312864",
     "email": "correo@evius.co"
 }
@@ -13439,12 +12314,135 @@ fetch(url, {
 ```
 
 
-> Example response (500):
+> Example response (200):
 
 ```json
-{
-    "message": "Server Error"
-}
+[
+    {
+        "name": "email",
+        "label": "Correo",
+        "unique": false,
+        "mandatory": false,
+        "type": "email",
+        "updated_at": "2021-11-30 20:20:02",
+        "created_at": "2021-11-30 20:20:02",
+        "_id": "61a687723bbf847b3f59d11b",
+        "author": null,
+        "categories": [],
+        "event_type": null,
+        "organiser": null,
+        "organizer": null,
+        "currency": {
+            "_id": "5c23936fe37db02c715b2a02",
+            "id": 1,
+            "title": "U.S. Dollar",
+            "symbol_left": "$",
+            "symbol_right": "",
+            "code": "USD",
+            "decimal_place": 2,
+            "value": 1,
+            "decimal_point": ".",
+            "thousand_point": ",",
+            "status": 1,
+            "created_at": "2013-11-29 19=>51=>38",
+            "updated_at": "2013-11-29 19=>51=>38"
+        },
+        "tickets": []
+    },
+    {
+        "name": "names",
+        "label": "Nombres Y Apellidos",
+        "unique": false,
+        "mandatory": false,
+        "type": "text",
+        "updated_at": "2021-11-30 20:20:02",
+        "created_at": "2021-11-30 20:20:02",
+        "_id": "61a687723bbf847b3f59d11c",
+        "author": null,
+        "categories": [],
+        "event_type": null,
+        "organiser": null,
+        "organizer": null,
+        "currency": {
+            "_id": "5c23936fe37db02c715b2a02",
+            "id": 1,
+            "title": "U.S. Dollar",
+            "symbol_left": "$",
+            "symbol_right": "",
+            "code": "USD",
+            "decimal_place": 2,
+            "value": 1,
+            "decimal_point": ".",
+            "thousand_point": ",",
+            "status": 1,
+            "created_at": "2013-11-29 19=>51=>38",
+            "updated_at": "2013-11-29 19=>51=>38"
+        },
+        "tickets": []
+    },
+    {
+        "name": "picture",
+        "label": "Avatar",
+        "unique": false,
+        "mandatory": false,
+        "type": "avatar",
+        "updated_at": "2021-11-30 20:20:02",
+        "created_at": "2021-11-30 20:20:02",
+        "_id": "61a687723bbf847b3f59d11d",
+        "author": null,
+        "categories": [],
+        "event_type": null,
+        "organiser": null,
+        "organizer": null,
+        "currency": {
+            "_id": "5c23936fe37db02c715b2a02",
+            "id": 1,
+            "title": "U.S. Dollar",
+            "symbol_left": "$",
+            "symbol_right": "",
+            "code": "USD",
+            "decimal_place": 2,
+            "value": 1,
+            "decimal_point": ".",
+            "thousand_point": ",",
+            "status": 1,
+            "created_at": "2013-11-29 19=>51=>38",
+            "updated_at": "2013-11-29 19=>51=>38"
+        },
+        "tickets": []
+    },
+    {
+        "name": "password",
+        "label": "Password",
+        "unique": false,
+        "mandatory": false,
+        "type": "password",
+        "updated_at": "2021-11-30 20:20:02",
+        "created_at": "2021-11-30 20:20:02",
+        "_id": "61a687723bbf847b3f59d11e",
+        "author": null,
+        "categories": [],
+        "event_type": null,
+        "organiser": null,
+        "organizer": null,
+        "currency": {
+            "_id": "5c23936fe37db02c715b2a02",
+            "id": 1,
+            "title": "U.S. Dollar",
+            "symbol_left": "$",
+            "symbol_right": "",
+            "code": "USD",
+            "decimal_place": 2,
+            "value": 1,
+            "decimal_point": ".",
+            "thousand_point": ",",
+            "status": 1,
+            "created_at": "2013-11-29 19=>51=>38",
+            "updated_at": "2013-11-29 19=>51=>38"
+        },
+        "tickets": []
+    }
+]
 ```
 
 ### HTTP Request
@@ -13494,12 +12492,10 @@ fetch(url, {
 ```
 
 
-> Example response (500):
+> Example response (200):
 
 ```json
-{
-    "message": "Server Error"
-}
+[]
 ```
 
 ### HTTP Request
@@ -13775,14 +12771,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/orders/libero/validateFreeorder" \
+    "https://api.evius.co/api/orders/non/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/orders/libero/validateFreeorder"
+    "https://api.evius.co/api/orders/non/validateFreeorder"
 );
 
 let headers = {
@@ -13820,14 +12816,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://api.evius.co/api/orders/fugit/validatePointOrder" \
+    "https://api.evius.co/api/orders/et/validatePointOrder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://api.evius.co/api/orders/fugit/validatePointOrder"
+    "https://api.evius.co/api/orders/et/validatePointOrder"
 );
 
 let headers = {
