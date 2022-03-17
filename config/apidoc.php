@@ -292,7 +292,7 @@ return [
         ],
         'urlParameters' => [
             \Mpociot\ApiDoc\Extracting\Strategies\UrlParameters\GetFromUrlParamTag::class,
-            \App\ApiDoc\AddEventOrganizationIdUrlParams::class,
+            // \App\ApiDoc\AddEventOrganizationIdUrlParams::class,
         ],
         'queryParameters' => [
             \Mpociot\ApiDoc\Extracting\Strategies\QueryParameters\GetFromQueryParamTag::class,
