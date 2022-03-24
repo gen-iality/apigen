@@ -338,6 +338,8 @@ class RSVPController extends Controller implements ShouldQueue
 
     /**
      * updateStatusMessageUser_: update the stadistics about the emails send
+     * @urlParam event The ID of the event
+     * @urlParam message The ID of the message
      */
     public function updateStatusMessageUser($event_id ,$message_id)
     {   

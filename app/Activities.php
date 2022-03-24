@@ -118,6 +118,7 @@ class Activities extends Moloquent
         "requires_registration",
         "password_meeting",     
         "latitude",
-        "length"  
+        "length" , 
+        "activity_type"
     ];
 }
