@@ -148,6 +148,7 @@ return [
                         'orders/*',
                     //RSVP
                         '*/sendeventrsvp/*',
+                        '*/updateStatusMessageUser/*',
                     //Discount code
                         '*/discountcodetemplate/*',
                         '*/discountcodetemplate',
