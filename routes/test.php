@@ -21,9 +21,4 @@ Route::get('test/permissions', 'TestingController@permissions');
 Route::get('test/orderSave/{order_id}', 'TestingController@orderSave');
 Route::get('test/ticket/{ticket_id}/order/{order_id}', 'ApiOrdersController@deleteAttendee');
 
-/***************
- * AWS
- ****************/
-Route::post('aws/messageupdatestatus', 'AwsSnsController@updateSnsMessages');
-Route::get('aws/sendemail', 'AwsSnsController@testEmail');
-Route::get('aws/test', 'AwsSnsController@testreqS3');
+
