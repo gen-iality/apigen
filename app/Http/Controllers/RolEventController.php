@@ -121,7 +121,8 @@ class RolEventController extends Controller
      */
     public function show($event_id , Rol $id)
     {   
-        return $id;
+        $rol = Rol::where('id' , $id)->where('event_id' , $event_id)->first();
+        return $rol;
     }
 
     /**
