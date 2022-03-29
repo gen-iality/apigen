@@ -26,11 +26,20 @@ use Redirect;
 /**
  * @group User
  * 
- * Manage users, the users info are stored in the backend and the user auth info (password, email, sms login) is stored in firebase auth. firebaseauth user and backend user are connected thought the uid field generated in firebaseauth.
- *
- * El manejo de la sessión (si un usuario ingreso al sistema) se maneja usando tokens JWT generados por firebase se maneja un token en la url que se vence cada media hora y un refresh_token almacenado en el usuario para refrescar el token que se pasa por la URL.
- *
- * Del token en la url se extrae la información del usuario se pasa de esta manera ?token=xxxxxxxxxxxxxxxxx
+ * Manage users, the users info are stored in the backend and the user auth info (password, email).
+ * There are two data base for the users: **firebase** and **mongodb**, the users are related by the field **uid** this id is genereated from  firebase.
+ * 
+ * Firebase manage the sessions user using tokens JTW.
+ * 
+ * The tokens are send in the url this way **?token=xxxxxxxxxxxxxxxxx**  for validate the athuentication of user.
+ * 
+ * If you want to work in development environment or production enviroment is necesary connect to proyect correspondent.
+ * 
+ * |                    | Prodcution    | Dev
+ * |--------------      |-------------  | -------------
+ * |**ID project**      |eviusauth      | eviusauthdev
+ * |**Name project**    |eviusAuth      | eviusAuthDev
+ * 
  */
 class UserController extends UserControllerWeb
 {

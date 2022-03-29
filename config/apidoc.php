@@ -7,7 +7,7 @@ return [
      * - "laravel" will generate the documentation as a Blade view,
      * so you can add routing and authentication.
      */
-    'type' => 'static',
+    'type' => 'laravel',
 
     /*
      * Settings for `laravel` type output.
@@ -17,7 +17,7 @@ return [
          * Whether to automatically create a docs endpoint for you to view your generated docs.
          * If this is false, you can still set up routing manually.
          */
-        'autoload' => false,
+        'autoload' => true,
 
         /*
          * URL path to use for the docs endpoint (if `autoload` is true).
@@ -29,7 +29,7 @@ return [
         /*
          * Middleware to attach to the docs endpoint (if `autoload` is true).
          */
-        'middleware' => [],
+        'middleware' => ['auth:token'],
     ],
 
     /*

@@ -31,3 +31,4 @@ public/assets/*
 public/vendor/*
 resources/docs/source/_tmp/*
 composer.lock
+/firebase-credentials-dev.json
