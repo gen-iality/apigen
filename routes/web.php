@@ -23,3 +23,6 @@ Route::post('testpush', 'SendContentController@sendPushNotification');
 // Ver rutas que tienen documetación
 Route::get('routes', 'RouteController@index');
 Route::get('routes/excel', 'RouteController@excel')->name('routes.excel');
+
+Route::view('docs', 'apidoc.index');
+
