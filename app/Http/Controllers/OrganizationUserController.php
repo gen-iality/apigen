@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Rol;
 use App\Organization;
 use App\Http\Resources\OrganizationUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -70,7 +71,7 @@ class OrganizationUserController extends Controller
             $validations
         );
 
-        $organization = Organization::find($organization_id);
+        $organization = Organization::findOrFail($organization_id);
         $user_properties = $organization->user_properties;
         
         //Se validan los campos que no aceptan datos, si no informativos
