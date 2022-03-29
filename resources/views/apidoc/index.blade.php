@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/all.js"></script>
+    <link rel="stylesheet" href="{{ asset('/docs/css/style.css') }}" />
+    <script src="{{ asset('/docs/js/all.js') }}"></script>
 
 
           <script>
@@ -21,11 +21,11 @@
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" />
+        <img src="/docs/images/navbar.png" />
       </span>
     </a>
     <div class="tocify-wrapper">
-        <img src="images/logo.png" />
+        <img src="/docs/images/logo.png" />
                     <div class="lang-selector">
                                   <a href="#" data-language-name="bash">bash</a>
                                   <a href="#" data-language-name="javascript">javascript</a>
@@ -46,7 +46,7 @@
           <!-- START_INFO -->
 <h1>Info</h1>
 <p>Welcome to the generated API reference.
-<a href="http://api.evius.co/docs/collection.json">Get Postman Collection</a></p>
+<a href="{{ route("apidoc.json") }}">Get Postman Collection</a></p>
 <!-- END_INFO -->
 <h1>Activity</h1>
 <p>The activities within an event are <strong>sessions, talks, lessons or conferences</strong> in which specific topics are discussed.</p>
@@ -58,11 +58,19 @@
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/1/duplicateactivitie/quis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/duplicateactivitie/quis"
+=======
+    "https://api.evius.co/api/events/1/duplicateactivitie/facilis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/1/duplicateactivitie/facilis"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -110,7 +118,11 @@ fetch(url, {
     "https://api.evius.co/api/events/1/createmeeting/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"nihil","activity_description":"et"}'
+=======
+    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"eos","activity_description":"doloribus"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/createmeeting/1"
@@ -123,8 +135,13 @@ let headers = {
 
 let body = {
     "activity_datetime_start": "2020-10-14 14:11",
+<<<<<<< HEAD:public/docs/index.html
     "activity_name": "nihil",
     "activity_description": "et"
+=======
+    "activity_name": "eos",
+    "activity_description": "doloribus"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -193,13 +210,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/1/activities/ipsam/hostAvailability" \
+=======
+    "https://api.evius.co/api/events/1/activities/soluta/hostAvailability" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"host_ids":"[\"KthHMroFQK24I97YoqxBZw\" , \"FIRVnSoZR7WMDajgtzf5Uw\" , \"15DKHS_6TqWIFpwShasM4w\" , \"2m-YaXq_TW2f791cVpP8og\", \"mSkbi8PmSSqQEWsm6FQiAA\"]","host_id":"KthHMroFQK24I97YoqxBZw","date_start_zoom":"2021-02-08T07:30:00","date_end_zoom":"2021-02-08T09:30:00"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/1/activities/ipsam/hostAvailability"
+=======
+    "https://api.evius.co/api/events/1/activities/soluta/hostAvailability"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -288,11 +313,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/1/activities/minima/register_and_checkin_to_activity" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/activities/minima/register_and_checkin_to_activity"
+=======
+    "https://api.evius.co/api/events/1/activities/consequatur/register_and_checkin_to_activity" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/1/activities/consequatur/register_and_checkin_to_activity"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -482,6 +515,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/id/activities/fugit/checkinbyadmin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -489,6 +523,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/id/activities/fugit/checkinbyadmin"
+=======
+    "https://api.evius.co/api/events/debitis/activities/aspernatur/checkinbyadmin" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"user_id":"dolore"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/debitis/activities/aspernatur/checkinbyadmin"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -497,7 +540,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "user_id": "neque"
+=======
+    "user_id": "dolore"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -1061,19 +1108,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (404):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "_id": "5ed66ce2a6929562725bd7c2",
-    "activity_id": "5ed4081416197f2b711c5ed5",
-    "user_id": "5ed667edd3093a019f783d58",
-    "event_id": "5ed3ff9f6ba39d1c634fe3f2",
-    "user_ids": [
-        "5ed667edd3093a019f783d58"
-    ],
-    "updated_at": "2020-06-02 15:14:42",
-    "created_at": "2020-06-02 15:14:42",
-    "user": null
+    "message": "No query results for model [App\\ActivityAssistant] 5ed66ce2a6929562725bd7c2"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/events/{event}/activities_attendees/{activities_attendee}</code></p>
@@ -1256,11 +1294,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/1/activities_attendees/rerum/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/activities_attendees/rerum/check_in"
+=======
+    "https://api.evius.co/api/events/1/activities_attendees/in/check_in" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/1/activities_attendees/in/check_in"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -1452,14 +1498,7 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{
-    "_id": "5bb25243b6312771e92c8693",
-    "name": "Evento Deportivo",
-    "organization_ids": [
-        "5bb63842c06586040e58aa35",
-        "5bb63861c065863d470263a3"
-    ]
-}</code></pre>
+<pre><code class="language-json">[]</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/categories/{category}</code></p>
 <h4>URL Parameters</h4>
@@ -1567,7 +1606,11 @@ fetch(url, {
     "https://api.evius.co/api/categories/5bb25243b6312771e92c8693" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"ipsam"}'
+=======
+    -d '{"name":"aperiam"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/categories/5bb25243b6312771e92c8693"
@@ -1579,7 +1622,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "ipsam"
+=======
+    "name": "aperiam"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -1681,11 +1728,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/comments/organizations/laboriosam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/comments/organizations/laboriosam"
+=======
+    -G "https://api.evius.co/api/comments/organizations/quidem" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/comments/organizations/quidem"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -1733,7 +1788,11 @@ fetch(url, {
     "https://api.evius.co/api/comments" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"organization_id":"odio","comment":"asperiores","image":"qui"}'
+=======
+    -d '{"organization_id":"repudiandae","comment":"voluptatem","image":"id"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/comments"
@@ -1745,9 +1804,15 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "organization_id": "odio",
     "comment": "asperiores",
     "image": "qui"
+=======
+    "organization_id": "repudiandae",
+    "comment": "voluptatem",
+    "image": "id"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -2185,11 +2250,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/discountcodetemplate/quidem/code/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/discountcodetemplate/quidem/code/aut"
+=======
+    "https://api.evius.co/api/discountcodetemplate/nemo/code/autem" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/discountcodetemplate/nemo/code/autem"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -2237,7 +2310,11 @@ fetch(url, {
     "https://api.evius.co/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"quod"}'
+=======
+    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"ratione"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/code/validatecode"
@@ -2251,7 +2328,11 @@ let headers = {
 let body = {
     "code": "Nyd0jOpQ",
     "event_id": "5ea23acbd74d5c4b360ddde2",
+<<<<<<< HEAD:public/docs/index.html
     "organization_id": "quod"
+=======
+    "organization_id": "ratione"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -2343,7 +2424,11 @@ fetch(url, {
     "https://api.evius.co/api/code/redeem_point_code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"code":"in"}'
+=======
+    -d '{"code":"iste"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/code/redeem_point_code"
@@ -2355,7 +2440,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "code": "in"
+=======
+    "code": "iste"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -2393,7 +2482,11 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/code/codesByUser?organization=nobis&amp;email=repudiandae" \
+=======
+    -G "https://api.evius.co/api/code/codesByUser?organization=dicta&amp;email=itaque" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -2401,8 +2494,13 @@ fetch(url, {
 );
 
 let params = {
+<<<<<<< HEAD:public/docs/index.html
     "organization": "nobis",
     "email": "repudiandae",
+=======
+    "organization": "dicta",
+    "email": "itaque",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -2529,7 +2627,11 @@ fetch(url, {
     "https://api.evius.co/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"qui"}'
+=======
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"dolore"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/discountcodetemplate"
@@ -2546,7 +2648,11 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
+<<<<<<< HEAD:public/docs/index.html
     "discount_type": "qui"
+=======
+    "discount_type": "dolore"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -2908,1094 +3014,7 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">[
-    {
-        "_id": "5fcfb83c0b46a571c2743c94",
-        "name": "Template test",
-        "use_limit": 1,
-        "discount": 90,
-        "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-        "updated_at": "2020-12-08 17:30:36",
-        "created_at": "2020-12-08 17:30:36",
-        "event": null,
-        "organization": {
-            "_id": "5e9caaa1d74d5c2f6a02a3c3",
-            "tax_name": "Tax Name",
-            "tax_value": "Tax Rate",
-            "tax_id": "Tax ID",
-            "author": "5e9caaa1d74d5c2f6a02a3c2",
-            "name": "Evius.co",
-            "updated_at": "2021-12-31 16:21:18",
-            "created_at": "2021-10-20 02:22:38",
-            "banner_image_email": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/AyzpPPMDQTSPWRxGc71I6ymjh742GaRuNgXx3KTf.gif",
-            "description": "Nuestra plataforma Evius de gestión en eventos streaming y físicos. Brinda experiencias 100% interactivas a nuestros usuarios en tiempo real",
-            "styles": {
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#184e69",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#2db898",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#9b9b9b",
-                "toolbarMenuSocial": "#50e3c2",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#9b9b9b",
-                "color_icon_socialzone": "#000000",
-                "color_tab_agenda": "#000000",
-                "event_image": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/bVbhvWil5MLAXDWLk5pCEZpMDZ1mxSczA5uBk4uH.jpg",
-                "banner_image": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/7VlNZs6c3GDBkOVv0de8KiXyRRKjyQcfQLsLfZ45.jpg",
-                "banner_image_email": null,
-                "menu_image": null,
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/3QKW6u6zkU8iOzOBrzCYwyJPvdHouBs6pqMyVHNG.jpg",
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_title": true,
-                "show_video_widget": true,
-                "show_card_banner": true,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null,
-                "hideDatesAgendaItem": true,
-                "hideHoursAgenda": false
-            },
-            "footer_image_email": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/wElkkpWTf6ijB3RPQ0gZmTLbvnI8yfirfzWi2Glv.jpg",
-            "user_properties": [
-                {
-                    "name": "prueba",
-                    "mandatory": true,
-                    "visibleByContacts": true,
-                    "visibleByAdmin": false,
-                    "label": "prueba",
-                    "description": null,
-                    "type": "text",
-                    "justonebyattendee": false,
-                    "updated_at": "2021-10-12 22:13:20",
-                    "created_at": "2021-10-12 22:12:59",
-                    "_id": {
-                        "$oid": "61af64c18a62447f312b0a02"
-                    },
-                    "sensibility": true,
-                    "index": 0,
-                    "order_weight": 1
-                },
-                {
-                    "name": "email",
-                    "mandatory": false,
-                    "visibleByContacts": false,
-                    "visibleByAdmin": false,
-                    "label": "email",
-                    "description": null,
-                    "type": "email",
-                    "justonebyattendee": false,
-                    "updated_at": "2021-10-14 20:29:56",
-                    "created_at": "2021-10-14 20:29:56",
-                    "_id": {
-                        "$oid": "61af64c18a62447f312b0a03"
-                    },
-                    "index": 1,
-                    "order_weight": 2
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres.",
-                    "unique": false,
-                    "mandatory": true,
-                    "type": "text",
-                    "updated_at": "2021-10-14 20:29:56",
-                    "created_at": "2020-04-24 01:03:08",
-                    "_id": {
-                        "$oid": "61af64c18a62447f312b0a04"
-                    },
-                    "author": null,
-                    "categories": [],
-                    "currency": {
-                        "_id": "5c23936fe37db02c715b2a02",
-                        "id": 1,
-                        "title": "U.S. Dollar",
-                        "symbol_left": "$",
-                        "symbol_right": null,
-                        "code": "USD",
-                        "decimal_place": 2,
-                        "value": 1,
-                        "decimal_point": ".",
-                        "thousand_point": ",",
-                        "status": 1,
-                        "created_at": "2013-11-29 19=&gt;51=&gt;38",
-                        "updated_at": "2013-11-29 19=&gt;51=&gt;38"
-                    },
-                    "event_type": null,
-                    "organiser": null,
-                    "organizer": null,
-                    "tickets": [],
-                    "visibleByContacts": false,
-                    "visibleByAdmin": false,
-                    "index": 2,
-                    "order_weight": 3
-                }
-            ],
-            "template_properties": [
-                {
-                    "name": "Template pruebas",
-                    "user_properties": [
-                        {
-                            "name": "names",
-                            "label": "Nombres",
-                            "unique": false,
-                            "mandatory": true,
-                            "type": "text",
-                            "_id": "614260d226e7862220497eab",
-                            "author": null,
-                            "categories": [],
-                            "currency": {
-                                "_id": "5c23936fe37db02c715b2a02",
-                                "id": 1,
-                                "title": "U.S. Dollar",
-                                "symbol_left": "$",
-                                "symbol_right": null,
-                                "code": "USD",
-                                "decimal_place": 2,
-                                "value": 1,
-                                "decimal_point": ".",
-                                "thousand_point": ",",
-                                "status": 1
-                            },
-                            "event_type": null,
-                            "organiser": null,
-                            "organizer": null,
-                            "tickets": [],
-                            "visibleByContacts": "public",
-                            "visibleByAdmin": false,
-                            "index": 0,
-                            "order_weight": 1
-                        },
-                        {
-                            "name": "email",
-                            "label": "Correo",
-                            "unique": false,
-                            "mandatory": true,
-                            "type": "email",
-                            "_id": "614260d226e7862220497eac",
-                            "author": null,
-                            "categories": [],
-                            "currency": {
-                                "_id": "5c23936fe37db02c715b2a02",
-                                "id": 1,
-                                "title": "U.S. Dollar",
-                                "symbol_left": "$",
-                                "symbol_right": null,
-                                "code": "USD",
-                                "decimal_place": 2,
-                                "value": 1,
-                                "decimal_point": ".",
-                                "thousand_point": ",",
-                                "status": 1
-                            },
-                            "event_type": null,
-                            "organiser": null,
-                            "organizer": null,
-                            "tickets": [],
-                            "visibleByContacts": "public",
-                            "visibleByAdmin": false,
-                            "index": 1,
-                            "order_weight": 2
-                        },
-                        {
-                            "name": "contrasena",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "Contraseña",
-                            "description": null,
-                            "type": "password",
-                            "justonebyattendee": false,
-                            "order_weight": 3,
-                            "_id": "614260d226e7862220497ead",
-                            "author": null,
-                            "categories": [],
-                            "event_type": null,
-                            "organiser": null,
-                            "organizer": null,
-                            "currency": {
-                                "_id": "5c23936fe37db02c715b2a02",
-                                "id": 1,
-                                "title": "U.S. Dollar",
-                                "symbol_left": "$",
-                                "symbol_right": null,
-                                "code": "USD",
-                                "decimal_place": 2,
-                                "value": 1,
-                                "decimal_point": ".",
-                                "thousand_point": ",",
-                                "status": 1
-                            },
-                            "tickets": [],
-                            "index": 2,
-                            "sensibility": true
-                        },
-                        {
-                            "name": "campoprueba",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campo prueba",
-                            "description": null,
-                            "type": "email",
-                            "justonebyattendee": false,
-                            "_id": "6165c586137aca6ac3319a24",
-                            "index": 3,
-                            "order_weight": 4
-                        },
-                        {
-                            "name": "camponuevo",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campo nuevo",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "_id": "6165c514137aca6ac3319a23",
-                            "index": 4,
-                            "order_weight": 5
-                        },
-                        {
-                            "name": "pruebassss",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "pruebassss",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "avatar",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "Avatar",
-                            "description": null,
-                            "type": "avatar",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "campoprueba",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campoprueba",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "campotexto",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campotexto",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "camponew",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campoNew",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "camporefresh",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "camporefresh",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "campofresh",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campofresh",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        }
-                    ],
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1634235514228"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1634076384407"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "616606e0a4eebe0c714bc8e2"
-                    }
-                },
-                {
-                    "name": "nuevo template",
-                    "user_properties": [
-                        {
-                            "name": "email",
-                            "label": "Correo",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "email",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false,
-                            "index": 0,
-                            "order_weight": 1
-                        },
-                        {
-                            "name": "datopruebanomandatory",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "datopruebanomandatory",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "index": 1,
-                            "order_weight": 2
-                        },
-                        {
-                            "name": "nombreprueba",
-                            "label": "NombrePrueba",
-                            "unique": false,
-                            "mandatory": true,
-                            "justonebyattendee": false,
-                            "type": "text",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false,
-                            "index": 2,
-                            "order_weight": 3
-                        },
-                        {
-                            "name": "datoplantilla",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "datoPlantilla",
-                            "description": null,
-                            "type": "city",
-                            "justonebyattendee": false,
-                            "index": 3,
-                            "order_weight": 4
-                        },
-                        {
-                            "name": "otrodatoplantilla",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "otrodatoplantilla",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "index": 4,
-                            "order_weight": 5
-                        },
-                        {
-                            "name": "datoprueba",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "datoPrueba",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "index": 5,
-                            "order_weight": 6
-                        },
-                        {
-                            "label": "campoMultiple",
-                            "name": "campomultiple",
-                            "type": "multiplelist",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "order_weight": 7,
-                            "options": [
-                                {
-                                    "label": "opcion1",
-                                    "value": "opcion1"
-                                },
-                                {
-                                    "label": "opcion2",
-                                    "value": "opcion2"
-                                }
-                            ],
-                            "index": 6
-                        }
-                    ],
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1635280353161"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1634162080756"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "616755a0c625ee3ac80f5f02"
-                    }
-                },
-                {
-                    "name": "Nueva Plantilla Cypress",
-                    "user_properties": [
-                        {
-                            "name": "email",
-                            "label": "Correo",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "email",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false
-                        },
-                        {
-                            "name": "names",
-                            "label": "Nombres Y Apellidos",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "text",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false
-                        },
-                        {
-                            "name": "picture",
-                            "label": "Avatar",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "avatar",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false
-                        }
-                    ],
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1635290375580"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1635290375580"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "61788d079df94e523803e4f5"
-                    }
-                }
-            ],
-            "itemsMenu": {
-                "evento": {
-                    "name": "Evento",
-                    "position": 1,
-                    "section": "evento",
-                    "icon": "CalendarOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                },
-                "agenda": {
-                    "name": "Agenda",
-                    "position": 2,
-                    "section": "agenda",
-                    "icon": "ReadOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                },
-                "speakers": {
-                    "name": "Seccion3",
-                    "position": 3,
-                    "section": "speakers",
-                    "icon": "AudioOutlined",
-                    "checked": true,
-                    "permissions": "assistants"
-                },
-                "tickets": {
-                    "name": "Register",
-                    "position": 4,
-                    "section": "tickets",
-                    "icon": "CreditCardOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                }
-            },
-            "type_event": "Corporativo",
-            "email": null
-        }
-    },
-    {
-        "_id": "5fcfc7510991c63a2c673c74",
-        "name": "Curso de regalo",
-        "use_limit": 1,
-        "discount": 100,
-        "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-        "updated_at": "2020-12-08 18:34:57",
-        "created_at": "2020-12-08 18:34:57",
-        "event": null,
-        "organization": {
-            "_id": "5e9caaa1d74d5c2f6a02a3c3",
-            "tax_name": "Tax Name",
-            "tax_value": "Tax Rate",
-            "tax_id": "Tax ID",
-            "author": "5e9caaa1d74d5c2f6a02a3c2",
-            "name": "Evius.co",
-            "updated_at": "2021-12-31 16:21:18",
-            "created_at": "2021-10-20 02:22:38",
-            "banner_image_email": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/AyzpPPMDQTSPWRxGc71I6ymjh742GaRuNgXx3KTf.gif",
-            "description": "Nuestra plataforma Evius de gestión en eventos streaming y físicos. Brinda experiencias 100% interactivas a nuestros usuarios en tiempo real",
-            "styles": {
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#184e69",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#2db898",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#9b9b9b",
-                "toolbarMenuSocial": "#50e3c2",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#9b9b9b",
-                "color_icon_socialzone": "#000000",
-                "color_tab_agenda": "#000000",
-                "event_image": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/bVbhvWil5MLAXDWLk5pCEZpMDZ1mxSczA5uBk4uH.jpg",
-                "banner_image": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/7VlNZs6c3GDBkOVv0de8KiXyRRKjyQcfQLsLfZ45.jpg",
-                "banner_image_email": null,
-                "menu_image": null,
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/3QKW6u6zkU8iOzOBrzCYwyJPvdHouBs6pqMyVHNG.jpg",
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_title": true,
-                "show_video_widget": true,
-                "show_card_banner": true,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null,
-                "hideDatesAgendaItem": true,
-                "hideHoursAgenda": false
-            },
-            "footer_image_email": "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/wElkkpWTf6ijB3RPQ0gZmTLbvnI8yfirfzWi2Glv.jpg",
-            "user_properties": [
-                {
-                    "name": "prueba",
-                    "mandatory": true,
-                    "visibleByContacts": true,
-                    "visibleByAdmin": false,
-                    "label": "prueba",
-                    "description": null,
-                    "type": "text",
-                    "justonebyattendee": false,
-                    "updated_at": "2021-10-12 22:13:20",
-                    "created_at": "2021-10-12 22:12:59",
-                    "_id": {
-                        "$oid": "61af64c18a62447f312b0a02"
-                    },
-                    "sensibility": true,
-                    "index": 0,
-                    "order_weight": 1
-                },
-                {
-                    "name": "email",
-                    "mandatory": false,
-                    "visibleByContacts": false,
-                    "visibleByAdmin": false,
-                    "label": "email",
-                    "description": null,
-                    "type": "email",
-                    "justonebyattendee": false,
-                    "updated_at": "2021-10-14 20:29:56",
-                    "created_at": "2021-10-14 20:29:56",
-                    "_id": {
-                        "$oid": "61af64c18a62447f312b0a03"
-                    },
-                    "index": 1,
-                    "order_weight": 2
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres.",
-                    "unique": false,
-                    "mandatory": true,
-                    "type": "text",
-                    "updated_at": "2021-10-14 20:29:56",
-                    "created_at": "2020-04-24 01:03:08",
-                    "_id": {
-                        "$oid": "61af64c18a62447f312b0a04"
-                    },
-                    "author": null,
-                    "categories": [],
-                    "currency": {
-                        "_id": "5c23936fe37db02c715b2a02",
-                        "id": 1,
-                        "title": "U.S. Dollar",
-                        "symbol_left": "$",
-                        "symbol_right": null,
-                        "code": "USD",
-                        "decimal_place": 2,
-                        "value": 1,
-                        "decimal_point": ".",
-                        "thousand_point": ",",
-                        "status": 1,
-                        "created_at": "2013-11-29 19=&gt;51=&gt;38",
-                        "updated_at": "2013-11-29 19=&gt;51=&gt;38"
-                    },
-                    "event_type": null,
-                    "organiser": null,
-                    "organizer": null,
-                    "tickets": [],
-                    "visibleByContacts": false,
-                    "visibleByAdmin": false,
-                    "index": 2,
-                    "order_weight": 3
-                }
-            ],
-            "template_properties": [
-                {
-                    "name": "Template pruebas",
-                    "user_properties": [
-                        {
-                            "name": "names",
-                            "label": "Nombres",
-                            "unique": false,
-                            "mandatory": true,
-                            "type": "text",
-                            "_id": "614260d226e7862220497eab",
-                            "author": null,
-                            "categories": [],
-                            "currency": {
-                                "_id": "5c23936fe37db02c715b2a02",
-                                "id": 1,
-                                "title": "U.S. Dollar",
-                                "symbol_left": "$",
-                                "symbol_right": null,
-                                "code": "USD",
-                                "decimal_place": 2,
-                                "value": 1,
-                                "decimal_point": ".",
-                                "thousand_point": ",",
-                                "status": 1
-                            },
-                            "event_type": null,
-                            "organiser": null,
-                            "organizer": null,
-                            "tickets": [],
-                            "visibleByContacts": "public",
-                            "visibleByAdmin": false,
-                            "index": 0,
-                            "order_weight": 1
-                        },
-                        {
-                            "name": "email",
-                            "label": "Correo",
-                            "unique": false,
-                            "mandatory": true,
-                            "type": "email",
-                            "_id": "614260d226e7862220497eac",
-                            "author": null,
-                            "categories": [],
-                            "currency": {
-                                "_id": "5c23936fe37db02c715b2a02",
-                                "id": 1,
-                                "title": "U.S. Dollar",
-                                "symbol_left": "$",
-                                "symbol_right": null,
-                                "code": "USD",
-                                "decimal_place": 2,
-                                "value": 1,
-                                "decimal_point": ".",
-                                "thousand_point": ",",
-                                "status": 1
-                            },
-                            "event_type": null,
-                            "organiser": null,
-                            "organizer": null,
-                            "tickets": [],
-                            "visibleByContacts": "public",
-                            "visibleByAdmin": false,
-                            "index": 1,
-                            "order_weight": 2
-                        },
-                        {
-                            "name": "contrasena",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "Contraseña",
-                            "description": null,
-                            "type": "password",
-                            "justonebyattendee": false,
-                            "order_weight": 3,
-                            "_id": "614260d226e7862220497ead",
-                            "author": null,
-                            "categories": [],
-                            "event_type": null,
-                            "organiser": null,
-                            "organizer": null,
-                            "currency": {
-                                "_id": "5c23936fe37db02c715b2a02",
-                                "id": 1,
-                                "title": "U.S. Dollar",
-                                "symbol_left": "$",
-                                "symbol_right": null,
-                                "code": "USD",
-                                "decimal_place": 2,
-                                "value": 1,
-                                "decimal_point": ".",
-                                "thousand_point": ",",
-                                "status": 1
-                            },
-                            "tickets": [],
-                            "index": 2,
-                            "sensibility": true
-                        },
-                        {
-                            "name": "campoprueba",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campo prueba",
-                            "description": null,
-                            "type": "email",
-                            "justonebyattendee": false,
-                            "_id": "6165c586137aca6ac3319a24",
-                            "index": 3,
-                            "order_weight": 4
-                        },
-                        {
-                            "name": "camponuevo",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campo nuevo",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "_id": "6165c514137aca6ac3319a23",
-                            "index": 4,
-                            "order_weight": 5
-                        },
-                        {
-                            "name": "pruebassss",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "pruebassss",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "avatar",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "Avatar",
-                            "description": null,
-                            "type": "avatar",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "campoprueba",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campoprueba",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "campotexto",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campotexto",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "camponew",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campoNew",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "camporefresh",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "camporefresh",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        },
-                        {
-                            "name": "campofresh",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "campofresh",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false
-                        }
-                    ],
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1634235514228"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1634076384407"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "616606e0a4eebe0c714bc8e2"
-                    }
-                },
-                {
-                    "name": "nuevo template",
-                    "user_properties": [
-                        {
-                            "name": "email",
-                            "label": "Correo",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "email",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false,
-                            "index": 0,
-                            "order_weight": 1
-                        },
-                        {
-                            "name": "datopruebanomandatory",
-                            "mandatory": false,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "datopruebanomandatory",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "index": 1,
-                            "order_weight": 2
-                        },
-                        {
-                            "name": "nombreprueba",
-                            "label": "NombrePrueba",
-                            "unique": false,
-                            "mandatory": true,
-                            "justonebyattendee": false,
-                            "type": "text",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false,
-                            "index": 2,
-                            "order_weight": 3
-                        },
-                        {
-                            "name": "datoplantilla",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "datoPlantilla",
-                            "description": null,
-                            "type": "city",
-                            "justonebyattendee": false,
-                            "index": 3,
-                            "order_weight": 4
-                        },
-                        {
-                            "name": "otrodatoplantilla",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "otrodatoplantilla",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "index": 4,
-                            "order_weight": 5
-                        },
-                        {
-                            "name": "datoprueba",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "visibleByAdmin": false,
-                            "label": "datoPrueba",
-                            "description": null,
-                            "type": "text",
-                            "justonebyattendee": false,
-                            "index": 5,
-                            "order_weight": 6
-                        },
-                        {
-                            "label": "campoMultiple",
-                            "name": "campomultiple",
-                            "type": "multiplelist",
-                            "mandatory": true,
-                            "visibleByContacts": false,
-                            "order_weight": 7,
-                            "options": [
-                                {
-                                    "label": "opcion1",
-                                    "value": "opcion1"
-                                },
-                                {
-                                    "label": "opcion2",
-                                    "value": "opcion2"
-                                }
-                            ],
-                            "index": 6
-                        }
-                    ],
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1635280353161"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1634162080756"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "616755a0c625ee3ac80f5f02"
-                    }
-                },
-                {
-                    "name": "Nueva Plantilla Cypress",
-                    "user_properties": [
-                        {
-                            "name": "email",
-                            "label": "Correo",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "email",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false
-                        },
-                        {
-                            "name": "names",
-                            "label": "Nombres Y Apellidos",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "text",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false
-                        },
-                        {
-                            "name": "picture",
-                            "label": "Avatar",
-                            "unique": false,
-                            "mandatory": false,
-                            "justonebyattendee": false,
-                            "type": "avatar",
-                            "description": "avatar del user",
-                            "visibleByAdmin": false,
-                            "visibleByContacts": false
-                        }
-                    ],
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1635290375580"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1635290375580"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "61788d079df94e523803e4f5"
-                    }
-                }
-            ],
-            "itemsMenu": {
-                "evento": {
-                    "name": "Evento",
-                    "position": 1,
-                    "section": "evento",
-                    "icon": "CalendarOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                },
-                "agenda": {
-                    "name": "Agenda",
-                    "position": 2,
-                    "section": "agenda",
-                    "icon": "ReadOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                },
-                "speakers": {
-                    "name": "Seccion3",
-                    "position": 3,
-                    "section": "speakers",
-                    "icon": "AudioOutlined",
-                    "checked": true,
-                    "permissions": "assistants"
-                },
-                "tickets": {
-                    "name": "Register",
-                    "position": 4,
-                    "section": "tickets",
-                    "icon": "CreditCardOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                }
-            },
-            "type_event": "Corporativo",
-            "email": null
-        }
-    }
-]</code></pre>
+<pre><code class="language-json">[]</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/discountcodetemplate/findByOrganization/{organization}</code></p>
 <h4>URL Parameters</h4>
@@ -4024,11 +3043,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/consequatur/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/consequatur/documentusers"
+=======
+    -G "https://api.evius.co/api/events/consequuntur/documentusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/consequuntur/documentusers"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4073,11 +3100,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/molestiae/documentusers/fugit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/molestiae/documentusers/fugit"
+=======
+    -G "https://api.evius.co/api/events/accusantium/documentusers/quae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/accusantium/documentusers/quae"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4135,6 +3170,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/sunt/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -4142,6 +3178,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/sunt/documentusers"
+=======
+    "https://api.evius.co/api/events/dolor/documentusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"dolorem","url":"odio","assign":false}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/dolor/documentusers"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4150,8 +3195,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "aut",
     "url": "eos",
+=======
+    "name": "dolorem",
+    "url": "odio",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "assign": false
 }
 
@@ -4233,11 +3283,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/illum/documentusers/harum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/illum/documentusers/harum"
+=======
+    "https://api.evius.co/api/events/et/documentusers/et" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/et/documentusers/et"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4296,11 +3354,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/fuga/documentusers/earum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/fuga/documentusers/earum"
+=======
+    "https://api.evius.co/api/events/sunt/documentusers/omnis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/sunt/documentusers/omnis"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4350,11 +3416,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/non/me/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/non/me/documentusers"
+=======
+    -G "https://api.evius.co/api/events/cum/me/documentusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/cum/me/documentusers"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4400,11 +3474,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/et/documents" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/et/documents"
+=======
+    -G "https://api.evius.co/api/events/nobis/documents" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/nobis/documents"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4424,8 +3506,13 @@ fetch(url, {
 <pre><code class="language-json">{
     "data": [],
     "links": {
+<<<<<<< HEAD:public/docs/index.html
         "first": "http:\/\/localhost\/api\/events\/et\/documents?page=1",
         "last": "http:\/\/localhost\/api\/events\/et\/documents?page=1",
+=======
+        "first": "http:\/\/localhost\/api\/events\/nobis\/documents?page=1",
+        "last": "http:\/\/localhost\/api\/events\/nobis\/documents?page=1",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
         "prev": null,
         "next": null
     },
@@ -4433,7 +3520,11 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
+<<<<<<< HEAD:public/docs/index.html
         "path": "http:\/\/localhost\/api\/events\/et\/documents",
+=======
+        "path": "http:\/\/localhost\/api\/events\/nobis\/documents",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -4465,13 +3556,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/aut/documents" \
+=======
+    "https://api.evius.co/api/events/similique/documents" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"gato.jpg","title":"gato.jpg","format":"jpg","type":"file","file":"https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&amp;token=1455a85f-6381-4a92-a00e-47c916ed236c"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/aut/documents"
+=======
+    "https://api.evius.co/api/events/similique/documents"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4563,11 +3662,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/consequatur/documents/officiis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/consequatur/documents/officiis"
+=======
+    -G "https://api.evius.co/api/events/quam/documents/sed" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/quam/documents/sed"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4585,7 +3692,11 @@ fetch(url, {
 <p>Example response (404):</p>
 </blockquote>
 <pre><code class="language-json">{
+<<<<<<< HEAD:public/docs/index.html
     "message": "No query results for model [App\\Documents] officiis"
+=======
+    "message": "No query results for model [App\\Documents] sed"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/events/{event}/documents/{document}</code></p>
@@ -4618,13 +3729,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/enim/documents/1" \
+=======
+    "https://api.evius.co/api/events/nisi/documents/1" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"gato.jpg","title":"gato.jpg","format":"jpg","type":"file","file":"https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&amp;token=1455a85f-6381-4a92-a00e-47c916ed236c"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/enim/documents/1"
+=======
+    "https://api.evius.co/api/events/nisi/documents/1"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4717,11 +3836,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/at/documents/voluptate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/at/documents/voluptate"
+=======
+    "https://api.evius.co/api/events/omnis/documents/nostrum" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/omnis/documents/nostrum"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -4832,11 +3959,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/organizations/aut/eventsstadistics" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/aut/eventsstadistics"
+=======
+    -G "https://api.evius.co/api/organizations/repellendus/eventsstadistics" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/repellendus/eventsstadistics"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -5009,7 +4144,11 @@ fetch(url, {
     "https://api.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"esse","picture":"repellendus","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+=======
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"quia","picture":"saepe","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events"
@@ -5025,8 +4164,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< HEAD:public/docs/index.html
     "type_event": "esse",
     "picture": "repellendus",
+=======
+    "type_event": "quia",
+    "picture": "saepe",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -5410,6 +4554,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/repellat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -5417,6 +4562,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/repellat"
+=======
+    "https://api.evius.co/api/events/est" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"quod","picture":"rerum","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/est"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -5429,8 +4583,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< HEAD:public/docs/index.html
     "type_event": "eligendi",
     "picture": "quia",
+=======
+    "type_event": "quod",
+    "picture": "rerum",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -5580,11 +4739,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/ipsum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/ipsum"
+=======
+    "https://api.evius.co/api/events/expedita" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/expedita"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -5628,7 +4795,11 @@ fetch(url, {
     "https://api.evius.co/api/events/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"et","picture":"voluptatem","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+=======
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"id","picture":"voluptas","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1"
@@ -5644,8 +4815,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< HEAD:public/docs/index.html
     "type_event": "et",
     "picture": "voluptatem",
+=======
+    "type_event": "id",
+    "picture": "voluptas",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -5912,6 +5088,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/debitis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -5919,6 +5096,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/debitis"
+=======
+    "https://api.evius.co/api/events/repellendus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"impedit","picture":"sint","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/repellendus"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -5931,8 +5117,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< HEAD:public/docs/index.html
     "type_event": "voluptatem",
     "picture": "officiis",
+=======
+    "type_event": "impedit",
+    "picture": "sint",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -6118,7 +5309,11 @@ fetch(url, {
     "https://api.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"et","picture":"et","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+=======
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"repudiandae","picture":"sequi","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/user/events"
@@ -6134,8 +5329,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< HEAD:public/docs/index.html
     "type_event": "et",
     "picture": "et",
+=======
+    "type_event": "repudiandae",
+    "picture": "sequi",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -6402,6 +5602,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/user/events/tempora" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -6409,6 +5610,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/user/events/tempora"
+=======
+    "https://api.evius.co/api/user/events/et" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"voluptatem","picture":"voluptas","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/user/events/et"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -6421,8 +5631,13 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
+<<<<<<< HEAD:public/docs/index.html
     "type_event": "alias",
     "picture": "repudiandae",
+=======
+    "type_event": "voluptatem",
+    "picture": "voluptas",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -6572,11 +5787,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/user/events/quisquam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/user/events/quisquam"
+=======
+    "https://api.evius.co/api/user/events/odit" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/user/events/odit"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -6778,353 +6001,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "_id": "61a687713bbf847b3f59d117",
-            "name": "Demo",
-            "address": null,
-            "type_event": "onlineEvent",
-            "datetime_from": "2021-11-30 15:18:00",
-            "datetime_to": "2021-11-30 16:18:00",
-            "picture": null,
-            "venue": null,
-            "location": null,
-            "visibility": "PUBLIC",
-            "description": null,
-            "allow_register": true,
-            "styles": {
-                "buttonColor": "#FFF",
-                "banner_color": "#FFF",
-                "menu_color": "#FFF",
-                "event_image": null,
-                "banner_image": null,
-                "menu_image": null,
-                "banner_image_email": null,
-                "footer_image_email": "",
-                "brandPrimary": "#FFFFFF",
-                "brandSuccess": "#FFFFFF",
-                "brandInfo": "#FFFFFF",
-                "brandDanger": "#FFFFFF",
-                "containerBgColor": "#ffffff",
-                "brandWarning": "#FFFFFF",
-                "toolbarDefaultBg": "#FFFFFF",
-                "brandDark": "#FFFFFF",
-                "brandLight": "#FFFFFF",
-                "textMenu": "#555352",
-                "activeText": "#FFFFFF",
-                "bgButtonsEvent": "#FFFFFF",
-                "BackgroundImage": null,
-                "FooterImage": null,
-                "banner_footer": null,
-                "mobile_banner": null,
-                "banner_footer_email": null,
-                "show_banner": "true",
-                "show_card_banner": false,
-                "show_inscription": false,
-                "hideDatesAgenda": true,
-                "hideDatesAgendaItem": false,
-                "hideHoursAgenda": false,
-                "hideBtnDetailAgenda": true,
-                "loader_page": "no",
-                "data_loader_page": null
-            },
-            "author_id": "61a685292e66fd61921378f2",
-            "organizer_id": "61a687203bbf847b3f59d113",
-            "event_type_id": "5bf47203754e2317e4300b68",
-            "updated_at": "2021-11-30 20:20:03",
-            "created_at": "2021-11-30 20:20:01",
-            "user_properties": [
-                {
-                    "name": "email",
-                    "label": "Correo",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "email",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1638303602342"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1638303602342"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "61a687723bbf847b3f59d11b"
-                    }
-                },
-                {
-                    "name": "names",
-                    "label": "Nombres Y Apellidos",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "text",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1638303602410"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1638303602410"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "61a687723bbf847b3f59d11c"
-                    }
-                },
-                {
-                    "name": "picture",
-                    "label": "Avatar",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "avatar",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1638303602534"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1638303602534"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "61a687723bbf847b3f59d11d"
-                    }
-                },
-                {
-                    "name": "password",
-                    "label": "Password",
-                    "unique": false,
-                    "mandatory": false,
-                    "type": "password",
-                    "updated_at": {
-                        "$date": {
-                            "$numberLong": "1638303602664"
-                        }
-                    },
-                    "created_at": {
-                        "$date": {
-                            "$numberLong": "1638303602664"
-                        }
-                    },
-                    "_id": {
-                        "$oid": "61a687723bbf847b3f59d11e"
-                    }
-                }
-            ],
-            "itemsMenu": {
-                "evento": {
-                    "name": "evento",
-                    "position": 1,
-                    "section": "evento",
-                    "icon": "CalendarOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                },
-                "agenda": {
-                    "name": "Mi agenda",
-                    "position": null,
-                    "section": "agenda",
-                    "icon": "ReadOutlined",
-                    "checked": true,
-                    "permissions": "public"
-                }
-            },
-            "author": {
-                "_id": "61a685292e66fd61921378f2",
-                "email": "geraldine.garcia+doc@mocionsoft.com",
-                "name": "Documentación",
-                "names": "Documentación",
-                "displayName": "Documentación",
-                "confirmation_code": "y3o1RLkmDc3ck0CN",
-                "uid": "SgfrWl1w6oOii5VVIPx0C4r6w5n1",
-                "updated_at": "2021-12-02 15:27:12",
-                "created_at": "2021-11-30 20:10:17"
-            },
-            "categories": [],
-            "event_type": {
-                "_id": "5bf47203754e2317e4300b68",
-                "name": "Educación"
-            },
-            "organiser": {
-                "_id": "61a687203bbf847b3f59d113",
-                "name": "Documentación",
-                "author": "61a685292e66fd61921378f2",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": "#FFF",
-                    "banner_image": "#FFF",
-                    "menu_image": "#FFF",
-                    "banner_image_email": "",
-                    "footer_image_email": ""
-                },
-                "updated_at": "2021-11-30 20:18:40",
-                "created_at": "2021-11-30 20:18:40",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1638303520095"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1638303520095"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61a687203bbf847b3f59d114"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1638303520107"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1638303520107"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61a687203bbf847b3f59d115"
-                        }
-                    },
-                    {
-                        "name": "picture",
-                        "label": "Avatar",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "avatar",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1638303520118"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1638303520118"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61a687203bbf847b3f59d116"
-                        }
-                    }
-                ]
-            },
-            "organizer": {
-                "_id": "61a687203bbf847b3f59d113",
-                "name": "Documentación",
-                "author": "61a685292e66fd61921378f2",
-                "styles": {
-                    "buttonColor": "#FFF",
-                    "banner_color": "#FFF",
-                    "menu_color": "#FFF",
-                    "event_image": "#FFF",
-                    "banner_image": "#FFF",
-                    "menu_image": "#FFF",
-                    "banner_image_email": "",
-                    "footer_image_email": ""
-                },
-                "updated_at": "2021-11-30 20:18:40",
-                "created_at": "2021-11-30 20:18:40",
-                "user_properties": [
-                    {
-                        "name": "email",
-                        "label": "Correo",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "email",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1638303520095"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1638303520095"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61a687203bbf847b3f59d114"
-                        }
-                    },
-                    {
-                        "name": "names",
-                        "label": "Nombres Y Apellidos",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "text",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1638303520107"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1638303520107"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61a687203bbf847b3f59d115"
-                        }
-                    },
-                    {
-                        "name": "picture",
-                        "label": "Avatar",
-                        "unique": false,
-                        "mandatory": false,
-                        "type": "avatar",
-                        "updated_at": {
-                            "$date": {
-                                "$numberLong": "1638303520118"
-                            }
-                        },
-                        "created_at": {
-                            "$date": {
-                                "$numberLong": "1638303520118"
-                            }
-                        },
-                        "_id": {
-                            "$oid": "61a687203bbf847b3f59d116"
-                        }
-                    }
-                ]
-            },
-            "currency": {
-                "_id": "5c23936fe37db02c715b2a02",
-                "id": 1,
-                "title": "U.S. Dollar",
-                "symbol_left": "$",
-                "symbol_right": "",
-                "code": "USD",
-                "decimal_place": 2,
-                "value": 1,
-                "decimal_point": ".",
-                "thousand_point": ",",
-                "status": 1,
-                "created_at": "2013-11-29 19=&gt;51=&gt;38",
-                "updated_at": "2013-11-29 19=&gt;51=&gt;38"
-            },
-            "tickets": []
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/eventsbeforetoday?page=1",
         "last": "http:\/\/localhost\/api\/eventsbeforetoday?page=1",
@@ -7133,12 +6010,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/eventsbeforetoday",
         "per_page": 2500,
-        "to": 1,
-        "total": 1
+        "to": null,
+        "total": 0
     }
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -7239,11 +6116,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/users/quam/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/users/quam/events"
+=======
+    -G "https://api.evius.co/api/users/molestiae/events" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/users/molestiae/events"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -7263,8 +6148,13 @@ fetch(url, {
 <pre><code class="language-json">{
     "data": [],
     "links": {
+<<<<<<< HEAD:public/docs/index.html
         "first": "http:\/\/localhost\/api\/users\/quam\/events?page=1",
         "last": "http:\/\/localhost\/api\/users\/quam\/events?page=1",
+=======
+        "first": "http:\/\/localhost\/api\/users\/molestiae\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/molestiae\/events?page=1",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
         "prev": null,
         "next": null
     },
@@ -7272,7 +6162,11 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
+<<<<<<< HEAD:public/docs/index.html
         "path": "http:\/\/localhost\/api\/users\/quam\/events",
+=======
+        "path": "http:\/\/localhost\/api\/users\/molestiae\/events",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -7332,6 +6226,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/doloremque/adddocumentuser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -7339,6 +6234,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/doloremque/adddocumentuser"
+=======
+    "https://api.evius.co/api/events/porro/adddocumentuser" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"quantity":1.44234727,"auto_assign":true}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/porro/adddocumentuser"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -7347,8 +6251,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "quantity": 1.670115,
     "auto_assign": false
+=======
+    "quantity": 1.44234727,
+    "auto_assign": true
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -7437,56 +6346,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "_id": "5bf471e3754e2317e4300b66",
-            "name": "Entidades Estatales"
-        },
-        {
-            "_id": "5bf471f9754e2317e4300b67",
-            "name": "Salud"
-        },
-        {
-            "_id": "5bf47203754e2317e4300b68",
-            "name": "Educación"
-        },
-        {
-            "_id": "5bf47215754e2317e4300b69",
-            "name": "Telcos"
-        },
-        {
-            "_id": "5bf47226754e2317e4300b6a",
-            "name": "Corporativo"
-        },
-        {
-            "_id": "5bf47230754e2317e4300b6b",
-            "name": "Automotor"
-        },
-        {
-            "_id": "5bf4724a754e2317e4300b6c",
-            "name": "Banca"
-        },
-        {
-            "_id": "5bf47252754e2317e4300b6d",
-            "name": "Pyme"
-        },
-        {
-            "_id": "5bf4725e754e2317e4300b6e",
-            "name": "Internacional"
-        },
-        {
-            "_id": "5bf47267754e2317e4300b6f",
-            "name": "Festivales"
-        },
-        {
-            "_id": "5bf47271754e2317e4300b70",
-            "name": "Deportes"
-        },
-        {
-            "_id": "617822f0c8a3d6cb5059e75b",
-            "name": "Misiones"
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/eventTypes?page=1",
         "last": "http:\/\/localhost\/api\/eventTypes?page=1",
@@ -7495,12 +6355,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/eventTypes",
         "per_page": 2500,
-        "to": 12,
-        "total": 12
+        "to": null,
+        "total": 0
     }
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -7515,7 +6375,11 @@ fetch(url, {
     "https://api.evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"asperiores"}'
+=======
+    -d '{"name":"quibusdam"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/eventTypes"
@@ -7527,7 +6391,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "asperiores"
+=======
+    "name": "quibusdam"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -7574,13 +6442,13 @@ Attendee has one user though account_id
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "https://api.evius.co/api/events/et/eventusers" \
+    "https://api.evius.co/api/events/reprehenderit/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"properties":{"email":{},"names":{},"others_properties":{}}}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "https://api.evius.co/api/events/et/eventusers"
+    "https://api.evius.co/api/events/reprehenderit/eventusers"
 );
 
 let headers = {
@@ -7846,11 +6714,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/eventUsers/soluta/checkin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/eventUsers/soluta/checkin"
+=======
+    "https://api.evius.co/api/eventUsers/aut/checkin" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/eventUsers/aut/checkin"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -7897,7 +6773,11 @@ if the user exists, the user will not be updated, it will only create the record
     "https://api.evius.co/api/eventUsers/createUserAndAddtoEvent/61ccd3551c821b765a312864" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"omnis"}}'
+=======
+    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"dolorum"}}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/eventUsers/createUserAndAddtoEvent/61ccd3551c821b765a312864"
@@ -7913,7 +6793,11 @@ let body = {
     "name": "Evius",
     "password": "*******",
     "other_params": {
+<<<<<<< HEAD:public/docs/index.html
         "city": "omnis"
+=======
+        "city": "dolorum"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     }
 }
 
@@ -8079,147 +6963,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "_id": "61ccdab78d17327aeb28f40e",
-            "checked_in": false,
-            "rol_id": "60e8a7e74f9fb74ccd00dc22",
-            "properties": {
-                "names": "Evius",
-                "email": "soporte@evius.co",
-                "rol_id": "60e8a7e74f9fb74ccd00dc22",
-                "checked_in": null,
-                "checkedin_at": null
-            },
-            "event_id": "61ccd3551c821b765a312864",
-            "account_id": "5c9541d8342254158d6a2149",
-            "private_reference_number": "052139230",
-            "updated_at": "2021-12-29 22:01:27",
-            "created_at": "2021-12-29 22:01:27",
-            "user": {
-                "_id": "5c9541d8342254158d6a2149",
-                "uid": "j4ZLBMDuh5UGiX5CKsmChv8UNFf1",
-                "email": "soporte@evius.co",
-                "emailVerified": false,
-                "displayName": "Juan",
-                "photoUrl": null,
-                "phoneNumber": null,
-                "disabled": false,
-                "metadata": {
-                    "createdAt": {
-                        "date": "2019-03-22 20:13:10.936000",
-                        "timezone_type": 3,
-                        "timezone": "UTC"
-                    },
-                    "lastLoginAt": {
-                        "date": "2019-03-22 20:13:10.936000",
-                        "timezone_type": 3,
-                        "timezone": "UTC"
-                    }
-                },
-                "providerData": [
-                    {
-                        "uid": "soporte@evius.co",
-                        "displayName": "soporte evius",
-                        "email": "soporte@evius.co",
-                        "photoUrl": null,
-                        "providerId": "password",
-                        "phoneNumber": null
-                    }
-                ],
-                "passwordHash": "UkVEQUNURUQ=",
-                "customAttributes": [],
-                "tokensValidAfterTime": {
-                    "date": "2019-03-22 20:13:10.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "confirmation_code": "ApdOsMM5RNiW2KxN",
-                "updated_at": "2020-05-15 23:45:06",
-                "created_at": "2019-03-22 20:13:12",
-                "cargo": "CTO",
-                "names": "Juan",
-                "tipocomida": "Asiatia"
-            },
-            "rol": {
-                "_id": "60e8a7e74f9fb74ccd00dc22",
-                "name": "Attendee",
-                "guard_name": "web",
-                "updated_at": "2021-08-06 19:04:06",
-                "created_at": "2021-07-09 19:47:51",
-                "type": "attendee"
-            }
-        },
-        {
-            "_id": "61ccd3551c821b765a312866",
-            "checked_in": false,
-            "rol_id": "5c1a59b2f33bd40bb67f2322",
-            "account_id": "61c277b0273b105bce48bd69",
-            "event_id": "61ccd3551c821b765a312864",
-            "model_type": "App\\Account",
-            "properties": {
-                "names": "Juliana",
-                "email": "geraldine.garcia@mocionsoft.com"
-            },
-            "private_reference_number": "692995318",
-            "updated_at": "2021-12-29 21:29:57",
-            "created_at": "2021-12-29 21:29:57",
-            "user": {
-                "_id": "61c277b0273b105bce48bd69",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1640134573655.png?alt=media&amp;token=5da9338e-a7bc-4855-97c8-5615c0cd30da",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "oX9B0OEsajRagsUI",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-03-03 21:59:05",
-                "created_at": "2021-12-22 00:56:16",
-                "properties": {
-                    "email": "geraldine.garcia@mocionsoft.com",
-                    "names": "Geraldine garcia"
-                },
-                "organization_ids": [
-                    "5f7e33ba3abc2119442e83e8"
-                ],
-                "others_properties": {
-                    "role": "student"
-                }
-            },
-            "rol": {
-                "_id": "5c1a59b2f33bd40bb67f2322",
-                "name": "Administrator",
-                "guard_name": "web",
-                "updated_at": "2021-07-02 20:58:53",
-                "created_at": "2018-12-19 14:46:10",
-                "type": "admin"
-            }
-        },
-        {
-            "_id": "61ccda9b8d17327aeb28f3c8",
-            "checked_in": false,
-            "rol_id": "60e8a7e74f9fb74ccd00dc22",
-            "properties": {
-                "names": "Mocion",
-                "email": "apps@mocionsoft.com",
-                "rol_id": "60e8a7e74f9fb74ccd00dc22",
-                "checked_in": null,
-                "checkedin_at": null
-            },
-            "event_id": "61ccd3551c821b765a312864",
-            "account_id": "61a5697ece9b9a6d780299c2",
-            "private_reference_number": "027229972",
-            "updated_at": "2021-12-29 22:00:59",
-            "created_at": "2021-12-29 22:00:59",
-            "user": null,
-            "rol": {
-                "_id": "60e8a7e74f9fb74ccd00dc22",
-                "name": "Attendee",
-                "guard_name": "web",
-                "updated_at": "2021-08-06 19:04:06",
-                "created_at": "2021-07-09 19:47:51",
-                "type": "attendee"
-            }
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/61ccd3551c821b765a312864\/eventusers?page=1",
         "last": "http:\/\/localhost\/api\/events\/61ccd3551c821b765a312864\/eventusers?page=1",
@@ -8228,12 +6972,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/61ccd3551c821b765a312864\/eventusers",
         "per_page": 2500,
-        "to": 3,
-        "total": 3
+        "to": null,
+        "total": 0
     }
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -8285,147 +7029,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "_id": "61ccdab78d17327aeb28f40e",
-            "checked_in": false,
-            "rol_id": "60e8a7e74f9fb74ccd00dc22",
-            "properties": {
-                "names": "Evius",
-                "email": "soporte@evius.co",
-                "rol_id": "60e8a7e74f9fb74ccd00dc22",
-                "checked_in": null,
-                "checkedin_at": null
-            },
-            "event_id": "61ccd3551c821b765a312864",
-            "account_id": "5c9541d8342254158d6a2149",
-            "private_reference_number": "052139230",
-            "updated_at": "2021-12-29 22:01:27",
-            "created_at": "2021-12-29 22:01:27",
-            "user": {
-                "_id": "5c9541d8342254158d6a2149",
-                "uid": "j4ZLBMDuh5UGiX5CKsmChv8UNFf1",
-                "email": "soporte@evius.co",
-                "emailVerified": false,
-                "displayName": "Juan",
-                "photoUrl": null,
-                "phoneNumber": null,
-                "disabled": false,
-                "metadata": {
-                    "createdAt": {
-                        "date": "2019-03-22 20:13:10.936000",
-                        "timezone_type": 3,
-                        "timezone": "UTC"
-                    },
-                    "lastLoginAt": {
-                        "date": "2019-03-22 20:13:10.936000",
-                        "timezone_type": 3,
-                        "timezone": "UTC"
-                    }
-                },
-                "providerData": [
-                    {
-                        "uid": "soporte@evius.co",
-                        "displayName": "soporte evius",
-                        "email": "soporte@evius.co",
-                        "photoUrl": null,
-                        "providerId": "password",
-                        "phoneNumber": null
-                    }
-                ],
-                "passwordHash": "UkVEQUNURUQ=",
-                "customAttributes": [],
-                "tokensValidAfterTime": {
-                    "date": "2019-03-22 20:13:10.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "confirmation_code": "ApdOsMM5RNiW2KxN",
-                "updated_at": "2020-05-15 23:45:06",
-                "created_at": "2019-03-22 20:13:12",
-                "cargo": "CTO",
-                "names": "Juan",
-                "tipocomida": "Asiatia"
-            },
-            "rol": {
-                "_id": "60e8a7e74f9fb74ccd00dc22",
-                "name": "Attendee",
-                "guard_name": "web",
-                "updated_at": "2021-08-06 19:04:06",
-                "created_at": "2021-07-09 19:47:51",
-                "type": "attendee"
-            }
-        },
-        {
-            "_id": "61ccd3551c821b765a312866",
-            "checked_in": false,
-            "rol_id": "5c1a59b2f33bd40bb67f2322",
-            "account_id": "61c277b0273b105bce48bd69",
-            "event_id": "61ccd3551c821b765a312864",
-            "model_type": "App\\Account",
-            "properties": {
-                "names": "Juliana",
-                "email": "geraldine.garcia@mocionsoft.com"
-            },
-            "private_reference_number": "692995318",
-            "updated_at": "2021-12-29 21:29:57",
-            "created_at": "2021-12-29 21:29:57",
-            "user": {
-                "_id": "61c277b0273b105bce48bd69",
-                "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/images%2F1640134573655.png?alt=media&amp;token=5da9338e-a7bc-4855-97c8-5615c0cd30da",
-                "email": "geraldine.garcia@mocionsoft.com",
-                "names": "Juliana",
-                "confirmation_code": "oX9B0OEsajRagsUI",
-                "uid": "RdEQ7SidFicBOOHMFgKISQZ3Gsr2",
-                "updated_at": "2022-03-03 21:59:05",
-                "created_at": "2021-12-22 00:56:16",
-                "properties": {
-                    "email": "geraldine.garcia@mocionsoft.com",
-                    "names": "Geraldine garcia"
-                },
-                "organization_ids": [
-                    "5f7e33ba3abc2119442e83e8"
-                ],
-                "others_properties": {
-                    "role": "student"
-                }
-            },
-            "rol": {
-                "_id": "5c1a59b2f33bd40bb67f2322",
-                "name": "Administrator",
-                "guard_name": "web",
-                "updated_at": "2021-07-02 20:58:53",
-                "created_at": "2018-12-19 14:46:10",
-                "type": "admin"
-            }
-        },
-        {
-            "_id": "61ccda9b8d17327aeb28f3c8",
-            "checked_in": false,
-            "rol_id": "60e8a7e74f9fb74ccd00dc22",
-            "properties": {
-                "names": "Mocion",
-                "email": "apps@mocionsoft.com",
-                "rol_id": "60e8a7e74f9fb74ccd00dc22",
-                "checked_in": null,
-                "checkedin_at": null
-            },
-            "event_id": "61ccd3551c821b765a312864",
-            "account_id": "61a5697ece9b9a6d780299c2",
-            "private_reference_number": "027229972",
-            "updated_at": "2021-12-29 22:00:59",
-            "created_at": "2021-12-29 22:00:59",
-            "user": null,
-            "rol": {
-                "_id": "60e8a7e74f9fb74ccd00dc22",
-                "name": "Attendee",
-                "guard_name": "web",
-                "updated_at": "2021-08-06 19:04:06",
-                "created_at": "2021-07-09 19:47:51",
-                "type": "attendee"
-            }
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/61ccd3551c821b765a312864\/eventUsers?page=1",
         "last": "http:\/\/localhost\/api\/events\/61ccd3551c821b765a312864\/eventUsers?page=1",
@@ -8434,12 +7038,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/61ccd3551c821b765a312864\/eventUsers",
         "per_page": 2500,
-        "to": 3,
-        "total": 3
+        "to": null,
+        "total": 0
     }
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -8527,7 +7131,11 @@ fetch(url, {
     "https://api.evius.co/api/events/61ccd3551c821b765a312864/eventusers/61ccd3551c821b765a312866" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"rol_id":"et","properties":{"other_properties":"quia"}}'
+=======
+    -d '{"rol_id":"et","properties":{"other_properties":"autem"}}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/61ccd3551c821b765a312864/eventusers/61ccd3551c821b765a312866"
@@ -8541,7 +7149,11 @@ let headers = {
 let body = {
     "rol_id": "et",
     "properties": {
+<<<<<<< HEAD:public/docs/index.html
         "other_properties": "quia"
+=======
+        "other_properties": "autem"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     }
 }
 
@@ -8810,17 +7422,29 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/quod/metricsbydate/eventusers?metrics_type=created_at&amp;datetime_from=est&amp;datetime_to=cupiditate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/quod/metricsbydate/eventusers"
+=======
+    -G "https://api.evius.co/api/events/perferendis/metricsbydate/eventusers?metrics_type=created_at&amp;datetime_from=est&amp;datetime_to=quia" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/perferendis/metricsbydate/eventusers"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let params = {
     "metrics_type": "created_at",
     "datetime_from": "est",
+<<<<<<< HEAD:public/docs/index.html
     "datetime_to": "cupiditate",
+=======
+    "datetime_to": "quia",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -8897,6 +7521,7 @@ This end point sends an email to the user to inform them of the change.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/mollitia/eventusers/possimus/updaterol" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -8904,6 +7529,15 @@ This end point sends an email to the user to inform them of the change.</p>
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/mollitia/eventusers/possimus/updaterol"
+=======
+    "https://api.evius.co/api/events/vitae/eventusers/hic/updaterol" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"rol_id":"dolores"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/vitae/eventusers/hic/updaterol"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -8912,7 +7546,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "rol_id": "non"
+=======
+    "rol_id": "dolores"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -9015,7 +7653,11 @@ for multiple files It returns an array of URLS.</p>
     "https://api.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"file":"exercitationem"}'
+=======
+    -d '{"file":"error"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/files/upload/"
@@ -9027,7 +7669,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "file": "exercitationem"
+=======
+    "file": "error"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -9073,6 +7719,7 @@ for multiple files It returns an array of URLS.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/files/uploadbase/officia" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -9080,6 +7727,15 @@ for multiple files It returns an array of URLS.</p>
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/files/uploadbase/officia"
+=======
+    "https://api.evius.co/api/files/uploadbase/esse" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"mollitia","type":"exercitationem"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/files/uploadbase/esse"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -9088,8 +7744,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "file": "veniam",
     "type": "quod"
+=======
+    "file": "mollitia",
+    "type": "exercitationem"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -9443,7 +8104,11 @@ fetch(url, {
     "https://api.evius.co/api/events/1/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"description":"&lt;p&gt;Es todo un profesional&lt;\/p&gt;","description_activity":"true","image":"minima","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+=======
+    -d '{"description":"&lt;p&gt;Es todo un profesional&lt;\/p&gt;","description_activity":"true","image":"molestiae","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/host"
@@ -9457,7 +8122,11 @@ let headers = {
 let body = {
     "description": "&lt;p&gt;Es todo un profesional&lt;\/p&gt;",
     "description_activity": "true",
+<<<<<<< HEAD:public/docs/index.html
     "image": "minima",
+=======
+    "image": "molestiae",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -9541,7 +8210,11 @@ fetch(url, {
     "https://api.evius.co/api/events/1/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"description":"&lt;p&gt;Es todo un profesional&lt;\/p&gt;","description_activity":"true","image":"rerum","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+=======
+    -d '{"description":"&lt;p&gt;Es todo un profesional&lt;\/p&gt;","description_activity":"true","image":"ut","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/host/1"
@@ -9555,7 +8228,11 @@ let headers = {
 let body = {
     "description": "&lt;p&gt;Es todo un profesional&lt;\/p&gt;",
     "description_activity": "true",
+<<<<<<< HEAD:public/docs/index.html
     "image": "rerum",
+=======
+    "image": "ut",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -9968,55 +8645,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "_id": "6107f97f2ca282701b4f66cf",
-            "title": "Nueva noticia",
-            "description_complete": "Se está realizando está noticia para implementar esta misma funcionalidad en Ucronio",
-            "description_short": "Esta es una noticia de prueba",
-            "linkYoutube": "https:\/\/www.youtube.com\/watch?v=m1YUmZRfgqU&amp;ab_channel=MG1010",
-            "image": [
-                "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/IdKxqboMxU0pvgY3AbRkig4ZptQcUNE4CUvysJIn.png"
-            ],
-            "time": "2021-08-02",
-            "event_id": "605241e68b276356801236e4",
-            "updated_at": "2021-08-02 13:56:15",
-            "created_at": "2021-08-02 13:56:15"
-        },
-        {
-            "_id": "6107fe65ff324f482d1c7569",
-            "title": "Nueva noticia",
-            "event_id": "605241e68b276356801236e4",
-            "updated_at": "2021-08-02 14:17:09",
-            "created_at": "2021-08-02 14:17:09"
-        },
-        {
-            "_id": "6112f753f27cc8092331ef32",
-            "event_id": "605241e68b276356801236e4",
-            "updated_at": "2021-08-10 22:01:55",
-            "created_at": "2021-08-10 22:01:55"
-        },
-        {
-            "_id": "6112f941ed3429091f394932",
-            "event_id": "605241e68b276356801236e4",
-            "updated_at": "2021-08-10 22:10:09",
-            "created_at": "2021-08-10 22:10:09"
-        },
-        {
-            "_id": "613221e52eaf673d574ace82",
-            "title": "Los mejores eventos estu00e1n en Evius",
-            "description_complete": "&lt;p&gt;Los eventos en evius son interactivos porque tiene multiples opciones...&lt;\/p&gt;",
-            "description_short": "&lt;p&gt;Los eventos en Evius son los mu00e1s interactivos y los mejores.&lt;\/p&gt;",
-            "linkYoutube": "https:\/\/www.youtube.com\/watch?v=m1YUmZRfgqU&amp;ab_channel=MG1010",
-            "image": [
-                "https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/IdKxqboMxU0pvgY3AbRkig4ZptQcUNE4CUvysJIn.png"
-            ],
-            "time": "2021-03-09",
-            "event_id": "605241e68b276356801236e4",
-            "updated_at": "2021-09-03 13:25:31",
-            "created_at": "2021-09-03 13:23:49"
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/605241e68b276356801236e4\/newsfeed?page=1",
         "last": "http:\/\/localhost\/api\/events\/605241e68b276356801236e4\/newsfeed?page=1",
@@ -10025,12 +8654,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/605241e68b276356801236e4\/newsfeed",
         "per_page": 2500,
-        "to": 5,
-        "total": 5
+        "to": null,
+        "total": 0
     }
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -10078,14 +8707,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (404):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "_id": "6107fe65ff324f482d1c7569",
-    "title": "Nueva noticia",
-    "event_id": "605241e68b276356801236e4",
-    "updated_at": "2021-08-02 14:17:09",
-    "created_at": "2021-08-02 14:17:09"
+    "message": "No query results for model [App\\Newsfeed] 6107fe65ff324f482d1c7569"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/events/{event}/newsfeed/{newsfeed}</code></p>
@@ -10471,52 +9096,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "_id": "61267f8384bbc0098951d63a",
-            "first_name": "Juliana Geraldine",
-            "last_name": "",
-            "email": "geraldine.garcia+1@mocionsoft.com",
-            "items": [
-                "6116b372396b8f5e864f033a"
-            ],
-            "order_status_id": "5c4232c1477041612349941e",
-            "amount": 400000,
-            "item_type": "auction",
-            "account_id": "6026b57a11dbd7582d770e5a",
-            "event_id": "5ea23acbd74d5c4b360ddde2",
-            "updated_at": "2021-08-25 17:36:03",
-            "created_at": "2021-08-25 17:36:03",
-            "tickets": [],
-            "order_status": {
-                "_id": "5c4232c1477041612349941e",
-                "id": "5",
-                "name": "Esperando Pago"
-            }
-        },
-        {
-            "_id": "612922581bf30548566d58a2",
-            "updated_at": "2021-09-02 16:50:11",
-            "created_at": "2021-08-27 17:35:20",
-            "account_id": "611e7345c4076910c41fb132",
-            "amount": "100000",
-            "email": "geraldine.garcia+2@mocionsoft.com",
-            "event_id": "5ea23acbd74d5c4b360ddde2",
-            "first_name": "TEST",
-            "item_type": "auction",
-            "items": [
-                "6116b372396b8f5e864f033a"
-            ],
-            "last_name": "",
-            "order_status_id": "5c4232c1477041612349941e",
-            "tickets": [],
-            "order_status": {
-                "_id": "5c4232c1477041612349941e",
-                "id": "5",
-                "name": "Esperando Pago"
-            }
-        }
-    ],
+    "data": [],
     "links": {
         "first": "http:\/\/localhost\/api\/events\/5ea23acbd74d5c4b360ddde2\/orders\/ordersevent?page=1",
         "last": "http:\/\/localhost\/api\/events\/5ea23acbd74d5c4b360ddde2\/orders\/ordersevent?page=1",
@@ -10525,12 +9105,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": 1,
+        "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/5ea23acbd74d5c4b360ddde2\/orders\/ordersevent",
         "per_page": 2500,
-        "to": 2,
-        "total": 2
+        "to": null,
+        "total": 0
     }
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -10783,7 +9363,11 @@ fetch(url, {
     "https://api.evius.co/api/organizations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"name":"natus","styles":[],"user_properties":[]}'
+=======
+    -d '{"name":"ex","styles":[],"user_properties":[]}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations"
@@ -10795,7 +9379,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "natus",
+=======
+    "name": "ex",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "styles": [],
     "user_properties": []
 }
@@ -10862,6 +9450,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/earum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -10869,6 +9458,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/earum"
+=======
+    "https://api.evius.co/api/organizations/et" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"est","styles":[],"user_properties":[]}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/et"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -10877,7 +9475,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "et",
+=======
+    "name": "est",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "styles": [],
     "user_properties": []
 }
@@ -10986,17 +9588,30 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/organization/est/ordersUsersPoints?status=pendiente&amp;date_from=mollitia&amp;date_to=consequatur&amp;type_report=csv" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organization/est/ordersUsersPoints"
+=======
+    -G "https://api.evius.co/api/organization/laudantium/ordersUsersPoints?status=pendiente&amp;date_from=qui&amp;date_to=maxime&amp;type_report=csv" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organization/laudantium/ordersUsersPoints"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let params = {
     "status": "pendiente",
+<<<<<<< HEAD:public/docs/index.html
     "date_from": "mollitia",
     "date_to": "consequatur",
+=======
+    "date_from": "qui",
+    "date_to": "maxime",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "type_report": "csv",
 };
 Object.keys(params)
@@ -11113,11 +9728,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/organizations/consequuntur/organizationusers/ipsa" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/consequuntur/organizationusers/ipsa"
+=======
+    -G "https://api.evius.co/api/organizations/at/organizationusers/excepturi" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/at/organizationusers/excepturi"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11168,11 +9791,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/et/organizationusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/et/organizationusers/1"
+=======
+    "https://api.evius.co/api/organizations/deserunt/organizationusers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/deserunt/organizationusers/1"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11217,11 +9848,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/omnis/organizationusers/dolor" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/omnis/organizationusers/dolor"
+=======
+    "https://api.evius.co/api/organizations/est/organizationusers/et" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/est/organizationusers/et"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11302,11 +9941,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/me/organizations/voluptatum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/me/organizations/voluptatum"
+=======
+    -G "https://api.evius.co/api/me/organizations/ratione" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/me/organizations/ratione"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11352,13 +9999,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/sapiente/addorganizationuser" \
+=======
+    "https://api.evius.co/api/organizations/ratione/addorganizationuser" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"test+11@mocionsoft.com","names":"test"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/sapiente/addorganizationuser"
+=======
+    "https://api.evius.co/api/organizations/ratione/addorganizationuser"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11498,11 +10153,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/organizations/1/userproperties/animi" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/1/userproperties/animi"
+=======
+    -G "https://api.evius.co/api/organizations/1/userproperties/asperiores" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/1/userproperties/asperiores"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11695,13 +10358,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/1/userproperties/consequatur" \
+=======
+    "https://api.evius.co/api/organizations/1/userproperties/in" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/1/userproperties/consequatur"
+=======
+    "https://api.evius.co/api/organizations/1/userproperties/in"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11833,11 +10504,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/1/userproperties/odio" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/1/userproperties/odio"
+=======
+    "https://api.evius.co/api/organizations/1/userproperties/voluptatibus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/1/userproperties/voluptatibus"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11884,13 +10563,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/sint/products" \
+=======
+    "https://api.evius.co/api/events/sapiente/products" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m","position":11111}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/sint/products"
+=======
+    "https://api.evius.co/api/events/sapiente/products"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -11994,13 +10681,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/magnam/products/1" \
+=======
+    "https://api.evius.co/api/events/nam/products/1" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/magnam/products/1"
+=======
+    "https://api.evius.co/api/events/nam/products/1"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12220,11 +10915,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/sit/products" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/sit/products"
+=======
+    -G "https://api.evius.co/api/events/delectus/products" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/delectus/products"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12244,8 +10947,13 @@ fetch(url, {
 <pre><code class="language-json">{
     "data": [],
     "links": {
+<<<<<<< HEAD:public/docs/index.html
         "first": "http:\/\/localhost\/api\/events\/sit\/products?page=1",
         "last": "http:\/\/localhost\/api\/events\/sit\/products?page=1",
+=======
+        "first": "http:\/\/localhost\/api\/events\/delectus\/products?page=1",
+        "last": "http:\/\/localhost\/api\/events\/delectus\/products?page=1",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
         "prev": null,
         "next": null
     },
@@ -12253,7 +10961,11 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
+<<<<<<< HEAD:public/docs/index.html
         "path": "http:\/\/localhost\/api\/events\/sit\/products",
+=======
+        "path": "http:\/\/localhost\/api\/events\/delectus\/products",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -12284,11 +10996,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/events/5bb25243b6312771e92c8693/products/quis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/5bb25243b6312771e92c8693/products/quis"
+=======
+    -G "https://api.evius.co/api/events/5bb25243b6312771e92c8693/products/beatae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/5bb25243b6312771e92c8693/products/beatae"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12339,6 +11059,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/rsvp/sendeventrsvp/suscipit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -12346,6 +11067,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/rsvp/sendeventrsvp/suscipit"
+=======
+    "https://api.evius.co/api/rsvp/sendeventrsvp/explicabo" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"subject":"similique","image_header":"aspernatur","content_header":"Has sido invitado a el evento","message":"quia","image":"laboriosam","image_footer":"omnis","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":true}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/rsvp/sendeventrsvp/explicabo"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12354,12 +11084,21 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "subject": "repellat",
     "image_header": "tempora",
     "content_header": "Has sido invitado a el evento",
     "message": "dolor",
     "image": "voluptatem",
     "image_footer": "expedita",
+=======
+    "subject": "similique",
+    "image_header": "aspernatur",
+    "content_header": "Has sido invitado a el evento",
+    "message": "quia",
+    "image": "laboriosam",
+    "image_footer": "omnis",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     },
@@ -12465,11 +11204,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/officiis/updateStatusMessageUser/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/officiis/updateStatusMessageUser/1"
+=======
+    "https://api.evius.co/api/events/culpa/updateStatusMessageUser/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/culpa/updateStatusMessageUser/1"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12537,7 +11284,26 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">[]</code></pre>
+<pre><code class="language-json">[
+    {
+        "_id": "60e8a7e74f9fb74ccd00dc22",
+        "name": "Attendee",
+        "guard_name": "web",
+        "updated_at": "2021-08-06 19:04:06",
+        "created_at": "2021-07-09 19:47:51",
+        "type": "attendee",
+        "module": "system"
+    },
+    {
+        "_id": "5c1a59b2f33bd40bb67f2322",
+        "name": "Administrator",
+        "guard_name": "web",
+        "updated_at": "2021-07-02 20:58:53",
+        "created_at": "2018-12-19 14:46:10",
+        "type": "admin",
+        "module": "system"
+    }
+]</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/organizations/{organization}/roles</code></p>
 <h4>URL Parameters</h4>
@@ -12565,6 +11331,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/nobis/roles" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -12572,6 +11339,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/nobis/roles"
+=======
+    "https://api.evius.co/api/organizations/quos/roles" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"maiores","type":"itaque","module":"et"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/quos/roles"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12580,9 +11356,15 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "voluptatem",
     "type": "atque",
     "module": "officiis"
+=======
+    "name": "maiores",
+    "type": "itaque",
+    "module": "et"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -12649,11 +11431,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/organizations/voluptatem/roles/quas" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/voluptatem/roles/quas"
+=======
+    -G "https://api.evius.co/api/organizations/quis/roles/id" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/quis/roles/id"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12699,6 +11489,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/tempore/roles/praesentium" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -12706,6 +11497,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/tempore/roles/praesentium"
+=======
+    "https://api.evius.co/api/organizations/est/roles/perspiciatis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"ut","model":"asperiores"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/est/roles/perspiciatis"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -12714,8 +11514,13 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "name": "cumque",
     "model": "omnis"
+=======
+    "name": "ut",
+    "model": "asperiores"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -12780,11 +11585,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/excepturi/roles/quo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/excepturi/roles/quo"
+=======
+    "https://api.evius.co/api/organizations/molestiae/roles/accusamus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/molestiae/roles/accusamus"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -13112,9 +11925,13 @@ fetch(url, {
 <blockquote>
 <p>Example response (401):</p>
 </blockquote>
+<<<<<<< HEAD:public/docs/index.html
 <pre><code class="language-json">{
     "message": "Unauthenticated."
 }</code></pre>
+=======
+<pre><code class="language-json">[]</code></pre>
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 <h3>HTTP Request</h3>
 <p><code>GET api/events/{event}/rolesattendees/{rolevent}</code></p>
 <h4>URL Parameters</h4>
@@ -13262,7 +12079,48 @@ fetch(url, {
 <tr>
 <td><code>event</code></td>
 <td>required</td>
+<<<<<<< HEAD:public/docs/index.html
 <td>The ID of the event</td>
+=======
+<td>id de RoleAttendee</td>
+</tr>
+</tbody>
+</table>
+<!-- END_20bcc935d9c85f19ae2a05947d0add4b -->
+<!-- START_67f0cc9990d72d5faeb7e08ced97043b -->
+<h2><em>destroy</em>: delete rol.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "https://api.evius.co/api/rolesattendees/dolor" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/rolesattendees/dolor"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/rolesattendees/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </tr>
 <tr>
 <td><code>rolevent</code></td>
@@ -13402,7 +12260,11 @@ fetch(url, {
     "https://api.evius.co/api/events/1/surveys" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"voluptas","points":1,"initialMessage":"porro","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":3531.2}'
+=======
+    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"dolores","points":1,"initialMessage":"quis","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":20.963}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/surveys"
@@ -13417,9 +12279,15 @@ let body = {
     "survey": "Nombre de encuesta",
     "show_horizontal_bar": false,
     "allow_vote_value_per_user": false,
+<<<<<<< HEAD:public/docs/index.html
     "activity_id": "voluptas",
     "points": 1,
     "initialMessage": "porro",
+=======
+    "activity_id": "dolores",
+    "points": 1,
+    "initialMessage": "quis",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "time_limit": 0,
     "allow_anonymous_answers": false,
     "allow_gradable_survey": false,
@@ -13428,7 +12296,11 @@ let body = {
     "freezeGame": false,
     "open": false,
     "publish": false,
+<<<<<<< HEAD:public/docs/index.html
     "minimumScore": 3531.2
+=======
+    "minimumScore": 20.963
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -13583,7 +12455,11 @@ fetch(url, {
     "https://api.evius.co/api/events/1/surveys/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"survey":"aut","show_horizontal_bar":"sunt","allow_vote_value_per_user":"voluptatem","activity_id":"et","points":"officia","initialMessage":"sequi","time_limit":"enim","allow_anonymous_answers":"dolore","allow_gradable_survey":"officia","hasMinimumScore":"voluptatem","isGlobal":"expedita","freezeGame":"itaque","open":"qui","publish":"velit","minimumScore":"consequatur"}'
+=======
+    -d '{"survey":"est","show_horizontal_bar":"nisi","allow_vote_value_per_user":"nemo","activity_id":"quia","points":"eum","initialMessage":"recusandae","time_limit":"voluptatem","allow_anonymous_answers":"voluptas","allow_gradable_survey":"similique","hasMinimumScore":"quos","isGlobal":"ab","freezeGame":"iusto","open":"modi","publish":"corrupti","minimumScore":"sed"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/1/surveys/1"
@@ -13595,6 +12471,7 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "survey": "aut",
     "show_horizontal_bar": "sunt",
     "allow_vote_value_per_user": "voluptatem",
@@ -13610,6 +12487,23 @@ let body = {
     "open": "qui",
     "publish": "velit",
     "minimumScore": "consequatur"
+=======
+    "survey": "est",
+    "show_horizontal_bar": "nisi",
+    "allow_vote_value_per_user": "nemo",
+    "activity_id": "quia",
+    "points": "eum",
+    "initialMessage": "recusandae",
+    "time_limit": "voluptatem",
+    "allow_anonymous_answers": "voluptas",
+    "allow_gradable_survey": "similique",
+    "hasMinimumScore": "quos",
+    "isGlobal": "ab",
+    "freezeGame": "iusto",
+    "open": "modi",
+    "publish": "corrupti",
+    "minimumScore": "sed"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -13804,11 +12698,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
+<<<<<<< HEAD:public/docs/index.html
     -G "https://api.evius.co/api/organizations/sed/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/sed/templateproperties"
+=======
+    -G "https://api.evius.co/api/organizations/voluptas/templateproperties" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/voluptas/templateproperties"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -13855,6 +12757,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/magnam/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -13862,6 +12765,15 @@ fetch(url, {
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/magnam/templateproperties"
+=======
+    "https://api.evius.co/api/organizations/hic/templateproperties" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"Template 1","user_properties":"laboriosam"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/hic/templateproperties"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -13871,7 +12783,11 @@ let headers = {
 
 let body = {
     "name": "Template 1",
+<<<<<<< HEAD:public/docs/index.html
     "user_properties": "quis"
+=======
+    "user_properties": "laboriosam"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 }
 
 fetch(url, {
@@ -13933,11 +12849,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/organizations/recusandae/templateproperties/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/organizations/recusandae/templateproperties/et"
+=======
+    "https://api.evius.co/api/organizations/nihil/templateproperties/nihil" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/organizations/nihil/templateproperties/nihil"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -14010,11 +12934,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/events/vel/templateproperties/1/addtemplateporperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/events/vel/templateproperties/1/addtemplateporperties"
+=======
+    "https://api.evius.co/api/events/optio/templateproperties/1/addtemplateporperties" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/events/optio/templateproperties/1/addtemplateporperties"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -14049,9 +12981,32 @@ fetch(url, {
 </table>
 <!-- END_239f959da521a75bb133a94e90fce443 -->
 <h1>User</h1>
-<p>Manage users, the users info are stored in the backend and the user auth info (password, email, sms login) is stored in firebase auth. firebaseauth user and backend user are connected thought the uid field generated in firebaseauth.</p>
-<p>El manejo de la sessión (si un usuario ingreso al sistema) se maneja usando tokens JWT generados por firebase se maneja un token en la url que se vence cada media hora y un refresh_token almacenado en el usuario para refrescar el token que se pasa por la URL.</p>
-<p>Del token en la url se extrae la información del usuario se pasa de esta manera ?token=xxxxxxxxxxxxxxxxx</p>
+<p>Manage users, the users info are stored in the backend and the user auth info (password, email).
+There are two data base for the users: <strong>firebase</strong> and <strong>mongodb</strong>, the users are related by the field <em>uid</em> this id is genereated from  firebase.</p>
+<p>Firebase manage the sessions user using tokens JTW.</p>
+<p>The tokens are send in the url this way <strong>?token=xxxxxxxxxxxxxxxxx</strong>  for validate the athuentication of user.</p>
+<p>If you want to work in development environment or production enviroment is necesary connect to proyect correspondent.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Prodcution</th>
+<th>Dev</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID project</strong></td>
+<td>eviusauth</td>
+<td>eviusauthdev</td>
+</tr>
+<tr>
+<td><strong>Name project</strong></td>
+<td>eviusAuth</td>
+<td>eviusAuthDev</td>
+</tr>
+</tbody>
+</table>
 <!-- START_fc1e4f6a697e3c48257de845299b71d5 -->
 <h2><em>index</em>: It&#039;s not posible to query all users in the platform.</h2>
 <p>Doesn't make sense to query all users. Users main function is to assits to an event
@@ -14183,18 +13138,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (404):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "_id": "603d6af041e6f468091c95d5",
-    "email": "correo@evius.co",
-    "names": "User Name",
-    "displayName": "Test",
-    "confirmation_code": "f5wu2dN4wxuD6oEz",
-    "updated_at": "2021-04-13 18:14:42",
-    "created_at": "2021-03-01 22:30:08",
-    "uid": "Rn7otxyh7uUNMpeErysaNnC44sy2",
-    "picture": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/evius%2FViews%2Flogo-E.jpg?alt=media&amp;token=cdf0098c-63d3-450b-a0f0-5be5e9d9ef9d"
+    "message": "No query results for model [App\\Account] 603d6af041e6f468091c95d5"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/users/{user}</code></p>
@@ -14468,20 +13415,7 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">[
-    {
-        "_id": "5ec0607e86cd0905540e96e2",
-        "email": "correo@evius.co",
-        "names": "Mario Perez",
-        "displayName": "Mario Perez"
-    },
-    {
-        "_id": "603d6af041e6f468091c95d5",
-        "email": "correo@evius.co",
-        "names": "User Name",
-        "displayName": "Test"
-    }
-]</code></pre>
+<pre><code class="language-json">[]</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/users/findByEmail/{email}</code></p>
 <h4>URL Parameters</h4>
@@ -14589,13 +13523,21 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/users/iure/changeStatusUser" \
+=======
+    "https://api.evius.co/api/users/ratione/changeStatusUser" \
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/users/iure/changeStatusUser"
+=======
+    "https://api.evius.co/api/users/ratione/changeStatusUser"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -14720,7 +13662,11 @@ fetch(url, {
     "https://api.evius.co/api/getloginlink" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD:public/docs/index.html
     -d '{"refreshlink":"sunt","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
+=======
+    -d '{"refreshlink":"saepe","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/getloginlink"
@@ -14732,7 +13678,11 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD:public/docs/index.html
     "refreshlink": "sunt",
+=======
+    "refreshlink": "saepe",
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
     "event": "61ccd3551c821b765a312864",
     "email": "correo@evius.co"
 }
@@ -15524,11 +14474,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/orders/possimus/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/orders/possimus/validateFreeorder"
+=======
+    "https://api.evius.co/api/orders/occaecati/validateFreeorder" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/orders/occaecati/validateFreeorder"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {
@@ -15567,11 +14525,19 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
+<<<<<<< HEAD:public/docs/index.html
     "https://api.evius.co/api/orders/eos/validatePointOrder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "https://api.evius.co/api/orders/eos/validatePointOrder"
+=======
+    "https://api.evius.co/api/orders/voluptatem/validatePointOrder" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.evius.co/api/orders/voluptatem/validatePointOrder"
+>>>>>>> f490f5bc82a847022712c3067761c6650f2f3935:resources/views/apidoc/index.blade.php
 );
 
 let headers = {

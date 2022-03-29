@@ -98,7 +98,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         $this->app->singleton(
             'Kreait\Firebase\Auth', function ($app) {
                 $fireauth = (new Factory)
-                    ->withServiceAccount(base_path('firebase_credentials.json'))
+                    ->withServiceAccount(config('filesystems.disks.gcs.key_file'))
                     ->createAuth();
 
                 return $fireauth;
@@ -108,13 +108,13 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
         $this->app->singleton(
             'Kreait\Firebase\Firestore', function ($app) {
                 $firebase = (new Factory)
-                    ->withServiceAccount(base_path('firebase_credentials.json'))
+                    ->withServiceAccount(config('filesystems.disks.gcs.key_file'))
                     ->createFirestore();
 
                 return $firebase;
             }
         );
-        // $serviceAccount = ServiceAccount::fromJsonFile(base_path('firebase_credentials.json'));
+        // $serviceAccount = ServiceAccount::fromJsonFile(config('filesystems.disks.gcs.key_file'));
         // $firestore = (new Factory)->withServiceAccount($serviceAccount)->createFirestore();
 
         $this->app->bind(
@@ -150,7 +150,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     public function saveFirestore($collectionpath, $document, $data)
     {
         $firebase = new FirestoreClient([
-            'keyFilePath' => base_path('firebase_credentials.json'),
+            'keyFilePath' => config('filesystems.disks.gcs.key_file'),
         ]);
 
         if ($data) {
@@ -175,7 +175,7 @@ class AppServiceProvider extends ServiceProvider implements ShouldQueue
     public function deleteFirestore($collectionpath, $document)
     {
         $firebase = new FirestoreClient([
-            'keyFilePath' => base_path('firebase_credentials.json'),
+            'keyFilePath' => config('filesystems.disks.gcs.key_file'),
         ]);
 
         $collection = $firebase->collection($collectionpath);
