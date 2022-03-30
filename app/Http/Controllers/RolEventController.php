@@ -184,7 +184,7 @@ class RolEventController extends Controller
     {
         $eventUser = Attendee::where('rol_id' , $rol_id)->where('event_id' , $event_id)->first();
         
-        if(isset($eventUser)){            
+        if(!isset($eventUser)){            
             RolesPermissions::where("rol_id", $rol_id)->delete();
             $rol = Rol::find($rol_id);
             return (string )$rol->delete();
