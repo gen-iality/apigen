@@ -29,7 +29,7 @@ return [
         /*
          * Middleware to attach to the docs endpoint (if `autoload` is true).
          */
-        'middleware' => ['auth:token'],
+        'middleware' => [],
     ],
 
     /*
