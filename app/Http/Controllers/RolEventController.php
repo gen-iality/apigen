@@ -6,6 +6,8 @@ use App\Rol;
 use App\Event;
 use Illuminate\Http\Request;
 use App\Permission;
+use \App\Attendee;
+use \App\RolesPermissions;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\Rule;
 use Validator;
@@ -104,7 +106,7 @@ class RolEventController extends Controller
         }
    
         $event = Event::find($event_id);
-        $data['event_id'] = $event_id;
+        
 
         $result = $event->rols()->create($data);
             
@@ -119,9 +121,9 @@ class RolEventController extends Controller
      * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      */
-    public function show($event_id , Rol $id)
+    public function show($event_id , $id)
     {   
-        $rol = Rol::where('id' , $id)->where('event_id' , $event_id)->first();
+        $rol = Rol::findOrFail($id);
         return $rol;
     }
 
@@ -178,12 +180,12 @@ class RolEventController extends Controller
      * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      */
-    public function destroy(Request $request, $event_id, $rol_id)
+    public function destroy($event_id, $rol_id)
     {
-        $eventUser = EventUser::where('rol_id' , $rol_id)->where('event_id' , $event_id)->first();
+        $eventUser = Attendee::where('rol_id' , $rol_id)->where('event_id' , $event_id)->first();
         
-        if(!isset($eventUser)){            
-            RolPermissions::where("rol_id", $rol_id)->delete();
+        if(isset($eventUser)){            
+            RolesPermissions::where("rol_id", $rol_id)->delete();
             $rol = Rol::find($rol_id);
             return (string )$rol->delete();
         }else{
