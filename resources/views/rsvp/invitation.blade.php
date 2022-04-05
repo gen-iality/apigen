@@ -11,7 +11,7 @@
 <br />
 <br />
 <div class="centered"  style="font-size: 18px;color">
-** {{ __ ('Mail.greeting')}} {{$eventUser_name}}**, {{ __ ('Mail.successful_enrollment')}}:
+{{ __ ('Mail.greeting')}} {{$eventUser_name}}, {{ __ ('Mail.successful_enrollment')}}:
 <b>{{$event->name}}</b>
 </div>
 {{-- Mensaje configurable desde el CMS en la sección configuración asistentes --}}
@@ -26,17 +26,25 @@
 <strong>{!! $eventUser->ticket_title!!} </strong>
 @endif
 
-@if(!empty($event->styles["event_image"]))
+{{-- @if(!empty($event->styles["event_image"]))
 <div class="centered">
 <img alt="{{$event->name}}" src={{$event->styles["event_image"]}} /> 
 </div>
-@endif
+@endif --}}
 
 <div style="text-align: center">
-@component('mail::button', ['url' => $link , 'color' => 'evius'])
-{{ __ ('Mail.enter_event')}}
-@endcomponent
+	<div style="text-align: center">
+		@if($event->type_event == "physicalEvent")
+			<img  src="{{$qr}}" />
+		@else
+			@component('mail::button', ['url' => $link , 'color' => 'evius'])
+				{{ __ ('Mail.enter_event')}}
+			@endcomponent
+		@endif
+	</div>
+	
 </div>
+Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
 
 <hr style="border-right : 0;border-left: 0;" />
 <div style="text-align: center">

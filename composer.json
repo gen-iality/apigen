@@ -33,10 +33,11 @@
     "laravel/framework": "^6.18.35",
     "laravel/helpers": "^1.3",
     "laravel/socialite": "~5.0.1",
+    "laravel/telescope": "^3.5",
     "laravel/tinker": "^2.0",
     "laravelcollective/html": "^6.2.0",
     "league/flysystem-aws-s3-v3": "^1.0",
-    "maatwebsite/excel": "~3.1.22",
+    "maatwebsite/excel": "^3.1",
     "maxhoffmann/parsedown-laravel": "dev-master",
     "mcamara/laravel-localization": "^1.3",
     "milon/barcode": "^6.0",
@@ -52,6 +53,7 @@
     "phpoffice/phpspreadsheet": "^1.14.1",
     "platformsh/config-reader": "^1.0",
     "predis/predis": "^1.0",
+    "realrashid/sweet-alert": "^4.1",
     "romm1/omnipay-payu": "^3.0",
     "seatsio/seatsio-php": "^43.0",
     "spatie/icalendar-generator": "^1.0",
@@ -76,7 +78,10 @@
   "config": {
       "optimize-autoloader": true,
       "preferred-install": "dist",
-      "sort-packages": true
+      "sort-packages": true,
+    "allow-plugins": {
+      "cweagans/composer-patches": true
+    }
   },
   "extra": {
     "enable-patching": true,

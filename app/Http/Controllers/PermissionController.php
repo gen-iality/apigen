@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Permission;
+use App\PermissionEvenent;
 use App\AttendeTicket;
 use App\Event;
-use App\Permission;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class PermissionEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +18,7 @@ class PermissionController extends Controller
     {
         //
         return JsonResource::collection(
-            Permission::paginate(config('app.page_size'))
+            PermissionEvent::paginate(config('app.page_size'))
         );
     }
 
@@ -42,7 +41,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         //
-        $result = new Permission($request->json()->all());
+        $result = new PermissionEvent($request->json()->all());
         $result->guard_name = 'web';
         $result->save();
         return $result;
@@ -54,7 +53,7 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function show(Permission $permission)
+    public function show(PermissionEvent $permission)
     {
         return new JsonResource($permission);
     }
@@ -65,7 +64,7 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission)
+    public function edit(PermissionEvent $permission)
     {
         //
     }
@@ -77,7 +76,7 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request, PermissionEvent $permission)
     {
         $data = $request->json()->all();
         $permissions = $permission;
@@ -92,7 +91,7 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy(PermissionEvent $permission)
     {
         //
     }
@@ -100,7 +99,7 @@ class PermissionController extends Controller
     public function getUserPermissionByEvent(Request $request,$id){
         $rol = AttendeTicket::where('event_id', $id)
                                     ->where('user_id', $request->get('user')->id)->firstOrFail();
-        $permissions = Rol::find($rol->rol_id);
+        $permissions = RolEvent::find($rol->rol_id);
         return $permissions;
     }
 }

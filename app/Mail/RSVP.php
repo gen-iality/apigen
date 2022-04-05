@@ -17,6 +17,7 @@ use Log;
 use App\MessageUser;
 use App;
 use GuzzleHttp\Client;
+use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
 
 class RSVP extends Mailable implements ShouldQueue
 {
@@ -52,7 +53,7 @@ class RSVP extends Mailable implements ShouldQueue
     public $messageLog;
     public $qr;
     public $include_login_button;
-
+    
     /**
      * Create a new message instance.
      *
@@ -98,13 +99,20 @@ class RSVP extends Mailable implements ShouldQueue
         }
 
         // Admin SDK API to generate the sign in with email link.
-        $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]    
+        );
+        // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
 
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
         $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $eventUser["_id"] .'/unsubscribe';
 
-        
+        $destination  = config('app.front_url');
+
         $this->organization_picture = $organization_picture;
         $this->type = $type;
 
@@ -128,6 +136,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->include_ical_calendar = $data['include_ical_calendar'];
         $this->include_login_button = $data['include_login_button'];
         $this->messageLog = $messageLog; 
+        $this->urlconfirmacion = $destination.'/landing/'.$event->_id;
 
 
 
@@ -150,19 +159,25 @@ class RSVP extends Mailable implements ShouldQueue
         $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-        $this->ical = iCalCalendar::create($event->name)
-            ->event(iCalEvent::create($event->name)
-                    ->startsAt($date_time_from)
-                    ->endsAt($date_time_to)
-                    ->description($descripcion)
-                    ->uniqueIdentifier($event->_id)
-                    ->createdAt(new \DateTime())
-                    ->address(($event->address) ? $event->address : "Virtual en web evius.co")
-                    ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
-                //->coordinates(51.2343, 4.4287)
-                    ->organizer('soporte@evius.co', $event->organizer->name)
-                    ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
-            )->get();
+        $this->ical = iCalCalendar::create($event->name)                
+                ->appendProperty(
+                    TextPropertyType::create('METHOD', "REQUEST") 
+                )
+                ->appendProperty(
+                    TextPropertyType::create('URL', $this->urlconfirmacion) 
+                )
+                ->event(iCalEvent::create($event->name)
+                        ->startsAt($date_time_from)
+                        ->endsAt($date_time_to)
+                        ->description($descripcion)
+                        ->uniqueIdentifier($event->_id)
+                        ->createdAt(new \DateTime())
+                        ->address(($event->address) ? $event->address : $this->urlconfirmacion )
+                        // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                    //->coordinates(51.2343, 4.4287)
+                        ->organizer('alerts@evius.co', $event->organizer->name)
+                        ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+                )->get();
 
     }
 
@@ -214,7 +229,9 @@ class RSVP extends Mailable implements ShouldQueue
     {   
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
-        $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
+        $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
+        $from = !empty($organization) ? $organization->name : "Evius Event ";        
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
 
         $gfService = new GoogleFiles();
         $event = $this->event;
@@ -252,7 +269,7 @@ class RSVP extends Mailable implements ShouldQueue
         if ($this->include_ical_calendar)
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
@@ -262,7 +279,7 @@ class RSVP extends Mailable implements ShouldQueue
         }
         
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from($emailOrganization, $from)
             ->subject($this->subject)
             ->markdown('rsvp.rsvpinvitation');
         

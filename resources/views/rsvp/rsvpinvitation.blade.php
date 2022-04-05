@@ -1,9 +1,17 @@
 @component('mail::message')
 
-@if(!empty($image_header))
-
-![Logo]({{$image_header}})<br>
-
+@if(isset($image_header) && !empty($image_header))
+<div class="centered">
+  <img alt="{{$event->name}}" src={{$image_header}} /> 
+</div>
+@elseif(!empty($event->styles["banner_image_email"]))
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["banner_image_email"]}} /> 
+</div>
+@elseif(!empty($event->styles["banner_image"]))
+<div class="centered">
+<img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} />  
+</div>
 @endif
 
 
@@ -39,13 +47,7 @@
 </div>
 
 
-<div>
-	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
-		@component('mail::button', ['url' => $link , 'color' => 'evius'])
-			{{ __ ('Mail.enter_event')}}
-		@endcomponent
-	@endif
-</div>
+
 <div class="centered">
 @if(!empty($image))
 <img alt="{{$event->name}}" src="{{ $image }}">
@@ -58,6 +60,16 @@
 @if ($event->registration_message && $type == "newuser" )
 {!!$event->registration_message!!}
 @endif
+
+<div>
+	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			{{ __ ('Mail.enter_event')}}
+		@endcomponent
+	@endif
+</div>
+
+Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
 
 
 
@@ -83,10 +95,15 @@
 </div>
 
 <div class="centered">
-@if(isset($image_footer) && !empty($image_footer))
-<!-- ![Logo]({{!empty($image_footer)}}) -->
-<img alt="{{$event->name}}" src={{$image_footer}} /> 
-@endif
+	@if(isset($image_footer) && !empty($image_footer))
+		<img alt="{{$event->name}}" src={{$image_footer}} /> 	
+		@elseif(isset($event->styles["banner_footer_email"]) && !empty($event->styles["banner_footer_email"]))
+		<img alt="{{$event->name}}" src={{$event->styles["banner_footer_email"]}} />  
+		@elseif(isset($event->styles["banner_footer"]) && !empty($event->styles["banner_footer"]))
+		<img alt="{{$event->name}}" src={{$event->styles["banner_footer"]}} />           
+		@elseif(isset($organization_picture) && !empty($organization_picture))
+		<img alt="{{$event->name}}" src={{$organization_picture}} /> 
+	@endif	
 </div>
 
 

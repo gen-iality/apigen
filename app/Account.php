@@ -17,7 +17,7 @@ class Account extends User
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
-
+    protected $guard_name = 'web';
     /**
      * The validation rules
      *
@@ -108,30 +108,45 @@ class Account extends User
             function ($model) {
                 try {
 
-                    // var_dump('Previo a usurio no existe Create');die;
+                                        // var_dump('Previo a usurio no existe Create');die;
                     
                     //Si ya existe un usuario con ese correo se jode
                     $newpassword = isset($model->password) ? $model->password : "evius.2040";
-                    $fbuser = self::$auth->createUser(
-                        [
-                            "email" => $model->email,
-                            // "document_number" => $model->document_number,
-                            //phoneNumber: "+11234567890",
-                            "password" => $newpassword,
-                            // "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
-                            //photoURL: "http://www.example.com/12345678/photo.png",
-                            //disabled: false
-                        ]
-                    );
+                    $userExist = '';
 
-                    $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);
+                    try{
+                        $userExist =  self::$auth->getUserByEmail($model->email);
+                        $model->email = strtolower($model->email);                  
+                        $model->uid = $userExist->uid;
+                        // $model->initial_token = $singed->idToken();
+                        // $model->refresh_token = $singed->refreshToken();
+                        $model->password = bcrypt($model->password);   
+                    }catch(\Exception $e)
+                    {
+                        $fbuser = self::$auth->createUser(
+                            [
+                                "email" => $model->email,
+                                // "document_number" => $model->document_number,
+                                //phoneNumber: "+11234567890",
+                                "password" => $newpassword,
+                                // "displayName" => isset($model->displayName) ? $model->displayName : $model->names,
+                                //photoURL: "http://www.example.com/12345678/photo.png",
+                                //disabled: false
+                            ]   
+                        );
 
-                    $model->uid = $fbuser->uid;
-                    $model->initial_token = $singed->idToken();
-                    $model->refresh_token = $singed->refreshToken();
-
+                        $model->email = strtolower($model->email);
+                        $singed = self::$auth->signInWithEmailAndPassword($model->email, $newpassword);                        
+                        $model->uid = $fbuser->uid;
+                        $model->initial_token = $singed->idToken();
+                        $model->refresh_token = $singed->refreshToken();
+                        $model->password = bcrypt($model->password);   
+                    } 
+                                        
+                            
+                    
                 } catch (\Exception $e) {
-                    var_dump($e->getMessage());
+                    var_dump($e->getMessage());die;
                 }
             }
         );
@@ -177,6 +192,7 @@ class Account extends User
                 $model->uid = $fbuser->uid;
                 $model->initial_token = $singed->idToken();
                 $model->refresh_token = $singed->refreshToken();
+                $model->password = bcrypt($model->password);
 
             } catch (\Exception $e) {
                 throw $e;
@@ -211,7 +227,7 @@ class Account extends User
     //->withTimestamps();
     public function role()
     {
-        return $this->belongsToMany(Role::class, 'role_user');
+        return $this->belongsTo('Spatie\Permission\Models\Role', 'role_id');
     }
 
     /**

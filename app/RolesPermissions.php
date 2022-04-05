@@ -4,18 +4,15 @@ namespace App;
 
 use Moloquent;
 use Spatie\Permission\Traits\HasRoles;
+use App\Rol;
 
 class RolesPermissions extends Moloquent
 {
     use HasRoles;
 
-    const NAME_ROL_ADMINISTRATOR = 'Administrator';
-    const NAME_ROL_COLABORATOR = 'Colaborator';
-    const NAME_ROL_ATTENDEE = 'Attendee';
-
     //
     protected $with = ['rol' , 'permission'];
-    protected $table = "roles_has_permissions";
+    protected $table = "roles_permissions";
     protected $fillable = [
         'rol_id' , 
         'permission_id'
@@ -30,5 +27,35 @@ class RolesPermissions extends Moloquent
     public function rol()
     {
         return $this->belongsTo('App\Rol', 'rol_id');
+    }
+
+
+    public static function boot()
+    {
+
+        $nonChangeableRoles = [
+            Rol::ID_ROL_ADMINISTRATOR ,
+            Rol::ID_ROL_ATTENDEE
+        ];
+
+
+        parent::boot();
+        self::saving(function ($model) {
+                
+            if(in_array($model->_id, $nonChangeableRoles))
+            {
+                abort(401 , "You don't have permission for do this action.");
+            }
+
+        });
+
+        self::deleting(function ($model) {
+                
+            if(in_array($model->_id, $nonChangeableRoles))
+            {
+                abort(401 , "You don't have permission for do this action.");
+            }
+
+        });
     }
 }

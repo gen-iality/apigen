@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Rol;
-use App\Permission;
-// use Spatie\Permission\Models\Role;
-// use Spatie\Permission\Models\Permission;
+use App\RolEvent;
+use App\PermissionEvent;
 use Illuminate\Http\Request;
-use App\RolesPermissions;
+use App\RolesPermissionsEvent;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RolesPermissionsController extends Controller
+class RolesPermissionsEventController extends Controller
 {
     /**
      * _index_: list all rolespermissions
@@ -19,8 +17,18 @@ class RolesPermissionsController extends Controller
     public function index()
     {        
         return JsonResource::collection(
-            RolesPermissionsController::paginate(config('app.page_size'))
+            RolesPermissionsEventEventController::paginate(config('app.page_size'))
         );
+    }
+
+    /**
+     * _indexByRoles: list all permisos by rol
+     * @authenticated
+     */
+    public function indexByRol($rol_id)
+    {   
+        $query = RolesPermissionsEvent::where('rol_id' , $rol_id);
+        return JsonResource::collection($query->paginate(config('app.page_size')));
     }
 
     /**
@@ -49,10 +57,10 @@ class RolesPermissionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RolesPermissionsController  $rolesPermissionsController
+     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
      * @return \Illuminate\Http\Response
      */
-    public function show(RolesPermissionsController $rolesPermissionsController)
+    public function show(RolesPermissionsEventEventController $rolesPermissionsController)
     {        
         return new JsonResource($rolesPermissionsController);
     }
@@ -60,10 +68,10 @@ class RolesPermissionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RolesPermissionsController  $rolesPermissionsController
+     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
      * @return \Illuminate\Http\Response
      */
-    public function edit(RolesPermissionsController $rolesPermissionsController)
+    public function edit(RolesPermissionsEventEventController $rolesPermissionsController)
     {
         //
     }
@@ -72,10 +80,10 @@ class RolesPermissionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RolesPermissionsController  $rolesPermissionsController
+     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RolesPermissionsController $rolesPermissionsController)
+    public function update(Request $request, RolesPermissionsEventEventController $rolesPermissionsController)
     {
         //
         $data = $request->json()->all();
@@ -88,10 +96,10 @@ class RolesPermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RolesPermissionsController  $rolesPermissionsController
+     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RolesPermissionsController $rolesPermissionsController)
+    public function destroy(RolesPermissionsEventEventController $rolesPermissionsController)
     {
         //
         $rolespermissions = $rolesPermissionsController;
@@ -123,20 +131,20 @@ class RolesPermissionsController extends Controller
         //El rol de administador tendras todos los nuevo permisos que se creen
         //El rol de colaborador tendrá todos los permisos de update, list, show y create.
         $rolesdefault = ['Administrator' , 'Colaborator'];
-        $roles = Rol::whereIn('name' , $rolesdefault)->get();
+        $roles = RolEvent::whereIn('name' , $rolesdefault)->get();
         
 
         foreach($roles as $role)
         {
-            RolesPermissions::updateOrCreate(
+            RolesPermissionsEvent::updateOrCreate(
                 ["rol_id" => $role->_id,"permission_id" => $permission->_id],
             );
         }
         
         
-        $roleUpdate = Rol::find($rol_id);
+        $roleUpdate = RolEvent::find($rol_id);
         
-        return RolesPermissions::updateOrCreate(
+        return RolesPermissionsEvent::updateOrCreate(
             ["rol_id" => $roleUpdate->_id,"permission_id" => $permission->_id],
         );;
 
@@ -162,33 +170,33 @@ class RolesPermissionsController extends Controller
 
         //         switch ($key) {
         //             case 'list':
-        //                 RolesPermissions::updateOrCreate(
+        //                 RolesPermissionsEvent::updateOrCreate(
         //                     ["rol_id" => $rolAdmin->_id,"permission_id" => $permission->_id],
         //                     ["rol_id" => $rolColaborator->_id,"permission_id" => $permission->_id],
         //                     ["rol_id" => $rolAttendee->_id,"permission_id" => $permission->_id],
         //                 );
         //             break;
         //             case 'show':
-        //                 RolesPermissions::updateOrCreate(
+        //                 RolesPermissionsEvent::updateOrCreate(
         //                     ["rol_id" => $rolAdmin->_id,"permission_id" => $permission->_id],
         //                     ["rol_id" => $rolColaborator->_id,"permission_id" => $permission->_id],
         //                     ["rol_id" => $rolAttendee->_id,"permission_id" => $permission->_id],
         //                 );
         //             break;
         //             case 'create':
-        //                 RolesPermissions::updateOrCreate(
+        //                 RolesPermissionsEvent::updateOrCreate(
         //                     ["rol_id" => $rolAdmin->_id,"permission_id" => $permission->_id],
         //                     ["rol_id" => $rolColaborator->_id,"permission_id" => $permission->_id],
         //                 );
         //             break;
         //             case 'update':
-        //                 RolesPermissions::updateOrCreate(
+        //                 RolesPermissionsEvent::updateOrCreate(
         //                     ["rol_id" => $rolAdmin->_id,"permission_id" => $permission->_id],
         //                     ["rol_id" => $rolColaborator->_id, "permission_id" => $permission->_id]
         //                 );
         //             break;
         //             case 'destroy':
-        //                 RolesPermissions::updateOrCreate(["rol_id" => $rolAdmin->_id, "permission_id" => $permission->_id]);
+        //                 RolesPermissionsEvent::updateOrCreate(["rol_id" => $rolAdmin->_id, "permission_id" => $permission->_id]);
         //             break;
         //         }
 

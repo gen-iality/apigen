@@ -14,6 +14,7 @@ class RolController extends Controller
     /**
      * _index_: list Roles.
      *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -34,7 +35,10 @@ class RolController extends Controller
      * _store_: create a new rol
      * 
      * @bodyParam name string required
+     * @bodyParam event_id string required 
      * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {

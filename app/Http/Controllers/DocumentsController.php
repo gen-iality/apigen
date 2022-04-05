@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @resource Event
- *
+ * @group Documents
+ * The documents are file that you can downloads from event.
  *
  */
 class DocumentsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * _index_ : list documents by event
+     * 
+     * @urlParam event required event_id
      */
     public function index(Request $request, $event_id)
     {
@@ -40,10 +40,14 @@ class DocumentsController extends Controller
         );
     }
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * _store_: create documents in the event
+     * @urlParam event required event id
+     * 
+     * @bodyParam name required name Example: gato.jpg
+     * @bodyParam title required title Example: gato.jpg 
+     * @bodyParam format required name Example: jpg 
+     * @bodyParam type required type Example: file
+     * @bodyParam file required url document Example: https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&token=1455a85f-6381-4a92-a00e-47c916ed236c
      */
     public function store(Request $request, $event_id)
     {
@@ -67,8 +71,16 @@ class DocumentsController extends Controller
             $result->save();
             return $result;
     }
-
-
+    /**
+    * _store_: create documents in the event
+    * @urlParam event required event id
+    * 
+    * @bodyParam name required name Example: gato.jpg
+    * @bodyParam title required title Example: gato.jpg 
+    * @bodyParam format required name Example: jpg 
+    * @bodyParam type required type Example: file
+    * @bodyParam file required url document Example: https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&token=1455a85f-6381-4a92-a00e-47c916ed236c
+    */
     public function update(Request $request, $event_id, $id)
     {
         $data = $request->json()->all();
@@ -78,14 +90,12 @@ class DocumentsController extends Controller
         $push->save();
         return $data;
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Documents  $Documents
-     * @return \Illuminate\Http\Response
-     */
 
-     
+    /**
+     * _show_: information from a specific document
+     * @urlParam event required event id
+     * @urlParam document required evdocdocumentumentent id
+     */ 
     public function show($event_id,$id)
     {
         $documents = Documents::findOrFail($id);
@@ -94,10 +104,10 @@ class DocumentsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
+     * _destroy_: delete a specific document
+     * 
+     * @urlParam event required event id
+     * @urlParam document required evdocdocumentumentent id
      */
     public function destroy(Request $request, $event_id, $id)
     {

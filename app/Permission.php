@@ -8,11 +8,10 @@ class Permission extends Moloquent
 {
     //
     protected $fillable = [
-        'name', 
-        'guard_name', 
-        'module'        
+        'name',          
+        'module',        
     ];
-
+    protected $table = "permissions";
     /**
      * The roles associated with the permission.    
      */

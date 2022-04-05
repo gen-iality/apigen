@@ -18,15 +18,28 @@ use App\Http\Resources\EventUserResource;
 use Auth;
 use App\OrganizationUser;
 use Log;
+use RealRashid\SweetAlert\Facades\Alert;
+use Redirect;
+
+
 
 /**
  * @group User
  * 
- * Manage users, the users info are stored in the backend and the user auth info (password, email, sms login) is stored in firebase auth. firebaseauth user and backend user are connected thought the uid field generated in firebaseauth.
- *
- * El manejo de la sessión (si un usuario ingreso al sistema) se maneja usando tokens JWT generados por firebase se maneja un token en la url que se vence cada media hora y un refresh_token almacenado en el usuario para refrescar el token que se pasa por la URL.
- *
- * Del token en la url se extrae la información del usuario se pasa de esta manera ?token=xxxxxxxxxxxxxxxxx
+ * Manage users, the users info are stored in the backend and the user auth info (password, email).
+ * There are two data base for the users: **firebase** and **mongodb**, the users are related by the field **uid** this id is genereated from  firebase.
+ * 
+ * Firebase manage the sessions user using tokens JTW.
+ * 
+ * The tokens are send in the url this way **?token=xxxxxxxxxxxxxxxxx**  for validate the athuentication of user.
+ * 
+ * If you want to work in development environment or production enviroment is necesary connect to proyect correspondent.
+ * 
+ * |                    | Prodcution    | Dev
+ * |--------------      |-------------  | -------------
+ * |**ID project**      |eviusauth      | eviusauthdev
+ * |**Name project**    |eviusAuth      | eviusAuthDev
+ * 
  */
 class UserController extends UserControllerWeb
 {
@@ -55,11 +68,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _show_: registered User
+     * _show_: view a specific registered user
      *
-     * @urlParam user required  id of user. Example: 5e9caaa1d74d5c2f6a02a3c2
-     *
-     *
+     * @urlParam user required  id of user. Example: 603d6af041e6f468091c95d5
      */
     public function show(String $id)
     {
@@ -70,67 +81,36 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _store_: create new user SignUp
+     * _store_: create new user and send confirmation email
      * 
      * 
-     * @bodyParam email email required Example: evius@evius.co
-     * @bodyParam names  string required  person name
-     * @bodyParam city  string 
-     * @bodyParam country  string 
-     * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
-     * @bodyParam password  string  optional if not provided a default evius.2040 password is assigned
-     * @bodyParam others_properties array  dynamic properties of the user you want to place Example:[]
-     * @bodyParam organization_ids array organizations to which the user belongs, in order to access their events Example: ["5f7e33ba3abc2119442e83e8" , "5e9caaa1d74d5c2f6a02a3c3"]["5f7e33ba3abc2119442e83e8" , "5e9caaa1d74d5c2f6a02a3c3"]
+     * @bodyParam email email required Example: example@evius.co
+     * @bodyParam names  string required  person name  Example: Evius   
+     * @bodyParam picture  string  Example: http://www.gravatar.com/avatar
+     * @bodyParam password  string  required  Example: *******
      * 
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {   
           
-        $validatedData = $request->validate([
-            'email' => 'required|unique:users|email',
+        $request->validate([
+            'email' => 'required|unique:users,email|email:rfc,dns',           
             'names' => 'required',
             'picture' => 'string',
-            'password' => 'string|min:6',
-            'others_properties' => 'array',
+            'password' => 'string|min:6'
         ]);
 
         $data = $request->json()->all();
-        $data['email'] = strtolower($data['email']);
-       
-        //For users registered as teachers, the status is set to 'unconfirmed' and then confirmed by the administrator
-        if(isset($data['others_properties']['role']))
-        {
-            $data['status'] = ($data['others_properties']['role'] == 'teacher') ? 'unconfirmed' : 'confirmed';        
-        }
+        $data['email'] = strtolower($data['email']);            
 
         $result = new Account($data);
-        // var_dump($data['organization_ids']);die;
-        $result->save();
-        if(isset($data['organization_ids'])){
-            
-            $result->organizations()->attach($data['organization_ids']);
-            
-            foreach($data['organization_ids'] as $organization)
-            {   
-                $result->total_number_events = 0;
-                $dataOganization['userid'] = $result->_id;
-                $dataOganization['organization_id'] = $organization;
-                $organizationUser = new OrganizationUser($dataOganization);
-                $organizationUser->save();
-                
-            }                          
-            $result->save();
-            Mail::to($result->email)
-            ->queue(            
-                new \App\Mail\UserRegistrationMail($result , $organization)
-            );
-
-        }                       
+        $result->save();                            
         
         $result = Account::find($result->_id);
+        Mail::to($result)
+            ->queue(
+                new  \App\Mail\UserRegistrationMail($result)
+            );
         return $result;
     }
 
@@ -139,25 +119,18 @@ class UserController extends UserControllerWeb
     /**
      * _update_: update registered user
      * @authenticated
-     * @urlParam user required id user. Example: 5e9caaa1d74d5c2f6a02a3c2
+     * @urlParam user required id user. Example: 603d6af041e6f468091c95d5
      *
-     * @bodyParam email email optional. Example: evius@evius.co
-     * @bodyParam names  string optional. Example: evius lopez
-     * @bodyParam city  string 
-     * @bodyParam country  string 
+     * @bodyParam names  string optional. Example: Evius Demo
+     * @bodyParam password string. Example: ******
      * @bodyParam picture  string optional. Example: http://www.gravatar.com/avatar
-     * @bodyParam organization_ids string. 
-     * @bodyParam others_properties array optional dynamic properties of the user you want to place. Example: []
-     * @return App\Http\Resources\UsersResource
      */
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'email' => 'email',
             'names' => 'string',
             'picture' => 'string',
-            'password' => 'string',
-            'others_properties' => 'array',
+            'password' => 'string'
         ]);
 
         $data = $request->json()->all();
@@ -167,17 +140,14 @@ class UserController extends UserControllerWeb
         $Account = Account::find($id);
         
         //If the user wants to change the password this will also be modified in firebase
-        if(isset($data['properties']['password']))
+        if(isset($data['password']))
         {               
-            $this->auth->changeUserPassword($Account['uid'], $data['properties']['password']);
+            $this->auth->changeUserPassword($Account['uid'], $data['password']);
         }
         // var_dump($auth);die;
         $Account->fill($data);
         $Account->save();
 
-        if(isset($data['organization_ids'])){
-            $Account->organizations()->sync($data['organization_ids']);
-        }     
 
         $Account = Account::find($Account->_id);
 
@@ -185,12 +155,9 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _delete_: dele a registered user
+     * _delete_: delete a registered user
      * @authenticated
-     * @urlParam id required id user
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @urlParam user required id user Example: 603d6af041e6f555591c95d5
      */
     public function destroy($id)
     {
@@ -204,15 +171,12 @@ class UserController extends UserControllerWeb
     }
 
     /**
-     * _signInWithEmailAndPassword_: login a user
-     *
-     * @bodyParam email email required Example: evius@evius.co
-     * @bodyParam password string required Example: evius.2040
+     * _signInWithEmailAndPassword_: login a user, you can see this [diagram](https://app.diagrams.net/#G1qSNi58JI6usiyqU7n7SsmyTrJW5oITAZ)
+     * 
+     * @bodyParam email email required Example: correo@evius.co
+     * @bodyParam password string required Example: *********
      * It returns the userdata and inside that data
      * the initial_token to be stored in front and be used in following api request
-     *
-     * @param Request $request
-     * @return void
      */
     public function signInWithEmailAndPassword(Request $request)
     {
@@ -241,10 +205,7 @@ class UserController extends UserControllerWeb
     /**
      * _findByEmail_: search for specific user by mail
      *
-     * @urlParam email required email del usuario buscado. Example: evius@evius.co
-     *
-     * @param  email  $email
-     * @return \Illuminate\Http\Response
+     * @urlParam email required email del usuario buscado. Example: correo@evius.co
      */
     public function findByEmail($email)
     {
@@ -257,6 +218,15 @@ class UserController extends UserControllerWeb
             return ["error" => $e->getMessage()];
         }
         return $Account;
+    }
+
+    public function validateEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|unique:users,email|email:rfc,dns'
+        ]);
+        
+        return response()->json(['message' => 'Email valid'], 200);
     }
 
     /**
@@ -338,7 +308,7 @@ class UserController extends UserControllerWeb
             $url_final_params["error"] = $e->getMessage();
 
         } finally {
-            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url') . '/events';
+            $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url');
             return redirect()->away($destination . "?" . http_build_query($url_final_params));
         }
 
@@ -391,14 +361,12 @@ class UserController extends UserControllerWeb
 
     /**
      * _userOrganization_: user lists all the users that belong to an organization, besides this you can filter all the users by **any of the properties** that have
+ 
+     * @authenticated
      * 
-     * 
-     * @autenticathed
-     * 
-     * @queryParam filtered optional filter parameters Example: [{"field":"others_properties.role","value":["admin"]}]
-     * @queryParam  orderBy filter parameters Example: [{"field":"status","order":"desc"}]     
-     * 
-     * @urlParam organization_id required organization to which the users belong
+     * @urlParam organization required organization to which the users belong. Example: 61ccd2cc81e73549a63dd5ce
+     * @queryParam filtered optional filter parameters Example: [{"field":names","Evius"}]
+     * @queryParam  orderBy filter parameters Example: [{"field":"_id","order":"desc"}]    
      * 
      */
     public function userOrganization(Request $request, String $organization_id, FilterQuery $filterQuery){
@@ -460,33 +428,158 @@ class UserController extends UserControllerWeb
     }
 
     /**
+     * _getAccessLink_: get and sent link acces to email to user.
+     * 
+     * @bodyParam refreshlink This parameter return the login link but not send email.
+     * @bodyParam event string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
+     * @bodyParam email email required  user email Example: correo@evius.co
      * 
      */
-    public function getAccessLink(Request $request)
+    public function getAccessLink(Request $request) 
     {
-        $data = $request->input();
-        if(isset($data["user_id"]))
+        $auth = resolve('Kreait\Firebase\Auth');
+
+        $request->validate([
+            "email" => "required|email:rfc,dns",            
+        ]);
+        $data = $request->all();
+        
+        $email = $data["email"];
+        
+
+        $link = '';
+        $event_id = null;
+        if(isset($data['event_id']))
+        {   
+            
+
+            $event_id = $data['event_id'];
+
+            $link = $auth->getSignInWithEmailLink(
+                $email,
+                [
+                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
+                ]    
+            );
+
+        }else{  
+            
+            $link = $auth->getSignInWithEmailLink(
+                $email,
+                [
+                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email),
+                ]    
+            );
+
+        } 
+        if(!isset($data['refreshlink']))    
         {
-            if(is_array($data["user_id"]))
-            {
-                for($i = 0; $i < count($data["user_id"]); $i++)
-                {
-                    $user = Account::find($data["user_id"][$i]);
-                    $password = "evius.2040";
-                    $pass = self::encryptdata($password);
-                    echo  config("app.api_evius") . "/singinwithemail?email=" . $user->email . "&innerpath=" . $data["event_id"]  . "&pass=" . $pass;
-                }
+            Mail::to($email)
+            ->queue(
+                new \App\Mail\LoginMail($link , $event_id, $email)
+            );
+        }
+        
+        
+        return $link;
+    }
+
+    /**
+     * _signInWithEmailLink_: this end point start the login when the user does click in the link
+     *  
+     * @bodyParam event_id string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
+     * @bodyParam email email required  user email Example: correo@evius.co
+     */
+    public function signInWithEmailLink(Request $request)
+    {
+        $auth = resolve('Kreait\Firebase\Auth');
+        $data = $request->all();
+        
+        $singin = '';
+        $redirect='';
+
+        try {
+        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
+        if(isset($data['event_id']))
+        {   
+            $redirect =  config('app.front_url') . "/loginWithCode?email=". urlencode($data['event_id']) . "&event_id=" . $data['event_id'];
+
             }else{
 
-                $user = Account::find($data["user_id"]);
-                $password = "evius.2040";
-                $pass = self::encryptdata($password);
-                echo  config("app.api_evius") . "/singinwithemail?email=" . $user->email . "&innerpath=" . $data["event_id"]  . "&pass=" . $pass;
+                $redirect =  config('app.front_url');
+            } 
 
-            }
+            return Redirect::to($redirect)->with($auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]));
+            
 
+        }catch(\Exception $e){
+            $link = $auth->getSignInWithEmailLink(
+                $data["email"],
+                [
+                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($data['event_id']) . "&event_id=" . $data['event_id'],
+                ]    
+            );
+
+            return Redirect::to($link);
+
+            // Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
+            // return view('Public.Errors.loginLink');         
         }
-        return true;
+        
+    }
+
+
+    /**
+     * _changeUserPassword_: send to email to user whit  link to change user password.
+     * 
+     * @bodyParam event_id string event id to redirect user, if this parameter not send, the link redirect to principal page. Example: 61ccd3551c821b765a312864
+     * @bodyParam email email required  user email Example: correo@evius.co
+     * 
+     */
+    public function changeUserPassword(Request $request)
+    {   
+        $auth = resolve('Kreait\Firebase\Auth');
+
+        $request->validate([
+            "email" => "required|email:rfc,dns",
+            "hostName" => "required|string"                     
+        ]);
+
+        $data = $request->json()->all();
+        $email = $data['email'];
+        $user = Account::where('email' , $email)->first();
+
+        if(!isset($user))
+        {
+            return response()->json([
+                "message" => "El usuario no está registrado en el sistema"
+            ] , 404);
+        }
+        //Algunos clientes prefieren que su marca este en todos los correos por eso se coloca la opción de evento     
+        $event = null;
+        $url = "";
+        if(isset($data['event_id']))
+        {
+            $event = Event::find($data['event_id']);
+            $url = config('app.front_url') . "/landing/". $event->_id ."/event";
+        }else{
+            // $url = config('app.front_url');
+            $url = $data['hostName'];
+        }
+        
+        
+        $link = $auth->getPasswordResetLink($email, 
+            [
+                "url" => $url,
+            ]
+        );        
+        
+        Mail::to($email)
+        ->queue(            
+            new \App\Mail\ChangeUserPasswordEmail($user , $link, $event)
+        ); 
+        return 'El correo ha sido enviado con exito';
+
     }
 
 }

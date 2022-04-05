@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use PDF;
 use Storage;
+use Auth;
 
 /**
  * @group Certificate
@@ -29,10 +30,9 @@ class CertificateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, string $event_id)
-    {
-        return JsonResource::collection(
-            Certificate::paginate(config('app.page_size'))
-        );
+    {   
+        $query = Certificate::where('event_id' , $event_id)->paginate(config('app.page_size'));
+        return JsonResource::collection($query);
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
@@ -115,7 +115,18 @@ class CertificateController extends Controller
      * @return void
      */
     public function indexByEvent(String $event_id)
-    {
+    {  
+        $auth = Auth::user();
+
+        $eventUser = Attendee::where("event_id", $event_id)->where('account_id' , $auth->_id)->first();
+
+
+        $certificates = Certificate::where("event_id", $event_id)->where('rol_id' , $eventUser->rol_id )->first();
+        
+        if(isset($certificates) && !empty($certificates))
+        {
+            return $certificates; 
+        }
         return JsonResource::collection(
             Certificate::where("event_id", $event_id)->paginate(config('app.page_size'))
         );

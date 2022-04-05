@@ -152,7 +152,7 @@ class Account extends MyBaseModel
     //->withTimestamps();
     public function role()
     {
-        return $this->belongsToMany(Role::class, 'role_user');
+        return $this->belongsTo('Spatie\Permission\Models\Role', 'role_id');
     }
 
     /**

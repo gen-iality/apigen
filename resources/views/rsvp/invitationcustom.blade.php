@@ -11,7 +11,7 @@
 <br />
 <br />
 <div class="centered"  style="font-size: 18px;color">
-** {{ __ ('Mail.greeting')}} {{$eventUser_name}}**, {{ __ ('Mail.successful_enrollment')}}:
+{{ __ ('Mail.greeting')}} {{$eventUser_name}}, {{ __ ('Mail.successful_enrollment')}}:
 <b>{{$event->name}}</b>
 </div>
 {{-- Mensaje configurable desde el CMS en la sección configuración asistentes --}}
@@ -36,10 +36,9 @@
 	@if($event->type_event == "physicalEvent")
 		<img  src="{{$qr}}" />
 	 @else
-		<p>
-			{{ __('Mail.alternative_entry')}}
-			<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
-		</p>
+		@component('mail::button', ['url' => $link , 'color' => 'evius'])
+			{{ __ ('Mail.enter_event')}}
+		@endcomponent
 	@endif
 </div>
 

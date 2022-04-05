@@ -5,9 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 use App\ModelHasRole;
-use App\RolesPermissions;
 use App\Permission;
-use App\Attendee;
 use Spatie\Permissionn\Exceptions\UnauthorizedException;
 use Illuminate\Auth\AuthenticationException;
 class PermissionMiddleware
@@ -30,29 +28,24 @@ class PermissionMiddleware
         ? $permission
         : explode('|', $permission);
         
-        //Se valida el rol del usuario, y el evento u organización que puede editar.               
-        $userRol = '';
+        //Se valida el rol del usuario, y el evento u organización que puede editar.
+        $userRol = ModelHasRole::where('model_id' , $user->_id);
 
-        if(Attendee::where('account_id' , $user->_id) !== null)
-        {
-            $userRol = Attendee::where('account_id' , $user->_id);                       
-        }else{
-            $userRol = ModelHasRole::where('model_id' , $user->_id);
-        }
-
-
+        
         switch ($urlParameter->parameterNames()[0]) {
             case 'event':
-                $userRol = $userRol->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'role_id', 'properties']);
+                $userRol = $userRol->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'role_id']);
                 break;
             case 'organization':
                 $userRol = $userRol->where('organization_id' ,$urlParameter->parameter('organization'))->first(['rol_id', 'role_id']);              
                 break;
         }        
+        
+
         if($userRol !== null)
         {    
             //Cono el usuario existe se busca los permisos que tiene el rol del usuario.
-            $permissionsUser = Permission::where('role_ids', $userRol->rol_id)->get();                               
+            $permissionsUser = Permission::where('role_ids', $userRol->role_id)->get();                               
             
             foreach ($permissions as $permission) 
             {   
@@ -62,27 +55,8 @@ class PermissionMiddleware
                                
                     if($permissionAccepted !== null)
                     {   
-                        
                         return $next($request);
                     }  
-                } 
-            }
-
-            //Esta segunda validación se hace para organizar mejor el código, ya que se separa  en roles_has_permissions la relación entre ambos
-            // $permissionsUser = Permission::where('name', $permission)->first();    
-            $permissionsRolUser = RolesPermissions::where('rol_id', $userRol->rol_id)->get();                                       
-            
-            foreach ($permissions as $permission) 
-            {   
-                foreach ($permissionsRolUser as $permissionUser) 
-                {   
-                    
-                    //send_products_silentauctiomail                    
-                    //return $permissionUser->permission->name;
-                    if($permissionUser->permission->name === $permission )
-                    {   
-                        return $next($request);
-                    }   
                 } 
             }
         }

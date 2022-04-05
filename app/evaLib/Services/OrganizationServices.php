@@ -20,10 +20,7 @@ class OrganizationServices
         $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
         $user_properties = new UserProperties($email);
         $model->user_properties()->save($user_properties);
-
-        $picture = array("name" => "picture", "label" => "Avatar", "unique" => false, "mandatory" => false, "type" => "avatar");
-        $user_properties = new UserProperties($picture);
-        $model->user_properties()->save($user_properties);        
+     
 
     }
 

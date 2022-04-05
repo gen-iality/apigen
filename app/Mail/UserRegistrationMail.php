@@ -15,22 +15,16 @@ class UserRegistrationMail extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $user;
-    public $organization;
    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user , $organization)
-    {   
-        
-        $organization = Organization::find($organization);
-        $organization = Account::find($organization->author);
-        $this->user = $user;        
-        $this->organization = $organization;
+    public function __construct($user)
+    {                          
+        $this->user = $user;    
     }
-
 
     /**
      * Build the message.
@@ -42,7 +36,7 @@ class UserRegistrationMail extends Mailable implements ShouldQueue
     {
         
         return $this
-            ->from($this->organization->email, $this->organization->displayName)
+            ->from("alerts@evius.co", "Evius")
             ->subject('Registro exitoso')
             ->markdown('Mailers.UserRegistration');
         //return $this->view('vendor.mail.html.message');
