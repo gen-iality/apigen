@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends MyBaseModel implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, SoftDeletes, Notifiable;
+    use Authenticatable, CanResetPassword,  Notifiable;
 
     /**
      * The database table used by the model.
