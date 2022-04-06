@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Account extends User
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     use Notifiable;
     use HasRoles;
     
