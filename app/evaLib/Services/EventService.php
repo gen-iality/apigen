@@ -138,7 +138,8 @@ class EventService
         $model = Event::find($event_id);
         $organization = Organization::find($model->organizer_id);
         if(empty($organization->template_properties[0]))
-        {
+        {   
+            dd('Hola1'); 
             $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
             $user_properties = new UserProperties($name);
             $model->user_properties()->save($user_properties);
@@ -146,14 +147,15 @@ class EventService
             $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
             $user_properties = new UserProperties($email);
             $model->user_properties()->save($user_properties);
-        } else {
-            $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
-            $user_properties = new UserProperties($name);
-            $model->user_properties()->save($user_properties);
-
-            $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
-            $user_properties = new UserProperties($email);
-            $model->user_properties()->save($user_properties);
+        } else {   
+            
+            $properties =  $organization->template_properties[0]->user_properties;         
+            foreach($properties as $propertie)
+            {   
+                $user_properties = new UserProperties($propertie);
+                $model->user_properties()->save($user_properties);                
+            }
+            
         }         
     }
 
