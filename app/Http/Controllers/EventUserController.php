@@ -439,7 +439,7 @@ class EventUserController extends Controller
                 $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
                
                 $client = new Client;
-                $url = config('app.api_url') . "/api/user";
+                $url = "https://devapi.evius.co/api/user";
                 $headers = ['Content-Type' => 'application/json'];
                 
                 $client->post($url,
@@ -452,6 +452,8 @@ class EventUserController extends Controller
                     ],
                     ['headers' => $headers]
                 );
+
+                $user = Account::where("email" , $email)->first();
             }
 
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
