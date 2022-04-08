@@ -577,8 +577,9 @@ class UserController extends UserControllerWeb
         Mail::to($email)
         ->queue(            
             new \App\Mail\ChangeUserPasswordEmail($user , $link, $event)
-        ); 
-        return 'El correo ha sido enviado con exito';
+        );
+        
+        return response()->json(['data' => compact("link"), 'message' => 'Mail sent successfully']);
 
     }
 
