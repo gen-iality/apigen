@@ -93,15 +93,16 @@ class UserController extends UserControllerWeb
     public function store(Request $request)
     {   
           
+        $data = $request->json()->all();
+        $email = strtolower($data['email']);        
+        $request->merge(['email' => $email]);
+
         $request->validate([
             'email' => 'required|unique:users,email|email:rfc,dns',           
             'names' => 'required',
             'picture' => 'string',
             'password' => 'string|min:6'
-        ]);
-
-        $data = $request->json()->all();
-        $data['email'] = strtolower($data['email']);            
+        ]);            
 
         $result = new Account($data);
         $result->save();                            
