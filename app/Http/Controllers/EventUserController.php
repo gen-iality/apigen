@@ -442,18 +442,15 @@ class EventUserController extends Controller
                 $url = "https://devapi.evius.co/api/user";
                 $headers = ['Content-Type' => 'application/json'];
                 
-                $client->post($url,
-                    ['json' => 
-                        [
-                            "email" => $email,
-                            "names" => $eventUserData["names"],
-                            "password" => $pass
-                        ],       
-                    ],
-                    ['headers' => $headers]
-                );
+                $user = Account::create([
+                    "email" => $email,
+                    "names" => $eventUserData["names"],
+                    "password" => $pass
+                ]); 
 
                 $user = Account::where("email" , $email)->first();
+
+                return $user;
             }
 
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
