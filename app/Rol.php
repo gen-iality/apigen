@@ -12,22 +12,17 @@ class Rol extends Moloquent
     const MODULE_SYSTEM = 'system';
 
     protected $fillable = [ 
-        'account_id', 
-        'event_id', 
-        'organization_id', 
+        'modeltable_id',
+        'modeltable_type',
         'name', 
-        'type',
-        'module'
+        'type'
     ];
     //
-    protected $table = ('roles');
-    public function event()
-    {
-        return $this->belongsTo('App\Event');
-    }
-    public function organization()
-    {
-        return $this->belongsTo('App\Organization');
+    protected $table = ('roles');   
+
+    public function modeltable(){
+
+        return $this->morphTo();
     }
 
     public function permissions()
@@ -38,10 +33,6 @@ class Rol extends Moloquent
 
     public static function boot()
     {
-
-        
-
-
         parent::boot();
         self::saving(function ($model) {
             $nonChangeableRoles = [

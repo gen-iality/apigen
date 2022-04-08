@@ -142,7 +142,7 @@ class RolOrganizationController extends Controller
     public function crearPermisosRolEvent(Request $request)
     {
         $data = $request->json()->all();
-        $rolAdmin = RolEvent::where('name' , 'Administrador')->first();
+        $rolAdmin = Rol::where('name' , 'Administrador')->first();
         
         $permission = new Permission($data);
         $permission->save();
@@ -164,7 +164,7 @@ class RolOrganizationController extends Controller
         $data = $request->json()->all();
 
         $permissions = Permission::where('name', 'like', '%'.$data['type_permission'].'%')->get();        
-        $rol = RolEvent::where('name' , $data['rol_name'])->first();
+        $rol = Rol::where('name' , $data['rol_name'])->first();
         
         if(!isset($rol))
         {   
@@ -172,7 +172,7 @@ class RolOrganizationController extends Controller
                 'name' => $data['rol_name'],
                 'guard_name' => 'web'
             ];
-            $rol = new RolEvent($dataRolEvent);
+            $rol = new Rol($dataRolEvent);
             $rol->save();
         }        
 

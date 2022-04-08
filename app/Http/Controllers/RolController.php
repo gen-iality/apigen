@@ -5,44 +5,63 @@ namespace App\Http\Controllers;
 use App\Rol;
 use Illuminate\Http\Request;
 use App\Permission;
-
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Validation\Rule;
+use Validator;
 /**
- * @group Rol
+ * @group RolEvent
  */
 class RolController extends Controller
-{
+{   
+    const AVALIABLE_TYPES = 'attendee,administrator';
+    const AVALIABLE_PERMISSIONS = 'list, show, update, create, destroy';
+
     /**
-     * _index_: list Roles.
+     * _index_: list roles by event.
+     * @authenticated
+     * 
+     * @urlParam event required event id 
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Rol::all();
+        $roles = Rol::all();
+        return JsonResource::collection($roles);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * _store_: create a new rol
+     * @authenticated
+     * 
+     * @urlParam event required event id
      * 
      * @bodyParam name string required
-     * @bodyParam event_id string required 
+     * @bodyParam name string required
      * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(Request $request)
     {
         //
+        $rules = $request->validate([
+            'name' => 'required',
+            'type' => 'required'
+        ]);
+
+        // $messages = ['in' => "The type should be one of: " . implode(", ", RolEventController::AVALIABLE_TYPES)];
+
+        $data = $request->json()->all();
+
+
+        // $validator = Validator::make($data, $rules, $messages);
+        // if (!$validator->passes()) {
+        //     return response()->json(['errors' => $validator->errors()->all()], 400);
+        // }
+
+        // $permission = Permission::where('name', $data['module'] .'_'. $data['permission'])->first();
+
+        
         $result = new Rol($request->json()->all());
         $result->save();
         return $result;
@@ -51,7 +70,7 @@ class RolController extends Controller
     /**
      * _show_: information from a specific role 
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
     public function show(Rol $id)
@@ -61,9 +80,21 @@ class RolController extends Controller
     }
 
     /**
+     * _show_: information from a specific role 
+     *
+     * @param  \App\RolEvent  $rol
+     * @return \Illuminate\Http\Response
+     */
+    public function showRolPublic(Rol $id)
+    {
+        //
+        return $id;
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
     public function edit(Rol $rol)
@@ -80,7 +111,7 @@ class RolController extends Controller
      * @bodyParam event_id string required 
      * 
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Rol $id)
@@ -97,7 +128,7 @@ class RolController extends Controller
      * 
      * @urlParam id id rol
      * 
-     * @param  \App\Rol  $rol
+     * @param  \App\RolEvent  $rol
      * @return \Illuminate\Http\Response
      */
     public function destroy(Rol $rol)
@@ -108,7 +139,7 @@ class RolController extends Controller
     /**
      * 
      */
-    public function crearPermisosRol(Request $request)
+    public function crearPermisosRolEvent(Request $request)
     {
         $data = $request->json()->all();
         $rolAdmin = Rol::where('name' , 'Administrador')->first();
@@ -128,7 +159,7 @@ class RolController extends Controller
     /**
      * 
      */
-    public function assignPermisosRol(Request $request)
+    public function assignPermisosRolEvent(Request $request)
     {
         $data = $request->json()->all();
 
@@ -137,11 +168,11 @@ class RolController extends Controller
         
         if(!isset($rol))
         {   
-            $dataRol = [
+            $dataRolEvent = [
                 'name' => $data['rol_name'],
                 'guard_name' => 'web'
             ];
-            $rol = new Rol($dataRol);
+            $rol = new Rol($dataRolEvent);
             $rol->save();
         }        
 
@@ -149,13 +180,13 @@ class RolController extends Controller
 
         foreach($permissions as $permission)
         {  
-            $permissonInRol = $permission->role_ids;    
+            $permissonInRolEvent = $permission->role_ids;    
             
-            if(array_search($rol->_id, $permissonInRol) === false)
+            if(array_search($rol->_id, $permissonInRolEvent) === false)
             {
                 var_dump('Entrada');
-                array_push($permissonInRol , $rol->_id );
-                $permission->role_ids = $permissonInRol;
+                array_push($permissonInRolEvent , $rol->_id );
+                $permission->role_ids = $permissonInRolEvent;
                 $permission->save(); 
             }
 

@@ -93,6 +93,6 @@ class EvaRol
         }
         //Si no es un administrador le deja el rol por defecto,
         // así se evita que cualquier persona se peuda colocar el rol de admin cuando se regista en un evento.
-        return RolEvent::ID_ROL_ATTENDEE;
+        return Rol::ID_ROL_ATTENDEE;
     }
 }

@@ -2,43 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\RolEvent;
+use App\Rol;
+use App\Attendee;
 use App\PermissionEvent;
 use Illuminate\Http\Request;
-use App\RolesPermissionsEvent;
+use App\RolesPermissions;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use App\evaLib\Services\FilterQuery;
+/**
+ * @group Roles Permissions
+ * These endpoint allow you manage the relationship between roles and permissions.
+ * Here you can see the which permissions have the roles and also you can add permissions
+ * to the roles.
+ */
 class RolesPermissionsEventController extends Controller
 {
     /**
-     * _index_: list all rolespermissions
+     * _index_: list all roles and their permissions
      * @authenticated
-     */
-    public function index()
-    {        
-        return JsonResource::collection(
-            RolesPermissionsEventEventController::paginate(config('app.page_size'))
-        );
-    }
-
-    /**
-     * _indexByRoles: list all permisos by rol
-     * @authenticated
-     */
-    public function indexByRol($rol_id)
-    {   
-        $query = RolesPermissionsEvent::where('rol_id' , $rol_id);
-        return JsonResource::collection($query->paginate(config('app.page_size')));
-    }
-
-    /**
-     * Show the form for creating a new resource.
      * 
-     * @return \Illuminate\Http\Response
+     * @urlParam event requires event id.
+     * 
+     * @response [
+     *  	{
+	 *      	"_id": "62265556a2634aabe418619e",
+	 *      	"rol_id": "60e8a7e74f9fb74ccd00dc22",
+	 *      	"permission_id": "6220f361b472fe2eb78b6d7b",
+	 *      	"updated_at": "2021-08-06 19:48:01",
+	 *      	"created_at": "2021-08-06 19:48:01",
+	 *      	"rol": {
+	 *      		"_id": "60e8a7e74f9fb74ccd00dc22",
+	 *      		"name": "Attendee",
+	 *      		"guard_name": "web",
+	 *      		"updated_at": "2021-08-06 19:04:06",
+	 *      		"created_at": "2021-07-09 19:47:51",
+	 *      		"type": "attendee",
+	 *      		"module": "system"
+	 *      	},
+	 *      	"permission": {
+	 *      		"_id": "6220f361b472fe2eb78b6d7b",
+	 *      		"name": "list_activities"
+	 *      	}
+	 *      }
+     * ]
      */
-    public function create()
-    {
-        //
+    public function index($event_id, FilterQuery $filterQuery = null)
+    {   
+        $rolesSystem = RolesPermissions::
+            whereHas('rol', function($query) use ($event_id)
+            {
+                $query->where('module' , Rol::MODULE_SYSTEM);
+            
+            })->get(); 
+
+        $rolesEvent =  RolesPermissions::
+            whereHas('rol', function($query) use ($event_id)
+            {
+                $query->where('modeltable_id', $event_id);
+            
+            })->paginate(config('app.page_size'));     
+        
+        $roles = $rolesEvent->concat($rolesSystem);
+
+        return JsonResource::collection($roles);
+    }
+
+    /**
+     * _indexByRoles_: list all permisos by rol
+     * @authenticated
+     * 
+     * @urlParam event requires event id.
+     * @urlParam rol requires event rol id.
+     * 
+     */
+    public function indexByRol($event_id, $rol_id, FilterQuery $filterQuery = null)
+    {   
+
+        $query = RolesPermissions::where('rol_id' , $rol_id)
+        ->whereHas('rol', function($query) use ($event_id)
+        {
+            $query->where('modeltable_id', $event_id);
+        
+        })->first();
+        
+        return $query;
     }
 
     /**
@@ -50,38 +97,28 @@ class RolesPermissionsEventController extends Controller
      */
     public function store(Request $request)
     {
-        $eventUser = Attendee::create($request->json()->all());
+        $eventUser = RolesPermissions::updateOrCreate($request->json()->all());
+
         return new JsonResource($eventUser);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
+     * _show_: information from a specific relationship between role and permiision 
+     * @authenticated
+     * 
+     * @urlParam rolpermission required rolpermission_id
      */
     public function show(RolesPermissionsEventEventController $rolesPermissionsController)
     {        
         return new JsonResource($rolesPermissionsController);
     }
-
+    
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RolesPermissionsEventEventController $rolesPermissionsController)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
+     * _update_: update a specific rolepermission
+     * @authenticated
+     * 
+     * @bodyParam rol_id string required
+     * @bodyParam permission_id string required
      */
     public function update(Request $request, RolesPermissionsEventEventController $rolesPermissionsController)
     {
@@ -94,10 +131,8 @@ class RolesPermissionsEventController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\RolesPermissionsEventEventController  $rolesPermissionsController
-     * @return \Illuminate\Http\Response
+     * _delete_: remove the specified resource from storage.
+     * @authenticated
      */
     public function destroy(RolesPermissionsEventEventController $rolesPermissionsController)
     {
@@ -131,7 +166,7 @@ class RolesPermissionsEventController extends Controller
         //El rol de administador tendras todos los nuevo permisos que se creen
         //El rol de colaborador tendrá todos los permisos de update, list, show y create.
         $rolesdefault = ['Administrator' , 'Colaborator'];
-        $roles = RolEvent::whereIn('name' , $rolesdefault)->get();
+        $roles = Rol::whereIn('name' , $rolesdefault)->get();
         
 
         foreach($roles as $role)
@@ -142,7 +177,7 @@ class RolesPermissionsEventController extends Controller
         }
         
         
-        $roleUpdate = RolEvent::find($rol_id);
+        $roleUpdate = Rol::find($rol_id);
         
         return RolesPermissionsEvent::updateOrCreate(
             ["rol_id" => $roleUpdate->_id,"permission_id" => $permission->_id],
