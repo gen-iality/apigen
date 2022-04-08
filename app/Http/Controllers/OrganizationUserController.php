@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-<<<<<<< HEAD
 use App\Rol;
-=======
->>>>>>> rolesEtapa2
 use App\Organization;
 use App\Http\Resources\OrganizationUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
