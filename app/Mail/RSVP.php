@@ -101,9 +101,10 @@ class RSVP extends Mailable implements ShouldQueue
         // Admin SDK API to generate the sign in with email link.
         $link = '';
         $firebasaUser = $auth->getUserByEmail($email);
-
+        
         if($firebasaUser->emailVerified)
-        {
+        {   
+            
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
@@ -118,6 +119,8 @@ class RSVP extends Mailable implements ShouldQueue
                 ]    
             );
         }
+        dd($link);
+
         
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
 
