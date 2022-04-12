@@ -438,9 +438,6 @@ class EventUserController extends Controller
                 // Si no tiene password, se le asigna el email como password
                 $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
                
-                $client = new Client;
-                $url = "https://devapi.evius.co/api/user";
-                $headers = ['Content-Type' => 'application/json'];
                 
                 $user = Account::create([
                     "email" => $email,
@@ -450,7 +447,6 @@ class EventUserController extends Controller
 
                 $user = Account::where("email" , $email)->first();
 
-                return $user;
             }
 
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
