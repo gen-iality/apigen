@@ -119,7 +119,6 @@ class RSVP extends Mailable implements ShouldQueue
                 ]    
             );
         }
-        dd($link);
 
         
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
