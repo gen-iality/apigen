@@ -15,7 +15,8 @@ class Rol extends Moloquent
         'modeltable_id',
         'modeltable_type',
         'name', 
-        'type'
+        'type',
+        'event_id'
     ];
     //
     protected $table = ('roles');   

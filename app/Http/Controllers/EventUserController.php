@@ -437,11 +437,16 @@ class EventUserController extends Controller
             {   
                 // Si no tiene password, se le asigna el email como password
                 $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
+               
+                
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
                     "password" => $pass
-                ]);
+                ]); 
+
+                $user = Account::where("email" , $email)->first();
+
             }
 
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
