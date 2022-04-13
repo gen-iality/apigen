@@ -212,6 +212,11 @@ class Event extends ModelsEvent
         return $this->hasMany('App\ModelHasRole');
     }
 
+    public function rols()
+    {
+        return $this->morphMany('App\Rol' , 'modeltable');
+    }
+
     public function user_properties()
     {
         return $this->embedsMany('App\UserProperties');

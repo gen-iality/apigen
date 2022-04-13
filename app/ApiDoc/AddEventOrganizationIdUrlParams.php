@@ -17,7 +17,7 @@ class AddEventOrganizationIdUrlParams extends Strategy
            ],
            'organization' => [
                 'type' => 'string',
-                'description' => 'The ID of the organization', 
+                'description' => 'The ID of the organizationss', 
                 'required' => true, 
                 'value' => config('apidoc.organization'),
             ]

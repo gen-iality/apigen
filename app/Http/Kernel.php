@@ -92,6 +92,7 @@ class Kernel extends HttpKernel
         'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
         'permission' => \App\Http\Middleware\Permissions\PermissionMiddleware::class,
         'permissionUser' => \App\Http\Middleware\Permissions\PermissionsManageUser::class,
+        'permissionAttendee' => \App\Http\Middleware\Permissions\PermissionAttendeeMidleware::class,
 
     ];
 }

@@ -8,6 +8,8 @@ include "user/user.php";
 include "user/userEvent.php";
 include "mail.php";
 include "test.php";
+include "web.php";
+
 
 
 
@@ -161,11 +163,6 @@ Route::group(
 );
 
 /***************
- * RolesAttendees
- ****************/
-Route::apiResource('events/{event}/rolesattendees', 'RoleAttendeeController');
-
-/***************
  * Mail
  ****************/
 Route::apiResource('events/{event}/mailing', 'MailController');
@@ -186,20 +183,7 @@ Route::group(
     }
 );
 
-//Route::get('rolesattendees/{id}', 'RoleAttendeeController@index');
-Route::apiResource('rolesattendees', 'RoleAttendeeController', ['only' => ['index', 'show']]);
-//Route::get('events/{event}/rolesattendees', 'RoleAttendeeController@indexByEvent');
 
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::apiResource('rolesattendees', 'RoleAttendeeController', ['except' => ['index', 'show']]);
-        Route::delete('rolesattendees/{id}', 'RoleAttendeeController@destroy');
-    }
-);
-
-Route::post('crearPermisosRol' , 'RolController@crearPermisosRol');
-Route::post('assignPermisosRol' , 'RolController@assignPermisosRol');
 
 /***************
  * Certificate
@@ -369,7 +353,7 @@ Route::post('order/{order_id}/resend', [
 
 //Events
 
-Route::middleware('auth:token')->get('permissions/{id}', 'PermissionEventController@getUserPermissionByEvent');
+// Route::middleware('auth:token')->get('permissions/{id}', 'PermissionEventController@getUserPermissionByEvent');
 
 //Account Events Endpoint
 Route::post('user/events/{id}/addUserProperty', 'EventController@addUserProperty');
@@ -389,11 +373,11 @@ Route::post("files/uploadbase/{name}", "FilesController@storeBaseImg");
 
 //Rol EndPoint
 // Route::get('events/{event}/rols', 'RolEventController@index');
-Route::middleware('auth:token')->get('rols', 'RolEventController@index');
+Route::middleware('auth:token')->get('rols', 'RolController@index');
 // Route::post('rols', 'RolEventController@store');
 // Route::put('rols/{id}', 'RolEventController@update');
 // Route::get('rols/{id}', 'RolEventController@show');
-Route::get('rols/{id}/rolseventspublic', 'RolEventController@showRolPublic');
+Route::get('rols/{id}/rolseventspublic', 'RolController@showRolPublic');
 // Route::post('roles/{role}/addpermissions', 'RolesPermissionsEventController@addPermissionToRol');
 
 Route::get('rolespermissionsevents/findbyrol/{rol}', 'RolesPermissionsEventController@indexByRol');
