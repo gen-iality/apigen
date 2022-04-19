@@ -11,6 +11,7 @@ use App\OrganizationUser;
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
+use App\evaLib\Services\OrganizationServices;
 
 /** 
  * @group Organization User
@@ -59,8 +60,10 @@ class OrganizationUserController extends Controller
         $data = $request->json()->all();
 
         $validations = [
-            'properties.email' => 'required|email',
+            'properties.email' => 'required|email:rfc,dns',
             'properties.names' => 'required',
+            'properties.password' => 'min:6',
+
         ];
 
         $validator = Validator::make(
@@ -70,15 +73,6 @@ class OrganizationUserController extends Controller
 
         $organization = Organization::findOrFail($organization_id);
         $user_properties = $organization->user_properties;
-
-
-        if (isset($data['properties'])) {
-            $userData = $data['properties'];
-
-            if (!empty($userData["password"]) && strlen($userData["password"]) < 6) {
-                return "minimun password length is 6 characters";
-            }
-        }
         
         //Se validan los campos que no aceptan datos, si no informativos
         foreach ($user_properties as $user_property) 
@@ -95,7 +89,19 @@ class OrganizationUserController extends Controller
                 422
             );
         }
-        $user = Account::updateOrCreate(['email'=> $data['properties']['email']], $data);
+        $email = $data['properties']['email'];
+        //Se valida si ya existe el usurio
+        $user = Account::where("email" , $email)->first();  
+        $password = isset($eventUserData["properties"]["password"]) ? $eventUserData["properties"]["password"] : $email;  
+        if(empty($user))
+        {   
+            $user = Account::create([
+                "email" => $email,
+                "names" => $eventUserData["properties"]["names"],
+                "password" => $password
+            ]); 
+        }  
+
          /* ya con el usuario actualizamos o creamos el organizationUser */         
         $matchAttributes = ["organization_id" => $organization_id, "account_id" => $user->_id];
         $data += $matchAttributes;                          
@@ -103,7 +109,7 @@ class OrganizationUserController extends Controller
 
         //Account rol assigned by default
         if (!isset($data["rol_id"])) {
-            $data["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
+            $data["rol_id"] = Rol::ID_ROL_ATTENDEE;
         }
 
         if ($model) {
@@ -114,31 +120,8 @@ class OrganizationUserController extends Controller
             $model = OrganizationUser::create($data);
         }
 
-
-        //Creamos un token para que se pueda autologuear el usuario
-        $auth = resolve('Kreait\Firebase\Auth');
-        $signInResult = null;
-        
-        if (!$signInResult) 
-        {
-            $pass = (isset($userData["password"])) ? $userData["password"] : $userData["email"];
-
-            //No conocemos otra forma de generar el token de login sino forzando un signin
-            if (isset($organizationUser->user->uid)) 
-            {
-
-                $updatedUser = $auth->changeUserPassword($organizationUser->user->uid, $pass);
-                $signInResult = $auth->signInWithEmailAndPassword($organizationUser->user->email, $pass);
-                $organizationUser->user->refresh_token = $signInResult->refreshToken();
-                $organizationUser->user->save();
-            }
-        }
-
-        if ($signInResult && $signInResult->accessToken()) {
-            $organizationUser->user->initial_token = $signInResult->accessToken();
-        } else if ($signInResult && $signInResult->idToken()) {
-            $organizationUser->user->initial_token = $signInResult->idToken();
-        }
+        //Add the member in all Events of the orgnization
+        OrganizationServices::createMembers($model);
 
         // $response = new OrganizationUserResource($organizationUser);
         return $model;

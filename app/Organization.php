@@ -58,4 +58,9 @@ class Organization extends Organiser
     {
         return $this->embedsMany('App\TemplateProperties');
     }
+
+    public function rols()
+    {
+        return $this->morphMany('App\Rol' , 'modeltable');
+    }
 }

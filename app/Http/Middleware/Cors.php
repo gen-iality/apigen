@@ -36,6 +36,7 @@ class Cors
             'Vary'=> 'origin'
         ];
         
+        
         if($response instanceof $IlluminateResponse) {
             foreach ($headers as $key => $value) {
                 $response->header($key, $value);

@@ -7,7 +7,7 @@ use App\Attendee;
 use App\OrganizationUser;
 use App\Rol;
 use App\RolesPermissions;
-
+use Illuminate\Auth\AuthenticationException;
 /**
  * Este moddleware realiza la administracion que tiene que ver con los usuario en eventUser, 
  * estos son diferentes que los administradores pueden cambiar la información de algunos usuarios y 
