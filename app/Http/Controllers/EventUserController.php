@@ -460,7 +460,7 @@ class EventUserController extends Controller
                     "names" => $eventUserData["names"],
                     "password" => $eventUserData["password"]
                 ]);
-                return $user;
+                
             }
 
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
