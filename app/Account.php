@@ -164,6 +164,11 @@ class Account extends User
 
                 $fbuser = self::$auth->getUserByEmail($model->email);
                 $model->uid = $fbuser->uid;
+                if(isset($model->password))
+                {
+                    self::$auth->changeUserPassword($fbuser->uid, $model->password); 
+                  
+                }
                 return;
 
             } catch (\Exception $e) {

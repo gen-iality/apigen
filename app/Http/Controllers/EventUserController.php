@@ -407,6 +407,8 @@ class EventUserController extends Controller
      * 
      * @authenticated
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
+     * 
+     * @queryParam allow_edit_password Allow change user password even if the user already register. If you don't send this parameter the password of user registered in the system dond't change. Example: true
      *
      * @bodyParam email email required email event user Example: example@evius.co
      * @bodyParam name  string required Example: Evius
@@ -423,11 +425,14 @@ class EventUserController extends Controller
         ]);
 
         $eventUserData = $request->json()->all();
+
+        //Este parámetro permite cambiar la contraseña de los usuarios importados, así esten previemente registrados en evius.     
+        $allowEditPassword = $request->query('allow_edit_password');
+
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
 
         $email = $eventUserData["email"];
-
         try {
 
             $user = Account::where("email" , $email)->first();
@@ -447,6 +452,15 @@ class EventUserController extends Controller
 
                 $user = Account::where("email" , $email)->first();
 
+            }elseif(isset($allowEditPassword) && $eventUserData["password"]){
+                $user = Account::updateOrCreate([
+                    "email" => $email,
+                ],
+                [
+                    "names" => $eventUserData["names"],
+                    "password" => $eventUserData["password"]
+                ]);
+                return $user;
             }
 
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
