@@ -24,5 +24,5 @@ Route::post('testpush', 'SendContentController@sendPushNotification');
 Route::get('routes', 'RouteController@index');
 Route::get('routes/excel', 'RouteController@excel')->name('routes.excel');
 
-Route::view('docs', 'apidoc.index');
+// Route::view('docs', 'apidoc.index');
 
