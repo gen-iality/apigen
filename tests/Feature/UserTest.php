@@ -4,109 +4,128 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\withoutExceptionHandling;
+use Mockery;
+
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {   
-    
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    // }
+    private static $id;
 
+    // public function __construct(){
+    //     $this->withoutMiddleware();
+    // }
     /**
-     * @group users
+     * @group users-crud
+     * https://api.evius.co/docs/#store-create-new-user-and-send-confirmation-email
      */
     public function testUserStore()
-    {
-        factory(\App\Account::class)->create();
+    {   
+
+        //Se quita la validación del middleware
+        $this->withoutMiddleware();
+
+
+        //Se llama factory para crear un usuario ficticio
+        $user = factory(\App\Account::class)->make();       
+
         // $response = $this->get('api/users');
-        // $response->assertStatus(200);
+        $response = $this->postJson(
+                        'api/users/' , 
+                        [
+                            'email' => $user->email,
+                            'names' => $user->names,
+                            'picture' => $user->picture,
+                            'password' => $user->password,
+            
+                        ]
+                    );   
+        self::$id =  $response->getOriginalContent()['_id'];            
+        $response->assertStatus(200);
     }
-    // /**
-    //  * Api doc:
-    //  * @group users
-    //  * https://api.evius.co/docs/#index-its-not-posible-to-query-all-users-in-the-platform
-    //  */
-    // public function testUserIndex()
-    // {
-    //     $response = $this->get('api/users');
-    //     $response->assertStatus(200);
-    // }
 
-    // /**
-    //  * https://api.evius.co/docs/#store-create-new-user-and-send-confirmation-email
-    //  */
-    // public function testUserStore()
-    // {
-    //     $response = $this->postJson(
-    //         `api/users/` , 
-    //         [
-    //             'email' => UserTest::EMAIL,
-    //             'names' => UserTest::NAMES,
-    //             'picture' => UserTest::PICTURE,
-    //             'password' => UserTest::PASSWORD,
+    
+    /**
+     * @depends testUserStore
+     * @group users-crud
+     * https://api.evius.co/docs/#show-view-a-specific-registered-user
+     */
+    public function testUserShow()
+    {
+        $response = $this->get("api/users/". self::$id);
+        $response->assertStatus(200);
+    }
 
-    //         ]
-    //     );
-    // }
+    /**
+     * @depends testUserStore
+     * @group users-crud
+     * https://api.evius.co/docs/#update-update-registered-user
+     */
+    public function testUserUpdate()
+    {
+        $this->withoutMiddleware();
+        $this->withoutExceptionHandling();
+        $response = $this->putJson(
+             "api/users/". self::$id, 
+            [
+                'names' => 'name update',
+            ]
+        );
+        $response->assertStatus(200);
+    }
 
-    // /**
-    //  * https://api.evius.co/docs/#show-view-a-specific-registered-user
-    //  */
-    // public function testUserShow()
-    // {
-    //     $response = $this->get(`api/users/${UserTest::USER_ID}`);
-    //     $response->assertStatus(200);
-    // }
+    /**
+     * @depends testUserUpdate
+     * @group users-crud
+     * https://api.evius.co/docs/#update-update-registered-user
+     */
+    public function testUserDelete()
+    {
+        $this->withoutMiddleware();
+        $response = $this->delete("api/users/". self::$id);
+        $response->assertStatus(200);
+    }
 
-    // /**
-    //  * 
-    //  */
-    // public function testUserUpdate()
-    // {
-    //     $response = $this->putJson(
-    //         `api/users/${UserTest::USER_ID}` , 
-    //         [
-    //             'email' => UserTest::EMAIL,
-    //             'names' => UserTest::NAMES,
-    //             'picture' => UserTest::PUCTURE,
-    //             'password' => UserTest::PASSWORD,
+    //Métodos especiales fuera del crud
 
-    //         ]
-    //     );
-    // }
-
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testGetLoginLink()
-    // {
-    //     $response = $this->postJson('api/getloginlink' , ['email' => UserTest::EMAIL]);
-
-    //     $response->assertStatus(200);
-    // }
-
-    // /**
-    //  * 
-    //  */
-    // public function testChangeUserPassword(){
+    /**
+     * @group users-mail
+     * @group mail
+     * https://api.evius.co/docs/#getaccesslink-get-and-sent-link-acces-to-email-to-user
+     */
+    public function testAccessLinkMail(){
         
-    //     $response = $this->putJson('api/changeuserpassword' , ['email' => UserTest::EMAIL , 'event_id' => UserTest::EVENT_ID]);
+        $this->withoutExceptionHandling();
 
-    //     $response->assertStatus(200);
-    // }
+        $response = $this->postJson(
+            "api/getloginlink/", 
+           [
+               'email' => getenv('EMAIL'),
+           ]
+       );
+        $response->assertStatus(200);
+    }
 
 
-    // /**
-    //  * @group currentUser
-    //  */
-    // public function testGetCurrentUser()
-    // {
-    //     $response = $this->get(`api/users/currentUser?evius_token=${UserTest::TOKEN}`);
-    //     $response->assertStatus(200);
-    // }
+    /**
+     * @group users-mail
+     * @group mail
+     * https://api.evius.co/docs/#changeuserpassword-send-to-email-to-user-whit-link-to-change-user-password
+     */
+    public function testChangeUserPassword(){
+        
+        $this->withoutExceptionHandling();
+
+        $response = $this->putJson(
+            "api/changeuserpassword/", 
+           [
+               'email' => getenv('EMAIL'),
+               'hostName' =>  config('app.front_url')
+           ]
+       );
+        $response->assertStatus(200);
+    }
+
 }

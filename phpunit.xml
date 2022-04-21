@@ -29,6 +29,10 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
+        <!-- <env name="EMAIL" value="apps@mocionsoft.com"/> -->
+        <env name="EMAIL" value="geraldine.garcia@mocionsoft.com"/>
         <server name="REQUEST_URI" value="124.0.0.1"/>
+        <!-- Telescope se desactiva para que no genere error -->
+        <env name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>

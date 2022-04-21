@@ -12,8 +12,8 @@ class Rol extends Moloquent
     const MODULE_SYSTEM = 'system';
 
     protected $fillable = [ 
-        'modeltable_id',
-        'modeltable_type',
+        'modeltable_id', //60e8asdsaa7asd74ccdasd00dc22
+        'modeltable_type', // App/Event
         'name', 
         'type',
         'event_id'
