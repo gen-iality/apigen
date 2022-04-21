@@ -426,12 +426,10 @@ class EventUserController extends Controller
 
         $eventUserData = $request->json()->all();
 
-        //Este parámetro permite cambiar la contraseña de los usuarios importados, así esten previemente registrados en evius.     
-        $allowEditPassword = $request->query('allow_edit_password');
-
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
 
+        $event = Event::find($event_id);
         $email = $eventUserData["email"];
         try {
 
@@ -452,7 +450,7 @@ class EventUserController extends Controller
 
                 $user = Account::where("email" , $email)->first();
 
-            }elseif(isset($allowEditPassword) && $eventUserData["password"]){
+            }elseif(isset($event->allow_edit_password) && $eventUserData["password"]){
                 $user = Account::updateOrCreate([
                     "email" => $email,
                 ],
