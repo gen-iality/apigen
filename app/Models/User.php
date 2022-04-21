@@ -37,6 +37,14 @@ class User extends MyBaseModel implements AuthenticatableContract, CanResetPassw
     protected $hidden = ['api_token' , 'initial_token', 'refresh_token', 'password'];
 
     /**
+     * set user email in lowercase
+     */
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array $fillable

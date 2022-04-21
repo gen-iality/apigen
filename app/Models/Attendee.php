@@ -137,4 +137,13 @@ class Attendee extends MyBaseModel
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+    
+    /**
+     * set attendee email in lowercase
+     */
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
 }

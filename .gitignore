@@ -30,5 +30,6 @@ _docs/build
 public/assets/*
 public/vendor/*
 resources/docs/source/_tmp/*
+.phpunit*
 composer.lock
 /firebase-credentials-dev.json
