@@ -44,8 +44,10 @@ class PermissionAttendeeMidleware
         
         $systemModule = DB::table('system_modules')->where('url' , $route->uri())->first();
         
+        //Endpoint Ej: api/events/{event}/activities
         $section = $systemModule['section'];
         
+        //Item en la landing del evento EJ: agenda
         $itemMenu = $event->itemsMenu[$section];
         
 
@@ -65,6 +67,7 @@ class PermissionAttendeeMidleware
             
             })->where('rol_id' , $attendee->rol_id)->first();
 
+            //Verifica 
             if(in_array($attendee->rol_id , $itemMenu['rol_ids']) || $permissionsRolAttendee ==! null)
             {   
                 
