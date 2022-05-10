@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Account::class, function (Faker $faker) {
     return [
         'names' => $faker->name,
-        'email' => $faker->unique()->word . "@mocionsoft.com",
+        'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'picture' =>'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
     ];

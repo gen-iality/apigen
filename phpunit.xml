@@ -23,16 +23,18 @@
         </whitelist>
     </filter>
     <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="MAIL_DRIVER" value="array"/>
+        <server name="APP_ENV" value="testing"/>
+        <server name="BCRYPT_ROUNDS" value="4"/>
+        <server name="CACHE_DRIVER" value="array"/>
+        <server name="SESSION_DRIVER" value="array"/>
+        <server name="QUEUE_DRIVER" value="sync"/>
+        <server name="MAIL_DRIVER" value="array"/>
         <!-- <env name="EMAIL" value="apps@mocionsoft.com"/> -->
-        <env name="EMAIL" value="geraldine.garcia@mocionsoft.com"/>
+        <server name="EMAIL" value="geraldine.garcia@mocionsoft.com"/>
+        <server name="DB_CONNECTION" value="mongodb" />
+        <!-- <server name="DB_DATABASE" value=":memory" /> -->
         <server name="REQUEST_URI" value="124.0.0.1"/>
         <!-- Telescope se desactiva para que no genere error -->
-        <env name="TELESCOPE_ENABLED" value="false"/>
+        <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>
