@@ -161,7 +161,7 @@ class UserController extends UserControllerWeb
      * @urlParam user required id user Example: 603d6af041e6f555591c95d5
      */
     public function destroy($id)
-    {
+    {   
         $Account = Account::find($id);
         $res = $Account->delete();
         if ($res == true) {

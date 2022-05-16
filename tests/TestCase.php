@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests;
+use Faker\Generator as Faker;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 

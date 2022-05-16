@@ -25,7 +25,7 @@ class PermissionMiddleware
             throw new AuthenticationException("No token provided. Unauthenticated");
         } 
         
-        //Se valida el rol del usuario, y el evento u organización que puede editar.               
+        //Se valida el rol del usuario           
         $userRol = '';
 
             
@@ -37,6 +37,7 @@ class PermissionMiddleware
         ? $permission
         : explode('|', $permission);   
 
+        //Aquí se valida si se accede a una config de un evento o una irganización
         switch ($urlParameter->parameterNames()[0]) {
             case 'event':
                 $userRol = Attendee::where('account_id' , $user->_id)->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'properties']);
@@ -50,7 +51,8 @@ class PermissionMiddleware
         $rol = isset($userRol) ? Rol::find($userRol->rol_id) : null;
 
         if(($rol) && $rol->type === 'admin')
-        {    
+        {   
+            //Busca el permiso por el nombre desde rolespermissions
             $permissionsRolUser = RolesPermissions::whereHas('permission', function($query) use ($permissions)
             {
                 $query->whereIn('name', $permissions);

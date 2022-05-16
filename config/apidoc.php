@@ -7,7 +7,7 @@ return [
      * - "laravel" will generate the documentation as a Blade view,
      * so you can add routing and authentication.
      */
-    'type' => 'laravel',
+    'type' => 'static',
 
     /*
      * Settings for `laravel` type output.
@@ -29,7 +29,7 @@ return [
         /*
          * Middleware to attach to the docs endpoint (if `autoload` is true).
          */
-        'middleware' => ['auth:token'],
+        'middleware' => [],
     ],
 
     /*

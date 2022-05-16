@@ -6,6 +6,8 @@ use App\Rol;
 use App\Event;
 use Illuminate\Http\Request;
 use App\Permission;
+use \App\Attendee;
+use \App\RolesPermissions;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\Rule;
 use Validator;
@@ -30,8 +32,8 @@ class RolEventController extends Controller
      * _index_: list roles by event.
      * 
      * In this list you can see the two roles default of the system: Attendee and Administrator. 
-     * Also you can see all roles created for you.
-     * When you create an event, you are assigned the admin role.
+     * Also you can see all roles created for you in you event.
+     * When you create an event, you are assigned the Administrator role.
      * 
      * @authenticated
      * 
@@ -80,8 +82,8 @@ class RolEventController extends Controller
      * 
      * @urlParam event required The ID of the event
      * 
-     * @bodyParam name string required Rol name Example: RolName
-     * @bodyParam type string required The type can be attendee or admin Example: attendee  
+     * @bodyParam name string required unique Rol name, the name of the role have to be unique, you can't create two or more roles with the same name. Example: RolName
+     * @bodyParam type string required The type can be attendee or admin. The user with role type attendee can have access to event’s landing and can consult only the functions get, thist ype of rol doesn’t  access to CMS. Example: attendee  
      * 
      */
     public function store(Request $request, $event_id)
@@ -104,7 +106,7 @@ class RolEventController extends Controller
         }
    
         $event = Event::find($event_id);
-        $data['event_id'] = $event_id;
+        
 
         $result = $event->rols()->create($data);
             
@@ -119,9 +121,10 @@ class RolEventController extends Controller
      * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      */
-    public function show($event_id , Rol $id)
+    public function show($event_id , $id)
     {   
-        return $id;
+        $rol = Rol::findOrFail($id);
+        return $rol;
     }
 
     /**
@@ -177,12 +180,12 @@ class RolEventController extends Controller
      * @urlParam event required The ID of the event
      * @urlParam rolevent required rol id
      */
-    public function destroy(Request $request, $event_id, $rol_id)
+    public function destroy($event_id, $rol_id)
     {
-        $eventUser = EventUser::where('rol_id' , $rol_id)->where('event_id' , $event_id)->first();
+        $eventUser = Attendee::where('rol_id' , $rol_id)->where('event_id' , $event_id)->first();
         
         if(!isset($eventUser)){            
-            RolPermissions::where("rol_id", $rol_id)->delete();
+            RolesPermissions::where("rol_id", $rol_id)->delete();
             $rol = Rol::find($rol_id);
             return (string )$rol->delete();
         }else{
