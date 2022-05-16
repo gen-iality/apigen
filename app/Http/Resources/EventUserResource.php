@@ -16,7 +16,7 @@ class EventUserResource extends JsonResource
     {
         $result = parent::toArray($request);
         // Si existe password la elimina de $result
-        $password = $result['properties']['password'];
+        // $password = $result['properties']['password'];
         if (!empty($password)) {
             unset($result['properties']['password']);
         }
