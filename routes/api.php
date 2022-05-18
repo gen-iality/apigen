@@ -471,3 +471,8 @@ Route::group(
 );
 
 
+/*****
+ * Plan
+ */
+
+Route::apiResource('planes', 'PlanesController');
