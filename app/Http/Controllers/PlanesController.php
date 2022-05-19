@@ -14,17 +14,8 @@ class PlanesController extends Controller
      */
     public function index()
     {
-        return 'Index plan';
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $planes = Plan::all();
+        return response()->json($planes);
     }
 
     /**
@@ -35,7 +26,16 @@ class PlanesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|numeric'
+        ]);
+
+        $data = $request->json()->all();
+        $plan = new Plan($data);
+        $plan->save();
+
+        return response()->json($plan, 201);
     }
 
     /**
@@ -44,20 +44,11 @@ class PlanesController extends Controller
      * @param  \App\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function show(Plan $plan)
+    public function show($plan)
     {
-        //
-    }
+        $plan = Plan::findOrFail($plan);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Plan $plan)
-    {
-        //
+        return $plan;
     }
 
     /**
@@ -67,9 +58,14 @@ class PlanesController extends Controller
      * @param  \App\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plan $plan)
+    public function update(Request $request, $plan)
     {
-        //
+        $data = $request->json()->all();
+        $plan  = Plan::findOrFail($plan);
+        $plan->fill($data);
+        $plan->save();
+
+        return response()->json($plan);
     }
 
     /**
@@ -78,8 +74,11 @@ class PlanesController extends Controller
      * @param  \App\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plan $plan)
+    public function destroy($plan)
     {
-        //
+        $plan = Plan::findOrFail($plan);
+        $plan->delete();
+
+        return response()->json([], 204);
     }
 }
