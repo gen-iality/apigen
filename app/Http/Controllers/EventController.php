@@ -190,6 +190,19 @@ class EventController extends Controller
                 ->paginate(config('app.page_size'))
         );
     }
+    /**
+     * EventbyAuthor_: search of events by author.
+     * 
+     * @urlParam user required  author_id
+     *
+     */
+    public function EventbyAuthor(string $id_author)
+    {
+        return EventResource::collection(
+            Event::where('author_id', $id_author)
+                ->paginate(config('app.page_size'))
+        );
+    }
 
     /**
      * _EventbyOrganizations_: search of events by user organizer.
@@ -287,16 +300,8 @@ class EventController extends Controller
             $data['status'] = ($userRol == 'admin') ? 'approved' : 'draft';
         }
 
-        //Funcion Obtener eventos by user
-        $EventByAuthor = function($id_author){
-            return EventResource::collection(
-                Event::where('author_id', $id_author)
-                    ->paginate(config('app.page_size'))
-            );
-        };
-
         /* Validation plan free:
-        If the user has ID_PLAN_FREE its not allowed to create more than 1 event.
+        If the user has Plan "Free" its not allowed to create more than 1 event.
             @response 400 {
                 'message': 'User has no plan related'
             }
@@ -307,7 +312,7 @@ class EventController extends Controller
         if (isset($user->plan_id)) {
             $plan = Plan::findorFail($user->plan_id);
             if (strcmp($plan->name, "Free") == 0) {
-                $Event_Author = $EventByAuthor($user->_id);
+                $Event_Author = $this->EventbyAuthor($user->_id);
                 if (isset($Event_Author->collection[0])) {
                     return response()->json(['message'=> 'Error events limit exceeded'], 401);
                 };
