@@ -425,7 +425,7 @@ class EventUserController extends Controller
 
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
-
+            
         $event = Event::find($event_id);
         $email = $eventUserData["email"];
         try {
@@ -463,6 +463,9 @@ class EventUserController extends Controller
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
 
+            $order_id = isset($eventUserData["order_id"]) ? $eventUserData["order_id"]: null;
+            unset($eventUserData["order_id"]);
+
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
                 [
@@ -474,6 +477,16 @@ class EventUserController extends Controller
                     "properties" => $eventUserData
                 ]
             );
+
+            // If the creation of the eventUser is through a redemption code, the user is assigned to the order
+            if (isset($order_id)) {
+                $order = Order::findOrFail($order_id);
+                $affiliatedUsers = $order->affiliates;
+                array_push($affiliatedUsers, $eventUser->_id);
+                $order->affiliates = $affiliatedUsers;
+                $order->save();
+            }
+
 
             $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 

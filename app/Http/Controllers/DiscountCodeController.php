@@ -431,13 +431,7 @@ class DiscountCodeController extends Controller
                     'discount_code_template_id' => $code->discount_code_template_id,
                     'space_available' => $code->space_available,
                     // user addiction to available affiliates
-                    'affiliates' => [
-                        [
-                            "_id" => $eventUser->_id,
-                            "names" => $eventUser['properties']['names'],
-                            "email" => $eventUser['properties']['email'],
-                        ]
-                    ]
+                    'affiliates' => [$eventUser->_id]
                 ];
                 $order = Order::create($newOrder);
                 // $order->save();
