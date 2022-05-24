@@ -334,6 +334,11 @@ class DiscountCodeController extends Controller
      */
     public function validateCode(Request $request)
     {   
+        $request->validate([
+            'code' => 'required|string',
+            'event_id' => 'required|string',
+            'organization_id' => 'string'
+        ]);
 
         $data = $request->json()->all();
         $code = "";
@@ -372,43 +377,50 @@ class DiscountCodeController extends Controller
      * @bodyParam code string required code that the user is redeeming
      * 
      */
-    public function redeemPointCode(Request $request){
+    public function redeemPointCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+            'discount_code_template_id' => 'required|string',
+        ]);
 
         $data = $request->json()->all();
-        $organization = $request->input('organization_id');
+        // $organization = $request->input('organization_id');
 
-        $code = "";
-        if(isset($organization) &&  $organization = '60467fbd9caef512a5626fc9')
-        {
-            $code = DiscountCodeMarinela::where('code', $data['code'])->first();
-            // Log::info("Ingreso correcto de Marinela");
-        }else{
-            $code = DiscountCode::where('code', $data['code'])->first();
-        }
+        // $code = "";
+        // if(isset($organization) &&  $organization = '60467fbd9caef512a5626fc9')
+        // {
+        //     $code = DiscountCodeMarinela::where('code', $data['code'])->first();
+        //     // Log::info("Ingreso correcto de Marinela");
+        // }else{
+        //     $code = DiscountCode::where('code', $data['code'])->first();
+        // }
+
+        $code = DiscountCode::where('code', $data['code'])->first();
         
         //authenticated user
-        $user = Auth::user();     
-        $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
-        if(!isset($group))   
-        {
-            $discount= "discount_code_template_id ";
-            $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
-        }
+        // $user = Auth::user();
+        $discountCodeTemplate = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
+        // if(!isset($group))   
+        // {
+        //     $discount= "discount_code_template_id ";
+        //     $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
+        // }
         
         
         //Se valida si el código ya se uso     
-        if($code->number_uses < $group->use_limit  ){
+        if($code->number_uses < $discountCodeTemplate->use_limit  ){
 
             //Si el código es valido se suma un uso
-            $code->account_id = $user->_id; 
-            $code->number_uses = $code->number_uses + 1;
+            // $code->account_id = $user->_id; 
+            $code->number_uses +=1;
             $code->save();
             
             //Se suman los puntos canjeados al usuario
-            $user->points = $user->points+$group->discount;
-            $user->save();
+            // $user->points = $user->points+$group->discount;
+            // $user->save();
 
-            return $user;
+            return $code;
         }
                         
         return abort(403 , 'El código ya se uso');    
