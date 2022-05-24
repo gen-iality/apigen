@@ -367,21 +367,6 @@ class EventUserController extends Controller
                              
         $eventUser = Attendee::create($eventUserData);
 
-        if ($eventUserData['order_id']) {
-            $order = Order::findOrFail($eventUserData['order_id']);
-
-            $names = $eventUser["properties"]["names"];
-            $_id = $eventUser->_id;
-
-            $affiliatedUsers = $order->affiliates;
-            array_push($affiliatedUsers, compact("_id", "email", "names"));
-            $order->affiliates = $affiliatedUsers;
-            $order->save();
-            
-            $eventUser->affiliated_by = $order->event_user_id;
-            $eventUser->save();
-        }
-
         // En caso de que el event posea document user
         // $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
         // if (!empty($document_user)) {
