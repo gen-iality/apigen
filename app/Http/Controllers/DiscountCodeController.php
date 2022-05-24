@@ -147,6 +147,10 @@ class DiscountCodeController extends Controller
      */
     public function store(Request $request , $group_id)
     {
+        $request->validate([
+            'space_available' => 'numeric' // Used for Royal Prestige, number of available users
+        ]);
+
         $data = $request->json()->all();
 
         $rules = [
@@ -186,7 +190,6 @@ class DiscountCodeController extends Controller
                     }else{                
                         $data['event_id'] = $group->event_id;
                     }
-                            
                     $resultCode = new DiscountCode($data);
 
                 //It checks if the code is repeated so as not to save it and generate another
