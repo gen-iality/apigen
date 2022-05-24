@@ -8,6 +8,7 @@ use App\evaLib\Services\EventService;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
+use App\Plan;
 use App\EventType;
 use App\Attendee;
 use App\Http\Resources\EventResource;
@@ -271,7 +272,7 @@ class EventController extends Controller
         $user = Auth::user();
         $data = $request->except(['user_properties', 'token']);
         $dataUserProperties = $request->only('user_properties');
-
+        
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data,
@@ -286,6 +287,34 @@ class EventController extends Controller
             $data['status'] = ($userRol == 'admin') ? 'approved' : 'draft';
         }
 
+        //Funcion Obtener eventos by user
+        $EventByAuthor = function($id_author){
+            return EventResource::collection(
+                Event::where('author_id', $id_author)
+                    ->paginate(config('app.page_size'))
+            );
+        };
+
+        /* Validation plan free:
+        If the user has ID_PLAN_FREE its not allowed to create more than 1 event.
+            @response 400 {
+                'message': 'User has no plan related'
+            }
+            @response 401 {
+                'message': 'Error, events limit exceeded'
+            }
+         */
+        if (isset($user->plan_id)) {
+            $plan = Plan::findorFail($user->plan_id);
+            if (strcmp($plan->name, "Free") == 0) {
+                $Event_Author = $EventByAuthor($user->_id);
+                if (isset($Event_Author->collection[0])) {
+                    return response()->json(['message'=> 'Error events limit exceeded'], 401);
+                };
+            };
+        }else{
+            return response()->json(['message'=> 'User has no plan related'], 400);
+        };
 
         if ($validator->fails()) {
             return response(
@@ -439,7 +468,7 @@ class EventController extends Controller
      *    ]
      * }
      */
-    public function show(String $id)
+    public static function show(String $id)
     {
         $event = Event::findOrFail($id);
         return $event;
