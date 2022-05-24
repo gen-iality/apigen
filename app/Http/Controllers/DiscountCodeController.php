@@ -341,26 +341,31 @@ class DiscountCodeController extends Controller
         ]);
 
         $data = $request->json()->all();
-        $code = "";
+        
+        // $code = "";
         // The entered code is searched for to validate if it exists 
             
         
-        if(isset($data['organization_id']) && $data['organization_id'] = '60467fbd9caef512a5626fc9')
-        {
-            $code = DiscountCodeMarinela::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
-            // Log::info("Ingreso correcto de Marinela");
+        // if(isset($data['organization_id']) && $data['organization_id'] = '60467fbd9caef512a5626fc9')
+        // {
+        //     $code = DiscountCodeMarinela::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+        //     // Log::info("Ingreso correcto de Marinela");
 
-        }else{
-            $code = isset($data['event_id']) ? 
+        // }else{
+        //     $code = isset($data['event_id']) ? 
+        //     DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
+        //     DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+        // }
+
+        $code = isset($data['event_id']) ? 
             DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
             DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
-        }
 
         if($code){
-            $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
+            $discountCodeTemplate = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
             
-            if($code->number_uses < $group->use_limit  ){
+            if($code->number_uses < $discountCodeTemplate->use_limit){
                 return $code;
             }
             
