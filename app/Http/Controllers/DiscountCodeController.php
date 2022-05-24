@@ -423,19 +423,26 @@ class DiscountCodeController extends Controller
                 $code->save();
 
                 //Creation of order in which the redemption of the code is registered
+                $eventUser = Attendee::findOrFail($data['event_user_id']);
                 $newOrder = [
                     'event_user_id' => $data['event_user_id'],
                     'event_id' => $data['event_id'],
                     'code_id' => $code->_id,
                     'discount_code_template_id' => $code->discount_code_template_id,
                     'space_available' => $code->space_available,
-                    'affiliates' => []
+                    // user addiction to available affiliates
+                    'affiliates' => [
+                        [
+                            "_id" => $eventUser->_id,
+                            "names" => $eventUser['properties']['names'],
+                            "email" => $eventUser['properties']['email'],
+                        ]
+                    ]
                 ];
                 $order = Order::create($newOrder);
                 // $order->save();
 
                 // Assign order to event user
-                $eventUser = Attendee::findOrFail($data['event_user_id']);
                 $eventUser->order_id = $order->_id;
                 $eventUser->save();
 
