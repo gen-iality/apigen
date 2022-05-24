@@ -15,6 +15,7 @@ use Auth;
 use App\evaLib\Services\CodeServices;
 use Log;
 use App\Account;
+use App\Attendee;
 use App\Order;
 
 
@@ -386,12 +387,13 @@ class DiscountCodeController extends Controller
     {
         $request->validate([
             'code' => 'required|string',
-            'discount_code_template_id' => 'required|string',
+            'event_user_id' => 'required|string',
+            'event_id' => 'required|string'
         ]);
-
+        
         $data = $request->json()->all();
         // $organization = $request->input('organization_id');
-
+        
         // $code = "";
         // if(isset($organization) &&  $organization = '60467fbd9caef512a5626fc9')
         // {
@@ -401,33 +403,49 @@ class DiscountCodeController extends Controller
         //     $code = DiscountCode::where('code', $data['code'])->first();
         // }
 
-        $code = DiscountCode::where('code', $data['code'])->first();
+        $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
         
         //authenticated user
         // $user = Auth::user();
         $discountCodeTemplate = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
         // if(!isset($group))   
         // {
-        //     $discount= "discount_code_template_id ";
-        //     $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
-        // }
-        
-        
-        //Se valida si el código ya se uso     
-        if($code->number_uses < $discountCodeTemplate->use_limit  ){
-
-            //Si el código es valido se suma un uso
-            // $code->account_id = $user->_id; 
-            $code->number_uses +=1;
-            $code->save();
+            //     $discount= "discount_code_template_id ";
+            //     $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
+            // }
             
-            //Se suman los puntos canjeados al usuario
-            // $user->points = $user->points+$group->discount;
-            // $user->save();
+            
+            //Se valida si el código ya se uso     
+            if($code->number_uses < $discountCodeTemplate->use_limit){
+                //Si el código es valido se suma un uso
+                // $code->account_id = $user->_id; 
+                $code->number_uses +=1;
+                $code->save();
 
-            return $code;
+                //Creation of order in which the redemption of the code is registered
+                $newOrder = [
+                    'event_user_id' => $data['event_user_id'],
+                    'event_id' => $data['event_id'],
+                    'code_id' => $code->_id,
+                    'discount_code_template_id' => $code->discount_code_template_id,
+                    'space_available' => $code->space_available,
+                    'affiliates' => []
+                ];
+                $order = Order::create($newOrder);
+                // $order->save();
+
+                // Assign order to event user
+                $eventUser = Attendee::findOrFail($data['event_user_id']);
+                $eventUser->order_id = $order->_id;
+                $eventUser->save();
+
+                //Se suman los puntos canjeados al usuario
+                // $user->points = $user->points+$group->discount;
+                // $user->save();
+
+                return compact("eventUser", "order");
         }
-                        
+        
         return abort(403 , 'El código ya se uso');    
     }   
     

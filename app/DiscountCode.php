@@ -22,7 +22,7 @@ class DiscountCode extends Moloquent
         'organization_id',             
     ];
 
-    protected $with = ['discount_code_template'];
+    // protected $with = ['discount_code_template'];
    
     public function discount_code_template()
     {
