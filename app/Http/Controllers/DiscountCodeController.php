@@ -443,7 +443,7 @@ class DiscountCodeController extends Controller
                 // $user->points = $user->points+$group->discount;
                 // $user->save();
 
-                return compact("eventUser", "order");
+                return compact("order");
         }
         
         return abort(403 , 'El código ya se uso');    
