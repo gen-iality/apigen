@@ -428,10 +428,20 @@ class EventUserController extends Controller
             
         $event = Event::find($event_id);
         $email = $eventUserData["email"];
+
+        // Validate the spaces available in the order
+        if (isset($eventUserData["order_id"])) {
+            $order_id = $eventUserData["order_id"];
+            $order = Order::findOrFail($order_id);
+            $affiliates = Attendee::where('order_id', $order_id)->get();
+            if (count($affiliates) >= $order->space_available) {
+                return response()->json(['message' => 'Affiliate limit exceeded'], 401);
+            }
+        }
         try {
 
             $user = Account::where("email" , $email)->first();
-
+            
             // crear cuenta de usuario si no existe 
             if(!isset($user))
             {   
@@ -463,7 +473,6 @@ class EventUserController extends Controller
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
 
-            $order_id = isset($eventUserData["order_id"]) ? $eventUserData["order_id"]: null;
             unset($eventUserData["order_id"]);
 
             //Se buscan usuarios existentes con el correo que se está ingresando
@@ -480,7 +489,6 @@ class EventUserController extends Controller
 
             // If the creation of the eventUser is through a redemption code, the user is assigned to the order
             if (isset($order_id)) {
-                $order = Order::findOrFail($order_id);
                 $affiliatedUsers = $order->affiliates;
                 array_push($affiliatedUsers, $eventUser->_id);
                 $order->affiliates = $affiliatedUsers;
