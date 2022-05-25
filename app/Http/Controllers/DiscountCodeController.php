@@ -390,8 +390,7 @@ class DiscountCodeController extends Controller
     {
         $request->validate([
             'code' => 'required|string',
-            'event_user_id' => 'required|string',
-            'event_id' => 'required|string'
+            'event_user_id' => 'required|string'
         ]);
         
         $data = $request->json()->all();
@@ -406,7 +405,7 @@ class DiscountCodeController extends Controller
         //     $code = DiscountCode::where('code', $data['code'])->first();
         // }
 
-        $code = DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first();
+        $code = DiscountCode::where("code" , $data['code'])->first();
         
         //authenticated user
         // $user = Auth::user();
@@ -429,7 +428,7 @@ class DiscountCodeController extends Controller
                 $eventUser = Attendee::findOrFail($data['event_user_id']);
                 $newOrder = [
                     'event_user_id' => $data['event_user_id'],
-                    'event_id' => $data['event_id'],
+                    'event_id' => $code->event_id,
                     'code_id' => $code->_id,
                     'discount_code_template_id' => $code->discount_code_template_id,
                     'space_available' => $code->space_available,
