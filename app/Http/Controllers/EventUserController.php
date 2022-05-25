@@ -481,10 +481,13 @@ class EventUserController extends Controller
             // If the creation of the eventUser is through a redemption code, the user is assigned to the order
             if (isset($order_id)) {
                 $order = Order::findOrFail($order_id);
-                $affiliatedUsers = $order->affiliates;
+                $affiliatedUsers = $order->attendees;
                 array_push($affiliatedUsers, $eventUser->_id);
-                $order->affiliates = $affiliatedUsers;
+                $order->attendees = $affiliatedUsers;
                 $order->save();
+                //Save order_id to manage relationship
+                $eventUser->order_id = $order_id;
+                $eventUser->save();
             }
 
 

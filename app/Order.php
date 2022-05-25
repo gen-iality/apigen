@@ -38,7 +38,7 @@ class Order extends Orders
     ];
 
 
-    protected $with = ['tickets', 'orderStatus'];
+    protected $with = ['tickets', 'orderStatus', 'attendees'];
 
     /**
      * The items associated with the order.
