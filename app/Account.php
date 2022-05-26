@@ -89,6 +89,8 @@ class Account extends User
         'qualification' => 0           
     ];
 
+    protected $with = ['plan'];
+
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);
@@ -204,6 +206,14 @@ class Account extends User
             }
         });
 
+    }
+
+    /**
+     * The plan that belong to the user.
+     */
+    public function plan()
+    {
+        return $this->belongsTo('App\Plan');
     }
 
     /**
