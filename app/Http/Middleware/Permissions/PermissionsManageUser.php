@@ -55,7 +55,7 @@ class PermissionsManageUser
                                 ->first();
             $userToEdit = Attendee::findOrFail($route->parameter("eventuser"));
 
-            if($order->_id === $orderOwner->order_id){ // valida que el order_id pertenesca al usuario que hace la peticion
+            if($order->event_user_id === $orderOwner->_id){ // valida que el order_id pertenesca al usuario que hace la peticion
                 // valida que el usuario a editar sea un afiliado suyo.
                 if ($userToEdit->order_id === $order->_id) {
                     return $next($request);
