@@ -317,9 +317,10 @@ class EventController extends Controller
                     return response()->json(['message'=> 'Error events limit exceeded'], 401);
                 };
             };
-        }else{
-            return response()->json(['message'=> 'User has no plan related'], 400);
-        };
+        }
+        // else{
+        //     return response()->json(['message'=> 'User has no plan related'], 400);
+        // };
 
         if ($validator->fails()) {
             return response(
