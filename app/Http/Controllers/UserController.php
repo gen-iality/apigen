@@ -99,7 +99,7 @@ class UserController extends UserControllerWeb
 
         $request->validate([
             'email' => 'required|unique:users,email|email:rfc,dns',           
-            'names' => 'required',
+            'names' => 'required|string',
             'picture' => 'string',
             'password' => 'string|min:6'
         ]);            

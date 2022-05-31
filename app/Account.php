@@ -109,6 +109,10 @@ class Account extends User
             
             function ($model) {
                 try {
+                    // By default, the free plan is assigned to the user
+                    if (!isset($model['plan_id'])) {
+                        $model['plan_id'] = '6285536ce040156b63d517e5';
+                    }
 
                                         // var_dump('Previo a usurio no existe Create');die;
                     
