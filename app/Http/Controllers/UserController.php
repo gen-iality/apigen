@@ -88,6 +88,7 @@ class UserController extends UserControllerWeb
      * @bodyParam names  string required  person name  Example: Evius   
      * @bodyParam picture  string  Example: http://www.gravatar.com/avatar
      * @bodyParam password  string  required  Example: *******
+     * @bodyParam plan_id  string Default Free Plan  Example: 62864ad118aa6b4b0f5820a2 (Basic Plan)
      * 
      */
     public function store(Request $request)
@@ -98,10 +99,11 @@ class UserController extends UserControllerWeb
         $request->merge(['email' => $email]);
 
         $request->validate([
-            'email' => 'required|unique:users,email|email:rfc,dns',           
+            'email' => 'required|unique:users,email|email:rfc,dns',
             'names' => 'required|string',
             'picture' => 'string',
-            'password' => 'string|min:6'
+            'password' => 'string|min:6',
+            'plan_id' => 'exists:planes,_id|string'
         ]);            
 
         $result = new Account($data);
