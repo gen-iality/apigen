@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Plan;
 use App\Host;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -72,6 +74,55 @@ class HostController extends Controller
      */
     public function store(Request $request, $event_id)
     {
+        /* Validation to create speakers by plan:
+            * Search event related
+            * Search user related to event
+            * Search user_plan relate to Plan
+            * "Switch" to view the behavior by plan (only free)
+        If the user has Plan "Free" its not allowed to create more than 2 speakers.
+            @response 401 {
+                'message': 'Error, events limit exceeded'
+            }
+         */
+        $event = Event::findOrFail($event_id);
+        $event = isset($event) ? $event : null;
+        $user = isset($event) ? User::findOrFail($event->author_id) : null;
+        $user_plan = isset($user) ? Plan::findOrFail($user->plan_id) : null;
+        
+        if (isset($user_plan)) {
+            $hosts = $this::index($request, $event_id);
+            $count_host = count($hosts->collection);
+            switch ($user_plan->name) {
+                case 'Free':
+                    if ($count_host >= 2) {
+                        return response()->json(['message'=> 'Speakers/host limit reached'], 401);
+                    }
+                    break;
+                case 'Basic':
+                    if ($count_host >= 5) {
+                        return response()->json(['message'=> 'Speakers/host limit reached'], 401);
+                    }
+                    break;
+                case 'Plus':
+                    if ($count_host >= 10) {
+                        return response()->json(['message'=> 'Speakers/host limit reached'], 401);
+                    }
+                    break;
+                case 'Pro':
+                    if ($count_host >= 10) {
+                        return response()->json(['message'=> 'Speakers/host limit reached'], 401);
+                    }
+                    break;
+                case 'Enterprise':
+                    if ($count_host >= 10) {
+                        return response()->json(['message'=> 'Speakers/host limit reached'], 401);
+                    }
+                    break;
+                default:
+                    break;
+            }   
+        }
+
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Host($data);
