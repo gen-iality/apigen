@@ -475,4 +475,4 @@ Route::group(
  * Plan
  */
 
-Route::apiResource('planes', 'PlanesController');
+Route::apiResource('plans', 'PlansController');

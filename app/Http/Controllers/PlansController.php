@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Plan;
 use Illuminate\Http\Request;
 
-class PlanesController extends Controller
+class PlansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class PlanesController extends Controller
      */
     public function index()
     {
-        $planes = Plan::all();
-        return response()->json($planes);
+        $plans = Plan::all();
+        return response()->json($plans);
     }
 
     /**

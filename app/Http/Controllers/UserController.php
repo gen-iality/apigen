@@ -103,7 +103,7 @@ class UserController extends UserControllerWeb
             'names' => 'required|string',
             'picture' => 'string',
             'password' => 'string|min:6',
-            'plan_id' => 'exists:planes,_id|string'
+            'plan_id' => 'exists:plans,_id|string'
         ]);            
 
         $result = new Account($data);

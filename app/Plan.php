@@ -6,7 +6,7 @@ namespace App;
 
 class Plan extends MyBaseModel
 {
-    protected $table = "planes";
+    protected $table = "plans";
     protected static $unguarded = true;
     protected $dates = ['created_at', 'updated_at'];
 }
