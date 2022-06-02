@@ -39,7 +39,7 @@ class NotificationController extends Controller
         return response()->json($notification, 201);
     }
     /**
-     * NotificationbyAuthor_: search of notifications by user.
+     * NotificationbyUser_: search of notifications by user.
      * 
      * @urlParam user required  user_id
      *
