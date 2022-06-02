@@ -471,6 +471,9 @@ Route::group(
 );
 
 
+/** 
+ *  ROUTES RESTRICCION */
+
 /*****
  * Plan
  */
@@ -482,3 +485,4 @@ Route::apiResource('plans', 'PlansController');
  */
 
 Route::apiResource('notifications', 'NotificationController');
+Route::get('users/{user}/notifications', 'NotificationController@NotificationbyUser');
