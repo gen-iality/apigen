@@ -20,16 +20,20 @@ class NotificationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * _store_: Create new Notification.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @bodyParam message string required message to notification Example: Speakers limit reached
+     * @bodyParam status string required status of notification Example: ACTIVE || INACTIVE
+     * @bodyParam user_id string required user related to notification Example: 628fdc698b89a10b9d464793
      */
     public function store(Request $request)
     {
         $request->validate([
             'message' => 'required|string',
-            'status' => 'required|string'
+            'status' => 'required|string',
+            'user_id' => 'required|string'
         ]);
 
         $data = $request->json()->all();
@@ -48,6 +52,8 @@ class NotificationController extends Controller
     {
         return NotificationResource::collection(
             Notification::where('user_id', $user_id)
+                ->where('status', '=', 'ACTIVE')
+                ->latest()
                 ->paginate(config('app.page_size'))
         );
     }
