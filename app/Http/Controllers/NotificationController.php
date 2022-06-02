@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Notification;
 use Illuminate\Http\Request;
 
-class NoticationController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class NoticationController extends Controller
     public function index()
     {
         $notifications = Notification::all();
+        dd("entro");
         return response()->json($notifications);
     }
 
