@@ -476,3 +476,9 @@ Route::group(
  */
 
 Route::apiResource('planes', 'PlanesController');
+
+/*****
+ * Notification
+ */
+
+Route::apiResource('notifications', 'NotificationController');
