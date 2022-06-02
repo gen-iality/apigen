@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notification;
 use Illuminate\Http\Request;
+use App\Http\Resources\NotificationResource;
 
 class NotificationController extends Controller
 {
@@ -36,6 +37,19 @@ class NotificationController extends Controller
         $notification->save();
 
         return response()->json($notification, 201);
+    }
+    /**
+     * NotificationbyAuthor_: search of notifications by user.
+     * 
+     * @urlParam user required  user_id
+     *
+     */
+    public function NotificationbyUser(string $user_id)
+    {
+        return NotificationResource::collection(
+            Notification::where('user_id', $user_id)
+                ->paginate(config('app.page_size'))
+        );
     }
 
     /**
