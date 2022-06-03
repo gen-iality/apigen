@@ -93,6 +93,8 @@ class Kernel extends HttpKernel
         'permission' => \App\Http\Middleware\Permissions\PermissionMiddleware::class,
         'permissionUser' => \App\Http\Middleware\Permissions\PermissionsManageUser::class,
         'permissionAttendee' => \App\Http\Middleware\Permissions\PermissionAttendeeMidleware::class,
+        // Restriction plan
+        'userRegistrationRestriction' => \App\Http\Middleware\RestrictionPlan\UserRegistrationRestriction::class
 
     ];
 }
