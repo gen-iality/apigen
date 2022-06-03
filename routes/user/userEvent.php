@@ -13,14 +13,14 @@
 ****************/
 Route::post('events/{event}/eventusers', 'EventUserController@store');
 Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
-Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail')->middleware('userRegistrationRestriction');
 Route::post('eventusers/{event}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
 Route::get('eventusers/{event}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
 Route::get('events/{event}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
 Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
-Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
+Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent')->middleware('userRegistrationRestriction');
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 Route::post('events/{event}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 Route::post('events/{event}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
