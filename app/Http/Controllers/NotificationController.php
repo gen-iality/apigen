@@ -59,10 +59,18 @@ class NotificationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
+     * _show_: display information about a specific notification.
+     * 
+     * @authenticated
+     * @urlParam notification required id of the notification you want to consult. Example: 6298cb08f8d427d2570e8382
+     * @response{
+     *   "_id": "6298cb08f8d427d2570e8382",
+	 *   "message": "Test",
+	 *   "status": "ACTIVE",
+	 *   "user_id": "628fdc698b89a10b9d464793",
+	 *   "updated_at": "2022-06-02 14:39:27",
+	 *   "created_at": "2022-06-02 14:36:56"
+     * }
      */
     public function show($notification)
     {
@@ -89,10 +97,10 @@ class NotificationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
+     * _destroy_: delete notification and related data.
+     * @authenticated
+     * @urlParam notification required id of the notification to be eliminated
+     * 
      */
     public function destroy($notification)
     {
