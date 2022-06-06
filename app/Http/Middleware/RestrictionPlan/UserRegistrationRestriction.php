@@ -27,17 +27,22 @@ class UserRegistrationRestriction
         $route = $request->route();
         $email = isset($data['properties']['email']) ? $data['properties']['email'] : $data['email'];
 
-	// get event owner user
+	    // get event owner user
         $eventToRegisterUser = Event::findOrFail($route->parameter("event"));
         $user = Account::findOrFail($eventToRegisterUser->author_id);
         
-	// if the person to register is the owner of the event,
-	// the restriction does not apply.
+	    // if the person to register is the owner of the event,
+	    // the restriction does not apply.
         if ($email === $user->email) {
             return $next($request);
         }
 
-	// fetch user events and validate total number of registered users
+        // there are users without a plan, they are old clients without restriction
+        if(empty($user->plan_id)) {
+            return $next($request);
+        }
+
+	    // fetch user events and validate total number of registered users
         $userEvents = Event::where('author_id', $user->_id)->get();
         $totalRegisteredUsers = 0;
         foreach ($userEvents as $event) {
