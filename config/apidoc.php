@@ -198,7 +198,9 @@ return [
                     //Document
                         '*/documents',
                         '*/documents/*', 
-
+                    // Notifications
+                        '*/notifications',
+                        '*/notifications/*'
                 ],  
 
                 /*

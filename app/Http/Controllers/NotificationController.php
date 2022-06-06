@@ -6,6 +6,10 @@ use App\Notification;
 use Illuminate\Http\Request;
 use App\Http\Resources\NotificationResource;
 
+/**
+ * @group Notification
+ *
+ */
 class NotificationController extends Controller
 {
     /**
