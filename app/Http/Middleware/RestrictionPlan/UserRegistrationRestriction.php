@@ -13,6 +13,9 @@ class UserRegistrationRestriction
 {
     /**
      * Handle an incoming request.
+     * 
+     * Restriction of users allowed
+     * according to the plan that the client has associated
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -24,22 +27,28 @@ class UserRegistrationRestriction
         $route = $request->route();
         $email = isset($data['properties']['email']) ? $data['properties']['email'] : $data['email'];
 
-        $event = Event::findOrFail($route->parameter("event"));
-        $user = Account::findOrFail($event->author_id);
+	// get event owner user
+        $eventToRegisterUser = Event::findOrFail($route->parameter("event"));
+        $user = Account::findOrFail($eventToRegisterUser->author_id);
         
+	// if the person to register is the owner of the event,
+	// the restriction does not apply.
         if ($email === $user->email) {
             return $next($request);
         }
 
-        $events = DB::table('events')->where('author_id', $user->_id)->get();
-        $eventUsers = 0;
-        foreach ($events as $eve) {
-            $users = DB::table('event_users')->where('event_id', $eve->_id)->where('properties.email', '!=', $user->email)->get();
-            $eventUsers+= count($users);
+	// fetch user events and validate total number of registered users
+        $userEvents = Event::where('author_id', $user->_id)->get();
+        $totalRegisteredUsers = 0;
+        foreach ($userEvents as $event) {
+            $usersAtTheEvent = DB::table('event_users')->where('event_id', $event['_id'])->where('properties.email', '!=', $user->email)->get();
+            $totalRegisteredUsers += count($usersAtTheEvent);
         }
-        if ($user->plan['availables']['users'] <= $eventUsers) {
+
+        if ($user->plan['availables']['users'] <= $totalRegisteredUsers ) {
             return response()->json(['message' => 'users limit exceeded'], 401);
         }
+
         return $next($request);
     }
 }
