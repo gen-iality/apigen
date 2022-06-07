@@ -33,7 +33,8 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         
         Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');              
-        Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update')->middleware('permissionUser:update');
+        Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update')
+            ->middleware('permissionUser:update', 'OrganizersRestriction');
         Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy')->middleware('permissionUser:destroy');
         Route::get('me/eventusers/event/{event}', 'EventUserController@indexByUserInEvent');
         Route::get('events/myevents', 'EventUserController@indexByEventUser');
