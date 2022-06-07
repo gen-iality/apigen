@@ -56,8 +56,7 @@ class OrganizersRestriction
                 break;
             
             case 'PUT':
-                $rolToAddUser = Rol::findOrFail($data['rol_id']);
-                echo('test' . json_encode($data));
+                $rolToAddUser = Rol::findOrFail($data['properties']['rol_id']);
                 $rol_name = $rolToAddUser->name;
                 if ($rol_name == 'Administrator') {
                     return $this::validateOrganizers($user, $next, $request);
