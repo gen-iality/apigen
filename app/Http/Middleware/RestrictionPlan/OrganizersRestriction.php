@@ -47,7 +47,7 @@ class OrganizersRestriction
                     $rolToAddUser = Rol::findOrFail($data['rol_id']);
                     $rol_name = $rolToAddUser->name;
                 }else{
-                    $rol_name = $data['rol_name'];
+                    return $next($request);
                     
                 }
                 if ($rol_name == 'Administrator') {
