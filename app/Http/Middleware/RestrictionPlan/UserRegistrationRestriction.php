@@ -50,7 +50,7 @@ class UserRegistrationRestriction
             $totalRegisteredUsers += count($usersAtTheEvent);
         }
 
-        if ($user->plan['availables']['users'] <= $totalRegisteredUsers ) {
+        if ($totalRegisteredUsers >= $user->plan['availables']['users']) {
             return response()->json(['message' => 'users limit exceeded'], 401);
         }
 
