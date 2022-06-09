@@ -78,11 +78,12 @@ class HostController extends Controller
             * Search event related
             * Search user related to event
             * Search user_plan relate to Plan
-        If the user has Plan "Free" its not allowed to create more than 2 speakers.
+            If the user has Plan "Free" its not allowed to create more than 2 speakers.
             @response 401 {
                 'message': 'Error, events limit exceeded'
             }
          */
+        /*
         $event = Event::findOrFail($event_id);
         $event = isset($event) ? $event : null;
         $user = isset($event) ? Account::findOrFail($event->author_id) : null;
@@ -94,7 +95,7 @@ class HostController extends Controller
                 return response()->json(['message'=> 'Speakers/host limit reached'], 401);
             }
         }
-
+        */
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Host($data);
