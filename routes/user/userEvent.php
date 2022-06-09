@@ -14,7 +14,8 @@
 Route::post('events/{event}/eventusers', 'EventUserController@store');
 Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
 Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail')
-    ->middleware('userRegistrationRestriction', 'OrganizersRestriction');
+    ->middleware('userRegistrationRestriction');
+//    ->middleware('userRegistrationRestriction', 'OrganizersRestriction'); CHANGE PRICING
 Route::post('eventusers/{event}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
 Route::get('eventusers/{event}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
 Route::get('events/{event}/users/{user_id}/asignticketstouser', 'EventUserManagementController@asignTicketsToUser');
@@ -22,7 +23,8 @@ Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
 Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent')
-    ->middleware('userRegistrationRestriction', 'OrganizersRestriction');
+    ->middleware('userRegistrationRestriction');
+//  ->middleware('userRegistrationRestriction', 'OrganizersRestriction'); CHANGE PRICING
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 Route::post('events/{event}/eventusersbyurl', 'EventUserController@createUserViaUrl');
 Route::post('events/{event}/sendemailtoallusers', 'EventUserController@sendQrToUsers');
@@ -34,7 +36,8 @@ Route::group(
         
         Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');              
         Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update')
-            ->middleware('permissionUser:update', 'OrganizersRestriction');
+            ->middleware('permissionUser:update');
+        //  ->middleware('permissionUser:update', 'OrganizersRestriction'); CHANGE PRICING
         Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy')->middleware('permissionUser:destroy');
         Route::get('me/eventusers/event/{event}', 'EventUserController@indexByUserInEvent');
         Route::get('events/myevents', 'EventUserController@indexByEventUser');
@@ -43,8 +46,8 @@ Route::group(
         Route::get('me/events/{event}/eventusers',  'EventUserController@meInEvent');
         Route::get('events/{event}/totalmetricsbyevent/', 'EventUserController@totalMetricsByEvent');
         Route::get('events/{event}/metricsbydate/eventusers',        'EventUserController@metricsEventByDate');
-        Route::put('events/{event}/eventusers/{eventuser}/updaterol', 'EventUserController@updateRolAndSendEmail')
-            ->middleware('OrganizersRestriction');
+        Route::put('events/{event}/eventusers/{eventuser}/updaterol', 'EventUserController@updateRolAndSendEmail');
+        //  ->middleware('OrganizersRestriction'); CHANGE PRICING
         Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
