@@ -309,6 +309,7 @@ class EventController extends Controller
                 'message': 'Error, events limit exceeded'
             }
          */
+        /*
         if (isset($user->plan_id)) {
             $plan = Plan::findorFail($user->plan_id);
             if (strcmp($plan->name, "Free") == 0) {
@@ -318,10 +319,7 @@ class EventController extends Controller
                 };
             };
         }
-        // else{
-        //     return response()->json(['message'=> 'User has no plan related'], 400);
-        // };
-
+        */
         if ($validator->fails()) {
             return response(
                 $validator->errors(),
