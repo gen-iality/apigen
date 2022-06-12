@@ -89,7 +89,8 @@ class Attendee extends Models\Attendee
     {
         try {
             $this->checked_in = true;
-            $this->checked_in_date = time();
+            // $this->checked_in_date = time();
+            $this->checkedin_at = time();
             return ($this->save()) ? "true" : "false";
         } catch (\Exception $e) {
             // do task when error

@@ -838,6 +838,22 @@ class EventUserController extends Controller
     }
 
     /**
+     * _Uncheck_: uncheck an existing Attendee to related event
+     *
+     * @urlParam eventuser string required id Attendee to checkin into the event
+     *
+     */
+    public function unCheck(String $eventUser)
+    {
+        $eventUser = Attendee::findOrFail($eventUser);
+        $eventUser->checked_in = false;
+        $eventUser->checkedin_at = null;
+        
+        $eventUser->save();
+        return $eventUser;
+    }
+
+    /**
      * __delete:__ remove a specific attendee from an event.
      * @authenticated
      * @urlParam event string required Example: 61ccd3551c821b765a312864
