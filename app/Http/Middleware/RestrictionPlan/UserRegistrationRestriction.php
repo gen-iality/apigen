@@ -16,6 +16,7 @@ class UserRegistrationRestriction
      * 
      * Restriction of users allowed
      * according to the plan that the client has associated
+     * If users are removed, they will still count towards the restriction. softdelete is used
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
