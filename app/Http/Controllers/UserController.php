@@ -20,6 +20,7 @@ use App\OrganizationUser;
 use Log;
 use RealRashid\SweetAlert\Facades\Alert;
 use Redirect;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -600,6 +601,24 @@ class UserController extends UserControllerWeb
         
         return response()->json(['data' => compact("link"), 'message' => 'Mail sent successfully']);
 
+    }
+
+    public function usersOfMyPlan(Request $request)
+    {
+        $user = Auth::user();
+
+	    // fetch user events and get total number of registered users
+        $userEvents = Event::where('author_id', $user->_id)->get();
+        $totalRegisteredUsers = 0;
+        foreach ($userEvents as $event) {
+            $usersAtTheEvent = DB::table('event_users')->where('event_id', $event['_id'])->where('properties.email', '!=', $user->email)->get();
+            $totalRegisteredUsers += count($usersAtTheEvent);
+        }
+
+        return response()->json([
+            'totalRegisteredUsers' => $totalRegisteredUsers,
+            'totalAllowedUsers' => $user->plan->availables['users']
+        ]);
     }
 
 }

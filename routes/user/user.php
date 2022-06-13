@@ -26,6 +26,7 @@ Route::group(
         Route::get('users/findByEmail/{email}', 'UserController@findrequireByEmail');
         
         Route::get('organization/{organization}/users', 'UserController@userOrganization');
+        Route::get('users/me/totaluser', "UserController@usersOfMyPlan");
         Route::put('users/{user_id}/changeStatusUser', 'UserController@changeStatusUser');
     }
 );
