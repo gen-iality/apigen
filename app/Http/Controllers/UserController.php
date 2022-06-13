@@ -135,7 +135,7 @@ class UserController extends UserControllerWeb
             'picture' => 'string',
             'password' => 'string'
         ]);
-
+        dd("update user", $request);
         $data = $request->json()->all();
         
         $auth = resolve('Kreait\Firebase\Auth');
@@ -155,6 +155,22 @@ class UserController extends UserControllerWeb
         $Account = Account::find($Account->_id);
 
         return $Account;
+    }
+
+    /**
+     * _update_: update plan of registered user
+     * @authenticated
+     */
+    public function updatePlan($data, string $id)
+    {
+        if ($data) {
+            $Account = Account::find($id);
+            $Account['plan_id'] = $data;
+            $Account->save();
+            $Account = Account::find($Account->_id);
+            return $Account;
+        }
+        return response()->json(['message'=> 'Data not found'], 404);
     }
 
     /**
