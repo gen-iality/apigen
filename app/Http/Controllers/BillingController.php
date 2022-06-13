@@ -106,11 +106,12 @@ class BillingController extends Controller
             $data['payment_id'] = json_decode(json_encode($payment))->original->_id;//se le relaciona el id del metodo recien creado
             $billing_save = new Billing($data);
             $billing_save->save();
+            return response()->json($billing_save, 201);
         }//Si no guarda el metodo de pago se guarda tal cual llega el billing
         $Billing = new Billing($data);
         $Billing->save();
-
         return response()->json($Billing, 201);
+
     }
     /**
      * BillingbyUser_: search of Billings by user.
