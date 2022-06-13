@@ -11,6 +11,7 @@ class Billing extends MyBaseModel
     protected $dates = ['created_at', 'updated_at'];
 
     //protected $with = ['user'];
+    protected $with = ['payment'];
 
     /***
      *
@@ -27,5 +28,10 @@ class Billing extends MyBaseModel
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo('App\Payment', 'payment_id');
     }
 }
