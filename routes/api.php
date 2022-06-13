@@ -486,3 +486,17 @@ Route::apiResource('plans', 'PlansController');
 
 Route::apiResource('notifications', 'NotificationController');
 Route::get('users/{user}/notifications', 'NotificationController@NotificationbyUser');
+
+/*****
+ * Billing
+ */
+
+Route::apiResource('billings', 'BillingController');
+Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
+
+/*****
+ * Payment
+ */
+
+Route::apiResource('payments', 'PaymentController');
+Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
