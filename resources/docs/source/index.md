@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/1/duplicateactivitie/rerum" \
+    "https://devapi.evius.co/api/events/1/duplicateactivitie/fugiat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/duplicateactivitie/rerum"
+    "https://devapi.evius.co/api/events/1/duplicateactivitie/fugiat"
 );
 
 let headers = {
@@ -72,6 +72,72 @@ Parameter | Status | Description
 
 <!-- END_0c4bcd062bf8533da02e9afdd3e9e075 -->
 
+<!-- START_3a1d1c593b60f8ba46e4d462e39ec73b -->
+## _indexByHost_: list activities by host
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/activitiesbyhost/fuga" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/activitiesbyhost/fuga"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/fuga?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/fuga?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/fuga",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/activitiesbyhost/{host_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | id of the event to which the activities belong.
+    `host_id` |  required  | id of the host for which you want to filter the activities.
+
+<!-- END_3a1d1c593b60f8ba46e4d462e39ec73b -->
+
 <!-- START_a4a55c62b61aebf221a7b56f081e0350 -->
 ## _createMeeting_: assing meeting to activitie.
 
@@ -82,7 +148,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/createmeeting/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"pariatur","activity_description":"commodi"}'
+    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"mollitia","activity_description":"recusandae"}'
 
 ```
 
@@ -98,8 +164,8 @@ let headers = {
 
 let body = {
     "activity_datetime_start": "2020-10-14 14:11",
-    "activity_name": "pariatur",
-    "activity_description": "commodi"
+    "activity_name": "mollitia",
+    "activity_description": "recusandae"
 }
 
 fetch(url, {
@@ -138,7 +204,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/1/activities/et/hostAvailability" \
+    "https://devapi.evius.co/api/events/1/activities/quia/hostAvailability" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"host_ids":"[\"KthHMroFQK24I97YoqxBZw\" , \"FIRVnSoZR7WMDajgtzf5Uw\" , \"15DKHS_6TqWIFpwShasM4w\" , \"2m-YaXq_TW2f791cVpP8og\", \"mSkbi8PmSSqQEWsm6FQiAA\"]","host_id":"KthHMroFQK24I97YoqxBZw","date_start_zoom":"2021-02-08T07:30:00","date_end_zoom":"2021-02-08T09:30:00"}'
@@ -147,7 +213,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activities/et/hostAvailability"
+    "https://devapi.evius.co/api/events/1/activities/quia/hostAvailability"
 );
 
 let headers = {
@@ -200,14 +266,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/1/activities/enim/register_and_checkin_to_activity" \
+    "https://devapi.evius.co/api/events/1/activities/officia/register_and_checkin_to_activity" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activities/enim/register_and_checkin_to_activity"
+    "https://devapi.evius.co/api/events/1/activities/officia/register_and_checkin_to_activity"
 );
 
 let headers = {
@@ -397,16 +463,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/voluptatum/activities/nihil/checkinbyadmin" \
+    "https://devapi.evius.co/api/events/et/activities/saepe/checkinbyadmin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":"dicta"}'
+    -d '{"user_id":"sed"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/voluptatum/activities/nihil/checkinbyadmin"
+    "https://devapi.evius.co/api/events/et/activities/saepe/checkinbyadmin"
 );
 
 let headers = {
@@ -415,7 +481,7 @@ let headers = {
 };
 
 let body = {
-    "user_id": "dicta"
+    "user_id": "sed"
 }
 
 fetch(url, {
@@ -953,6 +1019,54 @@ Parameter | Status | Description
 
 <!-- END_dcd50abfb0c53308b4c8f8faf5280a8e -->
 
+<!-- START_4655dc4092973a53378f11af1ae6a385 -->
+## _indexForAdmin_: list the activities and users that will attend from the administrator
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/activities_attendeesAdmin" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/activities_attendeesAdmin"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/activities_attendeesAdmin`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_4655dc4092973a53378f11af1ae6a385 -->
+
 <!-- START_5d7f38e360b7e302ecc8b12d1b42754b -->
 ## _meIndex_: list of registered activities of the logged-in user
 
@@ -1011,14 +1125,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/1/activities_attendees/quisquam/check_in" \
+    "https://devapi.evius.co/api/events/1/activities_attendees/eveniet/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activities_attendees/quisquam/check_in"
+    "https://devapi.evius.co/api/events/1/activities_attendees/eveniet/check_in"
 );
 
 let headers = {
@@ -1047,6 +1161,54 @@ Parameter | Status | Description
     `id` |  optional  | id of activity_assitant
 
 <!-- END_502d45645ea8a6d7fa50895c044bd950 -->
+
+<!-- START_0f85d9340df15a9c37b52571e47ecd6f -->
+## _totalMetricsByActivity_
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/totalmetricsbyactivity" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/totalmetricsbyactivity"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/totalmetricsbyactivity`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+
+<!-- END_0f85d9340df15a9c37b52571e47ecd6f -->
 
 #Category
 
@@ -1313,7 +1475,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/categories/5bb25243b6312771e92c8693" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ex"}'
+    -d '{"name":"ut"}'
 
 ```
 
@@ -1328,7 +1490,7 @@ let headers = {
 };
 
 let body = {
-    "name": "ex"
+    "name": "ut"
 }
 
 fetch(url, {
@@ -1403,6 +1565,258 @@ Parameter | Status | Description
 
 <!-- END_7513823f87b59040507bd5ab26f9ceb5 -->
 
+#Certificate
+
+En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.
+<!-- START_8025213a0b4af7f1ef20cd0e264c22e3 -->
+## _index_: Lista de certificados generados.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/certificates" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/certificates`
+
+
+<!-- END_8025213a0b4af7f1ef20cd0e264c22e3 -->
+
+<!-- START_75d7edbd389c3f4a3544ee2caa977188 -->
+## _store_:Creación de certificados.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/certificates" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"voluptatem","content":"libero","background":"qui"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "voluptatem",
+    "content": "libero",
+    "background": "qui"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/certificates`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo.
+    
+<!-- END_75d7edbd389c3f4a3544ee2caa977188 -->
+
+<!-- START_deb135231e108988b99e803e8a784c7a -->
+## _show_: Ver la información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a mostrar
+
+<!-- END_deb135231e108988b99e803e8a784c7a -->
+
+<!-- START_2a017c5d6985fc2f4b6116798211f61c -->
+## _update_: Actualizar información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"et","content":"tenetur","background":"et"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "et",
+    "content": "tenetur",
+    "background": "et"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo
+    
+<!-- END_2a017c5d6985fc2f4b6116798211f61c -->
+
+<!-- START_c889e5f87c477caab13eb1e79956f204 -->
+## _destroy_: Eliminar registro de un certificado.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+
+<!-- END_c889e5f87c477caab13eb1e79956f204 -->
+
 #Comment
 
 
@@ -1413,14 +1827,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/comments/organizations/illum" \
+    -G "https://devapi.evius.co/api/comments/organizations/ducimus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/comments/organizations/illum"
+    "https://devapi.evius.co/api/comments/organizations/ducimus"
 );
 
 let headers = {
@@ -1466,7 +1880,7 @@ curl -X POST \
     "https://devapi.evius.co/api/comments" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"organization_id":"recusandae","comment":"et","image":"et"}'
+    -d '{"organization_id":"quam","comment":"dicta","image":"quo"}'
 
 ```
 
@@ -1481,9 +1895,9 @@ let headers = {
 };
 
 let body = {
-    "organization_id": "recusandae",
-    "comment": "et",
-    "image": "et"
+    "organization_id": "quam",
+    "comment": "dicta",
+    "image": "quo"
 }
 
 fetch(url, {
@@ -1938,14 +2352,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/discountcodetemplate/nam/code/in" \
+    "https://devapi.evius.co/api/discountcodetemplate/doloremque/code/quaerat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/discountcodetemplate/nam/code/in"
+    "https://devapi.evius.co/api/discountcodetemplate/doloremque/code/quaerat"
 );
 
 let headers = {
@@ -1987,7 +2401,7 @@ curl -X POST \
     "https://devapi.evius.co/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"perspiciatis"}'
+    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"autem"}'
 
 ```
 
@@ -2004,7 +2418,7 @@ let headers = {
 let body = {
     "code": "Nyd0jOpQ",
     "event_id": "5ea23acbd74d5c4b360ddde2",
-    "organization_id": "perspiciatis"
+    "organization_id": "autem"
 }
 
 fetch(url, {
@@ -2082,7 +2496,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/code/redeem_point_code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"aut"}'
+    -d '{"code":"pariatur"}'
 
 ```
 
@@ -2097,7 +2511,7 @@ let headers = {
 };
 
 let body = {
-    "code": "aut"
+    "code": "pariatur"
 }
 
 fetch(url, {
@@ -2128,7 +2542,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/code/codesByUser?organization=omnis&email=autem" \
+    -G "https://devapi.evius.co/api/code/codesByUser?organization=et&email=aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -2139,8 +2553,8 @@ const url = new URL(
 );
 
 let params = {
-    "organization": "omnis",
-    "email": "autem",
+    "organization": "et",
+    "email": "aut",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -2274,7 +2688,7 @@ curl -X POST \
     "https://devapi.evius.co/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"neque"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"laudantium"}'
 
 ```
 
@@ -2294,7 +2708,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "neque"
+    "discount_type": "laudantium"
 }
 
 fetch(url, {
@@ -2643,14 +3057,14 @@ This model works to manage the documents to assign to the attendees.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/modi/documentusers" \
+    -G "https://devapi.evius.co/api/events/minima/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/modi/documentusers"
+    "https://devapi.evius.co/api/events/minima/documentusers"
 );
 
 let headers = {
@@ -2692,14 +3106,14 @@ Display the specified resource.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/qui/documentusers/et" \
+    -G "https://devapi.evius.co/api/events/impedit/documentusers/sint" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/qui/documentusers/et"
+    "https://devapi.evius.co/api/events/impedit/documentusers/sint"
 );
 
 let headers = {
@@ -2750,16 +3164,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/enim/documentusers" \
+    "https://devapi.evius.co/api/events/a/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"sapiente","url":"voluptas","assign":false}'
+    -d '{"name":"unde","url":"corrupti","assign":false}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/enim/documentusers"
+    "https://devapi.evius.co/api/events/a/documentusers"
 );
 
 let headers = {
@@ -2768,8 +3182,8 @@ let headers = {
 };
 
 let body = {
-    "name": "sapiente",
-    "url": "voluptas",
+    "name": "unde",
+    "url": "corrupti",
     "assign": false
 }
 
@@ -2823,14 +3237,14 @@ Update the specified resource in storage.
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/recusandae/documentusers/voluptates" \
+    "https://devapi.evius.co/api/events/soluta/documentusers/harum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/recusandae/documentusers/voluptates"
+    "https://devapi.evius.co/api/events/soluta/documentusers/harum"
 );
 
 let headers = {
@@ -2882,14 +3296,14 @@ Remove the specified resource from storage.
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/libero/documentusers/nam" \
+    "https://devapi.evius.co/api/events/repudiandae/documentusers/dicta" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/libero/documentusers/nam"
+    "https://devapi.evius.co/api/events/repudiandae/documentusers/dicta"
 );
 
 let headers = {
@@ -2932,14 +3346,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/ut/me/documentusers" \
+    -G "https://devapi.evius.co/api/events/sed/me/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/ut/me/documentusers"
+    "https://devapi.evius.co/api/events/sed/me/documentusers"
 );
 
 let headers = {
@@ -2983,14 +3397,14 @@ The documents are file that you can downloads from event.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/earum/documents" \
+    -G "https://devapi.evius.co/api/events/numquam/documents" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/earum/documents"
+    "https://devapi.evius.co/api/events/numquam/documents"
 );
 
 let headers = {
@@ -3013,8 +3427,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/earum\/documents?page=1",
-        "last": "http:\/\/localhost\/api\/events\/earum\/documents?page=1",
+        "first": "http:\/\/localhost\/api\/events\/numquam\/documents?page=1",
+        "last": "http:\/\/localhost\/api\/events\/numquam\/documents?page=1",
         "prev": null,
         "next": null
     },
@@ -3022,7 +3436,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/earum\/documents",
+        "path": "http:\/\/localhost\/api\/events\/numquam\/documents",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -3048,7 +3462,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/voluptatibus/documents" \
+    "https://devapi.evius.co/api/events/nemo/documents" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"gato.jpg","title":"gato.jpg","format":"jpg","type":"file","file":"https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&token=1455a85f-6381-4a92-a00e-47c916ed236c"}'
@@ -3057,7 +3471,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/voluptatibus/documents"
+    "https://devapi.evius.co/api/events/nemo/documents"
 );
 
 let headers = {
@@ -3110,14 +3524,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/sed/documents/qui" \
+    -G "https://devapi.evius.co/api/events/perferendis/documents/laboriosam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/sed/documents/qui"
+    "https://devapi.evius.co/api/events/perferendis/documents/laboriosam"
 );
 
 let headers = {
@@ -3138,7 +3552,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Documents] qui"
+    "message": "No query results for model [App\\Documents] laboriosam"
 }
 ```
 
@@ -3161,7 +3575,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/corrupti/documents/1" \
+    "https://devapi.evius.co/api/events/soluta/documents/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"gato.jpg","title":"gato.jpg","format":"jpg","type":"file","file":"https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&token=1455a85f-6381-4a92-a00e-47c916ed236c"}'
@@ -3170,7 +3584,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/corrupti/documents/1"
+    "https://devapi.evius.co/api/events/soluta/documents/1"
 );
 
 let headers = {
@@ -3225,14 +3639,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/aut/documents/nihil" \
+    "https://devapi.evius.co/api/events/inventore/documents/sapiente" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/aut/documents/nihil"
+    "https://devapi.evius.co/api/events/inventore/documents/sapiente"
 );
 
 let headers = {
@@ -3261,6 +3675,65 @@ Parameter | Status | Description
     `document` |  required  | evdocdocumentumentent id
 
 <!-- END_dd680f9966c666d6385239c68c07f2cb -->
+
+<!-- START_164324424165912a62aa9a2bc32fd5db -->
+## api/events/{event}/getallfiles
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/getallfiles" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/getallfiles"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/getallfiles?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/getallfiles?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/getallfiles",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/getallfiles`
+
+
+<!-- END_164324424165912a62aa9a2bc32fd5db -->
 
 #Event
 
@@ -3337,14 +3810,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/eos/eventsstadistics" \
+    -G "https://devapi.evius.co/api/organizations/sequi/eventsstadistics" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/eos/eventsstadistics"
+    "https://devapi.evius.co/api/organizations/sequi/eventsstadistics"
 );
 
 let headers = {
@@ -3515,7 +3988,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"dolorem","picture":"voluptas","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"ipsum","picture":"atque","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -3534,8 +4007,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "dolorem",
-    "picture": "voluptas",
+    "type_event": "ipsum",
+    "picture": "atque",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -3751,16 +4224,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/neque" \
+    "https://devapi.evius.co/api/events/dolorum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"officia","picture":"harum","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"aperiam","picture":"praesentium","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/neque"
+    "https://devapi.evius.co/api/events/dolorum"
 );
 
 let headers = {
@@ -3773,8 +4246,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "officia",
-    "picture": "harum",
+    "type_event": "aperiam",
+    "picture": "praesentium",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -3836,14 +4309,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/laudantium" \
+    "https://devapi.evius.co/api/events/enim" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/laudantium"
+    "https://devapi.evius.co/api/events/enim"
 );
 
 let headers = {
@@ -3872,6 +4345,50 @@ Parameter | Status | Description
 
 <!-- END_379a30feb2949828b5f95efbfd7649c3 -->
 
+<!-- START_a93e8332f4c17d5e8f07c962ff302da3 -->
+## _restore_: restore event and related data.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/voluptas/restore" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/voluptas/restore"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/restore`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | id of the event to be restore
+
+<!-- END_a93e8332f4c17d5e8f07c962ff302da3 -->
+
 <!-- START_66dbd029b818c574790a13910308d53a -->
 ## _store_: Create new event of the organizer.
 
@@ -3883,7 +4400,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"ut","picture":"aut","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"repellendus","picture":"dignissimos","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -3902,8 +4419,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "ut",
-    "picture": "aut",
+    "type_event": "repellendus",
+    "picture": "dignissimos",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -4002,16 +4519,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/dolorum" \
+    "https://devapi.evius.co/api/events/est" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"aut","picture":"amet","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"nisi","picture":"ipsam","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/dolorum"
+    "https://devapi.evius.co/api/events/est"
 );
 
 let headers = {
@@ -4024,8 +4541,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "aut",
-    "picture": "amet",
+    "type_event": "nisi",
+    "picture": "ipsam",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -4134,7 +4651,7 @@ curl -X POST \
     "https://devapi.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"veniam","picture":"voluptate","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"eveniet","picture":"iure","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -4153,8 +4670,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "veniam",
-    "picture": "voluptate",
+    "type_event": "eveniet",
+    "picture": "iure",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -4253,16 +4770,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/user/events/dolor" \
+    "https://devapi.evius.co/api/user/events/hic" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"similique","picture":"qui","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"omnis","picture":"ratione","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/user/events/dolor"
+    "https://devapi.evius.co/api/user/events/hic"
 );
 
 let headers = {
@@ -4275,8 +4792,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "similique",
-    "picture": "qui",
+    "type_event": "omnis",
+    "picture": "ratione",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -4338,14 +4855,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/user/events/harum" \
+    "https://devapi.evius.co/api/user/events/dolores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/user/events/harum"
+    "https://devapi.evius.co/api/user/events/dolores"
 );
 
 let headers = {
@@ -5773,14 +6290,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/users/et/events" \
+    -G "https://devapi.evius.co/api/users/autem/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/users/et/events"
+    "https://devapi.evius.co/api/users/autem/events"
 );
 
 let headers = {
@@ -5803,8 +6320,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/et\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/et\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/autem\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/autem\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -5812,7 +6329,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/et\/events",
+        "path": "http:\/\/localhost\/api\/users\/autem\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -5868,24 +6385,26 @@ fetch(url, {
 
 <!-- END_48ec4d386efb8ba88bf13409d75a9572 -->
 
-<!-- START_fee8ef1fe728ff1db6ba4c577c3fd10c -->
-## _addDocumentUserToEvent_: adds the default settings to events that have user documents.
+<!-- START_04c928fb7ec045888fb969784cc3eb7e -->
+## _addUserProperty_: adding dynamic user property to the event
 
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.
+The dynamic properties are returned within each UserEvent as the normal properties.
+
 > Example request:
 
 ```bash
-curl -X PUT \
-    "https://devapi.evius.co/api/events/dicta/adddocumentuser" \
+curl -X POST \
+    "https://devapi.evius.co/api/user/events/sapiente/addUserProperty" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"quantity":5476955,"auto_assign":true}'
+    -d '{"name":"amet","label":"reprehenderit","mandatory":false,"visibleByAdmin":false,"visibleByContacts":true,"description":"repellendus"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/dicta/adddocumentuser"
+    "https://devapi.evius.co/api/user/events/sapiente/addUserProperty"
 );
 
 let headers = {
@@ -5894,7 +6413,72 @@ let headers = {
 };
 
 let body = {
-    "quantity": 5476955,
+    "name": "amet",
+    "label": "reprehenderit",
+    "mandatory": false,
+    "visibleByAdmin": false,
+    "visibleByContacts": true,
+    "description": "repellendus"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/user/events/{id}/addUserProperty`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del evento
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | field name in database
+        `label` | string |  required  | 
+        `mandatory` | boolean |  required  | indicates if the field is mandatory or optional
+        `visibleByAdmin` | boolean |  required  | 
+        `visibleByContacts` | boolean |  required  | 
+        `description` | string |  optional  | 
+    
+<!-- END_04c928fb7ec045888fb969784cc3eb7e -->
+
+<!-- START_fee8ef1fe728ff1db6ba4c577c3fd10c -->
+## _addDocumentUserToEvent_: adds the default settings to events that have user documents.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/omnis/adddocumentuser" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"quantity":66807561.8664,"auto_assign":true}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/omnis/adddocumentuser"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "quantity": 66807561.8664,
     "auto_assign": true
 }
 
@@ -6003,7 +6587,7 @@ curl -X POST \
     "https://devapi.evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"amet"}'
+    -d '{"name":"est"}'
 
 ```
 
@@ -6018,7 +6602,7 @@ let headers = {
 };
 
 let body = {
-    "name": "amet"
+    "name": "est"
 }
 
 fetch(url, {
@@ -6063,7 +6647,7 @@ Attendee has one user though account_id
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/adipisci/eventusers" \
+    "https://devapi.evius.co/api/events/dolorem/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"properties":{"email":{},"names":{},"others_properties":{}}}'
@@ -6072,7 +6656,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/adipisci/eventusers"
+    "https://devapi.evius.co/api/events/dolorem/eventusers"
 );
 
 let headers = {
@@ -6256,6 +6840,49 @@ fetch(url, {
 
 <!-- END_ae3699df3bb574732c28c9b539afa6cf -->
 
+<!-- START_6b9ba84498ac309ef3cc779bb6c6279f -->
+## _updateWithStatus_: update With Status
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/withstatus/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/withstatus/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/withstatus/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+
+<!-- END_6b9ba84498ac309ef3cc779bb6c6279f -->
+
 <!-- START_62f0c5655d8d2562857a8516c1822886 -->
 ## _updateWithStatus_: update With Status
 
@@ -6306,14 +6933,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/eventUsers/et/checkin" \
+    "https://devapi.evius.co/api/eventUsers/veritatis/checkin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/eventUsers/et/checkin"
+    "https://devapi.evius.co/api/eventUsers/veritatis/checkin"
 );
 
 let headers = {
@@ -6349,14 +6976,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/eventUsers/eveniet/uncheck" \
+    "https://devapi.evius.co/api/eventUsers/ut/uncheck" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/eventUsers/eveniet/uncheck"
+    "https://devapi.evius.co/api/eventUsers/ut/uncheck"
 );
 
 let headers = {
@@ -6401,7 +7028,7 @@ curl -X POST \
     "https://devapi.evius.co/api/eventUsers/createUserAndAddtoEvent/61ccd3551c821b765a312864?allow_edit_password=true" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"vero"}}'
+    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"quaerat"}}'
 
 ```
 
@@ -6426,7 +7053,7 @@ let body = {
     "name": "Evius",
     "password": "*******",
     "other_params": {
-        "city": "vero"
+        "city": "quaerat"
     }
 }
 
@@ -6517,6 +7144,173 @@ Parameter | Type | Status | Description
     `eventUsersIds` | array |  required  | Attendees list who book in an event
     
 <!-- END_8584edbef5108e01985db1d291b64c2e -->
+
+<!-- START_42c0a6844b0eceddc135185f2aa1a4f1 -->
+## _createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusersbyurl" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"laborum","name":"voluptas","other_params,":{"":{"":{"":"pariatur"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusersbyurl"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "laborum",
+    "name": "voluptas",
+    "other_params,": {
+        "": {
+            "": {
+                "": "pariatur"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/eventusersbyurl`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  optional  | string required event id
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | 
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_42c0a6844b0eceddc135185f2aa1a4f1 -->
+
+<!-- START_2e7ec926ec739f2b02048853b415e020 -->
+## _sendQrToUsers_: send Qr To Users.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/sendemailtoallusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/sendemailtoallusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sendemailtoallusers`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  optional  | string required event id
+
+<!-- END_2e7ec926ec739f2b02048853b415e020 -->
+
+<!-- START_98727193033245a0c04abf17d3e83fdc -->
+## _store:_ Store a newly Attendee  in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/alias/eventusersanonymous" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"properties":{"email":{},"names":{},"others_properties":{}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/alias/eventusersanonymous"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "properties": {
+        "email": {},
+        "names": {},
+        "others_properties": {}
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/eventusersanonymous`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | event id
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `properties.email` | object |  optional  | other params  will be saved in user and eventUser each event can require aditional properties for registration.
+        `properties.names` | object |  optional  | other params  will be saved in user and eventUser each event can require aditional properties for registration.
+        `properties.others_properties` | object |  optional  | other params  will be saved in user and eventUser each event can require aditional properties for registration.
+    
+<!-- END_98727193033245a0c04abf17d3e83fdc -->
 
 <!-- START_c8437aa309bc9307e85279e92b05876e -->
 ## _index_ display all the EventUsers of an event
@@ -6712,7 +7506,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusers/61ccd3551c821b765a312866" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"dolor","properties":{"other_properties":"enim"}}'
+    -d '{"rol_id":"ducimus","properties":{"other_properties":"est"}}'
 
 ```
 
@@ -6727,9 +7521,9 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "dolor",
+    "rol_id": "ducimus",
     "properties": {
-        "other_properties": "enim"
+        "other_properties": "est"
     }
 }
 
@@ -6856,6 +7650,101 @@ Parameter | Status | Description
 
 <!-- END_84d74839b57eed0df8c1697071eeeaa6 -->
 
+<!-- START_f4ee022bcd35d6d38fadedb070189787 -->
+## _indexByEventUser_: list of events by logged in user
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/myevents" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/myevents"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/myevents`
+
+
+<!-- END_f4ee022bcd35d6d38fadedb070189787 -->
+
+<!-- START_cda2e12b865aafa8bd9e0e9d75c789ed -->
+## _searchInEvent_: search user within the event to verify if you are registered
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/searchinevent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/searchinevent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/searchinevent`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+
+<!-- END_cda2e12b865aafa8bd9e0e9d75c789ed -->
+
 <!-- START_4bd3b40485e104bf4de0c264138d1029 -->
 ## _ByUserInEvent_ : list of users by events
 
@@ -6957,6 +7846,56 @@ Parameter | Status | Description
 
 <!-- END_60d316aa60b8b526ece5acd538b7d419 -->
 
+<!-- START_45ffd5dbb9ca3d4f87a1fa6e5a9a82ec -->
+## _totalMetricsByEvent_
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/totalmetricsbyevent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/totalmetricsbyevent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/totalmetricsbyevent`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+
+<!-- END_45ffd5dbb9ca3d4f87a1fa6e5a9a82ec -->
+
 <!-- START_b11ff93318cdb6da2eb89990c0f8793c -->
 ## _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates  * or according specific dates.
 
@@ -6965,20 +7904,20 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/nulla/metricsbydate/eventusers?metrics_type=created_at&datetime_from=nihil&datetime_to=atque" \
+    -G "https://devapi.evius.co/api/events/et/metricsbydate/eventusers?metrics_type=created_at&datetime_from=excepturi&datetime_to=nemo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/nulla/metricsbydate/eventusers"
+    "https://devapi.evius.co/api/events/et/metricsbydate/eventusers"
 );
 
 let params = {
     "metrics_type": "created_at",
-    "datetime_from": "nihil",
-    "datetime_to": "atque",
+    "datetime_from": "excepturi",
+    "datetime_to": "nemo",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -7033,16 +7972,16 @@ This end point sends an email to the user to inform them of the change.
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/at/eventusers/quasi/updaterol" \
+    "https://devapi.evius.co/api/events/impedit/eventusers/et/updaterol" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"reprehenderit"}'
+    -d '{"rol_id":"nihil"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/at/eventusers/quasi/updaterol"
+    "https://devapi.evius.co/api/events/impedit/eventusers/et/updaterol"
 );
 
 let headers = {
@@ -7051,7 +7990,7 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "reprehenderit"
+    "rol_id": "nihil"
 }
 
 fetch(url, {
@@ -7154,7 +8093,7 @@ curl -X POST \
     "https://devapi.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"doloribus"}'
+    -d '{"file":"repudiandae"}'
 
 ```
 
@@ -7169,7 +8108,7 @@ let headers = {
 };
 
 let body = {
-    "file": "doloribus"
+    "file": "repudiandae"
 }
 
 fetch(url, {
@@ -7215,16 +8154,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/files/uploadbase/placeat" \
+    "https://devapi.evius.co/api/files/uploadbase/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"sequi","type":"quia"}'
+    -d '{"file":"praesentium","type":"vel"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/files/uploadbase/placeat"
+    "https://devapi.evius.co/api/files/uploadbase/et"
 );
 
 let headers = {
@@ -7233,8 +8172,8 @@ let headers = {
 };
 
 let body = {
-    "file": "sequi",
-    "type": "quia"
+    "file": "praesentium",
+    "type": "vel"
 }
 
 fetch(url, {
@@ -7541,7 +8480,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"sit","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"at","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
@@ -7558,7 +8497,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "sit",
+    "image": "at",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -7605,7 +8544,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"nihil","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"omnis","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
@@ -7622,7 +8561,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "nihil",
+    "image": "omnis",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -7702,6 +8641,533 @@ Parameter | Status | Description
     `id` |  required  | host id to be removed
 
 <!-- END_fc812c3ac5933927f6f5dd638d5e3990 -->
+
+#Invitation
+
+
+<!-- START_ebe9df597b5dabff6b5c60d9268f5ed4 -->
+## _invitationsSent_:List of applications sent
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/indexinvitations/natus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/indexinvitations/natus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/natus?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/natus?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/natus",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/indexinvitations/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_ebe9df597b5dabff6b5c60d9268f5ed4 -->
+
+<!-- START_b936727cd7c574a4d5aafc1c5431f8bf -->
+## _invitationsReceived_: List of applications recived
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/voluptatibus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/voluptatibus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/voluptatibus?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/voluptatibus?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/voluptatibus",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/indexinvitationsrecieved/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_b936727cd7c574a4d5aafc1c5431f8bf -->
+
+<!-- START_19405d38362150c89528c5d219e804ea -->
+## _acceptOrDeclineFriendRequest_: Accept Or Decline Friend Request
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/acceptordecline/est" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"response":"corporis"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/acceptordecline/est"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "response": "corporis"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/acceptordecline/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+    `id` |  required  | user who accepts or rejects the application
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `response` | string |  required  | 
+    
+<!-- END_19405d38362150c89528c5d219e804ea -->
+
+<!-- START_a51e9b1084fbde7e80d1fae56f7c9286 -->
+## _indexcontacts_: List of current contacts
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/contactlist/est" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contactlist/est"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+null
+```
+
+### HTTP Request
+`GET api/events/{event}/contactlist/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_a51e9b1084fbde7e80d1fae56f7c9286 -->
+
+<!-- START_a5fd75dcb2bf61eacd7dd66efe5fc04b -->
+## _indexcontacts_: List of current contacts
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/contactlist/distinctio" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contactlist/distinctio"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/contactlist/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_a5fd75dcb2bf61eacd7dd66efe5fc04b -->
+
+<!-- START_938655f5caff69b1d4b00e6c39292ba3 -->
+## _index_: Display a listing of the Invitation.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/invitation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/invitation?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/invitation?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/invitation",
+        "per_page": 10000,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/invitation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_938655f5caff69b1d4b00e6c39292ba3 -->
+
+<!-- START_ac1f64509df330a2e260786dfd3d6b66 -->
+## _store_: Send request with redirection to evius
+
+Enviar solicitud con redirección a evius
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/invitation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"id_user_requested":"dolores"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id_user_requested": "dolores"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/invitation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `id_user_requested` | string |  required  | 
+    
+<!-- END_ac1f64509df330a2e260786dfd3d6b66 -->
+
+<!-- START_ae0cce1ac6982a4e14d56fdff51ce1b2 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Invitation] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/invitation/{invitation}`
+
+
+<!-- END_ae0cce1ac6982a4e14d56fdff51ce1b2 -->
+
+<!-- START_747adb33452718cb75750d1a5a017e30 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/invitation/{invitation}`
+
+`PATCH api/events/{event}/invitation/{invitation}`
+
+
+<!-- END_747adb33452718cb75750d1a5a017e30 -->
+
+<!-- START_351a47e3660c33b569e8f53069b7893a -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/invitation/{invitation}`
+
+
+<!-- END_351a47e3660c33b569e8f53069b7893a -->
 
 #News Feed
 
@@ -8000,6 +9466,61 @@ Parameter | Status | Description
 
 
 The purpose of this end point is to store all the information of a user's payment orders
+<!-- START_72a1cecf7e479acdd5b52d61cd830ea8 -->
+## _createOrderWithTickets_: Create an order for an event with tickets
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/create-tickets" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"space_available":{}}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/create-tickets"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "space_available": {}
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/create-tickets`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `space_available` | object |  required  | Number of tickets that will be created
+    
+<!-- END_72a1cecf7e479acdd5b52d61cd830ea8 -->
+
 <!-- START_f9301c03a9281c0847565f96e6f723de -->
 ## _index_: list of all orders
 
@@ -8483,14 +10004,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/orders/inventore/orderOrganization" \
+    -G "https://devapi.evius.co/api/orders/ex/orderOrganization" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/orders/inventore/orderOrganization"
+    "https://devapi.evius.co/api/orders/ex/orderOrganization"
 );
 
 let headers = {
@@ -8634,7 +10155,7 @@ curl -X POST \
     "https://devapi.evius.co/api/organizations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"minima","styles":[],"user_properties":[]}'
+    -d '{"name":"quo","styles":[],"user_properties":[]}'
 
 ```
 
@@ -8649,7 +10170,7 @@ let headers = {
 };
 
 let body = {
-    "name": "minima",
+    "name": "quo",
     "styles": [],
     "user_properties": []
 }
@@ -8690,16 +10211,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/cupiditate" \
+    "https://devapi.evius.co/api/organizations/impedit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"sequi","styles":[],"user_properties":[]}'
+    -d '{"name":"culpa","styles":[],"user_properties":[]}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/cupiditate"
+    "https://devapi.evius.co/api/organizations/impedit"
 );
 
 let headers = {
@@ -8708,7 +10229,7 @@ let headers = {
 };
 
 let body = {
-    "name": "sequi",
+    "name": "culpa",
     "styles": [],
     "user_properties": []
 }
@@ -8791,20 +10312,20 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organization/ad/ordersUsersPoints?status=pendiente&date_from=rerum&date_to=expedita&type_report=csv" \
+    -G "https://devapi.evius.co/api/organization/recusandae/ordersUsersPoints?status=pendiente&date_from=esse&date_to=vero&type_report=csv" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organization/ad/ordersUsersPoints"
+    "https://devapi.evius.co/api/organization/recusandae/ordersUsersPoints"
 );
 
 let params = {
     "status": "pendiente",
-    "date_from": "rerum",
-    "date_to": "expedita",
+    "date_from": "esse",
+    "date_to": "vero",
     "type_report": "csv",
 };
 Object.keys(params)
@@ -8907,14 +10428,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/sit/organizationusers/eos" \
+    -G "https://devapi.evius.co/api/organizations/exercitationem/organizationusers/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/sit/organizationusers/eos"
+    "https://devapi.evius.co/api/organizations/exercitationem/organizationusers/aut"
 );
 
 let headers = {
@@ -8958,14 +10479,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/voluptas/organizationusers/1" \
+    "https://devapi.evius.co/api/organizations/nobis/organizationusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/voluptas/organizationusers/1"
+    "https://devapi.evius.co/api/organizations/nobis/organizationusers/1"
 );
 
 let headers = {
@@ -9002,14 +10523,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/organizations/magni/organizationusers/dolorem" \
+    "https://devapi.evius.co/api/organizations/ut/organizationusers/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/magni/organizationusers/dolorem"
+    "https://devapi.evius.co/api/organizations/ut/organizationusers/et"
 );
 
 let headers = {
@@ -9095,14 +10616,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/me/organizations/vero" \
+    -G "https://devapi.evius.co/api/me/organizations/tenetur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/me/organizations/vero"
+    "https://devapi.evius.co/api/me/organizations/tenetur"
 );
 
 let headers = {
@@ -9145,7 +10666,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/organizations/possimus/addorganizationuser" \
+    "https://devapi.evius.co/api/organizations/incidunt/addorganizationuser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"test+11@mocionsoft.com","names":"test"}'
@@ -9154,7 +10675,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/possimus/addorganizationuser"
+    "https://devapi.evius.co/api/organizations/incidunt/addorganizationuser"
 );
 
 let headers = {
@@ -9260,14 +10781,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/1/userproperties/asperiores" \
+    -G "https://devapi.evius.co/api/organizations/1/userproperties/in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/1/userproperties/asperiores"
+    "https://devapi.evius.co/api/organizations/1/userproperties/in"
 );
 
 let headers = {
@@ -9387,7 +10908,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/1/userproperties/explicabo" \
+    "https://devapi.evius.co/api/organizations/1/userproperties/maxime" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -9396,7 +10917,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/1/userproperties/explicabo"
+    "https://devapi.evius.co/api/organizations/1/userproperties/maxime"
 );
 
 let headers = {
@@ -9461,14 +10982,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/organizations/1/userproperties/quia" \
+    "https://devapi.evius.co/api/organizations/1/userproperties/facilis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/1/userproperties/quia"
+    "https://devapi.evius.co/api/organizations/1/userproperties/facilis"
 );
 
 let headers = {
@@ -9559,7 +11080,7 @@ Endpoint that manages event products.
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/nulla/products" \
+    "https://devapi.evius.co/api/events/magnam/products" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m","position":11111}'
@@ -9568,7 +11089,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/nulla/products"
+    "https://devapi.evius.co/api/events/magnam/products"
 );
 
 let headers = {
@@ -9626,7 +11147,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/est/products/1" \
+    "https://devapi.evius.co/api/events/voluptatibus/products/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m"}'
@@ -9635,7 +11156,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/est/products/1"
+    "https://devapi.evius.co/api/events/voluptatibus/products/1"
 );
 
 let headers = {
@@ -9690,14 +11211,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/recusandae" \
+    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/ipsum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/recusandae"
+    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/ipsum"
 );
 
 let headers = {
@@ -9790,14 +11311,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/enim/products" \
+    -G "https://devapi.evius.co/api/events/omnis/products" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/enim/products"
+    "https://devapi.evius.co/api/events/omnis/products"
 );
 
 let headers = {
@@ -9820,8 +11341,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/enim\/products?page=1",
-        "last": "http:\/\/localhost\/api\/events\/enim\/products?page=1",
+        "first": "http:\/\/localhost\/api\/events\/omnis\/products?page=1",
+        "last": "http:\/\/localhost\/api\/events\/omnis\/products?page=1",
         "prev": null,
         "next": null
     },
@@ -9829,7 +11350,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/enim\/products",
+        "path": "http:\/\/localhost\/api\/events\/omnis\/products",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -9855,14 +11376,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/accusamus" \
+    -G "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/dicta" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/accusamus"
+    "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/dicta"
 );
 
 let headers = {
@@ -9900,6 +11421,44 @@ Parameter | Status | Description
 #RSVP
 
 Handle RSVP(invitations for events)
+<!-- START_fec2cc956ad1dc663d6e2f7aff42dbc1 -->
+## *  notificaciones al correo por actividad en el muro
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/wallnotifications" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wallnotifications"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/wallnotifications`
+
+
+<!-- END_fec2cc956ad1dc663d6e2f7aff42dbc1 -->
+
 <!-- START_6b8165cc7da505120fbe6aa7aba5356e -->
 ## _createAndSendRSVP_: send RSVP to users in an event, taking eventUsersIds[] in request to filter which users the RSVP is going to be send to
 
@@ -9907,16 +11466,16 @@ Handle RSVP(invitations for events)
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/rsvp/sendeventrsvp/voluptas" \
+    "https://devapi.evius.co/api/rsvp/sendeventrsvp/sint" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"non","image_header":"rerum","content_header":"Has sido invitado a el evento","message":"magni","image":"quia","image_footer":"consectetur","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
+    -d '{"subject":"accusantium","image_header":"vel","content_header":"Has sido invitado a el evento","message":"iste","image":"necessitatibus","image_footer":"odio","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":true}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/rsvp/sendeventrsvp/voluptas"
+    "https://devapi.evius.co/api/rsvp/sendeventrsvp/sint"
 );
 
 let headers = {
@@ -9925,17 +11484,17 @@ let headers = {
 };
 
 let body = {
-    "subject": "non",
-    "image_header": "rerum",
+    "subject": "accusantium",
+    "image_header": "vel",
     "content_header": "Has sido invitado a el evento",
-    "message": "magni",
-    "image": "quia",
-    "image_footer": "consectetur",
+    "message": "iste",
+    "image": "necessitatibus",
+    "image_footer": "odio",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     },
     "include_ical_calendar": false,
-    "include_login_button": false
+    "include_login_button": true
 }
 
 fetch(url, {
@@ -9979,14 +11538,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/vitae/updateStatusMessageUser/1" \
+    "https://devapi.evius.co/api/events/soluta/updateStatusMessageUser/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/vitae/updateStatusMessageUser/1"
+    "https://devapi.evius.co/api/events/soluta/updateStatusMessageUser/1"
 );
 
 let headers = {
@@ -10095,16 +11654,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/organizations/est/roles" \
+    "https://devapi.evius.co/api/organizations/cupiditate/roles" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"dolore","type":"et","module":"porro"}'
+    -d '{"name":"id","type":"voluptatum","module":"culpa"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/est/roles"
+    "https://devapi.evius.co/api/organizations/cupiditate/roles"
 );
 
 let headers = {
@@ -10113,9 +11672,9 @@ let headers = {
 };
 
 let body = {
-    "name": "dolore",
-    "type": "et",
-    "module": "porro"
+    "name": "id",
+    "type": "voluptatum",
+    "module": "culpa"
 }
 
 fetch(url, {
@@ -10154,14 +11713,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/id/roles/ipsum" \
+    -G "https://devapi.evius.co/api/organizations/nulla/roles/perferendis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/id/roles/ipsum"
+    "https://devapi.evius.co/api/organizations/nulla/roles/perferendis"
 );
 
 let headers = {
@@ -10199,16 +11758,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/minus/roles/tempora" \
+    "https://devapi.evius.co/api/organizations/omnis/roles/voluptas" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"doloremque","model":"sunt"}'
+    -d '{"name":"illum","model":"similique"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/minus/roles/tempora"
+    "https://devapi.evius.co/api/organizations/omnis/roles/voluptas"
 );
 
 let headers = {
@@ -10217,8 +11776,8 @@ let headers = {
 };
 
 let body = {
-    "name": "doloremque",
-    "model": "sunt"
+    "name": "illum",
+    "model": "similique"
 }
 
 fetch(url, {
@@ -10257,14 +11816,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/organizations/voluptas/roles/ipsum" \
+    "https://devapi.evius.co/api/organizations/qui/roles/iusto" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/voluptas/roles/ipsum"
+    "https://devapi.evius.co/api/organizations/qui/roles/iusto"
 );
 
 let headers = {
@@ -10315,14 +11874,14 @@ When you create an event, you are assigned the Administrator role.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/quis/rolesattendees?filtered=%5B%7B%22field%22%3A%22type%22%2C%22value%22%3A%22attendee%22%7D%5D" \
+    -G "https://devapi.evius.co/api/events/dignissimos/rolesattendees?filtered=%5B%7B%22field%22%3A%22type%22%2C%22value%22%3A%22attendee%22%7D%5D" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/quis/rolesattendees"
+    "https://devapi.evius.co/api/events/dignissimos/rolesattendees"
 );
 
 let params = {
@@ -10394,7 +11953,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/voluptas/rolesattendees" \
+    "https://devapi.evius.co/api/events/sint/rolesattendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"RolName","type":"attendee"}'
@@ -10403,7 +11962,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/voluptas/rolesattendees"
+    "https://devapi.evius.co/api/events/sint/rolesattendees"
 );
 
 let headers = {
@@ -10451,14 +12010,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/quia/rolesattendees/et" \
+    -G "https://devapi.evius.co/api/events/dolores/rolesattendees/velit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/quia/rolesattendees/et"
+    "https://devapi.evius.co/api/events/dolores/rolesattendees/velit"
 );
 
 let headers = {
@@ -10503,16 +12062,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/ullam/rolesattendees/voluptatem" \
+    "https://devapi.evius.co/api/events/explicabo/rolesattendees/illum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"pariatur","type":"non"}'
+    -d '{"name":"neque","type":"deleniti"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/ullam/rolesattendees/voluptatem"
+    "https://devapi.evius.co/api/events/explicabo/rolesattendees/illum"
 );
 
 let headers = {
@@ -10521,8 +12080,8 @@ let headers = {
 };
 
 let body = {
-    "name": "pariatur",
-    "type": "non"
+    "name": "neque",
+    "type": "deleniti"
 }
 
 fetch(url, {
@@ -10560,14 +12119,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/facilis/rolesattendees/dolore" \
+    "https://devapi.evius.co/api/events/pariatur/rolesattendees/odit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/facilis/rolesattendees/dolore"
+    "https://devapi.evius.co/api/events/pariatur/rolesattendees/odit"
 );
 
 let headers = {
@@ -10610,14 +12169,14 @@ to the roles.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/sit/rolespermissions" \
+    -G "https://devapi.evius.co/api/events/necessitatibus/rolespermissions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/sit/rolespermissions"
+    "https://devapi.evius.co/api/events/necessitatibus/rolespermissions"
 );
 
 let headers = {
@@ -10672,6 +12231,58 @@ Parameter | Status | Description
 
 <!-- END_8d3e90084c3b726d3fbd482738591c60 -->
 
+<!-- START_e826b8361e3c949f3b2d8c317ba04799 -->
+## _indexByRoles_: list all permisos by rol
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/porro/rolespermissionsbyrol/molestiae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/porro/rolespermissionsbyrol/molestiae"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/rolespermissionsbyrol/{rol}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  optional  | requires event id.
+    `rol` |  optional  | requires event rol id.
+
+<!-- END_e826b8361e3c949f3b2d8c317ba04799 -->
+
 <!-- START_434e2e708f44439618f042917956910f -->
 ## _show_: information from a specific relationship between role and permiision
 
@@ -10680,14 +12291,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/1/rolespermissions/omnis" \
+    -G "https://devapi.evius.co/api/events/1/rolespermissions/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/rolespermissions/omnis"
+    "https://devapi.evius.co/api/events/1/rolespermissions/et"
 );
 
 let headers = {
@@ -10734,7 +12345,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/rolespermissions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"eum","permission_id":"sequi"}'
+    -d '{"rol_id":"sit","permission_id":"qui"}'
 
 ```
 
@@ -10749,8 +12360,8 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "eum",
-    "permission_id": "sequi"
+    "rol_id": "sit",
+    "permission_id": "qui"
 }
 
 fetch(url, {
@@ -10786,7 +12397,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/rolespermissions/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"voluptates","permission_id":"sed"}'
+    -d '{"rol_id":"amet","permission_id":"eveniet"}'
 
 ```
 
@@ -10801,8 +12412,8 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "voluptates",
-    "permission_id": "sed"
+    "rol_id": "amet",
+    "permission_id": "eveniet"
 }
 
 fetch(url, {
@@ -10838,7 +12449,7 @@ curl -X DELETE \
     "https://devapi.evius.co/api/events/1/rolespermissions/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"voluptas","permission_id":"saepe"}'
+    -d '{"rol_id":"dolore","permission_id":"recusandae"}'
 
 ```
 
@@ -10853,8 +12464,8 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "voluptas",
-    "permission_id": "saepe"
+    "rol_id": "dolore",
+    "permission_id": "recusandae"
 }
 
 fetch(url, {
@@ -10879,8 +12490,439 @@ Parameter | Type | Status | Description
     
 <!-- END_ccb7b798dcf1cc2f91466db6b637e3c5 -->
 
+#SendContent
+
+
+<!-- START_3b3cc7c04dd908cefc00ff8ec546ba06 -->
+## api/events/{event}/recoverypassword
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/recoverypassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/recoverypassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/recoverypassword`
+
+
+<!-- END_3b3cc7c04dd908cefc00ff8ec546ba06 -->
+
+<!-- START_e6b3cb8f3e1edf3605287cd526c7f97b -->
+## api/events/sendMecPerfil
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/sendMecPerfil" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/sendMecPerfil"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/sendMecPerfil`
+
+
+<!-- END_e6b3cb8f3e1edf3605287cd526c7f97b -->
+
+<!-- START_e91cb003b68fa252dcfc2b6391edc20a -->
+## api/events/sendMecPerfilMec
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/sendMecPerfilMec" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/sendMecPerfilMec"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/sendMecPerfilMec`
+
+
+<!-- END_e91cb003b68fa252dcfc2b6391edc20a -->
+
+<!-- START_72efb3cd575d3ae01d7c8d0a9d8e004f -->
+## api/events/{event}/sendMecPerfilMectoall
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/sendMecPerfilMectoall" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendMecPerfilMectoall"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sendMecPerfilMectoall`
+
+
+<!-- END_72efb3cd575d3ae01d7c8d0a9d8e004f -->
+
+<!-- START_8b57b71ba02b021a6361ad07c15afefd -->
+## api/events/sendnotificationemail
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/sendnotificationemail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/sendnotificationemail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/sendnotificationemail`
+
+
+<!-- END_8b57b71ba02b021a6361ad07c15afefd -->
+
+<!-- START_a9471b1d28f9f248a40e666b0442ec3d -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sendcontent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendcontent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (500):
+
+```json
+{
+    "message": "Server Error"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sendcontent`
+
+
+<!-- END_a9471b1d28f9f248a40e666b0442ec3d -->
+
+<!-- START_934386266248d5c7c9e2023575b4d9a9 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/sendcontent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendcontent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sendcontent`
+
+
+<!-- END_934386266248d5c7c9e2023575b4d9a9 -->
+
+<!-- START_95d9ebc6f735ea9a4c865086275b846f -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sendcontent/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendcontent/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (500):
+
+```json
+{
+    "message": "Server Error"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sendcontent/{sendcontent}`
+
+
+<!-- END_95d9ebc6f735ea9a4c865086275b846f -->
+
+<!-- START_fcb44849aacac0af522c53bbd3f27da6 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/sendcontent/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendcontent/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/sendcontent/{sendcontent}`
+
+`PATCH api/events/{event}/sendcontent/{sendcontent}`
+
+
+<!-- END_fcb44849aacac0af522c53bbd3f27da6 -->
+
+<!-- START_9ba52a07e213add3ad7c5d65615aed02 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/sendcontent/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendcontent/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/sendcontent/{sendcontent}`
+
+
+<!-- END_9ba52a07e213add3ad7c5d65615aed02 -->
+
 #Surveys
 
+
+<!-- START_6d59ec591a3d7c06ad3105c6abc0a0bc -->
+## api/events/{event}/questionedit/{id}
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/questionedit/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/questionedit/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/questionedit/{id}`
+
+
+<!-- END_6d59ec591a3d7c06ad3105c6abc0a0bc -->
 
 <!-- START_7525b8a38df41d7ddc341cd4c293b84c -->
 ## _show_ : view the information of a specific survey
@@ -11008,7 +13050,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/surveys" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"eaque","points":1,"initialMessage":"voluptatem","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":7.578}'
+    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"corrupti","points":1,"initialMessage":"ut","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":5677661.5947541}'
 
 ```
 
@@ -11026,9 +13068,9 @@ let body = {
     "survey": "Nombre de encuesta",
     "show_horizontal_bar": false,
     "allow_vote_value_per_user": false,
-    "activity_id": "eaque",
+    "activity_id": "corrupti",
     "points": 1,
-    "initialMessage": "voluptatem",
+    "initialMessage": "ut",
     "time_limit": 0,
     "allow_anonymous_answers": false,
     "allow_gradable_survey": false,
@@ -11037,7 +13079,7 @@ let body = {
     "freezeGame": false,
     "open": false,
     "publish": false,
-    "minimumScore": 7.578
+    "minimumScore": 5677661.5947541
 }
 
 fetch(url, {
@@ -11115,7 +13157,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/surveys/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"mollitia","show_horizontal_bar":"et","allow_vote_value_per_user":"quia","activity_id":"dolor","points":"nesciunt","initialMessage":"incidunt","time_limit":"eaque","allow_anonymous_answers":"molestiae","allow_gradable_survey":"aliquam","hasMinimumScore":"rem","isGlobal":"omnis","freezeGame":"sit","open":"velit","publish":"rem","minimumScore":"delectus"}'
+    -d '{"survey":"et","show_horizontal_bar":"iusto","allow_vote_value_per_user":"rerum","activity_id":"eum","points":"excepturi","initialMessage":"at","time_limit":"rerum","allow_anonymous_answers":"aliquid","allow_gradable_survey":"et","hasMinimumScore":"rerum","isGlobal":"est","freezeGame":"excepturi","open":"animi","publish":"accusamus","minimumScore":"sed"}'
 
 ```
 
@@ -11130,21 +13172,21 @@ let headers = {
 };
 
 let body = {
-    "survey": "mollitia",
-    "show_horizontal_bar": "et",
-    "allow_vote_value_per_user": "quia",
-    "activity_id": "dolor",
-    "points": "nesciunt",
-    "initialMessage": "incidunt",
-    "time_limit": "eaque",
-    "allow_anonymous_answers": "molestiae",
-    "allow_gradable_survey": "aliquam",
-    "hasMinimumScore": "rem",
-    "isGlobal": "omnis",
-    "freezeGame": "sit",
-    "open": "velit",
-    "publish": "rem",
-    "minimumScore": "delectus"
+    "survey": "et",
+    "show_horizontal_bar": "iusto",
+    "allow_vote_value_per_user": "rerum",
+    "activity_id": "eum",
+    "points": "excepturi",
+    "initialMessage": "at",
+    "time_limit": "rerum",
+    "allow_anonymous_answers": "aliquid",
+    "allow_gradable_survey": "et",
+    "hasMinimumScore": "rerum",
+    "isGlobal": "est",
+    "freezeGame": "excepturi",
+    "open": "animi",
+    "publish": "accusamus",
+    "minimumScore": "sed"
 }
 
 fetch(url, {
@@ -11243,14 +13285,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/sed/templateproperties" \
+    -G "https://devapi.evius.co/api/organizations/veniam/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/sed/templateproperties"
+    "https://devapi.evius.co/api/organizations/veniam/templateproperties"
 );
 
 let headers = {
@@ -11294,16 +13336,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/organizations/quia/templateproperties" \
+    "https://devapi.evius.co/api/organizations/beatae/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Template 1","user_properties":"temporibus"}'
+    -d '{"name":"Template 1","user_properties":"molestiae"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/quia/templateproperties"
+    "https://devapi.evius.co/api/organizations/beatae/templateproperties"
 );
 
 let headers = {
@@ -11313,7 +13355,7 @@ let headers = {
 
 let body = {
     "name": "Template 1",
-    "user_properties": "temporibus"
+    "user_properties": "molestiae"
 }
 
 fetch(url, {
@@ -11351,14 +13393,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/tempora/templateproperties/officia" \
+    "https://devapi.evius.co/api/organizations/sed/templateproperties/dolores" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/tempora/templateproperties/officia"
+    "https://devapi.evius.co/api/organizations/sed/templateproperties/dolores"
 );
 
 let headers = {
@@ -11434,14 +13476,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/et/templateproperties/1/addtemplateporperties" \
+    "https://devapi.evius.co/api/events/illum/templateproperties/1/addtemplateporperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/et/templateproperties/1/addtemplateporperties"
+    "https://devapi.evius.co/api/events/illum/templateproperties/1/addtemplateporperties"
 );
 
 let headers = {
@@ -11970,7 +14012,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/users/architecto/changeStatusUser" \
+    "https://devapi.evius.co/api/users/quisquam/changeStatusUser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -11979,7 +14021,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/users/architecto/changeStatusUser"
+    "https://devapi.evius.co/api/users/quisquam/changeStatusUser"
 );
 
 let headers = {
@@ -12078,7 +14120,7 @@ curl -X POST \
     "https://devapi.evius.co/api/getloginlink" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"refreshlink":"sunt","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
+    -d '{"refreshlink":"magnam","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
 
 ```
 
@@ -12093,7 +14135,7 @@ let headers = {
 };
 
 let body = {
-    "refreshlink": "sunt",
+    "refreshlink": "magnam",
     "event": "61ccd3551c821b765a312864",
     "email": "correo@evius.co"
 }
@@ -12577,6 +14619,9070 @@ fetch(url, {
 #general
 
 
+<!-- START_7903f6138525884e6d729abb651bfca1 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/spaces" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/spaces"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/spaces?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/spaces?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/spaces",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/spaces`
+
+
+<!-- END_7903f6138525884e6d729abb651bfca1 -->
+
+<!-- START_da599262543febadba3b28730c20d241 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/spaces/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/spaces/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Space] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/spaces/{space}`
+
+
+<!-- END_da599262543febadba3b28730c20d241 -->
+
+<!-- START_d741d361fd4b3c9dfb211414dd303f76 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/spaces" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/spaces"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/spaces`
+
+
+<!-- END_d741d361fd4b3c9dfb211414dd303f76 -->
+
+<!-- START_c4495b5419dcbebfe274530af44ec4ea -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/spaces/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/spaces/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/spaces/{space}`
+
+
+<!-- END_c4495b5419dcbebfe274530af44ec4ea -->
+
+<!-- START_8bd0d4058d5adb326eec199a8eaaefce -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/spaces/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/spaces/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/spaces/{space}`
+
+
+<!-- END_8bd0d4058d5adb326eec199a8eaaefce -->
+
+<!-- START_c4e1cf32e4ca36a34540840629748fdf -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/type" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/type"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [
+        {
+            "_id": "62446da01022be0b705b9954",
+            "name": "meeting",
+            "updated_at": "2022-03-30 14:48:00",
+            "created_at": "2022-03-30 14:48:00"
+        },
+        {
+            "_id": "62446dfe4d17c667593cadaa",
+            "name": "meeting",
+            "updated_at": "2022-03-30 14:49:34",
+            "created_at": "2022-03-30 14:49:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624477c64d17c667593cafec",
+            "name": "meeting",
+            "updated_at": "2022-03-30 15:31:18",
+            "created_at": "2022-03-30 15:31:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624477fe4b403905e6765af4",
+            "name": "url",
+            "updated_at": "2022-03-30 15:32:14",
+            "created_at": "2022-03-30 15:32:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624478969f33be59bb31bad4",
+            "name": "youTube",
+            "updated_at": "2022-03-30 15:34:46",
+            "created_at": "2022-03-30 15:34:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624478b29f33be59bb31bada",
+            "name": "youTube",
+            "updated_at": "2022-03-30 15:35:14",
+            "created_at": "2022-03-30 15:35:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624478db9f33be59bb31bae0",
+            "name": "youTube",
+            "updated_at": "2022-03-30 15:35:55",
+            "created_at": "2022-03-30 15:35:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244791f8984e2007556f1e7",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 15:37:03",
+            "created_at": "2022-03-30 15:37:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624479909f33be59bb31bb1f",
+            "name": "youTube",
+            "updated_at": "2022-03-30 15:38:56",
+            "created_at": "2022-03-30 15:38:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624479b44b403905e6765ca3",
+            "name": "url",
+            "updated_at": "2022-03-30 15:39:32",
+            "created_at": "2022-03-30 15:39:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624479d04b403905e6765cdf",
+            "name": "url",
+            "updated_at": "2022-03-30 15:40:00",
+            "created_at": "2022-03-30 15:40:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624479e34b403905e6765d1d",
+            "name": "url",
+            "updated_at": "2022-03-30 15:40:19",
+            "created_at": "2022-03-30 15:40:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447a0d4b403905e6765d8e",
+            "name": "url",
+            "updated_at": "2022-03-30 15:41:01",
+            "created_at": "2022-03-30 15:41:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447a264b403905e6765dfe",
+            "name": "vimeo",
+            "updated_at": "2022-03-30 15:41:26",
+            "created_at": "2022-03-30 15:41:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447a364b403905e6765e04",
+            "name": "vimeo",
+            "updated_at": "2022-03-30 15:41:42",
+            "created_at": "2022-03-30 15:41:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447ab44b403905e6765e44",
+            "name": "url",
+            "updated_at": "2022-03-30 15:43:48",
+            "created_at": "2022-03-30 15:43:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447c359f33be59bb31bca5",
+            "name": "vimeo",
+            "updated_at": "2022-03-30 15:50:13",
+            "created_at": "2022-03-30 15:50:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447c678984e2007556f43d",
+            "name": "vimeo",
+            "updated_at": "2022-03-30 15:51:03",
+            "created_at": "2022-03-30 15:51:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62447ed64b403905e6765fbe",
+            "name": "vimeo",
+            "updated_at": "2022-03-30 16:01:26",
+            "created_at": "2022-03-30 16:01:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624482f1fe6ae57a01280e47",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:18:57",
+            "created_at": "2022-03-30 16:18:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244830485222436d62af124",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 16:19:16",
+            "created_at": "2022-03-30 16:19:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624483d285222436d62af12a",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:22:42",
+            "created_at": "2022-03-30 16:22:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624484da85222436d62af15c",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:27:06",
+            "created_at": "2022-03-30 16:27:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624485541e0721376458aa0a",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:29:08",
+            "created_at": "2022-03-30 16:29:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244864a90f52e1700406565",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:33:14",
+            "created_at": "2022-03-30 16:33:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624486de90f52e1700406575",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:35:42",
+            "created_at": "2022-03-30 16:35:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244874490f52e170040657b",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:37:24",
+            "created_at": "2022-03-30 16:37:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244876290f52e170040662e",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:37:54",
+            "created_at": "2022-03-30 16:37:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62448810fe6ae57a01281110",
+            "name": "url",
+            "updated_at": "2022-03-30 16:40:48",
+            "created_at": "2022-03-30 16:40:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244882690f52e1700406637",
+            "name": "vimeo",
+            "updated_at": "2022-03-30 16:41:10",
+            "created_at": "2022-03-30 16:41:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244883490f52e170040663d",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:41:24",
+            "created_at": "2022-03-30 16:41:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244896cfe6ae57a01281256",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:46:36",
+            "created_at": "2022-03-30 16:46:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62448a3e143a4e34f6544d7d",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:50:06",
+            "created_at": "2022-03-30 16:50:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62448a5490f52e170040685f",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:50:28",
+            "created_at": "2022-03-30 16:50:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62448a72d48215297c2b4313",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 16:50:58",
+            "created_at": "2022-03-30 16:50:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62448a9a143a4e34f6544dba",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 16:51:38",
+            "created_at": "2022-03-30 16:51:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244ab6f301e7b27860d479f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 19:11:43",
+            "created_at": "2022-03-30 19:11:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244ac736bbb474a4728a07f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 19:16:03",
+            "created_at": "2022-03-30 19:16:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b0a8c17c2c5b13298390",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 19:34:00",
+            "created_at": "2022-03-30 19:34:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b13452a67920f9503926",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 19:36:20",
+            "created_at": "2022-03-30 19:36:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b192dc1854177b73c1e4",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 19:37:54",
+            "created_at": "2022-03-30 19:37:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b1d0ed40e345e61d46f3",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 19:38:56",
+            "created_at": "2022-03-30 19:38:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b3aced40e345e61d494a",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 19:46:52",
+            "created_at": "2022-03-30 19:46:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b59bdf56502e28757555",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 19:55:07",
+            "created_at": "2022-03-30 19:55:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b5c1dc1854177b73c4a1",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 19:55:45",
+            "created_at": "2022-03-30 19:55:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b633df56502e28757601",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 19:57:39",
+            "created_at": "2022-03-30 19:57:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b6f5df56502e28757609",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:00:53",
+            "created_at": "2022-03-30 20:00:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b7d8dc1854177b73c54c",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:04:40",
+            "created_at": "2022-03-30 20:04:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244b9a2855eb20d8b009a1f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:12:18",
+            "created_at": "2022-03-30 20:12:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244bb31746d0b50a33e52aa",
+            "name": "RTMP",
+            "updated_at": "2022-03-30 20:18:57",
+            "created_at": "2022-03-30 20:18:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244bc343c48ed04a00cea80",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:23:16",
+            "created_at": "2022-03-30 20:23:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244bc603c48ed04a00cead9",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:24:00",
+            "created_at": "2022-03-30 20:24:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244bdfcbaf9d41f0f2cba5a",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:30:52",
+            "created_at": "2022-03-30 20:30:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244be8bb1f3587d1517a523",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:33:15",
+            "created_at": "2022-03-30 20:33:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c2867639a940cc1afb0f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:50:14",
+            "created_at": "2022-03-30 20:50:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c378201d1906f717472a",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 20:54:16",
+            "created_at": "2022-03-30 20:54:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c5437639a940cc1afc19",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:01:55",
+            "created_at": "2022-03-30 21:01:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c62d7639a940cc1afceb",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:05:49",
+            "created_at": "2022-03-30 21:05:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c66b7639a940cc1afcf6",
+            "name": "youTube",
+            "updated_at": "2022-03-30 21:06:51",
+            "created_at": "2022-03-30 21:06:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c6cb77a01779d975f37f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:08:27",
+            "created_at": "2022-03-30 21:08:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c8c70eacde61520fe5f9",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:16:55",
+            "created_at": "2022-03-30 21:16:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244c9990eacde61520fe661",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:20:25",
+            "created_at": "2022-03-30 21:20:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244cb96318fcb3e203ea6ea",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:28:54",
+            "created_at": "2022-03-30 21:28:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244cf14127ff263e831e33b",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:43:48",
+            "created_at": "2022-03-30 21:43:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244cfcd127ff263e831e40f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 21:46:53",
+            "created_at": "2022-03-30 21:46:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244d5347c99527f884369eb",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 22:09:56",
+            "created_at": "2022-03-30 22:09:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244d5c67c99527f88436a60",
+            "name": "url",
+            "updated_at": "2022-03-30 22:12:22",
+            "created_at": "2022-03-30 22:12:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244d6c322c2d60dd01608bf",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 22:16:35",
+            "created_at": "2022-03-30 22:16:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244d8f322c2d60dd016099a",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 22:25:55",
+            "created_at": "2022-03-30 22:25:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244e0627376616b5f45348d",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 22:57:38",
+            "created_at": "2022-03-30 22:57:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244e1ab1703f619af098fd3",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 23:03:07",
+            "created_at": "2022-03-30 23:03:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244e5b804ebf71304605788",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 23:20:24",
+            "created_at": "2022-03-30 23:20:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244e61804ebf713046057cf",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 23:22:00",
+            "created_at": "2022-03-30 23:22:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244ebe11bf63107203a8df3",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 23:46:41",
+            "created_at": "2022-03-30 23:46:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244ee1f736e21018545a3b5",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-30 23:56:15",
+            "created_at": "2022-03-30 23:56:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244f8ac67df60382b2b8a3c",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 00:41:16",
+            "created_at": "2022-03-31 00:41:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244f8efba663a7f2522000b",
+            "name": "RTMP",
+            "updated_at": "2022-03-31 00:42:23",
+            "created_at": "2022-03-31 00:42:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244f9533be6e121001ee0a4",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 00:44:03",
+            "created_at": "2022-03-31 00:44:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244fcd637e6a67d1a55e419",
+            "name": "vimeo",
+            "updated_at": "2022-03-31 00:59:02",
+            "created_at": "2022-03-31 00:59:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244fdbb4dcefe0dae10d699",
+            "name": "url",
+            "updated_at": "2022-03-31 01:02:51",
+            "created_at": "2022-03-31 01:02:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244fe6b3926587f8879cef7",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 01:05:47",
+            "created_at": "2022-03-31 01:05:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6244ffd625a87c4cc732a7bc",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 01:11:50",
+            "created_at": "2022-03-31 01:11:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245007625a87c4cc732a7c8",
+            "name": "url",
+            "updated_at": "2022-03-31 01:14:30",
+            "created_at": "2022-03-31 01:14:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245019925a87c4cc732a83d",
+            "name": "url",
+            "updated_at": "2022-03-31 01:19:21",
+            "created_at": "2022-03-31 01:19:21",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624504844dcefe0dae10d91b",
+            "name": "url",
+            "updated_at": "2022-03-31 01:31:48",
+            "created_at": "2022-03-31 01:31:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624506b925a87c4cc732aa1c",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 01:41:13",
+            "created_at": "2022-03-31 01:41:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245105b25a87c4cc732aec7",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 02:22:19",
+            "created_at": "2022-03-31 02:22:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62451eafc139242f083be07c",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 03:23:27",
+            "created_at": "2022-03-31 03:23:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62452731484b604fab46c36a",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 03:59:45",
+            "created_at": "2022-03-31 03:59:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245288b484b604fab46c37c",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 04:05:31",
+            "created_at": "2022-03-31 04:05:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62452dd27d890b79b969bf81",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 04:28:02",
+            "created_at": "2022-03-31 04:28:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624538323abbf77dc90d97e9",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 05:12:18",
+            "created_at": "2022-03-31 05:12:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624538f73abbf77dc90d9851",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 05:15:35",
+            "created_at": "2022-03-31 05:15:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62453ac43abbf77dc90d99b7",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 05:23:16",
+            "created_at": "2022-03-31 05:23:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62453bdcbc5c28418650f305",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 05:27:56",
+            "created_at": "2022-03-31 05:27:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62453c0e3abbf77dc90d9a6d",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 05:28:46",
+            "created_at": "2022-03-31 05:28:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62453c421af83664b144f1e4",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 05:29:38",
+            "created_at": "2022-03-31 05:29:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62455ab23abbf77dc90d9b88",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 07:39:30",
+            "created_at": "2022-03-31 07:39:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245a6a9b581954528247b9f",
+            "name": "url",
+            "updated_at": "2022-03-31 13:03:37",
+            "created_at": "2022-03-31 13:03:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245a77b7730447a8c3d847a",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 13:07:07",
+            "created_at": "2022-03-31 13:07:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245a7f27730447a8c3d84bb",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 13:09:06",
+            "created_at": "2022-03-31 13:09:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245a828b581954528247cfb",
+            "name": "youTube",
+            "updated_at": "2022-03-31 13:10:00",
+            "created_at": "2022-03-31 13:10:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245a8777730447a8c3d8563",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 13:11:19",
+            "created_at": "2022-03-31 13:11:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245a8d77730447a8c3d8579",
+            "name": "youTube",
+            "updated_at": "2022-03-31 13:12:55",
+            "created_at": "2022-03-31 13:12:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245aaabb581954528247dcf",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 13:20:43",
+            "created_at": "2022-03-31 13:20:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245b2c096369600647170c4",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 13:55:12",
+            "created_at": "2022-03-31 13:55:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245b604ec3d2638ad648f60",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 14:09:08",
+            "created_at": "2022-03-31 14:09:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245cdcc6b350c03643f7c25",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 15:50:36",
+            "created_at": "2022-03-31 15:50:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d0c359a1b60e9a24ed86",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:03:15",
+            "created_at": "2022-03-31 16:03:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d208f6e5b254474faf22",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:08:40",
+            "created_at": "2022-03-31 16:08:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d448e3b7ee358c1e4537",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:18:16",
+            "created_at": "2022-03-31 16:18:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d4aae3b7ee358c1e45e0",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:19:54",
+            "created_at": "2022-03-31 16:19:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d4eac49779498b64fe28",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:20:58",
+            "created_at": "2022-03-31 16:20:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d5592fdb622b3c211c74",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:22:49",
+            "created_at": "2022-03-31 16:22:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d5d12fdb622b3c211cbb",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 16:24:49",
+            "created_at": "2022-03-31 16:24:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245d75b86addc352e03b4d2",
+            "name": "url",
+            "updated_at": "2022-03-31 16:31:23",
+            "created_at": "2022-03-31 16:31:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245df4ee955015e0e089705",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 17:05:18",
+            "created_at": "2022-03-31 17:05:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245df78166e5969b3184b94",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 17:06:00",
+            "created_at": "2022-03-31 17:06:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245df92166e5969b3184bcb",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 17:06:26",
+            "created_at": "2022-03-31 17:06:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245e011203b3a4aca6c02f2",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 17:08:33",
+            "created_at": "2022-03-31 17:08:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245e1e9203b3a4aca6c03e8",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 17:16:25",
+            "created_at": "2022-03-31 17:16:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245f88e203b3a4aca6c05c6",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 18:53:02",
+            "created_at": "2022-03-31 18:53:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245f8e93d63d06cba2d719d",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 18:54:33",
+            "created_at": "2022-03-31 18:54:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6245fd4021a821500078ea9e",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 19:13:04",
+            "created_at": "2022-03-31 19:13:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624600a2a8bfc506174eeaee",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 19:27:30",
+            "created_at": "2022-03-31 19:27:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624605439d70aa02150b6269",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 19:47:15",
+            "created_at": "2022-03-31 19:47:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246136ed6d1e951ef53a5ad",
+            "name": "vimeo",
+            "updated_at": "2022-03-31 20:47:42",
+            "created_at": "2022-03-31 20:47:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624613ee80a4213adf21b774",
+            "name": "vimeo",
+            "updated_at": "2022-03-31 20:49:50",
+            "created_at": "2022-03-31 20:49:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624614e0be66e448015befce",
+            "name": "vimeo",
+            "updated_at": "2022-03-31 20:53:52",
+            "created_at": "2022-03-31 20:53:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246150780a4213adf21b7e2",
+            "name": "vimeo",
+            "updated_at": "2022-03-31 20:54:31",
+            "created_at": "2022-03-31 20:54:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624617167784683e1b79cf71",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:03:18",
+            "created_at": "2022-03-31 21:03:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624618641881c97d5007061b",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:08:52",
+            "created_at": "2022-03-31 21:08:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624618d21881c97d500706c4",
+            "name": "url",
+            "updated_at": "2022-03-31 21:10:42",
+            "created_at": "2022-03-31 21:10:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624619041881c97d500707c9",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:11:32",
+            "created_at": "2022-03-31 21:11:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624619555630d27d032b20e8",
+            "name": "url",
+            "updated_at": "2022-03-31 21:12:53",
+            "created_at": "2022-03-31 21:12:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624619b01881c97d5007095f",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:14:24",
+            "created_at": "2022-03-31 21:14:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461a306529f16da768f344",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:16:32",
+            "created_at": "2022-03-31 21:16:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461ae66529f16da768f3d4",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:19:34",
+            "created_at": "2022-03-31 21:19:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461b23f124f9444001358c",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:20:35",
+            "created_at": "2022-03-31 21:20:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461d88f124f9444001367c",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:30:48",
+            "created_at": "2022-03-31 21:30:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461e28240fb45f7902ad45",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:33:28",
+            "created_at": "2022-03-31 21:33:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461ed4240fb45f7902adb3",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:36:20",
+            "created_at": "2022-03-31 21:36:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461ef68867702e3a172e30",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:36:54",
+            "created_at": "2022-03-31 21:36:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62461f788867702e3a172edc",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:39:04",
+            "created_at": "2022-03-31 21:39:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624620a88bfce4350c7ae495",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:44:08",
+            "created_at": "2022-03-31 21:44:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624620c1240fb45f7902af27",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:44:33",
+            "created_at": "2022-03-31 21:44:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246227f240fb45f7902af6a",
+            "name": "meeting",
+            "updated_at": "2022-03-31 21:51:59",
+            "created_at": "2022-03-31 21:51:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62462296240fb45f7902af72",
+            "name": "url",
+            "updated_at": "2022-03-31 21:52:22",
+            "created_at": "2022-03-31 21:52:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624622ce240fb45f7902afcd",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 21:53:18",
+            "created_at": "2022-03-31 21:53:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624622fc8867702e3a1730cc",
+            "name": "url",
+            "updated_at": "2022-03-31 21:54:04",
+            "created_at": "2022-03-31 21:54:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62462b2d8bfce4350c7ae63b",
+            "name": "meeting",
+            "updated_at": "2022-03-31 22:29:01",
+            "created_at": "2022-03-31 22:29:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62462f228bfce4350c7ae6f0",
+            "name": "meeting",
+            "updated_at": "2022-03-31 22:45:54",
+            "created_at": "2022-03-31 22:45:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463597f0453761fc078b94",
+            "name": "meeting",
+            "updated_at": "2022-03-31 23:13:27",
+            "created_at": "2022-03-31 23:13:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463611d41056138c755a93",
+            "name": "meeting",
+            "updated_at": "2022-03-31 23:15:29",
+            "created_at": "2022-03-31 23:15:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246365cd41056138c755acb",
+            "name": "meeting",
+            "updated_at": "2022-03-31 23:16:44",
+            "created_at": "2022-03-31 23:16:44",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463692f2be4215ba5553cc",
+            "name": "url",
+            "updated_at": "2022-03-31 23:17:38",
+            "created_at": "2022-03-31 23:17:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463846f2be4215ba55544e",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 23:24:54",
+            "created_at": "2022-03-31 23:24:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463a5db8ece249a66b6128",
+            "name": "meeting",
+            "updated_at": "2022-03-31 23:33:49",
+            "created_at": "2022-03-31 23:33:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463c2cf2be4215ba5555a9",
+            "name": "url",
+            "updated_at": "2022-03-31 23:41:32",
+            "created_at": "2022-03-31 23:41:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62463c48fa054f32ec1d32d6",
+            "name": "eviusMeet",
+            "updated_at": "2022-03-31 23:42:00",
+            "created_at": "2022-03-31 23:42:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246400a2b417f390512545b",
+            "name": "meeting",
+            "updated_at": "2022-03-31 23:58:02",
+            "created_at": "2022-03-31 23:58:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464021247b8d4bfe26fb4c",
+            "name": "url",
+            "updated_at": "2022-03-31 23:58:25",
+            "created_at": "2022-03-31 23:58:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624640500232295d6e535750",
+            "name": "url",
+            "updated_at": "2022-03-31 23:59:12",
+            "created_at": "2022-03-31 23:59:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624642aab74fdf3204072662",
+            "name": "url",
+            "updated_at": "2022-04-01 00:09:14",
+            "created_at": "2022-04-01 00:09:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246439d35a651239b7ee3ca",
+            "name": "meeting",
+            "updated_at": "2022-04-01 00:13:17",
+            "created_at": "2022-04-01 00:13:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624643f03fecd0330c5173fc",
+            "name": "url",
+            "updated_at": "2022-04-01 00:14:40",
+            "created_at": "2022-04-01 00:14:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464576432a487e74184224",
+            "name": "meeting",
+            "updated_at": "2022-04-01 00:21:10",
+            "created_at": "2022-04-01 00:21:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6246465b4701222d92237daf",
+            "name": "url",
+            "updated_at": "2022-04-01 00:24:59",
+            "created_at": "2022-04-01 00:24:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624647ed4701222d92237e73",
+            "name": "meeting",
+            "updated_at": "2022-04-01 00:31:41",
+            "created_at": "2022-04-01 00:31:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464b07432a487e741843ee",
+            "name": "url",
+            "updated_at": "2022-04-01 00:44:55",
+            "created_at": "2022-04-01 00:44:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464c1d24f0a5108a5ce174",
+            "name": "url",
+            "updated_at": "2022-04-01 00:49:33",
+            "created_at": "2022-04-01 00:49:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464cb972ea404e1d3ba24a",
+            "name": "url",
+            "updated_at": "2022-04-01 00:52:09",
+            "created_at": "2022-04-01 00:52:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464cdf09388b3c8a5c7336",
+            "name": "meeting",
+            "updated_at": "2022-04-01 00:52:47",
+            "created_at": "2022-04-01 00:52:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62464d7209388b3c8a5c7346",
+            "name": "url",
+            "updated_at": "2022-04-01 00:55:14",
+            "created_at": "2022-04-01 00:55:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624667e272ea404e1d3ba521",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 02:48:02",
+            "created_at": "2022-04-01 02:48:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624758f8a9aa494c0366a11c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 19:56:40",
+            "created_at": "2022-04-01 19:56:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62475ee9d0ebc33cbc2a8f9a",
+            "name": "url",
+            "updated_at": "2022-04-01 20:22:01",
+            "created_at": "2022-04-01 20:22:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624760aed9e44c057f7bb831",
+            "name": "vimeo",
+            "updated_at": "2022-04-01 20:29:34",
+            "created_at": "2022-04-01 20:29:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476427e4e0d1295654702d",
+            "name": "vimeo",
+            "updated_at": "2022-04-01 20:44:23",
+            "created_at": "2022-04-01 20:44:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624766fae4e0d129565470de",
+            "name": "youTube",
+            "updated_at": "2022-04-01 20:56:26",
+            "created_at": "2022-04-01 20:56:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6247671c3a0d327c5c7644c2",
+            "name": "vimeo",
+            "updated_at": "2022-04-01 20:57:00",
+            "created_at": "2022-04-01 20:57:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476a4181cdc36fc2772445",
+            "name": "url",
+            "updated_at": "2022-04-01 21:10:25",
+            "created_at": "2022-04-01 21:10:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476a942f0f987af47327fd",
+            "name": "url",
+            "updated_at": "2022-04-01 21:11:48",
+            "created_at": "2022-04-01 21:11:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476ab34c7b0d5c0f228051",
+            "name": "vimeo",
+            "updated_at": "2022-04-01 21:12:19",
+            "created_at": "2022-04-01 21:12:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476bae4c19cf0fcb7246dd",
+            "name": "vimeo",
+            "updated_at": "2022-04-01 21:16:30",
+            "created_at": "2022-04-01 21:16:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476da24094873d2831aa56",
+            "name": "youTube",
+            "updated_at": "2022-04-01 21:24:50",
+            "created_at": "2022-04-01 21:24:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476dc44c19cf0fcb72473d",
+            "name": "youTube",
+            "updated_at": "2022-04-01 21:25:24",
+            "created_at": "2022-04-01 21:25:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476dde4c19cf0fcb724745",
+            "name": "url",
+            "updated_at": "2022-04-01 21:25:50",
+            "created_at": "2022-04-01 21:25:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476e154c19cf0fcb724781",
+            "name": "url",
+            "updated_at": "2022-04-01 21:26:45",
+            "created_at": "2022-04-01 21:26:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476e6b7915254fee64606c",
+            "name": "url",
+            "updated_at": "2022-04-01 21:28:11",
+            "created_at": "2022-04-01 21:28:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476eef2eb38604aa595e68",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 21:30:23",
+            "created_at": "2022-04-01 21:30:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62476f2bc6a0f726bc6c9611",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 21:31:23",
+            "created_at": "2022-04-01 21:31:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624770a4f1730a2f977990b4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 21:37:40",
+            "created_at": "2022-04-01 21:37:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477575889a6a79cc191427",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 21:58:13",
+            "created_at": "2022-04-01 21:58:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477798889a6a79cc1914a7",
+            "name": "meeting",
+            "updated_at": "2022-04-01 22:07:20",
+            "created_at": "2022-04-01 22:07:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477bb0cfc4c960cc1f3873",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 22:24:48",
+            "created_at": "2022-04-01 22:24:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477ccfcfc4c960cc1f3a06",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 22:29:35",
+            "created_at": "2022-04-01 22:29:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477cd33064583214206f5e",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-01 22:29:39",
+            "created_at": "2022-04-01 22:29:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477e418be3db1c545ee028",
+            "name": "vimeo",
+            "updated_at": "2022-04-01 22:35:45",
+            "created_at": "2022-04-01 22:35:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477e9e10eb455c376c6103",
+            "name": "meeting",
+            "updated_at": "2022-04-01 22:37:18",
+            "created_at": "2022-04-01 22:37:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477f4ae0494e79ac3979ce",
+            "name": "url",
+            "updated_at": "2022-04-01 22:40:10",
+            "created_at": "2022-04-01 22:40:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62477fbf10eb455c376c61a4",
+            "name": "url",
+            "updated_at": "2022-04-01 22:42:07",
+            "created_at": "2022-04-01 22:42:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624af3cc4c564c44b57b1d16",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 13:34:04",
+            "created_at": "2022-04-04 13:34:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624afe1a4c564c44b57b1d8e",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 14:18:02",
+            "created_at": "2022-04-04 14:18:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b01e84c8a175d4e10beb0",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 14:34:16",
+            "created_at": "2022-04-04 14:34:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b022ee1e7ca52f3468212",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 14:35:26",
+            "created_at": "2022-04-04 14:35:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b032da4eaaa5d7a62a0dc",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 14:39:41",
+            "created_at": "2022-04-04 14:39:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b082b0c4a6c1748204019",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 15:00:59",
+            "created_at": "2022-04-04 15:00:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b5ed0ca777653a532d56b",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 21:10:40",
+            "created_at": "2022-04-04 21:10:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b639259f98769853f038b",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 21:30:58",
+            "created_at": "2022-04-04 21:30:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b73cdd37947019b2ac810",
+            "name": "RTMP",
+            "updated_at": "2022-04-04 22:40:13",
+            "created_at": "2022-04-04 22:40:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b77f7eff4fc12e73487f8",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 22:57:59",
+            "created_at": "2022-04-04 22:57:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624b7e7035db9c4b555785dc",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-04 23:25:36",
+            "created_at": "2022-04-04 23:25:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c4b803cff304350267af8",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 14:00:32",
+            "created_at": "2022-04-05 14:00:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c4bfb3a4e422ce3102847",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 14:02:35",
+            "created_at": "2022-04-05 14:02:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c50448bf63078a802d16a",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 14:20:52",
+            "created_at": "2022-04-05 14:20:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c6d195bb5d342b6767ee2",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 16:23:53",
+            "created_at": "2022-04-05 16:23:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c722b496a023ff3459873",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 16:45:31",
+            "created_at": "2022-04-05 16:45:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c73c7f14ed0359b3f2efe",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 16:52:23",
+            "created_at": "2022-04-05 16:52:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c7447f14ed0359b3f2f5a",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 16:54:31",
+            "created_at": "2022-04-05 16:54:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c799615b51b0d281a5de1",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 17:17:10",
+            "created_at": "2022-04-05 17:17:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c79a5da6e764bf8498bb4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 17:17:25",
+            "created_at": "2022-04-05 17:17:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c7a4115b51b0d281a5e6d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 17:20:01",
+            "created_at": "2022-04-05 17:20:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c862642abcd360603abe8",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 18:10:46",
+            "created_at": "2022-04-05 18:10:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c863dc59a7a652457e76f",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 18:11:09",
+            "created_at": "2022-04-05 18:11:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c89ac2764fa0ace29c468",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 18:25:48",
+            "created_at": "2022-04-05 18:25:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c9899ef041e42a442c09e",
+            "name": "meeting",
+            "updated_at": "2022-04-05 19:29:29",
+            "created_at": "2022-04-05 19:29:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c9b486c547679443239bb",
+            "name": "meeting",
+            "updated_at": "2022-04-05 19:40:56",
+            "created_at": "2022-04-05 19:40:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c9b4b6c547679443239c0",
+            "name": "meeting",
+            "updated_at": "2022-04-05 19:40:59",
+            "created_at": "2022-04-05 19:40:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c9b68a490c3488a3c2ce9",
+            "name": "meeting",
+            "updated_at": "2022-04-05 19:41:28",
+            "created_at": "2022-04-05 19:41:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c9dd3863552659d6a0fb1",
+            "name": "meeting",
+            "updated_at": "2022-04-05 19:51:47",
+            "created_at": "2022-04-05 19:51:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624c9f064f9b2125ed6443a9",
+            "name": "meeting",
+            "updated_at": "2022-04-05 19:56:54",
+            "created_at": "2022-04-05 19:56:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624ca5220b0b3c192f37254e",
+            "name": "url",
+            "updated_at": "2022-04-05 20:22:58",
+            "created_at": "2022-04-05 20:22:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624ca6ad41113548c8388e22",
+            "name": "meeting",
+            "updated_at": "2022-04-05 20:29:33",
+            "created_at": "2022-04-05 20:29:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624cb069d7e2c134b8778c92",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 21:11:05",
+            "created_at": "2022-04-05 21:11:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624cb7cfedede3359e4f9800",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 21:42:39",
+            "created_at": "2022-04-05 21:42:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624cbccf7c818901eb3b47ec",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-05 22:03:59",
+            "created_at": "2022-04-05 22:03:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dad64b4ce3107781aeb24",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 15:10:28",
+            "created_at": "2022-04-06 15:10:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dc428dc0c26562b0ebefa",
+            "name": "meeting",
+            "updated_at": "2022-04-06 16:47:37",
+            "created_at": "2022-04-06 16:47:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dc9c6c143926d3c594509",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 17:11:34",
+            "created_at": "2022-04-06 17:11:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd07074ab3621a822b518",
+            "name": "RTMP",
+            "updated_at": "2022-04-06 17:40:00",
+            "created_at": "2022-04-06 17:40:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd14aab4cd060321711f7",
+            "name": "vimeo",
+            "updated_at": "2022-04-06 17:43:38",
+            "created_at": "2022-04-06 17:43:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd259de341a6ff358a576",
+            "name": "youTube",
+            "updated_at": "2022-04-06 17:48:09",
+            "created_at": "2022-04-06 17:48:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd285de341a6ff358a5a0",
+            "name": "meeting",
+            "updated_at": "2022-04-06 17:48:53",
+            "created_at": "2022-04-06 17:48:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd484daadf85c735cc5b5",
+            "name": "url",
+            "updated_at": "2022-04-06 17:57:24",
+            "created_at": "2022-04-06 17:57:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd4858e628a3a69239a19",
+            "name": "url",
+            "updated_at": "2022-04-06 17:57:25",
+            "created_at": "2022-04-06 17:57:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd4e9daadf85c735cc68e",
+            "name": "url",
+            "updated_at": "2022-04-06 17:59:05",
+            "created_at": "2022-04-06 17:59:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dd53bdaadf85c735cc7c1",
+            "name": "url",
+            "updated_at": "2022-04-06 18:00:27",
+            "created_at": "2022-04-06 18:00:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dea420f241333b26ed5f2",
+            "name": "meeting",
+            "updated_at": "2022-04-06 19:30:10",
+            "created_at": "2022-04-06 19:30:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dec2b81fdab1aee739137",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 19:38:19",
+            "created_at": "2022-04-06 19:38:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dedbc0ac45e3540006509",
+            "name": "url",
+            "updated_at": "2022-04-06 19:45:00",
+            "created_at": "2022-04-06 19:45:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dedda0ac45e3540006561",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 19:45:30",
+            "created_at": "2022-04-06 19:45:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624df270f7c3d815a77f33ba",
+            "name": "url",
+            "updated_at": "2022-04-06 20:05:04",
+            "created_at": "2022-04-06 20:05:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624df81fc7ffb9751f6a4f7c",
+            "name": "url",
+            "updated_at": "2022-04-06 20:29:19",
+            "created_at": "2022-04-06 20:29:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624df8fafc732324872cc77a",
+            "name": "url",
+            "updated_at": "2022-04-06 20:32:58",
+            "created_at": "2022-04-06 20:32:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624df9a951d0697f621a5ce6",
+            "name": "url",
+            "updated_at": "2022-04-06 20:35:53",
+            "created_at": "2022-04-06 20:35:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfb359e467521187f36f4",
+            "name": "url",
+            "updated_at": "2022-04-06 20:42:29",
+            "created_at": "2022-04-06 20:42:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfba8fc0bc65ff2556cc3",
+            "name": "url",
+            "updated_at": "2022-04-06 20:44:24",
+            "created_at": "2022-04-06 20:44:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfc10fc0bc65ff2556d0c",
+            "name": "url",
+            "updated_at": "2022-04-06 20:46:08",
+            "created_at": "2022-04-06 20:46:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfc96fc0bc65ff2556d6d",
+            "name": "url",
+            "updated_at": "2022-04-06 20:48:22",
+            "created_at": "2022-04-06 20:48:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfd515688cd4b8e62b016",
+            "name": "url",
+            "updated_at": "2022-04-06 20:51:29",
+            "created_at": "2022-04-06 20:51:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfd7ae1242c72e671444d",
+            "name": "url",
+            "updated_at": "2022-04-06 20:52:10",
+            "created_at": "2022-04-06 20:52:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfd9367bdf34c6819e2f8",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 20:52:35",
+            "created_at": "2022-04-06 20:52:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dff0f67bdf34c6819e3cc",
+            "name": "meeting",
+            "updated_at": "2022-04-06 20:58:55",
+            "created_at": "2022-04-06 20:58:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dff3267bdf34c6819e45c",
+            "name": "meeting",
+            "updated_at": "2022-04-06 20:59:30",
+            "created_at": "2022-04-06 20:59:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfff82f9a010c496659fb",
+            "name": "meeting",
+            "updated_at": "2022-04-06 21:02:48",
+            "created_at": "2022-04-06 21:02:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624dfffd2f9a010c49665a05",
+            "name": "RTMP",
+            "updated_at": "2022-04-06 21:02:53",
+            "created_at": "2022-04-06 21:02:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0029dbef2d69606491f2",
+            "name": "RTMP",
+            "updated_at": "2022-04-06 21:03:37",
+            "created_at": "2022-04-06 21:03:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e01daaf435b14853e5e80",
+            "name": "url",
+            "updated_at": "2022-04-06 21:10:50",
+            "created_at": "2022-04-06 21:10:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e02010897527ac52ea5ea",
+            "name": "meeting",
+            "updated_at": "2022-04-06 21:11:29",
+            "created_at": "2022-04-06 21:11:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e02bfaa6b304ceb77de69",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 21:14:39",
+            "created_at": "2022-04-06 21:14:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e031b8283a00d23789280",
+            "name": "youTube",
+            "updated_at": "2022-04-06 21:16:11",
+            "created_at": "2022-04-06 21:16:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e051652cd631c12623e5a",
+            "name": "meeting",
+            "updated_at": "2022-04-06 21:24:38",
+            "created_at": "2022-04-06 21:24:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0537040a623aa564902e",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 21:25:11",
+            "created_at": "2022-04-06 21:25:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e055352cd631c12623ec7",
+            "name": "meeting",
+            "updated_at": "2022-04-06 21:25:39",
+            "created_at": "2022-04-06 21:25:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e058008c85d5fff784ee7",
+            "name": "url",
+            "updated_at": "2022-04-06 21:26:24",
+            "created_at": "2022-04-06 21:26:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e05aa08c85d5fff784fcd",
+            "name": "url",
+            "updated_at": "2022-04-06 21:27:06",
+            "created_at": "2022-04-06 21:27:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0607d518355e3862a39e",
+            "name": "meeting",
+            "updated_at": "2022-04-06 21:28:39",
+            "created_at": "2022-04-06 21:28:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0620d518355e3862a3d9",
+            "name": "url",
+            "updated_at": "2022-04-06 21:29:04",
+            "created_at": "2022-04-06 21:29:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e06733f0d1f50c957c0d9",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-06 21:30:27",
+            "created_at": "2022-04-06 21:30:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e07ab3a82295a7303e74b",
+            "name": "url",
+            "updated_at": "2022-04-06 21:35:39",
+            "created_at": "2022-04-06 21:35:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e080d91d1752ac041b218",
+            "name": "url",
+            "updated_at": "2022-04-06 21:37:17",
+            "created_at": "2022-04-06 21:37:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e082f85510f7e04358add",
+            "name": "url",
+            "updated_at": "2022-04-06 21:37:51",
+            "created_at": "2022-04-06 21:37:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0837bd548864dd5935c5",
+            "name": "url",
+            "updated_at": "2022-04-06 21:37:59",
+            "created_at": "2022-04-06 21:37:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0869d03802252c28a77c",
+            "name": "url",
+            "updated_at": "2022-04-06 21:38:49",
+            "created_at": "2022-04-06 21:38:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e08ed54b7af24ea526a74",
+            "name": "url",
+            "updated_at": "2022-04-06 21:41:01",
+            "created_at": "2022-04-06 21:41:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e08f41a67e77f602894c1",
+            "name": "meeting",
+            "updated_at": "2022-04-06 21:41:08",
+            "created_at": "2022-04-06 21:41:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e0a1f7ebb484ced781733",
+            "name": "url",
+            "updated_at": "2022-04-06 21:46:07",
+            "created_at": "2022-04-06 21:46:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e52f0b2eed8469a740692",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 02:56:48",
+            "created_at": "2022-04-07 02:56:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e562dbfa2eb59395556a7",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 03:10:37",
+            "created_at": "2022-04-07 03:10:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e5b857e885d04be6d798c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 03:33:25",
+            "created_at": "2022-04-07 03:33:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e5e01e26b2446116e2703",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 03:44:01",
+            "created_at": "2022-04-07 03:44:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e5f03e26b2446116e271d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 03:48:19",
+            "created_at": "2022-04-07 03:48:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e60937a85030eb6418079",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 03:54:59",
+            "created_at": "2022-04-07 03:54:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e6182e26b2446116e2899",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 03:58:58",
+            "created_at": "2022-04-07 03:58:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624e644170d20e17fd0fc7d0",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 04:10:41",
+            "created_at": "2022-04-07 04:10:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624eeff148eff008e8557615",
+            "name": "vimeo",
+            "updated_at": "2022-04-07 14:06:41",
+            "created_at": "2022-04-07 14:06:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f020c20317b44493d0d93",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 15:23:56",
+            "created_at": "2022-04-07 15:23:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f0bb51095873d4c4ab0fc",
+            "name": "url",
+            "updated_at": "2022-04-07 16:05:09",
+            "created_at": "2022-04-07 16:05:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f0c0e1095873d4c4ab161",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 16:06:38",
+            "created_at": "2022-04-07 16:06:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f0c3a6e179a50ea58967c",
+            "name": "url",
+            "updated_at": "2022-04-07 16:07:22",
+            "created_at": "2022-04-07 16:07:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f15366748ef0d45359055",
+            "name": "url",
+            "updated_at": "2022-04-07 16:45:42",
+            "created_at": "2022-04-07 16:45:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f1c6d704a022842470df9",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 17:16:29",
+            "created_at": "2022-04-07 17:16:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f1e57e8d901486a1df15c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 17:24:39",
+            "created_at": "2022-04-07 17:24:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f224596e49e0b9d41aa10",
+            "name": "meeting",
+            "updated_at": "2022-04-07 17:41:25",
+            "created_at": "2022-04-07 17:41:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f234df024ba7e5d0aeede",
+            "name": "meeting",
+            "updated_at": "2022-04-07 17:45:49",
+            "created_at": "2022-04-07 17:45:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f23ff8d4fd476da58b2a2",
+            "name": "meeting",
+            "updated_at": "2022-04-07 17:48:47",
+            "created_at": "2022-04-07 17:48:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f24ee96e49e0b9d41abb9",
+            "name": "url",
+            "updated_at": "2022-04-07 17:52:46",
+            "created_at": "2022-04-07 17:52:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f2508cf49d04b492a7109",
+            "name": "url",
+            "updated_at": "2022-04-07 17:53:12",
+            "created_at": "2022-04-07 17:53:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f2e057bbb1320041fdbc4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 18:31:33",
+            "created_at": "2022-04-07 18:31:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f35a8583a8124716f70d7",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:04:08",
+            "created_at": "2022-04-07 19:04:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f371295142870e657ce26",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:10:10",
+            "created_at": "2022-04-07 19:10:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f374a7f024b5bff7864b2",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:11:06",
+            "created_at": "2022-04-07 19:11:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f38a270d13a2a0322b4cd",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:16:50",
+            "created_at": "2022-04-07 19:16:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f391870d13a2a0322b52e",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:18:49",
+            "created_at": "2022-04-07 19:18:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f39ac48001b7f14037e54",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:21:16",
+            "created_at": "2022-04-07 19:21:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3a3f5cc2d473642fe4af",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:23:43",
+            "created_at": "2022-04-07 19:23:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3a4b5cc2d473642fe4ef",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:23:55",
+            "created_at": "2022-04-07 19:23:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3a83afb23f369d539c4d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:24:51",
+            "created_at": "2022-04-07 19:24:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3abfe462a11af7276fae",
+            "name": "meeting",
+            "updated_at": "2022-04-07 19:25:51",
+            "created_at": "2022-04-07 19:25:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3b32d998b719cc248b03",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:27:46",
+            "created_at": "2022-04-07 19:27:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3c183ce53402822c0b34",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:31:36",
+            "created_at": "2022-04-07 19:31:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3ceea543321f950b24d4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:35:10",
+            "created_at": "2022-04-07 19:35:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3d87c29e621a4846569c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 19:37:43",
+            "created_at": "2022-04-07 19:37:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3e7d7c3fe64ca54b4040",
+            "name": "RTMP",
+            "updated_at": "2022-04-07 19:41:49",
+            "created_at": "2022-04-07 19:41:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f3ea3155d673b69463b3c",
+            "name": "meeting",
+            "updated_at": "2022-04-07 19:42:27",
+            "created_at": "2022-04-07 19:42:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f41d8c4adf06c650db51d",
+            "name": "url",
+            "updated_at": "2022-04-07 19:56:08",
+            "created_at": "2022-04-07 19:56:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f42c313be3068c9099cd2",
+            "name": "youTube",
+            "updated_at": "2022-04-07 20:00:03",
+            "created_at": "2022-04-07 20:00:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f447c8280e031a62d5842",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:07:24",
+            "created_at": "2022-04-07 20:07:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f453e7d995324435b5ff4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:10:38",
+            "created_at": "2022-04-07 20:10:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f486c67f2676b2677440f",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:24:12",
+            "created_at": "2022-04-07 20:24:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f48e06d46bb6f2a4e9991",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:26:08",
+            "created_at": "2022-04-07 20:26:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f492267f2676b26774515",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:27:14",
+            "created_at": "2022-04-07 20:27:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f49bfccc1cb4239504d76",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:29:51",
+            "created_at": "2022-04-07 20:29:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f4a95f5794b2dab55a654",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:33:25",
+            "created_at": "2022-04-07 20:33:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f4acc04075562ba32f3d0",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 20:34:20",
+            "created_at": "2022-04-07 20:34:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f581a1643a02db62dec8a",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 21:31:06",
+            "created_at": "2022-04-07 21:31:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "624f58767d77af3cb4564cd4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-07 21:32:38",
+            "created_at": "2022-04-07 21:32:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625092175a28725c36203469",
+            "name": "url",
+            "updated_at": "2022-04-08 19:50:47",
+            "created_at": "2022-04-08 19:50:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251cd4760049a568c4429af",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:15:35",
+            "created_at": "2022-04-09 18:15:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251cd764408b022764070ea",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:16:22",
+            "created_at": "2022-04-09 18:16:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251cdcd7bf450398f090163",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:17:49",
+            "created_at": "2022-04-09 18:17:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251cf68d380554dbb543bc7",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:24:40",
+            "created_at": "2022-04-09 18:24:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251cfda7bf450398f090253",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:26:34",
+            "created_at": "2022-04-09 18:26:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251d0d529eb4c788d10ae7a",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:30:45",
+            "created_at": "2022-04-09 18:30:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251d4a429eb4c788d10ae84",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:47:00",
+            "created_at": "2022-04-09 18:47:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251d53603d3fd554c308e40",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:49:26",
+            "created_at": "2022-04-09 18:49:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251d606535cea5eb31aa188",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:52:54",
+            "created_at": "2022-04-09 18:52:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251d6f6c79c725906096afe",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 18:56:54",
+            "created_at": "2022-04-09 18:56:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251d89a6ed4ad085028edfc",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:03:54",
+            "created_at": "2022-04-09 19:03:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251db4af3e477777c6024ce",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:15:22",
+            "created_at": "2022-04-09 19:15:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251dbd8cc7a5c7f027f98db",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:17:44",
+            "created_at": "2022-04-09 19:17:44",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251dc6bf3e477777c602541",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:20:11",
+            "created_at": "2022-04-09 19:20:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251dcae29b7654afd2cf479",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:21:18",
+            "created_at": "2022-04-09 19:21:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251dda9dd6403460c56eccd",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:25:29",
+            "created_at": "2022-04-09 19:25:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251de7486b45661f5741f60",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:28:52",
+            "created_at": "2022-04-09 19:28:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e00e3fc5944bec25e520",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:35:42",
+            "created_at": "2022-04-09 19:35:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e0ea5037c266216b8c76",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:39:22",
+            "created_at": "2022-04-09 19:39:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e1fdd81be369d222b4d4",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:43:57",
+            "created_at": "2022-04-09 19:43:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e2d6d085974121042886",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:47:34",
+            "created_at": "2022-04-09 19:47:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e59f74246d141b2683dc",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 19:59:27",
+            "created_at": "2022-04-09 19:59:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e65a0402427f1d5e2a2b",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:02:34",
+            "created_at": "2022-04-09 20:02:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e72c1ea9d45bf138f47d",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:06:04",
+            "created_at": "2022-04-09 20:06:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e77e74246d141b2684c9",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:07:26",
+            "created_at": "2022-04-09 20:07:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e7911ea9d45bf138f4bb",
+            "name": "meeting",
+            "updated_at": "2022-04-09 20:07:45",
+            "created_at": "2022-04-09 20:07:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e7a70402427f1d5e2b5f",
+            "name": "url",
+            "updated_at": "2022-04-09 20:08:07",
+            "created_at": "2022-04-09 20:08:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e7dd74246d141b2685b3",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:09:01",
+            "created_at": "2022-04-09 20:09:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e81f74246d141b268614",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-09 20:10:07",
+            "created_at": "2022-04-09 20:10:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e8b11c739c503a7e8363",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:12:33",
+            "created_at": "2022-04-09 20:12:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e8c69a4bb9064f4faa9a",
+            "name": "url",
+            "updated_at": "2022-04-09 20:12:54",
+            "created_at": "2022-04-09 20:12:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e8c70338a424ce36ab8f",
+            "name": "finish",
+            "updated_at": "2022-04-09 20:12:55",
+            "created_at": "2022-04-09 20:12:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251e8ee9a4bb9064f4fab10",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:13:34",
+            "created_at": "2022-04-09 20:13:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6251eabe3eb8e13b665ad078",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-09 20:21:18",
+            "created_at": "2022-04-09 20:21:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6254378ee6247619312197bb",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-11 14:13:34",
+            "created_at": "2022-04-11 14:13:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625437a1d263d842fb685503",
+            "name": "meeting",
+            "updated_at": "2022-04-11 14:13:53",
+            "created_at": "2022-04-11 14:13:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625437b37a19d20d6a217051",
+            "name": "url",
+            "updated_at": "2022-04-11 14:14:11",
+            "created_at": "2022-04-11 14:14:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625437c9d263d842fb68550c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-11 14:14:33",
+            "created_at": "2022-04-11 14:14:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625437ddd263d842fb685586",
+            "name": "RTMP",
+            "updated_at": "2022-04-11 14:14:53",
+            "created_at": "2022-04-11 14:14:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62543809e6247619312198ce",
+            "name": "meeting",
+            "updated_at": "2022-04-11 14:15:37",
+            "created_at": "2022-04-11 14:15:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62543820e6247619312198d7",
+            "name": "youTube",
+            "updated_at": "2022-04-11 14:16:00",
+            "created_at": "2022-04-11 14:16:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625438367a19d20d6a2171bc",
+            "name": "vimeo",
+            "updated_at": "2022-04-11 14:16:22",
+            "created_at": "2022-04-11 14:16:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62543849d263d842fb685648",
+            "name": "youTube",
+            "updated_at": "2022-04-11 14:16:41",
+            "created_at": "2022-04-11 14:16:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6254385b7a19d20d6a2171f3",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-11 14:16:59",
+            "created_at": "2022-04-11 14:16:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62543881d263d842fb685710",
+            "name": "url",
+            "updated_at": "2022-04-11 14:17:37",
+            "created_at": "2022-04-11 14:17:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62543c3d54014d141865e389",
+            "name": "url",
+            "updated_at": "2022-04-11 14:33:33",
+            "created_at": "2022-04-11 14:33:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62548178790b243d3d0531c0",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-11 19:28:56",
+            "created_at": "2022-04-11 19:28:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62548225cb91dd3ec851862d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-11 19:31:49",
+            "created_at": "2022-04-11 19:31:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62557bc66e5c110f3664ba67",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 13:16:54",
+            "created_at": "2022-04-12 13:16:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255853daedea317e10f72a9",
+            "name": "url",
+            "updated_at": "2022-04-12 13:57:17",
+            "created_at": "2022-04-12 13:57:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255861f81859e455a080554",
+            "name": "url",
+            "updated_at": "2022-04-12 14:01:03",
+            "created_at": "2022-04-12 14:01:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255893e0262ea623f54d3a7",
+            "name": "url",
+            "updated_at": "2022-04-12 14:14:22",
+            "created_at": "2022-04-12 14:14:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255897ddc45d04bf9478fdb",
+            "name": "url",
+            "updated_at": "2022-04-12 14:15:25",
+            "created_at": "2022-04-12 14:15:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62558e435dbe7a16ea02db2a",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 14:35:47",
+            "created_at": "2022-04-12 14:35:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62558eb2e79f032fe458adec",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 14:37:38",
+            "created_at": "2022-04-12 14:37:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62559005e965e2716c0719a9",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 14:43:17",
+            "created_at": "2022-04-12 14:43:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625590a05dbe7a16ea02dcc2",
+            "name": "url",
+            "updated_at": "2022-04-12 14:45:52",
+            "created_at": "2022-04-12 14:45:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625590afe79f032fe458af50",
+            "name": "youTube",
+            "updated_at": "2022-04-12 14:46:07",
+            "created_at": "2022-04-12 14:46:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625591a0c4fd9f1300785046",
+            "name": "meeting",
+            "updated_at": "2022-04-12 14:50:08",
+            "created_at": "2022-04-12 14:50:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625591a1e965e2716c071ba5",
+            "name": "meeting",
+            "updated_at": "2022-04-12 14:50:09",
+            "created_at": "2022-04-12 14:50:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625592d1e79f032fe458b177",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 14:55:13",
+            "created_at": "2022-04-12 14:55:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625594292177be7e1d12be0b",
+            "name": "url",
+            "updated_at": "2022-04-12 15:00:57",
+            "created_at": "2022-04-12 15:00:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255942a548728692a66db4f",
+            "name": "url",
+            "updated_at": "2022-04-12 15:00:58",
+            "created_at": "2022-04-12 15:00:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255959a2177be7e1d12c0cb",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 15:07:06",
+            "created_at": "2022-04-12 15:07:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62559b329fc9ae70b3621bcd",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 15:30:58",
+            "created_at": "2022-04-12 15:30:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62559e4606f9cc59cb761084",
+            "name": "youTube",
+            "updated_at": "2022-04-12 15:44:06",
+            "created_at": "2022-04-12 15:44:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62559fdc596dac4ed7676fc8",
+            "name": "meeting",
+            "updated_at": "2022-04-12 15:50:52",
+            "created_at": "2022-04-12 15:50:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a16b7aab4b169c0f9625",
+            "name": "url",
+            "updated_at": "2022-04-12 15:57:31",
+            "created_at": "2022-04-12 15:57:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a2bed5121a31c766bc21",
+            "name": "vimeo",
+            "updated_at": "2022-04-12 16:03:10",
+            "created_at": "2022-04-12 16:03:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a5823a6469050c3004bb",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 16:14:58",
+            "created_at": "2022-04-12 16:14:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a7370a3fba0d3c0722dc",
+            "name": "url",
+            "updated_at": "2022-04-12 16:22:15",
+            "created_at": "2022-04-12 16:22:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a73ae8e315789f0e2cc9",
+            "name": "url",
+            "updated_at": "2022-04-12 16:22:18",
+            "created_at": "2022-04-12 16:22:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a7f2478a480fa91dda8c",
+            "name": "vimeo",
+            "updated_at": "2022-04-12 16:25:22",
+            "created_at": "2022-04-12 16:25:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a853226e213f76393557",
+            "name": "url",
+            "updated_at": "2022-04-12 16:26:59",
+            "created_at": "2022-04-12 16:26:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255a97f226e213f763936a2",
+            "name": "url",
+            "updated_at": "2022-04-12 16:31:59",
+            "created_at": "2022-04-12 16:31:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255aa88226e213f763938b3",
+            "name": "url",
+            "updated_at": "2022-04-12 16:36:24",
+            "created_at": "2022-04-12 16:36:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255aaef6190ba1bee4d0736",
+            "name": "url",
+            "updated_at": "2022-04-12 16:38:07",
+            "created_at": "2022-04-12 16:38:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255ac0699f7882dca3543d0",
+            "name": "url",
+            "updated_at": "2022-04-12 16:42:46",
+            "created_at": "2022-04-12 16:42:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255ac8414a47a4e4a592519",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 16:44:52",
+            "created_at": "2022-04-12 16:44:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255acfba8bfc4097b263979",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 16:46:51",
+            "created_at": "2022-04-12 16:46:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255ae604690ed21892f5b42",
+            "name": "url",
+            "updated_at": "2022-04-12 16:52:48",
+            "created_at": "2022-04-12 16:52:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255aed34690ed21892f5bb4",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 16:54:43",
+            "created_at": "2022-04-12 16:54:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255b0b00d738a236c2bcd5d",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 17:02:40",
+            "created_at": "2022-04-12 17:02:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255b0eb0d738a236c2bce2c",
+            "name": "url",
+            "updated_at": "2022-04-12 17:03:39",
+            "created_at": "2022-04-12 17:03:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255b244330cd6156a7a702f",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 17:09:24",
+            "created_at": "2022-04-12 17:09:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255b2d17a9b2b647b0a0503",
+            "name": "url",
+            "updated_at": "2022-04-12 17:11:45",
+            "created_at": "2022-04-12 17:11:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255b30a89bd810608599e37",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 17:12:42",
+            "created_at": "2022-04-12 17:12:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255b35389bd810608599e93",
+            "name": "url",
+            "updated_at": "2022-04-12 17:13:55",
+            "created_at": "2022-04-12 17:13:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255bc80d165c03e802c0d97",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 17:53:04",
+            "created_at": "2022-04-12 17:53:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255cb19532c5055af7c8f30",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 18:55:21",
+            "created_at": "2022-04-12 18:55:21",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255ce8f74a38e7ae728146d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 19:10:07",
+            "created_at": "2022-04-12 19:10:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d16b7f07a60e7641b802",
+            "name": "vimeo",
+            "updated_at": "2022-04-12 19:22:19",
+            "created_at": "2022-04-12 19:22:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d1a99bcbc67a9c19a014",
+            "name": "youTube",
+            "updated_at": "2022-04-12 19:23:21",
+            "created_at": "2022-04-12 19:23:21",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d1cd74a38e7ae7281546",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 19:23:57",
+            "created_at": "2022-04-12 19:23:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d27574a38e7ae72815a8",
+            "name": "meeting",
+            "updated_at": "2022-04-12 19:26:45",
+            "created_at": "2022-04-12 19:26:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d31e74a38e7ae7281675",
+            "name": "url",
+            "updated_at": "2022-04-12 19:29:34",
+            "created_at": "2022-04-12 19:29:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d40d9bcbc67a9c19a156",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-12 19:33:33",
+            "created_at": "2022-04-12 19:33:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6255d7c49436631ef2391ded",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-12 19:49:24",
+            "created_at": "2022-04-12 19:49:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62570a3f79c9c65f08709775",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-13 17:37:03",
+            "created_at": "2022-04-13 17:37:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62570ad1e47ef34fe22c55b8",
+            "name": "vimeo",
+            "updated_at": "2022-04-13 17:39:29",
+            "created_at": "2022-04-13 17:39:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62573d39e05b5c148a5e9819",
+            "name": "url",
+            "updated_at": "2022-04-13 21:14:33",
+            "created_at": "2022-04-13 21:14:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62573d61e05b5c148a5e9855",
+            "name": "url",
+            "updated_at": "2022-04-13 21:15:13",
+            "created_at": "2022-04-13 21:15:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62573f61aa3e0d0d01108e79",
+            "name": "url",
+            "updated_at": "2022-04-13 21:23:45",
+            "created_at": "2022-04-13 21:23:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62573f626d45db3d78120250",
+            "name": "url",
+            "updated_at": "2022-04-13 21:23:46",
+            "created_at": "2022-04-13 21:23:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d7be85c647b37e449827f",
+            "name": "url",
+            "updated_at": "2022-04-18 14:55:36",
+            "created_at": "2022-04-18 14:55:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d7c0d13db80552e19c49b",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-18 14:56:13",
+            "created_at": "2022-04-18 14:56:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d8d3b90e14a29270221b5",
+            "name": "url",
+            "updated_at": "2022-04-18 16:09:31",
+            "created_at": "2022-04-18 16:09:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d8db290e14a29270221f1",
+            "name": "url",
+            "updated_at": "2022-04-18 16:11:30",
+            "created_at": "2022-04-18 16:11:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d8dd090e14a2927022230",
+            "name": "url",
+            "updated_at": "2022-04-18 16:12:00",
+            "created_at": "2022-04-18 16:12:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d915daf895779e8214756",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-18 16:27:09",
+            "created_at": "2022-04-18 16:27:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d943511eea56d043ec212",
+            "name": "url",
+            "updated_at": "2022-04-18 16:39:17",
+            "created_at": "2022-04-18 16:39:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d947711eea56d043ec2d7",
+            "name": "url",
+            "updated_at": "2022-04-18 16:40:23",
+            "created_at": "2022-04-18 16:40:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d976b43a9915442751009",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-18 16:52:59",
+            "created_at": "2022-04-18 16:52:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d97de5132f1403a3716ea",
+            "name": "url",
+            "updated_at": "2022-04-18 16:54:54",
+            "created_at": "2022-04-18 16:54:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d981f5132f1403a371758",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-18 16:55:59",
+            "created_at": "2022-04-18 16:55:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625d9b7e3cbdd3651b01dcfe",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-18 17:10:22",
+            "created_at": "2022-04-18 17:10:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dbbe9cbd53e2d7877f229",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-18 19:28:41",
+            "created_at": "2022-04-18 19:28:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dbc08ea8d7d29924e050b",
+            "name": "url",
+            "updated_at": "2022-04-18 19:29:12",
+            "created_at": "2022-04-18 19:29:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dbc87cbd53e2d7877f2f6",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-18 19:31:19",
+            "created_at": "2022-04-18 19:31:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dbdc6cbd53e2d7877f4c1",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-18 19:36:38",
+            "created_at": "2022-04-18 19:36:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dc4c7b7ce327c72116d5a",
+            "name": "url",
+            "updated_at": "2022-04-18 20:06:31",
+            "created_at": "2022-04-18 20:06:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dc4e706b2ef1dfb3e8e81",
+            "name": "url",
+            "updated_at": "2022-04-18 20:07:03",
+            "created_at": "2022-04-18 20:07:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dc5b2dfbfff2f2f015fa0",
+            "name": "youTube",
+            "updated_at": "2022-04-18 20:10:26",
+            "created_at": "2022-04-18 20:10:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dc5dddfbfff2f2f015fc4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-18 20:11:09",
+            "created_at": "2022-04-18 20:11:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625dcebe0a87bc7d523d3e76",
+            "name": "meeting",
+            "updated_at": "2022-04-18 20:49:02",
+            "created_at": "2022-04-18 20:49:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ebedb1bdc6226ef6e82aa",
+            "name": "meeting",
+            "updated_at": "2022-04-19 13:53:31",
+            "created_at": "2022-04-19 13:53:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ebf3fd687a1442d0b7cd5",
+            "name": "meeting",
+            "updated_at": "2022-04-19 13:55:11",
+            "created_at": "2022-04-19 13:55:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ebfc9d687a1442d0b7d78",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 13:57:29",
+            "created_at": "2022-04-19 13:57:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec03ade9dd20e1e789348",
+            "name": "meeting",
+            "updated_at": "2022-04-19 13:59:22",
+            "created_at": "2022-04-19 13:59:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec0b4de9dd20e1e78937b",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 14:01:24",
+            "created_at": "2022-04-19 14:01:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec1035805f23d974b32cb",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 14:02:43",
+            "created_at": "2022-04-19 14:02:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec1785805f23d974b32d1",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 14:04:40",
+            "created_at": "2022-04-19 14:04:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec1fa5805f23d974b33ab",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 14:06:50",
+            "created_at": "2022-04-19 14:06:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec23e5805f23d974b33d7",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 14:07:58",
+            "created_at": "2022-04-19 14:07:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec37442e8c6413122a810",
+            "name": "meeting",
+            "updated_at": "2022-04-19 14:13:08",
+            "created_at": "2022-04-19 14:13:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec8078747bf6e7d64b5e7",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 14:32:39",
+            "created_at": "2022-04-19 14:32:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ec96723c4493c9f7695cb",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 14:38:31",
+            "created_at": "2022-04-19 14:38:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ecae1d9f836572904fb47",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-19 14:44:49",
+            "created_at": "2022-04-19 14:44:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ecb986eee8875121238e9",
+            "name": "url",
+            "updated_at": "2022-04-19 14:47:52",
+            "created_at": "2022-04-19 14:47:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ecc4bd9f836572904fc7a",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-19 14:50:51",
+            "created_at": "2022-04-19 14:50:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed05e793d457b79556cd3",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-19 15:08:14",
+            "created_at": "2022-04-19 15:08:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed0721c985e0d4f3dd947",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:08:34",
+            "created_at": "2022-04-19 15:08:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed0f11c985e0d4f3dd9ad",
+            "name": "url",
+            "updated_at": "2022-04-19 15:10:41",
+            "created_at": "2022-04-19 15:10:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed1191c985e0d4f3dda24",
+            "name": "url",
+            "updated_at": "2022-04-19 15:11:21",
+            "created_at": "2022-04-19 15:11:21",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed1511c985e0d4f3ddab4",
+            "name": "url",
+            "updated_at": "2022-04-19 15:12:17",
+            "created_at": "2022-04-19 15:12:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed21aa2c3b1055869e64e",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:15:38",
+            "created_at": "2022-04-19 15:15:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed296abb13e7bc40ab1af",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:17:42",
+            "created_at": "2022-04-19 15:17:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed30e37727b6a0501a879",
+            "name": "url",
+            "updated_at": "2022-04-19 15:19:42",
+            "created_at": "2022-04-19 15:19:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed33488113c6c587a39b8",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:20:20",
+            "created_at": "2022-04-19 15:20:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed431c1302d616115343b",
+            "name": "meeting",
+            "updated_at": "2022-04-19 15:24:33",
+            "created_at": "2022-04-19 15:24:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed4459ce8357f9336e669",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:24:53",
+            "created_at": "2022-04-19 15:24:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed4669ce8357f9336e66f",
+            "name": "meeting",
+            "updated_at": "2022-04-19 15:25:26",
+            "created_at": "2022-04-19 15:25:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed4999f6f932d3c7ac9bf",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:26:17",
+            "created_at": "2022-04-19 15:26:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed4bb8c6a88678c72d3e6",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 15:26:51",
+            "created_at": "2022-04-19 15:26:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed4c99ce8357f9336e743",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 15:27:05",
+            "created_at": "2022-04-19 15:27:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ed6142b01bb39904a7025",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 15:32:36",
+            "created_at": "2022-04-19 15:32:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ede3147b8be58e030f63f",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 16:07:13",
+            "created_at": "2022-04-19 16:07:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ee4ffb245bd3e871c4dbe",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 16:36:15",
+            "created_at": "2022-04-19 16:36:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ee63bb245bd3e871c4ed4",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 16:41:31",
+            "created_at": "2022-04-19 16:41:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ee9aba8ad26616e0941dc",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 16:56:11",
+            "created_at": "2022-04-19 16:56:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625ee9c4b3c2d2050d0e3aab",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 16:56:36",
+            "created_at": "2022-04-19 16:56:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625f0fb50cf9a8309c4edfba",
+            "name": "RTMP",
+            "updated_at": "2022-04-19 19:38:29",
+            "created_at": "2022-04-19 19:38:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625f10a59a433a569359ce1c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 19:42:29",
+            "created_at": "2022-04-19 19:42:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625f10e99a433a569359ce42",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-19 19:43:37",
+            "created_at": "2022-04-19 19:43:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625f11ea9a433a569359cecd",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 19:47:54",
+            "created_at": "2022-04-19 19:47:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "625f12a69a433a569359cfa1",
+            "name": "vimeo",
+            "updated_at": "2022-04-19 19:51:02",
+            "created_at": "2022-04-19 19:51:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260281b17db1857c84ab6a5",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-20 15:34:51",
+            "created_at": "2022-04-20 15:34:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62602a3ab239d42401221f34",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-20 15:43:54",
+            "created_at": "2022-04-20 15:43:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626037af74952867113f2d26",
+            "name": "url",
+            "updated_at": "2022-04-20 16:41:19",
+            "created_at": "2022-04-20 16:41:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626037c374952867113f2d62",
+            "name": "url",
+            "updated_at": "2022-04-20 16:41:39",
+            "created_at": "2022-04-20 16:41:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626037e374952867113f2d9e",
+            "name": "url",
+            "updated_at": "2022-04-20 16:42:11",
+            "created_at": "2022-04-20 16:42:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626038367e59f473b90d917d",
+            "name": "url",
+            "updated_at": "2022-04-20 16:43:35",
+            "created_at": "2022-04-20 16:43:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260386274952867113f2e17",
+            "name": "meeting",
+            "updated_at": "2022-04-20 16:44:18",
+            "created_at": "2022-04-20 16:44:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260387d74952867113f2e1d",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 16:44:45",
+            "created_at": "2022-04-20 16:44:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260389474952867113f2e23",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 16:45:08",
+            "created_at": "2022-04-20 16:45:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626038ff74952867113f2e82",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 16:46:55",
+            "created_at": "2022-04-20 16:46:55"
+        },
+        {
+            "_id": "62603964aadbbf6d5e064053",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 16:48:36",
+            "created_at": "2022-04-20 16:48:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62603bba0bdf2146ea4876bf",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 16:58:34",
+            "created_at": "2022-04-20 16:58:34"
+        },
+        {
+            "_id": "6260401a61ea5747140f29f1",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 17:17:14",
+            "created_at": "2022-04-20 17:17:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260410961ea5747140f2a2a",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 17:21:13",
+            "created_at": "2022-04-20 17:21:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62604241ad91f121826f76de",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 17:26:25",
+            "created_at": "2022-04-20 17:26:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626042e0d75aa768c577c0d9",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 17:29:04",
+            "created_at": "2022-04-20 17:29:04"
+        },
+        {
+            "_id": "62604471491e774750342114",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 17:35:45",
+            "created_at": "2022-04-20 17:35:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626044a6491e77475034214e",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 17:36:38",
+            "created_at": "2022-04-20 17:36:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626059e1e62ec555707fed31",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 19:07:13",
+            "created_at": "2022-04-20 19:07:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62605d529ce32c196c28b006",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 19:21:54",
+            "created_at": "2022-04-20 19:21:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62605fe0204b022c120d0485",
+            "name": "url",
+            "updated_at": "2022-04-20 19:32:48",
+            "created_at": "2022-04-20 19:32:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260630fa21706468d5779ac",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 19:46:23",
+            "created_at": "2022-04-20 19:46:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260633ba21706468d5779b2",
+            "name": "RTMP",
+            "updated_at": "2022-04-20 19:47:07",
+            "created_at": "2022-04-20 19:47:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260637deadf3470772ce0d9",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 19:48:13",
+            "created_at": "2022-04-20 19:48:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626063daa21706468d577a9c",
+            "name": "url",
+            "updated_at": "2022-04-20 19:49:46",
+            "created_at": "2022-04-20 19:49:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260718330f3e4559c6d6661",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 20:48:03",
+            "created_at": "2022-04-20 20:48:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260720bb0ef2e439d1c7f0e",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 20:50:19",
+            "created_at": "2022-04-20 20:50:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260754ac4e45720720c81db",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 21:04:10",
+            "created_at": "2022-04-20 21:04:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260785a300be7493d0a4a98",
+            "name": "url",
+            "updated_at": "2022-04-20 21:17:14",
+            "created_at": "2022-04-20 21:17:14"
+        },
+        {
+            "_id": "6260789f4da37864e3703a5a",
+            "name": "url",
+            "updated_at": "2022-04-20 21:18:23",
+            "created_at": "2022-04-20 21:18:23"
+        },
+        {
+            "_id": "6260790bd737802bc815c0e5",
+            "name": "url",
+            "updated_at": "2022-04-20 21:20:11",
+            "created_at": "2022-04-20 21:20:11"
+        },
+        {
+            "_id": "6260791b4da37864e3703b9d",
+            "name": "url",
+            "updated_at": "2022-04-20 21:20:27",
+            "created_at": "2022-04-20 21:20:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607931b18ccc3fae0652ad",
+            "name": "url",
+            "updated_at": "2022-04-20 21:20:49",
+            "created_at": "2022-04-20 21:20:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607940d737802bc815c216",
+            "name": "url",
+            "updated_at": "2022-04-20 21:21:04",
+            "created_at": "2022-04-20 21:21:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607963b18ccc3fae06532c",
+            "name": "url",
+            "updated_at": "2022-04-20 21:21:39",
+            "created_at": "2022-04-20 21:21:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607991b18ccc3fae065380",
+            "name": "url",
+            "updated_at": "2022-04-20 21:22:25",
+            "created_at": "2022-04-20 21:22:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626079afd737802bc815c2f8",
+            "name": "url",
+            "updated_at": "2022-04-20 21:22:55",
+            "created_at": "2022-04-20 21:22:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626079c1d737802bc815c343",
+            "name": "youTube",
+            "updated_at": "2022-04-20 21:23:13",
+            "created_at": "2022-04-20 21:23:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626079d1d737802bc815c349",
+            "name": "youTube",
+            "updated_at": "2022-04-20 21:23:29",
+            "created_at": "2022-04-20 21:23:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607aa9d737802bc815c426",
+            "name": "url",
+            "updated_at": "2022-04-20 21:27:05",
+            "created_at": "2022-04-20 21:27:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607aeed737802bc815c46a",
+            "name": "youTube",
+            "updated_at": "2022-04-20 21:28:14",
+            "created_at": "2022-04-20 21:28:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607b02d737802bc815c470",
+            "name": "youTube",
+            "updated_at": "2022-04-20 21:28:34",
+            "created_at": "2022-04-20 21:28:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607c1e36eaca5b632835fd",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 21:33:18",
+            "created_at": "2022-04-20 21:33:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607c3936eaca5b63283603",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 21:33:45",
+            "created_at": "2022-04-20 21:33:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62607f79dc120a1036281a71",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-20 21:47:37",
+            "created_at": "2022-04-20 21:47:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6260811dbf3fad6519219942",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 21:54:37",
+            "created_at": "2022-04-20 21:54:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626089a5aa648c05646ab966",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 22:31:01",
+            "created_at": "2022-04-20 22:31:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62608b0ac117f56dd4296aa1",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 22:36:58",
+            "created_at": "2022-04-20 22:36:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62608b56c117f56dd4296ad4",
+            "name": "vimeo",
+            "updated_at": "2022-04-20 22:38:14",
+            "created_at": "2022-04-20 22:38:14",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626166952a9b7c26754c7e17",
+            "name": "url",
+            "updated_at": "2022-04-21 14:13:41",
+            "created_at": "2022-04-21 14:13:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626166e7477cd51ac65e4b5a",
+            "name": "url",
+            "updated_at": "2022-04-21 14:15:03",
+            "created_at": "2022-04-21 14:15:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62616857e17b8665aa15847b",
+            "name": "vimeo",
+            "updated_at": "2022-04-21 14:21:11",
+            "created_at": "2022-04-21 14:21:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626168a321893738fe14d1b8",
+            "name": "meeting",
+            "updated_at": "2022-04-21 14:22:27",
+            "created_at": "2022-04-21 14:22:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6261ceda45a31b6259018378",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-21 21:38:34",
+            "created_at": "2022-04-21 21:38:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62620426abfdff173c57f349",
+            "name": "url",
+            "updated_at": "2022-04-22 01:25:58",
+            "created_at": "2022-04-22 01:25:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626217c839847c61921d728c",
+            "name": "meeting",
+            "updated_at": "2022-04-22 02:49:44",
+            "created_at": "2022-04-22 02:49:44",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621947465e1844653e6589",
+            "name": "meeting",
+            "updated_at": "2022-04-22 02:56:07",
+            "created_at": "2022-04-22 02:56:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621b75e59cac148a235dce",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:05:25",
+            "created_at": "2022-04-22 03:05:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621d34fbd8934bb968e9e3",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:12:52",
+            "created_at": "2022-04-22 03:12:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621d8f623ed544256f30a4",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:14:23",
+            "created_at": "2022-04-22 03:14:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621e3f4b92f170866d2e5f",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:17:19",
+            "created_at": "2022-04-22 03:17:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621f53f4bd306c75368ff6",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:21:55",
+            "created_at": "2022-04-22 03:21:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62621fc5bc073c76a40c8389",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:23:49",
+            "created_at": "2022-04-22 03:23:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262203094e5f6584973f7c4",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:25:36",
+            "created_at": "2022-04-22 03:25:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626220cc7b672216c81c9787",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:28:12",
+            "created_at": "2022-04-22 03:28:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626221435c3b825f4a385a35",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:30:11",
+            "created_at": "2022-04-22 03:30:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626221b43b714749bd68771e",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:32:04",
+            "created_at": "2022-04-22 03:32:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262225354d7a422c850821d",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:34:43",
+            "created_at": "2022-04-22 03:34:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626223995c838352c445c708",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:40:09",
+            "created_at": "2022-04-22 03:40:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626224966a7c0265f90d337d",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:44:22",
+            "created_at": "2022-04-22 03:44:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626224f43973bf3e441e3d89",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:45:56",
+            "created_at": "2022-04-22 03:45:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626225692928963ae7075696",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:47:53",
+            "created_at": "2022-04-22 03:47:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626225d4a3c4b0267c2455a3",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:49:40",
+            "created_at": "2022-04-22 03:49:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262262a3a0b6f0c422daf78",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:51:06",
+            "created_at": "2022-04-22 03:51:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626226dbcb95177656263bdd",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:54:03",
+            "created_at": "2022-04-22 03:54:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262283dcb95177656263dbd",
+            "name": "meeting",
+            "updated_at": "2022-04-22 03:59:57",
+            "created_at": "2022-04-22 03:59:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262290bd40de16ac86f3c26",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:03:23",
+            "created_at": "2022-04-22 04:03:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62622b22de0df3123d283bba",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:12:18",
+            "created_at": "2022-04-22 04:12:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62622c1b8fba7f4c420f6842",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:16:27",
+            "created_at": "2022-04-22 04:16:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62622cfd93a5e141492bf0ce",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:20:13",
+            "created_at": "2022-04-22 04:20:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62622eb9594ea52da94d699b",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:27:38",
+            "created_at": "2022-04-22 04:27:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62622f0f190e6a5a7445137e",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:29:03",
+            "created_at": "2022-04-22 04:29:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62622f8f13154650915aff92",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:31:11",
+            "created_at": "2022-04-22 04:31:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262304c0b41a514c22ab62e",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:34:20",
+            "created_at": "2022-04-22 04:34:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626230cfa6ff790e2d290196",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:36:31",
+            "created_at": "2022-04-22 04:36:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262313248944e26936e46be",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:38:10",
+            "created_at": "2022-04-22 04:38:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262319e80172b10813163b5",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:39:58",
+            "created_at": "2022-04-22 04:39:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262323e1f01d30c5d4110be",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:42:38",
+            "created_at": "2022-04-22 04:42:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262329560df6708ee2e42fe",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:44:05",
+            "created_at": "2022-04-22 04:44:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262338891bf742175035f44",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:48:08",
+            "created_at": "2022-04-22 04:48:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626233d556df9d59e16151c1",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:49:25",
+            "created_at": "2022-04-22 04:49:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626234c1e8834c48121890cc",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:53:21",
+            "created_at": "2022-04-22 04:53:21",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626235838635fb11601e3c01",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:56:35",
+            "created_at": "2022-04-22 04:56:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626235eb160e362b27058ca0",
+            "name": "meeting",
+            "updated_at": "2022-04-22 04:58:19",
+            "created_at": "2022-04-22 04:58:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262370e8cfc096a97654d8f",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:03:10",
+            "created_at": "2022-04-22 05:03:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626237e5c7fbac44d3351c3a",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:06:45",
+            "created_at": "2022-04-22 05:06:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626238f3c25fa425cb2d6b00",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:11:15",
+            "created_at": "2022-04-22 05:11:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623a0aff3bcc5599566420",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:15:54",
+            "created_at": "2022-04-22 05:15:54",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623ad30a63e214e63e2395",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:19:15",
+            "created_at": "2022-04-22 05:19:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623be055aae977a574f6d7",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:23:44",
+            "created_at": "2022-04-22 05:23:44",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623c564648d81c57790d77",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:25:42",
+            "created_at": "2022-04-22 05:25:42",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623d15a5ba3508ff3ef2d0",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:28:53",
+            "created_at": "2022-04-22 05:28:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623dbb506dc02f693246cc",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:31:39",
+            "created_at": "2022-04-22 05:31:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62623ead48013c71e157c382",
+            "name": "meeting",
+            "updated_at": "2022-04-22 05:35:41",
+            "created_at": "2022-04-22 05:35:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626240b848013c71e157c597",
+            "name": "url",
+            "updated_at": "2022-04-22 05:44:24",
+            "created_at": "2022-04-22 05:44:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262410aaa325d697f4b2281",
+            "name": "url",
+            "updated_at": "2022-04-22 05:45:46",
+            "created_at": "2022-04-22 05:45:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62624809cba9844c037168a2",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-22 06:15:37",
+            "created_at": "2022-04-22 06:15:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62624be0f683611b061e81fd",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-22 06:32:00",
+            "created_at": "2022-04-22 06:32:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62624cad0313ab4c34358234",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-22 06:35:25",
+            "created_at": "2022-04-22 06:35:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62624e33c037e8056b5f9765",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-22 06:41:55",
+            "created_at": "2022-04-22 06:41:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626250406f349a378d1718ce",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 06:50:40",
+            "created_at": "2022-04-22 06:50:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262510c4b9f653a2931f4ef",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 06:54:04",
+            "created_at": "2022-04-22 06:54:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262524c5a7fb06b891676b3",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 06:59:24",
+            "created_at": "2022-04-22 06:59:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262530a1a45662a057d4996",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 07:02:34",
+            "created_at": "2022-04-22 07:02:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262534ad98d11627476dd04",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 07:03:38",
+            "created_at": "2022-04-22 07:03:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626255101e2301323d6c7838",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 07:11:12",
+            "created_at": "2022-04-22 07:11:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262c4ff704eff31df254635",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 15:08:47",
+            "created_at": "2022-04-22 15:08:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262c5580604df35292a3a4b",
+            "name": "meeting",
+            "updated_at": "2022-04-22 15:10:16",
+            "created_at": "2022-04-22 15:10:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262c9f85dc15a0e3706151f",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 15:30:00",
+            "created_at": "2022-04-22 15:30:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262cf33e56e386daa20ebad",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 15:52:19",
+            "created_at": "2022-04-22 15:52:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262d1add4b79119f23db91e",
+            "name": "RTMP",
+            "updated_at": "2022-04-22 16:02:53",
+            "created_at": "2022-04-22 16:02:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262d3f81e37b45ffb131371",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-22 16:12:40",
+            "created_at": "2022-04-22 16:12:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262dc8d1e214a1d2e310175",
+            "name": "RTMP",
+            "updated_at": "2022-04-22 16:49:17",
+            "created_at": "2022-04-22 16:49:17",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6262dd218feece0e990ee667",
+            "name": "meeting",
+            "updated_at": "2022-04-22 16:51:45",
+            "created_at": "2022-04-22 16:51:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6263149d18e71d4a341a3faa",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-22 20:48:29",
+            "created_at": "2022-04-22 20:48:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626317e74ba0d615607d87da",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-22 21:02:31",
+            "created_at": "2022-04-22 21:02:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62659f4255f806152c16fa8d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-24 19:04:34",
+            "created_at": "2022-04-24 19:04:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265a284beb70166cb69bd12",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:18:28",
+            "created_at": "2022-04-24 19:18:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265a44cdf769b03174efd49",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:26:04",
+            "created_at": "2022-04-24 19:26:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265a6fdfcfadb04262723c3",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:37:33",
+            "created_at": "2022-04-24 19:37:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265a893a2ad956d180703ae",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:44:19",
+            "created_at": "2022-04-24 19:44:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265a98ba2ad956d1807062e",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:48:27",
+            "created_at": "2022-04-24 19:48:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265aa28c3e84969241dc605",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:51:04",
+            "created_at": "2022-04-24 19:51:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265ab5c7c4b1466d530ff8a",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:56:12",
+            "created_at": "2022-04-24 19:56:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265ac218729891b566e6c0b",
+            "name": "meeting",
+            "updated_at": "2022-04-24 19:59:29",
+            "created_at": "2022-04-24 19:59:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265ae2be6a2505b553c4bec",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:08:11",
+            "created_at": "2022-04-24 20:08:11",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265afb94cc17e105b1f8d8e",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:14:49",
+            "created_at": "2022-04-24 20:14:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265b0b5f63b3635ec53a5f7",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:19:01",
+            "created_at": "2022-04-24 20:19:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265b4e82575596c784d9382",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:36:56",
+            "created_at": "2022-04-24 20:36:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265b5c67522517fac5ffdfb",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:40:38",
+            "created_at": "2022-04-24 20:40:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265b6873e71520205233f86",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:43:51",
+            "created_at": "2022-04-24 20:43:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265b7662bd88d7bb77e5e45",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:47:34",
+            "created_at": "2022-04-24 20:47:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265b8f7cb98fc54d85bc48e",
+            "name": "meeting",
+            "updated_at": "2022-04-24 20:54:15",
+            "created_at": "2022-04-24 20:54:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265bdefc7879568ad32a2d7",
+            "name": "url",
+            "updated_at": "2022-04-24 21:15:27",
+            "created_at": "2022-04-24 21:15:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265be723a91cd5cf14fbd22",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-24 21:17:38",
+            "created_at": "2022-04-24 21:17:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265bff1e07ab278b13874c9",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-24 21:24:01",
+            "created_at": "2022-04-24 21:24:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6265c14914d132348e230756",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-24 21:29:45",
+            "created_at": "2022-04-24 21:29:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266b0d1811d1e6ca92076ed",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-25 14:31:45",
+            "created_at": "2022-04-25 14:31:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266b397d688462f32198649",
+            "name": "RTMP",
+            "updated_at": "2022-04-25 14:43:35",
+            "created_at": "2022-04-25 14:43:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266b4a293f34a23187539e4",
+            "name": "RTMP",
+            "updated_at": "2022-04-25 14:48:02",
+            "created_at": "2022-04-25 14:48:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266b4d48812901fa901716c",
+            "name": "RTMP",
+            "updated_at": "2022-04-25 14:48:52",
+            "created_at": "2022-04-25 14:48:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266b543b1f169780400f5e4",
+            "name": "RTMP",
+            "updated_at": "2022-04-25 14:50:43",
+            "created_at": "2022-04-25 14:50:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266b7195f7b177d471e5102",
+            "name": "RTMP",
+            "updated_at": "2022-04-25 14:58:33",
+            "created_at": "2022-04-25 14:58:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6266e12cfcafca1ace3ebcb2",
+            "name": "RTMP",
+            "updated_at": "2022-04-25 17:58:04",
+            "created_at": "2022-04-25 17:58:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62675512b288ca76fd751a32",
+            "name": "vimeo",
+            "updated_at": "2022-04-26 02:12:34",
+            "created_at": "2022-04-26 02:12:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62675689ed1fb26b7d7f3b41",
+            "name": "vimeo",
+            "updated_at": "2022-04-26 02:18:49",
+            "created_at": "2022-04-26 02:18:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62675880c08cf762816dc634",
+            "name": "youTube",
+            "updated_at": "2022-04-26 02:27:12",
+            "created_at": "2022-04-26 02:27:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626759cbc6701918bf153136",
+            "name": "youTube",
+            "updated_at": "2022-04-26 02:32:43",
+            "created_at": "2022-04-26 02:32:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62676b673d13725e1b5b3a11",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-26 03:47:51",
+            "created_at": "2022-04-26 03:47:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62676c48c5f505687c03afe6",
+            "name": "meeting",
+            "updated_at": "2022-04-26 03:51:36",
+            "created_at": "2022-04-26 03:51:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62676dde17d2292b1947ac8c",
+            "name": "RTMP",
+            "updated_at": "2022-04-26 03:58:22",
+            "created_at": "2022-04-26 03:58:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62676ed5bea5b20ad33cf3e0",
+            "name": "url",
+            "updated_at": "2022-04-26 04:02:29",
+            "created_at": "2022-04-26 04:02:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62676f5570c9013d663ed0b4",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-26 04:04:37",
+            "created_at": "2022-04-26 04:04:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267703456655d19fd143277",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-26 04:08:20",
+            "created_at": "2022-04-26 04:08:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626774afdc64ac4ab01bd3ef",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-26 04:27:27",
+            "created_at": "2022-04-26 04:27:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62677599dc64ac4ab01bd68a",
+            "name": "meeting",
+            "updated_at": "2022-04-26 04:31:21",
+            "created_at": "2022-04-26 04:31:21",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267767a7880fa7608332a5f",
+            "name": "RTMP",
+            "updated_at": "2022-04-26 04:35:06",
+            "created_at": "2022-04-26 04:35:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267776c7880fa7608332c72",
+            "name": "url",
+            "updated_at": "2022-04-26 04:39:08",
+            "created_at": "2022-04-26 04:39:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626779991839980b4601e455",
+            "name": "youTube",
+            "updated_at": "2022-04-26 04:48:25",
+            "created_at": "2022-04-26 04:48:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267816903a21013a96d878d",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-26 05:21:45",
+            "created_at": "2022-04-26 05:21:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267825cffbec029d2713065",
+            "name": "meeting",
+            "updated_at": "2022-04-26 05:25:48",
+            "created_at": "2022-04-26 05:25:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267833c20930541e33b1904",
+            "name": "RTMP",
+            "updated_at": "2022-04-26 05:29:32",
+            "created_at": "2022-04-26 05:29:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267f4a83a6c1a234077aee0",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-26 13:33:28",
+            "created_at": "2022-04-26 13:33:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267f59cea18b127c50d06c8",
+            "name": "meeting",
+            "updated_at": "2022-04-26 13:37:32",
+            "created_at": "2022-04-26 13:37:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267f69d2678ed2bcc60cce7",
+            "name": "RTMP",
+            "updated_at": "2022-04-26 13:41:49",
+            "created_at": "2022-04-26 13:41:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267f7ab554f1115af1ac927",
+            "name": "url",
+            "updated_at": "2022-04-26 13:46:19",
+            "created_at": "2022-04-26 13:46:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267f838908c5946897b467c",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-26 13:48:40",
+            "created_at": "2022-04-26 13:48:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267f92e89b86646d120be66",
+            "name": "vimeo",
+            "updated_at": "2022-04-26 13:52:46",
+            "created_at": "2022-04-26 13:52:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6267fa36908c5946897b4bae",
+            "name": "youTube",
+            "updated_at": "2022-04-26 13:57:10",
+            "created_at": "2022-04-26 13:57:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62687878201cd4522040f31f",
+            "name": "url",
+            "updated_at": "2022-04-26 22:55:52",
+            "created_at": "2022-04-26 22:55:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626878ff35dd313f7d0a9bdd",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-26 22:58:07",
+            "created_at": "2022-04-26 22:58:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62688135201cd4522040f780",
+            "name": "url",
+            "updated_at": "2022-04-26 23:33:09",
+            "created_at": "2022-04-26 23:33:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626883e129a405731c7b9c45",
+            "name": "url",
+            "updated_at": "2022-04-26 23:44:33",
+            "created_at": "2022-04-26 23:44:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626884701da97e5d31068515",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-26 23:46:56",
+            "created_at": "2022-04-26 23:46:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6269548606c2c566534fcd6b",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-27 14:34:46",
+            "created_at": "2022-04-27 14:34:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6269550406c2c566534fcda7",
+            "name": "cargarvideo",
+            "updated_at": "2022-04-27 14:36:52",
+            "created_at": "2022-04-27 14:36:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62697302132ca805c15bb37a",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-27 16:44:50",
+            "created_at": "2022-04-27 16:44:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626ab9922e3a8129320df43d",
+            "name": "url",
+            "updated_at": "2022-04-28 15:58:10",
+            "created_at": "2022-04-28 15:58:10",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626aeb737094b8360476d7ff",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-28 19:30:59",
+            "created_at": "2022-04-28 19:30:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626b0cfbd3819f0d6c3e004c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-28 21:54:03",
+            "created_at": "2022-04-28 21:54:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626c1d343980ce4d9b36fbc2",
+            "name": "url",
+            "updated_at": "2022-04-29 17:15:32",
+            "created_at": "2022-04-29 17:15:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626c405442d892257713789c",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-29 19:45:24",
+            "created_at": "2022-04-29 19:45:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626c5084be5571056020af6b",
+            "name": "eviusMeet",
+            "updated_at": "2022-04-29 20:54:28",
+            "created_at": "2022-04-29 20:54:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626f607694dba42f0c14b033",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-02 04:39:18",
+            "created_at": "2022-05-02 04:39:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626f64c294dba42f0c14b0b9",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-02 04:57:38",
+            "created_at": "2022-05-02 04:57:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626f670bc4fa0f04674ce89d",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-02 05:07:23",
+            "created_at": "2022-05-02 05:07:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "626fe7ddce8e2f4a545cdaec",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-02 14:17:01",
+            "created_at": "2022-05-02 14:17:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6270014f321cc8423339a26f",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-02 16:05:35",
+            "created_at": "2022-05-02 16:05:35",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627001b7695ed95610259285",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-02 16:07:19",
+            "created_at": "2022-05-02 16:07:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6271345f21e2d04ac3472b6e",
+            "name": "youTube",
+            "updated_at": "2022-05-03 13:55:43",
+            "created_at": "2022-05-03 13:55:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627135c521e2d04ac3472e15",
+            "name": "meeting",
+            "updated_at": "2022-05-03 14:01:41",
+            "created_at": "2022-05-03 14:01:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6271380321e2d04ac3473033",
+            "name": "url",
+            "updated_at": "2022-05-03 14:11:16",
+            "created_at": "2022-05-03 14:11:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627154826650065afb211ec7",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-03 16:12:50",
+            "created_at": "2022-05-03 16:12:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627180a2f2d0c451604bbd6e",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-03 19:21:06",
+            "created_at": "2022-05-03 19:21:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627180bcf2d0c451604bbd80",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-03 19:21:32",
+            "created_at": "2022-05-03 19:21:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627181aefa4eb5740c28f656",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-03 19:25:34",
+            "created_at": "2022-05-03 19:25:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6271afb48a43212038342c74",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-03 22:41:56",
+            "created_at": "2022-05-03 22:41:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62733ff0b019f9498462f4fb",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 03:09:36",
+            "created_at": "2022-05-05 03:09:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627340e5aaff22038d398613",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 03:13:41",
+            "created_at": "2022-05-05 03:13:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62734d34214e574da3293ced",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:06:12",
+            "created_at": "2022-05-05 04:06:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62734ee620d36d100135306f",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:13:26",
+            "created_at": "2022-05-05 04:13:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6273518f0ef09c748f0bf5b7",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:24:47",
+            "created_at": "2022-05-05 04:24:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627352720ef09c748f0bf7df",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:28:34",
+            "created_at": "2022-05-05 04:28:34",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627353d3eae9cc18e456d897",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:34:27",
+            "created_at": "2022-05-05 04:34:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62735534a3c4a9294028a927",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:40:20",
+            "created_at": "2022-05-05 04:40:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6273561da4e72b42163f0e6a",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:44:13",
+            "created_at": "2022-05-05 04:44:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62735792a3c4a9294028ada2",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:50:26",
+            "created_at": "2022-05-05 04:50:26",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62735970b9e33829f23b30c0",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 04:58:24",
+            "created_at": "2022-05-05 04:58:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62735b2cb9e33829f23b3261",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 05:05:48",
+            "created_at": "2022-05-05 05:05:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62735ce3b9e33829f23b3554",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 05:13:07",
+            "created_at": "2022-05-05 05:13:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6273e0495d8dfd6d37273c73",
+            "name": "meeting",
+            "updated_at": "2022-05-05 14:33:45",
+            "created_at": "2022-05-05 14:33:45",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6273e0653753fd59cc63d806",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-05 14:34:13",
+            "created_at": "2022-05-05 14:34:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627981cd6fcedb3df16855f2",
+            "name": "RTMP",
+            "updated_at": "2022-05-09 21:04:13",
+            "created_at": "2022-05-09 21:04:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279820f45f3cc599c05f2ea",
+            "name": "RTMP",
+            "updated_at": "2022-05-09 21:05:19",
+            "created_at": "2022-05-09 21:05:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279823a9a0cc30f0419d257",
+            "name": "RTMP",
+            "updated_at": "2022-05-09 21:06:02",
+            "created_at": "2022-05-09 21:06:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279825faf6ae843f27b7ae3",
+            "name": "RTMP",
+            "updated_at": "2022-05-09 21:06:39",
+            "created_at": "2022-05-09 21:06:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279bbb4594d1962375bb66f",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-10 01:11:16",
+            "created_at": "2022-05-10 01:11:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279bf09594d1962375bbaf0",
+            "name": "meeting",
+            "updated_at": "2022-05-10 01:25:29",
+            "created_at": "2022-05-10 01:25:29",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279c216f64cb217203b2fe2",
+            "name": "RTMP",
+            "updated_at": "2022-05-10 01:38:30",
+            "created_at": "2022-05-10 01:38:30",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279c3545ab37c01be54cb16",
+            "name": "url",
+            "updated_at": "2022-05-10 01:43:48",
+            "created_at": "2022-05-10 01:43:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279c480a788f55ee67beb5a",
+            "name": "url",
+            "updated_at": "2022-05-10 01:48:48",
+            "created_at": "2022-05-10 01:48:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279c5073fa2402e52257c60",
+            "name": "cargarvideo",
+            "updated_at": "2022-05-10 01:51:03",
+            "created_at": "2022-05-10 01:51:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279c6352120b90a040a158d",
+            "name": "vimeo",
+            "updated_at": "2022-05-10 01:56:05",
+            "created_at": "2022-05-10 01:56:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279c759c794b54b114c7b27",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:00:57",
+            "created_at": "2022-05-10 02:00:57",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279cb60ced0484149268b56",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:18:08",
+            "created_at": "2022-05-10 02:18:08",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279cc616d7292262043336c",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:22:25",
+            "created_at": "2022-05-10 02:22:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279ce62128cf4691204ad6b",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:30:58",
+            "created_at": "2022-05-10 02:30:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279d034128cf4691204b099",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:38:44",
+            "created_at": "2022-05-10 02:38:44",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279d0ee620ecd7e99531826",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:41:50",
+            "created_at": "2022-05-10 02:41:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279d307156a7237983dce0d",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:50:47",
+            "created_at": "2022-05-10 02:50:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279d4b1156a7237983dd0c5",
+            "name": "youTube",
+            "updated_at": "2022-05-10 02:57:53",
+            "created_at": "2022-05-10 02:57:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279d6d7d21dff66652e560e",
+            "name": "youTube",
+            "updated_at": "2022-05-10 03:07:03",
+            "created_at": "2022-05-10 03:07:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279d9ab73552549da60474f",
+            "name": "youTube",
+            "updated_at": "2022-05-10 03:19:07",
+            "created_at": "2022-05-10 03:19:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279daa176195b56c0414614",
+            "name": "youTube",
+            "updated_at": "2022-05-10 03:23:13",
+            "created_at": "2022-05-10 03:23:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279dc2fd19319576b09f8bf",
+            "name": "youTube",
+            "updated_at": "2022-05-10 03:29:51",
+            "created_at": "2022-05-10 03:29:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279ddde2fab3911a413da08",
+            "name": "youTube",
+            "updated_at": "2022-05-10 03:37:02",
+            "created_at": "2022-05-10 03:37:02",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6279df4bb8d7aa4db25ebb71",
+            "name": "youTube",
+            "updated_at": "2022-05-10 03:43:07",
+            "created_at": "2022-05-10 03:43:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627e73dc830d282585462eed",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-13 15:06:04",
+            "created_at": "2022-05-13 15:06:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627e73f8ccfd09281d4dd5e6",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-13 15:06:32",
+            "created_at": "2022-05-13 15:06:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627e7423830d282585462f95",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-13 15:07:15",
+            "created_at": "2022-05-13 15:07:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627e74432bfdae2d001d3145",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-13 15:07:47",
+            "created_at": "2022-05-13 15:07:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "627e746b830d282585463016",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-13 15:08:27",
+            "created_at": "2022-05-13 15:08:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6282561662bf78409a77dac2",
+            "name": "url",
+            "updated_at": "2022-05-16 13:48:06",
+            "created_at": "2022-05-16 13:48:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6283d9bf4b38db21497eef22",
+            "name": "url",
+            "updated_at": "2022-05-17 17:22:07",
+            "created_at": "2022-05-17 17:22:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6283f3997d126e404b77f852",
+            "name": "eviusMeet",
+            "updated_at": "2022-05-17 19:12:25",
+            "created_at": "2022-05-17 19:12:25",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6283f4198c2be959ea006c42",
+            "name": "meeting",
+            "updated_at": "2022-05-17 19:14:33",
+            "created_at": "2022-05-17 19:14:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6283f4357d126e404b77f853",
+            "name": "url",
+            "updated_at": "2022-05-17 19:15:01",
+            "created_at": "2022-05-17 19:15:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6285205d551aa0217b253e92",
+            "name": "url",
+            "updated_at": "2022-05-18 16:35:41",
+            "created_at": "2022-05-18 16:35:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869ab720e7c154203ad98b",
+            "name": "url",
+            "updated_at": "2022-05-19 19:29:59",
+            "created_at": "2022-05-19 19:29:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869c9e3991153ad00b0561",
+            "name": "url",
+            "updated_at": "2022-05-19 19:38:06",
+            "created_at": "2022-05-19 19:38:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869d7a3c62fd31822f1c55",
+            "name": "url",
+            "updated_at": "2022-05-19 19:41:46",
+            "created_at": "2022-05-19 19:41:46",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869dd65b67395f586c7438",
+            "name": "url",
+            "updated_at": "2022-05-19 19:43:18",
+            "created_at": "2022-05-19 19:43:18",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869e0756e20d270503a4e3",
+            "name": "url",
+            "updated_at": "2022-05-19 19:44:07",
+            "created_at": "2022-05-19 19:44:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869e1856e20d270503a4e4",
+            "name": "youTube",
+            "updated_at": "2022-05-19 19:44:24",
+            "created_at": "2022-05-19 19:44:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62869e2f3c62fd31822f1c5b",
+            "name": "url",
+            "updated_at": "2022-05-19 19:44:47",
+            "created_at": "2022-05-19 19:44:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6286a25c29222d4993726d12",
+            "name": "url",
+            "updated_at": "2022-05-19 20:02:36",
+            "created_at": "2022-05-19 20:02:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62880f8704b0f43f4a29c314",
+            "name": "url",
+            "updated_at": "2022-05-20 22:00:39",
+            "created_at": "2022-05-20 22:00:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62880fcd04b0f43f4a29c315",
+            "name": "url",
+            "updated_at": "2022-05-20 22:01:49",
+            "created_at": "2022-05-20 22:01:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "628d482c48bcc244f368bbc2",
+            "name": "url",
+            "updated_at": "2022-05-24 21:03:40",
+            "created_at": "2022-05-24 21:03:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "628e6287e306252f7e2f6f62",
+            "name": "url",
+            "updated_at": "2022-05-25 17:08:23",
+            "created_at": "2022-05-25 17:08:23",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "628e63ece306252f7e2f6f64",
+            "name": "url",
+            "updated_at": "2022-05-25 17:14:20",
+            "created_at": "2022-05-25 17:14:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "628eab4da6530f4ebd24a5f2",
+            "name": "url",
+            "updated_at": "2022-05-25 22:18:53",
+            "created_at": "2022-05-25 22:18:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "628eabdf2db1aa517c2b23a2",
+            "name": "url",
+            "updated_at": "2022-05-25 22:21:19",
+            "created_at": "2022-05-25 22:21:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "6297c130cef78c13087cf945",
+            "name": "url",
+            "updated_at": "2022-06-01 19:42:40",
+            "created_at": "2022-06-01 19:42:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629a6237dde5181a983fa223",
+            "name": "url",
+            "updated_at": "2022-06-03 19:34:15",
+            "created_at": "2022-06-03 19:34:15",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629a6375a9b936793a64f9f2",
+            "name": "url",
+            "updated_at": "2022-06-03 19:39:33",
+            "created_at": "2022-06-03 19:39:33",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629a63bf231c5d109700fae2",
+            "name": "url",
+            "updated_at": "2022-06-03 19:40:47",
+            "created_at": "2022-06-03 19:40:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629a63f719e42a61e649d022",
+            "name": "url",
+            "updated_at": "2022-06-03 19:41:43",
+            "created_at": "2022-06-03 19:41:43",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629a772bffa1845b2b50b022",
+            "name": "RTMP",
+            "updated_at": "2022-06-03 21:03:39",
+            "created_at": "2022-06-03 21:03:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629e337bf6593125dc7a9172",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-06 17:03:55",
+            "created_at": "2022-06-06 17:03:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629e4b2b3c710733c12d5a92",
+            "name": "meeting",
+            "updated_at": "2022-06-06 18:44:59",
+            "created_at": "2022-06-06 18:44:59",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "629f741c949d20593a4a54a1",
+            "name": "url",
+            "updated_at": "2022-06-07 15:51:56",
+            "created_at": "2022-06-07 15:51:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a0af3bcc7b877174481742",
+            "name": "meeting",
+            "updated_at": "2022-06-08 14:16:27",
+            "created_at": "2022-06-08 14:16:27",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a0af4629b261441e4e5a22",
+            "name": "meeting",
+            "updated_at": "2022-06-08 14:16:38",
+            "created_at": "2022-06-08 14:16:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a0afcf29b261441e4e5a24",
+            "name": "meeting",
+            "updated_at": "2022-06-08 14:18:55",
+            "created_at": "2022-06-08 14:18:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a0b05f2510c6030645b213",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-08 14:21:19",
+            "created_at": "2022-06-08 14:21:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a0b219067fbc4ab120410a",
+            "name": "meeting",
+            "updated_at": "2022-06-08 14:28:41",
+            "created_at": "2022-06-08 14:28:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a0f3cf8805a573ff0f9f22",
+            "name": "meeting",
+            "updated_at": "2022-06-08 19:09:03",
+            "created_at": "2022-06-08 19:09:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a106506f2cef5785395162",
+            "name": "url",
+            "updated_at": "2022-06-08 20:28:00",
+            "created_at": "2022-06-08 20:28:00",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a1071acf17ed6cc02f7092",
+            "name": "url",
+            "updated_at": "2022-06-08 20:31:22",
+            "created_at": "2022-06-08 20:31:22",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a1077dcf17ed6cc02f7093",
+            "name": "cargarvideo",
+            "updated_at": "2022-06-08 20:33:01",
+            "created_at": "2022-06-08 20:33:01",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a25d5c7be30b41730d3622",
+            "name": "meeting",
+            "updated_at": "2022-06-09 20:51:40",
+            "created_at": "2022-06-09 20:51:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a2682141c58b7f811e8bf2",
+            "name": "meeting",
+            "updated_at": "2022-06-09 21:37:37",
+            "created_at": "2022-06-09 21:37:37",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a37f9f074c7110b31d8382",
+            "name": "meeting",
+            "updated_at": "2022-06-10 17:30:07",
+            "created_at": "2022-06-10 17:30:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a396f48c02d317dc17c222",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-10 19:09:40",
+            "created_at": "2022-06-10 19:09:40",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a7ccbd504d057e16683d82",
+            "name": "url",
+            "updated_at": "2022-06-13 23:48:13",
+            "created_at": "2022-06-13 23:48:13",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a7d198cff0257a745652c2",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-14 00:08:56",
+            "created_at": "2022-06-14 00:08:56",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8adb57e1664119a71c453",
+            "name": "RTMP",
+            "updated_at": "2022-06-14 15:48:05",
+            "created_at": "2022-06-14 15:48:05",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8ae677211525c6d18aed2",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-14 15:51:03",
+            "created_at": "2022-06-14 15:51:03",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8ae9eb4e608792a7a0502",
+            "name": "url",
+            "updated_at": "2022-06-14 15:51:58",
+            "created_at": "2022-06-14 15:51:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8afa87211525c6d18aed3",
+            "name": "cargarvideo",
+            "updated_at": "2022-06-14 15:56:24",
+            "created_at": "2022-06-14 15:56:24",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8b73938b53422e605b622",
+            "name": "meeting",
+            "updated_at": "2022-06-14 16:28:41",
+            "created_at": "2022-06-14 16:28:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8b85b38b53422e605b623",
+            "name": "url",
+            "updated_at": "2022-06-14 16:33:31",
+            "created_at": "2022-06-14 16:33:31",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8b914f1c6cf398b1228f2",
+            "name": "vimeo",
+            "updated_at": "2022-06-14 16:36:36",
+            "created_at": "2022-06-14 16:36:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8b961e07d036c000b0222",
+            "name": "youTube",
+            "updated_at": "2022-06-14 16:37:53",
+            "created_at": "2022-06-14 16:37:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8b9cbf1c6cf398b1228f3",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-14 16:39:39",
+            "created_at": "2022-06-14 16:39:39",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8ec862bacba08b4224c82",
+            "name": "RTMP",
+            "updated_at": "2022-06-14 20:16:06",
+            "created_at": "2022-06-14 20:16:06",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8eda169bc4d38f0182492",
+            "name": "RTMP",
+            "updated_at": "2022-06-14 20:20:49",
+            "created_at": "2022-06-14 20:20:49",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8ee1d4905cc333535aa35",
+            "name": "url",
+            "updated_at": "2022-06-14 20:22:53",
+            "created_at": "2022-06-14 20:22:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a8f4bc779a784c433d9b42",
+            "name": "meeting",
+            "updated_at": "2022-06-14 20:51:08",
+            "created_at": "2022-06-14 20:51:08"
+        },
+        {
+            "_id": "62a9274d77612f46e1059cf2",
+            "name": "url",
+            "updated_at": "2022-06-15 00:26:53",
+            "created_at": "2022-06-15 00:26:53",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a928e0eae16e35485f6e82",
+            "name": "url",
+            "updated_at": "2022-06-15 00:33:36",
+            "created_at": "2022-06-15 00:33:36",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a92a3072434069bd30bad2",
+            "name": "meeting",
+            "updated_at": "2022-06-15 00:39:12",
+            "created_at": "2022-06-15 00:39:12",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a942b4e5a42042e8432b82",
+            "name": "RTMP",
+            "updated_at": "2022-06-15 02:23:48",
+            "created_at": "2022-06-15 02:23:48",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a944cf14681a2e29596c73",
+            "name": "url",
+            "updated_at": "2022-06-15 02:32:47",
+            "created_at": "2022-06-15 02:32:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9450214681a2e29596c74",
+            "name": "url",
+            "updated_at": "2022-06-15 02:33:38",
+            "created_at": "2022-06-15 02:33:38",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9452be5a42042e8432b83",
+            "name": "meeting",
+            "updated_at": "2022-06-15 02:34:19",
+            "created_at": "2022-06-15 02:34:19",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a945c47c4aa967834dba22",
+            "name": "RTMP",
+            "updated_at": "2022-06-15 02:36:52",
+            "created_at": "2022-06-15 02:36:52",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9562b4f71bf3fd27059d2",
+            "name": "RTMP",
+            "updated_at": "2022-06-15 03:46:51",
+            "created_at": "2022-06-15 03:46:51",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a95879575b5a4b9f0a8ac2",
+            "name": "meeting",
+            "updated_at": "2022-06-15 03:56:41",
+            "created_at": "2022-06-15 03:56:41",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9588a701d840ff93982c2",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 03:56:58",
+            "created_at": "2022-06-15 03:56:58",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9e07246a8f4067b1ee472",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 13:36:50",
+            "created_at": "2022-06-15 13:36:50",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9e1a339be0222a816e403",
+            "name": "RTMP",
+            "updated_at": "2022-06-15 13:41:55",
+            "created_at": "2022-06-15 13:41:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9e1a3f1beb81d973812c2",
+            "name": "finish",
+            "updated_at": "2022-06-15 13:41:55",
+            "created_at": "2022-06-15 13:41:55",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9ee6c374075151974df92",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 14:36:28",
+            "created_at": "2022-06-15 14:36:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9ee6c71584c794a16d422",
+            "name": "finish",
+            "updated_at": "2022-06-15 14:36:28",
+            "created_at": "2022-06-15 14:36:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62a9fddc186e5c29d94e3352",
+            "name": "url",
+            "updated_at": "2022-06-15 15:42:20",
+            "created_at": "2022-06-15 15:42:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa09ced2bd46682a0f2d32",
+            "name": "url",
+            "updated_at": "2022-06-15 16:33:18",
+            "created_at": "2022-06-15 16:33:18"
+        },
+        {
+            "_id": "62aa0a48f0c0e573903e87b2",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 16:35:20",
+            "created_at": "2022-06-15 16:35:20",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa0ba0d6bb8c5f404f4532",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 16:41:04",
+            "created_at": "2022-06-15 16:41:04",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa0eaf6b65ab4df81ec012",
+            "name": "RTMP",
+            "updated_at": "2022-06-15 16:54:07",
+            "created_at": "2022-06-15 16:54:07",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa0ed76b65ab4df81ec013",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 16:54:47",
+            "created_at": "2022-06-15 16:54:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa11c46b65ab4df81ec014",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 17:07:16",
+            "created_at": "2022-06-15 17:07:16",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa11f9dbe63d56803072e2",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 17:08:09",
+            "created_at": "2022-06-15 17:08:09",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa12c01a823261282c6022",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 17:11:28",
+            "created_at": "2022-06-15 17:11:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa12d31a823261282c6023",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 17:11:47",
+            "created_at": "2022-06-15 17:11:47",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa13001a823261282c6024",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 17:12:32",
+            "created_at": "2022-06-15 17:12:32",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa13ec6b65ab4df81ec015",
+            "name": "eviusMeet",
+            "updated_at": "2022-06-15 17:16:28",
+            "created_at": "2022-06-15 17:16:28",
+            "0": [
+                null
+            ]
+        },
+        {
+            "_id": "62aa4a716197e879201f62f2",
+            "name": "url",
+            "updated_at": "2022-06-15 21:09:05",
+            "created_at": "2022-06-15 21:09:05"
+        },
+        {
+            "_id": "62aa4b626197e879201f62f3",
+            "name": "url",
+            "updated_at": "2022-06-15 21:13:06",
+            "created_at": "2022-06-15 21:13:06"
+        },
+        {
+            "_id": "62aa4b8162a70a76b824d722",
+            "name": "url",
+            "updated_at": "2022-06-15 21:13:37",
+            "created_at": "2022-06-15 21:13:37"
+        },
+        {
+            "_id": "62aa623a78c1144f545092c2",
+            "name": "url",
+            "updated_at": "2022-06-15 22:50:34",
+            "created_at": "2022-06-15 22:50:34",
+            "0": [
+                null
+            ]
+        }
+    ],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/type?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/type?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/type",
+        "per_page": 2500,
+        "to": 847,
+        "total": 847
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/type`
+
+
+<!-- END_c4e1cf32e4ca36a34540840629748fdf -->
+
+<!-- START_e923574758221e67182672013457af09 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/type" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/type"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/type`
+
+
+<!-- END_e923574758221e67182672013457af09 -->
+
+<!-- START_65afbf2c97191c8200eb4d652b90cbce -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/type/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/type/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Type] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/type/{type}`
+
+
+<!-- END_65afbf2c97191c8200eb4d652b90cbce -->
+
+<!-- START_e53da28066a06a2267961829cecf071b -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/type/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/type/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/type/{type}`
+
+`PATCH api/events/{event}/type/{type}`
+
+
+<!-- END_e53da28066a06a2267961829cecf071b -->
+
+<!-- START_2e7fffcfbb4d9c9e642cf9a13b2b6216 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/type/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/type/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/type/{type}`
+
+
+<!-- END_2e7fffcfbb4d9c9e642cf9a13b2b6216 -->
+
+<!-- START_0026b9d7d9f12ca8a36fa2ab7000eec8 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/categoryactivities" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/categoryactivities"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/categoryactivities?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/categoryactivities?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/categoryactivities",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/categoryactivities`
+
+
+<!-- END_0026b9d7d9f12ca8a36fa2ab7000eec8 -->
+
+<!-- START_52f6c65e2d94e3c9eab893183781790e -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/categoryactivities" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/categoryactivities"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/categoryactivities`
+
+
+<!-- END_52f6c65e2d94e3c9eab893183781790e -->
+
+<!-- START_b434a48a4bd85a0c320f20d381063524 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/categoryactivities/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/categoryactivities/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\ActivityCategories] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/categoryactivities/{categoryactivity}`
+
+
+<!-- END_b434a48a4bd85a0c320f20d381063524 -->
+
+<!-- START_2d7bfcebffcf391d4585daf45b3a8396 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/categoryactivities/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/categoryactivities/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/categoryactivities/{categoryactivity}`
+
+`PATCH api/events/{event}/categoryactivities/{categoryactivity}`
+
+
+<!-- END_2d7bfcebffcf391d4585daf45b3a8396 -->
+
+<!-- START_66d236f17e3ce46bb1412bd7956d3532 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/categoryactivities/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/categoryactivities/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/categoryactivities/{categoryactivity}`
+
+
+<!-- END_66d236f17e3ce46bb1412bd7956d3532 -->
+
+<!-- START_543a0bd309e906714e3d5680515c7554 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sendpush" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendpush"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/sendpush?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/sendpush?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/sendpush",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sendpush`
+
+
+<!-- END_543a0bd309e906714e3d5680515c7554 -->
+
+<!-- START_2ace9268c9c5bcddb3164b9780231ffc -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/sendpush" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendpush"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sendpush`
+
+
+<!-- END_2ace9268c9c5bcddb3164b9780231ffc -->
+
+<!-- START_bc742627caba64ee9307d06df5123f94 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sendpush/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendpush/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\PushNotification] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sendpush/{sendpush}`
+
+
+<!-- END_bc742627caba64ee9307d06df5123f94 -->
+
+<!-- START_5d6b257183dd09ca38b17153bc67e2e1 -->
+## api/events/{event}/sendpush/{sendpush}
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/sendpush/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendpush/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/sendpush/{sendpush}`
+
+`PATCH api/events/{event}/sendpush/{sendpush}`
+
+
+<!-- END_5d6b257183dd09ca38b17153bc67e2e1 -->
+
+<!-- START_23a0dc857e2113b4d5674fbfcc3c10d6 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/sendpush/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sendpush/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/sendpush/{sendpush}`
+
+
+<!-- END_23a0dc857e2113b4d5674fbfcc3c10d6 -->
+
+<!-- START_e7c327e196539dd2e069856f6bb3bafc -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/wall" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wall"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/wall?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/wall?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/wall",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/wall`
+
+
+<!-- END_e7c327e196539dd2e069856f6bb3bafc -->
+
+<!-- START_d5770d2cc7504d816f669d8b3bde0845 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/wall" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wall"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/wall`
+
+
+<!-- END_d5770d2cc7504d816f669d8b3bde0845 -->
+
+<!-- START_81ddaff02b157590887f71e64580d3a9 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/wall/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wall/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Wall] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/wall/{wall}`
+
+
+<!-- END_81ddaff02b157590887f71e64580d3a9 -->
+
+<!-- START_f697f3789550f3b5b13a8a0ce2733642 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/wall/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wall/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/wall/{wall}`
+
+`PATCH api/events/{event}/wall/{wall}`
+
+
+<!-- END_f697f3789550f3b5b13a8a0ce2733642 -->
+
+<!-- START_61f384ae0479efc35753fcca680f1485 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/wall/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wall/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/wall/{wall}`
+
+
+<!-- END_61f384ae0479efc35753fcca680f1485 -->
+
+<!-- START_23827a699dc337fb0bc31f29c2621e6e -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/faqs" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/faqs"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/faqs?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/faqs?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/faqs",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/faqs`
+
+
+<!-- END_23827a699dc337fb0bc31f29c2621e6e -->
+
+<!-- START_f79a6ed99787f46ccea24f9afcbb108a -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/faqs/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/faqs/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Faq] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/faqs/{faqs}`
+
+
+<!-- END_f79a6ed99787f46ccea24f9afcbb108a -->
+
+<!-- START_30bd47a1099394cb80a804148e8ad056 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/faqs" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/faqs"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/faqs`
+
+
+<!-- END_30bd47a1099394cb80a804148e8ad056 -->
+
+<!-- START_8a7f77edbad239932e5ec1a8eb3807fc -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/faqs/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/faqs/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/faqs/{faqs}`
+
+
+<!-- END_8a7f77edbad239932e5ec1a8eb3807fc -->
+
+<!-- START_c25032e1736b13f3b3d45de6f9c6c101 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/faqs/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/faqs/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/faqs/{faqs}`
+
+
+<!-- END_c25032e1736b13f3b3d45de6f9c6c101 -->
+
+<!-- START_89ace0fb827fd8f5545b2154bddbcccf -->
+## api/events/{event}/duplicatefaqs/{id}
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/duplicatefaqs/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/duplicatefaqs/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/duplicatefaqs/{id}`
+
+
+<!-- END_89ace0fb827fd8f5545b2154bddbcccf -->
+
+<!-- START_93aa71bf26b2f4d319268e9c86ecfda4 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/zoomhost" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/zoomhost"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{id}/zoomhost`
+
+
+<!-- END_93aa71bf26b2f4d319268e9c86ecfda4 -->
+
+<!-- START_30c4fa0e804a8da038a8a2238375a0ea -->
+## api/events/zoomhost
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/zoomhost" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/zoomhost"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/zoomhost`
+
+
+<!-- END_30c4fa0e804a8da038a8a2238375a0ea -->
+
+<!-- START_b49acd106f42b7cc8661f913a2fa318b -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/zoomhost" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/zoomhost"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/zoomhost`
+
+
+<!-- END_b49acd106f42b7cc8661f913a2fa318b -->
+
 <!-- START_d9b62494c6aeb80a34684d6c82c603e4 -->
 ## api/eventusers/{event}/makeTicketIdaProperty/{ticket_id}
 > Example request:
@@ -12662,6 +23768,572 @@ fetch(url, {
 
 
 <!-- END_710a166934ebcbb3ee90ea0211f87e7b -->
+
+<!-- START_ce5e0fa9e7df410c8387d3102ac7f856 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/messages" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/messages"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Event] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/messages`
+
+
+<!-- END_ce5e0fa9e7df410c8387d3102ac7f856 -->
+
+<!-- START_1ee877fcd1da4d9818d8f0ae4e210034 -->
+## api/events/{event}/meetingrequest/notify
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/meetingrequest/notify" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/meetingrequest/notify"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/meetingrequest/notify`
+
+
+<!-- END_1ee877fcd1da4d9818d8f0ae4e210034 -->
+
+<!-- START_33920aa46be59ec6e109e04151fafe43 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/mailing" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/mailing"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/mailing?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/mailing?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/mailing",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/mailing`
+
+
+<!-- END_33920aa46be59ec6e109e04151fafe43 -->
+
+<!-- START_c1c19ea3d86b59fa48a28c443fd74121 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/mailing" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/mailing"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/mailing`
+
+
+<!-- END_c1c19ea3d86b59fa48a28c443fd74121 -->
+
+<!-- START_1e9b4fd361860d745969a8a9f380a7eb -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/mailing/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/mailing/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Mailing] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/mailing/{mailing}`
+
+
+<!-- END_1e9b4fd361860d745969a8a9f380a7eb -->
+
+<!-- START_b2ccb7bcc32d5bc48bd50e33d8bf72bf -->
+## api/events/{event}/mailing/{mailing}
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/mailing/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/mailing/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/mailing/{mailing}`
+
+`PATCH api/events/{event}/mailing/{mailing}`
+
+
+<!-- END_b2ccb7bcc32d5bc48bd50e33d8bf72bf -->
+
+<!-- START_f996378c1a9a6409c9b9dc749486c9d9 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/mailing/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/mailing/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/mailing/{mailing}`
+
+
+<!-- END_f996378c1a9a6409c9b9dc749486c9d9 -->
+
+<!-- START_969c60e16e8ced46beb2a4e95b969507 -->
+## Display a listing of the contributors of an event resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/contributors" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contributors"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/contributors`
+
+
+<!-- END_969c60e16e8ced46beb2a4e95b969507 -->
+
+<!-- START_9a4a28230ac61ba4e3ccfae2ee80ce8d -->
+## Store
+
+| Body Params   |
+| ------------- |
+| @body $_POST[role_id] required field       |
+| @body $_POST[event_id]  required field     |
+| @body $_POST[model_id] required field      |
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/contributors" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contributors"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/contributors`
+
+
+<!-- END_9a4a28230ac61ba4e3ccfae2ee80ce8d -->
+
+<!-- START_2431fc67947ac806d3900ff60ec831b1 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/contributors/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contributors/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/contributors/{id}`
+
+
+<!-- END_2431fc67947ac806d3900ff60ec831b1 -->
+
+<!-- START_ae3b42ed7cb137f9a5e48692b7b0c2af -->
+## Update the specified resource in storage.
+
+| Body Params   |
+| ------------- |
+| @body $_POST[role_id] required field       |
+| @body $_POST[event_id]  required field     |
+| @body $_POST[model_id] required field      |
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/contributors/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contributors/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/contributors/{id}`
+
+
+<!-- END_ae3b42ed7cb137f9a5e48692b7b0c2af -->
+
+<!-- START_7d6a82e31dc9505d49ca12d6c9b63474 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/contributors/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contributors/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/contributors/{id}`
+
+
+<!-- END_7d6a82e31dc9505d49ca12d6c9b63474 -->
+
+<!-- START_ebbff99c058fcf1b902170077f0e7b28 -->
+## Create model_has_role
+role_id
+model_id (user_id)
+event_id
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/contributors/events/1/me" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/contributors/events/1/me"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/contributors/events/{event}/me`
+
+
+<!-- END_ebbff99c058fcf1b902170077f0e7b28 -->
 
 <!-- START_739442a2495f200cd4de63da705ac98e -->
 ## Create model_has_role
@@ -12756,6 +24428,650 @@ fetch(url, {
 
 <!-- END_50361dad34e65e623afe3a82b2191784 -->
 
+<!-- START_cacf9dcada80f4a86feb220acecc03e3 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/tickets" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/tickets`
+
+
+<!-- END_cacf9dcada80f4a86feb220acecc03e3 -->
+
+<!-- START_636380a0158d1df9961b243319ec1b93 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/tickets" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/tickets`
+
+
+<!-- END_636380a0158d1df9961b243319ec1b93 -->
+
+<!-- START_e8191ded8130c5fa1a8277913ccccbf8 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/tickets/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Models\\Ticket] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/tickets/{ticket}`
+
+
+<!-- END_e8191ded8130c5fa1a8277913ccccbf8 -->
+
+<!-- START_80abdb0a569f685cfe652f764894ef7b -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/tickets/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/tickets/{ticket}`
+
+`PATCH api/events/{event}/tickets/{ticket}`
+
+
+<!-- END_80abdb0a569f685cfe652f764894ef7b -->
+
+<!-- START_99a0d52df37496fdc9dae25d9713fe18 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/tickets/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/tickets/{ticket}`
+
+
+<!-- END_99a0d52df37496fdc9dae25d9713fe18 -->
+
+<!-- START_a0502650b487d5b4c8fbf561ee0f0467 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/speakers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/speakers?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/speakers?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/speakers",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/speakers`
+
+
+<!-- END_a0502650b487d5b4c8fbf561ee0f0467 -->
+
+<!-- START_bb7e0a3c0f66f36eee0cf63387bd175f -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/speakers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/speakers`
+
+
+<!-- END_bb7e0a3c0f66f36eee0cf63387bd175f -->
+
+<!-- START_4f2c690204e02d0deb607fe62fda007b -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/speakers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/speakers/{speaker}`
+
+
+<!-- END_4f2c690204e02d0deb607fe62fda007b -->
+
+<!-- START_5f2f902dfa296da975d40b9094829ccb -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/speakers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/speakers/{speaker}`
+
+`PATCH api/events/{event}/speakers/{speaker}`
+
+
+<!-- END_5f2f902dfa296da975d40b9094829ccb -->
+
+<!-- START_44e3cee0c96f928cf81628ca49de15f0 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/speakers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/speakers/{speaker}`
+
+
+<!-- END_44e3cee0c96f928cf81628ca49de15f0 -->
+
+<!-- START_bdc0268a497e0fe6dd32311ed49036b3 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sessions" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/sessions?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/sessions?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/sessions",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sessions`
+
+
+<!-- END_bdc0268a497e0fe6dd32311ed49036b3 -->
+
+<!-- START_813d1a439d622f9d6691656ec6b3a008 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/sessions" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sessions`
+
+
+<!-- END_813d1a439d622f9d6691656ec6b3a008 -->
+
+<!-- START_046677bc0f2519edffbb576a5890ffcf -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sessions/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\EventSession] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sessions/{session}`
+
+
+<!-- END_046677bc0f2519edffbb576a5890ffcf -->
+
+<!-- START_8c1f359926396a023aa587463c9d13bc -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/sessions/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/sessions/{session}`
+
+`PATCH api/events/{event}/sessions/{session}`
+
+
+<!-- END_8c1f359926396a023aa587463c9d13bc -->
+
+<!-- START_6c3fea43b7a95644a7f7b4662541348e -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/sessions/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/sessions/{session}`
+
+
+<!-- END_6c3fea43b7a95644a7f7b4662541348e -->
+
 <!-- START_e2472f0dc8400d5818ee0a4fb92cf7ce -->
 ## _validateFreeorder_: validates the order in case the purchase value is 0
 
@@ -12763,14 +25079,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/orders/officia/validateFreeorder" \
+    "https://devapi.evius.co/api/orders/a/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/orders/officia/validateFreeorder"
+    "https://devapi.evius.co/api/orders/a/validateFreeorder"
 );
 
 let headers = {
@@ -12806,14 +25122,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/orders/sit/validatePointOrder" \
+    "https://devapi.evius.co/api/orders/occaecati/validatePointOrder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/orders/sit/validatePointOrder"
+    "https://devapi.evius.co/api/orders/occaecati/validatePointOrder"
 );
 
 let headers = {
@@ -12878,6 +25194,51 @@ fetch(url, {
 
 
 <!-- END_3e560035745c03dfe7c6d4b9bf634a60 -->
+
+<!-- START_986e7c215f65791c47ad3f4013061d39 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/message/1/messageUser" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/message/1/messageUser"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Event] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/message/{message_id}/messageUser`
+
+
+<!-- END_986e7c215f65791c47ad3f4013061d39 -->
 
 <!-- START_66df3678904adde969490f2278b8f47f -->
 ## Authenticate the request for channel access.

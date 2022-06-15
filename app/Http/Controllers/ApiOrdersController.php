@@ -424,6 +424,13 @@ class ApiOrdersController extends Controller
 
     }
     
+    /**
+     * _createOrderWithTickets_: Create an order for an event with tickets
+     * 
+     * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
+     * @authenticated
+     * @bodyParam space_available object required Number of tickets that will be created
+     */
     public function createOrderWithTickets(Request $request, $event)
     {
         $request->validate([
