@@ -97,28 +97,55 @@ class BillingController extends Controller
                 ->updatePlan($data['plan_id'], $data['user_id']);
         }
 
-        //Validacion si el usuaario desea guardar el metodo de pago
+        //Validacion si el usuario desea guardar el metodo de pago
         $save = isset($data['billing']['save']) ? $data['billing']['save'] : null;
+
         if ($save) {
             $payment = app('App\Http\Controllers\PaymentController')
                 ->createByBilling($data['billing']['payment_method'], $data['user_id']);//Llamada al controlador para crear el metodo de pago
             unset($data['billing']['payment_method']);//Como el usuario guarda los datos, se borran en el billing
             $data['payment_id'] = json_decode(json_encode($payment))->original->_id;//se le relaciona el id del metodo recien creado
+
+            //Se valida si la factura tiene adicionales
+            $addons = isset($data['billing']['details']) ? $data['billing']['details'] : null;
+            $this::findAndCreateAddons($addons, $data['user_id']);
+            
+            //save new billing
             $billing_save = new Billing($data);
             $billing_save->save();
             return response()->json($billing_save, 201);
-        }//Si no guarda el metodo de pago se guarda tal cual llega el billing
+        }
+        //Si no guarda el metodo de pago se guarda tal cual llega el billing e igual se comprueba si tiene adicionales
+        $this::findAndCreateAddons($data['details'], $data['user_id']);
         $Billing = new Billing($data);
         $Billing->save();
         return response()->json($Billing, 201);
 
     }
+
+    /**
+     * findAndCreateAddons_: search of Addons and create by user.
+     * 
+     * @urlParam details required  details
+     * @urlParam user required  user_id
+     *
+     */
+
+    public function findAndCreateAddons($details, $user_id)
+    {
+        $addon = $details[0]['users'] ? $details[0]['users'] : null; //En este momento solo hay adicional de usuarios
+        if ($addon) {
+            app('App\Http\Controllers\AddonController')->createByBilling($addon, $user_id);
+        }
+    }
+
     /**
      * BillingbyUser_: search of Billings by user.
      * 
      * @urlParam user required  user_id
      *
      */
+    
     public function BillingbyUser(string $user_id)
     {
         return BillingResource::collection(
