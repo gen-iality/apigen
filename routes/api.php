@@ -500,3 +500,10 @@ Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
 
 Route::apiResource('payments', 'PaymentController');
 Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
+
+/*****
+ * Addons
+ */
+
+Route::apiResource('addons', 'AddonController');
+Route::get('users/{user}/addons', 'AddonController@AddonbyUser');
