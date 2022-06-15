@@ -423,4 +423,47 @@ class ApiOrdersController extends Controller
         return OrderResource::collection($results);
 
     }
+    
+    public function createOrderWithTickets(Request $request, $event)
+    {
+        $request->validate([
+            'space_available' => 'required|numeric'
+        ]);
+
+        
+        $data = $request->json()->all();
+        $user = Auth::user();
+        
+        $eventUser = Attendee::where('event_id', $event, 'account_id', $user->_id)->first();
+
+        $newOrder = [
+            'event_user_id' => $eventUser->_id,
+            'event_id' => $event,
+            'space_available' => $data['space_available'],
+        ];
+
+        $order = Order::create($newOrder);
+        
+        $eventUser->order_id = $order->_id;
+        $eventUser->save();
+
+        // generate tickets
+        for ($i=1; $i <= $data['space_available']; $i++) {
+            try {
+            $newTicket = Attendee::create([
+                'prperties' => [
+                    "names" => "ticket 1",
+                ],
+                'event_id' => $eventUser->event_id,
+                'order_id' => $order->_id
+            ]);
+
+            } catch (\Exception $e) {
+                return response()->json((object) ["message" => $e->getMessage()], 400);
+    
+            }
+        }
+
+        return compact("order");
+    }
 }

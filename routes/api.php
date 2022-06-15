@@ -54,6 +54,7 @@ Route::post('events/{event}/restore', 'EventController@restore');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {        
+        Route::post('events/{event}/create-tickets', 'ApiOrdersController@createOrderWithTickets');
         Route::post ('events/{event}', 'EventController@store')->middleware('permission:create');        
         Route::put ('events/{event}', 'EventController@update')->middleware('permission:update');
         Route::delete('events/{event}', 'EventController@destroy')->middleware('permission:destroy');
