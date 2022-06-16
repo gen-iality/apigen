@@ -441,7 +441,7 @@ class ApiOrdersController extends Controller
         $data = $request->json()->all();
         $user = Auth::user();
         
-        $eventUser = Attendee::where('event_id', $event, 'account_id', $user->_id)->first();
+        $eventUser = Attendee::where('event_id', $event)->where('account_id', $user->_id)->first();
 
         $newOrder = [
             'event_user_id' => $eventUser->_id,
