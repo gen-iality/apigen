@@ -116,7 +116,8 @@ class BillingController extends Controller
             return response()->json($billing_save, 201);
         }
         //Si no guarda el metodo de pago se guarda tal cual llega el billing e igual se comprueba si tiene adicionales
-        $this::findAndCreateAddons($data['details'], $data['user_id']);
+        $addons = isset($data['billing']['details']) ? $data['billing']['details'] : null;
+        $this::findAndCreateAddons($addons, $data['user_id']);
         $Billing = new Billing($data);
         $Billing->save();
         return response()->json($Billing, 201);
