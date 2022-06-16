@@ -429,7 +429,7 @@ class ApiOrdersController extends Controller
      * 
      * @urlParam order required Example: 62ab83018579d9446f0e84f5
      * @authenticated
-     * @bodyParam status string required Order status when payment is made
+     * @bodyParam space_available integer required Available number of tickets
      */
     public function createPreOrder(Request $request, $event)
     {
@@ -469,7 +469,7 @@ class ApiOrdersController extends Controller
      * 
      * @urlParam order required Example: 62ab83018579d9446f0e84f5
      * @authenticated
-     * @bodyParam status string required Order status when payment is made
+     * @bodyParam status string required Order status when payment is made Example: COMPLETE
      */
     public function updateOrderAndAddTickets(Request $request, $order)
     {

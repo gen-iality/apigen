@@ -35,14 +35,14 @@ These activities, according to the organizer, can be carried out either in perso
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/1/duplicateactivitie/ut" \
+    "https://devapi.evius.co/api/events/1/duplicateactivitie/architecto" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/duplicateactivitie/ut"
+    "https://devapi.evius.co/api/events/1/duplicateactivitie/architecto"
 );
 
 let headers = {
@@ -79,14 +79,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/1/activitiesbyhost/dignissimos" \
+    -G "https://devapi.evius.co/api/events/1/activitiesbyhost/consequatur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activitiesbyhost/dignissimos"
+    "https://devapi.evius.co/api/events/1/activitiesbyhost/consequatur"
 );
 
 let headers = {
@@ -109,8 +109,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/dignissimos?page=1",
-        "last": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/dignissimos?page=1",
+        "first": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/consequatur?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/consequatur?page=1",
         "prev": null,
         "next": null
     },
@@ -118,7 +118,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/dignissimos",
+        "path": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/consequatur",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -148,7 +148,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/createmeeting/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"animi","activity_description":"qui"}'
+    -d '{"activity_datetime_start":"2020-10-14 14:11","activity_name":"quo","activity_description":"id"}'
 
 ```
 
@@ -164,8 +164,8 @@ let headers = {
 
 let body = {
     "activity_datetime_start": "2020-10-14 14:11",
-    "activity_name": "animi",
-    "activity_description": "qui"
+    "activity_name": "quo",
+    "activity_description": "id"
 }
 
 fetch(url, {
@@ -204,7 +204,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/1/activities/omnis/hostAvailability" \
+    "https://devapi.evius.co/api/events/1/activities/natus/hostAvailability" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"host_ids":"[\"KthHMroFQK24I97YoqxBZw\" , \"FIRVnSoZR7WMDajgtzf5Uw\" , \"15DKHS_6TqWIFpwShasM4w\" , \"2m-YaXq_TW2f791cVpP8og\", \"mSkbi8PmSSqQEWsm6FQiAA\"]","host_id":"KthHMroFQK24I97YoqxBZw","date_start_zoom":"2021-02-08T07:30:00","date_end_zoom":"2021-02-08T09:30:00"}'
@@ -213,7 +213,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activities/omnis/hostAvailability"
+    "https://devapi.evius.co/api/events/1/activities/natus/hostAvailability"
 );
 
 let headers = {
@@ -266,14 +266,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/1/activities/et/register_and_checkin_to_activity" \
+    "https://devapi.evius.co/api/events/1/activities/beatae/register_and_checkin_to_activity" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activities/et/register_and_checkin_to_activity"
+    "https://devapi.evius.co/api/events/1/activities/beatae/register_and_checkin_to_activity"
 );
 
 let headers = {
@@ -463,16 +463,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/expedita/activities/iste/checkinbyadmin" \
+    "https://devapi.evius.co/api/events/culpa/activities/magnam/checkinbyadmin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":"saepe"}'
+    -d '{"user_id":"iusto"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/expedita/activities/iste/checkinbyadmin"
+    "https://devapi.evius.co/api/events/culpa/activities/magnam/checkinbyadmin"
 );
 
 let headers = {
@@ -481,7 +481,7 @@ let headers = {
 };
 
 let body = {
-    "user_id": "saepe"
+    "user_id": "iusto"
 }
 
 fetch(url, {
@@ -1125,14 +1125,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/1/activities_attendees/numquam/check_in" \
+    "https://devapi.evius.co/api/events/1/activities_attendees/harum/check_in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/activities_attendees/numquam/check_in"
+    "https://devapi.evius.co/api/events/1/activities_attendees/harum/check_in"
 );
 
 let headers = {
@@ -1475,7 +1475,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/categories/5bb25243b6312771e92c8693" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"rerum"}'
+    -d '{"name":"reprehenderit"}'
 
 ```
 
@@ -1490,7 +1490,7 @@ let headers = {
 };
 
 let body = {
-    "name": "rerum"
+    "name": "reprehenderit"
 }
 
 fetch(url, {
@@ -1623,7 +1623,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/certificates" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"dolorem","content":"consequatur","background":"asperiores"}'
+    -d '{"name":"blanditiis","content":"eos","background":"hic"}'
 
 ```
 
@@ -1638,9 +1638,9 @@ let headers = {
 };
 
 let body = {
-    "name": "dolorem",
-    "content": "consequatur",
-    "background": "asperiores"
+    "name": "blanditiis",
+    "content": "eos",
+    "background": "hic"
 }
 
 fetch(url, {
@@ -1726,7 +1726,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/certificates/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatem","content":"aut","background":"laborum"}'
+    -d '{"name":"non","content":"et","background":"sint"}'
 
 ```
 
@@ -1741,9 +1741,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatem",
-    "content": "aut",
-    "background": "laborum"
+    "name": "non",
+    "content": "et",
+    "background": "sint"
 }
 
 fetch(url, {
@@ -1827,14 +1827,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/comments/organizations/corrupti" \
+    -G "https://devapi.evius.co/api/comments/organizations/consequuntur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/comments/organizations/corrupti"
+    "https://devapi.evius.co/api/comments/organizations/consequuntur"
 );
 
 let headers = {
@@ -1880,7 +1880,7 @@ curl -X POST \
     "https://devapi.evius.co/api/comments" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"organization_id":"et","comment":"repudiandae","image":"corporis"}'
+    -d '{"organization_id":"beatae","comment":"quia","image":"et"}'
 
 ```
 
@@ -1895,9 +1895,9 @@ let headers = {
 };
 
 let body = {
-    "organization_id": "et",
-    "comment": "repudiandae",
-    "image": "corporis"
+    "organization_id": "beatae",
+    "comment": "quia",
+    "image": "et"
 }
 
 fetch(url, {
@@ -2352,14 +2352,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/discountcodetemplate/maxime/code/quos" \
+    "https://devapi.evius.co/api/discountcodetemplate/aut/code/pariatur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/discountcodetemplate/maxime/code/quos"
+    "https://devapi.evius.co/api/discountcodetemplate/aut/code/pariatur"
 );
 
 let headers = {
@@ -2401,7 +2401,7 @@ curl -X POST \
     "https://devapi.evius.co/api/code/validatecode" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"eum"}'
+    -d '{"code":"Nyd0jOpQ","event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"temporibus"}'
 
 ```
 
@@ -2418,7 +2418,7 @@ let headers = {
 let body = {
     "code": "Nyd0jOpQ",
     "event_id": "5ea23acbd74d5c4b360ddde2",
-    "organization_id": "eum"
+    "organization_id": "temporibus"
 }
 
 fetch(url, {
@@ -2496,7 +2496,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/code/redeem_point_code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"code":"et"}'
+    -d '{"code":"corrupti"}'
 
 ```
 
@@ -2511,7 +2511,7 @@ let headers = {
 };
 
 let body = {
-    "code": "et"
+    "code": "corrupti"
 }
 
 fetch(url, {
@@ -2542,7 +2542,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/code/codesByUser?organization=et&email=sed" \
+    -G "https://devapi.evius.co/api/code/codesByUser?organization=et&email=enim" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -2554,7 +2554,7 @@ const url = new URL(
 
 let params = {
     "organization": "et",
-    "email": "sed",
+    "email": "enim",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -2688,7 +2688,7 @@ curl -X POST \
     "https://devapi.evius.co/api/discountcodetemplate" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"laborum"}'
+    -d '{"name":"Curso de regalo","use_limit":1,"discount":100,"event_id":"5ea23acbd74d5c4b360ddde2","organization_id":"5e9caaa1d74d5c2f6a02a3c3","discount_type":"aut"}'
 
 ```
 
@@ -2708,7 +2708,7 @@ let body = {
     "discount": 100,
     "event_id": "5ea23acbd74d5c4b360ddde2",
     "organization_id": "5e9caaa1d74d5c2f6a02a3c3",
-    "discount_type": "laborum"
+    "discount_type": "aut"
 }
 
 fetch(url, {
@@ -3057,14 +3057,14 @@ This model works to manage the documents to assign to the attendees.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/nemo/documentusers" \
+    -G "https://devapi.evius.co/api/events/porro/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/nemo/documentusers"
+    "https://devapi.evius.co/api/events/porro/documentusers"
 );
 
 let headers = {
@@ -3106,14 +3106,14 @@ Display the specified resource.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/nam/documentusers/sapiente" \
+    -G "https://devapi.evius.co/api/events/cum/documentusers/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/nam/documentusers/sapiente"
+    "https://devapi.evius.co/api/events/cum/documentusers/aut"
 );
 
 let headers = {
@@ -3164,16 +3164,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/repellendus/documentusers" \
+    "https://devapi.evius.co/api/events/id/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"veniam","url":"sint","assign":true}'
+    -d '{"name":"autem","url":"velit","assign":true}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/repellendus/documentusers"
+    "https://devapi.evius.co/api/events/id/documentusers"
 );
 
 let headers = {
@@ -3182,8 +3182,8 @@ let headers = {
 };
 
 let body = {
-    "name": "veniam",
-    "url": "sint",
+    "name": "autem",
+    "url": "velit",
     "assign": true
 }
 
@@ -3237,14 +3237,14 @@ Update the specified resource in storage.
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/totam/documentusers/nulla" \
+    "https://devapi.evius.co/api/events/eos/documentusers/est" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/totam/documentusers/nulla"
+    "https://devapi.evius.co/api/events/eos/documentusers/est"
 );
 
 let headers = {
@@ -3296,14 +3296,14 @@ Remove the specified resource from storage.
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/unde/documentusers/qui" \
+    "https://devapi.evius.co/api/events/et/documentusers/deleniti" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/unde/documentusers/qui"
+    "https://devapi.evius.co/api/events/et/documentusers/deleniti"
 );
 
 let headers = {
@@ -3346,14 +3346,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/maxime/me/documentusers" \
+    -G "https://devapi.evius.co/api/events/animi/me/documentusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/maxime/me/documentusers"
+    "https://devapi.evius.co/api/events/animi/me/documentusers"
 );
 
 let headers = {
@@ -3397,14 +3397,14 @@ The documents are file that you can downloads from event.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/id/documents" \
+    -G "https://devapi.evius.co/api/events/quo/documents" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/id/documents"
+    "https://devapi.evius.co/api/events/quo/documents"
 );
 
 let headers = {
@@ -3427,8 +3427,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/id\/documents?page=1",
-        "last": "http:\/\/localhost\/api\/events\/id\/documents?page=1",
+        "first": "http:\/\/localhost\/api\/events\/quo\/documents?page=1",
+        "last": "http:\/\/localhost\/api\/events\/quo\/documents?page=1",
         "prev": null,
         "next": null
     },
@@ -3436,7 +3436,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/id\/documents",
+        "path": "http:\/\/localhost\/api\/events\/quo\/documents",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -3462,7 +3462,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/modi/documents" \
+    "https://devapi.evius.co/api/events/quibusdam/documents" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"gato.jpg","title":"gato.jpg","format":"jpg","type":"file","file":"https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&token=1455a85f-6381-4a92-a00e-47c916ed236c"}'
@@ -3471,7 +3471,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/modi/documents"
+    "https://devapi.evius.co/api/events/quibusdam/documents"
 );
 
 let headers = {
@@ -3524,14 +3524,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/autem/documents/non" \
+    -G "https://devapi.evius.co/api/events/velit/documents/et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/autem/documents/non"
+    "https://devapi.evius.co/api/events/velit/documents/et"
 );
 
 let headers = {
@@ -3552,7 +3552,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Documents] non"
+    "message": "No query results for model [App\\Documents] et"
 }
 ```
 
@@ -3575,7 +3575,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/enim/documents/1" \
+    "https://devapi.evius.co/api/events/nemo/documents/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"gato.jpg","title":"gato.jpg","format":"jpg","type":"file","file":"https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/documents%2F61a65a6c47430f7aae79cca4%2F1639168484513-gato4.jpg?alt=media&token=1455a85f-6381-4a92-a00e-47c916ed236c"}'
@@ -3584,7 +3584,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/enim/documents/1"
+    "https://devapi.evius.co/api/events/nemo/documents/1"
 );
 
 let headers = {
@@ -3639,14 +3639,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/reprehenderit/documents/corporis" \
+    "https://devapi.evius.co/api/events/corporis/documents/animi" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/reprehenderit/documents/corporis"
+    "https://devapi.evius.co/api/events/corporis/documents/animi"
 );
 
 let headers = {
@@ -3810,14 +3810,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/repellendus/eventsstadistics" \
+    -G "https://devapi.evius.co/api/organizations/vero/eventsstadistics" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/repellendus/eventsstadistics"
+    "https://devapi.evius.co/api/organizations/vero/eventsstadistics"
 );
 
 let headers = {
@@ -3988,7 +3988,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"molestiae","picture":"cupiditate","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"aut","picture":"vel","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -4007,8 +4007,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "molestiae",
-    "picture": "cupiditate",
+    "type_event": "aut",
+    "picture": "vel",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -4224,16 +4224,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/qui" \
+    "https://devapi.evius.co/api/events/cumque" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"dolor","picture":"culpa","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"reiciendis","picture":"blanditiis","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/qui"
+    "https://devapi.evius.co/api/events/cumque"
 );
 
 let headers = {
@@ -4246,8 +4246,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "dolor",
-    "picture": "culpa",
+    "type_event": "reiciendis",
+    "picture": "blanditiis",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -4309,14 +4309,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/quia" \
+    "https://devapi.evius.co/api/events/est" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/quia"
+    "https://devapi.evius.co/api/events/est"
 );
 
 let headers = {
@@ -4353,14 +4353,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/modi/restore" \
+    "https://devapi.evius.co/api/events/dolor/restore" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/modi/restore"
+    "https://devapi.evius.co/api/events/dolor/restore"
 );
 
 let headers = {
@@ -4400,7 +4400,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"aut","picture":"quod","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"sit","picture":"aperiam","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -4419,8 +4419,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "aut",
-    "picture": "quod",
+    "type_event": "sit",
+    "picture": "aperiam",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -4519,16 +4519,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/eaque" \
+    "https://devapi.evius.co/api/events/architecto" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"perferendis","picture":"vel","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"earum","picture":"soluta","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/eaque"
+    "https://devapi.evius.co/api/events/architecto"
 );
 
 let headers = {
@@ -4541,8 +4541,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "perferendis",
-    "picture": "vel",
+    "type_event": "earum",
+    "picture": "soluta",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -4651,7 +4651,7 @@ curl -X POST \
     "https://devapi.evius.co/api/user/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"inventore","picture":"molestias","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"aperiam","picture":"autem","venue":"Venue B","location":{"Latitude":4.668184,"Longitude":-74.051968,"number":"#123","street":"Avenida siempre viva","city":"Bogot\u00e1","state":"Bogot\u00e1 D.C","FormattedAddress":"Av. Siempre viva #123, Bogot\u00e1, Colombia"},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{"buttonColor":"#FFF","banner_color":"#FFF","menu_color":"#FFF","brandPrimary":"#FFFFFF","brandSuccess":"#FFFFFF","brandInfo":"#FFFFFF","brandDanger":"#FFFFFF","containerBgColor":"#FFFFFF","brandWarning":"#FFFFFF","brandDark":"#FFFFFF","brandLight":"#FFFFFF","textMenu":"#555352","activeText":"#FFFFFF","bgButtonsEvent":"#FFFFFF"}}'
 
 ```
 
@@ -4670,8 +4670,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "inventore",
-    "picture": "molestias",
+    "type_event": "aperiam",
+    "picture": "autem",
     "venue": "Venue B",
     "location": {
         "Latitude": 4.668184,
@@ -4770,16 +4770,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/user/events/facilis" \
+    "https://devapi.evius.co/api/user/events/ullam" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"dolores","picture":"maxime","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
+    -d '{"name":"Demo","adress":"Avenida siempre viva","datetime_from":"2020-10-16 18:00:00","datetime_to":"2020-10-16 21:00:00","type_event":"expedita","picture":"tenetur","venue":"Venue B","location":{},"visibility":"PUBLIC","user_properties":[],"description":"Evento para mostrel funcionamiento de la plataforma.","event_type_id":"5bf47226754e2317e4300b6a","organizer_id":"5e9caaa1d74d5c2f6a02a3c3","category_ids":[],"styles":{}}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/user/events/facilis"
+    "https://devapi.evius.co/api/user/events/ullam"
 );
 
 let headers = {
@@ -4792,8 +4792,8 @@ let body = {
     "adress": "Avenida siempre viva",
     "datetime_from": "2020-10-16 18:00:00",
     "datetime_to": "2020-10-16 21:00:00",
-    "type_event": "dolores",
-    "picture": "maxime",
+    "type_event": "expedita",
+    "picture": "tenetur",
     "venue": "Venue B",
     "location": {},
     "visibility": "PUBLIC",
@@ -4855,14 +4855,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/user/events/unde" \
+    "https://devapi.evius.co/api/user/events/laborum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/user/events/unde"
+    "https://devapi.evius.co/api/user/events/laborum"
 );
 
 let headers = {
@@ -6290,14 +6290,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/users/rerum/events" \
+    -G "https://devapi.evius.co/api/users/omnis/events" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/users/rerum/events"
+    "https://devapi.evius.co/api/users/omnis/events"
 );
 
 let headers = {
@@ -6320,8 +6320,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/users\/rerum\/events?page=1",
-        "last": "http:\/\/localhost\/api\/users\/rerum\/events?page=1",
+        "first": "http:\/\/localhost\/api\/users\/omnis\/events?page=1",
+        "last": "http:\/\/localhost\/api\/users\/omnis\/events?page=1",
         "prev": null,
         "next": null
     },
@@ -6329,7 +6329,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/users\/rerum\/events",
+        "path": "http:\/\/localhost\/api\/users\/omnis\/events",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -6395,16 +6395,16 @@ The dynamic properties are returned within each UserEvent as the normal properti
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/user/events/quas/addUserProperty" \
+    "https://devapi.evius.co/api/user/events/quaerat/addUserProperty" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ut","label":"assumenda","mandatory":false,"visibleByAdmin":true,"visibleByContacts":false,"description":"sint"}'
+    -d '{"name":"consequatur","label":"ut","mandatory":true,"visibleByAdmin":true,"visibleByContacts":true,"description":"repellendus"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/user/events/quas/addUserProperty"
+    "https://devapi.evius.co/api/user/events/quaerat/addUserProperty"
 );
 
 let headers = {
@@ -6413,12 +6413,12 @@ let headers = {
 };
 
 let body = {
-    "name": "ut",
-    "label": "assumenda",
-    "mandatory": false,
+    "name": "consequatur",
+    "label": "ut",
+    "mandatory": true,
     "visibleByAdmin": true,
-    "visibleByContacts": false,
-    "description": "sint"
+    "visibleByContacts": true,
+    "description": "repellendus"
 }
 
 fetch(url, {
@@ -6460,16 +6460,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/et/adddocumentuser" \
+    "https://devapi.evius.co/api/events/amet/adddocumentuser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"quantity":25.1256,"auto_assign":false}'
+    -d '{"quantity":3.4023107,"auto_assign":true}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/et/adddocumentuser"
+    "https://devapi.evius.co/api/events/amet/adddocumentuser"
 );
 
 let headers = {
@@ -6478,8 +6478,8 @@ let headers = {
 };
 
 let body = {
-    "quantity": 25.1256,
-    "auto_assign": false
+    "quantity": 3.4023107,
+    "auto_assign": true
 }
 
 fetch(url, {
@@ -6587,7 +6587,7 @@ curl -X POST \
     "https://devapi.evius.co/api/eventTypes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"provident"}'
+    -d '{"name":"occaecati"}'
 
 ```
 
@@ -6602,7 +6602,7 @@ let headers = {
 };
 
 let body = {
-    "name": "provident"
+    "name": "occaecati"
 }
 
 fetch(url, {
@@ -6647,7 +6647,7 @@ Attendee has one user though account_id
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/voluptatem/eventusers" \
+    "https://devapi.evius.co/api/events/sit/eventusers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"properties":{"email":{},"names":{},"others_properties":{}}}'
@@ -6656,7 +6656,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/voluptatem/eventusers"
+    "https://devapi.evius.co/api/events/sit/eventusers"
 );
 
 let headers = {
@@ -6933,14 +6933,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/eventUsers/nam/checkin" \
+    "https://devapi.evius.co/api/eventUsers/nihil/checkin" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/eventUsers/nam/checkin"
+    "https://devapi.evius.co/api/eventUsers/nihil/checkin"
 );
 
 let headers = {
@@ -6976,14 +6976,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/eventUsers/ut/uncheck" \
+    "https://devapi.evius.co/api/eventUsers/quam/uncheck" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/eventUsers/ut/uncheck"
+    "https://devapi.evius.co/api/eventUsers/quam/uncheck"
 );
 
 let headers = {
@@ -7028,7 +7028,7 @@ curl -X POST \
     "https://devapi.evius.co/api/eventUsers/createUserAndAddtoEvent/61ccd3551c821b765a312864?allow_edit_password=true" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"perferendis"}}'
+    -d '{"email":"example@evius.co","name":"Evius","password":"*******","other_params":{"city":"nam"}}'
 
 ```
 
@@ -7053,7 +7053,7 @@ let body = {
     "name": "Evius",
     "password": "*******",
     "other_params": {
-        "city": "perferendis"
+        "city": "nam"
     }
 }
 
@@ -7155,7 +7155,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusersbyurl" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"aperiam","name":"incidunt","other_params,":{"":{"":{"":"at"}}}}'
+    -d '{"email":"quia","name":"in","other_params,":{"":{"":{"":"sunt"}}}}'
 
 ```
 
@@ -7170,12 +7170,12 @@ let headers = {
 };
 
 let body = {
-    "email": "aperiam",
-    "name": "incidunt",
+    "email": "quia",
+    "name": "in",
     "other_params,": {
         "": {
             "": {
-                "": "at"
+                "": "sunt"
             }
         }
     }
@@ -7259,7 +7259,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/modi/eventusersanonymous" \
+    "https://devapi.evius.co/api/events/corporis/eventusersanonymous" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"properties":{"email":{},"names":{},"others_properties":{}}}'
@@ -7268,7 +7268,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/modi/eventusersanonymous"
+    "https://devapi.evius.co/api/events/corporis/eventusersanonymous"
 );
 
 let headers = {
@@ -7506,7 +7506,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusers/61ccd3551c821b765a312866" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"nostrum","properties":{"other_properties":"eaque"}}'
+    -d '{"rol_id":"nesciunt","properties":{"other_properties":"cumque"}}'
 
 ```
 
@@ -7521,9 +7521,9 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "nostrum",
+    "rol_id": "nesciunt",
     "properties": {
-        "other_properties": "eaque"
+        "other_properties": "cumque"
     }
 }
 
@@ -7904,20 +7904,20 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/repudiandae/metricsbydate/eventusers?metrics_type=created_at&datetime_from=necessitatibus&datetime_to=aliquam" \
+    -G "https://devapi.evius.co/api/events/culpa/metricsbydate/eventusers?metrics_type=created_at&datetime_from=ratione&datetime_to=sed" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/repudiandae/metricsbydate/eventusers"
+    "https://devapi.evius.co/api/events/culpa/metricsbydate/eventusers"
 );
 
 let params = {
     "metrics_type": "created_at",
-    "datetime_from": "necessitatibus",
-    "datetime_to": "aliquam",
+    "datetime_from": "ratione",
+    "datetime_to": "sed",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -7972,16 +7972,16 @@ This end point sends an email to the user to inform them of the change.
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/illo/eventusers/praesentium/updaterol" \
+    "https://devapi.evius.co/api/events/consectetur/eventusers/accusamus/updaterol" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"enim"}'
+    -d '{"rol_id":"dolorem"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/illo/eventusers/praesentium/updaterol"
+    "https://devapi.evius.co/api/events/consectetur/eventusers/accusamus/updaterol"
 );
 
 let headers = {
@@ -7990,7 +7990,7 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "enim"
+    "rol_id": "dolorem"
 }
 
 fetch(url, {
@@ -8093,7 +8093,7 @@ curl -X POST \
     "https://devapi.evius.co/api/files/upload/" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"delectus"}'
+    -d '{"file":"corporis"}'
 
 ```
 
@@ -8108,7 +8108,7 @@ let headers = {
 };
 
 let body = {
-    "file": "delectus"
+    "file": "corporis"
 }
 
 fetch(url, {
@@ -8154,16 +8154,16 @@ for multiple files It returns an array of URLS.
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/files/uploadbase/molestiae" \
+    "https://devapi.evius.co/api/files/uploadbase/necessitatibus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"sit","type":"ut"}'
+    -d '{"file":"dolor","type":"vel"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/files/uploadbase/molestiae"
+    "https://devapi.evius.co/api/files/uploadbase/necessitatibus"
 );
 
 let headers = {
@@ -8172,8 +8172,8 @@ let headers = {
 };
 
 let body = {
-    "file": "sit",
-    "type": "ut"
+    "file": "dolor",
+    "type": "vel"
 }
 
 fetch(url, {
@@ -8480,7 +8480,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/host" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"enim","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"similique","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
@@ -8497,7 +8497,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "enim",
+    "image": "similique",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -8544,7 +8544,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/host/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"voluptatem","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
+    -d '{"description":"<p>Es todo un profesional<\/p>","description_activity":"true","image":"harum","name":"Primer conferencista","order":1,"profession":"Ingeniero"}'
 
 ```
 
@@ -8561,7 +8561,7 @@ let headers = {
 let body = {
     "description": "<p>Es todo un profesional<\/p>",
     "description_activity": "true",
-    "image": "voluptatem",
+    "image": "harum",
     "name": "Primer conferencista",
     "order": 1,
     "profession": "Ingeniero"
@@ -8652,14 +8652,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/1/indexinvitations/sint" \
+    -G "https://devapi.evius.co/api/events/1/indexinvitations/necessitatibus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/indexinvitations/sint"
+    "https://devapi.evius.co/api/events/1/indexinvitations/necessitatibus"
 );
 
 let headers = {
@@ -8682,8 +8682,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/sint?page=1",
-        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/sint?page=1",
+        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/necessitatibus?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/necessitatibus?page=1",
         "prev": null,
         "next": null
     },
@@ -8691,7 +8691,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/sint",
+        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/necessitatibus",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -8718,14 +8718,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/enim" \
+    -G "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/accusamus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/enim"
+    "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/accusamus"
 );
 
 let headers = {
@@ -8748,8 +8748,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/enim?page=1",
-        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/enim?page=1",
+        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/accusamus?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/accusamus?page=1",
         "prev": null,
         "next": null
     },
@@ -8757,7 +8757,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/enim",
+        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/accusamus",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -8784,16 +8784,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/1/acceptordecline/et" \
+    "https://devapi.evius.co/api/events/1/acceptordecline/omnis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"response":"architecto"}'
+    -d '{"response":"repellendus"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/acceptordecline/et"
+    "https://devapi.evius.co/api/events/1/acceptordecline/omnis"
 );
 
 let headers = {
@@ -8802,7 +8802,7 @@ let headers = {
 };
 
 let body = {
-    "response": "architecto"
+    "response": "repellendus"
 }
 
 fetch(url, {
@@ -8839,14 +8839,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/1/contactlist/quos" \
+    -G "https://devapi.evius.co/api/events/1/contactlist/eos" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/contactlist/quos"
+    "https://devapi.evius.co/api/events/1/contactlist/eos"
 );
 
 let headers = {
@@ -8888,14 +8888,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/1/contactlist/quia" \
+    "https://devapi.evius.co/api/events/1/contactlist/inventore" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/contactlist/quia"
+    "https://devapi.evius.co/api/events/1/contactlist/inventore"
 );
 
 let headers = {
@@ -9002,7 +9002,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/invitation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"id_user_requested":"porro"}'
+    -d '{"id_user_requested":"voluptates"}'
 
 ```
 
@@ -9017,7 +9017,7 @@ let headers = {
 };
 
 let body = {
-    "id_user_requested": "porro"
+    "id_user_requested": "voluptates"
 }
 
 fetch(url, {
@@ -9477,7 +9477,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/orders/create-preorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"status":"non"}'
+    -d '{"space_available":4}'
 
 ```
 
@@ -9492,7 +9492,7 @@ let headers = {
 };
 
 let body = {
-    "status": "non"
+    "space_available": 4
 }
 
 fetch(url, {
@@ -9517,7 +9517,7 @@ Parameter | Status | Description
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `status` | string |  required  | Order status when payment is made
+    `space_available` | integer |  required  | Available number of tickets
     
 <!-- END_984f5e68638542ddfe5080e61c3c0e9e -->
 
@@ -9532,7 +9532,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/orders/62ab83018579d9446f0e84f5/create-tickets" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"status":"dolorem"}'
+    -d '{"status":"COMPLETE"}'
 
 ```
 
@@ -9547,7 +9547,7 @@ let headers = {
 };
 
 let body = {
-    "status": "dolorem"
+    "status": "COMPLETE"
 }
 
 fetch(url, {
@@ -10059,14 +10059,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/orders/accusantium/orderOrganization" \
+    -G "https://devapi.evius.co/api/orders/architecto/orderOrganization" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/orders/accusantium/orderOrganization"
+    "https://devapi.evius.co/api/orders/architecto/orderOrganization"
 );
 
 let headers = {
@@ -10210,7 +10210,7 @@ curl -X POST \
     "https://devapi.evius.co/api/organizations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"autem","styles":[],"user_properties":[]}'
+    -d '{"name":"debitis","styles":[],"user_properties":[]}'
 
 ```
 
@@ -10225,7 +10225,7 @@ let headers = {
 };
 
 let body = {
-    "name": "autem",
+    "name": "debitis",
     "styles": [],
     "user_properties": []
 }
@@ -10266,16 +10266,16 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/perferendis" \
+    "https://devapi.evius.co/api/organizations/ut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"porro","styles":[],"user_properties":[]}'
+    -d '{"name":"beatae","styles":[],"user_properties":[]}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/perferendis"
+    "https://devapi.evius.co/api/organizations/ut"
 );
 
 let headers = {
@@ -10284,7 +10284,7 @@ let headers = {
 };
 
 let body = {
-    "name": "porro",
+    "name": "beatae",
     "styles": [],
     "user_properties": []
 }
@@ -10367,20 +10367,20 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organization/iste/ordersUsersPoints?status=pendiente&date_from=molestiae&date_to=vero&type_report=csv" \
+    -G "https://devapi.evius.co/api/organization/mollitia/ordersUsersPoints?status=pendiente&date_from=deleniti&date_to=tempora&type_report=csv" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organization/iste/ordersUsersPoints"
+    "https://devapi.evius.co/api/organization/mollitia/ordersUsersPoints"
 );
 
 let params = {
     "status": "pendiente",
-    "date_from": "molestiae",
-    "date_to": "vero",
+    "date_from": "deleniti",
+    "date_to": "tempora",
     "type_report": "csv",
 };
 Object.keys(params)
@@ -10483,14 +10483,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/numquam/organizationusers/totam" \
+    -G "https://devapi.evius.co/api/organizations/consequatur/organizationusers/sit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/numquam/organizationusers/totam"
+    "https://devapi.evius.co/api/organizations/consequatur/organizationusers/sit"
 );
 
 let headers = {
@@ -10534,14 +10534,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/nobis/organizationusers/1" \
+    "https://devapi.evius.co/api/organizations/tenetur/organizationusers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/nobis/organizationusers/1"
+    "https://devapi.evius.co/api/organizations/tenetur/organizationusers/1"
 );
 
 let headers = {
@@ -10578,14 +10578,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/organizations/aut/organizationusers/repellendus" \
+    "https://devapi.evius.co/api/organizations/molestiae/organizationusers/id" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/aut/organizationusers/repellendus"
+    "https://devapi.evius.co/api/organizations/molestiae/organizationusers/id"
 );
 
 let headers = {
@@ -10671,14 +10671,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/me/organizations/voluptates" \
+    -G "https://devapi.evius.co/api/me/organizations/labore" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/me/organizations/voluptates"
+    "https://devapi.evius.co/api/me/organizations/labore"
 );
 
 let headers = {
@@ -10721,7 +10721,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/organizations/ab/addorganizationuser" \
+    "https://devapi.evius.co/api/organizations/aspernatur/addorganizationuser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"test+11@mocionsoft.com","names":"test"}'
@@ -10730,7 +10730,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/ab/addorganizationuser"
+    "https://devapi.evius.co/api/organizations/aspernatur/addorganizationuser"
 );
 
 let headers = {
@@ -10836,14 +10836,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/1/userproperties/qui" \
+    -G "https://devapi.evius.co/api/organizations/1/userproperties/quis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/1/userproperties/qui"
+    "https://devapi.evius.co/api/organizations/1/userproperties/quis"
 );
 
 let headers = {
@@ -10963,7 +10963,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/1/userproperties/voluptates" \
+    "https://devapi.evius.co/api/organizations/1/userproperties/itaque" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"celular","mandatory":true,"visibleByContacts":true,"visibleByAdmin":true,"label":"Celular","description":"N\u00famero de contacto","type":"number","justonebyattendee":true,"order_weight":1}'
@@ -10972,7 +10972,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/1/userproperties/voluptates"
+    "https://devapi.evius.co/api/organizations/1/userproperties/itaque"
 );
 
 let headers = {
@@ -11037,14 +11037,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/organizations/1/userproperties/autem" \
+    "https://devapi.evius.co/api/organizations/1/userproperties/eum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/1/userproperties/autem"
+    "https://devapi.evius.co/api/organizations/1/userproperties/eum"
 );
 
 let headers = {
@@ -11135,7 +11135,7 @@ Endpoint that manages event products.
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/itaque/products" \
+    "https://devapi.evius.co/api/events/et/products" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m","position":11111}'
@@ -11144,7 +11144,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/itaque/products"
+    "https://devapi.evius.co/api/events/et/products"
 );
 
 let headers = {
@@ -11202,7 +11202,7 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/reprehenderit/products/1" \
+    "https://devapi.evius.co/api/events/quidem/products/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"Arbol","description":"Esta pintura es de un arbol.","image":"https:\/\/storage.googleapis.com\/eviusauth.appspot.com\/evius\/events\/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg","price":10000,"by":"Evius","short_description":"Pintura de arbol 1x2m"}'
@@ -11211,7 +11211,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/reprehenderit/products/1"
+    "https://devapi.evius.co/api/events/quidem/products/1"
 );
 
 let headers = {
@@ -11266,14 +11266,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/corrupti" \
+    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/corrupti"
+    "https://devapi.evius.co/api/events/5ea23acbd74d5c4b360ddde2/products/aut"
 );
 
 let headers = {
@@ -11366,14 +11366,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/in/products" \
+    -G "https://devapi.evius.co/api/events/voluptas/products" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/in/products"
+    "https://devapi.evius.co/api/events/voluptas/products"
 );
 
 let headers = {
@@ -11396,8 +11396,8 @@ fetch(url, {
 {
     "data": [],
     "links": {
-        "first": "http:\/\/localhost\/api\/events\/in\/products?page=1",
-        "last": "http:\/\/localhost\/api\/events\/in\/products?page=1",
+        "first": "http:\/\/localhost\/api\/events\/voluptas\/products?page=1",
+        "last": "http:\/\/localhost\/api\/events\/voluptas\/products?page=1",
         "prev": null,
         "next": null
     },
@@ -11405,7 +11405,7 @@ fetch(url, {
         "current_page": 1,
         "from": null,
         "last_page": 1,
-        "path": "http:\/\/localhost\/api\/events\/in\/products",
+        "path": "http:\/\/localhost\/api\/events\/voluptas\/products",
         "per_page": 2500,
         "to": null,
         "total": 0
@@ -11431,14 +11431,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/ut" \
+    -G "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/illo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/ut"
+    "https://devapi.evius.co/api/events/5bb25243b6312771e92c8693/products/illo"
 );
 
 let headers = {
@@ -11521,16 +11521,16 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/rsvp/sendeventrsvp/corrupti" \
+    "https://devapi.evius.co/api/rsvp/sendeventrsvp/nemo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"subject":"debitis","image_header":"sequi","content_header":"Has sido invitado a el evento","message":"dicta","image":"minima","image_footer":"necessitatibus","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":false}'
+    -d '{"subject":"consequuntur","image_header":"consequatur","content_header":"Has sido invitado a el evento","message":"repellat","image":"in","image_footer":"aliquam","eventUsersIds":{"":"\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"},"include_ical_calendar":false,"include_login_button":true}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/rsvp/sendeventrsvp/corrupti"
+    "https://devapi.evius.co/api/rsvp/sendeventrsvp/nemo"
 );
 
 let headers = {
@@ -11539,17 +11539,17 @@ let headers = {
 };
 
 let body = {
-    "subject": "debitis",
-    "image_header": "sequi",
+    "subject": "consequuntur",
+    "image_header": "consequatur",
     "content_header": "Has sido invitado a el evento",
-    "message": "dicta",
-    "image": "minima",
-    "image_footer": "necessitatibus",
+    "message": "repellat",
+    "image": "in",
+    "image_footer": "aliquam",
     "eventUsersIds": {
         "": "\"eventUsersIds\": [\"5f8734c81730821f216b6202\"]"
     },
     "include_ical_calendar": false,
-    "include_login_button": false
+    "include_login_button": true
 }
 
 fetch(url, {
@@ -11593,14 +11593,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/id/updateStatusMessageUser/1" \
+    "https://devapi.evius.co/api/events/officiis/updateStatusMessageUser/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/id/updateStatusMessageUser/1"
+    "https://devapi.evius.co/api/events/officiis/updateStatusMessageUser/1"
 );
 
 let headers = {
@@ -11709,16 +11709,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/organizations/corporis/roles" \
+    "https://devapi.evius.co/api/organizations/asperiores/roles" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"necessitatibus","type":"ut","module":"cumque"}'
+    -d '{"name":"aut","type":"et","module":"omnis"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/corporis/roles"
+    "https://devapi.evius.co/api/organizations/asperiores/roles"
 );
 
 let headers = {
@@ -11727,9 +11727,9 @@ let headers = {
 };
 
 let body = {
-    "name": "necessitatibus",
-    "type": "ut",
-    "module": "cumque"
+    "name": "aut",
+    "type": "et",
+    "module": "omnis"
 }
 
 fetch(url, {
@@ -11768,14 +11768,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/nostrum/roles/expedita" \
+    -G "https://devapi.evius.co/api/organizations/vitae/roles/enim" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/nostrum/roles/expedita"
+    "https://devapi.evius.co/api/organizations/vitae/roles/enim"
 );
 
 let headers = {
@@ -11813,16 +11813,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/enim/roles/aspernatur" \
+    "https://devapi.evius.co/api/organizations/ab/roles/eos" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"blanditiis","model":"voluptas"}'
+    -d '{"name":"eos","model":"veniam"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/enim/roles/aspernatur"
+    "https://devapi.evius.co/api/organizations/ab/roles/eos"
 );
 
 let headers = {
@@ -11831,8 +11831,8 @@ let headers = {
 };
 
 let body = {
-    "name": "blanditiis",
-    "model": "voluptas"
+    "name": "eos",
+    "model": "veniam"
 }
 
 fetch(url, {
@@ -11871,14 +11871,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/organizations/quae/roles/voluptas" \
+    "https://devapi.evius.co/api/organizations/enim/roles/natus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/quae/roles/voluptas"
+    "https://devapi.evius.co/api/organizations/enim/roles/natus"
 );
 
 let headers = {
@@ -11929,14 +11929,14 @@ When you create an event, you are assigned the Administrator role.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/corporis/rolesattendees?filtered=%5B%7B%22field%22%3A%22type%22%2C%22value%22%3A%22attendee%22%7D%5D" \
+    -G "https://devapi.evius.co/api/events/similique/rolesattendees?filtered=%5B%7B%22field%22%3A%22type%22%2C%22value%22%3A%22attendee%22%7D%5D" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/corporis/rolesattendees"
+    "https://devapi.evius.co/api/events/similique/rolesattendees"
 );
 
 let params = {
@@ -12008,7 +12008,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/events/ipsam/rolesattendees" \
+    "https://devapi.evius.co/api/events/rem/rolesattendees" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"RolName","type":"attendee"}'
@@ -12017,7 +12017,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/ipsam/rolesattendees"
+    "https://devapi.evius.co/api/events/rem/rolesattendees"
 );
 
 let headers = {
@@ -12065,14 +12065,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/unde/rolesattendees/et" \
+    -G "https://devapi.evius.co/api/events/quasi/rolesattendees/consectetur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/unde/rolesattendees/et"
+    "https://devapi.evius.co/api/events/quasi/rolesattendees/consectetur"
 );
 
 let headers = {
@@ -12117,16 +12117,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/est/rolesattendees/saepe" \
+    "https://devapi.evius.co/api/events/ipsum/rolesattendees/labore" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"molestiae","type":"voluptatem"}'
+    -d '{"name":"repudiandae","type":"alias"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/est/rolesattendees/saepe"
+    "https://devapi.evius.co/api/events/ipsum/rolesattendees/labore"
 );
 
 let headers = {
@@ -12135,8 +12135,8 @@ let headers = {
 };
 
 let body = {
-    "name": "molestiae",
-    "type": "voluptatem"
+    "name": "repudiandae",
+    "type": "alias"
 }
 
 fetch(url, {
@@ -12174,14 +12174,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X DELETE \
-    "https://devapi.evius.co/api/events/eligendi/rolesattendees/ratione" \
+    "https://devapi.evius.co/api/events/ipsa/rolesattendees/quis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/eligendi/rolesattendees/ratione"
+    "https://devapi.evius.co/api/events/ipsa/rolesattendees/quis"
 );
 
 let headers = {
@@ -12224,14 +12224,14 @@ to the roles.
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/molestiae/rolespermissions" \
+    -G "https://devapi.evius.co/api/events/culpa/rolespermissions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/molestiae/rolespermissions"
+    "https://devapi.evius.co/api/events/culpa/rolespermissions"
 );
 
 let headers = {
@@ -12294,14 +12294,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/consequuntur/rolespermissionsbyrol/aut" \
+    -G "https://devapi.evius.co/api/events/fugiat/rolespermissionsbyrol/perferendis" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/consequuntur/rolespermissionsbyrol/aut"
+    "https://devapi.evius.co/api/events/fugiat/rolespermissionsbyrol/perferendis"
 );
 
 let headers = {
@@ -12346,14 +12346,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/events/1/rolespermissions/eaque" \
+    -G "https://devapi.evius.co/api/events/1/rolespermissions/qui" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/1/rolespermissions/eaque"
+    "https://devapi.evius.co/api/events/1/rolespermissions/qui"
 );
 
 let headers = {
@@ -12400,7 +12400,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/rolespermissions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"quo","permission_id":"quos"}'
+    -d '{"rol_id":"provident","permission_id":"voluptatem"}'
 
 ```
 
@@ -12415,8 +12415,8 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "quo",
-    "permission_id": "quos"
+    "rol_id": "provident",
+    "permission_id": "voluptatem"
 }
 
 fetch(url, {
@@ -12452,7 +12452,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/rolespermissions/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"dolorem","permission_id":"molestiae"}'
+    -d '{"rol_id":"expedita","permission_id":"sunt"}'
 
 ```
 
@@ -12467,8 +12467,8 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "dolorem",
-    "permission_id": "molestiae"
+    "rol_id": "expedita",
+    "permission_id": "sunt"
 }
 
 fetch(url, {
@@ -12504,7 +12504,7 @@ curl -X DELETE \
     "https://devapi.evius.co/api/events/1/rolespermissions/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"rol_id":"ab","permission_id":"delectus"}'
+    -d '{"rol_id":"molestiae","permission_id":"qui"}'
 
 ```
 
@@ -12519,8 +12519,8 @@ let headers = {
 };
 
 let body = {
-    "rol_id": "ab",
-    "permission_id": "delectus"
+    "rol_id": "molestiae",
+    "permission_id": "qui"
 }
 
 fetch(url, {
@@ -13105,7 +13105,7 @@ curl -X POST \
     "https://devapi.evius.co/api/events/1/surveys" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"natus","points":1,"initialMessage":"aut","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":18679.816}'
+    -d '{"survey":"Nombre de encuesta","show_horizontal_bar":false,"allow_vote_value_per_user":false,"activity_id":"repellendus","points":1,"initialMessage":"dignissimos","time_limit":0,"allow_anonymous_answers":false,"allow_gradable_survey":false,"hasMinimumScore":false,"isGlobal":false,"freezeGame":false,"open":false,"publish":false,"minimumScore":28.738}'
 
 ```
 
@@ -13123,9 +13123,9 @@ let body = {
     "survey": "Nombre de encuesta",
     "show_horizontal_bar": false,
     "allow_vote_value_per_user": false,
-    "activity_id": "natus",
+    "activity_id": "repellendus",
     "points": 1,
-    "initialMessage": "aut",
+    "initialMessage": "dignissimos",
     "time_limit": 0,
     "allow_anonymous_answers": false,
     "allow_gradable_survey": false,
@@ -13134,7 +13134,7 @@ let body = {
     "freezeGame": false,
     "open": false,
     "publish": false,
-    "minimumScore": 18679.816
+    "minimumScore": 28.738
 }
 
 fetch(url, {
@@ -13212,7 +13212,7 @@ curl -X PUT \
     "https://devapi.evius.co/api/events/1/surveys/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"survey":"provident","show_horizontal_bar":"numquam","allow_vote_value_per_user":"voluptas","activity_id":"dolorem","points":"est","initialMessage":"deleniti","time_limit":"qui","allow_anonymous_answers":"qui","allow_gradable_survey":"saepe","hasMinimumScore":"expedita","isGlobal":"ea","freezeGame":"quis","open":"perspiciatis","publish":"quia","minimumScore":"et"}'
+    -d '{"survey":"qui","show_horizontal_bar":"harum","allow_vote_value_per_user":"quisquam","activity_id":"illum","points":"nihil","initialMessage":"molestias","time_limit":"soluta","allow_anonymous_answers":"corrupti","allow_gradable_survey":"commodi","hasMinimumScore":"quibusdam","isGlobal":"quod","freezeGame":"vero","open":"ea","publish":"nobis","minimumScore":"maiores"}'
 
 ```
 
@@ -13227,21 +13227,21 @@ let headers = {
 };
 
 let body = {
-    "survey": "provident",
-    "show_horizontal_bar": "numquam",
-    "allow_vote_value_per_user": "voluptas",
-    "activity_id": "dolorem",
-    "points": "est",
-    "initialMessage": "deleniti",
-    "time_limit": "qui",
-    "allow_anonymous_answers": "qui",
-    "allow_gradable_survey": "saepe",
-    "hasMinimumScore": "expedita",
-    "isGlobal": "ea",
-    "freezeGame": "quis",
-    "open": "perspiciatis",
-    "publish": "quia",
-    "minimumScore": "et"
+    "survey": "qui",
+    "show_horizontal_bar": "harum",
+    "allow_vote_value_per_user": "quisquam",
+    "activity_id": "illum",
+    "points": "nihil",
+    "initialMessage": "molestias",
+    "time_limit": "soluta",
+    "allow_anonymous_answers": "corrupti",
+    "allow_gradable_survey": "commodi",
+    "hasMinimumScore": "quibusdam",
+    "isGlobal": "quod",
+    "freezeGame": "vero",
+    "open": "ea",
+    "publish": "nobis",
+    "minimumScore": "maiores"
 }
 
 fetch(url, {
@@ -13340,14 +13340,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "https://devapi.evius.co/api/organizations/aut/templateproperties" \
+    -G "https://devapi.evius.co/api/organizations/magni/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/aut/templateproperties"
+    "https://devapi.evius.co/api/organizations/magni/templateproperties"
 );
 
 let headers = {
@@ -13391,16 +13391,16 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/organizations/qui/templateproperties" \
+    "https://devapi.evius.co/api/organizations/praesentium/templateproperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"Template 1","user_properties":"et"}'
+    -d '{"name":"Template 1","user_properties":"nesciunt"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/qui/templateproperties"
+    "https://devapi.evius.co/api/organizations/praesentium/templateproperties"
 );
 
 let headers = {
@@ -13410,7 +13410,7 @@ let headers = {
 
 let body = {
     "name": "Template 1",
-    "user_properties": "et"
+    "user_properties": "nesciunt"
 }
 
 fetch(url, {
@@ -13448,14 +13448,14 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/organizations/mollitia/templateproperties/est" \
+    "https://devapi.evius.co/api/organizations/dolores/templateproperties/architecto" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/organizations/mollitia/templateproperties/est"
+    "https://devapi.evius.co/api/organizations/dolores/templateproperties/architecto"
 );
 
 let headers = {
@@ -13531,14 +13531,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/events/vel/templateproperties/1/addtemplateporperties" \
+    "https://devapi.evius.co/api/events/dolor/templateproperties/1/addtemplateporperties" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/events/vel/templateproperties/1/addtemplateporperties"
+    "https://devapi.evius.co/api/events/dolor/templateproperties/1/addtemplateporperties"
 );
 
 let headers = {
@@ -14067,7 +14067,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X PUT \
-    "https://devapi.evius.co/api/users/quia/changeStatusUser" \
+    "https://devapi.evius.co/api/users/non/changeStatusUser" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"status":"approved"}'
@@ -14076,7 +14076,7 @@ curl -X PUT \
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/users/quia/changeStatusUser"
+    "https://devapi.evius.co/api/users/non/changeStatusUser"
 );
 
 let headers = {
@@ -14175,7 +14175,7 @@ curl -X POST \
     "https://devapi.evius.co/api/getloginlink" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"refreshlink":"doloribus","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
+    -d '{"refreshlink":"facere","event":"61ccd3551c821b765a312864","email":"correo@evius.co"}'
 
 ```
 
@@ -14190,7 +14190,7 @@ let headers = {
 };
 
 let body = {
-    "refreshlink": "doloribus",
+    "refreshlink": "facere",
     "event": "61ccd3551c821b765a312864",
     "email": "correo@evius.co"
 }
@@ -22608,6 +22608,15 @@ fetch(url, {
             "0": [
                 null
             ]
+        },
+        {
+            "_id": "62ab97e2e64d2c43c920fb42",
+            "name": "url",
+            "updated_at": "2022-06-16 20:51:46",
+            "created_at": "2022-06-16 20:51:46",
+            "0": [
+                null
+            ]
         }
     ],
     "links": {
@@ -22622,8 +22631,8 @@ fetch(url, {
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/events\/1\/type",
         "per_page": 2500,
-        "to": 858,
-        "total": 858
+        "to": 859,
+        "total": 859
     }
 }
 ```
@@ -25227,14 +25236,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/orders/culpa/validateFreeorder" \
+    "https://devapi.evius.co/api/orders/ut/validateFreeorder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/orders/culpa/validateFreeorder"
+    "https://devapi.evius.co/api/orders/ut/validateFreeorder"
 );
 
 let headers = {
@@ -25270,14 +25279,14 @@ Parameter | Status | Description
 
 ```bash
 curl -X POST \
-    "https://devapi.evius.co/api/orders/molestiae/validatePointOrder" \
+    "https://devapi.evius.co/api/orders/quia/validatePointOrder" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "https://devapi.evius.co/api/orders/molestiae/validatePointOrder"
+    "https://devapi.evius.co/api/orders/quia/validatePointOrder"
 );
 
 let headers = {
