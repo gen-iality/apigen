@@ -424,31 +424,22 @@ class ApiOrdersController extends Controller
 
     }
     
-    /**
-     * _createOrderWithTickets_: Create an order for an event with tickets
-     * 
-     * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
-     * @authenticated
-     * @bodyParam space_available integer required Number of tickets that will be created
-     */
-    public function createOrderWithTickets(Request $request, $event)
+    public function createPreOrder(Request $request, $event)
     {
         $request->validate([
             'space_available' => 'required|numeric'
         ]);
 
-        
         $data = $request->json()->all();
         $user = Auth::user();
-        
-        $eventUser = Attendee::where('event_id', $event)->where('account_id', $user->_id)->first();
 
+        $eventUser = Attendee::where('event_id', $event)->where('account_id', $user->_id)->first();
         $newOrder = [
             'event_user_id' => $eventUser->_id,
             'event_id' => $event,
             'space_available' => $data['space_available'],
+            'status' => 'INCOMPLETE'
         ];
-
         $order = Order::create($newOrder);
 
         // el usuario puede tener varias ordenes
@@ -462,15 +453,42 @@ class ApiOrdersController extends Controller
         array_push($ordersByUser, $order->_id);
         $eventUser->orders = $ordersByUser;
         $eventUser->save();
+    }
+    
+    /**
+     * _createOrderWithTickets_: Create an order for an event with tickets
+     * 
+     * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
+     * @authenticated
+     * @bodyParam space_available integer required Number of tickets that will be created
+     */
+    public function updateOrderAndAddTickets(Request $request, $order)
+    {
+        $request->validate([
+            'status' => 'required|string'
+        ]);
+        
+        $data = $request->json()->all();
+        $user = Auth::user();
+
+        if ($data['status'] !== 'COMPLETE') {
+            return response()->json(['message' => 'Invalid Order']);
+        }
+        
+        $order = Order::findOrFail($order);
+
+        $order->status = 'COMPLETE';
+        $order->save();
 
         // generate tickets
-        for ($i=1; $i <= $data['space_available']; $i++) {
+        // tickets are attendees
+        for ($i=1; $i <= $order->space_available; $i++) {
             try {
             $newTicket = Attendee::create([
                 'properties' => [
                     "names" => "ticket $i",
                 ],
-                'event_id' => $eventUser->event_id,
+                'event_id' => $order->event_id,
                 'order_id' => $order->_id
             ]);
 

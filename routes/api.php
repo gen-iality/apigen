@@ -54,7 +54,6 @@ Route::post('events/{event}/restore', 'EventController@restore');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {        
-        Route::post('events/{event}/create-tickets', 'ApiOrdersController@createOrderWithTickets');
         Route::post ('events/{event}', 'EventController@store')->middleware('permission:create');        
         Route::put ('events/{event}', 'EventController@update')->middleware('permission:update');
         Route::delete('events/{event}', 'EventController@destroy')->middleware('permission:destroy');
@@ -293,8 +292,12 @@ Route::apiResource('events/{event}/sessions', 'EventSessionController');
 /****************
  * Orders Events
  ****************/
-// Route::group(
-//     ['middleware' => 'auth:token'], function () {
+Route::group(
+    ['middleware' => 'auth:token'], function () {
+        Route::post('events/{event}/orders/create-preorder', 'ApiOrdersController@createPreOrder');
+        Route::put('order/{order}/create-tickets', 'ApiOrdersController@updateOrderAndAddTickets');
+    }
+);
 Route::apiResource('orders', 'ApiOrdersController');
 Route::post('orders/{order_id}/validateFreeorder', 'ApiCheckoutController@validateFreeOrder');
 Route::post('orders/{order_id}/validatePointOrder', 'ApiCheckoutController@validatePointOrder');
@@ -304,8 +307,6 @@ Route::get('events/{event}/orders/ordersevent', 'ApiOrdersController@indexByEven
 
 // Route::get('orders/{order_id}', 'ApiOrdersController@show');
 Route::post("payment_webhook_response", "ApiCheckoutController@paymentWebhookesponse");
-//     }
-// );
 
 /****************
  * Orders Users
