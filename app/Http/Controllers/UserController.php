@@ -175,6 +175,33 @@ class UserController extends UserControllerWeb
     }
 
     /**
+     * currentPlanInfo: Shows the information about consuming of current plan 
+     * @authenticated
+     * @urlParam user id required  user_id
+     */
+    public function currentPlanInfo(string $user_id)
+    {
+        $account = Account::find($user_id);
+        $events = Event::where('author_id', $user_id)->get();
+        $hours = $account->plan_id == "6285536ce040156b63d517e5" ? "2h" : "72h"; //Por el momento se toma 2h = free si no 72h
+        if (count($events) >= 1) {
+            for ($i=0; $i < count($events); $i++) { 
+                $table['events'][$i]['name'] = $events[$i]['name'];
+                $usersAtTheEvent = DB::table('event_users')->where('event_id', $events[$i]['_id'])
+                    ->where('properties.email', '!=', $account->email)->get();
+                $table['events'][$i]['users'] = count($usersAtTheEvent);
+                $table['events'][$i]['hours'] = $hours;
+                $table['events'][$i]['status'] = $events[$i]['isActive'] ? "ACTIVE" : "DISABLED";
+                $table['events'][$i]['startDate'] = $events[$i]['datetime_from']->format('d-m-Y'); //Fecha inicio
+                $table['events'][$i]['endDate'] = $events[$i]['datetime_to']->format('d-m-Y'); //Fecha fin
+            }
+            return $table;
+        }
+        return response()->json(['message' => 'No events created'], 404);
+        
+    }
+
+    /**
      * _delete_: delete a registered user
      * @authenticated
      * @urlParam user required id user Example: 603d6af041e6f555591c95d5
