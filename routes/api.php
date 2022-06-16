@@ -295,7 +295,7 @@ Route::apiResource('events/{event}/sessions', 'EventSessionController');
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/orders/create-preorder', 'ApiOrdersController@createPreOrder');
-        Route::put('order/{order}/create-tickets', 'ApiOrdersController@updateOrderAndAddTickets');
+        Route::put('orders/{order}/create-tickets', 'ApiOrdersController@updateOrderAndAddTickets');
     }
 );
 Route::apiResource('orders', 'ApiOrdersController');
