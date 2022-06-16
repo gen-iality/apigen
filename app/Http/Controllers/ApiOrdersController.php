@@ -429,7 +429,7 @@ class ApiOrdersController extends Controller
      * 
      * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
      * @authenticated
-     * @bodyParam space_available object required Number of tickets that will be created
+     * @bodyParam space_available integer required Number of tickets that will be created
      */
     public function createOrderWithTickets(Request $request, $event)
     {
@@ -458,8 +458,8 @@ class ApiOrdersController extends Controller
         for ($i=1; $i <= $data['space_available']; $i++) {
             try {
             $newTicket = Attendee::create([
-                'prperties' => [
-                    "names" => "ticket 1",
+                'properties' => [
+                    "names" => "ticket $i",
                 ],
                 'event_id' => $eventUser->event_id,
                 'order_id' => $order->_id
