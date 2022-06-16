@@ -450,8 +450,17 @@ class ApiOrdersController extends Controller
         ];
 
         $order = Order::create($newOrder);
-        
-        $eventUser->order_id = $order->_id;
+
+        // el usuario puede tener varias ordenes
+        $oldOrder = $eventUser->orders;
+        $ordersByUser = [];
+        if (isset($oldOrder)) {
+            foreach ($oldOrder as $ord) {
+                array_push($ordersByUser, $ord);
+            }
+        }
+        array_push($ordersByUser, $order->_id);
+        $eventUser->orders = $ordersByUser;
         $eventUser->save();
 
         // generate tickets
