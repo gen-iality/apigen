@@ -470,6 +470,14 @@ Route::group(
     }
 );
 
+/** 
+ *  ROUTES My Plan */
+
+/*****
+ * Current plan
+ */
+
+Route::get('users/{user}/currentPlan', 'UserController@currentPlanInfo');
 
 /** 
  *  ROUTES RESTRICCION */
