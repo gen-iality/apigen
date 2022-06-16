@@ -423,7 +423,14 @@ class ApiOrdersController extends Controller
         return OrderResource::collection($results);
 
     }
-    
+
+    /**
+     * _createPreOrder_: Create an Pre-order for an event
+     * 
+     * @urlParam order required Example: 62ab83018579d9446f0e84f5
+     * @authenticated
+     * @bodyParam status string required Order status when payment is made
+     */
     public function createPreOrder(Request $request, $event)
     {
         $request->validate([
@@ -453,14 +460,16 @@ class ApiOrdersController extends Controller
         array_push($ordersByUser, $order->_id);
         $eventUser->orders = $ordersByUser;
         $eventUser->save();
+
+        return compact("order");
     }
     
     /**
-     * _createOrderWithTickets_: Create an order for an event with tickets
+     * _updateOrderAndAddTickets_: Update an order for an event and generate tickets
      * 
-     * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
+     * @urlParam order required Example: 62ab83018579d9446f0e84f5
      * @authenticated
-     * @bodyParam space_available integer required Number of tickets that will be created
+     * @bodyParam status string required Order status when payment is made
      */
     public function updateOrderAndAddTickets(Request $request, $order)
     {
