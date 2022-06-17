@@ -454,10 +454,10 @@ class ApiOrdersController extends Controller
         $ordersByUser = [];
         if (isset($oldOrder)) {
             foreach ($oldOrder as $ord) {
-                array_push($ordersByUser, $ord);
+                array_push($ordersByUser, ['order_id' => $ord['order_id'], 'status' => $ord['status']]);
             }
         }
-        array_push($ordersByUser, $order->_id);
+        array_push($ordersByUser, ['order_id' => $order->_id, 'status' => $order->status]);
         $eventUser->orders = $ordersByUser;
         $eventUser->save();
 
@@ -481,13 +481,25 @@ class ApiOrdersController extends Controller
         $user = Auth::user();
 
         if ($data['status'] !== 'COMPLETE') {
-            return response()->json(['message' => 'Invalid Order']);
+            return response()->json(['message' => 'Invalid Order'], 401);
         }
         
         $order = Order::findOrFail($order);
 
         $order->status = 'COMPLETE';
         $order->save();
+
+        // actualizar estado de la orden en el event user
+        $eventUser = Attendee::findOrFail($order->event_user_id);
+        $ordersByUser = [];
+        foreach ($eventUser->orders as $ord) {
+            if($ord['order_id'] === $order->_id) {
+                $ord['status'] = $order->status;
+            }
+            array_push($ordersByUser, $ord);
+        }
+        $eventUser->orders = $ordersByUser;
+        $eventUser->save();
 
         // generate tickets
         // tickets are attendees
