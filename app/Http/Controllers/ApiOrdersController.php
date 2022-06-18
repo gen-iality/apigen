@@ -17,6 +17,7 @@ use App\Models\Ticket;
 use Auth;
 use Validator;
 use App\evaLib\Services\FilterQuery;
+use Mail;
 
 /**
  * @group Orders
@@ -485,11 +486,11 @@ class ApiOrdersController extends Controller
         }
         
         $order = Order::findOrFail($order);
-
+        
         $order->status = 'COMPLETE';
         $order->save();
 
-        // actualizar estado de la orden en el event user
+        // // actualizar estado de la orden en el event user
         $eventUser = Attendee::findOrFail($order->event_user_id);
         $ordersByUser = [];
         foreach ($eventUser->orders as $ord) {
@@ -500,7 +501,7 @@ class ApiOrdersController extends Controller
         }
         $eventUser->orders = $ordersByUser;
         $eventUser->save();
-
+        
         // generate tickets
         // tickets are attendees
         for ($i=1; $i <= $order->space_available; $i++) {
@@ -515,10 +516,19 @@ class ApiOrdersController extends Controller
 
             } catch (\Exception $e) {
                 return response()->json((object) ["message" => $e->getMessage()], 400);
-    
+                
             }
         }
 
+        $event = Event::findOrFail($order->event_id);
+        $attendees = Attendee::where('event_id', $event)->where('order_id', $order->_id)->get();
+
+        Mail::to($user->email)
+        ->queue(
+         new \App\Mail\SendQRs($eventUser, $event, $attendees)
+        );
+
+        
         return compact("order");
     }
 }
