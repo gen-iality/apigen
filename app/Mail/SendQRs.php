@@ -6,13 +6,14 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Organization;
 use App\evaLib\Services\GoogleFiles;
 use QRCode;
 
 class SendQRs extends Mailable
 {
     use Queueable, SerializesModels;
-    public $subject = 'Tremendo';
+    public $subject;
     public $qrs;
     public $eventUser;
     public $attendees;
@@ -48,6 +49,11 @@ class SendQRs extends Mailable
         //     array_push($this->qrs, ['code' => $qr, 'owner_qr' => $attendee->properties['names']]);
         // }
 
+        $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
+        $from = !empty($organization) ? $organization->name : "Evius Event ";
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
+        $this->subject = $this->event->name;
+
         try {
             $this->qrs = [];
             foreach ($this->attendees as $attendee) {
@@ -69,8 +75,8 @@ class SendQRs extends Mailable
             var_dump($e->getMessage());
         }
 
-        return $this ->from("alerts@evius.co", "Evius Event")
-        ->subject('evius')
+        return $this ->from($emailOrganization, $from)
+        ->subject($this->subject)
         ->markdown('rsvp.sendQR');
     }
 }

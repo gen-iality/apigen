@@ -521,7 +521,7 @@ class ApiOrdersController extends Controller
         }
 
         $event = Event::findOrFail($order->event_id);
-        $attendees = Attendee::where('event_id', $event)->where('order_id', $order->_id)->get();
+        $attendees = Attendee::where('event_id', $event->_id)->where('order_id', $order->_id)->get();
 
         Mail::to($user->email)
         ->queue(
