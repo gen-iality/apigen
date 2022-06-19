@@ -11,7 +11,7 @@ use App\evaLib\Services\GoogleFiles;
 use Barryvdh\DomPDF\Facade as PDF;
 use QRCode;
 
-class SendQRs extends Mailable implements ShouldQueue
+class SendQRs extends Mailable
 {
     use Queueable, SerializesModels;
     public $subject;

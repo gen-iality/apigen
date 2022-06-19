@@ -524,7 +524,7 @@ class ApiOrdersController extends Controller
         $attendees = Attendee::where('event_id', $event->_id)->where('order_id', $order->_id)->get();
 
         Mail::to($user->email)
-        ->queue(
+        ->send(
             new \App\Mail\SendQRs($eventUser, $event, $attendees, $order)
         );
 
