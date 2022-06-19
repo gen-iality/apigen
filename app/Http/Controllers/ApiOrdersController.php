@@ -508,7 +508,7 @@ class ApiOrdersController extends Controller
             try {
             $newTicket = Attendee::create([
                 'properties' => [
-                    "names" => "ticket $i",
+                    "names" => "TICKET $i",
                 ],
                 'event_id' => $order->event_id,
                 'order_id' => $order->_id
@@ -525,7 +525,7 @@ class ApiOrdersController extends Controller
 
         Mail::to($user->email)
         ->queue(
-         new \App\Mail\SendQRs($eventUser, $event, $attendees)
+            new \App\Mail\SendQRs($eventUser, $event, $attendees, $order)
         );
 
         

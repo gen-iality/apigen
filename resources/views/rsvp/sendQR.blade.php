@@ -24,15 +24,12 @@
 
 <br />
 <br />
-
-<div style="text-align: center">
-	@foreach($qrs as $qr)
-		<h1>{{$qr['owner_qr']}}</h1>
-		<img  src="{{$qr['code']}}"/>
-		<br />
-		<br />
-	@endforeach
+<div class="centered">
+	<p><b>Tu orden es</b><br/># Orden: {{$order->_id}}</p>
+	<br />
+	<p>Tickets disponibles {{count($qrs)}}</p>
 </div>
+
 
 <p style="font-size: 15px;color: gray;font-style: italic">
 	{{ __('Mail.support_mail') }}
