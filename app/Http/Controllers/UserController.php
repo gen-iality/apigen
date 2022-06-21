@@ -186,6 +186,7 @@ class UserController extends UserControllerWeb
         $hours = $account->plan_id == "6285536ce040156b63d517e5" ? "2h" : "72h"; //Por el momento se toma 2h = free si no 72h
         if (count($events) >= 1) {
             for ($i=0; $i < count($events); $i++) { 
+                $table['events'][$i]['ID'] = $events[$i]['_id'];
                 $table['events'][$i]['name'] = $events[$i]['name'];
                 $usersAtTheEvent = DB::table('event_users')->where('event_id', $events[$i]['_id'])
                     ->where('properties.email', '!=', $account->email)->get();
