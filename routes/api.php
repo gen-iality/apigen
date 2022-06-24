@@ -482,6 +482,13 @@ Route::get('users/{user}/currentPlan', 'UserController@currentPlanInfo');
 /** 
  *  ROUTES RESTRICCION */
 
+ /*****
+ * Coupons
+ */
+
+Route::get('coupons/{name}', 'CouponsController@findByName');
+Route::post('coupons', 'CouponsController@store')->middleware('permission:create');
+
 /*****
  * Plan
  */
@@ -501,6 +508,9 @@ Route::get('users/{user}/notifications', 'NotificationController@NotificationbyU
 
 Route::apiResource('billings', 'BillingController');
 Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
+//Test
+Route::get('automatic', 'BillingController@automaticPayment');
+Route::post('automatic', 'BillingController@automaticPayment');
 
 /*****
  * Payment
