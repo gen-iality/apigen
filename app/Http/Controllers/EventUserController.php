@@ -517,14 +517,6 @@ class EventUserController extends Controller
         ]);
 
         $eventUserData = $request->json()->all();
-
-	if ($eventUserData['order_id']) {
-		$findEventUser = Attendee::where('event_id', $event_id)->where('properties.email', $eventUserData['email'])->first();
-		if(isset($findEventUser)) {
-			return response()->json(['message' => 'User already exist'], 401);
-		}
-	}
-
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
         $event = Event::findOrFail($event_id);
