@@ -6,6 +6,7 @@ use App\Order;
 use App\User;
 use App\Account;
 use App\Attendee;
+use App\DiscountCode;
 use App\Event;
 use App\DiscountCodeTemplate;
 use App\Http\Resources\OrderResource;
@@ -527,8 +528,60 @@ class ApiOrdersController extends Controller
         ->send(
             new \App\Mail\SendQRs($eventUser, $event, $attendees, $order)
         );
-
         
+        return compact("order");
+    }
+
+    public function createOrderToPartner(Request $request, $event_id)
+    {
+        $request->validate([
+            'code' => 'required|string'
+        ]);
+
+        $user = Auth::user();
+        $data = $request->json()->all();
+
+        $code = DiscountCode::where("code" , $data['code'])->first();
+        $discountCodeTemplate = DiscountCodeTemplate::where('_id', $code->discount_code_template_id)->first();
+
+        if($code->number_uses >= $discountCodeTemplate->use_limit){
+            return abort(403 , 'El código ya se uso');
+        }
+
+        //Creation of order in which the redemption of the code is registered
+        $event = Event::findOrFail($event_id);
+        $eventUser = Attendee::where('event_id', $event_id)->where('account_id', $user->_id)->first();
+        $newOrder = [
+            'event_user_id' => $eventUser->_id,
+            'event_id' => $event_id,
+            'code_id' => $code->_id,
+            'discount_code_template_id' => $discountCodeTemplate->_id,
+            'space_available' => $code->space_available,
+            'status' => 'COMPLETE'
+        ];
+        $order = Order::create($newOrder);
+
+        // Assign order to event user
+        $eventUser->orders = [['order_id' => $order->_id, 'status' => $order->status]];
+        $eventUser->save();
+
+        // create ticket
+        $newTicket = Attendee::create([
+            'properties' => [
+                "names" => "TICKET 1",
+            ],
+            'event_id' => $order->event_id,
+            'order_id' => $order->_id
+        ]);
+
+        Mail::to($user->email)
+        ->send(
+            new \App\Mail\SendQRs($eventUser, $event, $attendees=[$newTicket], $order)
+        );
+
+        $code->number_uses +=1;
+        $code->save();
+
         return compact("order");
     }
 }

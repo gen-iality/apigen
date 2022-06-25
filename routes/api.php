@@ -296,6 +296,7 @@ Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::post('events/{event}/orders/create-preorder', 'ApiOrdersController@createPreOrder');
         Route::put('orders/{order}/create-tickets', 'ApiOrdersController@updateOrderAndAddTickets');
+        Route::post('events/{event}/orders/create-order-to-partner', 'ApiOrdersController@createOrderToPartner');
     }
 );
 Route::apiResource('orders', 'ApiOrdersController');
