@@ -334,7 +334,7 @@ class BillingController extends Controller
     public function findAndCreateAddons($details, $user_id)
     {
         if (isset($details['users'])) { //En este momento solo hay adicional de usuarios
-            app('App\Http\Controllers\AddonController')->createByBilling($addon, $user_id);
+            app('App\Http\Controllers\AddonController')->createByBilling($details['users'], $user_id);
         }
     }
 
