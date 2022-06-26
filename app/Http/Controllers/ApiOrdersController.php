@@ -535,7 +535,7 @@ class ApiOrdersController extends Controller
     public function createOrderToPartner(Request $request, $event_id)
     {
         $request->validate([
-            'code' => 'required|string'
+            'code' => 'required|exists:discount_codes,code|string'
         ]);
 
         $user = Auth::user();
