@@ -442,7 +442,7 @@ class ApiOrdersController extends Controller
         $user = Auth::user();
 
 	// validate that it does not exceed the amount of 100 tickets
-	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->get();
+	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->where('properties.codeRedeem', null)->get();
 	if(count($tickets) + $data['space_available'] > 100) {
 	  $ticketsAvailable = 100 - count($tickets);
 	  return response()->json(['message' => "ticket limit exceeded, $ticketsAvailable  tickets available"], 403);
@@ -605,7 +605,7 @@ class ApiOrdersController extends Controller
 
     public function getTicketsAvailable($event)
     {
-	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->get();
+	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->where('properties.codeRedeem', null)->get();
 	$ticketsAvailable = 100 - count($tickets);
 
 	return response()->json(['tickets_available' => $ticketsAvailable, 'total_tickets' => count($tickets)]);
