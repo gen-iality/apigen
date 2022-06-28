@@ -591,4 +591,12 @@ class ApiOrdersController extends Controller
 
         return compact("order");
     }
+
+    public function getTicketsAvailable($event)
+    {
+	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->get();
+	$ticketsAvailable = 100 - count($tickets);
+
+	return response()->json(['tickets_available' => $ticketsAvailable, 'total_tickets' => count($tickets)]);
+    }
 }

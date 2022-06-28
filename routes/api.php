@@ -299,6 +299,8 @@ Route::group(
         Route::post('events/{event}/orders/create-order-to-partner', 'ApiOrdersController@createOrderToPartner');
     }
 );
+Route::get('orders/tickets-available/{event}', 'ApiOrdersController@getTicketsAvailable');
+
 Route::apiResource('orders', 'ApiOrdersController');
 Route::post('orders/{order_id}/validateFreeorder', 'ApiCheckoutController@validateFreeOrder');
 Route::post('orders/{order_id}/validatePointOrder', 'ApiCheckoutController@validatePointOrder');
