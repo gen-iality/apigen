@@ -569,17 +569,28 @@ class ApiOrdersController extends Controller
         $order = Order::create($newOrder);
 
         // Assign order to event user
-        $eventUser->orders = [['order_id' => $order->_id, 'status' => $order->status]];
+        // User can have multiple orders
+        $oldOrder = $eventUser->orders;
+        $ordersByUser = [];
+        if (isset($oldOrder)) {
+            foreach ($oldOrder as $ord) {
+                array_push($ordersByUser, ['order_id' => $ord['order_id'], 'status' => $ord['status']]);
+            }
+        }
+        array_push($ordersByUser, ['order_id' => $order->_id, 'status' => $order->status]);
+        $eventUser->orders = $ordersByUser;
         $eventUser->save();
 
         // create ticket
         $newTicket = Attendee::create([
             'properties' => [
                 "names" => "TICKET 1",
+		"codeRedeem" => $code->code
             ],
             'event_id' => $order->event_id,
             'order_id' => $order->_id
         ]);
+
 
         Mail::to($user->email)
         ->send(
