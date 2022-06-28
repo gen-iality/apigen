@@ -438,10 +438,17 @@ class ApiOrdersController extends Controller
         $request->validate([
             'space_available' => 'required|numeric'
         ]);
-
         $data = $request->json()->all();
         $user = Auth::user();
 
+	// validate that it does not exceed the amount of 100 tickets
+	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->get();
+	if(count($tickets) + $data['space_available'] > 100) {
+	  $ticketsAvailable = 100 - count($tickets);
+	  return response()->json(['message' => "ticket limit exceeded, $ticketsAvailable  tickets available"], 403);
+	}
+
+	// Assign pre-order to user
         $eventUser = Attendee::where('event_id', $event)->where('account_id', $user->_id)->first();
         $newOrder = [
             'event_user_id' => $eventUser->_id,
@@ -451,7 +458,7 @@ class ApiOrdersController extends Controller
         ];
         $order = Order::create($newOrder);
 
-        // el usuario puede tener varias ordenes
+        // User can have multiple orders
         $oldOrder = $eventUser->orders;
         $ordersByUser = [];
         if (isset($oldOrder)) {
