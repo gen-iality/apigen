@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Addon;
 use App\Event;
 use App\Http\Controllers\web\UserController as UserControllerWeb;
 use App\Http\Resources\UsersResource;
@@ -173,6 +174,27 @@ class UserController extends UserControllerWeb
         }
         return response()->json(['message'=> 'Data not found'], 404);
     }
+
+    /**
+     * _update_: update addons of registered user
+     * @authenticated
+     */
+    public function updateAddons($billing)
+    {
+        if ($billing) {
+            if (isset($billing->billing['details']['users'])) {
+                $addons = Addon::where('billing_id', $billing->_id)->where('is_active', false)->get();
+                foreach ($addons as $addon) {
+                    $addon['is_active'] = true;
+                    $addon->save();
+                }
+                return response()->json(['message'=> 'Addons update successfully'], 204);
+            }
+            return response()->json(['message'=> 'Addons not found'], 404);
+        }
+        return response()->json(['message'=> 'Billing not found'], 404);
+    }
+
 
     /**
      * currentPlanInfo: Shows the information about consuming of current plan 
