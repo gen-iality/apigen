@@ -28,4 +28,9 @@ class Addon extends MyBaseModel
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function billing()
+    {
+        return $this->belongsTo('App\Billing', 'billing_id');
+    }
 }
