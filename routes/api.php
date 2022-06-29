@@ -508,9 +508,6 @@ Route::get('users/{user}/notifications', 'NotificationController@NotificationbyU
 
 Route::apiResource('billings', 'BillingController');
 Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
-//Test
-Route::get('automatic', 'BillingController@automaticPayment');
-Route::post('automatic', 'BillingController@automaticPayment');
 
 /*****
  * Payment
