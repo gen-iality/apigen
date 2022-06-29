@@ -46,10 +46,16 @@ class AddonController extends Controller
 
     }
 
-    public function createByBilling($data, $user_id)
+    public function createByBilling($data, $user_id, $billing_id)
     {
         if ($data) {
             $data['user_id'] = $user_id;
+            $data['billing_id'] = $billing_id;
+            $start_date = date('d-m-Y');
+            $data['start_date'] = $start_date;
+            $end_date = date('d-m-Y', strtotime($start_date . "+ 30 days"));
+            $data['end_date'] = $end_date;
+            $data['is_active'] = false;
             $Addon = new Addon($data);
             $Addon->save();
             return response()->json($Addon, 201);
