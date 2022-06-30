@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\User;
 use App\Addon;
 use App\Event;
 use App\Http\Controllers\web\UserController as UserControllerWeb;
@@ -165,12 +166,12 @@ class UserController extends UserControllerWeb
     public function updatePlan($plan_id, string $user_id)
     {
         if ($plan_id) {
-            $Account = Account::findOrFail($id);
-            $Account['plan_id'] = $data;
+            $Account = User::findOrFail($user_id);
+            $Account['plan_id'] = $plan_id;
             $Account->save();
             return $Account;
         }
-        return response()->json(['message'=> 'Data not found'], 404);
+        return response()->json(['message'=> 'Plan not found'], 404);
     }
 
     /**
