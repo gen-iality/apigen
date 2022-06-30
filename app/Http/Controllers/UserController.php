@@ -162,13 +162,12 @@ class UserController extends UserControllerWeb
      * _update_: update plan of registered user
      * @authenticated
      */
-    public function updatePlan($data, string $id)
+    public function updatePlan($plan_id, string $user_id)
     {
         if ($data) {
-            $Account = Account::find($id);
+            $Account = Account::findOrFail($id);
             $Account['plan_id'] = $data;
             $Account->save();
-            $Account = Account::find($Account->_id);
             return $Account;
         }
         return response()->json(['message'=> 'Data not found'], 404);
