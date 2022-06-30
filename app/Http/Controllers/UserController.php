@@ -164,7 +164,7 @@ class UserController extends UserControllerWeb
      */
     public function updatePlan($plan_id, string $user_id)
     {
-        if ($data) {
+        if ($plan_id) {
             $Account = Account::findOrFail($id);
             $Account['plan_id'] = $data;
             $Account->save();
