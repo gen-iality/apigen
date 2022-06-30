@@ -137,7 +137,6 @@ class UserController extends UserControllerWeb
             'picture' => 'string',
             'password' => 'string'
         ]);
-        dd("update user", $request);
         $data = $request->json()->all();
         
         $auth = resolve('Kreait\Firebase\Auth');
