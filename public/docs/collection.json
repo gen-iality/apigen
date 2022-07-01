@@ -2,11 +2,7 @@
     "variables": [],
     "info": {
         "name": "Evius API",
-<<<<<<< HEAD
         "_postman_id": "1df85146-8b24-47de-821d-90fb529ee140",
-=======
-        "_postman_id": "45200164-da1c-4535-a5a8-069d339e3807",
->>>>>>> beta
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -27,11 +23,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "quia",
-=======
-                                    "value": "architecto",
->>>>>>> beta
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -113,11 +105,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"quia\",\n    \"activity_description\": \"harum\"\n}"
-=======
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"quo\",\n    \"activity_description\": \"id\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -135,11 +123,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "sit",
-=======
-                                    "value": "natus",
->>>>>>> beta
                                     "description": "activity to which the meeting is to be created"
                                 }
                             ]
@@ -175,11 +159,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "qui",
-=======
-                                    "value": "beatae",
->>>>>>> beta
                                     "description": "id of activity"
                                 }
                             ]
@@ -299,21 +279,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "sit",
-=======
-                                    "value": "culpa",
->>>>>>> beta
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "activity",
                                     "key": "activity",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "magnam",
->>>>>>> beta
                                     "description": "activity id"
                                 }
                             ]
@@ -331,11 +303,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"user_id\": \"dolor\"\n}"
-=======
-                            "raw": "{\n    \"user_id\": \"iusto\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -655,11 +623,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "sunt",
-=======
-                                    "value": "harum",
->>>>>>> beta
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -875,11 +839,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"et\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"reprehenderit\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -1085,11 +1045,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "voluptatibus",
-=======
-                                    "value": "consequuntur",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -1135,11 +1091,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"organization_id\": \"sed\",\n    \"comment\": \"veritatis\",\n    \"image\": \"voluptatem\"\n}"
-=======
-                            "raw": "{\n    \"organization_id\": \"beatae\",\n    \"comment\": \"quia\",\n    \"image\": \"et\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -1389,21 +1341,13 @@
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-<<<<<<< HEAD
                                     "value": "dolor",
-=======
-                                    "value": "aut",
->>>>>>> beta
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-<<<<<<< HEAD
                                     "value": "cum",
-=======
-                                    "value": "pariatur",
->>>>>>> beta
                                     "description": "id code delete"
                                 }
                             ]
@@ -1449,11 +1393,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"sed\"\n}"
-=======
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"temporibus\"\n}"
->>>>>>> beta
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1481,11 +1421,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"code\": \"dolores\"\n}"
-=======
-                            "raw": "{\n    \"code\": \"corrupti\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -1507,11 +1443,7 @@
                                 },
                                 {
                                     "key": "email",
-<<<<<<< HEAD
                                     "value": "fugit",
-=======
-                                    "value": "enim",
->>>>>>> beta
                                     "description": "user email",
                                     "disabled": false
                                 }
@@ -1592,11 +1524,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"nemo\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"aut\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -1776,11 +1704,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "maiores",
-=======
-                                    "value": "porro",
->>>>>>> beta
                                     "description": "event_id"
                                 }
                             ]
@@ -1816,21 +1740,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "placeat",
-=======
-                                    "value": "cum",
->>>>>>> beta
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-<<<<<<< HEAD
                                     "value": "adipisci",
-=======
-                                    "value": "aut",
->>>>>>> beta
                                     "description": "document user id"
                                 }
                             ]
@@ -1866,11 +1782,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "autem",
-=======
-                                    "value": "id",
->>>>>>> beta
                                     "description": "event id"
                                 }
                             ]
@@ -1888,11 +1800,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"sit\",\n    \"url\": \"non\",\n    \"assign\": false\n}"
-=======
-                            "raw": "{\n    \"name\": \"autem\",\n    \"url\": \"velit\",\n    \"assign\": true\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -1910,21 +1818,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "animi",
-=======
-                                    "value": "eos",
->>>>>>> beta
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-<<<<<<< HEAD
                                     "value": "doloremque",
-=======
-                                    "value": "est",
->>>>>>> beta
                                     "description": "document user id"
                                 }
                             ]
@@ -1960,21 +1860,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "nihil",
-=======
-                                    "value": "et",
->>>>>>> beta
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "deleniti",
->>>>>>> beta
                                     "description": "document user id"
                                 }
                             ]
@@ -2010,11 +1902,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "fugit",
-=======
-                                    "value": "animi",
->>>>>>> beta
                                     "description": "event id"
                                 }
                             ]
@@ -2056,11 +1944,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "quidem",
-=======
-                                    "value": "quo",
->>>>>>> beta
                                     "description": "event_id"
                                 }
                             ]
@@ -2096,11 +1980,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "incidunt",
-=======
-                                    "value": "quibusdam",
->>>>>>> beta
                                     "description": "event id"
                                 }
                             ]
@@ -2136,21 +2016,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "debitis",
-=======
-                                    "value": "velit",
->>>>>>> beta
                                     "description": "event id"
                                 },
                                 {
                                     "id": "document",
                                     "key": "document",
-<<<<<<< HEAD
                                     "value": "non",
-=======
-                                    "value": "et",
->>>>>>> beta
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -2186,11 +2058,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "repellat",
-=======
-                                    "value": "nemo",
->>>>>>> beta
                                     "description": "event id"
                                 }
                             ]
@@ -2226,21 +2094,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "voluptatum",
-=======
-                                    "value": "corporis",
->>>>>>> beta
                                     "description": "event id"
                                 },
                                 {
                                     "id": "document",
                                     "key": "document",
-<<<<<<< HEAD
                                     "value": "nostrum",
-=======
-                                    "value": "animi",
->>>>>>> beta
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -2338,11 +2198,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "itaque",
-=======
-                                    "value": "vero",
->>>>>>> beta
                                     "description": "organization id"
                                 }
                             ]
@@ -2423,11 +2279,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"veritatis\",\n    \"picture\": \"dolorem\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
-=======
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"aut\",\n    \"picture\": \"vel\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -2481,11 +2333,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "ducimus",
-=======
-                                    "value": "cumque",
->>>>>>> beta
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2503,11 +2351,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"sed\",\n    \"picture\": \"recusandae\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
-=======
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"reiciendis\",\n    \"picture\": \"blanditiis\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -2525,11 +2369,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "est",
->>>>>>> beta
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -2611,11 +2451,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"saepe\",\n    \"picture\": \"asperiores\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
-=======
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"sit\",\n    \"picture\": \"aperiam\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -2633,11 +2469,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "consectetur",
-=======
-                                    "value": "architecto",
->>>>>>> beta
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2655,11 +2487,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"veritatis\",\n    \"picture\": \"quo\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
-=======
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"earum\",\n    \"picture\": \"soluta\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -2715,11 +2543,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"placeat\",\n    \"picture\": \"inventore\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
-=======
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"aperiam\",\n    \"picture\": \"autem\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -2737,11 +2561,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "velit",
-=======
-                                    "value": "ullam",
->>>>>>> beta
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2759,11 +2579,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"est\",\n    \"picture\": \"dignissimos\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
-=======
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"expedita\",\n    \"picture\": \"tenetur\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -2781,11 +2597,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "nostrum",
-=======
-                                    "value": "laborum",
->>>>>>> beta
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -2947,11 +2759,7 @@
                                 {
                                     "id": "user",
                                     "key": "user",
-<<<<<<< HEAD
                                     "value": "iusto",
-=======
-                                    "value": "omnis",
->>>>>>> beta
                                     "description": "organiser_id"
                                 }
                             ]
@@ -3051,11 +2859,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "voluptatem",
-=======
-                                    "value": "amet",
->>>>>>> beta
                                     "description": "event id"
                                 }
                             ]
@@ -3073,11 +2877,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"quantity\": 0,\n    \"auto_assign\": false\n}"
-=======
-                            "raw": "{\n    \"quantity\": 3.4023107,\n    \"auto_assign\": true\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -3139,11 +2939,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"ab\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"occaecati\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -3167,11 +2963,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "sit",
->>>>>>> beta
                                     "description": "event id"
                                 }
                             ]
@@ -3293,37 +3085,6 @@
                         "url": {
                             "protocol": "https",
                             "host": "devapi.evius.co",
-<<<<<<< HEAD
-=======
-                            "path": "api\/events\/withstatus\/:id",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "_updateWithStatus_: update With Status",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
->>>>>>> beta
                             "path": "api\/eventUsers\/:id\/withStatus",
                             "query": []
                         },
@@ -3358,47 +3119,7 @@
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-<<<<<<< HEAD
                                     "value": "omnis",
-=======
-                                    "value": "nihil",
-                                    "description": "string required id Attendee to checkin into the event"
-                                }
-                            ]
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "_Uncheck_: uncheck an existing Attendee to related event",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/eventUsers\/:eventuser\/uncheck",
-                            "query": [],
-                            "variable": [
-                                {
-                                    "id": "eventuser",
-                                    "key": "eventuser",
-                                    "value": "quam",
->>>>>>> beta
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -3459,11 +3180,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"quo\"\n    }\n}"
-=======
-                            "raw": "{\n    \"email\": \"example@evius.co\",\n    \"name\": \"Evius\",\n    \"password\": \"*******\",\n    \"other_params\": {\n        \"city\": \"nam\"\n    }\n}"
->>>>>>> beta
                         },
                         "description": "When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and\nif the user exists, the user will not be updated, it will only create the record in the event.\n\n![Screenshot](https:\/\/firebasestorage.googleapis.com\/v0\/b\/eviusauth.appspot.com\/o\/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)",
                         "response": []
@@ -3763,11 +3480,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"rol_id\": \"laboriosam\",\n    \"properties\": {\n        \"other_properties\": \"modi\"\n    }\n}"
-=======
-                            "raw": "{\n    \"rol_id\": \"nesciunt\",\n    \"properties\": {\n        \"other_properties\": \"cumque\"\n    }\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -4007,21 +3720,13 @@
                                 },
                                 {
                                     "key": "datetime_from",
-<<<<<<< HEAD
                                     "value": "nobis",
-=======
-                                    "value": "ratione",
->>>>>>> beta
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 },
                                 {
                                     "key": "datetime_to",
-<<<<<<< HEAD
                                     "value": "labore",
-=======
-                                    "value": "sed",
->>>>>>> beta
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 }
@@ -4030,11 +3735,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "culpa",
->>>>>>> beta
                                     "description": "event_id"
                                 }
                             ]
@@ -4070,21 +3771,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "beatae",
-=======
-                                    "value": "consectetur",
->>>>>>> beta
                                     "description": ""
                                 },
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-<<<<<<< HEAD
                                     "value": "sapiente",
-=======
-                                    "value": "accusamus",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -4102,11 +3795,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"rol_id\": \"aut\"\n}"
-=======
-                            "raw": "{\n    \"rol_id\": \"dolorem\"\n}"
->>>>>>> beta
                         },
                         "description": "This end point sends an email to the user to inform them of the change.",
                         "response": []
@@ -4168,11 +3857,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"file\": \"quae\"\n}"
-=======
-                            "raw": "{\n    \"file\": \"corporis\"\n}"
->>>>>>> beta
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -4190,11 +3875,7 @@
                                 {
                                     "id": "name",
                                     "key": "name",
-<<<<<<< HEAD
                                     "value": "assumenda",
-=======
-                                    "value": "necessitatibus",
->>>>>>> beta
                                     "description": "file field by default file"
                                 }
                             ]
@@ -4212,11 +3893,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"file\": \"doloremque\",\n    \"type\": \"dolor\"\n}"
-=======
-                            "raw": "{\n    \"file\": \"dolor\",\n    \"type\": \"vel\"\n}"
->>>>>>> beta
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -4340,11 +4017,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"non\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
-=======
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"similique\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -4372,11 +4045,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"nihil\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
-=======
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"harum\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -5469,11 +5138,7 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-<<<<<<< HEAD
                                     "value": "qui",
-=======
-                                    "value": "architecto",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -5581,11 +5246,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"rerum\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
-=======
-                            "raw": "{\n    \"name\": \"debitis\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -5603,11 +5264,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "fugiat",
-=======
-                                    "value": "ut",
->>>>>>> beta
                                     "description": "organization id"
                                 }
                             ]
@@ -5625,11 +5282,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"voluptates\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
-=======
-                            "raw": "{\n    \"name\": \"beatae\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -5679,21 +5332,13 @@
                                 },
                                 {
                                     "key": "date_from",
-<<<<<<< HEAD
                                     "value": "similique",
-=======
-                                    "value": "deleniti",
->>>>>>> beta
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the initial date.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "date_to",
-<<<<<<< HEAD
                                     "value": "ex",
-=======
-                                    "value": "tempora",
->>>>>>> beta
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the finish date.",
                                     "disabled": false
                                 },
@@ -5708,11 +5353,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "eveniet",
-=======
-                                    "value": "mollitia",
->>>>>>> beta
                                     "description": "organization_id"
                                 }
                             ]
@@ -5782,21 +5423,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "commodi",
-=======
-                                    "value": "consequatur",
->>>>>>> beta
                                     "description": "The id of the organization"
                                 },
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
-<<<<<<< HEAD
                                     "value": "alias",
-=======
-                                    "value": "sit",
->>>>>>> beta
                                     "description": "The id of the organization"
                                 }
                             ]
@@ -5832,11 +5465,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "eligendi",
-=======
-                                    "value": "tenetur",
->>>>>>> beta
                                     "description": "organization id"
                                 }
                             ]
@@ -5872,21 +5501,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "dicta",
-=======
-                                    "value": "molestiae",
->>>>>>> beta
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
-<<<<<<< HEAD
                                     "value": "ullam",
-=======
-                                    "value": "id",
->>>>>>> beta
                                     "description": "organization user id"
                                 }
                             ]
@@ -5950,11 +5571,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "incidunt",
-=======
-                                    "value": "labore",
->>>>>>> beta
                                     "description": "The id of the organization"
                                 }
                             ]
@@ -6060,11 +5677,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "deleniti",
-=======
-                                    "value": "quis",
->>>>>>> beta
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6128,11 +5741,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "est",
-=======
-                                    "value": "itaque",
->>>>>>> beta
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6168,11 +5777,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-<<<<<<< HEAD
                                     "value": "alias",
-=======
-                                    "value": "eum",
->>>>>>> beta
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -6248,11 +5853,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "culpa",
-=======
-                                    "value": "et",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -6288,11 +5889,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "sit",
-=======
-                                    "value": "quidem",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -6334,11 +5931,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-<<<<<<< HEAD
                                     "value": "non",
-=======
-                                    "value": "aut",
->>>>>>> beta
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -6416,11 +6009,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "in",
-=======
-                                    "value": "voluptas",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -6462,11 +6051,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-<<<<<<< HEAD
                                     "value": "sit",
-=======
-                                    "value": "illo",
->>>>>>> beta
                                     "description": "product"
                                 }
                             ]
@@ -6536,11 +6121,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "excepturi",
-=======
-                                    "value": "nemo",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -6558,11 +6139,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"subject\": \"enim\",\n    \"image_header\": \"deserunt\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"voluptatum\",\n    \"image\": \"ratione\",\n    \"image_footer\": \"rerum\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": true\n}"
-=======
-                            "raw": "{\n    \"subject\": \"consequuntur\",\n    \"image_header\": \"consequatur\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"repellat\",\n    \"image\": \"in\",\n    \"image_footer\": \"aliquam\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": true\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -6580,11 +6157,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "vitae",
-=======
-                                    "value": "officiis",
->>>>>>> beta
                                     "description": "The ID of the event"
                                 }
                             ]
@@ -6654,11 +6227,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "autem",
-=======
-                                    "value": "asperiores",
->>>>>>> beta
                                     "description": "organization id"
                                 }
                             ]
@@ -6676,11 +6245,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"sit\",\n    \"type\": \"culpa\",\n    \"module\": \"non\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"aut\",\n    \"type\": \"et\",\n    \"module\": \"omnis\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -6698,21 +6263,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "quia",
-=======
-                                    "value": "vitae",
->>>>>>> beta
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-<<<<<<< HEAD
                                     "value": "deleniti",
-=======
-                                    "value": "enim",
->>>>>>> beta
                                     "description": "organization rol"
                                 }
                             ]
@@ -6748,21 +6305,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "libero",
-=======
-                                    "value": "ab",
->>>>>>> beta
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-<<<<<<< HEAD
                                     "value": "sit",
-=======
-                                    "value": "eos",
->>>>>>> beta
                                     "description": "organization rol"
                                 }
                             ]
@@ -6780,11 +6329,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"voluptatum\",\n    \"model\": \"quis\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"eos\",\n    \"model\": \"veniam\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -6802,21 +6347,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "nobis",
-=======
-                                    "value": "enim",
->>>>>>> beta
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-<<<<<<< HEAD
                                     "value": "delectus",
-=======
-                                    "value": "natus",
->>>>>>> beta
                                     "description": "organization rol"
                                 }
                             ]
@@ -6865,11 +6402,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "a",
-=======
-                                    "value": "similique",
->>>>>>> beta
                                     "description": "The ID of the event"
                                 }
                             ]
@@ -6905,11 +6438,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "ullam",
-=======
-                                    "value": "rem",
->>>>>>> beta
                                     "description": "The ID of the event"
                                 }
                             ]
@@ -6945,21 +6474,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "doloremque",
-=======
-                                    "value": "quasi",
->>>>>>> beta
                                     "description": "The ID of the event"
                                 },
                                 {
                                     "id": "rolevent",
                                     "key": "rolevent",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "consectetur",
->>>>>>> beta
                                     "description": "rol id"
                                 }
                             ]
@@ -6995,21 +6516,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "quod",
-=======
-                                    "value": "ipsum",
->>>>>>> beta
                                     "description": "The ID of the event"
                                 },
                                 {
                                     "id": "rolevent",
                                     "key": "rolevent",
-<<<<<<< HEAD
                                     "value": "eligendi",
-=======
-                                    "value": "labore",
->>>>>>> beta
                                     "description": "rol id"
                                 }
                             ]
@@ -7027,11 +6540,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"perferendis\",\n    \"type\": \"ipsam\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"repudiandae\",\n    \"type\": \"alias\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7049,21 +6558,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "reiciendis",
-=======
-                                    "value": "ipsa",
->>>>>>> beta
                                     "description": "The ID of the event"
                                 },
                                 {
                                     "id": "rolevent",
                                     "key": "rolevent",
-<<<<<<< HEAD
                                     "value": "occaecati",
-=======
-                                    "value": "quis",
->>>>>>> beta
                                     "description": "rol id"
                                 }
                             ]
@@ -7105,11 +6606,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "qui",
-=======
-                                    "value": "culpa",
->>>>>>> beta
                                     "description": "requires event id."
                                 }
                             ]
@@ -7187,11 +6684,7 @@
                                 {
                                     "id": "rolpermission",
                                     "key": "rolpermission",
-<<<<<<< HEAD
                                     "value": "voluptatem",
-=======
-                                    "value": "qui",
->>>>>>> beta
                                     "description": "rolpermission_id"
                                 }
                             ]
@@ -7237,11 +6730,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"rol_id\": \"animi\",\n    \"permission_id\": \"dolorem\"\n}"
-=======
-                            "raw": "{\n    \"rol_id\": \"provident\",\n    \"permission_id\": \"voluptatem\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7269,11 +6758,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"rol_id\": \"et\",\n    \"permission_id\": \"molestiae\"\n}"
-=======
-                            "raw": "{\n    \"rol_id\": \"expedita\",\n    \"permission_id\": \"sunt\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7301,297 +6786,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"rol_id\": \"odio\",\n    \"permission_id\": \"non\"\n}"
-=======
-                            "raw": "{\n    \"rol_id\": \"molestiae\",\n    \"permission_id\": \"qui\"\n}"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                }
-            ]
-        },
-        {
-            "name": "SendContent",
-            "description": "",
-            "item": [
-                {
-                    "name": "api\/events\/{event}\/recoverypassword",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/recoverypassword",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/sendMecPerfil",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/sendMecPerfil",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/sendMecPerfilMec",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/sendMecPerfilMec",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event}\/sendMecPerfilMectoall",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendMecPerfilMectoall",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/sendnotificationemail",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/sendnotificationemail",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendcontent",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendcontent",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendcontent\/:sendcontent",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendcontent\/:sendcontent",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendcontent\/:sendcontent",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7709,11 +6904,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"iure\",\n    \"points\": 1,\n    \"initialMessage\": \"non\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 18372.91694782\n}"
-=======
-                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"repellendus\",\n    \"points\": 1,\n    \"initialMessage\": \"dignissimos\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 28.738\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7741,11 +6932,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"survey\": \"aliquid\",\n    \"show_horizontal_bar\": \"consequatur\",\n    \"allow_vote_value_per_user\": \"doloribus\",\n    \"activity_id\": \"culpa\",\n    \"points\": \"rerum\",\n    \"initialMessage\": \"quia\",\n    \"time_limit\": \"aliquam\",\n    \"allow_anonymous_answers\": \"dolorum\",\n    \"allow_gradable_survey\": \"natus\",\n    \"hasMinimumScore\": \"aspernatur\",\n    \"isGlobal\": \"ratione\",\n    \"freezeGame\": \"hic\",\n    \"open\": \"omnis\",\n    \"publish\": \"optio\",\n    \"minimumScore\": \"suscipit\"\n}"
-=======
-                            "raw": "{\n    \"survey\": \"qui\",\n    \"show_horizontal_bar\": \"harum\",\n    \"allow_vote_value_per_user\": \"quisquam\",\n    \"activity_id\": \"illum\",\n    \"points\": \"nihil\",\n    \"initialMessage\": \"molestias\",\n    \"time_limit\": \"soluta\",\n    \"allow_anonymous_answers\": \"corrupti\",\n    \"allow_gradable_survey\": \"commodi\",\n    \"hasMinimumScore\": \"quibusdam\",\n    \"isGlobal\": \"quod\",\n    \"freezeGame\": \"vero\",\n    \"open\": \"ea\",\n    \"publish\": \"nobis\",\n    \"minimumScore\": \"maiores\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7797,11 +6984,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "accusantium",
-=======
-                                    "value": "magni",
->>>>>>> beta
                                     "description": "organization_id"
                                 }
                             ]
@@ -7837,11 +7020,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "et",
-=======
-                                    "value": "praesentium",
->>>>>>> beta
                                     "description": "organization_id"
                                 }
                             ]
@@ -7859,11 +7038,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"totam\"\n}"
-=======
-                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"nesciunt\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -7881,21 +7056,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-<<<<<<< HEAD
                                     "value": "numquam",
-=======
-                                    "value": "dolores",
->>>>>>> beta
                                     "description": "organization_id"
                                 },
                                 {
                                     "id": "templatepropertie",
                                     "key": "templatepropertie",
-<<<<<<< HEAD
                                     "value": "rem",
-=======
-                                    "value": "architecto",
->>>>>>> beta
                                     "description": "template id"
                                 }
                             ]
@@ -7959,11 +7126,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-<<<<<<< HEAD
                                     "value": "labore",
-=======
-                                    "value": "dolor",
->>>>>>> beta
                                     "description": "event_id"
                                 }
                             ]
@@ -8310,11 +7473,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-<<<<<<< HEAD
                                     "value": "iure",
-=======
-                                    "value": "non",
->>>>>>> beta
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -8388,11 +7547,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-<<<<<<< HEAD
                             "raw": "{\n    \"refreshlink\": \"cupiditate\",\n    \"event\": \"61ccd3551c821b765a312864\",\n    \"email\": \"correo@evius.co\"\n}"
-=======
-                            "raw": "{\n    \"refreshlink\": \"facere\",\n    \"event\": \"61ccd3551c821b765a312864\",\n    \"email\": \"correo@evius.co\"\n}"
->>>>>>> beta
                         },
                         "description": "",
                         "response": []
@@ -8635,944 +7790,12 @@
             "description": "",
             "item": [
                 {
-<<<<<<< HEAD
                     "name": "api\/event\/{event}\/notifications\/{id}",
-=======
-                    "name": "Display a listing of the resource.",
->>>>>>> beta
                     "request": {
                         "url": {
                             "protocol": "https",
                             "host": "devapi.evius.co",
-<<<<<<< HEAD
                             "path": "api\/event\/:event\/notifications\/:id",
-=======
-                            "path": "api\/events\/:event\/spaces",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/spaces\/:space",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/spaces",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/spaces\/:space",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/spaces\/:space",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/type",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/type",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/type\/:type",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/type\/:type",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/type\/:type",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/categoryactivities",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/categoryactivities",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/categoryactivities\/:categoryactivity",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/categoryactivities\/:categoryactivity",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/categoryactivities\/:categoryactivity",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendpush",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendpush",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendpush\/:sendpush",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event}\/sendpush\/{sendpush}",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendpush\/:sendpush",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/sendpush\/:sendpush",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/wall",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/wall",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/wall\/:wall",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/wall\/:wall",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/wall\/:wall",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/faqs",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display the specified resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/faqs\/:faqs",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/faqs",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/faqs\/:faqs",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Remove the specified resource from storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/faqs\/:faqs",
-                            "query": []
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/{event}\/duplicatefaqs\/{id}",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:event\/duplicatefaqs\/:id",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/:id\/zoomhost",
-                            "query": []
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "api\/events\/zoomhost",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/zoomhost",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Display a listing of the resource.",
-                    "request": {
-                        "url": {
-                            "protocol": "https",
-                            "host": "devapi.evius.co",
-                            "path": "api\/events\/zoomhost",
->>>>>>> beta
                             "query": []
                         },
                         "method": "GET",
@@ -10502,11 +8725,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-<<<<<<< HEAD
                                     "value": "natus",
-=======
-                                    "value": "ut",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
@@ -10542,11 +8761,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-<<<<<<< HEAD
                                     "value": "voluptatem",
-=======
-                                    "value": "quia",
->>>>>>> beta
                                     "description": ""
                                 }
                             ]
