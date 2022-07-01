@@ -14,7 +14,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-            'App\Console\Commands\GenerateQR'
+        Commands\AutomaticPayment::class,
+        Commands\PlanExpiration::class,
+            //'App\Console\Commands\GenerateQR' Before
     ];
 
     /**
@@ -25,9 +27,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //before
         // $schedule->command('inspire')
         //          ->everyMinute();
-        $schedule->command('Petition:PlaceToPay')->hourly();
+        //$schedule->command('Petition:PlaceToPay')->hourly();
+        $schedule->command('automaticPayment:request')
+        ->daily();
+        $schedule->command('planExpiration:check')
+        ->daily();
+        // $schedule->command('minute:update')
+        // ->everyMinute();
 
     }
 
