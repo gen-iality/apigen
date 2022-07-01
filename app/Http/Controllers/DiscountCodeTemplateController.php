@@ -137,7 +137,7 @@ class DiscountCodeTemplateController extends Controller
         $rules = [
             'name' => "required",
             'use_limit' => "required",
-            'discount' => 'required',
+            // 'discount' => 'required',
         ];
 
         $validator = Validator::make($data, $rules);
@@ -156,7 +156,7 @@ class DiscountCodeTemplateController extends Controller
 
         $result->save();
 
-        $group_id = $result->_id;   
+        // $group_id = $result->_id;   
         
         // self::createCodes($group_id , $event_id, $quantity);        
 

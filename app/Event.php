@@ -35,7 +35,8 @@ class Event extends ModelsEvent
         'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
         'send_custom_email' , 'language', 'googleanlyticsid','status','googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
-        'video_position'
+        'video_position',
+        'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage' // count royal prestige
 
     ];
 

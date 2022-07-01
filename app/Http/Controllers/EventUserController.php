@@ -13,6 +13,7 @@ use App\Event;
 // use App\RolEvent;
 use App\Http\Resources\EventUserResource;
 use App\Message;
+use App\Order;
 use App\State;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -319,11 +320,11 @@ class EventUserController extends Controller
             'properties.names' => 'required|string|max:250'
         ]);
 
-        $eventUserData = $request->json()->all();	    
+        $eventUserData = $request->json()->all();
+        $email = $eventUserData["properties"]["email"];
 
         $noSendMail = $request->query('no_send_mail');
 
-        $email = $eventUserData["properties"]["email"];
         $eventUserData['event_id'] = $event_id;
         //Se buscan usuarios existentes con el correo que se está ingresando
         $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
@@ -363,19 +364,15 @@ class EventUserController extends Controller
         {
             EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
         }
-
-
-             
-        
-        
-
+                             
         $eventUser = Attendee::create($eventUserData);
+
         // En caso de que el event posea document user
-        $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
-        if (!empty($document_user)) {
-            $limit = $document_user['quantity'];
-            $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
-        }
+        // $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
+        // if (!empty($document_user)) {
+        //     $limit = $document_user['quantity'];
+        //     $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
+        // }
         
 
         if(empty($noSendMail))
@@ -428,13 +425,23 @@ class EventUserController extends Controller
 
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
-
+            
         $event = Event::find($event_id);
         $email = $eventUserData["email"];
+
+        // Validate the spaces available in the order
+        if (isset($eventUserData["order_id"])) {
+            $order_id = $eventUserData["order_id"];
+            $order = Order::findOrFail($order_id);
+            $affiliates = Attendee::where('order_id', $order_id)->get();
+            if (count($affiliates) >= $order->space_available) {
+                return response()->json(['message' => 'Affiliate limit exceeded'], 401);
+            }
+        }
         try {
 
             $user = Account::where("email" , $email)->first();
-
+            
             // crear cuenta de usuario si no existe 
             if(!isset($user))
             {   
@@ -466,6 +473,8 @@ class EventUserController extends Controller
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
 
+            unset($eventUserData["order_id"]);
+
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
                 [
@@ -477,6 +486,18 @@ class EventUserController extends Controller
                     "properties" => $eventUserData
                 ]
             );
+
+            // If the creation of the eventUser is through a redemption code, the user is assigned to the order
+            if (isset($order_id)) {
+                // $affiliatedUsers = $order->affiliates;
+                // array_push($affiliatedUsers, $eventUser->_id);
+                // $order->affiliates = $affiliatedUsers;
+                // $order->save();
+                //Save order_id to manage relationship
+                $eventUser->order_id = $order_id;
+                $eventUser->save();
+            }
+
 
             $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
@@ -813,6 +834,22 @@ class EventUserController extends Controller
 
         $eventUser->save();
 
+        return $eventUser;
+    }
+
+    /**
+     * _Uncheck_: uncheck an existing Attendee to related event
+     *
+     * @urlParam eventuser string required id Attendee to checkin into the event
+     *
+     */
+    public function unCheck(String $eventUser)
+    {
+        $eventUser = Attendee::findOrFail($eventUser);
+        $eventUser->checked_in = false;
+        $eventUser->checkedin_at = null;
+        
+        $eventUser->save();
         return $eventUser;
     }
 

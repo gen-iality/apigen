@@ -6,6 +6,7 @@ use App\Order;
 use App\User;
 use App\Account;
 use App\Attendee;
+use App\DiscountCode;
 use App\Event;
 use App\DiscountCodeTemplate;
 use App\Http\Resources\OrderResource;
@@ -17,6 +18,7 @@ use App\Models\Ticket;
 use Auth;
 use Validator;
 use App\evaLib\Services\FilterQuery;
+use Mail;
 
 /**
  * @group Orders
@@ -422,5 +424,190 @@ class ApiOrdersController extends Controller
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return OrderResource::collection($results);
 
+    }
+
+    /**
+     * _createPreOrder_: Create an Pre-order for an event
+     * 
+     * @urlParam order required Example: 62ab83018579d9446f0e84f5
+     * @authenticated
+     * @bodyParam space_available integer required Available number of tickets
+     */
+    public function createPreOrder(Request $request, $event)
+    {
+        $request->validate([
+            'space_available' => 'required|numeric'
+        ]);
+        $data = $request->json()->all();
+        $user = Auth::user();
+
+	// validate that it does not exceed the amount of 100 tickets
+	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->where('properties.codeRedeem', null)->get();
+	if(count($tickets) + $data['space_available'] > 100) {
+	  $ticketsAvailable = 100 - count($tickets);
+	  return response()->json(['message' => "ticket limit exceeded, $ticketsAvailable  tickets available"], 403);
+	}
+
+	// Assign pre-order to user
+        $eventUser = Attendee::where('event_id', $event)->where('account_id', $user->_id)->first();
+        $newOrder = [
+            'event_user_id' => $eventUser->_id,
+            'event_id' => $event,
+            'space_available' => $data['space_available'],
+            'status' => 'INCOMPLETE'
+        ];
+        $order = Order::create($newOrder);
+
+        // User can have multiple orders
+        $oldOrder = $eventUser->orders;
+        $ordersByUser = [];
+        if (isset($oldOrder)) {
+            foreach ($oldOrder as $ord) {
+                array_push($ordersByUser, ['order_id' => $ord['order_id'], 'status' => $ord['status']]);
+            }
+        }
+        array_push($ordersByUser, ['order_id' => $order->_id, 'status' => $order->status]);
+        $eventUser->orders = $ordersByUser;
+        $eventUser->save();
+
+        return compact("order");
+    }
+    
+    /**
+     * _updateOrderAndAddTickets_: Update an order for an event and generate tickets
+     * 
+     * @urlParam order required Example: 62ab83018579d9446f0e84f5
+     * @authenticated
+     * @bodyParam status string required Order status when payment is made Example: COMPLETE
+     */
+    public function updateOrderAndAddTickets(Request $request, $order)
+    {
+        $request->validate([
+            'status' => 'required|string'
+        ]);
+        
+        $data = $request->json()->all();
+        $user = Auth::user();
+
+        if ($data['status'] !== 'COMPLETE') {
+            return response()->json(['message' => 'Invalid Order'], 401);
+        }
+        
+        $order = Order::findOrFail($order);
+        
+        $order->status = 'COMPLETE';
+        $order->save();
+
+        // // actualizar estado de la orden en el event user
+        $eventUser = Attendee::findOrFail($order->event_user_id);
+        $ordersByUser = [];
+        foreach ($eventUser->orders as $ord) {
+            if($ord['order_id'] === $order->_id) {
+                $ord['status'] = $order->status;
+            }
+            array_push($ordersByUser, $ord);
+        }
+        $eventUser->orders = $ordersByUser;
+        $eventUser->save();
+        
+        // generate tickets
+        // tickets are attendees
+        for ($i=1; $i <= $order->space_available; $i++) {
+            try {
+            $newTicket = Attendee::create([
+                'properties' => [
+                    "names" => "TICKET $i",
+                ],
+                'event_id' => $order->event_id,
+                'order_id' => $order->_id
+            ]);
+
+            } catch (\Exception $e) {
+                return response()->json((object) ["message" => $e->getMessage()], 400);
+                
+            }
+        }
+
+        $event = Event::findOrFail($order->event_id);
+        $attendees = Attendee::where('event_id', $event->_id)->where('order_id', $order->_id)->get();
+
+        Mail::to($user->email)
+        ->send(
+            new \App\Mail\SendQRs($eventUser, $event, $attendees, $order)
+        );
+        
+        return compact("order");
+    }
+
+    public function createOrderToPartner(Request $request, $event_id)
+    {
+        $request->validate([
+            'code' => 'required|exists:discount_codes,code|string'
+        ]);
+
+        $user = Auth::user();
+        $data = $request->json()->all();
+
+        $code = DiscountCode::where("code" , $data['code'])->first();
+        $discountCodeTemplate = DiscountCodeTemplate::where('_id', $code->discount_code_template_id)->first();
+
+        if($code->number_uses >= $discountCodeTemplate->use_limit){
+            return abort(403 , 'El código ya se uso');
+        }
+
+        //Creation of order in which the redemption of the code is registered
+        $event = Event::findOrFail($event_id);
+        $eventUser = Attendee::where('event_id', $event_id)->where('account_id', $user->_id)->first();
+        $newOrder = [
+            'event_user_id' => $eventUser->_id,
+            'event_id' => $event_id,
+            'code_id' => $code->_id,
+            'discount_code_template_id' => $discountCodeTemplate->_id,
+            'space_available' => $code->space_available,
+            'status' => 'COMPLETE'
+        ];
+        $order = Order::create($newOrder);
+
+        // Assign order to event user
+        // User can have multiple orders
+        $oldOrder = $eventUser->orders;
+        $ordersByUser = [];
+        if (isset($oldOrder)) {
+            foreach ($oldOrder as $ord) {
+                array_push($ordersByUser, ['order_id' => $ord['order_id'], 'status' => $ord['status']]);
+            }
+        }
+        array_push($ordersByUser, ['order_id' => $order->_id, 'status' => $order->status]);
+        $eventUser->orders = $ordersByUser;
+        $eventUser->save();
+
+        // create ticket
+        $newTicket = Attendee::create([
+            'properties' => [
+                "names" => "TICKET 1",
+		"codeRedeem" => $code->code
+            ],
+            'event_id' => $order->event_id,
+            'order_id' => $order->_id
+        ]);
+
+
+        Mail::to($user->email)
+        ->send(
+            new \App\Mail\SendQRs($eventUser, $event, $attendees=[$newTicket], $order)
+        );
+
+        $code->number_uses +=1;
+        $code->save();
+
+        return compact("order");
+    }
+
+    public function getTicketsAvailable($event)
+    {
+	$tickets = Attendee::where('event_id', $event)->where('properties.names', 'like', '%TICKET%' )->where('properties.codeRedeem', null)->get();
+	$ticketsAvailable = 100 - count($tickets);
+
+	return response()->json(['tickets_available' => $ticketsAvailable, 'total_tickets' => count($tickets)]);
     }
 }

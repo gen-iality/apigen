@@ -15,6 +15,7 @@ use Auth;
 use App\evaLib\Services\CodeServices;
 use Log;
 use App\Account;
+use App\Attendee;
 use App\Order;
 
 
@@ -146,6 +147,10 @@ class DiscountCodeController extends Controller
      */
     public function store(Request $request , $group_id)
     {
+        $request->validate([
+            'space_available' => 'numeric' // Used for Royal Prestige, number of available users
+        ]);
+
         $data = $request->json()->all();
 
         $rules = [
@@ -185,7 +190,6 @@ class DiscountCodeController extends Controller
                     }else{                
                         $data['event_id'] = $group->event_id;
                     }
-                            
                     $resultCode = new DiscountCode($data);
 
                 //It checks if the code is repeated so as not to save it and generate another
@@ -334,28 +338,38 @@ class DiscountCodeController extends Controller
      */
     public function validateCode(Request $request)
     {   
+        $request->validate([
+            'code' => 'required|string',
+            'event_id' => 'required|string',
+            'organization_id' => 'string'
+        ]);
 
         $data = $request->json()->all();
-        $code = "";
+        
+        // $code = "";
         // The entered code is searched for to validate if it exists 
             
         
-        if(isset($data['organization_id']) && $data['organization_id'] = '60467fbd9caef512a5626fc9')
-        {
-            $code = DiscountCodeMarinela::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
-            // Log::info("Ingreso correcto de Marinela");
+        // if(isset($data['organization_id']) && $data['organization_id'] = '60467fbd9caef512a5626fc9')
+        // {
+        //     $code = DiscountCodeMarinela::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+        //     // Log::info("Ingreso correcto de Marinela");
 
-        }else{
-            $code = isset($data['event_id']) ? 
+        // }else{
+        //     $code = isset($data['event_id']) ? 
+        //     DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
+        //     DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
+        // }
+
+        $code = isset($data['event_id']) ? 
             DiscountCode::where('event_id', $data['event_id'])->where("code" , $data['code'])->first() :
             DiscountCode::where('organization_id', $data['organization_id'])->where("code" , $data['code'])->first();
-        }
 
         if($code){
-            $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
+            $discountCodeTemplate = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
             
             
-            if($code->number_uses < $group->use_limit  ){
+            if($code->number_uses < $discountCodeTemplate->use_limit){
                 return $code;
             }
             
@@ -372,45 +386,69 @@ class DiscountCodeController extends Controller
      * @bodyParam code string required code that the user is redeeming
      * 
      */
-    public function redeemPointCode(Request $request){
-
+    public function redeemPointCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+            'event_user_id' => 'required|string'
+        ]);
+        
         $data = $request->json()->all();
-        $organization = $request->input('organization_id');
+        // $organization = $request->input('organization_id');
+        
+        // $code = "";
+        // if(isset($organization) &&  $organization = '60467fbd9caef512a5626fc9')
+        // {
+        //     $code = DiscountCodeMarinela::where('code', $data['code'])->first();
+        //     // Log::info("Ingreso correcto de Marinela");
+        // }else{
+        //     $code = DiscountCode::where('code', $data['code'])->first();
+        // }
 
-        $code = "";
-        if(isset($organization) &&  $organization = '60467fbd9caef512a5626fc9')
-        {
-            $code = DiscountCodeMarinela::where('code', $data['code'])->first();
-            // Log::info("Ingreso correcto de Marinela");
-        }else{
-            $code = DiscountCode::where('code', $data['code'])->first();
-        }
+        $code = DiscountCode::where("code" , $data['code'])->first();
         
         //authenticated user
-        $user = Auth::user();     
-        $group = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
-        if(!isset($group))   
-        {
-            $discount= "discount_code_template_id ";
-            $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
-        }
-        
-        
-        //Se valida si el código ya se uso     
-        if($code->number_uses < $group->use_limit  ){
-
-            //Si el código es valido se suma un uso
-            $code->account_id = $user->_id; 
-            $code->number_uses = $code->number_uses + 1;
-            $code->save();
+        // $user = Auth::user();
+        $discountCodeTemplate = DiscountCodeTemplate::where('_id',$code->discount_code_template_id)->first();
+        // if(!isset($group))   
+        // {
+            //     $discount= "discount_code_template_id ";
+            //     $group = DiscountCodeTemplate::where('_id',$code->$discount)->first();            
+            // }
             
-            //Se suman los puntos canjeados al usuario
-            $user->points = $user->points+$group->discount;
-            $user->save();
+            
+            //Se valida si el código ya se uso     
+            if($code->number_uses < $discountCodeTemplate->use_limit){
+                //Si el código es valido se suma un uso
+                // $code->account_id = $user->_id; 
+                $code->number_uses +=1;
+                $code->save();
 
-            return $user;
+                //Creation of order in which the redemption of the code is registered
+                $eventUser = Attendee::findOrFail($data['event_user_id']);
+                $newOrder = [
+                    'event_user_id' => $data['event_user_id'],
+                    'event_id' => $code->event_id,
+                    'code_id' => $code->_id,
+                    'discount_code_template_id' => $code->discount_code_template_id,
+                    'space_available' => $code->space_available,
+                    // user addiction to available affiliates
+                    // 'affiliates' => [$eventUser->_id]
+                ];
+                $order = Order::create($newOrder);
+                // $order->save();
+
+                // Assign order to event user
+                $eventUser->order_id = $order->_id;
+                $eventUser->save();
+
+                //Se suman los puntos canjeados al usuario
+                // $user->points = $user->points+$group->discount;
+                // $user->save();
+
+                return compact("order");
         }
-                        
+        
         return abort(403 , 'El código ya se uso');    
     }   
     

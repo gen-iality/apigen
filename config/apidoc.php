@@ -104,6 +104,7 @@ return [
                         '*/activities_attendees/*',
                     //Events
                         '*/events',
+                        '*/events/*',
                         '*/events/{event}',
                         '*/events/{event_id}',
                         '*/eventTypes',

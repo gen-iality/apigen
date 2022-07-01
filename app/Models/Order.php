@@ -9,7 +9,7 @@ use PDF;
 class Order extends MyBaseModel
 {
     use SoftDeletes;
-
+        
     /**
      * The validation rules of the model.
      *
@@ -20,7 +20,7 @@ class Order extends MyBaseModel
         'order_last_name'  => ['required'],
         'order_email'      => ['required', 'email'],
     ];
-
+    
     //public $with = ['orderStatus'];
     protected $with = [ 'orderStatus'];
     /**
@@ -33,13 +33,14 @@ class Order extends MyBaseModel
         'order_last_name.required'  => 'Please enter a valid last name',
         'order_email.email'         => 'Please enter a valid email',
     ];
-
+    
+    protected static $unguarded = true;
     protected $fillable = [
         '_token',
         'organization_id'
     ];
 
-    protected $dates = ['datetime_to', 'datetime_from'];
+    protected $dates = ['datetime_to', 'datetime_from', 'created_at', 'updated_at'];
 
     /**
      * The items associated with the order.
