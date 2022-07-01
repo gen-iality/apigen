@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Billing;
 use App\Payment;
 use App\Plan;
+use App\Account;
+use App\User;
+use Mail;
 use Illuminate\Http\Request;
 use App\Http\Resources\BillingResource;
 use DateTime;
@@ -136,7 +139,7 @@ class BillingController extends Controller
 
             //Se valida si la factura tiene adicionales
             $addons = isset($data['billing']['details']) ? $data['billing']['details'] : null;
-            $this::findAndCreateAddons($addons, $data['user_id'], $billing_save->_id);
+            $this::findAndCreateAddons($addons, $data['user_id'], $billing_save->_id, $billing_save['billing']['subscription_type']);
 
             return response()->json($billing_save, 201);
         }
@@ -144,7 +147,7 @@ class BillingController extends Controller
         $Billing = new Billing($data);
         $Billing->save();
         $addons = isset($data['billing']['details']) ? $data['billing']['details'] : null;
-        $this::findAndCreateAddons($addons, $data['user_id'], $Billing->_id);
+        $this::findAndCreateAddons($addons, $data['user_id'], $Billing->_id, $Billing['billing']['subscription_type']);
         return response()->json($Billing, 201);
 
     }
@@ -155,6 +158,14 @@ class BillingController extends Controller
             $new_billing = new Billing($billing);
             $new_billing->save();
             //validar el estatus para enviar correo
+            $user = Account::findOrFail($billing['user_id']);
+            if ($new_billing['status'] == 'APPROVED') {
+                Mail::to($user->email)
+                    ->send(new \App\Mail\PlanPurchase($billing, 'Successful automatic renewal'));
+            }else{
+                Mail::to($user->email)
+                    ->send(new \App\Mail\PlanPurchase($billing, 'Failed automatic renewal'));
+            }
             return response()->json($new_billing, 201);
         }
         return response()>json(['message'=> 'Billing doesnt exist'], 404);
@@ -168,10 +179,10 @@ class BillingController extends Controller
      *
      */
 
-    public function findAndCreateAddons($details, $user_id, $billing_id)
+    public function findAndCreateAddons($details, $user_id, $billing_id, $subscription)
     {
         if (isset($details['users'])) { //En este momento solo hay adicional de usuarios
-            app('App\Http\Controllers\AddonController')->createByBilling($details['users'], $user_id, $billing_id);
+            app('App\Http\Controllers\AddonController')->createByBilling($details['users'], $user_id, $billing_id, $subscription);
         }
     }
 
@@ -226,13 +237,36 @@ class BillingController extends Controller
 
         if (isset($data['status'])) {
             $status = $data['status'];
+            $user = Account::findOrFail($billing['user_id']);
             if ($status == 'APPROVED') {
-                //Update plan user
-                app('App\Http\Controllers\UserController')
-                ->updatePlan($billing['plan_id'], $billing['user_id']);
-                //Update addons by user
-                app('App\Http\Controllers\UserController')
-                ->updateAddons($billing);
+                switch ($billing['action']) {
+                    case 'SUBSCRIPTION':
+                        //Update user plan_id
+                        app('App\Http\Controllers\UserController')
+                            ->updatePlan($billing['plan_id'], $billing['user_id']);
+                        //si tiene adicionales se actualizan
+                        app('App\Http\Controllers\UserController')
+                            ->updateAddons($billing);
+                        Mail::to($user->email)
+                            ->send(new \App\Mail\PlanPurchase($billing, 'Subscription Evius'));
+                        break;
+                    case 'RENEWAL':
+                        //si tiene adicionales se actualizan
+                        app('App\Http\Controllers\UserController')
+                            ->updateAddons($billing);
+                        Mail::to($user->email)
+                            ->send(new \App\Mail\PlanPurchase($billing, 'Renewal Evius'));
+                        break;
+                    case 'ADDITIONAL':
+                        //Update addons by user
+                        app('App\Http\Controllers\UserController')
+                            ->updateAddons($billing);
+                        Mail::to($user->email)
+                            ->send(new \App\Mail\PlanPurchase($billing, 'Buy additionals'));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         $billing->fill($data);
