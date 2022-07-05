@@ -3,26 +3,26 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Billing;
+use App\Addon;
 use App\Account;
 use DateTime;
 use Mail;
 
-class PlanExpiration extends Command
+class AdditionalExpirtation extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'planExpiration:check';
+    protected $signature = 'additionalExpiration:check';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'This Command ejecute validation of users plan';
+    protected $description = 'This Command ejecute validation of users additionals';
 
     /**
      * Create a new command instance.
@@ -41,25 +41,27 @@ class PlanExpiration extends Command
      */
     public function handle()
     {
-        $users_billing = Billing::where('status','APPROVED')
-            ->where('action', '!=', 'ADDITIONAL')
+        $additionals = Addon::where('is_active', true)
             ->latest()
             ->get();
-        $users_billing = $users_billing->unique('user_id');//se obtienen los billing unicos
-        foreach ($users_billing as $user) {
-            $end_date = DateTime::createFromFormat('U', strtotime($user->billing['end_date']));
+        
+        foreach ($additionals as $additional) {
+            $end_date = DateTime::createFromFormat('U', strtotime($additional->end_date));
             $today = new DateTime("now");
             if ($today > $end_date) {
+                //update addon
+                $additional['is_active'] = false;
+                $additional->save();
                 //generate notification
-                $notification['message'] = 'Your plan is now expired';
+                $notification['message'] = 'Your additional users buy in '. $additional->start_date . ' is now expired';
                 $notification['status'] = 'ACTIVE';
-                $notification['user_id'] = $user->user_id;
+                $notification['user_id'] = $additional->user_id;
                 app('App\Http\Controllers\NotificationController')
                             ->addNotification($notification);
                 //Vencimiento de plan
-                $account = Account::findOrFail($user->user_id);
+                $account = Account::findOrFail($additional->user_id);
                 Mail::to($account->email)
-                    ->send(new \App\Mail\PlanPurchase($user, 'Your plan has expired'));
+                    ->send(new \App\Mail\AdditionalExpired($additional, 'Your Additional has expired'));
             }
         }
     }
