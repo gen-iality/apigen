@@ -50,6 +50,12 @@ class PlanExpiration extends Command
             $end_date = DateTime::createFromFormat('U', strtotime($user->billing['end_date']));
             $today = new DateTime("now");
             if ($today > $end_date) {
+                //generate notification
+                $notification['message'] = 'Your plan is now expired';
+                $notification['status'] = 'ACTIVE';
+                $notification['user_id'] = $user->user_id;
+                app('App\Http\Controllers\NotificationController')
+                            ->addNotification($notification);
                 //Vencimiento de plan
                 $account = Account::findOrFail($user->user_id);
                 Mail::to($account->email)
