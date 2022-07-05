@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\AutomaticPayment::class,
         Commands\PlanExpiration::class,
+        Commands\AdditionalExpiration::class,
             //'App\Console\Commands\GenerateQR' Before
     ];
 
@@ -34,6 +35,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('automaticPayment:request')
         ->daily();
         $schedule->command('planExpiration:check')
+        ->daily();
+        $schedule->command('additionalExpiration:check')
         ->daily();
         // $schedule->command('minute:update')
         // ->everyMinute();
