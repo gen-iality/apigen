@@ -7,6 +7,7 @@ use Mail;
 // models
 use App\Event;
 use App\Account;
+use App\Addon;
 
 class UserRegistrationRestriction
 {
@@ -42,9 +43,16 @@ class UserRegistrationRestriction
             return $next($request);
         }
 
-        if ($user->registered_users >= $user->plan['availables']['users']) {
-	    Mail::to($user->email)->queue(
-	      new \App\Mail\ExceededUsers($user)
+	// get all addon users
+	$addonUsers = Addon::where('user_id', $user->_id)->where('is_active', true)->get();
+	$allowedUsers = $user->plan['availables']['users'];
+	foreach($addonUsers as $addonUser) {
+	  $allowedUsers+=$addonUser->amount;
+	}
+
+	if ($user->registered_users >= 2) {
+	    Mail::to('saidleonardo07@gmail.com')->queue(
+	      new \App\Mail\ExceededUsers($user, $allowedUsers)
 	    );
 	    return response()->json(['message' => 'users limit exceeded'], 403);
 	}

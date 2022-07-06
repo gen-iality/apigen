@@ -16,7 +16,7 @@
 			 </tr>
              <tr>
 				<td style="font-size:14px;text-align:left;padding:10px;display:block"> 
-					Tu plan {{$user->plan->name}} tiene un limite de {{$user->plan->availables['users']}} usuarios para tus eventos.<br/>
+					Tu plan {{$user->plan->name}} tiene un limite de {{$allowedUsers }} usuarios para tus eventos.<br/>
 				<br />
 				<table>
 				  <thead>
@@ -25,6 +25,7 @@
 				      <th>Usuarios</th>
 				    </tr>
 				  </thead>
+				<br />
 				@foreach($events as $event)
 				  <tbody>
 				    <tr>
@@ -37,10 +38,11 @@
 				  <tfoot>
 				    <tr>
 				      <td>TOTAL</td>
-				      <td>{{$user->registered_users}}</td>
+				      <td>{{$allowedUsers}}</td>
 				    </tr>
 				  </tfoot>
 				</table>
+				<br />
 				<br />
                     <p class="centered">¿Quieres potenciar tu plan o adquirir usuarios adicionales?<br /> Ingresa <a href="https://app.evius.co">aquí</a>.
 		    </p>
