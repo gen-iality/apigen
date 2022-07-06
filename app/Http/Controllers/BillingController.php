@@ -203,6 +203,22 @@ class BillingController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function findByReference($reference)
+    {
+        $billing_evius = Billing::where('billing.reference_evius', $reference)->get();
+        if (json_decode($billing_evius)==null) {
+            return response()->json(['message'=>'There is not reference evius related to a billing']);
+        }
+
+        return $billing_evius;
+    }
+
+    /**
      * _show_: display information about a specific Billing.
      * 
      * @authenticated
