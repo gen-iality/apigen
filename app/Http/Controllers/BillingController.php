@@ -218,6 +218,21 @@ class BillingController extends Controller
         return $billing_evius;
     }
 
+    public function updateByReference(Request $request, $reference)
+    {
+        $data = $request->json()->all();
+        $billing_evius = Billing::where('billing.reference_evius', $reference)->get();
+        if (isset($billing_evius)) {
+            $this::validationStatus($billing_evius[0], $data['status']);
+            $billing_evius[0]->fill($data);
+            $billing_evius[0]->save();
+            return response()->json($billing_evius[0]);
+        }else{
+            return response()->json(['message'=>'There is not reference evius related to a billing']);
+        }
+        
+    }
+
     /**
      * _show_: display information about a specific Billing.
      * 
@@ -253,51 +268,56 @@ class BillingController extends Controller
 
         if (isset($data['status'])) {
             $status = $data['status'];
-            $user = Account::findOrFail($billing['user_id']);
-            if ($status == 'APPROVED') {
-                switch ($billing['action']) {
-                    case 'SUBSCRIPTION':
-                        //Update user plan_id
-                        app('App\Http\Controllers\UserController')
-                            ->updatePlan($billing['plan_id'], $billing['user_id']);
-                        //si tiene adicionales se actualizan
-                        app('App\Http\Controllers\UserController')
-                            ->updateAddons($billing);
-                        Mail::to($user->email)
-                            ->send(new \App\Mail\PlanPurchase($billing, 'Subscription Evius'));
-                        //generate notification
-                        app('App\Http\Controllers\NotificationController')
-                            ->addNotification('Subscription to evius', $user->_id);
-                        break;
-                    case 'RENEWAL':
-                        //si tiene adicionales se actualizan
-                        app('App\Http\Controllers\UserController')
-                            ->updateAddons($billing);
-                        Mail::to($user->email)
-                            ->send(new \App\Mail\PlanPurchase($billing, 'Renewal Evius'));
-                        //generate notification
-                        app('App\Http\Controllers\NotificationController')
-                            ->addNotification('Renewal Evius', $user->_id);
-                        break;
-                    case 'ADDITIONAL':
-                        //Update addons by user
-                        app('App\Http\Controllers\UserController')
-                            ->updateAddons($billing);
-                        Mail::to($user->email)
-                            ->send(new \App\Mail\PlanPurchase($billing, 'Buy additionals'));
-                        //generate notification
-                        app('App\Http\Controllers\NotificationController')
-                            ->addNotification('Purchase of additional', $user->_id);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            $this::validationStatus($billing, $status);
         }
         $billing->fill($data);
         $billing->save();
 
         return response()->json($billing);
+    }
+
+    public function validationStatus($billing, $status)
+    {
+        $user = Account::findOrFail($billing['user_id']);
+        if ($status == 'APPROVED') {
+            switch ($billing['action']) {
+                case 'SUBSCRIPTION':
+                    //Update user plan_id
+                    app('App\Http\Controllers\UserController')
+                        ->updatePlan($billing['plan_id'], $billing['user_id']);
+                    //si tiene adicionales se actualizan
+                    app('App\Http\Controllers\UserController')
+                        ->updateAddons($billing);
+                    Mail::to($user->email)
+                        ->send(new \App\Mail\PlanPurchase($billing, 'Subscription Evius'));
+                    //generate notification
+                    app('App\Http\Controllers\NotificationController')
+                        ->addNotification('Subscription to evius', $user->_id);
+                    break;
+                case 'RENEWAL':
+                    //si tiene adicionales se actualizan
+                    app('App\Http\Controllers\UserController')
+                        ->updateAddons($billing);
+                    Mail::to($user->email)
+                        ->send(new \App\Mail\PlanPurchase($billing, 'Renewal Evius'));
+                    //generate notification
+                    app('App\Http\Controllers\NotificationController')
+                        ->addNotification('Renewal Evius', $user->_id);
+                    break;
+                case 'ADDITIONAL':
+                    //Update addons by user
+                    app('App\Http\Controllers\UserController')
+                        ->updateAddons($billing);
+                    Mail::to($user->email)
+                        ->send(new \App\Mail\PlanPurchase($billing, 'Buy additionals'));
+                    //generate notification
+                    app('App\Http\Controllers\NotificationController')
+                        ->addNotification('Purchase of additional', $user->_id);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /**
