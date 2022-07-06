@@ -49,99 +49,82 @@ class AutomaticPayment extends Command
         $users_has_payment = Payment::where('status', '=', 'ACTIVE')
         ->latest()
         ->paginate(10);
-        $users_payment = $users_has_payment->unique('user_id');
-        $client = new Client([
-            'base_uri' => 'https://sandbox.wompi.co/v1/'
-        ]);
-        $headers = [
-            'accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer prv_test_zEMOm6RL3zlnhRzDP52w9PNN0zefS65d'
-        ];
-        $options['headers'] = $headers;
-
-        //Get value of dolar
-        $api_dolar = $client->getAsync('https://api.fastforex.io/fetch-one?from=USD&to=COP&api_key=demo')
-            ->then(
-                function(ResponseInterface $res){
-                    $response = json_decode($res->getBody()->getContents());
-                    return $response;
-                },
-                function(RequestException $e){
-                    $response['data'] = $e->getMessage();
-                    return $response;
-                }
-            );
-        $response_dolar = $api_dolar->wait();
-        $dolar_today = isset($response_dolar->result->COP) ? $response_dolar->result->COP : 4000;
-        //$dolar_today = 4000;
-        //echo('$' . $dolar_today);
-
-        //get the acceptance token || require public_key
-        $response = $client->getAsync('merchants/pub_test_UGgvjUcTWcZv0Q57IhQrI4XcNObpSQe4')
-            ->then(
-                function(ResponseInterface $res){
-                    $response = json_decode($res->getBody()->getContents());
-                    return $response;
-                },
-                function(RequestException $e){
-                    $response['data'] = $e->getMessage();
-                    return $response;
-                }
-            );
-        $response_token = $response->wait(); 
-        $token = isset($response_token->data) ? $response_token->data->presigned_acceptance->acceptance_token : null;
-        //Log::info($token);
-
-        foreach ($users_payment as $user) {
-            //get last renew billing
-            $billing_renew = Billing::where('payment_id', $user->_id)
-            ->where('action', 'RENEWAL')
-            ->where('status', 'APPROVED')
-            ->first();
-            //get last sucription billing if renewal not exist
-            $billing = $billing_renew == null ? Billing::where('payment_id', $user->_id)
-                ->where('action', 'SUBSCRIPTION')
-                ->first() : $billing_renew;
-            //Log::info($billing);
-            echo('count' . $billing->_id);
-            if ($billing) {
-                $end_date = DateTime::createFromFormat('U', strtotime($billing->billing['end_date']));
-                $today = new DateTime();
-                //Log::info("CHECK AUTOMATIC PAYMENT");
-                //Log::info($today);
-
-                // if the end date is equal to the actual date the automatic payment is generated
-                if ($today >= $end_date) {
-                    $reference_evius =  'RENEWAL-' . $today->format('Y-m-d') .'-'. random_int(0001,10000);
-                    $plan = Plan::find($billing->plan_id);
-                    $base = $plan->price;
-                    $total = $base + ($base * $billing->billing['tax']);
-                    $cents = round(($total * $dolar_today * 100));
-
-                    //build body to wompi
-                    $options['body'] = $this::createBodyWompi($token, $cents, $user, $reference_evius);
-
-                    //POST CREATE TRANSACTION
-                    $promise = $client->postAsync('transactions', $options)
-                        ->then(
-                            function(ResponseInterface $res){
-                                $response = json_decode($res->getBody()->getContents());
-                                return $response;
-                            },
-                            function(RequestException $e){
-                                $response['data'] = $e->getMessage();
-                                return $response;
-                            }
-                        );
-                    $response = $promise->wait();
-                    Log::info($response['data']);
-                    if (!isset($response->data)) {
-                        return response()->json(['message' => $response['data']], 401);
+        if (isset($users_has_payment)) {
+            $users_payment = $users_has_payment->unique('user_id');
+            $client = new Client([
+                'base_uri' => 'https://sandbox.wompi.co/v1/'
+            ]);
+            $headers = [
+                'accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer prv_test_zEMOm6RL3zlnhRzDP52w9PNN0zefS65d'
+            ];
+            $options['headers'] = $headers;
+        
+            //Get value of dolar
+            $api_dolar = $client->getAsync('https://api.fastforex.io/fetch-one?from=USD&to=COP&api_key=demo')
+                ->then(
+                    function(ResponseInterface $res){
+                        $response = json_decode($res->getBody()->getContents());
+                        return $response;
+                    },
+                    function(RequestException $e){
+                        $response['data'] = $e->getMessage();
+                        return $response;
                     }
-                    $isPending = true;
-                    while ($isPending) {
-                        $get_transaction = $client->getAsync('transactions/' . $response->data->id)
+                );
+            $response_dolar = $api_dolar->wait();
+            $dolar_today = isset($response_dolar->result->COP) ? $response_dolar->result->COP : 4000;
+            //$dolar_today = 4000;
+            //echo('$' . $dolar_today);
+            
+            //get the acceptance token || require public_key
+            $response = $client->getAsync('merchants/pub_test_UGgvjUcTWcZv0Q57IhQrI4XcNObpSQe4')
+                ->then(
+                    function(ResponseInterface $res){
+                        $response = json_decode($res->getBody()->getContents());
+                        return $response;
+                    },
+                    function(RequestException $e){
+                        $response['data'] = $e->getMessage();
+                        return $response;
+                    }
+                );
+            $response_token = $response->wait(); 
+            $token = isset($response_token->data) ? $response_token->data->presigned_acceptance->acceptance_token : null;
+            //Log::info($token);
+            
+            foreach ($users_payment as $user) {
+                //get last renew billing
+                $billing_renew = Billing::where('payment_id', $user->_id)
+                ->where('action', 'RENEWAL')
+                ->where('status', 'APPROVED')
+                ->first();
+                //get last sucription billing if renewal not exist
+                $billing = $billing_renew == null ? Billing::where('payment_id', $user->_id)
+                    ->where('action', 'SUBSCRIPTION')
+                    ->first() : $billing_renew;
+                //Log::info($billing);
+                echo('count' . $billing->_id);
+                if ($billing) {
+                    $end_date = DateTime::createFromFormat('U', strtotime($billing->billing['end_date']));
+                    $today = new DateTime();
+                    //Log::info("CHECK AUTOMATIC PAYMENT");
+                    //Log::info($today);
+                
+                    // if the end date is equal to the actual date the automatic payment is generated
+                    if ($today >= $end_date) {
+                        $reference_evius =  'RENEWAL-' . $today->format('Y-m-d') .'-'. random_int(0001,10000);
+                        $plan = Plan::find($billing->plan_id);
+                        $base = $plan->price;
+                        $total = $base + ($base * $billing->billing['tax']);
+                        $cents = round(($total * $dolar_today * 100));
+                    
+                        //build body to wompi
+                        $options['body'] = $this::createBodyWompi($token, $cents, $user, $reference_evius);
+                    
+                        //POST CREATE TRANSACTION
+                        $promise = $client->postAsync('transactions', $options)
                             ->then(
                                 function(ResponseInterface $res){
                                     $response = json_decode($res->getBody()->getContents());
@@ -152,18 +135,37 @@ class AutomaticPayment extends Command
                                     return $response;
                                 }
                             );
-                        $response = $get_transaction->wait();
-                        $status = isset($response->data->status) ? $response->data->status : "PENDING";
-                        if ($status != "PENDING") {
-                            $isPending = false;
+                        $response = $promise->wait();
+                        Log::info($response['data']);
+                        if (!isset($response->data)) {
+                            return response()->json(['message' => $response['data']], 401);
                         }
+                        $isPending = true;
+                        while ($isPending) {
+                            $get_transaction = $client->getAsync('transactions/' . $response->data->id)
+                                ->then(
+                                    function(ResponseInterface $res){
+                                        $response = json_decode($res->getBody()->getContents());
+                                        return $response;
+                                    },
+                                    function(RequestException $e){
+                                        $response['data'] = $e->getMessage();
+                                        return $response;
+                                    }
+                                );
+                            $response = $get_transaction->wait();
+                            $status = isset($response->data->status) ? $response->data->status : "PENDING";
+                            if ($status != "PENDING") {
+                                $isPending = false;
+                            }
+                        }
+                    
+                        //CREATE NEW BILLING
+                        $save_billing = $this::createNewBilling($user, $billing, $response, $reference_evius, $base, $total, $status);
+                        //Log::info($save_billing);
                     }
-
-                    //CREATE NEW BILLING
-                    $save_billing = $this::createNewBilling($user, $billing, $response, $reference_evius, $base, $total, $status);
-                    //Log::info($save_billing);
+                
                 }
-
             }
         }
     }
