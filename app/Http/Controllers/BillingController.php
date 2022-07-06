@@ -249,6 +249,9 @@ class BillingController extends Controller
                             ->updateAddons($billing);
                         Mail::to($user->email)
                             ->send(new \App\Mail\PlanPurchase($billing, 'Subscription Evius'));
+                        //generate notification
+                        app('App\Http\Controllers\NotificationController')
+                            ->addNotification('Subscription to evius', $user->_id);
                         break;
                     case 'RENEWAL':
                         //si tiene adicionales se actualizan
@@ -256,6 +259,9 @@ class BillingController extends Controller
                             ->updateAddons($billing);
                         Mail::to($user->email)
                             ->send(new \App\Mail\PlanPurchase($billing, 'Renewal Evius'));
+                        //generate notification
+                        app('App\Http\Controllers\NotificationController')
+                            ->addNotification('Renewal Evius', $user->_id);
                         break;
                     case 'ADDITIONAL':
                         //Update addons by user
@@ -263,6 +269,9 @@ class BillingController extends Controller
                             ->updateAddons($billing);
                         Mail::to($user->email)
                             ->send(new \App\Mail\PlanPurchase($billing, 'Buy additionals'));
+                        //generate notification
+                        app('App\Http\Controllers\NotificationController')
+                            ->addNotification('Purchase of additional', $user->_id);
                         break;
                     default:
                         break;
