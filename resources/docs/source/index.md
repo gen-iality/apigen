@@ -72,6 +72,72 @@ Parameter | Status | Description
 
 <!-- END_0c4bcd062bf8533da02e9afdd3e9e075 -->
 
+<!-- START_3a1d1c593b60f8ba46e4d462e39ec73b -->
+## _indexByHost_: list activities by host
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/activitiesbyhost/consequatur" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/activitiesbyhost/consequatur"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/consequatur?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/consequatur?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/activitiesbyhost\/consequatur",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/activitiesbyhost/{host_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | id of the event to which the activities belong.
+    `host_id` |  required  | id of the host for which you want to filter the activities.
+
+<!-- END_3a1d1c593b60f8ba46e4d462e39ec73b -->
+
 <!-- START_a4a55c62b61aebf221a7b56f081e0350 -->
 ## _createMeeting_: assing meeting to activitie.
 
@@ -953,6 +1019,54 @@ Parameter | Status | Description
 
 <!-- END_dcd50abfb0c53308b4c8f8faf5280a8e -->
 
+<!-- START_4655dc4092973a53378f11af1ae6a385 -->
+## _indexForAdmin_: list the activities and users that will attend from the administrator
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/activities_attendeesAdmin" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/activities_attendeesAdmin"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/activities_attendeesAdmin`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_4655dc4092973a53378f11af1ae6a385 -->
+
 <!-- START_5d7f38e360b7e302ecc8b12d1b42754b -->
 ## _meIndex_: list of registered activities of the logged-in user
 
@@ -1047,6 +1161,54 @@ Parameter | Status | Description
     `id` |  optional  | id of activity_assitant
 
 <!-- END_502d45645ea8a6d7fa50895c044bd950 -->
+
+<!-- START_0f85d9340df15a9c37b52571e47ecd6f -->
+## _totalMetricsByActivity_
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/totalmetricsbyactivity" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/totalmetricsbyactivity"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/totalmetricsbyactivity`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+
+<!-- END_0f85d9340df15a9c37b52571e47ecd6f -->
 
 #Category
 
@@ -1402,6 +1564,258 @@ Parameter | Status | Description
     `category` |  optional  | category
 
 <!-- END_7513823f87b59040507bd5ab26f9ceb5 -->
+
+#Certificate
+
+En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.
+<!-- START_8025213a0b4af7f1ef20cd0e264c22e3 -->
+## _index_: Lista de certificados generados.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/certificates" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/certificates`
+
+
+<!-- END_8025213a0b4af7f1ef20cd0e264c22e3 -->
+
+<!-- START_75d7edbd389c3f4a3544ee2caa977188 -->
+## _store_:Creación de certificados.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/certificates" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"blanditiis","content":"eos","background":"hic"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "blanditiis",
+    "content": "eos",
+    "background": "hic"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/certificates`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo.
+    
+<!-- END_75d7edbd389c3f4a3544ee2caa977188 -->
+
+<!-- START_deb135231e108988b99e803e8a784c7a -->
+## _show_: Ver la información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a mostrar
+
+<!-- END_deb135231e108988b99e803e8a784c7a -->
+
+<!-- START_2a017c5d6985fc2f4b6116798211f61c -->
+## _update_: Actualizar información de un certificado específico.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"non","content":"et","background":"sint"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "non",
+    "content": "et",
+    "background": "sint"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | nombre del certificado
+        `content` | string |  required  | contenido del certificado
+        `background` | string |  required  | imagen de fondo
+    
+<!-- END_2a017c5d6985fc2f4b6116798211f61c -->
+
+<!-- START_c889e5f87c477caab13eb1e79956f204 -->
+## _destroy_: Eliminar registro de un certificado.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/certificates/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/certificates/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/certificates/{certificate}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | id del certificado a actualizar
+
+<!-- END_c889e5f87c477caab13eb1e79956f204 -->
 
 #Comment
 
@@ -3262,6 +3676,65 @@ Parameter | Status | Description
 
 <!-- END_dd680f9966c666d6385239c68c07f2cb -->
 
+<!-- START_164324424165912a62aa9a2bc32fd5db -->
+## api/events/{event}/getallfiles
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/getallfiles" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/getallfiles"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/getallfiles?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/getallfiles?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/getallfiles",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/getallfiles`
+
+
+<!-- END_164324424165912a62aa9a2bc32fd5db -->
+
 #Event
 
 
@@ -3871,6 +4344,50 @@ Parameter | Status | Description
     `event` |  required  | id of the event to be eliminated
 
 <!-- END_379a30feb2949828b5f95efbfd7649c3 -->
+
+<!-- START_a93e8332f4c17d5e8f07c962ff302da3 -->
+## _restore_: restore event and related data.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/dolor/restore" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/dolor/restore"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/restore`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | id of the event to be restore
+
+<!-- END_a93e8332f4c17d5e8f07c962ff302da3 -->
 
 <!-- START_66dbd029b818c574790a13910308d53a -->
 ## _store_: Create new event of the organizer.
@@ -5871,10 +6388,12 @@ fetch(url, {
 
 <!-- END_48ec4d386efb8ba88bf13409d75a9572 -->
 
-<!-- START_fee8ef1fe728ff1db6ba4c577c3fd10c -->
-## _addDocumentUserToEvent_: adds the default settings to events that have user documents.
+<!-- START_04c928fb7ec045888fb969784cc3eb7e -->
+## _addUserProperty_: adding dynamic user property to the event
 
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.
+The dynamic properties are returned within each UserEvent as the normal properties.
+
 > Example request:
 
 ```bash
@@ -6259,6 +6778,49 @@ fetch(url, {
 
 <!-- END_ae3699df3bb574732c28c9b539afa6cf -->
 
+<!-- START_6b9ba84498ac309ef3cc779bb6c6279f -->
+## _updateWithStatus_: update With Status
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/withstatus/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/withstatus/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/withstatus/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | string required
+
+<!-- END_6b9ba84498ac309ef3cc779bb6c6279f -->
+
 <!-- START_62f0c5655d8d2562857a8516c1822886 -->
 ## _updateWithStatus_: update With Status
 
@@ -6344,6 +6906,49 @@ Parameter | Status | Description
     `eventuser` |  optional  | string required id Attendee to checkin into the event
 
 <!-- END_4689c377b6415c181d64a5ee269eebce -->
+
+<!-- START_1f6f0b29c5980f049d843c6ca988db76 -->
+## _Uncheck_: uncheck an existing Attendee to related event
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/eventUsers/quam/uncheck" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/eventUsers/quam/uncheck"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/eventUsers/{eventuser}/uncheck`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `eventuser` |  optional  | string required id Attendee to checkin into the event
+
+<!-- END_1f6f0b29c5980f049d843c6ca988db76 -->
 
 <!-- START_f25c21b9dd2179852d16eac76d3bca80 -->
 ## _createUserAndAddtoEvent_: import  user and add it to an event.
@@ -6477,6 +7082,173 @@ Parameter | Type | Status | Description
     `eventUsersIds` | array |  required  | Attendees list who book in an event
     
 <!-- END_8584edbef5108e01985db1d291b64c2e -->
+
+<!-- START_42c0a6844b0eceddc135185f2aa1a4f1 -->
+## _createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusersbyurl" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"quia","name":"in","other_params,":{"":{"":{"":"sunt"}}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/eventusersbyurl"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "quia",
+    "name": "in",
+    "other_params,": {
+        "": {
+            "": {
+                "": "sunt"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/eventusersbyurl`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  optional  | string required event id
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `email` | email |  required  | 
+        `name` | string |  required  | 
+        `other_params,...` | any |  optional  | other params  will be saved in user and eventUser
+    
+<!-- END_42c0a6844b0eceddc135185f2aa1a4f1 -->
+
+<!-- START_2e7ec926ec739f2b02048853b415e020 -->
+## _sendQrToUsers_: send Qr To Users.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/sendemailtoallusers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/61ccd3551c821b765a312864/sendemailtoallusers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sendemailtoallusers`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  optional  | string required event id
+
+<!-- END_2e7ec926ec739f2b02048853b415e020 -->
+
+<!-- START_98727193033245a0c04abf17d3e83fdc -->
+## _store:_ Store a newly Attendee  in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/corporis/eventusersanonymous" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"properties":{"email":{},"names":{},"others_properties":{}}}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/corporis/eventusersanonymous"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "properties": {
+        "email": {},
+        "names": {},
+        "others_properties": {}
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/eventusersanonymous`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  required  | event id
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `properties.email` | object |  optional  | other params  will be saved in user and eventUser each event can require aditional properties for registration.
+        `properties.names` | object |  optional  | other params  will be saved in user and eventUser each event can require aditional properties for registration.
+        `properties.others_properties` | object |  optional  | other params  will be saved in user and eventUser each event can require aditional properties for registration.
+    
+<!-- END_98727193033245a0c04abf17d3e83fdc -->
 
 <!-- START_c8437aa309bc9307e85279e92b05876e -->
 ## _index_ display all the EventUsers of an event
@@ -6816,8 +7588,8 @@ Parameter | Status | Description
 
 <!-- END_84d74839b57eed0df8c1697071eeeaa6 -->
 
-<!-- START_4bd3b40485e104bf4de0c264138d1029 -->
-## _ByUserInEvent_ : list of users by events
+<!-- START_f4ee022bcd35d6d38fadedb070189787 -->
+## _indexByEventUser_: list of events by logged in user
 
 > Example request:
 
@@ -6916,6 +7688,56 @@ Parameter | Status | Description
     `event` |  optional  | string required event id
 
 <!-- END_60d316aa60b8b526ece5acd538b7d419 -->
+
+<!-- START_45ffd5dbb9ca3d4f87a1fa6e5a9a82ec -->
+## _totalMetricsByEvent_
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/totalmetricsbyevent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/totalmetricsbyevent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/totalmetricsbyevent`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+
+<!-- END_45ffd5dbb9ca3d4f87a1fa6e5a9a82ec -->
 
 <!-- START_b11ff93318cdb6da2eb89990c0f8793c -->
 ## _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates  * or according specific dates.
@@ -7663,6 +8485,533 @@ Parameter | Status | Description
 
 <!-- END_fc812c3ac5933927f6f5dd638d5e3990 -->
 
+#Invitation
+
+
+<!-- START_ebe9df597b5dabff6b5c60d9268f5ed4 -->
+## _invitationsSent_:List of applications sent
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/indexinvitations/necessitatibus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/indexinvitations/necessitatibus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/necessitatibus?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/necessitatibus?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitations\/necessitatibus",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/indexinvitations/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_ebe9df597b5dabff6b5c60d9268f5ed4 -->
+
+<!-- START_b936727cd7c574a4d5aafc1c5431f8bf -->
+## _invitationsReceived_: List of applications recived
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/accusamus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/indexinvitationsrecieved/accusamus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/accusamus?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/accusamus?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/indexinvitationsrecieved\/accusamus",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/indexinvitationsrecieved/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_b936727cd7c574a4d5aafc1c5431f8bf -->
+
+<!-- START_19405d38362150c89528c5d219e804ea -->
+## _acceptOrDeclineFriendRequest_: Accept Or Decline Friend Request
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/acceptordecline/omnis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"response":"repellendus"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/acceptordecline/omnis"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "response": "repellendus"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/acceptordecline/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+    `id` |  required  | user who accepts or rejects the application
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `response` | string |  required  | 
+    
+<!-- END_19405d38362150c89528c5d219e804ea -->
+
+<!-- START_a51e9b1084fbde7e80d1fae56f7c9286 -->
+## _indexcontacts_: List of current contacts
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/contactlist/eos" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contactlist/eos"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+null
+```
+
+### HTTP Request
+`GET api/events/{event}/contactlist/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_a51e9b1084fbde7e80d1fae56f7c9286 -->
+
+<!-- START_a5fd75dcb2bf61eacd7dd66efe5fc04b -->
+## _indexcontacts_: List of current contacts
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/contactlist/inventore" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/contactlist/inventore"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/contactlist/{user_id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  optional  | 
+    `user_id` |  optional  | 
+
+<!-- END_a5fd75dcb2bf61eacd7dd66efe5fc04b -->
+
+<!-- START_938655f5caff69b1d4b00e6c39292ba3 -->
+## _index_: Display a listing of the Invitation.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/invitation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/invitation?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/invitation?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/invitation",
+        "per_page": 10000,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/invitation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+
+<!-- END_938655f5caff69b1d4b00e6c39292ba3 -->
+
+<!-- START_ac1f64509df330a2e260786dfd3d6b66 -->
+## _store_: Send request with redirection to evius
+
+Enviar solicitud con redirección a evius
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/invitation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"id_user_requested":"voluptates"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id_user_requested": "voluptates"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/invitation`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event_id` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `id_user_requested` | string |  required  | 
+    
+<!-- END_ac1f64509df330a2e260786dfd3d6b66 -->
+
+<!-- START_ae0cce1ac6982a4e14d56fdff51ce1b2 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Invitation] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/invitation/{invitation}`
+
+
+<!-- END_ae0cce1ac6982a4e14d56fdff51ce1b2 -->
+
+<!-- START_747adb33452718cb75750d1a5a017e30 -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/invitation/{invitation}`
+
+`PATCH api/events/{event}/invitation/{invitation}`
+
+
+<!-- END_747adb33452718cb75750d1a5a017e30 -->
+
+<!-- START_351a47e3660c33b569e8f53069b7893a -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/invitation/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/invitation/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/invitation/{invitation}`
+
+
+<!-- END_351a47e3660c33b569e8f53069b7893a -->
+
 #News Feed
 
 
@@ -8305,6 +9654,116 @@ Parameter | Status | Description
 
 
 The purpose of this end point is to store all the information of a user's payment orders
+<!-- START_984f5e68638542ddfe5080e61c3c0e9e -->
+## _createPreOrder_: Create an Pre-order for an event
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/orders/create-preorder" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"space_available":4}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/orders/create-preorder"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "space_available": 4
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/orders/create-preorder`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `order` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `space_available` | integer |  required  | Available number of tickets
+    
+<!-- END_984f5e68638542ddfe5080e61c3c0e9e -->
+
+<!-- START_bdc39c957d2dd393b676445e1e9270aa -->
+## _updateOrderAndAddTickets_: Update an order for an event and generate tickets
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/orders/62ab83018579d9446f0e84f5/create-tickets" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"status":"COMPLETE"}'
+
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/orders/62ab83018579d9446f0e84f5/create-tickets"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "status": "COMPLETE"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/orders/{order}/create-tickets`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `order` |  required  | 
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `status` | string |  required  | Order status when payment is made
+    
+<!-- END_bdc39c957d2dd393b676445e1e9270aa -->
+
 <!-- START_f9301c03a9281c0847565f96e6f723de -->
 ## _index_: list of all orders
 
@@ -10205,6 +11664,44 @@ Parameter | Status | Description
 #RSVP
 
 Handle RSVP(invitations for events)
+<!-- START_fec2cc956ad1dc663d6e2f7aff42dbc1 -->
+## *  notificaciones al correo por actividad en el muro
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/wallnotifications" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/wallnotifications"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/wallnotifications`
+
+
+<!-- END_fec2cc956ad1dc663d6e2f7aff42dbc1 -->
+
 <!-- START_6b8165cc7da505120fbe6aa7aba5356e -->
 ## _createAndSendRSVP_: send RSVP to users in an event, taking eventUsersIds[] in request to filter which users the RSVP is going to be send to
 
@@ -10977,6 +12474,58 @@ Parameter | Status | Description
 
 <!-- END_8d3e90084c3b726d3fbd482738591c60 -->
 
+<!-- START_e826b8361e3c949f3b2d8c317ba04799 -->
+## _indexByRoles_: list all permisos by rol
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/fugiat/rolespermissionsbyrol/perferendis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/fugiat/rolespermissionsbyrol/perferendis"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/rolespermissionsbyrol/{rol}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `event` |  optional  | requires event id.
+    `rol` |  optional  | requires event rol id.
+
+<!-- END_e826b8361e3c949f3b2d8c317ba04799 -->
+
 <!-- START_434e2e708f44439618f042917956910f -->
 ## _show_: information from a specific relationship between role and permiision
 
@@ -11172,6 +12721,7 @@ fetch(url, {
 ```
 
 
+<!-- END_fcb44849aacac0af522c53bbd3f27da6 -->
 
 ### HTTP Request
 `DELETE api/events/{event}/rolespermissions/{rolpermission}`
@@ -11186,6 +12736,43 @@ Parameter | Type | Status | Description
 
 #Surveys
 
+
+<!-- START_6d59ec591a3d7c06ad3105c6abc0a0bc -->
+## api/events/{event}/questionedit/{id}
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/questionedit/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/questionedit/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/questionedit/{id}`
+
+
+<!-- END_6d59ec591a3d7c06ad3105c6abc0a0bc -->
 
 <!-- START_7525b8a38df41d7ddc341cd4c293b84c -->
 ## _show_ : view the information of a specific survey
@@ -13014,11 +14601,8 @@ fetch(url, {
 
 <!-- END_710a166934ebcbb3ee90ea0211f87e7b -->
 
-<!-- START_739442a2495f200cd4de63da705ac98e -->
-## Create model_has_role
-role_id
-model_id (user_id)
-event_id
+<!-- START_ce5e0fa9e7df410c8387d3102ac7f856 -->
+## Display a listing of the resource.
 
 > Example request:
 
@@ -13106,6 +14690,650 @@ fetch(url, {
 
 
 <!-- END_50361dad34e65e623afe3a82b2191784 -->
+
+<!-- START_cacf9dcada80f4a86feb220acecc03e3 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/tickets" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/tickets`
+
+
+<!-- END_cacf9dcada80f4a86feb220acecc03e3 -->
+
+<!-- START_636380a0158d1df9961b243319ec1b93 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/tickets" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/tickets`
+
+
+<!-- END_636380a0158d1df9961b243319ec1b93 -->
+
+<!-- START_e8191ded8130c5fa1a8277913ccccbf8 -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/tickets/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\Models\\Ticket] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/tickets/{ticket}`
+
+
+<!-- END_e8191ded8130c5fa1a8277913ccccbf8 -->
+
+<!-- START_80abdb0a569f685cfe652f764894ef7b -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/tickets/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/tickets/{ticket}`
+
+`PATCH api/events/{event}/tickets/{ticket}`
+
+
+<!-- END_80abdb0a569f685cfe652f764894ef7b -->
+
+<!-- START_99a0d52df37496fdc9dae25d9713fe18 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/tickets/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/tickets/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/tickets/{ticket}`
+
+
+<!-- END_99a0d52df37496fdc9dae25d9713fe18 -->
+
+<!-- START_a0502650b487d5b4c8fbf561ee0f0467 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/speakers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/speakers?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/speakers?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/speakers",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/speakers`
+
+
+<!-- END_a0502650b487d5b4c8fbf561ee0f0467 -->
+
+<!-- START_bb7e0a3c0f66f36eee0cf63387bd175f -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/speakers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/speakers`
+
+
+<!-- END_bb7e0a3c0f66f36eee0cf63387bd175f -->
+
+<!-- START_4f2c690204e02d0deb607fe62fda007b -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/speakers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[]
+```
+
+### HTTP Request
+`GET api/events/{event}/speakers/{speaker}`
+
+
+<!-- END_4f2c690204e02d0deb607fe62fda007b -->
+
+<!-- START_5f2f902dfa296da975d40b9094829ccb -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/speakers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/speakers/{speaker}`
+
+`PATCH api/events/{event}/speakers/{speaker}`
+
+
+<!-- END_5f2f902dfa296da975d40b9094829ccb -->
+
+<!-- START_44e3cee0c96f928cf81628ca49de15f0 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/speakers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/speakers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/speakers/{speaker}`
+
+
+<!-- END_44e3cee0c96f928cf81628ca49de15f0 -->
+
+<!-- START_bdc0268a497e0fe6dd32311ed49036b3 -->
+## Display a listing of the resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sessions" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [],
+    "links": {
+        "first": "http:\/\/localhost\/api\/events\/1\/sessions?page=1",
+        "last": "http:\/\/localhost\/api\/events\/1\/sessions?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": null,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/events\/1\/sessions",
+        "per_page": 2500,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sessions`
+
+
+<!-- END_bdc0268a497e0fe6dd32311ed49036b3 -->
+
+<!-- START_813d1a439d622f9d6691656ec6b3a008 -->
+## Store a newly created resource in storage.
+
+> Example request:
+
+```bash
+curl -X POST \
+    "https://devapi.evius.co/api/events/1/sessions" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/events/{event}/sessions`
+
+
+<!-- END_813d1a439d622f9d6691656ec6b3a008 -->
+
+<!-- START_046677bc0f2519edffbb576a5890ffcf -->
+## Display the specified resource.
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "https://devapi.evius.co/api/events/1/sessions/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (404):
+
+```json
+{
+    "message": "No query results for model [App\\EventSession] 1"
+}
+```
+
+### HTTP Request
+`GET api/events/{event}/sessions/{session}`
+
+
+<!-- END_046677bc0f2519edffbb576a5890ffcf -->
+
+<!-- START_8c1f359926396a023aa587463c9d13bc -->
+## Update the specified resource in storage.
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "https://devapi.evius.co/api/events/1/sessions/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/events/{event}/sessions/{session}`
+
+`PATCH api/events/{event}/sessions/{session}`
+
+
+<!-- END_8c1f359926396a023aa587463c9d13bc -->
+
+<!-- START_6c3fea43b7a95644a7f7b4662541348e -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "https://devapi.evius.co/api/events/1/sessions/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "https://devapi.evius.co/api/events/1/sessions/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/events/{event}/sessions/{session}`
+
+
+<!-- END_6c3fea43b7a95644a7f7b4662541348e -->
 
 <!-- START_e2472f0dc8400d5818ee0a4fb92cf7ce -->
 ## _validateFreeorder_: validates the order in case the purchase value is 0

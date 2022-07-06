@@ -19,10 +19,11 @@ class DiscountCode extends Moloquent
         'number_uses',
         'discount_code_template_id', 
         'event_id', 
-        'organization_id',             
+        'organization_id',
+        'space_available' // Used for Royal Prestige, number of available users       
     ];
 
-    protected $with = ['discount_code_template'];
+    // protected $with = ['discount_code_template'];
    
     public function discount_code_template()
     {

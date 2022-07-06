@@ -48,6 +48,42 @@
                     }
                 },
                 {
+                    "name": "_indexByHost_: list activities by host",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activitiesbyhost\/:host_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "host_id",
+                                    "key": "host_id",
+                                    "value": "consequatur",
+                                    "description": "id of the host for which you want to filter the activities."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_createMeeting_: assing meeting to activitie.",
                     "request": {
                         "url": {
@@ -520,6 +556,34 @@
                     }
                 },
                 {
+                    "name": "_indexForAdmin_: list the activities and users that will attend from the administrator",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/activities_attendeesAdmin",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_meIndex_: list of registered activities of the logged-in user",
                     "request": {
                         "url": {
@@ -565,6 +629,34 @@
                             ]
                         },
                         "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_totalMetricsByActivity_",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/totalmetricsbyactivity",
+                            "query": []
+                        },
+                        "method": "GET",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -769,6 +861,152 @@
                                     "description": "category"
                                 }
                             ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Certificate",
+            "description": "En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.",
+            "item": [
+                {
+                    "name": "_index_: Lista de certificados generados.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/certificates",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_:Creaci\u00f3n de certificados.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/certificates",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"blanditiis\",\n    \"content\": \"eos\",\n    \"background\": \"hic\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_show_: Ver la informaci\u00f3n de un certificado espec\u00edfico.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/certificates\/:certificate",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_update_: Actualizar informaci\u00f3n de un certificado espec\u00edfico.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/certificates\/:certificate",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"non\",\n    \"content\": \"et\",\n    \"background\": \"sint\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_destroy_: Eliminar registro de un certificado.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/certificates\/:certificate",
+                            "query": []
                         },
                         "method": "DELETE",
                         "header": [
@@ -1885,6 +2123,34 @@
                         "description": "",
                         "response": []
                     }
+                },
+                {
+                    "name": "api\/events\/{event}\/getallfiles",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/getallfiles",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
                 }
             ]
         },
@@ -2109,6 +2375,42 @@
                             ]
                         },
                         "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_restore_: restore event and related data.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/restore",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "dolor",
+                                    "description": "id of the event to be restore"
+                                }
+                            ]
+                        },
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -2510,6 +2812,42 @@
                     }
                 },
                 {
+                    "name": "_addUserProperty_: adding dynamic user property to the event",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/user\/events\/:id\/addUserProperty",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "quaerat",
+                                    "description": "id del evento"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"consequatur\",\n    \"label\": \"ut\",\n    \"mandatory\": true,\n    \"visibleByAdmin\": true,\n    \"visibleByContacts\": true,\n    \"description\": \"repellendus\"\n}"
+                        },
+                        "description": "Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.\nThe dynamic properties are returned within each UserEvent as the normal properties.",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_addDocumentUserToEvent_: adds the default settings to events that have user documents.",
                     "request": {
                         "url": {
@@ -2885,6 +3223,114 @@
                     }
                 },
                 {
+                    "name": "_createUserViaUrl_: tries to create a new user from provided data and then add that user to specified event",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/eventusersbyurl",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61ccd3551c821b765a312864",
+                                    "description": "string required event id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"quia\",\n    \"name\": \"in\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"sunt\"\n            }\n        }\n    }\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_sendQrToUsers_: send Qr To Users.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/sendemailtoallusers",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "61ccd3551c821b765a312864",
+                                    "description": "string required event id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store:_ Store a newly Attendee  in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/eventusersanonymous",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "corporis",
+                                    "description": "event id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"properties\": {\n        \"email\": {},\n        \"names\": {},\n        \"others_properties\": {}\n    }\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_index_ display all the EventUsers of an event",
                     "request": {
                         "url": {
@@ -3111,6 +3557,62 @@
                     }
                 },
                 {
+                    "name": "_indexByEventUser_: list of events by logged in user",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/myevents",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_searchInEvent_: search user within the event to verify if you are registered",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/searchinevent",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_ByUserInEvent_ : list of users by events",
                     "request": {
                         "url": {
@@ -3154,6 +3656,34 @@
                                     "description": "string required event id"
                                 }
                             ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_totalMetricsByEvent_",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/totalmetricsbyevent",
+                            "query": []
                         },
                         "method": "GET",
                         "header": [
@@ -3528,6 +4058,332 @@
                             "protocol": "https",
                             "host": "devapi.evius.co",
                             "path": "api\/events\/:event\/host\/:host",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Invitation",
+            "description": "",
+            "item": [
+                {
+                    "name": "_invitationsSent_:List of applications sent",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/indexinvitations\/:user_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "necessitatibus",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_invitationsReceived_: List of applications recived",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/indexinvitationsrecieved\/:user_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "accusamus",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_acceptOrDeclineFriendRequest_: Accept Or Decline Friend Request",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/acceptordecline\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "omnis",
+                                    "description": "user who accepts or rejects the application"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"response\": \"repellendus\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_indexcontacts_: List of current contacts",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contactlist\/:user_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "eos",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_indexcontacts_: List of current contacts",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contactlist\/:user_id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "inventore",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_index_: Display a listing of the Invitation.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/invitation",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_store_: Send request with redirection to evius",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/invitation",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id_user_requested\": \"voluptates\"\n}"
+                        },
+                        "description": "Enviar solicitud con redirecci\u00f3n a evius",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/invitation\/:invitation",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/invitation\/:invitation",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/invitation\/:invitation",
                             "query": []
                         },
                         "method": "DELETE",
@@ -3951,6 +4807,70 @@
             "name": "Orders",
             "description": "\nThe purpose of this end point is to store all the information of a user's payment orders",
             "item": [
+                {
+                    "name": "_createPreOrder_: Create an Pre-order for an event",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/orders\/create-preorder",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"space_available\": 4\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "_updateOrderAndAddTickets_: Update an order for an event and generate tickets",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/orders\/:order\/create-tickets",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "order",
+                                    "key": "order",
+                                    "value": "62ab83018579d9446f0e84f5",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"COMPLETE\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
                 {
                     "name": "_index_: list of all orders",
                     "request": {
@@ -4687,7 +5607,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "rerum",
+                                    "value": "aspernatur",
                                     "description": "organization_id"
                                 }
                             ]
@@ -5161,6 +6081,34 @@
             "name": "RSVP",
             "description": "Handle RSVP(invitations for events)",
             "item": [
+                {
+                    "name": "*  notificaciones al correo por actividad en el muro",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/wallnotifications",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
                 {
                     "name": "_createAndSendRSVP_: send RSVP to users in an event, taking eventUsersIds[] in request to filter which users the RSVP is going to be send to",
                     "request": {
@@ -5683,6 +6631,48 @@
                     }
                 },
                 {
+                    "name": "_indexByRoles_: list all permisos by rol",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/rolespermissionsbyrol\/:rol",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "fugiat",
+                                    "description": "requires event id."
+                                },
+                                {
+                                    "id": "rol",
+                                    "key": "rol",
+                                    "value": "perferendis",
+                                    "description": "requires event rol id."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "_show_: information from a specific relationship between role and permiision",
                     "request": {
                         "url": {
@@ -5808,6 +6798,34 @@
             "name": "Surveys",
             "description": "",
             "item": [
+                {
+                    "name": "api\/events\/{event}\/questionedit\/{id}",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/questionedit\/:id",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
                 {
                     "name": "_show_ : view the information of a specific survey",
                     "request": {
@@ -6856,6 +7874,370 @@
                     }
                 },
                 {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/messages",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event}\/meetingrequest\/notify",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/meetingrequest\/notify",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/mailing",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/mailing",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/mailing\/:mailing",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/events\/{event}\/mailing\/{mailing}",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/mailing\/:mailing",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/mailing\/:mailing",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display a listing of the contributors of an event resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contributors",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Store",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contributors",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Body Params   |\n| ------------- |\n| @body $_POST[role_id] required field       |\n| @body $_POST[event_id]  required field     |\n| @body $_POST[model_id] required field      |",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contributors\/:id",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contributors\/:id",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "| Body Params   |\n| ------------- |\n| @body $_POST[role_id] required field       |\n| @body $_POST[event_id]  required field     |\n| @body $_POST[model_id] required field      |",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/contributors\/:id",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Create model_has_role\nrole_id\nmodel_id (user_id)\nevent_id",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/contributors\/events\/:event\/me",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "Create model_has_role\nrole_id\nmodel_id (user_id)\nevent_id",
                     "request": {
                         "url": {
@@ -6893,6 +8275,426 @@
                             "query": []
                         },
                         "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/tickets",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/tickets",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/tickets\/:ticket",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/tickets\/:ticket",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/tickets\/:ticket",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/speakers",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/speakers",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/speakers\/:speaker",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/speakers\/:speaker",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/speakers\/:speaker",
+                            "query": []
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/sessions",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/sessions",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/sessions\/:session",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/sessions\/:session",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/sessions\/:session",
+                            "query": []
+                        },
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -6993,6 +8795,34 @@
                             "query": []
                         },
                         "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "devapi.evius.co",
+                            "path": "api\/events\/:event\/message\/:message_id\/messageUser",
+                            "query": []
+                        },
+                        "method": "GET",
                         "header": [
                             {
                                 "key": "Content-Type",

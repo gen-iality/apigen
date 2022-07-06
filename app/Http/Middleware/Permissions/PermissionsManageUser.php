@@ -8,6 +8,8 @@ use App\OrganizationUser;
 use App\Rol;
 use App\RolesPermissions;
 use Illuminate\Auth\AuthenticationException;
+
+use App\Order;
 /**
  * Este moddleware realiza la administracion que tiene que ver con los usuario en eventUser, 
  * estos son diferentes que los administradores pueden cambiar la información de algunos usuarios y 
@@ -36,6 +38,35 @@ class PermissionsManageUser
         $route = $request->route();
 
         $data = $request->json()->all();
+
+        /**
+         * Esto es temporal para Royal Prestige.
+         * 
+         * Un usuario que no es admin debe poder actualizar
+         * usuarios(EventUser) solamente cuando estos usuarios
+         * han sido afiliados por este, el usuario dueño de la orden no podra actualizar
+         * usuarios que no tenga afiliados, unicamente los propios.
+        */
+
+        if(isset($data['order_id'])) {
+            $order = Order::findOrFail($data['order_id']);
+            $orderOwner = Attendee::where('account_id' , $user->_id)
+                                ->where('event_id' ,$route->parameter('event'))
+                                ->first();
+            $userToEdit = Attendee::findOrFail($route->parameter("eventuser"));
+
+            if($order->event_user_id === $orderOwner->_id){ // valida que el order_id pertenesca al usuario que hace la peticion
+                // valida que el usuario a editar sea un afiliado suyo.
+                if ($userToEdit->order_id === $order->_id) {
+                    return $next($request);
+                }
+                throw abort(401 , "You don't have permission for do this action.");
+            } else {
+                throw abort(401 , "You don't have permission for do this action.");
+            }
+        }
+
+        /******** */
 
         //Validate EventUser
 
