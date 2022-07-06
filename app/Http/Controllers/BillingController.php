@@ -100,6 +100,7 @@ class BillingController extends Controller
             'billing.save' => 'required',
             'billing.reference_wompi' => 'required',
             'billing.reference_evius' => 'required',
+            'billing.billing_email' => 'required|email',
             'billing.start_date' => 'required',
             'billing.end_date' => 'required',
             'billing.payment_method' => 'required',
