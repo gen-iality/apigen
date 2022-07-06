@@ -53,13 +53,14 @@ class NotificationController extends Controller
      * @bodyParam  $notification
      * @return \Illuminate\Http\Response
      */
-    public function addNotification($notification)
+    public function addNotification($message, $user_id)
     {
-        if ($notification) {
-            $new_notification = new Notification($notification);
-            $new_notification->save();
-            return response()->json($new_notification, 201);
-        }
+        $notification['message'] = $message;
+        $notification['status'] = 'ACTIVE';
+        $notification['user_id'] = $user_id;
+        $new_notification = new Notification($notification);
+        $new_notification->save();
+        return response()->json($new_notification, 201);
     }
     /**
      * NotificationbyUser_: search of notifications by user.
