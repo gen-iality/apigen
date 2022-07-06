@@ -45,22 +45,22 @@ class PlanExpiration extends Command
             ->where('action', '!=', 'ADDITIONAL')
             ->latest()
             ->get();
-        $users_billing = $users_billing->unique('user_id');//se obtienen los billing unicos
-        foreach ($users_billing as $user) {
-            $end_date = DateTime::createFromFormat('U', strtotime($user->billing['end_date']));
-            $today = new DateTime("now");
-            if ($today > $end_date) {
-                //generate notification
-                $notification['message'] = 'Your plan is now expired';
-                $notification['status'] = 'ACTIVE';
-                $notification['user_id'] = $user->user_id;
-                app('App\Http\Controllers\NotificationController')
-                            ->addNotification($notification);
-                //Vencimiento de plan
-                $account = Account::findOrFail($user->user_id);
-                Mail::to($account->email)
-                    ->send(new \App\Mail\PlanPurchase($user, 'Your plan has expired'));
+        if (isset($users_billing)) {
+            $users_billing = $users_billing->unique('user_id');//se obtienen los billing unicos
+            foreach ($users_billing as $user) {
+                $end_date = DateTime::createFromFormat('U', strtotime($user->billing['end_date']));
+                $today = new DateTime("now");
+                if ($today > $end_date) {
+                    //generate notification
+                    app('App\Http\Controllers\NotificationController')
+                        ->addNotification('Your plan is now expired', $user->user_id);
+                    //Vencimiento de plan
+                    $account = Account::findOrFail($user->user_id);
+                    Mail::to($account->email)
+                        ->send(new \App\Mail\PlanPurchase($user, 'Your plan has expired'));
+                }
             }
         }
+        
     }
 }
