@@ -513,6 +513,8 @@ Route::get('users/{user}/notifications', 'NotificationController@NotificationbyU
 
 Route::apiResource('billings', 'BillingController');
 Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
+Route::get('reference/{reference}/billings', 'BillingController@findByReference');
+Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
 
 /*****
  * Payment
