@@ -50,8 +50,8 @@ class UserRegistrationRestriction
 	  $allowedUsers+=$addonUser->amount;
 	}
 
-	if ($user->registered_users >= 2) {
-	    Mail::to('saidleonardo07@gmail.com')->queue(
+	if ($user->registered_users >= $allowedUsers) {
+	    Mail::to('saidleonardo07@gmail.com')->send(
 	      new \App\Mail\ExceededUsers($user, $allowedUsers)
 	    );
 	    return response()->json(['message' => 'users limit exceeded'], 403);
