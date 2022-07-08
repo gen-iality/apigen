@@ -529,3 +529,10 @@ Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
 
 Route::apiResource('addons', 'AddonController');
 Route::get('users/{user}/addons', 'AddonController@AddonbyUser');
+
+/*****
+ * PreviewLanding
+ */
+
+Route::apiResource('previews', 'PreviewLandingController');
+Route::get('event/{event}/previews', 'PreviewLandingController@PreviewsbyEvent');

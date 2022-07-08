@@ -182,7 +182,8 @@ class AutomaticPayment extends Command
         $body['reference'] = $reference_evius;
         $body['payment_source_id'] = $user->id;
         $body['customer_data']['phone_number'] = $user->address['phone_number'];
-        $body['customer_data']['full_name'] = $user->address['full_name'];
+        //$body['customer_data']['full_name'] = $user->address['full_name'];
+        $body['customer_data']['full_name'] = $user->address['name'] . $user->address['last_name'];
         $body['shipping_address']['address_line_1'] = $user->address['address_line_1'];
         $body['shipping_address']['address_line_2'] = $user->address['address_line_2'];
         $body['shipping_address']['country'] = $user->address['country'];

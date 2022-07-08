@@ -100,7 +100,7 @@ class UserController extends UserControllerWeb
         $data = $request->json()->all();
         $email = strtolower($data['email']);        
         $request->merge(['email' => $email]);
-
+        
         $request->validate([
             'email' => 'required|unique:users,email|email:rfc,dns',
             'names' => 'required|string',
@@ -111,12 +111,15 @@ class UserController extends UserControllerWeb
 
         $result = new Account($data);
         $result->save();                            
-        
         $result = Account::find($result->_id);
+        
         Mail::to($result)
             ->queue(
                 new  \App\Mail\UserRegistrationMail($result)
             );
+        //generate notification
+        app('App\Http\Controllers\NotificationController')
+        ->addNotification('You have an active free plan', $result->_id);
         return $result;
     }
 
