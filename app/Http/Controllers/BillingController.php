@@ -106,6 +106,8 @@ class BillingController extends Controller
             'billing.payment_method' => 'required',
             'billing.payment_method.method_name' => 'required',
             'billing.payment_method.address' => 'required',
+            'billing.payment_method.address.name' => 'required',
+            'billing.payment_method.address.last_name' => 'required',
             'billing.payment_method.address.billing_email' => 'required|email',
             'billing.base_value' => 'required',
             'billing.tax' => 'required',
