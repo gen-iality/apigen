@@ -656,17 +656,19 @@ class UserController extends UserControllerWeb
     {
         $user = Auth::user();
 
-	    // fetch user events and get total number of registered users
-        $userEvents = Event::where('author_id', $user->_id)->get();
-        $totalRegisteredUsers = 0;
-        foreach ($userEvents as $event) {
-            $usersAtTheEvent = DB::table('event_users')->where('event_id', $event['_id'])->where('properties.email', '!=', $user->email)->get();
-            $totalRegisteredUsers += count($usersAtTheEvent);
-        }
+	// fetch user events and get total number of registered users
+        $totalRegisteredUsers = $user->registered_users;
+
+	// get all addon users
+	$addonUsers = Addon::where('user_id', $user->_id)->where('is_active', true)->get();
+	$allowedUsers = $user->plan['availables']['users'];
+	foreach($addonUsers as $addonUser) {
+	  $allowedUsers+=$addonUser->amount;
+	}
 
         return response()->json([
             'totalRegisteredUsers' => $totalRegisteredUsers,
-            'totalAllowedUsers' => $user->plan->availables['users']
+            'totalAllowedUsers' => $allowedUsers
         ]);
     }
 
