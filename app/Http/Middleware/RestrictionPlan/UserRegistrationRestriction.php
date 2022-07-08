@@ -51,7 +51,7 @@ class UserRegistrationRestriction
 	}
 
 	if ($user->registered_users >= $allowedUsers) {
-	    Mail::to('saidleonardo07@gmail.com')->send(
+	    Mail::to($user->email)->send(
 	      new \App\Mail\ExceededUsers($user, $allowedUsers)
 	    );
 	    return response()->json(['message' => 'users limit exceeded'], 403);
