@@ -43,7 +43,7 @@ class PlanPurchase extends Mailable
             $this->address = $payment->address['address_line_1'];
             $this->method_name = $payment['method_name'];
         }else{
-            $this->name = $billing['billing']['payment_method']['address']['full_name'];
+            $this->name = $billing['billing']['payment_method']['address']['name'] . $billing['billing']['payment_method']['address']['last_name'];
             $this->identification =  $billing['billing']['payment_method']['address']['identification']['value'];
             $this->phone = $billing['billing']['payment_method']['address']['phone_number'];
             $this->address = $billing['billing']['payment_method']['address']['address_line_1'];
