@@ -44,7 +44,7 @@
 				</table>
 				<br />
 				<br />
-                    <p class="centered">¿Quieres potenciar tu plan o adquirir usuarios adicionales?<br /> Ingresa <a href="https://app.evius.co">aquí</a>.
+                    <p class="centered">¿Quieres potenciar tu plan o adquirir usuarios adicionales?<br /> Ingresa <a href="https://evius.co/pricing/">aquí</a>.
 		    </p>
 				</td>
 			 </tr>		
