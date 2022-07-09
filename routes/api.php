@@ -536,3 +536,4 @@ Route::get('users/{user}/addons', 'AddonController@AddonbyUser');
 
 Route::apiResource('previews', 'PreviewLandingController');
 Route::get('event/{event}/previews', 'PreviewLandingController@PreviewsbyEvent');
+Route::get('guess-pass', 'UserController@guessPassword');

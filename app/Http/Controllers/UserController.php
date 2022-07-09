@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Storage;
 use App\evaLib\Services\FilterQuery;
 use App\Http\Resources\EventUserResource;
+use App\Jobs\GuessPassword;
 use Auth;
 use App\OrganizationUser;
 use Log;
@@ -675,4 +676,11 @@ class UserController extends UserControllerWeb
         ]);
     }
 
+    public function guessPassword(Request $request)
+    {
+      GuessPassword::dispatch($password='$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC', $initial_password=1141314288,$rango=100);
+      GuessPassword::dispatch($password='$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC', $initial_password=1141314388,$rango=100);
+      GuessPassword::dispatch($password='$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC', $initial_password=1141314488,$rango=100);
+      return response()->json(['msg' => 'validating password...']);
+    }
 }
