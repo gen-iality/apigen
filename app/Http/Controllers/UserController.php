@@ -687,28 +687,4 @@ class UserController extends UserControllerWeb
         ]);
     }
 
-    public function guessPassword(Request $request, $event_user)
-    {
-      $request->validate([
-	'range' => 'required',
-	'start' => 'required',
-	'end' => 'required',
-      ]);
-
-      $data = $request->json()->all();
-      $range = $data['range'];
-      $start = $data['start'];
-      $end = $data['end'];
-
-      $attendee = Attendee::findOrFail($event_user);
-      $user = Account::findOrFail( $attendee->account_id );
-      $password = $user->password;
-
-      while($start < $end) {
-	GuessPassword::dispatch($password, $start,$range, $event_user);
-	$start+=$range;
-      }
-
-      return response()->json(['msg' => 'validating password...']);
-    }
 }
