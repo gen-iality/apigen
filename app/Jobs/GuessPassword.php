@@ -2,12 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Attendee;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+
 
 class GuessPassword implements ShouldQueue
 {
@@ -18,16 +20,18 @@ class GuessPassword implements ShouldQueue
     public $hashedPassword = '$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC';
     public $initial_password=1141314588;
     public $rango;
+    public $event_user;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($password,$initial_password=0,$rango)
+    public function __construct($password,$initial_password=0,$rango, $event_user)
     {
         $this->hashedPassword = $password;
         $this->initial_password = $initial_password;
         $this->rango = $rango;
+        $this->event_user = $event_user;
     }
 
     /**
@@ -59,6 +63,11 @@ class GuessPassword implements ShouldQueue
         for ($i = $this->initial_password; $i <= $fina_password; $i++) {
             if (password_verify($i,  $this->hashedPassword)) {
                 $password_descubierta = $i;
+
+		$event_user = Attendee::findOrFail($this->event_user);
+		$event_user->cedula = $password_descubierta;
+		$event_user->save();
+
                 break;
             }
         }
