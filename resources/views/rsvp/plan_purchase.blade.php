@@ -32,7 +32,7 @@
          </tr>
          <tr>
             <td style="font-size:14px;text-align:left;padding:10px;display:block"> 
-                Dirrecion: {{$address}}
+                Dirección: {{$address}}
             </td>
          </tr>
             @if($subject == 'Your plan has expired')
