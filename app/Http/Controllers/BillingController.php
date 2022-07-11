@@ -292,30 +292,30 @@ class BillingController extends Controller
                     app('App\Http\Controllers\UserController')
                         ->updateAddons($billing);
                     Mail::to($user->email)
-                        ->send(new \App\Mail\PlanPurchase($billing, 'Subscription Evius'));
+                        ->send(new \App\Mail\PlanPurchase($billing, 'Adquiriste una nueva suscripción en Evius'));
                     //generate notification
                     app('App\Http\Controllers\NotificationController')
-                        ->addNotification('Subscription to evius', $user->_id);
+                        ->addNotification('Adquiriste una nueva suscripción en Evius', $user->_id);
                     break;
                 case 'RENEWAL':
                     //si tiene adicionales se actualizan
                     app('App\Http\Controllers\UserController')
                         ->updateAddons($billing);
                     Mail::to($user->email)
-                        ->send(new \App\Mail\PlanPurchase($billing, 'Renewal Evius'));
+                        ->send(new \App\Mail\PlanPurchase($billing, 'Se ha renovado tu suscripción en Evius'));
                     //generate notification
                     app('App\Http\Controllers\NotificationController')
-                        ->addNotification('Renewal Evius', $user->_id);
+                        ->addNotification('Se ha renovado tu suscripción en Evius', $user->_id);
                     break;
                 case 'ADDITIONAL':
                     //Update addons by user
                     app('App\Http\Controllers\UserController')
                         ->updateAddons($billing);
                     Mail::to($user->email)
-                        ->send(new \App\Mail\PlanPurchase($billing, 'Buy additionals'));
+                        ->send(new \App\Mail\PlanPurchase($billing, 'Adquiriste adicionales en tu plan de Evius'));
                     //generate notification
                     app('App\Http\Controllers\NotificationController')
-                        ->addNotification('Purchase of additional', $user->_id);
+                        ->addNotification('Adquiriste adicionales en tu plan de Evius', $user->_id);
                     break;
                 default:
                     break;

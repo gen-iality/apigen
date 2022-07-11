@@ -54,11 +54,11 @@ class AdditionalExpiration extends Command
                     $additional->save();
                     //generate notification
                     app('App\Http\Controllers\NotificationController')
-                        ->addNotification('Your additional users buy in '. $additional->start_date . ' is now expired', $additional->user_id);
+                        ->addNotification('Los adicionales comprados en '. $additional->start_date . ' han expirado', $additional->user_id);
                     //Vencimiento de plan
                     $account = Account::findOrFail($additional->user_id);
                     Mail::to($account->email)
-                        ->send(new \App\Mail\AdditionalExpired($additional, 'Your Additional has expired'));
+                        ->send(new \App\Mail\AdditionalExpired($additional, 'Los adicionales de tu plan en Evius han expirado'));
                 }
             }
         }
