@@ -48,8 +48,8 @@ class AdditionalExpiration extends Command
             foreach ($additionals as $additional) {
                 $end_date = DateTime::createFromFormat('U', strtotime($additional->end_date));
                 $today = new DateTime("now");
-                if ($today < $end_date) {
-                    //update addon
+                //update addon
+                if ($today > $end_date) {
                     $additional['is_active'] = false;
                     $additional->save();
                     //generate notification
