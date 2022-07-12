@@ -231,7 +231,7 @@ class BillingController extends Controller
     {
         $data = $request->json()->all();
         $billing_evius = Billing::where('billing.reference_evius', $reference)->get();
-        if (isset($billing_evius)) {
+        if (isset($billing_evius) && $billing_evius[0]->status == "PENDING") {
             $this::validationStatus($billing_evius[0], $data['status']);
             $billing_evius[0]->fill($data);
             $billing_evius[0]->save();
