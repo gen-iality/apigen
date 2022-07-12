@@ -219,7 +219,7 @@ class UserController extends UserControllerWeb
             $table['start_date'] = $user_billing->billing['start_date'];
             $table['end_date'] = $user_billing->billing['end_date'];
         }else{
-            $table['plan'] = "El usuario no tiene un plan"
+            $table['plan'] = "El usuario no tiene un plan";
         }
 
         if (count($events) >= 1) {
