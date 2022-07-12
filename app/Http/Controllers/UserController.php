@@ -121,7 +121,7 @@ class UserController extends UserControllerWeb
             );
         //generate notification
         app('App\Http\Controllers\NotificationController')
-        ->addNotification('You have an active free plan', $result->_id);
+        ->addNotification('Tienes un plan free activo', $result->_id);
         return $result;
     }
 
