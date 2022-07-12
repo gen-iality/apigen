@@ -164,10 +164,16 @@ class BillingController extends Controller
             $user = Account::findOrFail($billing['user_id']);
             if ($new_billing['status'] == 'APPROVED') {
                 Mail::to($user->email)
-                    ->send(new \App\Mail\PlanPurchase($billing, 'Successful automatic renewal'));
+                    ->send(new \App\Mail\PlanPurchase($billing, 'Se ha renovado tu suscripción en Evius'));
+                //generate notification
+                app('App\Http\Controllers\NotificationController')
+                ->addNotification('Se ha renovado tu suscripción en Evius', $user->_id);
             }else{
                 Mail::to($user->email)
                     ->send(new \App\Mail\PlanPurchase($billing, 'Failed automatic renewal'));
+                //generate notification
+                app('App\Http\Controllers\NotificationController')
+                ->addNotification('Se ha renovado tu suscripción en Evius', $user->_id);
             }
             return response()->json($new_billing, 201);
         }
