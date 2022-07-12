@@ -215,8 +215,12 @@ class UserController extends UserControllerWeb
             ->where('action', '!=', 'ADDITIONAL')
             ->latest()
             ->first();
-        $table['start_date'] = $user_billing->billing['start_date'];
-        $table['end_date'] = $user_billing->billing['end_date'];
+        if (isset($user_billing)) {
+            $table['start_date'] = $user_billing->billing['start_date'];
+            $table['end_date'] = $user_billing->billing['end_date'];
+        }else{
+            $table['plan'] = "El usuario no tiene un plan"
+        }
 
         if (count($events) >= 1) {
             for ($i=0; $i < count($events); $i++) { 
@@ -232,8 +236,8 @@ class UserController extends UserControllerWeb
             }
             return $table;
         }
-        return response()->json(['message' => 'No events created'], 404);
-        
+        $table['events'] = "No hay eventos creados";
+        return $table;
     }
 
     /**
