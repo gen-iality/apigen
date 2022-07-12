@@ -236,7 +236,7 @@ class UserController extends UserControllerWeb
             }
             return $table;
         }
-        $table['events'] = "No hay eventos creados";
+        $table['events'][0] = "No hay eventos creados";
         return $table;
     }
 
