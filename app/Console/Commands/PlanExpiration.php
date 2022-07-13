@@ -53,11 +53,11 @@ class PlanExpiration extends Command
                 if ($today > $end_date) {
                     //generate notification
                     app('App\Http\Controllers\NotificationController')
-                        ->addNotification('Your plan is now expired', $user->user_id);
+                        ->addNotification('Tu plan en Evius ha expirado', $user->user_id);
                     //Vencimiento de plan
                     $account = Account::findOrFail($user->user_id);
                     Mail::to($account->email)
-                        ->send(new \App\Mail\PlanPurchase($user, 'Your plan has expired'));
+                        ->send(new \App\Mail\PlanPurchase($user, 'Tu plan en Evius ha expirado'));
                 }
             }
         }

@@ -42,6 +42,29 @@ class PreviewLandingController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function CreateMany(Request $request, $event_id)
+    {
+        $request->validate([
+            'preview_landing' => 'required|array'
+        ]);
+        
+        $data = $request->json()->all();
+        dd($data);
+        foreach ($data as $preview) {
+            dd($preview[]);
+        }
+        $preview = new PreviewLanding($data);
+        $preview->save();
+
+        return response()->json($preview, 201);
+    }
+
+    /**
      * AddonbyUser_: search of Addons by user.
      * 
      * @urlParam user required  user_id

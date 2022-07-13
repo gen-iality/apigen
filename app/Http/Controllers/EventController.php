@@ -336,7 +336,7 @@ class EventController extends Controller
         $Properties = new UserProperties();
 
 	// Days after the live landing event
-	$data[ 'later_days' ] = ($user->plan['availables']['later_days'] * 24) * 60;
+	$data[ 'later_days' ] = $user->plan['availables']['later_days'];
 
         $result = new Event($data);
         

@@ -7,6 +7,7 @@ use App\User;
 use App\Addon;
 use App\Attendee;
 use App\Event;
+use App\Billing;
 use App\Http\Controllers\web\UserController as UserControllerWeb;
 use App\Http\Resources\UsersResource;
 use App\Mail\ConfirmationEmail;
@@ -121,7 +122,7 @@ class UserController extends UserControllerWeb
             );
         //generate notification
         app('App\Http\Controllers\NotificationController')
-        ->addNotification('You have an active free plan', $result->_id);
+        ->addNotification('Tienes un plan free activo', $result->_id);
         return $result;
     }
 
@@ -208,8 +209,20 @@ class UserController extends UserControllerWeb
     public function currentPlanInfo(string $user_id)
     {
         $account = Account::find($user_id);
-        $events = Event::where('author_id', $user_id)->get();
+        $events = Event::where('author_id', $user_id)->latest()->get();
         $hours = $account->plan_id == "6285536ce040156b63d517e5" ? "2h" : "72h"; //Por el momento se toma 2h = free si no 72h
+        $user_billing = Billing::where('status','APPROVED')
+            ->where('user_id', $account->_id)
+            ->where('action', '!=', 'ADDITIONAL')
+            ->latest()
+            ->first();
+        if (isset($user_billing)) {
+            $table['start_date'] = $user_billing->billing['start_date'];
+            $table['end_date'] = $user_billing->billing['end_date'];
+        }else{
+            $table['plan'] = "El usuario no tiene un plan";
+        }
+
         if (count($events) >= 1) {
             for ($i=0; $i < count($events); $i++) { 
                 $table['events'][$i]['ID'] = $events[$i]['_id'];
@@ -224,8 +237,8 @@ class UserController extends UserControllerWeb
             }
             return $table;
         }
-        return response()->json(['message' => 'No events created'], 404);
-        
+        $table['events'][0] = "No hay eventos creados";
+        return $table;
     }
 
     /**

@@ -37,13 +37,15 @@ class PlanPurchase extends Mailable
 
         if ($billing->billing['save']) {
             $payment = Payment::findOrFail($billing['payment_id']);
-            $this->name = $payment->address['name'] . $payment->address['last_name'];
+            //$this->name = $payment->address['name'] . $payment->address['last_name'];
+            $this->name = $user->names;
             $this->identification = $payment->address['identification']['value'];
             $this->phone = $payment->address['phone_number'];
             $this->address = $payment->address['address_line_1'];
             $this->method_name = $payment['method_name'];
         }else{
-            $this->name = $billing['billing']['payment_method']['address']['name'] . $billing['billing']['payment_method']['address']['last_name'];
+            //$this->name = $billing['billing']['payment_method']['address']['name'] . $billing['billing']['payment_method']['address']['last_name'];
+            $this->name = $user->names;
             $this->identification =  $billing['billing']['payment_method']['address']['identification']['value'];
             $this->phone = $billing['billing']['payment_method']['address']['phone_number'];
             $this->address = $billing['billing']['payment_method']['address']['address_line_1'];
