@@ -540,3 +540,10 @@ Route::post('event/{event}/addmanypreviews', 'PreviewLandingController@CreateMan
 
 //GUESS
 Route::get('guess-pass', 'UserController@guessPassword');
+
+/*****
+ * Ticket Categories
+ */
+
+Route::apiResource('ticketCategory', 'TicketCategoryController');
+Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCategorybyEvent');
