@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Billing;
-use App\Account;
+use App\User;
 use DateTime;
 use Mail;
 
@@ -51,13 +51,15 @@ class PlanExpiration extends Command
                 $end_date = DateTime::createFromFormat('U', strtotime($user->billing['end_date']));
                 $today = new DateTime("now");
                 if ($today > $end_date) {
-                    //generate notification
-                    app('App\Http\Controllers\NotificationController')
-                        ->addNotification('Tu plan en Evius ha expirado', $user->user_id);
                     //Vencimiento de plan
-                    $account = Account::findOrFail($user->user_id);
+                    $account = User::findOrFail($user->user_id);
+                    $account['has_plan_active'] = false;
+                    $account->save();
                     Mail::to($account->email)
                         ->send(new \App\Mail\PlanPurchase($user, 'Tu plan en Evius ha expirado'));
+                    //generate notification
+                    app('App\Http\Controllers\NotificationController')
+                       ->addNotification('Tu plan en Evius ha expirado', $user->user_id);
                 }
             }
         }
