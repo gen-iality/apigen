@@ -68,7 +68,7 @@ class PlanPurchase extends Mailable
      */
     public function build()
     {
-        $mail = $this->from('alerts@evius.co');
+        $mail = $this->from('no_reply@evius.co');
         $mail->subject($this->subject);
         return $mail->markdown('rsvp.plan_purchase');
     }

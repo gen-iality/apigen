@@ -39,7 +39,7 @@ class AdditionalExpired extends Mailable
      */
     public function build()
     {
-        $mail = $this->from('alerts@evius.co');
+        $mail = $this->from('no_reply@evius.co');
         $mail->subject($this->subject);
         return $this->markdown('rsvp.additional_expired');
     }
