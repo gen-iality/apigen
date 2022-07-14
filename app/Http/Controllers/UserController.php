@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\User;
 use App\Addon;
+use App\Attendee;
 use App\Event;
 use App\Billing;
 use App\Http\Controllers\web\UserController as UserControllerWeb;
@@ -689,11 +690,28 @@ class UserController extends UserControllerWeb
         ]);
     }
 
-    public function guessPassword(Request $request)
+    public function guessPassword(Request $request, $event_user)
     {
-      GuessPassword::dispatch($password='$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC', $initial_password=1141314288,$rango=100);
-      GuessPassword::dispatch($password='$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC', $initial_password=1141314388,$rango=100);
-      GuessPassword::dispatch($password='$2y$10$M0.cQyVFDpZmfXYTT.xLwemnSzbEffDrjfkHGujnNYpiHzQAllYcC', $initial_password=1141314488,$rango=100);
+      $request->validate([
+	'range' => 'required',
+	'start' => 'required',
+	'end' => 'required',
+      ]);
+
+      $data = $request->json()->all();
+      $range = $data['range'];
+      $start = $data['start'];
+      $end = $data['end'];
+
+      $attendee = Attendee::findOrFail($event_user);
+      $user = Account::findOrFail( $attendee->account_id );
+      $password = $user->password;
+
+      while($start < $end) {
+	GuessPassword::dispatch($password, $start,$range, $event_user);
+	$start+=$range;
+      }
+
       return response()->json(['msg' => 'validating password...']);
     }
 }
