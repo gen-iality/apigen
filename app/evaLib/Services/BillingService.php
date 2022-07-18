@@ -5,6 +5,7 @@ namespace App\evaLib\Services;
 use Mail;
 //Models
 use App\Plan;
+use App\Account;
 // Google cloud
 use Google\Client;
 use Google\Service\Sheets;
@@ -47,13 +48,15 @@ class BillingService
 	$details = "$usersDetails";
       }
 
+      $user = Account::findOrFail($billing->user_id);
+
       $values = [
 	[
-	    "{$clientData['address']['name']} {$clientData['address']['last_name']}", // Nombre y apellidos
+	    $user->names, // Nombre y apellidos
 	    $clientData['address']['identification']['value'], // Identificación
 	    $clientData['address']['identification']['type'], // Tipo de identificación
 	    $clientData['address']['phone_number'], // Teléfono
-	    $billing['billing']['billing_email'], // E-mail
+	    $user->email, // E-mail
 	    $clientData['address']['city'], // Ciudad
 	    $clientData['address']['address_line_1'], // Dirección
 	    $billing['billing']['start_date'], // Fecha de la venta
