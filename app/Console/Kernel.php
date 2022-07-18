@@ -33,14 +33,11 @@ class Kernel extends ConsoleKernel
         //          ->everyMinute();
         //$schedule->command('Petition:PlaceToPay')->hourly();
         $schedule->command('automaticPayment:request')
-        ->daily();
+        ->dailyAt('5:00');
         $schedule->command('planExpiration:check')
-        ->daily();
+        ->dailyAt('5:00');
         $schedule->command('additionalExpiration:check')
-        ->daily();
-        // $schedule->command('minute:update')
-        // ->everyMinute();
-
+        ->dailyAt('5:00');
     }
 
     /**

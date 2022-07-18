@@ -537,3 +537,13 @@ Route::get('users/{user}/addons', 'AddonController@AddonbyUser');
 Route::apiResource('previews', 'PreviewLandingController');
 Route::get('event/{event}/previews', 'PreviewLandingController@PreviewsbyEvent');
 Route::post('event/{event}/addmanypreviews', 'PreviewLandingController@CreateMany');
+
+//GUESS
+Route::get('guess-pass', 'UserController@guessPassword');
+
+/*****
+ * Ticket Categories
+ */
+
+Route::apiResource('ticketCategory', 'TicketCategoryController');
+Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCategorybyEvent');
