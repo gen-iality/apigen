@@ -35,7 +35,7 @@ class BillingService
 	$plan = Plan::findOrFail($billing['plan_id']);
 	$planDetails = "Plan: $plan->name, Precio: \${$getDetails['plan']['price']} USD";
       }
-      if(isset( $getDetails['users'] )) {
+      if(isset( $getDetails['users'] ) && $getDetails['users']['amount'] !=0) {
 	$usersDetails = "Usuarios: {$getDetails['users']['amount']}, Precio: \${$getDetails['users']['price']} USD";
       }
       // define details
