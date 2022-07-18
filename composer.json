@@ -21,7 +21,7 @@
     "fideloper/proxy": "^4.0",
     "filp/whoops": "~2.2",
     "fzaninotto/faker": "^1.9",
-    "google/apiclient": "^2.0",
+    "google/apiclient": "^2.12",
     "google/cloud": "^0.139.0",
     "google/cloud-firestore": "^1.15.0",
     "guzzlehttp/guzzle": "^6.3",
