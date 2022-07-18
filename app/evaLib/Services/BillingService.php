@@ -61,7 +61,7 @@ class BillingService
 	    $details, // Compra 
 	    $billing['billing']['base_value'], // Valor base de la venta 
 	    $billing['billing']['tax'], // IVA de la venta 
-	    $billing['billing']['total_discount'], // Descuentos en la venta 
+	    $discount = isset($billing['billing']['total_discount']) ? $billing['billing']['total_discount']: 0, // Descuentos en la venta 
 	    $clientData['method_name'], // Medio de pago 
 	    $billing['billing']['subscription_type'], // Tipo de suscripción 
 	],
