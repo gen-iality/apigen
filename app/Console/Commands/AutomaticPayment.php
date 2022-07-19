@@ -51,6 +51,7 @@ class AutomaticPayment extends Command
         ->paginate(10);
         if (isset($users_has_payment)) {
             $users_payment = $users_has_payment->unique('user_id');
+            //dd("payment", $users_has_payment[0]->_id);
             $client = new Client([
                 'base_uri' => 'https://sandbox.wompi.co/v1/'
             ]);
@@ -60,7 +61,7 @@ class AutomaticPayment extends Command
                 'Authorization' => 'Bearer prv_test_zEMOm6RL3zlnhRzDP52w9PNN0zefS65d'
             ];
             $options['headers'] = $headers;
-        
+            //dd("userhaspaymebt", $users_has_payment);
             //Get value of dolar
             $api_dolar = $client->getAsync('https://api.fastforex.io/fetch-one?from=USD&to=COP&api_key=demo')
                 ->then(
@@ -104,8 +105,7 @@ class AutomaticPayment extends Command
                 $billing = $billing_renew == null ? Billing::where('payment_id', $user->_id)
                     ->where('action', 'SUBSCRIPTION')
                     ->first() : $billing_renew;
-                //Log::info($billing);
-                echo('count' . $billing->_id);
+                //dd("payment", $user->_id, "billing", $billing->_id);
                 if ($billing) {
                     $end_date = DateTime::createFromFormat('U', strtotime($billing->billing['end_date']));
                     $today = new DateTime();
@@ -113,6 +113,7 @@ class AutomaticPayment extends Command
                     //Log::info($today);
                 
                     // if the end date is equal to the actual date the automatic payment is generated
+                    //change condition to test
                     if ($today >= $end_date) {
                         $reference_evius =  'RENEWAL-' . $today->format('Y-m-d') .'-'. random_int(0001,10000);
                         $plan = Plan::find($billing->plan_id);
@@ -121,7 +122,8 @@ class AutomaticPayment extends Command
                         $cents = round(($total * $dolar_today * 100));
                     
                         //build body to wompi
-                        $options['body'] = $this::createBodyWompi($token, $cents, $user, $reference_evius);
+                        //dd("billing", $billing->_id, "type", $user->type);
+                        $options['body'] = $this::createBodyWompi($token, $cents, $user, $reference_evius, $user->type);
                     
                         //POST CREATE TRANSACTION
                         $promise = $client->postAsync('transactions', $options)
@@ -136,10 +138,11 @@ class AutomaticPayment extends Command
                                 }
                             );
                         $response = $promise->wait();
-                        Log::info($response['data']);
+                        //Log::info($response['data']);
                         if (!isset($response->data)) {
                             return response()->json(['message' => $response['data']], 401);
                         }
+                        //dd("response", $response);
                         $isPending = true;
                         while ($isPending) {
                             $get_transaction = $client->getAsync('transactions/' . $response->data->id)
@@ -171,28 +174,31 @@ class AutomaticPayment extends Command
     }
 
 
-    public function createBodyWompi($token, $cents, $user, $reference_evius)
-    {
-        //build body
-        $body['acceptance_token'] = $token;
-        $body['amount_in_cents'] = $cents;
-        $body['currency'] = 'COP';
-        $body['customer_email'] = $user->address['email'];
-        $body['payment_method']['installments'] = 1;
-        $body['reference'] = $reference_evius;
-        $body['payment_source_id'] = $user->id;
-        $body['customer_data']['phone_number'] = $user->address['phone_number'];
-        //$body['customer_data']['full_name'] = $user->address['full_name'];
-        $body['customer_data']['full_name'] = $user->address['name'] . $user->address['last_name'];
-        $body['shipping_address']['address_line_1'] = $user->address['address_line_1'];
-        $body['shipping_address']['address_line_2'] = $user->address['address_line_2'];
-        $body['shipping_address']['country'] = $user->address['country'];
-        $body['shipping_address']['region'] = $user->address['region'];
-        $body['shipping_address']['city'] = $user->address['city'];
-        $body['shipping_address']['name'] = $user->address['full_name'];
-        $body['shipping_address']['phone_number'] = $user->address['phone_number'];
-        $body['shipping_address']['postal_code'] = $user->address['postal_code'];
+    public function createBodyWompi($token, $cents, $user, $reference_evius, $method_type)
+    {   
+        switch ($method_type) {
+            case 'CARD':
+                //build body
+                $body['amount_in_cents'] = $cents;
+                $body['currency'] = 'COP';
+                $body['customer_email'] = $user->address['email'];
+                $body['payment_method']['installments'] = 1;
+                $body['reference'] = $reference_evius;
+                $body['payment_source_id'] = $user->id;
+            case 'NEQUI':
+                //build body
+                $body['amount_in_cents'] = $cents;
+                $body['currency'] = 'COP';
+                $body['customer_email'] = $user->address['email'];
+                $body['reference'] = $reference_evius;
+                $body['payment_source_id'] = $user->id;
+                break;
+            default:
+                break;
+        }
+        //dd("body", $body);
         $body = json_encode($body);
+
         return $body;
     }
 
@@ -216,7 +222,7 @@ class AutomaticPayment extends Command
         $newBilling['billing']['details']['plan']['price'] = $base;
         $newBilling['billing']['details']['plan']['amount'] = 1;
         $newBilling['billing']['subscription_type'] = 'MONTHLY';
-        $newBilling['billing']['currency'] = 'COP';
+        $newBilling['billing']['currency'] = 'USD';
         $newBilling['action'] = 'RENEWAL';
         $newBilling['status'] = $status;
         $newBilling['payment_id'] = $user->_id;
