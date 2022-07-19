@@ -73,6 +73,7 @@ class PaymentController extends Controller
     {
         return PaymentResource::collection(
             Payment::where('user_id', $user_id)
+                ->where('status', 'AVAILABLE')
                 ->latest()
                 ->paginate(config('app.page_size'))
         );
