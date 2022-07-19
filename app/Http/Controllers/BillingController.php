@@ -192,7 +192,7 @@ class BillingController extends Controller
             }
             return response()->json($new_billing, 201);
         }
-        return response()>json(['message'=> 'Billing doesnt exist'], 404);
+        return response()->json(['message'=> 'Billing doesnt exist'], 404);
     }
 
     /**
@@ -341,6 +341,7 @@ class BillingController extends Controller
                 default:
                     break;
             }
+	  BillingService::generatePurchaseConsolidation($billing);
         }
     }
 
