@@ -137,9 +137,6 @@ class BillingController extends Controller
             $payment = app('App\Http\Controllers\PaymentController')
                 ->createByBilling($data['billing']['payment_method'], $data['user_id']);//Llamada al controlador para crear el metodo de pago
 	    
-	    // Consolidation of the purchase
-	    $clientData=$data['billing']['payment_method'];
-
             unset($data['billing']['payment_method']);//Como el usuario guarda los datos, se borran en el billing
             $data['payment_id'] = json_decode(json_encode($payment))->original->_id;//se le relaciona el id del metodo recien creado
 
@@ -151,9 +148,6 @@ class BillingController extends Controller
             $addons = isset($data['billing']['details']) ? $data['billing']['details'] : null;
             $this::findAndCreateAddons($addons, $data['user_id'], $billing_save->_id, $billing_save['billing']['subscription_type']);
 
-	    // Consolidation of the purchase
-	    BillingService::generatePurchaseConsolidation($billing_save, $clientData);
-
             return response()->json($billing_save, 201);
         }
         //Si no guarda el metodo de pago se guarda tal cual llega el billing e igual se comprueba si tiene adicionales
@@ -162,9 +156,6 @@ class BillingController extends Controller
         $addons = isset($data['billing']['details']) ? $data['billing']['details'] : null;
         $this::findAndCreateAddons($addons, $data['user_id'], $Billing->_id, $Billing['billing']['subscription_type']);
 
-	// Consolidation of the purchase
-	$clientData=$data['billing']['payment_method'];
-	BillingService::generatePurchaseConsolidation($Billing, $clientData);
 
         return response()->json($Billing, 201);
 
