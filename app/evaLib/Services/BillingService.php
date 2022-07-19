@@ -5,7 +5,6 @@ namespace App\evaLib\Services;
 use Mail;
 //Models
 use App\Plan;
-use App\Account;
 // Google cloud
 use Google\Client;
 use Google\Service\Sheets;
@@ -48,24 +47,27 @@ class BillingService
 	$details = "$usersDetails";
       }
 
-      $user = Account::findOrFail($billing->user_id);
-
       $values = [
 	[
-	    $user->names, // Nombre y apellidos
+	    $names = isset($clientData['address']['last_name']) ?
+	      "{$clientData['address']['name']} {$clientData['address']['last_name']}"
+	      : $clientData['address']['name'], // Nombre y apellidos
 	    $clientData['address']['identification']['value'], // Identificación
 	    $clientData['address']['identification']['type'], // Tipo de identificación
 	    $clientData['address']['phone_number'], // Teléfono
-	    $user->email, // E-mail
+	    $clientData['address']['billing_email'], // E-mail
 	    $clientData['address']['country'], // Pais
-	    $city = isset( $clientData['address']['city'] ) ? $clientData['address']['city']: "No aplica", // Ciudad
+	    $city = isset( $clientData['address']['city'] ) ?
+	      $clientData['address']['city']
+	      : "No aplica", // Ciudad
 	    $clientData['address']['address_line_1'], // Dirección
 	    $billing['billing']['start_date'], // Fecha de la venta
 	    $billing['billing']['total'], // Concepto 
 	    $details, // Compra 
 	    $billing['billing']['base_value'], // Valor base de la venta 
 	    $billing['billing']['tax'], // IVA de la venta 
-	    $discount = isset($billing['billing']['total_discount']) ? $billing['billing']['total_discount']: 0, // Descuentos en la venta 
+	    $discount = isset($billing['billing']['total_discount']) ?
+	      $billing['billing']['total_discount'] : 0, // Descuentos en la venta 
 	    $clientData['method_name'], // Medio de pago 
 	],
       ];
