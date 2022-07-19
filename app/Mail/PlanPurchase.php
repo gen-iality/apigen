@@ -34,8 +34,9 @@ class PlanPurchase extends Mailable
     public function __construct($billing, string $subject)
     {
         $user = Account::findOrFail($billing['user_id']);
-
-        if ($billing->billing['save']) {
+        $save = isset($billing->billing) ? $billing->billing['save'] : $billing["billing"]["save"];
+        //dd("save", $save);
+        if ($save) {
             $payment = Payment::findOrFail($billing['payment_id']);
             //$this->name = $payment->address['name'] . $payment->address['last_name'];
             $this->name = $user->names;
