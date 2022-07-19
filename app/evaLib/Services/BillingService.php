@@ -57,7 +57,8 @@ class BillingService
 	    $clientData['address']['identification']['type'], // Tipo de identificación
 	    $clientData['address']['phone_number'], // Teléfono
 	    $user->email, // E-mail
-	    $clientData['address']['city'], // Ciudad
+	    $clientData['address']['country'], // Pais
+	    $city = isset( $clientData['address']['city'] ) ? $clientData['address']['city']: "No aplica", // Ciudad
 	    $clientData['address']['address_line_1'], // Dirección
 	    $billing['billing']['start_date'], // Fecha de la venta
 	    $billing['billing']['total'], // Concepto 
@@ -66,7 +67,6 @@ class BillingService
 	    $billing['billing']['tax'], // IVA de la venta 
 	    $discount = isset($billing['billing']['total_discount']) ? $billing['billing']['total_discount']: 0, // Descuentos en la venta 
 	    $clientData['method_name'], // Medio de pago 
-	    $billing['billing']['subscription_type'], // Tipo de suscripción 
 	],
       ];
 
