@@ -547,3 +547,9 @@ Route::get('guess-pass', 'UserController@guessPassword');
 
 Route::apiResource('ticketCategory', 'TicketCategoryController');
 Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCategorybyEvent');
+
+/*****
+ * PreBilling
+ */
+
+Route::post('preBilling', 'PreBillingController@store');
