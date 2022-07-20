@@ -62,7 +62,7 @@ class BillingService
 	      : $clientData['address']['name'], // Nombre y apellidos
 	    $clientData['address']['identification']['value'], // Identificación
 	    $clientData['address']['identification']['type'], // Tipo de identificación
-	    $clientData['address']['phone_number'], // Teléfono
+	    "+{$clientData['address']['prefix']} {$clientData['address']['phone_number']}", // Teléfono
 	    $clientData['address']['billing_email'], // E-mail
 	    $clientData['address']['country'], // Pais
 	    $city = isset( $clientData['address']['city'] ) ?
@@ -73,7 +73,7 @@ class BillingService
 	    $billing['billing']['total'] / 100, // Concepto 
 	    $details, // Compra 
 	    $billing['billing']['base_value'], // Valor base de la venta 
-	    $billing['billing']['tax'], // IVA de la venta 
+	    $billing['billing']['tax'] * 100 . "%", // IVA de la venta 
 	    $discount = isset($billing['billing']['total_discount']) ?
 	      $billing['billing']['total_discount'] : 0, // Descuentos en la venta 
 	    $clientData['method_name'], // Medio de pago 
