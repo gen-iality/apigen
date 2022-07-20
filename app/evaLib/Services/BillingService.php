@@ -57,6 +57,7 @@ class BillingService
 
       $values = [
 	[
+	    $billing['billing']['start_date'], // Fecha de la venta
 	    $names = isset($clientData['address']['last_name']) ?
 	      "{$clientData['address']['name']} {$clientData['address']['last_name']}"
 	      : $clientData['address']['name'], // Nombre y apellidos
@@ -69,7 +70,6 @@ class BillingService
 	      $clientData['address']['city']
 	      : "No aplica", // Ciudad
 	    $clientData['address']['address_line_1'], // Dirección
-	    $billing['billing']['start_date'], // Fecha de la venta
 	    $billing['billing']['total'] / 100, // Concepto 
 	    $details, // Compra 
 	    $billing['billing']['base_value'], // Valor base de la venta 
