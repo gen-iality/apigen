@@ -811,9 +811,10 @@ class EventUserController extends Controller
     {
 	$data = $request->json()->all();
         $eventUser = Attendee::findOrFail($id);
-        if (!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false)) {
-            $eventUser->checkIn();
-        }
+        //if (!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false)) {
+	// Esta validacon ya la hace front
+        $eventUser->checkIn();
+        //}
 
         $printoutsHistory = [];
         $eventUser->printouts = $eventUser->printouts + 1;
