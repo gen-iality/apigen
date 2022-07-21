@@ -46,12 +46,12 @@ class AutomaticPayment extends Command
      */
     public function handle()
     {
-        $users_has_payment = Payment::where('status', '=', 'ACTIVE')
+        $users_has_payment = Payment::where('status', '=', 'AVAILABLE')
         ->latest()
         ->paginate(10);
+        Log::debug("metodos de pago disponibles: " . count($users_has_payment));
         if (isset($users_has_payment)) {
             $users_payment = $users_has_payment->unique('user_id');
-            //dd("payment", $users_has_payment[0]->_id);
             $client = new Client([
                 'base_uri' => 'https://sandbox.wompi.co/v1/'
             ]);
@@ -61,7 +61,6 @@ class AutomaticPayment extends Command
                 'Authorization' => 'Bearer prv_test_zEMOm6RL3zlnhRzDP52w9PNN0zefS65d'
             ];
             $options['headers'] = $headers;
-            //dd("userhaspaymebt", $users_has_payment);
             //Get value of dolar
             $api_dolar = $client->getAsync('https://api.fastforex.io/fetch-one?from=USD&to=COP&api_key=demo')
                 ->then(
@@ -76,8 +75,8 @@ class AutomaticPayment extends Command
                 );
             $response_dolar = $api_dolar->wait();
             $dolar_today = isset($response_dolar->result->COP) ? $response_dolar->result->COP : 4000;
+            Log::debug("Valor del dolar: " . $dolar_today);
             //$dolar_today = 4000;
-            //echo('$' . $dolar_today);
             
             //get the acceptance token || require public_key
             $response = $client->getAsync('merchants/pub_test_UGgvjUcTWcZv0Q57IhQrI4XcNObpSQe4')
@@ -93,7 +92,7 @@ class AutomaticPayment extends Command
                 );
             $response_token = $response->wait(); 
             $token = isset($response_token->data) ? $response_token->data->presigned_acceptance->acceptance_token : null;
-            //Log::info($token);
+            Log::debug("Acceptance token: ". $token);
             
             foreach ($users_payment as $user) {
                 //get last renew billing
@@ -105,8 +104,9 @@ class AutomaticPayment extends Command
                 $billing = $billing_renew == null ? Billing::where('payment_id', $user->_id)
                     ->where('action', 'SUBSCRIPTION')
                     ->first() : $billing_renew;
-                //dd("payment", $user->_id, "billing", $billing->_id);
+                
                 if ($billing) {
+                    Log::debug("Billing para validar fecha: " . $billing->_id);
                     $end_date = DateTime::createFromFormat('U', strtotime($billing->billing['end_date']));
                     $today = new DateTime();
                     //Log::info("CHECK AUTOMATIC PAYMENT");
@@ -114,7 +114,10 @@ class AutomaticPayment extends Command
                 
                     // if the end date is equal to the actual date the automatic payment is generated
                     //change condition to test
+                    Log::debug("Fecha actual: " . $today->format('Y-m-d H:i:s'));
+                    Log::debug("Fecha de corte: " . $end_date->format('Y-m-d H:i:s'));
                     if ($today >= $end_date) {
+                        Log::debug("Cumple requisito para pago automatico");
                         $reference_evius =  'RENEWAL-' . $today->format('Y-m-d') .'-'. random_int(0001,10000);
                         $plan = Plan::find($billing->plan_id);
                         $base = $plan->price;
@@ -122,7 +125,6 @@ class AutomaticPayment extends Command
                         $cents = round(($total * $dolar_today * 100));
                     
                         //build body to wompi
-                        //dd("billing", $billing->_id, "type", $user->type);
                         $options['body'] = $this::createBodyWompi($token, $cents, $user, $reference_evius, $user->type);
                     
                         //POST CREATE TRANSACTION
@@ -138,11 +140,10 @@ class AutomaticPayment extends Command
                                 }
                             );
                         $response = $promise->wait();
-                        //Log::info($response['data']);
+                        
                         if (!isset($response->data)) {
                             return response()->json(['message' => $response['data']], 401);
                         }
-                        //dd("response", $response);
                         $isPending = true;
                         while ($isPending) {
                             $get_transaction = $client->getAsync('transactions/' . $response->data->id)
@@ -167,6 +168,7 @@ class AutomaticPayment extends Command
                         $save_billing = $this::createNewBilling($user, $billing, $response, $reference_evius, $base, $total, $status);
                         //Log::info($save_billing);
                     }
+                    Log::debug("No Cumple requisito para pago automatico");
                 
                 }
             }
