@@ -55,6 +55,8 @@ class BillingService
 	$details = "$usersDetails";
       }
 
+      $dollarToday = $billing['billing']['dollarToday'];
+
       $values = [
 	[
 	    $billing['billing']['start_date'], // Fecha de la venta
@@ -70,12 +72,16 @@ class BillingService
 	      $clientData['address']['city']
 	      : "No aplica", // Ciudad
 	    $clientData['address']['address_line_1'], // Dirección
-	    $billing['billing']['total'] / 100, // Concepto 
+	    $billing['billing']['total'] / 100, // Concepto Pesos
+	    $billing['billing']['totals']['usd'], // Concepto Dolares
 	    $details, // Compra 
-	    $billing['billing']['base_value'], // Valor base de la venta 
+	    $billing['billing']['base_value'] * $dollarToday, // Valor base de la venta Pesos
+	    $billing['billing']['base_value'], // Valor base de la venta Dolares
 	    $billing['billing']['tax'] * 100 . "%", // IVA de la venta 
 	    $discount = isset($billing['billing']['total_discount']) ?
-	      $billing['billing']['total_discount'] : 0, // Descuentos en la venta 
+	      $billing['billing']['total_discount'] * $dollarToday : 0, // Descuentos en la venta Pesos
+	    $discount = isset($billing['billing']['total_discount']) ?
+	      $billing['billing']['total_discount'] : 0, // Descuentos en la venta Dolares
 	    $clientData['method_name'], // Medio de pago 
 	],
       ];
