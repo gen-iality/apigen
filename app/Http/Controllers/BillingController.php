@@ -10,10 +10,7 @@ use App\User;
 use Mail;
 use Illuminate\Http\Request;
 use App\Http\Resources\BillingResource;
-use DateTime;
-use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\RequestException;
+use Log;
 // Services
 use App\evaLib\Services\BillingService;
 
@@ -166,6 +163,7 @@ class BillingController extends Controller
         if ($billing) {
             $new_billing = new Billing($billing);
             $new_billing->save();
+            Log::debug("Nueva billing generada: " . $new_billing->_id);
             //validar el estatus para enviar correo
             $user = Account::findOrFail($billing['user_id']);
             if ($new_billing['status'] == 'APPROVED') {
@@ -176,10 +174,10 @@ class BillingController extends Controller
                 ->addNotification('Se ha renovado tu suscripción en Evius', $user->_id);
             }else{
                 Mail::to($user->email)
-                    ->send(new \App\Mail\PlanPurchase($billing, 'Failed automatic renewal'));
+                    ->send(new \App\Mail\PlanPurchase($billing, 'La renovacion de tu suscripción a Evius ha fallado'));
                 //generate notification
                 app('App\Http\Controllers\NotificationController')
-                ->addNotification('Se ha renovado tu suscripción en Evius', $user->_id);
+                ->addNotification('La renovacion de tu suscripción a Evius ha fallado', $user->_id);
             }
             return response()->json($new_billing, 201);
         }
