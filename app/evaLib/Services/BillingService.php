@@ -37,14 +37,18 @@ class BillingService
 	$clientData = $billing['billing']['payment_method'];
       }
 
+      $dollarToday = $billing['billing']['dollarToday'];
       // purchase details
       $getDetails = $billing['billing']['details'];
       if(isset( $getDetails['plan'] )) {
 	$plan = Plan::findOrFail($billing['plan_id']);
-	$planDetails = "Plan: $plan->name, Precio: \${$getDetails['plan']['price']} USD";
+	$pricePesos = intval( $getDetails['plan']['price'] * $dollarToday );
+	$planDetails = "Plan: $plan->name, Precio Pesos: \$$pricePesos, Precio Dólares: \${$getDetails['plan']['price']}";
       }
       if(isset( $getDetails['users'] ) && $getDetails['users']['amount'] !=0) {
-	$usersDetails = "Usuarios: {$getDetails['users']['amount']}, Precio: \${$getDetails['users']['price']} USD";
+	$pricePesos = intval( ($getDetails['users']['price'] * $dollarToday) * $getDetails['users']['amount'] );
+	$priceDollars = $getDetails['users']['price'] * $getDetails['users']['amount'];
+	$usersDetails = "Usuarios: {$getDetails['users']['amount']}, Precio Pesos: \$$pricePesos, Precio Dólares: \$$priceDollars";
       }
       // define details
       if(isset($planDetails) && isset($usersDetails)) {
@@ -55,27 +59,32 @@ class BillingService
 	$details = "$usersDetails";
       }
 
+
       $values = [
 	[
+	    $billing['billing']['start_date'], // Fecha de la venta
 	    $names = isset($clientData['address']['last_name']) ?
 	      "{$clientData['address']['name']} {$clientData['address']['last_name']}"
 	      : $clientData['address']['name'], // Nombre y apellidos
 	    $clientData['address']['identification']['value'], // Identificación
 	    $clientData['address']['identification']['type'], // Tipo de identificación
-	    $clientData['address']['phone_number'], // Teléfono
+	    "+{$clientData['address']['prefix']} {$clientData['address']['phone_number']}", // Teléfono
 	    $clientData['address']['billing_email'], // E-mail
 	    $clientData['address']['country'], // Pais
 	    $city = isset( $clientData['address']['city'] ) ?
 	      $clientData['address']['city']
 	      : "No aplica", // Ciudad
 	    $clientData['address']['address_line_1'], // Dirección
-	    $billing['billing']['start_date'], // Fecha de la venta
-	    $billing['billing']['total'] / 100, // Concepto 
-	    $details, // Compra 
-	    $billing['billing']['base_value'], // Valor base de la venta 
-	    $billing['billing']['tax'], // IVA de la venta 
+	    $billing['billing']['total'] / 100, // Concepto Pesos
+	    $billing['billing']['totals']['usd'], // Concepto Dolares
+	    $details, // Detalles compra 
+	    $billing['billing']['base_value'] * $dollarToday, // Valor base de la venta Pesos
+	    $billing['billing']['base_value'], // Valor base de la venta Dolares
+	    $billing['billing']['tax'] * 100 . "%", // IVA de la venta 
 	    $discount = isset($billing['billing']['total_discount']) ?
-	      $billing['billing']['total_discount'] : 0, // Descuentos en la venta 
+	      $billing['billing']['total_discount'] * $dollarToday : 0, // Descuentos en la venta Pesos
+	    $discount = isset($billing['billing']['total_discount']) ?
+	      $billing['billing']['total_discount'] : 0, // Descuentos en la venta Dolares
 	    $clientData['method_name'], // Medio de pago 
 	],
       ];
