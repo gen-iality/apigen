@@ -37,14 +37,18 @@ class BillingService
 	$clientData = $billing['billing']['payment_method'];
       }
 
+      $dollarToday = $billing['billing']['dollarToday'];
       // purchase details
       $getDetails = $billing['billing']['details'];
       if(isset( $getDetails['plan'] )) {
 	$plan = Plan::findOrFail($billing['plan_id']);
-	$planDetails = "Plan: $plan->name, Precio: \${$getDetails['plan']['price']} USD";
+	$pricePesos = intval( $getDetails['plan']['price'] * $dollarToday );
+	$planDetails = "Plan: $plan->name, Precio Pesos: \$$pricePesos, Precio Dólares: \${$getDetails['plan']['price']}";
       }
       if(isset( $getDetails['users'] ) && $getDetails['users']['amount'] !=0) {
-	$usersDetails = "Usuarios: {$getDetails['users']['amount']}, Precio: \${$getDetails['users']['price']} USD";
+	$pricePesos = intval( ($getDetails['users']['price'] * $dollarToday) * $getDetails['users']['amount'] );
+	$priceDollars = $getDetails['users']['price'] * $getDetails['users']['amount'];
+	$usersDetails = "Usuarios: {$getDetails['users']['amount']}, Precio Pesos: \$$pricePesos, Precio Dólares: \$$priceDollars";
       }
       // define details
       if(isset($planDetails) && isset($usersDetails)) {
@@ -55,7 +59,6 @@ class BillingService
 	$details = "$usersDetails";
       }
 
-      $dollarToday = $billing['billing']['dollarToday'];
 
       $values = [
 	[
@@ -74,7 +77,7 @@ class BillingService
 	    $clientData['address']['address_line_1'], // Dirección
 	    $billing['billing']['total'] / 100, // Concepto Pesos
 	    $billing['billing']['totals']['usd'], // Concepto Dolares
-	    $details, // Compra 
+	    $details, // Detalles compra 
 	    $billing['billing']['base_value'] * $dollarToday, // Valor base de la venta Pesos
 	    $billing['billing']['base_value'], // Valor base de la venta Dolares
 	    $billing['billing']['tax'] * 100 . "%", // IVA de la venta 
