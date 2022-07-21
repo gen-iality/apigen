@@ -807,8 +807,9 @@ class EventUserController extends Controller
      * @urlParam eventuser string required id Attendee to checkin into the event
      *
      */
-    public function checkIn($id)
+    public function checkIn(Request $request, $id)
     {
+	$data = $request->json()->all();
         $eventUser = Attendee::findOrFail($id);
         if (!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false)) {
             $eventUser->checkIn();
@@ -832,6 +833,11 @@ class EventUserController extends Controller
             $eventUser->printouts_history = $array;
         }
 
+	//checkin type
+	if(isset($data['checkedin_type'])) {
+	  $eventUser->checkedin_type = $data['checkedin_type'];
+	}
+
         $eventUser->save();
 
         return $eventUser;
@@ -845,11 +851,14 @@ class EventUserController extends Controller
      */
     public function unCheck(String $eventUser)
     {
+	// remove checked_in data
         $eventUser = Attendee::findOrFail($eventUser);
         $eventUser->checked_in = false;
         $eventUser->checkedin_at = null;
+	$eventUser->checkedin_type = null;
         
         $eventUser->save();
+
         return $eventUser;
     }
 
