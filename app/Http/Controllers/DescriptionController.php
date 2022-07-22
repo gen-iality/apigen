@@ -101,7 +101,25 @@ class DescriptionController extends Controller
      * @param  \App\Description  $description
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $event_id)
+    public function update(Request $request, $description)
+    {
+        $data = $request->json()->all();
+        $description  = Description::findOrFail($description);
+        $description->fill($data);
+        $description->save();
+
+        return response()->json($description);
+        
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Description  $description
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMany(Request $request, $event_id)
     {
         $event = Event::findOrFail($event_id);
         if ($event) {

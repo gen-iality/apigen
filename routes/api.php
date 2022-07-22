@@ -545,6 +545,7 @@ Route::post('event/{event}/addmanypreviews', 'PreviewLandingController@CreateMan
 
 Route::apiResource('descriptions', 'DescriptionController');
 Route::get('event/{event}/descriptions', 'DescriptionController@DescriptionbyEvent');
+Route::put('event/{event}/updateDescriptions', 'DescriptionController@updateMany');
 Route::post('event/{event}/addDescriptions', 'DescriptionController@storeMany');
 
 //GUESS
