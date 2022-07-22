@@ -106,25 +106,9 @@ class DescriptionController extends Controller
         $event = Event::findOrFail($event_id);
         if ($event) {
             foreach ($request->descriptions as $description) {
-                $description  = Description::findOrFail($description['_id']);
-                $description->fill($description);
-                $description->save();
-            }
-            return response()->json(["message"=>"Ok"]);
-        }else{
-            return response()->json(["message"=>"Event doesnt exist"], 404);
-        }
-        
-    }
-
-    public function updateMany(Request $request, $event_id)
-    {
-        $event = Event::findOrFail($event_id);
-        if ($event) {
-            foreach ($request->descriptions as $description) {
-                $updatedescription  = Description::findOrFail($description['_id']);
-                $updatedescription->fill($description);
-                $updatedescription->save();
+                $updateDescription  = Description::findOrFail($description['_id']);
+                $updateDescription->fill($description);
+                $updateDescription->save();
             }
             return response()->json(["message"=>"Ok"]);
         }else{
