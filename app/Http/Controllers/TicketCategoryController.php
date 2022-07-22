@@ -100,7 +100,7 @@ class TicketCategoryController extends Controller
      */
     public function update(Request $request, $event_id)
     {
-        event = Event::findOrFail($event_id);
+        $event = Event::findOrFail($event_id);
         $event['total_tickets'] = $request->total_tickets;
         $event->save();
         foreach ($request->categories as $category) {
@@ -108,7 +108,7 @@ class TicketCategoryController extends Controller
             $ticketCategory->fill($category);
             $ticketCategory->save();
         }
-        return response()->json(["message"=>"Ok"]);$
+        return response()->json(["message"=>"Ok"]);
     }
 
     /**
