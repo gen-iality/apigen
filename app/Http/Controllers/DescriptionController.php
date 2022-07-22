@@ -105,10 +105,8 @@ class DescriptionController extends Controller
     {
         $event = Event::findOrFail($event_id);
         if ($event) {
-            //dd($request->descriptions);
             foreach ($request->descriptions as $description) {
                 $description  = Description::findOrFail($description['_id']);
-                //dd($description);
                 $description->fill($description);
                 $description->save();
             }
@@ -123,7 +121,6 @@ class DescriptionController extends Controller
     {
         $event = Event::findOrFail($event_id);
         if ($event) {
-            //dd($request->descriptions);
             foreach ($request->descriptions as $description) {
                 $updatedescription  = Description::findOrFail($description['_id']);
                 $updatedescription->fill($description);
