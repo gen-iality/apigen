@@ -538,6 +538,15 @@ Route::apiResource('previews', 'PreviewLandingController');
 Route::get('event/{event}/previews', 'PreviewLandingController@PreviewsbyEvent');
 Route::post('event/{event}/addmanypreviews', 'PreviewLandingController@CreateMany');
 
+
+/*****
+ * Description events
+ */
+
+Route::apiResource('descriptions', 'DescriptionController');
+Route::get('event/{event}/descriptions', 'DescriptionController@DescriptionbyEvent');
+Route::post('event/{event}/addDescriptions', 'DescriptionController@storeMany');
+
 //GUESS
 Route::get('guess-pass', 'UserController@guessPassword');
 
