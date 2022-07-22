@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TicketCategory;
+use App\Event;
 use Illuminate\Http\Request;
 use App\Http\Resources\TicketCategoryResource;
 use Log;
@@ -41,6 +42,7 @@ class TicketCategoryController extends Controller
             'color' => 'required|string',
             'cost' => 'required|numeric',
             'amount' => 'required|numeric',
+            'availables' => 'required|numeric',
             'event_id' => 'required|string'
         ]);
 
@@ -96,14 +98,17 @@ class TicketCategoryController extends Controller
      * @param  \App\TicketCategory  $ticketCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $ticketCategory)
+    public function update(Request $request, $event_id)
     {
-        $data = $request->json()->all();
-        $ticketCategory  = TicketCategory::findOrFail($ticketCategory);
-        $ticketCategory->fill($data);
-        $ticketCategory->save();
-
-        return response()->json($ticketCategory);
+        event = Event::findOrFail($event_id);
+        $event['total_tickets'] = $request->total_tickets;
+        $event->save();
+        foreach ($request->categories as $category) {
+            $ticketCategory  = TicketCategory::findOrFail($category['_id']);
+            $ticketCategory->fill($category);
+            $ticketCategory->save();
+        }
+        return response()->json(["message"=>"Ok"]);$
     }
 
     /**
