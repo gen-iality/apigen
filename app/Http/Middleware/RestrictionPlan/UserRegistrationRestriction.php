@@ -13,7 +13,7 @@ class UserRegistrationRestriction
 {
     /**
      * Handle an incoming request.
-     * 
+     *
      * Restriction of users allowed
      * according to the plan that the client has associated
      * If users are removed, they will still count towards the restriction. softdelete is used
@@ -39,17 +39,15 @@ class UserRegistrationRestriction
         }
 
         // there are users without a plan, they are old clients without restriction
-        if(empty($user->plan_id)) {
+        if(empty($user->plan_id) || $user->plan['name'] === "Business") {
             return $next($request);
         }
 
 	// get all addon users
 	$addonUsers = Addon::where('user_id', $user->_id)->where('is_active', true)->get();
 	$allowedUsers = $user->plan['availables']['users'];
-	if(isset($addonUsers)){
-	  foreach($addonUsers as $addonUser) {
-	    $allowedUsers+=$addonUser->amount;
-	  }
+	foreach($addonUsers as $addonUser) {
+	  $allowedUsers+=$addonUser->amount;
 	}
 
 	if ($user->registered_users >= $allowedUsers) {
