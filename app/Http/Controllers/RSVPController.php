@@ -184,7 +184,7 @@ class RSVPController extends Controller implements ShouldQueue
 
         $eventUsers = Attendee::find($eventUsersIds)->unique("account_id");
         // $message->number_of_recipients = count($eventUsers);     
-        $message->save();
+        //$message->save();
 
         //var_dump($eventUsers);
         //Send RSVP
@@ -248,9 +248,13 @@ class RSVPController extends Controller implements ShouldQueue
             $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
 
+            // $include_date = false;
+            // if (!empty($data["include_date"])) {
+            //     $include_date = $data["include_date"] ? true : false;
+            // }
             $include_date = false;
-            if (!empty($data["include_date"])) {
-                $include_date = $data["include_date"] ? true : false;
+            if (isset($data["include_date"])) {
+                $include_date = $data["include_date"];
             }
 
             $data["include_ical_calendar"] = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true; 
@@ -264,7 +268,8 @@ class RSVPController extends Controller implements ShouldQueue
             
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, $message->subject, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, 
+                    $message->subject, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
                 );
                 
  

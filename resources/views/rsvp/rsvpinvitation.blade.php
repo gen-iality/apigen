@@ -33,6 +33,7 @@
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **{{ __('Mail.date') }}:** | **{{ __('Mail.hora') }}:** |
 | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
+| {{ $date_time_to->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_to->formatLocalized('%l:%M %p') }} |
 @endcomponent
 @endif
 

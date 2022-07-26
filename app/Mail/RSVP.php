@@ -155,15 +155,14 @@ class RSVP extends Mailable implements ShouldQueue
         $this->urlconfirmacion = $destination.'/landing/'.$event->_id;
 
 
-
        //Definición de horario de inicio y fin del evento.Se le agrega -05:00 para que quede hora Colombia
         $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start."-05:00") : \Carbon\Carbon::parse($event->datetime_from ."-05:00");
         $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end."-05:00") : \Carbon\Carbon::parse($event->datetime_to."-05:00");        
         $date_time_from = $date_time_from->setTimezone("UTC");
         $date_time_to = $date_time_to->setTimezone("UTC");
-
+        
         $this->date_time_from = \Carbon\Carbon::parse($event->datetime_from ."-05:00");
-        $this->date_time_to = $date_time_to;
+        $this->date_time_to = \Carbon\Carbon::parse($event->datetime_to ."-05:00");
         
 
         if (!$subject) {
@@ -281,7 +280,7 @@ class RSVP extends Mailable implements ShouldQueue
         
         $locale = isset($this->event->language) ? $this->event->language : 'es';
         App::setLocale($locale);
-        
+
         if ($this->include_ical_calendar)
         {
             return $this
