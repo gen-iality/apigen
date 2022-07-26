@@ -330,16 +330,15 @@ class EventController extends Controller
         $data['organizer_type'] = "App\user";
         //$userProperties = $data['user_properties'];
         // $userProperties->save();
-        
-        
 
         $Properties = new UserProperties();
 
 	// Days after the live landing event
-	$data[ 'later_days' ] = $user->plan['availables']['later_days'];
+	if(isset($user->plan['availables']['later_days'])) {
+	  $data[ 'later_days' ] = $user->plan['availables']['later_days'];
+	}
 
         $result = new Event($data);
-        
 
         if ($request->file('picture')) {
             $result->picture = $gfService->storeFile($request->file('picture'));
