@@ -13,7 +13,7 @@ class UserRegistrationRestriction
 {
     /**
      * Handle an incoming request.
-     * 
+     *
      * Restriction of users allowed
      * according to the plan that the client has associated
      * If users are removed, they will still count towards the restriction. softdelete is used
@@ -31,7 +31,7 @@ class UserRegistrationRestriction
 	// get event owner user
         $eventToRegisterUser = Event::findOrFail($route->parameter("event"));
         $user = Account::findOrFail($eventToRegisterUser->author_id);
-        
+
 	// if the person to register is the owner of the event,
 	// the restriction does not apply.
         if ($email === $user->email) {
@@ -39,7 +39,7 @@ class UserRegistrationRestriction
         }
 
         // there are users without a plan, they are old clients without restriction
-        if(empty($user->plan_id)) {
+        if(empty($user->plan_id) || $user->plan['name'] === "Business") {
             return $next($request);
         }
 
@@ -56,7 +56,7 @@ class UserRegistrationRestriction
 	    );
 	    return response()->json(['message' => 'users limit exceeded'], 403);
 	}
-	
+
 	$user->registered_users +=1;
 	$user->save();
 
