@@ -31,7 +31,7 @@ class UserRegistrationRestriction
 	// get event owner user
         $eventToRegisterUser = Event::findOrFail($route->parameter("event"));
         $user = Account::findOrFail($eventToRegisterUser->author_id);
-        
+
 	// if the person to register is the owner of the event,
 	// the restriction does not apply.
         if ($email === $user->email) {
@@ -46,8 +46,10 @@ class UserRegistrationRestriction
 	// get all addon users
 	$addonUsers = Addon::where('user_id', $user->_id)->where('is_active', true)->get();
 	$allowedUsers = $user->plan['availables']['users'];
-	foreach($addonUsers as $addonUser) {
-	  $allowedUsers+=$addonUser->amount;
+	if(isset($addonUsers)){
+	  foreach($addonUsers as $addonUser) {
+	    $allowedUsers+=$addonUser->amount;
+	  }
 	}
 
 	if ($user->registered_users >= $allowedUsers) {
@@ -56,7 +58,7 @@ class UserRegistrationRestriction
 	    );
 	    return response()->json(['message' => 'users limit exceeded'], 403);
 	}
-	
+
 	$user->registered_users +=1;
 	$user->save();
 
