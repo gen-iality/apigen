@@ -32,8 +32,10 @@
 | | |
 | -------------------- |:--------------------------------------------------------------------------------------:|
 | **{{ __('Mail.date') }}:** | **{{ __('Mail.hora') }}:** |
-| {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
-| {{ $date_time_to->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_to->formatLocalized('%l:%M %p') }} |
+|	Inicia: {{$date_time_from->format('m-d-Y')}}|{{$date_time_from->format('H:i:s')}} |
+|	Termina: {{$date_time_to->format('m-d-Y')}}|{{$date_time_to->format('H:i:s')}} |
+{{-- | {{ $date_time_from->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_from->formatLocalized('%l:%M %p') }} |
+| {{ $date_time_to->formatLocalized('%A, %e de %B %Y') }}|{{ $date_time_to->formatLocalized('%l:%M %p') }} | --}}
 @endcomponent
 @endif
 
