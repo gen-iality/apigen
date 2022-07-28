@@ -413,16 +413,20 @@ string(10) "1030522402"
             $properties_merge = array_merge($properties, ['documents_user' => $documents_user_url]);
             $eventUser['properties'] = $properties_merge;
             $eventUser->save();
-            
 
         }
-        
 
         return $eventUser;
     }
 
-    public static function asignRolToEventUser($rol_name)
+    public static function asignRolToEventUser($rol_name, $event, $user)
     {
+	// If the attendee is the owner of this event, don't change admin rol
+	if($event->author_id === $user->_id)
+	{
+	  return '5c1a59b2f33bd40bb67f2322';
+	}
+
         if ($rol_name) {
             $rol = Rol::where('name', $rol_name)->first();
             $rol_id = $rol['_id'];
@@ -430,7 +434,7 @@ string(10) "1030522402"
             // asignar rol de asistente por defecto
             $rol_id = '60e8a7e74f9fb74ccd00dc22';
         }
-        
+
         return $rol_id;
     }
 }

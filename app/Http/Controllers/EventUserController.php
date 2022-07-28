@@ -425,37 +425,34 @@ class EventUserController extends Controller
 
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
-            
         $event = Event::find($event_id);
         $email = $eventUserData["email"];
 
-        // Validate the spaces available in the order
-        if (isset($eventUserData["order_id"])) {
-            $order_id = $eventUserData["order_id"];
-            $order = Order::findOrFail($order_id);
-            $affiliates = Attendee::where('order_id', $order_id)->get();
-            if (count($affiliates) >= $order->space_available) {
-                return response()->json(['message' => 'Affiliate limit exceeded'], 401);
-            }
-        }
+        // Validate the spaces available in the order ROYAL PRESTIGE
+        //if (isset($eventUserData["order_id"])) {
+            //$order_id = $eventUserData["order_id"];
+            //$order = Order::findOrFail($order_id);
+            //$affiliates = Attendee::where('order_id', $order_id)->get();
+            //if (count($affiliates) >= $order->space_available) {
+                //return response()->json(['message' => 'Affiliate limit exceeded'], 401);
+            //}
+        //}
+
         try {
 
             $user = Account::where("email" , $email)->first();
-            
-            // crear cuenta de usuario si no existe 
+            // crear cuenta de usuario si no existe
             if(!isset($user))
-            {   
+            {
                 // Si no tiene password, se le asigna el email como password
                 $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
-               
-                
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
                     "password" => $pass
-                ]); 
+                ]);
 
-                $user = Account::where("email" , $email)->first();
+                //$user = Account::where("email" , $email)->first();
 
             }elseif(isset($event->allow_edit_password) && $eventUserData["password"]){
                 $user = Account::updateOrCreate([
@@ -465,15 +462,15 @@ class EventUserController extends Controller
                     "names" => $eventUserData["names"],
                     "password" => $eventUserData["password"]
                 ]);
-                
             }
 
-            $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
-            $rol_id = UserEventService::asignRolToEventUser($rol_name);
+	    // assign rol_id to attendee
+	    $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
+            $rol_id = UserEventService::asignRolToEventUser($rol_name, $event, $user);
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
 
-            unset($eventUserData["order_id"]);
+            //unset($eventUserData["order_id"]);
 
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
@@ -481,37 +478,36 @@ class EventUserController extends Controller
                     'account_id' => $user->_id,
                     "event_id" => $event_id
                 ],
-                [ 
+                [
                     'rol_id' => $rol_id,
                     "properties" => $eventUserData
                 ]
             );
 
-            // If the creation of the eventUser is through a redemption code, the user is assigned to the order
-            if (isset($order_id)) {
+            // If the creation of the eventUser is through a redemption code, the user is assigned to the order ROYAL PRESTIGE
+            //if (isset($order_id)) {
                 // $affiliatedUsers = $order->affiliates;
                 // array_push($affiliatedUsers, $eventUser->_id);
                 // $order->affiliates = $affiliatedUsers;
                 // $order->save();
                 //Save order_id to manage relationship
-                $eventUser->order_id = $order_id;
-                $eventUser->save();
-            }
-
+                //$eventUser->order_id = $order_id;
+                //$eventUser->save();
+            //}
 
             $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
             $result = (object) [
                 "status" => $result_status,
-                "data" => $eventUser,  
+                "data" => $eventUser,
                 "message" => "OK"
             ];
 
             $response = new EventUserResource($eventUser);
-            
+
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
-            
+
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);
 
