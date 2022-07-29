@@ -5,7 +5,6 @@
 | USER EVENT Routes
 |--------------------------------------------------------------------------
 | This is where you can register API routes to manage users in the events and the their submodules
-| 
 */
 
 /****************
@@ -13,8 +12,8 @@
 ****************/
 Route::post('events/{event}/eventusers', 'EventUserController@store');
 Route::get('events/{event}/eventusers/{eventuser}/unsubscribe', 'EventUserController@unsubscribe');
-Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail')
-    ->middleware('userRegistrationRestriction');
+Route::post('events/{event}/adduserwithemailvalidation/', 'EventUserController@SubscribeUserToEventAndSendEmail');
+    //->middleware('userRegistrationRestriction');
 //    ->middleware('userRegistrationRestriction', 'OrganizersRestriction'); CHANGE PRICING
 Route::post('eventusers/{event}/tranfereventuser/{event_user}', 'EventUserController@transferEventuserAndEnrollToActivity');
 Route::get('eventusers/{event}/makeTicketIdaProperty/{ticket_id}', 'EventUserManagementController@makeTicketIdaProperty');
@@ -23,8 +22,8 @@ Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
 Route::put('eventUsers/{eventuser}/uncheck', 'EventUserController@unCheck');
-Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent')
-    ->middleware('userRegistrationRestriction');
+Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
+    //->middleware('userRegistrationRestriction');
 //  ->middleware('userRegistrationRestriction', 'OrganizersRestriction'); CHANGE PRICING
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');
 Route::post('events/{event}/eventusersbyurl', 'EventUserController@createUserViaUrl');
@@ -34,8 +33,7 @@ Route::get('events/{event}/eventusers', 'EventUserController@index');
 Route::get('events/{event}/eventUsers',      'EventUserController@index');
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        
-        Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');              
+        Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');
         Route::put('events/{event}/eventusers/{eventuser}', 'EventUserController@update')
             ->middleware('permissionUser:update');
         //  ->middleware('permissionUser:update', 'OrganizersRestriction'); CHANGE PRICING

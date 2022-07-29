@@ -334,9 +334,9 @@ class EventController extends Controller
         $Properties = new UserProperties();
 
 	// Days after the live landing event
-	if(isset($user->plan['availables']['later_days'])) {
-	  $data[ 'later_days' ] = $user->plan['availables']['later_days'];
-	}
+	//if(isset($user->plan['availables']['later_days'])) {
+	  //$data[ 'later_days' ] = $user->plan['availables']['later_days'];
+	//}
 
         $result = new Event($data);
 
