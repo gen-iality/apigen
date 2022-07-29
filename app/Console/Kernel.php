@@ -32,12 +32,15 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->everyMinute();
         //$schedule->command('Petition:PlaceToPay')->hourly();
-        $schedule->command('automaticPayment:request')
-        ->dailyAt('5:00');
-        $schedule->command('planExpiration:check')
-        ->dailyAt('5:00');
-        $schedule->command('additionalExpiration:check')
-        ->dailyAt('5:00');
+
+        /**Comentarios tareas autoomaticas restricciones por plan
+            $schedule->command('automaticPayment:request')
+            ->dailyAt('5:00');
+            $schedule->command('planExpiration:check')
+            ->dailyAt('5:00');
+            $schedule->command('additionalExpiration:check')
+            ->dailyAt('5:00');
+        */
     }
 
     /**

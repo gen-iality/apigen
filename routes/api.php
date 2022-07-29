@@ -482,7 +482,7 @@ Route::group(
  * Current plan
  */
 
-Route::get('users/{user}/currentPlan', 'UserController@currentPlanInfo');
+//Route::get('users/{user}/currentPlan', 'UserController@currentPlanInfo');
 
 /** 
  *  ROUTES RESTRICCION */
@@ -491,44 +491,44 @@ Route::get('users/{user}/currentPlan', 'UserController@currentPlanInfo');
  * Coupons
  */
 
-Route::get('coupons/{name}', 'CouponsController@findByName');
-Route::post('coupons', 'CouponsController@store')->middleware('permission:create');
+// Route::get('coupons/{name}', 'CouponsController@findByName');
+// Route::post('coupons', 'CouponsController@store')->middleware('permission:create');
 
 /*****
  * Plan
  */
 
-Route::apiResource('plans', 'PlansController');
+// Route::apiResource('plans', 'PlansController');
 
 /*****
  * Notification
  */
 
-Route::apiResource('notifications', 'NotificationController');
-Route::get('users/{user}/notifications', 'NotificationController@NotificationbyUser');
+// Route::apiResource('notifications', 'NotificationController');
+// Route::get('users/{user}/notifications', 'NotificationController@NotificationbyUser');
 
 /*****
  * Billing
  */
 
-Route::apiResource('billings', 'BillingController');
-Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
-Route::get('reference/{reference}/billings', 'BillingController@findByReference');
-Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
+// Route::apiResource('billings', 'BillingController');
+// Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
+// Route::get('reference/{reference}/billings', 'BillingController@findByReference');
+// Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
 
 /*****
  * Payment
  */
 
-Route::apiResource('payments', 'PaymentController');
-Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
+// Route::apiResource('payments', 'PaymentController');
+// Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
 
 /*****
  * Addons
  */
 
-Route::apiResource('addons', 'AddonController');
-Route::get('users/{user}/addons', 'AddonController@AddonbyUser');
+// Route::apiResource('addons', 'AddonController');
+// Route::get('users/{user}/addons', 'AddonController@AddonbyUser');
 
 /*****
  * PreviewLanding
@@ -562,4 +562,4 @@ Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCate
  * PreBilling
  */
 
-Route::post('preBilling', 'PreBillingController@store');
+// Route::post('preBilling', 'PreBillingController@store');
