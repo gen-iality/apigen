@@ -57,6 +57,7 @@
     "realrashid/sweet-alert": "^4.1",
     "romm1/omnipay-payu": "^3.0",
     "seatsio/seatsio-php": "^43.0",
+    "sentry/sentry-laravel": "^2.13",
     "spatie/icalendar-generator": "^1.0",
     "spatie/laravel-analytics": "^3.11",
     "spatie/laravel-permission": "3.16.0",
