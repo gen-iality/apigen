@@ -46,23 +46,28 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        return;
+        if ($this->shouldReport($exception) && app()->bound('sentry')) {
+            app('sentry')->captureException($exception);
+        }
+    
+        parent::report($exception);
+        //return;
         //parent::report($exception);
         /*if ($this->shouldntReport($e)) {
         echo "que paso";die;
         var_dump($e);die;
         return;
         }*/
-        echo "2.5";
-        try {echo " 3";
-            $logger = $this->container->make(LoggerInterface::class);
-            echo "4 ";
-        } catch (Exception $ex) {
-            throw $e; // throw the original exception
-        }
-        $logger->error($e);
-        echo " report after ";
-        die("report");
+        // echo "2.5";
+        // try {echo " 3";
+        //     $logger = $this->container->make(LoggerInterface::class);
+        //     echo "4 ";
+        // } catch (Exception $ex) {
+        //     throw $e; // throw the original exception
+        // }
+        // $logger->error($e);
+        // echo " report after ";
+        // die("report");
     }
 
     /**

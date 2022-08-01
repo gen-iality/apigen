@@ -147,6 +147,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Sentry\Laravel\ServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -235,7 +236,8 @@ return [
     |
      */
 
-    'aliases' => [        
+    'aliases' => [
+        'Sentry' => Sentry\Laravel\Facade::class,     
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
