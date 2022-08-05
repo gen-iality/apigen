@@ -12,8 +12,8 @@ class Account extends User
 {
     // use SoftDeletes;
     use Notifiable;
-    use HasRoles;    
-    
+    use HasRoles;
+
     protected static $unguarded = true;
     protected static $auth;
     protected $table = 'users';
@@ -89,7 +89,7 @@ class Account extends User
         'qualification' => 0           
     ];
 
-    protected $with = ['plan'];
+    //protected $with = ['plan'];
 
     public function __construct($attributes = array())
     {
