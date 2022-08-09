@@ -9,6 +9,7 @@ use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
+use App\evaLib\Services\AdministratorService;
 use App\Event;
 // use App\RolEvent;
 use App\Http\Resources\EventUserResource;
@@ -363,6 +364,12 @@ class EventUserController extends Controller
         if(isset($eventUserData["rol_id"]))
         {
             EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
+            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"]);
+
+        }else if (isset($eventUserData['properties']['rol_id'])) {
+            //else if mientras se define con front como llegara la data
+            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData['properties']['rol_id']);
+            AdministratorService::notificationAdmin($eventUserData['properties']['rol_id'], $email, $event, $eventUserData["properties"]["names"]);
         }
                              
         $eventUser = Attendee::create($eventUserData);
@@ -425,7 +432,7 @@ class EventUserController extends Controller
 
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
-        $event = Event::find($event_id);
+        $event = Event::findOrFail($event_id);
         $email = $eventUserData["email"];
 
         // Validate the spaces available in the order ROYAL PRESTIGE
@@ -465,7 +472,7 @@ class EventUserController extends Controller
             }
 
 	    // assign rol_id to attendee
-	    $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
+	        $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
             $rol_id = UserEventService::asignRolToEventUser($rol_name, $event, $user);
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
@@ -760,6 +767,9 @@ class EventUserController extends Controller
 
         $properties_merge = array_merge($old_properties, $new_properties);
         $data['properties'] = $properties_merge;
+
+        $event = Event::find($event_id);
+        AdministratorService::notificationAdmin($rol, $data['properties']['email'], $event, $data['properties']['names']);
 
 
         $eventUser->fill($data);
