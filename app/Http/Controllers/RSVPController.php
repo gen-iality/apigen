@@ -226,7 +226,6 @@ class RSVPController extends Controller implements ShouldQueue
     {
         \Log::debug("attemp to send rsvp mail" . $message->subject);
 
-        
 
         foreach ($eventUsers as &$eventUser) {
             Log::info('foreach');
@@ -258,13 +257,15 @@ class RSVPController extends Controller implements ShouldQueue
             }
 
             $data["include_ical_calendar"] = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true; 
-            $data["include_login_button"] = isset($data["include_login_button"]) ? $data["include_login_button"]  : true;            
-
-            // sino existe la propiedad names lo más posible es que el usuario tenga un error
-            if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
-                continue;
-            }
+            $data["include_login_button"] = isset($data["include_login_button"]) ? $data["include_login_button"]  : true;
             
+            //$anonymus = isset($eventUser->anonymus) ? $eventUser->anonymus : false;
+            if (!$eventUser->anonymous) {
+                // sino existe la propiedad names lo más posible es que el usuario tenga un error
+                if (!isset($eventUser->user) || !isset($eventUser->user->uid)  || !isset($eventUser->properties) || !isset($eventUser->properties["names"])) {
+                    continue;
+                }
+            }
             
             Mail::to($email)
                 ->queue(

@@ -84,13 +84,15 @@ class RSVP extends Mailable implements ShouldQueue
 
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
 
-        $accountPassword = Account::find($eventUser->account_id);
-        $password = isset( $accountPassword->password) ?  $accountPassword->password : $email;
+        if (!$eventUser->anonymus) {
+            $accountPassword = Account::find($eventUser->account_id);
+            $password = isset( $accountPassword->password) ?  $accountPassword->password : $email;
+            // lets encrypt !
+            $pass = self::encryptdata($password);
+            $this->password = $password;
+        }
         
         $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
-
-        // lets encrypt !
-        $pass = self::encryptdata($password);
 
         $ticket_title = null;
 
@@ -98,26 +100,29 @@ class RSVP extends Mailable implements ShouldQueue
             $ticket_title = $eventUser->ticket->title;
         }
 
-        // Admin SDK API to generate the sign in with email link.
         $link = '';
-        $firebasaUser = $auth->getUserByEmail($email);
-        
-        if($firebasaUser->emailVerified)
-        {   
-            
-            $link = $auth->getSignInWithEmailLink(
-                $email,
-                [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-                ]    
-            );
-        } else {
-            $link = $auth->getEmailVerificationLink(
-                $email,
-                [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-                ]    
-            );
+        if (!$eventUser->anonymous) {
+            // Admin SDK API to generate the sign in with email link.
+            $firebasaUser = $auth->getUserByEmail($email);
+            if($firebasaUser->emailVerified)
+            {   
+
+                $link = $auth->getSignInWithEmailLink(
+                    $email,
+                    [
+                        "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+                    ]    
+                );
+            } else {
+                $link = $auth->getEmailVerificationLink(
+                    $email,
+                    [
+                        "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+                    ]    
+                );
+            }
+        }else {
+            $link = config('app.front_url') . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         }
 
         
@@ -147,7 +152,6 @@ class RSVP extends Mailable implements ShouldQueue
         $this->footer = $footer;
         $this->ticket_title = $ticket_title;
         $this->eventUser_name = $eventUser_name;
-        $this->password = $password;
         $this->email = $email;
         $this->include_ical_calendar = $data['include_ical_calendar'];
         $this->include_login_button = $data['include_login_button'];
