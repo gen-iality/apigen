@@ -84,7 +84,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
         
-        dd("es anonimo: ", $eventUser->anonymous);
+        //dd("es anonimo: ", $eventUser->anonymous);
         if (!$eventUser->anonymous) {
             $userPassword = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : null;
             $password = isset($userPassword) ? $userPassword : $email;
