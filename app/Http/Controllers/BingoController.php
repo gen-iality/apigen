@@ -36,8 +36,8 @@ class BingoController extends Controller
 
     public function BingobyEvent(string $event_id)
     {
-      $event =  Bingo::where('event_id', $event_id)->get();
-      return $event;
+      $bingo =  Bingo::where('event_id', $event_id)->first();
+      return $bingo;
     }
 
     public function update(Request $request, $event, Bingo $bingo)
