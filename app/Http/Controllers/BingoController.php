@@ -29,11 +29,11 @@ class BingoController extends Controller
 
     /**
      * BingobyEvent_: search of Bingo by event.
-     * 
+     *
      * @urlParam event required  event_id
      *
      */
-    
+
     public function BingobyEvent(string $event_id)
     {
         return BingoResource::collection(
@@ -52,18 +52,18 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
-    public function createRamdonBingoValues($event, Bingo $bingo)
+    public function createRandomBingoValues($event, Bingo $bingo)
     {
       $bingoValues = $bingo->bingo_values;
-      $ramdonBingoValues = [];
+      $randomBingoValues = [];
 
       // generar valores aleatoreos para bingo ganador
-      while(count($ramdonBingoValues) < count($bingoValues)) {
-	$ramdonValue = $bingoValues[rand(0, count($bingoValues) - 1)];
-	!in_array($ramdonValue, $ramdonBingoValues, true)
-	  && array_push($ramdonBingoValues, $ramdonValue);
+      while(count($randomBingoValues) < count($bingoValues)) {
+	$randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
+	!in_array($randomValue, $randomBingoValues, true)
+	  && array_push($randomBingoValues, $randomValue);
       }
-      $bingo->ramdon_bingo_values = $ramdonBingoValues;
+      $bingo->random_bingo_values = $randomBingoValues;
       $bingo->save();
 
       return response()->json($bingo);

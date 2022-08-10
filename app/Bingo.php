@@ -13,7 +13,7 @@ class Bingo extends MyBaseModel
     'amount_of_bingo',
     'regulation',
     'bingo_values',
-    'ramdon_bingo_values'
+    'random_bingo_values'
   ];
 
   public function event()
