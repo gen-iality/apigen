@@ -41,11 +41,8 @@ class BingoController extends Controller
     
     public function BingobyEvent(string $event_id)
     {
-        return BingoResource::collection(
-            Bingo::where('event_id', $event_id)
-                ->latest()
-                ->paginate(config('app.page_size'))
-        );
+      $event =  Bingo::where('event_id', $event_id)->get();
+      return $event;
     }
 
     public function update(Request $request, $event, Bingo $bingo)
