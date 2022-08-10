@@ -371,8 +371,13 @@ class EventUserController extends Controller
             EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData['properties']['rol_id']);
             AdministratorService::notificationAdmin($eventUserData['properties']['rol_id'], $email, $event, $eventUserData["properties"]["names"]);
         }
-                             
-        $eventUser = Attendee::create($eventUserData);
+
+	$eventUser = Attendee::create($eventUserData);
+
+	// Generacion de cartones de bingo
+	if($event->bingo) {
+	  UserEventService::generateBingoCardForAttendee($event_id, $eventUser->_id);
+	}
 
         // En caso de que el event posea document user
         // $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;

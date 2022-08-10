@@ -13,6 +13,8 @@ use App\Models\Ticket;
 use App\Order;
 use App\State;
 use App\DocumentUser;
+use App\Bingo;
+use App\BingoCard;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Auth;
@@ -440,5 +442,32 @@ string(10) "1030522402"
         }
 
         return $rol_id;
+    }
+
+    public static function generateBingoCardForAttendee($event_id, $event_user_id)
+    {
+      $bingo = Bingo::where('event_id', $event_id)->first();
+
+      $bingoValues = $bingo->bingo_values;
+
+      if($bingoValues) {
+	$randomBingoCardValues = [];
+      	// 25 representa carton 5x5, se planea que sea dinamico
+      	while(count($randomBingoCardValues) < 25) {
+      	  $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
+      	  !in_array($randomValue, $randomBingoCardValues, true)
+      	      && array_push($randomBingoCardValues, $randomValue);
+      	}
+
+      	BingoCard::create(
+      	  [
+      	    'event_user_id' => $event_user_id,
+      	    'event_id' => $event_id,
+      	    'bingo_id' => $bingo->_id,
+      	    'values_bingo_card' => $randomBingoCardValues
+      	  ]
+      	);
+      }
+
     }
 }

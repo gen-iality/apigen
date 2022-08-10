@@ -27,18 +27,13 @@ class BingoController extends Controller
       return response()->json($bingo, 201);
     }
 
-    public function show($event, Bingo $bingo)
-    {
-      return response()->json($bingo);
-    }
-
     /**
      * BingobyEvent_: search of Bingo by event.
-     * 
+     *
      * @urlParam event required  event_id
      *
      */
-    
+
     public function BingobyEvent(string $event_id)
     {
       $event =  Bingo::where('event_id', $event_id)->get();
@@ -54,19 +49,25 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
-    public function createRamdonBingoValues($event, Bingo $bingo)
+    public function destroy($event, Bingo $bingo)
+    {
+      $bingo->delete();
+
+      return response()->json([], 204);
+    }
+
+    public function createRandomBingoValues($event, Bingo $bingo)
     {
       $bingoValues = $bingo->bingo_values;
-      $ramdonBingoValues = [];
+      $randomBingoValues = [];
 
       // generar valores aleatoreos para bingo ganador
-      // el valor de 25 se planea tener dinamico
-      while(count($ramdonBingoValues) < 10) {
-	$ramdonValue = $bingoValues[rand(0, count($bingoValues) - 1)];
-	!in_array($ramdonValue, $ramdonBingoValues, true)
-	  && array_push($ramdonBingoValues, $ramdonValue);
+      while(count($randomBingoValues) < count($bingoValues)) {
+	$randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
+	!in_array($randomValue, $randomBingoValues, true)
+	  && array_push($randomBingoValues, $randomValue);
       }
-      $bingo->ramdon_bingo_values = $ramdonBingoValues;
+      $bingo->random_bingo_values = $randomBingoValues;
       $bingo->save();
 
       return response()->json($bingo);
