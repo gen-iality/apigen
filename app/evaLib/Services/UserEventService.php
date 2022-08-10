@@ -430,9 +430,9 @@ string(10) "1030522402"
         if ($rol_name) {
             $rol = Rol::where('name', $rol_name)->first();
             //dd("rol", $rol);
-            if ($rol == 'Administrator') {
-                AdministratorService::notificationAdmin($rol, $data['properties']['email'], $event, $data['properties']['names']);
-            }
+            // if ($rol == 'Administrator') {
+            //     AdministratorService::notificationAdmin($rol, $data['properties']['email'], $event, $data['properties']['names']);
+            // }
             $rol_id = $rol['_id'];
         } else {
             // asignar rol de asistente por defecto
