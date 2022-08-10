@@ -27,11 +27,6 @@ class BingoController extends Controller
       return response()->json($bingo, 201);
     }
 
-    public function show($event, Bingo $bingo)
-    {
-      return response()->json($bingo);
-    }
-
     /**
      * BingobyEvent_: search of Bingo by event.
      * 
@@ -63,8 +58,7 @@ class BingoController extends Controller
       $ramdonBingoValues = [];
 
       // generar valores aleatoreos para bingo ganador
-      // el valor de 25 se planea tener dinamico
-      while(count($ramdonBingoValues) < 10) {
+      while(count($ramdonBingoValues) < count($bingoValues)) {
 	$ramdonValue = $bingoValues[rand(0, count($bingoValues) - 1)];
 	!in_array($ramdonValue, $ramdonBingoValues, true)
 	  && array_push($ramdonBingoValues, $ramdonValue);
