@@ -62,6 +62,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         App::setLocale($locale);
 
         $auth = resolve('Kreait\Firebase\Auth');
+        //dd("auth", $auth);
         $this->auth = $auth;        
         
 
@@ -83,54 +84,61 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
         
-        $userPassword = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : null;
-        $password = isset($userPassword) ? $userPassword : $email;
-        
-        
+        dd("es anonimo: ", $eventUser->anonymous);
+        if (!$eventUser->anonymous) {
+            $userPassword = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : null;
+            $password = isset($userPassword) ? $userPassword : $email;
 
-        if($changePassword)
-        {
-            $password =  self::createPass();
-            try {
-                $updatedUser = $this->auth->changeUserPassword($eventUser['user']['uid'], $password);
-                $properties = $eventUser["properties"];
-                $properties["password"] = $password;
-                $eventUser["properties"] = $properties;
-                $eventUser->save();                 
+            if($changePassword)
+            {
+                $password =  self::createPass();
+                try {
+                    $updatedUser = $this->auth->changeUserPassword($eventUser['user']['uid'], $password);
+                    $properties = $eventUser["properties"];
+                    $properties["password"] = $password;
+                    $eventUser["properties"] = $properties;
+                    $eventUser->save();                 
 
-            }catch (AuthError $e) {
+                }catch (AuthError $e) {
 
-                Log::error("temp password used. " . $e->getMessage());
-                $password = "evius.2040";
-                $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $password);
+                    Log::error("temp password used. " . $e->getMessage());
+                    $password = "evius.2040";
+                    $updatedUser = $this->auth->changeUserPassword($userinfo->uid, $password);
+                }
             }
+
+            // var_dump($password);die;
+            $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
+
+            // lets encrypt !
+            $pass = self::encryptdata($password);
+
         }
+        
 
-        // var_dump($password);die;
-        $eventUser_name = isset($eventUser["properties"]["names"]) ? $eventUser["properties"]["names"] : $eventUser["properties"]["displayName"];
-
-        // lets encrypt !
-        $pass = self::encryptdata($password);
-
-        // Admin SDK API to generate the sign in with email link.
         $link = '';
-        $firebasaUser = $auth->getUserByEmail($email);
+        if (!$eventUser->anonymous) {
+            // Admin SDK API to generate the sign in with email link.
+            $firebasaUser = $auth->getUserByEmail($email);
+            if($firebasaUser->emailVerified)
+            {   
 
-        if($firebasaUser->emailVerified)
-        {
-            $link = $auth->getSignInWithEmailLink(
-                $email,
-                [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-                ]    
-            );
-        } else {
-            $link = $auth->getEmailVerificationLink(
-                $email,
-                [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-                ]    
-            );
+                $link = $auth->getSignInWithEmailLink(
+                    $email,
+                    [
+                        "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+                    ]    
+                );
+            } else {
+                $link = $auth->getEmailVerificationLink(
+                    $email,
+                    [
+                        "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+                    ]    
+                );
+            }
+        }else {
+            $link = config('app.front_url') . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         }
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
