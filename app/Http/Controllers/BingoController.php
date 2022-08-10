@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 // models
 use App\Bingo;
 use App\Event;
+use App\Http\Resources\BingoResource;
 
 class BingoController extends Controller
 {
@@ -29,6 +30,22 @@ class BingoController extends Controller
     public function show($event, Bingo $bingo)
     {
       return response()->json($bingo);
+    }
+
+    /**
+     * BingobyEvent_: search of Bingo by event.
+     * 
+     * @urlParam event required  event_id
+     *
+     */
+    
+    public function BingobyEvent(string $event_id)
+    {
+        return BingoResource::collection(
+            Bingo::where('event_id', $event_id)
+                ->latest()
+                ->paginate(config('app.page_size'))
+        );
     }
 
     public function update(Request $request, $event, Bingo $bingo)
