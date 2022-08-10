@@ -563,3 +563,10 @@ Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCate
  */
 
 // Route::post('preBilling', 'PreBillingController@store');
+
+// BINGO
+Route::post('events/{event}/bingos', 'BingoController@store');
+Route::get('events/{event}/bingos/{bingo}', 'BingoController@show');
+Route::put('events/{event}/bingos/{bingo}', 'BingoController@update');
+Route::put('events/{event}/bingos/{bingo}/ramdon-values', 'BingoController@createRamdonBingoValues');
+Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@importBingoValues');
