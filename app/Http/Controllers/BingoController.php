@@ -52,6 +52,13 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
+    public function destroy($event, Bingo $bingo)
+    {
+      $bingo->delete();
+
+      return response()->json([], 204);
+    }
+
     public function createRandomBingoValues($event, Bingo $bingo)
     {
       $bingoValues = $bingo->bingo_values;
