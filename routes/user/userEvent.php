@@ -51,6 +51,9 @@ Route::group(
     }
 );
 
+//BINGO
+Route::get('me/{eventuser}/event/{event}', 'EventUserController@BingoCardbyEventUser');
+
 
 /***************
  * ActivityAssistant asistentes a una actividad(charlas) dentro de un evento

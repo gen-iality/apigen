@@ -5,6 +5,7 @@ use App\Organization;
 use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
+use App\BingoCard;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
@@ -69,12 +70,28 @@ class EventUserController extends Controller
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      */
+
     public function meInEvent($event_id)
     {
         $query = Attendee::where("event_id", $event_id)->where("account_id", auth()->user()->_id)->first();
 
         $results = $query->makeHidden(['activities', 'event']);
         return new EventUserResource($results);
+    }
+
+    /**
+     * BingoCardbyEventUser_: search of BingoCards by EventUser.
+     * 
+     * @urlParam eventUser required  eventUser_id
+     * @urlParam event required  event_id
+     *
+     */
+    
+    public function BingoCardbyEventUser(string $eventUser_id, string $event_id)
+    {
+        return BingoCard::where('event_id', $event_id)
+                ->where('event_user_id', $eventUser_id)
+                ->get();
     }
 
     /**
