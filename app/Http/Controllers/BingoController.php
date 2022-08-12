@@ -84,13 +84,13 @@ class BingoController extends Controller
       $valuesToImport = $request->json()->all();
 
       $bingoValues = $bingo->bingo_values ?
-	$bingo->bingo_values : [];
+	    $bingo->bingo_values : [];
 
       foreach($valuesToImport as $value) {
-	if(in_array($value, $bingoValues, true)) {
-      	  return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-      	}
-	array_push($bingoValues, $value);
+	      if(in_array($value, $bingoValues, true)) {
+            	  return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+            	}
+	      array_push($bingoValues, $value);
       }
 
       $bingo->bingo_values = $bingoValues;
