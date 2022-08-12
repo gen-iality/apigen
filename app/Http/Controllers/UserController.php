@@ -148,9 +148,7 @@ class UserController extends UserControllerWeb
         
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
-        //$Account = Account::find($id);
-        /**Change account to user model */
-        $account = User::find($id);
+        $Account = Account::find($id);
         
         //If the user wants to change the password this will also be modified in firebase
         if(isset($data['password']))
@@ -158,14 +156,13 @@ class UserController extends UserControllerWeb
             $this->auth->changeUserPassword($Account['uid'], $data['password']);
         }
         // var_dump($auth);die;
-        $account->fill($data);
-        $account->save();
+        $Account->fill($data);
+        $Account->save();
 
 
-        //Se comenta la linea de abajo porque es redundante
-        //$Account = Account::find($Account->_id);
+        $Account = Account::find($Account->_id);
 
-        return $account;
+        return $Account;
     }
 
     /**
