@@ -568,7 +568,9 @@ Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCate
 Route::post('events/{event}/bingos', 'BingoController@store');
 Route::put('events/{event}/bingos/{bingo}', 'BingoController@update');
 Route::delete('events/{event}/bingos/{bingo}', 'BingoController@destroy');
-Route::put('events/{event}/bingos/{bingo}/random-values', 'BingoController@createRandomBingoValues');
+Route::put('events/{event}/bingos/{bingo}/values/{values}', 'BingoController@editBingoValues');
+Route::delete('events/{event}/bingos/{bingo}/values/{value}', 'BingoController@deleteBingoValue');
+//Route::put('events/{event}/bingos/{bingo}/random-values', 'BingoController@createRandomBingoValues');
 Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@importBingoValues');
 //BingobyEvent
 Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
