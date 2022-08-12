@@ -52,7 +52,7 @@ Route::group(
 );
 
 //BINGO
-Route::get('me/{eventuser}/event/{event}', 'EventUserController@BingoCardbyEventUser');
+Route::get('me/{eventuser}/bingocard', 'EventUserController@BingoCardbyEventUser');
 
 
 /***************
