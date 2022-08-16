@@ -26,7 +26,7 @@ class AdministratorMail extends Mailable
         $auth = resolve('Kreait\Firebase\Auth');
         $firebasaUser = $auth->getUserByEmail($email);
         if ($firebasaUser->emailVerified) {
-            $link = config('app.front_url') . "/eventadmin" . "/" . $event->_id . "/main";
+            $link = config('app.front_url') . "/eventadmin" . "/" . $event->_id . "/assistants";
             $this->link = $link;
             $this->event = $event;
             $this->names = $names;
