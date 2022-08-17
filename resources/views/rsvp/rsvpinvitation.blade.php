@@ -40,22 +40,16 @@
 @endif
 
 <div style="text-align: center">
-	@if($event->type_event == "physicalEvent")
-		<img  src="{{$qr}}" />
-	{{-- @else
-		@component('mail::button', ['url' => $link , 'color' => 'evius'])
-			Ingresar al Evento AQUÍ
-		@endcomponent --}}
+	@if($event->type_event == "physicalEvent" || $event->type_event == "hybridEvent")
+		<img  src="{{$qr}}" alt={{$event->type_event}} />
 	@endif
 </div>
 
-
-
-<div class="centered">
 @if(!empty($image))
-<img alt="{{$event->name}}" src="{{ $image }}">
+	<div class="centered">
+		<img alt="{{$event->name}}" src="{{ $image }}">
+	</div>
 @endif
-</div>
 
 @if(!empty($message) && $message != '<p><br></p>')
 {!!$message!!}
