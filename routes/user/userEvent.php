@@ -31,6 +31,11 @@ Route::post('events/{event}/sendemailtoallusers', 'EventUserController@sendQrToU
 Route::post('events/{event}/eventusersanonymous',     'EventUserController@store');
 Route::get('events/{event}/eventusers', 'EventUserController@index');
 Route::get('events/{event}/eventUsers',      'EventUserController@index');
+
+//BINGO
+Route::get('events/{event}/eventusers/bingocards', 'EventUserController@ListEventUsersWithBingoCards');
+Route::get('me/{eventuser}/bingocard', 'EventUserController@BingoCardbyEventUser');
+
 Route::group(
     ['middleware' => 'auth:token'], function () {
         Route::get('events/{event}/eventusers/{eventuser}', 'EventUserController@show');
@@ -50,10 +55,6 @@ Route::group(
         Route::get('me/eventUsers', 'EventUserController@meEvents');
     }
 );
-
-//BINGO
-Route::get('me/{eventuser}/bingocard', 'EventUserController@BingoCardbyEventUser');
-
 
 /***************
  * ActivityAssistant asistentes a una actividad(charlas) dentro de un evento
