@@ -108,6 +108,29 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
+    public function addBingoValue(Request $request, $event, Bingo $bingo)
+    {
+      $request->validate([
+	'type' => 'string|in:text,image',
+	'carton_value' => 'string',
+	'ballot_value' => 'string'
+      ]);
+
+      $value = $request->json()->all();
+      $bingoValues = $bingo->bingo_values ?
+	$bingo->bingo_values : [];
+
+      if(in_array($value, $bingoValues, true)) {
+	return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+      }
+
+      array_push($bingoValues, $value);
+      $bingo->bingo_values = $bingoValues;
+      $bingo->save();
+
+      return response()->json($bingo);
+    }
+
     public function editBingoValues(Request $request, $event, Bingo $bingo, $index)
     {
       $request->validate([
