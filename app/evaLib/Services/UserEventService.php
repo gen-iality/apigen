@@ -459,7 +459,7 @@ string(10) "1030522402"
       	      && array_push($randomBingoCardValues, $randomValue);
       	}
 
-      	BingoCard::create(
+      	$bingoCard = BingoCard::create(
       	  [
       	    'event_user_id' => $event_user_id,
       	    'event_id' => $event_id,
@@ -467,6 +467,8 @@ string(10) "1030522402"
       	    'values_bingo_card' => $randomBingoCardValues
       	  ]
       	);
+
+	return $bingoCard;
       }
 
     }

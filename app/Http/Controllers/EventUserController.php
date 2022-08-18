@@ -116,6 +116,19 @@ class EventUserController extends Controller
     }
 
     /**
+     * createBingoCardToAttendee: create bingo cards for a user in the event
+     *
+     * @urlParam event required  event_id
+     * @urlParam eventuser required  event_user_id
+     *
+     */
+    public function createBingoCardToAttendee($event, $attendee)
+    {
+      $bingoCard = UserEventService::generateBingoCardForAttendee($event, $attendee);
+      return response()->json($bingoCard, 201);
+    }
+
+    /**
      * BingoCardbyEventUser_: search of BingoCards by EventUser.
      * 
      * @urlParam eventUser required  eventUser_id

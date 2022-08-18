@@ -34,6 +34,7 @@ Route::get('events/{event}/eventUsers',      'EventUserController@index');
 
 //BINGO
 Route::get('events/{event}/eventusers/bingocards', 'EventUserController@ListEventUsersWithBingoCards');
+Route::post('events/{event}/eventusers/{eventuser}/bingocards', 'EventUserController@createBingoCardToAttendee');
 Route::get('me/{eventuser}/bingocard', 'EventUserController@BingoCardbyEventUser');
 
 Route::group(
