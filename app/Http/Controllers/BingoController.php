@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // models
 use App\Bingo;
+use App\BingoCard;
 use App\Event;
 use App\Http\Resources\BingoResource;
 
@@ -51,6 +52,14 @@ class BingoController extends Controller
 
     public function destroy($event, Bingo $bingo)
     {
+      $bingoCards = BingoCard::where('event_id', $event)
+        ->where('bingo_id', $bingo->_id)
+        ->get();
+      if (isset($bingoCards)) {
+        foreach ($bingoCards as $bingoCard) {
+          $bingoCard->delete();
+        }
+      }
       $bingo->delete();
 
       return response()->json([], 204);
