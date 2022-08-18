@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Evius API",
-        "_postman_id": "76689f21-6dcc-4dc2-a3d9-e42ec9ae6386",
+        "_postman_id": "1fcc7e21-e8a1-41ce-a3fa-7d6e0d2dea71",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -23,7 +23,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "unde",
+                                    "value": "ad",
                                     "description": "id of the activity you want to see."
                                 }
                             ]
@@ -59,7 +59,7 @@
                                 {
                                     "id": "host_id",
                                     "key": "host_id",
-                                    "value": "impedit",
+                                    "value": "dolor",
                                     "description": "id of the host for which you want to filter the activities."
                                 }
                             ]
@@ -105,7 +105,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"aut\",\n    \"activity_description\": \"perspiciatis\"\n}"
+                            "raw": "{\n    \"activity_datetime_start\": \"2020-10-14 14:11\",\n    \"activity_name\": \"neque\",\n    \"activity_description\": \"illum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -123,7 +123,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "tempore",
+                                    "value": "veritatis",
                                     "description": "activity to which the meeting is to be created"
                                 }
                             ]
@@ -159,7 +159,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "nihil",
+                                    "value": "iste",
                                     "description": "id of activity"
                                 }
                             ]
@@ -279,13 +279,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "minima",
+                                    "value": "esse",
                                     "description": "event to which the activity belongs"
                                 },
                                 {
                                     "id": "activity",
                                     "key": "activity",
-                                    "value": "molestiae",
+                                    "value": "repudiandae",
                                     "description": "activity id"
                                 }
                             ]
@@ -303,7 +303,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"user_id\": \"veniam\"\n}"
+                            "raw": "{\n    \"user_id\": \"culpa\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -623,7 +623,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "enim",
+                                    "value": "eum",
                                     "description": "id of activity_assitant"
                                 }
                             ]
@@ -839,7 +839,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"temporibus\"\n}"
+                            "raw": "{\n    \"name\": \"suscipit\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -937,7 +937,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"quae\",\n    \"content\": \"distinctio\",\n    \"background\": \"sint\"\n}"
+                            "raw": "{\n    \"name\": \"labore\",\n    \"content\": \"eum\",\n    \"background\": \"accusantium\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -993,7 +993,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"saepe\",\n    \"content\": \"iure\",\n    \"background\": \"aut\"\n}"
+                            "raw": "{\n    \"name\": \"magnam\",\n    \"content\": \"rerum\",\n    \"background\": \"necessitatibus\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1045,7 +1045,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "suscipit",
+                                    "value": "necessitatibus",
                                     "description": ""
                                 }
                             ]
@@ -1091,7 +1091,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"organization_id\": \"error\",\n    \"comment\": \"dolores\",\n    \"image\": \"mollitia\"\n}"
+                            "raw": "{\n    \"organization_id\": \"est\",\n    \"comment\": \"vel\",\n    \"image\": \"quis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1341,13 +1341,13 @@
                                 {
                                     "id": "template_id",
                                     "key": "template_id",
-                                    "value": "libero",
+                                    "value": "autem",
                                     "description": ""
                                 },
                                 {
                                     "id": "code",
                                     "key": "code",
-                                    "value": "dolores",
+                                    "value": "aut",
                                     "description": "id code delete"
                                 }
                             ]
@@ -1393,7 +1393,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"dicta\"\n}"
+                            "raw": "{\n    \"code\": \"Nyd0jOpQ\",\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"vitae\"\n}"
                         },
                         "description": "To verify the code you must send code and event_id or organization_id as the case may be",
                         "response": []
@@ -1421,7 +1421,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"code\": \"qui\"\n}"
+                            "raw": "{\n    \"code\": \"sit\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1437,13 +1437,13 @@
                             "query": [
                                 {
                                     "key": "organization",
-                                    "value": "illum",
+                                    "value": "velit",
                                     "description": "organization_id",
                                     "disabled": false
                                 },
                                 {
                                     "key": "email",
-                                    "value": "sequi",
+                                    "value": "est",
                                     "description": "user email",
                                     "disabled": false
                                 }
@@ -1524,7 +1524,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"totam\"\n}"
+                            "raw": "{\n    \"name\": \"Curso de regalo\",\n    \"use_limit\": 1,\n    \"discount\": 100,\n    \"event_id\": \"5ea23acbd74d5c4b360ddde2\",\n    \"organization_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"discount_type\": \"tenetur\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -1704,7 +1704,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "sed",
+                                    "value": "quia",
                                     "description": "event_id"
                                 }
                             ]
@@ -1740,13 +1740,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "perferendis",
+                                    "value": "inventore",
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "id",
+                                    "value": "aut",
                                     "description": "document user id"
                                 }
                             ]
@@ -1782,7 +1782,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "quo",
+                                    "value": "id",
                                     "description": "event id"
                                 }
                             ]
@@ -1800,7 +1800,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"voluptatem\",\n    \"url\": \"reprehenderit\",\n    \"assign\": true\n}"
+                            "raw": "{\n    \"name\": \"et\",\n    \"url\": \"reprehenderit\",\n    \"assign\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -1818,13 +1818,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "expedita",
+                                    "value": "recusandae",
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "eum",
+                                    "value": "ipsa",
                                     "description": "document user id"
                                 }
                             ]
@@ -1860,13 +1860,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "et",
+                                    "value": "est",
                                     "description": "event id"
                                 },
                                 {
                                     "id": "documentuser",
                                     "key": "documentuser",
-                                    "value": "aspernatur",
+                                    "value": "deserunt",
                                     "description": "document user id"
                                 }
                             ]
@@ -1902,7 +1902,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "doloribus",
+                                    "value": "inventore",
                                     "description": "event id"
                                 }
                             ]
@@ -1944,7 +1944,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "maiores",
+                                    "value": "mollitia",
                                     "description": "event_id"
                                 }
                             ]
@@ -1980,7 +1980,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "dolore",
+                                    "value": "est",
                                     "description": "event id"
                                 }
                             ]
@@ -2016,13 +2016,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "natus",
+                                    "value": "inventore",
                                     "description": "event id"
                                 },
                                 {
                                     "id": "document",
                                     "key": "document",
-                                    "value": "deserunt",
+                                    "value": "harum",
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -2058,7 +2058,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "qui",
+                                    "value": "aut",
                                     "description": "event id"
                                 }
                             ]
@@ -2094,13 +2094,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "et",
+                                    "value": "aliquam",
                                     "description": "event id"
                                 },
                                 {
                                     "id": "document",
                                     "key": "document",
-                                    "value": "ab",
+                                    "value": "alias",
                                     "description": "evdocdocumentumentent id"
                                 }
                             ]
@@ -2198,7 +2198,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "et",
+                                    "value": "pariatur",
                                     "description": "organization id"
                                 }
                             ]
@@ -2279,7 +2279,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"est\",\n    \"picture\": \"necessitatibus\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"accusantium\",\n    \"picture\": \"minima\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2333,7 +2333,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "voluptatem",
+                                    "value": "quia",
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2351,7 +2351,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"nihil\",\n    \"picture\": \"iure\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"cumque\",\n    \"picture\": \"vitae\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2369,7 +2369,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "rerum",
+                                    "value": "ut",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -2405,7 +2405,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "doloremque",
+                                    "value": "beatae",
                                     "description": "id of the event to be restore"
                                 }
                             ]
@@ -2451,7 +2451,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"natus\",\n    \"picture\": \"repellat\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"illo\",\n    \"picture\": \"ab\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2469,7 +2469,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "quidem",
+                                    "value": "minima",
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2487,7 +2487,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"sint\",\n    \"picture\": \"saepe\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"qui\",\n    \"picture\": \"molestiae\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2543,7 +2543,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"officiis\",\n    \"picture\": \"ut\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"quidem\",\n    \"picture\": \"vitae\",\n    \"venue\": \"Venue B\",\n    \"location\": {\n        \"Latitude\": 4.668184,\n        \"Longitude\": -74.051968,\n        \"number\": \"#123\",\n        \"street\": \"Avenida siempre viva\",\n        \"city\": \"Bogot\\u00e1\",\n        \"state\": \"Bogot\\u00e1 D.C\",\n        \"FormattedAddress\": \"Av. Siempre viva #123, Bogot\\u00e1, Colombia\"\n    },\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {\n        \"buttonColor\": \"#FFF\",\n        \"banner_color\": \"#FFF\",\n        \"menu_color\": \"#FFF\",\n        \"brandPrimary\": \"#FFFFFF\",\n        \"brandSuccess\": \"#FFFFFF\",\n        \"brandInfo\": \"#FFFFFF\",\n        \"brandDanger\": \"#FFFFFF\",\n        \"containerBgColor\": \"#FFFFFF\",\n        \"brandWarning\": \"#FFFFFF\",\n        \"brandDark\": \"#FFFFFF\",\n        \"brandLight\": \"#FFFFFF\",\n        \"textMenu\": \"#555352\",\n        \"activeText\": \"#FFFFFF\",\n        \"bgButtonsEvent\": \"#FFFFFF\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -2561,7 +2561,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "id",
+                                    "value": "illum",
                                     "description": "id of the event to be updated"
                                 }
                             ]
@@ -2579,7 +2579,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"et\",\n    \"picture\": \"placeat\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
+                            "raw": "{\n    \"name\": \"Demo\",\n    \"adress\": \"Avenida siempre viva\",\n    \"datetime_from\": \"2020-10-16 18:00:00\",\n    \"datetime_to\": \"2020-10-16 21:00:00\",\n    \"type_event\": \"in\",\n    \"picture\": \"tempore\",\n    \"venue\": \"Venue B\",\n    \"location\": {},\n    \"visibility\": \"PUBLIC\",\n    \"user_properties\": [],\n    \"description\": \"Evento para mostrel funcionamiento de la plataforma.\",\n    \"event_type_id\": \"5bf47226754e2317e4300b6a\",\n    \"organizer_id\": \"5e9caaa1d74d5c2f6a02a3c3\",\n    \"category_ids\": [],\n    \"styles\": {}\n}"
                         },
                         "description": "",
                         "response": []
@@ -2597,7 +2597,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "natus",
+                                    "value": "et",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -2759,7 +2759,7 @@
                                 {
                                     "id": "user",
                                     "key": "user",
-                                    "value": "est",
+                                    "value": "autem",
                                     "description": "organiser_id"
                                 }
                             ]
@@ -2841,7 +2841,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"ratione\",\n    \"label\": \"voluptatem\",\n    \"mandatory\": false,\n    \"visibleByAdmin\": true,\n    \"visibleByContacts\": true,\n    \"description\": \"laudantium\"\n}"
+                            "raw": "{\n    \"name\": \"sunt\",\n    \"label\": \"in\",\n    \"mandatory\": false,\n    \"visibleByAdmin\": true,\n    \"visibleByContacts\": true,\n    \"description\": \"voluptatem\"\n}"
                         },
                         "description": "Once the properties of the dynamic user events have been created, they can be obtained directly from $evento->propiedades from user.\nThe dynamic properties are returned within each UserEvent as the normal properties.",
                         "response": []
@@ -2859,7 +2859,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "commodi",
+                                    "value": "repellendus",
                                     "description": "event id"
                                 }
                             ]
@@ -2877,7 +2877,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"quantity\": 9,\n    \"auto_assign\": true\n}"
+                            "raw": "{\n    \"quantity\": 149537.0832,\n    \"auto_assign\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -2939,7 +2939,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"omnis\"\n}"
+                            "raw": "{\n    \"name\": \"ut\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -2963,7 +2963,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "qui",
+                                    "value": "hic",
                                     "description": "event id"
                                 }
                             ]
@@ -3147,7 +3147,7 @@
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "ea",
+                                    "value": "quisquam",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -3183,7 +3183,7 @@
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "aliquam",
+                                    "value": "consequatur",
                                     "description": "string required id Attendee to checkin into the event"
                                 }
                             ]
@@ -3316,7 +3316,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"dolores\",\n    \"name\": \"hic\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"temporibus\"\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"email\": \"quibusdam\",\n    \"name\": \"dicta\",\n    \"other_params,\": {\n        \"\": {\n            \"\": {\n                \"\": \"asperiores\"\n            }\n        }\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -3370,7 +3370,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "quaerat",
+                                    "value": "reprehenderit",
                                     "description": "event id"
                                 }
                             ]
@@ -3478,12 +3478,48 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "harum",
+                                    "value": "voluptatem",
                                     "description": "event_id"
                                 }
                             ]
                         },
                         "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "createBingoCardToAllAttendees: Create bingo cards for all attendees who do not have an assigned card",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "staging.evius.co",
+                            "path": "api\/events\/:event\/eventusers\/bingocards",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "event",
+                                    "key": "event",
+                                    "value": "voluptates",
+                                    "description": "event_id"
+                                }
+                            ]
+                        },
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -3514,13 +3550,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "at",
+                                    "value": "dignissimos",
                                     "description": "event_id"
                                 },
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "totam",
+                                    "value": "laudantium",
                                     "description": "event_user_id"
                                 }
                             ]
@@ -3622,7 +3658,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"nisi\",\n    \"properties\": {\n        \"other_properties\": \"aliquid\"\n    }\n}"
+                            "raw": "{\n    \"rol_id\": \"qui\",\n    \"properties\": {\n        \"other_properties\": \"tempora\"\n    }\n}"
                         },
                         "description": "",
                         "response": []
@@ -3862,13 +3898,13 @@
                                 },
                                 {
                                     "key": "datetime_from",
-                                    "value": "excepturi",
+                                    "value": "quo",
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 },
                                 {
                                     "key": "datetime_to",
-                                    "value": "maiores",
+                                    "value": "culpa",
                                     "description": "date format dd-mm-yyyy",
                                     "disabled": false
                                 }
@@ -3877,7 +3913,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "vel",
+                                    "value": "accusantium",
                                     "description": "event_id"
                                 }
                             ]
@@ -3913,13 +3949,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "rem",
+                                    "value": "sint",
                                     "description": ""
                                 },
                                 {
                                     "id": "eventuser",
                                     "key": "eventuser",
-                                    "value": "ratione",
+                                    "value": "omnis",
                                     "description": ""
                                 }
                             ]
@@ -3937,7 +3973,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"in\"\n}"
+                            "raw": "{\n    \"rol_id\": \"quia\"\n}"
                         },
                         "description": "This end point sends an email to the user to inform them of the change.",
                         "response": []
@@ -3999,7 +4035,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"minima\"\n}"
+                            "raw": "{\n    \"file\": \"quis\"\n}"
                         },
                         "description": "Uploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -4017,7 +4053,7 @@
                                 {
                                     "id": "name",
                                     "key": "name",
-                                    "value": "ut",
+                                    "value": "aspernatur",
                                     "description": "file field by default file"
                                 }
                             ]
@@ -4035,7 +4071,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"eaque\",\n    \"type\": \"labore\"\n}"
+                            "raw": "{\n    \"file\": \"occaecati\",\n    \"type\": \"eveniet\"\n}"
                         },
                         "description": "Uploads files send though HTTP multipart\/form-data\n\nUploads provided file though HTTPFile  multipart\/form-data; and returns full file URL.\n\nIn the request the file data came in field called file.\n\nBut in case this field name should be changed, It could be done though\n\nfield_name parameter\n\nHTTPFile could be just one file on multiple files,\n\n for one file this function returns  a string with the url\nfor multiple files It returns an array of URLS.",
                         "response": []
@@ -4159,7 +4195,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"assumenda\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"et\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4187,7 +4223,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"alias\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
+                            "raw": "{\n    \"description\": \"<p>Es todo un profesional<\\\/p>\",\n    \"description_activity\": \"true\",\n    \"image\": \"aut\",\n    \"name\": \"Primer conferencista\",\n    \"order\": 1,\n    \"profession\": \"Ingeniero\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4239,7 +4275,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "ut",
+                                    "value": "dignissimos",
                                     "description": ""
                                 }
                             ]
@@ -4275,7 +4311,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "nobis",
+                                    "value": "quos",
                                     "description": ""
                                 }
                             ]
@@ -4311,7 +4347,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "non",
+                                    "value": "modi",
                                     "description": "user who accepts or rejects the application"
                                 }
                             ]
@@ -4329,7 +4365,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"response\": \"commodi\"\n}"
+                            "raw": "{\n    \"response\": \"quas\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -4347,7 +4383,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "delectus",
+                                    "value": "non",
                                     "description": ""
                                 }
                             ]
@@ -4383,7 +4419,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "officia",
+                                    "value": "quia",
                                     "description": ""
                                 }
                             ]
@@ -4457,7 +4493,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id_user_requested\": \"autem\"\n}"
+                            "raw": "{\n    \"id_user_requested\": \"perferendis\"\n}"
                         },
                         "description": "Enviar solicitud con redirecci\u00f3n a evius",
                         "response": []
@@ -4773,7 +4809,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"space_available\": 7\n}"
+                            "raw": "{\n    \"space_available\": 20\n}"
                         },
                         "description": "",
                         "response": []
@@ -5138,7 +5174,7 @@
                                 {
                                     "id": "organization_id",
                                     "key": "organization_id",
-                                    "value": "rerum",
+                                    "value": "voluptatibus",
                                     "description": ""
                                 }
                             ]
@@ -5246,7 +5282,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"sint\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+                            "raw": "{\n    \"name\": \"illum\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -5264,7 +5300,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "saepe",
+                                    "value": "et",
                                     "description": "organization id"
                                 }
                             ]
@@ -5282,7 +5318,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"adipisci\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
+                            "raw": "{\n    \"name\": \"ut\",\n    \"styles\": [],\n    \"user_properties\": []\n}"
                         },
                         "description": "",
                         "response": []
@@ -5332,13 +5368,13 @@
                                 },
                                 {
                                     "key": "date_from",
-                                    "value": "nisi",
+                                    "value": "rerum",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the initial date.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "date_to",
-                                    "value": "provident",
+                                    "value": "ut",
                                     "description": "Format: DD-MM-YYYY If you want to filtered for date this is the finish date.",
                                     "disabled": false
                                 },
@@ -5353,7 +5389,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "iure",
+                                    "value": "aut",
                                     "description": "organization_id"
                                 }
                             ]
@@ -5423,13 +5459,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "ad",
+                                    "value": "sed",
                                     "description": "The id of the organization"
                                 },
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
-                                    "value": "iure",
+                                    "value": "aut",
                                     "description": "The id of the organization"
                                 }
                             ]
@@ -5465,7 +5501,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "quia",
+                                    "value": "architecto",
                                     "description": "organization id"
                                 }
                             ]
@@ -5501,13 +5537,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "non",
+                                    "value": "voluptas",
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "organizationuser",
                                     "key": "organizationuser",
-                                    "value": "illo",
+                                    "value": "aut",
                                     "description": "organization user id"
                                 }
                             ]
@@ -5571,7 +5607,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "sed",
+                                    "value": "vitae",
                                     "description": "The id of the organization"
                                 }
                             ]
@@ -5607,7 +5643,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "dolores",
+                                    "value": "incidunt",
                                     "description": "organization_id"
                                 }
                             ]
@@ -5677,7 +5713,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aut",
+                                    "value": "non",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -5741,7 +5777,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sit",
+                                    "value": "eius",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -5777,7 +5813,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quod",
+                                    "value": "soluta",
                                     "description": "id UserProperties"
                                 }
                             ]
@@ -5853,7 +5889,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "facere",
+                                    "value": "esse",
                                     "description": ""
                                 }
                             ]
@@ -5889,7 +5925,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "similique",
+                                    "value": "consequatur",
                                     "description": ""
                                 }
                             ]
@@ -5931,7 +5967,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "commodi",
+                                    "value": "quod",
                                     "description": "id of the event to be eliminated"
                                 }
                             ]
@@ -6009,7 +6045,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "fugiat",
+                                    "value": "delectus",
                                     "description": ""
                                 }
                             ]
@@ -6051,7 +6087,7 @@
                                 {
                                     "id": "product",
                                     "key": "product",
-                                    "value": "voluptatum",
+                                    "value": "illo",
                                     "description": "product"
                                 }
                             ]
@@ -6121,7 +6157,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "possimus",
+                                    "value": "ea",
                                     "description": ""
                                 }
                             ]
@@ -6139,7 +6175,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"subject\": \"voluptatem\",\n    \"image_header\": \"blanditiis\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"occaecati\",\n    \"image\": \"officiis\",\n    \"image_footer\": \"inventore\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": false\n}"
+                            "raw": "{\n    \"subject\": \"eum\",\n    \"image_header\": \"quia\",\n    \"content_header\": \"Has sido invitado a el evento\",\n    \"message\": \"vitae\",\n    \"image\": \"quam\",\n    \"image_footer\": \"neque\",\n    \"eventUsersIds\": {\n        \"\": \"\\\"eventUsersIds\\\": [\\\"5f8734c81730821f216b6202\\\"]\"\n    },\n    \"include_ical_calendar\": false,\n    \"include_login_button\": true\n}"
                         },
                         "description": "",
                         "response": []
@@ -6157,7 +6193,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "adipisci",
+                                    "value": "reprehenderit",
                                     "description": "The ID of the event"
                                 }
                             ]
@@ -6227,7 +6263,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "in",
+                                    "value": "ducimus",
                                     "description": "organization id"
                                 }
                             ]
@@ -6245,7 +6281,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"repudiandae\",\n    \"type\": \"asperiores\",\n    \"module\": \"sint\"\n}"
+                            "raw": "{\n    \"name\": \"cupiditate\",\n    \"type\": \"quisquam\",\n    \"module\": \"dolore\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6263,13 +6299,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "quia",
+                                    "value": "consectetur",
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "vel",
+                                    "value": "aliquid",
                                     "description": "organization rol"
                                 }
                             ]
@@ -6305,13 +6341,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "iure",
+                                    "value": "ullam",
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "amet",
+                                    "value": "quia",
                                     "description": "organization rol"
                                 }
                             ]
@@ -6329,7 +6365,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"autem\",\n    \"model\": \"soluta\"\n}"
+                            "raw": "{\n    \"name\": \"iste\",\n    \"model\": \"repellendus\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6347,13 +6383,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "quia",
+                                    "value": "nihil",
                                     "description": "organization id"
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "eos",
+                                    "value": "rem",
                                     "description": "organization rol"
                                 }
                             ]
@@ -6402,7 +6438,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "voluptatem",
+                                    "value": "aut",
                                     "description": "The ID of the event"
                                 }
                             ]
@@ -6438,7 +6474,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "eveniet",
+                                    "value": "est",
                                     "description": "The ID of the event"
                                 }
                             ]
@@ -6474,13 +6510,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "impedit",
+                                    "value": "asperiores",
                                     "description": "The ID of the event"
                                 },
                                 {
                                     "id": "rolevent",
                                     "key": "rolevent",
-                                    "value": "in",
+                                    "value": "ratione",
                                     "description": "rol id"
                                 }
                             ]
@@ -6516,13 +6552,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "et",
+                                    "value": "eveniet",
                                     "description": "The ID of the event"
                                 },
                                 {
                                     "id": "rolevent",
                                     "key": "rolevent",
-                                    "value": "molestiae",
+                                    "value": "assumenda",
                                     "description": "rol id"
                                 }
                             ]
@@ -6540,7 +6576,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"et\",\n    \"type\": \"labore\"\n}"
+                            "raw": "{\n    \"name\": \"sit\",\n    \"type\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6558,13 +6594,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "necessitatibus",
+                                    "value": "non",
                                     "description": "The ID of the event"
                                 },
                                 {
                                     "id": "rolevent",
                                     "key": "rolevent",
-                                    "value": "architecto",
+                                    "value": "eveniet",
                                     "description": "rol id"
                                 }
                             ]
@@ -6606,7 +6642,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "consequuntur",
+                                    "value": "dolorem",
                                     "description": "requires event id."
                                 }
                             ]
@@ -6642,13 +6678,13 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "ullam",
+                                    "value": "voluptas",
                                     "description": "requires event id."
                                 },
                                 {
                                     "id": "rol",
                                     "key": "rol",
-                                    "value": "odio",
+                                    "value": "dolorem",
                                     "description": "requires event rol id."
                                 }
                             ]
@@ -6684,7 +6720,7 @@
                                 {
                                     "id": "rolpermission",
                                     "key": "rolpermission",
-                                    "value": "eum",
+                                    "value": "occaecati",
                                     "description": "rolpermission_id"
                                 }
                             ]
@@ -6730,7 +6766,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"aut\",\n    \"permission_id\": \"ipsa\"\n}"
+                            "raw": "{\n    \"rol_id\": \"maxime\",\n    \"permission_id\": \"sequi\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6758,7 +6794,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"est\",\n    \"permission_id\": \"quisquam\"\n}"
+                            "raw": "{\n    \"rol_id\": \"ad\",\n    \"permission_id\": \"quam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -6786,7 +6822,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"rol_id\": \"consectetur\",\n    \"permission_id\": \"consequatur\"\n}"
+                            "raw": "{\n    \"rol_id\": \"est\",\n    \"permission_id\": \"quia\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -7190,7 +7226,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"beatae\",\n    \"points\": 1,\n    \"initialMessage\": \"voluptas\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 728\n}"
+                            "raw": "{\n    \"survey\": \"Nombre de encuesta\",\n    \"show_horizontal_bar\": false,\n    \"allow_vote_value_per_user\": false,\n    \"activity_id\": \"necessitatibus\",\n    \"points\": 1,\n    \"initialMessage\": \"expedita\",\n    \"time_limit\": 0,\n    \"allow_anonymous_answers\": false,\n    \"allow_gradable_survey\": false,\n    \"hasMinimumScore\": false,\n    \"isGlobal\": false,\n    \"freezeGame\": false,\n    \"open\": false,\n    \"publish\": false,\n    \"minimumScore\": 511315128.7605326\n}"
                         },
                         "description": "",
                         "response": []
@@ -7218,7 +7254,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"survey\": \"sequi\",\n    \"show_horizontal_bar\": \"ipsam\",\n    \"allow_vote_value_per_user\": \"adipisci\",\n    \"activity_id\": \"reiciendis\",\n    \"points\": \"quia\",\n    \"initialMessage\": \"ea\",\n    \"time_limit\": \"et\",\n    \"allow_anonymous_answers\": \"perspiciatis\",\n    \"allow_gradable_survey\": \"ipsum\",\n    \"hasMinimumScore\": \"officia\",\n    \"isGlobal\": \"in\",\n    \"freezeGame\": \"doloremque\",\n    \"open\": \"aut\",\n    \"publish\": \"et\",\n    \"minimumScore\": \"exercitationem\"\n}"
+                            "raw": "{\n    \"survey\": \"repudiandae\",\n    \"show_horizontal_bar\": \"sed\",\n    \"allow_vote_value_per_user\": \"ipsam\",\n    \"activity_id\": \"ipsum\",\n    \"points\": \"nesciunt\",\n    \"initialMessage\": \"ut\",\n    \"time_limit\": \"enim\",\n    \"allow_anonymous_answers\": \"velit\",\n    \"allow_gradable_survey\": \"repellat\",\n    \"hasMinimumScore\": \"aut\",\n    \"isGlobal\": \"laborum\",\n    \"freezeGame\": \"sit\",\n    \"open\": \"veniam\",\n    \"publish\": \"ullam\",\n    \"minimumScore\": \"cupiditate\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -7270,7 +7306,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "placeat",
+                                    "value": "quia",
                                     "description": "organization_id"
                                 }
                             ]
@@ -7306,7 +7342,7 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "sed",
+                                    "value": "dolores",
                                     "description": "organization_id"
                                 }
                             ]
@@ -7324,7 +7360,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"similique\"\n}"
+                            "raw": "{\n    \"name\": \"Template 1\",\n    \"user_properties\": \"nihil\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -7342,13 +7378,13 @@
                                 {
                                     "id": "organization",
                                     "key": "organization",
-                                    "value": "omnis",
+                                    "value": "sint",
                                     "description": "organization_id"
                                 },
                                 {
                                     "id": "templatepropertie",
                                     "key": "templatepropertie",
-                                    "value": "beatae",
+                                    "value": "error",
                                     "description": "template id"
                                 }
                             ]
@@ -7412,7 +7448,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "omnis",
+                                    "value": "assumenda",
                                     "description": "event_id"
                                 }
                             ]
@@ -7454,7 +7490,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "reiciendis",
+                                    "value": "asperiores",
                                     "description": "event_id"
                                 }
                             ]
@@ -7829,7 +7865,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "facilis",
+                                    "value": "quidem",
                                     "description": "id of the user to be rejected or approved"
                                 }
                             ]
@@ -7903,7 +7939,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"refreshlink\": \"eum\",\n    \"event\": \"61ccd3551c821b765a312864\",\n    \"email\": \"correo@evius.co\"\n}"
+                            "raw": "{\n    \"refreshlink\": \"sunt\",\n    \"event\": \"61ccd3551c821b765a312864\",\n    \"email\": \"correo@evius.co\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -10033,7 +10069,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "voluptas",
+                                    "value": "dolorem",
                                     "description": ""
                                 }
                             ]
@@ -10069,7 +10105,7 @@
                                 {
                                     "id": "order_id",
                                     "key": "order_id",
-                                    "value": "expedita",
+                                    "value": "veniam",
                                     "description": ""
                                 }
                             ]
@@ -10329,7 +10365,7 @@
                                 {
                                     "id": "event",
                                     "key": "event",
-                                    "value": "ullam",
+                                    "value": "velit",
                                     "description": "event_id"
                                 }
                             ]
