@@ -111,7 +111,7 @@ class BingoController extends Controller
     public function editBingoValues(Request $request, $event, Bingo $bingo, $index)
     {
       $request->validate([
-	'type' => 'string|in:string,image',
+	'type' => 'string|in:text,image',
 	'carton_value' => 'string',
 	'ballot_value' => 'string'
       ]);

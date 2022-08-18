@@ -453,13 +453,13 @@ string(10) "1030522402"
       if($bingoValues) {
 	$randomBingoCardValues = [];
       	// 25 representa carton 5x5, se planea que sea dinamico
-      	while(count($randomBingoCardValues) < 25) {
+      	while(count($randomBingoCardValues) < 10) {
       	  $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
       	  !in_array($randomValue, $randomBingoCardValues, true)
       	      && array_push($randomBingoCardValues, $randomValue);
       	}
 
-      	BingoCard::create(
+      	$bingoCard = BingoCard::create(
       	  [
       	    'event_user_id' => $event_user_id,
       	    'event_id' => $event_id,
@@ -467,6 +467,8 @@ string(10) "1030522402"
       	    'values_bingo_card' => $randomBingoCardValues
       	  ]
       	);
+
+	return $bingoCard;
       }
 
     }

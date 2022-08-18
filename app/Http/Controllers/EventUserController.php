@@ -80,6 +80,78 @@ class EventUserController extends Controller
     }
 
     /**
+     * ListEventUsersWithBingoCards: List the attendees of the event identifying if they have assigned bingo cards
+     *
+     * @urlParam event required  event_id
+     *
+     */
+    public function ListEventUsersWithBingoCards($event)
+    {
+      $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email')->get();
+
+      $attendeesist = [];
+      foreach($eventUsers as $eventUser) {
+	// estructura con datos necesarios
+	$dataEventUser = [
+	  '_id' => $eventUser->_id,
+	  'properties' => [
+	    'names' => $eventUser->properties['names'],
+	    'email' => $eventUser->properties['email']
+	  ],
+	  'bingo' => null
+	];
+
+	// asignar true si el asistente tiene un carton de bingo en el evento
+	BingoCard::where([
+	  [ 'event_id', $event ],
+	  ['event_user_id', $eventUser->_id]
+	])->exists() ?
+	  $dataEventUser['bingo'] = true
+	  : $dataEventUser['bingo'] = false;
+
+	array_push($attendeesist, $dataEventUser);
+      }
+
+      return $attendeesist;
+    }
+
+    /**
+     * createBingoCardToAttendee: create bingo cards for a user in the event
+     *
+     * @urlParam event required  event_id
+     * @urlParam eventuser required  event_user_id
+     *
+     */
+    public function createBingoCardToAttendee($event, $attendee)
+    {
+      $bingoCard = UserEventService::generateBingoCardForAttendee($event, $attendee);
+      return response()->json($bingoCard, 201);
+    }
+
+    /**
+     * createBingoCardToAllAttendees: Create bingo cards for all attendees who do not have an assigned card
+     *
+     * @urlParam event required  event_id
+     * @urlParam eventuser required  event_user_id
+     *
+     */
+    public function createBingoCardToAllAttendees($event)
+    {
+      // traer todos los asistente y asignarle a los que no tengan carton
+      $eventUsers = Attendee::where("event_id", $event)->select('_id')->get();
+
+      foreach($eventUsers as $eventUser) {
+	!BingoCard::where([
+	  [ 'event_id', $event ],
+	  ['event_user_id', $eventUser->_id]
+	])->exists()
+	  && UserEventService::generateBingoCardForAttendee($event, $eventUser->_id);
+      }
+
+      return response()->json(['message' => 'bingo cards created'], 201);
+    }
+
+    /**
      * BingoCardbyEventUser_: search of BingoCards by EventUser.
      * 
      * @urlParam eventUser required  eventUser_id
