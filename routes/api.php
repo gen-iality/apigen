@@ -577,4 +577,4 @@ Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@impor
 Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
 
 //BINGOCARD
-Route::get('bingocards/{bingocard}', 'BingoCardController@show');
+Route::apiResource('bingocards', 'BingoCardController');
