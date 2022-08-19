@@ -13,7 +13,7 @@ class Attendee extends Models\Attendee
 {
 
     use Notifiable;
-    use SoftDeletes;
+    //use SoftDeletes;
 
     const STATE_DRAFT = "5b0efc411d18160bce9bc706"; //"DRAFT";
     const STATE_INVITED = "5ba8d213aac5b12a5a8ce749"; //"INVITED";
