@@ -96,9 +96,13 @@ class BingoController extends Controller
 	    $bingo->bingo_values : [];
 
       foreach($valuesToImport as $value) {
+	      unset($bingo['id']);
+	      //isset($value['id']) && unset($bingo['id']);
 	      if(in_array($value, $bingoValues, true)) {
             	  return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-            	}
+              }
+
+	      $value[ 'id' ] = uniqid('', true);
 	      array_push($bingoValues, $value);
       }
 
@@ -111,12 +115,13 @@ class BingoController extends Controller
     public function addBingoValue(Request $request, $event, Bingo $bingo)
     {
       $request->validate([
-	'type' => 'string|in:text,image',
-	'carton_value' => 'string',
-	'ballot_value' => 'string'
+	'type' => 'required|string|in:text,image',
+	'carton_value' => 'required|string',
+	'ballot_value' => 'required|string'
       ]);
 
       $value = $request->json()->all();
+      $value[ 'id' ] = uniqid('', true);
       $bingoValues = $bingo->bingo_values ?
 	$bingo->bingo_values : [];
 
@@ -131,7 +136,7 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
-    public function editBingoValues(Request $request, $event, Bingo $bingo, $index)
+    public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
       $request->validate([
 	'type' => 'string|in:text,image',
@@ -140,27 +145,35 @@ class BingoController extends Controller
       ]);
 
       $value = $request->json()->all();
+      $value['id'] = $value_id;
 
-      $bingoValues = $bingo->bingo_values;
-      if(in_array($value, $bingoValues, true)) {
+      if(in_array($value, $bingo->bingo_values, true)) {
 	return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
       }
-      $bingoValues[$index] = $value;
+
+      $bingoValues = [];
+      foreach($bingo->bingo_values as $bingoValue) {
+	if(isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
+	  $bingoValue = $value;
+	}
+
+	array_push($bingoValues, $bingoValue);
+      }
+
       $bingo->bingo_values = $bingoValues;
       $bingo->save();
 
       return response()->json($bingo);
     }
 
-    public function deleteBingoValue($event, Bingo $bingo, $index)
+    public function deleteBingoValue($event, Bingo $bingo, $value_id)
     {
       $bingoValues = $bingo->bingo_values;
 
       //se omite usar array_filter por la forma en que devuelve los datos, foreach como alternativa
       $newBingoValues = [];
       foreach($bingoValues as $value) {
-	$bingoValues[$index] !== $value
-	  && array_push($newBingoValues, $value);
+	$value['id'] !== $value_id && array_push($newBingoValues, $value);
       };
 
       $bingo->bingo_values = $newBingoValues;

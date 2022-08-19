@@ -1210,4 +1210,21 @@ class EventUserController extends Controller
     {
         return UpdateRolEventUserAndSendEmail::UpdateRolEventUserAndSendEmail($request, $event_id, $eventUser_id);
     }
+
+    public function correosMocion(Request $request)
+    {
+      $request->validate([
+	'email' => 'required|string',
+	'html' => 'required|string'
+      ]);
+
+      $data = $request->json()->all();
+
+      Mail::to($data['email'])
+      ->queue(
+	  new \App\Mail\CorreoMocion($data['email'], $data[ 'html' ])
+      );
+
+      return response()->json(['message' => 'Mail send'], 201);
+    }
 }
