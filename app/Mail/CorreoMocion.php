@@ -33,7 +33,7 @@ class CorreoMocion extends Mailable
     public function build()
     {
         return $this
-            ->from("alerts@evius.co", "Qwest")
+            ->from("alerts@evius.co", "Quest")
             ->subject('¡Ganaste! reclama tu premio y descubre por qué la vida es Jeans')
             ->markdown('Mailers.CorreoMocion');
     }
