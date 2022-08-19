@@ -564,9 +564,12 @@ class EventUserController extends Controller
                 ]);
             }
 
-	    // assign rol_id to attendee
+	        // assign rol_id to attendee
 	        $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
             $rol_id = UserEventService::asignRolToEventUser($rol_name, $event, $user);
+            if ($rol_name === "Administrator") {
+                AdministratorService::notificationAdmin($rol_id, $email, $event, $eventUserData["names"]);
+            }
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
 
