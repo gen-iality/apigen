@@ -37,3 +37,7 @@ Route::get('users/findByEmail/{email}', 'UserController@findByEmail');
 Route::post('getloginlink', 'UserController@getAccessLink');
 Route::get('singinwithemaillink', 'UserController@signInWithEmailLink');
 Route::put("changeuserpassword", "UserController@changeUserPassword");
+//Change one user password
+Route::put("changeOneuserpassword/{user_id}", "UserController@updateOneUserPassword");
+//Change many user passwords
+Route::put("updatepasswordsbyevent/{event}", "UserController@updatePasswordsByEvent");
