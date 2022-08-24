@@ -6,6 +6,7 @@ use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
 use App\BingoCard;
+use App\Bingo;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
@@ -161,8 +162,9 @@ class EventUserController extends Controller
     
     public function BingoCardbyEventUser(string $eventUser_id)
     {
-        return BingoCard::where('event_user_id', $eventUser_id)
-                ->get();
+        $bingoCard = BingoCard::where('event_user_id', $eventUser_id)->first();
+        $bingo = Bingo::where('_id', $bingoCard['bingo_id'])->first();
+        return ['bingoCard'=>$bingoCard, 'bingo_name'=>$bingo->name, 'bingo_rules'=>$bingo->regulation];
     }
 
     /**
