@@ -1215,14 +1215,15 @@ class EventUserController extends Controller
     {
       $request->validate([
 	'email' => 'required|string',
-	'html' => 'required|string'
+	'html' => 'required|string',
+	'subject' => 'required|string'
       ]);
 
       $data = $request->json()->all();
 
       Mail::to($data['email'])
       ->queue(
-	  new \App\Mail\CorreoMocion($data['email'], $data[ 'html' ])
+	  new \App\Mail\CorreoMocion($data['email'], $data[ 'html' ], $data['subject'])
       );
 
       return response()->json(['message' => 'Mail send'], 201);
