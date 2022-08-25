@@ -161,7 +161,7 @@ class EventUserController extends Controller
     
     public function BingoCardbyEventUser(string $eventUser_id)
     {
-        return BingoCard::where('event_user_id', $eventUser_id)->first();
+        return BingoCard::where('event_user_id', $eventUser_id)->get();
     }
 
     /**
