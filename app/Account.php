@@ -86,7 +86,8 @@ class Account extends User
         'adress',
         'status',
         'total_number_events',
-        'qualification' => 0           
+	'qualification' => 0,
+	'open_password'
     ];
 
     //protected $with = ['plan'];

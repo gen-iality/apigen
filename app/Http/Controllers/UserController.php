@@ -110,12 +110,13 @@ class UserController extends UserControllerWeb
             'picture' => 'string',
             'password' => 'string|min:6',
             'plan_id' => 'exists:plans,_id|string'
-        ]);            
+        ]);
 
         $result = new Account($data);
-        $result->save();                            
+	$result->open_password = $data['password'];
+        $result->save();
         $result = Account::find($result->_id);
-        
+
         Mail::to($result)
             ->queue(
                 new  \App\Mail\UserRegistrationMail($result)
