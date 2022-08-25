@@ -406,7 +406,6 @@ class EventUserController extends Controller
         $request->validate([
             'properties.email' => 'required|email:rfc,dns',
             'properties.names' => 'required|string|max:250',
-            'rol_id' => 'required|string',
         ]);
 
         $eventUserData = $request->json()->all();
