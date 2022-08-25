@@ -13,16 +13,18 @@ class CorreoMocion extends Mailable
 
     public $email;
     public $html;
+    public $subject;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($email, $html)
+    public function __construct($email, $html, $subject)
     {
       $this->email = $email;
       $this->html = $html;
+      $this->subject = $subject;
     }
 
     /**
@@ -32,9 +34,11 @@ class CorreoMocion extends Mailable
      */
     public function build()
     {
-        return $this
-            ->from("alerts@evius.co", "Quest")
-            ->subject('¡Ganaste! reclama tu premio y descubre por qué la vida es Jeans')
-            ->markdown('Mailers.CorreoMocion');
+      $subject = $this->subject;
+
+      return $this
+          ->from("alerts@evius.co", "Quest")
+          ->subject($subject)
+          ->markdown('Mailers.CorreoMocion');
     }
 }
