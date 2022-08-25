@@ -161,8 +161,7 @@ class EventUserController extends Controller
     
     public function BingoCardbyEventUser(string $eventUser_id)
     {
-        return BingoCard::where('event_user_id', $eventUser_id)
-                ->get();
+        return BingoCard::where('event_user_id', $eventUser_id)->get();
     }
 
     /**
@@ -406,10 +405,12 @@ class EventUserController extends Controller
     {   
         $request->validate([
             'properties.email' => 'required|email:rfc,dns',
-            'properties.names' => 'required|string|max:250'
+            'properties.names' => 'required|string|max:250',
+            'rol_id' => 'required|string',
         ]);
 
         $eventUserData = $request->json()->all();
+        unset($eventUserData['properties']['rol_id']);//eliminar el rol_id de la data
         $email = $eventUserData["properties"]["email"];
 
         $noSendMail = $request->query('no_send_mail');
@@ -453,11 +454,6 @@ class EventUserController extends Controller
         {
             EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
             AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"]);
-
-        }else if (isset($eventUserData['properties']['rol_id'])) {
-            //else if mientras se define con front como llegara la data
-            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData['properties']['rol_id']);
-            AdministratorService::notificationAdmin($eventUserData['properties']['rol_id'], $email, $event, $eventUserData["properties"]["names"]);
         }
 
 	$eventUser = Attendee::create($eventUserData);
