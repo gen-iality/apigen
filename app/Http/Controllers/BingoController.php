@@ -52,7 +52,7 @@ class BingoController extends Controller
 
     public function destroy(Event $event, Bingo $bingo)
     {
-      $bingoCards = BingoCard::where('event_id', $event)
+      $bingoCards = BingoCard::where('event_id', $event->_id)
         ->where('bingo_id', $bingo->_id)
         ->get();
       if (isset($bingoCards)) {
