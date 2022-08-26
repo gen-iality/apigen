@@ -50,7 +50,7 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
-    public function destroy($event, Bingo $bingo)
+    public function destroy(Event $event, Bingo $bingo)
     {
       $bingoCards = BingoCard::where('event_id', $event)
         ->where('bingo_id', $bingo->_id)
@@ -61,6 +61,10 @@ class BingoController extends Controller
         }
       }
       $bingo->delete();
+
+      //Cambiar estado del bingo en el evento
+      $event->bingo = null;
+      $event->save();
 
       return response()->json([], 204);
     }
