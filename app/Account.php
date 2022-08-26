@@ -158,6 +158,7 @@ class Account extends User
         /** Idealmente se debe usar self::updating pero por alguna razón no lo llama */
         self::saving(function ($model) {
             //aplica solo para el evento update
+            $modelDirty = $model->getDirty();
 
             if (!$model->exists) {return;}
             
@@ -168,9 +169,9 @@ class Account extends User
 
                 $fbuser = self::$auth->getUserByEmail($model->email);
                 $model->uid = $fbuser->uid;
-                if(isset($model->password))
+                if(isset($modelDirty['password']))
                 {
-                    self::$auth->changeUserPassword($fbuser->uid, $model->password); 
+                    self::$auth->changeUserPassword($fbuser->uid, $modelDirty['password']); 
                   
                 }
                 return;
@@ -179,7 +180,6 @@ class Account extends User
                 //No existe el usuario en firebase                
                 $fbuser = null;
             }
-
 
             try {
                 //Sino existe el usuario el firebase lo creamos

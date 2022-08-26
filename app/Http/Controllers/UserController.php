@@ -159,9 +159,6 @@ class UserController extends UserControllerWeb
         $Account->fill($data);
         $Account->save();
 
-
-        $Account = Account::find($Account->_id);
-
         return $Account;
     }
 
