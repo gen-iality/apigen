@@ -24,7 +24,10 @@ class Attendee extends Models\Attendee
     protected $table = "event_users";
     protected $observables = ['saved', 'created', 'updated' , 'deleted'];
     protected static $unguarded = true;
-    protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "checkedin_type", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id", "registered_devices","printouts"];
+    protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "checkedin_type", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id", "registered_devices","printouts",
+      "attended_activities", // Listado de activades asistidas
+      "approved" // Estado del curso completado
+    ];
     protected $with = ["user","rol"];
     //protected $with = ["user:uid,email,displayName,names","rol", 'state', "ticket"];
    //protected $visible = ['_id','names','email','properties','user','account_id','score'];
