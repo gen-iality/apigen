@@ -36,8 +36,9 @@ class Event extends ModelsEvent
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
         'send_custom_email' , 'language', 'googleanlyticsid','status','googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
         'video_position',
-	'bingo', // boolean para saber si un evento tiene bingo
-	'later_days', // restriction plan: Days after the live landing event 
+	    'bingo', // boolean para saber si un evento tiene bingo
+	    'later_days', // restriction plan: Days after the live landing event 
+        'has_prelanding', // prelanding: boolean para saber si un evento tiene prelanding
         'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage' // count royal prestige
 
     ];
