@@ -37,7 +37,8 @@ class Event extends ModelsEvent
         'send_custom_email' , 'language', 'googleanlyticsid','status','googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
         'video_position',
 	'bingo', // boolean para saber si un evento tiene bingo
-	'later_days', // restriction plan: Days after the live landing event 
+	'later_days', // restriction plan: Days after the live landing event
+	'count_activities', // Get number event's activities
         'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage' // count royal prestige
 
     ];
