@@ -299,6 +299,7 @@ Route::group(
         Route::post('events/{event}/orders/create-order-to-partner', 'ApiOrdersController@createOrderToPartner');
     }
 );
+Route::put('orders/{order}/create-alternative-tickets', 'ApiOrdersController@alternativeTicket');
 Route::get('orders/tickets-available/{event}', 'ApiOrdersController@getTicketsAvailable');
 
 Route::apiResource('orders', 'ApiOrdersController');
