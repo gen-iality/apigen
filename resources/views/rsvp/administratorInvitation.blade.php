@@ -17,8 +17,9 @@
          </tr>
         <tr>
             <td style="text-align: center">
-                @component('mail::button', ['url' => $link , 'color' => 'evius'])
-                    {{ __ ('Mail.enter_event')}}
+                @component('mail::button', ['url' => $link])
+                    {{-- {{ __('Mail.enter_event')}} --}}
+                    Entra AQUÍ
                 @endcomponent
                 Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
             </td>
