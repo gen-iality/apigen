@@ -110,12 +110,13 @@ class UserController extends UserControllerWeb
             'picture' => 'string',
             'password' => 'string|min:6',
             'plan_id' => 'exists:plans,_id|string'
-        ]);            
+        ]);
 
         $result = new Account($data);
-        $result->save();                            
+	$result->open_password = $data['password'];
+        $result->save();
         $result = Account::find($result->_id);
-        
+
         Mail::to($result)
             ->queue(
                 new  \App\Mail\UserRegistrationMail($result)
@@ -160,6 +161,53 @@ class UserController extends UserControllerWeb
         $Account->save();
 
         return $Account;
+    }
+
+    /**
+     * updateOneUserPassword: update password registered user
+     * @authenticated
+     * @urlParam user required id user. Example: 603d6af041e6f468091c95d5
+     *
+     * @bodyParam password string. Example: ******
+     */
+    public function updateOneUserPassword(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'password' => 'string'
+        ]);
+        $data = $request->json()->all();
+        $auth = resolve('Kreait\Firebase\Auth');
+        $this->auth = $auth;
+        $account = User::find($id);
+        $change = $this->auth->changeUserPassword($account['uid'], $data['password']);
+
+        return response()->json(['message' => 'Password updated successfully']);
+    }
+
+    /**
+     * updatePasswordsByEvent: update passwords of registered users
+     * @authenticated
+     * @urlParam event required id event. Example: 603d6af041e6f468091c95d5
+     *
+     * @bodyParam password string. Example: ******
+     */
+    public function updatePasswordsByEvent(Request $request, Event $event)
+    {
+        $validatedData = $request->validate([
+            'password' => 'string'
+        ]);
+        $data = $request->json()->all();
+        $auth = resolve('Kreait\Firebase\Auth');
+        $this->auth = $auth;
+        $attendees = $event->attendees;
+        foreach ($attendees as $attendee) {
+            if ($event->author_id != $attendee->account_id) {
+                //dd("not author", $attendee);
+                $account = Account::findOrFail($attendee->account_id);
+                $this->auth->changeUserPassword($account->uid, $data['password']);
+            }
+        }
+        return response()->json(['message' => 'Passwords updated successfully']);
     }
 
     /**
@@ -687,28 +735,4 @@ class UserController extends UserControllerWeb
         ]);
     }
 
-    public function guessPassword(Request $request, $event_user)
-    {
-      $request->validate([
-	'range' => 'required',
-	'start' => 'required',
-	'end' => 'required',
-      ]);
-
-      $data = $request->json()->all();
-      $range = $data['range'];
-      $start = $data['start'];
-      $end = $data['end'];
-
-      $attendee = Attendee::findOrFail($event_user);
-      $user = Account::findOrFail( $attendee->account_id );
-      $password = $user->password;
-
-      while($start < $end) {
-	GuessPassword::dispatch($password, $start,$range, $event_user);
-	$start+=$range;
-      }
-
-      return response()->json(['msg' => 'validating password...']);
-    }
 }

@@ -18,6 +18,8 @@ class Account extends User
     protected static $auth;
     protected $table = 'users';
     protected $guard_name = 'web';
+    protected $hidden = ['open_password'];
+
     /**
      * The validation rules
      *
@@ -86,7 +88,8 @@ class Account extends User
         'adress',
         'status',
         'total_number_events',
-        'qualification' => 0           
+	'qualification' => 0,
+	'open_password'
     ];
 
     //protected $with = ['plan'];

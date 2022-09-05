@@ -610,4 +610,63 @@ class ApiOrdersController extends Controller
 
 	return response()->json(['tickets_available' => $ticketsAvailable, 'total_tickets' => count($tickets)]);
     }
+
+
+    public function alternativeTicket(Request $request, $order)
+    {
+        $request->validate([
+            'status' => 'required|string'
+        ]);
+        
+        $data = $request->json()->all();
+
+        if ($data['status'] !== 'COMPLETE') {
+            return response()->json(['message' => 'Invalid Order'], 401);
+        }
+        
+        $order = Order::findOrFail($order);
+        
+        $order->status = 'COMPLETE';
+        $order->save();
+
+        // actualizar estado de la orden en el event user
+        $eventUser = Attendee::findOrFail($order->event_user_id);
+        $ordersByUser = [];
+        foreach ($eventUser->orders as $ord) {
+            if($ord['order_id'] === $order->_id) {
+                $ord['status'] = $order->status;
+            }
+            array_push($ordersByUser, $ord);
+        }
+        $eventUser->orders = $ordersByUser;
+        $eventUser->save();
+        
+        // generate tickets
+        // tickets are attendees
+        for ($i=1; $i <= $order->space_available; $i++) {
+            try {
+            $newTicket = Attendee::create([
+                'properties' => [
+                    "names" => "TICKET $i",
+                ],
+                'event_id' => $order->event_id,
+                'order_id' => $order->_id
+            ]);
+
+            } catch (\Exception $e) {
+                return response()->json((object) ["message" => $e->getMessage()], 400);
+                
+            }
+        }
+
+        $event = Event::findOrFail($order->event_id);
+        $attendees = Attendee::where('event_id', $event->_id)->where('order_id', $order->_id)->get();
+
+        Mail::to($eventUser->properties['email'])
+        ->send(
+            new \App\Mail\SendQRs($eventUser, $event, $attendees, $order)
+        );
+        
+        return compact("order");
+    }
 }
