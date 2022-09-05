@@ -581,3 +581,8 @@ Route::get('bingocards/{bingocard}', 'BingoCardController@show');
 
 //eliminar despues, esto es un favor para mocion
 Route::post('correos-mocion', 'EventUserController@correosMocion');
+
+//NEXMO SEND SMS 
+Route::get('nexmo-send-sms', 'SmsController@sendSms');
+//TWILIO SEND SMS
+//Route::get('twilio-send-sms', 'WhatsappController@sendMsg');
