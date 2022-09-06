@@ -38,7 +38,7 @@ class Event extends ModelsEvent
         'video_position',
 	    'bingo', // boolean para saber si un evento tiene bingo
 	    'later_days', // restriction plan: Days after the live landing event 
-        'has_prelanding', // prelanding: boolean para saber si un evento tiene prelanding,
+        'where_it_run', // prelanding: boolean para saber si un evento tiene prelanding,
         'url_external', // prelanding: url externa para redireccionar,
         'success_message', // prelanding: mensaje de exito para mostrar en el prelanding,
         'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage' // count royal prestige
