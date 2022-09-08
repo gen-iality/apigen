@@ -1222,4 +1222,29 @@ class EventUserController extends Controller
 
       return response()->json(['message' => 'Mail send'], 201);
     }
+
+    /**
+     * _validateAttendeeData_: Compare la información que se requiere en el evento con la información que tienen los asistentes. 
+     * Esto puede ocurrir cuando se solicitan datos después de que un evento se haya configurado previamente y requiere que los asistentes completen esta información.
+     *
+     * @urlParam event required
+     * @urlParam eventuser required
+     *
+     */
+    public function validateAttendeeData(Event $event, Attendee $eventuser)
+    {
+        $properties = $eventuser->properties;
+        $fieldsRequired = $event->user_properties;
+
+        foreach($fieldsRequired as $field) {
+            $isRequired = $field['mandatory'];
+            $fieldName = $field['name'];
+
+            if ( $isRequired && empty($properties[$fieldName]) ) {
+                return response()->json(['message' => 'Attendee does not have all the necessary data'], 401);
+            }
+        }
+        
+        return response()->json(['message' => 'Ok'], 200);
+    }
 }
