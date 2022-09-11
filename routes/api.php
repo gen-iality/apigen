@@ -579,6 +579,7 @@ Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
 
 //BINGOCARD
 Route::get('bingocards/{bingocard}', 'BingoCardController@show');
+Route::get('bingocards/{bingocard}/download', 'BingoCardController@downloadBingoCard');
 
 //eliminar despues, esto es un favor para mocion
 Route::post('correos-mocion', 'EventUserController@correosMocion');

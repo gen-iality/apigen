@@ -28,7 +28,8 @@ class Message extends Moloquent
         'message', 
         'footer', 
         'image', 
-        'number_of_recipients'
+	'number_of_recipients',
+	'raw_data' // Necesario para reenviar mails en caso de fallos
     ];
     /**
      * The messages that belong to the user.

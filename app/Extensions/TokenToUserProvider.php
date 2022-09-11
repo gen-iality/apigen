@@ -164,7 +164,7 @@ class TokenToUserProvider implements UserProvider
     {
 
         Log::debug("buscando un usuario:" . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
-        $user_auth = $this->auth->getUser($verifiedIdToken->getClaim('sub'));
+        $user_auth = $this->auth->getUser($verifiedIdToken->claims()->get('sub'));
         $user = Account::where('uid', '=', $user_auth->uid)->first();
 
         return $user;
