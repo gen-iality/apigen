@@ -18,7 +18,7 @@ class WhatsappService
 
        $headers = [
         'Content-Type' => 'application/json',
-        'Authorization' => config('app.authorization'),
+        'Authorization' => 'Bearer EAAMp4c4T8RUBACAD97Nbnbou0cWKLBwlSHzlQBEr1ygVyxjUAgD5l2gELsF5H7WpmTdpNGP0bZCexLsOyVvvK8LYsY6UlfWAbMjZCQLUhNJbO6Ti25jtjdkE88n9cytuZAYIs0OEah0YZC3xwGfW2TaNYfqJ01LZCHfeX1GSCbaRzQidNn6BM'
        ];
 
        $options['headers'] = $headers;
