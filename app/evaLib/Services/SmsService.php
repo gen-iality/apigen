@@ -10,14 +10,14 @@ class SmsService
 {
     public static function sendSms($name, $event_name, $number, $link)
     {
-        $account_sid = 'AC191a64a19726083a7e595dc55db15e85';
-        $auth_token = '82d888af2b753c92e6a2afda9d3e9686';
+        $account_sid = config('app.account_sid');
+        $auth_token = config('app.auth_token');
         $twilio = new Client($account_sid, $auth_token);
 
         $message = $twilio->messages
             ->create($number, // to
                 [
-                    "messagingServiceSid" => "MG77e6cd4486da82e327d76e7cc63d6d95",
+                    "messagingServiceSid" => config('app.messaging_service_sid'),
                     "body" => "Hola " . $name . ", te invitamos a participar en el evento " . $event_name . ". Ingresa a " . $link . " para registrarte.",
                 ]
             );
