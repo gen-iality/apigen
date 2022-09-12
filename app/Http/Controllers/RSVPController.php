@@ -150,6 +150,8 @@ class RSVPController extends Controller implements ShouldQueue
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
+	$message->raw_data = $data; // Necesario para reenviar mails en caso de fallos
+
         if($data['eventUsersIds'] === 'all')
         {               
             $query = Attendee::where("event_id", $event->_id)->pluck('_id')->toArray();
@@ -384,5 +386,33 @@ class RSVPController extends Controller implements ShouldQueue
         return  response()->json([
                     'message' => 'Status actualizado exitosamente'
                 ]); 
+    }
+
+    /**
+     * sendMissingMails_: En ocaciones los correos masivos pueden fallar y no enviar los correos
+     * a todos los asistentes. Este enpoint se encarga de enviar el comunicado a las personas faltantes
+     * @urlParam event Event's id
+     * @urlParam message Message's id
+     */
+    public function sendMissingMails(Event $event, Message $message)
+    {
+      $recipients = Attendee::find($message->raw_data['eventUsersIds']);
+      $messagesDelivered = MessageUser::where('message_id', $message->_id)->pluck('event_user_id')->toArray();
+      $messagesToSend = [];
+
+      foreach($recipients as $recipient) {
+	!in_array($recipient->_id, $messagesDelivered , true)
+	    && array_push($messagesToSend, $recipient);
+      }
+
+      self::_sendRSVPmail(
+	  $eventUsers=$messagesToSend, $message, $event, $data=$message->raw_data
+      );
+
+      return response()->json(
+	[
+	  'message' => count($messagesToSend) . ' messages have been sent'
+	], 201
+      );
     }
 }

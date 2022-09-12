@@ -31,6 +31,7 @@ Route::post('events/{event}/sendemailtoallusers', 'EventUserController@sendQrToU
 Route::post('events/{event}/eventusersanonymous',     'EventUserController@store');
 Route::get('events/{event}/eventusers', 'EventUserController@index');
 Route::get('events/{event}/eventUsers',      'EventUserController@index');
+Route::get('events/{event}/eventusers/{eventuser}/validate-attendee-data', 'EventUserController@validateAttendeeData');
 
 //BINGO
 Route::get('events/{event}/eventusers/bingocards', 'EventUserController@ListEventUsersWithBingoCards');

@@ -14,6 +14,7 @@
 Route::get('rsvp/test', 'RSVPController@test');
 Route::get('rsvp/{id}', 'MessageController@show');
 Route::post('rsvp/sendeventrsvp/{event}', 'RSVPController@createAndSendRSVP');
+Route::post('rsvp/events/{event}/messages/{message}/send-missing-mails', 'RSVPController@sendMissingMails');
 Route::get('rsvp/confirmrsvp/{eventUser}', 'RSVPController@confirmRSVP');
 Route::get('rsvp/confirmrsvptest/{eventUser}', 'RSVPController@confirmRSVPTest');
 Route::get('events/{event}/messages', 'MessageController@indexEvent');
