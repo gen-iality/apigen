@@ -16,6 +16,8 @@ use App\evaLib\Services\GoogleFiles;use QRCode;
 use App;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
+use App\evaLib\Services\WhatsappService;
+use App\evaLib\Services\SmsService;
 
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
@@ -140,6 +142,22 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         }else {
             $link = config('app.front_url') . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         }
+
+        //WHATSAPP AND SMS SERVICE
+        $has_extension = false;
+        foreach ($event->user_properties as $propertie) {
+            $has_extension = $propertie->name == 'extension' ? true : false;
+        }
+        if ($has_extension) {
+            $code = $eventUser["properties"]["code"];
+            $codeWhatsapp = substr($code, 1);
+            $number = $eventUser["properties"]["extension"];
+            $numberWhatsapp = $codeWhatsapp . $number;
+            WhatsappService::sendWhatsapp($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $link);
+            $numberSms = $code . $number;//con el +
+            SmsService::sendSms($eventUser_name, $event->name, $numberSms, $link);
+        }
+
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
         //$message = "<div style='margin-bottom:-100px;text-align: center;font-size: 115%'>" . $message   . "</div>";
