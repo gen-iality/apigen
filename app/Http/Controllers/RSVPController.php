@@ -396,7 +396,13 @@ class RSVPController extends Controller implements ShouldQueue
      */
     public function sendMissingMails(Event $event, Message $message)
     {
-      $recipients = Attendee::find($message->raw_data['eventUsersIds']);
+      if($message->raw_data['eventUsersIds'] === 'all')
+      {
+          $recipients = Attendee::where("event_id", $event->_id)->pluck('_id')->toArray();
+      } else {
+	$recipients = Attendee::find($message->raw_data['eventUsersIds']);
+      }
+
       $messagesDelivered = MessageUser::where('message_id', $message->_id)->pluck('event_user_id')->toArray();
       $messagesToSend = [];
 
