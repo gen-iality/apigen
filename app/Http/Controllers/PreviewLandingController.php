@@ -70,11 +70,8 @@ class PreviewLandingController extends Controller
      */
     public function PreviewsbyEvent(string $event_id)
     {
-        return PreviewResource::collection(
-            PreviewLanding::where('event_id', $event_id)
-                ->latest()
-                ->paginate(config('app.page_size'))
-        );
+        $preview = PreviewLanding::where('event_id', $event_id)->first();
+        return $preview;
     }
 
     /**
