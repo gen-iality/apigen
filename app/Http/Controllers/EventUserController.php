@@ -810,7 +810,16 @@ class EventUserController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->json()->all();
+        $event = Event::find($data["event_id"]);
+        $image = $event->styles["banner_image"];
         $eventUser = Attendee::create($request->json()->all());
+        $image = null;
+        Mail::to($eventUser->properties["email"])
+            ->queue(
+                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                new \App\Mail\InvitationMailAnonymous("", $event, $eventUser, $image, "", $event->name)
+            );
         return new EventUserResource($eventUser);
     }
 
