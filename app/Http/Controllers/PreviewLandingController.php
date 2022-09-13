@@ -28,10 +28,8 @@ class PreviewLandingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'index' => 'required|numeric',
-            'name' => 'required|string',
-            'status' => 'required|boolean',
-            'event_id' => 'required|string'
+            'event_id' => 'required|string',
+            'main_landing_blocks' => 'required'
         ]);
 
         $data = $request->json()->all();
