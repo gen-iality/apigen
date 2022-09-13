@@ -398,7 +398,7 @@ class RSVPController extends Controller implements ShouldQueue
     {
       if($message->raw_data['eventUsersIds'] === 'all')
       {
-          $recipients = Attendee::where("event_id", $event->_id)->pluck('_id')->toArray();
+          $recipients = Attendee::where("event_id", $event->_id)->get();
       } else {
 	$recipients = Attendee::find($message->raw_data['eventUsersIds']);
       }
