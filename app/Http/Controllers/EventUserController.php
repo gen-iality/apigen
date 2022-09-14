@@ -547,19 +547,21 @@ class EventUserController extends Controller
                 ]);
 
                 //$user = Account::where("email" , $email)->first();
+	    }
 
-            }elseif(isset($event->allow_edit_password) && $eventUserData["password"]){
-                $user = Account::updateOrCreate([
-                    "email" => $email,
-                ],
-                [
-                    "names" => $eventUserData["names"],
-                    "password" => $eventUserData["password"]
-                ]);
-            }
+	    // Actualizar contrasenia deberia estar separado
+	    //elseif(isset($event->allow_edit_password) && $eventUserData["password"]){
+                //$user = Account::updateOrCreate([
+                    //"email" => $email,
+                //],
+                //[
+                    //"names" => $eventUserData["names"],
+                    //"password" => $eventUserData["password"]
+                //]);
+            //}
 
-	        // assign rol_id to attendee
-	        $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
+	    // assign rol_id to attendee
+	    $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
             $rol_id = UserEventService::asignRolToEventUser($rol_name, $event, $user);
             if ($rol_name === "Administrator") {
                 AdministratorService::notificationAdmin($rol_id, $email, $event, $eventUserData["names"]);
