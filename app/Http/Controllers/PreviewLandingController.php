@@ -28,10 +28,8 @@ class PreviewLandingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'index' => 'required|numeric',
-            'name' => 'required|string',
-            'status' => 'required|boolean',
-            'event_id' => 'required|string'
+            'event_id' => 'required|string',
+            'main_landing_blocks' => 'required'
         ]);
 
         $data = $request->json()->all();
@@ -72,11 +70,8 @@ class PreviewLandingController extends Controller
      */
     public function PreviewsbyEvent(string $event_id)
     {
-        return PreviewResource::collection(
-            PreviewLanding::where('event_id', $event_id)
-                ->latest()
-                ->paginate(config('app.page_size'))
-        );
+        $preview = PreviewLanding::where('event_id', $event_id)->first();
+        return $preview;
     }
 
     /**
