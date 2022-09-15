@@ -456,6 +456,7 @@ class EventUserController extends Controller
         }
 
 	$eventUser = Attendee::create($eventUserData);
+    //dd("create");
 
 	// Generacion de cartones de bingo
 	if($event->bingo) {
@@ -820,7 +821,7 @@ class EventUserController extends Controller
         Mail::to($eventUser->properties["email"])
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new \App\Mail\InvitationMailAnonymous("", $event, $eventUser, $image, "", $event->name)
+                new \App\Mail\InvitationMailAnonymous($event, $eventUser)
             );
         return new EventUserResource($eventUser);
     }
