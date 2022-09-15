@@ -153,10 +153,10 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             $codeWhatsapp = substr($code, 1);
             $number = $eventUser["properties"]["extension"];
             $numberWhatsapp = $codeWhatsapp . $number;
-            $code = WhatsappService::getCode($link);
-            WhatsappService::sendWhatsapp($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $code);
+            $codeUrl = WhatsappService::getCode($link);
+            WhatsappService::sendWhatsapp($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $codeUrl);
             $numberSms = $code . $number;//con el +
-            SmsService::sendSms($eventUser_name, $event->name, $numberSms, $code);
+            SmsService::sendSms($eventUser_name, $event->name, $numberSms, $codeUrl);
         }
 
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
