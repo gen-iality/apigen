@@ -588,3 +588,6 @@ Route::post('correos-mocion', 'EventUserController@correosMocion');
 Route::get('nexmo-send-sms', 'SmsController@sendSms');
 //TWILIO SEND SMS
 //Route::get('twilio-send-sms', 'WhatsappController@sendMsg');
+
+//REDIRECT TO LANDING
+Route::get('invitation/{code}', 'UrlController@redirectToLanding');
