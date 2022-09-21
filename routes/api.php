@@ -565,7 +565,7 @@ Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCate
 
 // Route::post('preBilling', 'PreBillingController@store');
 
-// Bingo
+// BINGO
 Route::post('events/{event}/bingos', 'BingoController@store');
 Route::put('events/{event}/bingos/{bingo}', 'BingoController@update');
 Route::delete('events/{event}/bingos/{bingo}', 'BingoController@destroy');
