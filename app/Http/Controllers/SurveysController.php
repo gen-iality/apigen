@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Attendee;
 use App\Survey;
 use App\Activities;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Mail;
 
 /**
  * @resource Event
@@ -83,7 +85,7 @@ class surveysController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $event_id)
-{   
+    {   
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
         $result = new Survey($data);
@@ -220,6 +222,50 @@ class surveysController extends Controller
         return "pregunta eliminada";
         }
         return (string) $survey->delete();
+    }
+
+    public function redirectToLanding(Survey $survey)
+    {
+        $event_id = $survey->event_id;
+        $event = Event::findOrFail($event_id);
+        $activity = Activities::findOrFail($survey->activity_id);
+        $attendees = $event->attendees;
+        
+        foreach ($attendees as $attendee) {
+            if($attendee->account_id != $event->author_id){
+                Mail::to($attendee->properties['email'])
+                    ->send(
+                    new \App\Mail\SurveyResponseMail($event, $survey->survey, $activity, $attendee)
+                    );
+            }
+        }
+        return "sending emails";
+    }
+
+    public function sendCode(Survey $survey, Attendee $eventuser)
+    {
+        //dd($survey, $eventuser);
+        $event = Event::findOrFail($survey->event_id);
+        //dd(isset($eventuser->properties['email']));
+        if(isset($eventuser->properties['email'])){
+            Mail::to($eventuser->properties['email'])
+                ->send(
+                new \App\Mail\SurveyCodeMail($event, $survey, $eventuser)
+                );
+            return "send";
+        }
+        /*
+        $attendees = $event->attendees;
+        foreach ($attendees as $attendee) {
+            if($attendee->account_id != $event->author_id){
+                Mail::to($attendee->properties['email'])
+                    ->queue(
+                    new \App\Mail\SurveyMail($event, $attendee)
+                    );
+            }
+        }
+        */
+        
     }
 
 }
