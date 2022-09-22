@@ -25,6 +25,7 @@ class Attendee extends Models\Attendee
     protected $observables = ['saved', 'created', 'updated' , 'deleted'];
     protected static $unguarded = true;
     protected $fillable = ['account_id', 'event_id', 'state_id', "checkedin_at", "checked_in", "checked_in_date", "checkedin_type", "properties", "activities", "rol_id", "enrollment_activity", "ticket_title", "ticket_id", "registered_devices","printouts",
+      "activityProperties", // Estructura de checkin por activades
       "attended_activities", // Listado de activades asistidas
       "approved" // Estado del curso completado
     ];
