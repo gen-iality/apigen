@@ -587,14 +587,9 @@ class EventUserController extends Controller
 
 	    // Si el usuario es creado desde una actividad
 	    // se crea estructura para generar checking por actividad
-	    $activity= $request->query('activity');
-	    if($activity) {
-	      $oldActivityProperties = $eventUser->activityProperties;
-	      $activityProperties = $oldActivityProperties ? $oldActivityProperties : [];
-	      array_push($activityProperties, ['activity_id' => $activity, 'checkIn' => false]);
-
-	      $eventUser->activityProperties = $activityProperties;
-	      $eventUser->save();
+	    $activity_id = $request->query('activity_id');
+	    if($activity_id) {
+	      UserEventService::assignFieldForCheckinByActivity($eventUser, $activity_id);
 	    }
 
             // If the creation of the eventUser is through a redemption code, the user is assigned to the order ROYAL PRESTIGE

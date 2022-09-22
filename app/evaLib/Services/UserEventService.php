@@ -472,4 +472,24 @@ string(10) "1030522402"
       }
 
     }
+
+    /**
+     * Asignar campo para checkin de actividad
+     *
+     * Cuando un usuario es creado o importado desde
+     * la seccion de checkin por actividad del cms, se debe
+     * crear estructura donde detalla cual es el ingreso del asistente
+     * a las actividades
+     */
+    public static function assignFieldForCheckinByActivity($eventUser, $activity_id)
+    {
+      $oldActivityProperties = $eventUser->activityProperties;
+      $newActivityProperties = $oldActivityProperties ? $oldActivityProperties : [];
+      array_push($newActivityProperties, ['activity_id' => $activity_id, 'checkIn' => false]);
+
+      $eventUser->activityProperties = $newActivityProperties;
+      $eventUser->save();
+
+      return $eventUser;
+    }
 }
