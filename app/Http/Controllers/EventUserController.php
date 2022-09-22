@@ -517,6 +517,7 @@ class EventUserController extends Controller
             'rol_name' => 'exists:roles,name|string' // por default se asigna rol asistente
         ]);
 
+
         $eventUserData = $request->json()->all();
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         // $noSendMail = $request->query('no_send_mail');
@@ -583,6 +584,18 @@ class EventUserController extends Controller
                     "properties" => $eventUserData
                 ]
             );
+
+	    // Si el usuario es creado desde una actividad
+	    // se crea estructura para generar checking por actividad
+	    $activity= $request->query('activity');
+	    if($activity) {
+	      $oldActivityProperties = $eventUser->activityProperties;
+	      $activityProperties = $oldActivityProperties ? $oldActivityProperties : [];
+	      array_push($activityProperties, ['activity_id' => $activity, 'checkIn' => false]);
+
+	      $eventUser->activityProperties = $activityProperties;
+	      $eventUser->save();
+	    }
 
             // If the creation of the eventUser is through a redemption code, the user is assigned to the order ROYAL PRESTIGE
             //if (isset($order_id)) {
