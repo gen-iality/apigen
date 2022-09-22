@@ -144,20 +144,28 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         }
 
         //WHATSAPP AND SMS SERVICE
+        /*
         $has_extension = false;
+        $phone = "";
         foreach ($event->user_properties as $propertie) {
-            $has_extension = $propertie->name == 'extension' ? true : false;
+            if ($propertie->type == "codearea") {
+                $has_extension = true;
+                $phone = $propertie->name;
+            }
         }
         if ($has_extension) {
             $code = $eventUser["properties"]["code"];
             $codeWhatsapp = substr($code, 1);
-            $number = $eventUser["properties"]["extension"];
+            $number = $eventUser["properties"][$phone];
             $numberWhatsapp = $codeWhatsapp . $number;
             $codeUrl = WhatsappService::getCode($link);
-            WhatsappService::sendWhatsapp($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $codeUrl);
+            $bodyWhatsapp = WhatsappService::templateButton($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $codeUrl);
+            WhatsappService::sendWhatsapp($bodyWhatsapp);
             $numberSms = $code . $number;//con el +
-            SmsService::sendSms($eventUser_name, $event->name, $numberSms, $codeUrl);
+            $body = SmsService::bodyInvitationEvent($eventUser_name, $event->name, $link);
+            SmsService::sendSms($numberSms, $body);
         }
+        */
 
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";

@@ -8,19 +8,40 @@ use Twilio\Rest\Client;
  */
 class SmsService
 {
-    public static function sendSms($name, $event_name, $number, $link)
+    public static function sendSms($number, $body)
     {
-        $account_sid = 'AC191a64a19726083a7e595dc55db15e85';
-        $auth_token = '82d888af2b753c92e6a2afda9d3e9686';
+        $account_sid = 'ACbd95743533eedc0b3db68fc5dcaf46c6';
+        $auth_token = '6c2cd4644549630444b9578aa9ca2560';
         $twilio = new Client($account_sid, $auth_token);
-        $link = config('app.evius_api') . '/invitation/' . $link;
-
+        
         $message = $twilio->messages
             ->create($number, // to
                 [
-                    "messagingServiceSid" => "MG77e6cd4486da82e327d76e7cc63d6d95",
-                    "body" => "¡Hola " . $name . "! Tu inscripción al evento " . $event_name . " ha sido exitosa. Puedes ingresar al evento mediante el siguiente enlace. ".$link. " ¡Te esperamos!",
+                    "from" => "+19032251131",
+                    "messagingServiceSid" => "MG1d774f772551ca47d19be4736bae073c",
+                    "body" => $body,
                 ]
             );
+            //dd($message);
+    }
+
+    public static function bodyInvitationEvent($name, $event_name, $link)
+    {
+        $link = config('app.evius_api') . '/invitation/' . $link;
+        $body = "¡Hola " . $name . "! Tu inscripción al evento " . $event_name . " ha sido exitosa. Puedes ingresar al evento mediante el siguiente enlace. ".$link. " ¡Te esperamos!";
+        return $body;
+    }
+
+    public static function bodyCodeEventPMI($name, $survey_name, $code)
+    {
+        $body = "¡Hola " . $name . "! El código asociado a la encuesta " . $survey_name . " es el siguiente: " . $code . ". ¡Gracias por participar!";
+        return $body;
+    }
+
+    public static function bodySurveyEventPMI($name, $survey_name, $link)
+    {
+        $link = config('app.evius_api') . '/invitation/' . $link;
+        $body = "¡Hola " . $name . "! La encuesta " . $survey_name . " ya está disponible. Inicia sesion y respondela mediante el siguiente enlace. " . $link . " ¡Te esperamos!";
+        return $body;
     }
 }

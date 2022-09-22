@@ -170,6 +170,8 @@ Route::group(
         Route::delete('events/{event}/surveys/{surveys}', 'SurveysController@destroy')->middleware('permission:destroy');
     }
 );
+Route::get('surveys/{survey}/eventusers/{eventuser}/sendcode', 'SurveysController@sendCode');
+Route::get('surveys/{survey}/open', 'SurveysController@redirectToLanding');
 
 
 // /****************
