@@ -483,11 +483,21 @@ string(10) "1030522402"
      */
     public static function assignFieldForCheckinByActivity($eventUser, $activity_id)
     {
-      $oldActivityProperties = $eventUser->activityProperties;
-      $newActivityProperties = $oldActivityProperties ? $oldActivityProperties : [];
-      array_push($newActivityProperties, ['activity_id' => $activity_id, 'checkIn' => false]);
+      $activityProperties = $eventUser->activityProperties ? $eventUser->activityProperties : [];
 
-      $eventUser->activityProperties = $newActivityProperties;
+      if(count($activityProperties) > 0) {
+	$activityAlreadyExists = array_filter($activityProperties, function($checkin) use ($activity_id) {
+      	  return $checkin['activity_id'] === $activity_id;
+      	});
+	// En caso de volver a ser importado en la actividad no se recrea
+	// el objecto con los datos
+      	if ($activityAlreadyExists) {
+      	  return $eventUser;
+      	}
+      }
+
+      array_push($activityProperties, ['activity_id' => $activity_id, 'checkIn' => false]);
+      $eventUser->activityProperties = $activityProperties;
       $eventUser->save();
 
       return $eventUser;
