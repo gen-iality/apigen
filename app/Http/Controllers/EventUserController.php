@@ -25,6 +25,7 @@ use Log;
 use Mail;
 use Validator;
 use Carbon\Carbon;
+use DateTime;
 /**
  * @group EventUser
  *
@@ -975,12 +976,30 @@ class EventUserController extends Controller
             $eventUser = Attendee::findOrFail($id);
             
             $oldActivityProperties = $eventUser->activityProperties;
+            if(count($oldActivityProperties) > 0) {
+                $newActivityProperties = [];
+                foreach ($oldActivityProperties as $activityProperty) {
+                    if($activityProperty['activity_id'] != $activity_id) {
+                        array_push($newActivityProperties, $activityProperty);
+                    }
+                }
+                
+                array_push($newActivityProperties, [
+                    'activity_id' => $activity_id, 
+                    'checked_in' => true,
+                    'checkedin_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+                    'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
+                ]);
+                $eventUser->activityProperties = $newActivityProperties;
+                $eventUser->save();
+                return $eventUser;
+            }
             $newActivityProperties = $oldActivityProperties ? $oldActivityProperties : [];
             array_push($newActivityProperties, [
                 'activity_id' => $activity_id, 
                 'checked_in' => true,
                 'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
-                'checkedin_at' => time(),
+                'checkedin_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
             $eventUser->activityProperties = $newActivityProperties;
