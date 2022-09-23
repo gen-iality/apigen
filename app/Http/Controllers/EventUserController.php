@@ -970,6 +970,7 @@ class EventUserController extends Controller
     public function checkInByActivity(Request $request, $id, $activity_id)
     {
         $activity = Activities::find($activity_id);
+        $data = $request->json()->all();
         if ($activity) {
             $eventUser = Attendee::findOrFail($id);
             
@@ -977,8 +978,9 @@ class EventUserController extends Controller
             $newActivityProperties = $oldActivityProperties ? $oldActivityProperties : [];
             array_push($newActivityProperties, [
                 'activity_id' => $activity_id, 
-                'checkIn' => true,
-                'checkInAt' => time(),
+                'checked_in' => true,
+                'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
+                'checkedin_at' => time(),
             ]);
 
             $eventUser->activityProperties = $newActivityProperties;
@@ -1001,10 +1003,11 @@ class EventUserController extends Controller
             $eventUser = Attendee::findOrFail($id);
 
             if($eventUser->activityProperties) {
-                $newActivityProperties = [];
+                //$newActivityProperties = [];
                 foreach ($eventUser->activityProperties as $activityProperty) {
                     if($activityProperty['activity_id'] != $activity_id) {
-                        array_push($newActivityProperties, $activityProperty);
+                        
+                        //array_push($newActivityProperties, $activityProperty);
                     }
                 }
                 $eventUser->activityProperties = $newActivityProperties;
