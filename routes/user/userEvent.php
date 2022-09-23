@@ -21,6 +21,11 @@ Route::get('events/{event}/users/{user_id}/asignticketstouser', 'EventUserManage
 Route::put('events/withstatus/{id}', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{id}/withStatus', 'EventUserController@updateWithStatus');
 Route::put('eventUsers/{eventuser}/checkin', 'EventUserController@checkIn');
+//CHECKIN BY ACTIVITY
+Route::put('eventUsers/{eventuser}/checkinactivity', 'EventUserController@checkInByActivity');
+//UNCHECKIN BY ACTIVITY
+Route::put('eventUsers/{eventuser}/uncheckinactivity', 'EventUserController@unCheckInByActivity');
+//
 Route::put('eventUsers/{eventuser}/uncheck', 'EventUserController@unCheck');
 Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
     //->middleware('userRegistrationRestriction');
