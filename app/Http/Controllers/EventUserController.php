@@ -967,11 +967,10 @@ class EventUserController extends Controller
      * @urlParam eventuser string required id Attendee to checkin into the event
      *
      */
-    public function checkInByActivity(Request $request, $id)
+    public function checkInByActivity(Request $request, $id, $activity_id)
     {
-        $activity_id = $request->query('activity_id');
-        if ($activity_id) {
-            $activity = Activities::findOrFail($activity_id);
+        $activity = Activities::find($activity_id);
+        if ($activity) {
             $eventUser = Attendee::findOrFail($id);
             
             $oldActivityProperties = $eventUser->activityProperties;
@@ -995,11 +994,10 @@ class EventUserController extends Controller
      * @urlParam eventuser string required id Attendee to checkin into the activity
      *
      */
-    public function unCheckInByActivity(Request $request, $id)
+    public function unCheckInByActivity(Request $request, $id, $activity_id)
     {
-        $activity_id = $request->query('activity_id');
-        if ($activity_id) {
-            $activity = Activities::findOrFail($activity_id);
+        $activity = Activities::find($activity_id);
+        if ($activity) {
             $eventUser = Attendee::findOrFail($id);
 
             if($eventUser->activityProperties) {
