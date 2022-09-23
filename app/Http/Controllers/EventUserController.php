@@ -5,6 +5,7 @@ use App\Organization;
 use App\Http\Resources\EventResource;
 use App\Account;
 use App\Attendee;
+use App\Activities;
 use App\BingoCard;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
@@ -925,10 +926,10 @@ class EventUserController extends Controller
      */
     public function checkIn(Request $request, $id)
     {
-	$data = $request->json()->all();
+	    $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($id);
         //if (!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false)) {
-	// Esta validacon ya la hace front
+        // Esta validacon ya la hace front
         $eventUser->checkIn();
         //}
 
@@ -958,6 +959,63 @@ class EventUserController extends Controller
         $eventUser->save();
 
         return $eventUser;
+    }
+
+    /**
+     * _checkInByActivity_: checks In an existent Attendee to the related activity
+     *
+     * @urlParam eventuser string required id Attendee to checkin into the event
+     *
+     */
+    public function checkInByActivity(Request $request, $id)
+    {
+        $activity_id = $request->query('activity_id');
+        if ($activity_id) {
+            $activity = Activities::findOrFail($activity_id);
+            $eventUser = Attendee::findOrFail($id);
+            
+            $oldActivityProperties = $eventUser->activityProperties;
+            $newActivityProperties = $oldActivityProperties ? $oldActivityProperties : [];
+            array_push($newActivityProperties, [
+                'activity_id' => $activity_id, 
+                'checkIn' => true,
+                'checkInAt' => time(),
+            ]);
+
+            $eventUser->activityProperties = $newActivityProperties;
+            $eventUser->save();
+            return $eventUser;
+        }
+        return response()->json(['message' => 'Activity not found'], 404);
+    }
+
+    /**
+     * _unCheckInByActivity_: checks In an existent Attendee to the related activity
+     *
+     * @urlParam eventuser string required id Attendee to checkin into the activity
+     *
+     */
+    public function unCheckInByActivity(Request $request, $id)
+    {
+        $activity_id = $request->query('activity_id');
+        if ($activity_id) {
+            $activity = Activities::findOrFail($activity_id);
+            $eventUser = Attendee::findOrFail($id);
+
+            if($eventUser->activityProperties) {
+                $newActivityProperties = [];
+                foreach ($eventUser->activityProperties as $activityProperty) {
+                    if($activityProperty['activity_id'] != $activity_id) {
+                        array_push($newActivityProperties, $activityProperty);
+                    }
+                }
+                $eventUser->activityProperties = $newActivityProperties;
+                $eventUser->save();
+                return $eventUser;
+            }
+            return response()->json(['message' => 'User has not checkin by activity'], 404);
+        }
+        return response()->json(['message' => 'Activity not found'], 404);
     }
 
     /**
