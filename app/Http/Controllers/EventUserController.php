@@ -1003,13 +1003,18 @@ class EventUserController extends Controller
             $eventUser = Attendee::findOrFail($id);
 
             if($eventUser->activityProperties) {
-                //$newActivityProperties = [];
+                $newActivityProperties = [];
                 foreach ($eventUser->activityProperties as $activityProperty) {
                     if($activityProperty['activity_id'] != $activity_id) {
-                        
-                        //array_push($newActivityProperties, $activityProperty);
+                        array_push($newActivityProperties, $activityProperty);
                     }
                 }
+                array_push($newActivityProperties, [
+                    'activity_id' => $activity_id, 
+                    'checked_in' => false,
+                    'checkedin_at' => null,
+                    'checkedin_type' => null,
+                ]);
                 $eventUser->activityProperties = $newActivityProperties;
                 $eventUser->save();
                 return $eventUser;
