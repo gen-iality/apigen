@@ -228,6 +228,11 @@ class surveysController extends Controller
     {
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
+        if(is_null($event->sms_notification) || $event->sms_notification == false){
+            return response()->json([
+                'message' => 'sms notification is disabled',
+            ], 401);
+        }
         $activity = Activities::findOrFail($survey->activity_id);
         $attendees = $event->attendees;
         
@@ -239,33 +244,28 @@ class surveysController extends Controller
                     );
             }
         }
-        return "sending emails";
+        return response()->json([
+            'message' => 'survey sent',
+        ], 200);
     }
 
     public function sendCode(Survey $survey, Attendee $eventuser)
     {
-        //dd($survey, $eventuser);
         $event = Event::findOrFail($survey->event_id);
-        //dd(isset($eventuser->properties['email']));
+        if(is_null($event->sms_notification) || $event->sms_notification == false){
+            return response()->json([
+                'message' => 'sms notification is disabled',
+            ], 401);
+        }
         if(isset($eventuser->properties['email'])){
             Mail::to($eventuser->properties['email'])
                 ->send(
                 new \App\Mail\SurveyCodeMail($event, $survey, $eventuser)
                 );
-            return "send";
+            return response()->json([
+                'message' => 'survey code sent',
+            ], 200);
         }
-        /*
-        $attendees = $event->attendees;
-        foreach ($attendees as $attendee) {
-            if($attendee->account_id != $event->author_id){
-                Mail::to($attendee->properties['email'])
-                    ->queue(
-                    new \App\Mail\SurveyMail($event, $attendee)
-                    );
-            }
-        }
-        */
-        
     }
 
 }

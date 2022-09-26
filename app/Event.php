@@ -36,6 +36,7 @@ class Event extends ModelsEvent
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
         'send_custom_email' , 'language', 'googleanlyticsid','status','googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
         'video_position',
+        'sms_notification', //boolean para activar o desactivar el envio de sms
 	    'bingo', // boolean para saber si un evento tiene bingo
 	    'later_days', // restriction plan: Days after the live landing event 
         'where_it_run', // prelanding: boolean para saber si un evento tiene prelanding,
