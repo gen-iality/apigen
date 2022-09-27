@@ -28,6 +28,7 @@ Route::put('eventUsers/{eventuser}/uncheckinactivity/{activity}', 'EventUserCont
 //
 Route::put('eventUsers/{eventuser}/uncheck', 'EventUserController@unCheck');
 Route::post('eventUsers/createUserAndAddtoEvent/{event}', 'EventUserController@createUserAndAddtoEvent');
+Route::post('eventUsers/events/{event}/activities/{activity}', 'EventUserController@createUserToActivity');
     //->middleware('userRegistrationRestriction');
 //  ->middleware('userRegistrationRestriction', 'OrganizersRestriction'); CHANGE PRICING
 Route::post('eventUsers/bookEventUsers/{event}', 'EventUserController@bookEventUsers');

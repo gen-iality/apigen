@@ -587,6 +587,26 @@ class EventUserController extends Controller
         return $response;
     }
 
+    public function createUserToActivity(Request $request, Event $event, Activities $activity) {
+      $request->validate([
+	'names' => 'required|string',
+	'email' => 'required|email'
+      ]);
+
+      $data = $request->json()->all();
+
+      $eventUserExists = Attendee::where('event_id', $event->id)->where('properties.email', $data['email'])->first();
+      if($eventUserExists) {
+	return response()->json(['message' => 'User already exists in the activity'], 401);
+      }
+
+      // atributo query necesario para generar estructura checkin por actividad
+      $request->query->set('activity_id', $activity->_id);
+      $eventUser = self::createUserAndAddtoEvent($request, $event->_id);
+
+      return $eventUser;
+    }
+
 
     private function encryptdata($string)
     {
