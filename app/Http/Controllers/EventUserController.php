@@ -613,6 +613,20 @@ class EventUserController extends Controller
       return $eventUser;
     }
 
+    public function deleteUserToActivity(Activities $activity,  Attendee $eventUser) {
+      $userActivities = $eventUser->activityProperties;
+      $newUserActivities = [];
+      foreach($userActivities as $userActivity) {
+	$userActivity['activity_id'] !== $activity->_id &&
+	  array_push($newUserActivities, $userActivity);
+      }
+
+      $eventUser->activityProperties = $newUserActivities;
+      $eventUser->save();
+
+      return response()->json([],204);
+    }
+
 
     private function encryptdata($string)
     {
