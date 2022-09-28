@@ -15,12 +15,12 @@ class WhatsappService
     public static function sendWhatSapp($body)
     {
        $client = new Client([
-        'base_uri' => 'https://graph.facebook.com/v14.0/100339866185300/',
+        'base_uri' => config('app.base_uri'),
        ]);
 
        $headers = [
         'Content-Type' => 'application/json',
-        'Authorization' => 'Bearer EAAHIPeB6GN8BADsiwKHBE8Ncjlqf86VzCnnLnFPDh4Pv488n81cs85tks93gvB0UJFKlmUBLqfgZBOvUEqI02u9gZCYRrjV2nNn3g8bhZCKqNReXRyU5wvZA6DTpgak2KpR96dEx0Ct80HUgjxGYY50LYTdtWaUPRz6IN6BzvtvxK3INiPdE'
+        'Authorization' => 'Bearer ' . config('app.authorization'),
        ];
 
        $options['headers'] = $headers;
