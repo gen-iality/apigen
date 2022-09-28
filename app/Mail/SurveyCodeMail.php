@@ -39,19 +39,8 @@ class SurveyCodeMail extends Mailable
         $this->image_footer = isset($event->styles['banner_footer_email']) ? $event->styles['banner_footer_email'] : "https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2FViews%2FFooter_Evius_1920x200px%20(1).png?alt=media&token=5216761a-b9b2-41e5-8552-5dcbc2a61c7a";
         
         //WHATSAPP AND SMS SERVICE
-        $has_extension = false;
-        $phone = "";
-        foreach ($event->user_properties as $propertie) {
-            if ($propertie->type == "codearea") {
-                $has_extension = true;
-                $phone = $propertie->name;
-            }
-        }
-        if ($has_extension) {
-            $code = $attendee["properties"]["code"];
-            $codeWhatsapp = substr($code, 1);
-            $number = $attendee["properties"][$phone];
-            $numberWhatsapp = $codeWhatsapp . $number;
+        if(isset($attendee->properties['celular'])){
+            $numberWhatsapp = substr($attendee->properties['celular'], 1);//sin el +
             $bodyWhatsapp = WhatsappService::templateCodePMI(
                 $numberWhatsapp, 
                 $event->styles["banner_image"], 
@@ -60,9 +49,11 @@ class SurveyCodeMail extends Mailable
                 $this->code
             );
             WhatsappService::sendWhatsapp($bodyWhatsapp);
-            $numberSms = $code . $number;//con el +
-            $body = SmsService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code);
-            SmsService::sendSms($numberSms, $body);
+            $numberSms = $attendee->properties['celular'];//con el +
+            //$body = SmsService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code);
+            $body = MMasvioService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code, $numberSms);
+            MMasivoService::sendSms($body);
+
         }
     }
 
