@@ -9,6 +9,7 @@ use App\Activities;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mail;
+use App\evaLib\Services\MMasivoService;
 
 /**
  * @resource Event
@@ -228,20 +229,25 @@ class surveysController extends Controller
     {
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
+
         if(is_null($event->sms_notification) || $event->sms_notification == false){
             return response()->json([
                 'message' => 'sms notification is disabled',
             ], 401);
         }
         $activity = Activities::findOrFail($survey->activity_id);
-        $attendees = $event->attendees;
-        
-        foreach ($attendees as $attendee) {
-            if($attendee->account_id != $event->author_id){
-                Mail::to($attendee->properties['email'])
-                    ->send(
-                    new \App\Mail\SurveyResponseMail($event, $survey->survey, $activity, $attendee)
+        $attendees = Attendee::where('event_id', $event_id)->get();
+
+        foreach($attendees as $attendee){
+            if(isset($attendee->activityProperties)){
+                for ($i=0; $i < count($attendee->activityProperties); $i++) {
+                    if($attendee->activityProperties[$i]['activity_id'] == $activity->id && $attendee->activityProperties[$i]['checked_in'] == true){
+                        Mail::to($attendee->properties['email'])
+                        ->send(
+                        new \App\Mail\SurveyResponseMail($event, $survey->survey, $activity, $attendee)
                     );
+                    }
+                }
             }
         }
         return response()->json([
