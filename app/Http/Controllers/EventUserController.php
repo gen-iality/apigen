@@ -519,22 +519,10 @@ class EventUserController extends Controller
             'rol_name' => 'exists:roles,name|string' // por default se asigna rol asistente
         ]);
 
-
         $eventUserData = $request->json()->all();
         $eventUserData["email"] = strtolower($eventUserData["email"]);
-        // $noSendMail = $request->query('no_send_mail');
         $event = Event::findOrFail($event_id);
         $email = $eventUserData["email"];
-
-        // Validate the spaces available in the order ROYAL PRESTIGE
-        //if (isset($eventUserData["order_id"])) {
-            //$order_id = $eventUserData["order_id"];
-            //$order = Order::findOrFail($order_id);
-            //$affiliates = Attendee::where('order_id', $order_id)->get();
-            //if (count($affiliates) >= $order->space_available) {
-                //return response()->json(['message' => 'Affiliate limit exceeded'], 401);
-            //}
-        //}
 
         try {
 
@@ -549,20 +537,7 @@ class EventUserController extends Controller
                     "names" => $eventUserData["names"],
                     "password" => $pass
                 ]);
-
-                //$user = Account::where("email" , $email)->first();
 	    }
-
-	    // Actualizar contrasenia deberia estar separado
-	    //elseif(isset($event->allow_edit_password) && $eventUserData["password"]){
-                //$user = Account::updateOrCreate([
-                    //"email" => $email,
-                //],
-                //[
-                    //"names" => $eventUserData["names"],
-                    //"password" => $eventUserData["password"]
-                //]);
-            //}
 
 	    // assign rol_id to attendee
 	    $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
@@ -572,8 +547,6 @@ class EventUserController extends Controller
             }
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
-
-            //unset($eventUserData["order_id"]);
 
             //Se buscan usuarios existentes con el correo que se está ingresando
             $eventUser = Attendee::updateOrCreate(
@@ -594,17 +567,6 @@ class EventUserController extends Controller
 	      UserEventService::assignFieldForCheckinByActivity($eventUser, $activity_id);
 	    }
 
-            // If the creation of the eventUser is through a redemption code, the user is assigned to the order ROYAL PRESTIGE
-            //if (isset($order_id)) {
-                // $affiliatedUsers = $order->affiliates;
-                // array_push($affiliatedUsers, $eventUser->_id);
-                // $order->affiliates = $affiliatedUsers;
-                // $order->save();
-                //Save order_id to manage relationship
-                //$eventUser->order_id = $order_id;
-                //$eventUser->save();
-            //}
-
             $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
             $result = (object) [
@@ -623,6 +585,46 @@ class EventUserController extends Controller
 
         }
         return $response;
+    }
+
+    public function createUserToActivity(Request $request, Activities $activity) {
+      $request->validate([
+	'names' => 'required|string',
+	'email' => 'required|email'
+      ]);
+
+      $data = $request->json()->all();
+
+      $eventUserExists = Attendee::where('event_id', $activity->event_id)->where('properties.email', $data['email'])->first();
+      if($eventUserExists && $eventUserExists->activityProperties) {
+	$userActivities = $eventUserExists->activityProperties;
+
+      	foreach($userActivities as $userActivity) {
+      	  if($userActivity['activity_id'] === $activity->_id) {
+      	    return response()->json(['message' => 'User already exists in the activity'], 401);
+      	  }
+      	}
+      }
+
+      // atributo query necesario para generar estructura checkin por actividad
+      $request->query->set('activity_id', $activity->_id);
+      $eventUser = self::createUserAndAddtoEvent($request, $activity->event_id);
+
+      return $eventUser;
+    }
+
+    public function deleteUserToActivity(Activities $activity,  Attendee $eventUser) {
+      $userActivities = $eventUser->activityProperties;
+      $newUserActivities = [];
+      foreach($userActivities as $userActivity) {
+	$userActivity['activity_id'] !== $activity->_id &&
+	  array_push($newUserActivities, $userActivity);
+      }
+
+      $eventUser->activityProperties = $newUserActivities;
+      $eventUser->save();
+
+      return response()->json([],204);
     }
 
 
@@ -988,7 +990,8 @@ class EventUserController extends Controller
                 array_push($newActivityProperties, [
                     'activity_id' => $activity_id, 
                     'checked_in' => true,
-                    'checkedin_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+		      //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+                    'checkedin_at' => gmdate("Y-m-d\TH:i:s\Z", time()),
                     'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
                 ]);
                 $eventUser->activityProperties = $newActivityProperties;
@@ -999,8 +1002,9 @@ class EventUserController extends Controller
             array_push($newActivityProperties, [
                 'activity_id' => $activity_id, 
                 'checked_in' => true,
+                //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+                'checkedin_at' => gmdate("Y-m-d\TH:i:s\Z", time()),
                 'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
-                'checkedin_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
             $eventUser->activityProperties = $newActivityProperties;

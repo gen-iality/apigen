@@ -496,7 +496,12 @@ string(10) "1030522402"
       	}
       }
 
-      array_push($activityProperties, ['activity_id' => $activity_id, 'checkIn' => false]);
+      array_push($activityProperties, [
+	'activity_id' => $activity_id,
+	'checked_in' => false,
+	'checked_at' => null,
+	'checkedin_type' => null
+      ]);
       $eventUser->activityProperties = $activityProperties;
       $eventUser->save();
 
