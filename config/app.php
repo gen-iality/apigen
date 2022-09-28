@@ -40,6 +40,9 @@ return [
     'encryption_iv' => env('ENCRYPTION_IV', "1234567812345678"),
     'encryption_key' => env('ENCRYPTION_KEY'),
     'zoom_server' => env('ZOOM_API'),
+    'base_uri' => env('BASE_URI', 'https://graph.facebook.com/v14.0/100339866185300/'), //whatsapp base uri
+    'authorization' => env('AUTHORIZATION'), //whatsapp token
+    'authorization_mmasivo' => env('AUTHORIZATION_MMASIVO'), //mmasivo token
     /*
     |--------------------------------------------------------------------------
     | Application URL
