@@ -990,7 +990,8 @@ class EventUserController extends Controller
                 array_push($newActivityProperties, [
                     'activity_id' => $activity_id, 
                     'checked_in' => true,
-                    'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+		      //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+                    'checkedin_at' => gmdate("Y-m-d\TH:i:s\Z", time()),
                     'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
                 ]);
                 $eventUser->activityProperties = $newActivityProperties;
@@ -1001,7 +1002,8 @@ class EventUserController extends Controller
             array_push($newActivityProperties, [
                 'activity_id' => $activity_id, 
                 'checked_in' => true,
-                'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+                //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+                'checkedin_at' => gmdate("Y-m-d\TH:i:s\Z", time()),
                 'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
             ]);
 
