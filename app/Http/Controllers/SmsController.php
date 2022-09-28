@@ -49,7 +49,15 @@ class SmsController extends Controller
                 );
             }
             $shortUrl = WhatsappService::getCode($link);
-            WhatsappService::sendWhatsapp($numberWhatsapp, $event->styles["banner_image"], $eventUser->properties["names"], $event->name, $shortUrl);
+            $bodyWhatsapp = WhatsappService::templateButton(
+                $numberWhatsapp, 
+                $event->styles["banner_image"], 
+                $eventUser->properties["names"],
+                $event->name,
+                $shortUrl
+            );
+            WhatsappService::sendWhatsapp($bodyWhatsapp);
+            dd("enviado");
             $numberSms = $code . $number;//con el +
             SmsService::sendSms($eventUser->properties["names"], $event->name, $numberSms, $shortUrl);
             //dd($eventUser);
