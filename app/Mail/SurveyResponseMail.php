@@ -55,7 +55,7 @@ class SurveyResponseMail extends Mailable
             WhatsappService::sendWhatsapp($bodyWhatsapp);
             $numberSms = $attendee->properties['celular'];//con el +
             //$body = SmsService::bodySurveyEventPMI($this->eventUser_name, $survey_name, $codeUrl);
-            $body = MMasivoService::bodySurveyEventPMI($this->eventUser_name, $survey_name, $codeUrl, $numberSms);
+            $body = MMasivoService::bodySurveyEventPMI($this->eventUser_name, $this->survey_name, $codeUrl, $numberSms);
             MMasivoService::sendSms($body);
         }
     }
