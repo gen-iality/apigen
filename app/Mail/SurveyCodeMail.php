@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use PUGX\Shortid\Shortid;
 //SMS
 use App\evaLib\Services\WhatsappService;
-use App\evaLib\Services\SmsService;
+use App\evaLib\Services\MMasivoService;
 
 class SurveyCodeMail extends Mailable
 {
@@ -51,7 +51,7 @@ class SurveyCodeMail extends Mailable
             WhatsappService::sendWhatsapp($bodyWhatsapp);
             $numberSms = $attendee->properties['celular'];//con el +
             //$body = SmsService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code);
-            $body = MMasvioService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code, $numberSms);
+            $body = MMasivoService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code, $numberSms);
             MMasivoService::sendSms($body);
 
         }
