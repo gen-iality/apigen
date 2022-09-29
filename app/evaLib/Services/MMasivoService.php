@@ -48,10 +48,10 @@ class MMasivoService
         return $body;
     }
 
-    public static function bodyCodeEventPMI($name, $survey_name, $code, $phone)
+    public static function bodyCodeEventPMI($code, $phone)
     {
         $body['to'] = $phone;
-        $body['text'] = "¡Hola " . $name . "! El código asociado a la encuesta " . $survey_name . " es el siguiente: " . $code . ". ¡Gracias por participar!";
+        $body['text'] = "¡Muchas gracias por tomarse el tiempo de diligenciar la encuesta! El código PDU de esta Conferencia es " . $code;
         return $body;
     }
 
@@ -59,7 +59,7 @@ class MMasivoService
     {
         $link = config('app.evius_api') . '/invitation/' . $link;
         $body['to'] = $phone;
-        $body['text'] = "¡Hola " . $name . "! La encuesta " . $survey_name . " ya está disponible. Inicia sesion y respondela mediante el siguiente enlace. " . $link . " ¡Te esperamos!";
+        $body['text'] = "¡Hola " . $name . "! La encuesta " . $survey_name . " ya está disponible. Inicia sesion y respondela mediante el siguiente enlace. Recuerda que el usuario y contraseña es el correo con el que te registraste " . $link ." ¡Te esperamos!";
         return $body;
     }
 }

@@ -144,7 +144,7 @@ class WhatsappService
         $body['messaging_product'] = 'whatsapp';
         $body['to'] = $number;//number 573114461222
         $body['type'] = 'template';
-        $body['template']['name'] = 'pmi_survey';
+        $body['template']['name'] = 'open_survey_noreply_1';
         $body['template']['language']['code'] = 'es';
         //header
         $body['template']['components'][0]['type'] = 'header';
@@ -157,7 +157,7 @@ class WhatsappService
         $body['template']['components'][1]['parameters'][0]['text'] = $user_name;//name
         //segundo parametro
         $body['template']['components'][1]['parameters'][1]['type'] = 'text';
-        $body['template']['components'][1]['parameters'][1]['text'] = $survey_name;//event name
+        $body['template']['components'][1]['parameters'][1]['text'] = $survey_name;//survey name
         //button
         $body['template']['components'][2]['type'] = 'button';
         $body['template']['components'][2]['sub_type'] = 'url';
@@ -175,18 +175,20 @@ class WhatsappService
         $body['messaging_product'] = 'whatsapp';
         $body['to'] = $number;//number 573114461222
         $body['type'] = 'template';
-        $body['template']['name'] = 'code_survey_pmi';
+        $body['template']['name'] = 'code_survey';
         $body['template']['language']['code'] = 'es';
         $body['template']['components'][0]['type'] = 'header';
         $body['template']['components'][0]['parameters'][0]['type'] = 'image';
         $body['template']['components'][0]['parameters'][0]['image']['link'] = $url_image;//url image
         $body['template']['components'][1]['type'] = 'body';
+        /*
         $body['template']['components'][1]['parameters'][0]['type'] = 'text';
         $body['template']['components'][1]['parameters'][0]['text'] = $user_name;//name
-        //segundo parametro
+        */
+        /*segundo parametro
         $body['template']['components'][1]['parameters'][1]['type'] = 'text';
         $body['template']['components'][1]['parameters'][1]['text'] = $survey_name;//survey name
-        //tercer parametro
+        */
         $body['template']['components'][1]['parameters'][2]['type'] = 'text';
         $body['template']['components'][1]['parameters'][2]['text'] = $code;//code
         $body = json_encode($body);
