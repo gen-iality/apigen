@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mail;
 use App\evaLib\Services\MMasivoService;
+use PUGX\Shortid\Shortid;
 
 /**
  * @resource Event
@@ -263,10 +264,15 @@ class surveysController extends Controller
                 'message' => 'sms notification is disabled',
             ], 401);
         }
+        $codeShort = Shortid::generate();
+        $codeShort = strval($codeShort);
+        $activity = Activities::findOrFail($survey->activity_id);
+        $code_pdu = isset($activity->code_pdu) ? $activity->code_pdu : $codeShort;
+
         if(isset($eventuser->properties['email'])){
             Mail::to($eventuser->properties['email'])
                 ->send(
-                new \App\Mail\SurveyCodeMail($event, $survey, $eventuser)
+                new \App\Mail\SurveyCodeMail($event, $survey, $eventuser, $code_pdu)
                 );
             return response()->json([
                 'message' => 'survey code sent',
