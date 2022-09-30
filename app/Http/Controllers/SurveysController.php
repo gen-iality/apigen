@@ -228,6 +228,7 @@ class surveysController extends Controller
 
     public function redirectToLanding(Survey $survey)
     {
+        /*
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
 
@@ -250,6 +251,20 @@ class surveysController extends Controller
                     }
                 }
             }
+        }
+        */
+
+        $event_id = $survey->event_id;
+        $event = Event::findOrFail($event_id);
+
+        $activity = Activities::findOrFail($survey->activity_id);
+        $attendees = Attendee::where('event_id', $event_id)->get();
+
+        foreach($attendees as $attendee){
+            Mail::to($attendee->properties['email'])
+            ->send(
+                new \App\Mail\SurveyResponseMail($event, $survey->survey, $activity, $attendee)
+            );
         }
         return response()->json([
             'message' => 'survey sent',
