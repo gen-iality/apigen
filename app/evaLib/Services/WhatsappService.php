@@ -175,8 +175,8 @@ class WhatsappService
         $body['messaging_product'] = 'whatsapp';
         $body['to'] = $number;//number 573114461222
         $body['type'] = 'template';
-        $body['template']['name'] = 'code_survey';
-        $body['template']['language']['code'] = 'es';
+        $body['template']['name'] = 'code_survey_noreply';
+        $body['template']['language']['code'] = 'es_MX';
         $body['template']['components'][0]['type'] = 'header';
         $body['template']['components'][0]['parameters'][0]['type'] = 'image';
         $body['template']['components'][0]['parameters'][0]['image']['link'] = $url_image;//url image
