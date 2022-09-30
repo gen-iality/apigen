@@ -15,7 +15,7 @@
         <tr>
             <td style="font-size:20px;text-align:center;padding:10px;display:block">
                 ¡Muchas gracias por tomarse el tiempo de diligenciar la encuesta!
-                El código PDU de esta Conferencia es <b>{{$code}}</b>
+                El código PDU de la Conferencia {{$survey_name}} es <b>{{$code}}</b>
             </td>
          </tr>
          <tr>

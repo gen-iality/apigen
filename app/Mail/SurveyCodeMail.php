@@ -37,18 +37,18 @@ class SurveyCodeMail extends Mailable
         
         //WHATSAPP AND SMS SERVICE
         if(isset($attendee->properties['celular'])){
-            $numberWhatsapp = substr($attendee->properties['celular'], 1);//sin el +
-            $bodyWhatsapp = WhatsappService::templateCodePMI(
-                $numberWhatsapp, 
-                $event->styles["banner_image"], 
-                $this->eventUser_name,
-                $this->survey_name,
-                $this->code
-            );
-            WhatsappService::sendWhatsapp($bodyWhatsapp);
+            // $numberWhatsapp = substr($attendee->properties['celular'], 1);//sin el +
+            // $bodyWhatsapp = WhatsappService::templateCodePMI(
+            //     $numberWhatsapp, 
+            //     $event->styles["banner_image"], 
+            //     $this->eventUser_name,
+            //     $this->survey_name,
+            //     $this->code
+            // );
+            // WhatsappService::sendWhatsapp($bodyWhatsapp);
             $numberSms = $attendee->properties['celular'];//con el +
             //$body = SmsService::bodyCodeEventPMI($this->eventUser_name, $this->survey_name, $this->code);
-            $body = MMasivoService::bodyCodeEventPMI($this->code, $numberSms);
+            $body = MMasivoService::bodyCodeEventPMI($this->code,$this->survey_name, $numberSms);
             MMasivoService::sendSms($body);
 
         }

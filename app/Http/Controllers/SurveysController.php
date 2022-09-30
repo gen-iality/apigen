@@ -280,4 +280,53 @@ class surveysController extends Controller
         }
     }
 
+    public function redirectManualAll(Survey $survey)
+    {
+        $event_id = $survey->event_id;
+        $event = Event::findOrFail($event_id);
+
+        $activity = Activities::findOrFail($survey->activity_id);
+        $attendees = Attendee::where('event_id', $event_id)->get();
+
+        foreach($attendees as $attendee){
+            Mail::to($attendee->properties['email'])
+            ->send(
+            new \App\Mail\SurveyResponseMail($event, $survey->survey, $activity, $attendee)
+        );
+                    
+                
+            
+        }
+    }
+
+    public function sendCodeAll(Survey $survey)
+    {
+        $event_id = $survey->event_id;
+        $event = Event::findOrFail($event_id);
+
+        if(is_null($event->sms_notification) || $event->sms_notification == false){
+            return response()->json([
+                'message' => 'sms notification is disabled',
+            ], 401);
+        }
+        $codeShort = Shortid::generate();
+        $codeShort = strval($codeShort);
+        $activity = Activities::findOrFail($survey->activity_id);
+        $code_pdu = isset($activity->code_pdu) ? $activity->code_pdu : $codeShort;
+        $attendees = Attendee::where('event_id', $event_id)->get();
+        //dd($attendees);
+
+        foreach($attendees as $attendee){
+            Mail::to($attendee->properties['email'])
+            ->send(
+            new \App\Mail\SurveyCodeMail($event, $survey, $attendee, $code_pdu)
+            );
+                    
+                
+        }
+        return response()->json([
+            'message' => 'survey sent',
+        ], 200);
+    }
+
 }

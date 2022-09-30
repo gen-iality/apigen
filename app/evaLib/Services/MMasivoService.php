@@ -48,10 +48,10 @@ class MMasivoService
         return $body;
     }
 
-    public static function bodyCodeEventPMI($code, $phone)
+    public static function bodyCodeEventPMI($code, $survey_name, $phone)
     {
         $body['to'] = $phone;
-        $body['text'] = "¡Muchas gracias por tomarse el tiempo de diligenciar la encuesta! El código PDU de esta Conferencia es " . $code;
+        $body['text'] = "¡Muchas gracias por tomarse el tiempo de diligenciar la encuesta! El código PDU de la Conferencia ". $survey_name ." es " . $code;
         return $body;
     }
 

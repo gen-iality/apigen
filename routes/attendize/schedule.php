@@ -172,6 +172,8 @@ Route::group(
 );
 Route::get('surveys/{survey}/eventusers/{eventuser}/sendcode', 'SurveysController@sendCode');
 Route::get('surveys/{survey}/open', 'SurveysController@redirectToLanding');
+Route::get('surveys/{survey}/open-manual', 'SurveysController@redirectManualAll');
+Route::get('surveys/{survey}/sendcodeall', 'SurveysController@sendCodeAll');
 
 
 // /****************

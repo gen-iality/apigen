@@ -49,10 +49,10 @@ class SurveyResponseMail extends Mailable
 
         //WHATSAPP AND SMS SERVICE
         if(isset($attendee->properties['celular'])){
-            $numberWhatsapp = substr($attendee->properties['celular'], 1);//sin el +
+            // $numberWhatsapp = substr($attendee->properties['celular'], 1);//sin el +
             $codeUrl = WhatsappService::getCodeSurveyResponse($link);
-            $bodyWhatsapp = WhatsappService::templateButtonSurvey($numberWhatsapp, $event->styles["banner_image"], $this->eventUser_name, $this->survey_name, $codeUrl);
-            WhatsappService::sendWhatsapp($bodyWhatsapp);
+            // $bodyWhatsapp = WhatsappService::templateButtonSurvey($numberWhatsapp, $event->styles["banner_image"], $this->eventUser_name, $this->survey_name, $codeUrl);
+            // WhatsappService::sendWhatsapp($bodyWhatsapp);
             $numberSms = $attendee->properties['celular'];//con el +
             //$body = SmsService::bodySurveyEventPMI($this->eventUser_name, $survey_name, $codeUrl);
             $body = MMasivoService::bodySurveyEventPMI($this->eventUser_name, $this->survey_name, $codeUrl, $numberSms);
