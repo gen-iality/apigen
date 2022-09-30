@@ -257,6 +257,12 @@ class surveysController extends Controller
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
 
+        if(is_null($event->sms_notification) || $event->sms_notification == false){
+            return response()->json([
+                'message' => 'sms notification is disabled',
+            ], 401);
+        }
+
         $activity = Activities::findOrFail($survey->activity_id);
         $attendees = Attendee::where('event_id', $event_id)->get();
 
