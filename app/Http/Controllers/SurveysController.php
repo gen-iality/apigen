@@ -228,7 +228,7 @@ class surveysController extends Controller
 
     public function redirectToLanding(Survey $survey)
     {
-        /*
+        
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
 
@@ -252,7 +252,7 @@ class surveysController extends Controller
                 }
             }
         }
-        */
+        /*
 
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
@@ -272,7 +272,7 @@ class surveysController extends Controller
                 new \App\Mail\SurveyResponseMail($event, $survey->survey, $activity, $attendee)
             );
         }
-        
+        */
         return response()->json([
             'message' => 'survey sent',
         ], 200);
@@ -326,26 +326,39 @@ class surveysController extends Controller
         $event_id = $survey->event_id;
         $event = Event::findOrFail($event_id);
 
-        if(is_null($event->sms_notification) || $event->sms_notification == false){
-            return response()->json([
-                'message' => 'sms notification is disabled',
-            ], 401);
-        }
-        $codeShort = Shortid::generate();
-        $codeShort = strval($codeShort);
+        // if(is_null($event->sms_notification) || $event->sms_notification == false){
+        //     return response()->json([
+        //         'message' => 'sms notification is disabled',
+        //     ], 401);
+        // }
+        // $codeShort = Shortid::generate();
+        // $codeShort = strval($codeShort);
         $activity = Activities::findOrFail($survey->activity_id);
-        $code_pdu = isset($activity->code_pdu) ? $activity->code_pdu : $codeShort;
+        $code_pdu = $activity->code_pdu;
         $attendees = Attendee::where('event_id', $event_id)->get();
         //dd($attendees);
-
+        
         foreach($attendees as $attendee){
             Mail::to($attendee->properties['email'])
-            ->send(
-            new \App\Mail\SurveyCodeMail($event, $survey, $attendee, $code_pdu)
+                ->send(
+                new \App\Mail\SurveyCodeMail($event, $survey, $attendee, $code_pdu)
             );
-                    
-                
         }
+        
+        /*
+        foreach($attendees as $attendee){
+            if(isset($attendee->activityProperties)){
+                for ($i=0; $i < count($attendee->activityProperties); $i++) {
+                    if($attendee->activityProperties[$i]['activity_id'] == $activity->id && $attendee->activityProperties[$i]['checked_in'] == true){
+                        Mail::to($attendee->properties['email'])
+                            ->send(
+                            new \App\Mail\SurveyCodeMail($event, $survey, $attendee, $code_pdu)
+                        );
+                    }
+                }
+            }
+        }
+        */
         return response()->json([
             'message' => 'survey sent',
         ], 200);
