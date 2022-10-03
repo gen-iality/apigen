@@ -69,22 +69,22 @@ class BingoController extends Controller
       return response()->json([], 204);
     }
 
-    public function createRandomBingoValues($event, Bingo $bingo)
-    {
-      $bingoValues = $bingo->bingo_values;
-      $randomBingoValues = [];
+    //public function createRandomBingoValues($event, Bingo $bingo)
+    //{
+      //$bingoValues = $bingo->bingo_values;
+      //$randomBingoValues = [];
 
-      // generar valores aleatoreos para bingo ganador
-      while(count($randomBingoValues) < count($bingoValues)) {
-	$randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
-	!in_array($randomValue, $randomBingoValues, true)
-	  && array_push($randomBingoValues, $randomValue);
-      }
-      $bingo->random_bingo_values = $randomBingoValues;
-      $bingo->save();
+      //// generar valores aleatoreos para bingo ganador
+      //while(count($randomBingoValues) < count($bingoValues)) {
+	//$randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
+	//!in_array($randomValue, $randomBingoValues, true)
+	  //&& array_push($randomBingoValues, $randomValue);
+      //}
+      //$bingo->random_bingo_values = $randomBingoValues;
+      //$bingo->save();
 
-      return response()->json($bingo);
-    }
+      //return response()->json($bingo);
+    //}
 
     public function importBingoValues(Request $request, $event, Bingo $bingo)
     {
@@ -143,9 +143,10 @@ class BingoController extends Controller
     public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
       $request->validate([
-	'type' => 'string|in:text,image',
-	'carton_value' => 'string',
-	'ballot_value' => 'string'
+	'carton_value.type' => 'string|in:text,image',
+	'carton_value.value' => 'string',
+	'ballot_value.type' =>  'string|in:text,image',
+	'ballot_value.value' =>  'string',
       ]);
 
       $value = $request->json()->all();
