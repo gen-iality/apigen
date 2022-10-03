@@ -13,8 +13,10 @@
     </thead>
     <tbody>
         <tr>
-            <td style="font-size:20px;text-align:center;padding:10px;display:block"> 
-                ¡Hola {{$eventUser_name}}! la encuesta <b>{{$survey_name}}</b> ha abierto
+            <td style="font-size:20px;text-align:center;padding:10px;display:block">
+                ¡Hola {{$eventUser_name}}! La encuesta <b>{{$survey_name}}</b> ya está disponible. 
+                Inicia sesion y respondela mediante el siguiente enlace. Recuerda que el usuario y contraseña es el correo con el que te registraste
+                ¡Te esperamos!
             </td>
          </tr>
          <tr>
@@ -23,7 +25,7 @@
                     {{-- {{ __('Mail.enter_event')}} --}}
                     Entra AQUÍ
                 @endcomponent
-                Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
+                Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.<br>Powered by Evius.co
             </td>
         </tr>			 
         <tr>

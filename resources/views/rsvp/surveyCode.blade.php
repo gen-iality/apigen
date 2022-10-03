@@ -13,12 +13,16 @@
     </thead>
     <tbody>
         <tr>
-            <td style="font-size:20px;text-align:center;padding:10px;display:block"> 
-                ¡Hola {{$eventUser_name}}! El código asociado a la encuesta {{$survey_name}} es el siguiente
-                    <b>{{$code}}</b>
-                ¡Gracias por participar!
+            <td style="font-size:20px;text-align:center;padding:10px;display:block">
+                ¡Muchas gracias por tomarse el tiempo de diligenciar la encuesta!
+                El código PDU de la Conferencia {{$survey_name}} es <b>{{$code}}</b>
             </td>
-         </tr>			 
+         </tr>
+         <tr>
+            <td style="text-align: center">
+                Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.<br>Powered by Evius.co
+            </td>
+        </tr>			 
         <tr>
             <td>
                 <div class="centered">

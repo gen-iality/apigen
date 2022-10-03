@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 //SMS
 use App\evaLib\Services\WhatsappService;
-use App\evaLib\Services\SmsService;
+use App\evaLib\Services\MMasivoService;
 
 class SurveyResponseMail extends Mailable
 {
@@ -48,27 +48,16 @@ class SurveyResponseMail extends Mailable
         $this->link = $link;
 
         //WHATSAPP AND SMS SERVICE
-        $has_extension = false;
-        $phone = "";
-        foreach ($event->user_properties as $propertie) {
-            if ($propertie->type == "codearea") {
-                $has_extension = true;
-                $phone = $propertie->name;
-            }
-        }
-        if ($has_extension) {
-            $code = $attendee["properties"]["code"];
-            $codeWhatsapp = substr($code, 1);
-            $number = $attendee["properties"][$phone];
-            $numberWhatsapp = $codeWhatsapp . $number;
+        if(isset($attendee->properties['celular'])){
+            // $numberWhatsapp = substr($attendee->properties['celular'], 1);//sin el +
             $codeUrl = WhatsappService::getCodeSurveyResponse($link);
-            $bodyWhatsapp = WhatsappService::templateButtonSurvey($numberWhatsapp, $event->styles["banner_image"], $this->eventUser_name, $this->survey_name, $codeUrl);
-            WhatsappService::sendWhatsapp($bodyWhatsapp);
-            $numberSms = $code . $number;//con el +
-            $body = SmsService::bodySurveyEventPMI($this->eventUser_name, $survey_name, $codeUrl);
-            SmsService::sendSms($numberSms, $body);
+            // $bodyWhatsapp = WhatsappService::templateButtonSurvey($numberWhatsapp, $event->styles["banner_image"], $this->eventUser_name, $this->survey_name, $codeUrl);
+            // WhatsappService::sendWhatsapp($bodyWhatsapp);
+            $numberSms = $attendee->properties['celular'];//con el +
+            //$body = SmsService::bodySurveyEventPMI($this->eventUser_name, $survey_name, $codeUrl);
+            $body = MMasivoService::bodySurveyEventPMI($this->eventUser_name, $this->survey_name, $codeUrl, $numberSms);
+            MMasivoService::sendSms($body);
         }
-        
     }
 
 
