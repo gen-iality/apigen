@@ -186,9 +186,9 @@ class BingoController extends Controller
     public function addBingoValue(Request $request, $event, Bingo $bingo)
     {
       $request->validate([
-	      'type' => 'required|string|in:text,image',
-	      'carton_value' => 'required|string',
-	      'ballot_value' => 'required|string'
+        'id' => 'required|string',
+	      'carton_value' => 'required',
+	      'ballot_value' => 'required',
       ]);
 
       $value = $request->json()->all();
