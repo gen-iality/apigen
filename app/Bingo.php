@@ -13,7 +13,8 @@ class Bingo extends MyBaseModel
     'amount_of_bingo',
     'regulation',
     'bingo_values',
-    'random_bingo_values'
+    'random_bingo_values',
+    'dimensions' // cantidad celda bingo:  int 3, 4, 5
   ];
 
   public function event()
