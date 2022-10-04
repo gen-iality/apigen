@@ -183,16 +183,24 @@ class BingoController extends Controller
       );
     }
 
+    /**
+     * It adds a value to the bingo values array
+     * 
+     * @param Request request The request object
+     * @param event The event ID
+     * @param Bingo bingo The Bingo model instance
+     * 
+     * @return The bingo object is being returned.
+     */
     public function addBingoValue(Request $request, $event, Bingo $bingo)
     {
       $request->validate([
-        'id' => 'required|string',
 	      'carton_value' => 'required',
 	      'ballot_value' => 'required',
       ]);
 
       $value = $request->json()->all();
-      $value[ 'id' ] = uniqid('', true);
+      $value['id'] = uniqid('', true);
       $bingoValues = $bingo->bingo_values ?
 	    $bingo->bingo_values : [];
 
