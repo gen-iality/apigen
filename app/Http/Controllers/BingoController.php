@@ -163,6 +163,14 @@ class BingoController extends Controller
         if(!isset($value['carton_value']['value']) || !isset($value['ballot_value']['value'])) {
           array_push($bingoValues_fail, $value);
         }
+        // validar que el tipo de carton_value sea el correcto
+        if($value['carton_value']['type'] != 'text' && $value['carton_value']['type'] != 'image') {
+          array_push($bingoValues_fail, $value);
+        }
+        // validar que el tipo de ballot_value sea el correcto
+        if($value['ballot_value']['type'] != 'text' && $value['ballot_value']['type'] != 'image') {
+          array_push($bingoValues_fail, $value);
+        }
 
         if($count_fail == count($bingoValues_fail)) {
           $value[ 'id' ] = uniqid('', true);
