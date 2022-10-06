@@ -182,7 +182,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
         $this->organization_picture = $organization_picture;
         $this->type = $type;
-        $this->image_header = $image_header;
+        $this->image_header = isset($event->styles['banner_image_email']) ? $event->styles['banner_image_email'] : $event->styles['banner_image'];
         $this->link = $link;
         $this->event = $event;
         $this->event_location = $event_location;

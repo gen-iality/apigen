@@ -37,10 +37,15 @@
 	<div style="text-align: center">
 		@if($event->type_event == "physicalEvent")
 			<img  src="{{$qr}}" />
-		@else
-			@component('mail::button', ['url' => $link , 'color' => 'evius'])
-				{{ __ ('Mail.enter_event')}}
-			@endcomponent
+			@elseif($event->type_event == "onlineEvent")
+				@component('mail::button', ['url' => $link , 'color' => 'evius'])
+					{{ __ ('Mail.enter_event')}}
+				@endcomponent
+			@elseif($event->type_event == "hybridEvent")
+				<img  src="{{$qr}}" />
+				@component('mail::button', ['url' => $link , 'color' => 'evius'])
+					{{ __ ('Mail.enter_event')}}
+				@endcomponent
 		@endif
 	</div>
 	
