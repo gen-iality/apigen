@@ -450,6 +450,12 @@ string(10) "1030522402"
 
       $bingoValues = $bingo->bingo_values;
 
+      // Solo asignar cartones de bingo cuando el bingo tenga la cantidad de valores
+      // minima para poder jugar segun las dimensiones correspondientes
+      if($bingo->dimensions['minimun_values'] > count($bingoValues)) {
+	  return ['message' => 'Not enough values to generate bingo cards'];
+      }
+
       if($bingoValues) {
 	$randomBingoCardValues = [];
       	// asignacion de valores al carton segun las dimensiones del bingo
