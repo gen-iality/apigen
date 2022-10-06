@@ -453,7 +453,7 @@ string(10) "1030522402"
       if($bingoValues) {
 	$randomBingoCardValues = [];
       	// asignacion de valores al carton segun las dimensiones del bingo
-      	while(count($randomBingoCardValues) < $bingo->dimensions * 2) {
+      	while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
       	  $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
       	  !in_array($randomValue, $randomBingoCardValues, true)
       	      && array_push($randomBingoCardValues, $randomValue);
