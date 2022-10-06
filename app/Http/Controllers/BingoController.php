@@ -203,8 +203,10 @@ class BingoController extends Controller
     public function addBingoValue(Request $request, $event, Bingo $bingo)
     {
       $request->validate([
-	      'carton_value' => 'required',
-	      'ballot_value' => 'required',
+	'carton_value.type' => 'required|string|in:text,image',
+	'carton_value.value' => 'required|string',
+	'ballot_value.type' =>  'required|string|in:text,image',
+	'ballot_value.value' =>  'required|string',
       ]);
 
       $value = $request->json()->all();
@@ -212,9 +214,9 @@ class BingoController extends Controller
       $bingoValues = $bingo->bingo_values ?
 	    $bingo->bingo_values : [];
 
-      if(in_array($value, $bingoValues, true)) {
-	      return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-      }
+      //if(in_array($value, $bingoValues, true)) {
+	      //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+      //}
 
       array_push($bingoValues, $value);
       $bingo->bingo_values = $bingoValues;
@@ -226,17 +228,18 @@ class BingoController extends Controller
     public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
       $request->validate([
-	      'type' => 'string|in:text,image',
-	      'carton_value' => 'string',
-	      'ballot_value' => 'string'
+	'carton_value.type' => 'string|in:text,image',
+	'carton_value.value' => 'string',
+	'ballot_value.type' =>  'string|in:text,image',
+	'ballot_value.value' =>  'string',
       ]);
 
       $value = $request->json()->all();
       $value['id'] = $value_id;
 
-      if(in_array($value, $bingo->bingo_values, true)) {
-	      return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-      }
+      //if(in_array($value, $bingo->bingo_values, true)) {
+	      //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+      //}
 
       $bingoValues = [];
       foreach($bingo->bingo_values as $bingoValue) {
