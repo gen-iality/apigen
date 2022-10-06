@@ -23,6 +23,9 @@ class BingoController extends Controller
     {
       $request->validate([
 	      'name' => 'required|string|max:250',
+	      'dimensions.format' => 'required|string|in:3x3,4x4,5x5',
+	      'dimensions.amount' => 'required|numeric|in:9,16,25',
+	      'dimensions.minimun_values' => 'required|numeric',
       ]);
 
       $data = $request->json()->all();
