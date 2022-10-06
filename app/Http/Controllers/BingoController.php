@@ -140,22 +140,24 @@ class BingoController extends Controller
      */
     public function importBingoValues(Request $request, $event, Bingo $bingo)
     {
+      $request->validate([
+        'replace_data' => 'required|boolean',
+        'data' => 'required'
+      ]);
       $valuesToImport = $request->json()->all();
-      /*
-      $bingoValues = $bingo->bingo_values ?
-	      $bingo->bingo_values : [];
-      */
+      //dd($valuesToImport['data']);
       //eliminar la data de momento y a futuro un flag para identificar si se añaden a la data existente
-      if(true){ //flag
+      if($valuesToImport['replace_data']){ //flag
         $bingo->bingo_values = [];
         $bingo->save();
       }
 
       $bingoValues = $bingo->bingo_values;
+      $success = [];
       $bingoValues_fail = [];
 
 
-      foreach($valuesToImport as $value) {
+      foreach($valuesToImport['data'] as $value) {
         $count_fail = count($bingoValues_fail);
         if(!isset($value['carton_value']) || !isset($value['ballot_value'])) {
           array_push($bingoValues_fail, $value);
@@ -166,18 +168,16 @@ class BingoController extends Controller
         if(!isset($value['carton_value']['value']) || !isset($value['ballot_value']['value'])) {
           array_push($bingoValues_fail, $value);
         }
-        // validar que el tipo de carton_value sea el correcto
-        if($value['carton_value']['type'] != 'text' && $value['carton_value']['type'] != 'image') {
-          array_push($bingoValues_fail, $value);
-        }
-        // validar que el tipo de ballot_value sea el correcto
-        if($value['ballot_value']['type'] != 'text' && $value['ballot_value']['type'] != 'image') {
+        // validar que el type/value sea el correcto en carton_value y ballot_value => text, image.
+        if($value['carton_value']['type'] != 'text' && $value['carton_value']['type'] != 'image'
+          || $value['ballot_value']['type'] != 'text' && $value['ballot_value']['type'] != 'image') {
           array_push($bingoValues_fail, $value);
         }
 
         if($count_fail == count($bingoValues_fail)) {
           $value[ 'id' ] = uniqid('', true);
           array_push($bingoValues, $value);
+          array_push($success, $value);
         }
       }
 
@@ -186,8 +186,8 @@ class BingoController extends Controller
 
       return response()->json(
         [
-          'success' => $bingoValues,
-          'count_success' => count($bingoValues),
+          'success' => $success,
+          'count_success' => count($success),
           'fail' => $bingoValues_fail,
           'count_fail' => count($bingoValues_fail)
         ], 201
