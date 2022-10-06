@@ -8,6 +8,7 @@ use App\Bingo;
 use App\BingoCard;
 use App\Event;
 use App\Http\Resources\BingoResource;
+use App\evaLib\Services\UserEventService;
 
 class BingoController extends Controller
 {
@@ -63,11 +64,16 @@ class BingoController extends Controller
      */
     public function update(Request $request, $event, Bingo $bingo)
     {
-      $data = $request->json()->all();
-      $bingo->fill($data);
-      $bingo->save();
 
-      return response()->json($bingo);
+	$data = $request->json()->all();
+	$bingo->fill($data);
+	$bingo->save();
+
+	if ($request->query('reset_bingo') === "yes") {
+	    UserEventService::resetBingoCardsForAttendees($bingo);
+	}
+
+	return response()->json($bingo);
     }
 
     /**

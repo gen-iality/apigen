@@ -452,31 +452,47 @@ string(10) "1030522402"
 
       // Solo asignar cartones de bingo cuando el bingo tenga la cantidad de valores
       // minima para poder jugar segun las dimensiones correspondientes
-      if($bingo->dimensions['minimun_values'] > count($bingoValues)) {
+      if(count($bingoValues) < $bingo->dimensions['minimun_values']) {
 	  return ['message' => 'Not enough values to generate bingo cards'];
       }
 
-      if($bingoValues) {
-	$randomBingoCardValues = [];
-      	// asignacion de valores al carton segun las dimensiones del bingo
-      	while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
-      	  $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
-      	  !in_array($randomValue, $randomBingoCardValues, true)
-      	      && array_push($randomBingoCardValues, $randomValue);
-      	}
-
-      	$bingoCard = BingoCard::create(
-      	  [
-      	    'event_user_id' => $event_user_id,
-      	    'event_id' => $event_id,
-      	    'bingo_id' => $bingo->_id,
-      	    'values_bingo_card' => $randomBingoCardValues
-      	  ]
-      	);
-
-	return $bingoCard;
+      $randomBingoCardValues = [];
+      // asignacion de valores al carton segun las dimensiones del bingo
+      while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
+        $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
+        !in_array($randomValue, $randomBingoCardValues, true)
+            && array_push($randomBingoCardValues, $randomValue);
       }
 
+      $bingoCard = BingoCard::create(
+        [
+          'event_user_id' => $event_user_id,
+          'event_id' => $event_id,
+          'bingo_id' => $bingo->_id,
+          'values_bingo_card' => $randomBingoCardValues
+        ]
+      );
+
+      return $bingoCard;
+    }
+
+    /**
+     * Cuando las dimensiones del bingo son cambiadas
+     * y ya existen usuario con cartones asignados
+     * se debe crear/modificar nuevos cartones
+     * con estas nuevas especificaciones
+     */
+    public static function resetBingoCardsForAttendees($bingo)
+    {
+	$eventUsers = Attendee::where('event_id', $bingo->event_id)->get();
+
+	foreach($eventUsers as $eventUser) {
+	    // Eliminar carton
+	    $bingoCard = BingoCard::where('event_user_id', $eventUser->_id)->first();
+	    isset($bingoCard) && $bingoCard->delete();
+	    // crear carton nuevo
+	    self::generateBingoCardForAttendee($eventUser->event_id, $eventUser->_id);
+	}
     }
 
     /**
