@@ -67,7 +67,7 @@ class InvitationMailAnonymous extends Mailable implements ShouldQueue
         $link = config('app.front_url') . "/landing/" . $event->_id . "/evento?email=" . $email . "&names=" . $eventUser->properties["names"];
         
         $this->organization_picture = $organization_picture;
-        $this->image_header = $event->styles["banner_image"];
+        $this->image_header = isset($event->styles['banner_image_email']) ? $event->styles['banner_image_email'] : $event->styles['banner_image'];
         $this->link = $link;
         $this->event = $event;
         $this->eventUser = $eventUser;
