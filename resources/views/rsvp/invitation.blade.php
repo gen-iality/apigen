@@ -1,7 +1,7 @@
 @component('mail::message')    
 @if(!empty($event->styles["banner_image"]))
 <div class="centered">
-<img alt="{{$event->name}}" src={{$event->styles["banner_image"]}} /> 
+<img alt="{{$event->name}}" src={{$image_header}} /> 
 </div>
 {{-- @elseif(!empty($event->styles["banner_image"]))
 <div class="centered">
@@ -37,10 +37,15 @@
 	<div style="text-align: center">
 		@if($event->type_event == "physicalEvent")
 			<img  src="{{$qr}}" />
-		@else
-			@component('mail::button', ['url' => $link , 'color' => 'evius'])
-				{{ __ ('Mail.enter_event')}}
-			@endcomponent
+			@elseif($event->type_event == "onlineEvent")
+				@component('mail::button', ['url' => $link , 'color' => 'evius'])
+					{{ __ ('Mail.enter_event')}}
+				@endcomponent
+			@elseif($event->type_event == "hybridEvent")
+				<img  src="{{$qr}}" />
+				@component('mail::button', ['url' => $link , 'color' => 'evius'])
+					{{ __ ('Mail.enter_event')}}
+				@endcomponent
 		@endif
 	</div>
 	
