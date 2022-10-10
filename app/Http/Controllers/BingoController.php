@@ -64,7 +64,6 @@ class BingoController extends Controller
      */
     public function update(Request $request, $event, Bingo $bingo)
     {
-
 	$data = $request->json()->all();
 	$bingo->fill($data);
 	$bingo->save();
@@ -236,32 +235,33 @@ class BingoController extends Controller
 
     public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
-      $request->validate([
-	'carton_value.type' => 'string|in:text,image',
-	'carton_value.value' => 'string',
-	'ballot_value.type' =>  'string|in:text,image',
-	'ballot_value.value' =>  'string',
-      ]);
+        $request->validate([
+          'carton_value.type' => 'string|in:text,image',
+          'carton_value.value' => 'string',
+          'ballot_value.type' =>  'string|in:text,image',
+          'ballot_value.value' =>  'string',
+        ]);
 
-      $value = $request->json()->all();
-      $value['id'] = $value_id;
+        $value = $request->json()->all();
+        $value['id'] = $value_id;
 
-      //if(in_array($value, $bingo->bingo_values, true)) {
-	      //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-      //}
+        //if(in_array($value, $bingo->bingo_values, true)) {
+                //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+        //}
+	UserEventService::updateBingoValues($bingo, $value);
 
-      $bingoValues = [];
-      foreach($bingo->bingo_values as $bingoValue) {
-	      if(isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
-	        $bingoValue = $value;
-	      }
-	      array_push($bingoValues, $bingoValue);
-      }
+        $bingoValues = [];
+        foreach($bingo->bingo_values as $bingoValue) {
+                if(isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
+                  $bingoValue = $value;
+                }
+                array_push($bingoValues, $bingoValue);
+        }
 
-      $bingo->bingo_values = $bingoValues;
-      $bingo->save();
+        $bingo->bingo_values = $bingoValues;
+        $bingo->save();
 
-      return response()->json($bingo);
+        return response()->json($bingo);
     }
 
     public function deleteBingoValue($event, Bingo $bingo, $value_id)
