@@ -499,7 +499,7 @@ Route::group(
  * Plan
  */
 
-// Route::apiResource('plans', 'PlansController');
+Route::apiResource('plans', 'PlansController');
 
 /*****
  * Notification
@@ -512,17 +512,17 @@ Route::group(
  * Billing
  */
 
-// Route::apiResource('billings', 'BillingController');
-// Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
-// Route::get('reference/{reference}/billings', 'BillingController@findByReference');
-// Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
+Route::apiResource('billings', 'BillingController');
+Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
+Route::get('reference/{reference}/billings', 'BillingController@findByReference');
+Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
 
 /*****
  * Payment
  */
 
-// Route::apiResource('payments', 'PaymentController');
-// Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
+Route::apiResource('payments', 'PaymentController');
+Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
 
 /*****
  * Addons
