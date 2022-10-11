@@ -495,6 +495,34 @@ string(10) "1030522402"
 	}
     }
 
+    // Cuando un valor de un bingo es actualizado
+    // en los cartones de los usuarios este valor debe actualizarce
+    public static function updateBingoValues($bingo, $value)
+    {
+	// traer todos los bingo cards
+	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)->get();
+	// verificar que existan cartones
+	if(!isset($bingoCards)) {
+	    return ['message' => 'There are no bingo cards to update'];
+	}
+
+        $updatedBingoValues = [];
+	foreach($bingoCards as $bingoCard) {
+	    // filtrar todos los que tengan ese valor
+	    foreach($bingoCard->values_bingo_card as $bingoValue) {
+		// remplazar el valor actualizar
+                if($bingoValue['id'] === $value['id']) {
+		    $bingoValue = $value;
+                }
+                array_push($updatedBingoValues, $bingoValue);
+	    }
+
+	    $bingoCard->values_bingo_card = $updatedBingoValues;
+	    $bingoCard->save();
+	    $updatedBingoValues = [];
+	}
+    }
+
     /**
      * Asignar campo para checkin de actividad
      *
