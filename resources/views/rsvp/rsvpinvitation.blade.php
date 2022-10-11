@@ -40,8 +40,17 @@
 @endif
 
 <div style="text-align: center">
-	@if($event->type_event == "physicalEvent" || $event->type_event == "hybridEvent")
-		<img  src="{{$qr}}" alt={{$event->type_event}} />
+	@if($event->type_event == "physicalEvent")
+		<img  src="{{$qr}}" />
+		@elseif($event->type_event == "onlineEvent")
+			@component('mail::button', ['url' => $link , 'color' => 'evius'])
+				{{ __ ('Mail.enter_event')}}
+			@endcomponent
+		@elseif($event->type_event == "hybridEvent")
+			<img  src="{{$qr}}" />
+			@component('mail::button', ['url' => $link , 'color' => 'evius'])
+				{{ __ ('Mail.enter_event')}}
+			@endcomponent
 	@endif
 </div>
 
@@ -58,13 +67,13 @@
 {!!$event->registration_message!!}
 @endif
 
-<div>
+{{-- <div>
 	@if(is_null($include_login_button) || $include_login_button == true || $include_login_button != false )
 		@component('mail::button', ['url' => $link , 'color' => 'evius'])
 			{{ __ ('Mail.enter_event')}}
 		@endcomponent
 	@endif
-</div>
+</div> --}}
 
 Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
 
