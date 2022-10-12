@@ -573,6 +573,7 @@ Route::post('events/{event}/bingos/{bingo}/values', 'BingoController@addBingoVal
 Route::put('events/{event}/bingos/{bingo}/values/{value}', 'BingoController@editBingoValues');
 Route::delete('events/{event}/bingos/{bingo}/values/{value}', 'BingoController@deleteBingoValue');
 //Route::put('events/{event}/bingos/{bingo}/random-values', 'BingoController@createRandomBingoValues');
+Route::put('events/{event}/bingos/{bingo}/reset-bingo-cards', 'BingoController@resetBingoCards');
 Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@importBingoValues');
 //BingobyEvent
 Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
