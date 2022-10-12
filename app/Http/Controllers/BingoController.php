@@ -127,6 +127,13 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
+    public function resetBingoCards($event, Bingo $bingo)
+    {
+	UserEventService::resetBingoCardsForAttendees($bingo);
+
+	return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
+    }
+
     /**
      * It takes a JSON array of objects, each object containing a `carton_value` and a `ballot_value`
      * property, and saves them to the database
