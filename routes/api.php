@@ -518,6 +518,11 @@ Route::get('reference/{reference}/billings', 'BillingController@findByReference'
 Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
 
 /*****
+ * PreBilling
+ */
+
+Route::post('preBilling', 'PreBillingController@store');
+/*****
  * Payment
  */
 
@@ -558,12 +563,6 @@ Route::get('guess-pass', 'UserController@guessPassword');
 
 Route::apiResource('ticketCategory', 'TicketCategoryController');
 Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCategorybyEvent');
-
-/*****
- * PreBilling
- */
-
- Route::post('preBilling', 'PreBillingController@store');
 
 // Bingo
 Route::post('events/{event}/bingos', 'BingoController@store');
