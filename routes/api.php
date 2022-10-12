@@ -516,6 +516,7 @@ Route::apiResource('billings', 'BillingController');
 Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
 Route::get('reference/{reference}/billings', 'BillingController@findByReference');
 Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
+Route::post('billings/tickets', 'BillingController@storeTickets');
 
 /*****
  * PreBilling
