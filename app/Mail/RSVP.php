@@ -139,7 +139,7 @@ class RSVP extends Mailable implements ShouldQueue
 
         $this->image_header = $image_header;
         $this->content_header = $content_header;
-        $this->image_footer = $image_footer;
+        $this->image_footer = isset($event->styles['banner_footer_email']) ? $event->styles['banner_footer_email'] : $image_footer;
         $this->include_date = $include_date;
         $this->include_date = $include_date;
         $this->link = $link;
