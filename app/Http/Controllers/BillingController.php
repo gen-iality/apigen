@@ -158,6 +158,38 @@ class BillingController extends Controller
 
     }
 
+    public function storeTickets(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|string',
+            'billing' => 'required',
+            'billing.save' => 'required',
+            'billing.reference_wompi' => 'required|string',
+            'billing.reference_evius' => 'required|string',
+            'billing.billing_email' => 'required|email',
+            'billing.payment_method' => 'required',
+            'billing.payment_method.type' => 'required|string',
+            'billing.payment_method.brand' => 'required|string',
+            'billing.payment_method.last_four' => 'required|string',
+            'billing.payment_method.address' => 'required',
+            'billing.payment_method.address.email' => 'required|email',
+            'billing.payment_method.method_name' => 'required|string',
+            'billing.base_value' => 'required|numeric',
+            'billing.total' => 'required|numeric',
+            'billing.tax' => 'required|numeric',
+            'billing.currency' => 'required',
+            'status' => 'required|string',
+        ]);
+
+        $data = $request->json()->all();
+        
+        $Billing = new Billing($data);
+        $Billing->save();
+
+        return response()->json($Billing, 201);
+  
+    }
+
     public function saveAutomaticPayment($billing)
     {
         if ($billing) {

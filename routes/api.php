@@ -512,17 +512,24 @@ Route::group(
  * Billing
  */
 
-// Route::apiResource('billings', 'BillingController');
-// Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
-// Route::get('reference/{reference}/billings', 'BillingController@findByReference');
-// Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
+Route::apiResource('billings', 'BillingController');
+Route::get('users/{user}/billings', 'BillingController@BillingbyUser');
+Route::get('reference/{reference}/billings', 'BillingController@findByReference');
+Route::put('reference/{reference}/billings', 'BillingController@updateByReference');
+Route::post('billings/tickets', 'BillingController@storeTickets');
+
+/*****
+ * PreBilling
+ */
+
+Route::post('preBilling', 'PreBillingController@store');
 
 /*****
  * Payment
  */
 
-// Route::apiResource('payments', 'PaymentController');
-// Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
+Route::apiResource('payments', 'PaymentController');
+Route::get('users/{user}/payments', 'PaymentController@PaymentbyUser');
 
 /*****
  * Addons
@@ -558,12 +565,6 @@ Route::get('guess-pass', 'UserController@guessPassword');
 
 Route::apiResource('ticketCategory', 'TicketCategoryController');
 Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCategorybyEvent');
-
-/*****
- * PreBilling
- */
-
-// Route::post('preBilling', 'PreBillingController@store');
 
 // Bingo
 Route::post('events/{event}/bingos', 'BingoController@store');
