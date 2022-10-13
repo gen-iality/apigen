@@ -50,22 +50,28 @@
 	</div>
 	
 </div>
-Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
 
-<hr style="border-right : 0;border-left: 0;" />
 <div style="text-align: center">
-<p style="font-size: 15px;color: gray;font-style: italic">
-	{{ __('Mail.recommend_browser') }}
-</p>
-<p style="font-size: 15px;color: gray;font-style: italic">
-	{{ __('Mail.support_mail') }}
-</p>
+	@if($event->type_event == "physicalEvent")
+	Nota: Recuerda que el acceso es de uso personal, no olvides presentarlo al ingreso del evento.
+		@elseif($event->type_event == "onlineEvent" || $event->type_event == "hybridEvent")
+		Nota: Recuerda que el acceso es de uso personal y no podrá ser abierto en dos o mas dispositivo al mismo tiempo.
+		<hr style="border-right : 0;border-left: 0;" />
+		<div style="text-align: center">
+			<p style="font-size: 15px;color: gray;font-style: italic">
+				{{ __('Mail.recommend_browser') }}
+			</p>
+			<p style="font-size: 15px;color: gray;font-style: italic">
+				{{ __('Mail.support_mail') }}
+			</p>
+		</div>
+		<p>
+			{{ __('Mail.alternative_entry')}}
+			<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
+		</p>
+		@elseif($event->type_event == "hybridEvent")
+	@endif
 </div>
-
-<p>
-	{{ __('Mail.alternative_entry')}}
-	<a href="{{$link}}">{{ __('Mail.enter_button')}}</a>
-</p>
 
 <div class="centered">
 @if(isset($image_footer) && !empty($image_footer))
