@@ -191,7 +191,7 @@ class RSVPController extends Controller implements ShouldQueue
         //var_dump($eventUsers);
         //Send RSVP
         self::_sendRSVPmail(
-            $eventUsers, $message, $event, $data
+            $eventUsers, $message, $event, $data, $request
         );
 
         return $message;
@@ -224,7 +224,7 @@ class RSVPController extends Controller implements ShouldQueue
      * @param [type] $message
      * @return void
      */
-    private static function _sendRSVPmail($eventUsers, $message, $event, $data = null)
+    private static function _sendRSVPmail($eventUsers, $message, $event, $data = null, $request)
     {
         \Log::debug("attemp to send rsvp mail" . $message->subject);
 
@@ -268,11 +268,11 @@ class RSVPController extends Controller implements ShouldQueue
                     continue;
                 }
             }
-            
+            $urlOrigin = $request->header('origin');
             Mail::to($email)
                 ->queue(
                     new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, 
-                    $message->subject, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
+                    $message->subject, $urlOrigin, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
                 );
                 
  
