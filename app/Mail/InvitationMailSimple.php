@@ -51,7 +51,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
     public $mensajepersonalizado;
     public $qr;
     public $firebasePasswordChange;
-    public $urlOrigin // Hace dinamico el envio de correo segun la url del front
+    public $urlOrigin; // Hace dinamico el envio de correo segun la url del front
 
     /**
      * Create a new message instance.
