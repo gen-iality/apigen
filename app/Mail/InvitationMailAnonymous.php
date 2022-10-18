@@ -39,13 +39,14 @@ class InvitationMailAnonymous extends Mailable implements ShouldQueue
     public $ical = "";
     public $qr;
     public $urlconfirmacion;
+    public $urlOrigin;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Event $event, $eventUser)
+    public function __construct(Event $event, $eventUser, $urlOrigin)
     {
 
         $locale = isset($event->language) ? $event->language : 'es';
@@ -64,7 +65,8 @@ class InvitationMailAnonymous extends Mailable implements ShouldQueue
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
         
         $link = '';
-        $link = config('app.front_url') . "/landing/" . $event->_id . "/evento?email=" . $email . "&names=" . $eventUser->properties["names"];
+        $this->urlOrigin = isset($urlOrigin) ? $urlOrigin : config('app.front_url');
+        $link = $this->urlOrigin . "/landing/" . $event->_id . "/evento?email=" . $email . "&names=" . $eventUser->properties["names"];
         
         $this->organization_picture = $organization_picture;
         $this->image_header = isset($event->styles['banner_image_email']) ? $event->styles['banner_image_email'] : $event->styles['banner_image'];
