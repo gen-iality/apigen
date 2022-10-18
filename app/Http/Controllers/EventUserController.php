@@ -477,10 +477,11 @@ class EventUserController extends Controller
 
         if(empty($noSendMail))
         {
+	    $urlOrigin = $request->header('origin');
             Mail::to($email)
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name)
+                new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name, $urlOrigin)
             );
         }
             
