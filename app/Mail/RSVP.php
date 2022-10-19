@@ -53,13 +53,14 @@ class RSVP extends Mailable implements ShouldQueue
     public $messageLog;
     public $qr;
     public $include_login_button;
+    public $urlOrigin;
     
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $data ,$messageLog)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null, string $urlOrigin, $image_header = null, $content_header = null, $image_footer = null, $include_date = null , $data ,$messageLog)
     {
 
         $locale = isset($event->language) ? $event->language : 'es';
@@ -101,6 +102,7 @@ class RSVP extends Mailable implements ShouldQueue
         }
 
         $link = '';
+        $this->urlOrigin = isset($urlOrigin) ? $urlOrigin : config('app.front_url');
         if (!$eventUser->anonymous) {
             // Admin SDK API to generate the sign in with email link.
             $firebasaUser = $auth->getUserByEmail($email);
@@ -110,19 +112,19 @@ class RSVP extends Mailable implements ShouldQueue
                 $link = $auth->getSignInWithEmailLink(
                     $email,
                     [
-                        "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+                        "url" => $this->urlOrigin . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
                     ]    
                 );
             } else {
                 $link = $auth->getEmailVerificationLink(
                     $email,
                     [
-                        "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+                        "url" => $this->urlOrigin . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
                     ]    
                 );
             }
         }else {
-            $link = config('app.front_url') . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
+            $link = $this->urlOrigin . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         }
 
         
