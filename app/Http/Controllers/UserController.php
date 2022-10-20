@@ -673,8 +673,7 @@ class UserController extends UserControllerWeb
         $auth = resolve('Kreait\Firebase\Auth');
 
         $request->validate([
-            "email" => "required|email:rfc,dns",
-            "hostName" => "required|string"                     
+            "email" => "required|email:rfc,dns",                     
         ]);
 
         $data = $request->json()->all();
@@ -689,16 +688,12 @@ class UserController extends UserControllerWeb
         }
         //Algunos clientes prefieren que su marca este en todos los correos por eso se coloca la opción de evento     
         $event = null;
-        $url = "";
+        $url = $request->headers->get('referer'); // url front dinamica
         if(isset($data['event_id']))
         {
             $event = Event::find($data['event_id']);
-            $url = config('app.front_url') . "/landing/". $event->_id ."/event";
-        }else{
-            // $url = config('app.front_url');
-            $url = $data['hostName'];
+            $url = $url . "/landing/". $event->_id ."/event";
         }
-        
         
         $link = $auth->getPasswordResetLink($email, 
             [
