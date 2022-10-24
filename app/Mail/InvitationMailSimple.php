@@ -2,23 +2,17 @@
 
 namespace App\Mail;
 
+use App;
+use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use App\evaLib\Services\UserEventService;
+use Illuminate\Mail\Mailable;use Illuminate\Queue\SerializesModels;
+use QRCode;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
-use App\evaLib\Services\GoogleFiles;use QRCode;
-use App;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Http;
-use App\evaLib\Services\WhatsappService;
-use App\evaLib\Services\SmsService;
-
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
 {
@@ -45,7 +39,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
     public $event_location;
     public $logo;
     public $ical = "";
-    public $changePassword;    
+    public $changePassword;
     public $onlylink;
     public $onetimelogin;
     public $mensajepersonalizado;
@@ -58,7 +52,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, string $urlOrigin, $image_header = null,$content_header = null, $image_footer = null,$changePassword = false,$destination=null,$onlylink=null,  $firebasePasswordChange = null)
+    public function __construct(string $message, Event $event, $eventUser, string $image = null, $activity = null, string $subject = null, string $urlOrigin, $image_header = null, $content_header = null, $image_footer = null, $changePassword = false, $destination = null, $onlylink = null, $firebasePasswordChange = null)
     {
 
         $locale = isset($event->language) ? $event->language : 'es';
@@ -66,17 +60,16 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
         $auth = resolve('Kreait\Firebase\Auth');
         //dd("auth", $auth);
-        $this->auth = $auth;        
-        
+        $this->auth = $auth;
 
-        $destination  = ($destination)?$destination:config('app.front_url');
+        $destination = ($destination) ? $destination : config('app.front_url');
 
         $event_location = null;
         if (!empty($event["location"]["FormattedAddress"])) {
             $event_location = $event["location"]["FormattedAddress"];
         }
         if (!empty($event->alt_image)) {
-           // $image = $event->alt_image;
+            // $image = $event->alt_image;
         }
         $type = null;
         $email = isset($eventUser["properties"]["email"]) ? $eventUser["properties"]["email"] : $eventUser["email"];
@@ -84,25 +77,24 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         if (is_null($email)) {
             $email = $eventUser->properties["email"];
         }
-        
+
         $organization_picture = !empty($event->styles["event_image"]) && strpos($event->styles["event_image"], 'htt') === 0 ? $event->styles["event_image"] : null;
-        
+
         //dd("es anonimo: ", $eventUser->anonymous);
         if (!$eventUser->anonymous) {
             $userPassword = isset($eventUser["properties"]["password"]) ? $eventUser["properties"]["password"] : null;
             $password = isset($userPassword) ? $userPassword : $email;
 
-            if($changePassword)
-            {
-                $password =  self::createPass();
+            if ($changePassword) {
+                $password = self::createPass();
                 try {
                     $updatedUser = $this->auth->changeUserPassword($eventUser['user']['uid'], $password);
                     $properties = $eventUser["properties"];
                     $properties["password"] = $password;
                     $eventUser["properties"] = $properties;
-                    $eventUser->save();                 
+                    $eventUser->save();
 
-                }catch (AuthError $e) {
+                } catch (AuthError $e) {
 
                     Log::error("temp password used. " . $e->getMessage());
                     $password = "evius.2040";
@@ -117,31 +109,29 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
             $pass = self::encryptdata($password);
 
         }
-        
 
         $link = '';
-	$this->urlOrigin = isset($urlOrigin) ? $urlOrigin : config('app.front_url');
+        $this->urlOrigin = isset($urlOrigin) ? $urlOrigin : config('app.front_url');
         if (!$eventUser->anonymous) {
             // Admin SDK API to generate the sign in with email link.
             $firebasaUser = $auth->getUserByEmail($email);
-            if($firebasaUser->emailVerified)
-            {   
+            if ($firebasaUser->emailVerified) {
 
                 $link = $auth->getSignInWithEmailLink(
                     $email,
                     [
-                        "url" => $this->urlOrigin . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-                    ]    
+                        "url" => $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
+                    ]
                 );
             } else {
                 $link = $auth->getEmailVerificationLink(
                     $email,
                     [
-                        "url" => $this->urlOrigin . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-                    ]    
+                        "url" => $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
+                    ]
                 );
             }
-        }else {
+        } else {
             $link = $this->urlOrigin . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         }
 
@@ -150,24 +140,24 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $has_extension = false;
         $phone = "";
         foreach ($event->user_properties as $propertie) {
-            if ($propertie->type == "codearea") {
-                $has_extension = true;
-                $phone = $propertie->name;
-            }
+        if ($propertie->type == "codearea") {
+        $has_extension = true;
+        $phone = $propertie->name;
+        }
         }
         if ($has_extension) {
-            $code = $eventUser["properties"]["code"];
-            $codeWhatsapp = substr($code, 1);
-            $number = $eventUser["properties"][$phone];
-            $numberWhatsapp = $codeWhatsapp . $number;
-            $codeUrl = WhatsappService::getCode($link);
-            $bodyWhatsapp = WhatsappService::templateButton($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $codeUrl);
-            WhatsappService::sendWhatsapp($bodyWhatsapp);
-            $numberSms = $code . $number;//con el +
-            $body = SmsService::bodyInvitationEvent($eventUser_name, $event->name, $link);
-            SmsService::sendSms($numberSms, $body);
+        $code = $eventUser["properties"]["code"];
+        $codeWhatsapp = substr($code, 1);
+        $number = $eventUser["properties"][$phone];
+        $numberWhatsapp = $codeWhatsapp . $number;
+        $codeUrl = WhatsappService::getCode($link);
+        $bodyWhatsapp = WhatsappService::templateButton($numberWhatsapp, $event->styles["banner_image"], $eventUser_name, $event->name, $codeUrl);
+        WhatsappService::sendWhatsapp($bodyWhatsapp);
+        $numberSms = $code . $number;//con el +
+        $body = SmsService::bodyInvitationEvent($eventUser_name, $event->name, $link);
+        SmsService::sendSms($numberSms, $body);
         }
-        */
+         */
 
         // $link = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&innerpath=' . $event->_id . "&pass=" . urlencode($pass);
         $content_header = "<div style='text-align: center;font-size: 115%'>" . $content_header . "</div>";
@@ -176,8 +166,8 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         // [LINK_EVENTO:TEXTO]
         $pattern = '/\[LINK_EVENTO\:(.*)\]/i';
 
-        $replacement = '<a href='.$link.'>$1</a>';
-        
+        $replacement = '<a href=' . $link . '>$1</a>';
+
         $mensajepersonalizado = preg_replace($pattern, $replacement, $event->registration_message);
 
         // var_dump($mensajepersonalizado);die;
@@ -197,51 +187,48 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $this->eventUser_name = $eventUser_name;
         $this->password = $password;
         $this->email = $email;
-        $this->urlconfirmacion = $destination.'/landing/'.$event->_id;
+        $this->urlconfirmacion = $destination . '/landing/' . $event->_id;
         $this->changePassword = $changePassword;
         $this->onlylink = $onlylink;
         $this->mensajepersonalizado = $mensajepersonalizado;
         $this->firebasePasswordChange = $firebasePasswordChange;
-        
-        
 
         if (!$subject) {
             "Invitación a " . $event->name . "";
         }
-        
+
         //Definición de horario de inicio y fin del evento.Se le agrega -05:00 para que quede hora Colombia
-            $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start."-05:00") : \Carbon\Carbon::parse($event->datetime_from ."-05:00");
-            $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end."-05:00") : \Carbon\Carbon::parse($event->datetime_to."-05:00");        
-            $date_time_from = $date_time_from->setTimezone("UTC");
-            $date_time_to = $date_time_to->setTimezone("UTC");
+        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start . "-05:00") : \Carbon\Carbon::parse($event->datetime_from . "-05:00");
+        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end . "-05:00") : \Carbon\Carbon::parse($event->datetime_to . "-05:00");
+        $date_time_from = $date_time_from->setTimezone("UTC");
+        $date_time_to = $date_time_to->setTimezone("UTC");
 
         $this->subject = $subject;
         // $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
         // $descripcion .= ($event->registration_message) ? $event->registration_message : $event->description;
 
-        $descripcion = $event->name." Ver el evento en: ".$this->link;
-        
-     
+        $descripcion = $event->name . " Ver el evento en: " . $this->link;
+
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-            $this->ical = iCalCalendar::create($event->name)
-                ->appendProperty(
-                    TextPropertyType::create('URL', $this->urlconfirmacion) 
-                )
-                ->appendProperty(
-                    TextPropertyType::create('METHOD', "REQUEST") 
-                )
-                ->event(iCalEvent::create($event->name)
-                        ->startsAt($date_time_from)
-                        ->endsAt($date_time_to)
-                        ->description($descripcion)
-                        ->uniqueIdentifier($event->_id)
-                        ->createdAt(new \DateTime())
-                        ->address(($event->address) ? $event->address :  $this->urlconfirmacion)
-                        // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
-                    //->coordinates(51.2343, 4.4287)
-                        ->organizer('soporte@evius.co', $event->organizer->name)
-                        ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
-                )->get();
+        $this->ical = iCalCalendar::create($event->name)
+            ->appendProperty(
+                TextPropertyType::create('URL', $this->urlconfirmacion)
+            )
+            ->appendProperty(
+                TextPropertyType::create('METHOD', "REQUEST")
+            )
+            ->event(iCalEvent::create($event->name)
+                    ->startsAt($date_time_from)
+                    ->endsAt($date_time_to)
+                    ->description($descripcion)
+                    ->uniqueIdentifier($event->_id)
+                    ->createdAt(new \DateTime())
+                    ->address(($event->address) ? $event->address : $this->urlconfirmacion)
+                // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                //->coordinates(51.2343, 4.4287)
+                    ->organizer('soporte@evius.co', $event->organizer->name)
+                    ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+            )->get();
         // var_dump($date_time_from);die;
 
     }
@@ -295,89 +282,83 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $this->logo = url($logo_evius);
 
         $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
-        $from = !empty($organization) ? $organization->name : "Evius Event ";        
+        $from = !empty($organization) ? $organization->name : "Evius Event ";
         $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
         $gfService = new GoogleFiles();
         $event = $this->event;
         try {
 
-            ob_start(); 
+            ob_start();
             $qr = QRCode::text($this->eventUser->_id)->setSize(8)->setMargin(4)->png();
             $page = ob_get_contents();
             ob_end_clean();
             $type = "png";
             $image = $page;
-            $url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
+            $url = $gfService->storeFile($image, "" . $this->eventUser->_id . "." . $type);
 
             $this->qr = (string) $url;
             $this->logo = url($logo_evius);
-
 
         } catch (\Exception $e) {
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
-        
 
-        if($this->onlylink){
-           
+        if ($this->onlylink) {
+
             return $this
-            ->from($emailOrganization, $from)
-            ->subject($this->subject)
-            ->markdown('rsvp.onetimelogin');
+                ->from($emailOrganization, $from)
+                ->subject($this->subject)
+                ->markdown('rsvp.onetimelogin');
         }
-        
+
         $locale = isset($this->event->language) ? $this->event->language : 'es';
         App::setLocale($locale);
 
-        if($this->changePassword)
-        {
+        if ($this->changePassword) {
             return $this
-            ->from($emailOrganization, $from)
-            ->subject($this->subject)
-            ->markdown('rsvp.changepassword');
+                ->from($emailOrganization, $from)
+                ->subject($this->subject)
+                ->markdown('rsvp.changepassword');
         }
-        if($this->onetimelogin){
+        if ($this->onetimelogin) {
             return $this
-            ->from($emailOrganization, $from)
-            ->subject($this->subject)
-            ->markdown('rsvp.onetimelogin');
+                ->from($emailOrganization, $from)
+                ->subject($this->subject)
+                ->markdown('rsvp.onetimelogin');
         }
-        if($this->event->send_custom_email)
-        {   
-            
+        if ($this->event->send_custom_email) {
+
             return $this
-            ->from($emailOrganization, $from)
-            ->subject($this->subject)
-            // ->attachData($this->ical, 'ical.ics', [
-            //     'mime' => 'text/calendar',
-            // ])
-            ->markdown('rsvp.invitationcustom');
-        //return $this->view('vendor.mail.html.message');
+                ->from($emailOrganization, $from)
+                ->subject($this->subject)
+                // ->attachData($this->ical, 'ical.ics', [
+                //     'mime' => 'text/calendar',
+                // ])
+                ->markdown('rsvp.invitationcustom');
+            //return $this->view('vendor.mail.html.message');
         }
-        
-        if($this->event->_id === '60c93174a85d8f027013691f' || $this->event->_id === "609ea39ca79e084e7602214c" || $this->event->_id === "60c9313f3e6e7a525514c3c7")
-        {
+
+        if ($this->event->_id === '60c93174a85d8f027013691f' || $this->event->_id === "609ea39ca79e084e7602214c" || $this->event->_id === "60c9313f3e6e7a525514c3c7") {
             return $this
-            ->from($emailOrganization, $from)
-            ->subject($this->subject)
-            ->markdown('rsvp.invitation');
+                ->from($emailOrganization, $from)
+                ->subject($this->subject)
+                ->markdown('rsvp.invitation');
         }
-        
+
         $icalCalendar = isset($event->extra_config['include_ical_calendar']) ? $event->extra_config['include_ical_calendar'] : true;
 
-        if(!$icalCalendar)
-        {
-            return $this ->from($emailOrganization, $from)
-            ->subject($this->subject)
-            ->markdown('rsvp.invitation');
+        if (!$icalCalendar) {
+            return $this->from($emailOrganization, $from)
+                ->subject($this->subject)
+                ->markdown('rsvp.invitation');
         }
-        return $this ->from($emailOrganization, $from)
+        return $this->from($emailOrganization, $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
             ])
             ->markdown('rsvp.invitation');
-        
+
     }
 }
