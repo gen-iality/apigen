@@ -105,13 +105,18 @@ class EventUserController extends Controller
 	  'bingo' => null
 	];
 
-	// asignar true si el asistente tiene un carton de bingo en el evento
-	BingoCard::where([
+	// asignar bingoCard y true si el asistente tiene carton
+	$bingoCard = BingoCard::where([
 	  [ 'event_id', $event ],
 	  ['event_user_id', $eventUser->_id]
-	])->exists() ?
-	  $dataEventUser['bingo'] = true
-	  : $dataEventUser['bingo'] = false;
+	])->first();
+
+	if (isset($bingoCard)) {
+	    $dataEventUser['bingo'] = true;
+	    $dataEventUser['bingo_card'] = $bingoCard;
+	} else {
+	    $dataEventUser['bingo'] = false;
+	}
 
 	array_push($attendeesist, $dataEventUser);
       }
