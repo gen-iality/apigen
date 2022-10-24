@@ -6,6 +6,7 @@ namespace App;
 //Importante usar moloquent!!!!!!
 use App\Models\Event as ModelsEvent;
 use Carbon\Carbon;
+
 //use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 //use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 //use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,22 +28,23 @@ class Event extends ModelsEvent
     protected $with = ['author', 'categories', 'eventType', 'organiser', 'organizer', 'currency', 'tickets'];
 
     protected $fillable = [
-        'has_payment','author', 'name', 'description', 'location', 'venue', 'address', 'pulep', 'registration_message',
+        'has_payment', 'author', 'name', 'description', 'location', 'venue', 'address', 'pulep', 'registration_message',
         'datetime_from', 'datetime_to', 'date_start', 'date_end', 'time_start', 'time_end',
         'visibility', 'picture', 'organization_id', 'category', 'extra_config',
         'user_properties', 'properties_group', 'styles', 'has_date', 'app_configuration',
         'banner_image', 'banner_image_email', 'homeSelectedScreen', 'allow_register', 'allow_detail_calendar', 'analytics',
         'banner_image_link', 'enable_language', "map_image", 'type_event', 'itemsMenu', 'video', 'meetinghostid', 'meetinghostname', 'meetinghostemail', 'dates',
         'include_date', 'event_platform', 'fields_conditions', 'validateEmail', 'loader_page', 'data_loader_page', 'show_banner', 'initial_page', 'show_banner_footer',
-        'send_custom_email' , 'language', 'googleanlyticsid','status','googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
+        'send_custom_email', 'language', 'googleanlyticsid', 'status', 'googletagmanagerid', 'facebookpixelid', 'sendregistrationnotification',
         'video_position',
         'sms_notification', //boolean para activar o desactivar el envio de sms
-	    'bingo', // boolean para saber si un evento tiene bingo
-	    'later_days', // restriction plan: Days after the live landing event 
+        'bingo', // boolean para saber si un evento tiene bingo
+        'dynamics', // object para guardar los datos de los campos dinamicos de un evento. Ej = {'bingo': true, 'share_photo': true}
+        'later_days', // restriction plan: Days after the live landing event
         'where_it_run', // prelanding: boolean para saber si un evento tiene prelanding,
         'url_external', // prelanding: url externa para redireccionar,
         'success_message', // prelanding: mensaje de exito para mostrar en el prelanding,
-        'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage' // count royal prestige
+        'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage', // count royal prestige
 
     ];
 
@@ -221,7 +223,7 @@ class Event extends ModelsEvent
 
     public function rols()
     {
-        return $this->morphMany('App\Rol' , 'modeltable');
+        return $this->morphMany('App\Rol', 'modeltable');
     }
 
     public function user_properties()
