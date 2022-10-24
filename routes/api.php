@@ -592,3 +592,10 @@ Route::get('nexmo-send-sms', 'SmsController@sendSms');
 
 //REDIRECT TO LANDING
 Route::get('invitation/{code}', 'UrlController@redirectToLanding');
+
+//SHARE PHOTO
+Route::apiResource('sharephoto', 'SharePhotoController');
+Route::put('sharephoto/{share_photo}/addpost', 'SharePhotoController@addOnePost');
+Route::delete('sharephoto/{share_photo}/post/{post_id}', 'SharePhotoController@removePost');
+Route::put('sharephoto/{share_photo}/addlike/{post_id}', 'SharePhotoController@addOneLike');
+Route::delete('sharephoto/{share_photo}/unlike/{post_id}', 'SharePhotoController@unlike');

@@ -2,10 +2,7 @@
 
 namespace App;
 
-//use Illuminate\Database\Eloquent\Model;
-use Moloquent;
-
-class Url extends MyBaseModel
+class SharePhoto extends MyBaseModel
 {
 
     protected $table = ('share_photos');
