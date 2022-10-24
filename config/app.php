@@ -32,7 +32,7 @@ return [
     'evius_api' => env('EVIUS_API', 'https://api.evius.co/api'),
     'page_size' => 2500,
     'sendinblue_page' => 'https://api.sendinblue.com/v2.0',
-    'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF", 'banner_image_email' => "" , 'footer_image_email' => ""],
+    'default_event_styles' => ['buttonColor' => "#FFF", 'banner_color' => "#FFF", 'menu_color' => "#FFF", 'event_image' => "#FFF", 'banner_image' => "#FFF", 'menu_image' => "#FFF", 'banner_image_email' => "", 'footer_image_email' => ""],
     'app_configuration' => [],
     'access_restriction_types_available' => [SUGGESTED, EXCLUSIVE, OPEN],
     'pushdirection' => env('PUSH_URL', 'production'),
@@ -43,6 +43,7 @@ return [
     'base_uri' => env('BASE_URI', 'https://graph.facebook.com/v14.0/100339866185300/'), //whatsapp base uri
     'authorization' => env('AUTHORIZATION'), //whatsapp token
     'authorization_mmasivo' => env('AUTHORIZATION_MMASIVO'), //mmasivo token
+    'rol_admin' => env('ROL_ADMIN', '5c1a59b2f33bd40bb67f2322'), //rol admin
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -225,7 +226,7 @@ return [
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-	Maatwebsite\Excel\ExcelServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -241,7 +242,7 @@ return [
      */
 
     'aliases' => [
-        'Sentry' => Sentry\Laravel\Facade::class,     
+        'Sentry' => Sentry\Laravel\Facade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -300,8 +301,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-	'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
