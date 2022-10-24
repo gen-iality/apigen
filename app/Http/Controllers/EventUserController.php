@@ -1,31 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Organization;
-use App\Http\Resources\EventResource;
+
 use App\Account;
-use App\Attendee;
 use App\Activities;
+use App\Attendee;
 use App\BingoCard;
+use App\evaLib\Services\AdministratorService;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\UpdateRolEventUserAndSendEmail;
 use App\evaLib\Services\UserEventService;
-use App\evaLib\Services\AdministratorService;
 use App\Event;
-// use App\RolEvent;
 use App\Http\Resources\EventUserResource;
+// use App\RolEvent;
 use App\Message;
 use App\Order;
 use App\State;
+use Carbon\Carbon;
+use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Log;
 use Mail;
 use Validator;
-use Carbon\Carbon;
-use DateTime;
+
 /**
  * @group EventUser
  *
@@ -52,7 +52,7 @@ class EventUserController extends Controller
     /**
      * _index_ display all the EventUsers of an event
      * @authenticated
-     *  
+     *
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      */
@@ -60,7 +60,7 @@ class EventUserController extends Controller
     {
 
         $input = $request->all();
-                $query = Attendee::where("event_id", $event_id);
+        $query = Attendee::where("event_id", $event_id);
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventUserResource::collection($results);
     }
@@ -68,7 +68,7 @@ class EventUserController extends Controller
     /**
      * _meInEvent_: user information logged into the event
      * @authenticated
-     * 
+     *
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
      *
      */
@@ -89,32 +89,32 @@ class EventUserController extends Controller
      */
     public function ListEventUsersWithBingoCards($event)
     {
-      $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email')->get();
+        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email')->get();
 
-      $attendeesist = [];
-      foreach($eventUsers as $eventUser) {
-	// estructura con datos necesarios
-	$dataEventUser = [
-	  '_id' => $eventUser->_id,
-	  'properties' => [
-	    'names' => $eventUser->properties['names'],
-	    'email' => $eventUser->properties['email']
-	  ],
-	  'bingo' => null
-	];
+        $attendeesist = [];
+        foreach ($eventUsers as $eventUser) {
+            // estructura con datos necesarios
+            $dataEventUser = [
+                '_id' => $eventUser->_id,
+                'properties' => [
+                    'names' => $eventUser->properties['names'],
+                    'email' => $eventUser->properties['email'],
+                ],
+                'bingo' => null,
+            ];
 
-	// asignar true si el asistente tiene un carton de bingo en el evento
-	BingoCard::where([
-	  [ 'event_id', $event ],
-	  ['event_user_id', $eventUser->_id]
-	])->exists() ?
-	  $dataEventUser['bingo'] = true
-	  : $dataEventUser['bingo'] = false;
+            // asignar true si el asistente tiene un carton de bingo en el evento
+            BingoCard::where([
+                ['event_id', $event],
+                ['event_user_id', $eventUser->_id],
+            ])->exists() ?
+            $dataEventUser['bingo'] = true
+            : $dataEventUser['bingo'] = false;
 
-	array_push($attendeesist, $dataEventUser);
-      }
+            array_push($attendeesist, $dataEventUser);
+        }
 
-      return $attendeesist;
+        return $attendeesist;
     }
 
     /**
@@ -126,8 +126,8 @@ class EventUserController extends Controller
      */
     public function createBingoCardToAttendee($event, $attendee)
     {
-      $bingoCard = UserEventService::generateBingoCardForAttendee($event, $attendee);
-      return response()->json($bingoCard, 201);
+        $bingoCard = UserEventService::generateBingoCardForAttendee($event, $attendee);
+        return response()->json($bingoCard, 201);
     }
 
     /**
@@ -139,28 +139,28 @@ class EventUserController extends Controller
      */
     public function createBingoCardToAllAttendees($event)
     {
-      // traer todos los asistente y asignarle a los que no tengan carton
-      $eventUsers = Attendee::where("event_id", $event)->select('_id')->get();
+        // traer todos los asistente y asignarle a los que no tengan carton
+        $eventUsers = Attendee::where("event_id", $event)->select('_id')->get();
 
-      foreach($eventUsers as $eventUser) {
-	!BingoCard::where([
-	  [ 'event_id', $event ],
-	  ['event_user_id', $eventUser->_id]
-	])->exists()
-	  && UserEventService::generateBingoCardForAttendee($event, $eventUser->_id);
-      }
+        foreach ($eventUsers as $eventUser) {
+            !BingoCard::where([
+                ['event_id', $event],
+                ['event_user_id', $eventUser->_id],
+            ])->exists()
+            && UserEventService::generateBingoCardForAttendee($event, $eventUser->_id);
+        }
 
-      return response()->json(['message' => 'bingo cards created'], 201);
+        return response()->json(['message' => 'bingo cards created'], 201);
     }
 
     /**
      * BingoCardbyEventUser_: search of BingoCards by EventUser.
-     * 
+     *
      * @urlParam eventUser required  eventUser_id
      * @urlParam event required  event_id
      *
      */
-    
+
     public function BingoCardbyEventUser(string $eventUser_id)
     {
         return BingoCard::where('event_user_id', $eventUser_id)->get();
@@ -172,7 +172,7 @@ class EventUserController extends Controller
      *
      */
     public function meEvents()
-    {   
+    {
         $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
         $results = $query->makeHidden(['activities', 'event']);
         return EventUserResource::collection($results);
@@ -181,7 +181,7 @@ class EventUserController extends Controller
     /**
      * _bookEventUsers_: when an event is pay the attendees can do book without having to pay.
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
-     * 
+     *
      * @bodyParam eventUsersIds array required Attendees list who book in an event
      */
     public function bookEventUsers(Request $request, Event $event)
@@ -404,14 +404,14 @@ class EventUserController extends Controller
      * @bodyParam properties.password  string  Example: *******
      */
     public function SubscribeUserToEventAndSendEmail(Request $request, string $event_id)
-    {   
+    {
         $request->validate([
             'properties.email' => 'required|email:rfc,dns',
             'properties.names' => 'required|string|max:250',
         ]);
 
         $eventUserData = $request->json()->all();
-        unset($eventUserData['properties']['rol_id']);//eliminar el rol_id de la data
+        unset($eventUserData['properties']['rol_id']); //eliminar el rol_id de la data
         $email = $eventUserData["properties"]["email"];
 
         $noSendMail = $request->query('no_send_mail');
@@ -428,42 +428,38 @@ class EventUserController extends Controller
             //Se llama al método que registra la cantidad de registros a un evento por día
             app('App\Http\Controllers\RegistrationMetricsController')->createByDay($date, $event_id);
 
-            $user = Account::where("email" , $email)->first();    
-            if(empty($user))
-            {   
+            $user = Account::where("email", $email)->first();
+            if (empty($user)) {
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["properties"]["names"],
-                    "password" => $email
-                ]); 
-            }  
-            $eventUserData['account_id'] = $user->_id;                            
+                    "password" => $email,
+                ]);
+            }
+            $eventUserData['account_id'] = $user->_id;
 
-
-        }else{
+        } else {
             return response()->json([
-                "message" => "The user is already registered in the event"
-            ],409);     
+                "message" => "The user is already registered in the event",
+            ], 409);
         }
-
 
         $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
 
-	    //Account rol assigned by default, this valor is constant because any user don't select their rol_id 
-        if(isset($eventUserData["rol_id"]))
-        {
-            EvaRol::createOrUpdateDefaultRolEventUser($event->_id , $eventUserData["rol_id"]);
-            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"]);
+        //Account rol assigned by default, this valor is constant because any user don't select their rol_id
+        if (isset($eventUserData["rol_id"])) {
+            EvaRol::createOrUpdateDefaultRolEventUser($event->_id, $eventUserData["rol_id"]);
+            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"], $request);
         }
 
-	$eventUser = Attendee::create($eventUserData);
-    //dd("create");
+        $eventUser = Attendee::create($eventUserData);
+        //dd("create");
 
-	// Generacion de cartones de bingo
-	if($event->bingo) {
-	  UserEventService::generateBingoCardForAttendee($event_id, $eventUser->_id);
-	}
+        // Generacion de cartones de bingo
+        if ($event->bingo) {
+            UserEventService::generateBingoCardForAttendee($event_id, $eventUser->_id);
+        }
 
         // En caso de que el event posea document user
         // $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
@@ -471,18 +467,15 @@ class EventUserController extends Controller
         //     $limit = $document_user['quantity'];
         //     $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
         // }
-        
 
-        if(empty($noSendMail))
-        {
+        if (empty($noSendMail)) {
             $urlOrigin = $request->header('origin');
             Mail::to($email)
-            ->queue(
-                //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name, $urlOrigin)
-            );
+                ->queue(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name, $urlOrigin)
+                );
         }
-            
 
         if ($event_id == '61a8443fa3023d1c117f9e13') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
@@ -494,16 +487,16 @@ class EventUserController extends Controller
 
     /**
      * _createUserAndAddtoEvent_: import  user and add it to an event.
-     * 
-     * 
+     *
+     *
      * When you import a user to an event, if the user does not exist, the user will be created and the record will be created in the event and
      * if the user exists, the user will not be updated, it will only create the record in the event.
-     * 
-     * ![Screenshot](https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)  
-     * 
+     *
+     * ![Screenshot](https://firebasestorage.googleapis.com/v0/b/eviusauth.appspot.com/o/evius%2Fdocumentation%2FcreateUserAndAddtoEvent.png?alt=media&token=ee03b215-85e6-49cc-9340-43ae3a00dd60)
+     *
      * @authenticated
      * @urlParam event string required event id Example: 61ccd3551c821b765a312864
-     * 
+     *
      * @queryParam allow_edit_password Allow change user password even if the user already register. If you don't send this parameter the password of user registered in the system dond't change. Example: true
      *
      * @bodyParam email email required email event user Example: example@evius.co
@@ -517,7 +510,7 @@ class EventUserController extends Controller
             'email' => 'required|email:rfc,dns',
             'names' => 'required|string|max:250',
             'password' => 'string|min:6',
-            'rol_name' => 'exists:roles,name|string' // por default se asigna rol asistente
+            'rol_name' => 'exists:roles,name|string', // por default se asigna rol asistente
         ]);
 
         $eventUserData = $request->json()->all();
@@ -527,24 +520,23 @@ class EventUserController extends Controller
 
         try {
 
-            $user = Account::where("email" , $email)->first();
+            $user = Account::where("email", $email)->first();
             // crear cuenta de usuario si no existe
-            if(!isset($user))
-            {
+            if (!isset($user)) {
                 // Si no tiene password, se le asigna el email como password
                 $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
-                    "password" => $pass
+                    "password" => $pass,
                 ]);
-	    }
+            }
 
-	    // assign rol_id to attendee
-	    $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
+            // assign rol_id to attendee
+            $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
             $rol_id = UserEventService::asignRolToEventUser($rol_name, $event, $user);
             if ($rol_name === "Administrator") {
-                AdministratorService::notificationAdmin($rol_id, $email, $event, $eventUserData["names"]);
+                AdministratorService::notificationAdmin($rol_id, $email, $event, $eventUserData["names"], $request);
             }
             unset($eventUserData['rol_name']);
             unset($eventUserData["password"]);
@@ -553,27 +545,27 @@ class EventUserController extends Controller
             $eventUser = Attendee::updateOrCreate(
                 [
                     'account_id' => $user->_id,
-                    "event_id" => $event_id
+                    "event_id" => $event_id,
                 ],
                 [
                     'rol_id' => $rol_id,
-                    "properties" => $eventUserData
+                    "properties" => $eventUserData,
                 ]
             );
 
-	    // Si el usuario es creado desde una actividad
-	    // se crea estructura para generar checking por actividad
-	    $activity_id = $request->query('activity_id');
-	    if($activity_id) {
-	      UserEventService::assignFieldForCheckinByActivity($eventUser, $activity_id);
-	    }
+            // Si el usuario es creado desde una actividad
+            // se crea estructura para generar checking por actividad
+            $activity_id = $request->query('activity_id');
+            if ($activity_id) {
+                UserEventService::assignFieldForCheckinByActivity($eventUser, $activity_id);
+            }
 
             $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
             $result = (object) [
                 "status" => $result_status,
                 "data" => $eventUser,
-                "message" => "OK"
+                "message" => "OK",
             ];
 
             $response = new EventUserResource($eventUser);
@@ -588,46 +580,47 @@ class EventUserController extends Controller
         return $response;
     }
 
-    public function createUserToActivity(Request $request, Activities $activity) {
-      $request->validate([
-	'names' => 'required|string',
-	'email' => 'required|email'
-      ]);
+    public function createUserToActivity(Request $request, Activities $activity)
+    {
+        $request->validate([
+            'names' => 'required|string',
+            'email' => 'required|email',
+        ]);
 
-      $data = $request->json()->all();
+        $data = $request->json()->all();
 
-      $eventUserExists = Attendee::where('event_id', $activity->event_id)->where('properties.email', $data['email'])->first();
-      if($eventUserExists && $eventUserExists->activityProperties) {
-	$userActivities = $eventUserExists->activityProperties;
+        $eventUserExists = Attendee::where('event_id', $activity->event_id)->where('properties.email', $data['email'])->first();
+        if ($eventUserExists && $eventUserExists->activityProperties) {
+            $userActivities = $eventUserExists->activityProperties;
 
-      	foreach($userActivities as $userActivity) {
-      	  if($userActivity['activity_id'] === $activity->_id) {
-      	    return response()->json(['message' => 'User already exists in the activity'], 401);
-      	  }
-      	}
-      }
+            foreach ($userActivities as $userActivity) {
+                if ($userActivity['activity_id'] === $activity->_id) {
+                    return response()->json(['message' => 'User already exists in the activity'], 401);
+                }
+            }
+        }
 
-      // atributo query necesario para generar estructura checkin por actividad
-      $request->query->set('activity_id', $activity->_id);
-      $eventUser = self::createUserAndAddtoEvent($request, $activity->event_id);
+        // atributo query necesario para generar estructura checkin por actividad
+        $request->query->set('activity_id', $activity->_id);
+        $eventUser = self::createUserAndAddtoEvent($request, $activity->event_id);
 
-      return $eventUser;
+        return $eventUser;
     }
 
-    public function deleteUserToActivity(Activities $activity,  Attendee $eventUser) {
-      $userActivities = $eventUser->activityProperties;
-      $newUserActivities = [];
-      foreach($userActivities as $userActivity) {
-	$userActivity['activity_id'] !== $activity->_id &&
-	  array_push($newUserActivities, $userActivity);
-      }
+    public function deleteUserToActivity(Activities $activity, Attendee $eventUser)
+    {
+        $userActivities = $eventUser->activityProperties;
+        $newUserActivities = [];
+        foreach ($userActivities as $userActivity) {
+            $userActivity['activity_id'] !== $activity->_id &&
+            array_push($newUserActivities, $userActivity);
+        }
 
-      $eventUser->activityProperties = $newUserActivities;
-      $eventUser->save();
+        $eventUser->activityProperties = $newUserActivities;
+        $eventUser->save();
 
-      return response()->json([],204);
+        return response()->json([], 204);
     }
-
 
     private function encryptdata($string)
     {
@@ -652,7 +645,6 @@ class EventUserController extends Controller
         // Display the encrypted string
         return $encryption;
     }
-
 
     /**
      * _testCreateUserAndAddtoEvent_: test Create User And Add to Event
@@ -774,10 +766,10 @@ class EventUserController extends Controller
 
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->
-            where(function ($query) {
+                where(function ($query) {
                 $query->where("account_id", auth()->user()->_id)
                 //Temporal fix for users that got different case in their email and thus firebase created different user
-                      ->orWhere('email', '=', strtolower(auth()->user()->email));
+                    ->orWhere('email', '=', strtolower(auth()->user()->email));
             })->paginate(config("app.page_size"))
         );
     }
@@ -817,7 +809,7 @@ class EventUserController extends Controller
 
     /**
      * _store:_ Store a newly Attendee  in storage.
-     * 
+     *
      * @urlParam event required event id
      * @bodyParam properties.email object other params  will be saved in user and eventUser each event can require aditional properties for registration.
      * @bodyParam properties.names object other params  will be saved in user and eventUser each event can require aditional properties for registration.
@@ -865,19 +857,18 @@ class EventUserController extends Controller
      *
      */
     public function update(Request $request, $event_id, $evenUserId)
-    {   
-        $auth = resolve('Kreait\Firebase\Auth');
-        
-
-        
+    {
         $data = $request->json()->all();
         $rol = isset($data["rol_id"]) ? $data["rol_id"] : $data["properties"]["rol_id"];
 
-        $data['rol_id'] = $rol;
-        $data['properties']['rol_id'] = $rol; 
-        // unset($data['properties']['rol_id']);
-        $eventUser = Attendee::findOrFail($evenUserId);        
+        $eventUser = Attendee::findOrFail($evenUserId);
+        if ($eventUser->anonymous && $rol == config('app.rol_admin')) {
+            return response()->json(["message" => "No se puede asignar rol de asistente a un usuario anónimo"], 400);
+        };
 
+        $data['rol_id'] = $rol;
+        $data['properties']['rol_id'] = $rol;
+        // unset($data['properties']['rol_id']);
 
         $new_properties = isset($data['properties']) ? $data['properties'] : [];
         $old_properties = isset($eventUser->properties) ? $eventUser->properties : [];
@@ -886,8 +877,7 @@ class EventUserController extends Controller
         $data['properties'] = $properties_merge;
 
         $event = Event::find($event_id);
-        AdministratorService::notificationAdmin($rol, $data['properties']['email'], $event, $data['properties']['names']);
-
+        AdministratorService::notificationAdmin($rol, $data['properties']['email'], $event, $data['properties']['names'], $request);
 
         $eventUser->fill($data);
         $eventUser->save();
@@ -932,7 +922,7 @@ class EventUserController extends Controller
      */
     public function checkIn(Request $request, $id)
     {
-	    $data = $request->json()->all();
+        $data = $request->json()->all();
         $eventUser = Attendee::findOrFail($id);
         //if (!isset($eventUser->checkedin_at) && ($eventUser->checkedin_at !== false)) {
         // Esta validacon ya la hace front
@@ -957,10 +947,10 @@ class EventUserController extends Controller
             $eventUser->printouts_history = $array;
         }
 
-	//checkin type
-	if(isset($data['checkedin_type'])) {
-	  $eventUser->checkedin_type = $data['checkedin_type'];
-	}
+        //checkin type
+        if (isset($data['checkedin_type'])) {
+            $eventUser->checkedin_type = $data['checkedin_type'];
+        }
 
         $eventUser->save();
 
@@ -979,21 +969,21 @@ class EventUserController extends Controller
         $data = $request->json()->all();
         if ($activity) {
             $eventUser = Attendee::findOrFail($id);
-            
+
             $oldActivityProperties = $eventUser->activityProperties;
             //dd(isset($oldActivityProperties) && ($oldActivityProperties) > 0);
-            if(isset($oldActivityProperties) && ($oldActivityProperties) > 0) {
+            if (isset($oldActivityProperties) && ($oldActivityProperties) > 0) {
                 $newActivityProperties = [];
                 foreach ($oldActivityProperties as $activityProperty) {
-                    if($activityProperty['activity_id'] != $activity_id) {
+                    if ($activityProperty['activity_id'] != $activity_id) {
                         array_push($newActivityProperties, $activityProperty);
                     }
                 }
 
                 array_push($newActivityProperties, [
-                    'activity_id' => $activity_id, 
+                    'activity_id' => $activity_id,
                     'checked_in' => true,
-		      //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
+                    //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
                     'checkedin_at' => gmdate("Y-m-d\TH:i:s\Z", time()),
                     'checkedin_type' => isset($data['checkedin_type']) ? $data['checkedin_type'] : null,
                 ]);
@@ -1003,7 +993,7 @@ class EventUserController extends Controller
             }
             $newActivityProperties = $oldActivityProperties ? $oldActivityProperties : [];
             array_push($newActivityProperties, [
-                'activity_id' => $activity_id, 
+                'activity_id' => $activity_id,
                 'checked_in' => true,
                 //'checkedin_at' => new \MongoDB\BSON\UTCDateTime(new DateTime("now")),
                 'checkedin_at' => gmdate("Y-m-d\TH:i:s\Z", time()),
@@ -1029,15 +1019,15 @@ class EventUserController extends Controller
         if ($activity) {
             $eventUser = Attendee::findOrFail($id);
 
-            if($eventUser->activityProperties) {
+            if ($eventUser->activityProperties) {
                 $newActivityProperties = [];
                 foreach ($eventUser->activityProperties as $activityProperty) {
-                    if($activityProperty['activity_id'] != $activity_id) {
+                    if ($activityProperty['activity_id'] != $activity_id) {
                         array_push($newActivityProperties, $activityProperty);
                     }
                 }
                 array_push($newActivityProperties, [
-                    'activity_id' => $activity_id, 
+                    'activity_id' => $activity_id,
                     'checked_in' => false,
                     'checkedin_at' => null,
                     'checkedin_type' => null,
@@ -1059,12 +1049,12 @@ class EventUserController extends Controller
      */
     public function unCheck(String $eventUser)
     {
-	// remove checked_in data
+        // remove checked_in data
         $eventUser = Attendee::findOrFail($eventUser);
         $eventUser->checked_in = false;
         $eventUser->checkedin_at = null;
-	$eventUser->checkedin_type = null;
-        
+        $eventUser->checkedin_type = null;
+
         $eventUser->save();
 
         return $eventUser;
@@ -1215,23 +1205,22 @@ class EventUserController extends Controller
                 ),
                 array(
                     'property' => 'cedula_de_ciudadania_nit',
-                    'value' => isset($eventUserData['properties']['nodecedula']) ?$eventUserData['properties']['nodecedula'] : "" ,
+                    'value' => isset($eventUserData['properties']['nodecedula']) ? $eventUserData['properties']['nodecedula'] : "",
                 ),
                 array(
                     'property' => 'rol_cargo',
                     'value' => isset($eventUserData['properties']['rolcargo']) ? $eventUserData['properties']['rolcargo'] : "",
                 ),
             ),
-        );        
+        );
 
         $response = null;
-        try{
+        try {
             $response = $client->request('POST', $url, [
                 'body' => json_encode($arr),
                 'headers' => ['Content-Type' => 'application/json'],
             ]);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
 
         }
         return $response;
@@ -1240,7 +1229,7 @@ class EventUserController extends Controller
     /**
      * _metricsEventByDate_: number of registered users and checked in for day according to event start and end dates  * or according specific dates.
      * @authenticated
-     * 
+     *
      * @urlParam event required event_id
      * @queryParam metrics_type required string With this parameter you can defined the type of metrics that you want to see, you can select created_at for see the registered users  or checkedin_at for see checked users. Example: created_at
      * @queryParam datetime_from date format dd-mm-yyyy
@@ -1253,7 +1242,7 @@ class EventUserController extends Controller
         $event = Event::findOrFail($event_id);
 
         $dateFrom = isset($data['datetime_from']) ? $data['datetime_from'] : $event->datetime_from;
-        $dateTo = isset($data['datetime_to'])? $data['datetime_to'] : $event->datetime_to;
+        $dateTo = isset($data['datetime_to']) ? $data['datetime_to'] : $event->datetime_to;
 
         //Se realiza esta conversión a fecha: 2021-08-30 00:00
         $dateFrom = Carbon::parse($dateFrom)->format('Y-m-d H:i');
@@ -1269,7 +1258,7 @@ class EventUserController extends Controller
                 )
             )
             ->get([$data['metrics_type']]);
-       
+
         // Se pueden consultar los registros y el checkIn, ambos aquí porque tienen la misam estructura de la consulta
         switch ($data['metrics_type']) {
             case "created_at";
@@ -1318,24 +1307,24 @@ class EventUserController extends Controller
 
     public function correosMocion(Request $request)
     {
-      $request->validate([
-	'email' => 'required|string',
-	'html' => 'required|string',
-	'subject' => 'required|string'
-      ]);
+        $request->validate([
+            'email' => 'required|string',
+            'html' => 'required|string',
+            'subject' => 'required|string',
+        ]);
 
-      $data = $request->json()->all();
+        $data = $request->json()->all();
 
-      Mail::to($data['email'])
-      ->queue(
-	  new \App\Mail\CorreoMocion($data['email'], $data[ 'html' ], $data['subject'])
-      );
+        Mail::to($data['email'])
+            ->queue(
+                new \App\Mail\CorreoMocion($data['email'], $data['html'], $data['subject'])
+            );
 
-      return response()->json(['message' => 'Mail send'], 201);
+        return response()->json(['message' => 'Mail send'], 201);
     }
 
     /**
-     * _validateAttendeeData_: Compare la información que se requiere en el evento con la información que tienen los asistentes. 
+     * _validateAttendeeData_: Compare la información que se requiere en el evento con la información que tienen los asistentes.
      * Esto puede ocurrir cuando se solicitan datos después de que un evento se haya configurado previamente y requiere que los asistentes completen esta información.
      *
      * @urlParam event required
@@ -1347,15 +1336,15 @@ class EventUserController extends Controller
         $properties = $eventuser->properties;
         $fieldsRequired = $event->user_properties;
 
-        foreach($fieldsRequired as $field) {
+        foreach ($fieldsRequired as $field) {
             $isRequired = $field['mandatory'];
             $fieldName = $field['name'];
 
-            if ( $isRequired && empty($properties[$fieldName]) ) {
+            if ($isRequired && empty($properties[$fieldName])) {
                 return response()->json(['message' => 'Attendee does not have all the necessary data'], 401);
             }
         }
-        
+
         return response()->json(['message' => 'Ok'], 200);
     }
 }
