@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -20,18 +19,13 @@ class AdministratorMail extends Mailable
      *
      * @return void
      */
-    public function __construct($email, $event, $names)
+    public function __construct($email, $event, $names, $urlOrigin)
     {
         $link = '';
-        $auth = resolve('Kreait\Firebase\Auth');
-        $firebasaUser = $auth->getUserByEmail($email);
-        //dd($firebasaUser);
-        // if ($firebasaUser->emailVerified) {
-            $link = config('app.front_url') . "/eventadmin" . "/" . $event->_id . "/assistants";
-            $this->link = $link;
-            $this->event = $event;
-            $this->names = $names;
-        // }
+        $link = $urlOrigin . "/eventadmin" . "/" . $event->_id . "/assistants";
+        $this->link = $link;
+        $this->event = $event;
+        $this->names = $names;
     }
 
     /**
