@@ -29,6 +29,12 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 201);
     }
 
+    public function SharePhotobyEvent(string $event_id)
+    {
+        $share_photo = SharePhoto::where('event_id', $event_id)->first();
+        return $share_photo;
+    }
+
     public function show($share_photo)
     {
         $share_photo = SharePhoto::findOrFail($share_photo);
@@ -130,7 +136,7 @@ class SharePhotoController extends Controller
                 }
                 $post['likes'] = $likesCopy;
                 array_push($postsCopy, $post);
-            }else{
+            } else {
                 array_push($postsCopy, $post);
             }
         }
