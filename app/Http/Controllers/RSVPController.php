@@ -394,7 +394,7 @@ class RSVPController extends Controller implements ShouldQueue
      * @urlParam event Event's id
      * @urlParam message Message's id
      */
-    public function sendMissingMails(Event $event, Message $message)
+    public function sendMissingMails(Request $request, Event $event, Message $message)
     {
       if($message->raw_data['eventUsersIds'] === 'all')
       {
@@ -412,7 +412,7 @@ class RSVPController extends Controller implements ShouldQueue
       }
 
       self::_sendRSVPmail(
-	  $eventUsers=$messagesToSend, $message, $event, $data=$message->raw_data
+	  $eventUsers=$messagesToSend, $message, $event, $data=$message->raw_data, $request
       );
 
       return response()->json(

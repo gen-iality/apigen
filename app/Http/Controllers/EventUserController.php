@@ -89,27 +89,34 @@ class EventUserController extends Controller
      */
     public function ListEventUsersWithBingoCards($event)
     {
-        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email')->get();
+        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->get();
 
         $attendeesist = [];
         foreach ($eventUsers as $eventUser) {
+            $userImage = Account::where('email', $eventUser->properties['email'])->select('picture')->first();
             // estructura con datos necesarios
             $dataEventUser = [
                 '_id' => $eventUser->_id,
                 'properties' => [
                     'names' => $eventUser->properties['names'],
                     'email' => $eventUser->properties['email'],
+                    'picture' => $userImage->picture,
                 ],
                 'bingo' => null,
             ];
 
-            // asignar true si el asistente tiene un carton de bingo en el evento
-            BingoCard::where([
+            // asignar bingoCard y true si el asistente tiene carton
+            $bingoCard = BingoCard::where([
                 ['event_id', $event],
                 ['event_user_id', $eventUser->_id],
-            ])->exists() ?
-            $dataEventUser['bingo'] = true
-            : $dataEventUser['bingo'] = false;
+            ])->first();
+
+            if (isset($bingoCard)) {
+                $dataEventUser['bingo'] = true;
+                $dataEventUser['bingo_card'] = $bingoCard;
+            } else {
+                $dataEventUser['bingo'] = false;
+            }
 
             array_push($attendeesist, $dataEventUser);
         }
@@ -450,7 +457,7 @@ class EventUserController extends Controller
         //Account rol assigned by default, this valor is constant because any user don't select their rol_id
         if (isset($eventUserData["rol_id"])) {
             EvaRol::createOrUpdateDefaultRolEventUser($event->_id, $eventUserData["rol_id"]);
-            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"], $request);
+            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"]);
         }
 
         $eventUser = Attendee::create($eventUserData);
@@ -863,7 +870,7 @@ class EventUserController extends Controller
 
         $eventUser = Attendee::findOrFail($evenUserId);
         if ($eventUser->anonymous && $rol == config('app.rol_admin')) {
-            return response()->json(["message" => "No se puede asignar rol de asistente a un usuario anónimo"], 400);
+            return response()->json(["message" => "No se puede asignar rol de administrador a un usuario anónimo"], 400);
         };
 
         $data['rol_id'] = $rol;

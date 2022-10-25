@@ -499,7 +499,7 @@ Route::group(
  * Plan
  */
 
-// Route::apiResource('plans', 'PlansController');
+Route::apiResource('plans', 'PlansController');
 
 /*****
  * Notification
@@ -524,6 +524,7 @@ Route::post('billings/tickets', 'BillingController@storeTickets');
 
 Route::post('preBilling', 'PreBillingController@store');
 
+Route::post('preBilling', 'PreBillingController@store');
 /*****
  * Payment
  */
@@ -574,6 +575,7 @@ Route::post('events/{event}/bingos/{bingo}/values', 'BingoController@addBingoVal
 Route::put('events/{event}/bingos/{bingo}/values/{value}', 'BingoController@editBingoValues');
 Route::delete('events/{event}/bingos/{bingo}/values/{value}', 'BingoController@deleteBingoValue');
 //Route::put('events/{event}/bingos/{bingo}/random-values', 'BingoController@createRandomBingoValues');
+Route::put('events/{event}/bingos/{bingo}/reset-bingo-cards', 'BingoController@resetBingoCards');
 Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@importBingoValues');
 //BingobyEvent
 Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
@@ -592,3 +594,11 @@ Route::get('nexmo-send-sms', 'SmsController@sendSms');
 
 //REDIRECT TO LANDING
 Route::get('invitation/{code}', 'UrlController@redirectToLanding');
+
+//SHARE PHOTO
+Route::apiResource('sharephoto', 'SharePhotoController');
+Route::put('sharephoto/{share_photo}/addpost', 'SharePhotoController@addOnePost');
+Route::delete('sharephoto/{share_photo}/post/{post_id}', 'SharePhotoController@removePost');
+Route::put('sharephoto/{share_photo}/addlike/{post_id}', 'SharePhotoController@addOneLike');
+Route::delete('sharephoto/{share_photo}/unlike/{post_id}', 'SharePhotoController@unlike');
+Route::get('events/{event}/sharephotos', 'SharePhotoController@SharePhotoByEvent');

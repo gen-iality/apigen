@@ -450,27 +450,77 @@ string(10) "1030522402"
 
       $bingoValues = $bingo->bingo_values;
 
-      if($bingoValues) {
-	$randomBingoCardValues = [];
-      	// 25 representa carton 5x5, se planea que sea dinamico
-      	while(count($randomBingoCardValues) < 25) {
-      	  $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
-      	  !in_array($randomValue, $randomBingoCardValues, true)
-      	      && array_push($randomBingoCardValues, $randomValue);
-      	}
-
-      	$bingoCard = BingoCard::create(
-      	  [
-      	    'event_user_id' => $event_user_id,
-      	    'event_id' => $event_id,
-      	    'bingo_id' => $bingo->_id,
-      	    'values_bingo_card' => $randomBingoCardValues
-      	  ]
-      	);
-
-	return $bingoCard;
+      // Solo asignar cartones de bingo cuando el bingo tenga la cantidad de valores
+      // minima para poder jugar segun las dimensiones correspondientes
+      if(count($bingoValues) < $bingo->dimensions['minimun_values']) {
+	  return ['message' => 'Not enough values to generate bingo cards'];
       }
 
+      $randomBingoCardValues = [];
+      // asignacion de valores al carton segun las dimensiones del bingo
+      while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
+        $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
+        !in_array($randomValue, $randomBingoCardValues, true)
+            && array_push($randomBingoCardValues, $randomValue);
+      }
+
+      $bingoCard = BingoCard::create(
+        [
+          'event_user_id' => $event_user_id,
+          'event_id' => $event_id,
+          'bingo_id' => $bingo->_id,
+          'values_bingo_card' => $randomBingoCardValues
+        ]
+      );
+
+      return $bingoCard;
+    }
+
+    /**
+     * Cuando las dimensiones del bingo son cambiadas
+     * y ya existen usuario con cartones asignados
+     * se debe crear/modificar nuevos cartones
+     * con estas nuevas especificaciones
+     */
+    public static function resetBingoCardsForAttendees($bingo)
+    {
+	$eventUsers = Attendee::where('event_id', $bingo->event_id)->get();
+
+	foreach($eventUsers as $eventUser) {
+	    // Eliminar carton
+	    $bingoCard = BingoCard::where('event_user_id', $eventUser->_id)->first();
+	    isset($bingoCard) && $bingoCard->delete();
+	    // crear carton nuevo
+	    self::generateBingoCardForAttendee($eventUser->event_id, $eventUser->_id);
+	}
+    }
+
+    // Cuando un valor de un bingo es actualizado
+    // en los cartones de los usuarios este valor debe actualizarce
+    public static function updateBingoValues($bingo, $value)
+    {
+	// traer todos los bingo cards
+	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)->get();
+	// verificar que existan cartones
+	if(!isset($bingoCards)) {
+	    return ['message' => 'There are no bingo cards to update'];
+	}
+
+        $updatedBingoValues = [];
+	foreach($bingoCards as $bingoCard) {
+	    // filtrar todos los que tengan ese valor
+	    foreach($bingoCard->values_bingo_card as $bingoValue) {
+		// remplazar el valor actualizar
+                if($bingoValue['id'] === $value['id']) {
+		    $bingoValue = $value;
+                }
+                array_push($updatedBingoValues, $bingoValue);
+	    }
+
+	    $bingoCard->values_bingo_card = $updatedBingoValues;
+	    $bingoCard->save();
+	    $updatedBingoValues = [];
+	}
     }
 
     /**
