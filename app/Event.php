@@ -42,7 +42,19 @@ class Event extends ModelsEvent
         'where_it_run', // prelanding: boolean para saber si un evento tiene prelanding,
         'url_external', // prelanding: url externa para redireccionar,
         'success_message', // prelanding: mensaje de exito para mostrar en el prelanding,
-        'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage' // count royal prestige
+        'useCountdown', 'dateLimit', 'countdownMessage', 'countdownFinalMessage', // count royal prestige
+        'sale_start_date', // fecha de inicio de venta de boletos
+        'sale_end_date', // fecha de fin de venta de boletos
+        'vat_added_price', // boolean para saber si al precio se le incluye iva
+        'vat_included_price', // boolean para saber si el precio viene con iva
+        'vat_value', // valor del iva %
+        'limit_tickets_per_user', // limite de boletos por usuario
+        'minimum_tickets_to_buy', // minimo de boletos a comprar
+        'maximum_tickets_to_buy', // maximo de boletos a comprar
+        'minimum_age', // edad minima para comprar boletos int
+        'view_price_list', // boolean para saber si se muestra la lista de precios
+        'view_range_price', // boolean para saber si se muestra el rango de precios
+
 
     ];
 
