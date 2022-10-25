@@ -457,7 +457,7 @@ class EventUserController extends Controller
         //Account rol assigned by default, this valor is constant because any user don't select their rol_id
         if (isset($eventUserData["rol_id"])) {
             EvaRol::createOrUpdateDefaultRolEventUser($event->_id, $eventUserData["rol_id"]);
-            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"]);
+            AdministratorService::notificationAdmin($eventUserData["rol_id"], $email, $event, $eventUserData["properties"]["names"], $request);
         }
 
         $eventUser = Attendee::create($eventUserData);
