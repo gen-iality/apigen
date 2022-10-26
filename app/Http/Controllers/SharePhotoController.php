@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attendee;
+use App\Event;
 use App\SharePhoto;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,12 @@ class SharePhotoController extends Controller
             'title' => 'required|string',
             'event_id' => 'required|string',
         ]);
+
+        $event = Event::where('_id', $request->event_id)->first();
+
+        $dynamics = ["share_photo" => true];
+        $event->dynamics = $dynamics;
+        $event->save();
 
         $data = $request->json()->all();
         $share_photo = new SharePhoto($data);
@@ -84,10 +91,13 @@ class SharePhotoController extends Controller
     public function removePost(SharePhoto $share_photo, $post_id)
     {
         $posts = isset($share_photo->posts) ? $share_photo->posts : [];
-        $posts = array_filter($posts, function ($post) use ($post_id) {
-            return $post['id'] != $post_id;
-        });
-        $share_photo->posts = $posts;
+        $new_posts = [];
+        foreach ($posts as $post) {
+            if ($post['id'] != $post_id) {
+                array_push($new_posts, $post);
+            }
+        }
+        $share_photo->posts = $new_posts;
         $share_photo->save();
 
         return response()->json($share_photo, 200);
@@ -147,7 +157,11 @@ class SharePhotoController extends Controller
 
     public function destroy($share_photo)
     {
+
         $share_photo = SharePhoto::findOrFail($share_photo);
+        $event = Event::where('_id', $share_photo->event_id)->first();
+        $event->dynamics['share_photo'] = null;
+        $event->save();
         $share_photo->delete();
 
         return response()->json([], 204);
