@@ -602,3 +602,9 @@ Route::delete('sharephoto/{share_photo}/post/{post_id}', 'SharePhotoController@r
 Route::put('sharephoto/{share_photo}/addlike/{post_id}', 'SharePhotoController@addOneLike');
 Route::delete('sharephoto/{share_photo}/unlike/{post_id}', 'SharePhotoController@unlike');
 Route::get('events/{event}/sharephotos', 'SharePhotoController@SharePhotoByEvent');
+
+//WHERE IS
+Route::apiResource('whereis', 'WhereIsController');
+Route::put('whereis/{where_is}/addresponse', 'WhereIsController@addOneResponse');
+Route::delete('whereis/{where_is}/responses/{response_id}', 'WhereIsController@removeResponse');
+Route::get('events/{event}/whereis', 'WhereIsController@WhereIsbyEvent');
