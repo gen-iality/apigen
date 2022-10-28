@@ -25,7 +25,12 @@ class SharePhotoController extends Controller
 
         $event = Event::where('_id', $request->event_id)->first();
 
-        $dynamics = ["share_photo" => true];
+        if(isset($event->dynamics)){
+            $dynamics = $event->dynamics;
+            $dynamics["share_photo"] = true;
+        }else{
+            $dynamics["share_photo"] = true;
+        }
         $event->dynamics = $dynamics;
         $event->save();
 
@@ -160,7 +165,13 @@ class SharePhotoController extends Controller
 
         $share_photo = SharePhoto::findOrFail($share_photo);
         $event = Event::where('_id', $share_photo->event_id)->first();
-        $event->dynamics['share_photo'] = null;
+        if(isset($event->dynamics)){
+            $dynamics = $event->dynamics;
+            $dynamics["share_photo"] = false;
+        }else{
+            $dynamics["share_photo"] = false;
+        }
+        $event->dynamics = $dynamics;
         $event->save();
         $share_photo->delete();
 
