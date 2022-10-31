@@ -93,6 +93,7 @@ class SharePhotoController extends Controller
         $posts = isset($share_photo->posts) ? $share_photo->posts : [];
 
         $data['id'] = uniqid('');
+        $data['user_name'] = $user_exist->properties['names'];
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
         $data['likes'] = [];
