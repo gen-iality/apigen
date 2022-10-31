@@ -80,12 +80,23 @@ class SharePhotoController extends Controller
         if (!isset($user_exist)) {
             return response()->json(['error' => 'User not found'], 404);
         }
-        $data['id'] = uniqid('', true);
+
+        //validacion de que el usuario no haya compartido antes
+        if(isset($share_photo->posts)){
+            foreach($share_photo->posts as $post){
+                if($post['event_user_id'] == $data['event_user_id']){
+                    return response()->json(['error' => 'User already posted'], 404);
+                }
+            }
+        }
+
+        $posts = isset($share_photo->posts) ? $share_photo->posts : [];
+
+        $data['id'] = uniqid('');
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
         $data['likes'] = [];
 
-        $posts = isset($share_photo->posts) ? $share_photo->posts : [];
         array_push($posts, $data);
         $share_photo->posts = $posts;
         $share_photo->save();
@@ -115,12 +126,19 @@ class SharePhotoController extends Controller
         ]);
 
         $data = $request->json()->all();
+
         $data['created_at'] = date('Y-m-d H:i:s');
         $postsCopy = [];
 
         foreach ($share_photo->posts as $post) {
             if ($post['id'] == $post_id) {
                 $likes = isset($post['likes']) ? $post['likes'] : [];
+                //Validacion de que el usuario no haya dado like antes al mismo post
+                foreach($likes as $like){
+                    if($like['event_user_id'] == $data['event_user_id']){
+                        return response()->json(['error' => 'User already liked'], 404);
+                    }
+                }
                 array_push($likes, $data);
                 $post['likes'] = $likes;
                 array_push($postsCopy, $post);
