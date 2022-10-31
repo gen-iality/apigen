@@ -94,6 +94,7 @@ class SharePhotoController extends Controller
 
         $data['id'] = uniqid('');
         $data['user_name'] = $user_exist->properties['names'];
+        $data['picture'] = $user_exist->user->picture ? $user_exist->user->picture : null;
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
         $data['likes'] = [];
