@@ -33,6 +33,15 @@ class BingoController extends Controller
       $data[ 'event_id' ] = $event->_id;
       $bingo = Bingo::create($data);
 
+      //Nuevo atributo para el bingo creado. $event->dynamics.
+      if(isset($event->dynamics)){
+          $dynamics = $event->dynamics;
+          $dynamics["bingo"] = true;
+      }else{
+          $dynamics["bingo"] = true;
+      }
+      $event->dynamics = $dynamics;
+
       // estado para determinar si el evento cuenta con bingo creado
       $event->bingo = true;
       $event->save();
@@ -93,6 +102,14 @@ class BingoController extends Controller
           $bingoCard->delete();
         }
       }
+
+      if(isset($event->dynamics)){
+        $dynamics = $event->dynamics;
+        $dynamics["bingo"] = false;
+      }else{
+        $dynamics["bingo"] = false;
+      }
+      $event->dynamics = $dynamics;
       $bingo->delete();
 
       //Cambiar estado del bingo en el evento
