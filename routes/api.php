@@ -608,3 +608,10 @@ Route::apiResource('whereis', 'WhereIsController');
 Route::put('whereis/{where_is}/addresponse', 'WhereIsController@addOneResponse');
 Route::delete('whereis/{where_is}/responses/{response_id}', 'WhereIsController@removeResponse');
 Route::get('events/{event}/whereis', 'WhereIsController@WhereIsbyEvent');
+
+//WHO WANTS TO BE MILLIONAIRE
+Route::post('events/{event}/millionaires', 'MillionaireController@store');
+Route::put('events/{event}/millionaires/{millionaire}', 'MillionaireController@update');
+Route::delete('events/{event}/millionaires/{millionaire}', 'MillionaireController@destroy');
+//MillionairebyEvent
+Route::get('events/{event}/millionaires', 'MillionaireController@MillionairebyEvent');
