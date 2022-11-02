@@ -615,3 +615,17 @@ Route::put('events/{event}/millionaires/{millionaire}', 'MillionaireController@u
 Route::delete('events/{event}/millionaires/{millionaire}', 'MillionaireController@destroy');
 //MillionairebyEvent
 Route::get('events/{event}/millionaires', 'MillionaireController@MillionairebyEvent');
+//Add || update || delete  => stage
+Route::post('millionaires/{millionaire}/stages', 'MillionaireController@addStage');
+Route::put('millionaires/{millionaire}/stages/{stage}', 'MillionaireController@updateStage');
+Route::delete('millionaires/{millionaire}/stages/{stage}', 'MillionaireController@removeStage');
+//Add || update || delete => question
+Route::post('millionaires/{millionaire}/questions', 'MillionaireController@addOneQuestion');
+Route::put('millionaires/{millionaire}/questions/{question}', 'MillionaireController@updateQuestion');
+Route::delete('millionaires/{millionaire}/questions/{question}', 'MillionaireController@removeOneQuestion');
+//Assing question to stage
+Route::put('millionaires/{millionaire}/stages/{stage}/questions/{question}', 'MillionaireController@assignQuestionToStage');
+//Add || update || delete => answer
+Route::post('millionaires/{millionaire}/questions/{question}/answers', 'MillionaireController@addOneAnswer');
+Route::put('millionaires/{millionaire}/questions/{question}/answers/{answer}', 'MillionaireController@updateAnswer');
+Route::delete('millionaires/{millionaire}/questions/{question}/answers/{answer}', 'MillionaireController@removeOneAnswer');
