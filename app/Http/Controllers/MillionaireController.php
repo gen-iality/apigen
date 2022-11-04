@@ -242,6 +242,13 @@ class MillionaireController extends Controller
      */
     public function removeOneQuestion(Millionaire $millionaire, $question_id)
     {
+        //comprobar si la pregunta esta asignada a una etapa
+        foreach($millionaire->stages as $stage) {
+            if($stage['question']['id'] == $question_id) {
+                return response()->json(['error' => 'The question is assigned to a stage'], 400);
+            }
+        }
+
         $questions = $millionaire->questions;
         $new_questions = [];
         foreach ($questions as $question) {
@@ -251,6 +258,7 @@ class MillionaireController extends Controller
         }
         $millionaire->questions = $new_questions;
         $millionaire->save();
+        
         return response()->json($millionaire);
     }
 
